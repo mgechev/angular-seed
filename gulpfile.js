@@ -28,7 +28,12 @@ gulp.task('build', function () {
   return gulp.src('./js/**/*.js')
     .pipe(traceur({
       sourceMaps: 'inline',
-      modules: 'instantiate'
+      modules: 'instantiate',
+      annotations: true,
+      memberVariables: true,
+      typeAssertions: true,
+      typeAssertionModule: './lib/rtts_assert',
+      types: true
     }))
     .pipe(gulp.dest('./dev'));
 });
