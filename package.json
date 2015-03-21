@@ -1,0 +1,22 @@
+{
+  "name": "ng2hn",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Minko Gechev <mgechev>",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-shell": "^0.4.0",
+    "gulp-traceur": "^0.17.0"
+  },
+  "dependencies": {
+    "angular2": "2.0.0-alpha.13",
+    "es6-module-loader": "^0.15.0",
+    "rtts_assert": "^2.0.0-alpha.11",
+    "systemjs": "^0.15.0"
+  }
+}

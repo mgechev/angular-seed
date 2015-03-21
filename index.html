@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <script src="./node_modules/es6-module-loader/node_modules/traceur/bin/traceur-runtime.js"></script>
+<script src="./node_modules/es6-module-loader/dist/es6-module-loader.js"></script>
+<script src="./node_modules/systemjs/dist/system.js"></script>
+<script src="./lib/angular2.js"></script>
+<script>
+  System.paths = {
+    'angular2/*': './lib/*.js',
+    'rtts_assert/*': './lib/rtts_assert/es6/src/*.js',
+    'app': './dist/app.js'
+  };
+  System.import('app')
+    .then(function (app) {
+      console.log(app.default());
+    }, function (e) {
+      console.error('Something terrible just happened...Open new issue at https://github.com/mgechev/angular2-seed');
+    });
+</script>
+</body>
+</html>
