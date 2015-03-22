@@ -1,0 +1,40 @@
+<style>
+.sample-app-content {
+  font-family: Verdana;
+}
+.sample-app-content h1 {
+  color: #999999;
+  font-size: 3em;
+}
+.sample-app-content h2 {
+  color: #990000;
+  font-size: 2em;
+}
+.sample-app-content p {
+  padding: 30px;
+}
+.sample-app-content li,
+.sample-app-content p {
+  font-size: 1.2em;
+}
+.sample-app-content li {
+  font-family: Consolas;
+}
+</style>
+
+<section class="sample-app-content">
+  <h1>Howdy!</h1>
+
+  <h2>
+    Gratz!
+  </h2>
+
+  <p>
+    Your deployment of AngularJS 2 Seed worked perfectly!
+    For reward, here is a list of awesome computer scientists!
+  </p>
+
+  <ul>
+    <li *foreach="#name in names">{{name}}</li>
+  </ul>
+</section>
