@@ -14,6 +14,11 @@ import {NameList} from 'services/NameList';
 class SampleApp {
   constructor() {
     this.names = NameList.get();
+    this.newName = '';
+  }
+  addName(newname) {
+    this.names.push(newname.value);
+    newname.value = '';
   }
 }
 

@@ -34,6 +34,11 @@
     For reward, here is a list of awesome computer scientists!
   </p>
 
+  <p>
+    You want more? Add them yourself!
+  </p>
+  <input #newname>
+  <button (click)="addName(newname)">Add</button>
   <ul>
     <li *foreach="#name in names">{{name}}</li>
   </ul>
