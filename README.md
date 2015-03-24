@@ -1,6 +1,10 @@
+# Introduction
+
 A seed project for AngularJS 2 apps.
 
-It is something similar to the AngularJS Quick Start but does all the app bootstrap (setup) with gulp, instead of random bash scripts (actually gulp invokes the random bash scripts used for building angular 2).
+It is something similar to the AngularJS Quick Start but does all the app bootstrap (setup) with gulp, instead of bash scripts (actually gulp invokes the same bash scripts used for building angular 2).
+
+This repository exists mostly for bootstrapping my own experiments with AngularJS 2.
 
 # How to start
 
