@@ -20,6 +20,12 @@
 .sample-app-content li {
   font-family: Consolas;
 }
+.sample-app-content input,
+.sample-app-content button {
+  padding: 5px;
+  font-size: 1em;
+  outline: none;
+}
 </style>
 
 <section class="sample-app-content">
@@ -37,8 +43,10 @@
   <p>
     You want more? Add them yourself!
   </p>
-  <input #newname>
-  <button (click)="addName(newname)">Add</button>
+  <p>
+    <input #newname>
+    <button (click)="addName(newname)">Add</button>
+  </p>
   <ul>
     <li *foreach="#name in names">{{name}}</li>
   </ul>
