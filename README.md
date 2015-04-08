@@ -9,7 +9,7 @@ This repository exists mostly for bootstrapping my own experiments with AngularJ
 # How to start
 
 ```bash
-git clone git@github.com:mgechev/angular2-seed.git
+git clone https://github.com/mgechev/angular2-seed.git
 cd angular2-seed
 npm install
 npm install -g gulp
