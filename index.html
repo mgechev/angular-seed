@@ -6,23 +6,23 @@
 </head>
 <body>
   <sample-app></sample-app>
-<script src="./node_modules/es6-module-loader/node_modules/traceur/bin/traceur-runtime.js"></script>
-<script src="./node_modules/zone.js/zone.js"></script>
-<script src="./node_modules/es6-module-loader/dist/es6-module-loader.js"></script>
-<script src="./node_modules/systemjs/dist/system.js"></script>
+<script src="./lib/traceour/traceur-runtime.js"></script>
+<script src="./node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.js"></script>
+<script src="./node_modules/reflect-metadata/Reflect.js"></script>
+<script src="./node_modules/systemjs/lib/extension-register.js"></script>
 <script>
-  System.paths = {
-    'angular2/*': './lib/angular/*.js',
-    'rtts_assert/*': './lib/rtts_assert/es6/src/*.js',
-    'app': './dev/app.js',
-    'services/*' : './dev/services/*.js'
-  };
-  System.import('app')
-    .then(function (app) {
-      app.default();
-    }, function (e) {
-      console.error('Something terrible just happened...Open new issue at https://github.com/mgechev/angular2-seed', e);
-    });
+register(System);
+</script>
+
+<script src="./lib/zone.js/zone.js"></script>
+<script src="./lib/angular2/angular2.js"></script>
+<script>
+System.baseURL += 'dev/';
+System.import('./app')
+  .catch(function (e) {
+    console.error(e,
+      'Report this error at https://github.com/mgechev/angular2-seed/issues');
+  });
 </script>
 </body>
 </html>

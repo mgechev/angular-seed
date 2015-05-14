@@ -1,8 +1,8 @@
-let names = ['Dijkstra', 'Knuth', 'Turing', 'Hopper'];
-
-export let NameList = {
-  get() {
-    return names;
+export class NamesList {
+  constructor() {
+    this.names = ['Dijkstra', 'Knuth', 'Turing', 'Hopper'];
   }
-};
-
+  get() {
+    return this.names;
+  }
+}

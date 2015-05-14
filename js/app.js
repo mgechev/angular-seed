@@ -1,27 +1,29 @@
-import {Component, Template, bootstrap, Foreach} from 'angular2/angular2';
+import {
+  ComponentAnnotation as Component,
+  ViewAnnotation as View,
+  bootstrap,
+  For
+} from 'angular2/angular2';
+
 import {NameList} from 'services/NameList';
 
 @Component({
   selector: 'sample-app',
-  componentServices: [
-    NameList
-  ]
+  injectables: [NameList]
 })
-@Template({
-  url: './templates/sample-app.html',
-  directives: [Foreach]
+@View({
+  templateUrl: './templates/sample-app.html',
+  directives: [For]
 })
 class SampleApp {
   constructor() {
-    this.names = NameList.get();
-    this.newName = '';
+//    this.names = list.get();
+//    this.newName = '';
   }
   addName(newname) {
-    this.names.push(newname.value);
-    newname.value = '';
+//    this.names.push(newname.value);
+//    newname.value = '';
   }
 }
 
-export default () => {
-  bootstrap(SampleApp);
-};
+bootstrap(SampleApp);
