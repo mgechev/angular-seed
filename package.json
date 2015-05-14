@@ -11,17 +11,13 @@
   "devDependencies": {
     "del": "^1.1.1",
     "gulp": "^3.8.11",
-    "gulp-shell": "^0.4.0",
-    "gulp-traceur": "^0.17.0",
-    "systemjs-builder": "^0.10.6"
+    "gulp-traceur": "^0.17.0"
   },
   "dependencies": {
     "angular2": "2.0.0-alpha.23",
-    "es6-module-loader": "^0.16.0",
-    "react": "^0.13.3",
-    "react-mentions": "^0.1.4",
-    "reflect-metadata": "^0.1.0",
+    "es6-module-loader": "^0.15.0",
     "systemjs": "^0.15.0",
-    "zone.js": "^0.5.0"
+    "zone.js": "^0.4.1",
+    "reflect-metadata": "0.1.0"
   }
 }
