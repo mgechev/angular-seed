@@ -6,16 +6,13 @@
 </head>
 <body>
   <sample-app></sample-app>
-<script src="./lib/traceour/traceur-runtime.js"></script>
-<script src="./node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.js"></script>
-<script src="./node_modules/reflect-metadata/Reflect.js"></script>
-<script src="./node_modules/systemjs/lib/extension-register.js"></script>
-<script>
-register(System);
-</script>
+<script src="./lib/traceur-runtime.js"></script>
+<script src="./lib/es6-module-loader-sans-promises.js"></script>
+<script src="./lib/Reflect.js"></script>
+<script src="./lib/system.js"></script>
+<script src="./lib/zone.js"></script>
+<script src="./lib/angular2.js"></script>
 
-<script src="./lib/zone.js/zone.js"></script>
-<script src="./lib/angular2/angular2.js"></script>
 <script>
 System.baseURL += 'dev/';
 System.import('./app')
