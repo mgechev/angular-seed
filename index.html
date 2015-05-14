@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
+  <script>
+  window.module = {};
+  console.log(window);
+  </script>
 </head>
 <body>
   <sample-app></sample-app>
@@ -10,10 +14,12 @@
 <script src="./node_modules/zone.js/zone.js"></script>
 <script src="./node_modules/es6-module-loader/dist/es6-module-loader.js"></script>
 <script src="./node_modules/systemjs/dist/system.js"></script>
+<script src="./node_modules/reflect-metadata/Reflect.js"></script>
 <script>
   System.paths = {
-    'angular2/*': './lib/angular/*.js',
-    'rtts_assert/*': './lib/rtts_assert/es6/src/*.js',
+    'angular2/*': './node_modules/angular2/*.js',
+    'rtts_assert/*': './node_modules/angular2/node_modules/rtts_assert/*.js',
+    'rx': './node_modules/angular2/node_modules/rx/dist/rx.js',
     'app': './dev/app.js',
     'services/*' : './dev/services/*.js'
   };
