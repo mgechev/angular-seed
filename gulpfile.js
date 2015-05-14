@@ -1,7 +1,6 @@
 'use strict';
 
 var gulp = require('gulp');
-var shell = require('gulp-shell');
 var traceur = require('gulp-traceur');
 
 gulp.task('build', function () {
