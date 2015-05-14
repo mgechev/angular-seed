@@ -13,7 +13,7 @@ git clone https://github.com/mgechev/angular2-seed.git
 cd angular2-seed
 npm install
 npm install -g gulp
-gulp build:angular
+gulp build:lib
 gulp watch
 ```
 
