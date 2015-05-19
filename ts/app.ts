@@ -1,9 +1,5 @@
-import {
-  ComponentAnnotation as Component,
-  ViewAnnotation as View,
-  bootstrap,
-  For
-} from 'angular2/angular2';
+/// <reference path="../typings/angular2/angular2.d.ts" />
+import {Component, View, bootstrap, For} from 'angular2/angular2';
 
 import {NamesList} from './services/NameList';
 
@@ -16,7 +12,10 @@ import {NamesList} from './services/NameList';
   directives: [For]
 })
 class SampleApp {
-  constructor(list:NamesList) {
+  names: Array<string>;
+  newName: string;
+
+  constructor(list: NamesList) {
     this.names = list.get();
     this.newName = '';
   }
