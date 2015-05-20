@@ -3,12 +3,14 @@
 var gulp = require('gulp');
 var del = require('del');
 var Builder = require('systemjs-builder');
-var traceur = require('gulp-traceur');
+var ts = require('gulp-typescript');
+var plumber = require('gulp-plumber');
+var sourcemaps = require('gulp-sourcemaps');
 
 var http = require('http');
 var connect = require('connect');
 var serveStatic = require('serve-static');
-var open = require('open');
+var openResource = require('open');
 
 gulp.task('clean', function (done) {
   del(['dev'], done);
@@ -31,7 +33,7 @@ gulp.task('build:angular2', function () {
 
 gulp.task('build:lib', ['build:angular2'], function () {
   gulp.src([
-    './node_modules/gulp-traceur/node_modules/traceur/bin/traceur-runtime.js',
+    './node_modules/angular2/node_modules/traceur/bin/traceur-runtime.js',
     './node_modules/angular2/node_modules/zone.js/dist/zone.js',
     './node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.js',
     './node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.js.map',
@@ -43,27 +45,29 @@ gulp.task('build:lib', ['build:angular2'], function () {
   .pipe(gulp.dest('./lib'));
 });
 
-gulp.task('build', function () {
-  return gulp.src('./js/**/*.js')
-    .pipe(traceur({
-      sourceMaps: 'inline',
-      modules: 'instantiate',
-      annotations: true,
-      memberVariables: true,
-      types: true
-    }))
+var tsProject = ts.createProject('tsconfig.json', {
+  typescript: require('typescript')
+});
+
+gulp.task('build', ['clean'], function () {
+  var result = gulp.src('./ts/**/*.ts')
+    .pipe(plumber())
+    .pipe(sourcemaps.init())
+    .pipe(ts(tsProject));
+
+  return result.js
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('./dev'));
 });
 
 gulp.task('serve', ['build:lib', 'build'], function () {
-  var port = 5555
+  var port = 5555;
   var app;
 
-  gulp.watch('./js/**', ['build']);
+  gulp.watch('./ts/**', ['build']);
 
   app = connect().use(serveStatic(__dirname));
   http.createServer(app).listen(port, function () {
-    open('http://localhost:' + port);
+    openResource('http://localhost:' + port);
   });
 });
-
