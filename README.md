@@ -15,8 +15,6 @@ gulp build:lib
 gulp serve
 ```
 
-*Note: This repository exists mostly for bootstrapping my own experiments with AngularJS 2.*
-
 # License
 
 MIT
