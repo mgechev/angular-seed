@@ -5,6 +5,7 @@ var del = require('del');
 var Builder = require('systemjs-builder');
 var ts = require('gulp-typescript');
 var plumber = require('gulp-plumber');
+var sourcemaps = require('gulp-sourcemaps');
 
 var http = require('http');
 var connect = require('connect');
@@ -51,9 +52,12 @@ var tsProject = ts.createProject('tsconfig.json', {
 gulp.task('build', ['clean'], function () {
     var result = gulp.src('./ts/**/*.ts')
         .pipe(plumber())
+        .pipe(sourcemaps.init())
         .pipe(ts(tsProject));
 
-    return result.js.pipe(gulp.dest('./dev'));
+    return result.js
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest('./dev'));
 });
 
 gulp.task('serve', ['build:lib', 'build'], function () {
