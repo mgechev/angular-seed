@@ -239,7 +239,7 @@ interface _ComponentArg {
    * }
    * ```
    */
-  injectables?: List<any>;
+  appInjector?: List<any>;
 
   /**
    * Specifies a set of lifecycle hostListeners in which the directive participates.
@@ -533,7 +533,7 @@ declare module "angular2/angular2" {
    * - `<template [ng-for]="#item" [of]="items" #i="index"><li>...</li></template>`
    *
    */
-  function For(): void;
+  function NgFor(): void;
 
   /**
    * Removes or recreates a portion of the DOM tree based on an {expression}.
@@ -557,7 +557,7 @@ declare module "angular2/angular2" {
    * - `<template [ng-if]="condition"><div>...</div></template>`
    *
    */
-  function If(): void;
+  function NgIf(): void;
 
   /**
    * The `NonBindable` directive tells Angular not to compile or bind the contents of the current
@@ -573,7 +573,7 @@ declare module "angular2/angular2" {
    * ```
    *
    */
-  function NonBindable(): void;
+  function NgNonBindable(): void;
 
   /**
    * The `Switch` directive is used to conditionally swap DOM structure on your template based on a
@@ -601,7 +601,7 @@ declare module "angular2/angular2" {
    * ```
    *
    */
-  function Switch(): void;
+  function NgSwitch(): void;
   var Observable: any;
   var EventEmitter: any;
   var DomRenderer: any;
