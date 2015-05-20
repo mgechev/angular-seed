@@ -9,7 +9,7 @@ var plumber = require('gulp-plumber');
 var http = require('http');
 var connect = require('connect');
 var serveStatic = require('serve-static');
-var open = require('open');
+var openResource = require('open');
 
 gulp.task('clean', function (done) {
   del(['dev'], done);
@@ -45,26 +45,25 @@ gulp.task('build:lib', ['build:angular2'], function () {
 });
 
 var tsProject = ts.createProject('tsconfig.json', {
-    typescript: require("typescript")
+  typescript: require('typescript')
 });
 
 gulp.task('build', ['clean'], function () {
-    var result = gulp.src('./ts/**/*.ts')
-        .pipe(plumber())
-        .pipe(ts(tsProject));
+  var result = gulp.src('./ts/**/*.ts')
+    .pipe(plumber())
+    .pipe(ts(tsProject));
 
-    return result.js.pipe(gulp.dest('./dev'));
+  return result.js.pipe(gulp.dest('./dev'));
 });
 
 gulp.task('serve', ['build:lib', 'build'], function () {
-  var port = 5555
+  var port = 5555;
   var app;
 
   gulp.watch('./ts/**', ['build']);
 
   app = connect().use(serveStatic(__dirname));
   http.createServer(app).listen(port, function () {
-    open('http://localhost:' + port);
+    openResource('http://localhost:' + port);
   });
 });
-
