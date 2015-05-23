@@ -12,6 +12,7 @@ It is something similar to the AngularJS Quick Start but does the entire build w
 git clone https://github.com/mgechev/angular2-seed.git
 cd angular2-seed
 npm install
+# If you don't have gulp already installed
 npm install -g gulp
 gulp build:lib
 gulp serve
