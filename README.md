@@ -18,6 +18,10 @@ gulp build:lib
 gulp serve
 ```
 
+# Change Log
+
+You can follow the [Angular 2 change log here](https://github.com/angular/angular/blob/master/CHANGELOG.md).
+
 # License
 
 MIT
