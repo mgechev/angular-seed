@@ -20,6 +20,12 @@ gulp build:lib
 gulp serve
 ```
 
+# Contributors
+
+[<img alt="mgechev" src="https://avatars.githubusercontent.com/u/455023?v=3&s=117" width="117">](https://github.com/mgechev) |[<img alt="ludohenin" src="https://avatars.githubusercontent.com/u/1011516?v=3&s=117" width="117">](https://github.com/ludohenin) |
+:---: |:---: |
+[mgechev](https://github.com/mgechev) |[ludohenin](https://github.com/ludohenin) |
+
 # Change Log
 
 You can follow the [Angular 2 change log here](https://github.com/angular/angular/blob/master/CHANGELOG.md).
