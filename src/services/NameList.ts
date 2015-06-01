@@ -6,4 +6,7 @@ export class NamesList {
   get() {
     return this.names;
   }
+  add(value) {
+    this.names.push(value);
+  }
 }

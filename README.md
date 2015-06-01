@@ -14,7 +14,7 @@ cd angular2-seed
 npm install
 # If you don't have gulp already installed
 npm install -g gulp
-gulp build:lib
+gulp build.lib.dev
 gulp serve
 ```
 

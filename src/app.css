@@ -1,4 +1,3 @@
-<style>
 .sample-app-content {
   font-family: Verdana;
 }
@@ -31,13 +30,3 @@
   font-size: 1em;
   outline: none;
 }
-</style>
-
-<section class="sample-app-content">
-  <nav>
-    <a router-link="component1">Component 1</a>
-    <a router-link="component2">Component 2</a>
-  </nav>
-
-  <router-outlet></router-outlet>
-</section>

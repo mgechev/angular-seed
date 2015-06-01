@@ -12,10 +12,11 @@
     "connect": "^3.3.5",
     "del": "^1.1.1",
     "gulp": "^3.8.11",
-    "gulp-typescript": "~2.7.5",
     "gulp-plumber": "~1.0.1",
     "gulp-sourcemaps": "~1.5.2",
+    "gulp-typescript": "~2.7.5",
     "open": "0.0.5",
+    "run-sequence": "^1.1.0",
     "serve-static": "^1.9.2",
     "systemjs-builder": "^0.10.6",
     "typescript": "~1.5.0-beta"
