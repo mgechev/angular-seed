@@ -115,9 +115,9 @@ gulp.task('build.dev', function (done) {
 // To be implemented.
 
 // --------------
-// Serve.
+// Serve dev.
 
-gulp.task('serve', ['build.app.dev'], function () {
+gulp.task('serve.dev', ['build.app.dev'], function () {
   var port = 5555;
   var app;
 
