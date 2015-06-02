@@ -17,7 +17,7 @@ npm install
 # If you don't have gulp already installed
 npm install -g gulp
 gulp build.lib.dev
-gulp serve
+gulp serve.dev
 ```
 
 # Contributors
