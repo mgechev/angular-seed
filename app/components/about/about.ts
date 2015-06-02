@@ -1,23 +1,25 @@
 import {Component, View, NgFor} from 'angular2/angular2';
 
-import {NamesList} from '../services/NameList';
+import {NamesList} from '../../services/NameList';
 
 @Component({
   selector: 'component-2',
   appInjector: [NamesList]
 })
 @View({
-  templateUrl: './templates/component2.html',
+  templateUrl: './components/about/about.html',
   directives: [NgFor]
 })
-export class Component2 {
+export class About {
   names: Array<string>;
+  list: NamesList;
 
   constructor(list: NamesList) {
+    this.list = list;
     this.names = list.get();
   }
   addName(newname) {
-    this.names.push(newname.value);
+    this.list.add(newname.value);
     newname.value = '';
   }
 }
