@@ -62,17 +62,18 @@ var tsProject = ts.createProject('tsconfig.json', {
 // --------------
 // Clean.
 
-gulp.task('clean', function(done) {
+gulp.task('clean', function (done) {
   del(PATH.dest.all, done);
 });
 
-gulp.task('clean.dev', function(done) {
+gulp.task('clean.dev', function (done) {
   del(PATH.dest.dev.all, done);
 });
 
 gulp.task('clean.app.dev', function (done) {
   // TODO: rework this part.
-  del([join(PATH.dest.dev.all, '**/*'), '!' + PATH.dest.dev.lib, '!' + join(PATH.dest.dev.lib ,'*')], done);
+  del([join(PATH.dest.dev.all, '**/*'), '!' +
+       PATH.dest.dev.lib, '!' + join(PATH.dest.dev.lib, '*')], done);
 });
 
 // --------------
@@ -89,7 +90,7 @@ gulp.task('build.lib.dev', ['build.ng2.dev'], function () {
 });
 
 gulp.task('build.js.dev', ['clean.app.dev'], function () {
-  var result = gulp.src('./src/**/*ts')
+  var result = gulp.src('./app/**/*ts')
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(ts(tsProject));
@@ -99,12 +100,12 @@ gulp.task('build.js.dev', ['clean.app.dev'], function () {
     .pipe(gulp.dest(PATH.dest.dev.all));
 });
 
-gulp.task('build.app.dev', ['build.js.dev'], function() {
-  return gulp.src(['./src/**/*.html', './src/**/*.css'])
+gulp.task('build.app.dev', ['build.js.dev'], function () {
+  return gulp.src(['./app/**/*.html', './app/**/*.css'])
     .pipe(gulp.dest(PATH.dest.dev.all));
 });
 
-gulp.task('build.dev', function(done) {
+gulp.task('build.dev', function (done) {
   runSequence('clean.dev', ['build.lib.dev', 'build.app.dev'], done);
 });
 
@@ -120,7 +121,7 @@ gulp.task('serve', ['build.app.dev'], function () {
   var port = 5555;
   var app;
 
-  gulp.watch('./src/**', ['build.app.dev']);
+  gulp.watch('./app/**', ['build.app.dev']);
 
   app = connect().use(serveStatic(join(__dirname, PATH.dest.dev.all)));
   http.createServer(app).listen(port, function () {
