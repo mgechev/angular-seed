@@ -139,7 +139,7 @@ gulp.task('build.assets.dev', ['build.js.dev'], function () {
 });
 
 gulp.task('build.index.dev', function() {
-  var target = gulp.src(injectableDevAssetsRef('dev'), { read: false });
+  var target = gulp.src(injectableDevAssetsRef(), { read: false });
   return gulp.src('./app/index.html')
     .pipe(inject(target, { transform: transformPath('dev') }))
     .pipe(gulp.dest(PATH.dest.dev.all));
@@ -225,7 +225,7 @@ gulp.task('build.app.prod', function (done) {
 
 gulp.task('build.prod', function (done) {
   runSequence('clean.prod', 'build.lib.prod', 'clean.tmp', 'build.app.prod',
-              'clean.tmp', done);
+              done);
 });
 
 // --------------
