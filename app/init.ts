@@ -1,4 +1,5 @@
 /// <reference path="../typings/custom.system.d.ts" />
+// Ugly workaround of systemjs issue
 (function () {
   var c = System.defined['angular2/core'];
   var i = c.deps.indexOf('angular2/src/core/compiler/interfaces');
