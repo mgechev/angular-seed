@@ -236,7 +236,7 @@ gulp.task('build.prod', function (done) {
 // --------------
 // Serve dev.
 
-gulp.task('serve.dev', ['build.app.dev'], function () {
+gulp.task('serve.dev', ['build.dev'], function () {
   var app;
 
   gulp.watch('./app/**', ['build.app.dev']);
@@ -250,7 +250,7 @@ gulp.task('serve.dev', ['build.app.dev'], function () {
 // --------------
 // Serve prod.
 
-gulp.task('serve.prod', ['build.app.prod'], function () {
+gulp.task('serve.prod', ['build.prod'], function () {
   var app;
 
   gulp.watch('./app/**', ['build.app.prod']);

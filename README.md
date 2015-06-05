@@ -17,10 +17,8 @@ npm install
 # If you don't have gulp already installed
 npm install -g gulp
 # dev
-gulp build.lib.dev
 gulp serve.dev
 # prod
-gulp build.lib.prod
 gulp serve.prod
 ```
 
