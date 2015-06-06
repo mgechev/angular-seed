@@ -7,7 +7,7 @@ import {NamesList} from '../../services/NameList';
   appInjector: [NamesList]
 })
 @View({
-  templateUrl: './components/about/about.html',
+  templateUrl: './components/about/about.html?v=<%= VERSION %>',
   directives: [NgFor]
 })
 export class About {

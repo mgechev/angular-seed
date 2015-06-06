@@ -13,7 +13,7 @@ import {About} from './components/about/about';
   { path: '/about', component: About, as: 'about' }
 ])
 @View({
-  templateUrl: './app.html',
+  templateUrl: './app.html?v=<%= VERSION %>',
   directives: [RouterOutlet, RouterLink]
 })
 class App {}
