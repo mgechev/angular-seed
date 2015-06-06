@@ -34,7 +34,7 @@
   "dependencies": {
     "angular2": "2.0.0-alpha.25",
     "es6-module-loader": "^0.15.0",
-    "systemjs": "^0.15.0",
+    "systemjs": "^0.16.0",
     "zone.js": "^0.4.1",
     "reflect-metadata": "0.1.0"
   }

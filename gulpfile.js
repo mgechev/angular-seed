@@ -51,8 +51,7 @@ var PATH = {
       './node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.js.map',
       './node_modules/reflect-metadata/Reflect.js',
       './node_modules/reflect-metadata/Reflect.js.map',
-      './node_modules/systemjs/dist/system.js',
-      './node_modules/systemjs/dist/system.js.map',
+      './node_modules/systemjs/dist/system.src.js',
       './node_modules/angular2/node_modules/zone.js/dist/zone.js'
     ]
   }
@@ -60,7 +59,7 @@ var PATH = {
 
 var ng2Builder = new Builder({
   paths: {
-    'angular2/*': 'node_modules/angular2/es6/prod/*.es6',
+    'angular2/*': 'node_modules/angular2/es6/dev/*.es6',
     rx: 'node_modules/angular2/node_modules/rx/dist/rx.js'
   },
   meta: {
