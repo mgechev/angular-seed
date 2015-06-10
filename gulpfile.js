@@ -191,10 +191,10 @@ gulp.task('build.lib.prod', ['build.ng2.prod'], function () {
 gulp.task('build.js.tmp', function () {
   var result = gulp.src(['./app/**/*ts', '!./app/init.ts'])
     .pipe(plumber())
-    .pipe(sourcemaps.init())
     .pipe(tsc(tsProject));
 
   return result.js
+    .pipe(template({ VERSION: getVersion() }))
     .pipe(gulp.dest('tmp'));
 });
 
