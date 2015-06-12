@@ -302,7 +302,7 @@ gulp.task('serve.prod', ['build.prod'], function () {
 function transformPath(env) {
   var v = '?v=' + getVersion();
   return function (filepath) {
-    arguments[0] = filepath.replace('/' + PATH.dest[env].all, '') + v;
+    arguments[0] = filepath.replace('/' + PATH.dest[env].all, '.') + v;
     return inject.transform.apply(inject.transform, arguments);
   };
 }
