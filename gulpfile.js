@@ -162,7 +162,7 @@ gulp.task('build.app.dev', function (done) {
 });
 
 gulp.task('build.dev', function (done) {
-  runSequence('clean.dev', ['build.lib.dev', 'build.app.dev'], done);
+  runSequence('clean.dev', 'build.lib.dev', 'build.app.dev', done);
 });
 
 // --------------
