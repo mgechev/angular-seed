@@ -22,6 +22,16 @@ gulp serve.dev
 gulp serve.prod
 ```
 
+# Now to extend?
+
+If you want to use your custom libraries:
+
+```bash
+npm install my-library --save
+vim gulpfile.js
+```
+Add reference to the installed library in `PATH.src.lib`.
+
 # Contributors
 
 [<img alt="mgechev" src="https://avatars.githubusercontent.com/u/455023?v=3&s=117" width="117">](https://github.com/mgechev) |[<img alt="ludohenin" src="https://avatars.githubusercontent.com/u/1011516?v=3&s=117" width="117">](https://github.com/ludohenin) |[<img alt="jgolla" src="https://avatars.githubusercontent.com/u/1542447?v=3&s=117" width="117">](https://github.com/jgolla) |
