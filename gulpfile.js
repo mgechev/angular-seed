@@ -181,10 +181,8 @@ gulp.task('build.lib.prod', ['build.ng2.prod'], function () {
 
   return series(lib, ng2, router)
     .pipe(jsOnly)
-    .pipe(sourcemaps.init())
     .pipe(concat('lib.js'))
     .pipe(uglify())
-    .pipe(sourcemaps.write())
     .pipe(gulp.dest(PATH.dest.prod.lib));
 });
 
