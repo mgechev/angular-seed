@@ -223,9 +223,7 @@ gulp.task('build.assets.prod', ['build.js.prod'], function () {
     .pipe(minifyHTML(HTMLMinifierOpts))
     .pipe(filterHTML.restore())
     .pipe(filterCSS)
-    .pipe(sourcemaps.init())
     .pipe(minifyCSS())
-    .pipe(sourcemaps.write())
     .pipe(filterCSS.restore())
     .pipe(gulp.dest(PATH.dest.prod.all));
 });
