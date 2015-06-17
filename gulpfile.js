@@ -272,7 +272,7 @@ gulp.task('serve.dev', ['build.dev'], function () {
   var app;
 
   watch('./app/**', function () {
-    runSequence('build.app.dev');
+    gulp.start('build.app.dev');
   });
 
   app = connect().use(serveStatic(join(__dirname, PATH.dest.dev.all)));
@@ -288,7 +288,7 @@ gulp.task('serve.prod', ['build.prod'], function () {
   var app;
 
   watch('./app/**', function () {
-    runSequence('build.app.prod');
+    gulp.start('build.app.prod');
   });
 
   app = connect().use(serveStatic(join(__dirname, PATH.dest.prod.all)));
