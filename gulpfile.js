@@ -59,7 +59,7 @@ var PATH = {
 
 var ng2Builder = new Builder({
   paths: {
-    'angular2/*': 'node_modules/angular2/es6/dev/*.es6',
+    'angular2/*': 'node_modules/angular2/es6/dev/*.js',
     rx: 'node_modules/angular2/node_modules/rx/dist/rx.js'
   },
   meta: {
