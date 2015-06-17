@@ -12,6 +12,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var template = require('gulp-template');
 var tsc = require('gulp-typescript');
 var uglify = require('gulp-uglify');
+var watch = require('gulp-watch');
 
 var Builder = require('systemjs-builder');
 var del = require('del');
@@ -270,7 +271,9 @@ gulp.task('bump.reset', function() {
 gulp.task('serve.dev', ['build.dev'], function () {
   var app;
 
-  gulp.watch('./app/**', ['build.app.dev']);
+  watch('./app/**', function () {
+    runSequence('build.app.dev');
+  });
 
   app = connect().use(serveStatic(join(__dirname, PATH.dest.dev.all)));
   http.createServer(app).listen(port, function () {
@@ -284,7 +287,9 @@ gulp.task('serve.dev', ['build.dev'], function () {
 gulp.task('serve.prod', ['build.prod'], function () {
   var app;
 
-  gulp.watch('./app/**', ['build.app.prod']);
+  watch('./app/**', function () {
+    runSequence('build.app.prod');
+  });
 
   app = connect().use(serveStatic(join(__dirname, PATH.dest.prod.all)));
   http.createServer(app).listen(port, function () {

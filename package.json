@@ -23,6 +23,7 @@
     "gulp-template": "^3.0.0",
     "gulp-typescript": "~2.7.5",
     "gulp-uglify": "^1.2.0",
+    "gulp-watch": "^4.2.4",
     "open": "0.0.5",
     "run-sequence": "^1.1.0",
     "semver": "^4.3.6",
