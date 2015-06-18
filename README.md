@@ -22,6 +22,34 @@ gulp serve.dev
 gulp serve.prod
 ```
 
+# Directory Structure
+
+```
+.
+├── app
+│   ├── components
+│   │   ├── about
+│   │   │   ├── about.html
+│   │   │   └── about.ts
+│   │   └── home
+│   │       ├── home.html
+│   │       └── home.ts
+│   ├── services
+│   ├── app.css
+│   ├── app.html
+│   ├── app.ts
+│   ├── index.html
+│   └── init.ts
+├── dist
+│   ├── dev
+│   └── prod
+├── typings
+├── gulpfile.js
+├── package.json
+├── tsconfig.json
+└── tsd.json
+```
+
 # Now to extend?
 
 If you want to use your custom libraries:
