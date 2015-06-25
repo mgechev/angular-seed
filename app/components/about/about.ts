@@ -11,12 +11,7 @@ import {NamesList} from '../../services/NameList';
   directives: [NgFor]
 })
 export class About {
-  names: Array<string>;
-  list: NamesList;
-
-  constructor(list: NamesList) {
-    this.list = list;
-    this.names = list.get();
+  constructor(public list: NamesList) {
   }
   addName(newname) {
     this.list.add(newname.value);
