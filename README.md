@@ -50,6 +50,11 @@ gulp serve.prod
 └── tsd.json
 ```
 
+# Configuration
+
+Configure your app base if you serve the app from another directory than root in `gulpfile.js`.
+Defaults to `var APP_BASE = '/'`
+
 # Now to extend?
 
 If you want to use your custom libraries:

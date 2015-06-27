@@ -29,6 +29,7 @@ var openResource = require('open');
 
 // --------------
 // Configuration.
+var APP_BASE = '/';
 
 var PATH = {
   dest: {
@@ -141,7 +142,7 @@ gulp.task('build.js.dev', function () {
 
   return result.js
     .pipe(sourcemaps.write())
-    .pipe(template({ VERSION: getVersion() }))
+    .pipe(template(templateLocals()))
     .pipe(gulp.dest(PATH.dest.dev.all));
 });
 
@@ -154,7 +155,7 @@ gulp.task('build.index.dev', function() {
   var target = gulp.src(injectableDevAssetsRef(), { read: false });
   return gulp.src('./app/index.html')
     .pipe(inject(target, { transform: transformPath('dev') }))
-    .pipe(template({ VERSION: getVersion() }))
+    .pipe(template(templateLocals()))
     .pipe(gulp.dest(PATH.dest.dev.all));
 });
 
@@ -211,7 +212,7 @@ gulp.task('build.init.prod', function() {
 
   return result.js
     .pipe(uglify())
-    .pipe(template({ VERSION: getVersion() }))
+    .pipe(template(templateLocals()))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(PATH.dest.prod.all));
 });
@@ -234,7 +235,7 @@ gulp.task('build.index.prod', function() {
                          join(PATH.dest.prod.all, '**/*.css')], { read: false });
   return gulp.src('./app/index.html')
     .pipe(inject(target, { transform: transformPath('prod') }))
-    .pipe(template({ VERSION: getVersion() }))
+    .pipe(template(templateLocals()))
     .pipe(gulp.dest(PATH.dest.prod.all));
 });
 
@@ -303,7 +304,7 @@ gulp.task('serve.prod', ['build.prod'], function () {
 function transformPath(env) {
   var v = '?v=' + getVersion();
   return function (filepath) {
-    arguments[0] = filepath.replace('/' + PATH.dest[env].all, '.') + v;
+    arguments[0] = filepath.replace('/' + PATH.dest[env].all, '') + v;
     return inject.transform.apply(inject.transform, arguments);
   };
 }
@@ -320,6 +321,13 @@ function injectableDevAssetsRef() {
 function getVersion(){
   var pkg = JSON.parse(fs.readFileSync('package.json'));
   return pkg.version;
+}
+
+function templateLocals() {
+  return {
+    VERSION: getVersion(),
+    APP_BASE: APP_BASE
+  };
 }
 
 function registerBumpTasks() {
