@@ -4,9 +4,11 @@ import {RouteConfig, RouterOutlet, RouterLink, routerInjectables} from 'angular2
 
 import {Home} from './components/home/home';
 import {About} from './components/about/about';
+import {NamesList} from './services/NameList';
 
 @Component({
-  selector: 'app'
+  selector: 'app',
+  appInjector: [NamesList]
 })
 @RouteConfig([
   { path: '/', component: Home, as: 'home' },
