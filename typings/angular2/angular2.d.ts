@@ -1,4 +1,4 @@
-// Type definitions for Angular v2.0.0-alpha.28
+// Type definitions for Angular v2.0.0-alpha.29
 // Project: http://angular.io/
 // Definitions by: angular team <https://github.com/angular/>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
@@ -505,9 +505,7 @@ declare module "angular2/angular2" {
    *
    * @exportedAs angular2/annotations
    */
-  function Directive(args: _DirectiveArgs): (target:any) => any;
-
-  interface _DirectiveArgs {
+  class Directive extends  Injectable {
 
     /**
      * The CSS selector that triggers the instantiation of a directive.
@@ -540,7 +538,7 @@ declare module "angular2/angular2" {
      *
      * The directive would only be instantiated on the `<input type="text">` element.
      */
-    selector?: string;
+    selector: string;
 
     /**
      * Enumerates the set of properties that accept data binding for a directive.
@@ -634,7 +632,7 @@ declare module "angular2/angular2" {
      * In this case, the two pipes compose as if they were inlined: `someExpression | somePipe |
      * keyValDiff`.
      */
-    properties?: List<string>;
+    properties: List<string>;
 
     /**
      * Enumerates the set of emitted events.
@@ -678,7 +676,7 @@ declare module "angular2/angular2" {
      * }
      * ```
      */
-    events?: List<string>;
+    events: List<string>;
 
     /**
      * Specifiy the events, actions, properties and attributes related to the host element.
@@ -805,7 +803,7 @@ declare module "angular2/angular2" {
      *
      * In this example calling focus on InputDirective will result in calling focus on the input.
      */
-    host?: StringMap<string, string>;
+    host: StringMap<string, string>;
 
     /**
      * Specifies which lifecycle should be notified to the directive.
@@ -813,12 +811,12 @@ declare module "angular2/angular2" {
      * See <a href='/angular2/angular2/onChange'><code>onChange</code></a>, <a href='/angular2/angular2/onDestroy'><code>onDestroy</code></a>, <a href='/angular2/angular2/onCheck'><code>onCheck</code></a>,
      * <a href='/angular2/angular2/onInit'><code>onInit</code></a>, <a href='/angular2/angular2/onAllChangesDone'><code>onAllChangesDone</code></a> for details.
      */
-    lifecycle?: List<LifecycleEvent>;
+    lifecycle: List<LifecycleEvent>;
 
     /**
      * If set to false the compiler does not compile the children of this directive.
      */
-    compileChildren?: boolean;
+    compileChildren: boolean;
 
     /**
      * Defines the set of injectable objects that are visible to a Directive and its light dom
@@ -850,7 +848,7 @@ declare module "angular2/angular2" {
      * }
      * ```
      */
-    hostInjector?: List<any>;
+    hostInjector: List<any>;
 
     /**
      * Defines the name that can be used in the template to assign this directive to a variable.
@@ -877,7 +875,7 @@ declare module "angular2/angular2" {
      *
      * ```
      */
-    exportAs?: string;
+    exportAs: string;
   }
 
 
@@ -930,7 +928,7 @@ declare module "angular2/angular2" {
     selector: any;
     isVarBindingQuery: boolean;
     varBindings: List<string>;
-    toString(): any;
+    toString(): string;
   }
 
 
@@ -961,6 +959,22 @@ declare module "angular2/angular2" {
    * @exportedAs angular2/di_annotations
    */
   class Injectable {
+    visibility: Visibility;
+  }
+
+
+  /**
+   * Specifies how injector should resolve a dependency.
+   *
+   * See <a href='/angular2/angular2/Self'><code>Self</code></a>, <a href='/angular2/angular2/Parent'><code>Parent</code></a>, <a href='/angular2/angular2/Ancestor'><code>Ancestor</code></a>, <a href='/angular2/angular2/Unbounded'><code>Unbounded</code></a>.
+   *
+   * @exportedAs angular2/di_annotations
+   */
+  class Visibility {
+    depth: number;
+    crossBoundaries: boolean;
+    includeSelf: boolean;
+    toString(): string;
   }
 
 
@@ -977,8 +991,8 @@ declare module "angular2/angular2" {
     reset(newList: any): any;
     add(obj: any): any;
     fireCallbacks(): any;
-    onChange(callback: any): any;
-    removeCallback(callback: any): any;
+    onChange(callback: any): void;
+    removeCallback(callback: any): void;
     length: any;
     first: any;
     last: any;
@@ -1064,13 +1078,6 @@ declare module "angular2/angular2" {
     views: List<AppView>;
   }
 
-  class Visibility extends  DependencyAnnotation {
-    depth: number;
-    crossComponentBoundaries: boolean;
-    includeSelf: boolean;
-    toString(): any;
-  }
-
 
   /**
    * Entry point for creating, moving views in the view hierarchy and destroying views.
@@ -1090,7 +1097,7 @@ declare module "angular2/angular2" {
     getComponent(hostLocation: ElementRef): any;
     createRootHostView(hostProtoViewRef: ProtoViewRef, overrideSelector: string, injector: Injector): ViewRef;
     destroyRootHostView(hostViewRef: ViewRef): any;
-    createViewInContainer(viewContainerLocation: ElementRef, atIndex: number, protoViewRef: ProtoViewRef, context?: ElementRef, injector?: Injector): ViewRef;
+    createViewInContainer(viewContainerLocation: ElementRef, atIndex: number, protoViewRef: ProtoViewRef, context?: ElementRef, bindings?: ResolvedBinding[]): ViewRef;
     destroyViewInContainer(viewContainerLocation: ElementRef, atIndex: number): any;
     attachViewInContainer(viewContainerLocation: ElementRef, atIndex: number, viewRef: ViewRef): ViewRef;
     detachViewInContainer(viewContainerLocation: ElementRef, atIndex: number): ViewRef;
@@ -1146,13 +1153,13 @@ declare module "angular2/angular2" {
   /**
    * ON_PUSH means that the change detector's mode will be set to CHECK_ONCE during hydration.
    */
-  var ON_PUSH: any;
+  var ON_PUSH;
 
 
   /**
    * DEFAULT means that the change detector's mode will be set to CHECK_ALWAYS during hydration.
    */
-  var DEFAULT: any;
+  var DEFAULT;
 
 
   /**
@@ -1222,7 +1229,7 @@ declare module "angular2/angular2" {
    *
    *  onDestroy() {}
    *
-   *  transform(value) {
+   *  transform(value, args = []) {
    *    return `${value}${value}`;
    *  }
    * }
@@ -1233,12 +1240,12 @@ declare module "angular2/angular2" {
   interface Pipe {
     supports(obj: any): boolean;
     onDestroy(): void;
-    transform(value: any): any;
+    transform(value: any, args: List<any>): any;
   }
 
   interface PipeFactory {
     supports(obs: any): boolean;
-    create(cdRef: any): Pipe;
+    create(cdRef: ChangeDetectorRef): Pipe;
   }
 
 
@@ -1247,8 +1254,8 @@ declare module "angular2/angular2" {
    */
   class NullPipe extends  BasePipe {
     called: boolean;
-    supports(obj: any): any;
-    transform(value: any): any;
+    supports(obj: any): boolean;
+    transform(value: any, args?: List<any>): WrappedValue;
   }
 
 
@@ -1257,10 +1264,10 @@ declare module "angular2/angular2" {
    */
   class NullPipeFactory implements  PipeFactory {
     supports(obj: any): boolean;
-    create(cdRef: any): Pipe;
+    create(cdRef: ChangeDetectorRef): Pipe;
   }
 
-  var defaultPipes: any;
+  var defaultPipes;
 
 
   /**
@@ -1395,7 +1402,7 @@ declare module "angular2/angular2" {
   class BasePipe implements  Pipe {
     supports(obj: any): boolean;
     onDestroy(): void;
-    transform(value: any): any;
+    transform(value: any, args: List<any>): any;
   }
 
   class DirectiveRecord {
@@ -1408,13 +1415,9 @@ declare module "angular2/angular2" {
     isOnPushChangeDetection(): boolean;
   }
 
-  var Inject: any;
+  var Inject;
 
-  var InjectPromise: any;
-
-  var InjectLazy: any;
-
-  var Optional: any;
+  var Optional;
 
 
   /**
@@ -1500,11 +1503,7 @@ declare module "angular2/angular2" {
    * @exportedAs angular2/di
    */
   class Injector {
-
-    /**
-     * Direct parent of this injector.
-     */
-    parent: Injector;
+    ei: any;
 
     /**
      * Retrieves an instance from the injector.
@@ -1524,12 +1523,24 @@ declare module "angular2/angular2" {
     getOptional(token: any): any;
 
     /**
-     * Retrieves an instance from the injector asynchronously. Used with asynchronous bindings.
+     * Retrieves an instance from the injector.
      *
-     * @param `token`: usually a `Type`. (Same as token used while setting up a binding).
-     * @returns a `Promise` which resolves to the instance represented by the token.
+     * @param `index`: index of an instance.
+     * @returns an instance represented by the index. Throws if not found.
      */
-    asyncGet(token: any): Promise<any>;
+    getAt(index: number): any;
+
+    /**
+     * Direct parent of this injector.
+     */
+    parent: Injector;
+
+    /**
+     * Internal. Do not use.
+     *
+     * We return `any` not to export the InjectorStrategy type.
+     */
+    internalStrategy: any;
 
     /**
      * Creates a child injector and loads a new set of bindings into it.
@@ -1551,6 +1562,11 @@ declare module "angular2/angular2" {
      * @returns a new child <a href='/angular2/angular2/Injector'><code>Injector</code></a>.
      */
     createChildFromResolved(bindings: List<ResolvedBinding>): Injector;
+  }
+
+  class ProtoInjector {
+    distanceToParent: number;
+    getBindingAtIndex(index: number): any;
   }
 
 
@@ -1679,34 +1695,7 @@ declare module "angular2/angular2" {
     toFactory: Function;
 
     /**
-     * Binds a key to a function which computes the value asynchronously.
-     *
-     * ## Example
-     *
-     * ```javascript
-     * var injector = Injector.resolveAndCreate([
-     *   new Binding(Number, { toAsyncFactory: () => {
-     *     return new Promise((resolve) => resolve(1 + 2));
-     *   }}),
-     *   new Binding(String, { toFactory: (value) => { return "Value: " + value; },
-     *                         dependencies: [Number]})
-     * ]);
-     *
-     * injector.asyncGet(Number).then((v) => expect(v).toBe(3));
-     * injector.asyncGet(String).then((v) => expect(v).toBe('Value: 3'));
-     * ```
-     *
-     * The interesting thing to note is that event though `Number` has an async factory, the `String`
-     * factory function takes the resolved value. This shows that the <a href='/angular2/angular2/Injector'><code>Injector</code></a> delays
-     * executing the
-     * `String` factory
-     * until after the `Number` is resolved. This can only be done if the `token` is retrieved using
-     * the `asyncGet` API in the <a href='/angular2/angular2/Injector'><code>Injector</code></a>.
-     */
-    toAsyncFactory: Function;
-
-    /**
-     * Used in conjunction with `toFactory` or `toAsyncFactory` and specifies a set of dependencies
+     * Used in conjunction with `toFactory` and specifies a set of dependencies
      * (as `token`s) which should be injected into the factory function.
      *
      * ## Example
@@ -1854,7 +1843,6 @@ declare module "angular2/angular2" {
    * @exportedAs angular2/di_errors
    */
   class InstantiationError extends  AbstractBindingError {
-    cause: any;
     causeKey: any;
   }
 
@@ -1919,11 +1907,6 @@ declare module "angular2/angular2" {
      * Arguments (dependencies) to the `factory` function.
      */
     dependencies: List<Dependency>;
-
-    /**
-     * Specifies whether the `factory` function returns a `Promise`.
-     */
-    providedAsPromise: boolean;
   }
 
 
@@ -2033,31 +2016,6 @@ declare module "angular2/angular2" {
      * ```
      */
     toFactory(factoryFunction: Function, dependencies?: List<any>): Binding;
-
-    /**
-     * Binds a key to a function which computes the value asynchronously.
-     *
-     * ## Example
-     *
-     * ```javascript
-     * var injector = Injector.resolveAndCreate([
-     *   bind(Number).toAsyncFactory(() => {
-     *     return new Promise((resolve) => resolve(1 + 2));
-     *   }),
-     *   bind(String).toFactory((v) => { return "Value: " + v; }, [Number])
-     * ]);
-     *
-     * injector.asyncGet(Number).then((v) => expect(v).toBe(3));
-     * injector.asyncGet(String).then((v) => expect(v).toBe('Value: 3'));
-     * ```
-     *
-     * The interesting thing to note is that event though `Number` has an async factory, the `String`
-     * factory function takes the resolved value. This shows that the <a href='/angular2/angular2/Injector'><code>Injector</code></a> delays
-     * executing of the `String` factory
-     * until after the `Number` is resolved. This can only be done if the `token` is retrieved using
-     * the `asyncGet` API in the <a href='/angular2/angular2/Injector'><code>Injector</code></a>.
-     */
-    toAsyncFactory(factoryFunction: Function, dependencies?: List<any>): Binding;
   }
 
 
@@ -2066,11 +2024,18 @@ declare module "angular2/angular2" {
    */
   class Dependency {
     key: Key;
-    asPromise: boolean;
-    lazy: boolean;
     optional: boolean;
+    visibility: Visibility;
     properties: List<any>;
   }
+
+  var Self;
+
+  var Parent;
+
+  var Ancestor;
+
+  var Unbounded;
 
 
   /**
@@ -2088,10 +2053,14 @@ declare module "angular2/angular2" {
     untouched: boolean;
     valueChanges: Observable;
     markAsTouched(): void;
+    markAsDirty({onlySelf}?: {onlySelf?: boolean}): void;
     setParent(parent: any): any;
+    updateValidity({onlySelf}?: {onlySelf?: boolean}): void;
+    updateValueAndValidity({onlySelf, emitEvent}?: {onlySelf?: boolean,
+                                                 emitEvent?: boolean}): void;
     find(path: List<string | number>| string): AbstractControl;
     getError(errorCode: string, path?: List<string>): any;
-    hasError(errorCode: string, path?: List<string>): any;
+    hasError(errorCode: string, path?: List<string>): boolean;
   }
 
 
@@ -2105,6 +2074,7 @@ declare module "angular2/angular2" {
    * @exportedAs angular2/forms
    */
   class Control extends  AbstractControl {
+    updateValue(value: any, {onlySelf, emitEvent}?: {onlySelf?: boolean, emitEvent?: boolean}): void;
     registerOnChange(fn: Function): void;
   }
 
@@ -2470,7 +2440,7 @@ declare module "angular2/angular2" {
     addControlGroup(dir: NgControlGroup): any;
     removeControlGroup(dir: NgControlGroup): any;
     updateModel(dir: NgControl, value: any): void;
-    onSubmit(): any;
+    onSubmit(): boolean;
   }
 
 
@@ -2522,7 +2492,7 @@ declare module "angular2/angular2" {
     addControlGroup(dir: NgControlGroup): void;
     removeControlGroup(dir: NgControlGroup): void;
     updateModel(dir: NgControl, value: any): void;
-    onSubmit(): any;
+    onSubmit(): boolean;
   }
 
 
@@ -2665,7 +2635,7 @@ declare module "angular2/angular2" {
    *
    * @Component({
    *   selector: 'login-comp',
-   *   appInjector: [
+   *   viewInjector: [
    *     FormBuilder
    *   ]
    * })
@@ -2739,7 +2709,7 @@ declare module "angular2/angular2" {
    * Once a reference implementation of the spec is available, switch to it.
    */
   class EventEmitter extends  Observable {
-    observer(generator: any): any;
+    observer(generator: any): Rx.IDisposable;
     toRx(): Rx.Observable<any>;
     next(value: any): any;
     throw(error: any): any;
@@ -2768,7 +2738,7 @@ declare module "angular2/angular2" {
     setEventDispatcher(viewRef: RenderViewRef, dispatcher: any): void;
   }
 
-  var DOCUMENT_TOKEN: any;
+  var DOCUMENT_TOKEN;
 
 
   /**
@@ -2796,9 +2766,9 @@ declare module "angular2/angular2" {
     clear(): void;
     get(index: number): ViewRef;
     length: number;
-    create(protoViewRef?: ProtoViewRef, atIndex?: number, context?: ElementRef, injector?: Injector): ViewRef;
+    create(protoViewRef?: ProtoViewRef, atIndex?: number, context?: ElementRef, bindings?: ResolvedBinding[]): ViewRef;
     insert(viewRef: ViewRef, atIndex?: number): ViewRef;
-    indexOf(viewRef: ViewRef): any;
+    indexOf(viewRef: ViewRef): number;
     remove(atIndex?: number): void;
 
     /**
@@ -2839,6 +2809,21 @@ declare module "angular2/angular2" {
   class NgZone {
 
     /**
+     * Initializes the zone hooks.
+     *
+     * @param {() => void} onTurnStart called before code executes in the inner zone for each VM turn
+     * @param {() => void} onTurnDone called at the end of a VM turn if code has executed in the inner
+     * zone
+     * @param {(error, stack) => void} onErrorHandler called when an exception is thrown by a macro or
+     * micro task
+     */
+    initCallbacks({onTurnStart, onTurnDone, onErrorHandler}?: {
+    onTurnStart?: /*() => void*/ Function,
+    onTurnDone?: /*() => void*/ Function,
+    onErrorHandler?: /*(error, stack) => void*/ Function
+  }): any;
+
+    /**
      * Runs `fn` in the inner zone and returns whatever it returns.
      *
      * In a typical app where the inner zone is the Angular zone, this allows one to make use of the
@@ -2872,197 +2857,6 @@ declare module "angular2/angular2" {
      * ```
      */
     runOutsideAngular(fn: any): any;
-  }
-
-
-  /**
-   * Specifies that an injector should retrieve a dependency from its element.
-   *
-   * ## Example
-   *
-   * Here is a simple directive that retrieves a dependency from its element.
-   *
-   * ```
-   * @Directive({
-   *   selector: '[dependency]',
-   *   properties: [
-   *     'id: dependency'
-   *   ]
-   * })
-   * class Dependency {
-   *   id:string;
-   * }
-   *
-   *
-   * @Directive({
-   *   selector: '[my-directive]'
-   * })
-   * class Dependency {
-   *   constructor(@Self() dependency:Dependency) {
-   *     expect(dependency.id).toEqual(1);
-   *   };
-   * }
-   * ```
-   *
-   * We use this with the following HTML template:
-   *
-   * ```
-   * <div dependency="1" my-directive></div>
-   * ```
-   *
-   * @exportedAs angular2/annotations
-   */
-  class SelfAnnotation extends  Visibility {
-    toString(): any;
-  }
-
-
-  /**
-   * Specifies that an injector should retrieve a dependency from any ancestor element within the same
-   * shadow boundary.
-   *
-   * An ancestor is any element between the parent element and the shadow root.
-   *
-   * Use <a href='/angular2/angular2/Unbounded'><code>Unbounded</code></a> if you need to cross upper shadow boundaries.
-   *
-   * ## Example
-   *
-   * Here is a simple directive that retrieves a dependency from an ancestor element.
-   *
-   * ```
-   * @Directive({
-   *   selector: '[dependency]',
-   *   properties: [
-   *     'id: dependency'
-   *   ]
-   * })
-   * class Dependency {
-   *   id:string;
-   * }
-   *
-   *
-   * @Directive({
-   *   selector: '[my-directive]'
-   * })
-   * class Dependency {
-   *   constructor(@Ancestor() dependency:Dependency) {
-   *     expect(dependency.id).toEqual(2);
-   *   };
-   * }
-   * ```
-   *
-   *  We use this with the following HTML template:
-   *
-   * ```
-   * <div dependency="1">
-   *   <div dependency="2">
-   *     <div>
-   *       <div dependency="3" my-directive></div>
-   *     </div>
-   *   </div>
-   * </div>
-   * ```
-   *
-   * The `@Ancestor()` annotation in our constructor forces the injector to retrieve the dependency
-   * from the
-   * nearest ancestor element:
-   * - The current element `dependency="3"` is skipped because it is not an ancestor.
-   * - Next parent has no directives `<div>`
-   * - Next parent has the `Dependency` directive and so the dependency is satisfied.
-   *
-   * Angular injects `dependency=2`.
-   *
-   * @exportedAs angular2/annotations
-   */
-  class AncestorAnnotation extends  Visibility {
-    toString(): any;
-  }
-
-
-  /**
-   * Specifies that an injector should retrieve a dependency from the direct parent.
-   *
-   * ## Example
-   *
-   * Here is a simple directive that retrieves a dependency from its parent element.
-   *
-   * ```
-   * @Directive({
-   *   selector: '[dependency]',
-   *   properties: [
-   *     'id: dependency'
-   *   ]
-   * })
-   * class Dependency {
-   *   id:string;
-   * }
-   *
-   *
-   * @Directive({
-   *   selector: '[my-directive]'
-   * })
-   * class Dependency {
-   *   constructor(@Parent() dependency:Dependency) {
-   *     expect(dependency.id).toEqual(1);
-   *   };
-   * }
-   * ```
-   *
-   * We use this with the following HTML template:
-   *
-   * ```
-   * <div dependency="1">
-   *   <div dependency="2" my-directive></div>
-   * </div>
-   * ```
-   * The `@Parent()` annotation in our constructor forces the injector to retrieve the dependency from
-   * the
-   * parent element (even thought the current element could resolve it): Angular injects
-   * `dependency=1`.
-   *
-   * @exportedAs angular2/annotations
-   */
-  class ParentAnnotation extends  Visibility {
-    toString(): any;
-  }
-
-
-  /**
-   * Specifies that an injector should retrieve a dependency from any ancestor element, crossing
-   * component boundaries.
-   *
-   * Use <a href='/angular2/angular2/Ancestor'><code>Ancestor</code></a> to look for ancestors within the current shadow boundary only.
-   *
-   * ## Example
-   *
-   * Here is a simple directive that retrieves a dependency from an ancestor element.
-   *
-   * ```
-   * @Directive({
-   *   selector: '[dependency]',
-   *   properties: [
-   *     'id: dependency'
-   *   ]
-   * })
-   * class Dependency {
-   *   id:string;
-   * }
-   *
-   *
-   * @Directive({
-   *   selector: '[my-directive]'
-   * })
-   * class Dependency {
-   *   constructor(@Unbounded() dependency:Dependency) {
-   *     expect(dependency.id).toEqual(2);
-   *   };
-   * }
-   * ```
-   *
-   * @exportedAs angular2/annotations
-   */
-  class UnboundedAnnotation extends  Visibility {
-    toString(): any;
   }
 
 
@@ -3226,11 +3020,9 @@ declare module "angular2/angular2" {
    *  1. It uses the component's `selector` property to locate the DOM element which needs to be
    * upgraded into
    *     the angular component.
-   *  2. It creates a new child injector (from the platform injector) and configures the injector with
-   * the component's
-   *     `appInjector`. Optionally, you can also override the injector configuration for an app by
-   * invoking
-   *     `bootstrap` with the `componentInjectableBindings` argument.
+   *  2. It creates a new child injector (from the platform injector). Optionally, you can also
+   * override the injector configuration for an app by
+   * invoking `bootstrap` with the `componentInjectableBindings` argument.
    *  3. It creates a new `Zone` and connects it to the angular application's change detection domain
    * instance.
    *  4. It creates a shadow DOM on the selected component's host element and loads the template into
@@ -3287,9 +3079,9 @@ declare module "angular2/angular2" {
    * - `appComponentType`: The root component which should act as the application. This is a reference
    * to a `Type`
    *   which is annotated with `@Component(...)`.
-   * - `componentInjectableBindings`: An additional set of bindings that can be added to `appInjector`
-   * for the
-   * <a href='/angular2/angular2/Component'><code>Component</code></a> to override default injection behavior.
+   * - `componentInjectableBindings`: An additional set of bindings that can be added to the app
+   * injector
+   * to override default injection behavior.
    * - `errorReporter`: `function(exception:any, stackTrace:string)` a default error reporter for
    * unhandled exceptions.
    *
@@ -3323,7 +3115,7 @@ declare module "angular2/angular2" {
     selector: any;
     isVarBindingQuery: boolean;
     varBindings: List<string>;
-    toString(): any;
+    toString(): string;
   }
 
 
@@ -3358,7 +3150,7 @@ declare module "angular2/angular2" {
   class AttributeAnnotation extends  DependencyAnnotation {
     attributeName: string;
     token: any;
-    toString(): any;
+    toString(): string;
   }
 
 
@@ -3506,7 +3298,7 @@ declare module "angular2/angular2" {
   }
 
   class DirectiveResolver {
-    resolve(type: Type): DirectiveAnnotation;
+    resolve(type: Type): Directive;
   }
 
 
@@ -3534,7 +3326,7 @@ declare module "angular2/angular2" {
      * component's selector.
      * The loaded component receives injection normally as a hosted view.
      */
-    loadAsRoot(typeOrBinding: Type | Binding, overrideSelector?: string, injector?: Injector): Promise<ComponentRef>;
+    loadAsRoot(typeOrBinding: Type | Binding, overrideSelector: string, injector: Injector): Promise<ComponentRef>;
 
     /**
      * Loads a component into the component view of the provided ElementRef
@@ -3542,13 +3334,13 @@ declare module "angular2/angular2" {
      * The loaded component receives
      * injection normally as a hosted view.
      */
-    loadIntoLocation(typeOrBinding: Type | Binding, hostLocation: ElementRef, anchorName: string, injector?: Injector): Promise<ComponentRef>;
+    loadIntoLocation(typeOrBinding: Type | Binding, hostLocation: ElementRef, anchorName: string, bindings?: ResolvedBinding[]): Promise<ComponentRef>;
 
     /**
      * Loads a component next to the provided ElementRef. The loaded component receives
      * injection normally as a hosted view.
      */
-    loadNextToLocation(typeOrBinding: Type | Binding, location: ElementRef, injector?: Injector): Promise<ComponentRef>;
+    loadNextToLocation(typeOrBinding: Type | Binding, location: ElementRef, bindings?: ResolvedBinding[]): Promise<ComponentRef>;
   }
 
 
@@ -3563,8 +3355,7 @@ declare module "angular2/angular2" {
    * When a component is instantiated, Angular
    * - creates a shadow DOM for the component.
    * - loads the selected template into the shadow DOM.
-   * - creates a child <a href='/angular2/angular2/Injector'><code>Injector</code></a> which is configured with the `appInjector` for the
-   * <a href='/angular2/angular2/Component'><code>Component</code></a>.
+   * - creates all the injectable objects configured with `hostInjector` and `viewInjector`.
    *
    * All template expressions and statements are then evaluated against the component instance.
    *
@@ -3591,7 +3382,7 @@ declare module "angular2/angular2" {
    *
    * @exportedAs angular2/annotations
    */
-  interface ComponentAnnotation extends  DirectiveAnnotation {
+  class ComponentAnnotation extends  Directive {
 
     /**
      * Defines the used change detection strategy.
@@ -3605,59 +3396,6 @@ declare module "angular2/angular2" {
      * tells it to do so.
      */
     changeDetection: string;
-
-    /**
-     * Defines the set of injectable objects that are visible to a Component and its children.
-     *
-     * The `appInjector` defined in the Component annotation allow you to configure a set of bindings
-     * for the component's
-     * injector.
-     *
-     * When a component is instantiated, Angular creates a new child Injector, which is configured
-     * with the bindings in
-     * the Component `appInjector` annotation. The injectable objects then become available for
-     * injection to the component
-     * itself and any of the directives in the component's template, i.e. they are not available to
-     * the directives which
-     * are children in the component's light DOM.
-     *
-     *
-     * The syntax for configuring the `appInjector` injectable is identical to <a href='/angular2/angular2/Injector'><code>Injector</code></a>
-     * injectable configuration.
-     * See <a href='/angular2/angular2/Injector'><code>Injector</code></a> for additional detail.
-     *
-     *
-     * ## Simple Example
-     *
-     * Here is an example of a class that can be injected:
-     *
-     * ```
-     * class Greeter {
-     *    greet(name:string) {
-     *      return 'Hello ' + name + '!';
-     *    }
-     * }
-     *
-     * @Component({
-     *   selector: 'greet',
-     *   appInjector: [
-     *     Greeter
-     *   ]
-     * })
-     * @View({
-     *   template: `{{greeter.greet('world')}}!`,
-     *   directives: [Child]
-     * })
-     * class HelloWorld {
-     *   greeter:Greeter;
-     *
-     *   constructor(greeter:Greeter) {
-     *     this.greeter = greeter;
-     *   }
-     * }
-     * ```
-     */
-    appInjector: List<any>;
 
     /**
      * Defines the set of injectable objects that are visible to its view dom children.
@@ -4480,7 +4218,6 @@ declare module "angular2/angular2" {
   }
 
   interface ComponentArgs extends  DirectiveArgs {
-    appInjector: List<any>;
     viewInjector: List<any>;
     changeDetection: string;
   }
@@ -4515,7 +4252,7 @@ declare module "angular2/angular2" {
    * ```
    * @exportedAs angular2/annotations
    */
-  var onDestroy: any;
+  var onDestroy;
 
 
   /**
@@ -4553,7 +4290,7 @@ declare module "angular2/angular2" {
    *  ```
    * @exportedAs angular2/annotations
    */
-  var onChange: any;
+  var onChange;
 
 
   /**
@@ -4578,7 +4315,7 @@ declare module "angular2/angular2" {
    *  ```
    * @exportedAs angular2/annotations
    */
-  var onCheck: any;
+  var onCheck;
 
 
   /**
@@ -4603,7 +4340,7 @@ declare module "angular2/angular2" {
    *  ```
    * @exportedAs angular2/annotations
    */
-  var onInit: any;
+  var onInit;
 
 
   /**
@@ -4626,7 +4363,7 @@ declare module "angular2/angular2" {
    *  ```
    * @exportedAs angular2/annotations
    */
-  var onAllChangesDone: any;
+  var onAllChangesDone;
 
   interface DirectiveTypeDecorator extends  TypeDecorator {
   }
@@ -4639,19 +4376,11 @@ declare module "angular2/angular2" {
     View(obj: ViewArgs): ViewTypeDecorator;
   }
 
-  var Component: any;
+  var Component;
 
-  var View: any;
+  var View;
 
-  var Self: any;
-
-  var Parent: any;
-
-  var Ancestor: any;
-
-  var Unbounded: any;
-
-  var Attribute: any;
+  var Attribute;
 
 
   /**
@@ -4731,7 +4460,7 @@ declare module "angular2/angular2" {
    *
    * - `<li *ng-for="#item of items; #i = index">...</li>`
    * - `<li template="ng-for #item of items; #i = index">...</li>`
-   * - `<template [ng-for] #item [ng-for-of]="items" #i="index"><li>...</li></template>`
+   * - `<template ng-for #item [ng-for-of]="items" #i="index"><li>...</li></template>`
    *
    * @exportedAs angular2/directives
    */
@@ -4821,7 +4550,7 @@ declare module "angular2/angular2" {
    * <ANY [ng-switch]="expression">
    *   <template [ng-switch-when]="whenExpression1">...</template>
    *   <template [ng-switch-when]="whenExpression1">...</template>
-   *   <template [ng-switch-default]>...</template>
+   *   <template ng-switch-default>...</template>
    * </ANY>
    * ```
    *
@@ -4844,7 +4573,7 @@ declare module "angular2/angular2" {
    * <template [ng-switch-when]="contextVariable">...</template>
    *
    * // match against a constant string
-   * <template [ng-switch-when]="'stringValue'">...</template>
+   * <template ng-switch-when="stringValue">...</template>
    * ```
    *
    * @exportedAs angular2/directives
@@ -4863,7 +4592,7 @@ declare module "angular2/angular2" {
    * Example:
    *
    * ```
-   * <template [ng-switch-default]>...</template>
+   * <template ng-switch-default>...</template>
    * ```
    *
    * @exportedAs angular2/directives
@@ -4873,13 +4602,9 @@ declare module "angular2/angular2" {
 
 
   /**
-   * Connection class used by MockBackend
-   *
-   * This class is typically not instantiated directly, but instances can be retrieved by subscribing
-   * to the `connections` Observable of
-   * <a href='/angular2/angular2/MockBackend'><code>MockBackend</code></a> in order to mock responses to requests.
+   * Mock Connection to represent a <a href='/angular2/angular2/Connection'><code>Connection</code></a> for tests.
    */
-  class MockConnection implements  Connection {
+  class MockConnection {
 
     /**
      * Describes the state of the connection, based on `XMLHttpRequest.readyState`, but with
@@ -4893,11 +4618,10 @@ declare module "angular2/angular2" {
     request: Request;
 
     /**
-     * [RxJS
-     * Observable](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md)
-     * of <a href='/angular2/angular2/Response'><code>Response</code></a>. Can be subscribed to in order to be notified when a response is available.
+     * <a href='/angular2/angular2/EventEmitter'><code>EventEmitter</code></a> of <a href='/angular2/angular2/Response'><code>Response</code></a>. Can be subscribed to in order to be notified when a
+     * response is available.
      */
-    response: Rx.Subject<Response>;
+    response: EventEmitter;
 
     /**
      * Changes the `readyState` of the connection to a custom state of 5 (cancelled).
@@ -4906,7 +4630,7 @@ declare module "angular2/angular2" {
 
     /**
      * Sends a mock response to the connection. This response is the value that is emitted to the
-     * `Observable` returned by <a href='/angular2/angular2/Http'><code>Http</code></a>.
+     * <a href='/angular2/angular2/EventEmitter'><code>EventEmitter</code></a> returned by <a href='/angular2/angular2/Http'><code>Http</code></a>.
      *
      * #Example
      *
@@ -4928,7 +4652,8 @@ declare module "angular2/angular2" {
     mockDownload(res: Response): any;
 
     /**
-     * Emits the provided error object as an error to the <a href='/angular2/angular2/Response'><code>Response</code></a> observable returned
+     * Emits the provided error object as an error to the <a href='/angular2/angular2/Response'><code>Response</code></a> <a href='/angular2/angular2/EventEmitter'><code>EventEmitter</code></a>
+     * returned
      * from <a href='/angular2/angular2/Http'><code>Http</code></a>.
      */
     mockError(err?: any): any;
@@ -4966,11 +4691,10 @@ declare module "angular2/angular2" {
    *
    * This method only exists in the mock implementation, not in real Backends.
    */
-  class MockBackend implements  ConnectionBackend {
+  class MockBackend {
 
     /**
-     * [RxJS
-     * Subject](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/subjects/subject.md)
+     * <a href='/angular2/angular2/EventEmitter'><code>EventEmitter</code></a>
      * of <a href='/angular2/angular2/MockConnection'><code>MockConnection</code></a> instances that have been created by this backend. Can be subscribed
      * to in order to respond to connections.
      *
@@ -4994,14 +4718,14 @@ declare module "angular2/angular2" {
      *   http.request('something.json').subscribe(res => {
      *     text = res.text();
      *   });
-     *   connection.mockRespond(new Response('Something'));
+     *   connection.mockRespond(new Response({body: 'Something'}));
      *   expect(text).toBe('Something');
      * });
      * ```
      *
      * This property only exists in the mock implementation, not in real Backends.
      */
-    connections: Rx.Subject<MockConnection>;
+    connections: EventEmitter;
 
     /**
      * An array representation of `connections`. This array will be updated with each connection that
@@ -5012,14 +4736,14 @@ declare module "angular2/angular2" {
     connectionsArray: Array<MockConnection>;
 
     /**
-     * [Observable](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md)
-     * of <a href='/angular2/angular2/MockConnection'><code>MockConnection</code></a> instances that haven't yet been resolved (i.e. with a `readyState`
+     * <a href='/angular2/angular2/EventEmitter'><code>EventEmitter</code></a> of <a href='/angular2/angular2/MockConnection'><code>MockConnection</code></a> instances that haven't yet been resolved (i.e.
+     * with a `readyState`
      * less than 4). Used internally to verify that no connections are pending via the
      * `verifyNoPendingRequests` method.
      *
      * This property only exists in the mock implementation, not in real Backends.
      */
-    pendingConnections: Rx.Observable<MockConnection>;
+    pendingConnections: EventEmitter;
 
     /**
      * Checks all connections, and raises an exception if any connection has not received a response.
@@ -5039,22 +4763,22 @@ declare module "angular2/angular2" {
     /**
      * Creates a new <a href='/angular2/angular2/MockConnection'><code>MockConnection</code></a>. This is equivalent to calling `new
      * MockConnection()`, except that it also will emit the new `Connection` to the `connections`
-     * observable of this `MockBackend` instance. This method will usually only be used by tests
+     * emitter of this `MockBackend` instance. This method will usually only be used by tests
      * against the framework itself, not by end-users.
      */
-    createConnection(req: Request): any;
+    createConnection(req: Request): Connection;
   }
 
 
   /**
-   * Creates `Request` instances with default values.
+   * Creates `Request` instances from provided values.
    *
    * The Request's interface is inspired by the Request constructor defined in the [Fetch
    * Spec](https://fetch.spec.whatwg.org/#request-class),
    * but is considered a static value whose body can be accessed many times. There are other
    * differences in the implementation, but this is the most significant.
    */
-  class Request implements  IRequest {
+  class Request {
 
     /**
      * Http method with which to perform the request.
@@ -5075,6 +4799,7 @@ declare module "angular2/angular2" {
      * Url of the remote resource
      */
     url: string;
+    cache: RequestCacheOpts;
 
     /**
      * Returns the request's body as string, assuming that body exists. If body is undefined, return
@@ -5086,7 +4811,7 @@ declare module "angular2/angular2" {
 
 
   /**
-   * Creates `Response` instances with default values.
+   * Creates `Response` instances from provided values.
    *
    * Though this object isn't
    * usually instantiated by end-users, it is the primary object interacted with when it comes time to
@@ -5098,12 +4823,12 @@ declare module "angular2/angular2" {
    * http.request('my-friends.txt').subscribe(response => this.friends = response.text());
    * ```
    *
-   * The Response's interface is inspired by the Request constructor defined in the [Fetch
+   * The Response's interface is inspired by the Response constructor defined in the [Fetch
    * Spec](https://fetch.spec.whatwg.org/#response-class), but is considered a static value whose body
    * can be accessed many times. There are other differences in the implementation, but this is the
    * most significant.
    */
-  class Response implements  IResponse {
+  class Response {
 
     /**
      * One of "basic", "cors", "default", "error, or "opaque".
@@ -5163,12 +4888,12 @@ declare module "angular2/angular2" {
     /**
      * Not yet implemented
      */
-    blob(): Blob;
+    blob(): any;
 
     /**
      * Attempts to return body as parsed `JSON` object, or raises an exception.
      */
-    json(): JSON;
+    json(): Object;
 
     /**
      * Returns the body as a string, presuming `toString()` can be called on the response body.
@@ -5178,97 +4903,153 @@ declare module "angular2/angular2" {
     /**
      * Not yet implemented
      */
-    arrayBuffer(): ArrayBuffer;
+    arrayBuffer(): any;
   }
 
 
   /**
-   * Performs http requests using `XMLHttpRequest` as the default backend.
+   * Interface for options to construct a Request, based on
+   * [RequestInit](https://fetch.spec.whatwg.org/#requestinit) from the Fetch spec.
+   */
+  interface IRequestOptions {
+    url: string;
+    method: RequestMethods;
+    headers: Headers;
+    body: string;
+    mode: RequestModesOpts;
+    credentials: RequestCredentialsOpts;
+    cache: RequestCacheOpts;
+  }
+
+
+  /**
+   * Interface for options to construct a Response, based on
+   * [ResponseInit](https://fetch.spec.whatwg.org/#responseinit) from the Fetch spec.
+   */
+  interface IResponseOptions {
+    body: string | Object | FormData;
+    status: number;
+    statusText: string;
+    headers: Headers;
+    type: ResponseTypes;
+    url: string;
+  }
+
+
+  /**
+   * Abstract class from which real connections are derived.
+   */
+  class Connection {
+    readyState: ReadyStates;
+    request: Request;
+    response: EventEmitter;
+    dispose(): void;
+  }
+
+
+  /**
+   * Abstract class from which real backends are derived.
    *
-   * `Http` is available as an injectable class, with methods to perform http requests. Calling
-   * `request` returns an
-   * [Observable](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/observable.md),
-   * which will emit a single <a href='/angular2/angular2/Response'><code>Response</code></a> when a response is
-   * received.
+   * The primary purpose of a `ConnectionBackend` is to create new connections to fulfill a given
+   * <a href='/angular2/angular2/Request'><code>Request</code></a>.
+   */
+  class ConnectionBackend {
+    createConnection(request: any): Connection;
+  }
+
+
+  /**
+   * Injectable version of <a href='/angular2/angular2/RequestOptions'><code>RequestOptions</code></a>, with overridable default values.
    *
    * #Example
    *
    * ```
-   * import {Http, httpInjectables} from 'angular2/http';
-   * @Component({selector: 'http-app', appInjector: [httpInjectables]})
-   * @View({templateUrl: 'people.html'})
-   * class PeopleComponent {
-   *   constructor(http: Http) {
-   *     http('people.json')
-   *       // Call map on the response observable to get the parsed people object
-   *       .map(res => res.json())
-   *       // Subscribe to the observable to get the parsed people object and attach it to the
-   *       // component
-   *       .subscribe(people => this.people = people);
+   * import {Http, BaseRequestOptions, Request} from 'angular2/http';
+   * ...
+   * class MyComponent {
+   *   constructor(baseRequestOptions:BaseRequestOptions, http:Http) {
+   *     var options = baseRequestOptions.merge({body: 'foobar', url: 'https://foo'});
+   *     var request = new Request(options);
+   *     http.request(request).subscribe(res => this.bars = res.json());
    *   }
    * }
-   * ```
    *
-   * The default construct used to perform requests, `XMLHttpRequest`, is abstracted as a "Backend" (
-   * <a href='/angular2/angular2/XHRBackend'><code>XHRBackend</code></a> in this case), which could be mocked with dependency injection by replacing
-   * the <a href='/angular2/angular2/XHRBackend'><code>XHRBackend</code></a> binding, as in the following example:
-   *
-   * #Example
-   *
-   * ```
-   * import {MockBackend, BaseRequestOptions, Http} from 'angular2/http';
-   * var injector = Injector.resolveAndCreate([
-   *   BaseRequestOptions,
-   *   MockBackend,
-   *   bind(Http).toFactory(
-   *       function(backend, defaultOptions) {
-   *         return new Http(backend, defaultOptions);
-   *       },
-   *       [MockBackend, BaseRequestOptions])
-   * ]);
-   * var http = injector.get(Http);
-   * http.get('request-from-mock-backend.json').subscribe((res:Response) => doSomething(res));
    * ```
    */
-  class Http {
+  class BaseRequestOptions extends  RequestOptions {
+  }
+
+
+  /**
+   * Creates a request options object similar to the `RequestInit` description
+   * in the [Fetch
+   * Spec](https://fetch.spec.whatwg.org/#requestinit) to be optionally provided when instantiating a
+   * <a href='/angular2/angular2/Request'><code>Request</code></a>.
+   *
+   * All values are null by default.
+   */
+  class RequestOptions implements  IRequestOptions {
 
     /**
-     * Performs any type of http request. First argument is required, and can either be a url or
-     * a <a href='/angular2/angular2/Request'><code>Request</code></a> instance. If the first argument is a url, an optional <a href='/angular2/angular2/RequestOptions'><code>RequestOptions</code></a>
-     * object can be provided as the 2nd argument. The options object will be merged with the values
-     * of <a href='/angular2/angular2/BaseRequestOptions'><code>BaseRequestOptions</code></a> before performing the request.
+     * Http method with which to execute the request.
+     *
+     * Defaults to "GET".
      */
-    request(url: string | Request, options?: IRequestOptions): Rx.Observable<Response>;
+    method: RequestMethods;
 
     /**
-     * Performs a request with `get` http method.
+     * Headers object based on the `Headers` class in the [Fetch
+     * Spec](https://fetch.spec.whatwg.org/#headers-class).
      */
-    get(url: string, options?: IRequestOptions): any;
+    headers: Headers;
 
     /**
-     * Performs a request with `post` http method.
+     * Body to be used when creating the request.
      */
-    post(url: string, body: URLSearchParams | FormData | Blob | string, options?: IRequestOptions): any;
+    body: string;
+    mode: RequestModesOpts;
+    credentials: RequestCredentialsOpts;
+    cache: RequestCacheOpts;
+    url: string;
 
     /**
-     * Performs a request with `put` http method.
+     * Creates a copy of the `RequestOptions` instance, using the optional input as values to override
+     * existing values.
      */
-    put(url: string, body: URLSearchParams | FormData | Blob | string, options?: IRequestOptions): any;
+    merge(options?: IRequestOptions): RequestOptions;
+  }
 
-    /**
-     * Performs a request with `delete` http method.
-     */
-    delete(url: string, options?: IRequestOptions): any;
 
-    /**
-     * Performs a request with `patch` http method.
-     */
-    patch(url: string, body: URLSearchParams | FormData | Blob | string, options?: IRequestOptions): any;
+  /**
+   * Injectable version of <a href='/angular2/angular2/ResponseOptions'><code>ResponseOptions</code></a>, with overridable default values.
+   */
+  class BaseResponseOptions extends  ResponseOptions {
+    body: string | Object | ArrayBuffer | JSON | FormData | Blob;
+    status: number;
+    headers: Headers;
+    statusText: string;
+    type: ResponseTypes;
+    url: string;
+  }
 
-    /**
-     * Performs a request with `head` http method.
-     */
-    head(url: string, options?: IRequestOptions): any;
+
+  /**
+   * Creates a response options object similar to the
+   * [ResponseInit](https://fetch.spec.whatwg.org/#responseinit) description
+   * in the Fetch
+   * Spec to be optionally provided when instantiating a
+   * <a href='/angular2/angular2/Response'><code>Response</code></a>.
+   *
+   * All values are null by default.
+   */
+  class ResponseOptions implements  IResponseOptions {
+    body: string | Object;
+    status: number;
+    headers: Headers;
+    statusText: string;
+    type: ResponseTypes;
+    url: string;
+    merge(options?: IResponseOptions): ResponseOptions;
   }
 
 
@@ -5284,7 +5065,7 @@ declare module "angular2/angular2" {
    * ```
    * import {Http, MyNodeBackend, httpInjectables, BaseRequestOptions} from 'angular2/http';
    * @Component({
-   *   appInjector: [
+   *   viewInjector: [
    *     httpInjectables,
    *     bind(Http).toFactory((backend, options) => {
    *       return new Http(backend, options);
@@ -5314,11 +5095,10 @@ declare module "angular2/angular2" {
     request: Request;
 
     /**
-     * Response
-     * [Subject](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/subjects/subject.md)
-     * which emits a single <a href='/angular2/angular2/Response'><code>Response</code></a> value on load event of `XMLHttpRequest`.
+     * Response <a href='/angular2/angular2/EventEmitter'><code>EventEmitter</code></a> which emits a single <a href='/angular2/angular2/Response'><code>Response</code></a> value on load event of
+     * `XMLHttpRequest`.
      */
-    response: Rx.Subject<Response>;
+    response: EventEmitter;
     readyState: ReadyStates;
 
     /**
@@ -5329,151 +5109,112 @@ declare module "angular2/angular2" {
 
 
   /**
-   * Injectable version of <a href='/angular2/angular2/RequestOptions'><code>RequestOptions</code></a>.
+   * Performs http requests using `XMLHttpRequest` as the default backend.
+   *
+   * `Http` is available as an injectable class, with methods to perform http requests. Calling
+   * `request` returns an <a href='/angular2/angular2/EventEmitter'><code>EventEmitter</code></a> which will emit a single <a href='/angular2/angular2/Response'><code>Response</code></a> when a
+   * response is received.
+   *
+   *
+   * ## Breaking Change
+   *
+   * Previously, methods of `Http` would return an RxJS Observable directly. For now,
+   * the `toRx()` method of <a href='/angular2/angular2/EventEmitter'><code>EventEmitter</code></a> needs to be called in order to get the RxJS
+   * Subject. `EventEmitter` does not provide combinators like `map`, and has different semantics for
+   * subscribing/observing. This is temporary; the result of all `Http` method calls will be either an
+   * Observable
+   * or Dart Stream when [issue #2794](https://github.com/angular/angular/issues/2794) is resolved.
    *
    * #Example
    *
    * ```
-   * import {Http, BaseRequestOptions, Request} from 'angular2/http';
-   * ...
-   * class MyComponent {
-   *   constructor(baseRequestOptions:BaseRequestOptions, http:Http) {
-   *     var options = baseRequestOptions.merge({body: 'foobar'});
-   *     var request = new Request('https://foo', options);
-   *     http.request(request).subscribe(res => this.bars = res.json());
+   * import {Http, httpInjectables} from 'angular2/http';
+   * @Component({selector: 'http-app', viewInjector: [httpInjectables]})
+   * @View({templateUrl: 'people.html'})
+   * class PeopleComponent {
+   *   constructor(http: Http) {
+   *     http.get('people.json')
+   *       //Get the RxJS Subject
+   *       .toRx()
+   *       // Call map on the response observable to get the parsed people object
+   *       .map(res => res.json())
+   *       // Subscribe to the observable to get the parsed people object and attach it to the
+   *       // component
+   *       .subscribe(people => this.people = people);
    *   }
    * }
-   *
    * ```
-   */
-  class BaseRequestOptions extends  RequestOptions {
-  }
-
-
-  /**
-   * Creates a request options object with default properties as described in the [Fetch
-   * Spec](https://fetch.spec.whatwg.org/#requestinit) to be optionally provided when instantiating a
-   * <a href='/angular2/angular2/Request'><code>Request</code></a>. This class is used implicitly by <a href='/angular2/angular2/Http'><code>Http</code></a> to merge in provided request
-   * options with the default options specified here. These same default options are injectable via
-   * the <a href='/angular2/angular2/BaseRequestOptions'><code>BaseRequestOptions</code></a> class.
-   */
-  class RequestOptions implements  IRequestOptions {
-
-    /**
-     * Http method with which to execute the request.
-     *
-     * Defaults to "GET".
-     */
-    method: RequestMethods;
-
-    /**
-     * Headers object based on the `Headers` class in the [Fetch
-     * Spec](https://fetch.spec.whatwg.org/#headers-class).
-     */
-    headers: Headers;
-
-    /**
-     * Body to be used when creating the request.
-     */
-    body: URLSearchParams | FormData | Blob | string;
-    mode: RequestModesOpts;
-    credentials: RequestCredentialsOpts;
-    cache: RequestCacheOpts;
-
-    /**
-     * Creates a copy of the `RequestOptions` instance, using the optional input as values to override
-     * existing values.
-     */
-    merge(opts?: IRequestOptions): RequestOptions;
-  }
-
-
-  /**
-   * Alias to the `request` method of <a href='/angular2/angular2/Http'><code>Http</code></a>, for those who'd prefer a simple function instead
-   * of an object. In order to get TypeScript type information about the `HttpFactory`, the <a href='*'>IHttp</a> interface can be used as shown in the following example.
+   *
+   * To use the <a href='/angular2/angular2/EventEmitter'><code>EventEmitter</code></a> returned by `Http`, simply pass a generator (See "interface
+   * Generator" in the Async Generator spec: https://github.com/jhusain/asyncgenerator) to the
+   * `observer` method of the returned emitter, with optional methods of `next`, `throw`, and `return`.
    *
    * #Example
    *
    * ```
-   * import {httpInjectables, HttpFactory, IHttp} from 'angular2/http';
-   * @Component({
-   *   appInjector: [httpInjectables]
-   * })
-   * @View({
-   *   templateUrl: 'people.html'
-   * })
-   * class MyComponent {
-   *  constructor(@Inject(HttpFactory) http:IHttp) {
-   *    http('people.json').subscribe(res => this.people = res.json());
-   *  }
-   * }
+   * http.get('people.json').observer({next: (value) => this.people = people});
    * ```
-   */
-  function HttpFactory(backend: XHRBackend, defaultOptions: BaseRequestOptions): any;
-
-
-  /**
-   * Provides an interface to provide type information for <a href='/angular2/angular2/HttpFactory'><code>HttpFactory</code></a> when injecting.
+   *
+   * The default construct used to perform requests, `XMLHttpRequest`, is abstracted as a "Backend" (
+   * <a href='/angular2/angular2/XHRBackend'><code>XHRBackend</code></a> in this case), which could be mocked with dependency injection by replacing
+   * the <a href='/angular2/angular2/XHRBackend'><code>XHRBackend</code></a> binding, as in the following example:
    *
    * #Example
    *
    * ```
-   * * import {httpInjectables, HttpFactory, IHttp} from 'angular2/http';
-   * @Component({
-   *   appInjector: [httpInjectables]
-   * })
-   * @View({
-   *   templateUrl: 'people.html'
-   * })
-   * class MyComponent {
-   *  constructor(@Inject(HttpFactory) http:IHttp) {
-   *    http('people.json').subscribe(res => this.people = res.json());
-   *  }
-   * }
+   * import {MockBackend, BaseRequestOptions, Http} from 'angular2/http';
+   * var injector = Injector.resolveAndCreate([
+   *   BaseRequestOptions,
+   *   MockBackend,
+   *   bind(Http).toFactory(
+   *       function(backend, defaultOptions) {
+   *         return new Http(backend, defaultOptions);
+   *       },
+   *       [MockBackend, BaseRequestOptions])
+   * ]);
+   * var http = injector.get(Http);
+   * http.get('request-from-mock-backend.json').toRx().subscribe((res:Response) => doSomething(res));
    * ```
    */
-  interface IHttp {
-  }
+  class Http {
 
-  interface IRequestOptions {
-    method: RequestMethods;
-    headers: Headers;
-    body: URLSearchParams | FormData | Blob | string;
-    mode: RequestModesOpts;
-    credentials: RequestCredentialsOpts;
-    cache: RequestCacheOpts;
-  }
+    /**
+     * Performs any type of http request. First argument is required, and can either be a url or
+     * a <a href='/angular2/angular2/Request'><code>Request</code></a> instance. If the first argument is a url, an optional <a href='/angular2/angular2/RequestOptions'><code>RequestOptions</code></a>
+     * object can be provided as the 2nd argument. The options object will be merged with the values
+     * of <a href='/angular2/angular2/BaseRequestOptions'><code>BaseRequestOptions</code></a> before performing the request.
+     */
+    request(url: string | Request, options?: IRequestOptions): EventEmitter;
 
-  interface IRequest {
-    method: RequestMethods;
-    mode: RequestModesOpts;
-    credentials: RequestCredentialsOpts;
-  }
+    /**
+     * Performs a request with `get` http method.
+     */
+    get(url: string, options?: IRequestOptions): EventEmitter;
 
-  interface IResponse {
-    headers: Headers;
-    ok: boolean;
-    status: number;
-    statusText: string;
-    type: ResponseTypes;
-    url: string;
-    totalBytes: number;
-    bytesLoaded: number;
-    blob(): Blob;
-    arrayBuffer(): ArrayBuffer;
-    text(): string;
-    json(): Object;
-  }
+    /**
+     * Performs a request with `post` http method.
+     */
+    post(url: string, body: string, options?: IRequestOptions): EventEmitter;
 
-  interface Connection {
-    readyState: ReadyStates;
-    request: IRequest;
-    response: Rx.Subject<IResponse>;
-    dispose(): void;
-  }
+    /**
+     * Performs a request with `put` http method.
+     */
+    put(url: string, body: string, options?: IRequestOptions): EventEmitter;
 
-  interface ConnectionBackend {
-    createConnection(observer: any, config: IRequest): Connection;
+    /**
+     * Performs a request with `delete` http method.
+     */
+    delete(url: string, options?: IRequestOptions): EventEmitter;
+
+    /**
+     * Performs a request with `patch` http method.
+     */
+    patch(url: string, body: string, options?: IRequestOptions): EventEmitter;
+
+    /**
+     * Performs a request with `head` http method.
+     */
+    head(url: string, options?: IRequestOptions): EventEmitter;
   }
 
 
@@ -5483,18 +5224,137 @@ declare module "angular2/angular2" {
    * difference from the spec is the lack of an `entries` method.
    */
   class Headers {
+
+    /**
+     * Appends a header to existing list of header values for a given header name.
+     */
     append(name: string, value: string): void;
+
+    /**
+     * Deletes all header values for the given name.
+     */
     delete(name: string): void;
     forEach(fn: Function): any;
+
+    /**
+     * Returns first header that matches given name.
+     */
     get(header: string): string;
-    has(header: string): any;
-    keys(): any;
+
+    /**
+     * Check for existence of header by given name.
+     */
+    has(header: string): boolean;
+
+    /**
+     * Provides names of set headers
+     */
+    keys(): List<string>;
+
+    /**
+     * Sets or overrides header value for given name.
+     */
     set(header: string, value: string | List<string>): void;
-    values(): any;
+
+    /**
+     * Returns values of all headers.
+     */
+    values(): List<List<string>>;
+
+    /**
+     * Returns list of header values for a given name.
+     */
     getAll(header: string): Array<string>;
+
+    /**
+     * This method is not implemented.
+     */
     entries(): any;
   }
 
+
+  /**
+   * Acceptable response types to be associated with a <a href='/angular2/angular2/Response'><code>Response</code></a>, based on
+   * [ResponseType](https://fetch.spec.whatwg.org/#responsetype) from the Fetch spec.
+   */
+  enum ResponseTypes {
+    Basic,
+    Cors,
+    Default,
+    Error,
+    Opaque
+  }
+
+
+  /**
+   * All possible states in which a connection can be, based on
+   * [States](http://www.w3.org/TR/XMLHttpRequest/#states) from the `XMLHttpRequest` spec, but with an
+   * additional "CANCELLED" state.
+   */
+  enum ReadyStates {
+    UNSENT,
+    OPEN,
+    HEADERS_RECEIVED,
+    LOADING,
+    DONE,
+    CANCELLED
+  }
+
+
+  /**
+   * Supported http methods.
+   */
+  enum RequestMethods {
+    GET,
+    POST,
+    PUT,
+    DELETE,
+    OPTIONS,
+    HEAD,
+    PATCH
+  }
+
+
+  /**
+   * Acceptable credentials option to be associated with a <a href='/angular2/angular2/Request'><code>Request</code></a>, based on
+   * [RequestCredentials](https://fetch.spec.whatwg.org/#requestcredentials) from the Fetch spec.
+   */
+  enum RequestCredentialsOpts {
+    Omit,
+    SameOrigin,
+    Include
+  }
+
+
+  /**
+   * Acceptable cache option to be associated with a <a href='/angular2/angular2/Request'><code>Request</code></a>, based on
+   * [RequestCache](https://fetch.spec.whatwg.org/#requestcache) from the Fetch spec.
+   */
+  enum RequestCacheOpts {
+    Default,
+    NoStore,
+    Reload,
+    NoCache,
+    ForceCache,
+    OnlyIfCached
+  }
+
+
+  /**
+   * Acceptable origin modes to be associated with a <a href='/angular2/angular2/Request'><code>Request</code></a>, based on
+   * [RequestMode](https://fetch.spec.whatwg.org/#requestmode) from the Fetch spec.
+   */
+  enum RequestModesOpts {
+    Cors,
+    NoCors,
+    SameOrigin
+  }
+
+
+  /**
+   * Map-like representation of url search parameters, based on
+   * [URLSearchParams](https://url.spec.whatwg.org/#urlsearchparams) in the url living standard.
+   */
   class URLSearchParams {
     paramsMap: Map<string, List<string>>;
     rawParams: string;
@@ -5514,7 +5374,7 @@ declare module "angular2/angular2" {
    *
    * ```
    * import {httpInjectables, Http} from 'angular2/http';
-   * @Component({selector: 'http-app', appInjector: [httpInjectables]})
+   * @Component({selector: 'http-app', viewInjector: [httpInjectables]})
    * @View({template: '{{data}}'})
    * class MyApp {
    *   constructor(http:Http) {
@@ -5524,54 +5384,6 @@ declare module "angular2/angular2" {
    * ```
    */
   var httpInjectables : List<any> ;
-
-  enum RequestModesOpts {
-    Cors,
-    NoCors,
-    SameOrigin
-  }
-
-  enum RequestCacheOpts {
-    Default,
-    NoStore,
-    Reload,
-    NoCache,
-    ForceCache,
-    OnlyIfCached
-  }
-
-  enum RequestCredentialsOpts {
-    Omit,
-    SameOrigin,
-    Include
-  }
-
-  enum RequestMethods {
-    GET,
-    POST,
-    PUT,
-    DELETE,
-    OPTIONS,
-    HEAD,
-    PATCH
-  }
-
-  enum ReadyStates {
-    UNSENT,
-    OPEN,
-    HEADERS_RECEIVED,
-    LOADING,
-    DONE,
-    CANCELLED
-  }
-
-  enum ResponseTypes {
-    Basic,
-    Cors,
-    Default,
-    Error,
-    Opaque
-  }
 
 
   /**
@@ -5831,17 +5643,12 @@ declare module "angular2/angular2" {
     children: T[];
   }
 
-  class DependencyWithVisibility extends  Dependency {
-    visibility: Visibility;
-  }
-
-  class DirectiveDependency extends  DependencyWithVisibility {
+  class DirectiveDependency extends  Dependency {
     attributeName: string;
     queryDecorator: Query;
   }
 
   class DirectiveBinding extends  ResolvedBinding {
-    resolvedAppInjectables: List<ResolvedBinding>;
     resolvedHostInjectables: List<ResolvedBinding>;
     resolvedViewInjectables: List<ResolvedBinding>;
     metadata: DirectiveMetadata;
@@ -5863,48 +5670,21 @@ declare module "angular2/angular2" {
   class EventEmitterAccessor {
     eventName: string;
     getter: Function;
-    subscribe(view:AppView, boundElementIndex: number, directive: Object): any;
+    subscribe(view:AppView, boundElementIndex: number, directive: Object): Object;
   }
 
   class HostActionAccessor {
     methodName: string;
     getter: Function;
-    subscribe(view:AppView, boundElementIndex: number, directive: Object): any;
+    subscribe(view:AppView, boundElementIndex: number, directive: Object): Object;
   }
 
-  class BindingData {
-    binding: ResolvedBinding;
-    visibility: number;
-    getKeyId(): any;
-    createEventEmitterAccessors(): any;
-    createHostActionAccessors(): any;
-  }
-
-
-  /**
-   * Difference between di.Injector and ElementInjector
-   *
-   * di.Injector:
-   *  - imperative based (can create child injectors imperativly)
-   *  - Lazy loading of code
-   *  - Component/App Level services which are usually not DOM Related.
-   *
-   *
-   * ElementInjector:
-   *   - ProtoBased (Injector structure fixed at compile time)
-   *   - understands @Ancestor, @Parent, @Child, @Descendent
-   *   - Fast
-   *   - Query mechanism for children
-   *   - 1:1 to DOM structure.
-   *
-   *  PERF BENCHMARK:
-   * http://www.williambrownstreet.net/blog/2014/04/faster-angularjs-rendering-angularjs-and-reactjs/
-   */
   class ProtoElementInjector {
     view: AppView;
     attributes: Map<string, string>;
     eventEmitterAccessors: List<List<EventEmitterAccessor>>;
     hostActionAccessors: List<List<HostActionAccessor>>;
+    protoInjector: ProtoInjector;
     parent: ProtoElementInjector;
     index: int;
     distanceToParent: number;
@@ -5919,7 +5699,7 @@ declare module "angular2/angular2" {
     hydrated: boolean;
     dehydrate(): void;
     onAllChangesDone(): void;
-    hydrate(injector: Injector, host: ElementInjector, preBuiltObjects: PreBuiltObjects): void;
+    hydrate(imperativelyCreatedInjector: Injector, host: ElementInjector, preBuiltObjects: PreBuiltObjects): void;
     hasVariableBinding(name: string): boolean;
     getVariableBinding(name: string): any;
     get(token: any): any;
@@ -5931,16 +5711,29 @@ declare module "angular2/angular2" {
     getElementRef(): ElementRef;
     getViewContainerRef(): ViewContainerRef;
     directParent(): ElementInjector;
+    isComponentKey(key: Key): boolean;
+    getDependency(dep: any): any;
     addDirectivesMatchingQuery(query: Query, list: any[]): void;
     link(parent: ElementInjector): void;
     linkAfter(parent: ElementInjector, prevSibling: ElementInjector): void;
     unlink(): void;
     getDirectiveAtIndex(index: number): any;
     hasInstances(): boolean;
-    getLightDomAppInjector(): Injector;
-    getShadowDomAppInjector(): Injector;
     getHost(): ElementInjector;
     getBoundElementIndex(): number;
+  }
+
+  class QueryError extends  BaseException {
+    message: string;
+    toString(): string;
+  }
+
+  class QueryRef {
+    query: Query;
+    list: QueryList<any>;
+    originator: ElementInjector;
+    update(): void;
+    visit(inj: ElementInjector, aggregator: any[]): void;
   }
 
   class AST {
@@ -6135,25 +5928,25 @@ declare module "angular2/angular2" {
   }
 
   class AstTransformer implements  AstVisitor {
-    visitImplicitReceiver(ast: ImplicitReceiver): any;
-    visitInterpolation(ast: Interpolation): any;
-    visitLiteralPrimitive(ast: LiteralPrimitive): any;
-    visitAccessMember(ast: AccessMember): any;
-    visitSafeAccessMember(ast: SafeAccessMember): any;
-    visitMethodCall(ast: MethodCall): any;
-    visitSafeMethodCall(ast: SafeMethodCall): any;
-    visitFunctionCall(ast: FunctionCall): any;
-    visitLiteralArray(ast: LiteralArray): any;
-    visitLiteralMap(ast: LiteralMap): any;
-    visitBinary(ast: Binary): any;
-    visitPrefixNot(ast: PrefixNot): any;
-    visitConditional(ast: Conditional): any;
-    visitPipe(ast: BindingPipe): any;
-    visitKeyedAccess(ast: KeyedAccess): any;
-    visitAll(asts: List<any>): any;
-    visitChain(ast: Chain): any;
-    visitAssignment(ast: Assignment): any;
-    visitIf(ast: If): any;
+    visitImplicitReceiver(ast: ImplicitReceiver): ImplicitReceiver;
+    visitInterpolation(ast: Interpolation): Interpolation;
+    visitLiteralPrimitive(ast: LiteralPrimitive): LiteralPrimitive;
+    visitAccessMember(ast: AccessMember): AccessMember;
+    visitSafeAccessMember(ast: SafeAccessMember): SafeAccessMember;
+    visitMethodCall(ast: MethodCall): MethodCall;
+    visitSafeMethodCall(ast: SafeMethodCall): SafeMethodCall;
+    visitFunctionCall(ast: FunctionCall): FunctionCall;
+    visitLiteralArray(ast: LiteralArray): LiteralArray;
+    visitLiteralMap(ast: LiteralMap): LiteralMap;
+    visitBinary(ast: Binary): Binary;
+    visitPrefixNot(ast: PrefixNot): PrefixNot;
+    visitConditional(ast: Conditional): Conditional;
+    visitPipe(ast: BindingPipe): BindingPipe;
+    visitKeyedAccess(ast: KeyedAccess): KeyedAccess;
+    visitAll(asts: List<any>): List<any>;
+    visitChain(ast: Chain): Chain;
+    visitAssignment(ast: Assignment): Assignment;
+    visitIf(ast: If): If;
   }
 
 }
