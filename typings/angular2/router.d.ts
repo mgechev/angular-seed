@@ -427,10 +427,12 @@ declare module ng {
 
   var RouteConfig;
 
+  class Instruction {}
+
 }
 
 
 
-declare module "angular2/angular2" {
+declare module "angular2/router" {
   export = ng;
 }
