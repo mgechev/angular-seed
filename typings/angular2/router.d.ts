@@ -1,4 +1,4 @@
-// Type definitions for Angular v2.0.0-local_sha.6c933a4
+// Type definitions for Angular v2.0.0-alpha.30
 // Project: http://angular.io/
 // Definitions by: angular team <https://github.com/angular/>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
