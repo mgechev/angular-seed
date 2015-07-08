@@ -23,7 +23,7 @@ var semver = require('semver');
 var series = require('stream-series');
 
 var http = require('http');
-var connect = require('connect');
+var express = require('express');
 var serveStatic = require('serve-static');
 var openResource = require('open');
 
@@ -276,10 +276,7 @@ gulp.task('serve.dev', ['build.dev'], function () {
     gulp.start('build.app.dev');
   });
 
-  app = connect().use(serveStatic(join(__dirname, PATH.dest.dev.all)));
-  http.createServer(app).listen(port, function () {
-    openResource('http://localhost:' + port);
-  });
+  serveSPA('dev');
 });
 
 // --------------
@@ -292,10 +289,7 @@ gulp.task('serve.prod', ['build.prod'], function () {
     gulp.start('build.app.prod');
   });
 
-  app = connect().use(serveStatic(join(__dirname, PATH.dest.prod.all)));
-  http.createServer(app).listen(port, function () {
-    openResource('http://localhost:' + port);
-  });
+  serveSPA('prod');
 });
 
 // --------------
@@ -343,5 +337,16 @@ function registerBumpTasks() {
     gulp.task(bumpTaskName, function(done) {
         runSequence(semverTaskName, 'build.app.prod', done);
     });
+  });
+}
+
+function serveSPA(env) {
+  var app;
+  app = express().use(serveStatic(join(__dirname, PATH.dest[env].all)));
+  app.all('*', function (req, res, next) {
+    res.sendFile(join(__dirname, PATH.dest[env].all, 'index.html'));
+  });
+  app.listen(port, function () {
+    openResource('http://localhost:' + port);
   });
 }
