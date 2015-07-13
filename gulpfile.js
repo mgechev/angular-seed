@@ -298,7 +298,8 @@ gulp.task('serve.prod', ['build.prod'], function () {
 function transformPath(env) {
   var v = '?v=' + getVersion();
   return function (filepath) {
-    arguments[0] = filepath.replace('/' + PATH.dest[env].all, '') + v;
+    var filename = filepath.replace('/' + PATH.dest[env].all, '') + v;
+    arguments[0] = join(APP_BASE, filename);
     return inject.transform.apply(inject.transform, arguments);
   };
 }
@@ -342,11 +343,11 @@ function registerBumpTasks() {
 
 function serveSPA(env) {
   var app;
-  app = express().use(serveStatic(join(__dirname, PATH.dest[env].all)));
-  app.all('*', function (req, res, next) {
+  app = express().use(APP_BASE, serveStatic(join(__dirname, PATH.dest[env].all)));
+  app.all(APP_BASE + '*', function (req, res, next) {
     res.sendFile(join(__dirname, PATH.dest[env].all, 'index.html'));
   });
   app.listen(port, function () {
-    openResource('http://localhost:' + port);
+    openResource('http://localhost:' + port + APP_BASE);
   });
 }
