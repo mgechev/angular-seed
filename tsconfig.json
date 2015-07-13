@@ -27,5 +27,6 @@
     "filesGlob": [
         "./app/**/*.ts",
         "./typings/**/*.ts"
-    ]
+    ],
+    "compileOnSave": false
 }
