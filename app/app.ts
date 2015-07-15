@@ -1,5 +1,5 @@
 /// <reference path="../typings/tsd.d.ts" />
-import {Component, View, bootstrap, NgFor} from 'angular2/angular2';
+import {Component, View, bootstrap, NgFor, httpInjectables} from 'angular2/angular2';
 import {RouteConfig, RouterOutlet, RouterLink, routerInjectables} from 'angular2/router';
 
 import {Home} from './components/home/home';
@@ -21,4 +21,4 @@ import {NamesList} from './services/NameList';
 class App {}
 
 
-bootstrap(App, [routerInjectables]);
+bootstrap(App, [routerInjectables, httpInjectables]);

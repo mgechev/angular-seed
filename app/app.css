@@ -1,3 +1,12 @@
+h1,
+h2,
+h3,
+h4,
+h5 {
+  padding:0;
+  margin:0;
+}
+
 .sample-app-content {
   font-family: Verdana;
 }
@@ -11,7 +20,7 @@
 }
 .sample-app-content p,
 .sample-app-content nav {
-  padding: 30px;
+  padding: 4px;
 }
 .sample-app-content li,
 .sample-app-content p {
@@ -29,4 +38,31 @@
   padding: 5px;
   font-size: 1em;
   outline: none;
+}
+
+.http-example {
+  border-top: 1px solid #efefef;
+  padding: 5px 12px;
+  color: #999;
+}
+
+.http-example .loading {
+  color: blue;
+  font-style: italic;
+  padding:14px 22px;
+}
+
+.http-example .stories {
+  padding:0 22px;
+}
+
+.http-example .stories h4 {
+  font-weight: normal;
+  padding:14px 0 0;
+  color:#AB9005;
+}
+
+.http-example .stories a {
+  margin:0 0 8px 0;
+  display: block;
 }
