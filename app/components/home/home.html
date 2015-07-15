@@ -6,5 +6,22 @@ Gratz!
 
 <p>
 Your deployment of Angular 2 Seed worked perfectly!
-Click on <em>about</em> to get your reward!
+Click on <a [router-link]="['/about']">About</a> to get your reward!
 </p>
+
+<div class="http-example">
+  Also check out these tweets about Angular 2:
+  <div class="loading" *ng-if="loading">
+    Loading latest tweets...
+  </div>
+  <div class="stories" *ng-if="!loading">
+    <div *ng-for="#tweet of tweets">
+      <h4>
+        {{tweet.snippet}}
+      </h4>
+      <a class="link" href="{{tweet.link}}" target="_blank">
+        {{tweet.link}}
+      </a>
+    </div>
+  </div>
+</div>
