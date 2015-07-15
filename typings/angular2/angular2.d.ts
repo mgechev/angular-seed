@@ -1,4 +1,4 @@
-// Type definitions for Angular v2.0.0-alpha.30
+// Type definitions for Angular v2.0.0-alpha.31
 // Project: http://angular.io/
 // Definitions by: angular team <https://github.com/angular/>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
@@ -32,6 +32,7 @@ declare module ng {
     stack: string;
     toString(): string;
   }
+  interface InjectableReference {}
 }
 
 
@@ -274,11 +275,11 @@ declare module ng {
 
      removeCallback(callback: any): void;
 
-     length: number;
+     length: void;
 
-     first: T;
+     first: void;
 
-     last: T;
+     last: void;
   }
 
   class AppProtoView {
@@ -1138,7 +1139,7 @@ declare module ng {
    *
    * @exportedAs angular2/di
    */
-  class Key {
+  interface Key {
 
      token: Object;
 
@@ -1516,8 +1517,6 @@ declare module ng {
    */
   class Control extends AbstractControl {
 
-     constructor(control: string, validator?: any)
-
      updateValue(value: any, {onlySelf, emitEvent}?: {onlySelf?: boolean, emitEvent?: boolean}): void;
 
      registerOnChange(fn: Function): void;
@@ -1542,8 +1541,6 @@ declare module ng {
    * @exportedAs angular2/forms
    */
   class ControlGroup extends AbstractControl {
-
-     constructor(options: StringMap<string,Control>, optional?: any)
 
      controls: StringMap<string, AbstractControl>;
 
@@ -4162,7 +4159,7 @@ declare module ng {
    * component, injector,
    * or dispose of an application.
    */
-  class ApplicationRef {
+  interface ApplicationRef {
 
 
     /**
@@ -4313,7 +4310,7 @@ declare module ng {
    *
    * @exportedAs angular2/view
    */
-  class Compiler {
+  interface Compiler {
 
      compileInHost(componentTypeOrBinding: Type | Binding): Promise<ProtoViewRef>;
   }
@@ -4324,7 +4321,7 @@ declare module ng {
    * This manager contains all recursion and delegates to helper methods
    * in AppViewManagerUtils and the Renderer, so unit tests get simpler.
    */
-  class AppViewManager {
+  interface AppViewManager {
 
 
     /**
@@ -4537,15 +4534,13 @@ declare module ng {
      onChange(callback: any): void;
 
      removeCallback(callback: any): void;
-
-     _results: Array<T>;
   }
 
 
   /**
    * Reference to the element.
    *
-   * Represents an opeque refference to the underlying element. The element is a DOM ELement in
+   * Represents an opaque reference to the underlying element. The element is a DOM ELement in
    * a Browser, but may represent other types on other rendering platforms. In the browser the
    * `ElementRef` can be sent to the web-worker. Web Workers can not have references to the
    * DOM Elements.
@@ -4612,8 +4607,8 @@ declare module ng {
   /**
    * A reference to an Angular View.
    *
-   * A View is a fundemental building block of Application UI. A View is the smallest set of
-   * elements which are created and destroyed together. A View can chane properties on the elements
+   * A View is a fundamental building block of Application UI. A View is the smallest set of
+   * elements which are created and destroyed together. A View can change properties on the elements
    * within the view, but it can not change the structure of those elements.
    *
    * To change structure of the elements, the Views can contain zero or more <a href='/angular2/angular2.api/ViewContainerRef'><code>ViewContainerRef</code></a>s
@@ -4645,9 +4640,9 @@ declare module ng {
    *   <li>{{item}}</li>
    * ```
    *
-   * Notice that the original template is broken down into two separet <a href='/angular2/angular2.api/ProtoViewRef'><code>ProtoViewRef</code></a>s.
+   * Notice that the original template is broken down into two separate <a href='/angular2/angular2.api/ProtoViewRef'><code>ProtoViewRef</code></a>s.
    *
-   * The outter/inner <a href='/angular2/angular2.api/ProtoViewRef'><code>ProtoViewRef</code></a>s are then assambled into views like so:
+   * The outter/inner <a href='/angular2/angular2.api/ProtoViewRef'><code>ProtoViewRef</code></a>s are then assembled into views like so:
    *
    * ```
    * <!-- ViewRef: outter-0 -->
@@ -4679,7 +4674,7 @@ declare module ng {
 
 
   /**
-   * A reference to an an Angular ProtoView.
+   * A reference to an Angular ProtoView.
    *
    * A ProtoView is a reference to a template for easy creation of views.
    * (See <a href='/angular2/angular2.api/AppViewManager#createViewInContainer'><code>AppViewManager</code></a> and <a href='/angular2/angular2.api/AppViewManager#createRootHostView'><code>AppViewManager</code></a>).
@@ -4712,11 +4707,11 @@ declare module ng {
    *   <li>{{item}}</li>
    * ```
    *
-   * Notice that the original template is broken down into two separet <a href='/angular2/angular2.api/ProtoViewRef'><code>ProtoViewRef</code></a>s.
+   * Notice that the original template is broken down into two separate <a href='/angular2/angular2.api/ProtoViewRef'><code>ProtoViewRef</code></a>s.
    *
    * @exportedAs angular2/view
    */
-  class ProtoViewRef {
+  interface ProtoViewRef {
   }
 
 
@@ -4892,46 +4887,6 @@ declare module ng {
      throw(error: any): void;
 
      return(value?: any): void;
-  }
-
-  class ProtoViewFactory {
-
-     createAppProtoViews(hostComponentBinding: DirectiveBinding, rootRenderProtoView:ProtoViewDto, allDirectives: List<DirectiveBinding>): List<AppProtoView>;
-  }
-
-  class RenderCompiler {
-
-
-    /**
-     * Creats a ProtoViewDto that contains a single nested component with the given componentId.
-     */
-     compileHost(directiveMetadata: DirectiveMetadata): Promise<ProtoViewDto>;
-
-
-    /**
-     * Compiles a single DomProtoView. Non recursive so that
-     * we don't need to serialize all possible components over the wire,
-     * but only the needed ones based on previous calls.
-     */
-     compile(view: ViewDefinition): Promise<ProtoViewDto>;
-  }
-
-
-  /**
-   * Cache that stores the AppProtoView of the template of a component.
-   * Used to prevent duplicate work and resolve cyclic dependencies.
-   */
-  class CompilerCache {
-
-     set(component: Type, protoView: AppProtoView): void;
-
-     get(component: Type): AppProtoView;
-
-     setHost(component: Type, protoView: AppProtoView): void;
-
-     getHost(component: Type): AppProtoView;
-
-     clear(): void;
   }
 
 
@@ -6214,6 +6169,23 @@ declare module ng {
      styles: List<string>;
   }
 
+  class RenderCompiler {
+
+
+    /**
+     * Creats a ProtoViewDto that contains a single nested component with the given componentId.
+     */
+     compileHost(directiveMetadata: DirectiveMetadata): Promise<ProtoViewDto>;
+
+
+    /**
+     * Compiles a single DomProtoView. Non recursive so that
+     * we don't need to serialize all possible components over the wire,
+     * but only the needed ones based on previous calls.
+     */
+     compile(view: ViewDefinition): Promise<ProtoViewDto>;
+  }
+
   class Renderer {
 
 
@@ -6878,6 +6850,16 @@ declare module ng {
 
      visitIf(ast: If): If;
   }
+
+  var Key: InjectableReference;
+
+  var ApplicationRef: InjectableReference;
+
+  var Compiler: InjectableReference;
+
+  var AppViewManager: InjectableReference;
+
+  var ProtoViewRef: InjectableReference;
 
 }
 

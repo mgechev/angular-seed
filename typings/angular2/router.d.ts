@@ -1,4 +1,4 @@
-// Type definitions for Angular v2.0.0-alpha.30
+// Type definitions for Angular v2.0.0-alpha.31
 // Project: http://angular.io/
 // Definitions by: angular team <https://github.com/angular/>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
@@ -322,6 +322,11 @@ declare module ng {
 
   var appBaseHrefToken : OpaqueToken ;
 
+  class Instruction {
+    reuseComponentsFrom(oldInstruction: Instruction): void;
+    params(): StringMap<string, string>;
+    hasChild(): boolean;
+  }
 
   /**
    * Responsible for performing each step of navigation.
@@ -339,8 +344,6 @@ declare module ng {
   var routerInjectables : List<any> ;
 
   var RouteConfig;
-
-  class Instruction {}
 
 }
 
