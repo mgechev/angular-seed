@@ -276,13 +276,17 @@ gulp.task('build.ng2.test', ['clean.test'], function () {
   return ng2Builder.build('angular2/angular2', 'test/lib/angular2.js', {});
 });
 
-gulp.task('build.test', ['build.ng2.test'], function() {
+gulp.task('build.test', function() {
   var result = gulp.src(['./app/**/*.ts', '!./app/init.ts'])
     .pipe(plumber())
     .pipe(tsc(tsProject));
 
   return result.js
     .pipe(gulp.dest('./test'));
+});
+
+gulp.task('init.test', function (done) {
+  runSequence('build.ng2.test', 'run.karma', done)
 });
 
 gulp.task('run.karma', ['build.test'], function(done) {
@@ -292,7 +296,7 @@ gulp.task('run.karma', ['build.test'], function(done) {
   }, done);
 });
 
-gulp.task('test', ['run.karma'], function() {
+gulp.task('test', ['init.test'], function() {
   watch('./app/**', function() {
       gulp.start('run.karma');
   });
