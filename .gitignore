@@ -26,7 +26,8 @@ node_modules
 
 # Users Environment Variables
 .lock-wscript
+.tsdrc
 
 dist
 dev
-lib
+test

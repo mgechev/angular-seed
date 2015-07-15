@@ -16,10 +16,12 @@
         "./app/components/home/home.ts",
         "./app/init.ts",
         "./app/services/NameList.ts",
+        "./app/services/NameList_spec.ts",
         "./typings/angular2/angular2.d.ts",
         "./typings/angular2/router.d.ts",
         "./typings/custom.system.d.ts",
         "./typings/es6-promise/es6-promise.d.ts",
+        "./typings/jasmine/jasmine.d.ts",
         "./typings/rx/rx-lite.d.ts",
         "./typings/rx/rx.d.ts",
         "./typings/tsd.d.ts"

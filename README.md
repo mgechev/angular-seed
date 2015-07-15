@@ -20,6 +20,8 @@ npm install -g gulp
 gulp serve.dev
 # prod
 gulp serve.prod
+# test
+gulp test
 ```
 
 # Directory Structure
@@ -45,7 +47,9 @@ gulp serve.prod
 │   └── prod
 ├── typings
 ├── gulpfile.js
+├── karma.conf.js
 ├── package.json
+├── test-main.js
 ├── tsconfig.json
 └── tsd.json
 ```

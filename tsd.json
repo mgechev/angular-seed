@@ -16,6 +16,9 @@
     },
     "angular2/angular2.d.ts": {
       "commit": "8ebc099072402b1a80d205c3eece59bed963ad87"
+    },
+    "jasmine/jasmine.d.ts": {
+      "commit": "0fff32b558aa91ba24cfca5479aba02e4ef2fafe"
     }
   }
 }

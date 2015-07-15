@@ -30,7 +30,12 @@
     "serve-static": "^1.9.2",
     "stream-series": "^0.1.1",
     "systemjs-builder": "^0.10.6",
-    "typescript": "~1.5.0-beta"
+    "typescript": "~1.5.0-beta",
+    "karma": "~0.12.37",
+    "jasmine-core": "~2.3.4",
+    "karma-jasmine": "~0.3.6",
+    "karma-chrome-launcher": "~0.2.0",
+    "karma-mocha-reporter": "~1.0.2"
   },
   "dependencies": {
     "angular2": "2.0.0-alpha.30",

@@ -18,6 +18,7 @@ var Builder = require('systemjs-builder');
 var del = require('del');
 var fs = require('fs');
 var join = require('path').join;
+var karma = require('karma').server;
 var runSequence = require('run-sequence');
 var semver = require('semver');
 var series = require('stream-series');
@@ -26,6 +27,8 @@ var http = require('http');
 var express = require('express');
 var serveStatic = require('serve-static');
 var openResource = require('open');
+
+// TODO: Make ng2 build DRY-er
 
 // --------------
 // Configuration.
@@ -119,6 +122,10 @@ gulp.task('clean.app.prod', function (done) {
 
 gulp.task('clean.tmp', function(done) {
   del('tmp', done);
+});
+
+gulp.task('clean.test', function(done) {
+  del('test', done);
 });
 
 // --------------
@@ -264,7 +271,32 @@ gulp.task('bump.reset', function() {
 // --------------
 // Test.
 
-// To be implemented.
+gulp.task('build.ng2.test', ['clean.test'], function () {
+  ng2Builder.build('angular2/router', 'test/lib/router.js', {});
+  return ng2Builder.build('angular2/angular2', 'test/lib/angular2.js', {});
+});
+
+gulp.task('build.test', ['build.ng2.test'], function() {
+  var result = gulp.src(['./app/**/*.ts', '!./app/init.ts'])
+    .pipe(plumber())
+    .pipe(tsc(tsProject));
+
+  return result.js
+    .pipe(gulp.dest('./test'));
+});
+
+gulp.task('run.karma', ['build.test'], function(done) {
+  karma.start({
+    configFile: join(__dirname, 'karma.conf.js'),
+    singleRun: true
+  }, done);
+});
+
+gulp.task('test', ['run.karma'], function() {
+  watch('./app/**', function() {
+      gulp.start('run.karma');
+  });
+});
 
 // --------------
 // Serve dev.
