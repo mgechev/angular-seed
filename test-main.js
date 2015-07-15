@@ -15,14 +15,13 @@ System.baseURL = '/base/';
 System.paths = {
   '*': '*.js',
   'angular2/angular2': 'test/lib/angular2.js',
-  'angular2/router': 'test/lib/router.js',
-  'rx': 'node_modules/angular2/node_modules/rx/dist/rx.js'
+  'angular2/router': 'test/lib/router.js'
 };
 
 Promise.all(
   Object.keys(window.__karma__.files) // All files served by Karma.
   .filter(onlySpecFiles)
-  .map(window.file2moduleName)        // Normalize paths to module names.
+  .map(file2moduleName)
   .map(function(path) {
     return System.import(path).then(function(module) {
       if (module.hasOwnProperty('main')) {
@@ -44,6 +43,7 @@ function onlySpecFiles(path) {
   return /_spec\.js$/.test(path);
 }
 
+// Normalize paths to module names.
 function file2moduleName(filePath) {
   var name = filePath.replace(/\\/g, '/')
     // make valid module name
