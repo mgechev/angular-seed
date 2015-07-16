@@ -46,7 +46,6 @@ function onlySpecFiles(path) {
 // Normalize paths to module names.
 function file2moduleName(filePath) {
   var name = filePath.replace(/\\/g, '/')
-    // make valid module name
     .replace(/^\/base\//, '')
     .replace(/\.js/, '');
   return name;
