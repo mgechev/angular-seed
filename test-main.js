@@ -18,19 +18,23 @@ System.paths = {
   'angular2/router': 'test/lib/router.js'
 };
 
-Promise.all(
-  Object.keys(window.__karma__.files) // All files served by Karma.
-  .filter(onlySpecFiles)
-  .map(file2moduleName)
-  .map(function(path) {
-    return System.import(path).then(function(module) {
-      if (module.hasOwnProperty('main')) {
-        module.main();
-      } else {
-        throw new Error('Module ' + path + ' does not implement main() method.');
-      }
-    });
-  }))
+System.import('angular2/src/dom/browser_adapter').then(function(browser_adapter) {
+  browser_adapter.BrowserDomAdapter.makeCurrent();
+}).then(function() {
+  return Promise.all(
+    Object.keys(window.__karma__.files) // All files served by Karma.
+    .filter(onlySpecFiles)
+    .map(file2moduleName)
+    .map(function(path) {
+      return System.import(path).then(function(module) {
+        if (module.hasOwnProperty('main')) {
+          module.main();
+        } else {
+          throw new Error('Module ' + path + ' does not implement main() method.');
+        }
+      });
+    }))
+})
 .then(function() {
   __karma__.start();
 }, function(error) {

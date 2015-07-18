@@ -25,7 +25,9 @@ module.exports = function(config) {
 
       'test/lib/angular2.js',
       'test/lib/router.js',
+      'test/lib/test.js',
       { pattern: 'test/**/*.js', included: false, watched: false },
+      { pattern: 'test/**/*.html', included: false, watched: false },
       'test-main.js',
     ],
 
@@ -57,7 +59,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DEBUG,
 
 
     // enable / disable watching file and executing tests whenever any file changes

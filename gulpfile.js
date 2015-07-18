@@ -273,16 +273,22 @@ gulp.task('bump.reset', function() {
 
 gulp.task('build.ng2.test', ['clean.test'], function () {
   ng2Builder.build('angular2/router', 'test/lib/router.js', {});
+  ng2Builder.build('angular2/test', 'test/lib/test.js', {});
   return ng2Builder.build('angular2/angular2', 'test/lib/angular2.js', {});
 });
 
-gulp.task('build.test', function() {
+gulp.task('build.test', ['build.assets.test'], function() {
   var result = gulp.src(['./app/**/*.ts', '!./app/init.ts'])
     .pipe(plumber())
     .pipe(tsc(tsProject));
 
   return result.js
     .pipe(gulp.dest('./test'));
+});
+
+gulp.task('build.assets.test', function () {
+  return gulp.src(['./app/**/*.html'])
+    .pipe(gulp.dest('test'));
 });
 
 gulp.task('init.test', function (done) {
