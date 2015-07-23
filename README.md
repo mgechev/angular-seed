@@ -35,6 +35,7 @@ gulp serve.prod
 │   │       ├── home.html
 │   │       └── home.ts
 │   ├── services
+│   ├── typings
 │   ├── app.css
 │   ├── app.html
 │   ├── app.ts
@@ -43,7 +44,7 @@ gulp serve.prod
 ├── dist
 │   ├── dev
 │   └── prod
-├── typings
+├── tsd_typings
 ├── gulpfile.js
 ├── package.json
 ├── tsconfig.json

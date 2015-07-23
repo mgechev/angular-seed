@@ -1,3 +1,4 @@
+/// <reference path="/app/typings/_custom.d.ts" />
 import {Component, View, NgFor} from 'angular2/angular2';
 
 import {NamesList} from '../../services/NameList';

@@ -1,5 +1,5 @@
 {
-    "version": "1.5.0",
+    "version": "1.5.3",
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
@@ -16,17 +16,19 @@
         "./app/components/home/home.ts",
         "./app/init.ts",
         "./app/services/NameList.ts",
-        "./typings/angular2/angular2.d.ts",
-        "./typings/angular2/router.d.ts",
-        "./typings/custom.system.d.ts",
-        "./typings/es6-promise/es6-promise.d.ts",
-        "./typings/rx/rx-lite.d.ts",
-        "./typings/rx/rx.d.ts",
-        "./typings/tsd.d.ts"
+        "./app/typings/_custom.d.ts",
+        "./app/typings/systemjs.d.ts",
+        "./tsd_typings/angular2/angular2.d.ts",
+        "./tsd_typings/angular2/router.d.ts",
+        "./tsd_typings/custom.system.d.ts",
+        "./tsd_typings/es6-promise/es6-promise.d.ts",
+        "./tsd_typings/rx/rx-lite.d.ts",
+        "./tsd_typings/rx/rx.d.ts",
+        "./tsd_typings/tsd.d.ts"
     ],
     "filesGlob": [
         "./app/**/*.ts",
-        "./typings/**/*.ts"
+        "./tsd_typings/**/*.ts"
     ],
     "compileOnSave": false
 }

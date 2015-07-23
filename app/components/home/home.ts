@@ -1,3 +1,4 @@
+/// <reference path="/app/typings/_custom.d.ts" />
 import {Component, View} from 'angular2/angular2';
 import {RouterLink} from 'angular2/router';
 
