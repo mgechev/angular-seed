@@ -1,4 +1,4 @@
-/// <reference path="../typings/custom.system.d.ts" />
+/// <reference path="typings/_custom.d.ts" />
 System.config({
   baseURL: '<%= APP_BASE %>',
   paths: {'*': '*.js?v=<%= VERSION %>'}
