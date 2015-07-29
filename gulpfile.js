@@ -22,7 +22,6 @@ var runSequence = require('run-sequence');
 var semver = require('semver');
 var series = require('stream-series');
 
-var http = require('http');
 var express = require('express');
 var serveStatic = require('serve-static');
 var openResource = require('open');
@@ -270,8 +269,6 @@ gulp.task('bump.reset', function() {
 // Serve dev.
 
 gulp.task('serve.dev', ['build.dev'], function () {
-  var app;
-
   watch('./app/**', function () {
     gulp.start('build.app.dev');
   });
@@ -283,8 +280,6 @@ gulp.task('serve.dev', ['build.dev'], function () {
 // Serve prod.
 
 gulp.task('serve.prod', ['build.prod'], function () {
-  var app;
-
   watch('./app/**', function () {
     gulp.start('build.app.prod');
   });
