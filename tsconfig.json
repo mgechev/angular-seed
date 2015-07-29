@@ -21,7 +21,6 @@
         "./app/typings/systemjs.d.ts",
         "./tsd_typings/angular2/angular2.d.ts",
         "./tsd_typings/angular2/router.d.ts",
-        "./tsd_typings/custom.system.d.ts",
         "./tsd_typings/es6-promise/es6-promise.d.ts",
         "./tsd_typings/rx/rx-lite.d.ts",
         "./tsd_typings/rx/rx.d.ts",
