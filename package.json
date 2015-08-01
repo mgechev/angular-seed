@@ -9,6 +9,7 @@
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
   "devDependencies": {
+    "connect-livereload": "^0.5.3",
     "del": "^1.1.1",
     "express": "~4.13.1",
     "gulp": "^3.8.11",
@@ -30,6 +31,7 @@
     "serve-static": "^1.9.2",
     "stream-series": "^0.1.1",
     "systemjs-builder": "^0.10.6",
+    "tiny-lr": "^0.1.6",
     "typescript": "~1.5.3"
   },
   "dependencies": {
