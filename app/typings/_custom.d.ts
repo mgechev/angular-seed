@@ -1,7 +1,7 @@
 /*
- * Our custom types
+ * Your custom types
+ * Place references (from ./app/typings) to any custom typings you need here
  */
-/// <reference path="systemjs.d.ts" />
 
 
 /*

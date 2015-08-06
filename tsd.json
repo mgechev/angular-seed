@@ -19,6 +19,9 @@
     },
     "angular2/router.d.ts": {
       "commit": "f6c8ca47193fb67947944a3170912672ac3e908e"
+    },
+    "systemjs/systemjs.d.ts": {
+      "commit": "bd03c6ea51abde7d13e354908716c6373fc38b1f"
     }
   }
 }

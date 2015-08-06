@@ -18,4 +18,4 @@ declare var System: System;
 
 declare module "systemjs" {
   export = System;
-} 
+}
