@@ -18,12 +18,12 @@
         "./app/init.ts",
         "./app/services/NameList.ts",
         "./app/typings/_custom.d.ts",
-        "./app/typings/systemjs.d.ts",
         "./tsd_typings/angular2/angular2.d.ts",
         "./tsd_typings/angular2/router.d.ts",
         "./tsd_typings/es6-promise/es6-promise.d.ts",
         "./tsd_typings/rx/rx-lite.d.ts",
         "./tsd_typings/rx/rx.d.ts",
+        "./tsd_typings/systemjs/systemjs.d.ts",
         "./tsd_typings/tsd.d.ts"
     ],
     "filesGlob": [
