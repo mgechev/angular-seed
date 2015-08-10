@@ -129,7 +129,7 @@ gulp.task('clean.tmp', function(done) {
 // Build dev.
 
 gulp.task('build.ng2.dev', function () {
-  ng2Builder.build('angular2/router', PATH.dest.dev.router, {});
+  ng2Builder.build('angular2/router - angular2/angular2', PATH.dest.dev.router, {});
   return ng2Builder.build('angular2/angular2', PATH.dest.dev.ng2, {});
 });
 
@@ -175,7 +175,7 @@ gulp.task('build.dev', function (done) {
 // Build prod.
 
 gulp.task('build.ng2.prod', function () {
-  ng2Builder.build('angular2/router', join('tmp', 'router.js'), {});
+  ng2Builder.build('angular2/router - angular2/angular2', join('tmp', 'router.js'), {});
   return ng2Builder.build('angular2/angular2', join('tmp', 'angular2.js'), {});
 });
 
