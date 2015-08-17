@@ -35,7 +35,7 @@
     "typescript": "~1.5.3"
   },
   "dependencies": {
-    "angular2": "2.0.0-alpha.33",
+    "angular2": "2.0.0-alpha.34",
     "es6-module-loader": "^0.15.0",
     "systemjs": "^0.16.0",
     "zone.js": "^0.4.1",
