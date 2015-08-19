@@ -7,7 +7,7 @@ import {NamesList} from './services/NameList';
 
 @Component({
   selector: 'app',
-  viewInjector: [NamesList]
+  bindings: [NamesList]
 })
 @RouteConfig([
   { path: '/', component: Home, as: 'home' },
