@@ -15,7 +15,7 @@ import {NamesList} from './services/NameList';
 ])
 @View({
   templateUrl: './app.html?v=<%= VERSION %>',
-  directives: [RouterOutlet, RouterLink, SampleDirective]
+  directives: [RouterOutlet, RouterLink]
 })
 class App {}
 
