@@ -7,7 +7,7 @@ import {NamesList} from './services/NameList';
 
 @Component({
   selector: 'app',
-  bindings: [NamesList]
+  viewBindings: [NamesList]
 })
 @RouteConfig([
   { path: '/', component: Home, as: 'home' },
@@ -15,7 +15,7 @@ import {NamesList} from './services/NameList';
 ])
 @View({
   templateUrl: './app.html?v=<%= VERSION %>',
-  directives: [RouterOutlet, RouterLink]
+  directives: [RouterOutlet, RouterLink, SampleDirective]
 })
 class App {}
 
