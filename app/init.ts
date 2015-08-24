@@ -1,20 +1,15 @@
 System.config({
+  defaultJSExtensions: true,
   baseURL: '<%= APP_BASE %>',
-  paths: {'*': '*.js?v=<%= VERSION %>'}
-});
-
-// Patching System.js
-System['import'] = function (name:string, options:any):any {
-  return System.originalSystem.import.call(this, name, options).then(function(module) {
-    return module;
-  });
-};
-
-// Dirty workaround in order to load angular2/router properly
-System.import('angular2/router').then(m => {
-  System.defined['angular2/router'] = { normalizedDeps: [] };
-  System.defined['angular2/router'].module = {};
-  System.defined['angular2/router'].module.exports = m;
+  paths: {
+    'angular2/angular2': 'lib/angular2.js',
+    'angular2/router': 'lib/router.js',
+    '*': '*.js?v=<%= VERSION %>'
+  },
+  meta: {
+    'angular2/angular2': { format: 'register', bundle: true },
+    'angular2/router': { format: 'register' }
+  }
 });
 
 
