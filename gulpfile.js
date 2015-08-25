@@ -40,8 +40,6 @@ var PATH = {
     dev: {
       all: 'dist/dev',
       lib: 'dist/dev/lib',
-      ng2: 'dist/dev/lib/angular2.js',
-      router: 'dist/dev/lib/router.js'
     },
     prod: {
       all: 'dist/prod',
@@ -49,36 +47,31 @@ var PATH = {
     }
   },
   src: {
-    // Order is quite important here for the HTML tag injection.
-    lib: [
+    loader: [
       './node_modules/angular2/node_modules/traceur/bin/traceur-runtime.js',
       './node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.js',
       './node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.js.map',
       './node_modules/reflect-metadata/Reflect.js',
       './node_modules/reflect-metadata/Reflect.js.map',
-      './node_modules/systemjs/dist/system.src.js',
-      './app/system.config.js',
+      './node_modules/systemjs/dist/system.src.js'
+    ],
+    loaderConfig: [
+      './app/system.config.js'
+    ],
+    // Order is quite important here for the HTML tag injection.
+    angular: [
       './node_modules/angular2/bundles/angular2.dev.js',
       './node_modules/angular2/bundles/router.dev.js'
     ]
   }
 };
 
+PATH.src.lib = PATH.src.loader
+    .concat(PATH.src.loaderConfig)
+    .concat(PATH.src.angular);
+
 var PORT = 5555;
 var LIVE_RELOAD_PORT = 4002;
-
-var ng2Builder = new Builder({
-  defaultJSExtensions: true,
-  paths: {
-    'angular2/*': 'node_modules/angular2/es6/dev/*.js',
-    rx: 'node_modules/angular2/node_modules/rx/dist/rx.js'
-  },
-  meta: {
-    rx: {
-      format: 'cjs'
-    }
-  }
-});
 
 var appProdBuilder = new Builder({
   baseURL: 'file:./tmp',
@@ -131,12 +124,7 @@ gulp.task('clean.tmp', function(done) {
 // --------------
 // Build dev.
 
-gulp.task('build.ng2.dev', function () {
-//  ng2Builder.build('angular2/router - angular2/angular2', PATH.dest.dev.router, {});
-//  return ng2Builder.build('angular2/angular2', PATH.dest.dev.ng2, {});
-});
-
-gulp.task('build.lib.dev', ['build.ng2.dev'], function () {
+gulp.task('build.lib.dev', function () {
   return gulp.src(PATH.src.lib)
     .pipe(gulp.dest(PATH.dest.dev.lib));
 });
@@ -177,18 +165,11 @@ gulp.task('build.dev', function (done) {
 // --------------
 // Build prod.
 
-gulp.task('build.ng2.prod', function () {
-//  ng2Builder.build('angular2/router - angular2/angular2', join('tmp', 'router.js'), {});
-//  return ng2Builder.build('angular2/angular2', join('tmp', 'angular2.js'), {});
-});
-
-gulp.task('build.lib.prod', ['build.ng2.prod'], function () {
+gulp.task('build.lib.prod', function () {
   var jsOnly = filter('**/*.js');
   var lib = gulp.src(PATH.src.lib);
-  var ng2 = gulp.src('tmp/angular2.js');
-  var router = gulp.src('tmp/router.js');
 
-  return series(lib, ng2, router)
+  return series(lib)
     .pipe(jsOnly)
     .pipe(concat('lib.js'))
     .pipe(uglify())
@@ -329,8 +310,7 @@ function injectableDevAssetsRef() {
   var src = PATH.src.lib.map(function(path) {
     return join(PATH.dest.dev.lib, path.split('/').pop());
   });
-  src.push(PATH.dest.dev.ng2, PATH.dest.dev.router,
-           join(PATH.dest.dev.all, '**/*.css'));
+  src.push(join(PATH.dest.dev.all, '**/*.css'));
   return src;
 }
 
