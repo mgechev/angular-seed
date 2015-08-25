@@ -5,6 +5,7 @@ var bump = require('gulp-bump');
 var concat = require('gulp-concat');
 var filter = require('gulp-filter');
 var inject = require('gulp-inject');
+var inlineNg2Template = require('gulp-inline-ng2-template');
 var minifyCSS = require('gulp-minify-css');
 var minifyHTML = require('gulp-minify-html');
 var plumber = require('gulp-plumber');
@@ -282,6 +283,7 @@ gulp.task('build.ng2.test', ['clean.test'], function () {
 gulp.task('build.test', ['build.assets.test'], function() {
   var result = gulp.src(['./app/**/*.ts', '!./app/init.ts'])
     .pipe(plumber())
+    .pipe(inlineNg2Template({ base: 'app' }))
     .pipe(tsc(tsProject));
 
   return result.js

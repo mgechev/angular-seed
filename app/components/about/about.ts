@@ -6,22 +6,7 @@ import {NamesList} from '../../services/NameList';
   selector: 'about'
 })
 @View({
-  template: `
-    <p>
-      For reward, here is a list of awesome computer scientists!
-    </p>
-
-    <p>
-      You want more? Add them yourself!
-    </p>
-    <p>
-      <input #newname>
-      <button (click)="addName(newname)">Add</button>
-    </p>
-    <ul>
-      <li *ng-for="#name of list.get()">{{name}}</li>
-    </ul>
-  `,
+  templateUrl: './components/about/about.html?v=<%= VERSION %>',
   directives: [NgFor]
 })
 export class About {
