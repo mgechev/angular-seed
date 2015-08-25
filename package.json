@@ -30,15 +30,15 @@
     "semver": "^4.3.6",
     "serve-static": "^1.9.2",
     "stream-series": "^0.1.1",
-    "systemjs-builder": "^0.10.6",
+    "systemjs-builder": "^0.13.3",
     "tiny-lr": "^0.1.6",
     "typescript": "~1.5.3"
   },
   "dependencies": {
-    "angular2": "2.0.0-alpha.34",
+    "angular2": "2.0.0-alpha.35",
     "es6-module-loader": "^0.15.0",
-    "systemjs": "^0.16.0",
-    "zone.js": "^0.4.1",
-    "reflect-metadata": "0.1.0"
+    "reflect-metadata": "0.1.0",
+    "systemjs": "^0.18.11",
+    "zone.js": "^0.4.1"
   }
 }
