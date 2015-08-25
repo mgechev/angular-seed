@@ -57,7 +57,9 @@ var PATH = {
       './node_modules/reflect-metadata/Reflect.js',
       './node_modules/reflect-metadata/Reflect.js.map',
       './node_modules/systemjs/dist/system.src.js',
-      './node_modules/angular2/node_modules/zone.js/dist/zone.js'
+      './app/system.config.js',
+      './node_modules/angular2/bundles/angular2.dev.js',
+      './node_modules/angular2/bundles/router.dev.js'
     ]
   }
 };
@@ -130,8 +132,8 @@ gulp.task('clean.tmp', function(done) {
 // Build dev.
 
 gulp.task('build.ng2.dev', function () {
-  ng2Builder.build('angular2/router - angular2/angular2', PATH.dest.dev.router, {});
-  return ng2Builder.build('angular2/angular2', PATH.dest.dev.ng2, {});
+//  ng2Builder.build('angular2/router - angular2/angular2', PATH.dest.dev.router, {});
+//  return ng2Builder.build('angular2/angular2', PATH.dest.dev.ng2, {});
 });
 
 gulp.task('build.lib.dev', ['build.ng2.dev'], function () {
@@ -176,8 +178,8 @@ gulp.task('build.dev', function (done) {
 // Build prod.
 
 gulp.task('build.ng2.prod', function () {
-  ng2Builder.build('angular2/router - angular2/angular2', join('tmp', 'router.js'), {});
-  return ng2Builder.build('angular2/angular2', join('tmp', 'angular2.js'), {});
+//  ng2Builder.build('angular2/router - angular2/angular2', join('tmp', 'router.js'), {});
+//  return ng2Builder.build('angular2/angular2', join('tmp', 'angular2.js'), {});
 });
 
 gulp.task('build.lib.prod', ['build.ng2.prod'], function () {
