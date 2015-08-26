@@ -50,6 +50,6 @@ export function main() {
   });
 };
 
-@Component({selector: 'test-cmp', viewInjector: [NamesList]})
+@Component({selector: 'test-cmp', bindings: [NamesList]})
 @View({directives: [About]})
 class TestComponent {}

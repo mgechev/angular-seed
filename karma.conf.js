@@ -23,10 +23,8 @@ module.exports = function(config) {
       'node_modules/systemjs/dist/system.src.js',
       'node_modules/reflect-metadata/Reflect.js',
 
-      'test/lib/angular2.js',
-      'test/lib/router.js',
-      'test/lib/test_lib.js',
-      { pattern: 'test/**/*.js', included: false, watched: false },
+      { pattern: 'test/**/*.js', included: false, watched: true },
+      { pattern: 'node_modules/angular2/**/*.js', included: false, watched: false },
       'test-main.js',
     ],
 
