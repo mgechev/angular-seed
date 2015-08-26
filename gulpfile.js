@@ -314,7 +314,6 @@ function injectableDevAssetsRef() {
         return join(PATH.dest.dev.lib, path.split('/').pop());
     });
     src.push(join(PATH.dest.dev.all, '**/*.css'));
-    console.log(src);
     return src;
 }
 
