@@ -13,10 +13,8 @@ import {
   xit,
 } from 'angular2/test';
 import {Component, View} from 'angular2/angular2';
-import {routerInjectables, RouteConfig} from 'angular2/router';
 import {DOM} from 'angular2/src/dom/dom_adapter';
 import {Home} from './home';
-import {About} from '../about/about';
 
 export function main() {
   describe('Home component', () => {
@@ -35,7 +33,6 @@ export function main() {
   });
 };
 
-@Component({selector: 'test-cmp', hostInjector: [routerInjectables]})
-@RouteConfig([ { path: '/about', component: About, as: 'about' }])
+@Component({selector: 'test-cmp'})
 @View({directives: [Home]})
 class TestComponent {}
