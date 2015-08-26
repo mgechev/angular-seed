@@ -276,7 +276,7 @@ gulp.task('bump.reset', function() {
 
 gulp.task('build.ng2.test', ['clean.test'], function () {
   ng2Builder.build('angular2/router', 'test/lib/router.js', {});
-  ng2Builder.build('angular2/test', 'test/lib/test.js', {});
+  ng2Builder.build('angular2/test', 'test/lib/test_lib.js', {});
   return ng2Builder.build('angular2/angular2', 'test/lib/angular2.js', {});
 });
 
