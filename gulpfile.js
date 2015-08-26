@@ -280,6 +280,11 @@ gulp.task('build.ng2.test', ['clean.test'], function () {
   return ng2Builder.build('angular2/angular2', 'test/lib/angular2.js', {});
 });
 
+gulp.task('build.assets.test', function () {
+  return gulp.src(['./app/**/*.html'])
+    .pipe(gulp.dest('test'));
+});
+
 gulp.task('build.test', ['build.assets.test'], function() {
   var result = gulp.src(['./app/**/*.ts', '!./app/init.ts'])
     .pipe(plumber())
@@ -290,16 +295,11 @@ gulp.task('build.test', ['build.assets.test'], function() {
     .pipe(gulp.dest('./test'));
 });
 
-gulp.task('build.assets.test', function () {
-  return gulp.src(['./app/**/*.html'])
-    .pipe(gulp.dest('test'));
-});
-
 gulp.task('init.test', function (done) {
-  runSequence('build.ng2.test', 'run.karma', done)
+  runSequence('build.ng2.test', 'karma.start', done)
 });
 
-gulp.task('run.karma', ['build.test'], function(done) {
+gulp.task('karma.start', ['build.test'], function(done) {
   karma.start({
     configFile: join(__dirname, 'karma.conf.js'),
     singleRun: true
@@ -308,7 +308,7 @@ gulp.task('run.karma', ['build.test'], function(done) {
 
 gulp.task('test', ['init.test'], function() {
   watch('./app/**', function() {
-      gulp.start('run.karma');
+      gulp.start('karma.start');
   });
 });
 
