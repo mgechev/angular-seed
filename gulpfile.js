@@ -40,12 +40,12 @@ var PATH = {
   dest: {
     all: APP_DEST,
     dev: {
-      all: join(APP_DEST, '/dev'),
-      lib: join(APP_DEST, '/dev/lib')
+      all: join(APP_DEST, 'dev'),
+      lib: join(APP_DEST, 'dev/lib')
     },
     prod: {
-      all: join(APP_DEST, '/prod'),
-      lib: join(APP_DEST, '/prod/lib')
+      all: join(APP_DEST, 'prod'),
+      lib: join(APP_DEST, 'prod/lib')
     }
   },
   src: {
@@ -59,7 +59,7 @@ var PATH = {
       './node_modules/systemjs/dist/system.src.js'
     ],
     loaderConfig: [
-      join(APP_SRC, '/system.config.js')
+      join(APP_SRC, 'system.config.js')
     ],
 // Order is quite important here for the HTML tag injection.
     angular: [
@@ -133,7 +133,7 @@ gulp.task('build.lib.dev', function() {
 });
 
 gulp.task('build.js.dev', function() {
-  var result = gulp.src(join(PATH.src.all, '/**/*ts'))
+  var result = gulp.src(join(PATH.src.all, '**/*ts'))
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(tsc(tsProject));
@@ -145,14 +145,14 @@ gulp.task('build.js.dev', function() {
 });
 
 gulp.task('build.assets.dev', ['build.js.dev'], function() {
-  return gulp.src([join(PATH.src.all, '/**/*.html'), join(PATH.src.all, '/**/*.css')])
+  return gulp.src([join(PATH.src.all, '**/*.html'), join(PATH.src.all, '**/*.css')])
     .pipe(gulp.dest(PATH.dest.dev.all));
 });
 
 gulp.task('build.index.dev', function() {
   var target = gulp.src(injectableDevAssetsRef(), { read: false });
-  console.log(join(PATH.src.all, '/index.html'))
-  return gulp.src(join(PATH.src.all, '/index.html'))
+  console.log(join(PATH.src.all, 'index.html'))
+  return gulp.src(join(PATH.src.all, 'index.html'))
     .pipe(inject(target, { transform: transformPath('dev') }))
     .pipe(template(templateLocals()))
     .pipe(gulp.dest(PATH.dest.dev.all));
@@ -181,7 +181,7 @@ gulp.task('build.lib.prod', function() {
 });
 
 gulp.task('build.js.tmp', function() {
-  var result = gulp.src([join(PATH.src.all, '/**/*ts'), '!' + join(PATH.src.all, '/init.ts')])
+  var result = gulp.src([join(PATH.src.all, '**/*ts'), '!' + join(PATH.src.all, 'init.ts')])
     .pipe(plumber())
     .pipe(tsc(tsProject));
 
@@ -197,7 +197,7 @@ gulp.task('build.js.prod', ['build.js.tmp'], function() {
 });
 
 gulp.task('build.init.prod', function() {
-  var result = gulp.src(join(PATH.src.all, '/init.ts'))
+  var result = gulp.src(join(PATH.src.all, 'init.ts'))
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(tsc(tsProject));
@@ -212,7 +212,7 @@ gulp.task('build.init.prod', function() {
 gulp.task('build.assets.prod', ['build.js.prod'], function() {
   var filterHTML = filter('**/*.html');
   var filterCSS = filter('**/*.css');
-  return gulp.src([join(PATH.src.all, '/**/*.html'), join(PATH.src.all, '/**/*.css')])
+  return gulp.src([join(PATH.src.all, '**/*.html'), join(PATH.src.all, '**/*.css')])
     .pipe(filterHTML)
     .pipe(minifyHTML(HTMLMinifierOpts))
     .pipe(filterHTML.restore())
@@ -225,7 +225,7 @@ gulp.task('build.assets.prod', ['build.js.prod'], function() {
 gulp.task('build.index.prod', function() {
   var target = gulp.src([join(PATH.dest.prod.lib, 'lib.js'),
                          join(PATH.dest.prod.all, '**/*.css')], {read: false});
-  return gulp.src(join(PATH.src.all, '/index.html'))
+  return gulp.src(join(PATH.src.all, 'index.html'))
     .pipe(inject(target, { transform: transformPath('prod') }))
     .pipe(template(templateLocals()))
     .pipe(gulp.dest(PATH.dest.prod.all));
@@ -262,7 +262,7 @@ gulp.task('bump.reset', function() {
 // Serve dev.
 
 gulp.task('serve.dev', ['build.dev', 'livereload'], function() {
-  watch(join(PATH.src.all, '/**'), function(e) {
+  watch(join(PATH.src.all, '**'), function(e) {
     runSequence('build.app.dev', function() {
       notifyLiveReload(e);
     });
@@ -274,7 +274,7 @@ gulp.task('serve.dev', ['build.dev', 'livereload'], function() {
 // Serve prod.
 
 gulp.task('serve.prod', ['build.prod', 'livereload'], function() {
-  watch(join(PATH.src.all, '/**'), function(e) {
+  watch(join(PATH.src.all, '**'), function(e) {
     runSequence('build.app.prod', function() {
       notifyLiveReload(e);
     });
