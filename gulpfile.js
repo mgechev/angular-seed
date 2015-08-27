@@ -292,7 +292,7 @@ gulp.task('livereload', function() {
 // --------------
 // Utils.
 
-functionnotifyLiveReload(e) {
+function notifyLiveReload(e) {
   var fileName = e.path;
   tinylr.changed({
     body: {
@@ -301,7 +301,7 @@ functionnotifyLiveReload(e) {
   });
 }
 
-functiontransformPath(env) {
+function transformPath(env) {
   var v = '?v=' + getVersion();
   return function(filepath) {
     var filename = filepath.replace('/' + PATH.dest[env].all, '') + v;
@@ -310,7 +310,7 @@ functiontransformPath(env) {
   };
 }
 
-functioninjectableDevAssetsRef() {
+function injectableDevAssetsRef() {
   var src = PATH.src.lib.map(function(path) {
     return join(PATH.dest.dev.lib, path.split('/').pop());
   });
@@ -318,19 +318,19 @@ functioninjectableDevAssetsRef() {
   return src;
 }
 
-functiongetVersion() {
+function getVersion() {
   var pkg = JSON.parse(fs.readFileSync('package.json'));
   return pkg.version;
 }
 
-functiontemplateLocals() {
+function templateLocals() {
   return {
     VERSION: getVersion(),
     APP_BASE: APP_BASE
   };
 }
 
-functionregisterBumpTasks() {
+function registerBumpTasks() {
   semverReleases.forEach(function(release) {
     var semverTaskName = 'semver.' + release;
     var bumpTaskName = 'bump.' + release;
@@ -346,7 +346,7 @@ functionregisterBumpTasks() {
   });
 }
 
-functionserveSPA(env) {
+function serveSPA(env) {
   var app;
   app = express().use(APP_BASE, connectLivereload({ port: LIVE_RELOAD_PORT }), serveStatic(join(__dirname, PATH.dest[env].all)));
   app.all(APP_BASE + '*', function(req, res, next) {
