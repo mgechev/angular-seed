@@ -2,7 +2,7 @@
     "version": "1.5.3",
     "compilerOptions": {
         "target": "es5",
-        "module": "amd",
+        "module": "commonjs",
         "declaration": false,
         "noImplicitAny": false,
         "removeComments": true,
