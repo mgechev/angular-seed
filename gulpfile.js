@@ -136,7 +136,7 @@ gulp.task('build.lib.dev', function () {
 });
 
 gulp.task('build.js.dev', function () {
-  var result = gulp.src('./app/**/*ts')
+  var result = gulp.src(['./app/**/*ts', '!./app/**/*_spec.ts'])
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(tsc(tsProject));
@@ -183,7 +183,7 @@ gulp.task('build.lib.prod', function () {
 });
 
 gulp.task('build.js.tmp', function () {
-  var result = gulp.src(['./app/**/*ts', '!./app/init.ts'])
+  var result = gulp.src(['./app/**/*ts', '!./app/init.ts', '!./app/**/*_spec.ts'])
     .pipe(plumber())
     .pipe(tsc(tsProject));
 
