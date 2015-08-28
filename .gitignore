@@ -27,6 +27,9 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 
+#IntelliJ configuration files
+.idea
+
 dist
 dev
 lib
