@@ -106,7 +106,7 @@ gulp.task('clean.dev', function(done) {
 
 gulp.task('clean.app.dev', function(done) {
 // TODO: rework this part.
-  del([join(PATH.dest.dev.all, '**/*'), join('!', PATH.dest.dev.lib)
+  del([join(PATH.dest.dev.all, '**/*'), '!' + PATH.dest.dev.lib
     , '!' + join(PATH.dest.dev.lib, '*')], done);
 });
 
