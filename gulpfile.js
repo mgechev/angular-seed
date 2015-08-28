@@ -106,7 +106,7 @@ gulp.task('clean.dev', function (done) {
 
 gulp.task('clean.app.dev', function (done) {
 // TODO: rework this part.
-  del([join(PATH.dest.dev.all, '**/*'), join('!', PATH.dest.dev.lib),
+  del([join(PATH.dest.dev.all, '**/*'), '!' + PATH.dest.dev.lib,
     '!' + join(PATH.dest.dev.lib, '*')], done);
 });
 
@@ -116,8 +116,8 @@ gulp.task('clean.prod', function (done) {
 
 gulp.task('clean.app.prod', function (done) {
 // TODO: rework this part.
-  del([join(PATH.dest.prod.all, '**/*'), '!' +
-  PATH.dest.prod.lib, '!' + join(PATH.dest.prod.lib, '*')], done);
+  del([join(PATH.dest.prod.all, '**/*'), '!' +  PATH.dest.prod.lib,
+    '!' + join(PATH.dest.prod.lib, '*')], done);
 });
 
 gulp.task('clean.tmp', function (done) {
