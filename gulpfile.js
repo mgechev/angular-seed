@@ -275,6 +275,7 @@ gulp.task('build.test', function() {
 });
 
 gulp.task('karma.start', ['build.test'], function(done) {
+
   karma.start({
     configFile: join(__dirname, 'karma.conf.js'),
     singleRun: true
@@ -283,7 +284,7 @@ gulp.task('karma.start', ['build.test'], function(done) {
 
 gulp.task('test', ['karma.start'], function() {
   watch('./app/**', function() {
-      gulp.start('karma.start');
+    gulp.start('karma.start');
   });
 });
 
