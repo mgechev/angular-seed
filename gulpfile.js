@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var gulp = require('gulp');
 var bump = require('gulp-bump');
@@ -35,20 +35,23 @@ var connectLivereload = require('connect-livereload');
 // --------------
 // Configuration.
 var APP_BASE = '/';
+var APP_SRC = 'app';
+var APP_DEST = 'dist';
 
 var PATH = {
   dest: {
-    all: 'dist',
+    all: APP_DEST,
     dev: {
-      all: 'dist/dev',
-      lib: 'dist/dev/lib',
+      all: join(APP_DEST, 'dev'),
+      lib: join(APP_DEST, 'dev/lib')
     },
     prod: {
-      all: 'dist/prod',
-      lib: 'dist/prod/lib'
+      all: join(APP_DEST, 'prod'),
+      lib: join(APP_DEST, 'prod/lib')
     }
   },
   src: {
+    all: APP_SRC,
     loader: [
       './node_modules/angular2/node_modules/traceur/bin/traceur-runtime.js',
       './node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.js',
@@ -58,7 +61,7 @@ var PATH = {
       './node_modules/systemjs/dist/system.src.js'
     ],
     loaderConfig: [
-      './app/system.config.js'
+      join(APP_SRC, 'system.config.js')
     ],
     // Order is quite important here for the HTML tag injection.
     angular: [
@@ -104,9 +107,9 @@ gulp.task('clean.dev', function (done) {
 });
 
 gulp.task('clean.app.dev', function (done) {
-  // TODO: rework this part.
-  del([join(PATH.dest.dev.all, '**/*'), '!' +
-       PATH.dest.dev.lib, '!' + join(PATH.dest.dev.lib, '*')], done);
+// TODO: rework this part.
+  del([join(PATH.dest.dev.all, '**/*'), '!' + PATH.dest.dev.lib,
+       '!' + join(PATH.dest.dev.lib, '*')], done);
 });
 
 gulp.task('clean.prod', function (done) {
@@ -114,12 +117,12 @@ gulp.task('clean.prod', function (done) {
 });
 
 gulp.task('clean.app.prod', function (done) {
-  // TODO: rework this part.
-  del([join(PATH.dest.prod.all, '**/*'), '!' +
-       PATH.dest.prod.lib, '!' + join(PATH.dest.prod.lib, '*')], done);
+// TODO: rework this part.
+  del([join(PATH.dest.prod.all, '**/*'), '!' +  PATH.dest.prod.lib,
+       '!' + join(PATH.dest.prod.lib, '*')], done);
 });
 
-gulp.task('clean.tmp', function(done) {
+gulp.task('clean.tmp', function (done) {
   del('tmp', done);
 });
 
@@ -136,7 +139,8 @@ gulp.task('build.lib.dev', function () {
 });
 
 gulp.task('build.js.dev', function () {
-  var result = gulp.src(['./app/**/*ts', '!./app/**/*_spec.ts'])
+  var result = gulp.src([join(PATH.src.all, '**/*ts'),
+                         '!' + join(PATH.src.all, '**/*_spec.ts')])
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(tsc(tsProject));
@@ -148,13 +152,13 @@ gulp.task('build.js.dev', function () {
 });
 
 gulp.task('build.assets.dev', ['build.js.dev'], function () {
-  return gulp.src(['./app/**/*.html', './app/**/*.css'])
+  return gulp.src([join(PATH.src.all, '**/*.html'), join(PATH.src.all, '**/*.css')])
     .pipe(gulp.dest(PATH.dest.dev.all));
 });
 
-gulp.task('build.index.dev', function() {
+gulp.task('build.index.dev', function () {
   var target = gulp.src(injectableDevAssetsRef(), { read: false });
-  return gulp.src('./app/index.html')
+  return gulp.src(join(PATH.src.all, 'index.html'))
     .pipe(inject(target, { transform: transformPath('dev') }))
     .pipe(template(templateLocals()))
     .pipe(gulp.dest(PATH.dest.dev.all));
@@ -183,7 +187,9 @@ gulp.task('build.lib.prod', function () {
 });
 
 gulp.task('build.js.tmp', function () {
-  var result = gulp.src(['./app/**/*ts', '!./app/init.ts', '!./app/**/*_spec.ts'])
+  var result = gulp.src([join(PATH.src.all, '**/*ts'),
+                         '!' + join(PATH.src.all, 'init.ts'),
+                         '!' + join(PATH.src.all, '/**/*_spec.ts')])
     .pipe(plumber())
     .pipe(tsc(tsProject));
 
@@ -193,13 +199,13 @@ gulp.task('build.js.tmp', function () {
 });
 
 // TODO: add inline source maps (System only generate separate source maps file).
-gulp.task('build.js.prod', ['build.js.tmp'], function() {
+gulp.task('build.js.prod', ['build.js.tmp'], function () {
   return appProdBuilder.build('app', join(PATH.dest.prod.all, 'app.js'),
-    { minify: true }).catch(function (e) { console.log(e); });
+      { minify: true }).catch(function (e) { console.log(e); });
 });
 
-gulp.task('build.init.prod', function() {
-  var result = gulp.src('./app/init.ts')
+gulp.task('build.init.prod', function () {
+  var result = gulp.src(join(PATH.src.all, 'init.ts'))
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(tsc(tsProject));
@@ -214,7 +220,7 @@ gulp.task('build.init.prod', function() {
 gulp.task('build.assets.prod', ['build.js.prod'], function () {
   var filterHTML = filter('**/*.html');
   var filterCSS = filter('**/*.css');
-  return gulp.src(['./app/**/*.html', './app/**/*.css'])
+  return gulp.src([join(PATH.src.all, '**/*.html'), join(PATH.src.all, '**/*.css')])
     .pipe(filterHTML)
     .pipe(minifyHTML(HTMLMinifierOpts))
     .pipe(filterHTML.restore())
@@ -224,17 +230,17 @@ gulp.task('build.assets.prod', ['build.js.prod'], function () {
     .pipe(gulp.dest(PATH.dest.prod.all));
 });
 
-gulp.task('build.index.prod', function() {
+gulp.task('build.index.prod', function () {
   var target = gulp.src([join(PATH.dest.prod.lib, 'lib.js'),
-                         join(PATH.dest.prod.all, '**/*.css')], { read: false });
-  return gulp.src('./app/index.html')
+                         join(PATH.dest.prod.all, '**/*.css')], {read: false});
+  return gulp.src(join(PATH.src.all, 'index.html'))
     .pipe(inject(target, { transform: transformPath('prod') }))
     .pipe(template(templateLocals()))
     .pipe(gulp.dest(PATH.dest.prod.all));
 });
 
 gulp.task('build.app.prod', function (done) {
-  // build.init.prod does not work as sub tasks dependencies so placed it here.
+// build.init.prod does not work as sub tasks dependencies so placed it here.
   runSequence('clean.app.prod', 'build.init.prod', 'build.assets.prod',
               'build.index.prod', 'clean.tmp', done);
 });
@@ -249,9 +255,9 @@ gulp.task('build.prod', function (done) {
 
 registerBumpTasks();
 
-gulp.task('bump.reset', function() {
+gulp.task('bump.reset', function () {
   return gulp.src('package.json')
-    .pipe(bump({ version: '0.0.0' }))
+    .pipe(bump({version: '0.0.0'}))
     .pipe(gulp.dest('./'));
 });
 
@@ -285,7 +291,7 @@ gulp.task('test', ['karma.start'], function() {
 // Serve dev.
 
 gulp.task('serve.dev', ['build.dev', 'livereload'], function () {
-  watch('./app/**', function (e) {
+  watch(join(PATH.src.all, '**'), function (e) {
     runSequence('build.app.dev', function () {
       notifyLiveReload(e);
     });
@@ -297,7 +303,7 @@ gulp.task('serve.dev', ['build.dev', 'livereload'], function () {
 // Serve prod.
 
 gulp.task('serve.prod', ['build.prod', 'livereload'], function () {
-  watch('./app/**', function (e) {
+  watch(join(PATH.src.all, '**'), function (e) {
     runSequence('build.app.prod', function () {
       notifyLiveReload(e);
     });
@@ -308,7 +314,7 @@ gulp.task('serve.prod', ['build.prod', 'livereload'], function () {
 // --------------
 // Livereload.
 
-gulp.task('livereload', function() {
+gulp.task('livereload', function () {
   tinylr.listen(LIVE_RELOAD_PORT);
 });
 
@@ -334,14 +340,14 @@ function transformPath(env) {
 }
 
 function injectableDevAssetsRef() {
-  var src = PATH.src.lib.map(function(path) {
+  var src = PATH.src.lib.map(function (path) {
     return join(PATH.dest.dev.lib, path.split('/').pop());
   });
   src.push(join(PATH.dest.dev.all, '**/*.css'));
   return src;
 }
 
-function getVersion(){
+function getVersion() {
   var pkg = JSON.parse(fs.readFileSync('package.json'));
   return pkg.version;
 }
@@ -357,13 +363,13 @@ function registerBumpTasks() {
   semverReleases.forEach(function (release) {
     var semverTaskName = 'semver.' + release;
     var bumpTaskName = 'bump.' + release;
-    gulp.task(semverTaskName, function() {
+    gulp.task(semverTaskName, function () {
       var version = semver.inc(getVersion(), release);
       return gulp.src('package.json')
-        .pipe(bump({ version: version }))
+        .pipe(bump({version: version}))
         .pipe(gulp.dest('./'));
     });
-    gulp.task(bumpTaskName, function(done) {
+    gulp.task(bumpTaskName, function (done) {
       runSequence(semverTaskName, 'build.app.prod', done);
     });
   });
@@ -372,7 +378,7 @@ function registerBumpTasks() {
 function serveSPA(env) {
   var app;
   app = express().use(APP_BASE, connectLivereload({ port: LIVE_RELOAD_PORT }), serveStatic(join(__dirname, PATH.dest[env].all)));
-  app.all(APP_BASE + '*', function (req, res, next) {
+  app.all(APP_BASE + '*', function (req, res) {
     res.sendFile(join(__dirname, PATH.dest[env].all, 'index.html'));
   });
   app.listen(PORT, function () {

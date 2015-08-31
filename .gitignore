@@ -28,6 +28,9 @@ node_modules
 .lock-wscript
 .tsdrc
 
+#IntelliJ configuration files
+.idea
+
 dist
 dev
 lib
