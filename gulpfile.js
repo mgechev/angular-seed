@@ -37,6 +37,7 @@ var connectLivereload = require('connect-livereload');
 var APP_BASE = '/';
 var APP_SRC = 'app';
 var APP_DEST = 'dist';
+var ANGULAR_BUNDLES = './node_modules/angular2/bundles/';
 
 var PATH = {
   dest: {
@@ -65,10 +66,11 @@ var PATH = {
     ],
     // Order is quite important here for the HTML tag injection.
     angular: [
-      './node_modules/angular2/bundles/angular2.dev.js',
-      './node_modules/angular2/bundles/router.dev.js'
+      ANGULAR_BUNDLES + '/angular2.dev.js',
+      ANGULAR_BUNDLES + '/router.dev.js'
     ]
-  }
+  },
+  typing: './tsd_typings/'
 };
 
 PATH.src.lib = PATH.src.loader
@@ -169,7 +171,7 @@ gulp.task('build.app.dev', function (done) {
 });
 
 gulp.task('build.dev', function (done) {
-  runSequence('clean.dev', 'build.lib.dev', 'build.app.dev', done);
+  runSequence('clean.dev', 'copy.tsd', 'build.lib.dev', 'build.app.dev', done);
 });
 
 // --------------
@@ -248,6 +250,17 @@ gulp.task('build.app.prod', function (done) {
 gulp.task('build.prod', function (done) {
   runSequence('clean.prod', 'build.lib.prod', 'clean.tmp', 'build.app.prod',
               done);
+});
+
+// --------------
+// Typing
+
+gulp.task('copy.tsd', function () {
+  return gulp.src([
+      join(ANGULAR_BUNDLES, 'typings', 'angular2', 'angular2.d.ts'),
+      join(ANGULAR_BUNDLES, 'typings', 'angular2', 'router.d.ts')
+    ])
+    .pipe(gulp.dest(join(PATH.typing, 'angular2')));
 });
 
 // --------------

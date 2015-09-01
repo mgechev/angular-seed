@@ -19,5 +19,4 @@ import {NamesList} from './services/NameList';
 })
 class App {}
 
-
 bootstrap(App, [ROUTER_BINDINGS]);
