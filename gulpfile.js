@@ -42,12 +42,12 @@ var PATH = {
   dest: {
     all: APP_DEST,
     dev: {
-      all: join(APP_DEST, 'dev'),
-      lib: join(APP_DEST, 'dev/lib')
+      all: APP_DEST + '/dev',
+      lib: APP_DEST + '/dev/lib'
     },
     prod: {
-      all: join(APP_DEST, 'prod'),
-      lib: join(APP_DEST, 'prod/lib')
+      all: APP_DEST + '/prod',
+      lib: APP_DEST + '/prod/lib'
     }
   },
   src: {
@@ -61,7 +61,7 @@ var PATH = {
       './node_modules/systemjs/dist/system.src.js'
     ],
     loaderConfig: [
-      join(APP_SRC, 'system.config.js')
+      APP_SRC + '/system.config.js'
     ],
     // Order is quite important here for the HTML tag injection.
     angular: [
@@ -335,6 +335,7 @@ function transformPath(env) {
   var v = '?v=' + getVersion();
   return function (filepath) {
     var filename = filepath.replace('/' + PATH.dest[env].all, '') + v;
+    console.log(filename);
     arguments[0] = join(APP_BASE, filename);
     return inject.transform.apply(inject.transform, arguments);
   };
