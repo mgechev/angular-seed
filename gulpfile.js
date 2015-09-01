@@ -335,7 +335,6 @@ function transformPath(env) {
   var v = '?v=' + getVersion();
   return function (filepath) {
     var filename = filepath.replace('/' + PATH.dest[env].all, '') + v;
-    console.log(filename);
     arguments[0] = join(APP_BASE, filename);
     return inject.transform.apply(inject.transform, arguments);
   };
