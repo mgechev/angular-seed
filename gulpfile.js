@@ -67,7 +67,8 @@ var PATH = {
     // Order is quite important here for the HTML tag injection.
     angular: [
       ANGULAR_BUNDLES + '/angular2.dev.js',
-      ANGULAR_BUNDLES + '/router.dev.js'
+      ANGULAR_BUNDLES + '/router.dev.js',
+      ANGULAR_BUNDLES + '/http.dev.js'
     ]
   },
   typing: './tsd_typings/'
@@ -258,7 +259,8 @@ gulp.task('build.prod', function (done) {
 gulp.task('copy.tsd', function () {
   return gulp.src([
       join(ANGULAR_BUNDLES, 'typings', 'angular2', 'angular2.d.ts'),
-      join(ANGULAR_BUNDLES, 'typings', 'angular2', 'router.d.ts')
+      join(ANGULAR_BUNDLES, 'typings', 'angular2', 'router.d.ts'),
+      join(ANGULAR_BUNDLES, 'typings', 'angular2', 'http.d.ts')
     ])
     .pipe(gulp.dest(join(PATH.typing, 'angular2')));
 });
