@@ -9,6 +9,7 @@ var inlineNg2Template = require('gulp-inline-ng2-template');
 var minifyCSS = require('gulp-minify-css');
 var minifyHTML = require('gulp-minify-html');
 var plumber = require('gulp-plumber');
+var shell = require('gulp-shell');
 var sourcemaps = require('gulp-sourcemaps');
 var template = require('gulp-template');
 var tsc = require('gulp-typescript');
@@ -70,8 +71,7 @@ var PATH = {
       ANGULAR_BUNDLES + '/router.dev.js',
       ANGULAR_BUNDLES + '/http.dev.js'
     ]
-  },
-  typing: './tsd_typings/'
+  }
 };
 
 PATH.src.lib = PATH.src.loader
@@ -108,6 +108,10 @@ gulp.task('clean.app.dev', function (done) {
 
 gulp.task('clean.test', function(done) {
   del('test', done);
+});
+
+gulp.task('clean.tsd_typings', function(done) {
+  del('tsd_typings', done);
 });
 
 // --------------
@@ -149,7 +153,7 @@ gulp.task('build.app.dev', function (done) {
 });
 
 gulp.task('build.dev', function (done) {
-  runSequence('clean.dev', 'copy.tsd', 'build.lib.dev', 'build.app.dev', done);
+  runSequence('clean.dev', 'build.lib.dev', 'build.app.dev', done);
 });
 
 // --------------
@@ -158,15 +162,16 @@ gulp.task('build.dev', function (done) {
 // To be implemented (https://github.com/mgechev/angular2-seed/issues/58)
 
 // --------------
-// Typing
+// Post install
 
-gulp.task('copy.tsd', function () {
-  return gulp.src([
-      join(ANGULAR_BUNDLES, 'typings', 'angular2', 'angular2.d.ts'),
-      join(ANGULAR_BUNDLES, 'typings', 'angular2', 'router.d.ts'),
-      join(ANGULAR_BUNDLES, 'typings', 'angular2', 'http.d.ts')
-    ])
-    .pipe(gulp.dest(join(PATH.typing, 'angular2')));
+gulp.task('install.typings', ['clean.tsd_typings'], shell.task([
+  'tsd reinstall --overwrite',
+  'tsd link',
+  'tsd rebundle'
+]));
+
+gulp.task('postinstall', function (done) {
+  runSequence('install.typings', done);
 });
 
 // --------------
