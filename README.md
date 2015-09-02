@@ -18,8 +18,6 @@ npm install
 npm install -g gulp
 # dev
 gulp serve.dev
-# prod
-gulp serve.prod
 # test
 gulp test
 ```
