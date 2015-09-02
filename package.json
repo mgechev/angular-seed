@@ -4,7 +4,8 @@
   "description": "Seed for Angular 2 apps",
   "repository": "https://github.com/mgechev/angular2-seed",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "gulp postinstall"
   },
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
@@ -21,6 +22,7 @@
     "gulp-minify-css": "^1.1.6",
     "gulp-minify-html": "^1.0.3",
     "gulp-plumber": "~1.0.1",
+    "gulp-shell": "~0.4.3",
     "gulp-sourcemaps": "~1.5.2",
     "gulp-template": "^3.0.0",
     "gulp-typescript": "~2.7.5",
