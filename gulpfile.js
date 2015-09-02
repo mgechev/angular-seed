@@ -37,6 +37,7 @@ var connectLivereload = require('connect-livereload');
 var APP_BASE = '/';
 var APP_SRC = 'app';
 var APP_DEST = 'dist';
+var ANGULAR_BUNDLES = './node_modules/angular2/bundles/';
 
 var PATH = {
   dest: {
@@ -65,10 +66,12 @@ var PATH = {
     ],
     // Order is quite important here for the HTML tag injection.
     angular: [
-      './node_modules/angular2/bundles/angular2.dev.js',
-      './node_modules/angular2/bundles/router.dev.js'
+      ANGULAR_BUNDLES + '/angular2.dev.js',
+      ANGULAR_BUNDLES + '/router.dev.js',
+      ANGULAR_BUNDLES + '/http.dev.js'
     ]
-  }
+  },
+  typing: './tsd_typings/'
 };
 
 PATH.src.lib = PATH.src.loader
@@ -77,14 +80,6 @@ PATH.src.lib = PATH.src.loader
 
 var PORT = 5555;
 var LIVE_RELOAD_PORT = 4002;
-
-var appProdBuilder = new Builder({
-  baseURL: 'file:./tmp',
-  meta: {
-    'angular2/angular2': { build: false },
-    'angular2/router': { build: false }
-  }
-});
 
 var HTMLMinifierOpts = { conditionals: true };
 
@@ -107,23 +102,8 @@ gulp.task('clean.dev', function (done) {
 });
 
 gulp.task('clean.app.dev', function (done) {
-// TODO: rework this part.
   del([join(PATH.dest.dev.all, '**/*'), '!' + PATH.dest.dev.lib,
        '!' + join(PATH.dest.dev.lib, '*')], done);
-});
-
-gulp.task('clean.prod', function (done) {
-  del(PATH.dest.prod.all, done);
-});
-
-gulp.task('clean.app.prod', function (done) {
-// TODO: rework this part.
-  del([join(PATH.dest.prod.all, '**/*'), '!' +  PATH.dest.prod.lib,
-       '!' + join(PATH.dest.prod.lib, '*')], done);
-});
-
-gulp.task('clean.tmp', function (done) {
-  del('tmp', done);
 });
 
 gulp.task('clean.test', function(done) {
@@ -169,85 +149,24 @@ gulp.task('build.app.dev', function (done) {
 });
 
 gulp.task('build.dev', function (done) {
-  runSequence('clean.dev', 'build.lib.dev', 'build.app.dev', done);
+  runSequence('clean.dev', 'copy.tsd', 'build.lib.dev', 'build.app.dev', done);
 });
 
 // --------------
 // Build prod.
 
-gulp.task('build.lib.prod', function () {
-  var jsOnly = filter('**/*.js');
-  var lib = gulp.src(PATH.src.lib);
+// To be implemented (https://github.com/mgechev/angular2-seed/issues/58)
 
-  return series(lib)
-    .pipe(jsOnly)
-    .pipe(concat('lib.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest(PATH.dest.prod.lib));
-});
+// --------------
+// Typing
 
-gulp.task('build.js.tmp', function () {
-  var result = gulp.src([join(PATH.src.all, '**/*ts'),
-                         '!' + join(PATH.src.all, 'init.ts'),
-                         '!' + join(PATH.src.all, '/**/*_spec.ts')])
-    .pipe(plumber())
-    .pipe(tsc(tsProject));
-
-  return result.js
-    .pipe(template({ VERSION: getVersion() }))
-    .pipe(gulp.dest('tmp'));
-});
-
-// TODO: add inline source maps (System only generate separate source maps file).
-gulp.task('build.js.prod', ['build.js.tmp'], function () {
-  return appProdBuilder.build('app', join(PATH.dest.prod.all, 'app.js'),
-      { minify: true }).catch(function (e) { console.log(e); });
-});
-
-gulp.task('build.init.prod', function () {
-  var result = gulp.src(join(PATH.src.all, 'init.ts'))
-    .pipe(plumber())
-    .pipe(sourcemaps.init())
-    .pipe(tsc(tsProject));
-
-  return result.js
-    .pipe(uglify())
-    .pipe(template(templateLocals()))
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest(PATH.dest.prod.all));
-});
-
-gulp.task('build.assets.prod', ['build.js.prod'], function () {
-  var filterHTML = filter('**/*.html');
-  var filterCSS = filter('**/*.css');
-  return gulp.src([join(PATH.src.all, '**/*.html'), join(PATH.src.all, '**/*.css')])
-    .pipe(filterHTML)
-    .pipe(minifyHTML(HTMLMinifierOpts))
-    .pipe(filterHTML.restore())
-    .pipe(filterCSS)
-    .pipe(minifyCSS())
-    .pipe(filterCSS.restore())
-    .pipe(gulp.dest(PATH.dest.prod.all));
-});
-
-gulp.task('build.index.prod', function () {
-  var target = gulp.src([join(PATH.dest.prod.lib, 'lib.js'),
-                         join(PATH.dest.prod.all, '**/*.css')], {read: false});
-  return gulp.src(join(PATH.src.all, 'index.html'))
-    .pipe(inject(target, { transform: transformPath('prod') }))
-    .pipe(template(templateLocals()))
-    .pipe(gulp.dest(PATH.dest.prod.all));
-});
-
-gulp.task('build.app.prod', function (done) {
-// build.init.prod does not work as sub tasks dependencies so placed it here.
-  runSequence('clean.app.prod', 'build.init.prod', 'build.assets.prod',
-              'build.index.prod', 'clean.tmp', done);
-});
-
-gulp.task('build.prod', function (done) {
-  runSequence('clean.prod', 'build.lib.prod', 'clean.tmp', 'build.app.prod',
-              done);
+gulp.task('copy.tsd', function () {
+  return gulp.src([
+      join(ANGULAR_BUNDLES, 'typings', 'angular2', 'angular2.d.ts'),
+      join(ANGULAR_BUNDLES, 'typings', 'angular2', 'router.d.ts'),
+      join(ANGULAR_BUNDLES, 'typings', 'angular2', 'http.d.ts')
+    ])
+    .pipe(gulp.dest(join(PATH.typing, 'angular2')));
 });
 
 // --------------

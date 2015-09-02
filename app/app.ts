@@ -1,5 +1,5 @@
 import {Component, View, bootstrap} from 'angular2/angular2';
-import {RouteConfig, RouterOutlet, RouterLink, routerInjectables} from 'angular2/router';
+import {RouteConfig, RouterOutlet, RouterLink, ROUTER_BINDINGS} from 'angular2/router';
 
 import {Home} from './components/home/home';
 import {About} from './components/about/about';
@@ -19,5 +19,4 @@ import {NamesList} from './services/NameList';
 })
 class App {}
 
-
-bootstrap(App, [routerInjectables]);
+bootstrap(App, [ROUTER_BINDINGS]);
