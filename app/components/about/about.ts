@@ -1,4 +1,4 @@
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, View, CORE_DIRECTIVES} from 'angular2/angular2';
 
 import {NamesList} from '../../services/NameList';
 
@@ -7,7 +7,7 @@ import {NamesList} from '../../services/NameList';
 })
 @View({
   templateUrl: './components/about/about.html?v=<%= VERSION %>',
-  directives: [NgFor]
+  directives: [CORE_DIRECTIVES]
 })
 export class About {
   constructor(public list: NamesList) {

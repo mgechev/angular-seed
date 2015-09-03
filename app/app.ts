@@ -1,5 +1,6 @@
 import {Component, View, bootstrap} from 'angular2/angular2';
-import {RouteConfig, RouterOutlet, RouterLink, ROUTER_BINDINGS} from 'angular2/router';
+import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_BINDINGS} from 'angular2/router';
+// import {HTTP_BINDINGS} from 'http/http';
 
 import {Home} from './components/home/home';
 import {About} from './components/about/about';
@@ -15,7 +16,8 @@ import {NamesList} from './services/NameList';
 ])
 @View({
   templateUrl: './app.html?v=<%= VERSION %>',
-  directives: [RouterOutlet, RouterLink]
+  styleUrls: ['./app.css'],
+  directives: [ROUTER_DIRECTIVES]
 })
 class App {}
 

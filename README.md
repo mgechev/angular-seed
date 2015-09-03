@@ -13,13 +13,11 @@ It is something similar to the AngularJS Quick Start but does the entire build w
 ```bash
 git clone https://github.com/mgechev/angular2-seed.git
 cd angular2-seed
-# If you don't have gulp already installed
-npm install -g gulp
+# If you don't have gulp and/or tsd already installed
+npm install -g gulp tsd
 npm install
 # dev
 gulp serve.dev
-# test
-gulp test
 ```
 
 # Directory Structure
@@ -67,6 +65,17 @@ npm install my-library --save
 vim gulpfile.js
 ```
 Add reference to the installed library in `PATH.src.lib`.
+
+# Running test
+
+```bash
+# In a single bash window
+gulp test       # or npm test
+
+# Debug - In two bash windows
+npm run karma   # 1st window
+gulp test-dev   # 2nd window
+```
 
 # Contributors
 
