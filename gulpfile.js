@@ -1,20 +1,23 @@
 "use strict";
 
+// Gulp dev.
 var gulp = require('gulp');
 var bump = require('gulp-bump');
-var concat = require('gulp-concat');
-var filter = require('gulp-filter');
 var inject = require('gulp-inject');
 var inlineNg2Template = require('gulp-inline-ng2-template');
-var minifyCSS = require('gulp-minify-css');
-var minifyHTML = require('gulp-minify-html');
 var plumber = require('gulp-plumber');
 var shell = require('gulp-shell');
 var sourcemaps = require('gulp-sourcemaps');
 var template = require('gulp-template');
 var tsc = require('gulp-typescript');
-var uglify = require('gulp-uglify');
 var watch = require('gulp-watch');
+// Gulp prod.
+// var concat = require('gulp-concat');
+// var filter = require('gulp-filter');
+// var minifyCSS = require('gulp-minify-css');
+// var minifyHTML = require('gulp-minify-html');
+// var uglify = require('gulp-uglify');
+
 
 var Builder = require('systemjs-builder');
 var del = require('del');
@@ -35,7 +38,10 @@ var connectLivereload = require('connect-livereload');
 
 // --------------
 // Configuration.
+var PORT = 5555;
+var LIVE_RELOAD_PORT = 4002;
 var APP_BASE = '/';
+
 var APP_SRC = 'app';
 var APP_DEST = 'dist';
 var ANGULAR_BUNDLES = './node_modules/angular2/bundles/';
@@ -54,32 +60,21 @@ var PATH = {
   },
   src: {
     all: APP_SRC,
-    loader: [
+    lib: [
+      // Order is quite important here for the HTML tag injection.
       './node_modules/angular2/node_modules/traceur/bin/traceur-runtime.js',
       './node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.js',
       './node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.js.map',
       './node_modules/reflect-metadata/Reflect.js',
       './node_modules/reflect-metadata/Reflect.js.map',
-      './node_modules/systemjs/dist/system.src.js'
-    ],
-    loaderConfig: [
-      APP_SRC + '/system.config.js'
-    ],
-    // Order is quite important here for the HTML tag injection.
-    angular: [
+      './node_modules/systemjs/dist/system.src.js',
+      APP_SRC + '/system.config.js',
       ANGULAR_BUNDLES + '/angular2.dev.js',
       ANGULAR_BUNDLES + '/router.dev.js',
       ANGULAR_BUNDLES + '/http.dev.js'
     ]
   }
 };
-
-PATH.src.lib = PATH.src.loader
-    .concat(PATH.src.loaderConfig)
-    .concat(PATH.src.angular);
-
-var PORT = 5555;
-var LIVE_RELOAD_PORT = 4002;
 
 var HTMLMinifierOpts = { conditionals: true };
 
@@ -206,6 +201,12 @@ gulp.task('karma.start', ['build.test'], function(done) {
   }, done);
 });
 
+gulp.task('test-dev', ['build.test'], function() {
+  watch('./app/**', function() {
+    gulp.start('build.test');
+  });
+});
+
 gulp.task('test', ['karma.start'], function() {
   watch('./app/**', function() {
     gulp.start('karma.start');
@@ -268,7 +269,6 @@ function injectableDevAssetsRef() {
   var src = PATH.src.lib.map(function (path) {
     return join(PATH.dest.dev.lib, path.split('/').pop());
   });
-  src.push(join(PATH.dest.dev.all, '**/*.css'));
   return src;
 }
 
