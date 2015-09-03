@@ -35,13 +35,11 @@
 
 <div class="highlight highlight-bash"><pre>git clone https://github.com/mgechev/angular2-seed.git
 <span class="pl-c1">cd</span> angular2-seed
-<span class="pl-c"># If you don't have gulp already installed</span>
-npm install -g gulp
+<span class="pl-c"># If you don't have gulp and/or tsd already installed</span>
+npm install -g gulp tsd
 npm install
 <span class="pl-c"># dev</span>
-gulp serve.dev
-<span class="pl-c"># test</span>
-gulp <span class="pl-c1">test</span></pre></div>
+gulp serve.dev</pre></div>
 
 <h1>
 <a id="directory-structure" class="anchor" href="#directory-structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>Directory Structure</h1>
@@ -89,6 +87,16 @@ Defaults to <code>var APP_BASE = '/'</code></p>
 vim gulpfile.js</pre></div>
 
 <p>Add reference to the installed library in <code>PATH.src.lib</code>.</p>
+
+<h1>
+<a id="running-test" class="anchor" href="#running-test" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running test</h1>
+
+<div class="highlight highlight-bash"><pre><span class="pl-c"># In a single bash window</span>
+gulp <span class="pl-c1">test</span>       <span class="pl-c"># or npm test</span>
+
+<span class="pl-c"># Debug - In two bash windows</span>
+npm run karma   <span class="pl-c"># 1st window</span>
+gulp <span class="pl-c1">test</span>-dev   <span class="pl-c"># 2nd window</span></pre></div>
 
 <h1>
 <a id="contributors" class="anchor" href="#contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributors</h1>
