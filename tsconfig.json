@@ -1,34 +1,34 @@
 {
-    "version": "1.5.3",
-    "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "declaration": false,
-        "noImplicitAny": false,
-        "removeComments": true,
-        "noLib": false,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "sourceMap": true
-    },
-    "files": [
-        "./app/app.ts",
-        "./app/components/about/about.ts",
-        "./app/components/about/about_spec.ts",
-        "./app/components/home/home.ts",
-        "./app/components/home/home_spec.ts",
-        "./app/init.ts",
-        "./app/services/NameList.ts",
-        "./app/services/NameList_spec.ts",
-        "./app/typings/_custom.d.ts",
-        "./app/typings/ng2_test.d.ts",
-        "./tsd_typings/jasmine/jasmine.d.ts",
-        "./tsd_typings/systemjs/systemjs.d.ts",
-        "./tsd_typings/tsd.d.ts"
-    ],
-    "filesGlob": [
-        "./app/**/*.ts",
-        "./tsd_typings/**/*.d.ts"
-    ],
-    "compileOnSave": false
+  "version": "1.5.3",
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": false,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "noLib": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true
+  },
+  "files": [
+    "./app/app.ts",
+    "./app/components/about/about.ts",
+    "./app/components/about/about_spec.ts",
+    "./app/components/home/home.ts",
+    "./app/components/home/home_spec.ts",
+    "./app/init.ts",
+    "./app/services/NameList.ts",
+    "./app/services/NameList_spec.ts",
+    "./app/typings/_custom.d.ts",
+    "./app/typings/ng2_test.d.ts",
+    "./tsd_typings/jasmine/jasmine.d.ts",
+    "./tsd_typings/systemjs/systemjs.d.ts",
+    "./tsd_typings/tsd.d.ts"
+  ],
+  "filesGlob": [
+    "./app/**/*.ts",
+    "./tsd_typings/**/*.d.ts"
+  ],
+  "compileOnSave": false
 }
