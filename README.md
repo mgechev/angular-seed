@@ -29,10 +29,14 @@ gulp serve.dev
 │   │   ├── about
 │   │   │   ├── about.html
 │   │   │   └── about.ts
+│   │   │   └── about_spec.ts
 │   │   └── home
 │   │       ├── home.html
 │   │       └── home.ts
+│   │       └── home_spec.ts
 │   ├── services
+│   │       ├── NameList.ts
+│   │       └── NameList_spec.ts
 │   ├── typings
 │   ├── app.css
 │   ├── app.html
