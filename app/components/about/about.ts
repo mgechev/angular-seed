@@ -6,7 +6,7 @@ import {NamesList} from '../../services/NameList';
   selector: 'about'
 })
 @View({
-  templateUrl: './components/about/about.html?v=<%= VERSION %>',
+  templateUrl: './components/about/about.html',
   directives: [CORE_DIRECTIVES]
 })
 export class About {

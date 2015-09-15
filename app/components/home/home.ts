@@ -4,6 +4,6 @@ import {Component, View} from 'angular2/angular2';
   selector: 'home'
 })
 @View({
-  templateUrl: './components/home/home.html?v=<%= VERSION %>'
+  templateUrl: './components/home/home.html'
 })
 export class Home {}
