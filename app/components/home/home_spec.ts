@@ -13,7 +13,7 @@ import {
   xit,
 } from 'angular2/test';
 import {Component, View} from 'angular2/angular2';
-import {DOM} from 'angular2/src/dom/dom_adapter';
+import {DOM} from 'angular2/src/core/dom/dom_adapter';
 import {Home} from './home';
 
 export function main() {
