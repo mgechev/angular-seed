@@ -161,9 +161,9 @@ gulp.task('build.dev', function (done) {
 // Post install
 
 gulp.task('install.typings', ['clean.tsd_typings'], shell.task([
-  'tsd reinstall --overwrite',
-  'tsd link',
-  'tsd rebundle'
+  './node_modules/.bin/tsd reinstall --overwrite',
+  './node_modules/.bin/tsd link',
+  './node_modules/.bin/tsd rebundle'
 ]));
 
 gulp.task('postinstall', function (done) {
