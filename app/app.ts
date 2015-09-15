@@ -15,7 +15,7 @@ import {NamesList} from './services/NameList';
   { path: '/about', component: About, as: 'about' }
 ])
 @View({
-  templateUrl: './app.html?v=<%= VERSION %>',
+  templateUrl: './app.html',
   styleUrls: ['./app.css'],
   directives: [ROUTER_DIRECTIVES]
 })
