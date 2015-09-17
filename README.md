@@ -57,8 +57,19 @@ gulp serve.dev
 
 # Configuration
 
-Configure your app base if you serve the app from another directory than root in `gulpfile.js`.
-Defaults to `var APP_BASE = '/'`
+Default application server configuratoin
+
+```javascript
+var PORT             = 5555;
+var LIVE_RELOAD_PORT = 4002;
+var APP_BASE         = '/';
+```
+
+Configure at runtime
+
+```bash
+gulp serve.dev --port 8080 --reload-port 4000 --base /my-app/
+```
 
 # Now to extend?
 

@@ -1,6 +1,7 @@
 "use strict";
 
 // Gulp dev.
+var argv = require('yargs').argv;
 var gulp = require('gulp');
 var bump = require('gulp-bump');
 var inject = require('gulp-inject');
@@ -38,9 +39,9 @@ var connectLivereload = require('connect-livereload');
 
 // --------------
 // Configuration.
-var PORT = 5555;
-var LIVE_RELOAD_PORT = 4002;
-var APP_BASE = '/';
+var PORT             = argv['port']        || 5555;
+var LIVE_RELOAD_PORT = argv['reload-port'] || 4002;
+var APP_BASE         = argv['base']        || '/';
 
 var APP_SRC = 'app';
 var APP_DEST = 'dist';
