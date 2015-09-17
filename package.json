@@ -41,7 +41,8 @@
     "systemjs-builder": "^0.13.6",
     "tiny-lr": "^0.1.6",
     "tsd": "^0.6.4",
-    "typescript": "~1.6.0"
+    "typescript": "~1.6.0",
+    "yargs": "^3.25.0"
   },
   "dependencies": {
     "angular2": "2.0.0-alpha.37",
