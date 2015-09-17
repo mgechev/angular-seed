@@ -57,7 +57,7 @@ gulp serve.dev
 
 # Configuration
 
-Default application server configuratoin
+Default application server configuration
 
 ```javascript
 var PORT             = 5555;
