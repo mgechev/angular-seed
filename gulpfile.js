@@ -121,8 +121,8 @@ gulp.task('build.js.dev', function () {
   var result = gulp.src([join(PATH.src.all, '**/*ts'),
                          '!' + join(PATH.src.all, '**/*_spec.ts')])
     .pipe(plumber())
-    .pipe(sourcemaps.init())
     .pipe(inlineNg2Template({ base: 'app' }))
+    .pipe(sourcemaps.init())
     .pipe(tsc(tsProject));
 
   return result.js
