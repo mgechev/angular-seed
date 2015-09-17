@@ -26,7 +26,7 @@
     "gulp-shell": "~0.4.3",
     "gulp-sourcemaps": "~1.5.2",
     "gulp-template": "^3.0.0",
-    "gulp-typescript": "~2.7.5",
+    "gulp-typescript": "~2.8.2",
     "gulp-uglify": "^1.2.0",
     "gulp-watch": "^4.2.4",
     "jasmine-core": "~2.3.4",
@@ -38,17 +38,17 @@
     "semver": "^4.3.6",
     "serve-static": "^1.9.2",
     "stream-series": "^0.1.1",
-    "systemjs-builder": "^0.13.3",
+    "systemjs-builder": "^0.13.6",
     "tiny-lr": "^0.1.6",
     "tsd": "^0.6.4",
-    "typescript": "~1.5.3",
+    "typescript": "~1.6.0",
     "yargs": "^3.25.0"
   },
   "dependencies": {
     "angular2": "2.0.0-alpha.37",
     "es6-module-loader": "^0.15.0",
     "reflect-metadata": "0.1.0",
-    "systemjs": "^0.18.11",
+    "systemjs": "^0.18.17",
     "zone.js": "^0.4.1"
   }
 }
