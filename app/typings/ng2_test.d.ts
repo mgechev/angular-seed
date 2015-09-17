@@ -24,6 +24,6 @@ declare module "angular2/test" {
   export = ng;
 }
 
-declare module "angular2/src/dom/dom_adapter" {
+declare module "angular2/src/core/dom/dom_adapter" {
   export = ng;
 }
