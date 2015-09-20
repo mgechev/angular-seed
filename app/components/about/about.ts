@@ -10,9 +10,8 @@ import {NamesList} from '../../services/NameList';
   directives: [CORE_DIRECTIVES]
 })
 export class About {
-  constructor(public list: NamesList) {
-  }
-  addName(newname) {
+  constructor(public list: NamesList) {}
+  addName(newname):void {
     this.list.add(newname.value);
     newname.value = '';
   }
