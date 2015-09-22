@@ -11,9 +11,10 @@ import {NamesList} from '../../services/NameList';
 })
 export class About {
   constructor(public list: NamesList) {}
-  addName(newname):void {
+  addName(newname):boolean {
     this.list.add(newname.value);
     newname.value = '';
+    // prevent default form submit behavior to refresh the page
     return false;
   }
 }
