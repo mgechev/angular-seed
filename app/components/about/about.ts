@@ -14,5 +14,6 @@ export class About {
   addName(newname):void {
     this.list.add(newname.value);
     newname.value = '';
+    return false;
   }
 }
