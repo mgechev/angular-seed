@@ -5,10 +5,10 @@
 <p>
   You want more? Add them yourself!
 </p>
-<p>
+<form (submit)="addName(newname); $event.preventDefault();">
   <input #newname>
-  <button (click)="addName(newname)">Add</button>
-</p>
+  <button type="submit">Add</button>
+</form>
 <ul>
   <li *ng-for="#name of list.get()">{{name}}</li>
 </ul>
