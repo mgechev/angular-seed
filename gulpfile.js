@@ -27,7 +27,6 @@ var path = require('path');
 var join = path.join;
 var karma = require('karma').server;
 var runSequence = require('run-sequence');
-var semver = require('semver');
 var series = require('stream-series');
 
 var express = require('express');
@@ -82,9 +81,6 @@ var HTMLMinifierOpts = { conditionals: true };
 var tsProject = tsc.createProject('tsconfig.json', {
   typescript: require('typescript')
 });
-
-var semverReleases = ['major', 'premajor', 'minor', 'preminor', 'patch',
-                      'prepatch', 'prerelease'];
 
 // --------------
 // Clean.
@@ -159,19 +155,6 @@ gulp.task('build.dev', function (done) {
 // To be implemented (https://github.com/mgechev/angular2-seed/issues/58)
 
 // --------------
-// Post install
-
-gulp.task('install.typings', ['clean.tsd_typings'], shell.task([
-  'tsd reinstall --overwrite',
-  'tsd link',
-  'tsd rebundle'
-]));
-
-gulp.task('postinstall', function (done) {
-  runSequence('install.typings', done);
-});
-
-// --------------
 // Test.
 
 gulp.task('build.test', function() {
@@ -202,6 +185,19 @@ gulp.task('test', ['karma.start'], function() {
   watch('./app/**', function() {
     gulp.start('karma.start');
   });
+});
+
+// --------------
+// Post install
+
+gulp.task('install.typings', ['clean.tsd_typings'], shell.task([
+  'tsd reinstall --overwrite',
+  'tsd link',
+  'tsd rebundle'
+]));
+
+gulp.task('postinstall', function (done) {
+  runSequence('install.typings', done);
 });
 
 // --------------
