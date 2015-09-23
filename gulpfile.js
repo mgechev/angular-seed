@@ -3,7 +3,6 @@
 // Gulp dev.
 var argv = require('yargs').argv;
 var gulp = require('gulp');
-var bump = require('gulp-bump');
 var inject = require('gulp-inject');
 var inlineNg2Template = require('gulp-inline-ng2-template');
 var plumber = require('gulp-plumber');
