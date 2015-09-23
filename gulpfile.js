@@ -27,7 +27,6 @@ var path = require('path');
 var join = path.join;
 var karma = require('karma').server;
 var runSequence = require('run-sequence');
-var semver = require('semver');
 var series = require('stream-series');
 
 var express = require('express');
@@ -82,9 +81,6 @@ var HTMLMinifierOpts = { conditionals: true };
 var tsProject = tsc.createProject('tsconfig.json', {
   typescript: require('typescript')
 });
-
-var semverReleases = ['major', 'premajor', 'minor', 'preminor', 'patch',
-                      'prepatch', 'prerelease'];
 
 // --------------
 // Clean.
@@ -159,30 +155,6 @@ gulp.task('build.dev', function (done) {
 // To be implemented (https://github.com/mgechev/angular2-seed/issues/58)
 
 // --------------
-// Post install
-
-gulp.task('install.typings', ['clean.tsd_typings'], shell.task([
-  'tsd reinstall --overwrite',
-  'tsd link',
-  'tsd rebundle'
-]));
-
-gulp.task('postinstall', function (done) {
-  runSequence('install.typings', done);
-});
-
-// --------------
-// Version.
-
-registerBumpTasks();
-
-gulp.task('bump.reset', function () {
-  return gulp.src('package.json')
-    .pipe(bump({version: '0.0.0'}))
-    .pipe(gulp.dest('./'));
-});
-
-// --------------
 // Test.
 
 gulp.task('build.test', function() {
@@ -216,6 +188,19 @@ gulp.task('test', ['karma.start'], function() {
 });
 
 // --------------
+// Post install
+
+gulp.task('install.typings', ['clean.tsd_typings'], shell.task([
+  'tsd reinstall --overwrite',
+  'tsd link',
+  'tsd rebundle'
+]));
+
+gulp.task('postinstall', function (done) {
+  runSequence('install.typings', done);
+});
+
+// --------------
 // Serve dev.
 
 gulp.task('serve.dev', ['build.dev', 'livereload'], function () {
@@ -230,14 +215,7 @@ gulp.task('serve.dev', ['build.dev', 'livereload'], function () {
 // --------------
 // Serve prod.
 
-gulp.task('serve.prod', ['build.prod', 'livereload'], function () {
-  watch(join(PATH.src.all, '**'), function (e) {
-    runSequence('build.app.prod', function () {
-      notifyLiveReload(e);
-    });
-  });
-  serveSPA('prod');
-});
+// To be implemented (https://github.com/mgechev/angular2-seed/issues/58)
 
 // --------------
 // Livereload.
@@ -284,22 +262,6 @@ function templateLocals() {
     VERSION: getVersion(),
     APP_BASE: APP_BASE
   };
-}
-
-function registerBumpTasks() {
-  semverReleases.forEach(function (release) {
-    var semverTaskName = 'semver.' + release;
-    var bumpTaskName = 'bump.' + release;
-    gulp.task(semverTaskName, function () {
-      var version = semver.inc(getVersion(), release);
-      return gulp.src('package.json')
-        .pipe(bump({version: version}))
-        .pipe(gulp.dest('./'));
-    });
-    gulp.task(bumpTaskName, function (done) {
-      runSequence(semverTaskName, 'build.app.prod', done);
-    });
-  });
 }
 
 function serveSPA(env) {
