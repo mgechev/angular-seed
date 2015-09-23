@@ -46,7 +46,6 @@
     "angular2": "2.0.0-alpha.37",
     "es6-module-loader": "^0.15.0",
     "reflect-metadata": "0.1.0",
-    "systemjs": "^0.18.17",
-    "zone.js": "^0.4.1"
+    "systemjs": "^0.18.17"
   }
 }
