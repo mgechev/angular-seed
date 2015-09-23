@@ -191,6 +191,7 @@ gulp.task('test', ['karma.start'], function() {
 // Post install
 
 gulp.task('install.typings', ['clean.tsd_typings'], shell.task([
+  'npm prune',
   'tsd reinstall --overwrite',
   'tsd link',
   'tsd rebundle'
