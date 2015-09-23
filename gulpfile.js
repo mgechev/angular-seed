@@ -172,17 +172,6 @@ gulp.task('postinstall', function (done) {
 });
 
 // --------------
-// Version.
-
-registerBumpTasks();
-
-gulp.task('bump.reset', function () {
-  return gulp.src('package.json')
-    .pipe(bump({version: '0.0.0'}))
-    .pipe(gulp.dest('./'));
-});
-
-// --------------
 // Test.
 
 gulp.task('build.test', function() {
@@ -277,22 +266,6 @@ function templateLocals() {
     VERSION: getVersion(),
     APP_BASE: APP_BASE
   };
-}
-
-function registerBumpTasks() {
-  semverReleases.forEach(function (release) {
-    var semverTaskName = 'semver.' + release;
-    var bumpTaskName = 'bump.' + release;
-    gulp.task(semverTaskName, function () {
-      var version = semver.inc(getVersion(), release);
-      return gulp.src('package.json')
-        .pipe(bump({version: version}))
-        .pipe(gulp.dest('./'));
-    });
-    gulp.task(bumpTaskName, function (done) {
-      runSequence(semverTaskName, 'build.app.prod', done);
-    });
-  });
 }
 
 function serveSPA(env) {
