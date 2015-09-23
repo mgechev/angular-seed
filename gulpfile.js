@@ -230,14 +230,7 @@ gulp.task('serve.dev', ['build.dev', 'livereload'], function () {
 // --------------
 // Serve prod.
 
-gulp.task('serve.prod', ['build.prod', 'livereload'], function () {
-  watch(join(PATH.src.all, '**'), function (e) {
-    runSequence('build.app.prod', function () {
-      notifyLiveReload(e);
-    });
-  });
-  serveSPA('prod');
-});
+// To be implemented (https://github.com/mgechev/angular2-seed/issues/58)
 
 // --------------
 // Livereload.
