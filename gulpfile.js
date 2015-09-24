@@ -3,7 +3,6 @@
 // Gulp dev.
 var argv = require('yargs').argv;
 var gulp = require('gulp');
-var bump = require('gulp-bump');
 var inject = require('gulp-inject');
 var inlineNg2Template = require('gulp-inline-ng2-template');
 var plumber = require('gulp-plumber');
@@ -62,12 +61,12 @@ var PATH = {
     all: APP_SRC,
     lib: [
       // Order is quite important here for the HTML tag injection.
-      './node_modules/angular2/node_modules/traceur/bin/traceur-runtime.js',
-      './node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.js',
-      './node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.js.map',
-      './node_modules/reflect-metadata/Reflect.js',
-      './node_modules/reflect-metadata/Reflect.js.map',
-      './node_modules/systemjs/dist/system.src.js',
+      require.resolve('angular2/node_modules/traceur/bin/traceur-runtime.js'),
+      require.resolve('es6-module-loader/dist/es6-module-loader-sans-promises.js'),
+      require.resolve('es6-module-loader/dist/es6-module-loader-sans-promises.js.map'),
+      require.resolve('reflect-metadata/Reflect.js'),
+      require.resolve('reflect-metadata/Reflect.js.map'),
+      require.resolve('systemjs/dist/system.src.js'),
       APP_SRC + '/system.config.js',
       ANGULAR_BUNDLES + '/angular2.dev.js',
       ANGULAR_BUNDLES + '/router.dev.js',
@@ -191,6 +190,7 @@ gulp.task('test', ['karma.start'], function() {
 // Post install
 
 gulp.task('install.typings', ['clean.tsd_typings'], shell.task([
+  'npm prune',
   'tsd reinstall --overwrite',
   'tsd link',
   'tsd rebundle'
