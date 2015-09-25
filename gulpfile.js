@@ -33,7 +33,7 @@ var express = require('express');
 var serveStatic = require('serve-static');
 var openResource = require('open');
 
-var tinylr = require('tiny-lr')();
+var minilr = require('mini-lr')();
 var connectLivereload = require('connect-livereload');
 
 // --------------
@@ -222,7 +222,7 @@ gulp.task('serve.dev', ['build.dev', 'livereload'], function () {
 // Livereload.
 
 gulp.task('livereload', function () {
-  tinylr.listen(LIVE_RELOAD_PORT);
+  minilr.listen(LIVE_RELOAD_PORT);
 });
 
 // --------------
@@ -230,7 +230,7 @@ gulp.task('livereload', function () {
 
 function notifyLiveReload(e) {
   var fileName = e.path;
-  tinylr.changed({
+  minilr.changed({
     body: {
       files: [fileName]
     }
