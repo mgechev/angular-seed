@@ -24,6 +24,7 @@ var del = require('del');
 var fs = require('fs');
 var path = require('path');
 var join = path.join;
+var slash = require('slash');
 var karma = require('karma').server;
 var runSequence = require('run-sequence');
 var series = require('stream-series');
@@ -247,7 +248,7 @@ function transformPath(env) {
 
 function injectableDevAssetsRef() {
   var src = PATH.src.lib.map(function (path) {
-    return join(PATH.dest.dev.lib, path.split('/').pop());
+    return join(PATH.dest.dev.lib, slash(path).split('/').pop());
   });
   return src;
 }
