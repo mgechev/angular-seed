@@ -11,20 +11,25 @@ var connectLivereload = require('connect-livereload');
 var serveStatic = require('serve-static');
 var openResource = require('open');
 var express = require('express');
-
+var minilr = require('mini-lr')();
 
 // --------------
 // Utils.
 
 function notifyLiveReload(e) {
     var fileName = e.path;
-    tinylr.changed({
+    minilr.changed({
         body: {
             files: [fileName]
         }
     });
 }
 module.exports.notifyLiveReload = notifyLiveReload;
+
+function livereload() {
+    minilr.listen(CONFIG.LIVE_RELOAD_PORT);
+};
+module.exports.livereload = livereload;
 
 function transformPath(plugins, env) {
     var v = '?v=' + getVersion();

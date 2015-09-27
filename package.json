@@ -39,7 +39,8 @@
     "serve-static": "^1.9.2",
     "stream-series": "^0.1.1",
     "systemjs-builder": "^0.13.6",
-    "tiny-lr": "^0.1.6",
+    "mini-lr": "^0.1.6",
+    "traceur": "0.0.91",
     "tsd": "^0.6.4",
     "typescript": "~1.6.0",
     "yargs": "^3.25.0"

@@ -3,10 +3,9 @@
 // Gulp dev.
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
-var CONFIG = require('./tools/workflow.config');
 var shell = require('gulp-shell');
 var runSequence = require('run-sequence');
-var tinylr = require('tiny-lr')();
+var utils = require('./tools/utils');
 
 // Gulp prod.
 // var concat = require('gulp-concat');
@@ -86,6 +85,6 @@ gulp.task('serve.dev', ['build.js.dev', 'livereload'], tasks('serve.dev'));
 // --------------
 // Livereload.
 //
-gulp.task('livereload', function () {
-  tinylr.listen(CONFIG.LIVE_RELOAD_PORT);
+gulp.task('livereload', function() {
+    utils.livereload();
 });
