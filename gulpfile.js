@@ -33,7 +33,7 @@ var express = require('express');
 var serveStatic = require('serve-static');
 var openResource = require('open');
 
-var tinylr = require('tiny-lr')();
+var minilr = require('mini-lr')();
 var connectLivereload = require('connect-livereload');
 
 // --------------
@@ -62,7 +62,7 @@ var PATH = {
     all: APP_SRC,
     lib: [
       // Order is quite important here for the HTML tag injection.
-      require.resolve('angular2/node_modules/traceur/bin/traceur-runtime.js'),
+      require.resolve('traceur/bin/traceur-runtime.js'),
       require.resolve('es6-module-loader/dist/es6-module-loader-sans-promises.js'),
       require.resolve('es6-module-loader/dist/es6-module-loader-sans-promises.js.map'),
       require.resolve('reflect-metadata/Reflect.js'),
@@ -222,7 +222,7 @@ gulp.task('serve.dev', ['build.dev', 'livereload'], function () {
 // Livereload.
 
 gulp.task('livereload', function () {
-  tinylr.listen(LIVE_RELOAD_PORT);
+  minilr.listen(LIVE_RELOAD_PORT);
 });
 
 // --------------
@@ -230,7 +230,7 @@ gulp.task('livereload', function () {
 
 function notifyLiveReload(e) {
   var fileName = e.path;
-  tinylr.changed({
+  minilr.changed({
     body: {
       files: [fileName]
     }
