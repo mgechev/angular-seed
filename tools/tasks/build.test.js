@@ -2,12 +2,9 @@
 
 var utils = require('../utils');
 
-module.exports = function (gulp, plugins, config) {
-
+module.exports = function (gulp, plugins) {
   return function () {
-
     var tsProject = utils.tsProject(plugins);
-
     var result = gulp.src(['./app/**/*.ts', '!./app/init.ts'])
       .pipe(plugins.plumber())
       .pipe(plugins.inlineNg2Template({base: 'app'}))

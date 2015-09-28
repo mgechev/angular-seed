@@ -6,7 +6,6 @@ var CONFIG = require('../workflow.config');
 var utils = require('../utils');
 
 module.exports = function (gulp, plugins) {
-
   return function () {
     var tsProject = utils.tsProject(plugins);
 
@@ -27,4 +26,3 @@ module.exports = function (gulp, plugins) {
       .pipe(gulp.dest(CONFIG.PATH.dest.dev.all));
   };
 };
-

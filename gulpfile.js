@@ -18,6 +18,7 @@ function tasks(task, options) {
     return require('./tools/tasks/' + task)(gulp, plugins, options);
 }
 
+
 // --------------
 // Clean.
 gulp.task('clean', tasks('clean', 'clean'));
@@ -55,9 +56,8 @@ gulp.task('test-dev', ['build.test'], tasks('test-dev'));
 gulp.task('test', ['karma.start'], tasks('test'));
 
 
-//// --------------
-//// Post install
-//
+// --------------
+// Post install
 gulp.task('install.typings', ['clean.tsd_typings'], shell.task([
   'npm prune',
   'tsd reinstall --overwrite',
@@ -75,7 +75,6 @@ gulp.task('postinstall', function (done) {
 gulp.task('serve.dev', ['build.js.dev', 'livereload'], tasks('serve.dev'));
 
 
-//
 // --------------
 // Serve prod.
 
@@ -84,7 +83,6 @@ gulp.task('serve.dev', ['build.js.dev', 'livereload'], tasks('serve.dev'));
 
 // --------------
 // Livereload.
-//
 gulp.task('livereload', function() {
     utils.livereload();
 });

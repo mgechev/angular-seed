@@ -4,10 +4,10 @@ var karma = require('karma').server;
 var path = require('path');
 var join = path.join;
 
-module.exports = function (gulp, plugins, config) {
+module.exports = function () {
   return function (done) {
     karma.start({
-      configFile: join(__dirname, '../../karma.conf.js'),
+      configFile: join(process.cwd(), 'karma.conf.js'),
       singleRun: true
     }, done);
   };

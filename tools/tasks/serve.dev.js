@@ -18,4 +18,3 @@ module.exports = function (gulp, plugins) {
     utils.serveSPA('dev');
   };
 };
-
