@@ -21,7 +21,10 @@
         "./app/services/NameList.ts",
         "./app/services/NameList_spec.ts",
         "./app/typings/_custom.d.ts",
-        "./app/typings/ng2_test.d.ts"
+        "./app/typings/ng2_test.d.ts",
+        "./tsd_typings/jasmine/jasmine.d.ts",
+        "./tsd_typings/systemjs/systemjs.d.ts",
+        "./tsd_typings/tsd.d.ts"
     ],
     "filesGlob": [
         "./app/**/*.ts",

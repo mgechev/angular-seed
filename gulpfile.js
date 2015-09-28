@@ -72,7 +72,7 @@ gulp.task('postinstall', function (done) {
 
 // --------------
 // Serve dev.
-gulp.task('serve.dev', ['build.js.dev', 'livereload'], tasks('serve.dev'));
+gulp.task('serve.dev', ['build.dev', 'livereload'], tasks('serve.dev'));
 
 
 // --------------
