@@ -66,7 +66,7 @@ gulp.task('install.typings', ['clean.tsd_typings'], shell.task([
 ]));
 
 gulp.task('postinstall', function (done) {
-  runSequence('install.typings', done);
+  runSequence(['clean', 'clean.test'], 'install.typings', done);
 });
 
 
