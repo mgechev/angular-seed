@@ -4,8 +4,10 @@
   "description": "Seed for Angular 2 apps",
   "repository": "https://github.com/mgechev/angular2-seed",
   "scripts": {
+    "serve.dev": "gulp serve.dev",
     "test": "gulp test",
     "karma": "karma start",
+    "test-dev": "gulp test-dev",
     "postinstall": "gulp postinstall"
   },
   "author": "Minko Gechev <mgechev>",
