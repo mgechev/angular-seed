@@ -4,11 +4,11 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_BINDINGS} from 'angular2/router';
 
 import {Home} from './components/home/home';
 import {About} from './components/about/about';
-import {NamesList} from './services/NameList';
+import {NameList} from './services/name_list';
 
 @Component({
   selector: 'app',
-  viewBindings: [NamesList]
+  viewBindings: [NameList]
 })
 @RouteConfig([
   { path: '/', component: Home, as: 'home' },
