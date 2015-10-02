@@ -15,7 +15,7 @@ import {
 import {Component, View} from 'angular2/angular2';
 import {DOM} from 'angular2/src/core/dom/dom_adapter';
 import {About} from './about';
-import {NamesList} from '../../services/NameList';
+import {NameList} from '../../services/name_list';
 
 export function main() {
   describe('About component', () => {
@@ -32,7 +32,7 @@ export function main() {
               return aboutInstance.list.names.length;
             }
 
-            expect(aboutInstance.list).toEqual(jasmine.any(NamesList));
+            expect(aboutInstance.list).toEqual(jasmine.any(NameList));
             expect(nameListLen()).toEqual(4);
             expect(DOM.querySelectorAll(aboutDOMEl, 'li').length).toEqual(nameListLen());
 
@@ -50,6 +50,6 @@ export function main() {
   });
 };
 
-@Component({selector: 'test-cmp', bindings: [NamesList]})
+@Component({selector: 'test-cmp', bindings: [NameList]})
 @View({directives: [About]})
 class TestComponent {}

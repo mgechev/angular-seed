@@ -1,4 +1,4 @@
-export class NamesList {
+export class NameList {
   names = ['Dijkstra', 'Knuth', 'Turing', 'Hopper'];
 
   get():string[] {
