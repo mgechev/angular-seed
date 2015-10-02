@@ -35,7 +35,7 @@ _Does not rely on any global dependencies._
 │   │       └── home_spec.ts
 │   ├── services
 │   │   ├── name_list.ts
-│   │   └── NameList_spec.ts
+│   │   └── name_list_spec.ts
 │   ├── typings
 │   ├── app.css
 │   ├── app.html
