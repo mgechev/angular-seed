@@ -13,12 +13,11 @@ It is something similar to the AngularJS Quick Start but does the entire build w
 ```bash
 git clone https://github.com/mgechev/angular2-seed.git
 cd angular2-seed
-# If you don't have gulp and/or tsd already installed
-npm install -g gulp tsd
 npm install
 # dev
-gulp serve.dev
+npm run serve.dev
 ```
+_Does not rely on any global dependencies._
 
 # Directory Structure
 
@@ -35,8 +34,8 @@ gulp serve.dev
 │   │       └── home.ts
 │   │       └── home_spec.ts
 │   ├── services
-│   │       ├── NameList.ts
-│   │       └── NameList_spec.ts
+│   │   ├── name_list.ts
+│   │   └── NameList_spec.ts
 │   ├── typings
 │   ├── app.css
 │   ├── app.html
@@ -46,6 +45,10 @@ gulp serve.dev
 ├── dist
 │   ├── dev
 │   └── prod
+├── tools
+│   ├── tasks
+│   ├── utils.js
+│   └── workflow.config.js
 ├── tsd_typings
 ├── gulpfile.js
 ├── karma.conf.js
@@ -68,7 +71,7 @@ var APP_BASE         = '/';
 Configure at runtime
 
 ```bash
-gulp serve.dev --port 8080 --reload-port 4000 --base /my-app/
+npm run serve.dev -- --port 8080 --reload-port 4000 --base /my-app/
 ```
 
 # Now to extend?
@@ -79,17 +82,17 @@ If you want to use your custom libraries:
 npm install my-library --save
 vim gulpfile.js
 ```
-Add reference to the installed library in `PATH.src.lib`.
+Add reference to the installed library in `PATH.src.lib` into `./tools/workflow.config.js`.
 
 # Running test
 
 ```bash
 # In a single bash window
-gulp test       # or npm test
+npm run test
 
 # Debug - In two bash windows
-npm run karma   # 1st window
-gulp test-dev   # 2nd window
+npm run karma      # 1st window
+npm run test-dev   # 2nd window
 ```
 
 # Contributors
