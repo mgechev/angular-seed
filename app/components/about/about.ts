@@ -1,6 +1,6 @@
 import {Component, View, CORE_DIRECTIVES} from 'angular2/angular2';
 
-import {NamesList} from '../../services/NameList';
+import {NameList} from '../../services/name_list';
 
 @Component({
   selector: 'about'
@@ -10,7 +10,7 @@ import {NamesList} from '../../services/NameList';
   directives: [CORE_DIRECTIVES]
 })
 export class About {
-  constructor(public list: NamesList) {}
+  constructor(public list: NameList) {}
   addName(newname):boolean {
     this.list.add(newname.value);
     newname.value = '';
