@@ -5,7 +5,7 @@
   "repository": "https://github.com/mgechev/angular2-seed",
   "scripts": {
     "test": "gulp test",
-    "karma": "node_modules/.bin/karma start",
+    "karma": "karma start",
     "postinstall": "gulp postinstall"
   },
   "author": "Minko Gechev <mgechev>",
@@ -37,6 +37,7 @@
     "open": "0.0.5",
     "run-sequence": "^1.1.0",
     "serve-static": "^1.9.2",
+    "slash": "~1.0.0",
     "stream-series": "^0.1.1",
     "systemjs-builder": "^0.13.6",
     "mini-lr": "^0.1.6",
@@ -49,7 +50,6 @@
     "angular2": "2.0.0-alpha.37",
     "es6-module-loader": "^0.15.0",
     "reflect-metadata": "0.1.0",
-    "slash": "~1.0.0",
     "systemjs": "^0.18.17"
   }
 }
