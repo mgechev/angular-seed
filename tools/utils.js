@@ -44,10 +44,9 @@ function transformPath(plugins, env) {
 module.exports.transformPath = transformPath;
 
 function injectableDevAssetsRef() {
-  var src = PATH.src.lib.map(function (path) {
+  return PATH.src.lib.map(function(path) {
     return join(PATH.dest.dev.lib, slash(path).split('/').pop());
   });
-  return src;
 }
 module.exports.injectableDevAssetsRef = injectableDevAssetsRef;
 
