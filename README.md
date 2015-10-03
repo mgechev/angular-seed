@@ -27,11 +27,11 @@ _Does not rely on any global dependencies._
 │   ├── components
 │   │   ├── about
 │   │   │   ├── about.html
-│   │   │   └── about.ts
+│   │   │   ├── about.ts
 │   │   │   └── about_spec.ts
 │   │   └── home
 │   │       ├── home.html
-│   │       └── home.ts
+│   │       ├── home.ts
 │   │       └── home_spec.ts
 │   ├── services
 │   │   ├── name_list.ts
