@@ -18,13 +18,13 @@ module.exports = function(config) {
       'node_modules/angular2/node_modules/zone.js/dist/zone-microtask.js',
       'node_modules/angular2/node_modules/zone.js/dist/long-stack-trace-zone.js',
       'node_modules/angular2/node_modules/zone.js/dist/jasmine-patch.js',
-      'node_modules/angular2/node_modules/traceur/bin/traceur-runtime.js',
       'node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.src.js',
       'node_modules/systemjs/dist/system.src.js',
-      'node_modules/reflect-metadata/Reflect.js',
+      'node_modules/angular2/node_modules/reflect-metadata/Reflect.js',
 
       { pattern: 'test/**/*.js', included: false, watched: true },
       { pattern: 'node_modules/angular2/**/*.js', included: false, watched: false },
+      { pattern: 'node_modules/angular2/node_modules/@reactivex/rxjs/**', included: false, watched: false, served: true },
       'test-main.js',
     ],
 
