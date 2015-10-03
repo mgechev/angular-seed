@@ -9,7 +9,6 @@ module.exports = function (gulp, plugins) {
     var results = gulp.src(
       [
         join(CONFIG.PATH.src.all, '**/*.ts'),
-        '!' + join(CONFIG.PATH.src.all, '**/*_spec.ts'),
         '!' + join(CONFIG.PATH.src.all, 'typings/**/*.ts')
       ]);
 
