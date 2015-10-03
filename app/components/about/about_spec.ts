@@ -48,7 +48,7 @@ export function main() {
           });
       }));
   });
-};
+}
 
 @Component({selector: 'test-cmp', bindings: [NameList]})
 @View({directives: [About]})

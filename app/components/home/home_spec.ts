@@ -31,7 +31,7 @@ export function main() {
           });
       }));
   });
-};
+}
 
 @Component({selector: 'test-cmp'})
 @View({directives: [Home]})
