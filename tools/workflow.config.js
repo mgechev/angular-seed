@@ -28,11 +28,10 @@ var PATH = {
     all: APP_SRC,
     lib: [
       // Order is quite important here for the HTML tag injection.
-      require.resolve('traceur/bin/traceur-runtime.js'),
       require.resolve('es6-module-loader/dist/es6-module-loader-sans-promises.js'),
       require.resolve('es6-module-loader/dist/es6-module-loader-sans-promises.js.map'),
-      require.resolve('reflect-metadata/Reflect.js'),
-      require.resolve('reflect-metadata/Reflect.js.map'),
+      require.resolve('angular2/node_modules/reflect-metadata/Reflect.js'),
+      require.resolve('angular2/node_modules/reflect-metadata/Reflect.js.map'),
       require.resolve('systemjs/dist/system.src.js'),
       APP_SRC + '/system.config.js',
       ANGULAR_BUNDLES + '/angular2.dev.js',
