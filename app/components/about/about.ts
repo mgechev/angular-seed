@@ -6,12 +6,12 @@ import {NameList} from '../../services/name_list';
   selector: 'about'
 })
 @View({
-  templateUrl: './components/about/about.html',
-  directives: [CORE_DIRECTIVES]
+  directives: [CORE_DIRECTIVES],
+  templateUrl: './components/about/about.html'
 })
 export class About {
   constructor(public list: NameList) {}
-  addName(newname):boolean {
+  addName(newname): boolean {
     this.list.add(newname.value);
     newname.value = '';
     // prevent default form submit behavior to refresh the page
