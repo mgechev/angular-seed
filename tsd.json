@@ -7,9 +7,6 @@
   "installed": {
     "systemjs/systemjs.d.ts": {
       "commit": "bd03c6ea51abde7d13e354908716c6373fc38b1f"
-    },
-    "jasmine/jasmine.d.ts": {
-      "commit": "0fff32b558aa91ba24cfca5479aba02e4ef2fafe"
     }
   }
 }
