@@ -30,7 +30,7 @@ export function main() {
             var aboutDOMEl = rootTC.componentViewChildren[0].nativeElement;
             var nameListLen = function () {
               return aboutInstance.list.names.length;
-            }
+            };
 
             expect(aboutInstance.list).toEqual(jasmine.any(NameList));
             expect(nameListLen()).toEqual(4);
