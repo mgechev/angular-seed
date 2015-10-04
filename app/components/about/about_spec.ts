@@ -1,16 +1,10 @@
 import {
   AsyncTestCompleter,
   TestComponentBuilder,
-  By,
-  beforeEach,
-  ddescribe,
   describe,
-  el,
   expect,
-  iit,
   inject,
-  it,
-  xit,
+  it
 } from 'angular2/test_lib';
 import {Component, View} from 'angular2/angular2';
 import {DOM} from 'angular2/src/core/dom/dom_adapter';
@@ -26,11 +20,11 @@ export function main() {
           .then((rootTC) => {
             rootTC.detectChanges();
 
-            var aboutInstance = rootTC.componentViewChildren[0].componentInstance;
-            var aboutDOMEl = rootTC.componentViewChildren[0].nativeElement;
-            var nameListLen = function () {
+            let aboutInstance = rootTC.debugElement.componentViewChildren[0].componentInstance;
+            let aboutDOMEl = rootTC.debugElement.componentViewChildren[0].nativeElement;
+            let nameListLen = function () {
               return aboutInstance.list.names.length;
-            }
+            };
 
             expect(aboutInstance.list).toEqual(jasmine.any(NameList));
             expect(nameListLen()).toEqual(4);
