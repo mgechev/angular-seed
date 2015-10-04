@@ -31,10 +31,11 @@ gulp.task('clean.tsd_typings', tasks('clean', 'tsd_typings'));
 // --------------
 // Build dev.
 gulp.task('build.lib.dev', tasks('build.lib.dev'));
-gulp.task('build.js.dev', tasks('build.js.dev'));
-gulp.task('build.linter.js.dev', tasks('build.linter.js.dev'));
-gulp.task('build.linter.ts.dev', tasks('build.linter.ts.dev'));
-gulp.task('build.assets.dev', ['build.js.dev', 'build.linter.js.dev', 'build.linter.ts.dev'], tasks('build.assets.dev'));
+gulp.task('build.js.dev', ['linter.dev'], tasks('build.js.dev'));
+gulp.task('linter.dev', ['jshint.dev', 'tslint.dev']);
+gulp.task('jshint.dev', tasks('jshint.dev'));
+gulp.task('tslint.dev', tasks('tslint.dev'));
+gulp.task('build.assets.dev', ['build.js.dev'], tasks('build.assets.dev'));
 gulp.task('build.index.dev', tasks('build.index.dev'));
 gulp.task('build.app.dev', function (done) {
   runSequence('clean.app.dev', 'build.assets.dev', 'build.index.dev', done);

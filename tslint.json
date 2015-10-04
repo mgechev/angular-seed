@@ -49,7 +49,7 @@
     "quotemark": [true, "single"],
     "radix": true,
     "semicolon": true,
-    "sort-object-literal-keys": true,
+    "sort-object-literal-keys": false,
     "triple-equals": [true, "allow-null-check"],
     "variable-name": false,
     "whitespace": [true,

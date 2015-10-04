@@ -6,8 +6,8 @@ import {NameList} from '../../services/name_list';
   selector: 'about'
 })
 @View({
-  directives: [CORE_DIRECTIVES],
-  templateUrl: './components/about/about.html'
+  templateUrl: './components/about/about.html',
+  directives: [CORE_DIRECTIVES]
 })
 export class About {
   constructor(public list: NameList) {}
