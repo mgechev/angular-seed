@@ -22,16 +22,13 @@
         "./app/services/name_list_spec.ts",
         "./app/typings/_custom.d.ts",
         "./app/typings/ng2_test.d.ts",
+        "./tsd_typings/jasmine/jasmine.d.ts",
         "./tsd_typings/systemjs/systemjs.d.ts",
-        "./tsd_typings/tsd.d.ts",
-        "./node_modules/angular2/bundles/typings/angular2/test_lib.d.ts",
-        "./node_modules/angular2/bundles/typings/jasmine/jasmine.d.ts"
+        "./tsd_typings/tsd.d.ts"
     ],
     "filesGlob": [
         "./app/**/*.ts",
-        "./tsd_typings/**/*.d.ts",
-        "./node_modules/angular2/bundles/typings/angular2/test_lib.d.ts",
-        "./node_modules/angular2/bundles/typings/jasmine/jasmine.d.ts"
+        "./tsd_typings/**/*.d.ts"
     ],
     "compileOnSave": false
 }
