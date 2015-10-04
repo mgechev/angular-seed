@@ -12,7 +12,7 @@ System.config({
   defaultJSExtensions: true,
   paths: {
     'angular2/*': 'node_modules/angular2/*.js',
-    '@reactivex/rxjs/*': 'node_modules/angular2/node_modules/@reactivex/rxjs/*.js',
+    '@reactivex/rxjs/*': 'node_modules/@reactivex/rxjs/*.js',
   }
 });
 
@@ -31,7 +31,7 @@ System.import('angular2/src/core/dom/browser_adapter').then(function(browser_ada
           throw new Error('Module ' + path + ' does not implement main() method.');
         }
       });
-    }))
+    }));
 })
 .then(function() {
   __karma__.start();
