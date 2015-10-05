@@ -25,6 +25,7 @@ module.exports = function(config) {
 
       { pattern: 'test/**/*.js', included: false, watched: true },
       { pattern: 'node_modules/angular2/**/*.js', included: false, watched: false },
+      { pattern: 'node_modules/systemjs/dist/*.js', included: false, watched: false },
       'test-main.js',
     ],
 
@@ -65,7 +66,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS2', 'Chrome'],
 
 
     // Continuous Integration mode
