@@ -38,6 +38,7 @@
     "karma": "~0.12.37",
     "karma-chrome-launcher": "~0.2.0",
     "karma-jasmine": "~0.3.6",
+    "karma-phantomjs2-launcher": "^0.3.2",
     "open": "0.0.5",
     "run-sequence": "^1.1.0",
     "serve-static": "^1.9.2",
