@@ -22,12 +22,21 @@
         "./app/services/name_list_spec.ts",
         "./app/typings/_custom.d.ts",
         "./app/typings/ng2_test.d.ts",
+        "./gulpfile.ts",
+        "./tsd_typings/gulp-load-plugins/gulp-load-plugins.d.ts",
+        "./tsd_typings/gulp-shell/gulp-shell.d.ts",
+        "./tsd_typings/gulp/gulp.d.ts",
         "./tsd_typings/jasmine/jasmine.d.ts",
+        "./tsd_typings/node/node.d.ts",
+        "./tsd_typings/orchestrator/orchestrator.d.ts",
+        "./tsd_typings/q/Q.d.ts",
         "./tsd_typings/systemjs/systemjs.d.ts",
         "./tsd_typings/tsd.d.ts"
     ],
     "filesGlob": [
         "./app/**/*.ts",
+        "./gulpfile.ts",
+        "./tools/**/*.ts",
         "./tsd_typings/**/*.d.ts"
     ],
     "compileOnSave": false

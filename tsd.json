@@ -10,6 +10,24 @@
     },
     "jasmine/jasmine.d.ts": {
       "commit": "98d3168c2c570352a3a7393788e2ec9fbb08ade6"
+    },
+    "node/node.d.ts": {
+      "commit": "05557455c49043ff0189182e27c9e04403a70802"
+    },
+    "gulp/gulp.d.ts": {
+      "commit": "05557455c49043ff0189182e27c9e04403a70802"
+    },
+    "q/Q.d.ts": {
+      "commit": "05557455c49043ff0189182e27c9e04403a70802"
+    },
+    "orchestrator/orchestrator.d.ts": {
+      "commit": "05557455c49043ff0189182e27c9e04403a70802"
+    },
+    "gulp-load-plugins/gulp-load-plugins.d.ts": {
+      "commit": "05557455c49043ff0189182e27c9e04403a70802"
+    },
+    "gulp-shell/gulp-shell.d.ts": {
+      "commit": "05557455c49043ff0189182e27c9e04403a70802"
     }
   }
 }
