@@ -1,5 +1,6 @@
 // Karma configuration
 // Generated on Wed Jul 15 2015 09:44:02 GMT+0200 (Romance Daylight Time)
+"use strict";
 
 module.exports = function(config) {
   config.set({
@@ -25,7 +26,7 @@ module.exports = function(config) {
 
       { pattern: 'test/**/*.js', included: false, watched: true },
       { pattern: 'node_modules/angular2/**/*.js', included: false, watched: false },
-      'test-main.js',
+      'test-main.js'
     ],
 
 
@@ -71,5 +72,5 @@ module.exports = function(config) {
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: false
-  })
-}
+  });
+};
