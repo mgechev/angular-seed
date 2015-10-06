@@ -1,16 +1,10 @@
 import {
   AsyncTestCompleter,
   TestComponentBuilder,
-  By,
-  beforeEach,
-  ddescribe,
   describe,
-  el,
   expect,
-  iit,
   inject,
   it,
-  xit,
 } from 'angular2/test';
 import {Component, View} from 'angular2/angular2';
 import {DOM} from 'angular2/src/core/dom/dom_adapter';
@@ -26,9 +20,9 @@ export function main() {
           .then((rootTC) => {
             rootTC.detectChanges();
 
-            var aboutInstance = rootTC.componentViewChildren[0].componentInstance;
-            var aboutDOMEl = rootTC.componentViewChildren[0].nativeElement;
-            var nameListLen = function () {
+            let aboutInstance = rootTC.componentViewChildren[0].componentInstance;
+            let aboutDOMEl = rootTC.componentViewChildren[0].nativeElement;
+            let nameListLen = function () {
               return aboutInstance.list.names.length;
             };
 
@@ -50,6 +44,6 @@ export function main() {
   });
 }
 
-@Component({selector: 'test-cmp', bindings: [NameList]})
+@Component({bindings: [NameList], selector: 'test-cmp'})
 @View({directives: [About]})
 class TestComponent {}

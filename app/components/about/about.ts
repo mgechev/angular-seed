@@ -11,7 +11,7 @@ import {NameList} from '../../services/name_list';
 })
 export class About {
   constructor(public list: NameList) {}
-  addName(newname):boolean {
+  addName(newname): boolean {
     this.list.add(newname.value);
     newname.value = '';
     // prevent default form submit behavior to refresh the page
