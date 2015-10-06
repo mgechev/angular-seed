@@ -34,7 +34,6 @@ var PATH = {
       require.resolve('reflect-metadata/Reflect.js'),
       require.resolve('reflect-metadata/Reflect.js.map'),
       require.resolve('systemjs/dist/system.src.js'),
-      require.resolve('systemjs/dist/system-polyfills.js'),
       APP_SRC + '/system.config.js',
       ANGULAR_BUNDLES + '/angular2.dev.js',
       ANGULAR_BUNDLES + '/router.dev.js',
