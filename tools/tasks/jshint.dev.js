@@ -10,7 +10,8 @@ module.exports = function (gulp, plugins) {
       [
         join(CONFIG.PATH.src.all, '**/*.js'),
         join(CONFIG.PATH.src.all, '../tools/**/*.js'),
-        join(CONFIG.PATH.src.all, '../gulpfile.js')
+        join(CONFIG.PATH.src.all, '../gulpfile.js'),
+        join(CONFIG.PATH.src.all, '../karma.conf.js')
       ]);
 
     return results
