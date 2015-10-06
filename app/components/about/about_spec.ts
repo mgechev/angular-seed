@@ -42,8 +42,8 @@ export function main() {
           });
       }));
   });
-};
+}
 
-@Component({selector: 'test-cmp', bindings: [NameList]})
+@Component({bindings: [NameList], selector: 'test-cmp'})
 @View({directives: [About]})
 class TestComponent {}
