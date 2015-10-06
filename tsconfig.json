@@ -23,6 +23,7 @@
         "./app/typings/_custom.d.ts",
         "./app/typings/ng2_test.d.ts",
         "./tsd_typings/jasmine/jasmine.d.ts",
+        "./tsd_typings/node/node.d.ts",
         "./tsd_typings/systemjs/systemjs.d.ts",
         "./tsd_typings/tsd.d.ts"
     ],

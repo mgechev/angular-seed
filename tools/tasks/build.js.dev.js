@@ -16,7 +16,7 @@ module.exports = function (gulp, plugins) {
       ])
 
       .pipe(plugins.plumber())
-      .pipe(plugins.inlineNg2Template({base: 'app'}))
+      .pipe(plugins.inlineNg2Template({base: CONFIG.APP_SRC}))
       .pipe(plugins.sourcemaps.init())
       .pipe(plugins.typescript(tsProject));
 
