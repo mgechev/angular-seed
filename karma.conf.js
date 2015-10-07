@@ -1,5 +1,6 @@
 // Karma configuration
 // Generated on Wed Jul 15 2015 09:44:02 GMT+0200 (Romance Daylight Time)
+"use strict";
 
 module.exports = function(config) {
   config.set({
@@ -26,7 +27,7 @@ module.exports = function(config) {
       { pattern: 'node_modules/@reactivex/rxjs/**', included: false, watched: false, served: true },
       { pattern: 'test/**/*.js', included: false, watched: true },
 
-      'test-main.js',
+      'test-main.js'
     ],
 
 
