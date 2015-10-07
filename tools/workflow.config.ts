@@ -1,24 +1,24 @@
-"use strict";
-
-var argv = require('yargs').argv;
+import yargs = require('yargs');
+let argv = yargs.argv;
 
 // --------------
 // Configuration.
-var PORT             = argv['port']        || 5555;
-var LIVE_RELOAD_PORT = argv['reload-port'] || 4002;
-var APP_BASE         = argv['base']        || '/';
+let PORT             = argv['port']        || 5555;
+let LIVE_RELOAD_PORT = argv['reload-port'] || 4002;
+let APP_BASE         = argv['base']        || '/';
 
-var APP_SRC = 'app';
-var APP_DEST = 'dist';
-var ANGULAR_BUNDLES = './node_modules/angular2/bundles';
+const APP_SRC = 'app';
+const APP_DEST = 'dist';
+const ANGULAR_BUNDLES = './node_modules/angular2/bundles';
 
-var PATH = {
+const PATH = {
   dest: {
     all: APP_DEST,
     dev: {
       all: APP_DEST + '/dev',
       lib: APP_DEST + '/dev/lib'
     },
+    test: 'test',
     prod: {
       all: APP_DEST + '/prod',
       lib: APP_DEST + '/prod/lib'
@@ -26,7 +26,7 @@ var PATH = {
   },
   src: {
     all: APP_SRC,
-    lib: [
+    lib_inject: [
       // Order is quite important here for the HTML tag injection.
       require.resolve('es6-module-loader/dist/es6-module-loader-sans-promises.js'),
       require.resolve('es6-module-loader/dist/es6-module-loader-sans-promises.js.map'),
@@ -37,17 +37,20 @@ var PATH = {
       ANGULAR_BUNDLES + '/angular2.dev.js',
       ANGULAR_BUNDLES + '/router.dev.js',
       ANGULAR_BUNDLES + '/http.dev.js'
+    ],
+    lib_copy_only: [
+      require.resolve('systemjs/dist/system-polyfills.js'),
+      require.resolve('systemjs/dist/system-polyfills.js.map')
     ]
   }
 };
 
-var CONFIG = {
-  PORT: PORT,
-  LIVE_RELOAD_PORT: LIVE_RELOAD_PORT,
-  APP_BASE: APP_BASE,
-  APP_SRC: APP_SRC,
-  APP_DEST: APP_DEST,
-  ANGULAR_BUNDLES: ANGULAR_BUNDLES,
-  PATH: PATH
+export = {
+  PORT,
+  LIVE_RELOAD_PORT,
+  APP_BASE,
+  APP_SRC,
+  APP_DEST,
+  ANGULAR_BUNDLES,
+  PATH
 };
-module.exports = CONFIG;

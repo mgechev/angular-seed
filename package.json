@@ -7,14 +7,16 @@
     "build.dev": "gulp build.dev",
     "build.test": "gulp build.test",
     "karma": "karma start",
+    "preinstall": "node ./tools/preinstall",
     "postinstall": "gulp postinstall",
     "serve.dev": "gulp serve.dev",
     "test": "gulp test",
-    "test-dev": "gulp test-dev"
+    "test.dev": "gulp test.dev"
   },
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
   "devDependencies": {
+    "async": "^1.4.2",
     "connect-livereload": "^0.5.3",
     "del": "^1.1.1",
     "express": "~4.13.1",

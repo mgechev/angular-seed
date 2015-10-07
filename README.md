@@ -30,6 +30,7 @@ _Does not rely on any global dependencies._
 │   │   │   ├── about.ts
 │   │   │   └── about_spec.ts
 │   │   └── home
+│   │       ├── home.css
 │   │       ├── home.html
 │   │       ├── home.ts
 │   │       └── home_spec.ts
@@ -92,7 +93,7 @@ npm run test
 
 # Debug - In two bash windows
 npm run karma      # 1st window
-npm run test-dev   # 2nd window
+npm run test.dev   # 2nd window
 ```
 
 # Contributors
