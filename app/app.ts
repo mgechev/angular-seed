@@ -1,4 +1,4 @@
-import {Component, View, bind, bootstrap} from 'angular2/angular2';
+import {Component, View, bind, bootstrap, ViewEncapsulation} from 'angular2/angular2';
 import {
   RouteConfig,
   ROUTER_DIRECTIVES,
@@ -22,6 +22,7 @@ import {NameList} from './services/name_list';
 @View({
   templateUrl: './app.html',
   styleUrls: ['./app.css'],
+  encapsulation: ViewEncapsulation.None,
   directives: [ROUTER_DIRECTIVES]
 })
 class App {}

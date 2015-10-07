@@ -14,7 +14,6 @@ module.exports = function (gulp, plugins) {
         join(CONFIG.PATH.src.all, '**/*ts'),
         '!' + join(CONFIG.PATH.src.all, '**/*_spec.ts')
       ])
-
       .pipe(plugins.plumber())
       .pipe(plugins.inlineNg2Template({base: CONFIG.APP_SRC}))
       .pipe(plugins.sourcemaps.init())
