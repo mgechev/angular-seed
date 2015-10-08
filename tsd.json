@@ -43,15 +43,6 @@
     },
     "async/async.d.ts": {
       "commit": "e9be3cecf8a326d3e220c52b42d218169a7bb9f2"
-    },
-    "karma/karma.d.ts": {
-      "commit": "1c7dc757837b1c2089b7d2c2c6fabdeba77587ab"
-    },
-    "log4js/log4js.d.ts": {
-      "commit": "1c7dc757837b1c2089b7d2c2c6fabdeba77587ab"
-    },
-    "bluebird/bluebird.d.ts": {
-      "commit": "1c7dc757837b1c2089b7d2c2c6fabdeba77587ab"
     }
   }
 }

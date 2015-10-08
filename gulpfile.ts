@@ -29,8 +29,9 @@ gulp.task('clean.test', tasks('clean', 'test'));
 
 // --------------
 // Build dev.
+gulp.task('tslint', tasks('tslint'));
 gulp.task('build.lib.dev', tasks('build.lib.dev'));
-gulp.task('build.js.dev', tasks('build.js.dev'));
+gulp.task('build.js.dev', ['tslint'], tasks('build.js.dev'));
 gulp.task('build.assets.dev', ['build.js.dev'], tasks('build.assets.dev'));
 gulp.task('build.index.dev', tasks('build.index.dev'));
 gulp.task('build.app.dev', function (done) {
