@@ -1,5 +1,4 @@
-import yargs = require('yargs');
-let argv = yargs.argv;
+import {argv} from 'yargs';
 
 // --------------
 // Configuration.
@@ -45,7 +44,7 @@ const PATH = {
   }
 };
 
-export = {
+export {
   PORT,
   LIVE_RELOAD_PORT,
   APP_BASE,

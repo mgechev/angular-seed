@@ -1,10 +1,7 @@
-import async = require('async');
-import del = require('del');
-import path = require('path');
-import CONFIG = require('../workflow.config');
-
-const join = path.join;
-const PATH = CONFIG.PATH;
+import * as async from 'async';
+import * as del from 'del';
+import {join} from 'path';
+import {PATH} from '../workflow.config';
 
 export = function (gulp, plugins, option) {
   return function (done) {

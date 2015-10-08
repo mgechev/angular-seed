@@ -1,5 +1,4 @@
-import CONFIG = require('../workflow.config');
-const PATH = CONFIG.PATH;
+import {PATH} from '../workflow.config';
 
 export = function (gulp) {
   return function () {

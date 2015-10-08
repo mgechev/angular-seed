@@ -1,12 +1,9 @@
-import karma = require('karma');
-import path = require('path');
-
-const join = path.join;
-const karmaServer = karma.server;
+import {server as karma} from 'karma';
+import {join} from 'path';
 
 export = function () {
   return function (done) {
-    karmaServer.start({
+    karma.start({
       configFile: join(process.cwd(), 'karma.conf.js'),
       singleRun: true
     }, done);

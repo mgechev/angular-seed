@@ -1,19 +1,19 @@
-import utils = require('../utils');
-import CONFIG = require('../workflow.config');
+import {tsProject} from '../utils';
+import {PATH, APP_SRC} from '../workflow.config';
 
 export = function (gulp, plugins) {
   return function () {
-    let tsProject = utils.tsProject(plugins);
+    let config = tsProject(plugins);
     let result = gulp.src(
       [
         './app/**/*.ts',
         '!./app/init.ts'
       ])
       .pipe(plugins.plumber())
-      .pipe(plugins.inlineNg2Template({base: CONFIG.APP_SRC}))
-      .pipe(plugins.typescript(tsProject));
+      .pipe(plugins.inlineNg2Template({ base: APP_SRC }))
+      .pipe(plugins.typescript(config));
 
     return result.js
-      .pipe(gulp.dest('./test'));
+      .pipe(gulp.dest(PATH.dest.test));
   };
 };

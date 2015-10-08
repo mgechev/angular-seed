@@ -1,9 +1,9 @@
 // Gulp dev.
-import gulp = require('gulp');
-import plugins = require('gulp-load-plugins');
-import shell = require('gulp-shell');
-import runSequence = require('run-sequence');
-import utils = require('./tools/utils');
+import * as gulp from 'gulp';
+import * as plugins from 'gulp-load-plugins';
+import * as shell from 'gulp-shell';
+import * as runSequence from 'run-sequence';
+import {livereload} from './tools/utils';
 
 // Gulp prod.
 // var concat = require('gulp-concat');
@@ -81,5 +81,5 @@ gulp.task('serve.dev', ['build.dev', 'livereload'], tasks('serve.dev'));
 // --------------
 // Livereload.
 gulp.task('livereload', function() {
-    utils.livereload();
+    livereload();
 });

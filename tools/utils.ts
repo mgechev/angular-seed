@@ -1,19 +1,16 @@
-import fs = require('fs');
-import path = require('path');
-import slash = require('slash');
+import {readFileSync} from 'fs';
+import {join, resolve} from 'path';
+import * as slash from 'slash';
 
 // Server dependencies.
-import connectLivereload = require('connect-livereload');
-import serveStatic = require('serve-static');
-import openResource = require('open');
-import express = require('express');
-import minilrFn = require('mini-lr');
+import * as connectLivereload from 'connect-livereload';
+import * as serveStatic from 'serve-static';
+import * as openResource from 'open';
+import * as express from 'express';
+import * as minilrFn from 'mini-lr';
 
-import CONFIG = require('./workflow.config');
+import {PATH, LIVE_RELOAD_PORT, APP_BASE, PORT} from './workflow.config';
 
-const PATH = CONFIG.PATH;
-const join = path.join;
-const resolve = path.resolve;
 let minilr = minilrFn();
 
 // --------------
@@ -27,14 +24,14 @@ export function notifyLiveReload(e) {
 }
 
 export function livereload() {
-  minilr.listen(CONFIG.LIVE_RELOAD_PORT);
+  minilr.listen(LIVE_RELOAD_PORT);
 }
 
 export function transformPath(plugins, env) {
   var v = '?v=' + getVersion();
   return function (filepath) {
     var filename = filepath.replace('/' + PATH.dest[env].all, '') + v;
-    arguments[0] = join(CONFIG.APP_BASE, filename);
+    arguments[0] = join(APP_BASE, filename);
     return plugins.inject.transform.apply(plugins.inject.transform, arguments);
   };
 }
@@ -47,7 +44,7 @@ export function injectableDevAssetsRef() {
 export function templateLocals() {
   return {
     VERSION: getVersion(),
-    APP_BASE: CONFIG.APP_BASE
+    APP_BASE: APP_BASE
   };
 }
 
@@ -60,21 +57,21 @@ export function tsProject(plugins) {
 export function serveSPA(env) {
   var app = express();
   app.use(
-    CONFIG.APP_BASE,
-    connectLivereload( { port: CONFIG.LIVE_RELOAD_PORT }),
+    APP_BASE,
+    connectLivereload({ port: LIVE_RELOAD_PORT }),
     serveStatic(resolve(process.cwd(), PATH.dest[env].all))
   );
 
-  app.all(CONFIG.APP_BASE + '*', (req, res) =>
+  app.all(APP_BASE + '*', (req, res) =>
     res.sendFile(resolve(process.cwd(), PATH.dest[env].all, 'index.html'))
   );
 
-  app.listen(CONFIG.PORT, () =>
-    openResource('http://localhost:' + CONFIG.PORT + CONFIG.APP_BASE)
+  app.listen(PORT, () =>
+    openResource('http://localhost:' + PORT + APP_BASE)
   );
 }
 
 function getVersion() {
-  var pkg = JSON.parse(fs.readFileSync('package.json').toString());
+  var pkg = JSON.parse(readFileSync('package.json').toString());
   return pkg.version;
 }

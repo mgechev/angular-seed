@@ -1,17 +1,14 @@
-import runSequence = require('run-sequence');
-import utils = require('../utils');
-import CONFIG = require('../workflow.config');
-import path = require('path');
-
-const PATH = CONFIG.PATH;
-const join = path.join;
+import {join} from 'path';
+import * as runSequence from 'run-sequence';
+import {notifyLiveReload, serveSPA} from '../utils';
+import {PATH} from '../workflow.config';
 
 export = function serveDev(gulp, plugins) {
   return function () {
     plugins.watch(join(PATH.src.all, '**'), e =>
-      runSequence('build.app.dev', () => utils.notifyLiveReload(e))
+      runSequence('build.app.dev', () => notifyLiveReload(e))
     );
 
-    utils.serveSPA('dev');
+    serveSPA('dev');
   };
 };
