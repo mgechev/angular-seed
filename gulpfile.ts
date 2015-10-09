@@ -16,9 +16,6 @@ function tasks(task: string, option?: string) {
   return require('./tools/tasks/' + task)(gulp, plugins(), option);
 }
 
-gulp.task('build.dev', () => console.log('working so far'));
-gulp.task('postinstall', () => console.log('You successfully installed angular2-seed!'));
-
 // --------------
 // Clean.
 gulp.task('clean', tasks('clean', 'clean'));
