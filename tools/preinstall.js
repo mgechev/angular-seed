@@ -1,9 +1,6 @@
-// Written in JS as executed before typings and packages
-// allowing to use TypeScript are installed.
+// Written in JS as executed before types defintions are installed.
 "use strict";
 
-
-var exec = require('child_process').exec;
 var fs = require('fs');
 var join = require('path').join;
 
@@ -11,15 +8,9 @@ var TSD_CONFIG = fs.readFileSync(join(process.cwd(), 'tsd.json'));
 var FOLDER_NAME = JSON.parse(TSD_CONFIG).path;
 var TSD_TYPINGS = join(process.cwd(), FOLDER_NAME);
 
-// Delete folder.
+// Delete tsd typings folder.
 deleteFolder(TSD_TYPINGS, function () {
   console.log(FOLDER_NAME + ' folder cleaned successfully!');
-});
-
-// Install typings.
-exec('tsd install', function (err, stdout) {
-  if (err) return console.log(err);
-  console.log(stdout);
 });
 
 
