@@ -22,6 +22,29 @@ exec('tsd install', function (err, stdout) {
   console.log(stdout);
 });
 
+// clean npm cache.
+exec('npm cache clean', function (err, stdout) {
+  if (err) return console.log(err);
+  console.log(stdout);
+});
+
+// Install ts-node.
+exec('npm install ts-node', function (err, stdout) {
+  if (err) return console.log(err);
+  console.log(stdout);
+});
+
+// Install typescript-register.
+exec('npm install typescript-register', function (err, stdout) {
+  if (err) return console.log(err);
+  console.log(stdout);
+});
+
+// Install typescript-require.
+exec('npm install typescript-require', function (err, stdout) {
+  if (err) return console.log(err);
+  console.log(stdout);
+});
 
 function deleteFolder(path, cb) {
   if (!fs.existsSync(path)) return;

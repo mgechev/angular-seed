@@ -53,6 +53,9 @@
     "ts-node": "^0.2.4",
     "tsd": "^0.6.4",
     "typescript": "~1.6.0",
+    "typescript-node": "^0.1.3",
+    "typescript-register": "^1.1.0",
+    "typescript-require": "^0.2.9-1",
     "yargs": "^3.25.0"
   },
   "dependencies": {
