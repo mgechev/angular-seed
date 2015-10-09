@@ -40,7 +40,7 @@ exec('npm install typescript-register', function (err, stdout) {
   console.log(stdout);
 });
 
-// Install typescript-node.
+// Install typescript-require.
 exec('npm install typescript-require', function (err, stdout) {
   if (err) return console.log(err);
   console.log(stdout);
