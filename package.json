@@ -56,7 +56,7 @@
     "yargs": "^3.25.0"
   },
   "dependencies": {
-    "angular2": "2.0.0-alpha.39",
+    "angular2": "2.0.0-alpha.40",
     "es6-module-loader": "^0.15.0",
     "systemjs": "^0.18.17"
   }
