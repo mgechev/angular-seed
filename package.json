@@ -8,7 +8,7 @@
     "build.test": "gulp build.test",
     "karma": "karma start",
     "preinstall": "node ./tools/preinstall",
-    "postinstall": "gulp postinstall",
+    "postinstall": "node ./tools/postinstall",
     "serve.dev": "gulp serve.dev",
     "test": "gulp test",
     "test.dev": "gulp test.dev"

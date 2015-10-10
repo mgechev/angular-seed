@@ -1,7 +1,6 @@
 // Gulp dev.
 import * as gulp from 'gulp';
 import * as plugins from 'gulp-load-plugins';
-import * as shell from 'gulp-shell';
 import * as runSequence from 'run-sequence';
 import {livereload} from './tools/utils';
 
@@ -54,15 +53,8 @@ gulp.task('test', ['karma.start'], tasks('test'));
 
 // --------------
 // Post install
-gulp.task('install.typings', shell.task([
-  'tsd link',
-  'tsd rebundle'
-]));
-
-gulp.task('npm.prune', shell.task('npm prune'));
-
 gulp.task('postinstall', function (done) {
-  runSequence('clean', 'install.typings', 'npm.prune', done);
+  runSequence('clean', done);
 });
 
 
