@@ -5,11 +5,11 @@ var async = require('async');
 var exec = require('child_process').exec;
 
 async.series([
-  function (cb) { tsdInstall(cb); },
-  function (cb) { tsdLink(cb); },
-  function (cb) { tsdRebundle(cb); },
-  function (cb) { npmPrune(cb); },
-  function (cb) { gulpPostinstall(cb); }
+  tsdInstall,
+  tsdLink,
+  tsdRebundle,
+  npmPrune,
+  gulpPostinstall
 ], function (err) {
   if (err) console.log(err);
 });
