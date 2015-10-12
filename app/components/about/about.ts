@@ -1,11 +1,9 @@
-import {Component, View, CORE_DIRECTIVES} from 'angular2/angular2';
+import {Component, CORE_DIRECTIVES} from 'angular2/angular2';
 
 import {NameList} from '../../services/name_list';
 
 @Component({
-  selector: 'about'
-})
-@View({
+  selector: 'about',
   templateUrl: './components/about/about.html',
   directives: [CORE_DIRECTIVES]
 })
