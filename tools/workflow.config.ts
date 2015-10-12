@@ -27,8 +27,8 @@ const PATH = {
     all: APP_SRC,
     lib_inject: [
       // Order is quite important here for the HTML tag injection.
-      require.resolve('es6-module-loader/dist/es6-module-loader-sans-promises.js'),
-      require.resolve('es6-module-loader/dist/es6-module-loader-sans-promises.js.map'),
+      require.resolve('es6-module-loader/dist/es6-module-loader.js'),
+      require.resolve('es6-module-loader/dist/es6-module-loader.js.map'),
       require.resolve('reflect-metadata/Reflect.js'),
       require.resolve('reflect-metadata/Reflect.js.map'),
       require.resolve('systemjs/dist/system.src.js'),
