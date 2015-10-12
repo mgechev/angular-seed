@@ -1,4 +1,4 @@
-import {Component, View, bind, bootstrap, ViewEncapsulation} from 'angular2/angular2';
+import {Component, bind, bootstrap, ViewEncapsulation} from 'angular2/angular2';
 import {
   RouteConfig,
   ROUTER_DIRECTIVES,
@@ -13,18 +13,16 @@ import {NameList} from './services/name_list';
 
 @Component({
   selector: 'app',
-  viewBindings: [NameList]
-})
-@RouteConfig([
-  { path: '/', component: Home, as: 'Home' },
-  { path: '/about', component: About, as: 'About' }
-])
-@View({
+  viewBindings: [NameList],
   templateUrl: './app.html',
   styleUrls: ['./app.css'],
   encapsulation: ViewEncapsulation.None,
   directives: [ROUTER_DIRECTIVES]
 })
+@RouteConfig([
+  { path: '/', component: Home, as: 'Home' },
+  { path: '/about', component: About, as: 'About' }
+])
 class App {}
 
 bootstrap(App, [
