@@ -12,7 +12,7 @@ System.config({
   defaultJSExtensions: true,
   paths: {
     'angular2/*': 'node_modules/angular2/*.js',
-    '@reactivex/rxjs/*': 'node_modules/@reactivex/rxjs/*.js',
+    '@reactivex/rxjs/*': 'node_modules/@reactivex/rxjs/*.js'
   }
 });
 
@@ -47,8 +47,7 @@ function onlySpecFiles(path) {
 
 // Normalize paths to module names.
 function file2moduleName(filePath) {
-  var name = filePath.replace(/\\/g, '/')
+  return filePath.replace(/\\/g, '/')
     .replace(/^\/base\//, '')
     .replace(/\.js/, '');
-  return name;
 }
