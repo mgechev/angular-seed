@@ -61,6 +61,7 @@
   "dependencies": {
     "angular2": "2.0.0-alpha.40",
     "es6-module-loader": "^0.17.8",
+    "es6-shim": "^0.33.6",
     "systemjs": "^0.19.4"
   }
 }
