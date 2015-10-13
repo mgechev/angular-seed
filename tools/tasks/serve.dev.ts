@@ -3,7 +3,7 @@ import * as runSequence from 'run-sequence';
 import {notifyLiveReload, serveSPA} from '../utils';
 import {PATH} from '../workflow.config';
 
-export = function serveDev(gulp, plugins) {
+export = function task(gulp, plugins) {
   return function () {
     plugins.watch(join(PATH.src.all, '**'), e =>
       runSequence('build.app.dev', () => notifyLiveReload(e))
@@ -11,4 +11,4 @@ export = function serveDev(gulp, plugins) {
 
     serveSPA('dev');
   };
-};
+}
