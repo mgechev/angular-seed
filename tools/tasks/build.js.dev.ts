@@ -9,7 +9,7 @@ export = function (gulp, plugins) {
     var result = gulp.src(
       [
         join(PATH.src.all, '**/*ts'),
-        '!' + join(PATH.src.all, '**/*_spec.ts')
+        '!' + join(PATH.src.all, '**/*[\.|_]spec.ts')
       ])
       .pipe(plugins.plumber())
       .pipe(plugins.inlineNg2Template({ base: APP_SRC }))

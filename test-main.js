@@ -42,7 +42,7 @@ System.import('angular2/src/core/dom/browser_adapter').then(function(browser_ada
 
 
 function onlySpecFiles(path) {
-  return /_spec\.js$/.test(path);
+  return /[\.|_]spec\.js$/.test(path);
 }
 
 // Normalize paths to module names.
