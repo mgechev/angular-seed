@@ -17,7 +17,13 @@
   <!-- inject:js -->
   <!-- endinject -->
 
-  <script src="<%= APP_BASE %>init.js?v=<%= VERSION %>"></script>
+  <script>
+    System.import('bootstrap')
+      .catch(function (e) {
+        console.error(e,
+          'Report this error at https://github.com/mgechev/angular2-seed/issues');
+      });
+  </script>
 
 </body>
 </html>

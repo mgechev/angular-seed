@@ -7,19 +7,21 @@ import {
   it,
 } from 'angular2/test_lib';
 import {Component, View} from 'angular2/angular2';
-import {DOM} from 'angular2/src/core/dom/dom_adapter';
-import {HomeCmp} from './home';
+// import {DOM} from 'angular2/src/core/dom/dom_adapter';
+import {AppCmp} from './app';
 
 export function main() {
-  describe('Home component', () => {
+  describe('App component', () => {
     it('should work',
       inject([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
         tcb.overrideTemplate(TestComponent, '<div><home></home></div>')
           .createAsync(TestComponent)
           .then((rootTC) => {
-            let homeDOMEl = rootTC.debugElement.componentViewChildren[0].nativeElement;
+            let elRef = rootTC.debugElement.elementRef;
 
-            expect(DOM.querySelectorAll(homeDOMEl, 'h1')[0].textContent).toEqual('Howdy!');
+            // TODO: Add navigation testing?
+
+            expect(elRef).not.toBeNull(true);
 
             async.done();
           });
@@ -28,5 +30,5 @@ export function main() {
 }
 
 @Component({selector: 'test-cmp'})
-@View({directives: [HomeCmp]})
+@View({directives: [AppCmp]})
 class TestComponent {}

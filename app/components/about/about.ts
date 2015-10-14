@@ -7,7 +7,7 @@ import {NameList} from '../../services/name_list';
   templateUrl: './components/about/about.html',
   directives: [CORE_DIRECTIVES]
 })
-export class About {
+export class AboutCmp {
   constructor(public list: NameList) {}
   addName(newname): boolean {
     this.list.add(newname.value);
