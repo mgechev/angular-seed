@@ -17,9 +17,10 @@ let minilr = minilrFn();
 // Utils.
 
 export function notifyLiveReload(e) {
-  var fileName = e.path;
+  let fileName = e.path;
+
   minilr.changed({
-    body: { files: [fileName] }
+    body: {files: [fileName]}
   });
 }
 
@@ -28,10 +29,13 @@ export function livereload() {
 }
 
 export function transformPath(plugins, env) {
-  var v = '?v=' + getVersion();
+  let v = '?v=' + getVersion();
+
   return function (filepath) {
-    var filename = filepath.replace('/' + PATH.dest[env].all, '') + v;
+    let filename = filepath.replace('/' + PATH.dest[env].all, '') + v;
+
     arguments[0] = join(APP_BASE, filename);
+
     return plugins.inject.transform.apply(plugins.inject.transform, arguments);
   };
 }
@@ -55,10 +59,11 @@ export function tsProject(plugins) {
 }
 
 export function serveSPA(env) {
-  var app = express();
+  let app = express();
+
   app.use(
     APP_BASE,
-    connectLivereload({ port: LIVE_RELOAD_PORT }),
+    connectLivereload({port: LIVE_RELOAD_PORT}),
     serveStatic(resolve(process.cwd(), PATH.dest[env].all))
   );
 
@@ -72,6 +77,7 @@ export function serveSPA(env) {
 }
 
 function getVersion() {
-  var pkg = JSON.parse(readFileSync('package.json').toString());
+  let pkg = JSON.parse(readFileSync('package.json').toString());
+
   return pkg.version;
 }
