@@ -43,6 +43,12 @@
     },
     "async/async.d.ts": {
       "commit": "e9be3cecf8a326d3e220c52b42d218169a7bb9f2"
+    },
+    "es6-promise/es6-promise.d.ts": {
+      "commit": "b27d0d0e1ce4207a7a5b1da847cb776c16d7531e"
+    },
+    "jasmine/jasmine.d.ts": {
+      "commit": "b27d0d0e1ce4207a7a5b1da847cb776c16d7531e"
     }
   }
 }
