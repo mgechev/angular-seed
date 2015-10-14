@@ -1,7 +1,7 @@
 import {join} from 'path';
 import {PATH} from '../workflow.config';
 
-export = function task(gulp, plugins) {
+export = function tslint(gulp, plugins) {
   return function () {
     return gulp.src([
         join(PATH.src.all, '**/*.ts'),

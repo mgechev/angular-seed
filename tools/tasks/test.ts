@@ -1,7 +1,7 @@
 import {join} from 'path';
 import {PATH} from '../workflow.config';
 
-export = function task(gulp, plugins) {
+export = function test(gulp, plugins) {
   return function () {
     gulp.task('test', ['karma.start'], function () {
       if (!process.env.TRAVIS) {

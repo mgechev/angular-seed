@@ -1,6 +1,6 @@
 import {PATH} from '../workflow.config';
 
-export = function task(gulp) {
+export = function buildLibDev(gulp) {
   return function () {
     return gulp.src(
       [].concat(

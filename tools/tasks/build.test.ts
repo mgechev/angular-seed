@@ -1,7 +1,7 @@
 import {tsProject} from '../utils';
 import {PATH, APP_SRC} from '../workflow.config';
 
-export = function task(gulp, plugins) {
+export = function buildTest(gulp, plugins) {
   return function () {
     let config = tsProject(plugins);
     let result = gulp.src([

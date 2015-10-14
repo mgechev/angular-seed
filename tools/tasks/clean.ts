@@ -3,7 +3,7 @@ import * as del from 'del';
 import {join} from 'path';
 import {PATH} from '../workflow.config';
 
-export = function task(gulp, plugins, option) {
+export = function clean(gulp, plugins, option) {
   return function (done) {
     switch(option) {
       case 'clean'        : cleanAll(done);     break;
