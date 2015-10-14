@@ -1,11 +1,11 @@
 import {join} from 'path';
 import {PATH} from '../workflow.config';
 
-export = function (gulp, plugins) {
+export = function tslint(gulp, plugins) {
   return function () {
-    return gulp.src(
-      [
+    return gulp.src([
         join(PATH.src.all, '**/*.ts'),
+        join(PATH.src.all, '../gulpfile.ts'),
         join(PATH.src.all, '../tools/**/*.ts'),
         '!' + join(PATH.src.all, '**/*.d.ts'),
         '!' + join(PATH.src.all, '../tools/**/*.d.ts')
@@ -17,4 +17,4 @@ export = function (gulp, plugins) {
         bell: true
       }));
   };
-};
+}

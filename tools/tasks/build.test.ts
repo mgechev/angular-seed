@@ -1,11 +1,10 @@
 import {tsProject} from '../utils';
 import {PATH, APP_SRC} from '../workflow.config';
 
-export = function (gulp, plugins) {
+export = function buildTest(gulp, plugins) {
   return function () {
     let config = tsProject(plugins);
-    let result = gulp.src(
-      [
+    let result = gulp.src([
         './app/**/*.ts',
         '!./app/init.ts'
       ])
@@ -16,4 +15,4 @@ export = function (gulp, plugins) {
     return result.js
       .pipe(gulp.dest(PATH.dest.test));
   };
-};
+}

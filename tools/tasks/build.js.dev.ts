@@ -2,12 +2,10 @@ import {join} from 'path';
 import {templateLocals, tsProject} from '../utils';
 import {PATH, APP_SRC} from '../workflow.config';
 
-export = function (gulp, plugins) {
+export = function buildJsDev(gulp, plugins) {
   return function () {
-    var config = tsProject(plugins);
-
-    var result = gulp.src(
-      [
+    let config = tsProject(plugins);
+    let result = gulp.src([
         join(PATH.src.all, '**/*ts'),
         '!' + join(PATH.src.all, '**/*[\.|_]spec.ts')
       ])
@@ -21,4 +19,4 @@ export = function (gulp, plugins) {
       .pipe(plugins.template(templateLocals()))
       .pipe(gulp.dest(PATH.dest.dev.all));
   };
-};
+}

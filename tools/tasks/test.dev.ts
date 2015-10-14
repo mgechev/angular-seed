@@ -1,5 +1,8 @@
-export = function (gulp, plugins) {
+import {join} from 'path';
+import {PATH} from '../workflow.config';
+
+export = function testDev(gulp, plugins) {
   return function () {
-    plugins.watch('./app/**', () => gulp.start('build.test'));
+    plugins.watch(join(PATH.src.all, '**'), () => gulp.start('build.test'));
   };
-};
+}
