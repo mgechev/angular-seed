@@ -11,4 +11,4 @@ export = function serveDev(gulp, plugins) {
 
     serveSPA('dev');
   };
-};
+}

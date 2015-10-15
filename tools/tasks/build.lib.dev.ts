@@ -1,6 +1,6 @@
 import {PATH} from '../workflow.config';
 
-export = function (gulp) {
+export = function buildLibDev(gulp) {
   return function () {
     return gulp.src(
       [].concat(
@@ -9,4 +9,4 @@ export = function (gulp) {
       ))
       .pipe(gulp.dest(PATH.dest.dev.lib));
   };
-};
+}
