@@ -17,9 +17,9 @@ export function registerInjectableAssetsRef(paths: string[], target: string = ''
 }
 
 export function transformPath(plugins, env) {
-  var v = '?v=' + VERSION;
+  let v = '?v=' + VERSION;
   return function (filepath) {
-    var filename = filepath.replace('/' + PATH.dest[env].all, '') + v;
+    let filename = filepath.replace('/' + PATH.dest[env].all, '') + v;
     arguments[0] = join(APP_BASE, filename);
     return plugins.inject.transform.apply(plugins.inject.transform, arguments);
   };
