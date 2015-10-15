@@ -8,4 +8,4 @@ export = function karmaStart() {
       singleRun: true
     }, done);
   };
-}
+};
