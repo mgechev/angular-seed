@@ -1,11 +1,11 @@
-import {Component, bind, bootstrap, ViewEncapsulation} from 'angular2/angular2';
+import {Component, provide, bootstrap, ViewEncapsulation} from 'angular2/angular2';
 import {
   RouteConfig,
   ROUTER_DIRECTIVES,
-  ROUTER_BINDINGS,
+  ROUTER_PROVIDERS,
   ROUTER_PRIMARY_COMPONENT
 } from 'angular2/router';
-// import {HTTP_BINDINGS} from 'http/http';
+// import {HTTP_PROVIDERS} from 'http/http';
 
 import {Home} from './components/home/home';
 import {About} from './components/about/about';
@@ -13,7 +13,7 @@ import {NameList} from './services/name_list';
 
 @Component({
   selector: 'app',
-  viewBindings: [NameList],
+  viewProviders: [NameList],
   templateUrl: './app.html',
   styleUrls: ['./app.css'],
   encapsulation: ViewEncapsulation.None,
@@ -26,6 +26,6 @@ import {NameList} from './services/name_list';
 class App {}
 
 bootstrap(App, [
-  ROUTER_BINDINGS,
-  bind(ROUTER_PRIMARY_COMPONENT).toValue(App)
+  ROUTER_PROVIDERS,
+  provide(ROUTER_PRIMARY_COMPONENT, {useValue:App})
 ]);
