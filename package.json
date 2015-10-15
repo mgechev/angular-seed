@@ -5,13 +5,19 @@
   "repository": "https://github.com/mgechev/angular2-seed",
   "scripts": {
     "build.dev": "gulp build.dev",
+    "build.dev.watch": "gulp build.dev.watch",
     "build.test": "gulp build.test",
-    "karma": "karma start",
-    "preinstall": "node ./tools/preinstall",
-    "postinstall": "node ./tools/postinstall",
-    "serve.dev": "gulp serve.dev",
+    "build.test.watch": "gulp build.test.watch",
+    "gulp": "gulp",
+    "karma": "karma",
+    "karma.start": "karma start",
+    "lint": "gulp tslint",
+    "postinstall": "gulp postinstall",
+    "start": "npm run serve.dev",
+    "serve.dev": "gulp serve --env dev",
+    "tasks.list": "gulp --tasks-simple",
     "test": "gulp test",
-    "test.dev": "gulp test.dev"
+    "tsd": "tsd"
   },
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
@@ -30,6 +36,7 @@
     "gulp-minify-css": "^1.1.6",
     "gulp-minify-html": "^1.0.3",
     "gulp-plumber": "~1.0.1",
+    "gulp-sass": "^2.0.4",
     "gulp-shell": "~0.4.3",
     "gulp-sourcemaps": "~1.5.2",
     "gulp-template": "^3.0.0",
@@ -63,6 +70,7 @@
   },
   "dependencies": {
     "angular2": "2.0.0-alpha.40",
+    "bootstrap": "^3.3.5",
     "es6-module-loader": "^0.17.8",
     "es6-shim": "^0.33.6",
     "systemjs": "^0.19.4"
