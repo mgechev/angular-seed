@@ -12,8 +12,8 @@ import {NameList} from '../../services/name_list';
 @Component({
   selector: 'app',
   viewBindings: [NameList],
-  templateUrl: './app.html',
-  styleUrls: ['./app.css'],
+  templateUrl: './components/app/app.html',
+  styleUrls: ['./components/app/app.css'],
   encapsulation: ViewEncapsulation.None,
   directives: [ROUTER_DIRECTIVES]
 })
