@@ -1,16 +1,18 @@
 "use strict";
 
-var exec = require('child_process').exec;
+var execSync = require('child_process').execSync;
 
-exec('npm install tsd', installTypings);
-
+try {
+  var stdout = execSync('npm install tsd');
+  installTypings(null, stdout.toString());
+} catch (e) {
+  installTypings(e, null);
+}
 
 function installTypings(err, stdout) {
   if (err) return console.log(err);
   console.log(stdout);
 
-  exec('tsd install --clean', function cb(err, stdout) {
-    if (err) return console.log(err);
-    console.log(stdout);
-  });
+  execSync('tsd install --clean');
 }
+
