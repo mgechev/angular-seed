@@ -12,8 +12,8 @@ import {
 // Configuration.
 autoRegisterTasks();
 
-registerInjectableAssetsRef(PATH.src.lib_inject, PATH.dest.dev.lib);
-registerInjectableAssetsRef(PATH.src.css, PATH.dest.dev.css);
+registerInjectableAssetsRef(PATH.src.jslib_inject, PATH.dest.dev.lib);
+registerInjectableAssetsRef(PATH.src.csslib, PATH.dest.dev.css);
 
 
 // --------------
@@ -36,10 +36,10 @@ gulp.task('postinstall', done =>
 gulp.task('build.dev', done =>
   runSequence('clean.dist',
               'tslint',
-              'build.lib.dev',
+              'build.jslib.dev',
               'build.sass.dev',
               'build.js.dev',
-              'build.css.dev',
+              'build.csslib.dev',
               'build.fonts',
               'build.index.dev',
               done));
