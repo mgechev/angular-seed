@@ -1,22 +1,24 @@
 import {join} from 'path';
-import {templateLocals, tsProject} from '../utils';
-import {PATH, APP_SRC} from '../workflow.config';
+import {PATH, APP_SRC} from '../config';
+import {templateLocals, tsProjectFn} from '../utils';
 
-export = function buildJsDev(gulp, plugins) {
+export = function buildJSDev(gulp, plugins) {
   return function () {
-    let config = tsProject(plugins);
-    let result = gulp.src([
-        join(PATH.src.all, '**/*ts'),
-        '!' + join(PATH.src.all, '**/*[\.|_]spec.ts')
-      ])
+    let tsProject = tsProjectFn(plugins);
+    let src = [
+                join(PATH.src.all, '**/*.ts'),
+                '!' + join(PATH.src.all, '**/*_spec.ts')
+              ];
+
+    let result = gulp.src(src)
       .pipe(plugins.plumber())
       .pipe(plugins.inlineNg2Template({ base: APP_SRC }))
       .pipe(plugins.sourcemaps.init())
-      .pipe(plugins.typescript(config));
+      .pipe(plugins.typescript(tsProject));
 
     return result.js
       .pipe(plugins.sourcemaps.write())
       .pipe(plugins.template(templateLocals()))
       .pipe(gulp.dest(PATH.dest.dev.all));
   };
-}
+};

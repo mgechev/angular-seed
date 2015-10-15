@@ -1,15 +1,16 @@
 import {join} from 'path';
-import {PATH} from '../workflow.config';
+import {PATH} from '../config';
 
 export = function tslint(gulp, plugins) {
   return function () {
-    return gulp.src([
-        join(PATH.src.all, '**/*.ts'),
-        join(PATH.src.all, '../gulpfile.ts'),
-        join(PATH.src.all, '../tools/**/*.ts'),
-        '!' + join(PATH.src.all, '**/*.d.ts'),
-        '!' + join(PATH.src.all, '../tools/**/*.d.ts')
-      ])
+    let src = [
+                join(PATH.src.all, '**/*.ts'),
+                '!' + join(PATH.src.all, '**/*.d.ts'),
+                join(PATH.tools, '**/*.ts'),
+                '!' + join(PATH.tools, '**/*.d.ts')
+              ];
+
+    return gulp.src(src)
       .pipe(plugins.tslint())
       .pipe(plugins.tslint.report(plugins.tslintStylish, {
         emitError: false,
@@ -17,4 +18,4 @@ export = function tslint(gulp, plugins) {
         bell: true
       }));
   };
-}
+};

@@ -18,9 +18,8 @@ It is something similar to the AngularJS Quick Start but does the entire build w
 ```bash
 git clone https://github.com/mgechev/angular2-seed.git
 cd angular2-seed
-npm install
-# dev
-npm run serve.dev
+npm install   # clean npm cache & delete node_modules folder if you get an error
+npm start     # start with --env dev
 ```
 _Does not rely on any global dependencies._
 
@@ -77,7 +76,7 @@ var APP_BASE         = '/';
 Configure at runtime
 
 ```bash
-npm run serve.dev -- --port 8080 --reload-port 4000 --base /my-app/
+npm start -- --port 8080 --reload-port 4000 --base /my-app/
 ```
 
 # Now to extend?
@@ -86,19 +85,18 @@ If you want to use your custom libraries:
 
 ```bash
 npm install my-library --save
-vim gulpfile.js
+vim tools/config.js
 ```
-Add reference to the installed library in `PATH.src.lib` into `./tools/workflow.config.js`.
+Add reference to the installed library in `PATH.src.jslib` (or whatever you like).
 
 # Running test
 
 ```bash
-# In a single bash window
-npm run test
+npm test
 
-# Debug - In two bash windows
-npm run karma      # 1st window
-npm run test.dev   # 2nd window
+# Debug - In two different shell windows
+npm run build.test.watch      # 1st window
+npm run karma.start           # 2nd window
 ```
 
 # Contributors

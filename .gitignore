@@ -35,4 +35,4 @@ dist
 dev
 lib
 test
-tsd_typings
+tools/typings/tsd
