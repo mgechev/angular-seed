@@ -13,6 +13,7 @@
     "karma.start": "karma start",
     "lint": "gulp tslint",
     "postinstall": "gulp postinstall",
+    "preinstall": "node ./tools/preinstall",
     "start": "gulp serve --env dev",
     "serve.dev": "gulp serve --env dev",
     "tasks.list": "gulp --tasks-simple",
