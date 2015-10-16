@@ -11,7 +11,7 @@ function installTypings(err, stdout) {
 
   console.log(stdout);
 
-  exec(process.cwd() + '/node_modules/.bin/tsd install --clean', function cb(err, stdout) {
+  exec('./node_modules/.bin/tsd install --clean', function cb(err, stdout) {
     if (err) {
       return console.log(err);
     }
