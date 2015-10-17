@@ -23,64 +23,52 @@ gulp.task('clean.test',  task('clean', 'test'));
 // --------------
 // Postinstall.
 gulp.task('postinstall', done =>
-  runSequence(
-    'clean',
-    'tsd',
-    'npm',
-    done
-  ));
+  runSequence('clean',
+              'tsd',
+              'npm',
+              done));
 
 
 // --------------
 // Build dev.
 gulp.task('build.dev', done =>
-  runSequence(
-    'clean.dist',
-    'tslint',
-    'build.jslib.dev',
-    'build.sass.dev',
-    'build.js.dev',
-    'build.csslib.dev',
-    'build.fonts',
-    'build.index.dev',
-    done
-  ));
+  runSequence('clean.dist',
+              'tslint',
+              'build.jslib.dev',
+              'build.sass.dev',
+              'build.js.dev',
+              'build.csslib.dev',
+              'build.fonts',
+              'build.index.dev',
+              done));
 
 gulp.task('build.dev.watch', done =>
-  runSequence(
-    'build.dev',
-    'watch.dev',
-    done
-  ));
+  runSequence('build.dev',
+              'watch.dev',
+              done));
 
 gulp.task('build.test.watch', done =>
-  runSequence(
-    'build.test',
-    'watch.test',
-    done
-  ));
+  runSequence('build.test',
+              'watch.test',
+              done));
 
 // --------------
 // Test.
 gulp.task('test', done =>
-  runSequence(
-    'clean.test',
-    'tslint',
-    'build.test',
-    'karma.start',
-    done
-  ));
+  runSequence('clean.test',
+              'tslint',
+              'build.test',
+              'karma.start',
+              done));
 
 
 // --------------
 // Serve.
 gulp.task('serve', done =>
-  runSequence(
-    `build.${ENV}`,
-    'server.start',
-    'watch.serve',
-    done
-  ));
+  runSequence(`build.${ENV}`,
+              'server.start',
+              'watch.serve',
+              done));
 
 // --------------
 // Build prod.
