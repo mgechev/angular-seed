@@ -27,40 +27,88 @@ _Does not rely on any global dependencies._
 
 ```
 .
+├── LICENSE
+├── README.md
 ├── app
+│   ├── bootstrap.ts
 │   ├── components
 │   │   ├── about
 │   │   │   ├── about.html
 │   │   │   ├── about.ts
 │   │   │   └── about_spec.ts
+│   │   ├── app
+│   │   │   ├── app.css
+│   │   │   ├── app.html
+│   │   │   ├── app.ts
+│   │   │   └── app_spec.ts
 │   │   └── home
 │   │       ├── home.css
 │   │       ├── home.html
 │   │       ├── home.ts
 │   │       └── home_spec.ts
+│   ├── index.html
 │   ├── services
 │   │   ├── name_list.ts
-│   │   └── name_list_spec.ts
-│   ├── typings
-│   ├── app.css
-│   ├── app.html
-│   ├── app.ts
-│   ├── index.html
-│   └── init.ts
-├── dist
-│   ├── dev
-│   └── prod
-├── tools
-│   ├── tasks
-│   ├── utils.js
-│   └── workflow.config.js
-├── tsd_typings
-├── gulpfile.js
+│   │   └── name_list_spec.ts
+│   ├── system.config.js
+│   └── typings.d.ts
+├── gulpfile.ts
 ├── karma.conf.js
 ├── package.json
+├── test
+│   ├── components
+│   │   ├── about
+│   │   │   ├── about.js
+│   │   │   └── about_spec.js
+│   │   ├── app
+│   │   │   ├── app.js
+│   │   │   └── app_spec.js
+│   │   └── home
+│   │       ├── home.js
+│   │       └── home_spec.js
+│   └── services
+│       ├── name_list.js
+│       └── name_list_spec.js
 ├── test-main.js
+├── tools
+│   ├── config.ts
+│   ├── preinstall.js
+│   ├── tasks
+│   │   ├── build.csslib.dev.ts
+│   │   ├── build.fonts.ts
+│   │   ├── build.index.dev.ts
+│   │   ├── build.js.dev.ts
+│   │   ├── build.jslib.dev.ts
+│   │   ├── build.sass.dev.ts
+│   │   ├── build.test.ts
+│   │   ├── clean.ts
+│   │   ├── karma.start.ts
+│   │   ├── npm.ts
+│   │   ├── server.start.ts
+│   │   ├── tsd.ts
+│   │   ├── tslint.ts
+│   │   ├── watch.dev.ts
+│   │   ├── watch.serve.ts
+│   │   └── watch.test.ts
+│   ├── typings
+│   │   ├── connect-livereload.d.ts
+│   │   ├── gulp-load-plugins.d.ts
+│   │   ├── karma.d.ts
+│   │   ├── mini-lr.d.ts
+│   │   ├── ng2_test.d.ts
+│   │   ├── open.d.ts
+│   │   ├── run-sequence.d.ts
+│   │   ├── slash.d.ts
+│   │   └── yargs.d.ts
+│   ├── utils
+│   │   ├── server.ts
+│   │   ├── tasks-tools.ts
+│   │   ├── template-injectables.ts
+│   │   └── template-locals.ts
+│   └── utils.ts
 ├── tsconfig.json
-└── tsd.json
+├── tsd.json
+└── tslint.json
 ```
 
 # Configuration
