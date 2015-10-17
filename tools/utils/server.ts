@@ -8,14 +8,14 @@ import {APP_BASE, LIVE_RELOAD_PORT, PATH, PORT, ENV} from '../config';
 
 let minilr = minilrFn();
 
-
 export function serveSPA() {
   let server = express();
+
   minilr.listen(LIVE_RELOAD_PORT);
 
   server.use(
     APP_BASE,
-    connectLivereload({ port: LIVE_RELOAD_PORT }),
+    connectLivereload({port: LIVE_RELOAD_PORT}),
     serveStatic(resolve(process.cwd(), PATH.dest[ENV].all))
   );
 
@@ -30,7 +30,8 @@ export function serveSPA() {
 
 export function notifyLiveReload(e) {
   let fileName = e.path;
+
   minilr.changed({
-    body: { files: [fileName] }
+    body: {files: [fileName]}
   });
 }

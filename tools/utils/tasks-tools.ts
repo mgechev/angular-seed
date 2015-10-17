@@ -14,7 +14,6 @@ export function task(taskname: string, option?: string) {
   return require(join('..', 'tasks', taskname))(gulp, plugins(), option);
 }
 
-
 // ----------
 // Private.
 
@@ -31,12 +30,15 @@ function scanDir(root: string, cb: (taskname: string) => void) {
   function walk(path) {
     readdirSync(path).forEach(function(file) {
       let curPath = join(path, file);
+
       if (lstatSync(curPath).isDirectory()) { // recurse
         path = file;
         walk(curPath);
       }
+
       if (lstatSync(curPath).isFile()) {
         let taskname = file.replace(/(\.ts)/, '');
+
         cb(taskname);
       }
     });

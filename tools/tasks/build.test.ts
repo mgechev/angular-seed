@@ -6,9 +6,9 @@ export = function buildTest(gulp, plugins) {
   return function () {
     let tsProject = tsProjectFn(plugins);
     let src = [
-                join(PATH.src.all, '**/*.ts'),
-                '!' + join(PATH.src.all, 'bootstrap.ts')
-              ];
+      join(PATH.src.all, '**/*.ts'),
+      '!' + join(PATH.src.all, 'bootstrap.ts')
+    ];
 
     let result = gulp.src(src)
       .pipe(plugins.plumber())
@@ -18,4 +18,4 @@ export = function buildTest(gulp, plugins) {
     return result.js
       .pipe(gulp.dest(PATH.dest.test));
   };
-};
+}

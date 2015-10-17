@@ -7,14 +7,12 @@ import {
   task
 } from './tools/utils';
 
-
 // --------------
 // Configuration.
 autoRegisterTasks();
 
 registerInjectableAssetsRef(PATH.src.jslib_inject, PATH.dest.dev.lib);
 registerInjectableAssetsRef(PATH.src.csslib, PATH.dest.dev.css);
-
 
 // --------------
 // Clean (override).
@@ -71,8 +69,6 @@ gulp.task('serve', done =>
               'server.start',
               'watch.serve',
               done));
-
-
 
 // --------------
 // Build prod.
