@@ -9,7 +9,7 @@ import {
 export = function buildIndexDev(gulp, plugins) {
   return function () {
     let injectables = injectableAssetsRef();
-    let target = gulp.src(injectables, { read: false });
+    let target = gulp.src(injectables, {read: false});
 
     return gulp.src(join(PATH.src.all, 'index.html'))
       .pipe(plugins.inject(target, {
@@ -18,4 +18,4 @@ export = function buildIndexDev(gulp, plugins) {
       .pipe(plugins.template(templateLocals()))
       .pipe(gulp.dest(PATH.dest.dev.all));
   };
-};
+}

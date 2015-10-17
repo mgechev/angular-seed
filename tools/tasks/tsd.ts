@@ -4,4 +4,4 @@ export = function tsd(gulp, plugins) {
     'tsd link',
     'tsd rebundle'
   ]);
-};
+}

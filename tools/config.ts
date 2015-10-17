@@ -63,7 +63,6 @@ export const PATH = {
   }
 };
 
-
 // --------------
 // Private.
 function version(): number|string {

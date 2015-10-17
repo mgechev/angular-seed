@@ -9,4 +9,4 @@ export = function watchServe(gulp, plugins) {
       runSequence('build.dev', () => notifyLiveReload(e))
     );
   };
-};
+}

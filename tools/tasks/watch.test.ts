@@ -5,4 +5,4 @@ export = function watchTest(gulp, plugins) {
   return function () {
     plugins.watch(join(APP_SRC, '**/*.ts'), () => gulp.start('build.test'));
   };
-};
+}

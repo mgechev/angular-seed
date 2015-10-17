@@ -4,11 +4,11 @@ import {PATH} from '../config';
 export = function tslint(gulp, plugins) {
   return function () {
     let src = [
-                join(PATH.src.all, '**/*.ts'),
-                '!' + join(PATH.src.all, '**/*.d.ts'),
-                join(PATH.tools, '**/*.ts'),
-                '!' + join(PATH.tools, '**/*.d.ts')
-              ];
+      join(PATH.src.all, '**/*.ts'),
+      '!' + join(PATH.src.all, '**/*.d.ts'),
+      join(PATH.tools, '**/*.ts'),
+      '!' + join(PATH.tools, '**/*.d.ts')
+    ];
 
     return gulp.src(src)
       .pipe(plugins.tslint())
@@ -18,4 +18,4 @@ export = function tslint(gulp, plugins) {
         bell: true
       }));
   };
-};
+}
