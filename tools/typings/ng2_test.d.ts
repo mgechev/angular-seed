@@ -6,4 +6,3 @@ declare module ng {
 declare module "angular2/src/core/dom/dom_adapter" {
   export = ng;
 }
-

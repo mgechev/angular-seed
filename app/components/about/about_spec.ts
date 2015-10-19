@@ -1,9 +1,8 @@
 import {
-  AsyncTestCompleter,
   TestComponentBuilder,
   describe,
   expect,
-  inject,
+  injectAsync,
   it
 } from 'angular2/testing';
 import {Component, View} from 'angular2/angular2';
@@ -14,8 +13,8 @@ import {NameList} from '../../services/name_list';
 export function main() {
   describe('About component', () => {
     it('should work',
-      inject([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
-        tcb.overrideTemplate(TestComponent, '<div><about></about></div>')
+      injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+        return tcb.overrideTemplate(TestComponent, '<div><about></about></div>')
           .createAsync(TestComponent)
           .then((rootTC) => {
             rootTC.detectChanges();
@@ -37,8 +36,6 @@ export function main() {
             expect(DOM.querySelectorAll(aboutDOMEl, 'li').length).toEqual(nameListLen());
 
             expect(DOM.querySelectorAll(aboutDOMEl, 'li')[4].textContent).toEqual('Minko');
-
-            async.done();
           });
       }));
   });
