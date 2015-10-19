@@ -1,9 +1,8 @@
 import {
-  AsyncTestCompleter,
   TestComponentBuilder,
   describe,
   expect,
-  inject,
+  injectAsync,
   it,
 } from 'angular2/testing';
 import {Component, View} from 'angular2/angular2';
@@ -13,15 +12,13 @@ import {HomeCmp} from './home';
 export function main() {
   describe('Home component', () => {
     it('should work',
-      inject([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
-        tcb.overrideTemplate(TestComponent, '<div><home></home></div>')
+      injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+        return tcb.overrideTemplate(TestComponent, '<div><home></home></div>')
           .createAsync(TestComponent)
           .then((rootTC) => {
             let homeDOMEl = rootTC.debugElement.componentViewChildren[0].nativeElement;
 
             expect(DOM.querySelectorAll(homeDOMEl, 'h1')[0].textContent).toEqual('Howdy!');
-
-            async.done();
           });
       }));
   });
