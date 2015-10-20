@@ -2,8 +2,8 @@
   "version": "v4",
   "repo": "borisyankov/DefinitelyTyped",
   "ref": "master",
-  "path": "tsd_typings",
-  "bundle": "tsd_typings/tsd.d.ts",
+  "path": "tools/typings/tsd",
+  "bundle": "tools/typings/tsd/tsd.d.ts",
   "installed": {
     "systemjs/systemjs.d.ts": {
       "commit": "bd03c6ea51abde7d13e354908716c6373fc38b1f"

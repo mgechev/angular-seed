@@ -1,21 +1,20 @@
 import {
-  AsyncTestCompleter,
   TestComponentBuilder,
   describe,
   expect,
-  inject,
+  injectAsync,
   it
-} from 'angular2/test_lib';
+} from 'angular2/testing';
 import {Component, View} from 'angular2/angular2';
 import {DOM} from 'angular2/src/core/dom/dom_adapter';
-import {About} from './about';
+import {AboutCmp} from './about';
 import {NameList} from '../../services/name_list';
 
 export function main() {
   describe('About component', () => {
     it('should work',
-      inject([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
-        tcb.overrideTemplate(TestComponent, '<div><about></about></div>')
+      injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+        return tcb.overrideTemplate(TestComponent, '<div><about></about></div>')
           .createAsync(TestComponent)
           .then((rootTC) => {
             rootTC.detectChanges();
@@ -37,13 +36,11 @@ export function main() {
             expect(DOM.querySelectorAll(aboutDOMEl, 'li').length).toEqual(nameListLen());
 
             expect(DOM.querySelectorAll(aboutDOMEl, 'li')[4].textContent).toEqual('Minko');
-
-            async.done();
           });
       }));
   });
 }
 
 @Component({bindings: [NameList], selector: 'test-cmp'})
-@View({directives: [About]})
+@View({directives: [AboutCmp]})
 class TestComponent {}
