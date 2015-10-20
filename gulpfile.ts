@@ -71,14 +71,7 @@ gulp.task('serve', done =>
               'watch.serve',
               done));
 
-// --------------
-// Docs
 
-gulp.task('docs', done =>
-  runSequence(
-        'build.docs', 
-        done
-  ));
 
 // --------------
 // Build prod.
