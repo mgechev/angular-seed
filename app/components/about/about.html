@@ -1,0 +1,14 @@
+<p>
+  For reward, here is a list of awesome computer scientists!
+</p>
+
+<p>
+  You want more? Add them yourself!
+</p>
+<form (submit)="addName(newname)">
+  <input #newname>
+  <button type="submit">Add</button>
+</form>
+<ul>
+  <li *ng-for="#name of list.get()">{{name}}</li>
+</ul>

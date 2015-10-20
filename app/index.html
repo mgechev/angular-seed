@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>My Angular 2 App</title>
+  <base href="<%= APP_BASE %>">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- inject:css -->
+  <!-- endinject -->
+</head>
+<body>
+
+  <app>Loading...</app>
+
+  <!-- inject:js -->
+  <!-- endinject -->
+
+  <script>
+    System.import('bootstrap')
+      .catch(function (e) {
+        console.error(e,
+          'Report this error at https://github.com/mgechev/angular2-seed/issues');
+      });
+  </script>
+
+</body>
+</html>
