@@ -18,9 +18,9 @@ before_install:
 before_script:
 
 notifications:
-  email: false
+  email: true
 
-#after_failure: "cat /home/travis/build/mgechev/angular2-seed/npm-debug.log"
+after_failure: "cat /home/travis/build/mgechev/angular2-seed/npm-debug.log"
 
 # whitelisted branches
 branches:
