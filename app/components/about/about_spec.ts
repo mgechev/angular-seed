@@ -1,36 +1,29 @@
 import {
-  AsyncTestCompleter,
   TestComponentBuilder,
-  By,
-  beforeEach,
-  ddescribe,
   describe,
-  el,
   expect,
-  iit,
-  inject,
-  it,
-  xit,
-} from 'angular2/test';
+  injectAsync,
+  it
+} from 'angular2/testing';
 import {Component, View} from 'angular2/angular2';
 import {DOM} from 'angular2/src/core/dom/dom_adapter';
-import {About} from './about';
+import {AboutCmp} from './about';
 import {NameList} from '../../services/name_list';
 
 export function main() {
   describe('About component', () => {
     it('should work',
-      inject([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
-        tcb.overrideTemplate(TestComponent, '<div><about></about></div>')
+      injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+        return tcb.overrideTemplate(TestComponent, '<div><about></about></div>')
           .createAsync(TestComponent)
           .then((rootTC) => {
             rootTC.detectChanges();
 
-            var aboutInstance = rootTC.componentViewChildren[0].componentInstance;
-            var aboutDOMEl = rootTC.componentViewChildren[0].nativeElement;
-            var nameListLen = function () {
+            let aboutInstance = rootTC.debugElement.componentViewChildren[0].componentInstance;
+            let aboutDOMEl = rootTC.debugElement.componentViewChildren[0].nativeElement;
+            let nameListLen = function () {
               return aboutInstance.list.names.length;
-            }
+            };
 
             expect(aboutInstance.list).toEqual(jasmine.any(NameList));
             expect(nameListLen()).toEqual(4);
@@ -43,13 +36,11 @@ export function main() {
             expect(DOM.querySelectorAll(aboutDOMEl, 'li').length).toEqual(nameListLen());
 
             expect(DOM.querySelectorAll(aboutDOMEl, 'li')[4].textContent).toEqual('Minko');
-
-            async.done();
           });
       }));
   });
-};
+}
 
-@Component({selector: 'test-cmp', bindings: [NameList]})
-@View({directives: [About]})
+@Component({bindings: [NameList], selector: 'test-cmp'})
+@View({directives: [AboutCmp]})
 class TestComponent {}

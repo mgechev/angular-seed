@@ -1,9 +1,8 @@
-import {Component, View} from 'angular2/angular2';
+import {Component} from 'angular2/angular2';
 
 @Component({
-  selector: 'home'
+  selector: 'home',
+  templateUrl: './components/home/home.html',
+  styleUrls: ['./components/home/home.css']
 })
-@View({
-  templateUrl: './components/home/home.html'
-})
-export class Home {}
+export class HomeCmp {}
