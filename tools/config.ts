@@ -14,12 +14,14 @@ export const APP_BASE         = argv['base']        || '/';
 
 export const APP_SRC          = 'app';
 export const APP_DEST         = 'dist';
+export const APP_DOCS         = 'docs';
 export const ANGULAR_BUNDLES  = './node_modules/angular2/bundles';
 export const VERSION          = version();
 
 export const PATH = {
   cwd: process.cwd(),
   tools: 'tools',
+  docs :`${APP_DEST}/${APP_DOCS}`,
   dest: {
     all: APP_DEST,
     dev: {
