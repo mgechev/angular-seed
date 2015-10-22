@@ -25,6 +25,7 @@
         "gulpfile.ts",
         "tools/config.ts",
         "tools/tasks/build.csslib.dev.ts",
+        "tools/tasks/build.docs.ts",
         "tools/tasks/build.fonts.ts",
         "tools/tasks/build.index.dev.ts",
         "tools/tasks/build.js.dev.ts",
