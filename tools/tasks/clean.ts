@@ -1,35 +1,43 @@
-import * as async from 'async';
 import * as del from 'del';
 import {join} from 'path';
 import {PATH} from '../config';
 
 export = function clean(gulp, plugins, option) {
   return function (done) {
+    let task;
 
     switch(option) {
-      case 'all'    : cleanAll(done);     break;
-      case 'dist'   : cleanDist(done);    break;
-      case 'test'   : cleanTest(done);    break;
-      case 'tmp'    : cleanTmp(done);     break;
-      default: done();
+      case 'all'  : task = cleanAll();  break;
+      case 'dist' : task = cleanDist(); break;
+      case 'test' : task = cleanTest(); break;
+      case 'tmp'  : task = cleanTmp();  break;
+      default: return done();
     }
 
+    task.then(function() {
+      done();
+    }).catch(function(error) {
+      done(error);
+    });
   };
 };
 
-function cleanAll(done) {
-  async.parallel([
-    cleanDist,
-    cleanTest,
-    cleanTmp
-  ], done);
+function cleanAll() {
+  return Promise.all([
+    cleanDist(),
+    cleanTest(),
+    cleanTmp()
+  ]);
 }
-function cleanDist(done) {
-  del(PATH.dest.all, done);
+
+function cleanDist() {
+  return del(PATH.dest.all);
 }
-function cleanTest(done) {
-  del(PATH.dest.test, done);
+
+function cleanTest() {
+  return del(PATH.dest.test);
 }
-function cleanTmp(done) {
-  del(join(PATH.dest.tmp), done);
+
+function cleanTmp() {
+  return del(join(PATH.dest.tmp));
 }
