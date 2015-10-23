@@ -149,7 +149,7 @@ npm run karma.start           # 2nd window
 
 # Contributing
 
-Please see the [CONTRIBUTING](https://github.com/mgechev/angular2-seed/blob/master/CONTRIBUTING.md) file for guidelines.
+Please see the [CONTRIBUTING.MD](https://github.com/mgechev/angular2-seed/blob/master/CONTRIBUTING.MD) file for guidelines.
 
 # Contributors
 
