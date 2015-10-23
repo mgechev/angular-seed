@@ -12,7 +12,7 @@ System.config({
   defaultJSExtensions: true,
   paths: {
     'angular2/*': 'node_modules/angular2/*.js',
-    '@reactivex/rxjs/*': 'node_modules/angular2/node_modules/@reactivex/rxjs/*.js'
+    '@reactivex/rxjs/*': 'node_modules/@reactivex/rxjs/*.js'
   }
 });
 
