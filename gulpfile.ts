@@ -70,13 +70,14 @@ gulp.task('serve', done =>
               'server.start',
               'watch.serve',
               done));
-
+              
 // --------------
 // Docs
 
 gulp.task('docs', done =>
   runSequence(
-        'build.docs', 
+        'build.docs',
+        'serve.docs',
         done
   ));
 
