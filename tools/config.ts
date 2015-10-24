@@ -26,7 +26,8 @@ export const PATH = {
       all: `${APP_DEST}/${ENV}`,
       lib: `${APP_DEST}/${ENV}/lib`,
       css: `${APP_DEST}/${ENV}/css`,
-      fonts: `${APP_DEST}/${ENV}/fonts`
+      fonts: `${APP_DEST}/${ENV}/fonts`,
+      images: `${APP_DEST}/${ENV}/img`
     },
     test: 'test',
     tmp: '.tmp'
@@ -59,6 +60,9 @@ export const PATH = {
       resolve('bootstrap/dist/fonts/glyphicons-halflings-regular.ttf'),
       resolve('bootstrap/dist/fonts/glyphicons-halflings-regular.woff'),
       resolve('bootstrap/dist/fonts/glyphicons-halflings-regular.woff2')
+    ],
+    images: [
+      `${APP_SRC}/img/**/*`
     ]
   }
 };
