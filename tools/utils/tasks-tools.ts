@@ -35,7 +35,7 @@ function scanDir(root: string, cb: (taskname: string) => void) {
         path = file;
         walk(curPath);
       }
-      if (lstatSync(curPath).isFile()) {
+      if (lstatSync(curPath).isFile() && file.endsWith('.ts')) {
         let taskname = file.replace(/(\.ts)/, '');
         cb(taskname);
       }
