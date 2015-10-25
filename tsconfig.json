@@ -59,8 +59,7 @@
     "filesGlob": [
         "./app/**/*.ts",
         "./gulpfile.ts",
-        "./tools/**/*.ts",
-        "./tsd_typings/**/*.d.ts"
+        "./tools/**/*.ts"
     ],
     "compileOnSave": false,
     "exclude": []
