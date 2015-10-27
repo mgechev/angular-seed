@@ -13,6 +13,7 @@
     "karma.start": "karma start",
     "lint": "gulp tslint",
     "postinstall": "tsd reinstall --clean && tsd link && tsd rebundle && gulp postinstall",
+    "reinstall": "npm cache clean && rm -rf node_modules && npm install",
     "start": "gulp serve --env dev",
     "serve.dev": "gulp serve --env dev",
     "tasks.list": "gulp --tasks-simple",
