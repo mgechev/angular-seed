@@ -61,7 +61,7 @@
     "stream-series": "^0.1.1",
     "systemjs-builder": "^0.14.8",
     "traceur": "^0.0.92",
-    "ts-node": "^0.2.4",
+    "ts-node": "^0.4.0",
     "tsd": "^0.6.4",
     "typescript": "~1.6.0",
     "typescript-register": "^1.1.0",
