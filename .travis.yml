@@ -1,5 +1,9 @@
 language: node_js
 
+os:
+  - linux
+  - osx
+
 node_js:
   - "4.0"
   - "4.1"
@@ -9,6 +13,11 @@ sudo: false
 services:
 
 before_install:
+# nvm is not yet supported on osx, manually install
+  - "git clone https://github.com/creationix/nvm.git /tmp/.nvm"
+  - "source /tmp/.nvm/nvm.sh"
+  - "nvm install $NODE_VERSION"
+  - "nvm use $NODE_VERSION"
   - "npm update -g npm"
   - "npm --version"
   - "export CHROME_BIN=chromium-browser"
