@@ -60,7 +60,6 @@
     "slash": "~1.0.0",
     "stream-series": "^0.1.1",
     "systemjs-builder": "^0.14.8",
-    "traceur": "^0.0.91",
     "ts-node": "^0.2.4",
     "tsd": "^0.6.4",
     "typescript": "~1.6.0",
