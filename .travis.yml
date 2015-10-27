@@ -21,8 +21,3 @@ notifications:
   email: true
 
 after_failure: "cat /home/travis/build/mgechev/angular2-seed/npm-debug.log"
-
-# whitelisted branches
-branches:
-  only:
-    - master
