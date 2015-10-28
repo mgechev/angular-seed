@@ -18,7 +18,7 @@ It is something similar to the AngularJS Quick Start but does the entire build w
 ```bash
 git clone https://github.com/mgechev/angular2-seed.git
 cd angular2-seed
-npm install   # clean npm cache & delete node_modules folder if you get an error
+npm install   # or `npm run reinstall` if you get an error
 npm start     # start with --env dev
 ```
 _Does not rely on any global dependencies._
@@ -146,6 +146,10 @@ npm test
 npm run build.test.watch      # 1st window
 npm run karma.start           # 2nd window
 ```
+
+# Contributing
+
+Please see the [CONTRIBUTING](https://github.com/mgechev/angular2-seed/blob/master/CONTRIBUTING.md) file for guidelines.
 
 # Contributors
 

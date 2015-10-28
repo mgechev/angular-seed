@@ -1,9 +1,8 @@
 import {
-  AsyncTestCompleter,
   TestComponentBuilder,
   describe,
   expect,
-  inject,
+  injectAsync,
   it,
 } from 'angular2/testing';
 import {Component, View} from 'angular2/angular2';
@@ -13,8 +12,8 @@ import {AppCmp} from './app';
 export function main() {
   describe('App component', () => {
     it('should work',
-      inject([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async) => {
-        tcb.overrideTemplate(TestComponent, '<div><home></home></div>')
+      injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+        return tcb.overrideTemplate(TestComponent, '<div><home></home></div>')
           .createAsync(TestComponent)
           .then((rootTC) => {
             let elRef = rootTC.debugElement.elementRef;
@@ -22,8 +21,6 @@ export function main() {
             // TODO: Add navigation testing?
 
             expect(elRef).not.toBeNull(true);
-
-            async.done();
           });
       }));
   });

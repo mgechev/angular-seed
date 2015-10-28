@@ -12,7 +12,8 @@
     "karma": "karma",
     "karma.start": "karma start",
     "lint": "gulp tslint",
-    "postinstall": "gulp postinstall",
+    "postinstall": "tsd reinstall --clean && tsd link && tsd rebundle && gulp postinstall",
+    "reinstall": "npm cache clean && rm -rf node_modules && npm install",
     "start": "gulp serve --env dev",
     "serve.dev": "gulp serve --env dev",
     "tasks.list": "gulp --tasks-simple",
@@ -22,6 +23,7 @@
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
   "devDependencies": {
+    "@reactivex/rxjs": "^5.0.0-alpha.6",
     "async": "^1.4.2",
     "connect-livereload": "^0.5.3",
     "del": "^1.1.1",
@@ -68,7 +70,7 @@
     "zone.js": "^0.5.8"
   },
   "dependencies": {
-    "angular2": "2.0.0-alpha.41",
+    "angular2": "2.0.0-alpha.44",
     "bootstrap": "^3.3.5",
     "es6-module-loader": "^0.17.8",
     "es6-shim": "^0.33.6",
