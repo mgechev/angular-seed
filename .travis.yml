@@ -14,7 +14,7 @@ addons:
 
 env:
   matrix:
-  - TRAVIS_NODE_VERSION="0.12"
+  #- TRAVIS_NODE_VERSION="0.12" // Enable this line when #196 is merged
   - TRAVIS_NODE_VERSION="4.0"
   - TRAVIS_NODE_VERSION="4.1"
   - TRAVIS_NODE_VERSION="4.2"
