@@ -20,6 +20,7 @@ git clone https://github.com/mgechev/angular2-seed.git
 cd angular2-seed
 npm install   # or `npm run reinstall` if you get an error
 npm start     # start with --env dev
+npm docs      # api document for app
 ```
 _Does not rely on any global dependencies._
 
@@ -75,6 +76,7 @@ _Does not rely on any global dependencies._
 │   ├── preinstall.js
 │   ├── tasks
 │   │   ├── build.csslib.dev.ts
+│   │   ├── build.docs.ts
 │   │   ├── build.fonts.ts
 │   │   ├── build.index.dev.ts
 │   │   ├── build.js.dev.ts
@@ -84,6 +86,7 @@ _Does not rely on any global dependencies._
 │   │   ├── clean.ts
 │   │   ├── karma.start.ts
 │   │   ├── npm.ts
+│   │   ├── server.docs.ts
 │   │   ├── server.start.ts
 │   │   ├── tsd.ts
 │   │   ├── tslint.ts
@@ -118,6 +121,7 @@ Default application server configuration
 ```javascript
 var PORT             = 5555;
 var LIVE_RELOAD_PORT = 4002;
+var DOCS_PORT        = 4003;
 var APP_BASE         = '/';
 ```
 
