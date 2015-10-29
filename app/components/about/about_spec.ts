@@ -41,6 +41,6 @@ export function main() {
   });
 }
 
-@Component({bindings: [NameList], selector: 'test-cmp'})
+@Component({providers: [NameList], selector: 'test-cmp'})
 @View({directives: [AboutCmp]})
 class TestComponent {}
