@@ -33,6 +33,7 @@ node_modules
 
 dist
 dev
+docs
 lib
 test
 tools/typings/tsd
