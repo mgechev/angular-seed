@@ -44,7 +44,7 @@
         "tools/typings/connect-livereload.d.ts",
         "tools/typings/gulp-load-plugins.d.ts",
         "tools/typings/karma.d.ts",
-        "tools/typings/mini-lr.d.ts",
+        "tools/typings/tiny-lr.d.ts",
         "tools/typings/ng2_test.d.ts",
         "tools/typings/ng2_testing_workaround.d.ts",
         "tools/typings/open.d.ts",

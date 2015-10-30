@@ -97,7 +97,7 @@ _Does not rely on any global dependencies._
 │   │   ├── connect-livereload.d.ts
 │   │   ├── gulp-load-plugins.d.ts
 │   │   ├── karma.d.ts
-│   │   ├── mini-lr.d.ts
+│   │   ├── tiny-lr.d.ts
 │   │   ├── ng2_test.d.ts
 │   │   ├── open.d.ts
 │   │   ├── run-sequence.d.ts
