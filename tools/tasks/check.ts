@@ -1,7 +1,7 @@
 export = function check(gulp, plugins, option) {
   return function () {
-    var exec = require('child_process').exec;
-    var semver = require('semver');
+    let exec = require('child_process').exec;
+    let semver = require('semver');
 
     exec('npm --version',
       function (error, stdout, stderr) {
