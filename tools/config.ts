@@ -19,6 +19,9 @@ export const APP_DOCS         = 'docs';
 export const ANGULAR_BUNDLES  = './node_modules/angular2/bundles';
 export const VERSION          = version();
 
+export const VERSION_NPM      = "3.0.0";
+export const VERSION_NODE     = "4.0.0";
+
 export const PATH = {
   cwd: process.cwd(),
   tools: 'tools',

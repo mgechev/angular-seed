@@ -1,6 +1,6 @@
 import * as gulp from 'gulp';
 import * as runSequence from 'run-sequence';
-import {ENV, PATH} from './tools/config';
+import {ENV, PATH, VERSION_NPM, VERSION_NODE} from './tools/config';
 import {
   autoRegisterTasks,
   registerInjectableAssetsRef,
@@ -29,6 +29,12 @@ gulp.task('postinstall', done =>
               'npm',
               done));
 
+gulp.task('check', task('check', {npm: VERSION_NPM, node: VERSION_NODE}));
+
+// --------------
+// Preinstall.
+gulp.task('preinstall', done =>
+  runSequence('check'));
 
 // --------------
 // Build dev.
@@ -70,7 +76,7 @@ gulp.task('serve', done =>
               'server.start',
               'watch.serve',
               done));
-              
+
 // --------------
 // Docs
 
