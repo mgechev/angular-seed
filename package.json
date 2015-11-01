@@ -18,7 +18,8 @@
     "serve.dev": "gulp serve --env dev",
     "tasks.list": "gulp --tasks-simple",
     "test": "gulp test",
-    "tsd": "tsd"
+    "tsd": "tsd",
+    "docs": "npm run gulp -- build.docs && npm run gulp -- serve.docs"
   },
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",

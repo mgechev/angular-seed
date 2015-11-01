@@ -20,7 +20,7 @@ git clone https://github.com/mgechev/angular2-seed.git
 cd angular2-seed
 npm install   # or `npm run reinstall` if you get an error
 npm start     # start with --env dev
-npm docs      # api document for app
+npm run docs      # api document for app
 ```
 _Does not rely on any global dependencies._
 
