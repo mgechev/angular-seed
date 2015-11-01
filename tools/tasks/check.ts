@@ -9,7 +9,7 @@ export = function check(gulp, plugins, option) {
           throw new Error('npm preinstall error: ' + error + stderr);
         }
 
-        if (!semver.gt(stdout, option.npm)) {
+        if (!semver.gte(stdout, option.npm)) {
           throw new Error('NPM is not in required version! Required is ' + option.npm + ' and you\'re using ' + stdout);
         }
       });
@@ -20,7 +20,7 @@ export = function check(gulp, plugins, option) {
           throw new Error('npm preinstall error: ' + error + stderr);
         }
 
-        if (!semver.gt(stdout, option.node)) {
+        if (!semver.gte(stdout, option.node)) {
           throw new Error('NODE is not in required version! Required is ' + option.node + ' and you\'re using ' + stdout);
         }
       });
