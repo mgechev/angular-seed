@@ -10,7 +10,7 @@ export function autoRegisterTasks(): void {
   scanDir(TASKS_PATH, (taskname) => registerTask(taskname));
 }
 
-export function task(taskname: string, option?: string) {
+export function task(taskname: string, option?: string | Object) {
   return require(join('..', 'tasks', taskname))(gulp, plugins(), option);
 }
 
