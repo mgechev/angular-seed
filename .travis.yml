@@ -18,6 +18,7 @@ env:
   - TRAVIS_NODE_VERSION="4.0"
   - TRAVIS_NODE_VERSION="4.1"
   - TRAVIS_NODE_VERSION="4.2"
+  - TRAVIS_NODE_VERSION="5.0"
 
 sudo: false
 
