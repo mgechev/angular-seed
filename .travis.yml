@@ -33,10 +33,11 @@ install:
   - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
   - if [[ $TRAVIS_NODE_VERSION == "0.8" ]]; then npm install npm@2 && node_modules/.bin/npm install npm; else npm install npm; fi
   - mv node_modules npm
-  - npm/.bin/npm --version
+  - PATH=~/npm/.bin/:$PATH
+  - npm --version
   - if [[ $TRAVIS_OS_NAME == "linux" ]]; then export CXX=g++-4.8; fi
   - if [[ $TRAVIS_OS_NAME == "linux" ]]; then $CXX --version; fi
-  - npm/.bin/npm install
+  - npm install
 
 before_script:
 
