@@ -54,3 +54,7 @@ after_failure:
 branches:
   only:
     - master
+
+env:
+  global:
+    secure: ST6ry22mTsKmr/g4xnBJggsjwnqn9UPjlaEly/FI1gZiXF2ZXG3QhXZE6I3Z/ili7Z7xUBBAMJj70G1+mtY2MVwBv8PynTpRxxfDhNrOUhp634+TcLz4yUXbKJmrbU/0yfKF/TK2DjJCPWG312dgaC8Kh3ZbgFjADa458NrzqYE=
