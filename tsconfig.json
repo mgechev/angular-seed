@@ -33,6 +33,7 @@
         "tools/tasks/build.sass.dev.ts",
         "tools/tasks/build.test.ts",
         "tools/tasks/clean.ts",
+        "tools/tasks/check.ts",
         "tools/tasks/karma.start.ts",
         "tools/tasks/npm.ts",
         "tools/tasks/server.start.ts",
