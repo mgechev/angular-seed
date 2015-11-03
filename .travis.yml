@@ -17,3 +17,8 @@ after_failure: cat /home/travis/build/mgechev/angular2-seed/npm-debug.log
 branches:
   only:
   - master
+env:
+  global:
+  # https://github.com/DefinitelyTyped/tsd#tsdrc
+  # Token has no scope (read-only access to public information)
+  - TSD_GITHUB_TOKEN=9b18c72997769f3867ef2ec470e626d39661795d
