@@ -13,7 +13,7 @@ It is something similar to the AngularJS Quick Start but does the entire build w
 
 # How to start
 
-**Note** that this seed project requires node v0.12.x or higher and npm 3.x.x.
+**Note** that this seed project requires node v4.x.x or higher and npm 3.x.x.
 
 ```bash
 git clone https://github.com/mgechev/angular2-seed.git
