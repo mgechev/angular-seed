@@ -1,3 +1,10 @@
 .note {
   color: #a8a8a8;
 }
+smile {
+  width: 27px;
+  height: 29px;
+  display: inline-block;
+  vertical-align: bottom;
+  background: url("/assets/img/smile2.gif");
+}

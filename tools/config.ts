@@ -32,6 +32,7 @@ export const PATH = {
       all: `${APP_DEST}/${ENV}`,
       lib: `${APP_DEST}/${ENV}/lib`,
       css: `${APP_DEST}/${ENV}/css`,
+      assets: `${APP_DEST}/${ENV}/assets`,
       fonts: `${APP_DEST}/${ENV}/fonts`
     },
     test: 'test',
@@ -58,6 +59,9 @@ export const PATH = {
     csslib: [
       resolve('bootstrap/dist/css/bootstrap.css'),
       resolve('bootstrap/dist/css/bootstrap.css.map')
+    ],
+    assets: [
+      `${APP_SRC}/assets/**/*`
     ],
     fonts: [
       resolve('bootstrap/dist/fonts/glyphicons-halflings-regular.eot'),
