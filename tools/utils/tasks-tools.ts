@@ -29,7 +29,11 @@ function scanDir(root: string, cb: (taskname: string) => void) {
   walk(root);
 
   function walk(path) {
-    readdirSync(path).forEach(function(file) {
+    var files = readdirSync(path);
+    
+    for(var i=0; i<files.length;i++)
+    {
+      var file = files[i];
       let curPath = join(path, file);
       if (lstatSync(curPath).isDirectory()) { // recurse
         path = file;
@@ -39,6 +43,19 @@ function scanDir(root: string, cb: (taskname: string) => void) {
         let taskname = file.replace(/(\.ts)/, '');
         cb(taskname);
       }
-    });
+    }
   }
+}
+
+// Polyfill for endsWith
+if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
 }
