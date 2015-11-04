@@ -1,6 +1,6 @@
 import * as gulp from 'gulp';
 import * as runSequence from 'run-sequence';
-import {ENV, PATH, VERSION_NPM, VERSION_NODE} from './tools/config';
+import {ENV, PATH} from './tools/config';
 import {
   autoRegisterTasks,
   registerInjectableAssetsRef,
@@ -15,7 +15,6 @@ autoRegisterTasks();
 registerInjectableAssetsRef(PATH.src.jslib_inject, PATH.dest.dev.lib);
 registerInjectableAssetsRef(PATH.src.csslib, PATH.dest.dev.css);
 
-
 // --------------
 // Clean (override).
 gulp.task('clean',       task('clean', 'all'));
@@ -28,13 +27,6 @@ gulp.task('postinstall', done =>
   runSequence('clean',
               'npm',
               done));
-
-gulp.task('check', task('check', {npm: VERSION_NPM, node: VERSION_NODE}));
-
-// --------------
-// Preinstall.
-gulp.task('preinstall', done =>
-  runSequence('check'));
 
 // --------------
 // Build dev.
@@ -68,7 +60,6 @@ gulp.task('test', done =>
               'karma.start',
               done));
 
-
 // --------------
 // Serve.
 gulp.task('serve', done =>
@@ -79,13 +70,10 @@ gulp.task('serve', done =>
 
 // --------------
 // Docs
-
 gulp.task('docs', done =>
-  runSequence(
-        'build.docs',
-        'serve.docs',
-        done
-  ));
+  runSequence('build.docs',
+              'serve.docs',
+              done));
 
 // --------------
 // Build prod.
