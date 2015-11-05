@@ -29,4 +29,7 @@ install:
 test_script:
   # Output useful info for debugging.
   - node --version && npm --version
+  # We test multiple Windows shells because of prior stdout buffering issues
+  # filed against Grunt. https://github.com/joyent/node/issues/3584
+  - ps: "npm --version # PowerShell" # Pass comment to PS for easier debugging
   - npm test
