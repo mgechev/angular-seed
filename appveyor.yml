@@ -1,0 +1,35 @@
+# AppVeyor file
+# http://www.appveyor.com/docs/appveyor-yml
+# This file: cloned from https://github.com/gruntjs/grunt/blob/master/appveyor.yml
+
+# Build version format
+version: "{build}"
+
+# Test against this version of Node.js
+environment:
+  nodejs_version: "4.1.0"
+  # https://github.com/DefinitelyTyped/tsd#tsdrc
+  # Token has no scope (read-only access to public information)
+  TSD_GITHUB_TOKEN: "9b18c72997769f3867ef2ec470e626d39661795d"
+
+build: off
+
+clone_depth: 10
+
+# Fix line endings on Windows
+init:
+  - git config --global core.autocrlf true
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - npm install -g npm
+  - ps: $env:path = $env:appdata + "\npm;" + $env:path
+  - npm install
+
+test_script:
+  # Output useful info for debugging.
+  - node --version && npm --version
+  # We test multiple Windows shells because of prior stdout buffering issues
+  # filed against Grunt. https://github.com/joyent/node/issues/3584
+  - ps: "npm --version # PowerShell" # Pass comment to PS for easier debugging
+  - npm test
