@@ -37,6 +37,7 @@ gulp.task('build.dev', done =>
               'build.sass.dev',
               'build.js.dev',
               'build.csslib.dev',
+              'build.assets',
               'build.fonts',
               'build.index.dev',
               done));
