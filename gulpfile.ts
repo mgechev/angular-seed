@@ -40,6 +40,7 @@ gulp.task('build.dev', done =>
               'build.assets',
               'build.fonts',
               'build.index.dev',
+              'build.images.dev',
               done));
 
 gulp.task('build.dev.watch', done =>
