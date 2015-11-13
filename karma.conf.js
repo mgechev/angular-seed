@@ -92,6 +92,7 @@ module.exports = function(config) {
   if (process.env.APPVEYOR) {
     config.browsers = ['IE'];
     config.singleRun = true;
+    config.browserNoActivityTimeout = 60000; // Note: default value (10000) is not enough
   }
 
   if (process.env.TRAVIS || process.env.CIRCLECI) {
