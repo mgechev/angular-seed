@@ -1,5 +1,6 @@
 // Karma configuration
 // Generated on Wed Jul 15 2015 09:44:02 GMT+0200 (Romance Daylight Time)
+'use strict';
 
 module.exports = function(config) {
   config.set({
@@ -92,7 +93,7 @@ module.exports = function(config) {
   if (process.env.APPVEYOR) {
     config.browsers = ['IE'];
     config.singleRun = true;
-    config.browserNoActivityTimeout = 60000; // Note: default value (10000) is not enough
+    config.browserNoActivityTimeout = 90000; // Note: default value (10000) is not enough
   }
 
   if (process.env.TRAVIS || process.env.CIRCLECI) {
