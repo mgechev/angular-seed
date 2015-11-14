@@ -17,20 +17,21 @@ import {AppCmp} from './app';
 
 export function main() {
 
-  // Support for testing component that uses Router
-  beforeEachProviders(() => [
-    RouteRegistry,
-    DirectiveResolver,
-    provide(Location, {useClass: SpyLocation}),
-    provide(Router,
-      {
-        useFactory:
-          (registry, location) => { return new RootRouter(registry, location, AppCmp); },
-        deps: [RouteRegistry, Location]
-      })
-  ]);
-
   describe('App component', () => {
+
+    // Support for testing component that uses Router
+    beforeEachProviders(() => [
+      RouteRegistry,
+      DirectiveResolver,
+      provide(Location, {useClass: SpyLocation}),
+      provide(Router,
+        {
+          useFactory:
+            (registry, location) => { return new RootRouter(registry, location, AppCmp); },
+          deps: [RouteRegistry, Location]
+        })
+    ]);
+
     it('should work',
       injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
         return tcb.overrideTemplate(TestComponent, '<div><app></app></div>')
