@@ -1,8 +1,14 @@
-<section class="sample-app-content">
-  <nav>
-    <a [router-link]="['/Home']">Home</a>
-    <a [router-link]="['/About']">About</a>
-  </nav>
+<nav>
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo">Angular2 Seed</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a class="mdl-navigation__link" [router-link]="['/Home']">Home</a></li>
+      <li> <a class="mdl-navigation__link" [router-link]="['/About']">About</a></li>
+      <li> <a class="mdl-navigation__link" [router-link]="['/Contributors']">Contributors</a></li>
+    </ul>
+  </div>
+</nav>
 
+<section class="sample-app-content">
   <router-outlet></router-outlet>
 </section>
