@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My Angular 2 App</title>
+  <title><%= APP_TITLE %></title>
   <base href="<%= APP_BASE %>">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,16 +14,21 @@
 
   <app>Loading...</app>
 
-  <!-- inject:js -->
+  <!-- shims:js -->
   <!-- endinject -->
 
   <script>
+    System.config(<%= JSON.stringify(SYSTEM_CONFIG) %>)
+
     System.import('bootstrap')
       .catch(function (e) {
         console.error(e,
           'Report this error at https://github.com/mgechev/angular2-seed/issues');
       });
   </script>
+
+  <!-- inject:js -->
+  <!-- endinject -->
 
 </body>
 </html>
