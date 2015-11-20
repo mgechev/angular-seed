@@ -13,7 +13,7 @@ export = function buildIndexDev(gulp, plugins) {
   };
 
 
-  function inject(name: string = 'inject') {
+  function inject(name?: string) {
     return plugins.inject(gulp.src(getInjectablesDependenciesRef(name), { read: false }), {
       name,
       transform: transformPath(plugins, 'dev')

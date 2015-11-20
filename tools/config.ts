@@ -37,8 +37,9 @@ export const DEV_DEPENDENCIES = [
   { src: 'reflect-metadata/Reflect.js', dest: LIB_DEST, inject: 'shims' },
   { src: 'systemjs/dist/system.src.js', dest: LIB_DEST, inject: 'shims' },
 
-  { src: '@reactivex/rxjs/dist/cjs/**/*.js', dest: `${LIB_DEST}/@reactivex` },
-  { src: 'angular2/**/*.js',                 dest: `${LIB_DEST}/angular2` },
+  { src: 'angular2/bundles/angular2.dev.js',  dest: LIB_DEST, inject: true },
+  { src: 'angular2/bundles/router.dev.js',    dest: LIB_DEST, inject: true },
+  { src: 'angular2/bundles/http.dev.js',      dest: LIB_DEST, inject: true },
 
   { src: 'bootstrap/dist/css/bootstrap.css', dest: CSS_DEST, inject: true },
 
@@ -51,10 +52,7 @@ export const DEV_DEPENDENCIES = [
 
 export const SYSTEM_CONFIG = {
   defaultJSExtensions: true,
-  paths: {
-    '@reactivex/rxjs/dist/cjs/*': 'lib/@reactivex/*',
-    'angular2/*': 'lib/angular2/*'
-  }
+  paths: { }
 };
 
 
