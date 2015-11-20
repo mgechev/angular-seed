@@ -14,11 +14,14 @@
 
   <app>Loading...</app>
 
+  <script src="/node_modules/reflect-metadata/Reflect.js"></script>
+  <script src="/node_modules/systemjs/dist/system.js"></script>
+  <script src="/app/system.config.js"></script>
   <!-- inject:js -->
   <!-- endinject -->
 
   <script>
-    System.import('bootstrap')
+    System.import('/dist/dev/bootstrap')
       .catch(function (e) {
         console.error(e,
           'Report this error at https://github.com/mgechev/angular2-seed/issues');

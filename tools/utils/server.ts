@@ -15,16 +15,12 @@ export function serveSPA() {
 
   server.use(
     APP_BASE,
-    connectLivereload({ port: LIVE_RELOAD_PORT }),
-    serveStatic(resolve(process.cwd(), PATH.dest[ENV].all))
-  );
-
-  server.all(APP_BASE + '*', (req, res) =>
-    res.sendFile(resolve(process.cwd(), PATH.dest[ENV].all, 'index.html'))
+    express.static(process.cwd()),
+    connectLivereload({ port: LIVE_RELOAD_PORT })
   );
 
   server.listen(PORT, () =>
-    openResource('http://localhost:' + PORT + APP_BASE)
+    openResource('http://localhost:' + PORT + APP_BASE + PATH.dest[ENV].all)
   );
 }
 

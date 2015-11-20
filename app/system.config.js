@@ -1,3 +1,6 @@
 System.config({
-  defaultJSExtensions: true
+  defaultJSExtensions: true,
+  paths: {
+    '*': '/node_modules/*',
+  }
 });
