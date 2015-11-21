@@ -16,7 +16,7 @@ export function serveSPA() {
   server.use(
     APP_BASE,
     connectLivereload({ port: LIVE_RELOAD_PORT }),
-    serveStatic(resolve(process.cwd(), APP_DEST))
+    serveStatic(process.cwd())
   );
 
   server.all(APP_BASE + '*', (req, res) =>

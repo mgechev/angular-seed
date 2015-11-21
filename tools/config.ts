@@ -33,13 +33,10 @@ export const VERSION_NODE         = '4.0.0';
 export const DEV_DEPENDENCIES = [
   { src: 'systemjs/dist/system-polyfills.js', dest: LIB_DEST },
 
+  { src: 'zone.js/dist/zone.js',        dest: LIB_DEST, inject: 'shims' },
   { src: 'es6-shim/es6-shim.min.js',    dest: LIB_DEST, inject: 'shims' },
   { src: 'reflect-metadata/Reflect.js', dest: LIB_DEST, inject: 'shims' },
   { src: 'systemjs/dist/system.src.js', dest: LIB_DEST, inject: 'shims' },
-
-  { src: 'angular2/bundles/angular2.dev.js',  dest: LIB_DEST, inject: true },
-  { src: 'angular2/bundles/router.dev.js',    dest: LIB_DEST, inject: true },
-  { src: 'angular2/bundles/http.dev.js',      dest: LIB_DEST, inject: true },
 
   { src: 'bootstrap/dist/css/bootstrap.css', dest: CSS_DEST, inject: true },
 
@@ -52,7 +49,9 @@ export const DEV_DEPENDENCIES = [
 
 export const SYSTEM_CONFIG = {
   defaultJSExtensions: true,
-  paths: { }
+  paths: {
+    '*': './node_modules/*'
+  }
 };
 
 
