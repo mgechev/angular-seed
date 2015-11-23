@@ -4,16 +4,21 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><%= APP_TITLE %></title>
-  <base href="<%= APP_BASE %>">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- inject:css -->
-  <!-- endinject -->
+  <link href="/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheets">
 </head>
 <body>
 
   <app>Loading...</app>
 
+  <script src="/node_modules/systemjs/dist/system-polyfills.js"></script>
+  <script src="/node_modules/systemjs/dist/system.src.js"></script>
+  <script src="/node_modules/reflect-metadata/Reflect.js"></script>
+  <script src="/node_modules/es6-shim/es6-shim.min.js"></script>
+  <script src="/node_modules/zone.js/dist/zone.js"></script>
+
+  <!-- Deprecated -->
   <!-- shims:js -->
   <!-- endinject -->
 
@@ -27,6 +32,7 @@
       });
   </script>
 
+  <!-- Deprecated -->
   <!-- inject:js -->
   <!-- endinject -->
 

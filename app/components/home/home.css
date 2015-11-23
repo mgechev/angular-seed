@@ -6,5 +6,5 @@ smile {
   height: 29px;
   display: inline-block;
   vertical-align: bottom;
-  background: url("./<%= APP_DEST %>/assets/img/smile2.gif");
+  background: url("./assets/img/smile2.gif");
 }
