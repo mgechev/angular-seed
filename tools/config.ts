@@ -30,9 +30,21 @@ export const VERSION_NPM          = '3.0.0';
 export const VERSION_NODE         = '4.0.0';
 
 
-// @deprecated
 export const DEV_DEPENDENCIES = [
+  { src: 'systemjs/dist/system-polyfills.js', dest: LIB_DEST },
 
+  { src: 'zone.js/dist/zone.js',        dest: LIB_DEST, inject: 'shims' },
+  { src: 'es6-shim/es6-shim.min.js',    dest: LIB_DEST, inject: 'shims' },
+  { src: 'reflect-metadata/Reflect.js', dest: LIB_DEST, inject: 'shims' },
+  { src: 'systemjs/dist/system.src.js', dest: LIB_DEST, inject: 'shims' },
+
+  { src: 'bootstrap/dist/css/bootstrap.css', dest: CSS_DEST, inject: true },
+
+  { src: 'bootstrap/dist/fonts/glyphicons-halflings-regular.eot',   dest: FONTS_DEST},
+  { src: 'bootstrap/dist/fonts/glyphicons-halflings-regular.svg',   dest: FONTS_DEST},
+  { src: 'bootstrap/dist/fonts/glyphicons-halflings-regular.ttf',   dest: FONTS_DEST},
+  { src: 'bootstrap/dist/fonts/glyphicons-halflings-regular.woff',  dest: FONTS_DEST},
+  { src: 'bootstrap/dist/fonts/glyphicons-halflings-regular.woff2', dest: FONTS_DEST}
 ];
 
 export const SYSTEM_CONFIG = {
