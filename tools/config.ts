@@ -50,7 +50,7 @@ export const DEV_DEPENDENCIES = [
 export const SYSTEM_CONFIG = {
   defaultJSExtensions: true,
   paths: {
-    '*': '/node_modules/*'
+    '*': `${APP_BASE}node_modules/*`
   }
 };
 
