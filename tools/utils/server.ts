@@ -15,8 +15,8 @@ export function serveSPA() {
 
   server.use(
     APP_BASE,
-    express.static(process.cwd()),
-    connectLivereload({ port: LIVE_RELOAD_PORT })
+    connectLivereload({ port: LIVE_RELOAD_PORT }),
+    express.static(process.cwd())
   );
 
   server.listen(PORT, () =>
