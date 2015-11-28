@@ -37,8 +37,6 @@ export const DEV_DEPENDENCIES = [
   { src: 'reflect-metadata/Reflect.js', dest: LIB_DEST, inject: 'shims' },
   { src: 'systemjs/dist/system.src.js', dest: LIB_DEST, inject: 'shims' },
 
-  { src: 'systemjs/dist/system.src.js', dest: LIB_DEST, inject: 'shims' },
-
   // Faster dev page load
   { src: 'angular2/bundles/angular2.dev.js', dest: LIB_DEST, inject: 'libs' },
   { src: 'angular2/bundles/router.dev.js', dest: LIB_DEST, inject: 'libs' },
