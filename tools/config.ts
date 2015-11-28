@@ -39,9 +39,10 @@ export const DEV_DEPENDENCIES = [
 
   { src: 'systemjs/dist/system.src.js', dest: LIB_DEST, inject: 'shims' },
 
+  // Faster dev page load
   { src: 'angular2/bundles/angular2.dev.js', dest: LIB_DEST, inject: 'libs' },
-  { src: 'angular2/bundles/http.dev.js', dest: LIB_DEST, inject: 'libs' },
   { src: 'angular2/bundles/router.dev.js', dest: LIB_DEST, inject: 'libs' },
+  { src: 'angular2/bundles/http.dev.js', dest: LIB_DEST, inject: 'libs' },
 
   { src: 'bootstrap/dist/css/bootstrap.css', dest: CSS_DEST, inject: true },
 
@@ -50,6 +51,12 @@ export const DEV_DEPENDENCIES = [
   { src: 'bootstrap/dist/fonts/glyphicons-halflings-regular.ttf',   dest: FONTS_DEST},
   { src: 'bootstrap/dist/fonts/glyphicons-halflings-regular.woff',  dest: FONTS_DEST},
   { src: 'bootstrap/dist/fonts/glyphicons-halflings-regular.woff2', dest: FONTS_DEST}
+];
+
+DEV_DEPENDENCIES.forEach(d => d.src = require.resolve(d.src));
+
+export const APP_ASSETS = [
+  { src: `${ASSETS_DEST}/main.css`, inject: true, dest: ASSETS_DEST }
 ];
 
 export const SYSTEM_CONFIG = {
