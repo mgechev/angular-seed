@@ -55,9 +55,6 @@ export const DEV_DEPENDENCIES = [
 export const SYSTEM_CONFIG = {
   defaultJSExtensions: true,
   paths: {
-    'angula2/angular2': `${LIB_DEST}/angular2.dev.js`,
-    'angula2/router': `${LIB_DEST}/router.dev.js`,
-    'angula2/http': `${LIB_DEST}/http.dev.js`,
     '*': `${APP_BASE}node_modules/*`
   }
 };
