@@ -29,7 +29,7 @@ export const VERSION              = appVersion();
 export const VERSION_NPM          = '3.0.0';
 export const VERSION_NODE         = '4.0.0';
 
-
+// Declare NPM dependencies (Note that globs should not be injected).
 export const DEV_DEPENDENCIES = [
   { src: 'systemjs/dist/system-polyfills.js', dest: LIB_DEST },
 
@@ -44,14 +44,12 @@ export const DEV_DEPENDENCIES = [
 
   { src: 'bootstrap/dist/css/bootstrap.css', dest: CSS_DEST, inject: true },
 
-  { src: 'bootstrap/dist/fonts/glyphicons-halflings-regular.eot',   dest: FONTS_DEST},
-  { src: 'bootstrap/dist/fonts/glyphicons-halflings-regular.svg',   dest: FONTS_DEST},
-  { src: 'bootstrap/dist/fonts/glyphicons-halflings-regular.ttf',   dest: FONTS_DEST},
-  { src: 'bootstrap/dist/fonts/glyphicons-halflings-regular.woff',  dest: FONTS_DEST},
-  { src: 'bootstrap/dist/fonts/glyphicons-halflings-regular.woff2', dest: FONTS_DEST}
+  { src: 'bootstrap/dist/fonts/**/*', dest: FONTS_DEST}
 ];
 
-DEV_DEPENDENCIES.forEach(d => d.src = require.resolve(d.src));
+DEV_DEPENDENCIES
+  .filter(d => !/\*/.test(d.src)) // Skip globs
+  .forEach(d => d.src = require.resolve(d.src));
 
 export const APP_ASSETS = [
   { src: `${ASSETS_DEST}/main.css`, inject: true, dest: ASSETS_DEST }
