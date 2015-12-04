@@ -16,18 +16,18 @@
   <!-- shims:js -->
   <!-- endinject -->
 
-  <script>
-    System.config(<%= JSON.stringify(SYSTEM_CONFIG) %>)
+  <script>System.config(<%= JSON.stringify(SYSTEM_CONFIG) %>)</script>
 
+  <!-- libs:js -->
+  <!-- endinject -->
+
+  <script>
     System.import('<%= APP_BASE + APP_DEST %>/bootstrap')
       .catch(function (e) {
         console.error(e,
           'Report this error at https://github.com/mgechev/angular2-seed/issues');
       });
   </script>
-
-  <!-- libs:js -->
-  <!-- endinject -->
 
   <!-- inject:js -->
   <!-- endinject -->
