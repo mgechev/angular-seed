@@ -3,7 +3,7 @@ import {
   RouteConfig,
   ROUTER_DIRECTIVES
 } from 'angular2/router';
-// import {HTTP_PROVIDERS} from 'http/http';
+// import {HTTP_PROVIDERS} from 'angular2/http';
 
 import {HomeCmp} from '../home/home';
 import {AboutCmp} from '../about/about';
