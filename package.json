@@ -2,7 +2,9 @@
   "name": "angular2-seed",
   "version": "0.0.0",
   "description": "Seed for Angular 2 apps",
-  "repository": "https://github.com/mgechev/angular2-seed",
+  "repository": {
+    "url": "https://github.com/mgechev/angular2-seed"
+  },
   "scripts": {
     "build.dev": "gulp build.dev",
     "build.dev.watch": "gulp build.dev.watch",
