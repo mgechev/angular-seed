@@ -14,7 +14,7 @@ export const APP_BASE             = argv['base']        || '/';
 export const APP_TITLE            = 'My Angular2 App';
 
 export const APP_SRC              = 'app';
-export const ASSETS_SRC           = `${APP_SRC}/assets/**/*`;
+export const ASSETS_SRC           = `${APP_SRC}/assets`;
 
 export const TOOLS_DIR            = 'tools';
 export const TEST_DEST            = 'test';
@@ -51,7 +51,7 @@ DEV_DEPENDENCIES
 
 // Declare local files that needs to be injected
 export const APP_ASSETS = [
-  { src: `${ASSETS_DEST}/main.css`, inject: true }
+  { src: `${ASSETS_SRC}/main.css`, inject: true }
 ];
 
 export const SYSTEM_CONFIG = {
