@@ -27,7 +27,6 @@ gulp.task('build.dev', done =>
   runSequence('clean.dist',
               'tslint',
               'build.sass.dev',
-              'build.assets',
               'build.images.dev',
               'build.js.dev',
               'build.index.dev',
