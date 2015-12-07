@@ -6,7 +6,7 @@ import {
   it
 } from 'angular2/testing';
 import {Component, View} from 'angular2/angular2';
-import {DOM} from 'angular2/src/core/dom/dom_adapter';
+import {DOM} from 'angular2/src/platform/dom/dom_adapter';
 import {AboutCmp} from './about';
 import {NameList} from '../../services/name_list';
 
