@@ -12,6 +12,7 @@ loadTasks();
 gulp.task('clean',       task('clean', 'all'));
 gulp.task('clean.dist',  task('clean', 'dist'));
 gulp.task('clean.test',  task('clean', 'test'));
+gulp.task('clean.tmp',   task('clean', 'tmp'));
 
 // --------------
 // Postinstall.
@@ -35,6 +36,7 @@ gulp.task('build.dev', done =>
 // Build prod.
 gulp.task('build.prod', done =>
   runSequence('clean.dist',
+              'clean.tmp',
               'tslint',
               'build.sass.dev',
               'build.images.dev',
