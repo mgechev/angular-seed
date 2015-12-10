@@ -85,7 +85,7 @@ export const SYSTEM_CONFIG_BUILDER = {
   paths: {
     '*': `${TMP_DIR}/*`,
     'angular2/*': 'node_modules/angular2/*',
-    '@reactivex/*': 'node_modules/@reactivex/*'
+    'rxjs/*': 'node_modules/rxjs/*'
   }
 };
 
