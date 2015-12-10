@@ -1,48 +1,51 @@
 {
   "version": "v4",
-  "repo": "borisyankov/DefinitelyTyped",
+  "repo": "DefinitelyTyped/DefinitelyTyped",
   "ref": "master",
   "path": "tools/typings/tsd",
   "bundle": "tools/typings/tsd/tsd.d.ts",
   "installed": {
     "systemjs/systemjs.d.ts": {
-      "commit": "bd03c6ea51abde7d13e354908716c6373fc38b1f"
-    },
-    "node/node.d.ts": {
-      "commit": "1c7dc757837b1c2089b7d2c2c6fabdeba77587ab"
+      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
     },
     "gulp/gulp.d.ts": {
-      "commit": "05557455c49043ff0189182e27c9e04403a70802"
+      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
     },
     "q/Q.d.ts": {
-      "commit": "05557455c49043ff0189182e27c9e04403a70802"
+      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
     },
     "orchestrator/orchestrator.d.ts": {
-      "commit": "05557455c49043ff0189182e27c9e04403a70802"
+      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
     },
     "gulp-shell/gulp-shell.d.ts": {
-      "commit": "05557455c49043ff0189182e27c9e04403a70802"
+      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
     },
     "mime/mime.d.ts": {
-      "commit": "1c7dc757837b1c2089b7d2c2c6fabdeba77587ab"
+      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
     },
     "express/express.d.ts": {
-      "commit": "1c7dc757837b1c2089b7d2c2c6fabdeba77587ab"
+      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
     },
     "serve-static/serve-static.d.ts": {
-      "commit": "1c7dc757837b1c2089b7d2c2c6fabdeba77587ab"
+      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
     },
     "del/del.d.ts": {
-      "commit": "e9be3cecf8a326d3e220c52b42d218169a7bb9f2"
+      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
     },
     "glob/glob.d.ts": {
-      "commit": "e9be3cecf8a326d3e220c52b42d218169a7bb9f2"
+      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
     },
     "minimatch/minimatch.d.ts": {
-      "commit": "e9be3cecf8a326d3e220c52b42d218169a7bb9f2"
+      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
     },
     "async/async.d.ts": {
-      "commit": "e9be3cecf8a326d3e220c52b42d218169a7bb9f2"
+      "commit": "5c3e47967affa3c4128a3875d1664ba206ae1b0f"
+    },
+    "es6-promise/es6-promise.d.ts": {
+      "commit": "923c5431d9447db9d5cf41adc5914e3c94c1ff10"
+    },
+    "node/node.d.ts": {
+      "commit": "923c5431d9447db9d5cf41adc5914e3c94c1ff10"
     }
   }
 }

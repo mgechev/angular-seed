@@ -2,9 +2,9 @@
   color: #a8a8a8;
 }
 smile {
-  width: 27px;
-  height: 29px;
+  width: 32px;
+  height: 32px;
   display: inline-block;
   vertical-align: bottom;
-  background: url("./assets/img/smile2.gif");
+  background: url("./assets/img/smile.png");
 }
