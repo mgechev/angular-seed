@@ -39,7 +39,7 @@ gulp.task('build.prod', done =>
               'clean.tmp',
               'tslint',
               'build.sass.dev',
-              'build.images.dev',
+              'build.img.dev',
               'build.html_css.prod',
               'build.deps',
               'build.js.prod',
