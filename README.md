@@ -28,9 +28,14 @@ _Does not rely on any global dependencies._
 
 ```
 .
+├── CONTRIBUTING.md
 ├── LICENSE
 ├── README.md
 ├── app
+│   ├── assets
+│   │   ├── img
+│   │   │   └── smile.png
+│   │   └── main.css
 │   ├── bootstrap.ts
 │   ├── components
 │   │   ├── about
@@ -48,11 +53,27 @@ _Does not rely on any global dependencies._
 │   │       ├── home.ts
 │   │       └── home_spec.ts
 │   ├── index.html
-│   ├── services
-│   │   ├── name_list.ts
-│   │   └── name_list_spec.ts
-│   ├── system.config.js
-│   └── typings.d.ts
+│   └── services
+│       ├── name_list.ts
+│       └── name_list_spec.ts
+├── appveyor.yml
+├── circle.yml
+├── dist
+│   └── dev
+│       ├── assets
+│       │   └── img
+│       │       └── smile.png
+│       ├── bootstrap.js
+│       ├── components
+│       │   ├── about
+│       │   │   └── about.js
+│       │   ├── app
+│       │   │   └── app.js
+│       │   └── home
+│       │       └── home.js
+│       ├── index.html
+│       └── services
+│           └── name_list.js
 ├── gulpfile.ts
 ├── karma.conf.js
 ├── package.json
@@ -73,20 +94,22 @@ _Does not rely on any global dependencies._
 ├── test-main.js
 ├── tools
 │   ├── config.ts
-│   ├── preinstall.js
 │   ├── tasks
-│   │   ├── build.csslib.dev.ts
-│   │   ├── build.docs.ts
-│   │   ├── build.fonts.ts
-│   │   ├── build.index.dev.ts
+│   │   ├── build.bundles.ts
+│   │   ├── build.deps.ts
+│   │   ├── build.docs.ts
+│   │   ├── build.html_css.prod.ts
+│   │   ├── build.img.dev.ts
+│   │   ├── build.index.ts
 │   │   ├── build.js.dev.ts
-│   │   ├── build.jslib.dev.ts
+│   │   ├── build.js.prod.ts
 │   │   ├── build.sass.dev.ts
 │   │   ├── build.test.ts
+│   │   ├── check.versions.ts
 │   │   ├── clean.ts
 │   │   ├── karma.start.ts
 │   │   ├── npm.ts
-│   │   ├── server.docs.ts
+│   │   ├── serve.docs.ts
 │   │   ├── server.start.ts
 │   │   ├── tsd.ts
 │   │   ├── tslint.ts
@@ -94,15 +117,6 @@ _Does not rely on any global dependencies._
 │   │   ├── watch.serve.ts
 │   │   └── watch.test.ts
 │   ├── typings
-│   │   ├── connect-livereload.d.ts
-│   │   ├── gulp-load-plugins.d.ts
-│   │   ├── karma.d.ts
-│   │   ├── tiny-lr.d.ts
-│   │   ├── ng2_test.d.ts
-│   │   ├── open.d.ts
-│   │   ├── run-sequence.d.ts
-│   │   ├── slash.d.ts
-│   │   └── yargs.d.ts
 │   ├── utils
 │   │   ├── server.ts
 │   │   ├── tasks-tools.ts
@@ -112,6 +126,7 @@ _Does not rely on any global dependencies._
 ├── tsconfig.json
 ├── tsd.json
 └── tslint.json
+
 ```
 
 # Configuration
