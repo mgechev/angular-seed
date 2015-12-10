@@ -2,7 +2,7 @@ import * as merge from 'merge-stream';
 import {join} from 'path';
 import {APP_SRC, TMP_DIR} from '../config';
 
-const HTML_MINIFIER_OPTS = { empty: true };
+// const HTML_MINIFIER_OPTS = { empty: true };
 
 export = function buildJSDev(gulp, plugins) {
   return function () {
@@ -11,7 +11,7 @@ export = function buildJSDev(gulp, plugins) {
 
     function minifyHtml() {
       return gulp.src(join(APP_SRC, '**/*.html'))
-        .pipe(plugins.minifyHtml(HTML_MINIFIER_OPTS))
+        // .pipe(plugins.minifyHtml(HTML_MINIFIER_OPTS))
         .pipe(gulp.dest(TMP_DIR));
     }
 
