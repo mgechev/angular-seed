@@ -1,5 +1,5 @@
 import * as gulp from 'gulp';
-import * as plugins from 'gulp-load-plugins';
+import * as gulpLoadPlugins from 'gulp-load-plugins';
 import {readdirSync, existsSync, lstatSync} from 'fs';
 import {join} from 'path';
 import {TOOLS_DIR} from '../config';
@@ -11,7 +11,8 @@ export function loadTasks(): void {
 }
 
 export function task(taskname: string, option?: string | Object) {
-  return require(join('..', 'tasks', taskname))(gulp, plugins(), option);
+  let plugins = gulpLoadPlugins();
+  return require(join('..', 'tasks', taskname))(gulp, plugins, option);
 }
 
 
