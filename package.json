@@ -80,10 +80,11 @@
     "zone.js": "^0.5.8"
   },
   "dependencies": {
-    "angular2": "2.0.0-alpha.48",
+    "angular2": "2.0.0-alpha.49",
     "bootstrap": "^3.3.5",
     "es6-module-loader": "^0.17.8",
     "es6-shim": "^0.33.6",
-    "systemjs": "^0.19.4"
+    "systemjs": "^0.19.4",
+    "rxjs": "5.0.0-alpha.13"
   }
 }
