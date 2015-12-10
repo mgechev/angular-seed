@@ -1,6 +1,5 @@
 import * as gulp from 'gulp';
 import * as runSequence from 'run-sequence';
-import {ENV} from './tools/config';
 import {loadTasks, task} from './tools/utils';
 
 
@@ -13,6 +12,7 @@ loadTasks();
 gulp.task('clean',       task('clean', 'all'));
 gulp.task('clean.dist',  task('clean', 'dist'));
 gulp.task('clean.test',  task('clean', 'test'));
+gulp.task('clean.tmp',   task('clean', 'tmp'));
 
 // --------------
 // Postinstall.
@@ -29,9 +29,26 @@ gulp.task('build.dev', done =>
               'build.sass.dev',
               'build.img.dev',
               'build.js.dev',
-              'build.index.dev',
+              'build.index',
               done));
 
+// --------------
+// Build prod.
+gulp.task('build.prod', done =>
+  runSequence('clean.dist',
+              'clean.tmp',
+              'tslint',
+              'build.sass.dev',
+              'build.images.dev',
+              'build.html_css.prod',
+              'build.deps',
+              'build.js.prod',
+              'build.bundles',
+              'build.index',
+              done));
+
+// --------------
+// Watch.
 gulp.task('build.dev.watch', done =>
   runSequence('build.dev',
               'watch.dev',
@@ -54,7 +71,7 @@ gulp.task('test', done =>
 // --------------
 // Serve.
 gulp.task('serve', done =>
-  runSequence(`build.${ENV}`,
+  runSequence('build.dev',
               'server.start',
               'watch.serve',
               done));
@@ -65,8 +82,3 @@ gulp.task('docs', done =>
   runSequence('build.docs',
               'serve.docs',
               done));
-
-// --------------
-// Build prod.
-// To be implemented (https://github.com/mgechev/angular2-seed/issues/58)
-// Will start implementation when Angular 2 will get close to a stable release.

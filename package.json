@@ -8,6 +8,7 @@
   "scripts": {
     "build.dev": "gulp build.dev",
     "build.dev.watch": "gulp build.dev.watch",
+    "build.prod": "gulp build.prod --env prod",
     "build.test": "gulp build.test",
     "build.test.watch": "gulp build.test.watch",
     "docs": "npm run gulp -- build.docs && npm run gulp -- serve.docs",
@@ -58,6 +59,7 @@
     "karma-jasmine": "~0.3.6",
     "karma-mocha-reporter": "^1.1.1",
     "karma-phantomjs2-launcher": "^0.3.2",
+    "merge-stream": "^1.0.0",
     "open": "0.0.5",
     "reflect-metadata": "^0.1.2",
     "rimraf": "^2.4.3",
