@@ -29,6 +29,7 @@
   "devDependencies": {
     "@reactivex/rxjs": "^5.0.0-alpha.6",
     "async": "^1.4.2",
+    "chalk": "^1.1.1",
     "connect-livereload": "^0.5.3",
     "del": "^1.1.1",
     "express": "~4.13.1",
