@@ -76,8 +76,7 @@
     "typedoc": "^0.3.12",
     "typescript": "~1.7.3",
     "typescript-register": "^1.1.0",
-    "yargs": "^3.25.0",
-    "zone.js": "^0.5.9"
+    "yargs": "^3.25.0"
   },
   "dependencies": {
     "angular2": "2.0.0-alpha.53",
@@ -86,6 +85,7 @@
     "es6-shim": "^0.33.6",
     "reflect-metadata": "^0.1.2",
     "rxjs": "5.0.0-alpha.14",
-    "systemjs": "^0.19.4"
+    "systemjs": "^0.19.4",
+    "zone.js": "0.5.8"
   }
 }

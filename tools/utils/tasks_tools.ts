@@ -5,7 +5,6 @@ import * as gulpLoadPlugins from 'gulp-load-plugins';
 import {readdirSync, existsSync, lstatSync} from 'fs';
 import {join} from 'path';
 import {TOOLS_DIR} from '../config';
-import {TaskCache} from './task_utils/task_cache';
 
 const TASKS_PATH = join(TOOLS_DIR, 'tasks');
 
@@ -13,14 +12,9 @@ export function loadTasks(): void {
   scanDir(TASKS_PATH, (taskname) => registerTask(taskname));
 }
 
-let tasksCache: TaskCache = new TaskCache();
-
 export function task(taskname: string, option?: string) {
-  if (!tasksCache.hasTask(taskname, option)) {
-    util.log('Loading task', chalk.yellow(taskname, option));
-    tasksCache.setTask(taskname, option, require(join('..', 'tasks', taskname))(gulp, gulpLoadPlugins(), option));
-  }
-  return tasksCache.getTask(taskname, option);
+  util.log('Loading task', chalk.yellow(taskname, option));
+  return require(join('..', 'tasks', taskname))(gulp, gulpLoadPlugins(), option);
 }
 
 // ----------
