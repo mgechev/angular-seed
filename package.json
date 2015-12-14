@@ -50,6 +50,7 @@
     "gulp-tslint-stylish": "^1.0.4",
     "gulp-typescript": "~2.8.2",
     "gulp-uglify": "^1.2.0",
+    "gulp-util": "^3.0.7",
     "gulp-watch": "^4.2.4",
     "jasmine-core": "~2.3.4",
     "karma": "~0.12.37",
