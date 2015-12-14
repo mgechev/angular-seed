@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from 'angular2/angular2';
+import {Component, ViewEncapsulation} from 'angular2/core';
 import {
   RouteConfig,
   ROUTER_DIRECTIVES

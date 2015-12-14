@@ -6,7 +6,7 @@ import {
   it,
   beforeEachProviders
 } from 'angular2/testing';
-import {Component, View, provide, DirectiveResolver} from 'angular2/angular2';
+import {Component, View, provide, DirectiveResolver} from 'angular2/core';
 
 import {Location, Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT} from 'angular2/router';
 import {SpyLocation} from 'angular2/src/mock/location_mock';
