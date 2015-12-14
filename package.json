@@ -83,7 +83,8 @@
     "bootstrap": "^3.3.5",
     "es6-module-loader": "^0.17.8",
     "es6-shim": "^0.33.6",
-    "systemjs": "^0.19.4",
-    "rxjs": "5.0.0-alpha.14"
+    "reflect-metadata": "^0.1.2",
+    "rxjs": "5.0.0-alpha.14",
+    "systemjs": "^0.19.4"
   }
 }
