@@ -21,9 +21,7 @@ export function task(taskname: string, option?: string) {
 // Private.
 
 function registerTask(taskname: string, filename?: string, option: string = ''): void {
-  gulp.task(taskname, function (done) {
-    return task(filename || taskname, option)(done);
-  });
+  gulp.task(taskname, task(filename || taskname, option));
 }
 
 // TODO: add recursive lookup ? or enforce pattern file + folder (ie ./tools/utils & ./tools/utils.ts )
