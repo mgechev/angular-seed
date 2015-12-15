@@ -61,7 +61,6 @@
     "karma-phantomjs2-launcher": "^0.3.2",
     "merge-stream": "^1.0.0",
     "open": "0.0.5",
-    "reflect-metadata": "^0.1.2",
     "rimraf": "^2.4.3",
     "run-sequence": "^1.1.0",
     "semver": "^5.0.3",
@@ -79,7 +78,7 @@
     "yargs": "^3.25.0"
   },
   "dependencies": {
-    "angular2": "2.0.0-alpha.55",
+    "angular2": "2.0.0-beta.0",
     "bootstrap": "^3.3.5",
     "es6-module-loader": "^0.17.8",
     "es6-shim": "^0.33.6",
