@@ -21,7 +21,7 @@ export function task(taskname: string, option?: string) {
 
 export function runSequence(...sequence: any[]) {
   let tasks = [];
-  let _sequence = sequence;
+  let _sequence = sequence.slice(0);
   sequence.pop();
 
   scanDir(TASKS_PATH, taskname => tasks.push(taskname));
