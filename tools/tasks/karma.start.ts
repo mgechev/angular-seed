@@ -3,7 +3,7 @@ import {join} from 'path';
 
 export = function karmaStart() {
   return function (done) {
-    new karma.Server({
+    new (<any>karma).Server({
       configFile: join(process.cwd(), 'karma.conf.js'),
       singleRun: true
     }).start(done);
