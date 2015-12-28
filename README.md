@@ -144,7 +144,7 @@ Configure at runtime
 npm start -- --port 8080 --reload-port 4000 --base /my-app/
 ```
 
-# Now to extend?
+# How to extend?
 
 If you want to use your custom libraries:
 
