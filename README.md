@@ -152,7 +152,24 @@ If you want to use your custom libraries:
 npm install my-library --save
 vim tools/config.js
 ```
-Add reference to the installed library in `PATH.src.jslib` (or whatever you like).
+Add reference to the installed library in `NPM_DEPENDENCIES`:
+
+```ts
+export const NPM_DEPENDENCIES = [
+  { src: 'systemjs/dist/system-polyfills.js', dest: LIB_DEST },
+
+
+  { src: 'bootstrap/dist/css/bootstrap.min.css', inject: true, dest: CSS_DEST }
+  // ...
+  { src: 'my-library/dist/bundle.js', inject: true, dest: LIB_DEST }
+];
+
+```
+- `src` - relative to `node_modules`
+- `inject` - indicates whether the library should be injected (if not you have to include it manually in `index.html`)
+- `dest` - your library will be copied to this location. Used for the production build.
+
+**Do not forget to add a reference to the type definition inside the files where you use your custom library.**
 
 # Running test
 
