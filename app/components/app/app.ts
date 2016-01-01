@@ -3,10 +3,10 @@ import {
   RouteConfig,
   ROUTER_DIRECTIVES
 } from 'angular2/router';
+import {componentProxyFactory} from '../../services/component_proxy';
 // import {HTTP_PROVIDERS} from 'angular2/http';
 
 import {HomeCmp} from '../home/home';
-import {AboutCmp} from '../about/about';
 import {NameList} from '../../services/name_list';
 
 @Component({
@@ -19,6 +19,13 @@ import {NameList} from '../../services/name_list';
 })
 @RouteConfig([
   { path: '/', component: HomeCmp, as: 'Home' },
-  { path: '/about', component: AboutCmp, as: 'About' }
+  {
+    path: '/about',
+    component: componentProxyFactory({
+      path: './components/about/about',
+      provide: m => m.AboutCmp
+    }),
+    as: 'About'
+  }
 ])
 export class AppCmp {}

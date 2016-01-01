@@ -4,7 +4,8 @@ import {NameList} from '../../services/name_list';
 
 @Component({
   selector: 'about',
-  templateUrl: './components/about/about.html'
+  templateUrl: './components/about/about.html',
+  styleUrls: ['./components/about/about.css']
 })
 export class AboutCmp {
   constructor(public list: NameList) {}
