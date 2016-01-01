@@ -150,7 +150,7 @@ If you want to use your custom libraries:
 
 ```bash
 npm install my-library --save
-vim tools/config.js
+vim tools/config.ts
 ```
 Add reference to the installed library in `NPM_DEPENDENCIES`:
 
