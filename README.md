@@ -20,6 +20,13 @@ npm install       # or `npm run reinstall` if you get an error
 npm start         # start with --env dev
 npm run docs      # api document for app
 ```
+
+If you want to try the experimental [hot loading](http://blog.mgechev.com/2015/10/26/angular2-hot-loader-hot-loading-tooling/) support use:
+
+```
+npm start -- --hot-loader true
+```
+
 _Does not rely on any global dependencies._
 
 # Directory Structure

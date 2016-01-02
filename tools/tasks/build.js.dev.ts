@@ -12,8 +12,6 @@ export = function buildJSDev(gulp, plugins) {
 
     let result = gulp.src(src)
       .pipe(plugins.plumber())
-      // Won't be required for non-production build after the change
-      .pipe(plugins.inlineNg2Template({ base: APP_SRC }))
       .pipe(plugins.sourcemaps.init())
       .pipe(plugins.typescript(tsProject));
 
