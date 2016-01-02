@@ -21,11 +21,15 @@ npm start         # start with --env dev
 npm run docs      # api document for app
 ```
 
+## Using the experimental hot loader support
+
 If you want to try the experimental [hot loading](http://blog.mgechev.com/2015/10/26/angular2-hot-loader-hot-loading-tooling/) support use:
 
 ```
 npm start -- --hot-loader true
 ```
+
+Note that the hot loader is still in experimental phase of development and there are some missing features. If you experience any issues with it report them at [here](https://github.com/mgechev/angular2-hot-loader/issues).
 
 _Does not rely on any global dependencies._
 
