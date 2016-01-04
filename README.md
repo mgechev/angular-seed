@@ -38,11 +38,15 @@ _Does not rely on any global dependencies._
 - [Introduction](#introduction)
 - [How to start](#how-to-start)
   * [Using the experimental hot loader support](#using-the-experimental-hot-loader-support)
+- [Table of Content](#table-of-content)
 - [Directory Structure](#directory-structure)
 - [Configuration](#configuration)
 - [How to extend?](#how-to-extend-)
+  * [Adding custom libraries](#adding-custom-libraries)
+  * [Adding custom gulp task](#adding-custom-gulp-task)
 - [Running test](#running-test)
 - [Contributing](#contributing)
+- [Examples](#examples)
 - [Contributors](#contributors)
 - [Change Log](#change-log)
 - [License](#license)
@@ -143,6 +147,8 @@ npm start -- --port 8080 --reload-port 4000 --base /my-app/
 
 # How to extend?
 
+## Adding custom libraries
+
 If you want to use your custom libraries:
 
 ```bash
@@ -167,6 +173,57 @@ export const NPM_DEPENDENCIES = [
 - `dest` - your library will be copied to this location. Used for the production build.
 
 **Do not forget to add a reference to the type definition inside the files where you use your custom library.**
+
+## Adding custom gulp task
+
+In this example we are going to add SASS support to the seed's dev build:
+
+1. Install `gulp-sass` as dependency:
+
+```bash
+npm install gulp-sass --save-dev
+```
+
+2. Add type definitions:
+
+```bash
+# Note: tsd MUST be installed as global
+tsd install gulp-sass --save
+```
+
+3. Add SASS task at `./tools/tasks/build.sass.dev.ts`:
+
+```ts
+import {join} from 'path';
+import {APP_SRC} from '../config';
+
+export = function buildSassDev(gulp, plugins, option) {
+  return function () {
+    return gulp.src(join(APP_SRC, '**', '*.scss'))
+      .pipe(plugins.sass().on('error', plugins.sass.logError))
+      .pipe(gulp.dest(APP_SRC));
+  };
+}
+```
+
+4. Add `build.sass.dev` to your dev pipeline:
+
+```ts
+// gulpfile.ts
+...
+// --------------
+// Build dev.
+gulp.task('build.dev', done =>
+  runSequence('clean.dist',
+              'tslint',
+              'build.sass.dev',
+              'build.assets.dev',
+              'build.js.dev',
+              'build.index',
+              done));
+...
+
+```
 
 # Running test
 
