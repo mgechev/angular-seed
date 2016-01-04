@@ -33,6 +33,20 @@ Note that the hot loader is still in experimental phase of development and there
 
 _Does not rely on any global dependencies._
 
+# Table of Content
+
+- [Introduction](#introduction)
+- [How to start](#how-to-start)
+  * [Using the experimental hot loader support](#using-the-experimental-hot-loader-support)
+- [Directory Structure](#directory-structure)
+- [Configuration](#configuration)
+- [How to extend?](#how-to-extend-)
+- [Running test](#running-test)
+- [Contributing](#contributing)
+- [Contributors](#contributors)
+- [Change Log](#change-log)
+- [License](#license)
+
 # Directory Structure
 
 ```
