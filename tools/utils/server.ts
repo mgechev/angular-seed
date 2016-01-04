@@ -1,3 +1,4 @@
+import * as util from 'gulp-util';
 import * as express from 'express';
 import * as openResource from 'open';
 import * as serveStatic from 'serve-static';
@@ -10,9 +11,10 @@ export function serveSPA() {
   codeChangeTool.listen();
   server.use.apply(server, codeChangeTool.middleware);
 
-  server.listen(PORT, () =>
-    openResource('http://localhost:' + PORT + APP_BASE + APP_DEST)
-  );
+  server.listen(PORT, () => {
+    util.log('Server is listening on port: ' + PORT);
+    openResource('http://localhost:' + PORT + APP_BASE + APP_DEST);
+  });
 }
 
 export function notifyLiveReload(e) {
