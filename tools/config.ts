@@ -61,9 +61,7 @@ export const NPM_DEPENDENCIES = [
 // Declare local files that needs to be injected
 export const APP_ASSETS = [
   // inject minified css files from tmp
-  { src: `${TMP_ASSETS_DIR}/main.css`, inject: true, dest: CSS_DEST },
-  // copy (inject: false) css map from tmp
-  { src: `${TMP_ASSETS_DIR}/main.css.map`, dest: CSS_DEST }
+  { src: `${TMP_ASSETS_DIR}/main.css`, inject: true, dest: CSS_DEST }
 ];
 
 NPM_DEPENDENCIES
