@@ -25,6 +25,7 @@ export const ASSETS_SRC           = `${APP_SRC}/assets`;
 
 export const TOOLS_DIR            = 'tools';
 export const TMP_DIR              = 'tmp';
+export const TMP_ASSETS_DIR       = `${TMP_DIR}/assets`;
 export const TEST_DEST            = 'test';
 export const DOCS_DEST            = 'docs';
 export const APP_DEST             = `dist/${ENV}`;
@@ -59,7 +60,10 @@ export const NPM_DEPENDENCIES = [
 
 // Declare local files that needs to be injected
 export const APP_ASSETS = [
-  { src: `${ASSETS_SRC}/main.css`, inject: true, dest: CSS_DEST }
+  // inject minified css files from tmp
+  { src: `${TMP_ASSETS_DIR}/main.css`, inject: true, dest: CSS_DEST },
+  // copy (inject: false) css map from tmp
+  { src: `${TMP_ASSETS_DIR}/main.css.map`, dest: CSS_DEST }
 ];
 
 NPM_DEPENDENCIES
