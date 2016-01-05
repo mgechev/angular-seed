@@ -59,6 +59,7 @@ export const NPM_DEPENDENCIES = [
 
 // Declare local files that needs to be injected
 export const APP_ASSETS = [
+  // inject minified css files from tmp
   { src: `${ASSETS_SRC}/main.css`, inject: true, dest: CSS_DEST }
 ];
 
