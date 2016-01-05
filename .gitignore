@@ -39,3 +39,10 @@ lib
 test
 tools/typings/tsd
 tmp
+
+# Transpiled files
+gulpfile.js*
+app/**/*.js
+app/**/*.js.map
+tools/**/*.js
+tools/**/*.js.map
