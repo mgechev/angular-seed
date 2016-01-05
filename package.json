@@ -31,7 +31,7 @@
     "async": "^1.4.2",
     "chalk": "^1.1.1",
     "connect-livereload": "^0.5.3",
-    "del": "^1.1.1",
+    "del": "^2.2.0",
     "express": "~4.13.1",
     "extend": "^3.0.0",
     "gulp": "^3.9.0",

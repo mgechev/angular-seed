@@ -1,4 +1,6 @@
 import * as async from 'async';
+import * as util from 'gulp-util';
+import * as chalk from 'chalk';
 import * as del from 'del';
 import {APP_DEST, TEST_DEST, TMP_DIR} from '../config';
 
@@ -24,11 +26,20 @@ function cleanAll(done) {
   ], done);
 }
 function cleanDist(done) {
-  del(APP_DEST, done);
+  del(APP_DEST).then((paths) => {
+    util.log('Deleted', chalk.yellow(paths && paths.join(', ') || '-'));
+    done();
+  });
 }
 function cleanTest(done) {
-  del(TEST_DEST, done);
+  del(TEST_DEST).then((paths) => {
+    util.log('Deleted', chalk.yellow(paths && paths.join(', ') || '-'));
+    done();
+  });
 }
 function cleanTmp(done) {
-  del(TMP_DIR, done);
+  del(TMP_DIR).then((paths) => {
+    util.log('Deleted', chalk.yellow(paths && paths.join(', ') || '-'));
+    done();
+  });
 }
