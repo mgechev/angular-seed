@@ -8,8 +8,7 @@
         "noLib": false,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "sourceMap": true,
-        "outDir": "dev/ts_compiled"
+        "sourceMap": true
     },
     "exclude": [
         "node_modules"
