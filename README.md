@@ -257,6 +257,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
  - https://github.com/justindujardin/angular2-seed - integration with [ng2-material](https://github.com/justindujardin/ng2-material)
  - https://github.com/AngularShowcase/angular2-sample-app - sample Angular 2 application
  - https://github.com/AngularShowcase/ng2-bootstrap-sbadmin - ng2-bootstrap-sbadmin
+ - https://github.com/AngularShowcase/angular2-seed-ng2-highcharts - Simple application including a [Highcharts](http://www.highcharts.com) graph.
 
 # Contributors
 
