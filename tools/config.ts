@@ -36,7 +36,7 @@ export const LIB_DEST             = `${APP_DEST}/lib`;
 export const APP_ROOT             = ENV === 'dev' ? `${APP_BASE}${APP_DEST}/` : `${APP_BASE}`;
 export const VERSION              = appVersion();
 
-export const VERSION_NPM          = '2.14.7';
+export const VERSION_NPM          = '2.14.2';
 export const VERSION_NODE         = '4.0.0';
 
 // Declare NPM dependencies (Note that globs should not be injected).
