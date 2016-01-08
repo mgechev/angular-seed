@@ -6,7 +6,6 @@ node_js:
 sudo: false
 services:
 before_install:
-- npm update -g npm
 - npm --version
 - export CHROME_BIN=chromium-browser
 - export DISPLAY=:99.0
