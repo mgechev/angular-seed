@@ -3,7 +3,7 @@ import * as connectLivereload from 'connect-livereload';
 import {ENABLE_HOT_LOADING, LIVE_RELOAD_PORT, HOT_LOADER_PORT, APP_SRC, APP_BASE, PROJECT_ROOT} from '../config';
 import * as ng2HotLoader from 'angular2-hot-loader';
 import * as tinylrFn from 'tiny-lr';
-import {sep} from 'path';
+import {join} from 'path';
 
 let tinylr = tinylrFn();
 let listen = () => {
@@ -11,7 +11,7 @@ let listen = () => {
     return ng2HotLoader.listen({
       port: HOT_LOADER_PORT,
       processPath: file => {
-        return file.replace(`${PROJECT_ROOT}${sep}${APP_SRC}`, '/dist/dev/');
+        return file.replace(join(PROJECT_ROOT, APP_SRC), join('dist', 'dev'));
       }
     });
   } else {
