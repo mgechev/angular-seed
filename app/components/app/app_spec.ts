@@ -5,8 +5,8 @@ import {
   injectAsync,
   it,
   beforeEachProviders
-} from 'angular2/testing_internal';
-import {Component, View, provide, DirectiveResolver} from 'angular2/core';
+} from 'angular2/testing';
+import {Component, provide, DirectiveResolver} from 'angular2/core';
 
 import {Location, Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT} from 'angular2/router';
 import {SpyLocation} from 'angular2/src/mock/location_mock';
@@ -30,8 +30,7 @@ export function main() {
 
     it('should work',
       injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-        return tcb.overrideTemplate(TestComponent, '<div><app></app></div>')
-          .createAsync(TestComponent)
+        return tcb.createAsync(TestComponent)
           .then(rootTC => {
             rootTC.detectChanges();
             let appDOMEl = rootTC.debugElement.componentViewChildren[0].nativeElement;
@@ -41,6 +40,9 @@ export function main() {
   });
 }
 
-@Component({selector: 'test-cmp'})
-@View({directives: [AppCmp]})
+@Component({
+  selector: 'test-cmp',
+  template: '<div><app></app></div>',
+  directives: [AppCmp]
+})
 class TestComponent {}

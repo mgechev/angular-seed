@@ -4,18 +4,18 @@ import {
   expect,
   injectAsync,
   it
-} from 'angular2/testing_internal';
-import {Component, View} from 'angular2/core';
+} from 'angular2/testing';
+import {Component} from 'angular2/core';
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
 import {AboutCmp} from './about';
+import {CORE_DIRECTIVES} from 'angular2/common';
 import {NameList} from '../../services/name_list';
 
 export function main() {
   describe('About component', () => {
     it('should work',
       injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-        return tcb.overrideTemplate(TestComponent, '<div><about></about></div>')
-          .createAsync(TestComponent)
+        return tcb.createAsync(TestComponent)
           .then((rootTC) => {
             rootTC.detectChanges();
 
@@ -41,6 +41,10 @@ export function main() {
   });
 }
 
-@Component({providers: [NameList], selector: 'test-cmp'})
-@View({directives: [AboutCmp]})
+@Component({
+  providers: [NameList],
+  selector: 'test-cmp',
+  template: '<div><about></about></div>',
+  directives: [AboutCmp, CORE_DIRECTIVES]
+})
 class TestComponent {}
