@@ -8,7 +8,6 @@ import {
 import {Component} from 'angular2/core';
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
 import {AboutCmp} from './about';
-import {CORE_DIRECTIVES} from 'angular2/common';
 import {NameList} from '../../services/name_list';
 
 export function main() {
@@ -45,6 +44,6 @@ export function main() {
   providers: [NameList],
   selector: 'test-cmp',
   template: '<div><about></about></div>',
-  directives: [AboutCmp, CORE_DIRECTIVES]
+  directives: [AboutCmp]
 })
 class TestComponent {}
