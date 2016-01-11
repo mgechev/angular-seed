@@ -181,50 +181,50 @@ In this example we are going to add SASS support to the seed's dev build:
 
 1. Install `gulp-sass` as dependency:
 
-```bash
-npm install gulp-sass --save-dev
-```
+  ```bash
+  npm install gulp-sass --save-dev
+  ```
 
 2. Add type definitions:
 
-```bash
-# Note: tsd MUST be installed as global
-tsd install gulp-sass --save
-```
+  ```bash
+  # Note: tsd MUST be installed as global
+  tsd install gulp-sass --save
+  ```
 
 3. Add SASS task at `./tools/tasks/build.sass.dev.ts`:
 
-```ts
-import {join} from 'path';
-import {APP_SRC, APP_DEST} from '../config';
-
-export = function buildSassDev(gulp, plugins, option) {
-  return function () {
-    return gulp.src(join(APP_SRC, '**', '*.scss'))
-      .pipe(plugins.sass().on('error', plugins.sass.logError))
-      .pipe(gulp.dest(APP_DEST));
-  };
-}
-```
+  ```ts
+  import {join} from 'path';
+  import {APP_SRC, APP_DEST} from '../config';
+  
+  export = function buildSassDev(gulp, plugins, option) {
+    return function () {
+      return gulp.src(join(APP_SRC, '**', '*.scss'))
+        .pipe(plugins.sass().on('error', plugins.sass.logError))
+        .pipe(gulp.dest(APP_DEST));
+    };
+  }
+  ```
 
 4. Add `build.sass.dev` to your dev pipeline:
 
-```ts
-// gulpfile.ts
-...
-// --------------
-// Build dev.
-gulp.task('build.dev', done =>
-  runSequence('clean.dist',
-              'tslint',
-              'build.sass.dev',
-              'build.assets.dev',
-              'build.js.dev',
-              'build.index',
-              done));
-...
-
-```
+  ```ts
+  // gulpfile.ts
+  ...
+  // --------------
+  // Build dev.
+  gulp.task('build.dev', done =>
+    runSequence('clean.dist',
+                'tslint',
+                'build.sass.dev',
+                'build.assets.dev',
+                'build.js.dev',
+                'build.index',
+                done));
+  ...
+  
+  ```
 
 # Running test
 
