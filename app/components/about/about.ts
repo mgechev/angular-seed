@@ -1,13 +1,10 @@
 import {Component} from 'angular2/core';
 
-import {CORE_DIRECTIVES} from 'angular2/common';
-
 import {NameList} from '../../services/name_list';
 
 @Component({
   selector: 'about',
-  templateUrl: './components/about/about.html',
-  directives: [CORE_DIRECTIVES]
+  templateUrl: './components/about/about.html'
 })
 export class AboutCmp {
   constructor(public list: NameList) {}
