@@ -15,7 +15,7 @@ export function main() {
     it('should work',
       injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
         return tcb.createAsync(TestComponent)
-          .then((rootTC) => {
+          .then(rootTC => {
             rootTC.detectChanges();
 
             let aboutInstance = rootTC.debugElement.componentViewChildren[0].componentInstance;
@@ -28,7 +28,8 @@ export function main() {
             expect(nameListLen()).toEqual(4);
             expect(DOM.querySelectorAll(aboutDOMEl, 'li').length).toEqual(nameListLen());
 
-            aboutInstance.addName({value: 'Minko'});
+            aboutInstance.newName = 'Minko';
+            aboutInstance.addName();
             rootTC.detectChanges();
 
             expect(nameListLen()).toEqual(5);

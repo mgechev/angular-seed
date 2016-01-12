@@ -5,8 +5,8 @@
 <p>
   You want more? Add them yourself!
 </p>
-<form (submit)="addName(newname)">
-  <input #newname>
+<form (submit)="addName()">
+  <input [(ngModel)]="newName">
   <button type="submit">Add</button>
 </form>
 <ul>

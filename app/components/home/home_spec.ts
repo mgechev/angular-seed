@@ -25,7 +25,7 @@ export function main() {
 
 @Component({
   selector: 'test-cmp',
-  directives: [HomeCmp, HomeCmp],
+  directives: [HomeCmp],
   template: '<div><home></home></div>'
 })
 class TestComponent {}
