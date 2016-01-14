@@ -1,11 +1,11 @@
 import {Component} from 'angular2/core';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
 
-import {NameList} from '../../services/name_list';
+import {NameList} from '../../shared/services/name_list';
 
 @Component({
   selector: 'about',
-  templateUrl: './components/about/about.html',
+  templateUrl: './about/components/about.html',
   directives: [FORM_DIRECTIVES, CORE_DIRECTIVES]
 })
 export class AboutCmp {

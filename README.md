@@ -80,39 +80,39 @@ _Does not rely on any global dependencies._
 ├── LICENSE
 ├── README.md
 ├── app
+│   ├── about
+│   │   └── components
+│   │       ├── about.e2e.ts
+│   │       ├── about.html
+│   │       ├── about.ts
+│   │       └── about_spec.ts
+│   ├── app
+│   │   └── components
+│   │       ├── app.css
+│   │       ├── app.e2e.ts
+│   │       ├── app.html
+│   │       ├── app.ts
+│   │       └── app_spec.ts
 │   ├── assets
 │   │   ├── img
 │   │   │   └── smile.png
 │   │   └── main.css
-│   ├── bootstrap.ts
-│   ├── components
-│   │   ├── about
-│   │   │   ├── about.html
-│   │   │   ├── about.ts
-│   │   │   └── about_spec.ts
-│   │   ├── app
-│   │   │   ├── app.css
-│   │   │   ├── app.html
-│   │   │   ├── app.ts
-│   │   │   └── app_spec.ts
-│   │   └── home
+│   ├── home
+│   │   └── components
 │   │       ├── home.css
 │   │       ├── home.html
 │   │       ├── home.ts
 │   │       └── home_spec.ts
-│   ├── hot_loader_bootstrap.ts
-│   ├── index.html
-│   └── services
-│       ├── name_list.ts
-│       └── name_list_spec.ts
-├── appveyor.yml
+│   ├── shared
+│   │   └── services
+│   │       ├── name_list.ts
+│   │       └── name_list_spec.ts
+│   ├── hot_loader_main.ts
+│   ├── main.ts
+│   └── index.html
 ├── dist
-├── gulpfile.ts
-├── karma.conf.js
-├── package.json
-├── test-main.js
+├── test
 ├── tools
-│   ├── config.ts
 │   ├── tasks
 │   ├── typings
 │   ├── utils
@@ -121,7 +121,14 @@ _Does not rely on any global dependencies._
 │   │   ├── tasks_tools.ts
 │   │   ├── template_injectables.ts
 │   │   └── template_locals.ts
+│   ├── config.ts
 │   └── utils.ts
+├── appveyor.yml
+├── gulpfile.ts
+├── karma.conf.js
+├── package.json
+├── protractor.conf.js
+├── test-main.js
 ├── tsconfig.json
 ├── tsd.json
 └── tslint.json

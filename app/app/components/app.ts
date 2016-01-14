@@ -3,17 +3,16 @@ import {
   RouteConfig,
   ROUTER_DIRECTIVES
 } from 'angular2/router';
-// import {HTTP_PROVIDERS} from 'angular2/http';
 
-import {HomeCmp} from '../home/home';
-import {AboutCmp} from '../about/about';
-import {NameList} from '../../services/name_list';
+import {HomeCmp} from '../../home/components/home';
+import {AboutCmp} from '../../about/components/about';
+import {NameList} from '../../shared/services/name_list';
 
 @Component({
   selector: 'app',
   viewProviders: [NameList],
-  templateUrl: './components/app/app.html',
-  styleUrls: ['./components/app/app.css'],
+  templateUrl: './app/components/app.html',
+  styleUrls: ['./app/components/app.css'],
   encapsulation: ViewEncapsulation.None,
   directives: [ROUTER_DIRECTIVES]
 })

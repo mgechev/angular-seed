@@ -34,7 +34,7 @@ export = function bundles(gulp, plugins) {
     }
 
     function bundleApp() {
-      return browserify(join(TMP_DIR, 'bootstrap'))
+      return browserify(join(TMP_DIR, 'main'))
         .bundle()
         .pipe(require('vinyl-source-stream')(JS_PROD_APP_BUNDLE))
         .pipe(require('vinyl-buffer')())
