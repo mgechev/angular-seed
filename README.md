@@ -1,14 +1,25 @@
 # Introduction
 
+[![Build Status](https://travis-ci.org/mgechev/angular2-seed.svg?branch=master)](https://travis-ci.org/mgechev/angular2-seed)
 [![Join the chat at https://gitter.im/mgechev/angular2-seed](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mgechev/angular2-seed?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 [![Dependency Status](https://david-dm.org/mgechev/angular2-seed.svg)](https://david-dm.org/mgechev/angular2-seed)
 [![devDependency Status](https://david-dm.org/mgechev/angular2-seed/dev-status.svg)](https://david-dm.org/mgechev/angular2-seed#info=devDependencies)
-[![Build Status](https://travis-ci.org/mgechev/angular2-seed.svg?branch=master)](https://travis-ci.org/mgechev/angular2-seed)
-[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 A seed project for Angular 2 apps.
 
-It is something similar to the AngularJS Quick Start but does the entire build with gulp.
+It is something similar to the Angular Quick Start but does the entire build with gulp.
+
+`angular2-seed` provides the following features:
+
+- Ready to go, statically typed build system using gulp for working with TypeScript
+- Production and development builds
+- Sample unit tests with Jasmine and Karma
+- End-to-end tests with Protractor
+- Development server with Livereload
+- Experimental hot loading support
+- Following the best practices for your application’s structure
+- Manager of your type definitions using tsd
 
 # How to start
 
