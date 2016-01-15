@@ -9,6 +9,8 @@ gulp.task('clean.test',  task('clean', 'test'));
 gulp.task('clean.tmp',   task('clean', 'tmp'));
 
 gulp.task('check.versions', task('check.versions'));
+gulp.task('build.docs', task('build.docs'));
+gulp.task('serve.docs', task('serve.docs'));
 
 // --------------
 // Postinstall.
@@ -73,7 +75,7 @@ gulp.task('serve', done =>
 // --------------
 // Docs
 // Disabled until https://github.com/sebastian-lenz/typedoc/issues/162 gets resolved
-// gulp.task('docs', done =>
-//   runSequence('build.docs',
-//               'serve.docs',
-//               done));
+gulp.task('docs', done =>
+  runSequence('build.docs',
+              'serve.docs',
+              done));
