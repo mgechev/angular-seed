@@ -20,6 +20,7 @@ It is something similar to the Angular Quick Start but does the entire build wit
 - Experimental hot loading support
 - Following the best practices for your application’s structure
 - Manager of your type definitions using tsd
+- Basic Service Worker, which implements "Cache then network strategy"
 
 # How to start
 
