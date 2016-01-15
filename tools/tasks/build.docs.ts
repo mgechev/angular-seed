@@ -19,7 +19,7 @@ export = function buildDocs(gulp, plugins, option) {
         out: DOCS_DEST,
         json: join(DOCS_DEST , 'data/docs.json' ),
         name: APP_TITLE,
-        ignoreCompilerErrors: false,
+        ignoreCompilerErrors: true,
         experimentalDecorators: true,
         version: true
       }));
