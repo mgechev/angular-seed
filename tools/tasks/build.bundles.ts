@@ -1,26 +1,47 @@
-import {parallel} from 'async';
+import * as merge from 'merge-stream';
 import {join} from 'path';
-import * as Builder from 'systemjs-builder';
-import {BUNDLES_DEST, SYSTEM_CONFIG_BUILDER} from '../config';
-
-const BUNDLE_OPTS = {
-  minify: true,
-  sourceMaps: true,
-  format: 'cjs'
-};
+import * as browserify from 'browserify';
+import {
+  PROD_DEPENDENCIES,
+  JS_PROD_SHIMS_BUNDLE,
+  JS_PROD_APP_BUNDLE,
+  JS_DEST,
+  TMP_DIR
+} from '../config';
 
 export = function bundles(gulp, plugins) {
-  return function (done) {
-    let builder = new Builder(SYSTEM_CONFIG_BUILDER);
+  return function () {
 
-    parallel([
-      bundleApp
-    ], () => done());
+    return merge(bundleShims(), bundleApp());
 
-    function bundleApp(done) {
-      builder.bundle(
-        'bootstrap - angular2/*',
-        join(BUNDLES_DEST, 'app.js'), BUNDLE_OPTS).then(done);
+    function getShims() {
+      let libs = PROD_DEPENDENCIES
+        .filter(d => /\.js$/.test(d.src));
+      return libs.filter(l => l.inject === 'shims')
+        .concat(libs.filter(l => l.inject === 'libs'))
+        .concat(libs.filter(l => l.inject === true))
+        .map(l => l.src);
+    }
+
+    function bundleShims() {
+      return gulp.src(getShims())
+      // Strip comments and sourcemaps
+      .pipe(plugins.uglify({
+        mangle: false
+      }))
+      .pipe(plugins.concat(JS_PROD_SHIMS_BUNDLE))
+      .pipe(gulp.dest(JS_DEST));
+    }
+
+    function bundleApp() {
+      return browserify(join(TMP_DIR, 'bootstrap'))
+        .bundle()
+        .pipe(require('vinyl-source-stream')(JS_PROD_APP_BUNDLE))
+        .pipe(require('vinyl-buffer')())
+        .pipe(plugins.uglify({
+          mangle: false
+        }))
+        .pipe(gulp.dest(JS_DEST));
     }
   };
 };

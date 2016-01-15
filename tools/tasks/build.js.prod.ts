@@ -2,7 +2,7 @@ import {join} from 'path';
 import {APP_SRC, TMP_DIR} from '../config';
 import {templateLocals, tsProjectFn} from '../utils';
 
-export = function buildJSDev(gulp, plugins) {
+export = function buildJSProd(gulp, plugins) {
   return function () {
     let tsProject = tsProjectFn(plugins);
     let src = [

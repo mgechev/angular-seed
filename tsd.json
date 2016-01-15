@@ -45,7 +45,7 @@
       "commit": "923c5431d9447db9d5cf41adc5914e3c94c1ff10"
     },
     "node/node.d.ts": {
-      "commit": "5a8fc5ee71701431e4fdbb80c506e3c13f85a9ff"
+      "commit": "138ad74b9e8e6c08af7633964962835add4c91e2"
     },
     "gulp-util/gulp-util.d.ts": {
       "commit": "5a8fc5ee71701431e4fdbb80c506e3c13f85a9ff"
@@ -58,6 +58,12 @@
     },
     "chalk/chalk.d.ts": {
       "commit": "5a8fc5ee71701431e4fdbb80c506e3c13f85a9ff"
+    },
+    "vinyl-source-stream/vinyl-source-stream.d.ts": {
+      "commit": "ffceea9dd124d277c4597c7bd12930666ec074c5"
+    },
+    "browserify/browserify.d.ts": {
+      "commit": "138ad74b9e8e6c08af7633964962835add4c91e2"
     }
   }
 }
