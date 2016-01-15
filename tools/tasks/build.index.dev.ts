@@ -1,5 +1,5 @@
-import {join, sep} from 'path';
-import {APP_SRC, APP_DEST, DEPENDENCIES, ENV} from '../config';
+import {join} from 'path';
+import {APP_SRC, APP_DEST, DEV_DEPENDENCIES} from '../config';
 import {transformPath, templateLocals} from '../utils';
 
 export = function buildIndexDev(gulp, plugins) {
@@ -22,13 +22,16 @@ export = function buildIndexDev(gulp, plugins) {
   }
 
   function getInjectablesDependenciesRef(name?: string) {
-    return DEPENDENCIES
+    return DEV_DEPENDENCIES
       .filter(dep => dep['inject'] && dep['inject'] === (name || true))
       .map(mapPath);
   }
 
   function mapPath(dep) {
-    let prodPath = join(dep.dest, dep.src.split(sep).pop());
-    return ('prod' === ENV ? prodPath : dep.src );
+    let envPath = dep.src;
+    if (envPath.startsWith(APP_SRC)) {
+      envPath = join(APP_DEST, dep.src.replace(APP_SRC, ''));
+    }
+    return envPath;
   }
 };

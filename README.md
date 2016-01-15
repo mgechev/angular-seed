@@ -26,11 +26,19 @@ It is something similar to the Angular Quick Start but does the entire build wit
 **Note** that this seed project requires node v4.x.x or higher and npm 2.14.7.
 
 ```bash
-git clone https://github.com/mgechev/angular2-seed.git
+git clone --depth 1 https://github.com/mgechev/angular2-seed.git
 cd angular2-seed
-npm install       # or `npm run reinstall` if you get an error
-npm start         # start with --env dev
-npm run docs      # api document for app
+# install the project's dependencies
+npm install
+# watches your files and uses livereload by default
+npm start
+# api document for the app
+npm run docs
+
+# dev build
+npm build.dev
+# prod build
+npm build.prod
 ```
 
 ## Using the experimental hot loader support
@@ -105,28 +113,6 @@ _Does not rely on any global dependencies._
 ├── tools
 │   ├── config.ts
 │   ├── tasks
-│   │   ├── build.assets.dev.ts
-│   │   ├── build.assets.prod.ts
-│   │   ├── build.bundles.ts
-│   │   ├── build.deps.ts
-│   │   ├── build.docs.ts
-│   │   ├── build.html_css.prod.ts
-│   │   ├── build.index.ts
-│   │   ├── build.js.dev.ts
-│   │   ├── build.js.prod.ts
-│   │   ├── build.sass.dev.ts
-│   │   ├── build.test.ts
-│   │   ├── check.versions.ts
-│   │   ├── clean.ts
-│   │   ├── karma.start.ts
-│   │   ├── npm.ts
-│   │   ├── serve.docs.ts
-│   │   ├── server.start.ts
-│   │   ├── tsd.ts
-│   │   ├── tslint.ts
-│   │   ├── watch.dev.ts
-│   │   ├── watch.serve.ts
-│   │   └── watch.test.ts
 │   ├── typings
 │   ├── utils
 │   │   ├── code_change_tools.ts
@@ -208,7 +194,7 @@ In this example we are going to add SASS support to the seed's dev build:
   ```ts
   import {join} from 'path';
   import {APP_SRC, APP_DEST} from '../config';
-  
+
   export = function buildSassDev(gulp, plugins, option) {
     return function () {
       return gulp.src(join(APP_SRC, '**', '*.scss'))
@@ -227,14 +213,14 @@ In this example we are going to add SASS support to the seed's dev build:
   // Build dev.
   gulp.task('build.dev', done =>
     runSequence('clean.dist',
-                'tslint',
-                'build.sass.dev',
-                'build.assets.dev',
-                'build.js.dev',
-                'build.index',
-                done));
+        'tslint',
+        'build.sass.dev',
+        'build.assets.dev',
+        'build.js.dev',
+        'build.index',
+        done));
   ...
-  
+
   ```
 
 # Running test

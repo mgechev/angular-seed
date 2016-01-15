@@ -8,7 +8,7 @@
   "scripts": {
     "build.dev": "gulp build.dev",
     "build.dev.watch": "gulp build.dev.watch",
-    "build.prod": "gulp build.prod --env prod",
+    "build.prod": "gulp build.prod",
     "build.test": "gulp build.test",
     "build.test.watch": "gulp build.test.watch",
     "docs": "npm run gulp -- build.docs && npm run gulp -- serve.docs",
@@ -33,9 +33,11 @@
   "devDependencies": {
     "angular2-hot-loader": "0.0.16",
     "async": "^1.4.2",
+    "browserify": "^13.0.0",
     "chalk": "^1.1.1",
     "connect-livereload": "^0.5.3",
     "del": "^2.2.0",
+    "event-stream": "^3.3.2",
     "express": "~4.13.1",
     "extend": "^3.0.0",
     "gulp": "^3.9.0",
@@ -73,13 +75,14 @@
     "serve-static": "^1.9.2",
     "slash": "~1.0.0",
     "stream-series": "^0.1.1",
-    "systemjs-builder": "^0.14.8",
     "tiny-lr": "^0.2.1",
     "traceur": "^0.0.91",
     "ts-node": "^0.5.4",
     "tsd": "^0.6.4",
     "typedoc": "^0.3.12",
     "typescript": "~1.7.3",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
     "yargs": "^3.25.0"
   },
   "dependencies": {

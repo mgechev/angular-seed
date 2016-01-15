@@ -26,7 +26,7 @@ gulp.task('build.dev', done =>
               'tslint',
               'build.assets.dev',
               'build.js.dev',
-              'build.index',
+              'build.index.dev',
               done));
 
 // --------------
@@ -37,10 +37,9 @@ gulp.task('build.prod', done =>
               'tslint',
               'build.assets.prod',
               'build.html_css.prod',
-              'build.deps',
               'build.js.prod',
               'build.bundles',
-              'build.index',
+              'build.index.prod',
               done));
 
 // --------------
