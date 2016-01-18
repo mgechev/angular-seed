@@ -1,4 +1,4 @@
-import {join, sep} from 'path';
+import {join, sep, normalize} from 'path';
 import {templateLocals} from '../utils';
 import {
   APP_SRC,
@@ -25,7 +25,7 @@ export = function buildIndexProd(gulp, plugins) {
         read: false
       }), {
         transform: function (filepath) {
-          let path = filepath.split(sep);
+          let path = normalize(filepath).split(sep);
           arguments[0] = path.slice(path.length - 2, path.length).join(sep);
           return plugins.inject.transform.apply(plugins.inject.transform, arguments);
         }
