@@ -13,7 +13,7 @@ export = function tslint(gulp, plugins) {
     return gulp.src(src)
       .pipe(plugins.tslint())
       .pipe(plugins.tslint.report(plugins.tslintStylish, {
-        emitError: false,
+        emitError: true,
         sort: true,
         bell: true
       }));
