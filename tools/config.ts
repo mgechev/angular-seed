@@ -21,7 +21,7 @@ export const APP_BASE             = argv['base']        || '/';
 export const ENABLE_HOT_LOADING   = !!argv['hot-loader'];
 export const HOT_LOADER_PORT      = 5578;
 
-export const BOOTSTRAP_MODULE     = ENABLE_HOT_LOADING ? 'hot_loader_bootstrap' : 'bootstrap';
+export const BOOTSTRAP_MODULE     = ENABLE_HOT_LOADING ? 'hot_loader_main' : 'main';
 
 export const APP_TITLE            = 'My Angular2 App';
 
@@ -88,8 +88,8 @@ export const PROD_DEPENDENCIES = PROD_NPM_DEPENDENCIES.concat(APP_ASSETS);
 const SYSTEM_CONFIG_DEV = {
   defaultJSExtensions: true,
   paths: {
-    'bootstrap': `${APP_ROOT}bootstrap`,
-    'hot_loader_bootstrap': `${APP_ROOT}hot_loader_bootstrap`,
+    'main': `${APP_ROOT}main`,
+    'hot_loader_main': `${APP_ROOT}hot_loader_main`,
     '*': `${APP_BASE}node_modules/*`
   }
 };
