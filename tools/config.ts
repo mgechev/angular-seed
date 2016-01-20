@@ -87,9 +87,10 @@ export const PROD_DEPENDENCIES = PROD_NPM_DEPENDENCIES.concat(APP_ASSETS);
 // SystemsJS Configuration.
 const SYSTEM_CONFIG_DEV = {
   defaultJSExtensions: true,
-  packages: {
-    angular2: { defaultExtension: false },
-    rxjs: { defaultExtension: false }
+  paths: {
+    'main': `${APP_ROOT}main`,
+    'hot_loader_main': `${APP_ROOT}hot_loader_main`,
+    '*': `${APP_BASE}node_modules/*`
   }
 };
 
