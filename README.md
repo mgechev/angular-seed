@@ -168,7 +168,7 @@ export const NPM_DEPENDENCIES = [
   { src: 'systemjs/dist/system-polyfills.js', dest: LIB_DEST },
 
 
-  { src: 'bootstrap/dist/css/bootstrap.min.css', inject: true, dest: CSS_DEST }
+  { src: 'bootstrap/dist/css/bootstrap.min.css', inject: true, dest: CSS_DEST },
   // ...
   { src: 'my-library/dist/bundle.js', inject: true, dest: LIB_DEST }
 ];
