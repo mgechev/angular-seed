@@ -12,15 +12,15 @@ It is something similar to the Angular Quick Start but does the entire build wit
 
 `angular2-seed` provides the following features:
 
-- Ready to go, statically typed build system using gulp for working with TypeScript
-- Production and development builds
-- Sample unit tests with Jasmine and Karma
-- End-to-end tests with Protractor
-- Development server with Livereload
-- Experimental hot loading support
-- Following the best practices for your application’s structure
-- Manager of your type definitions using tsd
-- Basic Service Worker, which implements "Cache then network strategy"
+- Ready to go, statically typed build system using gulp for working with TypeScript.
+- Production and development builds.
+- Sample unit tests with Jasmine and Karma.
+- End-to-end tests with Protractor.
+- Development server with Livereload.
+- Experimental hot loading support.
+- Following the best practices for your application’s structure.
+- Manager of your type definitions using tsd.
+- Basic Service Worker, which implements "Cache then network strategy".
 
 # How to start
 
@@ -63,8 +63,6 @@ _Does not rely on any global dependencies._
 - [Directory Structure](#directory-structure)
 - [Configuration](#configuration)
 - [How to extend?](#how-to-extend-)
-  * [Adding custom libraries](#adding-custom-libraries)
-  * [Adding custom gulp task](#adding-custom-gulp-task)
 - [Running test](#running-test)
 - [Contributing](#contributing)
 - [Examples](#examples)
@@ -116,11 +114,6 @@ _Does not rely on any global dependencies._
 │   ├── tasks
 │   ├── typings
 │   ├── utils
-│   │   ├── code_change_tools.ts
-│   │   ├── server.ts
-│   │   ├── tasks_tools.ts
-│   │   ├── template_injectables.ts
-│   │   └── template_locals.ts
 │   ├── config.ts
 │   └── utils.ts
 ├── appveyor.yml
@@ -153,83 +146,7 @@ npm start -- --port 8080 --reload-port 4000 --base /my-app/
 
 # How to extend?
 
-## Adding custom libraries
-
-If you want to use your custom libraries:
-
-```bash
-npm install my-library --save
-vim tools/config.ts
-```
-Add reference to the installed library in `NPM_DEPENDENCIES`:
-
-```ts
-export const NPM_DEPENDENCIES = [
-  { src: 'systemjs/dist/system-polyfills.js', dest: LIB_DEST },
-
-
-  { src: 'bootstrap/dist/css/bootstrap.min.css', inject: true, dest: CSS_DEST }
-  // ...
-  { src: 'my-library/dist/bundle.js', inject: true, dest: LIB_DEST }
-];
-
-```
-- `src` - relative to `node_modules`
-- `inject` - indicates whether the library should be injected (if not you have to include it manually in `index.html`)
-- `dest` - your library will be copied to this location. Used for the production build.
-
-**Do not forget to add a reference to the type definition inside the files where you use your custom library.**
-
-## Adding custom gulp task
-
-In this example we are going to add SASS support to the seed's dev build:
-
-1. Install `gulp-sass` as dependency:
-
-  ```bash
-  npm install gulp-sass --save-dev
-  ```
-
-2. Add type definitions:
-
-  ```bash
-  # Note: tsd MUST be installed as global
-  tsd install gulp-sass --save
-  ```
-
-3. Add SASS task at `./tools/tasks/build.sass.dev.ts`:
-
-  ```ts
-  import {join} from 'path';
-  import {APP_SRC, APP_DEST} from '../config';
-
-  export = function buildSassDev(gulp, plugins, option) {
-    return function () {
-      return gulp.src(join(APP_SRC, '**', '*.scss'))
-        .pipe(plugins.sass().on('error', plugins.sass.logError))
-        .pipe(gulp.dest(APP_DEST));
-    };
-  }
-  ```
-
-4. Add `build.sass.dev` to your dev pipeline:
-
-  ```ts
-  // gulpfile.ts
-  ...
-  // --------------
-  // Build dev.
-  gulp.task('build.dev', done =>
-    runSequence('clean.dist',
-        'tslint',
-        'build.sass.dev',
-        'build.assets.dev',
-        'build.js.dev',
-        'build.index',
-        done));
-  ...
-
-  ```
+Visit the [Wiki page](https://github.com/mgechev/angular2-seed/wiki) of the project.
 
 # Running test
 
