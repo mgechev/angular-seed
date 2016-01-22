@@ -37,9 +37,9 @@ npm start
 npm run docs
 
 # dev build
-npm build.dev
+npm run build.dev
 # prod build
-npm build.prod
+npm run build.prod
 ```
 
 ## Using the experimental hot loader support
