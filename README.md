@@ -19,7 +19,7 @@ It is something similar to the Angular Quick Start but does the entire build wit
 - Development server with Livereload.
 - Experimental hot loading support.
 - Following the best practices for your application’s structure.
-- Manager of your type definitions using tsd.
+- Manager of your type definitions using [typings](https://github.com/typings/typings).
 - Basic Service Worker, which implements "Cache then network strategy".
 
 # How to start
@@ -109,6 +109,7 @@ _Does not rely on any global dependencies._
 │   │       ├── home.css
 │   │       ├── home.html
 │   │       ├── home.ts
+│   │       ├── home.e2e.ts
 │   │       └── home_spec.ts
 │   ├── shared
 │   │   └── services
@@ -120,8 +121,8 @@ _Does not rely on any global dependencies._
 ├── dist
 ├── test
 ├── tools
+│   ├── manual_typings
 │   ├── tasks
-│   ├── typings
 │   ├── utils
 │   ├── config.ts
 │   └── utils.ts
@@ -132,8 +133,8 @@ _Does not rely on any global dependencies._
 ├── protractor.conf.js
 ├── test-main.js
 ├── tsconfig.json
-├── tsd.json
-└── tslint.json
+├── tslint.json
+└── typings.json
 ```
 
 # Configuration
