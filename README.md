@@ -26,6 +26,15 @@ It is something similar to the Angular Quick Start but does the entire build wit
 
 **Note** that this seed project requires node v4.x.x or higher and npm 2.14.7.
 
+You must have `ts-node` installed as global. If you don't use:
+
+```bash
+npm install -g ts-node
+```
+
+In order to start the seed use:
+
+
 ```bash
 git clone --depth 1 https://github.com/mgechev/angular2-seed.git
 cd angular2-seed
