@@ -1,3 +1,5 @@
+/// <reference path="../manual_typings/open.d.ts" />
+
 import * as util from 'gulp-util';
 import * as express from 'express';
 import * as openResource from 'open';
