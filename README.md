@@ -71,7 +71,7 @@ _Does not rely on any global dependencies._
 - [Table of Content](#table-of-content)
 - [Directory Structure](#directory-structure)
 - [Configuration](#configuration)
-- [How to extend?](#how-to-extend-)
+- [How to extend?](#how-to-extend)
 - [Running test](#running-test)
 - [Contributing](#contributing)
 - [Examples](#examples)
