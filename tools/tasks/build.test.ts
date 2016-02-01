@@ -1,5 +1,5 @@
 import {join} from 'path';
-import {BOOTSTRAP_MODULE APP_SRC, TEST_DEST} from '../config';
+import {BOOTSTRAP_MODULE, APP_SRC, TEST_DEST} from '../config';
 import {tsProjectFn} from '../utils';
 
 export = function buildTest(gulp, plugins) {
