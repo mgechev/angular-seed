@@ -1,5 +1,5 @@
 import {join} from 'path';
-import {APP_SRC, TEST_DEST} from '../config';
+import {BOOTSTRAP_MODULE, APP_SRC, TEST_DEST} from '../config';
 import {tsProjectFn} from '../utils';
 
 export = function buildTest(gulp, plugins) {
@@ -9,9 +9,8 @@ export = function buildTest(gulp, plugins) {
       'typings/main.d.ts',
       join(APP_SRC, '**/*.ts'),
       '!' + join(APP_SRC, '**/*.e2e.ts'),
-      '!' + join(APP_SRC, 'main.ts')
+      '!' + join(APP_SRC, `${BOOTSTRAP_MODULE}.ts`)
     ];
-
     let result = gulp.src(src)
       .pipe(plugins.plumber())
       .pipe(plugins.inlineNg2Template({ base: APP_SRC }))

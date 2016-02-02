@@ -2,6 +2,7 @@ import * as merge from 'merge-stream';
 import {join} from 'path';
 import * as browserify from 'browserify';
 import {
+  BOOTSTRAP_MODULE,
   PROD_DEPENDENCIES,
   JS_PROD_SHIMS_BUNDLE,
   JS_PROD_APP_BUNDLE,
@@ -34,7 +35,7 @@ export = function bundles(gulp, plugins) {
     }
 
     function bundleApp() {
-      return browserify(join(TMP_DIR, 'main'))
+      return browserify(join(TMP_DIR, BOOTSTRAP_MODULE))
         .bundle()
         .pipe(require('vinyl-source-stream')(JS_PROD_APP_BUNDLE))
         .pipe(require('vinyl-buffer')())
