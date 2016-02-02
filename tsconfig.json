@@ -10,9 +10,10 @@
         "experimentalDecorators": true,
         "sourceMap": true
     },
-    "files": [
-        "typings/main.d.ts",
-        "app/main.ts"
+    "exclude": [
+        "node_modules",
+        "typings/browser.d.ts",
+        "typings/browser/**"
     ],
     "compileOnSave": false
 }

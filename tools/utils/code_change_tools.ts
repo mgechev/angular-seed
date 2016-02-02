@@ -1,7 +1,3 @@
-/// <reference path="../manual_typings/angular2-hot-loader.d.ts" />
-/// <reference path="../manual_typings/connect-livereload.d.ts" />
-/// <reference path="../manual_typings/tiny-lr.d.ts" />
-
 import * as express from 'express';
 import * as connectLivereload from 'connect-livereload';
 import {ENABLE_HOT_LOADING, LIVE_RELOAD_PORT, HOT_LOADER_PORT, APP_SRC, APP_BASE, PROJECT_ROOT} from '../config';

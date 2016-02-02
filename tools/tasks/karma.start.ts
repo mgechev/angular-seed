@@ -1,5 +1,3 @@
-/// <reference path="../manual_typings/karma.d.ts" />
-
 import * as karma from 'karma';
 import {join} from 'path';
 

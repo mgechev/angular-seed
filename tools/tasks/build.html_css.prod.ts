@@ -1,5 +1,3 @@
-/// <reference path="../manual_typings/merge-stream.d.ts" />
-
 import * as merge from 'merge-stream';
 import {join} from 'path';
 import {
