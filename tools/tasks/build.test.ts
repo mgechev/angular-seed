@@ -1,5 +1,5 @@
 import {join} from 'path';
-import {APP_SRC, TEST_DEST} from '../config';
+import {BOOTSTRAP_MODULE, APP_SRC, TEST_DEST} from '../config';
 import {tsProjectFn} from '../utils';
 
 export = function buildTest(gulp, plugins) {
@@ -7,7 +7,7 @@ export = function buildTest(gulp, plugins) {
     let tsProject = tsProjectFn(plugins);
     let src = [
                 join(APP_SRC, '**/*.ts'),
-                '!' + join(APP_SRC, 'main.ts')
+                '!' + join(APP_SRC, `${BOOTSTRAP_MODULE}.ts`)
               ];
 
     let result = gulp.src(src)

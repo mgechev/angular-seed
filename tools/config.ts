@@ -88,11 +88,11 @@ export const PROD_DEPENDENCIES = PROD_NPM_DEPENDENCIES.concat(APP_ASSETS);
 const SYSTEM_CONFIG_DEV = {
   defaultJSExtensions: true,
   paths: {
-    'main': `${APP_ROOT}main`,
     'hot_loader_main': `${APP_ROOT}hot_loader_main`,
     '*': `${APP_BASE}node_modules/*`
   }
 };
+SYSTEM_CONFIG_DEV.paths[BOOTSTRAP_MODULE] = `${APP_ROOT}${BOOTSTRAP_MODULE}`;
 
 export const SYSTEM_CONFIG = SYSTEM_CONFIG_DEV;
 
