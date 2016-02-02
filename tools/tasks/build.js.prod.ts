@@ -6,9 +6,11 @@ export = function buildJSProd(gulp, plugins) {
   return function () {
     let tsProject = tsProjectFn(plugins);
     let src = [
-                join(APP_SRC, '**/*.ts'),
-                '!' + join(APP_SRC, '**/*_spec.ts')
-              ];
+      'typings/main.d.ts',
+      join(APP_SRC, '**/*.ts'),
+      '!' + join(APP_SRC, '**/*.e2e.ts'),
+      '!' + join(APP_SRC, '**/*_spec.ts')
+    ];
 
     let result = gulp.src(src)
       .pipe(plugins.plumber())

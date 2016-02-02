@@ -1,3 +1,5 @@
+/// <reference path="../manual_typings/slash.d.ts" />
+
 import * as slash from 'slash';
 import {join} from 'path';
 import {APP_BASE, APP_DEST, ENV} from '../config';

@@ -19,7 +19,7 @@ It is something similar to the Angular Quick Start but does the entire build wit
 - Development server with Livereload.
 - Experimental hot loading support.
 - Following the best practices for your application’s structure.
-- Manager of your type definitions using tsd.
+- Manager of your type definitions using [typings](https://github.com/typings/typings).
 - Basic Service Worker, which implements "Cache then network strategy".
 
 # How to start
@@ -87,44 +87,45 @@ _Does not rely on any global dependencies._
 ├── LICENSE
 ├── README.md
 ├── app
-│   ├── about
-│   │   └── components
-│   │       ├── about.e2e.ts
-│   │       ├── about.html
-│   │       ├── about.ts
-│   │       └── about_spec.ts
-│   ├── app
-│   │   └── components
-│   │       ├── app.css
-│   │       ├── app.e2e.ts
-│   │       ├── app.html
-│   │       ├── app.ts
-│   │       └── app_spec.ts
-│   ├── assets
-│   │   ├── img
-│   │   │   └── smile.png
-│   │   └── main.css
-│   ├── home
-│   │   └── components
-│   │       ├── home.css
-│   │       ├── home.html
-│   │       ├── home.ts
-│   │       └── home_spec.ts
-│   ├── shared
-│   │   └── services
-│   │       ├── name_list.ts
-│   │       └── name_list_spec.ts
-│   ├── hot_loader_main.ts
-│   ├── main.ts
-│   └── index.html
+│   ├── about
+│   │   └── components
+│   │       ├── about.e2e.ts
+│   │       ├── about.html
+│   │       ├── about.ts
+│   │       └── about_spec.ts
+│   ├── app
+│   │   └── components
+│   │       ├── app.css
+│   │       ├── app.e2e.ts
+│   │       ├── app.html
+│   │       ├── app.ts
+│   │       └── app_spec.ts
+│   ├── assets
+│   │   ├── img
+│   │   │   └── smile.png
+│   │   └── main.css
+│   ├── home
+│   │   └── components
+│   │       ├── home.css
+│   │       ├── home.html
+│   │       ├── home.ts
+│   │       ├── home.e2e.ts
+│   │       └── home_spec.ts
+│   ├── shared
+│   │   └── services
+│   │       ├── name_list.ts
+│   │       └── name_list_spec.ts
+│   ├── hot_loader_main.ts
+│   ├── main.ts
+│   └── index.html
 ├── dist
 ├── test
 ├── tools
-│   ├── tasks
-│   ├── typings
-│   ├── utils
-│   ├── config.ts
-│   └── utils.ts
+│   ├── manual_typings
+│   ├── tasks
+│   ├── utils
+│   ├── config.ts
+│   └── utils.ts
 ├── appveyor.yml
 ├── gulpfile.ts
 ├── karma.conf.js
@@ -132,8 +133,8 @@ _Does not rely on any global dependencies._
 ├── protractor.conf.js
 ├── test-main.js
 ├── tsconfig.json
-├── tsd.json
-└── tslint.json
+├── tslint.json
+└── typings.json
 ```
 
 # Configuration

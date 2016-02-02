@@ -5,9 +5,11 @@ export = function buildDocs(gulp, plugins, option) {
   return function() {
 
     let src = [
-                join(APP_SRC, '**/*.ts'),
-                '!' + join(APP_SRC, '**/*_spec.ts')
-              ];
+      'typings/main.d.ts',
+      join(APP_SRC, '**/*.ts'),
+      '!' + join(APP_SRC, '**/*_spec.ts'),
+      '!' + join(APP_SRC, '**/*.e2e.ts')
+    ];
 
     return gulp.src(src)
       .pipe(plugins.typedoc({
