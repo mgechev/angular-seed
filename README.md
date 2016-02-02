@@ -69,15 +69,71 @@ _Does not rely on any global dependencies._
 - [How to start](#how-to-start)
   * [Using the experimental hot loader support](#using-the-experimental-hot-loader-support)
 - [Table of Content](#table-of-content)
-- [Directory Structure](#directory-structure)
 - [Configuration](#configuration)
 - [How to extend?](#how-to-extend)
 - [Running test](#running-test)
 - [Contributing](#contributing)
 - [Examples](#examples)
+- [Directory Structure](#directory-structure)
 - [Contributors](#contributors)
 - [Change Log](#change-log)
 - [License](#license)
+
+# Configuration
+
+Default application server configuration
+
+```javascript
+var PORT             = 5555;
+var LIVE_RELOAD_PORT = 4002;
+var DOCS_PORT        = 4003;
+var APP_BASE         = '/';
+```
+
+Configure at runtime
+
+```bash
+npm start -- --port 8080 --reload-port 4000 --base /my-app/
+```
+
+# How to extend?
+
+Visit the [Wiki page](https://github.com/mgechev/angular2-seed/wiki) of the project.
+
+# Running test
+
+```bash
+npm test
+
+# Debug - In two different shell windows
+npm run build.test.watch      # 1st window
+npm run karma.start           # 2nd window
+
+# e2e (aka. end-to-end, integration) - In three different shell windows
+npm start
+# npm run webdriver-update <- You may need to run this the first time
+npm run webdriver-start
+npm run e2e
+
+# e2e live mode - Protractor interactive mode
+# Instead of last command above, you can use:
+npm run e2e-live
+```
+You can learn more about [Protractor Interactive Mode here](https://github.com/angular/protractor/blob/master/docs/debugging.md#testing-out-protractor-interactively)
+
+# Contributing
+
+Please see the [CONTRIBUTING](https://github.com/mgechev/angular2-seed/blob/master/CONTRIBUTING.md) file for guidelines.
+
+# Examples
+
+Forks of this project demonstrate how to extend and integrate with other libraries:
+
+ - https://github.com/justindujardin/angular2-seed - integration with [ng2-material](https://github.com/justindujardin/ng2-material)
+ - https://github.com/AngularShowcase/angular2-sample-app - sample Angular 2 application
+ - https://github.com/AngularShowcase/ng2-bootstrap-sbadmin - ng2-bootstrap-sbadmin
+ - https://github.com/AngularShowcase/angular2-seed-ng2-highcharts - Simple application including a [Highcharts](http://www.highcharts.com) graph.
+ - https://github.com/tarlepp/angular-sailsjs-boilerplate-frontend-angular2 - Example application for [Sails.js](http://sailsjs.org/) integration.
 
 # Directory Structure
 
@@ -136,62 +192,6 @@ _Does not rely on any global dependencies._
 ├── tslint.json
 └── typings.json
 ```
-
-# Configuration
-
-Default application server configuration
-
-```javascript
-var PORT             = 5555;
-var LIVE_RELOAD_PORT = 4002;
-var DOCS_PORT        = 4003;
-var APP_BASE         = '/';
-```
-
-Configure at runtime
-
-```bash
-npm start -- --port 8080 --reload-port 4000 --base /my-app/
-```
-
-# How to extend?
-
-Visit the [Wiki page](https://github.com/mgechev/angular2-seed/wiki) of the project.
-
-# Running test
-
-```bash
-npm test
-
-# Debug - In two different shell windows
-npm run build.test.watch      # 1st window
-npm run karma.start           # 2nd window
-
-# e2e (aka. end-to-end, integration) - In three different shell windows
-npm start
-# npm run webdriver-update <- You may need to run this the first time
-npm run webdriver-start
-npm run e2e
-
-# e2e live mode - Protractor interactive mode
-# Instead of last command above, you can use:
-npm run e2e-live
-```
-You can learn more about [Protractor Interactive Mode here](https://github.com/angular/protractor/blob/master/docs/debugging.md#testing-out-protractor-interactively)
-
-# Contributing
-
-Please see the [CONTRIBUTING](https://github.com/mgechev/angular2-seed/blob/master/CONTRIBUTING.md) file for guidelines.
-
-# Examples
-
-Forks of this project demonstrate how to extend and integrate with other libraries:
-
- - https://github.com/justindujardin/angular2-seed - integration with [ng2-material](https://github.com/justindujardin/ng2-material)
- - https://github.com/AngularShowcase/angular2-sample-app - sample Angular 2 application
- - https://github.com/AngularShowcase/ng2-bootstrap-sbadmin - ng2-bootstrap-sbadmin
- - https://github.com/AngularShowcase/angular2-seed-ng2-highcharts - Simple application including a [Highcharts](http://www.highcharts.com) graph.
- - https://github.com/tarlepp/angular-sailsjs-boilerplate-frontend-angular2 - Example application for [Sails.js](http://sailsjs.org/) integration.
 
 # Contributors
 
