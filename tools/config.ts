@@ -107,8 +107,8 @@ export const SYSTEM_CONFIG = SYSTEM_CONFIG_DEV;
 
 function normalizeDependencies(deps: InjectableDependency[]) {
   deps
-    .filter(d => !/\*/.test(d.src)) // Skip globs
-    .forEach(d => d.src = require.resolve(d.src));
+    .filter((d:InjectableDependency) => !/\*/.test(d.src)) // Skip globs
+    .forEach((d:InjectableDependency) => d.src = require.resolve(d.src));
   return deps;
 }
 
@@ -118,7 +118,7 @@ function appVersion(): number|string {
 }
 
 function getEnvironment() {
-  let base = argv['_'];
+  let base:string[] = argv['_'];
   let prodKeyword = !!base.filter(o => o.indexOf(ENVIRONMENTS.PRODUCTION) >= 0).pop();
   if (base && prodKeyword || argv['env'] === ENVIRONMENTS.PRODUCTION) {
     return ENVIRONMENTS.PRODUCTION;
