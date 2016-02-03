@@ -10,11 +10,10 @@ const ENVIRONMENTS = {
   PRODUCTION: 'prod'
 };
 
+export const PORT                 = argv['port']        || 5555;
 export const PROJECT_ROOT         = normalize(join(__dirname, '..'));
 export const ENV                  = getEnvironment();
 export const DEBUG                = argv['debug']       || false;
-export const PORT                 = argv['port']        || 5555;
-export const LIVE_RELOAD_PORT     = argv['reload-port'] || 4002;
 export const DOCS_PORT            = argv['docs-port']   || 4003;
 export const APP_BASE             = argv['base']        || '/';
 
@@ -88,10 +87,9 @@ export const PROD_DEPENDENCIES = PROD_NPM_DEPENDENCIES.concat(APP_ASSETS);
 const SYSTEM_CONFIG_DEV = {
   defaultJSExtensions: true,
   paths: {
-    [BOOTSTRAP_MODULE]: `${APP_ROOT}${BOOTSTRAP_MODULE}`,
-    'hot_loader_main': `${APP_ROOT}hot_loader_main`,
-    'angular2/*': `${APP_ROOT}angular2/*`,
-    'rxjs/*': `${APP_ROOT}rxjs/*`,
+    [BOOTSTRAP_MODULE]: `${APP_BASE}${BOOTSTRAP_MODULE}`,
+    'angular2/*': `${APP_BASE}angular2/*`,
+    'rxjs/*': `${APP_BASE}rxjs/*`,
     '*': `${APP_BASE}node_modules/*`
   },
   packages: {

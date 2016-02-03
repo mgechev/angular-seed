@@ -32,6 +32,7 @@
   "devDependencies": {
     "angular2-hot-loader": "0.0.17",
     "async": "^1.4.2",
+    "browser-sync": "^2.11.1",
     "browserify": "^13.0.0",
     "chalk": "^1.1.1",
     "connect": "^3.4.1",
