@@ -148,14 +148,14 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │       ├── about.e2e.ts
 │   │       ├── about.html
 │   │       ├── about.ts
-│   │       └── about_spec.ts
+│   │       └── about.spec.ts
 │   ├── app
 │   │   └── components
 │   │       ├── app.css
 │   │       ├── app.e2e.ts
 │   │       ├── app.html
 │   │       ├── app.ts
-│   │       └── app_spec.ts
+│   │       └── app.spec.ts
 │   ├── assets
 │   │   ├── img
 │   │   │   └── smile.png
@@ -166,11 +166,11 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │       ├── home.html
 │   │       ├── home.ts
 │   │       ├── home.e2e.ts
-│   │       └── home_spec.ts
+│   │       └── home.spec.ts
 │   ├── shared
 │   │   └── services
 │   │       ├── name_list.ts
-│   │       └── name_list_spec.ts
+│   │       └── name_list.spec.ts
 │   ├── hot_loader_main.ts
 │   ├── main.ts
 │   └── index.html

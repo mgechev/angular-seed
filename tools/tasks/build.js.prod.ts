@@ -9,7 +9,7 @@ export = function buildJSProd(gulp, plugins) {
       'typings/browser.d.ts',
       join(APP_SRC, '**/*.ts'),
       '!' + join(APP_SRC, '**/*.e2e.ts'),
-      '!' + join(APP_SRC, '**/*_spec.ts')
+      '!' + join(APP_SRC, '**/*.spec.ts')
     ];
 
     let result = gulp.src(src)
