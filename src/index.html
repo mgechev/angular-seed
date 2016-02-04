@@ -34,6 +34,10 @@
   <!-- shims:js -->
   <!-- endinject -->
 
+  <% if (ENV === 'dev') { %>
+  <script>System.config(<%= JSON.stringify(SYSTEM_CONFIG) %>)</script>
+  <% } %>
+
   <!-- libs:js -->
   <!-- endinject -->
 
@@ -41,8 +45,6 @@
   <!-- endinject -->
 
   <% if (ENV === 'dev') { %>
-  <script>System.config(<%= JSON.stringify(SYSTEM_CONFIG) %>)</script>
-
   <script>
     System.import('<%= BOOTSTRAP_MODULE %>')
       .catch(function (e) {
