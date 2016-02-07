@@ -1,7 +1,7 @@
 describe('App', function() {
 
   beforeEach(function() {
-      browser.get('/dist/dev');
+      browser.get('');
   });
 
   it('should have a title', function() {
