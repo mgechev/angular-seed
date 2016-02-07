@@ -32,6 +32,7 @@ build/Release
 #IDE configuration files
 .idea
 .vscode
+*.iml
 
 dist
 dev
