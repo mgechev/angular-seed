@@ -71,7 +71,7 @@ _Does not rely on any global dependencies._
 - [Table of Content](#table-of-content)
 - [Configuration](#configuration)
 - [How to extend?](#how-to-extend)
-- [Running test](#running-test)
+- [Running tests](#running-tests)
 - [Contributing](#contributing)
 - [Examples](#examples)
 - [Directory Structure](#directory-structure)
@@ -100,7 +100,7 @@ npm start -- --port 8080 --reload-port 4000 --base /my-app/
 
 Visit the [Wiki page](https://github.com/mgechev/angular2-seed/wiki) of the project.
 
-# Running test
+# Running tests
 
 ```bash
 npm test
@@ -110,8 +110,9 @@ npm run build.test.watch      # 1st window
 npm run karma.start           # 2nd window
 
 # e2e (aka. end-to-end, integration) - In three different shell windows
+# Make sure you don't have a global instance of Protractor
 npm start
-# npm run webdriver-update <- You may need to run this the first time
+# npm run webdriver-update <- You will need to run this the first time
 npm run webdriver-start
 npm run e2e
 
