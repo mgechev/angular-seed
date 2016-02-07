@@ -142,7 +142,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
 ├── CONTRIBUTING.md
 ├── LICENSE
 ├── README.md
-├── app
+├── src
 │   ├── about
 │   │   └── components
 │   │       ├── about.e2e.ts
