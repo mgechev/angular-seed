@@ -1,7 +1,7 @@
 describe('Home', function() {
 
   beforeEach(function() {
-    browser.get('/dist/dev');
+    browser.get('');
   });
 
   it('should have correct h1', function() {
