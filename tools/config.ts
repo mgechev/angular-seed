@@ -24,7 +24,7 @@ export const BOOTSTRAP_MODULE     = ENABLE_HOT_LOADING ? 'hot_loader_main' : 'ma
 
 export const APP_TITLE            = 'My Angular2 App';
 
-export const APP_SRC              = 'app';
+export const APP_SRC              = 'src';
 export const ASSETS_SRC           = `${APP_SRC}/assets`;
 
 export const TOOLS_DIR            = 'tools';
