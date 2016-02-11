@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "es6-promise": "github:typings/typed-es6-promise#9243c53f70fb4909ed7cce3094bec221b9fb6d5f",
     "xhr2": "github:gdi2290/typed-xhr2#69f2b8d40d0cd407c1b2a2f2f41fecc6852cabbb"
   },
   "devDependencies": {},
