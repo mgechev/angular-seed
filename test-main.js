@@ -23,6 +23,8 @@ System.config({
   defaultJSExtensions: true,
   paths: {
     'angular2/*': 'node_modules/angular2/*.js',
+    //Temporary hack to be able to run angular2@2.0.0-beta.5
+    'rxjs/observable/fromPromise': 'node_modules/rxjs/add/observable/fromPromise',
     'rxjs/*': 'node_modules/rxjs/*.js'
   }
 });
