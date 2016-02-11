@@ -36,6 +36,7 @@
     "browserify": "^13.0.0",
     "chalk": "^1.1.1",
     "connect": "^3.4.1",
+    "connect-history-api-fallback": "^1.1.0",
     "connect-livereload": "^0.5.3",
     "del": "^2.2.0",
     "event-stream": "^3.3.2",

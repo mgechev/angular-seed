@@ -1,11 +1,11 @@
 import {provide} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
-import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
+import {ROUTER_PROVIDERS, APP_BASE_HREF} from 'angular2/router';
 import {AppCmp} from './app/components/app';
 
 bootstrap(AppCmp, [
   ROUTER_PROVIDERS,
-  provide(LocationStrategy, { useClass: HashLocationStrategy })
+  provide(APP_BASE_HREF, { useValue: '/' })
 ]);
 
 // In order to start the Service Worker located at "./sw.js"

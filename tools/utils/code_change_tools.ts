@@ -9,6 +9,7 @@ let runServer = () => {
     '/node_modules': 'node_modules'
   };
   browserSync({
+    middleware: [require('connect-history-api-fallback')()],
     port: PORT,
     startPath: '/',
     server: {
