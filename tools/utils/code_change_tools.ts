@@ -1,6 +1,4 @@
-import {PORT, APP_SRC, PROJECT_ROOT, APP_DEST} from '../config';
-import {join} from 'path';
-import * as ng2HotLoader from 'angular2-hot-loader';
+import {PORT, APP_DEST} from '../config';
 import * as browserSync from 'browser-sync';
 
 let runServer = () => {
