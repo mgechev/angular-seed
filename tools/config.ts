@@ -89,6 +89,8 @@ const SYSTEM_CONFIG_DEV = {
   paths: {
     [BOOTSTRAP_MODULE]: `${APP_BASE}${BOOTSTRAP_MODULE}`,
     'angular2/*': `${APP_BASE}angular2/*`,
+    //Temporary hack to be able to run angular2@2.0.0-beta.5
+    'rxjs/observable/fromPromise': 'rxjs/add/observable/fromPromise',
     'rxjs/*': `${APP_BASE}rxjs/*`,
     '*': `${APP_BASE}node_modules/*`
   },
