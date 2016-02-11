@@ -18,7 +18,7 @@
     "karma": "karma",
     "karma.start": "karma start",
     "postinstall": "typings install && gulp check.versions && gulp postinstall",
-    "reinstall": "rimraf node_modules && npm cache clean && npm install",
+    "reinstall": "rimraf typings && rimraf node_modules && npm cache clean && npm install",
     "start": "gulp serve --env dev",
     "serve.dev": "gulp serve --env dev",
     "tasks.list": "gulp --tasks-simple",
@@ -86,13 +86,13 @@
     "yargs": "^3.32.0"
   },
   "dependencies": {
-    "angular2": "2.0.0-beta.4",
+    "angular2": "2.0.0-beta.5",
     "bootstrap": "^3.3.5",
     "es6-module-loader": "^0.17.8",
     "es6-shim": "^0.33.3",
     "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.0",
     "systemjs": "~0.19.18",
-    "zone.js": "0.5.13"
+    "zone.js": "^0.5.14",
+    "rxjs": "5.0.0-beta.2"
   }
 }
