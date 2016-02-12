@@ -33,7 +33,7 @@ export function main() {
         return tcb.createAsync(TestComponent)
           .then(rootTC => {
             rootTC.detectChanges();
-            let appDOMEl = rootTC.debugElement.componentViewChildren[0].nativeElement;
+            let appDOMEl = rootTC.debugElement.children[0].nativeElement;
             expect(DOM.querySelectorAll(appDOMEl, 'section > nav > a')[1].href).toMatch(/http:\/\/localhost:\d+\/about/);
           });
       }));
