@@ -17,7 +17,6 @@ It is something similar to the Angular Quick Start but does the entire build wit
 - Sample unit tests with Jasmine and Karma.
 - End-to-end tests with Protractor.
 - Development server with Livereload.
-- Experimental hot loading support.
 - Following the best practices for your application’s structure.
 - Manager of your type definitions using [typings](https://github.com/typings/typings).
 - Basic Service Worker, which implements "Cache then network strategy".
@@ -51,23 +50,12 @@ npm run build.dev
 npm run build.prod
 ```
 
-## Using the experimental hot loader support
-
-If you want to try the experimental [hot loading](http://blog.mgechev.com/2015/10/26/angular2-hot-loader-hot-loading-tooling/) support use:
-
-```
-npm start -- --hot-loader true
-```
-
-Note that the hot loader is still in experimental phase of development and there are some missing features. If you experience any issues with it report them at [here](https://github.com/mgechev/angular2-hot-loader/issues).
-
 _Does not rely on any global dependencies._
 
 # Table of Content
 
 - [Introduction](#introduction)
 - [How to start](#how-to-start)
-  * [Using the experimental hot loader support](#using-the-experimental-hot-loader-support)
 - [Table of Content](#table-of-content)
 - [Configuration](#configuration)
 - [How to extend?](#how-to-extend)

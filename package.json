@@ -11,14 +11,13 @@
     "build.prod": "gulp build.prod",
     "build.test": "gulp build.test",
     "build.test.watch": "gulp build.test.watch",
-    "clean-ng2": "rimraf node_modules/angular2/manual_typings node_modules/angular2/typings",
     "docs": "npm run gulp -- build.docs && npm run gulp -- serve.docs",
     "e2e": "protractor",
     "e2e-live": "protractor --elementExplorer",
     "gulp": "gulp",
     "karma": "karma",
     "karma.start": "karma start",
-    "postinstall": "typings install && npm run clean-ng2 && gulp check.versions && gulp postinstall",
+    "postinstall": "typings install && gulp check.versions && gulp postinstall",
     "reinstall": "rimraf node_modules && npm cache clean && npm install",
     "start": "gulp serve --env dev",
     "serve.dev": "gulp serve --env dev",
@@ -30,12 +29,12 @@
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
   "devDependencies": {
-    "angular2-hot-loader": "0.0.17",
     "async": "^1.4.2",
     "browser-sync": "^2.11.1",
     "browserify": "^13.0.0",
     "chalk": "^1.1.1",
     "connect": "^3.4.1",
+    "connect-history-api-fallback": "^1.1.0",
     "connect-livereload": "^0.5.3",
     "del": "^2.2.0",
     "event-stream": "^3.3.2",
@@ -87,13 +86,13 @@
     "yargs": "^3.32.0"
   },
   "dependencies": {
-    "angular2": "2.0.0-beta.2",
+    "angular2": "2.0.0-beta.6",
     "bootstrap": "^3.3.5",
     "es6-module-loader": "^0.17.8",
     "es6-shim": "^0.33.3",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.0",
-    "systemjs": "0.19.9",
-    "zone.js": "0.5.10"
+    "systemjs": "~0.19.18",
+    "zone.js": "^0.5.14"
   }
 }
