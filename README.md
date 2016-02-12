@@ -1,3 +1,5 @@
+# beta.4 is broken. Use beta.6 or newer.
+
 # Introduction
 
 [![Build Status](https://travis-ci.org/mgechev/angular2-seed.svg?branch=master)](https://travis-ci.org/mgechev/angular2-seed)
