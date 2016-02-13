@@ -1,5 +1,5 @@
 import {join} from 'path';
-import {APP_SRC, TMP_DIR} from '../config';
+import {APP_SRC, TEST_SRC, TMP_DIR} from '../config';
 import {templateLocals, tsProjectFn} from '../utils';
 
 export = function buildJSProd(gulp, plugins) {
@@ -8,8 +8,8 @@ export = function buildJSProd(gulp, plugins) {
     let src = [
       'typings/browser.d.ts',
       join(APP_SRC, '**/*.ts'),
-      '!' + join(APP_SRC, '**/*.e2e.ts'),
-      '!' + join(APP_SRC, '**/*.spec.ts')
+      '!' + join(TEST_SRC, '**/*.spec.ts'),
+      '!' + join(TEST_SRC, '**/*.e2e.ts')
     ];
 
     let result = gulp.src(src)

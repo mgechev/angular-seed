@@ -26,6 +26,7 @@ gulp.task('build.dev', done =>
               'tslint',
               'build.assets.dev',
               'build.js.dev',
+              'build.e2e_test',
               'build.index.dev',
               done));
 
