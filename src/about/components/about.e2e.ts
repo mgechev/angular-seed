@@ -1,7 +1,7 @@
 describe('About', function() {
 
   beforeEach(function() {
-    browser.get('#/about');
+    browser.get('about');
   });
 
   it('should have an input', function() {
