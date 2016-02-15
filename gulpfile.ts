@@ -3,7 +3,9 @@ import {runSequence, task} from './tools/utils';
 
 // --------------
 // Clean (override).
-gulp.task('clean', task('clean'));
+gulp.task('clean',       task('clean', 'all'));
+gulp.task('clean.dev',   task('clean', 'dev'));
+gulp.task('clean.prod',  task('clean', 'prod'));
 
 gulp.task('check.versions', task('check.versions'));
 gulp.task('build.docs', task('build.docs'));
@@ -19,7 +21,7 @@ gulp.task('postinstall', done =>
 // --------------
 // Build dev.
 gulp.task('build.dev', done =>
-  runSequence('clean',
+  runSequence('clean.dev',
               'tslint',
               'build.assets.dev',
               'build.js.dev',
@@ -36,7 +38,7 @@ gulp.task('build.dev.watch', done =>
 // --------------
 // Build e2e.
 gulp.task('build.e2e', done =>
-    runSequence('clean',
+    runSequence('clean.dev',
         'tslint',
         'build.assets.dev',
         'build.js.e2e',
@@ -46,7 +48,7 @@ gulp.task('build.e2e', done =>
 // --------------
 // Build prod.
 gulp.task('build.prod', done =>
-  runSequence('clean',
+  runSequence('clean.prod',
               'tslint',
               'build.assets.prod',
               'build.html_css.prod',
@@ -58,7 +60,7 @@ gulp.task('build.prod', done =>
 // --------------
 // Build test.
 gulp.task('build.test', done =>
-    runSequence('clean',
+    runSequence('clean.dev',
         'tslint',
         'build.assets.dev',
         'build.js.test',
@@ -81,17 +83,25 @@ gulp.task('docs', done =>
               done));
 
 // --------------
-// Serve.
-gulp.task('serve', done =>
+// Serve dev
+gulp.task('serve.dev', done =>
   runSequence('build.dev',
               'server.start',
               'watch.serve',
               done));
 
 // --------------
-// Serve E2E
+// Serve e2e
 gulp.task('serve.e2e', done =>
   runSequence('build.e2e',
+              'server.start',
+              'watch.serve',
+              done));
+
+// --------------
+// Serve prod
+gulp.task('serve.prod', done =>
+  runSequence('build.prod',
               'server.start',
               'watch.serve',
               done));
