@@ -2,6 +2,12 @@ import {join} from 'path';
 import {APP_SRC, TEST_SRC, TMP_DIR} from '../config';
 import {templateLocals, tsProjectFn} from '../utils';
 
+const INLINE_OPTIONS = {
+  base: TMP_DIR ,
+  useRelativePaths: true,
+  removeLineBreaks: true
+};
+
 export = function buildJSProd(gulp, plugins) {
   return function () {
     let tsProject = tsProjectFn(plugins);
@@ -14,7 +20,7 @@ export = function buildJSProd(gulp, plugins) {
 
     let result = gulp.src(src)
       .pipe(plugins.plumber())
-      .pipe(plugins.inlineNg2Template({ base: TMP_DIR , useRelativePaths: true }))
+      .pipe(plugins.inlineNg2Template(INLINE_OPTIONS))
       .pipe(plugins.typescript(tsProject));
 
     return result.js
