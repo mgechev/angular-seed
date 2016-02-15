@@ -30,6 +30,11 @@
     });
   }
   </script>
+  
+  <script>
+  // Fixes undefined module function in SystemJS bundle
+  function module() {}
+  </script>
 
   <!-- shims:js -->
   <!-- endinject -->
@@ -46,11 +51,11 @@
 
   <% if (ENV === 'dev') { %>
   <script>
-    System.import('<%= BOOTSTRAP_MODULE %>')
-      .catch(function (e) {
-        console.error(e,
-          'Report this error at https://github.com/mgechev/angular2-seed/issues');
-      });
+  System.import('<%= BOOTSTRAP_MODULE %>')
+    .catch(function (e) {
+      console.error(e,
+        'Report this error at https://github.com/mgechev/angular2-seed/issues');
+    });
   </script>
   <% } %>
 

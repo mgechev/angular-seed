@@ -72,8 +72,10 @@ export const DEV_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencie
 ]);
 
 export const PROD_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencies([
+  { src: 'systemjs/dist/system-polyfills.src.js', inject: 'shims' },
   { src: 'reflect-metadata/Reflect.js', inject: 'shims' },
   { src: 'es6-shim/es6-shim.min.js', inject: 'shims' },
+  { src: 'systemjs/dist/system.js', inject: 'shims' },
   { src: 'angular2/bundles/angular2-polyfills.min.js', inject: 'libs' }
 ]);
 
@@ -104,6 +106,15 @@ const SYSTEM_CONFIG_DEV = {
 };
 
 export const SYSTEM_CONFIG = SYSTEM_CONFIG_DEV;
+
+export const SYSTEM_BUILDER_CONFIG = {
+  defaultJSExtensions: true,
+  paths: {
+    '*': `${TMP_DIR}/*`,
+    'angular2/*': 'node_modules/angular2/*',
+    'rxjs/*': 'node_modules/rxjs/*'
+  }
+};
 
 // --------------
 // Private.

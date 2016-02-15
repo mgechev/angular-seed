@@ -1,19 +1,14 @@
 import * as merge from 'merge-stream';
-import {join} from 'path';
-import * as browserify from 'browserify';
 import {
-  BOOTSTRAP_MODULE,
   PROD_DEPENDENCIES,
   JS_PROD_SHIMS_BUNDLE,
-  JS_PROD_APP_BUNDLE,
-  JS_DEST,
-  TMP_DIR
+  JS_DEST
 } from '../config';
 
 export = function bundles(gulp, plugins) {
   return function () {
 
-    return merge(bundleShims(), bundleApp());
+    return merge(bundleShims());
 
     function getShims() {
       let libs = PROD_DEPENDENCIES
@@ -32,17 +27,6 @@ export = function bundles(gulp, plugins) {
       }))
       .pipe(plugins.concat(JS_PROD_SHIMS_BUNDLE))
       .pipe(gulp.dest(JS_DEST));
-    }
-
-    function bundleApp() {
-      return browserify(join(TMP_DIR, BOOTSTRAP_MODULE))
-        .bundle()
-        .pipe(require('vinyl-source-stream')(JS_PROD_APP_BUNDLE))
-        .pipe(require('vinyl-buffer')())
-        .pipe(plugins.uglify({
-          mangle: false
-        }))
-        .pipe(gulp.dest(JS_DEST));
     }
   };
 };

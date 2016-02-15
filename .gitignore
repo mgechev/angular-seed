@@ -28,6 +28,7 @@ build/Release
 # Users Environment Variables
 .lock-wscript
 .tsdrc
+.typingsrc
 
 #IDE configuration files
 .idea
@@ -39,5 +40,4 @@ dev
 docs
 lib
 test
-tools/typings/tsd
 tmp
