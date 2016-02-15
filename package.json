@@ -31,7 +31,6 @@
   "devDependencies": {
     "async": "^1.4.2",
     "browser-sync": "^2.11.1",
-    "browserify": "^13.0.0",
     "chalk": "^1.1.1",
     "connect": "^3.4.1",
     "connect-history-api-fallback": "^1.1.0",
@@ -75,6 +74,7 @@
     "serve-static": "^1.9.2",
     "slash": "~1.0.0",
     "stream-series": "^0.1.1",
+    "systemjs-builder": "^0.15.7",
     "tiny-lr": "^0.2.1",
     "traceur": "^0.0.91",
     "ts-node": "^0.5.4",
