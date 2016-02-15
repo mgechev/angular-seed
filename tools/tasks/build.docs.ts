@@ -1,5 +1,5 @@
 import {join} from 'path';
-import {APP_SRC, TEST_SRC, APP_TITLE, DOCS_DEST} from '../config';
+import {APP_SRC, APP_TITLE, DOCS_DEST} from '../config';
 
 export = function buildDocs(gulp, plugins, option) {
   return function() {
@@ -7,8 +7,8 @@ export = function buildDocs(gulp, plugins, option) {
     let src = [
       'typings/main.d.ts',
       join(APP_SRC, '**/*.ts'),
-      '!' + join(TEST_SRC, '**/*.spec.ts'),
-      '!' + join(TEST_SRC, '**/*.e2e.ts')
+      '!' + join(APP_SRC, '**/*.spec.ts'),
+      '!' + join(APP_SRC, '**/*.e2e.ts')
     ];
 
     return gulp.src(src)

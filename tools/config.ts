@@ -26,15 +26,13 @@ export const BOOTSTRAP_MODULE     = ENABLE_HOT_LOADING ? 'hot_loader_main' : 'ma
 export const APP_TITLE            = 'My Angular2 App';
 
 export const APP_SRC              = 'src';
-export const TEST_SRC             = 'src';
 export const ASSETS_SRC           = `${APP_SRC}/assets`;
 
 export const TOOLS_DIR            = 'tools';
-export const TMP_DIR              = 'tmp';
-export const TEST_SPEC_DEST       = 'dist/test/spec';
-export const TEST_E2E_DEST        = 'dist/test/e2e';
 export const DOCS_DEST            = 'docs';
-export const APP_DEST             = `dist/${ENV}`;
+export const DIST_DIR             = 'dist';
+export const TMP_DIR              = `${DIST_DIR}/tmp`;
+export const APP_DEST             = `${DIST_DIR}/${ENV}`;
 export const CSS_DEST             = `${APP_DEST}/css`;
 export const JS_DEST              = `${APP_DEST}/js`;
 export const APP_ROOT             = ENV === 'dev' ? `${APP_BASE}${APP_DEST}/` : `${APP_BASE}`;

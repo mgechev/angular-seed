@@ -99,9 +99,9 @@ npm run karma.start           # 2nd window
 
 # e2e (aka. end-to-end, integration) - In three different shell windows
 # Make sure you don't have a global instance of Protractor
-npm start
 # npm run webdriver-update <- You will need to run this the first time
 npm run webdriver-start
+npm run serve.e2e
 npm run e2e
 
 # e2e live mode - Protractor interactive mode
@@ -164,7 +164,6 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   ├── main.ts
 │   └── index.html
 ├── dist
-├── test
 ├── tools
 │   ├── manual_typings
 │   ├── tasks

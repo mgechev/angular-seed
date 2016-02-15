@@ -3,10 +3,7 @@ import {runSequence, task} from './tools/utils';
 
 // --------------
 // Clean (override).
-gulp.task('clean',       task('clean', 'all'));
-gulp.task('clean.dist',  task('clean', 'dist'));
-gulp.task('clean.test',  task('clean', 'test'));
-gulp.task('clean.tmp',   task('clean', 'tmp'));
+gulp.task('clean', task('clean'));
 
 gulp.task('check.versions', task('check.versions'));
 gulp.task('build.docs', task('build.docs'));
@@ -22,19 +19,34 @@ gulp.task('postinstall', done =>
 // --------------
 // Build dev.
 gulp.task('build.dev', done =>
-  runSequence('clean.dist',
+  runSequence('clean',
               'tslint',
               'build.assets.dev',
               'build.js.dev',
-              'build.e2e_test',
               'build.index.dev',
               done));
 
 // --------------
+// Build dev watch.
+gulp.task('build.dev.watch', done =>
+  runSequence('build.dev',
+              'watch.dev',
+              done));
+
+// --------------
+// Build e2e.
+gulp.task('build.e2e', done =>
+    runSequence('clean',
+        'tslint',
+        'build.assets.dev',
+        'build.js.e2e',
+        'build.index.dev',
+        done));
+
+// --------------
 // Build prod.
 gulp.task('build.prod', done =>
-  runSequence('clean.dist',
-              'clean.tmp',
+  runSequence('clean',
               'tslint',
               'build.assets.prod',
               'build.html_css.prod',
@@ -44,24 +56,28 @@ gulp.task('build.prod', done =>
               done));
 
 // --------------
-// Watch.
-gulp.task('build.dev.watch', done =>
-  runSequence('build.dev',
-              'watch.dev',
-              done));
+// Build test.
+gulp.task('build.test', done =>
+    runSequence('clean',
+        'tslint',
+        'build.assets.dev',
+        'build.js.test',
+        'build.index.dev',
+        done));
 
+// --------------
+// Build test watch.
 gulp.task('build.test.watch', done =>
   runSequence('build.test',
               'watch.test',
               done));
 
 // --------------
-// Test.
-gulp.task('test', done =>
-  runSequence('clean.test',
-              'tslint',
-              'build.test',
-              'karma.start',
+// Docs
+// Disabled until https://github.com/sebastian-lenz/typedoc/issues/162 gets resolved
+gulp.task('docs', done =>
+  runSequence('build.docs',
+              'serve.docs',
               done));
 
 // --------------
@@ -73,9 +89,16 @@ gulp.task('serve', done =>
               done));
 
 // --------------
-// Docs
-// Disabled until https://github.com/sebastian-lenz/typedoc/issues/162 gets resolved
-gulp.task('docs', done =>
-  runSequence('build.docs',
-              'serve.docs',
+// Serve E2E
+gulp.task('serve.e2e', done =>
+  runSequence('build.e2e',
+              'server.start',
+              'watch.serve',
+              done));
+
+// --------------
+// Test.
+gulp.task('test', done =>
+  runSequence('build.test',
+              'karma.start',
               done));

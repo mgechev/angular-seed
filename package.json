@@ -8,6 +8,7 @@
   "scripts": {
     "build.dev": "gulp build.dev",
     "build.dev.watch": "gulp build.dev.watch",
+    "build.e2e": "gulp build.e2e",
     "build.prod": "gulp build.prod",
     "build.test": "gulp build.test",
     "build.test.watch": "gulp build.test.watch",
@@ -19,12 +20,13 @@
     "karma.start": "karma start",
     "postinstall": "typings install && gulp check.versions && gulp postinstall",
     "reinstall": "rimraf node_modules && npm cache clean && npm install",
-    "start": "gulp serve --env dev",
     "serve.dev": "gulp serve --env dev",
+    "serve.e2e": "gulp serve.e2e --env dev",
+    "start": "gulp serve --env dev",
     "tasks.list": "gulp --tasks-simple",
     "test": "gulp test",
-    "webdriver-update": "webdriver-manager update",
-    "webdriver-start": "webdriver-manager start"
+    "webdriver-start": "webdriver-manager start",
+    "webdriver-update": "webdriver-manager update"
   },
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
