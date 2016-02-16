@@ -17,17 +17,13 @@ In order to start the test drive use:
 
 
 ```bash
-git clone --depth 1 https://github.com/mgechev/angular2-seed.git
-cd angular2-seed
+git clone https://github.com/dellfort/angular2-redux-ag-grid
+cd angular2-redux-ag-grid
+# checkout development branch - master will only be updated occasionally
+git checkout develop
 # install the project's dependencies
 npm install
-# watches your files and uses livereload by default
+# watches your files and uses livereload by default:
 npm start
-# api document for the app
-npm run docs
 
-# dev build
-npm run build.dev
-# prod build
-npm run build.prod
 ```
