@@ -5,7 +5,8 @@ import {NameList} from '../../shared/services/name_list';
 
 @Component({
   selector: 'about',
-  templateUrl: './about/components/about.html',
+  moduleId: module.id,
+  templateUrl: './about.html',
   directives: [FORM_DIRECTIVES, CORE_DIRECTIVES]
 })
 export class AboutCmp {
