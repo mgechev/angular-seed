@@ -5,6 +5,7 @@ import {
   JS_PROD_APP_BUNDLE,
   JS_DEST,
   SYSTEM_BUILDER_CONFIG,
+  TMP_DIR
 } from '../config';
 
 const BUNDLER_OPTIONS = {
@@ -17,7 +18,9 @@ export = function bundles(gulp, plugins) {
   return function (done) {
     let builder = new Builder(SYSTEM_BUILDER_CONFIG);
     builder
-      .buildStatic(BOOTSTRAP_MODULE, join(JS_DEST, JS_PROD_APP_BUNDLE), BUNDLER_OPTIONS)
+      .buildStatic(join(TMP_DIR, BOOTSTRAP_MODULE),
+                   join(JS_DEST, JS_PROD_APP_BUNDLE),
+                   BUNDLER_OPTIONS)
       .then(() => done());
   };
 };
