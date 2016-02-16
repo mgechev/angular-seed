@@ -17,7 +17,7 @@
     "gulp": "gulp",
     "karma": "karma",
     "karma.start": "karma start",
-    "postinstall": "typings install && gulp check.versions && gulp postinstall",
+    "postinstall": "typings install && gulp check.versions && npm prune",
     "reinstall": "rimraf node_modules && npm cache clean && npm install",
     "start": "gulp serve --env dev",
     "serve.dev": "gulp serve --env dev",
