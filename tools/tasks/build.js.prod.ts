@@ -14,7 +14,7 @@ export = function buildJSProd(gulp, plugins) {
 
     let result = gulp.src(src)
       .pipe(plugins.plumber())
-      .pipe(plugins.inlineNg2Template({ base: TMP_DIR }))
+      .pipe(plugins.inlineNg2Template({ base: TMP_DIR , useRelativePaths: true }))
       .pipe(plugins.typescript(tsProject));
 
     return result.js
