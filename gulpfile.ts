@@ -13,13 +13,6 @@ gulp.task('build.docs', task('build.docs'));
 gulp.task('serve.docs', task('serve.docs'));
 
 // --------------
-// Postinstall.
-gulp.task('postinstall', done =>
-  runSequence('clean',
-              'npm',
-              done));
-
-// --------------
 // Build dev.
 gulp.task('build.dev', done =>
   runSequence('clean.dist',
