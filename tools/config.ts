@@ -110,9 +110,8 @@ export const SYSTEM_CONFIG = SYSTEM_CONFIG_DEV;
 export const SYSTEM_BUILDER_CONFIG = {
   defaultJSExtensions: true,
   paths: {
-    '*': `${TMP_DIR}/*`,
-    'angular2/*': 'node_modules/angular2/*',
-    'rxjs/*': 'node_modules/rxjs/*'
+    [`${TMP_DIR}/*`]: `${TMP_DIR}/*`,
+    '*': 'node_modules/*'
   }
 };
 

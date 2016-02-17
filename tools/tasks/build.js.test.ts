@@ -13,7 +13,7 @@ export = function buildJSTest(gulp, plugins) {
     ];
     let result = gulp.src(src)
       .pipe(plugins.plumber())
-      .pipe(plugins.inlineNg2Template({ base: APP_SRC }))
+      .pipe(plugins.inlineNg2Template({ base: APP_SRC, useRelativePaths: true }))
       .pipe(plugins.typescript(tsProject));
 
     return result.js

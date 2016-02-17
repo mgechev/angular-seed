@@ -7,6 +7,7 @@ export = function buildJSDev(gulp, plugins) {
     let tsProject = tsProjectFn(plugins);
     let src = [
       'typings/browser.d.ts',
+      'tools/manual_typings/**/*.d.ts',
       join(APP_SRC, '**/*.ts'),
       '!' + join(APP_SRC, '**/*.spec.ts'),
       '!' + join(APP_SRC, '**/*.e2e.ts')
