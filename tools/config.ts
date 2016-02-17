@@ -110,8 +110,8 @@ export const SYSTEM_CONFIG = SYSTEM_CONFIG_DEV;
 export const SYSTEM_BUILDER_CONFIG = {
   defaultJSExtensions: true,
   paths: {
-    'tmp/*': 'tmp/*',
-    '*': `node_modules/*`
+    [`${TMP_DIR}/*`]: `${TMP_DIR}/*`,
+    '*': 'node_modules/*'
   }
 };
 
