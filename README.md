@@ -106,7 +106,7 @@ npm run e2e
 
 # e2e live mode - Protractor interactive mode
 # Instead of last command above, you can use:
-npm run e2e-live
+npm run e2e.live
 ```
 You can learn more about [Protractor Interactive Mode here](https://github.com/angular/protractor/blob/master/docs/debugging.md#testing-out-protractor-interactively)
 

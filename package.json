@@ -14,7 +14,7 @@
     "build.test.watch": "gulp build.test.watch",
     "docs": "npm run gulp -- build.docs && npm run gulp -- serve.docs",
     "e2e": "protractor",
-    "e2e-live": "protractor --elementExplorer",
+    "e2e.live": "protractor --elementExplorer",
     "gulp": "gulp",
     "karma": "karma",
     "karma.start": "karma start",
