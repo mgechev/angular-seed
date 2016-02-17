@@ -3,16 +3,17 @@
  */
 
 import { Component } from 'angular2/core';
-import {Store} from '../store/store';
+import {MainLayout} from './shared/components/layouts/main-layout/main-layout.component';
+import {InitializeService} from './shared/services/initialize.service';
 
 @Component({
-  selector: 'app',
-  template: `
-    <h1>NG2 + redux + ag-grid</h1>
-    <p>{{ store.getState().uiState.message }}</p>
-    `
+    selector: 'app',
+    template: `<main-layout></main-layout>`,
+    directives: [MainLayout],
+    providers: [InitializeService]
 })
-
 export class AppComponent {
-  constructor(private store: Store) {}
+    constructor(initializeService:InitializeService) {
+        initializeService.initialize();
+    }
 }
