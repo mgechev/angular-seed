@@ -1,24 +1,27 @@
-/**
- * Created by dellfort on 15/02/16.
- */
-
 import {Injectable} from 'angular2/core';
-import {createStore, combineReducers} from 'redux';
-import {uiState, initialUiState} from './reducers/ui-state';
 import {ReduxWrapper} from './ReduxWrapper';
+import {createStore, combineReducers} from 'redux';
+
+import {uiState, initialUiState} from './reducers/ui-state';
 import {sessionState, SessionState} from './reducers/session-state';
 import {initialSessionState} from './reducers/session-state';
+import {assignmentsState, initialAssignmentsState} from './reducers/assignments';
+import {usersState, initialUsersState} from './reducers/users';
 
 const state = combineReducers({
   uiState,
-  sessionState
+  sessionState,
+  usersState,
+  assignmentsState
 });
 
 const store = createStore(
   state,
   {
     uiState: initialUiState,
-    sessionState: initialSessionState
+    sessionState: initialSessionState,
+    usersState: initialUsersState,
+    assignmentsState: initialAssignmentsState
   }
 );
 

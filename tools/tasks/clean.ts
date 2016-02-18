@@ -1,44 +1,37 @@
-import * as async from 'async';
 import * as util from 'gulp-util';
 import * as chalk from 'chalk';
 import * as del from 'del';
-import {APP_DEST, TEST_SPEC_DEST, TEST_E2E_DEST, TMP_DIR} from '../config';
+import {DIST_DIR, DEV_DEST, PROD_DEST, TMP_DIR} from '../config';
 
 export = function clean(gulp, plugins, option) {
-  return function (done) {
 
+  return function(done) {
     switch(option) {
-      case 'all'    : cleanAll(done);     break;
-      case 'dist'   : cleanDist(done);    break;
-      case 'test'   : cleanTest(done);    break;
-      case 'tmp'    : cleanTmp(done);     break;
+      case 'all'  : cleanAll(done);  break;
+      case 'dev'  : cleanDev(done);  break;
+      case 'prod' : cleanProd(done); break;
       default: done();
     }
-
   };
+
 };
 
 function cleanAll(done) {
-  async.parallel([
-    cleanDist,
-    cleanTest,
-    cleanTmp
-  ], done);
-}
-function cleanDist(done) {
-  del(APP_DEST).then((paths) => {
+  del(DIST_DIR).then((paths) => {
     util.log('Deleted', chalk.yellow(paths && paths.join(', ') || '-'));
     done();
   });
 }
-function cleanTest(done) {
-  del([TEST_SPEC_DEST, TEST_E2E_DEST]).then((paths) => {
+
+function cleanDev(done) {
+  del(DEV_DEST).then((paths) => {
     util.log('Deleted', chalk.yellow(paths && paths.join(', ') || '-'));
     done();
   });
 }
-function cleanTmp(done) {
-  del(TMP_DIR).then((paths) => {
+
+function cleanProd(done) {
+  del([PROD_DEST, TMP_DIR]).then((paths) => {
     util.log('Deleted', chalk.yellow(paths && paths.join(', ') || '-'));
     done();
   });

@@ -1,7 +1,3 @@
-/**
- * Created by dellfort on 15/02/16.
- */
-
 import {SERVICE_ACTION_STARTED, SERVICE_ACTION_FINISHED} from '../actions/services';
 import {APP_INITIALIZED} from '../actions/app';
 
