@@ -3,13 +3,12 @@ import {runSequence, task} from './tools/utils';
 
 // --------------
 // Clean (override).
-gulp.task('clean',       task('clean', 'all'));
-gulp.task('clean.dev',   task('clean', 'dev'));
-gulp.task('clean.prod',  task('clean', 'prod'));
-
-gulp.task('check.versions', task('check.versions'));
-gulp.task('build.docs', task('build.docs'));
-gulp.task('serve.docs', task('serve.docs'));
+gulp.task('clean',          () => { task('clean', 'all'  ); });
+gulp.task('clean.dev',      () => { task('clean', 'dev' ); });
+gulp.task('clean.prod',     () => { task('clean', 'prod' ); });
+gulp.task('check.versions', () => { task('check.versions'); });
+gulp.task('build.docs',     () => { task('build.docs'    ); });
+gulp.task('serve.docs',     () => { task('serve.docs'    ); });
 
 // --------------
 // Build dev.
