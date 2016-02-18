@@ -1,8 +1,8 @@
-import {Component} from 'angular2/core';
-import {MainLayout} from './shared/components/layouts/main-layout/main-layout.component';
+import { Component } from 'angular2/core';
 import {InitializeService} from './shared/services/initialize.service';
 import {Store} from '../store/store';
 import {LoginComponent} from './components/login/login.component';
+import {AdministrationComponent} from './administration/administration.component';
 import {OnInit} from 'angular2/core';
 import {LoginService} from './shared/stubs/services/login.service';
 import {UserLoginDto} from './shared/stubs/dtos/user-login-dto';
@@ -14,10 +14,21 @@ import {logoutUser} from '../store/actions/session';
   template: `
   <login *ngIf="!store.getSessionState().userAuthenticated"></login>
   <button id="logout" (click)="onLogout()">Logout</button>
-  <main-layout *ngIf="store.getSessionState().userAuthenticated"></main-layout>
+
+  <section *ngIf="store.getSessionState().userAuthenticated" id="applicationframe">
+
+      <mainnavigation><!-- placeholder //--></mainnavigation>
+
+      <startpage> <!-- placeholder //--></startpage>
+      <manage> <!-- placeholder //--></manage>
+      <activities> <!-- placeholder //--></activities>
+      <administration></administration>
+
+  </section>
+
   `,
-  directives: [LoginComponent, MainLayout],
-  providers: [LoginService, InitializeService]
+  directives: [LoginComponent, AdministrationComponent],
+  providers: [InitializeService]
 })
 export class AppComponent implements OnInit {
   constructor(private store:Store, private loginService:LoginService, private initializeService:InitializeService) {

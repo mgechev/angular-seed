@@ -26,15 +26,15 @@ export const BOOTSTRAP_MODULE     = ENABLE_HOT_LOADING ? 'hot_loader_main' : 'ma
 export const APP_TITLE            = 'My Angular2 App';
 
 export const APP_SRC              = 'src';
-export const TEST_SRC             = 'src';
 export const ASSETS_SRC           = `${APP_SRC}/assets`;
 
 export const TOOLS_DIR            = 'tools';
-export const TMP_DIR              = 'tmp';
-export const TEST_SPEC_DEST       = 'dist/test/spec';
-export const TEST_E2E_DEST        = 'dist/test/e2e';
 export const DOCS_DEST            = 'docs';
-export const APP_DEST             = `dist/${ENV}`;
+export const DIST_DIR             = 'dist';
+export const DEV_DEST             = `${DIST_DIR}/dev`;
+export const PROD_DEST            = `${DIST_DIR}/prod`;
+export const TMP_DIR              = `${DIST_DIR}/tmp`;
+export const APP_DEST             = `${DIST_DIR}/${ENV}`;
 export const CSS_DEST             = `${APP_DEST}/css`;
 export const JS_DEST              = `${APP_DEST}/js`;
 export const APP_ROOT             = ENV === 'dev' ? `${APP_BASE}${APP_DEST}/` : `${APP_BASE}`;
@@ -68,7 +68,9 @@ export const DEV_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencie
   { src: 'rxjs/bundles/Rx.js', inject: 'libs', dest: JS_DEST },
   { src: 'angular2/bundles/angular2.js', inject: 'libs', dest: JS_DEST },
   { src: 'angular2/bundles/router.js', inject: 'libs', dest: JS_DEST },
-  { src: 'angular2/bundles/http.js', inject: 'libs', dest: JS_DEST }
+  { src: 'angular2/bundles/http.js', inject: 'libs', dest: JS_DEST },
+  { src: 'ag-grid/dist/styles/ag-grid.css', inject: true },
+  { src: 'ag-grid/dist/styles/theme-fresh.css', inject: true }
 ]);
 
 export const PROD_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencies([
@@ -97,6 +99,7 @@ const SYSTEM_CONFIG_DEV = {
     [BOOTSTRAP_MODULE]: `${APP_BASE}${BOOTSTRAP_MODULE}`,
     'angular2/*': `${APP_BASE}angular2/*`,
     'rxjs/*': `${APP_BASE}rxjs/*`,
+    'rxjs/add/operator/*' : `${APP_BASE}node_modules/rxjs/add/operator/*`,
     'redux': `${APP_BASE}node_modules/redux/dist/redux`,
     '*': `${APP_BASE}node_modules/*`
   },
@@ -111,9 +114,8 @@ export const SYSTEM_CONFIG = SYSTEM_CONFIG_DEV;
 export const SYSTEM_BUILDER_CONFIG = {
   defaultJSExtensions: true,
   paths: {
-    '*': `${TMP_DIR}/*`,
-    'angular2/*': 'node_modules/angular2/*',
-    'rxjs/*': 'node_modules/rxjs/*'
+    [`${TMP_DIR}/*`]: `${TMP_DIR}/*`,
+    '*': 'node_modules/*'
   }
 };
 
