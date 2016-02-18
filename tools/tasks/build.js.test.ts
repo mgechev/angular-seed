@@ -1,14 +1,14 @@
 import {join} from 'path';
-import {BOOTSTRAP_MODULE, APP_SRC, TEST_SRC, TEST_SPEC_DEST} from '../config';
+import {BOOTSTRAP_MODULE, APP_SRC, APP_DEST} from '../config';
 import {tsProjectFn} from '../utils';
 
-export = function buildTest(gulp, plugins) {
+export = function buildJSTest(gulp, plugins) {
   return function () {
     let tsProject = tsProjectFn(plugins);
     let src = [
       'typings/browser.d.ts',
       join(APP_SRC, '**/*.ts'),
-      '!' + join(TEST_SRC, '**/*.e2e.ts'),
+      '!' + join(APP_SRC, '**/*.e2e.ts'),
       '!' + join(APP_SRC, `${BOOTSTRAP_MODULE}.ts`)
     ];
     let result = gulp.src(src)
@@ -17,6 +17,6 @@ export = function buildTest(gulp, plugins) {
       .pipe(plugins.typescript(tsProject));
 
     return result.js
-      .pipe(gulp.dest(TEST_SPEC_DEST));
+      .pipe(gulp.dest(APP_DEST));
   };
 };
