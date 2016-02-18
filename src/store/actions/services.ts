@@ -1,7 +1,3 @@
-/**
- * Created by dellfort on 15/02/16.
- */
-
 export const SERVICE_ACTION_STARTED = 'BACKEND_ACTION_STARTED';
 export const SERVICE_ACTION_FINISHED = 'BACKEND_ACTION_FINISHED';
 

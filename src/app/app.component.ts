@@ -1,24 +1,22 @@
-/**
- * Created by dellfort on 16/02/16.
- */
-
 import { Component } from 'angular2/core';
-//import {MainLayout} from './shared/components/layouts/main-layout/main-layout.component';
+import {MainLayout} from './shared/components/layouts/main-layout/main-layout.component';
 import {InitializeService} from './shared/services/initialize.service';
-import {AdministrationComponent} from './administration/administration.component';
 import {Store} from '../store/store';
+import {LoginComponent} from './components/login/login.component';
 
 @Component({
-    selector: 'app',
-    template: `<h1>NG2 + redux + ag-grid</h1>
-               <p>{{ store.getState().uiState.message }} - initialized {{store.getState().uiState.initialized}}</p>
-               <administration-component></administration-component>
-               `,
-    directives: [AdministrationComponent],
-    providers: [InitializeService]
+  selector: 'app',
+  template: `
+  <login *ngIf="!store.getSessionState().userAuthenticated"></login>
+  <main-layout *ngIf="store.getSessionState().userAuthenticated"></main-layout>
+  `,
+  directives: [LoginComponent, MainLayout],
+  providers: [InitializeService]
 })
+
 export class AppComponent {
-    constructor(initializeService:InitializeService, private store: Store) {
-        initializeService.initialize();
-    }
+
+  constructor(private store:Store, initializeService:InitializeService) {
+    console.log(initializeService);
+  }
 }
