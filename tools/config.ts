@@ -68,7 +68,9 @@ export const DEV_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencie
   { src: 'rxjs/bundles/Rx.js', inject: 'libs', dest: JS_DEST },
   { src: 'angular2/bundles/angular2.js', inject: 'libs', dest: JS_DEST },
   { src: 'angular2/bundles/router.js', inject: 'libs', dest: JS_DEST },
-  { src: 'angular2/bundles/http.js', inject: 'libs', dest: JS_DEST }
+  { src: 'angular2/bundles/http.js', inject: 'libs', dest: JS_DEST },
+  { src: 'ag-grid/dist/styles/ag-grid.css', inject: true },
+  { src: 'ag-grid/dist/styles/theme-fresh.css', inject: true }
 ]);
 
 export const PROD_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencies([
