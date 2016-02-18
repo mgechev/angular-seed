@@ -1,8 +1,7 @@
 import {Response} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 
-export interface IPostCall
-{
+export interface IPostCall {
   setUrlParams(value:Object):IPostCall;
   setData(value:any):IPostCall;
   setFile(value:any):IPostCall;

@@ -1,6 +1,5 @@
-import {Http, Response, RequestOptionsArgs} from 'angular2/http';
+import {Http} from 'angular2/http';
 import 'rxjs/add/operator/map';
-import {Observable} from 'rxjs/Observable';
 
 import {GetCall} from './calls/get-call';
 import {PostCall} from './calls/post-call';
@@ -12,18 +11,15 @@ import {IGetCall} from './calls/get-call.interface';
 /**
  * Base service class contains hidden functionality for call creation.
  */
-export class BaseService
-{
+export class BaseService {
   protected servicePath:string;
   protected version:string;
 
-  constructor(private _http:Http)
-  {
+  constructor(private _http:Http) {
     //////////
     // hack to be able to send credentials to the server (see: https://github.com/angular/angular/issues/4231)
     let _build = (<any> _http)._backend._browserXHR.build;
-    (<any> _http)._backend._browserXHR.build = () =>
-    {
+    (<any> _http)._backend._browserXHR.build = () => {
       let _xhr = _build();
       _xhr.withCredentials = true;
       return _xhr;
@@ -38,8 +34,7 @@ export class BaseService
    * @param methodPath
    * @returns {IGetCall}
    */
-  protected newGetCall(methodPath:string):IGetCall
-  {
+  protected newGetCall(methodPath:string):IGetCall {
     return new GetCall(this._http, this.servicePath, this.version, methodPath) as IGetCall;
   }
 
@@ -49,18 +44,15 @@ export class BaseService
    * @param methodPath
    * @returns {IPostCall}
    */
-  protected newPostCall(methodPath:string):IPostCall
-  {
+  protected newPostCall(methodPath:string):IPostCall {
     return new PostCall(this._http, this.servicePath, this.version, methodPath) as IPostCall;
   }
 
-  protected newDeleteCall():any
-  {
+  protected newDeleteCall():any {
     // TODO: add new DeleteCall
   }
 
-  protected newPutCall():any
-  {
+  protected newPutCall():any {
     // TODO: add new PutCall
   }
 }

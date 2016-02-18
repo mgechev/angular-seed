@@ -2,8 +2,7 @@ import {EntityDto} from './base/entity-dto';
 import {TenantLoginDto} from './tenant-login-dto';
 import {AttachmentFileDto} from './attachment-file-dto';
 
-export class _UserLoginDto extends EntityDto
-{
+export class SuperUserLoginDto extends EntityDto {
   public loginname:string = undefined;
   public firstname:string = undefined;
   public middlename:string = undefined;

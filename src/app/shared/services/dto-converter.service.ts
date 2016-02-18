@@ -1,10 +1,9 @@
-import {dtoMap} from '../../models/dtos/dto-map';
+import {dtos} from '../stubs/dtos';
 
 /**
  * Static helper service, which converts JSON to typed instances and vice versa.
  */
-export class DtoConverter
-{
+export class DtoConverter {
   //--------------------------------------------------
   // typify
 
@@ -14,28 +13,18 @@ export class DtoConverter
    * @param dumbObject
    * @returns {any}
    */
-  public static typify(dumbObject:any):any
-  {
+  public static typify(dumbObject:any):any {
     var typedObject:any;
-    if (dumbObject)
-    {
+    if (dumbObject) {
       // is it an object?
-      if (typeof dumbObject === 'object')
-      {
+      if (typeof dumbObject === 'object') {
         // but it's no array?
-        if (!Array.isArray(dumbObject))
-        {
+        if (!Array.isArray(dumbObject)) {
           typedObject = DtoConverter.typifyObject(dumbObject);
-        }
-        // sure, it is an array
-        else if (Array.isArray(dumbObject))
-        {
+        } else if (Array.isArray(dumbObject)) { // sure, it is an array
           typedObject = DtoConverter.typifyArray(dumbObject);
         }
-      }
-      // no, it is NOT an object, it's a primitve
-      else
-      {
+      } else { // no, it is NOT an object, it's a primitve
         typedObject = DtoConverter.typifyPrimitive(dumbObject);
       }
     }
@@ -48,44 +37,33 @@ export class DtoConverter
    * @param dumbObject
    * @returns {Object}
    */
-  public static typifyObject(dumbObject:Object):Object
-  {
+  public static typifyObject(dumbObject:Object):Object {
     var typedObject:Object;
     var objectIsTyped = false;
 
     // has it the @type information?
-    if (dumbObject && dumbObject.hasOwnProperty('@type'))
-    {
+    if (dumbObject && dumbObject.hasOwnProperty('@type')) {
       // is this type already existing?
-      if (dtoMap.hasOwnProperty(dumbObject['@type']))
-      {
+      if (dtos.hasOwnProperty(dumbObject['@type'])) {
         // use that type!
-        typedObject = new dtoMap[dumbObject['@type']]();
+        typedObject = new dtos[dumbObject['@type']]();
 
         objectIsTyped = true;
-      }
-      // no type, but we have lazy developers
-      else
-      {
+      } else { // no type, but we have lazy developers
         typedObject = {};
       }
       // remove @type information, not needed anymore
       delete dumbObject['@type'];
-    }
-    // nope, no @type. It stays dumb
-    else
-    {
+    } else { // nope, no @type. It stays dumb
       typedObject = {};
     }
 
     // let's check the properties of the dumb object
-    for (var prop in dumbObject)
-    {
+    for (var prop in dumbObject) {
       var propValue = dumbObject[prop];
 
       // if it is a typed object, we only use valid properties. If not, we don't care about the properties
-      if (((objectIsTyped && typedObject.hasOwnProperty(prop)) || !objectIsTyped))
-      {
+      if (((objectIsTyped && typedObject.hasOwnProperty(prop)) || !objectIsTyped)) {
         typedObject[prop] = DtoConverter.typify(propValue);
       }
       /*///////// dummy /////////
@@ -111,13 +89,11 @@ export class DtoConverter
    * @param dumbObject
    * @returns {Array<any>}
    */
-  public static typifyArray(dumbObject:Array<any>):Array<any>
-  {
+  public static typifyArray(dumbObject:Array<any>):Array<any> {
     var typedObject:Array<any> = [];
 
     // items loop
-    dumbObject.forEach(function (dumObjectItem)
-    {
+    dumbObject.forEach(function (dumObjectItem) {
       typedObject.push(DtoConverter.typify(dumObjectItem));
     });
 
@@ -130,17 +106,13 @@ export class DtoConverter
    * @param dumbObject
    * @returns {any}
    */
-  public static typifyPrimitive(dumbObject:any):any
-  {
+  public static typifyPrimitive(dumbObject:any):any {
     var typedObject:any;
 
     // check if it is a date (dates are represented as strings)
-    if (typeof dumbObject === 'string' && !isNaN(Date.parse(dumbObject)))
-    {
+    if (typeof dumbObject === 'string' && !isNaN(Date.parse(dumbObject))) {
       typedObject = new Date(dumbObject);
-    }
-    else
-    {
+    } else {
       typedObject = dumbObject;
     }
 
@@ -156,35 +128,22 @@ export class DtoConverter
    * @param typedObject
    * @returns {any}
    */
-  public static dumbify(typedObject:any):any
-  {
+  public static dumbify(typedObject:any):any {
     var dumbObject:any;
 
     // typed object exists?
-    if (typedObject !== undefined)
-    {
+    if (typedObject !== undefined) {
       // is it an object?
-      if (typeof typedObject === 'object')
-      {
+      if (typeof typedObject === 'object') {
         // it is an Array?
-        if (Array.isArray(typedObject))
-        {
+        if (Array.isArray(typedObject)) {
           dumbObject = DtoConverter.dumbifyArray(typedObject);
-        }
-        // is it a Date?
-        else if (typedObject instanceof Date)
-        {
+        } else if (typedObject instanceof Date) { // is it a Date?
           dumbObject = DtoConverter.dumbifyDate(typedObject);
-        }
-        // it is not an Array -> proceed with Object handling
-        else
-        {
+        } else { // it is not an Array -> proceed with Object handling
           dumbObject = DtoConverter.dumbifyObject(typedObject);
         }
-      }
-      // no, it is NOT an object, and no function -> it's a primitve
-      else if (typeof typedObject !== 'function')
-      {
+      } else if (typeof typedObject !== 'function') { // no, it is NOT an object, and no function -> it's a primitve
         dumbObject = DtoConverter.dumbifyPrimitive(typedObject);
       }
     }
@@ -198,23 +157,19 @@ export class DtoConverter
    * @param typedObject
    * @returns {Object}
    */
-  public static dumbifyObject(typedObject:any):Object
-  {
+  public static dumbifyObject(typedObject:any):Object {
     var dumbObject:Object = {};
 
     // make dumb object an Object
 
     // check for a non-normal Object
-    if (typedObject.constructor.name !== 'Object')
-    {
+    if (typedObject.constructor.name !== 'Object') {
       dumbObject['@type'] = typedObject.constructor.name;
     }
 
     // let's check the properties of the typed object
-    for (var prop in typedObject)
-    {
-      if (prop.indexOf('_') === 0 || prop.indexOf('$') === 0)
-      {
+    for (var prop in typedObject) {
+      if (prop.indexOf('_') === 0 || prop.indexOf('$') === 0) {
         continue;
       }
       var propValue = typedObject[prop];
@@ -243,14 +198,12 @@ export class DtoConverter
    * @param typedObject
    * @returns {Array<any>}
    */
-  public static dumbifyArray(typedObject:Array<any>):Array<any>
-  {
+  public static dumbifyArray(typedObject:Array<any>):Array<any> {
     // make dumb object an Array too
     var dumbObject:Array<any> = [];
 
     // loop typed object items
-    typedObject.forEach(function (typedObjectItem)
-    {
+    typedObject.forEach(function (typedObjectItem) {
       // dumbify typed object items and add to dumb object
       dumbObject.push(DtoConverter.dumbify(typedObjectItem));
     });
@@ -264,8 +217,7 @@ export class DtoConverter
    * @param typedObject
    * @returns {string}
    */
-  public static dumbifyDate(typedObject:Date):string
-  {
+  public static dumbifyDate(typedObject:Date):string {
     return typedObject.toISOString();
   }
 
@@ -275,8 +227,7 @@ export class DtoConverter
    * @param typedObject
    * @returns {any}
    */
-  public static dumbifyPrimitive(typedObject:any):any
-  {
+  public static dumbifyPrimitive(typedObject:any):any {
     return typedObject;
   }
 }

@@ -4,12 +4,10 @@
  * @param source
  * @returns {string}
  */
-export function queryParams(source:Object):string
-{
+export function queryParams(source:Object):string {
   var array:Array<string> = [];
 
-  for (var key in source)
-  {
+  for (var key in source) {
     array.push(encodeURIComponent(key) + '=' + encodeURIComponent(source[key]));
   }
 

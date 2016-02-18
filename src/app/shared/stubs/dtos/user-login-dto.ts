@@ -1,3 +1,4 @@
-/**
- * Created by manuel.lang on 17.02.2016.
- */
+import {SuperUserLoginDto} from './_user-login-dto';
+
+export class UserLoginDto extends SuperUserLoginDto {
+}

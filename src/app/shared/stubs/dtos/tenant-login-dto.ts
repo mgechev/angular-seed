@@ -1,6 +1,5 @@
-import {_TenantLoginDto} from '_tenant-login-dto';
+import {SuperTenantLoginDto} from '_tenant-login-dto';
 
-export class TenantLoginDto extends _TenantLoginDto
-{
+export class TenantLoginDto extends SuperTenantLoginDto {
   // add helper methods here if needed
 }
