@@ -31,6 +31,12 @@
     "quotemark": [true, "single"],
     "semicolon": true,
     "triple-equals": true,
-    "variable-name": false
+    "variable-name": false,
+
+    "component-selector-name": [true, "kebab-case"],
+    "component-selector-type": [true, "element"],
+    "host-parameter-decorator": true,
+    "input-parameter-decorator": true,
+    "output-parameter-decorator": true
   }
 }
