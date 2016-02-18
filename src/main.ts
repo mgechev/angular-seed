@@ -7,7 +7,7 @@ if ('<%= ENV %>' === 'prod') { enableProdMode(); }
 
 bootstrap(AppCmp, [
   ROUTER_PROVIDERS,
-  provide(APP_BASE_HREF, { useValue: '/' })
+  provide(APP_BASE_HREF, { useValue: '<%= APP_BASE %>' })
 ]);
 
 // In order to start the Service Worker located at "./sw.js"
