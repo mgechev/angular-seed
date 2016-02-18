@@ -5,7 +5,7 @@
 import { Component, Input, OnInit, OnChanges } from 'angular2/core';
 import {Store} from '../../../store/store';
 import {AgGridNg2} from 'ag-grid-ng2/main';
-import {AssignmentsService} from '../../../services/assignments.service';
+import {AssignmentsService} from '../../shared/services/assignments.service';
 
 @Component({
   selector: 'assignments-component',
