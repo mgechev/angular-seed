@@ -28,7 +28,7 @@ import {logoutUser} from '../store/actions/session';
 
   `,
   directives: [LoginComponent, AdministrationComponent],
-  providers: [InitializeService]
+  providers: [LoginService, InitializeService]
 })
 export class AppComponent implements OnInit {
   constructor(private store:Store, private loginService:LoginService, private initializeService:InitializeService) {
