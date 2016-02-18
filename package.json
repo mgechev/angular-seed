@@ -1,9 +1,9 @@
 {
   "name": "angular2-seed",
   "version": "0.0.0",
-  "description": "Seed for Angular 2 apps",
+  "description": "Test drive for ng2 + redux + ag-grid",
   "repository": {
-    "url": "https://github.com/mgechev/angular2-seed"
+    "url": "https://github.com/dellfort/angular2-redux-ag-grid"
   },
   "scripts": {
     "build.dev": "gulp build.dev",
