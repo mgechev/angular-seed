@@ -1,7 +1,3 @@
-/**
- * Created by dellfort on 17/02/16.
- */
-
 import {SERVICE_ACTION_FINISHED} from '../actions/services';
 
 const initialUsersState = {

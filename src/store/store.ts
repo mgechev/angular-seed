@@ -1,7 +1,3 @@
-/**
- * Created by dellfort on 15/02/16.
- */
-
 import {Injectable} from 'angular2/core';
 import {ReduxWrapper} from './ReduxWrapper';
 import {createStore, combineReducers} from 'redux';

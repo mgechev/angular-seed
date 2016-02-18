@@ -1,7 +1,3 @@
-/**
- * Created by dellfort on 16/02/16.
- */
-
 import { Component } from 'angular2/core';
 import {Store} from '../../store/store';
 import {AssignmentsComponent} from './assignments/assignments.component';

@@ -1,7 +1,3 @@
-/**
- * Created by dellfort on 16/02/16.
- */
-
 import { Component, Input, OnInit, OnChanges } from 'angular2/core';
 import {Store} from '../../../store/store';
 import {AgGridNg2} from 'ag-grid-ng2/main';

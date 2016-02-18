@@ -1,7 +1,3 @@
-/**
- * Created by dellfort on 16/02/16.
- */
-
 import {Injectable} from 'angular2/core';
 import {Http} from 'angular2/http';
 import {Store} from '../../../store/store';
