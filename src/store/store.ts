@@ -3,18 +3,25 @@
  */
 
 import {Injectable} from 'angular2/core';
-import {createStore, combineReducers} from 'redux';
-import {uiState, initialUiState} from './reducers/ui-state';
 import {ReduxWrapper} from './ReduxWrapper';
+import {createStore, combineReducers} from 'redux';
+
+import {uiState, initialUiState} from './reducers/ui-state';
+import {assignmentsState, initialAssignmentsState} from './reducers/assignments';
+import {usersState, initialUsersState} from './reducers/users';
 
 const state = combineReducers({
-  uiState
+  uiState,
+  usersState,
+  assignmentsState
 });
 
 const store = createStore(
   state,
   {
-    uiState: initialUiState
+    uiState: initialUiState,
+    usersState: initialUsersState,
+    assignmentsState: initialAssignmentsState
   }
 );
 
