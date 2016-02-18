@@ -1,7 +1,16 @@
-export const USER_AUTHENTICATED:string = 'USER_AUTHENTICATED';
+export const AUTHENTICATE_USER:string = 'AUTHENTICATE_USER';
+export const USER_IS_AUTHENTICATED:string = 'USER_IS_AUTHENTICATED';
 
-export function userAuthenticated():Object {
+export function authenticateUser(username:string, password:string, tenant:string):Object {
   return {
-    type: USER_AUTHENTICATED
+    type: AUTHENTICATE_USER,
+    username,
+    password,
+    tenant
+  };
+}
+export function userIsAuthenticated():Object {
+  return {
+    type: USER_IS_AUTHENTICATED
   };
 }

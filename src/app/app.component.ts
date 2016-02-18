@@ -1,7 +1,3 @@
-/**
- * Created by dellfort on 16/02/16.
- */
-
 import {Component} from 'angular2/core';
 import {MainLayout} from './shared/components/layouts/main-layout/main-layout.component';
 import {InitializeService} from './shared/services/initialize.service';
@@ -20,6 +16,5 @@ import {LoginComponent} from './components/login/login.component';
 export class AppComponent {
 
   constructor(private store:Store, initializeService:InitializeService) {
-    console.log(initializeService);
   }
 }
