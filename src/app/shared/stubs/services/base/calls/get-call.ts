@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {queryParams} from './query-params.function';
 import {IGetCall} from './get-call.interface';
 import {DtoConverter} from '../../../../services/dto-converter.service';
+import {SERVER_URL} from '../base.service';
 
 export class GetCall implements IGetCall {
   private _urlParams:string = '';
@@ -28,11 +29,10 @@ export class GetCall implements IGetCall {
   }
 
   public send():Observable<Response> {
-    var splUrl:string = window.location.protocol + '//' + window.location.hostname + ':8080/serviceplanet';
-
     return this._http
       .get(
-        splUrl + '/remote/service/' + this._version + '/' + this._servicePath + '/' + this._methodPath + this._urlSubPath + this._urlParams)
+        SERVER_URL + '/remote/service/' + this._version + '/' + this._servicePath + '/' + this._methodPath +
+        this._urlSubPath + this._urlParams)
       .map(function (response:Response) {
         return DtoConverter.typify(response.json());
       });

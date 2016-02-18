@@ -5,6 +5,7 @@ import {queryParams} from './query-params.function';
 import {IPostCall} from './post-call.interface';
 import {CustomRequestOptionsArgs} from './custom-request-options-args';
 import {DtoConverter} from '../../../../services/dto-converter.service';
+import {SERVER_URL} from '../base.service';
 
 export class PostCall implements IPostCall {
   private _requestData:any;
@@ -50,11 +51,10 @@ export class PostCall implements IPostCall {
   }
 
   public send():Observable<Response> {
-    var splUrl:string = window.location.protocol + '//' + window.location.hostname + ':8080/serviceplanet';
-
     return this._http
       .post(
-        splUrl + '/remote/service/' + this._version + '/' + this._servicePath + '/' + this._methodPath + this._urlSubPath,
+        SERVER_URL + '/remote/service/' + this._version + '/' + this._servicePath + '/' + this._methodPath +
+        this._urlSubPath,
         DtoConverter.dumbify(this._requestData), this._config)
       .map(function (response:Response) {
         return DtoConverter.typify(response.json());
