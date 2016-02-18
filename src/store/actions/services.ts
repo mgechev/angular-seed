@@ -1,11 +1,7 @@
-/**
- * Created by dellfort on 15/02/16.
- */
-
 export const SERVICE_ACTION_STARTED = 'BACKEND_ACTION_STARTED';
 export const SERVICE_ACTION_FINISHED = 'BACKEND_ACTION_FINISHED';
 
-export function backendActionStarted(message: string) {
+export function backendActionStarted(message:string) {
   return {
     type: SERVICE_ACTION_STARTED,
     message
