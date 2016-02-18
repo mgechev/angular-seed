@@ -3,7 +3,6 @@ import {Store} from '../../../store/store';
 import {LoginService} from '../../shared/stubs/services/login.service';
 import {UserLoginDto} from '../../shared/stubs/dtos/user-login-dto';
 import {userIsAuthenticated} from '../../../store/actions/session';
-import {authenticateUser} from '../../../store/actions/session';
 
 @Component({
   selector: 'login',
@@ -48,11 +47,11 @@ export class LoginComponent {
      harder to reproduce the bug. (ok, for the login it doesn't matter, but it's a general point)
      */
 
-    this.store.dispatch(authenticateUser(username, password, tenant));
-    /*this.loginService.authenticate(username, password, tenant)
+    //this.store.dispatch(authenticateUser(username, password, tenant));
+    this.loginService.authenticate(username, password, tenant)
       .subscribe(function (loggedInUser:UserLoginDto):void {
         console.log('loggedInUser', loggedInUser);
         self.store.dispatch(userIsAuthenticated(loggedInUser));
-      });*/
+      });
   }
 }
