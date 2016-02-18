@@ -3,17 +3,27 @@ import {Store} from '../../store/store';
 import {AssignmentsComponent} from './assignments/assignments.component';
 
 @Component({
-  selector: 'administration-component',
+  selector: 'administration',
   directives: [AssignmentsComponent],
   template: `
     <section>
-      <section>Navigation</section>
-      <section>
-          <assignments-component
+
+          <admin-overview></admin-overview>
+          <admin-users></admin-users>
+          <admin-groups></admin-groups>
+          <admin-tenants></admin-tenants>
+          <admin-roles></admin-roles>
+          <assignments
             [assignments]="store.getState().assignmentsState"
-            [users]="store.getState().usersState"
-          ></assignments-component>
-      </section>
+            [users]="store.getState().usersState">
+          </assignments>
+          <admin-responsibility></admin-responsibility>
+          <admin-sessions></admin-sessions>
+          <admin-audit-trail></admin-audit-trail>
+          <admin-settings></admin-settings>
+          <admin-import-export></admin-import-export>
+          <admin-scripting></admin-scripting>
+          <admin-startpages></admin-startpages>
 
     </section>
   `

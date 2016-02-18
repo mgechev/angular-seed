@@ -20,7 +20,6 @@ const store = createStore(
   {
     uiState: initialUiState,
     sessionState: initialSessionState,
-    uiState: initialUiState,
     usersState: initialUsersState,
     assignmentsState: initialAssignmentsState
   }

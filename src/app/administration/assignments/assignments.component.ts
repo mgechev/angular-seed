@@ -4,7 +4,7 @@ import {AgGridNg2} from 'ag-grid-ng2/main';
 import {AssignmentsService} from '../../shared/services/assignments.service';
 
 @Component({
-  selector: 'assignments-component',
+  selector: 'assignments',
   directives: [AgGridNg2],
   bindings: [AssignmentsService],
   template: `

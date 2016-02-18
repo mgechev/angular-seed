@@ -10,7 +10,6 @@ export class UsersService {
   constructor(private http: Http, private store: Store) {}
 
   fetchUsers() {
-    console.log('in fetch users');
     let endpoint = '/mocks/users.json';
     this.http.get(endpoint).map(response => response.json()).subscribe(data => {
       this.store.dispatch(backendActionFinished(endpoint,data));
