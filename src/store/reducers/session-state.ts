@@ -4,7 +4,7 @@ import {USER_IS_AUTHENTICATED} from '../actions/session';
  * Typed definition of sessionState data-node in the store
  */
 class SessionState {
-  public userAuthenticated:boolean = false;
+  public userAuthenticated:boolean = true;
 }
 
 /**

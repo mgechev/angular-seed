@@ -5,14 +5,14 @@ import {LoginComponent} from './components/login/login.component';
 import {AdministrationComponent} from './administration/administration.component';
 import {OnInit} from 'angular2/core';
 import {LoginService} from './shared/stubs/services/login.service';
-import {UserLoginDto} from './shared/stubs/dtos/user-login-dto';
-import {userIsAuthenticated} from '../store/actions/session';
+// import {UserLoginDto} from './shared/stubs/dtos/user-login-dto';
+// import {userIsAuthenticated} from '../store/actions/session';
 import {logoutUser} from '../store/actions/session';
 
 @Component({
   selector: 'app',
   template: `
-  <login *ngIf="!store.getSessionState().userAuthenticated"></login>
+<!--  <login *ngIf="!store.getSessionState().userAuthenticated"></login> //-->
   <button id="logout" (click)="onLogout()">Logout</button>
 
   <section *ngIf="store.getSessionState().userAuthenticated" id="applicationframe">
@@ -35,14 +35,14 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit():any {
-    var self:AppComponent = this;
+//    var self:AppComponent = this;
 
-    self.loginService.hasLoggedInUser()
+   /* self.loginService.hasLoggedInUser()
       .subscribe(function (hasLoggedInUser:boolean):void {
         if (hasLoggedInUser) {
           self.getLoggedInUserFromBackend();
         }
-      });
+      }); */
 
     return null;
   }
@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
       });
   }
 
-  private getLoggedInUserFromBackend():void {
+  /* private getLoggedInUserFromBackend():void {
     let self:AppComponent = this;
 
     self.loginService.getLoggedInUser()
@@ -65,5 +65,5 @@ export class AppComponent implements OnInit {
 
         self.initializeService.initialize();
       });
-  }
+  }*/
 }
