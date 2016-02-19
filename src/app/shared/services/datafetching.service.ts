@@ -5,14 +5,23 @@ import 'rxjs/add/operator/map';
 import {backendActionFinished} from '../../../store/actions/services';
 
 @Injectable()
-export class UsersService {
+export class DataFetchingService {
 
   constructor(private http: Http, private store: Store) {}
 
-  fetchUsers() {
-    let endpoint = '/mocks/users.json';
+  endpointToStoreMap = {
+      'usersState': '/mocks/users.json',
+      'assignmentsState':  '/mocks/usergroups-users.json'
+  };
+
+  fetch(storepath) {
+
+    let endpoint = this.endpointToStoreMap[storepath];
+
     this.http.get(endpoint).map(response => response.json()).subscribe(data => {
       this.store.dispatch(backendActionFinished(endpoint,data));
     }, error => console.log('Could not load users.'+ error));
+
   }
+
 }

@@ -1,12 +1,12 @@
 import { Component, Input, OnInit, OnChanges } from 'angular2/core';
 import {Store} from '../../../store/store';
 import {AgGridNg2} from 'ag-grid-ng2/main';
-import {AssignmentsService} from '../../shared/services/assignments.service';
+import {DataFetchingService} from '../../shared/services/datafetching.service';
 
 @Component({
   selector: 'assignments',
   directives: [AgGridNg2],
-  bindings: [AssignmentsService],
+  bindings: [DataFetchingService],
   template: `
     <section>
       <h2>Roles and Rights</h2>
@@ -36,13 +36,14 @@ export class AssignmentsComponent implements OnInit, OnChanges {
   @Input() assignments;
   @Input() users;
 
-  constructor(private service: AssignmentsService, private store: Store) {}
+  constructor(private service: DataFetchingService, private store: Store) {}
 
   columnDefs;
   rowDataUsers;
 
   ngOnInit() {
-    this.service.fetchUsergroupsUsersRelation();
+    this.service.fetch('usersState');
+    this.service.fetch('assignmentsState');
   }
 
   ngOnChanges(changes) {

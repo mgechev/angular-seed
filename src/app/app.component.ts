@@ -32,7 +32,7 @@ import {backendCallFails} from '../store/actions/app';
       <administration></administration>
 
   </section>
-<footer>Message: {{store.getState().uiState.message}}</footer>
+  <footer>Message: {{store.getState().uiState.message}}</footer>
   `,
   directives: [LoginComponent, AdministrationComponent],
   providers: [LoginService, InitializeService]
