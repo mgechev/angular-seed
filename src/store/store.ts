@@ -8,8 +8,8 @@ import {initialSessionState} from './reducers/session-state';
 import {assignmentsState, initialAssignmentsState} from './reducers/assignments';
 import {usersState, initialUsersState} from './reducers/users';
 import {initialDataStore} from './reducers/data';
-import {dataStoreReducer} from './reducers/data';
 import {DataStore} from './reducers/data';
+import {dataStoreReducer} from './reducers/data';
 
 /**
  * Combine all reducers from application.

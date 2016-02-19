@@ -4,7 +4,6 @@ import {Store} from '../store/store';
 import {LoginComponent} from './components/login/login.component';
 import {AdministrationComponent} from './administration/administration.component';
 import {OnInit} from 'angular2/core';
-import {LoginService} from './shared/stubs/services/login.service';
 import {UserLoginDto} from './shared/stubs/dtos/user-login-dto';
 import {userIsAuthenticated} from '../store/actions/session';
 import {logoutUser} from '../store/actions/session';
@@ -12,6 +11,7 @@ import {userWantsToLogin} from '../store/actions/session';
 import {TenantLoginDto} from './shared/stubs/dtos/tenant-login-dto';
 import {activeTenantsOfUserLoaded} from '../store/actions/session';
 import {backendCallFails} from '../store/actions/app';
+import {LoginService} from './shared/stubs/services/login.service';
 
 @Component({
   selector: 'app',
@@ -35,7 +35,7 @@ import {backendCallFails} from '../store/actions/app';
   <footer>Message: {{store.getState().uiState.message}}</footer>
   `,
   directives: [LoginComponent, AdministrationComponent],
-  providers: [LoginService, InitializeService]
+  providers: [InitializeService]
 })
 export class AppComponent implements OnInit {
   constructor(private store:Store, private loginService:LoginService, private initializeService:InitializeService) {

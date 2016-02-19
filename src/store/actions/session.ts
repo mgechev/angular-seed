@@ -1,11 +1,13 @@
 import {UserLoginDto} from '../../app/shared/stubs/dtos/user-login-dto';
 import {TenantLoginDto} from '../../app/shared/stubs/dtos/tenant-login-dto';
+import {AuthPermissionDto} from '../../app/shared/stubs/dtos/auth-permission-dto';
 
 export const ACTIVE_TENANTS_OF_USER_LOADED:string = 'ACTIVE_TENANTS_OF_USER_LOADED';
 export const USER_WANTS_TO_LOGIN:string = 'USER_WANTS_TO_LOGIN';
 export const AUTHENTICATE_USER:string = 'AUTHENTICATE_USER';
 export const LOGOUT_USER:string = 'LOGOUT_USER';
 export const USER_IS_AUTHENTICATED:string = 'USER_IS_AUTHENTICATED';
+export const USERS_PERMISSIONS_LOADED:string = 'USERS_PERMISSIONS_LOADED';
 
 export function activeTenantsOfUserLoaded(tenants:Array<TenantLoginDto>):Object {
   return {
@@ -38,5 +40,12 @@ export function userIsAuthenticated(loggedInUser:UserLoginDto):Object {
   return {
     type: USER_IS_AUTHENTICATED,
     loggedInUser
+  };
+}
+
+export function usersPermissionsLoaded(permissions:Array<AuthPermissionDto>):Object {
+  return {
+    type: USERS_PERMISSIONS_LOADED,
+    permissions
   };
 }
