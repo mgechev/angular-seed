@@ -72,6 +72,9 @@ export const DEV_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencie
   { src: 'angular2/bundles/router.js', inject: 'libs', dest: JS_DEST },
   { src: 'angular2/bundles/http.js', inject: 'libs', dest: JS_DEST },
   { src: 'ag-grid/dist/styles/ag-grid.css', inject: true },
+  { src: 'ag-grid/dist/styles/theme-fresh.css', inject: true },
+  { src: 'bootstrap/dist/css/bootstrap.css', inject: true },
+  { src: 'bootstrap/dist/css/bootstrap.css.map', inject: true },
   { src: 'ag-grid/dist/styles/theme-fresh.css', inject: true }
 ]);
 

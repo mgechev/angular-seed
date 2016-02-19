@@ -12,10 +12,12 @@ import {userWantsToLogin} from '../store/actions/session';
 import {TenantLoginDto} from './shared/stubs/dtos/tenant-login-dto';
 import {activeTenantsOfUserLoaded} from '../store/actions/session';
 import {backendCallFails} from '../store/actions/app';
+import {ApplicationHeader} from './shared/components/application-header/application-header.component';
 
 @Component({
   selector: 'app',
   template: `
+  <application-header></application-header>
   <login *ngIf="!store.getSessionState().userAuthenticated"
   (usernameBlured)="onUsernameBlured($event)"
   (loginClicked)="onLoginClicked($event)"
@@ -34,7 +36,7 @@ import {backendCallFails} from '../store/actions/app';
   </section>
   <footer>Message: {{store.getState().uiState.message}}</footer>
   `,
-  directives: [LoginComponent, AdministrationComponent],
+  directives: [LoginComponent, AdministrationComponent, ApplicationHeader],
   providers: [LoginService, InitializeService]
 })
 export class AppComponent implements OnInit {
