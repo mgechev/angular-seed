@@ -14,8 +14,8 @@ import {backendCallFails} from '../store/actions/app';
 import {LoginService} from './shared/stubs/services/login.service';
 
 @Component({
-  selector: 'app',
-  template: `
+    selector: 'app',
+    template: `
   <login *ngIf="!store.getSessionState().userAuthenticated"
   (usernameBlured)="onUsernameBlured($event)"
   (loginClicked)="onLoginClicked($event)"
@@ -34,71 +34,71 @@ import {LoginService} from './shared/stubs/services/login.service';
   </section>
   <footer>Message: {{store.getState().uiState.message}}</footer>
   `,
-  directives: [LoginComponent, AdministrationComponent],
-  providers: [InitializeService]
+    directives: [LoginComponent, AdministrationComponent],
+    providers: [InitializeService]
 })
 export class AppComponent implements OnInit {
-  constructor(private store:Store, private loginService:LoginService, private initializeService:InitializeService) {
-  }
+    constructor(private store:Store, private loginService:LoginService, private initializeService:InitializeService) {
+    }
 
-  public ngOnInit():any {
-    let self:AppComponent = this;
+    public ngOnInit():any {
+        let self:AppComponent = this;
 
-    self.loginService.hasLoggedInUser()
-      .subscribe(function (hasLoggedInUser:boolean):void {
-        if (hasLoggedInUser) {
-          self.getLoggedInUserFromBackend();
-        }
-      });
+        self.loginService.hasLoggedInUser()
+            .subscribe(function (hasLoggedInUser:boolean):void {
+                if (hasLoggedInUser) {
+                    self.getLoggedInUserFromBackend();
+                }
+            });
 
-    return null;
-  }
+        return null;
+    }
 
-  public onLogout():void {
-    let self:AppComponent = this;
+    public onLogout():void {
+        let self:AppComponent = this;
 
-    self.loginService.logout()
-      .subscribe(function ():void {
-        self.store.dispatch(logoutUser());
-      }, function (error:Object):void {
-        self.store.dispatch(backendCallFails(error));
-      });
-  }
+        self.loginService.logout()
+            .subscribe(function ():void {
+                self.store.dispatch(logoutUser());
+            }, function (error:Object):void {
+                self.store.dispatch(backendCallFails(error));
+            });
+    }
 
-  public onUsernameBlured(event:any):void {
-    let self:AppComponent = this;
+    public onUsernameBlured(event:any):void {
+        let self:AppComponent = this;
 
-    self.loginService.findActiveTenantsByUser(event['username'])
-      .subscribe(function (tenants:Array<TenantLoginDto>):void {
-        self.store.dispatch(activeTenantsOfUserLoaded(tenants));
-      }, function (error:Object):void {
-        self.store.dispatch(backendCallFails(error));
-      });
-  }
+        self.loginService.findActiveTenantsByUser(event['username'])
+            .subscribe(function (tenants:Array<TenantLoginDto>):void {
+                self.store.dispatch(activeTenantsOfUserLoaded(tenants));
+            }, function (error:Object):void {
+                self.store.dispatch(backendCallFails(error));
+            });
+    }
 
-  public onLoginClicked(event:any):void {
-    let self:AppComponent = this;
+    public onLoginClicked(event:any):void {
+        let self:AppComponent = this;
 
-    self.store.dispatch(userWantsToLogin(event['username'], event['password'], event['tenant']));
+        self.store.dispatch(userWantsToLogin(event['username'], event['password'], event['tenant']));
 
-    self.loginService.authenticate(event['username'], event['password'], event['tenant'])
-      .subscribe(function (userLoginDto:UserLoginDto):void {
-        self.store.dispatch(userIsAuthenticated(userLoginDto));
-      }, function (error:Object):void {
-        self.store.dispatch(backendCallFails(error));
-      });
-  }
+        self.loginService.authenticate(event['username'], event['password'], event['tenant'])
+            .subscribe(function (userLoginDto:UserLoginDto):void {
+                self.store.dispatch(userIsAuthenticated(userLoginDto));
+                self.initializeService.initialize();
+            }, function (error:Object):void {
+                self.store.dispatch(backendCallFails(error));
+            });
+    }
 
-  private getLoggedInUserFromBackend():void {
-    let self:AppComponent = this;
+    private getLoggedInUserFromBackend():void {
+        let self:AppComponent = this;
 
-    self.loginService.getLoggedInUser()
-      .subscribe(function (loggedInUser:UserLoginDto):void {
-        self.store.dispatch(userIsAuthenticated(loggedInUser));
-
-        self.initializeService.initialize();
-      }, function (error:Object):void {
-        self.store.dispatch(backendCallFails(error));
-      });
-  }
+        self.loginService.getLoggedInUser()
+            .subscribe(function (loggedInUser:UserLoginDto):void {
+                self.store.dispatch(userIsAuthenticated(loggedInUser));
+                self.initializeService.initialize();
+            }, function (error:Object):void {
+                self.store.dispatch(backendCallFails(error));
+            });
+    }
 }
