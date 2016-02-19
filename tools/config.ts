@@ -47,6 +47,8 @@ export const JS_PROD_APP_BUNDLE   = 'app.js';
 export const VERSION_NPM          = '2.14.2';
 export const VERSION_NODE         = '4.0.0';
 
+export const NG2LINT_RULES        = join('node_modules', 'ng2lint', 'dist', 'src');
+
 if (ENABLE_HOT_LOADING) {
   console.log(chalk.bgRed.white.bold('The hot loader is temporary disabled.'));
   process.exit(0);
