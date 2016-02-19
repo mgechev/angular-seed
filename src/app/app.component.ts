@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import {Component} from 'angular2/core';
 import {InitializeService} from './shared/services/initialize.service';
 import {Store} from '../store/store';
 import {LoginComponent} from './components/login/login.component';
@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit():any {
-    var self:AppComponent = this;
+    let self:AppComponent = this;
 
     self.loginService.hasLoggedInUser()
       .subscribe(function (hasLoggedInUser:boolean):void {
@@ -66,7 +66,7 @@ export class AppComponent implements OnInit {
   }
 
   public onUsernameBlured(event:any):void {
-    var self:AppComponent = this;
+    let self:AppComponent = this;
 
     self.loginService.findActiveTenantsByUser(event['username'])
       .subscribe(function (tenants:Array<TenantLoginDto>):void {
@@ -77,7 +77,7 @@ export class AppComponent implements OnInit {
   }
 
   public onLoginClicked(event:any):void {
-    var self:AppComponent = this;
+    let self:AppComponent = this;
 
     self.store.dispatch(userWantsToLogin(event['username'], event['password'], event['tenant']));
 
