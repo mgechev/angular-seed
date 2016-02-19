@@ -1,5 +1,5 @@
 import {join} from 'path';
-import {APP_SRC, TOOLS_DIR} from '../config';
+import {APP_SRC, TOOLS_DIR, NG2LINT_RULES} from '../config';
 
 export = function tslint(gulp, plugins) {
   return function () {
@@ -11,7 +11,9 @@ export = function tslint(gulp, plugins) {
     ];
 
     return gulp.src(src)
-      .pipe(plugins.tslint())
+      .pipe(plugins.tslint({
+        rulesDirectory: NG2LINT_RULES
+      }))
       .pipe(plugins.tslint.report(plugins.tslintStylish, {
         emitError: true,
         sort: true,
