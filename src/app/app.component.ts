@@ -9,16 +9,18 @@ import {UserLoginDto} from './shared/stubs/dtos/user-login-dto';
 import {userIsAuthenticated} from '../store/actions/session';
 import {logoutUser} from '../store/actions/session';
 import {userWantsToLogin} from '../store/actions/session';
+import {TenantLoginDto} from './shared/stubs/dtos/tenant-login-dto';
+import {activeTenantsOfUserLoaded} from '../store/actions/session';
 
 @Component({
   selector: 'app',
   template: `
   <login *ngIf="!store.getSessionState().userAuthenticated"
-  (usernameFocusOut)="onUsernameFocusOut($event)"
+  (usernameBlured)="onUsernameBlured($event)"
   (loginClicked)="onLoginClicked($event)"
   [tenants]="store.getSessionState().tenants"></login>
-  <button id="logout" (click)="onLogout()">Logout</button>
 
+  <button *ngIf="store.getSessionState().userAuthenticated" id="logout" (click)="onLogout()">Logout</button>
   <section *ngIf="store.getSessionState().userAuthenticated" id="applicationframe">
 
       <mainnavigation><!-- placeholder //--></mainnavigation>
@@ -60,18 +62,22 @@ export class AppComponent implements OnInit {
       });
   }
 
-  public onUsernameFocusOut(event):void {
-    console.log('username focus out');
+  public onUsernameBlured(event:any):void {
+    var self:AppComponent = this;
+
+    self.loginService.findActiveTenantsByUser(event['username'])
+      .subscribe(function (tenants:Array<TenantLoginDto>):void {
+        self.store.dispatch(activeTenantsOfUserLoaded(tenants));
+      });
   }
 
-  public onLoginClicked(event):void {
+  public onLoginClicked(event:any):void {
     var self:AppComponent = this;
 
     self.store.dispatch(userWantsToLogin(event['username'], event['password'], event['tenant']));
 
     self.loginService.authenticate(event['username'], event['password'], event['tenant'])
       .subscribe(function (userLoginDto:UserLoginDto):void {
-        console.log(userLoginDto);
         self.store.dispatch(userIsAuthenticated(userLoginDto));
       });
   }
