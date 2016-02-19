@@ -1,5 +1,6 @@
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/Rx';
 
 import {queryParams} from './query-params.function';
 import {IPostCall} from './post-call.interface';
@@ -58,6 +59,9 @@ export class PostCall implements IPostCall {
         DtoConverter.dumbify(this._requestData), this._config)
       .map(function (response:Response) {
         return DtoConverter.typify(response.json());
+      })
+      .catch(function (error:Response, source:Observable<any>, caught:Observable<any>):Observable<any> {
+        return Observable.throw(error.json());
       });
   }
 }

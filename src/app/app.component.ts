@@ -11,6 +11,7 @@ import {logoutUser} from '../store/actions/session';
 import {userWantsToLogin} from '../store/actions/session';
 import {TenantLoginDto} from './shared/stubs/dtos/tenant-login-dto';
 import {activeTenantsOfUserLoaded} from '../store/actions/session';
+import {backendCallFails} from '../store/actions/app';
 
 @Component({
   selector: 'app',
@@ -31,7 +32,7 @@ import {activeTenantsOfUserLoaded} from '../store/actions/session';
       <administration></administration>
 
   </section>
-
+<footer>Message: {{store.getState().uiState.message}}</footer>
   `,
   directives: [LoginComponent, AdministrationComponent],
   providers: [LoginService, InitializeService]
@@ -59,6 +60,8 @@ export class AppComponent implements OnInit {
     self.loginService.logout()
       .subscribe(function ():void {
         self.store.dispatch(logoutUser());
+      }, function (error:Object):void {
+        self.store.dispatch(backendCallFails(error));
       });
   }
 
@@ -68,6 +71,8 @@ export class AppComponent implements OnInit {
     self.loginService.findActiveTenantsByUser(event['username'])
       .subscribe(function (tenants:Array<TenantLoginDto>):void {
         self.store.dispatch(activeTenantsOfUserLoaded(tenants));
+      }, function (error:Object):void {
+        self.store.dispatch(backendCallFails(error));
       });
   }
 
@@ -79,6 +84,8 @@ export class AppComponent implements OnInit {
     self.loginService.authenticate(event['username'], event['password'], event['tenant'])
       .subscribe(function (userLoginDto:UserLoginDto):void {
         self.store.dispatch(userIsAuthenticated(userLoginDto));
+      }, function (error:Object):void {
+        self.store.dispatch(backendCallFails(error));
       });
   }
 
@@ -90,6 +97,8 @@ export class AppComponent implements OnInit {
         self.store.dispatch(userIsAuthenticated(loggedInUser));
 
         self.initializeService.initialize();
+      }, function (error:Object):void {
+        self.store.dispatch(backendCallFails(error));
       });
   }
 }

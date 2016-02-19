@@ -42,7 +42,6 @@ function sessionState(state:SessionState, action:any):SessionState {
       };
       break;
     case USER_WANTS_TO_LOGIN:
-      console.log('user wants to login reducer');
       newState = {
         userAuthenticated: false,
         loginAttempt: {
@@ -50,7 +49,7 @@ function sessionState(state:SessionState, action:any):SessionState {
           pasword: action.password,
           tenant: action.tenant
         },
-        tenants: null
+        tenants: state.tenants
       };
       break;
     case USER_IS_AUTHENTICATED:
