@@ -1,8 +1,9 @@
 import {Component} from 'angular2/core';
-import {Store} from '../../../store/store';
-import {LoginService} from '../../shared/stubs/services/login.service';
-import {UserLoginDto} from '../../shared/stubs/dtos/user-login-dto';
-import {userIsAuthenticated} from '../../../store/actions/session';
+import {Input} from 'angular2/core';
+import {OnChanges} from 'angular2/core';
+import {Output} from 'angular2/core';
+import {EventEmitter} from 'angular2/core';
+import {TenantLoginDto} from '../../shared/stubs/dtos/tenant-login-dto';
 
 @Component({
   selector: 'login',
@@ -20,38 +21,27 @@ import {userIsAuthenticated} from '../../../store/actions/session';
           <option value="FNT-GmbH">FNT-GmbH</option>
         </select>
       </label>
-      <button type="submit" (click)="onLogin(username.value, password.value, tenant.value)">Login</button>
+      <button type="submit" (click)="loginClicked.emit({
+      username: username.value,
+       password: password.value,
+        tenant: tenant.value
+        })">Login</button>
     </form>
   </section>
-  `,
-  providers: [LoginService]
+  `
 })
-export class LoginComponent {
-  constructor(private store:Store, private loginService:LoginService) {
-  }
+export class LoginComponent implements OnChanges {
 
-  public onLogin(username:string, password:string, tenant:string):void {
-    let self:LoginComponent = this;
+  @Input()
+  public tenants:Array<TenantLoginDto>;
 
-    console.log('onLogin reached', username, password, tenant);
-    /*
-     What is better here?
-     - Option 1
-     First dispatching an action which sends the user inputs to the store and afterwards calling the backend
-     (but how can we do this?)
-     - Option 2
-     First call the backend and don't store the user inputs at all
+  @Output()
+  public usernameFocusOut = new EventEmitter();
 
-     For debugging I guessed that option 1 is better, because the store needs to know about the exact state before a
-     backend call is proceed to be able to reproduce this state. If the store doesn't know about the data, it will be
-     harder to reproduce the bug. (ok, for the login it doesn't matter, but it's a general point)
-     */
+  @Output()
+  public loginClicked = new EventEmitter();
 
-    //this.store.dispatch(authenticateUser(username, password, tenant));
-    this.loginService.authenticate(username, password, tenant)
-      .subscribe(function (loggedInUser:UserLoginDto):void {
-        console.log('loggedInUser', loggedInUser);
-        self.store.dispatch(userIsAuthenticated(loggedInUser));
-      });
+  public ngOnChanges(changes:{}):any {
+    return null;
   }
 }
