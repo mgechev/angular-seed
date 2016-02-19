@@ -1,11 +1,26 @@
-import {USER_AUTHENTICATED} from '../actions/session';
+import {USER_IS_AUTHENTICATED} from '../actions/session';
 
+/**
+ * Typed definition of sessionState data-node in the store
+ */
 class SessionState {
-  public userAuthenticated:boolean = false;
+  public userAuthenticated:boolean = true;
 }
 
+/**
+ * Holds initial state of sessionState data-node
+ *
+ * @type {SessionState}
+ */
 const initialSessionState:SessionState = new SessionState();
 
+/**
+ * Reducer for sessionState data-node
+ *
+ * @param {SessionState} state
+ * @param {Object} action
+ * @returns {SessionState}
+ */
 function sessionState(state:SessionState, action:any):SessionState {
   if (!state) {
     return initialSessionState;
@@ -14,7 +29,7 @@ function sessionState(state:SessionState, action:any):SessionState {
   let newState:SessionState;
 
   switch (action.type) {
-    case USER_AUTHENTICATED:
+    case USER_IS_AUTHENTICATED:
       newState = {
         userAuthenticated: true
       };
