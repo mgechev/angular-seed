@@ -1,10 +1,15 @@
 import {USER_IS_AUTHENTICATED} from '../actions/session';
+import {USER_WANTS_TO_LOGIN} from '../actions/session';
+import {TenantLoginDto} from '../../app/shared/stubs/dtos/tenant-login-dto';
+import {ACTIVE_TENANTS_OF_USER_LOADED} from '../actions/session';
 
 /**
  * Typed definition of sessionState data-node in the store
  */
 class SessionState {
-  public userAuthenticated:boolean = true;
+  public loginAttempt:Object;
+  public userAuthenticated:boolean = false;
+  public tenants:Array<TenantLoginDto>;
 }
 
 /**
@@ -29,9 +34,29 @@ function sessionState(state:SessionState, action:any):SessionState {
   let newState:SessionState;
 
   switch (action.type) {
+    case ACTIVE_TENANTS_OF_USER_LOADED:
+      newState = {
+        userAuthenticated: false,
+        loginAttempt: null,
+        tenants: action.tenants
+      };
+      break;
+    case USER_WANTS_TO_LOGIN:
+      newState = {
+        userAuthenticated: false,
+        loginAttempt: {
+          username: action.username,
+          pasword: action.password,
+          tenant: action.tenant
+        },
+        tenants: state.tenants
+      };
+      break;
     case USER_IS_AUTHENTICATED:
       newState = {
-        userAuthenticated: true
+        userAuthenticated: true,
+        loginAttempt: null,
+        tenants: null
       };
       break;
     default:
