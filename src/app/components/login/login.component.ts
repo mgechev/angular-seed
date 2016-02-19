@@ -3,6 +3,7 @@ import {TenantLoginDto} from '../../shared/stubs/dtos/tenant-login-dto';
 
 @Component({
   selector: 'login',
+  moduleId: module.id,
   templateUrl: './login.template.html'
 })
 export class LoginComponent {
