@@ -16,7 +16,6 @@
     "no-duplicate-variable": true,
     "no-empty": true,
     "no-eval": true,
-    "no-trailing-comma": true,
     "no-trailing-whitespace": true,
     "no-unused-expression": true,
     "no-unused-variable": true,
@@ -30,6 +29,7 @@
     ],
     "quotemark": [true, "single"],
     "semicolon": true,
+    "trailing-comma": true,
     "triple-equals": true,
     "variable-name": false,
 
