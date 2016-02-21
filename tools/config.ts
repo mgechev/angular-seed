@@ -15,7 +15,8 @@ export const PORT                 = argv['port']        || 5555;
 export const PROJECT_ROOT         = normalize(join(__dirname, '..'));
 export const ENV                  = getEnvironment();
 export const DEBUG                = argv['debug']       || false;
-export const DOCS_PORT            = argv['docs-port']   || 4003;
+export const DOCS_PORT            = argv['docs-port'] || 4003;
+export const COVERAGE_PORT        = argv['coverage-port'] || 4004;
 export const APP_BASE             = argv['base']        || '/';
 
 export const ENABLE_HOT_LOADING   = !!argv['hot-loader'];

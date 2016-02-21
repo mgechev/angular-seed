@@ -9,6 +9,7 @@ gulp.task('clean.prod', done => task('clean', 'prod')(done));
 gulp.task('check.versions', () => task('check.versions'));
 gulp.task('build.docs', () => task('build.docs'));
 gulp.task('serve.docs', () => task('serve.docs'));
+gulp.task('serve.coverage', task('serve.coverage'));
 
 // --------------
 // Build dev.
