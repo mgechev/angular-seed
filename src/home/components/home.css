@@ -1,10 +1,13 @@
-.note {
-  color: #a8a8a8;
+:host {
+  display: block;
+  padding: 0 16px;
 }
-smile {
-  width: 32px;
-  height: 32px;
-  display: inline-block;
-  vertical-align: bottom;
-  background: url("./assets/img/smile.png");
+
+input {
+  width: 250px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0 0 0 8px;
 }

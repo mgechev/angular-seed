@@ -5,23 +5,19 @@ describe('App', function() {
   });
 
   it('should have a title', function() {
-      expect(browser.getTitle()).toEqual('My Angular2 App');
-  });
-
-  it('should have <section>', function() {
-      expect(element(by.css('app section')).isPresent()).toEqual(true);
+      expect(browser.getTitle()).toEqual('Angular 2 Seed');
   });
 
   it('should have <nav>', function() {
-      expect(element(by.css('app section nav')).isPresent()).toEqual(true);
+      expect(element(by.css('sd-app sd-navbar nav')).isPresent()).toEqual(true);
   });
 
   it('should have correct nav text for Home', function() {
-      expect(element(by.css('app section nav a:first-child')).getText()).toEqual('Home');
+      expect(element(by.css('sd-app sd-navbar nav a:first-child')).getText()).toEqual('HOME');
   });
 
   it('should have correct nav text for About', function() {
-      expect(element(by.css('app section nav a:last-child')).getText()).toEqual('About');
+      expect(element(by.css('sd-app sd-navbar nav a:last-child')).getText()).toEqual('ABOUT');
   });
 
 });

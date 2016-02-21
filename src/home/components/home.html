@@ -1,10 +1,14 @@
-<h1>Howdy!</h1>
-
-<h2>
-  Gratz! <smile></smile>
-</h2>
-
-<p class="note">
-  Your deployment of Angular 2 Seed worked perfectly!
-  Click <em>about (above)</em> to get your reward!
+<p>
+  Howdy! Here's a list of awesome computer scientists.
+  Do you know any others? Add to the list yourself.
 </p>
+
+<form (submit)="addName()">
+  <input [(ngModel)]="newName" placeholder="Awesome Computer Scientist">
+  <button type="submit">Add</button>
+</form>
+
+
+<ul>
+  <li *ngFor="#name of nameListService.get()">{{name}}</li>
+</ul>
