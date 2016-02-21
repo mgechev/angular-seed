@@ -15,7 +15,8 @@ export const PORT                 = argv['port']        || 5555;
 export const PROJECT_ROOT         = normalize(join(__dirname, '..'));
 export const ENV                  = getEnvironment();
 export const DEBUG                = argv['debug']       || false;
-export const DOCS_PORT            = argv['docs-port']   || 4003;
+export const DOCS_PORT            = argv['docs-port'] || 4003;
+export const COVERAGE_PORT        = argv['coverage-port'] || 4004;
 export const APP_BASE             = argv['base']        || '/';
 
 export const ENABLE_HOT_LOADING   = !!argv['hot-loader'];
@@ -47,7 +48,7 @@ export const JS_PROD_APP_BUNDLE   = 'app.js';
 export const VERSION_NPM          = '2.14.2';
 export const VERSION_NODE         = '4.0.0';
 
-export const NG2LINT_RULES        = join('node_modules', 'ng2lint', 'dist', 'src');
+export const NG2LINT_RULES        = customRules();
 
 if (ENABLE_HOT_LOADING) {
   console.log(chalk.bgRed.white.bold('The hot loader is temporary disabled.'));
@@ -130,6 +131,11 @@ function normalizeDependencies(deps: InjectableDependency[]) {
 function appVersion(): number|string {
   var pkg = JSON.parse(readFileSync('package.json').toString());
   return pkg.version;
+}
+
+function customRules(): string[] {
+  var lintConf = JSON.parse(readFileSync('tslint.json').toString());
+  return lintConf.rulesDirectory;
 }
 
 function getEnvironment() {

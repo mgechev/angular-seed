@@ -14,7 +14,7 @@ It is something similar to the Angular Quick Start but does the entire build wit
 
 - Ready to go, statically typed build system using gulp for working with TypeScript.
 - Production and development builds.
-- Sample unit tests with Jasmine and Karma.
+- Sample unit tests with Jasmine and Karma including code coverage via [istanbul](https://gotwarlost.github.io/istanbul/).
 - End-to-end tests with Protractor.
 - Development server with Livereload.
 - Following the best practices for your application’s structure.
@@ -96,6 +96,11 @@ npm test
 # Debug - In two different shell windows
 npm run build.test.watch      # 1st window
 npm run karma.start           # 2nd window
+
+# code coverage (istanbul)
+# auto-generated at the end of `npm test`
+# view coverage report:
+npm run serve.coverage
 
 # e2e (aka. end-to-end, integration) - In three different shell windows
 # Make sure you don't have a global instance of Protractor
