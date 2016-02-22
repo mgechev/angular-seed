@@ -3,13 +3,14 @@ import {Navigation} from '../../ui-elements/navigation';
 import {Store} from '../../../../store/store';
 import {logoutUser} from '../../../../store/actions/session';
 import {mainNavigationItemClicked, secondaryNavigationItemClicked} from '../../../../store/actions/navigation';
+import {LoginService} from '../../stubs/services/login.service';
 
 @Component({
-    selector: 'application-header',
-    directives: [
-      Navigation
-    ],
-    template: `
+  selector: 'application-header',
+  directives: [
+    Navigation
+  ],
+  template: `
     <section class="application-header">
       <nav class="navbar navbar-full navbar-dark bg-inverse">
 
@@ -33,20 +34,21 @@ import {mainNavigationItemClicked, secondaryNavigationItemClicked} from '../../.
 })
 export class ApplicationHeader {
 
-  constructor(private store:Store) {}
+  constructor(private store:Store, private loginService:LoginService) {
+  }
 
   // ToDo: Move all or part of this to Store:
   mainNavigationItems = [
-    {key:'startpage',label:'Startpage'},
-    {key:'activities',label:'Activities'},
-    {key:'manage',label:'Manage'},
-    {key:'administration',label:'Administration'}
+    {key: 'startpage', label: 'Startpage'},
+    {key: 'activities', label: 'Activities'},
+    {key: 'manage', label: 'Manage'},
+    {key: 'administration', label: 'Administration'}
   ];
   secondaryNavigationItems = [
-    {key:'secondary1',label:'Secondary 1'},
-    {key:'secondary2',label:'Secondary 2'},
-    {key:'secondary3',label:'Secondary 3'},
-    {key:'logout',label:'Logout'}
+    {key: 'secondary1', label: 'Secondary 1'},
+    {key: 'secondary2', label: 'Secondary 2'},
+    {key: 'secondary3', label: 'Secondary 3'},
+    {key: 'logout', label: 'Logout'}
   ];
 
   onMainNavigationItemClicked(event):void {
@@ -54,11 +56,15 @@ export class ApplicationHeader {
   }
 
   onSecondaryNavigationItemClicked(event):void {
-    if(event==='logout') {
-      this.store.dispatch(logoutUser());
+    var self:ApplicationHeader = this;
+    if (event === 'logout') {
+      self.loginService.logout()
+        .subscribe(function ():void {
+          self.store.dispatch(logoutUser());
+        });
       return;
     }
-    this.store.dispatch(secondaryNavigationItemClicked(event));
+    self.store.dispatch(secondaryNavigationItemClicked(event));
   }
 
 }
