@@ -1,8 +1,8 @@
-import {assignmentsState} from './assignments.reducer';
-import {usersState} from './users.reducer';
-import {sessionState} from './session-store.reducer';
-import {uiState} from './ui-state.reducer';
-import {activeModule} from './modules-state';
+import {assignmentsStateReducer} from './assignments.reducer';
+import {usersStateReducer} from './users.reducer';
+import {sessionStateReducer} from './session-store.reducer';
+import {uiStateReducer} from './ui-state.reducer';
+import {activeModuleReducer} from './modules-state.reducer';
 import {dataStoreReducer} from './data.reducer';
 import {Reducer, combineReducers}from 'redux';
 
@@ -13,9 +13,9 @@ import {Reducer, combineReducers}from 'redux';
  */
 export const rootReducer:Reducer = combineReducers({
   data: dataStoreReducer,
-  activeModule: activeModule,
-  uiState: uiState,
-  sessionState: sessionState,
-  usersState: usersState,
-  assignmentsState: assignmentsState
+  activeModule: activeModuleReducer,
+  uiState: uiStateReducer,
+  sessionState: sessionStateReducer,
+  usersState: usersStateReducer,
+  assignmentsState: assignmentsStateReducer
 });

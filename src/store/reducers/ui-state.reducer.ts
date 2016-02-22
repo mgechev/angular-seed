@@ -4,7 +4,7 @@ import {BACKEND_CALL_FAILS} from '../actions/app';
 import {initialUiStateStore} from '../stores/ui-state.store';
 import {IUiStateStore} from '../stores/ui-state.store';
 
-export function uiState(state:IUiStateStore = initialUiStateStore, action) {
+export function uiStateReducer(state:IUiStateStore = initialUiStateStore, action) {
 
   let newState:IUiStateStore;
   switch (action.type) {

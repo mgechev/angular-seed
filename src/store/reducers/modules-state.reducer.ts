@@ -1,7 +1,7 @@
 import {MAIN_NAVIGATION_ITEM_CLICKED} from '../actions/navigation';
 import {initialActiveModuleStore} from '../stores/modules.store';
 
-export function activeModule(state = initialActiveModuleStore, action) {
+export function activeModuleReducer(state = initialActiveModuleStore, action) {
 
   let newState;
   switch (action.type) {

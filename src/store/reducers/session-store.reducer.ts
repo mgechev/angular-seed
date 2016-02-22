@@ -12,7 +12,7 @@ import {initialSessionStore} from '../stores/session.store';
  * @param {Object} action
  * @returns {ISessionStore}
  */
-export function sessionState(state:ISessionStore = initialSessionStore, action:any):ISessionStore {
+export function sessionStateReducer(state:ISessionStore = initialSessionStore, action:any):ISessionStore {
 
   let newState:ISessionStore;
 

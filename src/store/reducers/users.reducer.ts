@@ -2,7 +2,7 @@ import {SERVICE_ACTION_FINISHED} from '../actions/services';
 import {IUsersStore} from '../stores/users.store';
 import {initialUsersStore} from '../stores/users.store';
 
-export function usersState(usersState:IUsersStore = initialUsersStore, action) {
+export function usersStateReducer(usersState:IUsersStore = initialUsersStore, action) {
   let newState;
 
   switch (action.type) {
