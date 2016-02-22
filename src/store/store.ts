@@ -2,7 +2,6 @@ import {ReduxWrapper} from './ReduxWrapper';
 import {createStore} from 'redux';
 import {initialRootStore} from './stores/root.store';
 import {rootReducer} from './reducers/root.reducer';
-import {Injectable} from 'angular2/core';
 import {IDataStore} from './stores/data.store';
 import {IUiStateStore} from './stores/ui-state.store';
 import {ISessionStore} from './stores/session.store';
@@ -20,7 +19,6 @@ const rootStore = createStore(
  * Wrapper for specific access to data-nodes.
  * Maybe there exists a small inheritence of stores later in the development.
  */
-@Injectable()
 export class Store extends ReduxWrapper {
   constructor() {
     super(rootStore);
