@@ -7,6 +7,8 @@ import {initialSessionStore} from '../stores/session.store';
 import {IBaseAction} from '../actions/base.action';
 import {IActiveTenantsOfUserLoadedAction} from '../actions/session.actions';
 import {IUserWantsToLoginAction} from '../actions/session.actions';
+import {ILogoutUserAction} from '../actions/session.actions';
+import {IUserIsAuthenticatedAction} from '../actions/session.actions';
 
 /**
  * Reducer for sessionState data-node
@@ -21,42 +23,61 @@ export function sessionStateReducer(state:ISessionStore = initialSessionStore, a
 
   switch (action.type) {
     case ACTIVE_TENANTS_OF_USER_LOADED:
-      newState = {
-        userAuthenticated: false,
-        loginAttempt: null,
-        tenants: (action as IActiveTenantsOfUserLoadedAction).tenants
-      };
+      newState = activeTenantsOfUserLoadedReducer(state, action as IActiveTenantsOfUserLoadedAction);
       break;
+
     case USER_WANTS_TO_LOGIN:
-      newState = {
-        userAuthenticated: false,
-        loginAttempt: {
-          username: (action as IUserWantsToLoginAction).username,
-          pasword: (action as IUserWantsToLoginAction).password,
-          tenant: (action as IUserWantsToLoginAction).tenant
-        },
-        tenants: state.tenants
-      };
+      newState = userWantsToLoginReducer(state, action as IUserWantsToLoginAction);
       break;
+
     case LOGOUT_USER:
-      newState = {
-        userAuthenticated: false,
-        loginAttempt: state.loginAttempt,
-        tenants: state.tenants
-      };
+      newState = logoutUserReducer(state, action as ILogoutUserAction);
       break;
 
     case USER_IS_AUTHENTICATED:
-      newState = {
-        userAuthenticated: true,
-        loginAttempt: null,
-        tenants: null
-      };
+      newState = userIsAuthenticatedReducer(state, action as IUserIsAuthenticatedAction);
       break;
+
     default:
       newState = state;
       break;
   }
 
   return newState;
+}
+
+function activeTenantsOfUserLoadedReducer(state:ISessionStore, action:IActiveTenantsOfUserLoadedAction):ISessionStore {
+  return {
+    userAuthenticated: false,
+    loginAttempt: null,
+    tenants: action.tenants
+  };
+}
+
+function userWantsToLoginReducer(state:ISessionStore, action:IUserWantsToLoginAction):ISessionStore {
+  return {
+    userAuthenticated: false,
+    loginAttempt: {
+      username: action.username,
+      pasword: action.password,
+      tenant: action.tenant
+    },
+    tenants: state.tenants
+  };
+}
+
+function logoutUserReducer(state:ISessionStore, action:ILogoutUserAction):ISessionStore {
+  return {
+    userAuthenticated: false,
+    loginAttempt: state.loginAttempt,
+    tenants: state.tenants
+  };
+}
+
+function userIsAuthenticatedReducer(state:ISessionStore, action:IUserIsAuthenticatedAction):ISessionStore {
+  return {
+    userAuthenticated: true,
+    loginAttempt: null,
+    tenants: null
+  };
 }
