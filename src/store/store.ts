@@ -7,6 +7,7 @@ import {sessionState, SessionState} from './reducers/session-state';
 import {initialSessionState} from './reducers/session-state';
 import {assignmentsState, initialAssignmentsState} from './reducers/assignments';
 import {usersState, initialUsersState} from './reducers/users';
+import {activeModule, initialActiveModule} from './reducers/modules-state';
 
 /**
  * Combine all reducers from application.
@@ -14,6 +15,7 @@ import {usersState, initialUsersState} from './reducers/users';
  * The name of the reducer is at the same time the name of the data-node in the store.
  */
 const state = combineReducers({
+  activeModule,
   uiState,
   sessionState,
   usersState,
@@ -26,6 +28,7 @@ const state = combineReducers({
 const store = createStore(
   state,
   {
+    activeModule: initialActiveModule,
     uiState: initialUiState,
     sessionState: initialSessionState,
     usersState: initialUsersState,

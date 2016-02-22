@@ -2,12 +2,14 @@ import {Component} from 'angular2/core';
 import {InitializeService} from './shared/services/initialize.service';
 import {Store} from '../store/store';
 import {LoginComponent} from './components/login/login.component';
+import {StartpageComponent} from './startpage/startpage.component';
+import {ManageComponent} from './manage/manage.component';
+import {ActivitiesComponent} from './activities/activities.component';
 import {AdministrationComponent} from './administration/administration.component';
 import {OnInit} from 'angular2/core';
 import {LoginService} from './shared/stubs/services/login.service';
 import {UserLoginDto} from './shared/stubs/dtos/user-login-dto';
 import {userIsAuthenticated} from '../store/actions/session';
-import {logoutUser} from '../store/actions/session';
 import {userWantsToLogin} from '../store/actions/session';
 import {TenantLoginDto} from './shared/stubs/dtos/tenant-login-dto';
 import {activeTenantsOfUserLoaded} from '../store/actions/session';
@@ -17,26 +19,26 @@ import {ApplicationHeader} from './shared/components/application-header/applicat
 @Component({
   selector: 'app',
   template: `
-  <application-header></application-header>
+
   <login *ngIf="!store.getSessionState().userAuthenticated"
   (usernameBlured)="onUsernameBlured($event)"
   (loginClicked)="onLoginClicked($event)"
   [tenants]="store.getSessionState().tenants"></login>
 
-  <button *ngIf="store.getSessionState().userAuthenticated" id="logout" (click)="onLogout()">Logout</button>
   <section *ngIf="store.getSessionState().userAuthenticated" id="applicationframe">
 
-      <mainnavigation><!-- placeholder //--></mainnavigation>
+      <application-header></application-header>
 
-      <startpage> <!-- placeholder //--></startpage>
-      <manage> <!-- placeholder //--></manage>
-      <activities> <!-- placeholder //--></activities>
-      <administration></administration>
+      <startpage *ngIf="store.getState().activeModule=='startpage'"></startpage>
+      <manage *ngIf="store.getState().activeModule=='manage'"></manage>
+      <activities *ngIf="store.getState().activeModule=='activities'"></activities>
+      <administration *ngIf="store.getState().activeModule=='administration'"></administration>
+
+      <footer>Message: {{store.getState().uiState.message}}</footer>
 
   </section>
-  <footer>Message: {{store.getState().uiState.message}}</footer>
   `,
-  directives: [LoginComponent, AdministrationComponent, ApplicationHeader],
+  directives: [LoginComponent, StartpageComponent, ManageComponent, ActivitiesComponent, AdministrationComponent, ApplicationHeader],
   providers: [LoginService, InitializeService]
 })
 export class AppComponent implements OnInit {
@@ -54,17 +56,6 @@ export class AppComponent implements OnInit {
       });
 
     return null;
-  }
-
-  public onLogout():void {
-    let self:AppComponent = this;
-
-    self.loginService.logout()
-      .subscribe(function ():void {
-        self.store.dispatch(logoutUser());
-      }, function (error:Object):void {
-        self.store.dispatch(backendCallFails(error));
-      });
   }
 
   public onUsernameBlured(event:any):void {
