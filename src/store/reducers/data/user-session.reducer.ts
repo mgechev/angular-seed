@@ -1,6 +1,6 @@
 import {USERS_PERMISSIONS_LOADED} from '../../actions/session';
-import {IUserSessionStore} from '../../stores/data-store/user-session-store';
-import {initialUserSessionStore} from '../../stores/data-store/user-session-store';
+import {IUserSessionStore} from '../../stores/data/user-session.store';
+import {initialUserSessionStore} from '../../stores/data/user-session.store';
 
 export function userSessionReducer(state:IUserSessionStore = initialUserSessionStore, action:any):IUserSessionStore {
   let newState:IUserSessionStore;

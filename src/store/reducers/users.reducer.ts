@@ -1,19 +1,13 @@
 import {SERVICE_ACTION_FINISHED} from '../actions/services';
+import {IUsersStore} from '../stores/users.store';
+import {initialUsersStore} from '../stores/users.store';
 
-const initialUsersState = {
-  state: 'empty',
-  usersList: []
-};
-
-function usersState(usersState, action) {
-
-  if (!usersState) return initialUsersState;
-
+export function usersState(usersState:IUsersStore = initialUsersStore, action) {
   let newState;
 
-  switch(action.type) {
+  switch (action.type) {
     case SERVICE_ACTION_FINISHED:
-      if(action.endpoint === '/mocks/users.json') {
+      if (action.endpoint === '/mocks/users.json') {
         newState = {
           state: 'loaded',
           usersList: action.result
@@ -29,6 +23,3 @@ function usersState(usersState, action) {
   return newState;
 
 }
-
-export {initialUsersState};
-export {usersState};

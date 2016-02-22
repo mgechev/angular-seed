@@ -1,18 +1,21 @@
 import {ReduxWrapper} from './ReduxWrapper';
 import {createStore, combineReducers} from 'redux';
 
-import {uiState} from './reducers/ui-state';
-import {sessionState} from './reducers/session-store';
-import {initialSessionStore} from './reducers/session-store';
-import {assignmentsState, initialAssignmentsState} from './reducers/assignments';
-import {usersState, initialUsersState} from './reducers/users';
-import {dataStoreReducer} from './reducers/data';
-import {ISessionStore} from './reducers/session-store';
-import {activeModule, initialActiveModule} from './reducers/modules-state';
-import {IDataStore} from './stores/data-store';
-import {initialDataStore} from './stores/data-store';
+import {uiState} from './reducers/ui-state.reducer';
+import {sessionState} from './reducers/session-store.reducer';
+import {assignmentsState} from './reducers/assignments.reducer';
+import {usersState} from './reducers/users.reducer';
+import {dataStoreReducer} from './reducers/data.reducer';
+import {activeModule} from './reducers/modules-state';
+import {IDataStore} from './stores/data.store';
+import {initialDataStore} from './stores/data.store';
 import {initialUiStateStore} from './stores/ui-state.store';
 import {Injectable} from 'angular2/core';
+import {initialAssignmentsStore} from './stores/assignments.store';
+import {initialUsersStore} from './stores/users.store';
+import {initialSessionStore} from './stores/session.store';
+import {initialActiveModuleStore} from './stores/modules.store';
+import {ISessionStore} from './stores/session.store';
 
 export interface IRootStore {
   data: IDataStore;
@@ -25,11 +28,11 @@ export interface IRootStore {
 
 const initialRootStore:IRootStore = {
   data: initialDataStore,
-  activeModule: initialActiveModule,
+  activeModule: initialActiveModuleStore,
   uiState: initialUiStateStore,
   sessionState: initialSessionStore,
-  usersState: initialUsersState,
-  assignmentsState: initialAssignmentsState
+  usersState: initialUsersStore,
+  assignmentsState: initialAssignmentsStore
 };
 
 /**

@@ -1,5 +1,5 @@
-import {IUserSessionStore} from './data-store/user-session-store';
-import {initialUserSessionStore} from './data-store/user-session-store';
+import {IUserSessionStore} from './data/user-session.store';
+import {initialUserSessionStore} from './data/user-session.store';
 
 export interface IDataStore {
   userSession:IUserSessionStore;
