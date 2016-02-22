@@ -3,13 +3,14 @@ import {ReduxWrapper} from './ReduxWrapper';
 import {createStore, combineReducers} from 'redux';
 
 import {uiState, initialUiState} from './reducers/ui-state';
-import {sessionState, SessionState} from './reducers/session-state';
-import {initialSessionState} from './reducers/session-state';
+import {sessionState} from './reducers/session-store';
+import {initialSessionStore} from './reducers/session-store';
 import {assignmentsState, initialAssignmentsState} from './reducers/assignments';
 import {usersState, initialUsersState} from './reducers/users';
 import {initialDataStore} from './reducers/data';
 import {dataStoreReducer} from './reducers/data';
 import {IDataStore} from './reducers/data';
+import {ISessionStore} from './reducers/session-store';
 
 /**
  * Combine all reducers from application.
@@ -32,7 +33,7 @@ const store = createStore(
   {
     data: initialDataStore,
     uiState: initialUiState,
-    sessionState: initialSessionState,
+    sessionState: initialSessionStore,
     usersState: initialUsersState,
     assignmentsState: initialAssignmentsState
   }
@@ -65,7 +66,7 @@ export class Store extends ReduxWrapper {
   /**
    * Specific access to data-node of sessionState
    */
-  public getSessionState():SessionState {
+  public getSessionState():ISessionStore {
     return this.getState().sessionState;
   }
 }
