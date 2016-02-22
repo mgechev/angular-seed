@@ -10,7 +10,7 @@ import {NameListService} from '../../shared/services/name-list.service';
   selector: 'sd-app',
   viewProviders: [NameListService],
   moduleId: module.id,
-  templateUrl: './app.html',
+  templateUrl: './app.component.html',
   encapsulation: ViewEncapsulation.None,
   directives: [ROUTER_DIRECTIVES, NavbarComponent, ToolbarComponent]
 })
