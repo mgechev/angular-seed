@@ -11,6 +11,7 @@ import {initialDataStore} from './reducers/data';
 import {dataStoreReducer} from './reducers/data';
 import {IDataStore} from './reducers/data';
 import {ISessionStore} from './reducers/session-store';
+import {activeModule, initialActiveModule} from './reducers/modules-state';
 
 /**
  * Combine all reducers from application.
@@ -19,6 +20,7 @@ import {ISessionStore} from './reducers/session-store';
  */
 const state = combineReducers({
   data: dataStoreReducer,
+  activeModule,
   uiState,
   sessionState,
   usersState,
@@ -32,6 +34,7 @@ const store = createStore(
   state,
   {
     data: initialDataStore,
+    activeModule: initialActiveModule,
     uiState: initialUiState,
     sessionState: initialSessionStore,
     usersState: initialUsersState,
