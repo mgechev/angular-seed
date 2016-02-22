@@ -1,11 +1,7 @@
 import {MAIN_NAVIGATION_ITEM_CLICKED} from '../actions/navigation';
+import {initialActiveModuleStore} from '../stores/modules.store';
 
-const initialActiveModule = 'startpage';
-
-function activeModule(state, action) {
-  if (!state) {
-    return initialActiveModule;
-  }
+export function activeModuleReducer(state = initialActiveModuleStore, action) {
 
   let newState;
   switch (action.type) {
@@ -25,6 +21,3 @@ function activeModule(state, action) {
 
   return newState;
 }
-
-export {initialActiveModule};
-export {activeModule};

@@ -1,18 +1,11 @@
 import {SERVICE_ACTION_FINISHED} from '../actions/services';
+import {initialAssignmentsStore} from '../stores/assignments.store';
+import {IAssignmentsStore} from '../stores/assignments.store';
 
-const initialAssignmentsState = {
-  usergroupsUsersRelation: null,
-  usergroupsTenantsRelation: null,
-  usergroupsRolesRelation: null
-};
-
-function assignmentsState(assignmentsState, action) {
-  if (!assignmentsState) {
-    return initialAssignmentsState;
-  }
-  switch(action.type) {
+export function assignmentsStateReducer(assignmentsState:IAssignmentsStore = initialAssignmentsStore, action) {
+  switch (action.type) {
     case SERVICE_ACTION_FINISHED:
-      if(action.endpoint === '/mocks/usergroups-users.json') {
+      if (action.endpoint === '/mocks/usergroups-users.json') {
         return {
           usergroupsRolesRelation: assignmentsState.usergroupsRolesRelation,
           usergroupsTenantsRelation: assignmentsState.usergroupsTenantsRelation,
@@ -25,6 +18,3 @@ function assignmentsState(assignmentsState, action) {
       return assignmentsState;
   }
 }
-
-export {initialAssignmentsState};
-export {assignmentsState};

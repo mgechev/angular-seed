@@ -1,25 +1,9 @@
 import {USER_IS_AUTHENTICATED} from '../actions/session';
 import {USER_WANTS_TO_LOGIN} from '../actions/session';
 import {LOGOUT_USER} from '../actions/session';
-import {TenantLoginDto} from '../../app/shared/stubs/dtos/tenant-login-dto';
 import {ACTIVE_TENANTS_OF_USER_LOADED} from '../actions/session';
-
-export interface ISessionStore {
-  loginAttempt:Object;
-  userAuthenticated:boolean;
-  tenants:Array<TenantLoginDto>;
-}
-
-/**
- * Holds initial state of sessionState data-node
- *
- * @type {ISessionStore}
- */
-export const initialSessionStore:ISessionStore = {
-  loginAttempt: null,
-  userAuthenticated: false,
-  tenants: null
-};
+import {ISessionStore} from '../stores/session.store';
+import {initialSessionStore} from '../stores/session.store';
 
 /**
  * Reducer for sessionState data-node
@@ -28,7 +12,7 @@ export const initialSessionStore:ISessionStore = {
  * @param {Object} action
  * @returns {ISessionStore}
  */
-export function sessionState(state:ISessionStore = initialSessionStore, action:any):ISessionStore {
+export function sessionStateReducer(state:ISessionStore = initialSessionStore, action:any):ISessionStore {
 
   let newState:ISessionStore;
 
