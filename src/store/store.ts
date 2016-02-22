@@ -8,8 +8,8 @@ import {initialSessionState} from './reducers/session-state';
 import {assignmentsState, initialAssignmentsState} from './reducers/assignments';
 import {usersState, initialUsersState} from './reducers/users';
 import {initialDataStore} from './reducers/data';
-import {DataStore} from './reducers/data';
 import {dataStoreReducer} from './reducers/data';
+import {IDataStore} from './reducers/data';
 
 /**
  * Combine all reducers from application.
@@ -51,7 +51,7 @@ export class Store extends ReduxWrapper {
   /**
    * Specific access to store-node of data
    */
-  public getDataStore():DataStore {
+  public getDataStore():IDataStore {
     return this.getState().data;
   }
 

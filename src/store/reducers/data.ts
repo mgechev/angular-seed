@@ -1,12 +1,15 @@
-import {UserSessionStore} from './data/user-session';
 import {combineReducers} from 'redux';
 import {userSessionReducer} from './data/user-session';
+import {IUserSessionStore} from './data/user-session';
+import {initialUserSessionStore} from './data/user-session';
 
-export class DataStore {
-  public userSession:UserSessionStore = new UserSessionStore();
+export interface IDataStore {
+  userSession:IUserSessionStore;
 }
 
-export const initialDataStore:DataStore = new DataStore();
+export const initialDataStore:IDataStore = {
+  userSession: initialUserSessionStore
+};
 
 export const dataStoreReducer = combineReducers({
   userSession: userSessionReducer
