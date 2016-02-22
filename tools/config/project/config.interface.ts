@@ -1,3 +1,3 @@
 export interface IProjectConfig {
-  TEST;
+  SAMPLE_VALUE;
 }

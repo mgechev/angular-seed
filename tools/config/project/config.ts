@@ -1,4 +1,3 @@
-// import {DIST_DIR} from './seed';
+import {SEED_CONFIG} from '../seed.config';
 
-export const TEST = `my-test`;
-export const APP_DEST = 'preprod';
+export const SAMPLE_VALUE = `${SEED_CONFIG.DIST_DIR}/sample val`;
