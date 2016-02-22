@@ -3,10 +3,14 @@ import {ReduxWrapper} from './ReduxWrapper';
 import {createStore, combineReducers} from 'redux';
 
 import {uiState, initialUiState} from './reducers/ui-state';
-import {sessionState, SessionState} from './reducers/session-state';
-import {initialSessionState} from './reducers/session-state';
+import {sessionState} from './reducers/session-store';
+import {initialSessionStore} from './reducers/session-store';
 import {assignmentsState, initialAssignmentsState} from './reducers/assignments';
 import {usersState, initialUsersState} from './reducers/users';
+import {initialDataStore} from './reducers/data';
+import {dataStoreReducer} from './reducers/data';
+import {IDataStore} from './reducers/data';
+import {ISessionStore} from './reducers/session-store';
 import {activeModule, initialActiveModule} from './reducers/modules-state';
 
 /**
@@ -15,6 +19,7 @@ import {activeModule, initialActiveModule} from './reducers/modules-state';
  * The name of the reducer is at the same time the name of the data-node in the store.
  */
 const state = combineReducers({
+  data: dataStoreReducer,
   activeModule,
   uiState,
   sessionState,
@@ -28,9 +33,10 @@ const state = combineReducers({
 const store = createStore(
   state,
   {
+    data: initialDataStore,
     activeModule: initialActiveModule,
     uiState: initialUiState,
-    sessionState: initialSessionState,
+    sessionState: initialSessionStore,
     usersState: initialUsersState,
     assignmentsState: initialAssignmentsState
   }
@@ -47,6 +53,13 @@ export class Store extends ReduxWrapper {
   }
 
   /**
+   * Specific access to store-node of data
+   */
+  public getDataStore():IDataStore {
+    return this.getState().data;
+  }
+
+  /**
    * Specific access to data-node of uiState
    */
   public getUiState():Object {
@@ -56,7 +69,7 @@ export class Store extends ReduxWrapper {
   /**
    * Specific access to data-node of sessionState
    */
-  public getSessionState():SessionState {
+  public getSessionState():ISessionStore {
     return this.getState().sessionState;
   }
 }

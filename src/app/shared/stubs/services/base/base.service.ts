@@ -16,11 +16,8 @@ export function getServerUrl():string {
     serverUrl = window.localStorage.getItem('splServerUrl');
   }
 
-  console.log('used server url:', serverUrl);
-
   return serverUrl;
 }
-//export const SERVER_URL:string = 'http://smdb.fntgrp.com:8002/serviceplanet';
 
 /**
  * Base service class contains hidden functionality for call creation.

@@ -7,7 +7,6 @@ import {TenantLoginDto} from '../../shared/stubs/dtos/tenant-login-dto';
   templateUrl: './login.template.html'
 })
 export class LoginComponent {
-
   @Input()
   public tenants:Array<TenantLoginDto>;
 
