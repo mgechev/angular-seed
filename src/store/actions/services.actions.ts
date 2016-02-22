@@ -25,6 +25,6 @@ export function backendActionFinished(endpoint:string = '', result):IServiceActi
     type: SERVICE_ACTION_FINISHED,
     endpoint,
     result,
-    message: 'Backend action started'
+    message: 'Ready'
   };
 }
