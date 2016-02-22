@@ -1,4 +1,3 @@
-import {Injectable} from '../../node_modules/angular2/core.d.ts';
 import {ReduxWrapper} from './ReduxWrapper';
 import {createStore, combineReducers} from 'redux';
 
@@ -12,7 +11,8 @@ import {ISessionStore} from './reducers/session-store';
 import {activeModule, initialActiveModule} from './reducers/modules-state';
 import {IDataStore} from './stores/data-store';
 import {initialDataStore} from './stores/data-store';
-import {initialUiStateStore} from './stores/ui-state.store.ts';
+import {initialUiStateStore} from './stores/ui-state.store';
+import {Injectable} from 'angular2/core';
 
 export interface IRootStore {
   data: IDataStore;

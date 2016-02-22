@@ -1,19 +1,12 @@
 import {SERVICE_ACTION_STARTED, SERVICE_ACTION_FINISHED} from '../actions/services';
 import {APP_INITIALIZED} from '../actions/app';
 import {BACKEND_CALL_FAILS} from '../actions/app';
+import {initialUiStateStore} from '../stores/ui-state.store';
+import {IUiStateStore} from '../stores/ui-state.store';
 
-const initialUiState = {
-  initialized: false,
-  actionOngoing: false,
-  message: 'Ready'
-};
+export function uiState(state:IUiStateStore = initialUiStateStore, action) {
 
-function uiState(state, action) {
-  if (!state) {
-    return initialUiState;
-  }
-
-  let newState;
+  let newState:IUiStateStore;
   switch (action.type) {
     case APP_INITIALIZED:
       newState = {
@@ -54,6 +47,3 @@ function uiState(state, action) {
 
   return newState;
 }
-
-export {initialUiState};
-export {uiState};
