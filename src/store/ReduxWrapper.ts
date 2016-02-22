@@ -1,7 +1,8 @@
 class ReduxWrapper {
-  static initialized: boolean = false;
+  static initialized:boolean = false;
   private store;
-  constructor(store: any) {
+
+  constructor(store:any) {
     this.store = store;
     if (!store) {
       throw new Error('store cannot be undefined. Make sure to pass the redux store as the only argument of the constructor.');
@@ -12,7 +13,7 @@ class ReduxWrapper {
     ReduxWrapper.initialized = true;
   }
 
-  getState () {
+  getState() {
     return this.store.getState();
   }
 
@@ -22,7 +23,9 @@ class ReduxWrapper {
 
   subscribe(listener) {
     var _this = this;
-    return this.store.subscribe(function () { return listener(_this.getState()); });
+    return this.store.subscribe(function () {
+      return listener(_this.getState());
+    });
   }
 }
 

@@ -1,24 +1,43 @@
-import {Injectable} from 'angular2/core';
+import {Injectable} from '../../node_modules/angular2/core.d.ts';
 import {ReduxWrapper} from './ReduxWrapper';
 import {createStore, combineReducers} from 'redux';
 
-import {uiState, initialUiState} from './reducers/ui-state';
+import {uiState} from './reducers/ui-state';
 import {sessionState} from './reducers/session-store';
 import {initialSessionStore} from './reducers/session-store';
 import {assignmentsState, initialAssignmentsState} from './reducers/assignments';
 import {usersState, initialUsersState} from './reducers/users';
-import {initialDataStore} from './reducers/data';
 import {dataStoreReducer} from './reducers/data';
-import {IDataStore} from './reducers/data';
 import {ISessionStore} from './reducers/session-store';
 import {activeModule, initialActiveModule} from './reducers/modules-state';
+import {IDataStore} from './stores/data-store';
+import {initialDataStore} from './stores/data-store';
+import {initialUiStateStore} from './stores/ui-state.store.ts';
+
+export interface IRootStore {
+  data: IDataStore;
+  activeModule: string;
+  uiState: Object;
+  sessionState: ISessionStore;
+  usersState: Object;
+  assignmentsState: Object;
+}
+
+const initialRootStore:IRootStore = {
+  data: initialDataStore,
+  activeModule: initialActiveModule,
+  uiState: initialUiStateStore,
+  sessionState: initialSessionStore,
+  usersState: initialUsersState,
+  assignmentsState: initialAssignmentsState
+};
 
 /**
  * Combine all reducers from application.
  * NOTE:
  * The name of the reducer is at the same time the name of the data-node in the store.
  */
-const state = combineReducers({
+const rootReducer = combineReducers({
   data: dataStoreReducer,
   activeModule,
   uiState,
@@ -30,16 +49,9 @@ const state = combineReducers({
 /**
  * Creates the store with the combined reducers and an initial state of all data-nodes.
  */
-const store = createStore(
-  state,
-  {
-    data: initialDataStore,
-    activeModule: initialActiveModule,
-    uiState: initialUiState,
-    sessionState: initialSessionStore,
-    usersState: initialUsersState,
-    assignmentsState: initialAssignmentsState
-  }
+const rootStore = createStore(
+  rootReducer,
+  initialRootStore
 );
 
 /**
@@ -49,7 +61,7 @@ const store = createStore(
 @Injectable()
 export class Store extends ReduxWrapper {
   constructor() {
-    super(store);
+    super(rootStore);
   }
 
   /**
