@@ -3,35 +3,33 @@ import {USER_WANTS_TO_LOGIN} from '../actions/session';
 import {TenantLoginDto} from '../../app/shared/stubs/dtos/tenant-login-dto';
 import {ACTIVE_TENANTS_OF_USER_LOADED} from '../actions/session';
 
-/**
- * Typed definition of sessionState data-node in the store
- */
-class SessionState {
-  public loginAttempt:Object;
-  public userAuthenticated:boolean = false;
-  public tenants:Array<TenantLoginDto>;
+export interface ISessionStore {
+  loginAttempt:Object;
+  userAuthenticated:boolean;
+  tenants:Array<TenantLoginDto>;
 }
 
 /**
  * Holds initial state of sessionState data-node
  *
- * @type {SessionState}
+ * @type {ISessionStore}
  */
-const initialSessionState:SessionState = new SessionState();
+export const initialSessionStore:ISessionStore = {
+  loginAttempt: null,
+  userAuthenticated: false,
+  tenants: null
+};
 
 /**
  * Reducer for sessionState data-node
  *
- * @param {SessionState} state
+ * @param {ISessionStore} state
  * @param {Object} action
- * @returns {SessionState}
+ * @returns {ISessionStore}
  */
-function sessionState(state:SessionState, action:any):SessionState {
-  if (!state) {
-    return initialSessionState;
-  }
+export function sessionState(state:ISessionStore = initialSessionStore, action:any):ISessionStore {
 
-  let newState:SessionState;
+  let newState:ISessionStore;
 
   switch (action.type) {
     case ACTIVE_TENANTS_OF_USER_LOADED:
@@ -66,7 +64,3 @@ function sessionState(state:SessionState, action:any):SessionState {
 
   return newState;
 }
-
-export {SessionState};
-export {initialSessionState};
-export {sessionState};
