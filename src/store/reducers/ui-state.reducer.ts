@@ -1,12 +1,16 @@
-import {SERVICE_ACTION_STARTED, SERVICE_ACTION_FINISHED} from '../actions/services';
-import {APP_INITIALIZED} from '../actions/app';
-import {BACKEND_CALL_FAILS} from '../actions/app';
+import {SERVICE_ACTION_STARTED, SERVICE_ACTION_FINISHED} from '../actions/services.actions';
+import {APP_INITIALIZED} from '../actions/app.actions';
+import {BACKEND_CALL_FAILS} from '../actions/app.actions';
 import {initialUiStateStore} from '../stores/ui-state.store';
 import {IUiStateStore} from '../stores/ui-state.store';
+import {IBaseAction} from '../actions/base.action';
+import {IServiceActionStartedAction} from '../actions/services.actions';
+import {IServiceActionFinishedAction} from '../actions/services.actions';
+import {IBackendCallFailsAction} from '../actions/app.actions';
 
-export function uiStateReducer(state:IUiStateStore = initialUiStateStore, action) {
-
+export function uiStateReducer(state:IUiStateStore = initialUiStateStore, action:IBaseAction):IUiStateStore {
   let newState:IUiStateStore;
+
   switch (action.type) {
     case APP_INITIALIZED:
       newState = {
@@ -20,7 +24,7 @@ export function uiStateReducer(state:IUiStateStore = initialUiStateStore, action
       newState = {
         initialized: state.initialized,
         actionOngoing: true,
-        message: action.message
+        message: (action as IServiceActionStartedAction).message
       };
       break;
 
@@ -28,7 +32,7 @@ export function uiStateReducer(state:IUiStateStore = initialUiStateStore, action
       newState = {
         initialized: state.initialized,
         actionOngoing: false,
-        message: action.message ? action.message : 'Ready'
+        message: (action as IServiceActionFinishedAction).message ? (action as IServiceActionFinishedAction).message : 'Ready'
       };
       break;
 
@@ -36,7 +40,7 @@ export function uiStateReducer(state:IUiStateStore = initialUiStateStore, action
       newState = {
         initialized: state.initialized,
         actionOngoing: state.actionOngoing,
-        message: action.error['localizedMessage']
+        message: (action as IBackendCallFailsAction).error['localizedMessage']
       };
       break;
 

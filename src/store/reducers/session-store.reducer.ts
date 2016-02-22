@@ -1,9 +1,12 @@
-import {USER_IS_AUTHENTICATED} from '../actions/session';
-import {USER_WANTS_TO_LOGIN} from '../actions/session';
-import {LOGOUT_USER} from '../actions/session';
-import {ACTIVE_TENANTS_OF_USER_LOADED} from '../actions/session';
+import {USER_IS_AUTHENTICATED} from '../actions/session.actions';
+import {USER_WANTS_TO_LOGIN} from '../actions/session.actions';
+import {LOGOUT_USER} from '../actions/session.actions';
+import {ACTIVE_TENANTS_OF_USER_LOADED} from '../actions/session.actions';
 import {ISessionStore} from '../stores/session.store';
 import {initialSessionStore} from '../stores/session.store';
+import {IBaseAction} from '../actions/base.action';
+import {IActiveTenantsOfUserLoadedAction} from '../actions/session.actions';
+import {IUserWantsToLoginAction} from '../actions/session.actions';
 
 /**
  * Reducer for sessionState data-node
@@ -12,7 +15,7 @@ import {initialSessionStore} from '../stores/session.store';
  * @param {Object} action
  * @returns {ISessionStore}
  */
-export function sessionStateReducer(state:ISessionStore = initialSessionStore, action:any):ISessionStore {
+export function sessionStateReducer(state:ISessionStore = initialSessionStore, action:IBaseAction):ISessionStore {
 
   let newState:ISessionStore;
 
@@ -21,16 +24,16 @@ export function sessionStateReducer(state:ISessionStore = initialSessionStore, a
       newState = {
         userAuthenticated: false,
         loginAttempt: null,
-        tenants: action.tenants
+        tenants: (action as IActiveTenantsOfUserLoadedAction).tenants
       };
       break;
     case USER_WANTS_TO_LOGIN:
       newState = {
         userAuthenticated: false,
         loginAttempt: {
-          username: action.username,
-          pasword: action.password,
-          tenant: action.tenant
+          username: (action as IUserWantsToLoginAction).username,
+          pasword: (action as IUserWantsToLoginAction).password,
+          tenant: (action as IUserWantsToLoginAction).tenant
         },
         tenants: state.tenants
       };

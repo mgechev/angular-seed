@@ -1,9 +1,9 @@
 import {Store} from '../../../store/store';
 import {Injectable} from 'angular2/core';
-import {appInitialized} from '../../../store/actions/app';
+import {appInitialized} from '../../../store/actions/app.actions';
 import {UserAuthorizationService} from '../stubs/services/user-authorization.service';
 import {AuthPermissionDto} from '../stubs/dtos/auth-permission-dto';
-import {usersPermissionsLoaded} from '../../../store/actions/session';
+import {usersPermissionsLoaded} from '../../../store/actions/session.actions';
 
 @Injectable()
 export class InitializeService {
