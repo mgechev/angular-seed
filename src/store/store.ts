@@ -1,53 +1,12 @@
 import {ReduxWrapper} from './ReduxWrapper';
-import {createStore, combineReducers} from 'redux';
-
-import {uiState} from './reducers/ui-state.reducer';
-import {sessionState} from './reducers/session-store.reducer';
-import {assignmentsState} from './reducers/assignments.reducer';
-import {usersState} from './reducers/users.reducer';
-import {dataStoreReducer} from './reducers/data.reducer';
-import {activeModule} from './reducers/modules-state';
-import {IDataStore} from './stores/data.store';
-import {initialDataStore} from './stores/data.store';
-import {initialUiStateStore} from './stores/ui-state.store';
+import {createStore} from 'redux';
+import {initialRootStore} from './stores/root.store';
+import {rootReducer} from './reducers/root.reducer';
 import {Injectable} from 'angular2/core';
-import {initialAssignmentsStore} from './stores/assignments.store';
-import {initialUsersStore} from './stores/users.store';
-import {initialSessionStore} from './stores/session.store';
-import {initialActiveModuleStore} from './stores/modules.store';
+import {IDataStore} from './stores/data.store';
+import {IUiStateStore} from './stores/ui-state.store';
 import {ISessionStore} from './stores/session.store';
-
-export interface IRootStore {
-  data: IDataStore;
-  activeModule: string;
-  uiState: Object;
-  sessionState: ISessionStore;
-  usersState: Object;
-  assignmentsState: Object;
-}
-
-const initialRootStore:IRootStore = {
-  data: initialDataStore,
-  activeModule: initialActiveModuleStore,
-  uiState: initialUiStateStore,
-  sessionState: initialSessionStore,
-  usersState: initialUsersStore,
-  assignmentsState: initialAssignmentsStore
-};
-
-/**
- * Combine all reducers from application.
- * NOTE:
- * The name of the reducer is at the same time the name of the data-node in the store.
- */
-const rootReducer = combineReducers({
-  data: dataStoreReducer,
-  activeModule,
-  uiState,
-  sessionState,
-  usersState,
-  assignmentsState
-});
+import {IRootStore} from './stores/root.store';
 
 /**
  * Creates the store with the combined reducers and an initial state of all data-nodes.
@@ -67,6 +26,10 @@ export class Store extends ReduxWrapper {
     super(rootStore);
   }
 
+  public getState():IRootStore {
+    return super.getState();
+  }
+
   /**
    * Specific access to store-node of data
    */
@@ -77,7 +40,7 @@ export class Store extends ReduxWrapper {
   /**
    * Specific access to data-node of uiState
    */
-  public getUiState():Object {
+  public getUiState():IUiStateStore {
     return this.getState().uiState;
   }
 

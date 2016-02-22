@@ -1,8 +1,10 @@
+import Store = Redux.Store;
+
 class ReduxWrapper {
   static initialized:boolean = false;
-  private store;
+  private store:Store;
 
-  constructor(store:any) {
+  constructor(store:Store) {
     this.store = store;
     if (!store) {
       throw new Error('store cannot be undefined. Make sure to pass the redux store as the only argument of the constructor.');
