@@ -1,20 +1,26 @@
-import {SERVICE_ACTION_FINISHED} from '../actions/services';
+import {SERVICE_ACTION_FINISHED} from '../actions/services.actions';
 import {initialAssignmentsStore} from '../stores/assignments.store';
 import {IAssignmentsStore} from '../stores/assignments.store';
+import {IBaseAction} from '../actions/base.action';
+import {IServiceActionFinishedAction} from '../actions/services.actions';
 
-export function assignmentsStateReducer(assignmentsState:IAssignmentsStore = initialAssignmentsStore, action) {
+export function assignmentsStateReducer(assignmentsState:IAssignmentsStore = initialAssignmentsStore,
+                                        action:IBaseAction):IAssignmentsStore {
+  let newState:IAssignmentsStore;
   switch (action.type) {
     case SERVICE_ACTION_FINISHED:
-      if (action.endpoint === '/mocks/usergroups-users.json') {
-        return {
+      if ((action as IServiceActionFinishedAction).endpoint === '/mocks/usergroups-users.json') {
+        newState = {
           usergroupsRolesRelation: assignmentsState.usergroupsRolesRelation,
           usergroupsTenantsRelation: assignmentsState.usergroupsTenantsRelation,
-          usergroupsUsersRelation: action.result
+          usergroupsUsersRelation: (action as IServiceActionFinishedAction).result
         };
       } else {
-        return assignmentsState;
+        newState = assignmentsState;
       }
+      break;
     default:
-      return assignmentsState;
+      newState = assignmentsState;
   }
+  return newState;
 }

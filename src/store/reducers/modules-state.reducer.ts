@@ -1,9 +1,11 @@
-import {MAIN_NAVIGATION_ITEM_CLICKED} from '../actions/navigation';
+import {MAIN_NAVIGATION_ITEM_CLICKED} from '../actions/navigation.actions';
 import {initialActiveModuleStore} from '../stores/modules.store';
+import {IBaseAction} from '../actions/base.action';
+import {IMainNavigationItemClickedAction} from '../actions/navigation.actions';
 
-export function activeModuleReducer(state = initialActiveModuleStore, action) {
+export function activeModuleReducer(state:string = initialActiveModuleStore, action:IBaseAction):string {
 
-  let newState;
+  let newState:string;
   switch (action.type) {
 
     case MAIN_NAVIGATION_ITEM_CLICKED:
@@ -11,7 +13,7 @@ export function activeModuleReducer(state = initialActiveModuleStore, action) {
       console.log('action:');
       console.log(action);
 
-      newState = action.key;
+      newState = (action as IMainNavigationItemClickedAction).key;
       break;
 
     default:

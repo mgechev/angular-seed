@@ -9,11 +9,11 @@ import {AdministrationComponent} from './administration/administration.component
 import {OnInit} from 'angular2/core';
 import {LoginService} from './shared/stubs/services/login.service';
 import {UserLoginDto} from './shared/stubs/dtos/user-login-dto';
-import {userIsAuthenticated} from '../store/actions/session';
-import {userWantsToLogin} from '../store/actions/session';
+import {userIsAuthenticated} from '../store/actions/session.actions';
+import {userWantsToLogin} from '../store/actions/session.actions';
 import {TenantLoginDto} from './shared/stubs/dtos/tenant-login-dto';
-import {activeTenantsOfUserLoaded} from '../store/actions/session';
-import {backendCallFails} from '../store/actions/app';
+import {activeTenantsOfUserLoaded} from '../store/actions/session.actions';
+import {backendCallFails} from '../store/actions/app.actions';
 import {ApplicationHeader} from './shared/components/application-header/application-header.component';
 
 @Component({
