@@ -1,5 +1,6 @@
 import {USER_IS_AUTHENTICATED} from '../actions/session';
 import {USER_WANTS_TO_LOGIN} from '../actions/session';
+import {LOGOUT_USER} from '../actions/session';
 import {TenantLoginDto} from '../../app/shared/stubs/dtos/tenant-login-dto';
 import {ACTIVE_TENANTS_OF_USER_LOADED} from '../actions/session';
 
@@ -52,6 +53,14 @@ function sessionState(state:SessionState, action:any):SessionState {
         tenants: state.tenants
       };
       break;
+    case LOGOUT_USER:
+      newState = {
+        userAuthenticated: false,
+        loginAttempt: state.loginAttempt,
+        tenants: state.tenants
+      };
+      break;
+
     case USER_IS_AUTHENTICATED:
       newState = {
         userAuthenticated: true,

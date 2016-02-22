@@ -9,6 +9,7 @@ import {DataFetchingService} from '../../shared/services/datafetching.service';
   bindings: [DataFetchingService],
   template: `
     <section>
+
       <h2>Roles and Rights</h2>
       <p>users.state: {{ users.state }}</p>
       <p>assignments.state: {{ assignments.state }}</p>

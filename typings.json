@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "moment": "github:typed-typings/npm-moment#a4075cd50e63efbedd850f654594f293ab81a385",
     "xhr2": "github:gdi2290/typed-xhr2#69f2b8d40d0cd407c1b2a2f2f41fecc6852cabbb"
   },
   "devDependencies": {},
