@@ -4,18 +4,19 @@ describe('Home', function() {
     browser.get('');
   });
 
-  it('should have correct h1', function() {
-      expect(element(by.css('app section home h1')).getText())
-      .toEqual('Howdy!');
+  it('should have an input', function() {
+    expect(element(by.css('sd-app sd-home form input')).isPresent()).toEqual(true);
   });
 
-  it('should have correct h2', function() {
-      expect(element(by.css('app section home h2')).getText())
-      .toEqual('Gratz!');
+  it('should have a list of computer scientists', function() {
+    expect(element(by.css('sd-app sd-home ul')).getText())
+      .toEqual('Edsger Dijkstra\nDonald Knuth\nAlan Turing\nGrace Hopper');
   });
 
-  it('should have correct success msg', function() {
-      expect(element(by.css('app section home p')).getText())
-      .toEqual('Your deployment of Angular 2 Seed worked perfectly! Click about (above) to get your reward!');
+  it('should add a name to the list using the form', function() {
+    element(by.css('sd-app sd-home form input')).sendKeys('Tim Berners-Lee');
+    element(by.css('sd-app sd-home form button')).click();
+    expect(element(by.css('sd-app sd-home ul')).getText())
+      .toEqual('Edsger Dijkstra\nDonald Knuth\nAlan Turing\nGrace Hopper\nTim Berners-Lee');
   });
 });

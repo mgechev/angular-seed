@@ -1,15 +1,15 @@
-import {NameList} from './name_list';
+import {NameListService} from './name-list.service';
 
 export function main() {
   describe('NameList Service', () => {
-    let nameList;
+    let nameListService;
 
     beforeEach(() => {
-      nameList = new NameList;
+      nameListService = new NameListService;
     });
 
     it('should return the list of names', () => {
-      let names = nameList.get();
+      let names = nameListService.get();
       expect(names).toEqual(jasmine.any(Array));
     });
   });

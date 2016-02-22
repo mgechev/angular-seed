@@ -31,12 +31,12 @@ gulp.task('build.dev.watch', done =>
 // --------------
 // Build e2e.
 gulp.task('build.e2e', done =>
-    runSequence('clean.dev',
-        'tslint',
-        'build.assets.dev',
-        'build.js.e2e',
-        'build.index.dev',
-        done));
+  runSequence('clean.dev',
+              'tslint',
+              'build.assets.dev',
+              'build.js.e2e',
+              'build.index.dev',
+              done));
 
 // --------------
 // Build prod.
@@ -54,12 +54,12 @@ gulp.task('build.prod', done =>
 // --------------
 // Build test.
 gulp.task('build.test', done =>
-    runSequence('clean.dev',
-        'tslint',
-        'build.assets.dev',
-        'build.js.test',
-        'build.index.dev',
-        done));
+  runSequence('clean.dev',
+              'tslint',
+              'build.assets.dev',
+              'build.js.test',
+              'build.index.dev',
+              done));
 
 // --------------
 // Build test watch.
