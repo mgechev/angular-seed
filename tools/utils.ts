@@ -1,10 +1,8 @@
-export * from './utils/template_locals';
-export * from './utils/server';
-export * from './utils/tasks_tools';
+import * as SEED_UTILS from './utils/seed.utils';
+import * as PROJECT_UTILS from './utils/project.utils';
 
+// Maintain compatibility.
+export * from './utils/seed.utils';
 
-export function tsProjectFn(plugins) {
-  return plugins.typescript.createProject('tsconfig.json', {
-    typescript: require('typescript')
-  });
-}
+// Interface issue to solve.
+export const UTILS = Object.assign(SEED_UTILS, PROJECT_UTILS);

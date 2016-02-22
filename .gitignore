@@ -35,6 +35,7 @@ build/Release
 .vscode
 *.iml
 
+/tools/**/*.js
 dist
 dev
 docs
