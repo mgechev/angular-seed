@@ -22,3 +22,5 @@ export const initialRootStore:IRootStore = {
   usersState: initialUsersStore,
   assignmentsState: initialAssignmentsStore
 };
+
+console.log('initialRootStore', initialRootStore);

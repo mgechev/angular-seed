@@ -6,10 +6,9 @@ import {IBaseAction} from '../actions/base.action';
 import {IServiceActionStartedAction} from '../actions/services.actions';
 import {IServiceActionFinishedAction} from '../actions/services.actions';
 import {IBackendCallFailsAction} from '../actions/app.actions';
-import {ITypedAction} from '../actions/typed.action';
-import {UserLoginDto} from '../../app/shared/stubs/dtos/user-login-dto';
+import {initialUiStateStore} from '../stores/ui-state.store';
 
-export function uiStateReducer(state:IUiStateStore, action:IBaseAction):IUiStateStore {
+export function uiStateReducer(state:IUiStateStore = initialUiStateStore, action:IBaseAction):IUiStateStore {
   let newState:IUiStateStore;
 
   switch (action.type) {

@@ -8,6 +8,7 @@ import {IActiveTenantsOfUserLoadedAction} from '../actions/session.actions';
 import {IUserWantsToLoginAction} from '../actions/session.actions';
 import {ILogoutUserAction} from '../actions/session.actions';
 import {IUserIsAuthenticatedAction} from '../actions/session.actions';
+import {initialSessionStore} from '../stores/session.store';
 
 /**
  * Reducer for sessionState data-node
@@ -16,7 +17,7 @@ import {IUserIsAuthenticatedAction} from '../actions/session.actions';
  * @param {Object} action
  * @returns {ISessionStore}
  */
-export function sessionStateReducer(state:ISessionStore, action:IBaseAction):ISessionStore {
+export function sessionStateReducer(state:ISessionStore = initialSessionStore, action:IBaseAction):ISessionStore {
 
   let newState:ISessionStore;
 
