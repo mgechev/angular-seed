@@ -6,13 +6,14 @@ import {UserLoginDto} from '../../../shared/stubs/dtos/user-login-dto';
 import {
   backendUserInquiryInitialized,
   sessionUserExists,
-  backendProvidedUsername,
   activeTenantsOfUserLoaded,
   userIsAuthenticated,
-  backendAuthenticationInitialized
-} from '../../../../store/actions/session.actions';
-import {backendCallFails} from '../../../../store/actions/app.actions';
-import {Store} from '../../../../store/store';
+  backendAuthenticationInitialized,
+  logoutUser
+} from '../../../store/actions/session.actions';
+import {backendCallFails} from '../../../store/actions/app.actions';
+import {Store} from '../../../store/store';
+import {ISessionStore} from '../../../store/stores/session.store';
 
 @Injectable()
 export class LoginService extends BaseService {
@@ -24,14 +25,14 @@ export class LoginService extends BaseService {
 
     var self:LoginService = this;
     this.store.subscribe(() => {
-      let sessionState = self.store.getSessionState();
+      let sessionState:ISessionStore = self.store.getSessionState();
 
       if(sessionState.loggedInUserRequired && !sessionState.backendUserInquiryInitialized) {
-         self.hasLoggedInUser();
+          self.hasLoggedInUser();
       }
 
-      if(sessionState.sessionUserExists) {
-        self.getLoggedInUser();
+      if(sessionState.sessionUserExists && !sessionState.userAuthenticated) {
+         self.getLoggedInUser();
       }
 
       if(sessionState.providedUsername && !sessionState.tenants) {
@@ -44,6 +45,10 @@ export class LoginService extends BaseService {
           sessionState.loginAttempt.password,
           sessionState.loginAttempt.tenant
         );
+      }
+
+      if(sessionState.userLogoutRequest && sessionState.userAuthenticated) {
+        self.logout();
       }
 
       console.log('sessionState:');
@@ -87,36 +92,41 @@ export class LoginService extends BaseService {
       });
   }
 
-  public getLoggedInUser() {
-    let store:Store = this.store;
-
-    this.newGetCall('getLoggedInUser')
-      .send()
-      .then(function (sessionUser:boolean):void {
-        console.log('in getLoggedInUser, callback:');
-        console.log(sessionUser);
-        if (sessionUser && sessionUser.loginname) {
-          store.dispatch(backendProvidedUsername(sessionUser.loginname));
-        }
-      });
-  }
-
   public hasLoggedInUser() {
     let store:Store = this.store;
     store.dispatch(backendUserInquiryInitialized());
 
     this.newGetCall('hasLoggedInUser')
       .send()
-      .then(function (hasLoggedInUser:boolean):void {
-        if (hasLoggedInUser) {
+      .then(function (LoggedInUser:boolean):void {
+        if (LoggedInUser) {
           store.dispatch(sessionUserExists());
         }
       });
   }
 
+  public getLoggedInUser() {
+    let store:Store = this.store;
+
+    this.newGetCall('getLoggedInUser')
+      .send()
+      .then(function (sessionUser:UserLoginDto):void {
+        console.log('in getLoggedInUser, callback:');
+        console.log(sessionUser);
+        if (sessionUser) {
+          store.dispatch(userIsAuthenticated(sessionUser));
+        }
+      });
+  }
+
   public logout() {
+    let store:Store = this.store;
+
     return this.newPostCall('logout')
-      .send();
+      .send()
+      .then(function ():void {
+        store.dispatch(logoutUser());
+      });
   }
 
   public switchTenant(tenant:string) {

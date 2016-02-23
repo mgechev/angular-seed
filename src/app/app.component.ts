@@ -1,16 +1,16 @@
 import {Component,OnInit} from 'angular2/core';
-import {InitializeService} from './shared/services/initialize.service';
+import {InitializeService} from './shared/features/services/initialize.service';
 import {LoginService} from './shared/stubs/services/login.service';
-import {Store} from '../store/store';
+import {Store} from './store/store';
 
-import {LoginComponent} from './components/login/login.component';
-import {StartpageComponent} from './startpage/startpage.component';
-import {ManageComponent} from './manage/manage.component';
-import {ActivitiesComponent} from './activities/activities.component';
-import {AdministrationComponent} from './administration/administration.component';
-import {ApplicationHeader} from './shared/components/application-header/application-header.component';
+import {LoginComponent} from './features/login/login.component';
+import {StartpageComponent} from './features/startpage/startpage.component';
+import {ManageComponent} from './features/manage/manage.component';
+import {ActivitiesComponent} from './features/activities/activities.component';
+import {AdministrationComponent} from './features/administration/administration.component';
+import {ApplicationHeader} from './shared/features/application-header/application-header.component';
 
-import {loggedInUserRequired} from '../store/actions/session.actions';
+import {loggedInUserRequired} from './store/actions/session.actions';
 
 @Component({
   selector: 'app',
@@ -42,18 +42,4 @@ export class AppComponent implements OnInit {
     this.store.dispatch(loggedInUserRequired());
   }
 
-  /*  private getLoggedInUserFromBackend():void {
-    let self:AppComponent = this;
-
-    self.loginService.getLoggedInUser()
-      .subscribe(function (loggedInUser:UserLoginDto):void {
-        self.store.dispatch(userIsAuthenticated(loggedInUser));
-
-        self.initializeService.initialize();
-      }, function (error:Object):void {
-        self.store.dispatch(backendCallFails(error));
-      });
-
-
-  }*/
 }

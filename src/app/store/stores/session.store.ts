@@ -8,6 +8,7 @@ export interface ISessionStore {
   providedUsername:string;
   loginAttempt:Object;
   userAuthenticated:boolean;
+  userLogoutRequest:boolean;
   tenants:Array<TenantLoginDto>;
 }
 
@@ -24,5 +25,6 @@ export const initialSessionStore:ISessionStore = {
   providedUsername: null,
   loginAttempt: null,
   userAuthenticated: false,
+  userLogoutRequest:false,
   tenants: null
 };

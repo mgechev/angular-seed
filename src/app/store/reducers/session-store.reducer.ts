@@ -10,10 +10,10 @@ import {IUsernameProvidedAction} from '../actions/session.actions';
 import {LOGOUT_USER} from '../actions/session.actions';
 import {IUserIsAuthenticatedAction} from '../actions/session.actions';
 import {USER_PROVIDED_USERNAME} from '../actions/session.actions';
-import {BACKEND_PROVIDED_USERNAME} from '../actions/session.actions';
 import {SESSION_USER_EXISTS} from '../actions/session.actions';
 import {BACKEND_AUTHENTICATION_INITIALIZED} from '../actions/session.actions';
 import {LOGGEDIN_USER_REQUIRED} from '../actions/session.actions';
+import {USER_LOGOUT_REQUEST} from '../actions/session.actions';
 import {BACKEND_USER_INQUIRY_INITIALIZED} from '../actions/session.actions';
 
 
@@ -44,10 +44,6 @@ export function sessionStateReducer(state:ISessionStore = initialSessionStore, a
       newState = sessionUserExistsReducer(state, action as IUsernameProvidedAction);
       break;
 
-    case BACKEND_PROVIDED_USERNAME:
-      newState = backendProvidedUsernameReducer(state, action as IUsernameProvidedAction);
-      break;
-
     case USER_PROVIDED_USERNAME:
       newState = userProvidedUsernameReducer(state, action as IUsernameProvidedAction);
       break;
@@ -62,6 +58,10 @@ export function sessionStateReducer(state:ISessionStore = initialSessionStore, a
 
     case BACKEND_AUTHENTICATION_INITIALIZED:
       newState = backendAuthenticationInitialized(state);
+      break;
+
+    case USER_LOGOUT_REQUEST:
+      newState = userLogoutRequestReducer(state, action as IBaseAction);
       break;
 
     case LOGOUT_USER:
@@ -84,11 +84,12 @@ function loggedInUserRequiredReducer(state:ISessionStore):ISessionStore {
   return {
     loggedInUserRequired: true,
     backendUserInquiryInitialized: state.backendUserInquiryInitialized,
-    sessionUserExists:false,
+    sessionUserExists: state.sessionUserExists,
     providedUsername: state.providedUsername,
     backendAuthenticationInitialized: state.backendAuthenticationInitialized,
     userAuthenticated: state.userAuthenticated,
     loginAttempt: state.loginAttempt,
+    userLogoutRequest: state.userLogoutRequest,
     tenants: state.tenants
   };
 }
@@ -98,36 +99,27 @@ function sessionUserExistsReducer(state:ISessionStore, action:IUsernameProvidedA
     backendUserInquiryInitialized: false,
     loggedInUserRequired: false,
     sessionUserExists:true,
-    providedUsername: action.username,
-    backendAuthenticationInitialized: false,
-    userAuthenticated: false,
-    loginAttempt: null,
+    providedUsername: state.providedUsername,
+    backendAuthenticationInitialized: state.backendAuthenticationInitialized,
+    userAuthenticated: state.userAuthenticated,
+    loginAttempt:state.loginAttempt,
+    userLogoutRequest: state.userLogoutRequest,
     tenants: state.tenants
   };
 }
 
-function backendProvidedUsernameReducer(state:ISessionStore, action:IUsernameProvidedAction):ISessionStore {
-  return {
-    backendUserInquiryInitialized: state.backendUserInquiryInitialized,
-    loggedInUserRequired: state.loggedInUserRequired,
-    sessionUserExists: state.sessionUserExists,
-    providedUsername: state.providedUsername, // set this to action.username if you want to prefill login form
-    backendAuthenticationInitialized: state.userAuthenticated,
-    userAuthenticated: state.userAuthenticated,
-    loginAttempt: state.loginAttempt,
-    tenants: state.tenants
-  };
-}
 
 function userProvidedUsernameReducer(state:ISessionStore, action:IUsernameProvidedAction):ISessionStore {
+
   return {
     backendUserInquiryInitialized: state.backendUserInquiryInitialized,
     loggedInUserRequired: state.loggedInUserRequired,
     sessionUserExists: state.sessionUserExists,
     providedUsername: action.username,
     backendAuthenticationInitialized: state.backendAuthenticationInitialized,
-    userAuthenticated: state.userAuthenticated,
+    userAuthenticated: false,
     loginAttempt: state.loginAttempt,
+    userLogoutRequest: state.userLogoutRequest,
     tenants: state.tenants
   };
 }
@@ -142,6 +134,7 @@ function activeTenantsOfUserLoadedReducer(state:ISessionStore, action:IActiveTen
     backendAuthenticationInitialized: false,
     userAuthenticated: state.userAuthenticated,
     loginAttempt: state.loginAttempt,
+    userLogoutRequest: state.userLogoutRequest,
     tenants: action.tenants
   };
 }
@@ -155,6 +148,7 @@ function backendUserInquiryInitializedReducer(state:ISessionStore):ISessionStore
     backendAuthenticationInitialized: true,
     userAuthenticated: state.userAuthenticated,
     loginAttempt: state.loginAttempt,
+    userLogoutRequest: state.userLogoutRequest,
     tenants: state.tenants
   };
 }
@@ -172,6 +166,7 @@ function userWantsToLoginReducer(state:ISessionStore, action:IUserWantsToLoginAc
       password: action.password,
       tenant: action.tenant
     },
+    userLogoutRequest: state.userLogoutRequest,
     tenants: state.tenants
   };
 }
@@ -185,6 +180,7 @@ function backendAuthenticationInitialized(state:ISessionStore):ISessionStore {
     backendAuthenticationInitialized: true,
     userAuthenticated: state.userAuthenticated,
     loginAttempt: state.loginAttempt,
+    userLogoutRequest: state.userLogoutRequest,
     tenants: state.tenants
   };
 }
@@ -198,7 +194,22 @@ function userIsAuthenticatedReducer(state:ISessionStore, action:IUserIsAuthentic
     backendAuthenticationInitialized: false,
     userAuthenticated: true,
     loginAttempt: state.loginAttempt,
+    userLogoutRequest: state.userLogoutRequest,
     tenants: state.tenants
+  };
+}
+
+function userLogoutRequestReducer(state:ISessionStore, action:IBaseAction):ISessionStore {
+  return {
+    backendUserInquiryInitialized: false,
+    loggedInUserRequired: false,
+    sessionUserExists: false,
+    providedUsername: null,
+    backendAuthenticationInitialized: false,
+    userAuthenticated: false,
+    loginAttempt: null,
+    userLogoutRequest: true,
+    tenants: null
   };
 }
 
@@ -211,6 +222,7 @@ function logoutUserReducer(state:ISessionStore, action:IBaseAction):ISessionStor
     backendAuthenticationInitialized: false,
     userAuthenticated: false,
     loginAttempt: null,
+    userLogoutRequest: false,
     tenants: null
   };
 }

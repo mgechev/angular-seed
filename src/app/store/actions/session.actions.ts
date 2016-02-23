@@ -8,9 +8,10 @@ export const BACKEND_USER_INQUIRY_INITIALIZED:string = 'BACKEND_USER_INQUIRY_INI
 export const SESSION_USER_EXISTS:string = 'SESSION_USER_EXISTS';
 export const BACKEND_AUTHENTICATION_INITIALIZED:string = 'BACKEND_AUTHENTICATION_INITIALIZED';
 export const USER_PROVIDED_USERNAME:string = 'USER_PROVIDED_USERNAME';
-export const BACKEND_PROVIDED_USERNAME:string = 'USER_PROVIDED_USERNAME';
 
 export const AUTHENTICATE_USER:string = 'AUTHENTICATE_USER';
+
+export const USER_LOGOUT_REQUEST:string = 'USER_LOGOUT_REQUEST';
 export const LOGOUT_USER:string = 'LOGOUT_USER';
 
 export interface IUsernameProvidedAction extends IBaseAction {
@@ -52,13 +53,6 @@ export function loggedInUserRequired():IBaseAction {
 export function sessionUserExists():IBaseAction {
   return {
     type: SESSION_USER_EXISTS
-  };
-}
-
-export function backendProvidedUsername(username:string):IUsernameProvidedAction {
-  return {
-    type: USER_PROVIDED_USERNAME,
-    username
   };
 }
 
@@ -104,6 +98,13 @@ export function logoutUser():IBaseAction {
     type: LOGOUT_USER
   };
 }
+
+export function userLogoutRequest():IBaseAction {
+  return {
+    type: USER_LOGOUT_REQUEST
+  };
+}
+
 export function userIsAuthenticated(loggedInUser:UserLoginDto):IUserIsAuthenticatedAction {
   return {
     type: USER_IS_AUTHENTICATED,

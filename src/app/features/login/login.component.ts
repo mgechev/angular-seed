@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
-import {Store} from '../../../store/store';
-import {userProvidedUsername,userWantsToLogin} from '../../../store/actions/session.actions';
+import {Store} from '../../store/store';
+import {userProvidedUsername,userWantsToLogin} from '../../store/actions/session.actions';
 
 @Component({
   selector: 'login',
