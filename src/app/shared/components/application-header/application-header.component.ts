@@ -59,7 +59,7 @@ export class ApplicationHeader {
     var self:ApplicationHeader = this;
     if (event === 'logout') {
       self.loginService.logout()
-        .subscribe(function ():void {
+        .then(function ():void {
           self.store.dispatch(logoutUser());
         });
       return;

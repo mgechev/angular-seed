@@ -1,8 +1,6 @@
 import {BaseService} from './base/base.service';
 import {Injectable} from 'angular2/core';
 import {Http} from 'angular2/http';
-import {Observable} from 'rxjs/Observable';
-import {Response} from 'angular2/http';
 
 @Injectable()
 export class UserAuthorizationService extends BaseService {
@@ -13,12 +11,12 @@ export class UserAuthorizationService extends BaseService {
     this.version = 'v1';
   }
 
-  public getPermissions():Observable<Response> {
+  public getPermissions():Promise<any> {
     return this.newGetCall('getPermissions')
       .send();
   }
 
-  public hasAuthorization():Observable<Response> {
+  public hasAuthorization():Promise<any> {
     return this.newGetCall('hasAuthorization')
       .send();
   }

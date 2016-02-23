@@ -1,5 +1,4 @@
 import {Http, Response} from 'angular2/http';
-import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 import {queryParams} from './query-params.function';
@@ -29,16 +28,14 @@ export class GetCall implements IGetCall {
     return this;
   }
 
-  public send():Observable<Response> {
+  public send():Promise<any> {
     return this._http
       .get(
         getServerUrl() + '/remote/service/' + this._version + '/' + this._servicePath + '/' + this._methodPath +
         this._urlSubPath + this._urlParams)
-      .map(function (response:Response) {
+      .toPromise()
+      .then(function (response:Response):any {
         return DtoConverter.typify(response.json());
-      })
-      .catch(function (error:Response, source:Observable<any>, caught:Observable<any>):Observable<any> {
-        return Observable.throw(error.json());
       });
   }
 }
