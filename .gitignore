@@ -36,6 +36,7 @@ build/Release
 *.iml
 
 /tools/**/*.js
+gulpfile.js
 dist
 dev
 docs
