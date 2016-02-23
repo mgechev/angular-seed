@@ -4,6 +4,31 @@ import {userProvidedUsername,userWantsToLogin} from '../../../store/actions/sess
 
 @Component({
   selector: 'login',
+  template: `
+   <h1>Login</h1>
+    <section>
+      <!-- here could be a place, where the form-generator is used... -->
+      <form>
+        <label for="username">Username:
+          <input [value]="store.getSessionState().providedUsername" id="username" #username (blur)="onUsernameBlurred({
+            username: username.value
+          })"/></label>
+        <label for="password">Password: <input id="password" #password type="password"/></label>
+        <label for="tenant">Tenant:
+          <select id="tenant" #tenant>
+            <option *ngFor="#tenant of store.getSessionState().tenants" value="{{tenant.name}}">{{tenant.name}}</option>
+          </select>
+        </label>
+        <button type="submit" (click)="onLoginClicked({
+            username: username.value,
+            password: password.value,
+            tenant: tenant.value
+          })">Login
+        </button>
+      </form>
+    </section>
+
+  `,
   moduleId: module.id,
   templateUrl: './login.template.html'
 })
@@ -12,22 +37,12 @@ export class LoginComponent {
   constructor(private store:Store) {}
 
   public onLoginClicked(event:any):void {
-    //let self:AppComponent = this;
-    console.log('event:');
-    console.log(event);
-
-
     this.store.dispatch(userWantsToLogin(event['username'], event['password'], event['tenant']));
-
-    /*  self.loginService.authenticate(event['username'], event['password'], event['tenant'])
-     .subscribe(function (userLoginDto:UserLoginDto):void {
-     self.store.dispatch(userIsAuthenticated(userLoginDto));
-     }, function (error:Object):void {
-     self.store.dispatch(backendCallFails(error));
-     }); */
   }
 
   public onUsernameBlurred(event:any):void {
+    console.log('event in blurred:');
+    console.log(event);
     this.store.dispatch(userProvidedUsername(event.username));
   }
 }

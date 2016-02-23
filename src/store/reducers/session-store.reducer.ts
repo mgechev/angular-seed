@@ -28,6 +28,8 @@ export function sessionStateReducer(state:ISessionStore = initialSessionStore, a
 
   let newState:ISessionStore;
 
+  console.log('action type:');
+  console.log(action.type);
 
   switch (action.type) {
     case LOGGEDIN_USER_REQUIRED:
@@ -106,26 +108,26 @@ function sessionUserExistsReducer(state:ISessionStore, action:IUsernameProvidedA
 
 function backendProvidedUsernameReducer(state:ISessionStore, action:IUsernameProvidedAction):ISessionStore {
   return {
-    backendUserInquiryInitialized: false,
-    loggedInUserRequired: false,
-    sessionUserExists:false,
-    providedUsername: action.username,
-    backendAuthenticationInitialized: false,
-    userAuthenticated: false,
-    loginAttempt: null,
+    backendUserInquiryInitialized: state.backendUserInquiryInitialized,
+    loggedInUserRequired: state.loggedInUserRequired,
+    sessionUserExists: state.sessionUserExists,
+    providedUsername: state.providedUsername, // set this to action.username if you want to prefill login form
+    backendAuthenticationInitialized: state.userAuthenticated,
+    userAuthenticated: state.userAuthenticated,
+    loginAttempt: state.loginAttempt,
     tenants: state.tenants
   };
 }
 
 function userProvidedUsernameReducer(state:ISessionStore, action:IUsernameProvidedAction):ISessionStore {
   return {
-    backendUserInquiryInitialized: false,
-    loggedInUserRequired: false,
-    sessionUserExists:false,
+    backendUserInquiryInitialized: state.backendUserInquiryInitialized,
+    loggedInUserRequired: state.loggedInUserRequired,
+    sessionUserExists: state.sessionUserExists,
     providedUsername: action.username,
-    backendAuthenticationInitialized: false,
-    userAuthenticated: false,
-    loginAttempt: null,
+    backendAuthenticationInitialized: state.backendAuthenticationInitialized,
+    userAuthenticated: state.userAuthenticated,
+    loginAttempt: state.loginAttempt,
     tenants: state.tenants
   };
 }
@@ -133,13 +135,13 @@ function userProvidedUsernameReducer(state:ISessionStore, action:IUsernameProvid
 function activeTenantsOfUserLoadedReducer(state:ISessionStore, action:IActiveTenantsOfUserLoadedAction):ISessionStore {
 
   return {
-    backendUserInquiryInitialized: false,
-    loggedInUserRequired: false,
-    sessionUserExists:false,
+    backendUserInquiryInitialized: state.backendUserInquiryInitialized,
+    loggedInUserRequired: state.loggedInUserRequired,
+    sessionUserExists: state.sessionUserExists,
     providedUsername: state.providedUsername,
     backendAuthenticationInitialized: false,
-    userAuthenticated: false,
-    loginAttempt: null,
+    userAuthenticated: state.userAuthenticated,
+    loginAttempt: state.loginAttempt,
     tenants: action.tenants
   };
 }
@@ -147,19 +149,6 @@ function activeTenantsOfUserLoadedReducer(state:ISessionStore, action:IActiveTen
 function backendUserInquiryInitializedReducer(state:ISessionStore):ISessionStore {
   return {
     backendUserInquiryInitialized: true,
-    loggedInUserRequired: false,
-    sessionUserExists:false,
-    providedUsername: state.providedUsername,
-    backendAuthenticationInitialized: true,
-    userAuthenticated: state.userAuthenticated,
-    loginAttempt: state.loginAttempt,
-    tenants: state.tenants
-  };
-}
-
-function backendAuthenticationInitialized(state:ISessionStore):ISessionStore {
-  return {
-    backendUserInquiryInitialized: false,
     loggedInUserRequired: false,
     sessionUserExists:false,
     providedUsername: state.providedUsername,
@@ -187,29 +176,43 @@ function userWantsToLoginReducer(state:ISessionStore, action:IUserWantsToLoginAc
   };
 }
 
-
-function logoutUserReducer(state:ISessionStore, action:IBaseAction):ISessionStore {
+function backendAuthenticationInitialized(state:ISessionStore):ISessionStore {
   return {
     backendUserInquiryInitialized: false,
     loggedInUserRequired: false,
     sessionUserExists:false,
     providedUsername: state.providedUsername,
-    backendAuthenticationInitialized: false,
-    userAuthenticated: false,
-    loginAttempt: {},
-    tenants: []
+    backendAuthenticationInitialized: true,
+    userAuthenticated: state.userAuthenticated,
+    loginAttempt: state.loginAttempt,
+    tenants: state.tenants
   };
 }
 
 function userIsAuthenticatedReducer(state:ISessionStore, action:IUserIsAuthenticatedAction):ISessionStore {
   return {
-    backendUserInquiryInitialized: false,
-    loggedInUserRequired: false,
-    sessionUserExists:false,
+    backendUserInquiryInitialized: state.backendUserInquiryInitialized,
+    loggedInUserRequired: state.loggedInUserRequired,
+    sessionUserExists: state.sessionUserExists,
     providedUsername: state.providedUsername,
     backendAuthenticationInitialized: false,
     userAuthenticated: true,
+    loginAttempt: state.loginAttempt,
+    tenants: state.tenants
+  };
+}
+
+function logoutUserReducer(state:ISessionStore, action:IBaseAction):ISessionStore {
+  return {
+    backendUserInquiryInitialized: false,
+    loggedInUserRequired: false,
+    sessionUserExists: false,
+    providedUsername: null,
+    backendAuthenticationInitialized: false,
+    userAuthenticated: false,
     loginAttempt: null,
     tenants: null
   };
 }
+
+

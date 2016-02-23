@@ -1,8 +1,6 @@
 import {BaseService} from './base/base.service';
 import {Injectable} from 'angular2/core';
 import {Http} from 'angular2/http';
-import {Observable} from 'rxjs/Observable';
-import {Response} from 'angular2/http';
 import {TenantLoginDto} from '../../../shared/stubs/dtos/tenant-login-dto';
 import {UserLoginDto} from '../../../shared/stubs/dtos/user-login-dto';
 import {
@@ -66,7 +64,7 @@ export class LoginService extends BaseService {
         'tenant': tenant
       })
       .send()
-      .subscribe(function (userLoginDto:UserLoginDto):void {
+      .then(function (userLoginDto:UserLoginDto):void {
         store.dispatch(userIsAuthenticated(userLoginDto));
       }, function (error:Object):void {
         store.dispatch(backendCallFails(error));
@@ -81,7 +79,7 @@ export class LoginService extends BaseService {
         'loginname': loginname
       })
       .send()
-      .subscribe(function (tenants:Array<TenantLoginDto>):void {
+      .then(function (tenants:Array<TenantLoginDto>):void {
         console.log('in subscription of get tenants');
         store.dispatch(activeTenantsOfUserLoaded(tenants));
       }, function (error:Object):void {
@@ -94,7 +92,7 @@ export class LoginService extends BaseService {
 
     this.newGetCall('getLoggedInUser')
       .send()
-      .subscribe(function (sessionUser:boolean):void {
+      .then(function (sessionUser:boolean):void {
         console.log('in getLoggedInUser, callback:');
         console.log(sessionUser);
         if (sessionUser && sessionUser.loginname) {
@@ -109,19 +107,19 @@ export class LoginService extends BaseService {
 
     this.newGetCall('hasLoggedInUser')
       .send()
-      .subscribe(function (hasLoggedInUser:boolean):void {
+      .then(function (hasLoggedInUser:boolean):void {
         if (hasLoggedInUser) {
           store.dispatch(sessionUserExists());
         }
       });
   }
 
-  public logout():Observable<Response> {
+  public logout() {
     return this.newPostCall('logout')
       .send();
   }
 
-  public switchTenant(tenant:string):Observable<Response> {
+  public switchTenant(tenant:string) {
     return this.newPostCall('switchTenant')
       .setUrlParams({
         'tenant': tenant
