@@ -1,5 +1,6 @@
-import {Component,Input,Output,EventEmitter} from 'angular2/core';
-import {TenantLoginDto} from '../../shared/stubs/dtos/tenant-login-dto';
+import {Component} from 'angular2/core';
+import {Store} from '../../../store/store';
+import {userProvidedUsername,userWantsToLogin} from '../../../store/actions/session.actions';
 
 @Component({
   selector: 'login',
@@ -7,12 +8,26 @@ import {TenantLoginDto} from '../../shared/stubs/dtos/tenant-login-dto';
   templateUrl: './login.template.html'
 })
 export class LoginComponent {
-  @Input()
-  public tenants:Array<TenantLoginDto>;
 
-  @Output()
-  public usernameBlured:EventEmitter<any> = new EventEmitter<any>();
+  constructor(private store:Store) {}
 
-  @Output()
-  public loginClicked:EventEmitter<any> = new EventEmitter<any>();
+  public onLoginClicked(event:any):void {
+    //let self:AppComponent = this;
+    console.log('event:');
+    console.log(event);
+
+
+    this.store.dispatch(userWantsToLogin(event['username'], event['password'], event['tenant']));
+
+    /*  self.loginService.authenticate(event['username'], event['password'], event['tenant'])
+     .subscribe(function (userLoginDto:UserLoginDto):void {
+     self.store.dispatch(userIsAuthenticated(userLoginDto));
+     }, function (error:Object):void {
+     self.store.dispatch(backendCallFails(error));
+     }); */
+  }
+
+  public onUsernameBlurred(event:any):void {
+    this.store.dispatch(userProvidedUsername(event.username));
+  }
 }

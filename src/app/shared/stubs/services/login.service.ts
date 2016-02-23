@@ -3,42 +3,117 @@ import {Injectable} from 'angular2/core';
 import {Http} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import {Response} from 'angular2/http';
+import {TenantLoginDto} from '../../../shared/stubs/dtos/tenant-login-dto';
+import {UserLoginDto} from '../../../shared/stubs/dtos/user-login-dto';
+import {
+  backendUserInquiryInitialized,
+  sessionUserExists,
+  backendProvidedUsername,
+  activeTenantsOfUserLoaded,
+  userIsAuthenticated,
+  backendAuthenticationInitialized
+} from '../../../../store/actions/session.actions';
+import {backendCallFails} from '../../../../store/actions/app.actions';
+import {Store} from '../../../../store/store';
 
 @Injectable()
 export class LoginService extends BaseService {
-  constructor(http:Http) {
+  constructor(http:Http, private store:Store) {
     super(http);
 
     this.servicePath = 'login';
     this.version = 'v1';
+
+    var self:LoginService = this;
+    this.store.subscribe(() => {
+      let sessionState = self.store.getSessionState();
+
+      if(sessionState.loggedInUserRequired && !sessionState.backendUserInquiryInitialized) {
+         self.hasLoggedInUser();
+      }
+
+      if(sessionState.sessionUserExists) {
+        self.getLoggedInUser();
+      }
+
+      if(sessionState.providedUsername && !sessionState.tenants) {
+        self.findActiveTenantsByUser(sessionState.providedUsername);
+      }
+
+      if(sessionState.loginAttempt && !sessionState.userAuthenticated && !sessionState.backendAuthenticationInitialized) {
+        self.authenticate(
+          sessionState.loginAttempt.username,
+          sessionState.loginAttempt.password,
+          sessionState.loginAttempt.tenant
+        );
+      }
+
+      console.log('sessionState:');
+      console.log(sessionState);
+
+    });
   }
 
-  public authenticate(loginname:string, password:string, tenant:string):Observable<Response> {
-    return this.newPostCall('authenticate')
+  public authenticate(loginname:string, password:string, tenant:string) {
+    let store:Store = this.store;
+
+    store.dispatch(backendAuthenticationInitialized());
+
+    this.newPostCall('authenticate')
       .setUrlParams({
         'loginname': loginname,
         'password': password,
         'tenant': tenant
       })
-      .send();
+      .send()
+      .subscribe(function (userLoginDto:UserLoginDto):void {
+        store.dispatch(userIsAuthenticated(userLoginDto));
+      }, function (error:Object):void {
+        store.dispatch(backendCallFails(error));
+      });
+
   }
 
-  public findActiveTenantsByUser(loginname:string):Observable<Response> {
-    return this.newGetCall('findActiveTenantsByUser')
+  public findActiveTenantsByUser(loginname:string) {
+    let store:Store = this.store;
+    this.newGetCall('findActiveTenantsByUser')
       .setUrlParams({
         'loginname': loginname
       })
-      .send();
+      .send()
+      .subscribe(function (tenants:Array<TenantLoginDto>):void {
+        console.log('in subscription of get tenants');
+        store.dispatch(activeTenantsOfUserLoaded(tenants));
+      }, function (error:Object):void {
+        store.dispatch(backendCallFails(error));
+      });
   }
 
-  public getLoggedInUser():Observable<Response> {
-    return this.newGetCall('getLoggedInUser')
-      .send();
+  public getLoggedInUser() {
+    let store:Store = this.store;
+
+    this.newGetCall('getLoggedInUser')
+      .send()
+      .subscribe(function (sessionUser:boolean):void {
+        console.log('in getLoggedInUser, callback:');
+        console.log(sessionUser);
+        if (sessionUser && sessionUser.loginname) {
+          store.dispatch(backendProvidedUsername(sessionUser.loginname));
+        }
+      });
   }
 
-  public hasLoggedInUser():Observable<Response> {
-    return this.newGetCall('hasLoggedInUser')
-      .send();
+  public hasLoggedInUser() {
+    let store:Store = this.store;
+    store.dispatch(backendUserInquiryInitialized());
+
+    this.newGetCall('hasLoggedInUser')
+      .send()
+      .subscribe(function (hasLoggedInUser:boolean):void {
+        if (hasLoggedInUser) {
+          store.dispatch(sessionUserExists());
+        }
+      });
   }
 
   public logout():Observable<Response> {
