@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {Navigation} from '../../shared/ui-elements/navigation';
+import {Navigation} from '../../shared/features/ui-elements/navigation';
 import {Store} from '../../store/store';
 import {administrationNavigationItemClicked} from '../../store/actions/navigation.actions';
 import {AssignmentsComponent} from './assignments/assignments.component';

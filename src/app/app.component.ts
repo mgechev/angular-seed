@@ -1,5 +1,5 @@
 import {Component,OnInit} from 'angular2/core';
-import {InitializeService} from './shared/services/initialize.service';
+import {InitializeService} from './shared/features/services/initialize.service';
 import {Store} from './store/store';
 import {LoginComponent} from './features/login/login.component';
 import {StartpageComponent} from './features/startpage/startpage.component';
@@ -13,7 +13,7 @@ import {userWantsToLogin} from './store/actions/session.actions';
 import {TenantLoginDto} from './shared/stubs/dtos/tenant-login-dto';
 import {activeTenantsOfUserLoaded} from './store/actions/session.actions';
 import {backendCallFails} from './store/actions/app.actions';
-import {ApplicationHeader} from './shared/components/application-header/application-header.component';
+import {ApplicationHeader} from './shared/features/application-header/application-header.component';
 
 @Component({
   selector: 'app',

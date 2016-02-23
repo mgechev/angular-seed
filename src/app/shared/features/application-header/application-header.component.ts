@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {Navigation} from '../../ui-elements/navigation';
+import {Navigation} from '../ui-elements/navigation';
 import {Store} from '../../../store/store';
 import {logoutUser} from '../../../store/actions/session.actions';
 import {mainNavigationItemClicked, secondaryNavigationItemClicked} from '../../../store/actions/navigation.actions';

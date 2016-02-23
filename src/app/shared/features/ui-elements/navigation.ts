@@ -4,7 +4,7 @@ import { NgFor, NgIf } from 'angular2/common';
 
 @Component({
   selector: 'navigation',
-  directives: [NgFor,NgIf,Collapse],
+  directives: [NgFor, NgIf, Collapse],
   template: `
     <div [ngClass]="{ 'pull-xs-right' : align==='right' }" *ngIf="toggable">
      <button (click)="isOpened = !isOpened" class="navbar-toggler hidden-lg-up" type="button">&#9776;</button>

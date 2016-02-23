@@ -1,4 +1,4 @@
-import {dtos} from '../stubs/dtos';
+import {dtos} from '../../stubs/dtos';
 
 /**
  * Static helper service, which converts JSON to typed instances and vice versa.
