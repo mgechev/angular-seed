@@ -1,8 +1,8 @@
 import {Injectable} from 'angular2/core';
 import {Http} from 'angular2/http';
-import {Store} from '../../../store/store';
+import {Store} from '../../store/store';
 import 'rxjs/add/operator/map';
-import {backendActionFinished} from '../../../store/actions/services.actions';
+import {backendActionFinished} from '../../store/actions/services.actions';
 
 @Injectable()
 export class DataFetchingService {

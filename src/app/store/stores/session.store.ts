@@ -1,4 +1,4 @@
-import {TenantLoginDto} from '../../app/shared/stubs/dtos/tenant-login-dto';
+import {TenantLoginDto} from '../../shared/stubs/dtos/tenant-login-dto';
 
 export interface ISessionStore {
   loginAttempt:Object;

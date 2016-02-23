@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {Store} from '../../../../../store/store';
+import {Store} from '../../../../store/store';
 
 @Component({
     selector: 'main-layout',

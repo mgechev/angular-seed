@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnChanges } from 'angular2/core';
 import {AgGridNg2} from 'ag-grid-ng2/main';
 import {DataFetchingService} from '../../../shared/services/datafetching.service';
-import {Store} from '../../../../store/store';
+import {Store} from '../../../store/store';
 
 @Component({
   selector: 'assignments',

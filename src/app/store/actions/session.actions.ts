@@ -1,7 +1,7 @@
-import {UserLoginDto} from '../../app/shared/stubs/dtos/user-login-dto';
-import {TenantLoginDto} from '../../app/shared/stubs/dtos/tenant-login-dto';
-import {AuthPermissionDto} from '../../app/shared/stubs/dtos/auth-permission-dto';
 import {IBaseAction} from './base.action';
+import {TenantLoginDto} from '../../shared/stubs/dtos/tenant-login-dto';
+import {UserLoginDto} from '../../shared/stubs/dtos/user-login-dto';
+import {AuthPermissionDto} from '../../shared/stubs/dtos/auth-permission-dto';
 
 export const ACTIVE_TENANTS_OF_USER_LOADED:string = 'ACTIVE_TENANTS_OF_USER_LOADED';
 export interface IActiveTenantsOfUserLoadedAction extends IBaseAction {
