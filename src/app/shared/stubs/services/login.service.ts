@@ -1,8 +1,6 @@
 import {BaseService} from './base/base.service';
 import {Injectable} from 'angular2/core';
 import {Http} from 'angular2/http';
-import {Observable} from 'rxjs/Observable';
-import {Response} from 'angular2/http';
 
 @Injectable()
 export class LoginService extends BaseService {
@@ -13,7 +11,7 @@ export class LoginService extends BaseService {
     this.version = 'v1';
   }
 
-  public authenticate(loginname:string, password:string, tenant:string):Observable<Response> {
+  public authenticate(loginname:string, password:string, tenant:string):Promise<any> {
     return this.newPostCall('authenticate')
       .setUrlParams({
         'loginname': loginname,
@@ -23,7 +21,7 @@ export class LoginService extends BaseService {
       .send();
   }
 
-  public findActiveTenantsByUser(loginname:string):Observable<Response> {
+  public findActiveTenantsByUser(loginname:string):Promise<any> {
     return this.newGetCall('findActiveTenantsByUser')
       .setUrlParams({
         'loginname': loginname
@@ -31,22 +29,22 @@ export class LoginService extends BaseService {
       .send();
   }
 
-  public getLoggedInUser():Observable<Response> {
+  public getLoggedInUser():Promise<any> {
     return this.newGetCall('getLoggedInUser')
       .send();
   }
 
-  public hasLoggedInUser():Observable<Response> {
+  public hasLoggedInUser():Promise<any> {
     return this.newGetCall('hasLoggedInUser')
       .send();
   }
 
-  public logout():Observable<Response> {
+  public logout():Promise<any> {
     return this.newPostCall('logout')
       .send();
   }
 
-  public switchTenant(tenant:string):Observable<Response> {
+  public switchTenant(tenant:string):Promise<any> {
     return this.newPostCall('switchTenant')
       .setUrlParams({
         'tenant': tenant

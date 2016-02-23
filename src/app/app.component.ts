@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
     let self:AppComponent = this;
 
     self.loginService.hasLoggedInUser()
-      .subscribe(function (hasLoggedInUser:boolean):void {
+      .then(function (hasLoggedInUser:boolean) {
         if (hasLoggedInUser) {
           self.getLoggedInUserFromBackend();
         }
@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
     let self:AppComponent = this;
 
     self.loginService.findActiveTenantsByUser(event['username'])
-      .subscribe(function (tenants:Array<TenantLoginDto>):void {
+      .then(function (tenants:Array<TenantLoginDto>):void {
         self.store.dispatch(activeTenantsOfUserLoaded(tenants));
       }, function (error:Object):void {
         self.store.dispatch(backendCallFails(error));
@@ -75,7 +75,7 @@ export class AppComponent implements OnInit {
     self.store.dispatch(userWantsToLogin(event['username'], event['password'], event['tenant']));
 
     self.loginService.authenticate(event['username'], event['password'], event['tenant'])
-      .subscribe(function (userLoginDto:UserLoginDto):void {
+      .then(function (userLoginDto:UserLoginDto):void {
         self.store.dispatch(userIsAuthenticated(userLoginDto));
       }, function (error:Object):void {
         self.store.dispatch(backendCallFails(error));
@@ -86,7 +86,7 @@ export class AppComponent implements OnInit {
     let self:AppComponent = this;
 
     self.loginService.getLoggedInUser()
-      .subscribe(function (loggedInUser:UserLoginDto):void {
+      .then(function (loggedInUser:UserLoginDto):void {
         self.store.dispatch(userIsAuthenticated(loggedInUser));
 
         self.initializeService.initialize();
