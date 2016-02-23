@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {Store} from '../../store/store';
+import {Store} from '../../../store/store';
 
 @Component({
   selector: 'activities',
@@ -12,5 +12,6 @@ import {Store} from '../../store/store';
 })
 
 export class ActivitiesComponent {
-  constructor(private store: Store) {}
+  constructor(private store:Store) {
+  }
 }

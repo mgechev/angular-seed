@@ -1,5 +1,5 @@
-import {Component} from 'angular2/core';
-import {Store} from '../../store/store';
+import {Component} from '../../../../node_modules/angular2/core.d';
+import {Store} from '../../../store/store';
 
 @Component({
   selector: 'manage',
@@ -12,5 +12,6 @@ import {Store} from '../../store/store';
 })
 
 export class ManageComponent {
-  constructor(private store: Store) {}
+  constructor(private store:Store) {
+  }
 }
