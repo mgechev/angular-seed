@@ -1,20 +1,19 @@
-import {Component} from 'angular2/core';
-import {InitializeService} from './shared/services/initialize.service';
-import {Store} from '../store/store';
-import {LoginComponent} from './components/login/login.component';
-import {StartpageComponent} from './startpage/startpage.component';
-import {ManageComponent} from './manage/manage.component';
-import {ActivitiesComponent} from './activities/activities.component';
-import {AdministrationComponent} from './administration/administration.component';
-import {OnInit} from 'angular2/core';
+import {Component,OnInit} from 'angular2/core';
+import {InitializeService} from './shared/features/services/initialize.service';
+import {Store} from './store/store';
+import {LoginComponent} from './features/login/login.component';
+import {StartpageComponent} from './features/startpage/startpage.component';
+import {ManageComponent} from './features/manage/manage.component';
+import {ActivitiesComponent} from './features/activities/activities.component';
+import {AdministrationComponent} from './features/administration/administration.component';
 import {LoginService} from './shared/stubs/services/login.service';
 import {UserLoginDto} from './shared/stubs/dtos/user-login-dto';
-import {userIsAuthenticated} from '../store/actions/session.actions';
-import {userWantsToLogin} from '../store/actions/session.actions';
+import {userIsAuthenticated} from './store/actions/session.actions';
+import {userWantsToLogin} from './store/actions/session.actions';
 import {TenantLoginDto} from './shared/stubs/dtos/tenant-login-dto';
-import {activeTenantsOfUserLoaded} from '../store/actions/session.actions';
-import {backendCallFails} from '../store/actions/app.actions';
-import {ApplicationHeader} from './shared/components/application-header/application-header.component';
+import {activeTenantsOfUserLoaded} from './store/actions/session.actions';
+import {backendCallFails} from './store/actions/app.actions';
+import {ApplicationHeader} from './shared/features/application-header/application-header.component';
 
 @Component({
   selector: 'app',

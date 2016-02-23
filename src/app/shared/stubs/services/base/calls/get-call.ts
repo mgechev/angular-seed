@@ -3,7 +3,7 @@ import 'rxjs/Rx';
 
 import {queryParams} from './query-params.function';
 import {IGetCall} from './get-call.interface';
-import {DtoConverter} from '../../../../services/dto-converter.service';
+import {DtoConverter} from '../../../../features/services/dto-converter.service';
 import {getServerUrl} from '../base.service';
 
 export class GetCall implements IGetCall {

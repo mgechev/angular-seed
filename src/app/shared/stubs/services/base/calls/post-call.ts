@@ -4,7 +4,7 @@ import 'rxjs/Rx';
 import {queryParams} from './query-params.function';
 import {IPostCall} from './post-call.interface';
 import {CustomRequestOptionsArgs} from './custom-request-options-args';
-import {DtoConverter} from '../../../../services/dto-converter.service';
+import {DtoConverter} from '../../../../features/services/dto-converter.service';
 import {getServerUrl} from '../base.service';
 
 export class PostCall implements IPostCall {
