@@ -5,7 +5,7 @@ import {LoginComponent} from './components/login/login.component';
 import {StartpageComponent} from './components/startpage/startpage.component';
 import {ManageComponent} from './components/manage/manage.component';
 import {ActivitiesComponent} from './components/activities/activities.component';
-import {AdministrationComponent} from './administration/administration.component';
+import {AdministrationComponent} from './components/administration/administration.component';
 import {OnInit} from 'angular2/core';
 import {LoginService} from './shared/stubs/services/login.service';
 import {UserLoginDto} from './shared/stubs/dtos/user-login-dto';

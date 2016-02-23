@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnChanges } from 'angular2/core';
-import {Store} from '../../../store/store';
 import {AgGridNg2} from 'ag-grid-ng2/main';
-import {DataFetchingService} from '../../shared/services/datafetching.service';
+import {DataFetchingService} from '../../../shared/services/datafetching.service';
+import {Store} from '../../../../store/store';
 
 @Component({
   selector: 'assignments',
@@ -37,7 +37,8 @@ export class AssignmentsComponent implements OnInit, OnChanges {
   @Input() assignments;
   @Input() users;
 
-  constructor(private service: DataFetchingService, private store: Store) {}
+  constructor(private service:DataFetchingService, private store:Store) {
+  }
 
   columnDefs;
   rowDataUsers;
@@ -49,12 +50,12 @@ export class AssignmentsComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes) {
 
-    if(changes.assignments) { // map 'assignments' data from store to ag-grid data
+    if (changes.assignments) { // map 'assignments' data from store to ag-grid data
       let updatedUserAssignments = changes.assignments.currentValue.usergroupsUsersRelation;
-      if(!updatedUserAssignments) return;
+      if (!updatedUserAssignments) return;
 
       let mappedUserGroups = updatedUserAssignments.map((usergroup, index) => {
-        return {headerName: usergroup.group.name, field: 'cell'+ index, width: usergroup.group.name.length*7+50};
+        return {headerName: usergroup.group.name, field: 'cell' + index, width: usergroup.group.name.length * 7 + 50};
       });
       mappedUserGroups.unshift(
         {
@@ -67,12 +68,27 @@ export class AssignmentsComponent implements OnInit, OnChanges {
       this.columnDefs = mappedUserGroups;
     }
 
-    if(changes.users) { // map 'users' data from store to ag-grid data
+    if (changes.users) { // map 'users' data from store to ag-grid data
       let users = changes.users.currentValue.usersList;
       let mappedData = users.map(user => {
-        return {group: false, data: {
-          name: user['firstname'] +' '+ user['lastname'], cell0: 'X', cell1: 'X', cell2: '0', cell3: '0'
-          , cell4: 'X', cell5: 'X', cell6: 'X', cell7: 'X', cell8: 'X', cell9: 'X', cell10: 'X', cell11: 'X', cell12: 'X'}
+        return {
+          group: false, data: {
+            name: user['firstname'] + ' ' + user['lastname'],
+            cell0: 'X',
+            cell1: 'X',
+            cell2: '0',
+            cell3: '0'
+            ,
+            cell4: 'X',
+            cell5: 'X',
+            cell6: 'X',
+            cell7: 'X',
+            cell8: 'X',
+            cell9: 'X',
+            cell10: 'X',
+            cell11: 'X',
+            cell12: 'X'
+          }
         };
       });
       this.rowDataUsers = mappedData;

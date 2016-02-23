@@ -1,4 +1,4 @@
-import {Component} from '../../../../node_modules/angular2/core.d';
+import {Component} from 'angular2/core';
 import {Store} from '../../../store/store';
 
 @Component({

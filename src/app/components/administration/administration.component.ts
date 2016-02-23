@@ -1,12 +1,12 @@
 import {Component} from 'angular2/core';
-import {Navigation} from '../shared/ui-elements/navigation';
-import {Store} from '../../store/store';
-import {administrationNavigationItemClicked} from '../../store/actions/navigation.actions';
+import {Navigation} from '../../shared/ui-elements/navigation';
+import {Store} from '../../../store/store';
+import {administrationNavigationItemClicked} from '../../../store/actions/navigation.actions';
 import {AssignmentsComponent} from './assignments/assignments.component';
 
 @Component({
   selector: 'administration',
-  directives: [AssignmentsComponent,Navigation],
+  directives: [AssignmentsComponent, Navigation],
   template: `
     <section>
 
@@ -38,22 +38,23 @@ import {AssignmentsComponent} from './assignments/assignments.component';
 })
 
 export class AdministrationComponent {
-  constructor(private store: Store) {}
+  constructor(private store:Store) {
+  }
 
   // ToDO: move this to Store, if it makes sense:
   administartionNavigationItems = [
-    {key:'admin-overview',label:'Overview'},
-    {key:'admin-users',label:'Users'},
-    {key:'admin-groups',label:'Groups'},
-    {key:'admin-tenants',label:'Tenants'},
-    {key:'admin-roles',label:'Roles'},
-    {key:'admin-responsibility',label:'Responsibility'},
-    {key:'admin-sessions',label:'Sessions'},
-    {key:'admin-audit-trail',label:'Audit Trail'},
-    {key:'admin-settings',label:'Settings'},
-    {key:'admin-import-export',label:'Import Export'},
-    {key:'admin-scripting',label:'Skripting'},
-    {key:'admin-startpages',label:'Startpages'}
+    {key: 'admin-overview', label: 'Overview'},
+    {key: 'admin-users', label: 'Users'},
+    {key: 'admin-groups', label: 'Groups'},
+    {key: 'admin-tenants', label: 'Tenants'},
+    {key: 'admin-roles', label: 'Roles'},
+    {key: 'admin-responsibility', label: 'Responsibility'},
+    {key: 'admin-sessions', label: 'Sessions'},
+    {key: 'admin-audit-trail', label: 'Audit Trail'},
+    {key: 'admin-settings', label: 'Settings'},
+    {key: 'admin-import-export', label: 'Import Export'},
+    {key: 'admin-scripting', label: 'Skripting'},
+    {key: 'admin-startpages', label: 'Startpages'}
   ];
 
   onAdministartionNavigationItemClicked(event):void {
