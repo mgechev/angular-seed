@@ -1,13 +1,5 @@
 import {join} from 'path';
-import {APP_SRC, APP_DEST} from '../../config';
-
-import {config} from '../../config';
-import {provide} from 'angular2/core';
-let conf = config.resolveAndCreateChild([
-  provide(APP_SRC, { useValue: 'my-test' })
-]);
-
-console.log(conf.get(APP_SRC));
+import {CONFIG} from '../../config';
 
 /**
  * Sample tasks
@@ -16,7 +8,7 @@ console.log(conf.get(APP_SRC));
 
 export = function sampleTask(gulp, plugins) {
   return function () {
-    return gulp.src(join(APP_SRC, '**/*.ts'))
-      .pipe(gulp.dest(APP_DEST));
+    return gulp.src(join(CONFIG.APP_SRC, '**/*.ts'))
+      .pipe(gulp.dest(CONFIG.APP_DEST));
   };
 }
