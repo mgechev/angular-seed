@@ -1,9 +1,8 @@
 import {MAIN_NAVIGATION_ITEM_CLICKED} from '../actions/navigation.actions';
-import {initialActiveModuleStore} from '../stores/modules.store';
 import {IBaseAction} from '../actions/base.action';
 import {IMainNavigationItemClickedAction} from '../actions/navigation.actions';
 
-export function activeModuleReducer(state:string = initialActiveModuleStore, action:IBaseAction):string {
+export function activeModuleReducer(state:string, action:IBaseAction):string {
 
   let newState:string;
   switch (action.type) {

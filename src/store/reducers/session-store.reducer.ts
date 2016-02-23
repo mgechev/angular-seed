@@ -3,7 +3,6 @@ import {USER_WANTS_TO_LOGIN} from '../actions/session.actions';
 import {LOGOUT_USER} from '../actions/session.actions';
 import {ACTIVE_TENANTS_OF_USER_LOADED} from '../actions/session.actions';
 import {ISessionStore} from '../stores/session.store';
-import {initialSessionStore} from '../stores/session.store';
 import {IBaseAction} from '../actions/base.action';
 import {IActiveTenantsOfUserLoadedAction} from '../actions/session.actions';
 import {IUserWantsToLoginAction} from '../actions/session.actions';
@@ -17,7 +16,7 @@ import {IUserIsAuthenticatedAction} from '../actions/session.actions';
  * @param {Object} action
  * @returns {ISessionStore}
  */
-export function sessionStateReducer(state:ISessionStore = initialSessionStore, action:IBaseAction):ISessionStore {
+export function sessionStateReducer(state:ISessionStore, action:IBaseAction):ISessionStore {
 
   let newState:ISessionStore;
 

@@ -1,10 +1,9 @@
 import {USERS_PERMISSIONS_LOADED} from '../../actions/session.actions';
 import {IUserSessionStore} from '../../stores/data/user-session.store';
-import {initialUserSessionStore} from '../../stores/data/user-session.store';
 import {IBaseAction} from '../../actions/base.action';
 import {IUsersPermissionsLoadedAction} from '../../actions/session.actions';
 
-export function userSessionReducer(state:IUserSessionStore = initialUserSessionStore, action:IBaseAction):IUserSessionStore {
+export function userSessionReducer(state:IUserSessionStore, action:IBaseAction):IUserSessionStore {
   let newState:IUserSessionStore;
   switch (action.type) {
     case USERS_PERMISSIONS_LOADED:
