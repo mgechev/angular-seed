@@ -1,6 +1,5 @@
 import {Component,OnInit} from 'angular2/core';
 import {InitializeService} from './shared/features/services/initialize.service';
-import {LoginService} from './shared/stubs/services/login.service';
 import {Store} from './store/store';
 
 import {LoginComponent} from './features/login/login.component';
@@ -11,6 +10,7 @@ import {AdministrationComponent} from './features/administration/administration.
 import {ApplicationHeader} from './shared/features/application-header/application-header.component';
 
 import {loggedInUserRequired} from './store/actions/session.actions';
+import {SessionService} from './shared/features/services/session.service';
 
 @Component({
   selector: 'app',
@@ -39,10 +39,10 @@ import {loggedInUserRequired} from './store/actions/session.actions';
     </div>
   `,
   directives: [LoginComponent, StartpageComponent, ManageComponent, ActivitiesComponent, AdministrationComponent, ApplicationHeader],
-  providers: [InitializeService]
+  providers: [InitializeService, SessionService]
 })
 export class AppComponent implements OnInit {
-  constructor(private store:Store, private initializeService:InitializeService, private loginService:LoginService) {
+  constructor(private store:Store, private initializeService:InitializeService, sessionService:SessionService) {
   }
 
   public ngOnInit():any {

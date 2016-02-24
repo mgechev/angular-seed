@@ -6,10 +6,16 @@ export interface ISessionStore {
   sessionUserExists:boolean;
   backendAuthenticationInitialized:boolean;
   providedUsername:string;
-  loginAttempt:Object;
+  loginAttempt:ILoginAttempt;
   userAuthenticated:boolean;
   userLogoutRequest:boolean;
   tenants:Array<TenantLoginDto>;
+}
+
+interface ILoginAttempt {
+  username:string;
+  password:string;
+  tenant:string;
 }
 
 /**
@@ -20,11 +26,11 @@ export interface ISessionStore {
 export const initialSessionStore:ISessionStore = {
   loggedInUserRequired: false,
   backendUserInquiryInitialized: false,
-  sessionUserExists:false,
+  sessionUserExists: false,
   backendAuthenticationInitialized: false,
   providedUsername: null,
   loginAttempt: null,
   userAuthenticated: false,
-  userLogoutRequest:false,
+  userLogoutRequest: false,
   tenants: null
 };
