@@ -60,7 +60,6 @@ export function sessionUserExists():IBaseAction {
 }
 
 export function userProvidedUsername(username:string):IUsernameProvidedAction {
-  console.log('in userProvidedUsername action');
   return {
     type: USER_PROVIDED_USERNAME,
     username
@@ -68,7 +67,6 @@ export function userProvidedUsername(username:string):IUsernameProvidedAction {
 }
 
 export function userProvidedPassword(password:string):IPasswordProvidedAction {
-  console.log('in userProvidedPassword action');
   return {
     type: USER_PROVIDED_PASSWORD,
     password
@@ -76,7 +74,6 @@ export function userProvidedPassword(password:string):IPasswordProvidedAction {
 }
 
 export function userProvidedTenant(tenant:TenantLoginDto):ITenantProvidedAction {
-  console.log('in userProvidedTenat action');
   return {
     type: USER_PROVIDED_TENANT,
     tenant: tenant.name
