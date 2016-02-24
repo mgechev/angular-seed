@@ -6,13 +6,13 @@ import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
   selector: 'dropdown',
   directives: [DROPDOWN_DIRECTIVES],
   template: `
-     <fieldset class="form-group">
+     <fieldset class="form-group" (click)="preventPropagation($event)">
 
        <label>{{ label }}:</label>
-       <p class="form-control-static" *ngIf="!options">
-          <small class="text-muted">{{ emptyMessage }}</small>
-       </p>
-       <div *ngIf="options" dropdown keyboardNav="true" (onToggle)="toggled($event)" class="form-control-static">
+
+       <p class="form-control-static" *ngIf="!options"> <small class="text-muted">{{ emptyMessage }}</small></p>
+
+       <div *ngIf="options" dropdown keyboardNav="true" class="form-control-static">
 
           <a href dropdownToggle>{{ options ? options[0].name : '' }}</a>
 
@@ -32,15 +32,18 @@ export class Dropdown {
   @Input() label:string;
   @Input() options:Array<Object>;
   @Input() emptyMessage:string;
-//  @Output() public toggled:EventEmitter<any> = new EventEmitter<any>();
   @Output() public optionSelected:EventEmitter<any> = new EventEmitter<any>();
 
-  public toggled(open:boolean):void {
-    console.log('Dropdown is now open: ', open);
-  }
 
-  public itemSelected(option):void {
-    console.log('item selected: ', option);
+  /* following is a hack:
+     since the keyboardNav functionality needs to work, there must be the empty "href" attribute
+     on the links inside "dropdown-menu".
+     But clicking that links triggers a browser reload. So to prevent that, the default event
+     behaviour must be prevented.. TBD
+
+   */
+  preventPropagation($event:MouseEvent) {
+    $event.preventDefault();
   }
 
 
