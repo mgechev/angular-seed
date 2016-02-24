@@ -14,7 +14,7 @@ import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 
        <div *ngIf="options" dropdown keyboardNav="true" class="form-control-static">
 
-          <a href dropdownToggle>{{ options ? options[0].name : '' }}</a>
+          <a href dropdownToggle>{{ defaultOption }}</a>
 
           <ul class="dropdown-menu" aria-labelledby="simple-dropdown">
             <li *ngFor="#option of options">
@@ -31,6 +31,7 @@ export class Dropdown {
 
   @Input() label:string;
   @Input() options:Array<Object>;
+  @Input() defaultOption:string;
   @Input() emptyMessage:string;
   @Output() public optionSelected:EventEmitter<any> = new EventEmitter<any>();
 

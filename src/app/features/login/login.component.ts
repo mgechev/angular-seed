@@ -29,6 +29,7 @@ import {userProvidedUsername,userProvidedPassword,userProvidedTenant,userWantsTo
 
        <dropdown
           [options]="store.getSessionState().tenants ? store.getSessionState().tenants : null"
+          [defaultOption]="store.getSessionState().providedTenant"
           [label]="'Tenants'"
           [emptyMessage]="'Please enter username in order to see available tenants'"
           (optionSelected)="onTenantSelected($event)"></dropdown>

@@ -176,7 +176,7 @@ function activeTenantsOfUserLoadedReducer(state:ISessionStore, action:IActiveTen
     loggedInUserRequired: state.loggedInUserRequired,
     sessionUserExists: state.sessionUserExists,
     providedUsername: state.providedUsername,
-    providedTenant: state.providedTenant,
+    providedTenant: action.tenants[0].name,
     providedPassword: state.providedPassword,
     backendAuthenticationInitialized: false,
     userAuthenticated: state.userAuthenticated,
