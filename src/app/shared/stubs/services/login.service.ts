@@ -14,78 +14,48 @@ export class LoginService extends BaseService {
 
   public authenticate(loginname:string, password:string, tenant:string):Promise<any> {
     var self:LoginService = this;
-
-    //self.store.dispatch(backendActionStarted());
     return self.newPostCall('authenticate')
       .setUrlParams({
         'loginname': loginname,
         'password': password,
         'tenant': tenant
       })
-      .send()
-      /*.then(function ():void {
-       self.store.dispatch(backendActionFinished('', null));
-       })*/;
+      .send();
   }
 
   public findActiveTenantsByUser(loginname:string):Promise<any> {
     var self:LoginService = this;
-
-    //self.store.dispatch(backendActionStarted());
     return self.newGetCall('findActiveTenantsByUser')
       .setUrlParams({
         'loginname': loginname
       })
-      .send()
-      /*.then(function ():void {
-       self.store.dispatch(backendActionFinished('', null));
-       })*/;
+      .send();
   }
 
   public hasLoggedInUser():Promise<any> {
     var self:LoginService = this;
-
-    //self.store.dispatch(backendActionStarted());
     return self.newGetCall('hasLoggedInUser')
-      .send()
-      /*.then(function ():void {
-       self.store.dispatch(backendActionFinished('', null));
-       })*/;
+      .send();
   }
 
   public getLoggedInUser():Promise<any> {
     var self:LoginService = this;
-
-    //self.store.dispatch(backendActionStarted());
     return self.newGetCall('getLoggedInUser')
-      .send()
-      /*.then(function ():void {
-       self.store.dispatch(backendActionFinished('', null));
-       })*/;
+      .send();
   }
 
   public logout():Promise<any> {
     var self:LoginService = this;
-
-    //self.store.dispatch(backendActionStarted());
     return self.newPostCall('logout')
-      .send()
-      /*.then(function ():void {
-       self.store.dispatch(backendActionFinished('', null));
-       })*/;
+      .send();
   }
 
   public switchTenant(tenant:string):Promise<any> {
     var self:LoginService = this;
-
-    //self.store.dispatch(backendActionStarted());
     return self.newPostCall('switchTenant')
       .setUrlParams({
         'tenant': tenant
       })
-      .send()
-      /*.then(function ():void {
-       self.store.dispatch(backendActionFinished('', null));
-       })*/;
+      .send();
   }
 }
