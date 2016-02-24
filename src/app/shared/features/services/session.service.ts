@@ -17,7 +17,6 @@ export class SessionService {
     let self:SessionService = this;
 
     store.subscribe(function ():void {
-      console.log('##### session service subs');
       let sessionState:ISessionStore = store.getSessionState();
 
       if (sessionState.loggedInUserRequired && !sessionState.backendUserInquiryInitialized) {
@@ -89,7 +88,6 @@ export class SessionService {
   private handleLogout(sessionState:ISessionStore):void {
     let store:Store = this.store;
 
-    console.log('logout handle####');
     this.loginService.logout()
       .then(function ():void {
         store.dispatch(logoutUser());
