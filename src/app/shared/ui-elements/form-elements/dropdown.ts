@@ -10,9 +10,10 @@ import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 
        <label>{{ label }}:</label>
 
-       <p class="form-control-static" *ngIf="!options"> <small class="text-muted">{{ emptyMessage }}</small></p>
+       <p class="form-control-static" *ngIf="!options"> <small class="text-muted">{{ noDataMessage }}</small></p>
+       <p class="form-control-static" *ngIf="options && options.length===0"> <small class="text-muted">{{ emptyOptionsMessage }}</small></p>
 
-       <div *ngIf="options" dropdown keyboardNav="true" class="form-control-static">
+       <div *ngIf="options && options.length>0" dropdown keyboardNav="true" class="form-control-static">
 
           <a href dropdownToggle>{{ defaultOption }}</a>
 
@@ -32,7 +33,8 @@ export class Dropdown {
   @Input() label:string;
   @Input() options:Array<Object>;
   @Input() defaultOption:string;
-  @Input() emptyMessage:string;
+  @Input() noDataMessage:string;
+  @Input() emptyOptionsMessage:string;
   @Output() public optionSelected:EventEmitter<any> = new EventEmitter<any>();
 
 

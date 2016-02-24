@@ -133,7 +133,7 @@ function userProvidedUsernameReducer(state:ISessionStore, action:IUsernameProvid
     userAuthenticated: false,
     loginAttempt: state.loginAttempt,
     userLogoutRequest: state.userLogoutRequest,
-    tenants: state.tenants
+    tenants: null
   };
 }
 
@@ -176,7 +176,7 @@ function activeTenantsOfUserLoadedReducer(state:ISessionStore, action:IActiveTen
     loggedInUserRequired: state.loggedInUserRequired,
     sessionUserExists: state.sessionUserExists,
     providedUsername: state.providedUsername,
-    providedTenant: action.tenants[0].name,
+    providedTenant: action.tenants && action.tenants.length > 0 ? action.tenants[0].name : state.providedTenant,
     providedPassword: state.providedPassword,
     backendAuthenticationInitialized: false,
     userAuthenticated: state.userAuthenticated,

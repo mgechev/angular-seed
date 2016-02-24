@@ -31,7 +31,8 @@ import {userProvidedUsername,userProvidedPassword,userProvidedTenant,userWantsTo
           [options]="store.getSessionState().tenants ? store.getSessionState().tenants : null"
           [defaultOption]="store.getSessionState().providedTenant"
           [label]="'Tenants'"
-          [emptyMessage]="'Please enter username in order to see available tenants'"
+          [noDataMessage]="'Please enter username in order to see available tenants'"
+          [emptyOptionsMessage]="'No tenants available for chosen user'"
           (optionSelected)="onTenantSelected($event)"></dropdown>
 
         <button type="submit" class="btn btn-primary pull-xs-right" (click)="onLoginClicked()">Login
