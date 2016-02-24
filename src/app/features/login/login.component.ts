@@ -27,14 +27,12 @@ import {userProvidedUsername,userWantsToLogin} from '../../store/actions/session
         </button>
       </form>
     </section>
-
-  `,
-  moduleId: module.id,
-  templateUrl: './login.template.html'
+  `
 })
 export class LoginComponent {
 
-  constructor(private store:Store) {}
+  constructor(private store:Store) {
+  }
 
   public onLoginClicked(event:any):void {
     this.store.dispatch(userWantsToLogin(event['username'], event['password'], event['tenant']));

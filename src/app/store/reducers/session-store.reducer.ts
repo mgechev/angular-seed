@@ -28,9 +28,6 @@ export function sessionStateReducer(state:ISessionStore = initialSessionStore, a
 
   let newState:ISessionStore;
 
-  console.log('action type:');
-  console.log(action.type);
-
   switch (action.type) {
     case LOGGEDIN_USER_REQUIRED:
       newState = loggedInUserRequiredReducer(state);
@@ -98,11 +95,11 @@ function sessionUserExistsReducer(state:ISessionStore, action:IUsernameProvidedA
   return {
     backendUserInquiryInitialized: false,
     loggedInUserRequired: false,
-    sessionUserExists:true,
+    sessionUserExists: true,
     providedUsername: state.providedUsername,
     backendAuthenticationInitialized: state.backendAuthenticationInitialized,
     userAuthenticated: state.userAuthenticated,
-    loginAttempt:state.loginAttempt,
+    loginAttempt: state.loginAttempt,
     userLogoutRequest: state.userLogoutRequest,
     tenants: state.tenants
   };
@@ -143,7 +140,7 @@ function backendUserInquiryInitializedReducer(state:ISessionStore):ISessionStore
   return {
     backendUserInquiryInitialized: true,
     loggedInUserRequired: false,
-    sessionUserExists:false,
+    sessionUserExists: false,
     providedUsername: state.providedUsername,
     backendAuthenticationInitialized: true,
     userAuthenticated: state.userAuthenticated,
@@ -157,7 +154,7 @@ function userWantsToLoginReducer(state:ISessionStore, action:IUserWantsToLoginAc
   return {
     backendUserInquiryInitialized: false,
     loggedInUserRequired: false,
-    sessionUserExists:false,
+    sessionUserExists: false,
     providedUsername: state.providedUsername,
     backendAuthenticationInitialized: false,
     userAuthenticated: false,
@@ -175,7 +172,7 @@ function backendAuthenticationInitialized(state:ISessionStore):ISessionStore {
   return {
     backendUserInquiryInitialized: false,
     loggedInUserRequired: false,
-    sessionUserExists:false,
+    sessionUserExists: false,
     providedUsername: state.providedUsername,
     backendAuthenticationInitialized: true,
     userAuthenticated: state.userAuthenticated,
@@ -206,7 +203,7 @@ function userLogoutRequestReducer(state:ISessionStore, action:IBaseAction):ISess
     sessionUserExists: false,
     providedUsername: null,
     backendAuthenticationInitialized: false,
-    userAuthenticated: false,
+    userAuthenticated: state.userAuthenticated,
     loginAttempt: null,
     userLogoutRequest: true,
     tenants: null
