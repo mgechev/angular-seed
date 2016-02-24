@@ -28,6 +28,8 @@ export function sessionStateReducer(state:ISessionStore = initialSessionStore, a
 
   let newState:ISessionStore;
 
+  console.log('session state reducer, action type:', action.type);
+
   switch (action.type) {
     case LOGGEDIN_USER_REQUIRED:
       newState = loggedInUserRequiredReducer(state);
@@ -203,7 +205,7 @@ function userLogoutRequestReducer(state:ISessionStore, action:IBaseAction):ISess
     sessionUserExists: false,
     providedUsername: null,
     backendAuthenticationInitialized: false,
-    userAuthenticated: false,
+    userAuthenticated: state.userAuthenticated,
     loginAttempt: null,
     userLogoutRequest: true,
     tenants: null

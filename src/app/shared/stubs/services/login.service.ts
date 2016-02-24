@@ -2,8 +2,6 @@ import {BaseService} from './base/base.service';
 import {Injectable} from 'angular2/core';
 import {Http} from 'angular2/http';
 import {Store} from '../../../store/store';
-import {backendActionStarted} from '../../../store/actions/services.actions';
-import {backendActionFinished} from '../../../store/actions/services.actions';
 
 @Injectable()
 export class LoginService extends BaseService {
@@ -12,14 +10,12 @@ export class LoginService extends BaseService {
 
     this.servicePath = 'login';
     this.version = 'v1';
-
-    console.log('#### login service');
   }
 
   public authenticate(loginname:string, password:string, tenant:string):Promise<any> {
     var self:LoginService = this;
 
-    self.store.dispatch(backendActionStarted());
+    //self.store.dispatch(backendActionStarted());
     return self.newPostCall('authenticate')
       .setUrlParams({
         'loginname': loginname,
@@ -27,69 +23,69 @@ export class LoginService extends BaseService {
         'tenant': tenant
       })
       .send()
-      .then(function ():void {
-        self.store.dispatch(backendActionFinished('', null));
-      });
+      /*.then(function ():void {
+       self.store.dispatch(backendActionFinished('', null));
+       })*/;
   }
 
   public findActiveTenantsByUser(loginname:string):Promise<any> {
     var self:LoginService = this;
 
-    self.store.dispatch(backendActionStarted());
+    //self.store.dispatch(backendActionStarted());
     return self.newGetCall('findActiveTenantsByUser')
       .setUrlParams({
         'loginname': loginname
       })
       .send()
-      .then(function ():void {
-        self.store.dispatch(backendActionFinished('', null));
-      });
+      /*.then(function ():void {
+       self.store.dispatch(backendActionFinished('', null));
+       })*/;
   }
 
   public hasLoggedInUser():Promise<any> {
     var self:LoginService = this;
 
-    self.store.dispatch(backendActionStarted());
+    //self.store.dispatch(backendActionStarted());
     return self.newGetCall('hasLoggedInUser')
       .send()
-      .then(function ():void {
-        self.store.dispatch(backendActionFinished('', null));
-      });
+      /*.then(function ():void {
+       self.store.dispatch(backendActionFinished('', null));
+       })*/;
   }
 
   public getLoggedInUser():Promise<any> {
     var self:LoginService = this;
 
-    self.store.dispatch(backendActionStarted());
+    //self.store.dispatch(backendActionStarted());
     return self.newGetCall('getLoggedInUser')
       .send()
-      .then(function ():void {
-        self.store.dispatch(backendActionFinished('', null));
-      });
+      /*.then(function ():void {
+       self.store.dispatch(backendActionFinished('', null));
+       })*/;
   }
 
   public logout():Promise<any> {
     var self:LoginService = this;
 
-    self.store.dispatch(backendActionStarted());
+    //self.store.dispatch(backendActionStarted());
     return self.newPostCall('logout')
       .send()
-      .then(function ():void {
-        self.store.dispatch(backendActionFinished('', null));
-      });
+      /*.then(function ():void {
+       self.store.dispatch(backendActionFinished('', null));
+       })*/;
   }
 
   public switchTenant(tenant:string):Promise<any> {
     var self:LoginService = this;
 
-    self.store.dispatch(backendActionStarted());
+    //self.store.dispatch(backendActionStarted());
     return self.newPostCall('switchTenant')
       .setUrlParams({
         'tenant': tenant
       })
       .send()
-      .then(function ():void {
-        self.store.dispatch(backendActionFinished('', null));
-      });
+      /*.then(function ():void {
+       self.store.dispatch(backendActionFinished('', null));
+       })*/;
   }
 }
