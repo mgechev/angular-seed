@@ -3,7 +3,7 @@ import {Store} from '../../store/store';
 import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {Dropdown} from '../../shared/ui-elements/form-elements/dropdown';
 import {TenantLoginDto} from '../../shared/stubs/dtos/tenant-login-dto';
-import {userProvidedUsername,userWantsToLogin} from '../../store/actions/session.actions';
+import {userProvidedUsername,userProvidedPassword,userProvidedTenant,userWantsToLogin} from '../../store/actions/session.actions';
 
 @Component({
   selector: 'login',
@@ -23,7 +23,8 @@ import {userProvidedUsername,userWantsToLogin} from '../../store/actions/session
 
        <fieldset class="form-group">
           <label for="password">Password:</label>
-          <input id="password" #password type="password" class="form-control"/>
+          <input id="password" #password type="password" class="form-control"
+          (blur)="onPasswordBlurred({password: password.value})"/>
        </fieldset>
 
        <dropdown
@@ -32,11 +33,7 @@ import {userProvidedUsername,userWantsToLogin} from '../../store/actions/session
           [emptyMessage]="'Please enter username in order to see available tenants'"
           (optionSelected)="onTenantSelected($event)"></dropdown>
 
-        <button type="submit" class="btn btn-primary pull-xs-right" (click)="onLoginClicked({
-            username: username.value,
-            password: password.value,
-            tenant: tenant.value
-          })">Login
+        <button type="submit" class="btn btn-primary pull-xs-right" (click)="onLoginClicked()">Login
         </button>
       </form>
     </section>
@@ -48,18 +45,18 @@ export class LoginComponent {
   constructor(private store:Store) {}
 
   public onLoginClicked(event:any):void {
-    this.store.dispatch(userWantsToLogin(event['username'], event['password'], event['tenant']));
+    this.store.dispatch(userWantsToLogin());
   }
 
   public onUsernameBlurred(event:any):void {
-    console.log('event in blurred:');
-    console.log(event);
     this.store.dispatch(userProvidedUsername(event.username));
   }
 
+  public onPasswordBlurred(event:any):void {
+    this.store.dispatch(userProvidedPassword(event.password));
+  }
+
   public onTenantSelected(tenant:TenantLoginDto):void {
-    console.log('tenant in onTenantSelected:');
-    console.log(tenant);
-    //  this.store.dispatch(userProvidedUsername(event.username));
+    this.store.dispatch(userProvidedTenant(tenant));
   }
 }

@@ -6,6 +6,8 @@ export interface ISessionStore {
   sessionUserExists:boolean;
   backendAuthenticationInitialized:boolean;
   providedUsername:string;
+  providedTenant:string;
+  providedPassword:string;
   loginAttempt:ILoginAttempt;
   userAuthenticated:boolean;
   userLogoutRequest:boolean;
@@ -29,6 +31,8 @@ export const initialSessionStore:ISessionStore = {
   sessionUserExists: false,
   backendAuthenticationInitialized: false,
   providedUsername: null,
+  providedTenant: null,
+  providedPassword: null,
   loginAttempt: null,
   userAuthenticated: false,
   userLogoutRequest: false,
