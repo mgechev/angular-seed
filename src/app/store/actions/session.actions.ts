@@ -8,6 +8,8 @@ export const BACKEND_USER_INQUIRY_INITIALIZED:string = 'BACKEND_USER_INQUIRY_INI
 export const SESSION_USER_EXISTS:string = 'SESSION_USER_EXISTS';
 export const BACKEND_AUTHENTICATION_INITIALIZED:string = 'BACKEND_AUTHENTICATION_INITIALIZED';
 export const USER_PROVIDED_USERNAME:string = 'USER_PROVIDED_USERNAME';
+export const USER_PROVIDED_PASSWORD:string = 'USER_PROVIDED_PASSWORD';
+export const USER_PROVIDED_TENANT:string = 'USER_PROVIDED_TENANT';
 
 export const AUTHENTICATE_USER:string = 'AUTHENTICATE_USER';
 
@@ -17,17 +19,18 @@ export const LOGOUT_USER:string = 'LOGOUT_USER';
 export interface IUsernameProvidedAction extends IBaseAction {
   username:string;
 }
+export interface IPasswordProvidedAction extends IBaseAction {
+  password:string;
+}
+export interface ITenantProvidedAction extends IBaseAction {
+  tenant:string;
+}
 
 export const ACTIVE_TENANTS_OF_USER_LOADED:string = 'ACTIVE_TENANTS_OF_USER_LOADED';
 export interface IActiveTenantsOfUserLoadedAction extends IBaseAction {
   tenants:Array<TenantLoginDto>;
 }
 export const USER_WANTS_TO_LOGIN:string = 'USER_WANTS_TO_LOGIN';
-export interface IUserWantsToLoginAction extends IBaseAction {
-  username:string;
-  password:string;
-  tenant:string;
-}
 
 export const USER_IS_AUTHENTICATED:string = 'USER_IS_AUTHENTICATED';
 export interface IUserIsAuthenticatedAction extends IBaseAction {
@@ -57,10 +60,23 @@ export function sessionUserExists():IBaseAction {
 }
 
 export function userProvidedUsername(username:string):IUsernameProvidedAction {
-  console.log('in userProvidedUsername action');
   return {
     type: USER_PROVIDED_USERNAME,
     username
+  };
+}
+
+export function userProvidedPassword(password:string):IPasswordProvidedAction {
+  return {
+    type: USER_PROVIDED_PASSWORD,
+    password
+  };
+}
+
+export function userProvidedTenant(tenant:TenantLoginDto):ITenantProvidedAction {
+  return {
+    type: USER_PROVIDED_TENANT,
+    tenant: tenant.name
   };
 }
 
@@ -70,12 +86,9 @@ export function activeTenantsOfUserLoaded(tenants:Array<TenantLoginDto>):IActive
     tenants
   };
 }
-export function userWantsToLogin(username:string, password:string, tenant:string):IUserWantsToLoginAction {
+export function userWantsToLogin():IBaseAction {
   return {
-    type: USER_WANTS_TO_LOGIN,
-    username,
-    password,
-    tenant
+    type: USER_WANTS_TO_LOGIN
   };
 }
 

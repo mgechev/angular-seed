@@ -15,21 +15,28 @@ import {SessionService} from './shared/features/services/session.service';
 @Component({
   selector: 'app',
   template: `
+    <div class="container">
+      <div class="row">
+        <login *ngIf="!store.getSessionState().userAuthenticated"
+        class="col-lg-4 col-md-6 col-sm-7 col-xs-8 center-block pull-xs-none m-t-3"></login>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <section *ngIf="store.getSessionState().userAuthenticated" id="applicationframe">
 
-  <login *ngIf="!store.getSessionState().userAuthenticated"></login>
+            <application-header></application-header>
 
-  <section *ngIf="store.getSessionState().userAuthenticated" id="applicationframe">
+            <startpage *ngIf="store.getState().activeModule=='startpage'"></startpage>
+            <manage *ngIf="store.getState().activeModule=='manage'"></manage>
+            <activities *ngIf="store.getState().activeModule=='activities'"></activities>
+            <administration *ngIf="store.getState().activeModule=='administration'"></administration>
 
-      <application-header></application-header>
+            <footer>Message: {{store.getState().uiState.message}}</footer>
 
-      <startpage *ngIf="store.getState().activeModule=='startpage'"></startpage>
-      <manage *ngIf="store.getState().activeModule=='manage'"></manage>
-      <activities *ngIf="store.getState().activeModule=='activities'"></activities>
-      <administration *ngIf="store.getState().activeModule=='administration'"></administration>
-
-      <footer>Message: {{store.getState().uiState.message}}</footer>
-
-  </section>
+        </section>
+      </div>
+    </div>
   `,
   directives: [LoginComponent, StartpageComponent, ManageComponent, ActivitiesComponent, AdministrationComponent, ApplicationHeader],
   providers: [InitializeService, SessionService]

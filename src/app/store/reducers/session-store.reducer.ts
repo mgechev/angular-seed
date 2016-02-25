@@ -5,8 +5,7 @@ import {ISessionStore} from '../stores/session.store';
 import {initialSessionStore} from '../stores/session.store';
 import {IBaseAction} from '../actions/base.action';
 import {IActiveTenantsOfUserLoadedAction} from '../actions/session.actions';
-import {IUserWantsToLoginAction} from '../actions/session.actions';
-import {IUsernameProvidedAction} from '../actions/session.actions';
+import {IUsernameProvidedAction,IPasswordProvidedAction,ITenantProvidedAction} from '../actions/session.actions';
 import {LOGOUT_USER} from '../actions/session.actions';
 import {IUserIsAuthenticatedAction} from '../actions/session.actions';
 import {USER_PROVIDED_USERNAME} from '../actions/session.actions';
@@ -15,6 +14,8 @@ import {BACKEND_AUTHENTICATION_INITIALIZED} from '../actions/session.actions';
 import {LOGGEDIN_USER_REQUIRED} from '../actions/session.actions';
 import {USER_LOGOUT_REQUEST} from '../actions/session.actions';
 import {BACKEND_USER_INQUIRY_INITIALIZED} from '../actions/session.actions';
+import {USER_PROVIDED_TENANT} from '../actions/session.actions';
+import {USER_PROVIDED_PASSWORD} from '../actions/session.actions';
 
 
 /**
@@ -45,12 +46,21 @@ export function sessionStateReducer(state:ISessionStore = initialSessionStore, a
       newState = userProvidedUsernameReducer(state, action as IUsernameProvidedAction);
       break;
 
+    case USER_PROVIDED_PASSWORD:
+      newState = userProvidedPasswordReducer(state, action as IPasswordProvidedAction);
+      break;
+
+
+    case USER_PROVIDED_TENANT:
+      newState = userProvidedTenantReducer(state, action as ITenantProvidedAction);
+      break;
+
     case ACTIVE_TENANTS_OF_USER_LOADED:
       newState = activeTenantsOfUserLoadedReducer(state, action as IActiveTenantsOfUserLoadedAction);
       break;
 
     case USER_WANTS_TO_LOGIN:
-      newState = userWantsToLoginReducer(state, action as IUserWantsToLoginAction);
+      newState = userWantsToLoginReducer(state, action as IBaseAction);
       break;
 
     case BACKEND_AUTHENTICATION_INITIALIZED:
@@ -83,6 +93,8 @@ function loggedInUserRequiredReducer(state:ISessionStore):ISessionStore {
     backendUserInquiryInitialized: state.backendUserInquiryInitialized,
     sessionUserExists: state.sessionUserExists,
     providedUsername: state.providedUsername,
+    providedTenant: state.providedTenant,
+    providedPassword: state.providedPassword,
     backendAuthenticationInitialized: state.backendAuthenticationInitialized,
     userAuthenticated: state.userAuthenticated,
     loginAttempt: state.loginAttempt,
@@ -97,6 +109,8 @@ function sessionUserExistsReducer(state:ISessionStore, action:IUsernameProvidedA
     loggedInUserRequired: false,
     sessionUserExists: true,
     providedUsername: state.providedUsername,
+    providedTenant: state.providedTenant,
+    providedPassword: state.providedPassword,
     backendAuthenticationInitialized: state.backendAuthenticationInitialized,
     userAuthenticated: state.userAuthenticated,
     loginAttempt: state.loginAttempt,
@@ -113,8 +127,42 @@ function userProvidedUsernameReducer(state:ISessionStore, action:IUsernameProvid
     loggedInUserRequired: state.loggedInUserRequired,
     sessionUserExists: state.sessionUserExists,
     providedUsername: action.username,
+    providedTenant: state.providedTenant,
+    providedPassword: state.providedPassword,
     backendAuthenticationInitialized: state.backendAuthenticationInitialized,
     userAuthenticated: false,
+    loginAttempt: state.loginAttempt,
+    userLogoutRequest: state.userLogoutRequest,
+    tenants: null
+  };
+}
+
+function userProvidedPasswordReducer(state:ISessionStore, action:IPasswordProvidedAction):ISessionStore {
+  return {
+    backendUserInquiryInitialized: state.backendUserInquiryInitialized,
+    loggedInUserRequired: state.loggedInUserRequired,
+    sessionUserExists: state.sessionUserExists,
+    providedUsername: state.providedUsername,
+    providedTenant: state.providedTenant,
+    providedPassword: action.password,
+    backendAuthenticationInitialized: state.backendAuthenticationInitialized,
+    userAuthenticated: state.userAuthenticated,
+    loginAttempt: state.loginAttempt,
+    userLogoutRequest: state.userLogoutRequest,
+    tenants: state.tenants
+  };
+}
+
+function userProvidedTenantReducer(state:ISessionStore, action:ITenantProvidedAction):ISessionStore {
+  return {
+    backendUserInquiryInitialized: state.backendUserInquiryInitialized,
+    loggedInUserRequired: state.loggedInUserRequired,
+    sessionUserExists: state.sessionUserExists,
+    providedUsername: state.providedUsername,
+    providedTenant: action.tenant,
+    providedPassword: state.providedPassword,
+    backendAuthenticationInitialized: state.backendAuthenticationInitialized,
+    userAuthenticated: state.userAuthenticated,
     loginAttempt: state.loginAttempt,
     userLogoutRequest: state.userLogoutRequest,
     tenants: state.tenants
@@ -128,6 +176,8 @@ function activeTenantsOfUserLoadedReducer(state:ISessionStore, action:IActiveTen
     loggedInUserRequired: state.loggedInUserRequired,
     sessionUserExists: state.sessionUserExists,
     providedUsername: state.providedUsername,
+    providedTenant: action.tenants && action.tenants.length > 0 ? action.tenants[0].name : state.providedTenant,
+    providedPassword: state.providedPassword,
     backendAuthenticationInitialized: false,
     userAuthenticated: state.userAuthenticated,
     loginAttempt: state.loginAttempt,
@@ -142,6 +192,8 @@ function backendUserInquiryInitializedReducer(state:ISessionStore):ISessionStore
     loggedInUserRequired: false,
     sessionUserExists: false,
     providedUsername: state.providedUsername,
+    providedTenant: state.providedTenant,
+    providedPassword: state.providedPassword,
     backendAuthenticationInitialized: true,
     userAuthenticated: state.userAuthenticated,
     loginAttempt: state.loginAttempt,
@@ -150,18 +202,20 @@ function backendUserInquiryInitializedReducer(state:ISessionStore):ISessionStore
   };
 }
 
-function userWantsToLoginReducer(state:ISessionStore, action:IUserWantsToLoginAction):ISessionStore {
+function userWantsToLoginReducer(state:ISessionStore, action:IBaseAction):ISessionStore {
   return {
     backendUserInquiryInitialized: false,
     loggedInUserRequired: false,
     sessionUserExists: false,
     providedUsername: state.providedUsername,
+    providedTenant: state.providedTenant,
+    providedPassword: state.providedPassword,
     backendAuthenticationInitialized: false,
     userAuthenticated: false,
     loginAttempt: {
-      username: action.username,
-      password: action.password,
-      tenant: action.tenant
+      username: state.providedUsername,
+      password: state.providedPassword,
+      tenant: state.providedTenant
     },
     userLogoutRequest: state.userLogoutRequest,
     tenants: state.tenants
@@ -174,6 +228,8 @@ function backendAuthenticationInitialized(state:ISessionStore):ISessionStore {
     loggedInUserRequired: false,
     sessionUserExists: false,
     providedUsername: state.providedUsername,
+    providedTenant: state.providedTenant,
+    providedPassword: state.providedPassword,
     backendAuthenticationInitialized: true,
     userAuthenticated: state.userAuthenticated,
     loginAttempt: state.loginAttempt,
@@ -188,6 +244,8 @@ function userIsAuthenticatedReducer(state:ISessionStore, action:IUserIsAuthentic
     loggedInUserRequired: state.loggedInUserRequired,
     sessionUserExists: state.sessionUserExists,
     providedUsername: state.providedUsername,
+    providedTenant: state.providedTenant,
+    providedPassword: state.providedPassword,
     backendAuthenticationInitialized: false,
     userAuthenticated: true,
     loginAttempt: state.loginAttempt,
@@ -198,15 +256,17 @@ function userIsAuthenticatedReducer(state:ISessionStore, action:IUserIsAuthentic
 
 function userLogoutRequestReducer(state:ISessionStore, action:IBaseAction):ISessionStore {
   return {
-    backendUserInquiryInitialized: false,
-    loggedInUserRequired: false,
-    sessionUserExists: false,
-    providedUsername: null,
-    backendAuthenticationInitialized: false,
+    backendUserInquiryInitialized: state.backendUserInquiryInitialized,
+    loggedInUserRequired: state.loggedInUserRequired,
+    sessionUserExists: state.sessionUserExists,
+    providedUsername: state.providedUsername,
+    providedTenant: state.providedTenant,
+    providedPassword: state.providedPassword,
+    backendAuthenticationInitialized: state.backendAuthenticationInitialized,
     userAuthenticated: state.userAuthenticated,
-    loginAttempt: null,
+    loginAttempt: state.loginAttempt,
     userLogoutRequest: true,
-    tenants: null
+    tenants: state.tenants
   };
 }
 
@@ -216,6 +276,8 @@ function logoutUserReducer(state:ISessionStore, action:IBaseAction):ISessionStor
     loggedInUserRequired: false,
     sessionUserExists: false,
     providedUsername: null,
+    providedTenant: null,
+    providedPassword: null,
     backendAuthenticationInitialized: false,
     userAuthenticated: false,
     loginAttempt: null,

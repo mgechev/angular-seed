@@ -10,9 +10,6 @@ export function activeModuleReducer(state:string = initialActiveModuleStore, act
 
     case MAIN_NAVIGATION_ITEM_CLICKED:
 
-      console.log('action:');
-      console.log(action);
-
       newState = (action as IMainNavigationItemClickedAction).key;
       break;
 
