@@ -12,7 +12,6 @@ import {USER_IS_AUTHENTICATED} from '../../actions/session.actions';
 import {USER_LOGGED_OUT} from '../../actions/session.actions';
 import {USER_LOGOUT_REQUEST} from '../../actions/session.actions';
 import {ACTIVE_TENANTS_OF_USER_LOADED} from '../../actions/session.actions';
-import {TenantLoginDto} from '../../../shared/stubs/dtos/tenant-login-dto';
 
 export function sessionReducer(state:ISessionStore = initialSessionStore, action:Action<any>):ISessionStore {
   let newState:ISessionStore;
