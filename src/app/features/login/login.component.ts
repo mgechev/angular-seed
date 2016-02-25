@@ -56,7 +56,6 @@ export class LoginComponent {
   }
 
   public onPasswordChanged(event:any):void {
-    console.log('password changed');
     this.store.dispatch(userProvidedPassword(event.password));
   }
 
