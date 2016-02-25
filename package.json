@@ -57,7 +57,7 @@
     "gulp-tslint": "^4.3.2",
     "gulp-tslint-stylish": "^1.0.4",
     "gulp-typedoc": "^1.2.1",
-    "gulp-typescript": "~2.8.2",
+    "gulp-typescript": "~2.10.0",
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.2.4",
