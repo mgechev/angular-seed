@@ -55,14 +55,14 @@ if (ENABLE_HOT_LOADING) {
   process.exit(0);
 }
 
-interface InjectableDependency {
+interface IDependency {
   src: string;
   inject: string | boolean;
   dest?: string;
 }
 
 // Declare NPM dependencies (Note that globs should not be injected).
-export const DEV_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencies([
+export const DEV_NPM_DEPENDENCIES: IDependency[] = normalizeDependencies([
   { src: 'systemjs/dist/system-polyfills.src.js', inject: 'shims', dest: JS_DEST },
   { src: 'reflect-metadata/Reflect.js', inject: 'shims', dest: JS_DEST },
   { src: 'es6-shim/es6-shim.js', inject: 'shims', dest: JS_DEST },
@@ -74,7 +74,7 @@ export const DEV_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencie
   { src: 'angular2/bundles/http.js', inject: 'libs', dest: JS_DEST }
 ]);
 
-export const PROD_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencies([
+export const PROD_NPM_DEPENDENCIES: IDependency[] = normalizeDependencies([
   { src: 'systemjs/dist/system-polyfills.src.js', inject: 'shims' },
   { src: 'reflect-metadata/Reflect.js', inject: 'shims' },
   { src: 'es6-shim/es6-shim.min.js', inject: 'shims' },
@@ -83,7 +83,7 @@ export const PROD_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependenci
 ]);
 
 // Declare local files that needs to be injected
-export const APP_ASSETS: InjectableDependency[] = [
+export const APP_ASSETS: IDependency[] = [
   { src: `${ASSETS_SRC}/main.css`, inject: true, dest: CSS_DEST }
 ];
 
@@ -121,10 +121,10 @@ export const SYSTEM_BUILDER_CONFIG = {
 // --------------
 // Private.
 
-function normalizeDependencies(deps: InjectableDependency[]) {
+function normalizeDependencies(deps: IDependency[]) {
   deps
-    .filter((d:InjectableDependency) => !/\*/.test(d.src)) // Skip globs
-    .forEach((d:InjectableDependency) => d.src = require.resolve(d.src));
+    .filter((d:IDependency) => !/\*/.test(d.src)) // Skip globs
+    .forEach((d:IDependency) => d.src = require.resolve(d.src));
   return deps;
 }
 
