@@ -7,6 +7,7 @@ import {USER_IS_AUTHENTICATED} from '../../actions/session.actions';
 import {AuthPermissionDto} from '../../../shared/stubs/dtos/auth-permission-dto';
 import {TenantLoginDto} from '../../../shared/stubs/dtos/tenant-login-dto';
 import {UserLoginDto} from '../../../shared/stubs/dtos/user-login-dto';
+import {USER_LOGGED_OUT} from '../../actions/session.actions';
 
 export function userSessionReducer(state:IUserSessionStore = initialUserSessionStore, action:Action<any>):IUserSessionStore {
   let newState:IUserSessionStore;
@@ -40,6 +41,10 @@ export function userSessionReducer(state:IUserSessionStore = initialUserSessionS
         permissions: state.permissions,
         userPreferences: state.userPreferences
       };
+      break;
+
+    case USER_LOGGED_OUT:
+      newState = initialUserSessionStore;
       break;
 
     default:
