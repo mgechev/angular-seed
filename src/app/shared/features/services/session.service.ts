@@ -93,8 +93,12 @@ export class SessionService {
   private triggerAuthenticate(username:string, password:string, tenant:string):void {
     let store:Store = this.store;
 
+    console.log(module.id, 'request');
+    console.time('authenticate call');
     this.loginService.authenticate(username, password, tenant)
       .then(function (userLoginDto:UserLoginDto):void {
+        console.timeEnd('authenticate call');
+        console.log(module.id, 'response');
         store.dispatch(userIsAuthenticated(userLoginDto));
       });
   }
