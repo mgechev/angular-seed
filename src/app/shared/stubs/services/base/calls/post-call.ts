@@ -7,16 +7,26 @@ import {CustomRequestOptionsArgs} from './custom-request-options-args';
 import {DtoConverter} from '../../../../features/services/dto-converter.service';
 import {getServerUrl} from '../base.service';
 import {Store} from '../../../../../store/store';
+import {backendCallStarted} from '../../../../../store/actions/services.actions';
+import {backendCallSucceeded} from '../../../../../store/actions/services.actions';
+import {backendCallFailed} from '../../../../../store/actions/services.actions';
 
 export class PostCall implements IPostCall {
+  private _restPath:string;
+
   private _requestData:any;
 
   private _urlSubPath:string = '';
 
   private _config:CustomRequestOptionsArgs;
 
-  constructor(private http:Http, private store:Store, private servicePath:string, private version:string, private methodPath:string) {
+  constructor(private http:Http, private store:Store, private methodIdent:string) {
     this._config = new CustomRequestOptionsArgs();
+  }
+
+  public setRestPath(restPath:string):IPostCall {
+    this._restPath = restPath;
+    return this;
   }
 
   public setUrlParams(value:Object):IPostCall {
@@ -52,13 +62,17 @@ export class PostCall implements IPostCall {
   }
 
   public send():Promise<any> {
-    return this.http
+    let self:PostCall = this;
+
+    self.store.dispatch(backendCallStarted(self.methodIdent, null, null));
+    return self.http
       .post(
-        getServerUrl() + '/remote/service/' + this.version + '/' + this.servicePath + '/' + this.methodPath +
-        this._urlSubPath,
-        DtoConverter.dumbify(this._requestData), this._config)
+        getServerUrl() + '/remote/service/' + self._restPath +
+        self._urlSubPath,
+        DtoConverter.dumbify(self._requestData), self._config)
       .toPromise()
       .then(function (response:Response):any {
+        let result:any;
 
         /*
          Not every time the call returns a json which can be parsed
@@ -67,11 +81,16 @@ export class PostCall implements IPostCall {
          */
 
         if (response.text() === '') {
-          return response.text();
+          result = response.text();
         } else {
-          return DtoConverter.typify(response.json());
+          result = DtoConverter.typify(response.json());
         }
+        self.store.dispatch(backendCallSucceeded(self.methodIdent, result));
 
+        return result;
+      }, function (error:any):any {
+        console.log(error);
+        self.store.dispatch(backendCallFailed(self.methodIdent, error));
       });
   }
 }

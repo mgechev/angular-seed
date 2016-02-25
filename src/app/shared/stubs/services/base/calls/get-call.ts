@@ -6,13 +6,22 @@ import {IGetCall} from './get-call.interface';
 import {DtoConverter} from '../../../../features/services/dto-converter.service';
 import {getServerUrl} from '../base.service';
 import {Store} from '../../../../../store/store';
+import {backendCallStarted} from '../../../../../store/actions/services.actions';
+import {backendCallSucceeded} from '../../../../../store/actions/services.actions';
+import {backendCallFailed} from '../../../../../store/actions/services.actions';
 
 export class GetCall implements IGetCall {
-  private _urlParams:string = '';
 
+  private _restPath:string = '';
+  private _urlParams:string = '';
   private _urlSubPath:string = '';
 
-  constructor(private http:Http, private store:Store, private servicePath:string, private version:string, private methodPath:string) {
+  constructor(private http:Http, private store:Store, private methodIdent:string) {
+  }
+
+  public setRestPath(restPath:string):IGetCall {
+    this._restPath = restPath;
+    return this;
   }
 
   public setUrlParams(value:Object):IGetCall {
@@ -30,18 +39,34 @@ export class GetCall implements IGetCall {
   }
 
   public send():Promise<any> {
-    return this.http
+    let self:GetCall = this;
+
+    self.store.dispatch(backendCallStarted(self.methodIdent, null, null));
+    return self.http
       .get(
-        getServerUrl() + '/remote/service/' + this.version + '/' + this.servicePath + '/' + this.methodPath +
-        this._urlSubPath + this._urlParams)
+        getServerUrl() + '/remote/service/' + self._restPath + '/' +
+        self._urlSubPath + self._urlParams)
       .toPromise()
       .then(function (response:Response):any {
+        let result:any;
+
+        /*
+         Not every time the call returns a json which can be parsed
+         the logout() for example returns an empty string.
+         ToDo: Investigate all possible response formats and handle exceptions
+         */
 
         if (response.text() === '') {
-          return response.text();
+          result = response.text();
         } else {
-          return DtoConverter.typify(response.json());
+          result = DtoConverter.typify(response.json());
         }
+        self.store.dispatch(backendCallSucceeded(self.methodIdent, result));
+
+        return result;
+      }, function (error:any):any {
+        console.log(error);
+        self.store.dispatch(backendCallFailed(self.methodIdent, error));
       });
   }
 }

@@ -24,9 +24,6 @@ export function getServerUrl():string {
  * Base service class contains hidden functionality for call creation.
  */
 export class BaseService {
-  protected servicePath:string;
-  protected version:string;
-
   constructor(private http:Http, private store:Store) {
     //////////
     // hack to be able to send credentials to the server (see: https://github.com/angular/angular/issues/4231)
@@ -43,21 +40,21 @@ export class BaseService {
   /**
    * Creates new GetCall object which provides possible functionality for GET method calls
    *
-   * @param methodPath
+   * @param methodIdent
    * @returns {IGetCall}
    */
-  protected newGetCall(methodPath:string):IGetCall {
-    return new GetCall(this.http, this.store, this.servicePath, this.version, methodPath) as IGetCall;
+  protected createGetCall(methodIdent:string):IGetCall {
+    return new GetCall(this.http, this.store, methodIdent) as IGetCall;
   }
 
   /**
    * Creates new PostCall object provides possible functionality for POST method calls
    *
-   * @param methodPath
+   * @param methodIdent
    * @returns {IPostCall}
    */
-  protected newPostCall(methodPath:string):IPostCall {
-    return new PostCall(this.http, this.store, this.servicePath, this.version, methodPath) as IPostCall;
+  protected createPostCall(methodIdent:string):IPostCall {
+    return new PostCall(this.http, this.store, methodIdent) as IPostCall;
   }
 
   protected newDeleteCall():any {

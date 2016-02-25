@@ -22,6 +22,7 @@ export class SessionService {
       let dataStore:IDataStore = store.getDataStore();
 
       // add check for previousStore here. Don't proceed if session has not changed
+      console.log('session service processed: ' + UiSessionStateEnum[uiStore.session.state]);
 
       switch (uiStore.session.state) {
         // check for INITIAL state of session to check, if a valid session exists on the server for this client

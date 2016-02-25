@@ -7,14 +7,11 @@ import {Store} from '../../../store/store';
 export class LoginService extends BaseService {
   constructor(http:Http, store:Store) {
     super(http, store);
-
-    this.servicePath = 'login';
-    this.version = 'v1';
   }
 
   public authenticate(loginname:string, password:string, tenant:string):Promise<any> {
-    var self:LoginService = this;
-    return self.newPostCall('authenticate')
+    return this.createPostCall('LoginService.authenticate')
+      .setRestPath('v1/login/authenticate')
       .setUrlParams({
         'loginname': loginname,
         'password': password,
@@ -24,8 +21,8 @@ export class LoginService extends BaseService {
   }
 
   public findActiveTenantsByUser(loginname:string):Promise<any> {
-    var self:LoginService = this;
-    return self.newGetCall('findActiveTenantsByUser')
+    return this.createGetCall('LoginService.findActiveTenantsByUser')
+      .setRestPath('v1/login/findActiveTenantsByUser')
       .setUrlParams({
         'loginname': loginname
       })
@@ -33,26 +30,26 @@ export class LoginService extends BaseService {
   }
 
   public hasLoggedInUser():Promise<any> {
-    var self:LoginService = this;
-    return self.newGetCall('hasLoggedInUser')
+    return this.createGetCall('LoginService.hasLoggedInUser')
+      .setRestPath('v1/login/hasLoggedInUser')
       .send();
   }
 
   public getLoggedInUser():Promise<any> {
-    var self:LoginService = this;
-    return self.newGetCall('getLoggedInUser')
+    return this.createGetCall('LoginService.getLoggedInUser')
+      .setRestPath('v1/login/getLoggedInUser')
       .send();
   }
 
   public logout():Promise<any> {
-    var self:LoginService = this;
-    return self.newPostCall('logout')
+    return this.createPostCall('LoginService.logout')
+      .setRestPath('v1/login/logout')
       .send();
   }
 
   public switchTenant(tenant:string):Promise<any> {
-    var self:LoginService = this;
-    return self.newPostCall('switchTenant')
+    return this.createPostCall('LoginService.switchTenant')
+      .setRestPath('v1/login/switchTenant')
       .setUrlParams({
         'tenant': tenant
       })

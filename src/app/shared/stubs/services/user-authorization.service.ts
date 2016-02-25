@@ -7,18 +7,17 @@ import {Store} from '../../../store/store';
 export class UserAuthorizationService extends BaseService {
   constructor(http:Http, store:Store) {
     super(http, store);
-
-    this.servicePath = 'userauthorization';
-    this.version = 'v1';
   }
 
   public getPermissions():Promise<any> {
-    return this.newGetCall('getPermissions')
+    return this.createGetCall('UserAuthorizationService.getPermissions')
+      .setRestPath('v1/userauthorization/getPermissions')
       .send();
   }
 
   public hasAuthorization():Promise<any> {
-    return this.newGetCall('hasAuthorization')
+    return this.createGetCall('UserAuthorizationService.hasAuthorization')
+      .setRestPath('v1/userauthorization/hasAuthorization')
       .send();
   }
 }

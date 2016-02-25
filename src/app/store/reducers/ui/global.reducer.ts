@@ -1,13 +1,20 @@
 import {IGlobalStore} from '../../stores/ui/global.store';
 import {Action} from '../../actions/base.action';
 import {initialGlobalStore} from '../../stores/ui/global.store';
-import {BACKEND_CALL_FAILS} from '../../actions/app.actions';
 import {OLD_SERVICE_ACTION_FINISHED} from '../../actions/services.actions';
 import {OLD_SERVICE_ACTION_STARTED} from '../../actions/services.actions';
 import {IOldServiceActionPayload} from '../../actions/services.actions';
+import {BACKEND_CALL_STARTED} from '../../actions/services.actions';
+import {BackendCallStartedActionPayload} from '../../actions/services.actions';
+import {BACKEND_CALL_FAILED} from '../../actions/services.actions';
+import {BackendCallFailedActionPayload} from '../../actions/services.actions';
+import {BACKEND_CALL_SUCCEEDED} from '../../actions/services.actions';
+import {BackendCallSucceededActionPayload} from '../../actions/services.actions';
 
 export function globalReducer(state:IGlobalStore = initialGlobalStore, action:Action<any>):IGlobalStore {
   let newState:IGlobalStore;
+
+  console.group('Action \'' + action.type + '\'');
 
   switch (action.type) {
     case OLD_SERVICE_ACTION_STARTED:
@@ -25,10 +32,30 @@ export function globalReducer(state:IGlobalStore = initialGlobalStore, action:Ac
       };
       break;
 
-    case BACKEND_CALL_FAILS:
+    case BACKEND_CALL_STARTED:
+      console.log('backend call started');
+      let backendCallStartedPayload:BackendCallStartedActionPayload = (action as Action<BackendCallStartedActionPayload>).payload;
       newState = {
-        actionOngoing: state.actionOngoing,
-        message: (action as Action<Object>).payload['localizedMessage']
+        actionOngoing: true,
+        message: 'Backend Call Active: ' + backendCallStartedPayload.methodIdent
+      };
+      break;
+
+    case BACKEND_CALL_SUCCEEDED:
+      console.log('backend call succeeded');
+      let backendCallSucceededPayload:BackendCallSucceededActionPayload = (action as Action<BackendCallSucceededActionPayload>).payload;
+      newState = {
+        actionOngoing: false,
+        message: 'Backend Call Succeeded: ' + backendCallSucceededPayload.methodIdent
+      };
+      break;
+
+    case BACKEND_CALL_FAILED:
+      console.log('backend call failed');
+      let backendCallFailedPayload:BackendCallFailedActionPayload = (action as Action<BackendCallFailedActionPayload>).payload;
+      newState = {
+        actionOngoing: false,
+        message: 'Backend Call Failed: ' + backendCallFailedPayload.methodIdent
       };
       break;
 
@@ -36,6 +63,9 @@ export function globalReducer(state:IGlobalStore = initialGlobalStore, action:Ac
       newState = state;
       break;
   }
+  console.log('Old State:', state);
+  console.log('New State:', newState);
+  console.groupEnd();
 
   return newState;
 }
