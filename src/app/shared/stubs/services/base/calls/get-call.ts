@@ -12,16 +12,10 @@ import {backendCallFailed} from '../../../../../store/actions/services.actions';
 
 export class GetCall implements IGetCall {
 
-  private _restPath:string = '';
   private _urlParams:string = '';
   private _urlSubPath:string = '';
 
-  constructor(private http:Http, private store:Store, private methodIdent:string) {
-  }
-
-  public setRestPath(restPath:string):IGetCall {
-    this._restPath = restPath;
-    return this;
+  constructor(private http:Http, private store:Store, private restPath:string) {
   }
 
   public setUrlParams(value:Object):IGetCall {
@@ -41,10 +35,10 @@ export class GetCall implements IGetCall {
   public send():Promise<any> {
     let self:GetCall = this;
 
-    self.store.dispatch(backendCallStarted(self.methodIdent, null, null));
+    self.store.dispatch(backendCallStarted(self.restPath, null, null));
     return self.http
       .get(
-        getServerUrl() + '/remote/service/' + self._restPath + '/' +
+        getServerUrl() + '/remote/service/' + self.restPath + '/' +
         self._urlSubPath + self._urlParams)
       .toPromise()
       .then(function (response:Response):any {
@@ -61,12 +55,12 @@ export class GetCall implements IGetCall {
         } else {
           result = DtoConverter.typify(response.json());
         }
-        self.store.dispatch(backendCallSucceeded(self.methodIdent, result));
+        self.store.dispatch(backendCallSucceeded(self.restPath, result));
 
         return result;
       }, function (error:any):any {
         console.log(error);
-        self.store.dispatch(backendCallFailed(self.methodIdent, error));
+        self.store.dispatch(backendCallFailed(self.restPath, error));
       });
   }
 }

@@ -12,21 +12,13 @@ import {backendCallSucceeded} from '../../../../../store/actions/services.action
 import {backendCallFailed} from '../../../../../store/actions/services.actions';
 
 export class PostCall implements IPostCall {
-  private _restPath:string;
 
   private _requestData:any;
-
   private _urlSubPath:string = '';
-
   private _config:CustomRequestOptionsArgs;
 
-  constructor(private http:Http, private store:Store, private methodIdent:string) {
+  constructor(private http:Http, private store:Store, private restPath:string) {
     this._config = new CustomRequestOptionsArgs();
-  }
-
-  public setRestPath(restPath:string):IPostCall {
-    this._restPath = restPath;
-    return this;
   }
 
   public setUrlParams(value:Object):IPostCall {
@@ -64,10 +56,10 @@ export class PostCall implements IPostCall {
   public send():Promise<any> {
     let self:PostCall = this;
 
-    self.store.dispatch(backendCallStarted(self.methodIdent, null, null));
+    self.store.dispatch(backendCallStarted(self.restPath, null, null));
     return self.http
       .post(
-        getServerUrl() + '/remote/service/' + self._restPath +
+        getServerUrl() + '/remote/service/' + self.restPath +
         self._urlSubPath,
         DtoConverter.dumbify(self._requestData), self._config)
       .toPromise()
@@ -85,12 +77,12 @@ export class PostCall implements IPostCall {
         } else {
           result = DtoConverter.typify(response.json());
         }
-        self.store.dispatch(backendCallSucceeded(self.methodIdent, result));
+        self.store.dispatch(backendCallSucceeded(self.restPath, result));
 
         return result;
       }, function (error:any):any {
         console.log(error);
-        self.store.dispatch(backendCallFailed(self.methodIdent, error));
+        self.store.dispatch(backendCallFailed(self.restPath, error));
       });
   }
 }

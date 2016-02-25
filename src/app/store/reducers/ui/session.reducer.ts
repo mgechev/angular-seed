@@ -107,6 +107,22 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
       };
       break;
 
+    /*case BACKEND_CALL_SUCCEEDED:
+     let succeededCallPayload:BackendCallSucceededActionPayload = (action as Action<BackendCallSucceededActionPayload>).payload;
+     switch (succeededCallPayload.methodIdent) {
+     case LoginService.HAS_LOGGED_IN_USER:
+     break;
+     case LoginService.GET_LOGGED_IN_USER:
+     break;
+     case LoginService.FIND_ACTIVE_TENANTS_BY_USER:
+     break;
+     case LoginService.AUTHENTICATE:
+     break;
+     case LoginService.LOGOUT:
+     break;
+     }
+     break;*/
+
     default:
       newState = state;
       break;
