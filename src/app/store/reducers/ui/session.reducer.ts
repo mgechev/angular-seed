@@ -12,7 +12,6 @@ import {USER_IS_AUTHENTICATED} from '../../actions/session.actions';
 import {USER_LOGGED_OUT} from '../../actions/session.actions';
 import {USER_LOGOUT_REQUEST} from '../../actions/session.actions';
 import {ACTIVE_TENANTS_OF_USER_LOADED} from '../../actions/session.actions';
-import {TenantLoginDto} from '../../../shared/stubs/dtos/tenant-login-dto';
 
 export function sessionReducer(state:ISessionStore = initialSessionStore, action:Action<any>):ISessionStore {
   let newState:ISessionStore;
@@ -46,17 +45,12 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
       break;
 
     case ACTIVE_TENANTS_OF_USER_LOADED:
-      let activeAction:Action<Array<TenantLoginDto>> = action as Action<Array<TenantLoginDto>>;
-      if (activeAction.payload) {
-        newState = {
-          state: state.state,
-          username: state.username,
-          password: state.password,
-          tenant: action.payload[0].name
-        };
-      } else {
-        newState = state;
-      }
+      newState = {
+        state: state.state,
+        username: state.username,
+        password: state.password,
+        tenant: action.payload.length > 0 ? action.payload[0].name : state.tenant
+      };
       break;
 
     case USER_PROVIDED_PASSWORD:

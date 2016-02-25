@@ -16,15 +16,14 @@ import {userProvidedUsername,userProvidedPassword,userProvidedTenant,userWantsTo
 
         <fieldset class="form-group">
           <label for="username">Username:</label>
-            <input id="username" #username (blur)="onUsernameBlurred({username: username.value})"
+            <input id="username" #username (change)="onUsernameChanged({username: username.value})"
                    class="form-control"/>
         </fieldset>
 
        <fieldset class="form-group">
           <label for="password">Password:</label>
           <input id="password" #password type="password" class="form-control"
-          (change)="onPasswordChanged({password: password.value})"
-          (blur)="onPasswordChanged({password: password.value})"/>
+          (change)="onPasswordChanged({password: password.value})"/>
        </fieldset>
 
        <dropdown
@@ -46,7 +45,7 @@ export class LoginComponent {
   constructor(private store:Store) {
   }
 
-  public onUsernameBlurred(event:any):void {
+  public onUsernameChanged(event:any):void {
     this.store.dispatch(userProvidedUsername(event.username));
   }
 

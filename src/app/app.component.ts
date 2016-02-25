@@ -50,9 +50,14 @@ export class AppComponent implements OnInit {
   public stateSessionValid:UiSessionStateEnum = UiSessionStateEnum.SESSION_VALID;
 
   public ngOnInit():any {
-    console.log('initial store:', this.store.getState());
+    /* this ist just for testing and debugging */
+    console.group('Initial Store');
+    console.log(this.store.getState());
+    console.groupEnd();
     this.store.subscribe(function (rootStore:IRootStore):void {
-      console.log('changed store:', rootStore);
+      console.group('Changed Store');
+      console.log(rootStore);
+      console.groupEnd();
     });
 
     this.store.dispatch(validSessionRequired());
