@@ -23,7 +23,7 @@ import {userProvidedUsername,userProvidedPassword,userProvidedTenant,userWantsTo
        <fieldset class="form-group">
           <label for="password">Password:</label>
           <input id="password" #password type="password" class="form-control"
-          (keyup)="onPasswordChanged({password: password.value})"
+          (change)="onPasswordChanged({password: password.value})"
           (blur)="onPasswordChanged({password: password.value})"/>
        </fieldset>
 
@@ -51,7 +51,6 @@ export class LoginComponent {
   }
 
   public onPasswordChanged(event:any):void {
-    console.log('password changed');
     this.store.dispatch(userProvidedPassword(event.password));
   }
 
