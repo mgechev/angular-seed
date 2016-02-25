@@ -5,6 +5,7 @@ import {GetCall} from './calls/get-call';
 import {PostCall} from './calls/post-call';
 import {IPostCall} from './calls/post-call.interface';
 import {IGetCall} from './calls/get-call.interface';
+import {Store} from '../../../../store/store';
 
 'use strict';
 
@@ -26,11 +27,11 @@ export class BaseService {
   protected servicePath:string;
   protected version:string;
 
-  constructor(private _http:Http) {
+  constructor(private http:Http, private store:Store) {
     //////////
     // hack to be able to send credentials to the server (see: https://github.com/angular/angular/issues/4231)
-    let _build = (<any> _http)._backend._browserXHR.build;
-    (<any> _http)._backend._browserXHR.build = () => {
+    let _build = (<any> http)._backend._browserXHR.build;
+    (<any> http)._backend._browserXHR.build = () => {
       let _xhr = _build();
       _xhr.withCredentials = true;
       return _xhr;
@@ -46,7 +47,7 @@ export class BaseService {
    * @returns {IGetCall}
    */
   protected newGetCall(methodPath:string):IGetCall {
-    return new GetCall(this._http, this.servicePath, this.version, methodPath) as IGetCall;
+    return new GetCall(this.http, this.store, this.servicePath, this.version, methodPath) as IGetCall;
   }
 
   /**
@@ -56,7 +57,7 @@ export class BaseService {
    * @returns {IPostCall}
    */
   protected newPostCall(methodPath:string):IPostCall {
-    return new PostCall(this._http, this.servicePath, this.version, methodPath) as IPostCall;
+    return new PostCall(this.http, this.store, this.servicePath, this.version, methodPath) as IPostCall;
   }
 
   protected newDeleteCall():any {

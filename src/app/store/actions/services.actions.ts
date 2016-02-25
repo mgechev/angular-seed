@@ -1,17 +1,20 @@
 import {Action} from './base.action';
 
-export const SERVICE_ACTION_STARTED = 'BACKEND_ACTION_STARTED';
-export const SERVICE_ACTION_FINISHED = 'BACKEND_ACTION_FINISHED';
+export const OLD_SERVICE_ACTION_STARTED = 'OLD_SERVICE_ACTION_STARTED';
+export const OLD_SERVICE_ACTION_FINISHED = 'OLD_SERVICE_ACTION_FINISHED';
 
-export interface IServiceActionPayload {
+export interface IOldServiceActionPayload {
   endpoint:string;
   message:string;
   result?:any;
 }
 
-export function backendActionStarted(endpoint:string = ''):Action<IServiceActionPayload> {
+/**
+ * @deprecated should use new implementation now
+ */
+export function oldBackendActionStarted(endpoint:string = ''):Action<IOldServiceActionPayload> {
   return {
-    type: SERVICE_ACTION_STARTED,
+    type: OLD_SERVICE_ACTION_STARTED,
     payload: {
       endpoint: endpoint,
       message: 'Backend action started'
@@ -19,13 +22,64 @@ export function backendActionStarted(endpoint:string = ''):Action<IServiceAction
   };
 }
 
-export function backendActionFinished(endpoint:string = '', result):Action<IServiceActionPayload> {
+/**
+ * @deprecated should use new implementation now
+ */
+export function oldBackendActionFinished(endpoint:string = '', result):Action<IOldServiceActionPayload> {
   return {
-    type: SERVICE_ACTION_FINISHED,
+    type: OLD_SERVICE_ACTION_FINISHED,
     payload: {
       endpoint: endpoint,
       message: 'Backend action started',
       result: result
+    }
+  };
+}
+
+// new implementation below
+export const BACKEND_CALL_STARTED:string = 'BACKEND_CALL_STARTED';
+export const BACKEND_CALL_SUCCEEDED:string = 'BACKEND_CALL_SUCCEEDED';
+export const BACKEND_CALL_FAILED:string = 'BACKEND_CALL_FAILED';
+
+export interface BackendCallStartedActionPayload {
+  methodIdent:string;
+  parameters?:Object;
+  options?:Object;
+}
+export interface BackendCallSucceededActionPayload {
+  methodIdent:string;
+  result?:any;
+}
+export interface BackendCallFailedActionPayload {
+  methodIdent:string;
+  error:Object;
+}
+
+export function backendCallStarted(methodIdent:string, parameters:Object, options:Object):Action<BackendCallStartedActionPayload> {
+  return {
+    type: BACKEND_CALL_STARTED,
+    payload: {
+      methodIdent,
+      parameters,
+      options
+    }
+  };
+}
+export function backendCallSucceeded(methodIdent:string, result:any):Action<BackendCallSucceededActionPayload> {
+  return {
+    type: BACKEND_CALL_SUCCEEDED,
+    payload: {
+      methodIdent,
+      result
+    }
+  };
+}
+export function backendCallFailed(methodIdent:string, error:Object):Action<BackendCallFailedActionPayload> {
+  return {
+    type: BACKEND_CALL_FAILED,
+    payload: {
+      methodIdent,
+      error
     }
   };
 }

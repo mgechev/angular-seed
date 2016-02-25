@@ -5,8 +5,8 @@ import {Store} from '../../../store/store';
 
 @Injectable()
 export class LoginService extends BaseService {
-  constructor(http:Http, private store:Store) {
-    super(http);
+  constructor(http:Http, store:Store) {
+    super(http, store);
 
     this.servicePath = 'login';
     this.version = 'v1';

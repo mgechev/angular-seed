@@ -2,23 +2,23 @@ import {IGlobalStore} from '../../stores/ui/global.store';
 import {Action} from '../../actions/base.action';
 import {initialGlobalStore} from '../../stores/ui/global.store';
 import {BACKEND_CALL_FAILS} from '../../actions/app.actions';
-import {SERVICE_ACTION_FINISHED} from '../../actions/services.actions';
-import {SERVICE_ACTION_STARTED} from '../../actions/services.actions';
-import {IServiceActionPayload} from '../../actions/services.actions';
+import {OLD_SERVICE_ACTION_FINISHED} from '../../actions/services.actions';
+import {OLD_SERVICE_ACTION_STARTED} from '../../actions/services.actions';
+import {IOldServiceActionPayload} from '../../actions/services.actions';
 
 export function globalReducer(state:IGlobalStore = initialGlobalStore, action:Action<any>):IGlobalStore {
   let newState:IGlobalStore;
 
   switch (action.type) {
-    case SERVICE_ACTION_STARTED:
+    case OLD_SERVICE_ACTION_STARTED:
       newState = {
         actionOngoing: true,
-        message: (action as Action<IServiceActionPayload>).payload.message
+        message: (action as Action<IOldServiceActionPayload>).payload.message
       };
       break;
 
-    case SERVICE_ACTION_FINISHED:
-      let serviceActionFinishedPayload:IServiceActionPayload = (action as Action<IServiceActionPayload>).payload;
+    case OLD_SERVICE_ACTION_FINISHED:
+      let serviceActionFinishedPayload:IOldServiceActionPayload = (action as Action<IOldServiceActionPayload>).payload;
       newState = {
         actionOngoing: false,
         message: serviceActionFinishedPayload.message ? serviceActionFinishedPayload.message : 'Ready'

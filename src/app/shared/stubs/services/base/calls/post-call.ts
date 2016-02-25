@@ -6,6 +6,7 @@ import {IPostCall} from './post-call.interface';
 import {CustomRequestOptionsArgs} from './custom-request-options-args';
 import {DtoConverter} from '../../../../features/services/dto-converter.service';
 import {getServerUrl} from '../base.service';
+import {Store} from '../../../../../store/store';
 
 export class PostCall implements IPostCall {
   private _requestData:any;
@@ -14,7 +15,7 @@ export class PostCall implements IPostCall {
 
   private _config:CustomRequestOptionsArgs;
 
-  constructor(private _http:Http, private _servicePath:string, private _version:string, private _methodPath:string) {
+  constructor(private http:Http, private store:Store, private servicePath:string, private version:string, private methodPath:string) {
     this._config = new CustomRequestOptionsArgs();
   }
 
@@ -51,9 +52,9 @@ export class PostCall implements IPostCall {
   }
 
   public send():Promise<any> {
-    return this._http
+    return this.http
       .post(
-        getServerUrl() + '/remote/service/' + this._version + '/' + this._servicePath + '/' + this._methodPath +
+        getServerUrl() + '/remote/service/' + this.version + '/' + this.servicePath + '/' + this.methodPath +
         this._urlSubPath,
         DtoConverter.dumbify(this._requestData), this._config)
       .toPromise()
