@@ -7,9 +7,8 @@ import {userProvidedUsername,userProvidedPassword,userProvidedTenant,userWantsTo
 
 @Component({
   selector: 'login',
-  directives: [DROPDOWN_DIRECTIVES,Dropdown],
+  directives: [DROPDOWN_DIRECTIVES, Dropdown],
   template: `
-
     <section>
        <h2>Login</h2>
       <!-- here could be a place, where the form-generator is used... -->
@@ -39,12 +38,12 @@ import {userProvidedUsername,userProvidedPassword,userProvidedTenant,userWantsTo
         </button>
       </form>
     </section>
-
   `
 })
 export class LoginComponent {
 
-  constructor(private store:Store) {}
+  constructor(private store:Store) {
+  }
 
   public onLoginClicked(event:any):void {
     this.store.dispatch(userWantsToLogin());
