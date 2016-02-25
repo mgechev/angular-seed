@@ -14,6 +14,8 @@ import {USER_WANTS_TO_LOGIN} from '../../actions/session.actions';
 import {USER_IS_AUTHENTICATED} from '../../actions/session.actions';
 import {USER_LOGGED_OUT} from '../../actions/session.actions';
 import {USER_LOGOUT_REQUEST} from '../../actions/session.actions';
+import {ACTIVE_TENANTS_OF_USER_LOADED} from '../../actions/session.actions';
+import {IActiveTenantsOfUserLoadedAction} from '../../actions/session.actions';
 
 export function sessionReducer(state:ISessionStore = initialSessionStore, action:IBaseAction):ISessionStore {
   let newState:ISessionStore;
@@ -44,6 +46,20 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
         password: state.password,
         tenant: state.tenant
       };
+      break;
+
+    case ACTIVE_TENANTS_OF_USER_LOADED:
+      let activeAction:IActiveTenantsOfUserLoadedAction = action as IActiveTenantsOfUserLoadedAction;
+      if (activeAction.tenants) {
+        newState = {
+          state: state.state,
+          username: state.username,
+          password: state.password,
+          tenant: (action as IActiveTenantsOfUserLoadedAction).tenants[0].name
+        };
+      } else {
+        newState = state;
+      }
       break;
 
     case USER_PROVIDED_PASSWORD:

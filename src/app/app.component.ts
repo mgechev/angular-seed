@@ -47,22 +47,14 @@ export class AppComponent implements OnInit {
   constructor(private store:Store, private initializeService:InitializeService, sessionService:SessionService) {
   }
 
-  public loginVisibleStates:Array<UiSessionStateEnum> = [
-    UiSessionStateEnum.SESSION_INVALID,
-    UiSessionStateEnum.USERNAME_ENTERED,
-    UiSessionStateEnum.PASSWORD_ENTERED,
-    UiSessionStateEnum.TENANTS_LOADED,
-    UiSessionStateEnum.TENANT_SELECTED,
-    UiSessionStateEnum.LOGIN_CLICKED
-  ];
   public stateSessionValid:UiSessionStateEnum = UiSessionStateEnum.SESSION_VALID;
 
   public ngOnInit():any {
+    console.log('initial store:', this.store.getState());
     this.store.subscribe(function (rootStore:IRootStore):void {
-      console.log('root store:', rootStore);
+      console.log('changed store:', rootStore);
     });
 
-    console.log('initial store:', this.store.getState());
     this.store.dispatch(validSessionRequired());
   }
 }

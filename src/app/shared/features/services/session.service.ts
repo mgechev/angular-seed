@@ -36,7 +36,6 @@ export class SessionService {
           break;
 
         case UiSessionStateEnum.LOGIN_CLICKED:
-          console.log('UiSessionStateEnum.LOGIN_CLICKED');
           self.triggerAuthenticate(uiStore.session.username, uiStore.session.password, uiStore.session.tenant);
           break;
 
@@ -56,7 +55,6 @@ export class SessionService {
           // do nothing here
           break;
       }
-      console.log('session service proceeded', uiStore.session.state);
     });
   }
 
@@ -66,12 +64,9 @@ export class SessionService {
 
     this.loginService.hasLoggedInUser()
       .then(function (hasValidSession:boolean):void {
-        console.log('hasLoggedInUser Response:', hasValidSession);
         if (hasValidSession) {
-          console.log('exists');
           self.triggerGetValidSession();
         } else {
-          console.log('exists not');
           store.dispatch(validSessionExistsNot());
         }
       });
