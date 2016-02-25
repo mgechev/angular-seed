@@ -7,9 +7,8 @@ import {userProvidedUsername,userProvidedPassword,userProvidedTenant,userWantsTo
 
 @Component({
   selector: 'login',
-  directives: [DROPDOWN_DIRECTIVES,Dropdown],
+  directives: [DROPDOWN_DIRECTIVES, Dropdown],
   template: `
-
     <section>
        <h2>Login</h2>
       <!-- here could be a place, where the form-generator is used... -->
@@ -29,8 +28,8 @@ import {userProvidedUsername,userProvidedPassword,userProvidedTenant,userWantsTo
        </fieldset>
 
        <dropdown
-          [options]="store.getSessionState().tenants ? store.getSessionState().tenants : null"
-          [defaultOption]="store.getSessionState().providedTenant"
+          [options]="store.getDataStore().userSession.tenants ? store.getDataStore().userSession.tenants : null"
+          [defaultOption]="store.getUiStore().session.tenant"
           [label]="'Tenants'"
           [noDataMessage]="'Please enter username in order to see available tenants'"
           [emptyOptionsMessage]="'No tenants available for chosen user'"
@@ -40,15 +39,11 @@ import {userProvidedUsername,userProvidedPassword,userProvidedTenant,userWantsTo
         </button>
       </form>
     </section>
-
   `
 })
 export class LoginComponent {
 
-  constructor(private store:Store) {}
-
-  public onLoginClicked(event:any):void {
-    this.store.dispatch(userWantsToLogin());
+  constructor(private store:Store) {
   }
 
   public onUsernameBlurred(event:any):void {
@@ -61,5 +56,9 @@ export class LoginComponent {
 
   public onTenantSelected(tenant:TenantLoginDto):void {
     this.store.dispatch(userProvidedTenant(tenant));
+  }
+
+  public onLoginClicked(event:any):void {
+    this.store.dispatch(userWantsToLogin());
   }
 }

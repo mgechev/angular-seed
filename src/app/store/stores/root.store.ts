@@ -1,15 +1,13 @@
 import {IAssignmentsStore, initialAssignmentsStore} from './assignments.store';
 import {IUsersStore,initialUsersStore} from './users.store';
-import {ISessionStore,initialSessionStore} from './session.store';
 import {IDataStore,initialDataStore} from './data.store';
-import {IUiStateStore,initialUiStateStore} from './ui-state.store';
+import {IUiStore,initialUiStore} from './ui.store';
 import {initialActiveModuleStore} from './modules.store';
 
 export interface IRootStore {
   data: IDataStore;
   activeModule: string;
-  uiState: IUiStateStore;
-  sessionState: ISessionStore;
+  ui: IUiStore;
   usersState: IUsersStore;
   assignmentsState: IAssignmentsStore;
 }
@@ -17,8 +15,7 @@ export interface IRootStore {
 export const initialRootStore:IRootStore = {
   data: initialDataStore,
   activeModule: initialActiveModuleStore,
-  uiState: initialUiStateStore,
-  sessionState: initialSessionStore,
+  ui: initialUiStore,
   usersState: initialUsersStore,
   assignmentsState: initialAssignmentsStore
 };

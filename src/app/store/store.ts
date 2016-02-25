@@ -3,8 +3,7 @@ import {createStore} from 'redux';
 import {initialRootStore} from './stores/root.store';
 import {rootReducer} from './reducers/root.reducer';
 import {IDataStore} from './stores/data.store';
-import {IUiStateStore} from './stores/ui-state.store';
-import {ISessionStore} from './stores/session.store';
+import {IUiStore} from './stores/ui.store';
 import {IRootStore} from './stores/root.store';
 
 /**
@@ -38,14 +37,7 @@ export class Store extends ReduxWrapper {
   /**
    * Specific access to data-node of uiState
    */
-  public getUiState():IUiStateStore {
-    return this.getState().uiState;
-  }
-
-  /**
-   * Specific access to data-node of sessionState
-   */
-  public getSessionState():ISessionStore {
-    return this.getState().sessionState;
+  public getUiStore():IUiStore {
+    return this.getState().ui;
   }
 }

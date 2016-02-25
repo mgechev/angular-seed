@@ -35,7 +35,12 @@ export class GetCall implements IGetCall {
         this._urlSubPath + this._urlParams)
       .toPromise()
       .then(function (response:Response):any {
-        return DtoConverter.typify(response.json());
+
+        if (response.text() === '') {
+          return response.text();
+        } else {
+          return DtoConverter.typify(response.json());
+        }
       });
   }
 }
