@@ -1,3 +1,3 @@
-export interface IBaseAction {
+export interface Action {
   type:string;
 }

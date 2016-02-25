@@ -1,11 +1,11 @@
-import {IBaseAction} from './base.action';
+import {Action} from './base.action';
 
 export const APP_INITIALIZED:string = 'APP_INITIALIZED';
-export interface IAppInitializedAction extends IBaseAction {
+export interface IAppInitializedAction extends Action {
 }
 
 export const BACKEND_CALL_FAILS:string = 'BACKEND_CALL_FAILS';
-export interface IBackendCallFailsAction extends IBaseAction {
+export interface IBackendCallFailsAction extends Action {
   error:Object;
 }
 

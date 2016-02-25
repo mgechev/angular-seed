@@ -1,6 +1,6 @@
 import {USERS_PERMISSIONS_LOADED} from '../../actions/session.actions';
 import {IUserSessionStore} from '../../stores/data/user-session.store';
-import {IBaseAction} from '../../actions/base.action';
+import {Action} from '../../actions/base.action';
 import {IUsersPermissionsLoadedAction} from '../../actions/session.actions';
 import {initialUserSessionStore} from '../../stores/data/user-session.store';
 import {ACTIVE_TENANTS_OF_USER_LOADED} from '../../actions/session.actions';
@@ -8,7 +8,7 @@ import {IActiveTenantsOfUserLoadedAction} from '../../actions/session.actions';
 import {USER_IS_AUTHENTICATED} from '../../actions/session.actions';
 import {IUserIsAuthenticatedAction} from '../../actions/session.actions';
 
-export function userSessionReducer(state:IUserSessionStore = initialUserSessionStore, action:IBaseAction):IUserSessionStore {
+export function userSessionReducer(state:IUserSessionStore = initialUserSessionStore, action:Action):IUserSessionStore {
   let newState:IUserSessionStore;
 
   switch (action.type) {

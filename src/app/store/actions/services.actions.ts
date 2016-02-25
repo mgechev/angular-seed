@@ -1,12 +1,12 @@
-import {IBaseAction} from './base.action';
+import {Action} from './base.action';
 
 export const SERVICE_ACTION_STARTED = 'BACKEND_ACTION_STARTED';
-export interface IServiceActionStartedAction extends IBaseAction {
+export interface IServiceActionStartedAction extends Action {
   endpoint:string;
   message:string;
 }
 export const SERVICE_ACTION_FINISHED = 'BACKEND_ACTION_FINISHED';
-export interface IServiceActionFinishedAction extends IBaseAction {
+export interface IServiceActionFinishedAction extends Action {
   endpoint:string;
   result:any;
   message:string;

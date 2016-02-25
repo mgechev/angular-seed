@@ -1,4 +1,4 @@
-import {IBaseAction} from '../../actions/base.action';
+import {Action} from '../../actions/base.action';
 import {VALID_SESSION_REQUIRED} from '../../actions/session.actions';
 import {VALID_SESSION_EXISTS_NOT} from '../../actions/session.actions';
 import {ISessionStore} from '../../stores/ui/session.store';
@@ -17,7 +17,7 @@ import {USER_LOGOUT_REQUEST} from '../../actions/session.actions';
 import {ACTIVE_TENANTS_OF_USER_LOADED} from '../../actions/session.actions';
 import {IActiveTenantsOfUserLoadedAction} from '../../actions/session.actions';
 
-export function sessionReducer(state:ISessionStore = initialSessionStore, action:IBaseAction):ISessionStore {
+export function sessionReducer(state:ISessionStore = initialSessionStore, action:Action):ISessionStore {
   let newState:ISessionStore;
 
   switch (action.type) {

@@ -1,4 +1,4 @@
-import {IBaseAction} from './base.action';
+import {Action} from './base.action';
 import {TenantLoginDto} from '../../shared/stubs/dtos/tenant-login-dto';
 import {UserLoginDto} from '../../shared/stubs/dtos/user-login-dto';
 import {AuthPermissionDto} from '../../shared/stubs/dtos/auth-permission-dto';
@@ -15,38 +15,38 @@ export const AUTHENTICATE_USER:string = 'AUTHENTICATE_USER';
 export const USER_LOGOUT_REQUEST:string = 'USER_LOGOUT_REQUEST';
 export const USER_LOGGED_OUT:string = 'USER_LOGGED_OUT';
 
-export interface IUsernameProvidedAction extends IBaseAction {
+export interface IUsernameProvidedAction extends Action {
   username:string;
 }
-export interface IPasswordProvidedAction extends IBaseAction {
+export interface IPasswordProvidedAction extends Action {
   password:string;
 }
-export interface ITenantProvidedAction extends IBaseAction {
+export interface ITenantProvidedAction extends Action {
   tenant:string;
 }
 
 export const ACTIVE_TENANTS_OF_USER_LOADED:string = 'ACTIVE_TENANTS_OF_USER_LOADED';
-export interface IActiveTenantsOfUserLoadedAction extends IBaseAction {
+export interface IActiveTenantsOfUserLoadedAction extends Action {
   tenants:Array<TenantLoginDto>;
 }
 export const USER_WANTS_TO_LOGIN:string = 'USER_WANTS_TO_LOGIN';
 
 export const USER_IS_AUTHENTICATED:string = 'USER_IS_AUTHENTICATED';
-export interface IUserIsAuthenticatedAction extends IBaseAction {
+export interface IUserIsAuthenticatedAction extends Action {
   loggedInUser:UserLoginDto;
 }
 export const USERS_PERMISSIONS_LOADED:string = 'USERS_PERMISSIONS_LOADED';
-export interface IUsersPermissionsLoadedAction extends IBaseAction {
+export interface IUsersPermissionsLoadedAction extends Action {
   permissions:Array<AuthPermissionDto>;
 }
 
-export function validSessionRequired():IBaseAction {
+export function validSessionRequired():Action {
   return {
     type: VALID_SESSION_REQUIRED
   };
 }
 
-export function validSessionExistsNot():IBaseAction {
+export function validSessionExistsNot():Action {
   return {
     type: VALID_SESSION_EXISTS_NOT
   };
@@ -79,7 +79,7 @@ export function activeTenantsOfUserLoaded(tenants:Array<TenantLoginDto>):IActive
     tenants
   };
 }
-export function userWantsToLogin():IBaseAction {
+export function userWantsToLogin():Action {
   return {
     type: USER_WANTS_TO_LOGIN
   };
@@ -94,13 +94,13 @@ export function authenticateUser(username:string, password:string, tenant:string
   };
 }
 
-export function userLoggedOut():IBaseAction {
+export function userLoggedOut():Action {
   return {
     type: USER_LOGGED_OUT
   };
 }
 
-export function userLogoutRequest():IBaseAction {
+export function userLogoutRequest():Action {
   return {
     type: USER_LOGOUT_REQUEST
   };
