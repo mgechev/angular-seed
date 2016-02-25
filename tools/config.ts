@@ -15,7 +15,8 @@ export const PORT                 = argv['port']        || 5555;
 export const PROJECT_ROOT         = normalize(join(__dirname, '..'));
 export const ENV                  = getEnvironment();
 export const DEBUG                = argv['debug']       || false;
-export const DOCS_PORT            = argv['docs-port']   || 4003;
+export const DOCS_PORT            = argv['docs-port'] || 4003;
+export const COVERAGE_PORT        = argv['coverage-port'] || 4004;
 export const APP_BASE             = argv['base']        || '/';
 
 export const ENABLE_HOT_LOADING   = !!argv['hot-loader'];
@@ -23,7 +24,7 @@ export const HOT_LOADER_PORT      = 5578;
 
 export const BOOTSTRAP_MODULE     = ENABLE_HOT_LOADING ? 'hot_loader_main' : 'main';
 
-export const APP_TITLE            = 'My Angular2 App';
+export const APP_TITLE            = 'Angular 2 Seed';
 
 export const APP_SRC              = 'src';
 export const ASSETS_SRC           = `${APP_SRC}/assets`;
@@ -47,19 +48,21 @@ export const JS_PROD_APP_BUNDLE   = 'app.js';
 export const VERSION_NPM          = '2.14.2';
 export const VERSION_NODE         = '4.0.0';
 
+export const NG2LINT_RULES        = customRules();
+
 if (ENABLE_HOT_LOADING) {
   console.log(chalk.bgRed.white.bold('The hot loader is temporary disabled.'));
   process.exit(0);
 }
 
-interface InjectableDependency {
+interface IDependency {
   src: string;
   inject: string | boolean;
   dest?: string;
 }
 
 // Declare NPM dependencies (Note that globs should not be injected).
-export const DEV_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencies([
+export const DEV_NPM_DEPENDENCIES: IDependency[] = normalizeDependencies([
   { src: 'systemjs/dist/system-polyfills.src.js', inject: 'shims', dest: JS_DEST },
   { src: 'reflect-metadata/Reflect.js', inject: 'shims', dest: JS_DEST },
   { src: 'es6-shim/es6-shim.js', inject: 'shims', dest: JS_DEST },
@@ -71,7 +74,7 @@ export const DEV_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencie
   { src: 'angular2/bundles/http.js', inject: 'libs', dest: JS_DEST }
 ]);
 
-export const PROD_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencies([
+export const PROD_NPM_DEPENDENCIES: IDependency[] = normalizeDependencies([
   { src: 'systemjs/dist/system-polyfills.src.js', inject: 'shims' },
   { src: 'reflect-metadata/Reflect.js', inject: 'shims' },
   { src: 'es6-shim/es6-shim.min.js', inject: 'shims' },
@@ -80,7 +83,7 @@ export const PROD_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependenci
 ]);
 
 // Declare local files that needs to be injected
-export const APP_ASSETS: InjectableDependency[] = [
+export const APP_ASSETS: IDependency[] = [
   { src: `${ASSETS_SRC}/main.css`, inject: true, dest: CSS_DEST }
 ];
 
@@ -118,16 +121,21 @@ export const SYSTEM_BUILDER_CONFIG = {
 // --------------
 // Private.
 
-function normalizeDependencies(deps: InjectableDependency[]) {
+function normalizeDependencies(deps: IDependency[]) {
   deps
-    .filter((d:InjectableDependency) => !/\*/.test(d.src)) // Skip globs
-    .forEach((d:InjectableDependency) => d.src = require.resolve(d.src));
+    .filter((d:IDependency) => !/\*/.test(d.src)) // Skip globs
+    .forEach((d:IDependency) => d.src = require.resolve(d.src));
   return deps;
 }
 
 function appVersion(): number|string {
   var pkg = JSON.parse(readFileSync('package.json').toString());
   return pkg.version;
+}
+
+function customRules(): string[] {
+  var lintConf = JSON.parse(readFileSync('tslint.json').toString());
+  return lintConf.rulesDirectory;
 }
 
 function getEnvironment() {

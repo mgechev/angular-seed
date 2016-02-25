@@ -13,7 +13,7 @@ import {SpyLocation} from 'angular2/src/mock/location_mock';
 import {RootRouter} from 'angular2/src/router/router';
 
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
-import {AppCmp} from './app';
+import {AppComponent} from './app.component';
 
 export function main() {
 
@@ -24,7 +24,7 @@ export function main() {
       RouteRegistry,
       DirectiveResolver,
       provide(Location, {useClass: SpyLocation}),
-      provide(ROUTER_PRIMARY_COMPONENT, {useValue: AppCmp}),
+      provide(ROUTER_PRIMARY_COMPONENT, {useValue: AppComponent}),
       provide(Router, {useClass: RootRouter})
     ]);
 
@@ -34,7 +34,7 @@ export function main() {
           .then(rootTC => {
             rootTC.detectChanges();
             let appDOMEl = rootTC.debugElement.children[0].nativeElement;
-            expect(DOM.querySelectorAll(appDOMEl, 'section > nav > a')[1].href).toMatch(/http:\/\/localhost:\d+\/about/);
+            expect(DOM.querySelectorAll(appDOMEl, 'sd-app > sd-navbar > nav > a')[1].href).toMatch(/http:\/\/localhost:\d+\/about/);
           });
       }));
   });
@@ -42,7 +42,7 @@ export function main() {
 
 @Component({
   selector: 'test-cmp',
-  template: '<app></app>',
-  directives: [AppCmp]
+  template: '<sd-app></sd-app>',
+  directives: [AppComponent]
 })
 class TestComponent {}

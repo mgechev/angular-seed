@@ -3,12 +3,13 @@ import {runSequence, task} from './tools/utils';
 
 // --------------
 // Clean (override).
-gulp.task('clean',          () => { task('clean', 'all'  ); });
-gulp.task('clean.dev',      () => { task('clean', 'dev' ); });
-gulp.task('clean.prod',     () => { task('clean', 'prod' ); });
-gulp.task('check.versions', () => { task('check.versions'); });
-gulp.task('build.docs',     () => { task('build.docs'    ); });
-gulp.task('serve.docs',     () => { task('serve.docs'    ); });
+gulp.task('clean', done => task('clean', 'all')(done));
+gulp.task('clean.dev', done => task('clean', 'dev')(done));
+gulp.task('clean.prod', done => task('clean', 'prod')(done));
+gulp.task('check.versions', () => task('check.versions'));
+gulp.task('build.docs', () => task('build.docs'));
+gulp.task('serve.docs', () => task('serve.docs'));
+gulp.task('serve.coverage', task('serve.coverage'));
 
 // --------------
 // Build dev.
@@ -30,12 +31,12 @@ gulp.task('build.dev.watch', done =>
 // --------------
 // Build e2e.
 gulp.task('build.e2e', done =>
-    runSequence('clean.dev',
-        'tslint',
-        'build.assets.dev',
-        'build.js.e2e',
-        'build.index.dev',
-        done));
+  runSequence('clean.dev',
+              'tslint',
+              'build.assets.dev',
+              'build.js.e2e',
+              'build.index.dev',
+              done));
 
 // --------------
 // Build prod.
@@ -53,12 +54,12 @@ gulp.task('build.prod', done =>
 // --------------
 // Build test.
 gulp.task('build.test', done =>
-    runSequence('clean.dev',
-        'tslint',
-        'build.assets.dev',
-        'build.js.test',
-        'build.index.dev',
-        done));
+  runSequence('clean.dev',
+              'tslint',
+              'build.assets.dev',
+              'build.js.test',
+              'build.index.dev',
+              done));
 
 // --------------
 // Build test watch.
