@@ -3,10 +3,9 @@ import {TenantLoginDto} from '../../shared/stubs/dtos/tenant-login-dto';
 import {UserLoginDto} from '../../shared/stubs/dtos/user-login-dto';
 import {AuthPermissionDto} from '../../shared/stubs/dtos/auth-permission-dto';
 
-export const LOGGEDIN_USER_REQUIRED:string = 'LOGGEDIN_USER_REQUIRED';
-export const BACKEND_USER_INQUIRY_INITIALIZED:string = 'BACKEND_USER_INQUIRY_INITIALIZED';
-export const SESSION_USER_EXISTS:string = 'SESSION_USER_EXISTS';
-export const BACKEND_AUTHENTICATION_INITIALIZED:string = 'BACKEND_AUTHENTICATION_INITIALIZED';
+export const VALID_SESSION_REQUIRED:string = 'VALID_SESSION_REQUIRED';
+export const VALID_SESSION_EXISTS_NOT:string = 'VALID_SESSION_EXISTS_NOT';
+
 export const USER_PROVIDED_USERNAME:string = 'USER_PROVIDED_USERNAME';
 export const USER_PROVIDED_PASSWORD:string = 'USER_PROVIDED_PASSWORD';
 export const USER_PROVIDED_TENANT:string = 'USER_PROVIDED_TENANT';
@@ -14,7 +13,7 @@ export const USER_PROVIDED_TENANT:string = 'USER_PROVIDED_TENANT';
 export const AUTHENTICATE_USER:string = 'AUTHENTICATE_USER';
 
 export const USER_LOGOUT_REQUEST:string = 'USER_LOGOUT_REQUEST';
-export const LOGOUT_USER:string = 'LOGOUT_USER';
+export const USER_LOGGED_OUT:string = 'USER_LOGGED_OUT';
 
 export interface IUsernameProvidedAction extends IBaseAction {
   username:string;
@@ -41,21 +40,15 @@ export interface IUsersPermissionsLoadedAction extends IBaseAction {
   permissions:Array<AuthPermissionDto>;
 }
 
-export function backendUserInquiryInitialized():IBaseAction {
+export function validSessionRequired():IBaseAction {
   return {
-    type: BACKEND_USER_INQUIRY_INITIALIZED
+    type: VALID_SESSION_REQUIRED
   };
 }
 
-export function loggedInUserRequired():IBaseAction {
+export function validSessionExistsNot():IBaseAction {
   return {
-    type: LOGGEDIN_USER_REQUIRED
-  };
-}
-
-export function sessionUserExists():IBaseAction {
-  return {
-    type: SESSION_USER_EXISTS
+    type: VALID_SESSION_EXISTS_NOT
   };
 }
 
@@ -92,11 +85,6 @@ export function userWantsToLogin():IBaseAction {
   };
 }
 
-export function backendAuthenticationInitialized():IBaseAction {
-  return {
-    type: BACKEND_AUTHENTICATION_INITIALIZED
-  };
-}
 export function authenticateUser(username:string, password:string, tenant:string):Object {
   return {
     type: AUTHENTICATE_USER,
@@ -106,9 +94,9 @@ export function authenticateUser(username:string, password:string, tenant:string
   };
 }
 
-export function logoutUser():IBaseAction {
+export function userLoggedOut():IBaseAction {
   return {
-    type: LOGOUT_USER
+    type: USER_LOGGED_OUT
   };
 }
 

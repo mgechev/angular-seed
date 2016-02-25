@@ -15,7 +15,7 @@ export class DtoConverter {
    */
   public static typify(dumbObject:any):any {
     var typedObject:any;
-    if (dumbObject) {
+    if (dumbObject !== undefined) {
       // is it an object?
       if (typeof dumbObject === 'object') {
         // but it's no array?

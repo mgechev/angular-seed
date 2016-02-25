@@ -27,8 +27,8 @@ import {userProvidedUsername,userProvidedPassword,userProvidedTenant,userWantsTo
        </fieldset>
 
        <dropdown
-          [options]="store.getSessionState().tenants ? store.getSessionState().tenants : null"
-          [defaultOption]="store.getSessionState().providedTenant"
+          [options]="store.getDataStore().userSession.tenants ? store.getDataStore().userSession.tenants : null"
+          [defaultOption]="store.getUiStore().session.tenant"
           [label]="'Tenants'"
           [noDataMessage]="'Please enter username in order to see available tenants'"
           [emptyOptionsMessage]="'No tenants available for chosen user'"
@@ -45,10 +45,6 @@ export class LoginComponent {
   constructor(private store:Store) {
   }
 
-  public onLoginClicked(event:any):void {
-    this.store.dispatch(userWantsToLogin());
-  }
-
   public onUsernameBlurred(event:any):void {
     this.store.dispatch(userProvidedUsername(event.username));
   }
@@ -59,5 +55,9 @@ export class LoginComponent {
 
   public onTenantSelected(tenant:TenantLoginDto):void {
     this.store.dispatch(userProvidedTenant(tenant));
+  }
+
+  public onLoginClicked(event:any):void {
+    this.store.dispatch(userWantsToLogin());
   }
 }

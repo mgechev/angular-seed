@@ -60,12 +60,12 @@ export class PostCall implements IPostCall {
       .then(function (response:Response):any {
 
         /*
-          Not every time the call returns a json which can be parsed
-          the logout() for example returns an empty string.
-          ToDo: Investigate all possible response formats and handle exceptions
+         Not every time the call returns a json which can be parsed
+         the logout() for example returns an empty string.
+         ToDo: Investigate all possible response formats and handle exceptions
          */
 
-        if(response.text()==='') {
+        if (response.text() === '') {
           return response.text();
         } else {
           return DtoConverter.typify(response.json());

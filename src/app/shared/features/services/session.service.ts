@@ -1,60 +1,83 @@
 import {Injectable} from 'angular2/core';
 import {Store} from '../../../store/store';
 import {LoginService} from '../../stubs/services/login.service';
-import {ISessionStore} from '../../../store/stores/session.store';
-import {backendAuthenticationInitialized} from '../../../store/actions/session.actions';
 import {UserLoginDto} from '../../stubs/dtos/user-login-dto';
 import {userIsAuthenticated} from '../../../store/actions/session.actions';
 import {TenantLoginDto} from '../../stubs/dtos/tenant-login-dto';
 import {activeTenantsOfUserLoaded} from '../../../store/actions/session.actions';
-import {backendUserInquiryInitialized} from '../../../store/actions/session.actions';
-import {sessionUserExists} from '../../../store/actions/session.actions';
-import {logoutUser} from '../../../store/actions/session.actions';
+import {userLoggedOut} from '../../../store/actions/session.actions';
+import {IUiStore} from '../../../store/stores/ui.store';
+import {validSessionExistsNot} from '../../../store/actions/session.actions';
+import {UiSessionStateEnum} from '../../../store/stores/ui/session.store';
+import {IDataStore} from '../../../store/stores/data.store';
 
 @Injectable()
 export class SessionService {
   constructor(private store:Store, private loginService:LoginService) {
     let self:SessionService = this;
 
-    store.subscribe(function ():void {
-      let sessionState:ISessionStore = store.getSessionState();
+    // listen for changed store and check, if a backend call is needed
+    store.subscribe(function (/*previousStore:Store*/):void {
+      let uiStore:IUiStore = store.getUiStore();
+      let dataStore:IDataStore = store.getDataStore();
 
-      if (sessionState.loggedInUserRequired && !sessionState.backendUserInquiryInitialized) {
-        self.handleHasLoggedInUser(sessionState);
-      }
+      // add check for previousStore here. Don't proceed if session has not changed
 
-      if (sessionState.sessionUserExists && !sessionState.userAuthenticated) {
-        self.handleGetLoggedInUser(sessionState);
-      }
+      switch (uiStore.session.state) {
+        // check for INITIAL state of session to check, if a valid session exists on the server for this client
+        case UiSessionStateEnum.VALID_SESSION_REQUIRED:
+          self.triggerCheckForValidSession();
+          break;
 
-      if (sessionState.providedUsername && !sessionState.tenants) {
-        self.handleFindActiveTenantsByUser(sessionState);
-      }
+        case UiSessionStateEnum.USERNAME_ENTERED:
+          if (!dataStore.userSession.tenants) {
+            self.triggerFindActiveTenantsByUser(uiStore.session.username);
+          }
+          break;
 
-      if (sessionState.loginAttempt && !sessionState.userAuthenticated && !sessionState.backendAuthenticationInitialized) {
-        self.handleAuthenticate(sessionState);
-      }
+        case UiSessionStateEnum.LOGIN_CLICKED:
+          console.log('UiSessionStateEnum.LOGIN_CLICKED');
+          self.triggerAuthenticate(uiStore.session.username, uiStore.session.password, uiStore.session.tenant);
+          break;
 
-      if (sessionState.userLogoutRequest && sessionState.userAuthenticated) {
-        self.handleLogout(sessionState);
+        case UiSessionStateEnum.LOGOUT_CLICKED:
+          self.triggerLogout();
+          break;
+
+        case UiSessionStateEnum.SESSION_INVALID:
+        case UiSessionStateEnum.SESSION_VALID:
+        case UiSessionStateEnum.PASSWORD_ENTERED:
+        case UiSessionStateEnum.TENANTS_LOADED:
+        case UiSessionStateEnum.TENANT_SELECTED:
+          // no backend call required
+          break;
+
+        default:
+          // do nothing here
+          break;
       }
+      console.log('session service proceeded', uiStore.session.state);
     });
   }
 
-  private handleHasLoggedInUser(sessionState:ISessionStore):void {
+  private triggerCheckForValidSession():void {
     let store:Store = this.store;
-
-    store.dispatch(backendUserInquiryInitialized());
+    let self:SessionService = this;
 
     this.loginService.hasLoggedInUser()
-      .then(function (hasLoggedInUser:boolean):void {
-        if (hasLoggedInUser) {
-          store.dispatch(sessionUserExists());
+      .then(function (hasValidSession:boolean):void {
+        console.log('hasLoggedInUser Response:', hasValidSession);
+        if (hasValidSession) {
+          console.log('exists');
+          self.triggerGetValidSession();
+        } else {
+          console.log('exists not');
+          store.dispatch(validSessionExistsNot());
         }
       });
   }
 
-  private handleGetLoggedInUser(sessionState:ISessionStore):void {
+  private triggerGetValidSession():void {
     let store:Store = this.store;
 
     this.loginService.getLoggedInUser()
@@ -63,34 +86,30 @@ export class SessionService {
       });
   }
 
-  private handleFindActiveTenantsByUser(sessionState:ISessionStore):void {
+  private triggerFindActiveTenantsByUser(username:string):void {
     let store:Store = this.store;
-    this.loginService.findActiveTenantsByUser(sessionState.providedUsername)
+
+    this.loginService.findActiveTenantsByUser(username)
       .then(function (tenants:Array<TenantLoginDto>):void {
         store.dispatch(activeTenantsOfUserLoaded(tenants));
       });
   }
 
-  private handleAuthenticate(sessionState:ISessionStore):void {
+  private triggerAuthenticate(username:string, password:string, tenant:string):void {
     let store:Store = this.store;
 
-    store.dispatch(backendAuthenticationInitialized());
-    this.loginService.authenticate(
-      sessionState.loginAttempt.username,
-      sessionState.loginAttempt.password,
-      sessionState.loginAttempt.tenant
-      )
+    this.loginService.authenticate(username, password, tenant)
       .then(function (userLoginDto:UserLoginDto):void {
         store.dispatch(userIsAuthenticated(userLoginDto));
       });
   }
 
-  private handleLogout(sessionState:ISessionStore):void {
+  private triggerLogout():void {
     let store:Store = this.store;
 
     this.loginService.logout()
       .then(function ():void {
-        store.dispatch(logoutUser());
+        store.dispatch(userLoggedOut());
       });
   }
 }

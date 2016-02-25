@@ -9,21 +9,23 @@ import {ActivitiesComponent} from './features/activities/activities.component';
 import {AdministrationComponent} from './features/administration/administration.component';
 import {ApplicationHeader} from './shared/features/application-header/application-header.component';
 
-import {loggedInUserRequired} from './store/actions/session.actions';
+import {validSessionRequired} from './store/actions/session.actions';
 import {SessionService} from './shared/features/services/session.service';
+import {UiSessionStateEnum} from './store/stores/ui/session.store';
+import {IRootStore} from './store/stores/root.store';
 
 @Component({
   selector: 'app',
   template: `
     <div class="container">
       <div class="row">
-        <login *ngIf="!store.getSessionState().userAuthenticated"
+        <login *ngIf="store.getUiStore().session.state !== stateSessionValid"
         class="col-lg-4 col-md-6 col-sm-7 col-xs-8 center-block pull-xs-none m-t-3"></login>
       </div>
     </div>
     <div class="container-fluid">
       <div class="row">
-        <section *ngIf="store.getSessionState().userAuthenticated" id="applicationframe">
+        <section *ngIf="store.getUiStore().session.state === stateSessionValid" id="applicationframe">
 
             <application-header></application-header>
 
@@ -32,7 +34,7 @@ import {SessionService} from './shared/features/services/session.service';
             <activities *ngIf="store.getState().activeModule=='activities'"></activities>
             <administration *ngIf="store.getState().activeModule=='administration'"></administration>
 
-            <footer>Message: {{store.getState().uiState.message}}</footer>
+            <footer>Message: {{store.getUiStore().global.message}}</footer>
 
         </section>
       </div>
@@ -45,8 +47,22 @@ export class AppComponent implements OnInit {
   constructor(private store:Store, private initializeService:InitializeService, sessionService:SessionService) {
   }
 
-  public ngOnInit():any {
-    this.store.dispatch(loggedInUserRequired());
-  }
+  public loginVisibleStates:Array<UiSessionStateEnum> = [
+    UiSessionStateEnum.SESSION_INVALID,
+    UiSessionStateEnum.USERNAME_ENTERED,
+    UiSessionStateEnum.PASSWORD_ENTERED,
+    UiSessionStateEnum.TENANTS_LOADED,
+    UiSessionStateEnum.TENANT_SELECTED,
+    UiSessionStateEnum.LOGIN_CLICKED
+  ];
+  public stateSessionValid:UiSessionStateEnum = UiSessionStateEnum.SESSION_VALID;
 
+  public ngOnInit():any {
+    this.store.subscribe(function (rootStore:IRootStore):void {
+      console.log('root store:', rootStore);
+    });
+
+    console.log('initial store:', this.store.getState());
+    this.store.dispatch(validSessionRequired());
+  }
 }

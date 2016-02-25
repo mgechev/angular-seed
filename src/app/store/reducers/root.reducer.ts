@@ -1,7 +1,6 @@
 import {assignmentsStateReducer} from './assignments.reducer';
 import {usersStateReducer} from './users.reducer';
-import {sessionStateReducer} from './session-store.reducer';
-import {uiStateReducer} from './ui-state.reducer';
+import {uiReducer} from './ui.reducer';
 import {activeModuleReducer} from './modules-state.reducer';
 import {dataStoreReducer} from './data.reducer';
 import {Reducer, combineReducers}from 'redux';
@@ -14,8 +13,7 @@ import {Reducer, combineReducers}from 'redux';
 export const rootReducer:Reducer = combineReducers({
   data: dataStoreReducer,
   activeModule: activeModuleReducer,
-  uiState: uiStateReducer,
-  sessionState: sessionStateReducer,
+  ui: uiReducer,
   usersState: usersStateReducer,
   assignmentsState: assignmentsStateReducer
 });
