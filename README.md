@@ -1,5 +1,6 @@
 # Introduction
 
+[![Angular 2 Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://github.com/mgechev/angular2-style-guide)
 [![Build Status](https://travis-ci.org/mgechev/angular2-seed.svg?branch=master)](https://travis-ci.org/mgechev/angular2-seed)
 [![Join the chat at https://gitter.im/mgechev/angular2-seed](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mgechev/angular2-seed?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
@@ -17,7 +18,7 @@ It is something similar to the Angular Quick Start but does the entire build wit
 - Sample unit tests with Jasmine and Karma including code coverage via [istanbul](https://gotwarlost.github.io/istanbul/).
 - End-to-end tests with Protractor.
 - Development server with Livereload.
-- Following the best practices for your application’s structure.
+- Following the [best practices for your application’s structure](https://github.com/mgechev/angular2-style-guide).
 - Manager of your type definitions using [typings](https://github.com/typings/typings).
 - Basic Service Worker, which implements "Cache then network strategy".
 
