@@ -1,36 +1,26 @@
-import {IBaseAction} from './base.action';
+import {Action} from './base.action';
 
 export const MAIN_NAVIGATION_ITEM_CLICKED:string = 'MAIN_NAVIGATION_ITEM_CLICKED';
-export interface IMainNavigationItemClickedAction extends IBaseAction {
-  key:string;
-}
-
 export const SECONDARY_NAVIGATION_ITEM_CLICKED:string = 'MAIN_NAVIGATION_ITEM_CLICKED';
-export interface ISecondaryNavigationItemClickedAction extends IBaseAction {
-  key:string;
-}
 export const ADMINISTRATION_NAVIGATION_ITEM_CLICKED:string = 'ADMINISTRATION_NAVIGATION_ITEM_CLICKED';
-export interface IAdministrationNavigationItemClickedAction extends IBaseAction {
-  key:string;
-}
 
-export function mainNavigationItemClicked(key:string):IMainNavigationItemClickedAction {
+export function mainNavigationItemClicked(key:string):Action<string> {
   return {
     type: MAIN_NAVIGATION_ITEM_CLICKED,
-    key
+    payload: key
   };
 }
 
-export function secondaryNavigationItemClicked(key:string):ISecondaryNavigationItemClickedAction {
+export function secondaryNavigationItemClicked(key:string):Action<string> {
   return {
     type: SECONDARY_NAVIGATION_ITEM_CLICKED,
-    key
+    payload: key
   };
 }
 
-export function administrationNavigationItemClicked(key:string):IAdministrationNavigationItemClickedAction {
+export function administrationNavigationItemClicked(key:string):Action<string> {
   return {
     type: ADMINISTRATION_NAVIGATION_ITEM_CLICKED,
-    key
+    payload: key
   };
 }

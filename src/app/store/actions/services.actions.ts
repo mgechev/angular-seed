@@ -1,30 +1,31 @@
-import {IBaseAction} from './base.action';
+import {Action} from './base.action';
 
 export const SERVICE_ACTION_STARTED = 'BACKEND_ACTION_STARTED';
-export interface IServiceActionStartedAction extends IBaseAction {
-  endpoint:string;
-  message:string;
-}
 export const SERVICE_ACTION_FINISHED = 'BACKEND_ACTION_FINISHED';
-export interface IServiceActionFinishedAction extends IBaseAction {
+
+export interface IServiceActionPayload {
   endpoint:string;
-  result:any;
   message:string;
+  result?:any;
 }
 
-export function backendActionStarted(endpoint:string = ''):IServiceActionStartedAction {
+export function backendActionStarted(endpoint:string = ''):Action<IServiceActionPayload> {
   return {
     type: SERVICE_ACTION_STARTED,
-    endpoint,
-    message: 'Backend action started'
+    payload: {
+      endpoint: endpoint,
+      message: 'Backend action started'
+    }
   };
 }
 
-export function backendActionFinished(endpoint:string = '', result):IServiceActionFinishedAction {
+export function backendActionFinished(endpoint:string = '', result):Action<IServiceActionPayload> {
   return {
     type: SERVICE_ACTION_FINISHED,
-    endpoint,
-    result,
-    message: 'Ready'
+    payload: {
+      endpoint: endpoint,
+      message: 'Backend action started',
+      result: result
+    }
   };
 }

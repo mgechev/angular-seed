@@ -1,18 +1,18 @@
 import {SERVICE_ACTION_FINISHED} from '../actions/services.actions';
 import {IUsersStore} from '../stores/users.store';
-import {IBaseAction} from '../actions/base.action';
-import {IServiceActionFinishedAction} from '../actions/services.actions';
+import {Action} from '../actions/base.action';
 import {initialUsersStore} from '../stores/users.store';
+import {IServiceActionPayload} from '../actions/services.actions';
 
-export function usersStateReducer(usersState:IUsersStore = initialUsersStore, action:IBaseAction):IUsersStore {
+export function usersStateReducer(usersState:IUsersStore = initialUsersStore, action:Action<any>):IUsersStore {
   let newState;
 
   switch (action.type) {
     case SERVICE_ACTION_FINISHED:
-      if ((action as IServiceActionFinishedAction).endpoint === '/mocks/users.json') {
+      if ((action as Action<IServiceActionPayload>).payload.endpoint === '/mocks/users.json') {
         newState = {
           state: 'loaded',
-          usersList: (action as IServiceActionFinishedAction).result
+          usersList: (action as Action<IServiceActionPayload>).payload.result
         };
       } else {
         newState = usersState;

@@ -1,14 +1,14 @@
 import {USERS_PERMISSIONS_LOADED} from '../../actions/session.actions';
 import {IUserSessionStore} from '../../stores/data/user-session.store';
-import {IBaseAction} from '../../actions/base.action';
-import {IUsersPermissionsLoadedAction} from '../../actions/session.actions';
+import {Action} from '../../actions/base.action';
 import {initialUserSessionStore} from '../../stores/data/user-session.store';
 import {ACTIVE_TENANTS_OF_USER_LOADED} from '../../actions/session.actions';
-import {IActiveTenantsOfUserLoadedAction} from '../../actions/session.actions';
 import {USER_IS_AUTHENTICATED} from '../../actions/session.actions';
-import {IUserIsAuthenticatedAction} from '../../actions/session.actions';
+import {AuthPermissionDto} from '../../../shared/stubs/dtos/auth-permission-dto';
+import {TenantLoginDto} from '../../../shared/stubs/dtos/tenant-login-dto';
+import {UserLoginDto} from '../../../shared/stubs/dtos/user-login-dto';
 
-export function userSessionReducer(state:IUserSessionStore = initialUserSessionStore, action:IBaseAction):IUserSessionStore {
+export function userSessionReducer(state:IUserSessionStore = initialUserSessionStore, action:Action<any>):IUserSessionStore {
   let newState:IUserSessionStore;
 
   switch (action.type) {
@@ -17,7 +17,7 @@ export function userSessionReducer(state:IUserSessionStore = initialUserSessionS
         user: state.user,
         tenantId: state.tenantId,
         tenants: state.tenants,
-        permissions: (action as IUsersPermissionsLoadedAction).permissions,
+        permissions: (action as Action<Array<AuthPermissionDto>>).payload,
         userPreferences: state.userPreferences
       };
       break;
@@ -26,7 +26,7 @@ export function userSessionReducer(state:IUserSessionStore = initialUserSessionS
       newState = {
         user: state.user,
         tenantId: state.tenantId,
-        tenants: (action as IActiveTenantsOfUserLoadedAction).tenants,
+        tenants: (action as Action<Array<TenantLoginDto>>).payload,
         permissions: state.permissions,
         userPreferences: state.userPreferences
       };
@@ -34,7 +34,7 @@ export function userSessionReducer(state:IUserSessionStore = initialUserSessionS
 
     case USER_IS_AUTHENTICATED:
       newState = {
-        user: (action as IUserIsAuthenticatedAction).loggedInUser,
+        user: (action as Action<UserLoginDto>).payload,
         tenantId: state.tenantId,
         tenants: state.tenants,
         permissions: state.permissions,

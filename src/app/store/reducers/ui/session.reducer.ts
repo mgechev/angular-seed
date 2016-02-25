@@ -1,4 +1,4 @@
-import {IBaseAction} from '../../actions/base.action';
+import {Action} from '../../actions/base.action';
 import {VALID_SESSION_REQUIRED} from '../../actions/session.actions';
 import {VALID_SESSION_EXISTS_NOT} from '../../actions/session.actions';
 import {ISessionStore} from '../../stores/ui/session.store';
@@ -7,17 +7,14 @@ import {UiSessionStateEnum} from '../../stores/ui/session.store';
 import {USER_PROVIDED_USERNAME} from '../../actions/session.actions';
 import {USER_PROVIDED_PASSWORD} from '../../actions/session.actions';
 import {USER_PROVIDED_TENANT} from '../../actions/session.actions';
-import {IUsernameProvidedAction} from '../../actions/session.actions';
-import {IPasswordProvidedAction} from '../../actions/session.actions';
-import {ITenantProvidedAction} from '../../actions/session.actions';
 import {USER_WANTS_TO_LOGIN} from '../../actions/session.actions';
 import {USER_IS_AUTHENTICATED} from '../../actions/session.actions';
 import {USER_LOGGED_OUT} from '../../actions/session.actions';
 import {USER_LOGOUT_REQUEST} from '../../actions/session.actions';
 import {ACTIVE_TENANTS_OF_USER_LOADED} from '../../actions/session.actions';
-import {IActiveTenantsOfUserLoadedAction} from '../../actions/session.actions';
+import {TenantLoginDto} from '../../../shared/stubs/dtos/tenant-login-dto';
 
-export function sessionReducer(state:ISessionStore = initialSessionStore, action:IBaseAction):ISessionStore {
+export function sessionReducer(state:ISessionStore = initialSessionStore, action:Action<any>):ISessionStore {
   let newState:ISessionStore;
 
   switch (action.type) {
@@ -42,20 +39,20 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
     case USER_PROVIDED_USERNAME:
       newState = {
         state: UiSessionStateEnum.USERNAME_ENTERED,
-        username: (action as IUsernameProvidedAction).username,
+        username: (action as Action<string>).payload,
         password: state.password,
         tenant: state.tenant
       };
       break;
 
     case ACTIVE_TENANTS_OF_USER_LOADED:
-      let activeAction:IActiveTenantsOfUserLoadedAction = action as IActiveTenantsOfUserLoadedAction;
-      if (activeAction.tenants) {
+      let activeAction:Action<Array<TenantLoginDto>> = action as Action<Array<TenantLoginDto>>;
+      if (activeAction.payload) {
         newState = {
           state: state.state,
           username: state.username,
           password: state.password,
-          tenant: (action as IActiveTenantsOfUserLoadedAction).tenants[0].name
+          tenant: action.payload[0].name
         };
       } else {
         newState = state;
@@ -66,7 +63,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
       newState = {
         state: UiSessionStateEnum.PASSWORD_ENTERED,
         username: state.username,
-        password: (action as IPasswordProvidedAction).password,
+        password: (action as Action<string>).payload,
         tenant: state.tenant
       };
       break;
@@ -76,7 +73,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
         state: UiSessionStateEnum.TENANT_SELECTED,
         username: state.username,
         password: state.password,
-        tenant: (action as ITenantProvidedAction).tenant
+        tenant: (action as Action<string>).payload
       };
       break;
 
@@ -87,7 +84,6 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
         password: state.password,
         tenant: state.tenant
       };
-      console.log('reducing USER_WANTS_TO_LOGIN...');
       break;
 
     case USER_IS_AUTHENTICATED:
