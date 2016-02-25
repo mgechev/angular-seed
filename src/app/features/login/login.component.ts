@@ -23,7 +23,8 @@ import {userProvidedUsername,userProvidedPassword,userProvidedTenant,userWantsTo
        <fieldset class="form-group">
           <label for="password">Password:</label>
           <input id="password" #password type="password" class="form-control"
-          (blur)="onPasswordBlurred({password: password.value})"/>
+          (change)="onPasswordChanged({password: password.value})"
+          (blur)="onPasswordChanged({password: password.value})"/>
        </fieldset>
 
        <dropdown
@@ -49,7 +50,7 @@ export class LoginComponent {
     this.store.dispatch(userProvidedUsername(event.username));
   }
 
-  public onPasswordBlurred(event:any):void {
+  public onPasswordChanged(event:any):void {
     this.store.dispatch(userProvidedPassword(event.password));
   }
 
