@@ -17,7 +17,7 @@ export class SessionService {
     let self:SessionService = this;
 
     // listen for changed store and check, if a backend call is needed
-    store.subscribe(function (/*previousStore:Store*/):void {
+    store.subscribe(function ():void {
       let uiStore:IUiStore = store.getUiStore();
       let dataStore:IDataStore = store.getDataStore();
 
