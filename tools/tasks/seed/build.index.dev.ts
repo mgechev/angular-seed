@@ -1,6 +1,7 @@
 import {join} from 'path';
-import {APP_SRC, APP_DEST, DEV_DEPENDENCIES} from '../../config';
-import {transformPath, templateLocals} from '../../utils';
+import * as slash from 'slash';
+import {APP_SRC, APP_DEST, APP_BASE, DEV_DEPENDENCIES} from '../../config';
+import {templateLocals} from '../../utils';
 
 export = function buildIndexDev(gulp, plugins) {
   return function () {

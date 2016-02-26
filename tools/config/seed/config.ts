@@ -63,15 +63,15 @@ interface InjectableDependency {
 
 // Declare NPM dependencies (Note that globs should not be injected).
 export const DEV_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencies([
-  { src: 'systemjs/dist/system-polyfills.src.js', inject: 'shims', dest: JS_DEST },
-  { src: 'reflect-metadata/Reflect.js', inject: 'shims', dest: JS_DEST },
-  { src: 'es6-shim/es6-shim.js', inject: 'shims', dest: JS_DEST },
-  { src: 'systemjs/dist/system.src.js', inject: 'shims', dest: JS_DEST },
-  { src: 'angular2/bundles/angular2-polyfills.js', inject: 'shims', dest: JS_DEST },
-  { src: 'rxjs/bundles/Rx.js', inject: 'libs', dest: JS_DEST },
-  { src: 'angular2/bundles/angular2.js', inject: 'libs', dest: JS_DEST },
-  { src: 'angular2/bundles/router.js', inject: 'libs', dest: JS_DEST },
-  { src: 'angular2/bundles/http.js', inject: 'libs', dest: JS_DEST }
+  { src: 'systemjs/dist/system-polyfills.src.js', inject: 'shims' },
+  { src: 'reflect-metadata/Reflect.js', inject: 'shims' },
+  { src: 'es6-shim/es6-shim.js', inject: 'shims' },
+  { src: 'systemjs/dist/system.src.js', inject: 'shims' },
+  { src: 'angular2/bundles/angular2-polyfills.js', inject: 'shims' },
+  { src: 'rxjs/bundles/Rx.js', inject: 'libs' },
+  { src: 'angular2/bundles/angular2.js', inject: 'libs' },
+  { src: 'angular2/bundles/router.js', inject: 'libs' },
+  { src: 'angular2/bundles/http.js', inject: 'libs' }
 ]);
 
 export const PROD_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencies([
@@ -84,7 +84,7 @@ export const PROD_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependenci
 
 // Declare local files that needs to be injected
 export const APP_ASSETS: InjectableDependency[] = [
-  { src: `${ASSETS_SRC}/main.css`, inject: true, dest: CSS_DEST }
+  { src: `${ASSETS_SRC}/main.css`, inject: true }
 ];
 
 

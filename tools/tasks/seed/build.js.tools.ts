@@ -8,8 +8,7 @@ export = function buildJSDev(gulp, plugins) {
     let src = [
       'typings/main.d.ts',
       'tools/manual_typings/**/*.d.ts',
-      join(TOOLS_DIR, '**/*.ts'),
-      'gulpfile.ts'
+      join(TOOLS_DIR, '**/*.ts')
     ];
     let result = gulp.src(src, { base: './' })
       .pipe(plugins.plumber())

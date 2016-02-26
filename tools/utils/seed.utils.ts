@@ -1,4 +1,3 @@
-export * from './seed/template_injectables';
 export * from './seed/template_locals';
 export * from './seed/server';
 export * from './seed/tasks_tools';
