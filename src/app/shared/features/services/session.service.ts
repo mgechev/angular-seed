@@ -15,7 +15,7 @@ export class SessionService {
 
       switch (uiStore.session.state) {
         case UiSessionStateEnum.VALID_SESSION_REQUIRED:
-          self.loginService.hasLoggedInUser();
+            self.loginService.hasLoggedInUser();
           break;
 
         case UiSessionStateEnum.BACKEND_HAS_VALID_SESSION:
