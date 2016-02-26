@@ -1,9 +1,9 @@
 {
   "name": "angular2-seed",
   "version": "0.0.0",
-  "description": "Seed for Angular 2 apps",
+  "description": "Test drive for ng2 + redux + ag-grid",
   "repository": {
-    "url": "https://github.com/mgechev/angular2-seed"
+    "url": "https://github.com/dellfort/angular2-redux-ag-grid"
   },
   "scripts": {
     "build.dev": "gulp build.dev",
@@ -95,9 +95,15 @@
     "yargs": "^3.32.0"
   },
   "dependencies": {
+    "ag-grid": "^3.3.3",
+    "ag-grid-ng2": "^3.3.1",
+    "bootstrap": "^4.0.0-alpha.2",
     "angular2": "2.0.0-beta.7",
     "es6-module-loader": "^0.17.8",
     "es6-shim": "^0.33.3",
+    "moment": "^2.11.2",
+    "ng2-bootstrap": "^1.0.3",
+    "redux": "^3.3.1",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
     "systemjs": "~0.19.18",
