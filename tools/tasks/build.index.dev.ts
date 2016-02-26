@@ -1,11 +1,11 @@
 import {join} from 'path';
-import {APP_SRC, APP_DEST, DEV_DEPENDENCIES} from '../config';
-import {transformPath, templateLocals} from '../utils';
+import {APP_SRC, APP_DEST, APP_BASE, DEV_DEPENDENCIES} from '../config';
+import {templateLocals} from '../utils';
+import * as slash from 'slash';
 
 export = function buildIndexDev(gulp, plugins) {
   return function () {
     return gulp.src(join(APP_SRC, 'index.html'))
-      // NOTE: There might be a way to pipe in loop.
       .pipe(inject('shims'))
       .pipe(inject('libs'))
       .pipe(inject())
@@ -17,7 +17,7 @@ export = function buildIndexDev(gulp, plugins) {
   function inject(name?: string) {
     return plugins.inject(gulp.src(getInjectablesDependenciesRef(name), { read: false }), {
       name,
-      transform: transformPath(plugins, 'dev')
+      transform: transformPath()
     });
   }
 
@@ -34,4 +34,12 @@ export = function buildIndexDev(gulp, plugins) {
     }
     return envPath;
   }
+
+  function transformPath() {
+    return function (filepath) {
+      arguments[0] = join(APP_BASE, filepath) + `?${Date.now()}`;
+      return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));
+    };
+  }
+
 };
