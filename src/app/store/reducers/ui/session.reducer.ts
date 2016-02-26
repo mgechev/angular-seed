@@ -11,10 +11,13 @@ import {USER_WANTS_TO_LOGIN} from '../../actions/session.actions';
 import {USER_IS_AUTHENTICATED} from '../../actions/session.actions';
 import {USER_LOGGED_OUT} from '../../actions/session.actions';
 import {USER_LOGOUT_REQUEST} from '../../actions/session.actions';
-import {ACTIVE_TENANTS_OF_USER_LOADED} from '../../actions/session.actions';
 import {BACKEND_CALL_SUCCEEDED} from '../../actions/services.actions';
 import {BackendCallSucceededActionPayload} from '../../actions/services.actions';
 import {ServiceMethods} from '../../../shared/stubs/services/meta/service-methods';
+import {getActionPayload} from '../../actions/base.action';
+import {BACKEND_CALL_STARTED} from '../../actions/services.actions';
+import {BackendCallStartedActionPayload} from '../../actions/services.actions';
+import {TenantLoginDto} from '../../../shared/stubs/dtos/tenant-login-dto';
 
 export function sessionReducer(state:ISessionStore = initialSessionStore, action:Action<any>):ISessionStore {
   let newState:ISessionStore;
@@ -44,15 +47,6 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
         username: (action as Action<string>).payload,
         password: state.password,
         tenant: state.tenant
-      };
-      break;
-
-    case ACTIVE_TENANTS_OF_USER_LOADED:
-      newState = {
-        state: state.state,
-        username: state.username,
-        password: state.password,
-        tenant: action.payload.length > 0 ? action.payload[0].name : state.tenant
       };
       break;
 
@@ -110,11 +104,89 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
       };
       break;
 
+    case BACKEND_CALL_STARTED:
+      let methodIdentStarted:string = getActionPayload<BackendCallStartedActionPayload>(action).methodIdent;
+
+      switch (methodIdentStarted) {
+        case ServiceMethods.LoginService.hasLoggedInUser:
+          newState = {
+            state: UiSessionStateEnum.BACKEND_ASKED_FOR_VALID_SESSION,
+            username: null,
+            password: null,
+            tenant: null
+          };
+          break;
+
+        case ServiceMethods.LoginService.getLoggedInUser:
+          newState = {
+            state: UiSessionStateEnum.BACKEND_VALID_SESSION_REQUESTED,
+            username: null,
+            password: null,
+            tenant: null
+          };
+          break;
+
+        case ServiceMethods.LoginService.findActiveTenantsByUser:
+          newState = {
+            state: UiSessionStateEnum.BACKEND_ASKED_FOR_ACTIVE_TENANTS,
+            username: null,
+            password: null,
+            tenant: null
+          };
+          break;
+
+        default:
+          newState = state;
+          break;
+      }
+      break;
+
     case BACKEND_CALL_SUCCEEDED:
-      let succeededCallPayload:BackendCallSucceededActionPayload = (action as Action<BackendCallSucceededActionPayload>).payload;
-      switch (succeededCallPayload.methodIdent) {
-        case ServiceMethods.LoginService.authenticate:
-          console.log('#');
+      let methodIdentSucceeded:string = getActionPayload<BackendCallSucceededActionPayload<any>>(action).methodIdent;
+
+      switch (methodIdentSucceeded) {
+
+        case ServiceMethods.LoginService.hasLoggedInUser:
+          let hasLoggedInUser:boolean = getActionPayload<BackendCallSucceededActionPayload<boolean>>(action).result;
+          if (hasLoggedInUser) {
+            newState = {
+              state: UiSessionStateEnum.BACKEND_HAS_VALID_SESSION,
+              username: null,
+              password: null,
+              tenant: null
+            };
+          } else {
+            newState = {
+              state: UiSessionStateEnum.BACKEND_HAS_NO_VALID_SESSION,
+              username: null,
+              password: null,
+              tenant: null
+            };
+          }
+          break;
+
+        case ServiceMethods.LoginService.getLoggedInUser:
+          newState = {
+            state: UiSessionStateEnum.SESSION_VALID,
+            username: null,
+            password: null,
+            tenant: null
+          };
+          break;
+
+        case ServiceMethods.LoginService.findActiveTenantsByUser:
+          let activeTenants:Array<TenantLoginDto> =
+            getActionPayload<BackendCallSucceededActionPayload<Array<TenantLoginDto>>>(action).result;
+          newState = {
+            state: UiSessionStateEnum.BACKEND_ACTIVE_TENANTS_RECEIVED,
+            username: null,
+            password: null,
+            tenant: activeTenants.length > 0 ? activeTenants[0].name : state.tenant
+          };
+          break;
+
+        default:
+          newState = state;
           break;
       }
       break;

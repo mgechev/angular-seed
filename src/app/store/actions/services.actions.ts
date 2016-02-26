@@ -46,9 +46,9 @@ export interface BackendCallStartedActionPayload {
   parameters?:Object;
   options?:Object;
 }
-export interface BackendCallSucceededActionPayload {
+export interface BackendCallSucceededActionPayload<R> {
   methodIdent:string;
-  result?:any;
+  result?:R;
 }
 export interface BackendCallFailedActionPayload {
   methodIdent:string;
@@ -65,7 +65,7 @@ export function backendCallStarted(methodIdent:string, parameters:Object, option
     }
   };
 }
-export function backendCallSucceeded(methodIdent:string, result:any):Action<BackendCallSucceededActionPayload> {
+export function backendCallSucceeded(methodIdent:string, result:any):Action<BackendCallSucceededActionPayload<any>> {
   return {
     type: BACKEND_CALL_SUCCEEDED,
     payload: {

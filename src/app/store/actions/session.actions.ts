@@ -15,7 +15,6 @@ export const AUTHENTICATE_USER:string = 'AUTHENTICATE_USER';
 export const USER_LOGOUT_REQUEST:string = 'USER_LOGOUT_REQUEST';
 export const USER_LOGGED_OUT:string = 'USER_LOGGED_OUT';
 
-export const ACTIVE_TENANTS_OF_USER_LOADED:string = 'ACTIVE_TENANTS_OF_USER_LOADED';
 export const USER_WANTS_TO_LOGIN:string = 'USER_WANTS_TO_LOGIN';
 
 export const USER_IS_AUTHENTICATED:string = 'USER_IS_AUTHENTICATED';
@@ -54,12 +53,6 @@ export function userProvidedTenant(tenant:TenantLoginDto):Action<string> {
   };
 }
 
-export function activeTenantsOfUserLoaded(tenants:Array<TenantLoginDto>):Action<Array<TenantLoginDto>> {
-  return {
-    type: ACTIVE_TENANTS_OF_USER_LOADED,
-    payload: tenants
-  };
-}
 export function userWantsToLogin():Action<any> {
   return {
     type: USER_WANTS_TO_LOGIN

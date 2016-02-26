@@ -10,6 +10,7 @@ import {BACKEND_CALL_FAILED} from '../../actions/services.actions';
 import {BackendCallFailedActionPayload} from '../../actions/services.actions';
 import {BACKEND_CALL_SUCCEEDED} from '../../actions/services.actions';
 import {BackendCallSucceededActionPayload} from '../../actions/services.actions';
+import {getActionPayload} from '../../actions/base.action';
 
 export function globalReducer(state:IGlobalStore = initialGlobalStore, action:Action<any>):IGlobalStore {
   let newState:IGlobalStore;
@@ -33,29 +34,26 @@ export function globalReducer(state:IGlobalStore = initialGlobalStore, action:Ac
       break;
 
     case BACKEND_CALL_STARTED:
-      console.log('backend call started');
-      let backendCallStartedPayload:BackendCallStartedActionPayload = (action as Action<BackendCallStartedActionPayload>).payload;
+      let methodIdentStarted:string = getActionPayload<BackendCallStartedActionPayload>(action).methodIdent;
       newState = {
         actionOngoing: true,
-        message: 'Backend Call Active: ' + backendCallStartedPayload.methodIdent
+        message: 'Backend Call Active: ' + methodIdentStarted
       };
       break;
 
     case BACKEND_CALL_SUCCEEDED:
-      console.log('backend call succeeded');
-      let backendCallSucceededPayload:BackendCallSucceededActionPayload = (action as Action<BackendCallSucceededActionPayload>).payload;
+      let methodIdentSucceeded:string = getActionPayload<BackendCallSucceededActionPayload<any>>(action).methodIdent;
       newState = {
         actionOngoing: false,
-        message: 'Backend Call Succeeded: ' + backendCallSucceededPayload.methodIdent
+        message: 'Backend Call Succeeded: ' + methodIdentSucceeded
       };
       break;
 
     case BACKEND_CALL_FAILED:
-      console.log('backend call failed');
-      let backendCallFailedPayload:BackendCallFailedActionPayload = (action as Action<BackendCallFailedActionPayload>).payload;
+      let methodIdentFailed:string = getActionPayload<BackendCallFailedActionPayload>(action).methodIdent;
       newState = {
         actionOngoing: false,
-        message: 'Backend Call Failed: ' + backendCallFailedPayload.methodIdent
+        message: 'Backend Call Failed: ' + methodIdentFailed
       };
       break;
 
