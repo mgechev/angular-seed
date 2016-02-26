@@ -41,7 +41,6 @@ function cleanProd(done) {
 }
 
 function cleanTools(done) {
-  del.sync('gulpfile.js');
   deleteAndWalk(TOOLS_DIR);
   done();
 
