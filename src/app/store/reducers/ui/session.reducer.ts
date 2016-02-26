@@ -12,6 +12,9 @@ import {USER_IS_AUTHENTICATED} from '../../actions/session.actions';
 import {USER_LOGGED_OUT} from '../../actions/session.actions';
 import {USER_LOGOUT_REQUEST} from '../../actions/session.actions';
 import {ACTIVE_TENANTS_OF_USER_LOADED} from '../../actions/session.actions';
+import {BACKEND_CALL_SUCCEEDED} from '../../actions/services.actions';
+import {BackendCallSucceededActionPayload} from '../../actions/services.actions';
+import {ServiceMethods} from '../../../shared/stubs/services/meta/service-methods';
 
 export function sessionReducer(state:ISessionStore = initialSessionStore, action:Action<any>):ISessionStore {
   let newState:ISessionStore;
@@ -107,21 +110,14 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
       };
       break;
 
-    /*case BACKEND_CALL_SUCCEEDED:
-     let succeededCallPayload:BackendCallSucceededActionPayload = (action as Action<BackendCallSucceededActionPayload>).payload;
-     switch (succeededCallPayload.methodIdent) {
-     case LoginService.HAS_LOGGED_IN_USER:
-     break;
-     case LoginService.GET_LOGGED_IN_USER:
-     break;
-     case LoginService.FIND_ACTIVE_TENANTS_BY_USER:
-     break;
-     case LoginService.AUTHENTICATE:
-     break;
-     case LoginService.LOGOUT:
-     break;
-     }
-     break;*/
+    case BACKEND_CALL_SUCCEEDED:
+      let succeededCallPayload:BackendCallSucceededActionPayload = (action as Action<BackendCallSucceededActionPayload>).payload;
+      switch (succeededCallPayload.methodIdent) {
+        case ServiceMethods.LoginService.authenticate:
+          console.log('#');
+          break;
+      }
+      break;
 
     default:
       newState = state;
