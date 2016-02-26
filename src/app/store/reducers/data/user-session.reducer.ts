@@ -1,12 +1,9 @@
-import {USERS_PERMISSIONS_LOADED} from '../../actions/session.actions';
 import {IUserSessionStore} from '../../stores/data/user-session.store';
 import {Action} from '../../actions/base.action';
 import {initialUserSessionStore} from '../../stores/data/user-session.store';
-import {USER_IS_AUTHENTICATED} from '../../actions/session.actions';
 import {AuthPermissionDto} from '../../../shared/stubs/dtos/auth-permission-dto';
 import {TenantLoginDto} from '../../../shared/stubs/dtos/tenant-login-dto';
 import {UserLoginDto} from '../../../shared/stubs/dtos/user-login-dto';
-import {USER_LOGGED_OUT} from '../../actions/session.actions';
 import {BACKEND_CALL_SUCCEEDED} from '../../actions/services.actions';
 import {BackendCallSucceededActionPayload} from '../../actions/services.actions';
 import {ServiceMethods} from '../../../shared/stubs/services/meta/service-methods';
@@ -16,29 +13,6 @@ export function userSessionReducer(state:IUserSessionStore = initialUserSessionS
   let newState:IUserSessionStore;
 
   switch (action.type) {
-    case USERS_PERMISSIONS_LOADED:
-      newState = {
-        user: state.user,
-        tenantId: state.tenantId,
-        tenants: state.tenants,
-        permissions: (action as Action<Array<AuthPermissionDto>>).payload,
-        userPreferences: state.userPreferences
-      };
-      break;
-
-    case USER_IS_AUTHENTICATED:
-      newState = {
-        user: (action as Action<UserLoginDto>).payload,
-        tenantId: state.tenantId,
-        tenants: state.tenants,
-        permissions: state.permissions,
-        userPreferences: state.userPreferences
-      };
-      break;
-
-    case USER_LOGGED_OUT:
-      newState = initialUserSessionStore;
-      break;
 
     case BACKEND_CALL_SUCCEEDED:
       let methodIdentSucceeded:string = getActionPayload<BackendCallSucceededActionPayload<any>>(action).methodIdent;
@@ -52,6 +26,33 @@ export function userSessionReducer(state:IUserSessionStore = initialUserSessionS
             tenantId: state.tenantId,
             tenants: activeTenants,
             permissions: state.permissions,
+            userPreferences: state.userPreferences
+          };
+          break;
+
+        case ServiceMethods.LoginService.authenticate:
+          let userLoginDto:UserLoginDto = getActionPayload<BackendCallSucceededActionPayload<UserLoginDto>>(action).result;
+          newState = {
+            user: userLoginDto,
+            tenantId: state.tenantId,
+            tenants: state.tenants,
+            permissions: state.permissions,
+            userPreferences: state.userPreferences
+          };
+          break;
+
+        case ServiceMethods.LoginService.logout:
+          newState = initialUserSessionStore;
+          break;
+
+        case ServiceMethods.UserAuthorizationService.getPermissions:
+          let permissions:Array<AuthPermissionDto> =
+            getActionPayload < BackendCallSucceededActionPayload<Array<AuthPermissionDto>>>(action).result;
+          newState = {
+            user: state.user,
+            tenantId: state.tenantId,
+            tenants: state.tenants,
+            permissions: permissions,
             userPreferences: state.userPreferences
           };
           break;

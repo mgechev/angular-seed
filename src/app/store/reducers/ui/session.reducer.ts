@@ -8,8 +8,6 @@ import {USER_PROVIDED_USERNAME} from '../../actions/session.actions';
 import {USER_PROVIDED_PASSWORD} from '../../actions/session.actions';
 import {USER_PROVIDED_TENANT} from '../../actions/session.actions';
 import {USER_WANTS_TO_LOGIN} from '../../actions/session.actions';
-import {USER_IS_AUTHENTICATED} from '../../actions/session.actions';
-import {USER_LOGGED_OUT} from '../../actions/session.actions';
 import {USER_LOGOUT_REQUEST} from '../../actions/session.actions';
 import {BACKEND_CALL_SUCCEEDED} from '../../actions/services.actions';
 import {BackendCallSucceededActionPayload} from '../../actions/services.actions';
@@ -77,27 +75,9 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
       };
       break;
 
-    case USER_IS_AUTHENTICATED:
-      newState = {
-        state: UiSessionStateEnum.SESSION_VALID,
-        username: null,
-        password: null,
-        tenant: null
-      };
-      break;
-
     case USER_LOGOUT_REQUEST:
       newState = {
         state: UiSessionStateEnum.LOGOUT_CLICKED,
-        username: null,
-        password: null,
-        tenant: null
-      };
-      break;
-
-    case USER_LOGGED_OUT:
-      newState = {
-        state: UiSessionStateEnum.LOGGED_OUT,
         username: null,
         password: null,
         tenant: null
@@ -129,9 +109,27 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
         case ServiceMethods.LoginService.findActiveTenantsByUser:
           newState = {
             state: UiSessionStateEnum.BACKEND_ASKED_FOR_ACTIVE_TENANTS,
-            username: null,
-            password: null,
-            tenant: null
+            username: state.username,
+            password: state.password,
+            tenant: state.tenant
+          };
+          break;
+
+        case ServiceMethods.LoginService.authenticate:
+          newState = {
+            state: UiSessionStateEnum.BACKEND_AUTHENTICATION_REQUESTED,
+            username: state.username,
+            password: state.password,
+            tenant: state.tenant
+          };
+          break;
+
+        case ServiceMethods.LoginService.logout:
+          newState = {
+            state: UiSessionStateEnum.BACKEND_LOGOUT_REQUESTED,
+            username: state.username,
+            password: state.password,
+            tenant: state.tenant
           };
           break;
 
@@ -179,9 +177,27 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
             getActionPayload<BackendCallSucceededActionPayload<Array<TenantLoginDto>>>(action).result;
           newState = {
             state: UiSessionStateEnum.BACKEND_ACTIVE_TENANTS_RECEIVED,
+            username: state.username,
+            password: state.password,
+            tenant: activeTenants.length > 0 ? activeTenants[0].name : state.tenant
+          };
+          break;
+
+        case ServiceMethods.LoginService.authenticate:
+          newState = {
+            state: UiSessionStateEnum.SESSION_VALID,
             username: null,
             password: null,
-            tenant: activeTenants.length > 0 ? activeTenants[0].name : state.tenant
+            tenant: null
+          };
+          break;
+
+        case ServiceMethods.LoginService.logout:
+          newState = {
+            state: UiSessionStateEnum.LOGGED_OUT,
+            username: null,
+            password: null,
+            tenant: null
           };
           break;
 

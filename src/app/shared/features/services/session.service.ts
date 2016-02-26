@@ -1,9 +1,6 @@
 import {Injectable} from 'angular2/core';
 import {Store} from '../../../store/store';
 import {LoginService} from '../../stubs/services/login.service';
-import {UserLoginDto} from '../../stubs/dtos/user-login-dto';
-import {userIsAuthenticated} from '../../../store/actions/session.actions';
-import {userLoggedOut} from '../../../store/actions/session.actions';
 import {IUiStore} from '../../../store/stores/ui.store';
 import {UiSessionStateEnum} from '../../../store/stores/ui/session.store';
 
@@ -30,11 +27,11 @@ export class SessionService {
           break;
 
         case UiSessionStateEnum.LOGIN_CLICKED:
-          self.triggerAuthenticate(uiStore.session.username, uiStore.session.password, uiStore.session.tenant);
+          self.loginService.authenticate(uiStore.session.username, uiStore.session.password, uiStore.session.tenant);
           break;
 
         case UiSessionStateEnum.LOGOUT_CLICKED:
-          self.triggerLogout();
+          self.loginService.logout();
           break;
 
         case UiSessionStateEnum.SESSION_INVALID:
@@ -50,27 +47,5 @@ export class SessionService {
           break;
       }
     });
-  }
-
-  private triggerAuthenticate(username:string, password:string, tenant:string):void {
-    let store:Store = this.store;
-
-    console.log(module.id, 'request');
-    console.time('authenticate call');
-    this.loginService.authenticate(username, password, tenant)
-      .then(function (userLoginDto:UserLoginDto):void {
-        console.timeEnd('authenticate call');
-        console.log(module.id, 'response');
-        store.dispatch(userIsAuthenticated(userLoginDto));
-      });
-  }
-
-  private triggerLogout():void {
-    let store:Store = this.store;
-
-    this.loginService.logout()
-      .then(function ():void {
-        store.dispatch(userLoggedOut());
-      });
   }
 }
