@@ -1,7 +1,7 @@
 import {Component} from 'angular2/core';
 import {Navigation} from '../ui-elements/navigation';
 import {Store} from '../../../store/store';
-import {userLogoutRequest} from '../../../store/actions/session.actions';
+import {userWantsToLogout} from '../../../store/actions/session.actions';
 import {mainNavigationItemClicked, secondaryNavigationItemClicked} from '../../../store/actions/navigation.actions';
 import {LoginService} from '../../stubs/services/login.service';
 
@@ -57,7 +57,7 @@ export class ApplicationHeader {
 
   onSecondaryNavigationItemClicked(event):void {
     if (event === 'logout') {
-      this.store.dispatch(userLogoutRequest());
+      this.store.dispatch(userWantsToLogout());
       return;
     }
     this.store.dispatch(secondaryNavigationItemClicked(event));

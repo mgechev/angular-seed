@@ -1,6 +1,5 @@
 import {Action} from '../../actions/base.action';
 import {VALID_SESSION_REQUIRED} from '../../actions/session.actions';
-import {VALID_SESSION_EXISTS_NOT} from '../../actions/session.actions';
 import {ISessionStore} from '../../stores/ui/session.store';
 import {initialSessionStore} from '../../stores/ui/session.store';
 import {UiSessionStateEnum} from '../../stores/ui/session.store';
@@ -8,7 +7,7 @@ import {USER_PROVIDED_USERNAME} from '../../actions/session.actions';
 import {USER_PROVIDED_PASSWORD} from '../../actions/session.actions';
 import {USER_PROVIDED_TENANT} from '../../actions/session.actions';
 import {USER_WANTS_TO_LOGIN} from '../../actions/session.actions';
-import {USER_LOGOUT_REQUEST} from '../../actions/session.actions';
+import {USER_WANTS_TO_LOGOUT} from '../../actions/session.actions';
 import {BACKEND_CALL_SUCCEEDED} from '../../actions/services.actions';
 import {BackendCallSucceededActionPayload} from '../../actions/services.actions';
 import {ServiceMethods} from '../../../shared/stubs/services/meta/service-methods';
@@ -24,15 +23,6 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
     case VALID_SESSION_REQUIRED:
       newState = {
         state: UiSessionStateEnum.VALID_SESSION_REQUIRED,
-        username: null,
-        password: null,
-        tenant: null
-      };
-      break;
-
-    case VALID_SESSION_EXISTS_NOT:
-      newState = {
-        state: UiSessionStateEnum.SESSION_INVALID,
         username: null,
         password: null,
         tenant: null
@@ -75,7 +65,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
       };
       break;
 
-    case USER_LOGOUT_REQUEST:
+    case USER_WANTS_TO_LOGOUT:
       newState = {
         state: UiSessionStateEnum.LOGOUT_CLICKED,
         username: null,

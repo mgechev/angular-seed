@@ -1,26 +1,27 @@
 import {Store} from '../../../store/store';
 import {Injectable} from 'angular2/core';
-import {AuthPermissionDto} from '../../stubs/dtos/auth-permission-dto';
-import {usersPermissionsLoaded} from '../../../store/actions/session.actions';
-import {appInitialized} from '../../../store/actions/app.actions';
 import {UserAuthorizationService} from '../../stubs/services/user-authorization.service';
+import {IUiStore} from '../../../store/stores/ui.store';
 
 @Injectable()
 export class InitializeService {
   constructor(private store:Store, private userAuthorizationService:UserAuthorizationService) {
-  }
 
-  public initialize():void {
-    this.getUsersPermissions();
-  }
+    //let self:InitializeService = this;
 
-  private getUsersPermissions():void {
-    var self:InitializeService = this;
+    // listen for changed store and check, if a backend call is needed
+    store.subscribe(function ():void {
+      let uiStore:IUiStore = store.getUiStore();
 
-    self.userAuthorizationService.getPermissions()
-      .then(function (usersPermissions:Array<AuthPermissionDto>):void {
-        self.store.dispatch(usersPermissionsLoaded(usersPermissions));
-        self.store.dispatch(appInitialized());
-      });
+      switch (uiStore.session.state) {
+        /*case UiSessionStateEnum.VALID_SESSION_REQUIRED:
+         self.userAuthorizationService.getPermissions();
+         break;*/
+
+        default:
+          // do nothing here
+          break;
+      }
+    });
   }
 }
