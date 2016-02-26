@@ -71,7 +71,7 @@
     "karma-mocha-reporter": "^1.1.1",
     "karma-phantomjs-launcher": "^1.0.0",
     "merge-stream": "^1.0.0",
-    "ng2lint": "0.0.6",
+    "ng2lint": "0.0.8",
     "open": "0.0.5",
     "phantomjs-prebuilt": "^2.1.4",
     "protractor": "^3.0.0",
