@@ -5,4 +5,4 @@ import * as PROJECT_UTILS from './utils/project.utils';
 export * from './utils/seed.utils';
 
 // Interface issue to solve.
-export const UTILS = Object.assign(SEED_UTILS, PROJECT_UTILS);
+export const UTILS = Object.assign({}, SEED_UTILS, PROJECT_UTILS);

@@ -6,4 +6,4 @@ export * from './config/seed/config';
 
 export interface IConfig extends ISeedConfig, IProjectConfig {}
 
-export const CONFIG: IConfig = Object.assign(SEED_CONFIG, PROJECT_CONFIG);
+export const CONFIG: IConfig = Object.assign({}, SEED_CONFIG, PROJECT_CONFIG);
