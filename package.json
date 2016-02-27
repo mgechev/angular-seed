@@ -52,7 +52,7 @@
     "gulp-load-plugins": "^0.10.0",
     "gulp-plumber": "~1.0.1",
     "gulp-shell": "~0.4.3",
-    "gulp-sourcemaps": "~1.5.2",
+    "gulp-sourcemaps": "~1.6.0",
     "gulp-template": "^3.0.0",
     "gulp-tslint": "^4.3.2",
     "gulp-tslint-stylish": "^1.1.1",
