@@ -15,6 +15,7 @@ export interface ISeedConfig {
   CSS_DEST: string;
   CSS_PROD_BUNDLE: string;
   DEBUG: string;
+  DEV_DEPENDENCIES;
   DEV_DEST: string;
   DIST_DIR: string;
   DOCS_DEST: string;
@@ -27,6 +28,7 @@ export interface ISeedConfig {
   JS_PROD_SHIMS_BUNDLE: string;
   NG2LINT_RULES: string[];
   PORT: number;
+  PROD_DEPENDENCIES;
   PROD_DEST: string;
   PROJECT_ROOT: string;
   TMP_DIR: string;

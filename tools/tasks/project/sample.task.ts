@@ -1,5 +1,5 @@
 import {join} from 'path';
-import {CONFIG} from '../../config';
+import {APP_SRC, APP_DEST} from '../../config';
 
 /**
  * Sample tasks
@@ -8,7 +8,7 @@ import {CONFIG} from '../../config';
 
 export = function sampleTask(gulp, plugins) {
   return function () {
-    return gulp.src(join(CONFIG.APP_SRC, '**/*.ts'))
-      .pipe(gulp.dest(CONFIG.APP_DEST));
+    return gulp.src(join(APP_SRC, '**/*.ts'))
+      .pipe(gulp.dest(APP_DEST));
   };
 }
