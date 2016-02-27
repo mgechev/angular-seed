@@ -85,7 +85,7 @@
     "systemjs-builder": "^0.15.7",
     "tiny-lr": "^0.2.1",
     "traceur": "^0.0.91",
-    "ts-node": "^0.5.4",
+    "ts-node": "^0.5.5",
     "tslint": "^3.5.0",
     "typedoc": "^0.3.12",
     "typescript": "~1.8.0",
