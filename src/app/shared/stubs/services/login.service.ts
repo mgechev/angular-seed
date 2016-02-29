@@ -1,20 +1,18 @@
 import {BaseService} from './base/base.service';
-import {Injectable} from 'angular2/core';
 import {Http} from 'angular2/http';
 import {Store} from '../../../store/store';
+import {Injectable} from 'angular2/core';
+import {ServiceMethods} from './meta/service-methods';
 
 @Injectable()
 export class LoginService extends BaseService {
-  constructor(http:Http, private store:Store) {
-    super(http);
 
-    this.servicePath = 'login';
-    this.version = 'v1';
+  constructor(http:Http, store:Store) {
+    super(http, store);
   }
 
   public authenticate(loginname:string, password:string, tenant:string):Promise<any> {
-    var self:LoginService = this;
-    return self.newPostCall('authenticate')
+    return this.createPostCall(ServiceMethods.LoginService.authenticate)
       .setUrlParams({
         'loginname': loginname,
         'password': password,
@@ -24,8 +22,7 @@ export class LoginService extends BaseService {
   }
 
   public findActiveTenantsByUser(loginname:string):Promise<any> {
-    var self:LoginService = this;
-    return self.newGetCall('findActiveTenantsByUser')
+    return this.createGetCall(ServiceMethods.LoginService.findActiveTenantsByUser)
       .setUrlParams({
         'loginname': loginname
       })
@@ -33,26 +30,22 @@ export class LoginService extends BaseService {
   }
 
   public hasLoggedInUser():Promise<any> {
-    var self:LoginService = this;
-    return self.newGetCall('hasLoggedInUser')
+    return this.createGetCall(ServiceMethods.LoginService.hasLoggedInUser)
       .send();
   }
 
   public getLoggedInUser():Promise<any> {
-    var self:LoginService = this;
-    return self.newGetCall('getLoggedInUser')
+    return this.createGetCall(ServiceMethods.LoginService.getLoggedInUser)
       .send();
   }
 
   public logout():Promise<any> {
-    var self:LoginService = this;
-    return self.newPostCall('logout')
+    return this.createPostCall(ServiceMethods.LoginService.logout)
       .send();
   }
 
   public switchTenant(tenant:string):Promise<any> {
-    var self:LoginService = this;
-    return self.newPostCall('switchTenant')
+    return this.createPostCall(ServiceMethods.LoginService.switchTenant)
       .setUrlParams({
         'tenant': tenant
       })

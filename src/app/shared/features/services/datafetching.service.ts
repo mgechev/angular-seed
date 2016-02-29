@@ -1,7 +1,7 @@
 import {Injectable} from 'angular2/core';
 import {Http} from 'angular2/http';
 import 'rxjs/add/operator/map';
-import {backendActionFinished} from '../../../store/actions/services.actions';
+import {oldBackendActionFinished} from '../../../store/actions/services.actions';
 import {Store} from '../../../store/store';
 
 @Injectable()
@@ -20,7 +20,7 @@ export class DataFetchingService {
     let endpoint = this.endpointToStoreMap[storepath];
 
     this.http.get(endpoint).map(response => response.json()).subscribe(data => {
-      this.store.dispatch(backendActionFinished(endpoint, data));
+      this.store.dispatch(oldBackendActionFinished(endpoint, data));
     }, error => console.log('Could not load users.' + error));
 
   }

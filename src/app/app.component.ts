@@ -44,7 +44,8 @@ import {IRootStore} from './store/stores/root.store';
   providers: [InitializeService, SessionService]
 })
 export class AppComponent implements OnInit {
-  constructor(private store:Store, private initializeService:InitializeService, sessionService:SessionService) {
+
+  constructor(private store:Store, initializeService:InitializeService, sessionService:SessionService) {
   }
 
   public stateSessionValid:UiSessionStateEnum = UiSessionStateEnum.SESSION_VALID;
