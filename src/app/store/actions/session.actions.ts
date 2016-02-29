@@ -6,6 +6,7 @@ export const VALID_SESSION_REQUIRED:string = 'VALID_SESSION_REQUIRED';
 export const USER_PROVIDED_USERNAME:string = 'USER_PROVIDED_USERNAME';
 export const USER_PROVIDED_PASSWORD:string = 'USER_PROVIDED_PASSWORD';
 export const USER_PROVIDED_TENANT:string = 'USER_PROVIDED_TENANT';
+export const USER_REQUESTED_TENANTSWITCH:string = 'USER_REQUESTED_TENANTSWITCH';
 
 export const USER_WANTS_TO_LOGOUT:string = 'USER_WANTS_TO_LOGOUT';
 
@@ -41,6 +42,13 @@ export function userProvidedTenant(tenant:TenantLoginDto):Action<string> {
 export function userWantsToLogin():Action<any> {
   return {
     type: USER_WANTS_TO_LOGIN
+  };
+}
+
+export function userRequestedTenantswitch(newTenant:TenantLoginDto):Action<any> {
+  return {
+    type: USER_REQUESTED_TENANTSWITCH,
+    payload: newTenant
   };
 }
 

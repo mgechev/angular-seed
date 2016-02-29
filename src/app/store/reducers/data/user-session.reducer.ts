@@ -41,6 +41,28 @@ export function userSessionReducer(state:IUserSessionStore = initialUserSessionS
           };
           break;
 
+        case ServiceMethods.LoginService.getLoggedInUser:
+          let currentUser:UserLoginDto = getActionPayload<BackendCallSucceededActionPayload<UserLoginDto>>(action).result;
+          newState = {
+            user: currentUser,
+            tenantId: state.tenantId,
+            tenants: state.tenants,
+            permissions: state.permissions,
+            userPreferences: state.userPreferences
+          };
+          break;
+
+        case ServiceMethods.LoginService.switchTenant:
+          let updatedUser:UserLoginDto = getActionPayload<BackendCallSucceededActionPayload<UserLoginDto>>(action).result;
+          newState = {
+            user: updatedUser,
+            tenantId: state.tenantId,
+            tenants: state.tenants,
+            permissions: state.permissions,
+            userPreferences: state.userPreferences
+          };
+          break;
+
         case ServiceMethods.LoginService.logout:
           newState = initialUserSessionStore;
           break;

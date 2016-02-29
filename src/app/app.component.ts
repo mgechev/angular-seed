@@ -1,3 +1,4 @@
+import {NgFor} from 'angular2/common';
 import {Component,OnInit} from 'angular2/core';
 import {InitializeService} from './shared/features/services/initialize.service';
 import {Store} from './store/store';
@@ -19,7 +20,7 @@ import {IRootStore} from './store/stores/root.store';
   template: `
     <div class="container">
       <div class="row">
-        <login *ngIf="store.getUiStore().session.state !== stateSessionValid"
+        <login *ngIf="!store.getUiStore().session.initializing && !store.getUiStore().session.loggedIn"
         class="col-lg-4 col-md-6 col-sm-7 col-xs-8 center-block pull-xs-none m-t-3"></login>
       </div>
     </div>
@@ -27,12 +28,25 @@ import {IRootStore} from './store/stores/root.store';
       <div class="row">
         <section *ngIf="store.getUiStore().session.state === stateSessionValid" id="applicationframe">
 
-            <application-header></application-header>
+            <application-header
+              [activeMainNavigationItem]="store.getUiStore().app.activeMainNavigationItem"
+              [mainNavigation]="store.getUiStore().app.mainNavigation"
+              [userSession]="store.getDataStore().userSession"
+              >
+            </application-header>
 
-            <startpage *ngIf="store.getState().activeModule=='startpage'"></startpage>
-            <manage *ngIf="store.getState().activeModule=='manage'"></manage>
-            <activities *ngIf="store.getState().activeModule=='activities'"></activities>
-            <administration *ngIf="store.getState().activeModule=='administration'"></administration>
+            <startpage
+              *ngIf="store.getUiStore().app.activeMainNavigationItem.key === store.getUiStore().app.mainNavigation[0].key">
+            </startpage>
+            <manage
+              *ngIf="store.getUiStore().app.activeMainNavigationItem.key === store.getUiStore().app.mainNavigation[1].key">
+            </manage>
+            <activities
+              *ngIf="store.getUiStore().app.activeMainNavigationItem.key === store.getUiStore().app.mainNavigation[2].key">
+            </activities>
+            <administration
+              *ngIf="store.getUiStore().app.activeMainNavigationItem.key === store.getUiStore().app.mainNavigation[3].key">
+            </administration>
 
             <footer>Message: {{store.getUiStore().global.message}}</footer>
 
@@ -40,7 +54,7 @@ import {IRootStore} from './store/stores/root.store';
       </div>
     </div>
   `,
-  directives: [LoginComponent, StartpageComponent, ManageComponent, ActivitiesComponent, AdministrationComponent, ApplicationHeader],
+  directives: [NgFor, LoginComponent, StartpageComponent, ManageComponent, ActivitiesComponent, AdministrationComponent, ApplicationHeader],
   providers: [InitializeService, SessionService]
 })
 export class AppComponent implements OnInit {
@@ -51,6 +65,7 @@ export class AppComponent implements OnInit {
   public stateSessionValid:UiSessionStateEnum = UiSessionStateEnum.SESSION_VALID;
 
   public ngOnInit():any {
+
     /* this ist just for testing and debugging */
     console.group('Initial Store');
     console.log(this.store.getState());

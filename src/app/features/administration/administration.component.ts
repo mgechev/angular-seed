@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {Navigation} from '../../shared/features/ui-elements/navigation';
+import {Navigation} from '../../shared/ui-elements/navigation';
 import {Store} from '../../store/store';
 import {administrationNavigationItemClicked} from '../../store/actions/navigation.actions';
 import {AssignmentsComponent} from './assignments/assignments.component';
@@ -11,8 +11,8 @@ import {AssignmentsComponent} from './assignments/assignments.component';
     <section>
 
       <navigation toggable="true"
-        [items]="administartionNavigationItems"
-        [activeItemKey]="store.getState().activeModule"
+        [items]="administrationNavigationItems"
+        [activeItem]=""
         (itemClicked)="onAdministrationNavigationItemClicked($event)">
       </navigation>
 
@@ -42,7 +42,7 @@ export class AdministrationComponent {
   }
 
   // ToDO: move this to Store, if it makes sense:
-  administartionNavigationItems = [
+  administrationNavigationItems = [
     {key: 'admin-overview', label: 'Overview'},
     {key: 'admin-users', label: 'Users'},
     {key: 'admin-groups', label: 'Groups'},

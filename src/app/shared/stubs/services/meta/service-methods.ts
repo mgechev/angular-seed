@@ -11,6 +11,9 @@ export class ServiceMethods {
     getPermissions: 'v1/userauthorization/getPermissions',
     hasAuthorization: 'v1/userauthorization/hasAuthorization'
   };
+  public static ApplicationInfoService:ApplicationInfoServiceMeta = {
+    getVersionInfo: 'v1/applicationinfo/getVersionInfo'
+  };
 }
 
 interface LoginServiceMeta {
@@ -24,4 +27,7 @@ interface LoginServiceMeta {
 interface UserAuthorizationServiceMeta {
   getPermissions:string;
   hasAuthorization:string;
+}
+interface ApplicationInfoServiceMeta {
+  getVersionInfo:string;
 }

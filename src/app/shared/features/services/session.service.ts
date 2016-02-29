@@ -3,11 +3,21 @@ import {Store} from '../../../store/store';
 import {LoginService} from '../../stubs/services/login.service';
 import {IUiStore} from '../../../store/stores/ui.store';
 import {UiSessionStateEnum} from '../../../store/stores/ui/session.store';
+import 'rxjs/operator/map';
+import 'rxjs/operator/distinctUntilChanged';
+import {observableFromStore} from '../../../store/observableFromStore';
+
 
 @Injectable()
 export class SessionService {
   constructor(private store:Store, private loginService:LoginService) {
     let self:SessionService = this;
+
+    let switchToTenant$ = observableFromStore(store).map(store => store.ui.session.switchToTenant).distinctUntilChanged();
+
+    switchToTenant$.subscribe(switchToTenant => { if (switchToTenant) {
+      this.loginService.switchTenant(switchToTenant.name);
+    }});
 
     // listen for changed store and check, if a backend call is needed
     store.subscribe(function ():void {
@@ -28,6 +38,12 @@ export class SessionService {
 
         case UiSessionStateEnum.LOGIN_CLICKED:
           self.loginService.authenticate(uiStore.session.username, uiStore.session.password, uiStore.session.tenant);
+          break;
+
+        case UiSessionStateEnum.SESSION_VALID:
+          if(uiStore.session.username && !uiStore.session.tenant) {
+            self.loginService.findActiveTenantsByUser(uiStore.session.username);
+          }
           break;
 
         case UiSessionStateEnum.LOGOUT_CLICKED:
