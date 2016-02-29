@@ -3,6 +3,8 @@ export interface ISessionStore {
   username:string;
   password:string;
   tenant:string;
+  switchToTenant:any;
+  loggedIn:boolean;
 }
 
 export enum UiSessionStateEnum {
@@ -33,5 +35,7 @@ export const initialSessionStore:ISessionStore = {
   state: UiSessionStateEnum.INITIAL,
   username: null,
   password: null,
-  tenant: null
+  tenant: null,
+  switchToTenant: null,
+  loggedIn: false
 };
