@@ -13,9 +13,9 @@ export class SessionService {
   constructor(private store:Store, private loginService:LoginService) {
     let self:SessionService = this;
 
-    let username$ = observableFromStore(store).map(store => store.ui.session.switchToTenant).distinctUntilChanged();
+    let switchToTenant$ = observableFromStore(store).map(store => store.ui.session.switchToTenant).distinctUntilChanged();
 
-    username$.subscribe(switchToTenant => { if (switchToTenant) {
+    switchToTenant$.subscribe(switchToTenant => { if (switchToTenant) {
       this.loginService.switchTenant(switchToTenant.name);
     }});
 
