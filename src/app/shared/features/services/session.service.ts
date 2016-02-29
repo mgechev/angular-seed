@@ -16,13 +16,8 @@ export class SessionService {
     let username$ = observableFromStore(store).map(store => store.ui.session.switchToTenant).distinctUntilChanged();
 
     username$.subscribe(switchToTenant => { if (switchToTenant) {
-      console.log('tenantSwitch changed to:'+ JSON.stringify(switchToTenant) );
       this.loginService.switchTenant(switchToTenant.name);
     }});
-
-
-
-
 
     // listen for changed store and check, if a backend call is needed
     store.subscribe(function ():void {

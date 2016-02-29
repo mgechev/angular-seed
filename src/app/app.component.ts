@@ -20,7 +20,7 @@ import {IRootStore} from './store/stores/root.store';
   template: `
     <div class="container">
       <div class="row">
-        <login *ngIf="store.getUiStore().session.state !== stateSessionValid"
+        <login *ngIf="!store.getUiStore().session.initializing && !store.getUiStore().session.loggedIn"
         class="col-lg-4 col-md-6 col-sm-7 col-xs-8 center-block pull-xs-none m-t-3"></login>
       </div>
     </div>

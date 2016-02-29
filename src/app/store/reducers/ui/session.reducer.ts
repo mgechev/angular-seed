@@ -24,6 +24,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
   switch (action.type) {
     case VALID_SESSION_REQUIRED:
       newState = {
+        initializing: true,
         state: UiSessionStateEnum.VALID_SESSION_REQUIRED,
         username: null,
         password: null,
@@ -35,6 +36,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
 
     case USER_PROVIDED_USERNAME:
       newState = {
+        initializing: state.initializing,
         state: UiSessionStateEnum.USERNAME_ENTERED,
         username: (action as Action<string>).payload,
         password: state.password,
@@ -46,6 +48,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
 
     case USER_PROVIDED_PASSWORD:
       newState = {
+        initializing: state.initializing,
         state: UiSessionStateEnum.PASSWORD_ENTERED,
         username: state.username,
         password: (action as Action<string>).payload,
@@ -57,6 +60,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
 
     case USER_PROVIDED_TENANT:
       newState = {
+        initializing: state.initializing,
         state: UiSessionStateEnum.TENANT_SELECTED,
         username: state.username,
         password: state.password,
@@ -68,6 +72,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
 
     case USER_WANTS_TO_LOGIN:
       newState = {
+        initializing: state.initializing,
         state: UiSessionStateEnum.LOGIN_CLICKED,
         username: state.username,
         password: state.password,
@@ -79,6 +84,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
 
     case USER_REQUESTED_TENANTSWITCH:
       newState = {
+        initializing: state.initializing,
         state: state.state,
         username: state.username,
         password: state.password,
@@ -90,6 +96,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
 
     case USER_WANTS_TO_LOGOUT:
       newState = {
+        initializing: state.initializing,
         state: UiSessionStateEnum.LOGOUT_CLICKED,
         username: null,
         password: null,
@@ -105,6 +112,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
       switch (methodIdentStarted) {
         case ServiceMethods.LoginService.hasLoggedInUser:
           newState = {
+            initializing: state.initializing,
             state: UiSessionStateEnum.BACKEND_ASKED_FOR_VALID_SESSION,
             username: null,
             password: null,
@@ -116,6 +124,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
 
         case ServiceMethods.LoginService.getLoggedInUser:
           newState = {
+            initializing: state.initializing,
             state: UiSessionStateEnum.BACKEND_VALID_SESSION_REQUESTED,
             username: null,
             password: null,
@@ -127,6 +136,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
 
         case ServiceMethods.LoginService.findActiveTenantsByUser:
           newState = {
+            initializing: state.initializing,
             state: UiSessionStateEnum.BACKEND_ASKED_FOR_ACTIVE_TENANTS,
             username: state.username,
             password: state.password,
@@ -138,6 +148,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
 
         case ServiceMethods.LoginService.authenticate:
           newState = {
+            initializing: state.initializing,
             state: UiSessionStateEnum.BACKEND_AUTHENTICATION_REQUESTED,
             username: state.username,
             password: state.password,
@@ -149,6 +160,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
 
         case ServiceMethods.LoginService.logout:
           newState = {
+            initializing: state.initializing,
             state: UiSessionStateEnum.BACKEND_LOGOUT_REQUESTED,
             username: state.username,
             password: state.password,
@@ -174,6 +186,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
           let hasLoggedInUser:boolean = getActionPayload<BackendCallSucceededActionPayload<boolean>>(action).result;
           if (hasLoggedInUser) {
             newState = {
+              initializing: state.initializing,
               state: UiSessionStateEnum.BACKEND_HAS_VALID_SESSION,
               username: null,
               password: null,
@@ -183,6 +196,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
             };
           } else {
             newState = {
+              initializing: false,
               state: UiSessionStateEnum.BACKEND_HAS_NO_VALID_SESSION,
               username: null,
               password: null,
@@ -197,6 +211,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
           let currentUser:UserLoginDto =
             getActionPayload<BackendCallSucceededActionPayload<UserLoginDto>>(action).result;
           newState = {
+            initializing: false,
             state: UiSessionStateEnum.SESSION_VALID,
             username: currentUser.loginname,
             password: null,
@@ -212,6 +227,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
 
           if(state.loggedIn) {
             newState = {
+              initializing: state.initializing,
               state: UiSessionStateEnum.SESSION_VALID,
               username: state.username,
               password: state.password,
@@ -221,6 +237,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
             };
           } else {
             newState = {
+              initializing: state.initializing,
               state: UiSessionStateEnum.BACKEND_ACTIVE_TENANTS_RECEIVED,
               username: state.username,
               password: state.password,
@@ -234,6 +251,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
 
         case ServiceMethods.LoginService.authenticate:
           newState = {
+            initializing: false,
             state: UiSessionStateEnum.SESSION_VALID,
             username: null,
             password: null,
@@ -245,6 +263,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
 
         case ServiceMethods.LoginService.logout:
           newState = {
+            initializing: state.initializing,
             state: UiSessionStateEnum.LOGGED_OUT,
             username: null,
             password: null,

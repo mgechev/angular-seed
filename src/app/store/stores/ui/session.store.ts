@@ -1,4 +1,5 @@
 export interface ISessionStore {
+  initializing:boolean;
   state:UiSessionStateEnum;
   username:string;
   password:string;
@@ -32,6 +33,7 @@ export enum UiSessionStateEnum {
 }
 
 export const initialSessionStore:ISessionStore = {
+  initializing: true,
   state: UiSessionStateEnum.INITIAL,
   username: null,
   password: null,
