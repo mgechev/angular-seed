@@ -2,6 +2,8 @@
 // Generated on Wed Jul 15 2015 09:44:02 GMT+0200 (Romance Daylight Time)
 'use strict';
 
+var argv = require('yargs').argv;
+
 module.exports = function(config) {
   config.set({
 
@@ -47,7 +49,6 @@ module.exports = function(config) {
     preprocessors: {
       'dist/**/!(*spec).js': ['coverage']
     },
-
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
@@ -98,7 +99,12 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: false, 
+
+    // Passing command line arguments to tests
+    client: {
+      files: argv.files
+    }
   });
 
   if (process.env.APPVEYOR) {
