@@ -49,12 +49,14 @@ export = function buildHTMLCSS(gulp, plugins) {
           join(APP_SRC, '**', '*.css'),
           '!' + join(APP_SRC, 'assets', '**', '*.css')
         ])
+        .pipe(isProd ? plugins.cached('process-component-css') : plugins.util.noop())
         .pipe(plugins.postcss(processors))
         .pipe(gulp.dest(isProd ? TMP_DIR: APP_DEST));
     }
 
     function processExternalCss() {
       return gulp.src(getExternalCss().map(r => r.src))
+        .pipe(isProd ? plugins.cached('process-external-css') : plugins.util.noop())
         .pipe(plugins.postcss(processors))
         .pipe(isProd ? plugins.concat(CSS_PROD_BUNDLE) : plugins.util.noop())
         .pipe(gulp.dest(CSS_DEST));
