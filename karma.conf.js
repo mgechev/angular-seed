@@ -24,6 +24,8 @@ module.exports = function(config) {
       'node_modules/traceur/bin/traceur.js',
       'node_modules/systemjs/dist/system.src.js',
       'node_modules/reflect-metadata/Reflect.js',
+      // beta.7 IE 11 polyfills from https://github.com/angular/angular/issues/7144
+      'node_modules/angular2/es6/dev/src/testing/shims_for_IE.js',
 
       { pattern: 'node_modules/angular2/**/*.js', included: false, watched: false },
       { pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false },
