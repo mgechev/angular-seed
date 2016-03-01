@@ -17,93 +17,47 @@ import {BACKEND_CALL_STARTED} from '../../actions/services.actions';
 import {BackendCallStartedActionPayload} from '../../actions/services.actions';
 import {TenantLoginDto} from '../../../shared/stubs/dtos/tenant-login-dto';
 import {UserLoginDto} from '../../../shared/stubs/dtos/user-login-dto';
+import * as _ from 'lodash';
 
 export function sessionReducer(state:ISessionStore = initialSessionStore, action:Action<any>):ISessionStore {
   let newState:ISessionStore;
 
   switch (action.type) {
     case VALID_SESSION_REQUIRED:
-      newState = {
-        initializing: true,
-        state: UiSessionStateEnum.VALID_SESSION_REQUIRED,
-        username: null,
-        password: null,
-        tenant: null,
-        switchToTenant: state.switchToTenant,
-        loggedIn: state.loggedIn
-      };
+      newState = _.merge({}, state, {state: UiSessionStateEnum.VALID_SESSION_REQUIRED});
       break;
 
     case USER_PROVIDED_USERNAME:
-      newState = {
-        initializing: state.initializing,
+      newState = _.merge({}, state, {
         state: UiSessionStateEnum.USERNAME_ENTERED,
-        username: (action as Action<string>).payload,
-        password: state.password,
-        tenant: state.tenant,
-        switchToTenant: state.switchToTenant,
-        loggedIn: state.loggedIn
-      };
+        username: (action as Action<string>).payload
+      });
       break;
 
     case USER_PROVIDED_PASSWORD:
-      newState = {
-        initializing: state.initializing,
+      newState = _.merge({}, state, {
         state: UiSessionStateEnum.PASSWORD_ENTERED,
-        username: state.username,
-        password: (action as Action<string>).payload,
-        tenant: state.tenant,
-        switchToTenant: state.switchToTenant,
-        loggedIn: state.loggedIn
-      };
+        password: (action as Action<string>).payload
+      });
       break;
 
     case USER_PROVIDED_TENANT:
-      newState = {
-        initializing: state.initializing,
+      newState = _.merge({}, state, {
         state: UiSessionStateEnum.TENANT_SELECTED,
-        username: state.username,
-        password: state.password,
-        tenant: (action as Action<string>).payload,
-        switchToTenant: state.switchToTenant,
-        loggedIn: state.loggedIn
-      };
+        tenant: (action as Action<string>).payload
+      });
       break;
 
     case USER_WANTS_TO_LOGIN:
-      newState = {
-        initializing: state.initializing,
-        state: UiSessionStateEnum.LOGIN_CLICKED,
-        username: state.username,
-        password: state.password,
-        tenant: state.tenant,
-        switchToTenant: state.switchToTenant,
-        loggedIn: state.loggedIn
-      };
+      newState = _.merge({}, state, {state: UiSessionStateEnum.LOGIN_CLICKED});
       break;
 
     case USER_REQUESTED_TENANTSWITCH:
-      newState = {
-        initializing: state.initializing,
-        state: state.state,
-        username: state.username,
-        password: state.password,
-        tenant: state.tenant,
-        switchToTenant: (action as Action<string>).payload,
-        loggedIn: state.loggedIn
-      };
+      newState = _.merge({}, state, {switchToTenant: (action as Action<string>).payload});
       break;
 
     case USER_WANTS_TO_LOGOUT:
-      newState = {
-        initializing: state.initializing,
-        state: UiSessionStateEnum.LOGOUT_CLICKED,
-        username: null,
-        password: null,
-        tenant: null,
-        switchToTenant: state.switchToTenant,
-        loggedIn: state.loggedIn
-      };
+      newState = _.merge({}, state, {state: UiSessionStateEnum.LOGOUT_CLICKED});
       break;
 
     case BACKEND_CALL_STARTED:
@@ -111,63 +65,23 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
 
       switch (methodIdentStarted) {
         case ServiceMethods.LoginService.hasLoggedInUser:
-          newState = {
-            initializing: state.initializing,
-            state: UiSessionStateEnum.BACKEND_ASKED_FOR_VALID_SESSION,
-            username: null,
-            password: null,
-            tenant: null,
-            switchToTenant: state.switchToTenant,
-            loggedIn: state.loggedIn
-          };
+          newState = _.merge({}, state, {state: UiSessionStateEnum.BACKEND_ASKED_FOR_VALID_SESSION});
           break;
 
         case ServiceMethods.LoginService.getLoggedInUser:
-          newState = {
-            initializing: state.initializing,
-            state: UiSessionStateEnum.BACKEND_VALID_SESSION_REQUESTED,
-            username: null,
-            password: null,
-            tenant: null,
-            switchToTenant: state.switchToTenant,
-            loggedIn: state.loggedIn
-          };
+          newState = _.merge({}, state, {state: UiSessionStateEnum.BACKEND_VALID_SESSION_REQUESTED});
           break;
 
         case ServiceMethods.LoginService.findActiveTenantsByUser:
-          newState = {
-            initializing: state.initializing,
-            state: UiSessionStateEnum.BACKEND_ASKED_FOR_ACTIVE_TENANTS,
-            username: state.username,
-            password: state.password,
-            tenant: state.tenant,
-            switchToTenant: state.switchToTenant,
-            loggedIn: state.loggedIn
-          };
+          newState = _.merge({}, state, {state: UiSessionStateEnum.BACKEND_ASKED_FOR_ACTIVE_TENANTS});
           break;
 
         case ServiceMethods.LoginService.authenticate:
-          newState = {
-            initializing: state.initializing,
-            state: UiSessionStateEnum.BACKEND_AUTHENTICATION_REQUESTED,
-            username: state.username,
-            password: state.password,
-            tenant: state.tenant,
-            switchToTenant: state.switchToTenant,
-            loggedIn: state.loggedIn
-          };
+          newState = _.merge({}, state, {state: UiSessionStateEnum.BACKEND_AUTHENTICATION_REQUESTED});
           break;
 
         case ServiceMethods.LoginService.logout:
-          newState = {
-            initializing: state.initializing,
-            state: UiSessionStateEnum.BACKEND_LOGOUT_REQUESTED,
-            username: state.username,
-            password: state.password,
-            tenant: state.tenant,
-            switchToTenant: state.switchToTenant,
-            loggedIn: state.loggedIn
-          };
+          newState = _.merge({}, state, {state: UiSessionStateEnum.BACKEND_LOGOUT_REQUESTED});
           break;
 
         default:
@@ -185,92 +99,59 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
         case ServiceMethods.LoginService.hasLoggedInUser:
           let hasLoggedInUser:boolean = getActionPayload<BackendCallSucceededActionPayload<boolean>>(action).result;
           if (hasLoggedInUser) {
-            newState = {
-              initializing: state.initializing,
+            newState = _.merge({}, state, {
               state: UiSessionStateEnum.BACKEND_HAS_VALID_SESSION,
-              username: null,
-              password: null,
-              tenant: null,
-              switchToTenant: state.switchToTenant,
-              loggedIn: state.loggedIn
-            };
+              initializing: false
+            });
           } else {
-            newState = {
-              initializing: false,
+            newState = _.merge({}, state, {
               state: UiSessionStateEnum.BACKEND_HAS_NO_VALID_SESSION,
-              username: null,
-              password: null,
-              tenant: null,
-              switchToTenant: state.switchToTenant,
-              loggedIn: state.loggedIn
-            };
+              initializing: false
+            });
           }
           break;
 
         case ServiceMethods.LoginService.getLoggedInUser:
           let currentUser:UserLoginDto =
             getActionPayload<BackendCallSucceededActionPayload<UserLoginDto>>(action).result;
-          newState = {
-            initializing: false,
+          newState = _.merge({}, state, {
             state: UiSessionStateEnum.SESSION_VALID,
             username: currentUser.loginname,
-            password: null,
-            tenant: null,
-            switchToTenant: state.switchToTenant,
             loggedIn: true
-          };
+          });
           break;
 
         case ServiceMethods.LoginService.findActiveTenantsByUser:
-          let activeTenants:Array<TenantLoginDto> =
+          let returnedTenants:Array<TenantLoginDto> =
             getActionPayload<BackendCallSucceededActionPayload<Array<TenantLoginDto>>>(action).result;
+          let activeTenant = returnedTenants.length > 0 ? returnedTenants[0].name : state.tenant;
 
           if(state.loggedIn) {
-            newState = {
-              initializing: state.initializing,
+            newState = _.merge({}, state, {
               state: UiSessionStateEnum.SESSION_VALID,
-              username: state.username,
-              password: state.password,
-              tenant: activeTenants.length > 0 ? activeTenants[0].name : state.tenant,
-              switchToTenant: state.switchToTenant,
-              loggedIn: true
-            };
+              tenant: activeTenant
+            });
           } else {
-            newState = {
-              initializing: state.initializing,
+            newState = _.merge({}, state, {
               state: UiSessionStateEnum.BACKEND_ACTIVE_TENANTS_RECEIVED,
-              username: state.username,
-              password: state.password,
-              tenant: activeTenants.length > 0 ? activeTenants[0].name : state.tenant,
-              switchToTenant: state.switchToTenant,
-              loggedIn: state.loggedIn
-            };
+              tenant: activeTenant
+            });
           }
 
           break;
 
         case ServiceMethods.LoginService.authenticate:
-          newState = {
-            initializing: false,
+          newState = _.merge({}, state, {
             state: UiSessionStateEnum.SESSION_VALID,
             username: null,
             password: null,
             tenant: null,
-            switchToTenant: state.switchToTenant,
             loggedIn: true
-          };
+          });
           break;
 
         case ServiceMethods.LoginService.logout:
-          newState = {
-            initializing: state.initializing,
-            state: UiSessionStateEnum.LOGGED_OUT,
-            username: null,
-            password: null,
-            tenant: null,
-            switchToTenant: null,
-            loggedIn: false
-          };
+          newState = _.merge({}, state, {loggedIn: false});
           break;
 
         default:
