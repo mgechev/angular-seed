@@ -106,6 +106,7 @@ const SYSTEM_CONFIG_DEV = {
     'rxjs/*': `${APP_BASE}rxjs/*`,
     'rxjs/add/operator/*' : `${APP_BASE}node_modules/rxjs/add/operator/*`,
     'redux': `${APP_BASE}node_modules/redux/dist/redux`,
+    'lodash': `${APP_BASE}node_modules/lodash/index`,
     '*': `${APP_BASE}node_modules/*`
   },
   packages: {
