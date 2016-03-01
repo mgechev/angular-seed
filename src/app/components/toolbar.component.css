@@ -16,7 +16,7 @@ h1 {
 }
 
 more {
-  background: url("./assets/svg/more.svg");
+  background: resolve("more.svg");
   float: right;
   height: 24px;
   margin-top: 12px;
