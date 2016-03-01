@@ -6,7 +6,7 @@ import {join} from 'path';
 import {
   APP_SRC,
   TMP_DIR,
-  PROD_DEPENDENCIES,
+  APP_ASSETS,
   CSS_PROD_BUNDLE,
   CSS_DEST,
   APP_DEST,
@@ -63,7 +63,7 @@ export = function buildHTMLCSS(gulp, plugins) {
     }
 
     function getExternalCss() {
-      return PROD_DEPENDENCIES.filter(d => /\.css$/.test(d.src));
+      return APP_ASSETS.filter(d => /\.css$/.test(d.src));
     }
   };
 };
