@@ -58,6 +58,7 @@ if (ENABLE_HOT_LOADING) {
 interface IDependency {
   src: string;
   inject: string | boolean;
+  vendor?: boolean;
 }
 
 // Declare NPM dependencies (Note that globs should not be injected).
@@ -85,7 +86,7 @@ export const PROD_NPM_DEPENDENCIES: IDependency[] = normalizeDependencies([
 
 // Declare local files that needs to be injected
 export const APP_ASSETS: IDependency[] = [
-  { src: `${ASSETS_SRC}/main.css`, inject: true }
+  { src: `${ASSETS_SRC}/main.css`, inject: true, vendor: false }
 ];
 
 
