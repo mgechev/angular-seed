@@ -62,7 +62,11 @@ Promise.all([
 });
 
 function onlySpecFiles(path) {
-  return /[\.|_]spec\.js$/.test(path);
+  // check for individual files, if not given, always matcches to all
+  var patternMatched = __karma__.config.files ?
+    path.match(new RegExp(__karma__.config.files)) : true;
+
+  return patternMatched && /[\.|_]spec\.js$/.test(path);
 }
 
 // Normalize paths to module names.
