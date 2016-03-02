@@ -5,7 +5,8 @@ export = function karmaStart() {
   return function (done) {
     new (<any>karma).Server({
       configFile: join(process.cwd(), 'karma.conf.js'),
-      singleRun: true
-    }).start(done);
+      singleRun: true,
+      autoWatch: false
+    }, done).start();
   };
 };
