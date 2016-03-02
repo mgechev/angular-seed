@@ -62,7 +62,7 @@ Promise.all([
 });
 
 function onlySpecFiles(path) {
-  // check for individual files, if not given, always matcches to all
+  // check for individual files, if not given, always matches to all
   var patternMatched = __karma__.config.files ?
     path.match(new RegExp(__karma__.config.files)) : true;
 
