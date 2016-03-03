@@ -4,9 +4,6 @@ import * as chalk from 'chalk';
 import * as isstream from 'isstream';
 import {readdirSync, existsSync, lstatSync} from 'fs';
 import {join} from 'path';
-import {TOOLS_DIR} from '../../config';
-
-const TASKS_PATH = join(process.cwd(), TOOLS_DIR, 'tasks', 'seed');
 
 
 export function loadTasks(path: string): void {
@@ -15,7 +12,7 @@ export function loadTasks(path: string): void {
 }
 
 function registerTask(taskname: string, path: string): void {
-  const TASK = join(TASKS_PATH, taskname);
+  const TASK = join(path, taskname);
   util.log('Registering task', chalk.yellow(TASK));
 
   gulp.task(taskname, done => {
