@@ -11,46 +11,46 @@ import {BackendCallStartedActionPayload} from '../../actions/services.actions';
 import {TenantLoginDto} from '../../../shared/stubs/dtos/tenant-login-dto';
 import {UserLoginDto} from '../../../shared/stubs/dtos/user-login-dto';
 import * as _ from 'lodash';
-import {AuthorizationActions} from '../../../shared/features/authentication/authentication.actions';
+import {AuthenticationActions} from '../../../shared/features/authentication/authentication.actions';
 
 export function sessionReducer(state:ISessionStore = initialSessionStore, action:Action<any>):ISessionStore {
   let newState:ISessionStore;
 
   switch (action.type) {
-    case AuthorizationActions.VALID_SESSION_REQUIRED:
+    case AuthenticationActions.VALID_SESSION_REQUIRED:
       newState = _.merge({}, state, {state: UiSessionStateEnum.VALID_SESSION_REQUIRED});
       break;
 
-    case AuthorizationActions.USER_PROVIDED_USERNAME:
+    case AuthenticationActions.USER_PROVIDED_USERNAME:
       newState = _.merge({}, state, {
         state: UiSessionStateEnum.USERNAME_ENTERED,
         username: (action as Action<string>).payload
       });
       break;
 
-    case AuthorizationActions.USER_PROVIDED_PASSWORD:
+    case AuthenticationActions.USER_PROVIDED_PASSWORD:
       newState = _.merge({}, state, {
         state: UiSessionStateEnum.PASSWORD_ENTERED,
         password: (action as Action<string>).payload
       });
       break;
 
-    case AuthorizationActions.USER_PROVIDED_TENANT:
+    case AuthenticationActions.USER_PROVIDED_TENANT:
       newState = _.merge({}, state, {
         state: UiSessionStateEnum.TENANT_SELECTED,
         tenant: (action as Action<string>).payload
       });
       break;
 
-    case AuthorizationActions.USER_WANTS_TO_LOGIN:
+    case AuthenticationActions.USER_WANTS_TO_LOGIN:
       newState = _.merge({}, state, {state: UiSessionStateEnum.LOGIN_CLICKED});
       break;
 
-    case AuthorizationActions.USER_REQUESTED_TENANTSWITCH:
+    case AuthenticationActions.USER_REQUESTED_TENANTSWITCH:
       newState = _.merge({}, state, {switchToTenant: (action as Action<string>).payload});
       break;
 
-    case AuthorizationActions.USER_WANTS_TO_LOGOUT:
+    case AuthenticationActions.USER_WANTS_TO_LOGOUT:
       newState = _.merge({}, state, {state: UiSessionStateEnum.LOGOUT_CLICKED});
       break;
 

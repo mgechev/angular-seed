@@ -6,7 +6,7 @@ import {NavigationItem} from '../../../store/stores/ui/app.store';
 import {IUserSessionStore} from '../../../store/stores/data/user-session.store';
 import {TenantLoginDto} from '../../../shared/stubs/dtos/tenant-login-dto';
 import {componentInitialized} from '../../../store/actions/app.actions';
-import {AuthorizationActions} from '../authentication/authentication.actions';
+import {AuthenticationActions} from '../authentication/authentication.actions';
 
 @Component({
   selector: 'application-header',
@@ -53,10 +53,10 @@ export class ApplicationHeader implements OnInit,OnChanges {
 
   onSecondaryNavigationItemClicked(event):void {
     if (event.key === 'logout') {
-      this.store.dispatch(AuthorizationActions.userWantsToLogout());
+      this.store.dispatch(AuthenticationActions.userWantsToLogout());
       return;
     } else if (event instanceof TenantLoginDto) {
-      this.store.dispatch(AuthorizationActions.userRequestedTenantswitch(event));
+      this.store.dispatch(AuthenticationActions.userRequestedTenantswitch(event));
     } else {
       this.store.dispatch(secondaryNavigationItemClicked(event));
     }

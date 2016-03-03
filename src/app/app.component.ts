@@ -13,7 +13,7 @@ import {ApplicationHeader} from './shared/features/application-header/applicatio
 import {SessionService} from './shared/features/services/session.service';
 import {UiSessionStateEnum} from './store/stores/ui/session.store';
 import {IRootStore} from './store/stores/root.store';
-import {AuthorizationActions} from './shared/features/authentication/authentication.actions';
+import {AuthenticationActions} from './shared/features/authentication/authentication.actions';
 
 @Component({
   selector: 'app',
@@ -76,6 +76,6 @@ export class AppComponent implements OnInit {
       console.groupEnd();
     });
 
-    this.store.dispatch(AuthorizationActions.validSessionRequired());
+    this.store.dispatch(AuthenticationActions.validSessionRequired());
   }
 }

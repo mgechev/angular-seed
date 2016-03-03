@@ -40,4 +40,21 @@ export class Store extends ReduxWrapper {
   public getUiStore():IUiStore {
     return this.getState().ui;
   }
+
+  /**
+   * Get substore from features area
+   *
+   * @param featureIdent
+   * @returns {T}
+   */
+  public getFeatureStore<T>(featureIdent:string):T {
+    let featureStore:T;
+    let rootStore:IRootStore = this.getState();
+
+    if (rootStore.features.hasOwnProperty(featureIdent)) {
+      featureStore = rootStore.features[featureIdent] as T;
+    }
+
+    return featureStore;
+  }
 }

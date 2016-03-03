@@ -1,7 +1,7 @@
 import {TenantLoginDto} from '../../stubs/dtos/tenant-login-dto';
 import {Action} from '../../../store/actions/base.action';
 
-export class AuthorizationActions {
+export class AuthenticationActions {
   public static VALID_SESSION_REQUIRED:string = 'VALID_SESSION_REQUIRED';
 
   public static USER_PROVIDED_USERNAME:string = 'USER_PROVIDED_USERNAME';
@@ -16,47 +16,47 @@ export class AuthorizationActions {
 
   public static validSessionRequired():Action<any> {
     return {
-      type: AuthorizationActions.VALID_SESSION_REQUIRED
+      type: AuthenticationActions.VALID_SESSION_REQUIRED
     };
   }
 
   public static userProvidedUsername(username:string):Action<string> {
     return {
-      type: AuthorizationActions.USER_PROVIDED_USERNAME,
+      type: AuthenticationActions.USER_PROVIDED_USERNAME,
       payload: username
     };
   }
 
   public static userProvidedPassword(password:string):Action<string> {
     return {
-      type: AuthorizationActions.USER_PROVIDED_PASSWORD,
+      type: AuthenticationActions.USER_PROVIDED_PASSWORD,
       payload: password
     };
   }
 
   public static userProvidedTenant(tenant:TenantLoginDto):Action<string> {
     return {
-      type: AuthorizationActions.USER_PROVIDED_TENANT,
+      type: AuthenticationActions.USER_PROVIDED_TENANT,
       payload: tenant.name
     };
   }
 
   public static userWantsToLogin():Action<any> {
     return {
-      type: AuthorizationActions.USER_WANTS_TO_LOGIN
+      type: AuthenticationActions.USER_WANTS_TO_LOGIN
     };
   }
 
   public static userRequestedTenantswitch(newTenant:TenantLoginDto):Action<TenantLoginDto> {
     return {
-      type: AuthorizationActions.USER_REQUESTED_TENANTSWITCH,
+      type: AuthenticationActions.USER_REQUESTED_TENANTSWITCH,
       payload: newTenant
     };
   }
 
   public static userWantsToLogout():Action<any> {
     return {
-      type: AuthorizationActions.USER_WANTS_TO_LOGOUT
+      type: AuthenticationActions.USER_WANTS_TO_LOGOUT
     };
   }
 }
