@@ -1,6 +1,8 @@
-import {join} from 'path';
+import * as gulp from 'gulp';
+import * as gulpLoadPlugins from 'gulp-load-plugins';import {join} from 'path';
 import {APP_SRC, TMP_DIR} from '../../config';
-import {templateLocals, tsProjectFn} from '../../utils';
+import {templateLocals, makeTsProject} from '../../utils';
+const plugins = <any>gulpLoadPlugins();
 
 const INLINE_OPTIONS = {
   base: TMP_DIR ,
@@ -8,23 +10,21 @@ const INLINE_OPTIONS = {
   removeLineBreaks: true
 };
 
-export = function buildJSProd(gulp, plugins) {
-  return function () {
-    let tsProject = tsProjectFn(plugins);
-    let src = [
-      'typings/browser.d.ts',
-      'tools/manual_typings/**/*.d.ts',
-      join(APP_SRC, '**/*.ts'),
-      '!' + join(APP_SRC, '**/*.spec.ts'),
-      '!' + join(APP_SRC, '**/*.e2e.ts')
-    ];
-    let result = gulp.src(src)
-      .pipe(plugins.plumber())
-      .pipe(plugins.inlineNg2Template(INLINE_OPTIONS))
-      .pipe(plugins.typescript(tsProject));
+export = () => {
+  let tsProject = makeTsProject();
+  let src = [
+    'typings/browser.d.ts',
+    'tools/manual_typings/**/*.d.ts',
+    join(APP_SRC, '**/*.ts'),
+    '!' + join(APP_SRC, '**/*.spec.ts'),
+    '!' + join(APP_SRC, '**/*.e2e.ts')
+  ];
+  let result = gulp.src(src)
+    .pipe(plugins.plumber())
+    .pipe(plugins.inlineNg2Template(INLINE_OPTIONS))
+    .pipe(plugins.typescript(tsProject));
 
-    return result.js
-      .pipe(plugins.template(templateLocals()))
-      .pipe(gulp.dest(TMP_DIR));
-  };
-};
+  return result.js
+    .pipe(plugins.template(templateLocals()))
+    .pipe(gulp.dest(TMP_DIR));
+}

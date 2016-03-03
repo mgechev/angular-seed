@@ -1,3 +1,4 @@
+import * as gulp from 'gulp';
 import {join} from 'path';
 import {APP_SRC, APP_DEST} from '../../config';
 
@@ -6,9 +7,7 @@ import {APP_SRC, APP_DEST} from '../../config';
  *
  */
 
-export = function sampleTask(gulp, plugins) {
-  return function () {
-    return gulp.src(join(APP_SRC, '**/*.ts'))
-      .pipe(gulp.dest(APP_DEST));
-  };
+export = () => {
+  return gulp.src(join(APP_SRC, '**/*.ts'))
+    .pipe(gulp.dest(APP_DEST));
 }

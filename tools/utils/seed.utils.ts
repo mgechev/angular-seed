@@ -1,10 +1,7 @@
-export * from './seed/template_locals';
+export * from './seed/clean';
+export * from './seed/code_change_tools';
 export * from './seed/server';
 export * from './seed/tasks_tools';
-
-// TODO: move into ./seed
-export function tsProjectFn(plugins) {
-  return plugins.typescript.createProject('tsconfig.json', {
-    typescript: require('typescript')
-  });
-}
+export * from './seed/template_locals';
+export * from './seed/tsproject';
+export * from './seed/watch';

@@ -1,3 +1,3 @@
 import {watch} from '../../utils';
 
-export = watch('build.test')
+export = watch('build.e2e')

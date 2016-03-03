@@ -1,48 +1,41 @@
 import * as gulp from 'gulp';
 import * as util from 'gulp-util';
 import * as chalk from 'chalk';
-import * as gulpLoadPlugins from 'gulp-load-plugins';
-import * as _runSequence from 'run-sequence';
+import * as isstream from 'isstream';
 import {readdirSync, existsSync, lstatSync} from 'fs';
 import {join} from 'path';
 import {TOOLS_DIR} from '../../config';
 
 const TASKS_PATH = join(process.cwd(), TOOLS_DIR, 'tasks', 'seed');
-// const TASKS_LIST = [];
 
-// NOTE: Remove if no issues with runSequence function below.
-// export function loadTasks(): void {
-//   scanDir(TASKS_PATH, (taskname) => registerTask(taskname));
-// }
 
-export function task(taskname: string, option?: string) {
-  util.log('Loading task', chalk.yellow(taskname, option || ''));
-  return require(join(TASKS_PATH, taskname))(gulp, gulpLoadPlugins(), option);
+export function loadTasks(path: string): void {
+  util.log('Loading tasks folder', chalk.yellow(path));
+  readDir(path, taskname => registerTask(taskname, path));
 }
 
-export function runSequence(...sequence: any[]) {
-  let tasks = [];
-  let _sequence = sequence.slice(0);
-  sequence.pop();
+function registerTask(taskname: string, path: string): void {
+  const TASK = join(TASKS_PATH, taskname);
+  util.log('Registering task', chalk.yellow(TASK));
 
-  scanDir(TASKS_PATH, taskname => tasks.push(taskname));
+  gulp.task(taskname, done => {
+    const task = require(TASK);
+    if (task.length > 0) {
+      return task(done);
+    }
 
-  sequence.forEach(task => {
-    if (tasks.indexOf(task) > -1) { registerTask(task); }
+    const taskReturnedValue = task();
+    if (isstream(taskReturnedValue)) {
+      return taskReturnedValue;
+    }
+
+    // TODO: add promise handling if needed at some point.
+
+    done();
   });
-
-  return _runSequence(..._sequence);
 }
 
-// ----------
-// Private.
-
-function registerTask(taskname: string, filename?: string, option: string = ''): void {
-  gulp.task(taskname, task(filename || taskname, option));
-}
-
-// TODO: add recursive lookup ? or enforce pattern file + folder (ie ./tools/utils & ./tools/utils.ts )
-function scanDir(root: string, cb: (taskname: string) => void) {
+function readDir(root: string, cb: (taskname: string) => void) {
   if (!existsSync(root)) return;
 
   walk(root);
@@ -52,10 +45,6 @@ function scanDir(root: string, cb: (taskname: string) => void) {
     for (let i = 0; i < files.length; i += 1) {
       let file = files[i];
       let curPath = join(path, file);
-      // if (lstatSync(curPath).isDirectory()) { // recurse
-      //   path = file;
-      //   walk(curPath);
-      // }
       if (lstatSync(curPath).isFile() && /\.ts$/.test(file)) {
         let taskname = file.replace(/(\.ts)/, '');
         cb(taskname);

@@ -9,11 +9,6 @@ export function serveSPA() {
   codeChangeTool.listen();
 }
 
-export function notifyLiveReload(e) {
-  let fileName = e.path;
-  codeChangeTool.changed(fileName);
-}
-
 export function serveDocs() {
   let server = express();
 
@@ -30,12 +25,12 @@ export function serveDocs() {
 export function serveCoverage() {
   let server = express();
 
-   server.use(
+  server.use(
     APP_BASE,
     serveStatic(resolve(process.cwd(), 'coverage'))
   );
 
-   server.listen(COVERAGE_PORT, () =>
+  server.listen(COVERAGE_PORT, () =>
     openResource('http://localhost:' + COVERAGE_PORT + APP_BASE)
   );
 }
