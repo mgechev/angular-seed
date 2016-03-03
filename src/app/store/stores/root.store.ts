@@ -1,6 +1,5 @@
 import {IAssignmentsStore, initialAssignmentsStore} from './assignments.store';
 import {IUsersStore,initialUsersStore} from './users.store';
-import {IDataStore,initialDataStore} from './data.store';
 import {IUiStore,initialUiStore} from './ui.store';
 import {initialActiveModuleStore} from './modules.store';
 import {initialCoreStore} from './core.store';
@@ -11,7 +10,6 @@ import {initialFeaturesStore} from './features.store';
 export interface IRootStore {
   core:CoreStore;
   features:FeaturesStore;
-  data:IDataStore;
   activeModule:string;
   ui:IUiStore;
   usersState:IUsersStore;
@@ -21,7 +19,6 @@ export interface IRootStore {
 export const initialRootStore:IRootStore = {
   core: initialCoreStore,
   features: initialFeaturesStore,
-  data: initialDataStore,
   activeModule: initialActiveModuleStore,
   ui: initialUiStore,
   usersState: initialUsersStore,

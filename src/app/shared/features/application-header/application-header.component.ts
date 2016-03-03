@@ -3,10 +3,10 @@ import {Navigation} from '../../ui-elements/navigation';
 import {Store} from '../../../store/store';
 import {mainNavigationItemClicked, secondaryNavigationItemClicked} from '../../../store/actions/navigation.actions';
 import {NavigationItem} from '../../../store/stores/ui/app.store';
-import {IUserSessionStore} from '../../../store/stores/data/user-session.store';
 import {TenantLoginDto} from '../../../shared/stubs/dtos/tenant-login-dto';
 import {componentInitialized} from '../../../store/actions/app.actions';
 import {AuthenticationActions} from '../authentication/authentication.actions';
+import {UserSessionStore} from '../authentication/authentication.store';
 
 @Component({
   selector: 'application-header',
@@ -40,7 +40,7 @@ export class ApplicationHeader implements OnInit,OnChanges {
 
   @Input() activeMainNavigationItem:NavigationItem;
   @Input() mainNavigation:Array<NavigationItem>;
-  @Input() userSession:IUserSessionStore;
+  @Input() userSession:UserSessionStore;
 
   constructor(private store:Store) {
   }

@@ -31,8 +31,7 @@ import {AuthenticationActions} from './shared/features/authentication/authentica
             <application-header
               [activeMainNavigationItem]="store.getUiStore().app.activeMainNavigationItem"
               [mainNavigation]="store.getUiStore().app.mainNavigation"
-              [userSession]="store.getDataStore().userSession"
-              >
+              [userSession]="store.getFeatureStore('authentication').userSession">
             </application-header>
 
             <startpage
