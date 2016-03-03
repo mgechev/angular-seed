@@ -2,7 +2,6 @@ import {ReduxWrapper} from './ReduxWrapper';
 import {createStore} from 'redux';
 import {initialRootStore} from './stores/root.store';
 import {rootReducer} from './reducers/root.reducer';
-import {IDataStore} from './stores/data.store';
 import {IUiStore} from './stores/ui.store';
 import {IRootStore} from './stores/root.store';
 
@@ -28,16 +27,26 @@ export class Store extends ReduxWrapper {
   }
 
   /**
-   * Specific access to store-node of data
-   */
-  public getDataStore():IDataStore {
-    return this.getState().data;
-  }
-
-  /**
    * Specific access to data-node of uiState
    */
   public getUiStore():IUiStore {
     return this.getState().ui;
+  }
+
+  /**
+   * Get substore from features area
+   *
+   * @param featureIdent
+   * @returns {T}
+   */
+  public getFeatureStore<T>(featureIdent:string):T {
+    let featureStore:T;
+    let rootStore:IRootStore = this.getState();
+
+    if (rootStore.features.hasOwnProperty(featureIdent)) {
+      featureStore = rootStore.features[featureIdent] as T;
+    }
+
+    return featureStore;
   }
 }

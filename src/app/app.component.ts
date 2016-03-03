@@ -3,36 +3,35 @@ import {Component,OnInit} from 'angular2/core';
 import {InitializeService} from './shared/features/services/initialize.service';
 import {Store} from './store/store';
 
-import {LoginComponent} from './features/login/login.component';
+import {LoginComponent} from './shared/features/authentication/login.component';
 import {StartpageComponent} from './features/startpage/startpage.component';
 import {ManageComponent} from './features/manage/manage.component';
 import {ActivitiesComponent} from './features/activities/activities.component';
 import {AdministrationComponent} from './features/administration/administration.component';
 import {ApplicationHeader} from './shared/features/application-header/application-header.component';
 
-import {validSessionRequired} from './store/actions/session.actions';
-import {SessionService} from './shared/features/services/session.service';
-import {UiSessionStateEnum} from './store/stores/ui/session.store';
+import {AuthenticationService} from './shared/features/authentication/authentication.service';
 import {IRootStore} from './store/stores/root.store';
+import {AuthenticationActions} from './shared/features/authentication/authentication.actions';
+import {UiSessionStateEnum} from './shared/features/authentication/authentication.store';
 
 @Component({
   selector: 'app',
   template: `
     <div class="container">
       <div class="row">
-        <login *ngIf="!store.getUiStore().session.initializing && !store.getUiStore().session.loggedIn"
+        <login *ngIf="!store.getFeatureStore('authentication').ui.initializing && !store.getFeatureStore('authentication').ui.loggedIn"
         class="col-lg-4 col-md-6 col-sm-7 col-xs-8 center-block pull-xs-none m-t-3"></login>
       </div>
     </div>
     <div class="container-fluid">
       <div class="row">
-        <section *ngIf="store.getUiStore().session.state === stateSessionValid" id="applicationframe">
+        <section *ngIf="store.getFeatureStore('authentication').ui.state === stateSessionValid" id="applicationframe">
 
             <application-header
               [activeMainNavigationItem]="store.getUiStore().app.activeMainNavigationItem"
               [mainNavigation]="store.getUiStore().app.mainNavigation"
-              [userSession]="store.getDataStore().userSession"
-              >
+              [userSession]="store.getFeatureStore('authentication').userSession">
             </application-header>
 
             <startpage
@@ -55,11 +54,11 @@ import {IRootStore} from './store/stores/root.store';
     </div>
   `,
   directives: [NgFor, LoginComponent, StartpageComponent, ManageComponent, ActivitiesComponent, AdministrationComponent, ApplicationHeader],
-  providers: [InitializeService, SessionService]
+  providers: [InitializeService, AuthenticationService]
 })
 export class AppComponent implements OnInit {
 
-  constructor(private store:Store, initializeService:InitializeService, sessionService:SessionService) {
+  constructor(private store:Store, initializeService:InitializeService, sessionService:AuthenticationService) {
   }
 
   public stateSessionValid:UiSessionStateEnum = UiSessionStateEnum.SESSION_VALID;
@@ -76,6 +75,6 @@ export class AppComponent implements OnInit {
       console.groupEnd();
     });
 
-    this.store.dispatch(validSessionRequired());
+    this.store.dispatch(AuthenticationActions.validSessionRequired());
   }
 }

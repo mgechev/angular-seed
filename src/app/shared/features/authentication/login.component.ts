@@ -1,9 +1,9 @@
 import {Component} from 'angular2/core';
-import {Store} from '../../store/store';
+import {Store} from '../../../store/store';
 import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
-import {Dropdown} from '../../shared/ui-elements/form-elements/dropdown';
-import {TenantLoginDto} from '../../shared/stubs/dtos/tenant-login-dto';
-import {userProvidedUsername,userProvidedPassword,userProvidedTenant,userWantsToLogin} from '../../store/actions/session.actions';
+import {Dropdown} from '../../ui-elements/form-elements/dropdown';
+import {TenantLoginDto} from '../../stubs/dtos/tenant-login-dto';
+import {AuthenticationActions} from './authentication.actions';
 
 @Component({
   selector: 'login',
@@ -27,8 +27,9 @@ import {userProvidedUsername,userProvidedPassword,userProvidedTenant,userWantsTo
        </fieldset>
 
        <dropdown
-          [options]="store.getDataStore().userSession.tenants ? store.getDataStore().userSession.tenants : null"
-          [defaultOption]="store.getUiStore().session.tenant"
+          [options]="store.getFeatureStore('authentication').userSession.tenants ?
+          store.getFeatureStore('authentication').userSession.tenants : null"
+          [defaultOption]="store.getFeatureStore('authentication').ui.tenant"
           [label]="'Tenants'"
           [noDataMessage]="'Please enter username in order to see available tenants'"
           [emptyOptionsMessage]="'No tenants available for chosen user'"
@@ -46,18 +47,18 @@ export class LoginComponent {
   }
 
   public onUsernameChanged(event:any):void {
-    this.store.dispatch(userProvidedUsername(event.username));
+    this.store.dispatch(AuthenticationActions.userProvidedUsername(event.username));
   }
 
   public onPasswordChanged(event:any):void {
-    this.store.dispatch(userProvidedPassword(event.password));
+    this.store.dispatch(AuthenticationActions.userProvidedPassword(event.password));
   }
 
   public onTenantSelected(tenant:TenantLoginDto):void {
-    this.store.dispatch(userProvidedTenant(tenant));
+    this.store.dispatch(AuthenticationActions.userProvidedTenant(tenant));
   }
 
   public onLoginClicked(event:any):void {
-    this.store.dispatch(userWantsToLogin());
+    this.store.dispatch(AuthenticationActions.userWantsToLogin());
   }
 }

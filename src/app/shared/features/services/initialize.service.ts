@@ -1,7 +1,7 @@
 import {Store} from '../../../store/store';
 import {Injectable} from 'angular2/core';
 import {UserAuthorizationService} from '../../stubs/services/user-authorization.service';
-import {IUiStore} from '../../../store/stores/ui.store';
+import {AuthenticationStore} from '../authentication/authentication.store';
 
 @Injectable()
 export class InitializeService {
@@ -11,9 +11,9 @@ export class InitializeService {
 
     // listen for changed store and check, if a backend call is needed
     store.subscribe(function ():void {
-      let uiStore:IUiStore = store.getUiStore();
+      let authenticationStore:AuthenticationStore = store.getFeatureStore<AuthenticationStore>('authentication');
 
-      switch (uiStore.session.state) {
+      switch (authenticationStore.ui.state) {
         /*case UiSessionStateEnum.VALID_SESSION_REQUIRED:
          self.userAuthorizationService.getPermissions();
          break;*/

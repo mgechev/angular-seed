@@ -2,8 +2,9 @@ import {assignmentsStateReducer} from './assignments.reducer';
 import {usersStateReducer} from './users.reducer';
 import {uiReducer} from './ui.reducer';
 import {activeModuleReducer} from './modules-state.reducer';
-import {dataStoreReducer} from './data.reducer';
 import {Reducer, combineReducers}from 'redux';
+import {coreReducer} from './core.reducer';
+import {featuresReducer} from './features.reducer';
 
 /**
  * Combine all reducers from application.
@@ -11,7 +12,8 @@ import {Reducer, combineReducers}from 'redux';
  * The name of the reducer is at the same time the name of the data-node in the store.
  */
 export const rootReducer:Reducer = combineReducers({
-  data: dataStoreReducer,
+  core: coreReducer,
+  features: featuresReducer,
   activeModule: activeModuleReducer,
   ui: uiReducer,
   usersState: usersStateReducer,
