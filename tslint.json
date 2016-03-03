@@ -38,6 +38,9 @@
     "component-selector-type": [true, "element"],
     "host-parameter-decorator": true,
     "input-parameter-decorator": true,
-    "output-parameter-decorator": true
+    "output-parameter-decorator": true,
+    "attribute-parameter-decorator": true,
+    "input-property-directive": true,
+    "output-property-directive": true
   }
 }
