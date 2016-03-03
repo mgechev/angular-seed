@@ -1,9 +1,9 @@
-import {Component} from '../../../../../node_modules/angular2/core.d';
+import {Component} from 'angular2/core';
 import {Store} from '../../../store/store';
-import {DROPDOWN_DIRECTIVES} from '../../../../../node_modules/ng2-bootstrap/ng2-bootstrap';
+import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {Dropdown} from '../../ui-elements/form-elements/dropdown';
 import {TenantLoginDto} from '../../stubs/dtos/tenant-login-dto';
-import {userProvidedUsername,userProvidedPassword,userProvidedTenant,userWantsToLogin} from '../../../store/actions/session.actions.ts';
+import {AuthorizationActions} from './authorization.actions';
 
 @Component({
   selector: 'login',
@@ -46,18 +46,18 @@ export class LoginComponent {
   }
 
   public onUsernameChanged(event:any):void {
-    this.store.dispatch(userProvidedUsername(event.username));
+    this.store.dispatch(AuthorizationActions.userProvidedUsername(event.username));
   }
 
   public onPasswordChanged(event:any):void {
-    this.store.dispatch(userProvidedPassword(event.password));
+    this.store.dispatch(AuthorizationActions.userProvidedPassword(event.password));
   }
 
   public onTenantSelected(tenant:TenantLoginDto):void {
-    this.store.dispatch(userProvidedTenant(tenant));
+    this.store.dispatch(AuthorizationActions.userProvidedTenant(tenant));
   }
 
   public onLoginClicked(event:any):void {
-    this.store.dispatch(userWantsToLogin());
+    this.store.dispatch(AuthorizationActions.userWantsToLogin());
   }
 }

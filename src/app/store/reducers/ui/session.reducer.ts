@@ -1,14 +1,7 @@
 import {Action} from '../../actions/base.action';
-import {VALID_SESSION_REQUIRED} from '../../actions/session.actions';
 import {ISessionStore} from '../../stores/ui/session.store';
 import {initialSessionStore} from '../../stores/ui/session.store';
 import {UiSessionStateEnum} from '../../stores/ui/session.store';
-import {USER_PROVIDED_USERNAME} from '../../actions/session.actions';
-import {USER_PROVIDED_PASSWORD} from '../../actions/session.actions';
-import {USER_PROVIDED_TENANT} from '../../actions/session.actions';
-import {USER_WANTS_TO_LOGIN} from '../../actions/session.actions';
-import {USER_WANTS_TO_LOGOUT} from '../../actions/session.actions';
-import {USER_REQUESTED_TENANTSWITCH} from '../../actions/session.actions';
 import {BACKEND_CALL_SUCCEEDED} from '../../actions/services.actions';
 import {BackendCallSucceededActionPayload} from '../../actions/services.actions';
 import {ServiceMethods} from '../../../shared/stubs/services/meta/service-methods';
@@ -18,45 +11,46 @@ import {BackendCallStartedActionPayload} from '../../actions/services.actions';
 import {TenantLoginDto} from '../../../shared/stubs/dtos/tenant-login-dto';
 import {UserLoginDto} from '../../../shared/stubs/dtos/user-login-dto';
 import * as _ from 'lodash';
+import {AuthorizationActions} from '../../../shared/features/authorization/authorization.actions';
 
 export function sessionReducer(state:ISessionStore = initialSessionStore, action:Action<any>):ISessionStore {
   let newState:ISessionStore;
 
   switch (action.type) {
-    case VALID_SESSION_REQUIRED:
+    case AuthorizationActions.VALID_SESSION_REQUIRED:
       newState = _.merge({}, state, {state: UiSessionStateEnum.VALID_SESSION_REQUIRED});
       break;
 
-    case USER_PROVIDED_USERNAME:
+    case AuthorizationActions.USER_PROVIDED_USERNAME:
       newState = _.merge({}, state, {
         state: UiSessionStateEnum.USERNAME_ENTERED,
         username: (action as Action<string>).payload
       });
       break;
 
-    case USER_PROVIDED_PASSWORD:
+    case AuthorizationActions.USER_PROVIDED_PASSWORD:
       newState = _.merge({}, state, {
         state: UiSessionStateEnum.PASSWORD_ENTERED,
         password: (action as Action<string>).payload
       });
       break;
 
-    case USER_PROVIDED_TENANT:
+    case AuthorizationActions.USER_PROVIDED_TENANT:
       newState = _.merge({}, state, {
         state: UiSessionStateEnum.TENANT_SELECTED,
         tenant: (action as Action<string>).payload
       });
       break;
 
-    case USER_WANTS_TO_LOGIN:
+    case AuthorizationActions.USER_WANTS_TO_LOGIN:
       newState = _.merge({}, state, {state: UiSessionStateEnum.LOGIN_CLICKED});
       break;
 
-    case USER_REQUESTED_TENANTSWITCH:
+    case AuthorizationActions.USER_REQUESTED_TENANTSWITCH:
       newState = _.merge({}, state, {switchToTenant: (action as Action<string>).payload});
       break;
 
-    case USER_WANTS_TO_LOGOUT:
+    case AuthorizationActions.USER_WANTS_TO_LOGOUT:
       newState = _.merge({}, state, {state: UiSessionStateEnum.LOGOUT_CLICKED});
       break;
 
@@ -126,7 +120,7 @@ export function sessionReducer(state:ISessionStore = initialSessionStore, action
             getActionPayload<BackendCallSucceededActionPayload<Array<TenantLoginDto>>>(action).result;
           let activeTenant = returnedTenants.length > 0 ? returnedTenants[0].name : state.tenant;
 
-          if(state.loggedIn) {
+          if (state.loggedIn) {
             newState = _.merge({}, state, {
               state: UiSessionStateEnum.SESSION_VALID,
               tenant: activeTenant

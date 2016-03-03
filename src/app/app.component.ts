@@ -3,17 +3,17 @@ import {Component,OnInit} from 'angular2/core';
 import {InitializeService} from './shared/features/services/initialize.service';
 import {Store} from './store/store';
 
-import {LoginComponent} from './features/login/login.component';
+import {LoginComponent} from './shared/features/authorization/login.component';
 import {StartpageComponent} from './features/startpage/startpage.component';
 import {ManageComponent} from './features/manage/manage.component';
 import {ActivitiesComponent} from './features/activities/activities.component';
 import {AdministrationComponent} from './features/administration/administration.component';
 import {ApplicationHeader} from './shared/features/application-header/application-header.component';
 
-import {validSessionRequired} from './store/actions/session.actions';
 import {SessionService} from './shared/features/services/session.service';
 import {UiSessionStateEnum} from './store/stores/ui/session.store';
 import {IRootStore} from './store/stores/root.store';
+import {AuthorizationActions} from './shared/features/authorization/authorization.actions';
 
 @Component({
   selector: 'app',
@@ -76,6 +76,6 @@ export class AppComponent implements OnInit {
       console.groupEnd();
     });
 
-    this.store.dispatch(validSessionRequired());
+    this.store.dispatch(AuthorizationActions.validSessionRequired());
   }
 }
