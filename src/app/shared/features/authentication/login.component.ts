@@ -3,7 +3,7 @@ import {Store} from '../../../store/store';
 import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {Dropdown} from '../../ui-elements/form-elements/dropdown';
 import {TenantLoginDto} from '../../stubs/dtos/tenant-login-dto';
-import {AuthorizationActions} from './authorization.actions';
+import {AuthorizationActions} from './authentication.actions';
 
 @Component({
   selector: 'login',

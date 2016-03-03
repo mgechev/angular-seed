@@ -11,7 +11,7 @@ import {BackendCallStartedActionPayload} from '../../actions/services.actions';
 import {TenantLoginDto} from '../../../shared/stubs/dtos/tenant-login-dto';
 import {UserLoginDto} from '../../../shared/stubs/dtos/user-login-dto';
 import * as _ from 'lodash';
-import {AuthorizationActions} from '../../../shared/features/authorization/authorization.actions';
+import {AuthorizationActions} from '../../../shared/features/authentication/authentication.actions';
 
 export function sessionReducer(state:ISessionStore = initialSessionStore, action:Action<any>):ISessionStore {
   let newState:ISessionStore;

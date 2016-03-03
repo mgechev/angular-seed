@@ -6,7 +6,7 @@ import {NavigationItem} from '../../../store/stores/ui/app.store';
 import {IUserSessionStore} from '../../../store/stores/data/user-session.store';
 import {TenantLoginDto} from '../../../shared/stubs/dtos/tenant-login-dto';
 import {componentInitialized} from '../../../store/actions/app.actions';
-import {AuthorizationActions} from '../authorization/authorization.actions';
+import {AuthorizationActions} from '../authentication/authentication.actions';
 
 @Component({
   selector: 'application-header',
@@ -17,7 +17,7 @@ import {AuthorizationActions} from '../authorization/authorization.actions';
     <section class="application-header">
       <nav class="navbar navbar-full navbar-dark bg-inverse">
 
-        <a class="navbar-brand">SPL-HTML </a>
+        <a class="navbar-brand">FNT ServicePlanet [HTML-UI]</a>
 
         <navigation
           [items]="mainNavigation"

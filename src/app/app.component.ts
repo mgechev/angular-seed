@@ -3,7 +3,7 @@ import {Component,OnInit} from 'angular2/core';
 import {InitializeService} from './shared/features/services/initialize.service';
 import {Store} from './store/store';
 
-import {LoginComponent} from './shared/features/authorization/login.component';
+import {LoginComponent} from './shared/features/authentication/login.component';
 import {StartpageComponent} from './features/startpage/startpage.component';
 import {ManageComponent} from './features/manage/manage.component';
 import {ActivitiesComponent} from './features/activities/activities.component';
@@ -13,7 +13,7 @@ import {ApplicationHeader} from './shared/features/application-header/applicatio
 import {SessionService} from './shared/features/services/session.service';
 import {UiSessionStateEnum} from './store/stores/ui/session.store';
 import {IRootStore} from './store/stores/root.store';
-import {AuthorizationActions} from './shared/features/authorization/authorization.actions';
+import {AuthorizationActions} from './shared/features/authentication/authentication.actions';
 
 @Component({
   selector: 'app',
