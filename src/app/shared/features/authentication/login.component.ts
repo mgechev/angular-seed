@@ -29,7 +29,7 @@ import {AuthenticationActions} from './authentication.actions';
        <dropdown
           [options]="store.getFeatureStore('authentication').userSession.tenants ?
           store.getFeatureStore('authentication').userSession.tenants : null"
-          [defaultOption]="store.getUiStore().session.tenant"
+          [defaultOption]="store.getFeatureStore('authentication').ui.tenant"
           [label]="'Tenants'"
           [noDataMessage]="'Please enter username in order to see available tenants'"
           [emptyOptionsMessage]="'No tenants available for chosen user'"

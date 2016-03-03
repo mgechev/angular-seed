@@ -1,31 +1,32 @@
 import {Injectable} from 'angular2/core';
 import {Store} from '../../../store/store';
 import {LoginService} from '../../stubs/services/login.service';
-import {IUiStore} from '../../../store/stores/ui.store';
-import {UiSessionStateEnum} from '../../../store/stores/ui/session.store';
 import 'rxjs/operator/map';
 import 'rxjs/operator/distinctUntilChanged';
 import {observableFromStore} from '../../../store/observableFromStore';
-
+import {UiSessionStateEnum} from '../authentication/authentication.store';
+import {AuthenticationStore} from '../authentication/authentication.store';
 
 @Injectable()
 export class SessionService {
   constructor(private store:Store, private loginService:LoginService) {
     let self:SessionService = this;
 
-    let switchToTenant$ = observableFromStore(store).map(store => store.ui.session.switchToTenant).distinctUntilChanged();
+    let switchToTenant$ = observableFromStore(store).map(store => store.features.authentication.ui.switchToTenant).distinctUntilChanged();
 
-    switchToTenant$.subscribe(switchToTenant => { if (switchToTenant) {
-      this.loginService.switchTenant(switchToTenant.name);
-    }});
+    switchToTenant$.subscribe(switchToTenant => {
+      if (switchToTenant) {
+        this.loginService.switchTenant(switchToTenant.name);
+      }
+    });
 
     // listen for changed store and check, if a backend call is needed
     store.subscribe(function ():void {
-      let uiStore:IUiStore = store.getUiStore();
+      let authenticationStore:AuthenticationStore = store.getFeatureStore<AuthenticationStore>('authentication');
 
-      switch (uiStore.session.state) {
+      switch (authenticationStore.ui.state) {
         case UiSessionStateEnum.VALID_SESSION_REQUIRED:
-            self.loginService.hasLoggedInUser();
+          self.loginService.hasLoggedInUser();
           break;
 
         case UiSessionStateEnum.BACKEND_HAS_VALID_SESSION:
@@ -33,16 +34,16 @@ export class SessionService {
           break;
 
         case UiSessionStateEnum.USERNAME_ENTERED:
-          self.loginService.findActiveTenantsByUser(uiStore.session.username);
+          self.loginService.findActiveTenantsByUser(authenticationStore.ui.username);
           break;
 
         case UiSessionStateEnum.LOGIN_CLICKED:
-          self.loginService.authenticate(uiStore.session.username, uiStore.session.password, uiStore.session.tenant);
+          self.loginService.authenticate(authenticationStore.ui.username, authenticationStore.ui.password, authenticationStore.ui.tenant);
           break;
 
         case UiSessionStateEnum.SESSION_VALID:
-          if(uiStore.session.username && !uiStore.session.tenant) {
-            self.loginService.findActiveTenantsByUser(uiStore.session.username);
+          if (authenticationStore.ui.username && !authenticationStore.ui.tenant) {
+            self.loginService.findActiveTenantsByUser(authenticationStore.ui.username);
           }
           break;
 
@@ -51,7 +52,6 @@ export class SessionService {
           break;
 
         case UiSessionStateEnum.SESSION_INVALID:
-        case UiSessionStateEnum.SESSION_VALID:
         case UiSessionStateEnum.PASSWORD_ENTERED:
         case UiSessionStateEnum.TENANTS_LOADED:
         case UiSessionStateEnum.TENANT_SELECTED:

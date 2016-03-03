@@ -6,7 +6,7 @@ import {NavigationItem} from '../../../store/stores/ui/app.store';
 import {TenantLoginDto} from '../../../shared/stubs/dtos/tenant-login-dto';
 import {componentInitialized} from '../../../store/actions/app.actions';
 import {AuthenticationActions} from '../authentication/authentication.actions';
-import {UserSessionStore} from '../authentication/authentication.store';
+import {AuthenticationUserSessionStore} from '../authentication/authentication.store';
 
 @Component({
   selector: 'application-header',
@@ -40,7 +40,7 @@ export class ApplicationHeader implements OnInit,OnChanges {
 
   @Input() activeMainNavigationItem:NavigationItem;
   @Input() mainNavigation:Array<NavigationItem>;
-  @Input() userSession:UserSessionStore;
+  @Input() userSession:AuthenticationUserSessionStore;
 
   constructor(private store:Store) {
   }

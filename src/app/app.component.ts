@@ -11,22 +11,22 @@ import {AdministrationComponent} from './features/administration/administration.
 import {ApplicationHeader} from './shared/features/application-header/application-header.component';
 
 import {SessionService} from './shared/features/services/session.service';
-import {UiSessionStateEnum} from './store/stores/ui/session.store';
 import {IRootStore} from './store/stores/root.store';
 import {AuthenticationActions} from './shared/features/authentication/authentication.actions';
+import {UiSessionStateEnum} from './shared/features/authentication/authentication.store';
 
 @Component({
   selector: 'app',
   template: `
     <div class="container">
       <div class="row">
-        <login *ngIf="!store.getUiStore().session.initializing && !store.getUiStore().session.loggedIn"
+        <login *ngIf="!store.getFeatureStore('authentication').ui.initializing && !store.getFeatureStore('authentication').ui.loggedIn"
         class="col-lg-4 col-md-6 col-sm-7 col-xs-8 center-block pull-xs-none m-t-3"></login>
       </div>
     </div>
     <div class="container-fluid">
       <div class="row">
-        <section *ngIf="store.getUiStore().session.state === stateSessionValid" id="applicationframe">
+        <section *ngIf="store.getFeatureStore('authentication').ui.state === stateSessionValid" id="applicationframe">
 
             <application-header
               [activeMainNavigationItem]="store.getUiStore().app.activeMainNavigationItem"
