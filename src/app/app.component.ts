@@ -10,7 +10,7 @@ import {ActivitiesComponent} from './features/activities/activities.component';
 import {AdministrationComponent} from './features/administration/administration.component';
 import {ApplicationHeader} from './shared/features/application-header/application-header.component';
 
-import {SessionService} from './shared/features/services/session.service';
+import {AuthenticationService} from './shared/features/authentication/authentication.service';
 import {IRootStore} from './store/stores/root.store';
 import {AuthenticationActions} from './shared/features/authentication/authentication.actions';
 import {UiSessionStateEnum} from './shared/features/authentication/authentication.store';
@@ -54,11 +54,11 @@ import {UiSessionStateEnum} from './shared/features/authentication/authenticatio
     </div>
   `,
   directives: [NgFor, LoginComponent, StartpageComponent, ManageComponent, ActivitiesComponent, AdministrationComponent, ApplicationHeader],
-  providers: [InitializeService, SessionService]
+  providers: [InitializeService, AuthenticationService]
 })
 export class AppComponent implements OnInit {
 
-  constructor(private store:Store, initializeService:InitializeService, sessionService:SessionService) {
+  constructor(private store:Store, initializeService:InitializeService, sessionService:AuthenticationService) {
   }
 
   public stateSessionValid:UiSessionStateEnum = UiSessionStateEnum.SESSION_VALID;

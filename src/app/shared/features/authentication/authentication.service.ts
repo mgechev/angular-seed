@@ -8,11 +8,13 @@ import {UiSessionStateEnum} from '../authentication/authentication.store';
 import {AuthenticationStore} from '../authentication/authentication.store';
 
 @Injectable()
-export class SessionService {
+export class AuthenticationService {
   constructor(private store:Store, private loginService:LoginService) {
-    let self:SessionService = this;
+    let self:AuthenticationService = this;
 
-    let switchToTenant$ = observableFromStore(store).map(store => store.features.authentication.ui.switchToTenant).distinctUntilChanged();
+    let switchToTenant$ = observableFromStore(store)
+      .map(store => store.features.authentication.ui.switchToTenant)
+      .distinctUntilChanged();
 
     switchToTenant$.subscribe(switchToTenant => {
       if (switchToTenant) {
