@@ -7,12 +7,13 @@
 [![Dependency Status](https://david-dm.org/mgechev/angular2-seed.svg)](https://david-dm.org/mgechev/angular2-seed)
 [![devDependency Status](https://david-dm.org/mgechev/angular2-seed/dev-status.svg)](https://david-dm.org/mgechev/angular2-seed#info=devDependencies)
 
-A seed project for Angular 2 apps.
+A modular seed project for Angular 2 apps.
 
 It is something similar to the Angular Quick Start but does the entire build with gulp.
 
 `angular2-seed` provides the following features:
 
+- Allows you to painlessly update the seed tasks of your already existing project.
 - Ready to go, statically typed build system using gulp for working with TypeScript.
 - Production and development builds.
 - Sample unit tests with Jasmine and Karma including code coverage via [istanbul](https://gotwarlost.github.io/istanbul/).
@@ -138,57 +139,60 @@ Forks of this project demonstrate how to extend and integrate with other librari
 
 ```
 .
-├── CONTRIBUTING.md
 ├── LICENSE
 ├── README.md
-├── src
-│   ├── about
-│   │   └── components
-│   │       ├── about.e2e.ts
-│   │       ├── about.html
-│   │       ├── about.ts
-│   │       └── about.spec.ts
-│   ├── app
-│   │   └── components
-│   │       ├── app.css
-│   │       ├── app.e2e.ts
-│   │       ├── app.html
-│   │       ├── app.ts
-│   │       └── app.spec.ts
-│   ├── assets
-│   │   ├── img
-│   │   │   └── smile.png
-│   │   └── main.css
-│   ├── home
-│   │   └── components
-│   │       ├── home.css
-│   │       ├── home.html
-│   │       ├── home.ts
-│   │       ├── home.e2e.ts
-│   │       └── home.spec.ts
-│   ├── shared
-│   │   └── services
-│   │       ├── name_list.ts
-│   │       └── name_list.spec.ts
-│   ├── hot_loader_main.ts
-│   ├── main.ts
-│   └── index.html
-├── dist
+├── gulpfile.ts                <- configuration of the gulp tasks
+├── karma.conf.js              <- configuration of the test runner
+├── package.json               <- dependencies of the project
+├── protractor.conf.js         <- e2e tests configuration
+├── src                        <- source code of the application
+│   ├── home
+│   │   └── components
+│   ├── index.html
+│   ├── main.ts
+│   ├── shared
+│   │   └── services
+│   │       ├── name-list...
+│   │       └── name-list...
+│   └── sw.js                  <- sample service worker
+├── test-main.js               <- testing configuration
 ├── tools
-│   ├── manual_typings
-│   ├── tasks
-│   ├── utils
-│   ├── config.ts
-│   └── utils.ts
-├── appveyor.yml
-├── gulpfile.ts
-├── karma.conf.js
-├── package.json
-├── protractor.conf.js
-├── test-main.js
-├── tsconfig.json
-├── tslint.json
-└── typings.json
+│   ├── README.md              <- build documentation
+│   ├── config
+│   │   ├── project.config.ts  <- configuration of the specific project
+│   │   ├── seed.config....
+│   │   └── seed.config.ts     <- generic configuration of the seed project
+│   ├── config.ts              <- exported configuration (merge both seed.config and project.config, project.config overrides seed.config)
+│   ├── debug.ts
+│   ├── manual_typings
+│   │   ├── project            <- manual ambient typings for the project
+│   │   │   └── sample.pac...
+│   │   └── seed               <- seed manual ambient typings
+│   │       ├── merge-stre..
+│   │       └── slash.d.ts
+│   ├── tasks                  <- gulp tasks
+│   │   ├── project            <- project specific gulp tasks
+│   │   │   └── sample.tas...
+│   │   └── seed               <- seed generic gulp tasks. They can be overriden by the project specific gulp tasks
+│   ├── utils                  <- build utils
+│   │   ├── project            <- project specific gulp utils
+│   │   │   └── sample_util...
+│   │   ├── project.utils.ts
+│   │   ├── seed               <- seed specific gulp utils
+│   │   │   ├── clean.ts
+│   │   │   ├── code_change...
+│   │   │   ├── server.ts
+│   │   │   ├── tasks_tools.ts
+│   │   │   ├── template_loc...
+│   │   │   ├── tsproject.ts
+│   │   │   └── watch.ts
+│   │   └── seed.utils.ts
+│   └── utils.ts
+├── tsconfig.json              <- configuration of the typescript project (ts-node, which runs the tasks defined in gulpfile.ts)
+├── tslint.json                <- tslint configuration
+├── typings                    <- typings directory. Contains all the external typing definitions defined with typings
+├── typings.json
+└── appveyor.yml
 ```
 
 # Contributors
