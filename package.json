@@ -23,7 +23,6 @@
     "serve.coverage": "remap-istanbul -i coverage/coverage-final.json -o coverage -t html && npm run gulp -- serve.coverage",
     "serve.dev": "gulp serve.dev",
     "serve.e2e": "gulp serve.e2e",
-    "serve.prod": "gulp serve.prod",
     "start": "gulp serve.dev",
     "tasks.list": "gulp --tasks-simple",
     "test": "gulp test",
