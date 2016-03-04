@@ -4,24 +4,18 @@ import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {Dropdown} from '../../ui-elements/form-elements/dropdown';
 import {TenantLoginDto} from '../../stubs/dtos/tenant-login-dto';
 import {AuthenticationActions} from './authentication.actions';
-import {backendUrlSelected} from '../backend/backend.actions';
+import {BackendChooserComponent} from '../backend/backend-chooser.component';
 
 @Component({
   selector: 'login',
-  directives: [DROPDOWN_DIRECTIVES, Dropdown],
+  directives: [DROPDOWN_DIRECTIVES, Dropdown, BackendChooserComponent],
   template: `
     <section>
        <h2>Login</h2>
       <!-- here could be a place, where the form-generator is used... -->
       <form class="p-y-1">
 
-       <dropdown
-          [options]="store.getFeatureStore('backend').backendUrls ? store.getFeatureStore('backend').backendUrls : null"
-          [defaultOption]="store.getFeatureStore('backend').backendUrl"
-          [label]="'Backend URL'"
-          [noDataMessage]="'No backend systems available'"
-          [emptyOptionsMessage]="'No backend systems available'"
-          (optionSelected)="onBackendSelected($event)"></dropdown>
+       <backend-chooser></backend-chooser>
 
         <fieldset class="form-group">
           <label for="username">Username:</label>
@@ -70,9 +64,5 @@ export class LoginComponent {
 
   public onLoginClicked(event:any):void {
     this.store.dispatch(AuthenticationActions.userWantsToLogin());
-  }
-
-  public onBackendSelected(backendUrl:string) {
-    this.store.dispatch(backendUrlSelected(backendUrl));
   }
 }
