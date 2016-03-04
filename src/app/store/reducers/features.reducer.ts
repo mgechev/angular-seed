@@ -1,7 +1,7 @@
 import {Action} from '../actions/base.action';
 import {authenticationReducer} from '../../shared/features/authentication/authentication.reducer';
-import {FeaturesStore} from '../stores/features.store';
-import {initialFeaturesStore} from '../stores/features.store';
+import {FeaturesStore, initialFeaturesStore} from '../stores/features.store';
+import {backendReducer} from '../../shared/features/backend/backend.reducer';
 
 export function featuresReducer(store:FeaturesStore, action:Action<any>):any {
   if (!store) {
@@ -14,6 +14,7 @@ export function featuresReducer(store:FeaturesStore, action:Action<any>):any {
   // state['feature-a'] = featureAReducer(state['feature-a'], action);
   // for now, check it statically
   newStore.authentication = authenticationReducer(store.authentication, action);
+  newStore.backend = backendReducer(store.backend, action);
 
   return newStore;
 }

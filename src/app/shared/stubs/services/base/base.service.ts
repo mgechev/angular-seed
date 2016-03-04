@@ -9,17 +9,6 @@ import {Store} from '../../../../store/store';
 
 'use strict';
 
-export function getServerUrl():string {
-  let serverUrl:string = window.location.protocol + '//' + window.location.hostname + ':8080/serviceplanet';
-
-  // check for existing config in localStorage
-  if (window.localStorage.hasOwnProperty('splServerUrl')) {
-    serverUrl = window.localStorage.getItem('splServerUrl');
-  }
-
-  return serverUrl;
-}
-
 /**
  * Base service class contains hidden functionality for call creation.
  */

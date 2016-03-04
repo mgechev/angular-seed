@@ -5,11 +5,11 @@ import {queryParams} from './query-params.function';
 import {IPostCall} from './post-call.interface';
 import {CustomRequestOptionsArgs} from './custom-request-options-args';
 import {DtoConverter} from '../../../../features/services/dto-converter.service';
-import {getServerUrl} from '../base.service';
 import {Store} from '../../../../../store/store';
 import {backendCallStarted} from '../../../../../store/actions/services.actions';
 import {backendCallSucceeded} from '../../../../../store/actions/services.actions';
 import {backendCallFailed} from '../../../../../store/actions/services.actions';
+import {BackendStore} from '../../../../features/backend/backend.store';
 
 export class PostCall implements IPostCall {
 
@@ -59,7 +59,7 @@ export class PostCall implements IPostCall {
     self.store.dispatch(backendCallStarted(self.restPath, null, null));
     return self.http
       .post(
-        getServerUrl() + '/remote/service/' + self.restPath +
+        self.store.getFeatureStore<BackendStore>('backend').backendUrl + '/remote/service/' + self.restPath + '/' +
         self._urlSubPath,
         DtoConverter.dumbify(self._requestData), self._config)
       .toPromise()

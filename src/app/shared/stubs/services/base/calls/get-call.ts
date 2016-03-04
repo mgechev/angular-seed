@@ -4,11 +4,11 @@ import 'rxjs/Rx';
 import {queryParams} from './query-params.function';
 import {IGetCall} from './get-call.interface';
 import {DtoConverter} from '../../../../features/services/dto-converter.service';
-import {getServerUrl} from '../base.service';
 import {Store} from '../../../../../store/store';
 import {backendCallStarted} from '../../../../../store/actions/services.actions';
 import {backendCallSucceeded} from '../../../../../store/actions/services.actions';
 import {backendCallFailed} from '../../../../../store/actions/services.actions';
+import {BackendStore} from '../../../../features/backend/backend.store';
 
 export class GetCall implements IGetCall {
 
@@ -38,7 +38,7 @@ export class GetCall implements IGetCall {
     self.store.dispatch(backendCallStarted(self.restPath, null, null));
     return self.http
       .get(
-        getServerUrl() + '/remote/service/' + self.restPath + '/' +
+        self.store.getFeatureStore<BackendStore>('backend').backendUrl + '/remote/service/' + self.restPath + '/' +
         self._urlSubPath + self._urlParams)
       .toPromise()
       .then(function (response:Response):any {
