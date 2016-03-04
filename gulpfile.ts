@@ -1,15 +1,11 @@
 import * as gulp from 'gulp';
-import {runSequence, task} from './tools/utils';
+import * as runSequence from 'run-sequence';
+import {loadTasks} from './tools/utils';
+import {SEED_TASKS_DIR, PROJECT_TASKS_DIR} from './tools/config';
 
-// --------------
-// Clean (override).
-gulp.task('clean', done => task('clean', 'all')(done));
-gulp.task('clean.dev', done => task('clean', 'dev')(done));
-gulp.task('clean.prod', done => task('clean', 'prod')(done));
-gulp.task('check.versions', () => task('check.versions'));
-gulp.task('build.docs', () => task('build.docs'));
-gulp.task('serve.docs', () => task('serve.docs'));
-gulp.task('serve.coverage', task('serve.coverage'));
+loadTasks(SEED_TASKS_DIR);
+loadTasks(PROJECT_TASKS_DIR);
+
 
 // --------------
 // Build dev.
@@ -69,8 +65,14 @@ gulp.task('build.test.watch', done =>
               done));
 
 // --------------
+// Build tools.
+gulp.task('build.tools', done =>
+  runSequence('clean.tools',
+              'build.js.tools',
+              done));
+
+// --------------
 // Docs
-// Disabled until https://github.com/sebastian-lenz/typedoc/issues/162 gets resolved
 gulp.task('docs', done =>
   runSequence('build.docs',
               'serve.docs',
@@ -81,7 +83,7 @@ gulp.task('docs', done =>
 gulp.task('serve.dev', done =>
   runSequence('build.dev',
               'server.start',
-              'watch.serve',
+              'watch.dev',
               done));
 
 // --------------
@@ -89,15 +91,7 @@ gulp.task('serve.dev', done =>
 gulp.task('serve.e2e', done =>
   runSequence('build.e2e',
               'server.start',
-              'watch.serve',
-              done));
-
-// --------------
-// Serve prod
-gulp.task('serve.prod', done =>
-  runSequence('build.prod',
-              'server.start',
-              'watch.serve',
+              'watch.e2e',
               done));
 
 // --------------

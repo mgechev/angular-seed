@@ -35,6 +35,8 @@ build/Release
 .vscode
 *.iml
 
+/tools/**/*.js
+gulpfile.js
 dist
 dev
 docs

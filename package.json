@@ -23,7 +23,6 @@
     "serve.coverage": "remap-istanbul -i coverage/coverage-final.json -o coverage -t html && npm run gulp -- serve.coverage",
     "serve.dev": "gulp serve.dev",
     "serve.e2e": "gulp serve.e2e",
-    "serve.prod": "gulp serve.prod",
     "start": "gulp serve.dev",
     "tasks.list": "gulp --tasks-simple",
     "test": "gulp test",
@@ -61,6 +60,7 @@
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.2.4",
+    "isstream": "^0.1.2",
     "jasmine-core": "~2.3.4",
     "jasmine-spec-reporter": "^2.4.0",
     "karma": "~0.13.21",
@@ -95,7 +95,7 @@
     "yargs": "^3.32.0"
   },
   "dependencies": {
-    "angular2": "2.0.0-beta.7",
+    "angular2": "2.0.0-beta.8",
     "es6-module-loader": "^0.17.8",
     "es6-shim": "^0.33.3",
     "reflect-metadata": "0.1.2",
