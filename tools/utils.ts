@@ -5,7 +5,7 @@ export * from './utils/tasks_tools';
 var _tsProject;
 
 export function tsProjectFn(plugins) {
-  if( !_tsProject ) { 
+  if(!_tsProject) {
     _tsProject = plugins.typescript.createProject('tsconfig.json', {
       typescript: require('typescript')
     });
