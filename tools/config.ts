@@ -58,6 +58,7 @@ if (ENABLE_HOT_LOADING) {
 interface IDependency {
   src: string;
   inject: string | boolean;
+  vendor?: boolean;
 }
 
 // Declare NPM dependencies (Note that globs should not be injected).
@@ -85,7 +86,7 @@ export const PROD_NPM_DEPENDENCIES: IDependency[] = normalizeDependencies([
 
 // Declare local files that needs to be injected
 export const APP_ASSETS: IDependency[] = [
-  { src: `${ASSETS_SRC}/main.css`, inject: true }
+  { src: `${ASSETS_SRC}/main.css`, inject: true, vendor: false }
 ];
 
 
@@ -118,6 +119,20 @@ export const SYSTEM_BUILDER_CONFIG = {
     '*': 'node_modules/*'
   }
 };
+
+// ----------------
+// Autoprefixer configuration.
+export const BROWSER_LIST = [
+  'ie >= 10',
+  'ie_mob >= 10',
+  'ff >= 30',
+  'chrome >= 34',
+  'safari >= 7',
+  'opera >= 23',
+  'ios >= 7',
+  'android >= 4.4',
+  'bb >= 10'
+];
 
 // --------------
 // Private.
