@@ -31,6 +31,7 @@ import {AuthenticationActions} from './authentication.actions';
           store.getFeatureStore('authentication').userSession.tenants : null"
           [defaultOption]="store.getFeatureStore('authentication').ui.tenant"
           [label]="'Tenants'"
+          [labelProperty]="'name'"
           [noDataMessage]="'Please enter username in order to see available tenants'"
           [emptyOptionsMessage]="'No tenants available for chosen user'"
           (optionSelected)="onTenantSelected($event)"></dropdown>

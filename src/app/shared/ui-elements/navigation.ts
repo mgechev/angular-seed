@@ -21,6 +21,7 @@ import {NgFor,NgIf} from 'angular2/common';
           <dropdown *ngIf="item.children" inline="true"
           [options]="item.children"
           [defaultOption]="item.label"
+          [labelProperty]="'label'"
           (optionSelected)="itemClicked.emit($event)"></dropdown>
         </li>
 
@@ -29,7 +30,6 @@ import {NgFor,NgIf} from 'angular2/common';
     `
 })
 export class Navigation implements OnInit {
-
   @Input() align:string;
   @Input() toggable:boolean;
   @Input() items:Array<NavigationItem>;
