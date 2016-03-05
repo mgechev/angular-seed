@@ -120,7 +120,7 @@ You can learn more about [Protractor Interactive Mode here](https://github.com/a
 
 # Contributing
 
-Please see the [CONTRIBUTING](https://github.com/mgechev/angular2-seed/blob/master/CONTRIBUTING.md) file for guidelines.
+Please see the [CONTRIBUTING](https://github.com/mgechev/angular2-seed/blob/master/.github/CONTRIBUTING.md) file for guidelines.
 
 # Examples
 
