@@ -22,11 +22,17 @@ export = () => {
     .pipe(gulp.dest(APP_DEST));
 }
 
-function inject(...files) {
+function inject(...files: any[]) {
     return plugins.inject(gulp.src(files, { read: false }), {
         files,
         transform: transformPath()
-    });
+    }), {
+      transform: function (filepath: string) {
+        let path = normalize(filepath).split(sep);
+        arguments[0] = path.slice(3, path.length).join(sep) + `?${Date.now()}`;
+        return plugins.inject.transform.apply(plugins.inject.transform, arguments);
+      }
+    };
 }
 
 function injectJs() {
@@ -39,7 +45,7 @@ function injectCss() {
 }
 
 function transformPath() {
-    return function(filepath) {
+    return function(filepath:string) {
         let path = normalize(filepath).split(sep);
         arguments[0] = path.slice(3, path.length).join(sep) + `?${Date.now()}`;
         return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));

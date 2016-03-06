@@ -36,7 +36,7 @@ let listen = () => {
   runServer();
 };
 
-let changed = files => {
+let changed = (files: any) => {
   if (!(files instanceof Array)) {
     files = [files];
   }
