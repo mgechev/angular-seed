@@ -43,7 +43,7 @@ let changed = files => {
   // if (ENABLE_HOT_LOADING) {
   //   ng2HotLoader.onChange(files);
   // } else {
-    browserSync.reload(files);
+  browserSync.reload(files);
   //}
 };
 
