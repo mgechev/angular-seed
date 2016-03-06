@@ -115,7 +115,7 @@ export class SeedConfig {
 // --------------
 // Utils.
 
-function normalizeDependencies(deps: InjectableDependency[]) {
+export function normalizeDependencies(deps: InjectableDependency[]) {
   deps
     .filter((d:InjectableDependency) => !/\*/.test(d.src)) // Skip globs
     .forEach((d:InjectableDependency) => d.src = require.resolve(d.src));
