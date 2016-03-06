@@ -1,10 +1,10 @@
-describe('About', function() {
+describe('About', () => {
 
-  beforeEach(function() {
+  beforeEach( () => {
     browser.get('about');
   });
 
-  it('should have correct feature heading', function() {
+  it('should have correct feature heading', () => {
       expect(element(by.css('sd-app sd-about h2')).getText())
       .toEqual('Features');
   });
