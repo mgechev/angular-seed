@@ -8,9 +8,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
-    // Nicer looking errors in console
     "pretty": true,
-    // Static analysis options
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "noImplicitAny": false,
