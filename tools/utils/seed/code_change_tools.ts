@@ -1,5 +1,16 @@
-import {PORT, APP_DEST, APP_BASE, DIST_DIR} from '../../config';
+import {
+  PORT,
+  APP_DEST,
+  APP_BASE,
+  DIST_DIR,
+  PROXY_PATH,
+  PROXY_HOST,
+  PROXY_PORT,
+  PROXY_PROTOCOL,
+  PROXY_LOCAL_PATH
+} from '../../config';
 import * as browserSync from 'browser-sync';
+const proxy = require('proxy-middleware');
 
 let runServer = () => {
   let baseDir = APP_DEST;
@@ -13,12 +24,26 @@ let runServer = () => {
     baseDir = `${DIST_DIR}/empty/`;
   }
 
+  let browserSyncMiddleswares = [];
+  if(PROXY_HOST) {
+    let proxyOptions = {
+      protocol: PROXY_PROTOCOL.indexOf(':') > -1 ? PROXY_PROTOCOL : PROXY_PROTOCOL + ':',
+      hostname: PROXY_HOST,
+      port: PROXY_PORT,
+      pathname: PROXY_PATH,
+      route: PROXY_LOCAL_PATH
+    };
+    browserSyncMiddleswares.push(proxy(proxyOptions));
+  }
+
+  browserSyncMiddleswares.push(require('connect-history-api-fallback')({index: `${APP_BASE}index.html`}));
+
   browserSync({
-    middleware: [require('connect-history-api-fallback')({index: `${APP_BASE}index.html`})],
     port: PORT,
     startPath: APP_BASE,
     server: {
       baseDir: baseDir,
+      middleware: browserSyncMiddleswares,
       routes: routes
     }
   });

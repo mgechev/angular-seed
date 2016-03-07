@@ -21,6 +21,12 @@ export class SeedConfig {
   ENABLE_HOT_LOADING   = argv['hot-loader'];
   HOT_LOADER_PORT      = 5578;
 
+  PROXY_PATH           = argv['proxy_target_path']           || '/api';
+  PROXY_HOST           = argv['proxy_target_host']           || 'localhost';
+  PROXY_PORT           = argv['proxy_target_port']           || 8080;
+  PROXY_PROTOCOL       = argv['proxy_target_protocol']       || 'http';
+  PROXY_LOCAL_PATH     = argv['proxy_local_path']            || this.PROXY_PATH;
+
   BOOTSTRAP_MODULE     = this.ENABLE_HOT_LOADING ? 'hot_loader_main' : 'main';
 
   APP_TITLE            = 'My Angular2 App';
