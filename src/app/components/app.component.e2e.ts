@@ -5,7 +5,7 @@ describe('App', () => {
   });
 
   it('should have a title', () => {
-      expect(browser.getTitle()).toEqual('Angular 2 Seed');
+      expect(browser.getTitle()).toEqual('My Angular2 App');
   });
 
   it('should have <nav>', () => {
