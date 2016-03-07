@@ -6,7 +6,7 @@ export class ProjectConfig extends SeedConfig {
 
   constructor() {
     super();
-    this.APP_TITLE = 'Put name of your app here';
+    // this.APP_TITLE = 'Put name of your app here';
     let additional_deps = [
       // {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
       // {src: 'lodash/lodash.min.js', inject: 'libs'},
