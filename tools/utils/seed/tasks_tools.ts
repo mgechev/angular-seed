@@ -5,7 +5,6 @@ import * as isstream from 'isstream';
 import {readdirSync, existsSync, lstatSync} from 'fs';
 import {join} from 'path';
 
-
 export function loadTasks(path: string): void {
   util.log('Loading tasks folder', chalk.yellow(path));
   readDir(path, taskname => registerTask(taskname, path));
@@ -39,13 +38,15 @@ function readDir(root: string, cb: (taskname: string) => void) {
 
   function walk(path) {
     let files = readdirSync(path);
-    for (let i = 0; i < files.length; i += 1) {
-      let file = files[i];
+
+    files.map((file) => {
       let curPath = join(path, file);
+
       if (lstatSync(curPath).isFile() && /\.ts$/.test(file)) {
         let taskname = file.replace(/(\.ts)/, '');
+
         cb(taskname);
       }
-    }
+    });
   }
 }
