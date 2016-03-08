@@ -1,6 +1,7 @@
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import {join, sep, normalize} from 'path';
+import * as slash from 'slash';
 import {templateLocals} from '../../utils';
 import {
   APP_SRC,
@@ -22,15 +23,9 @@ export = () => {
 }
 
 function inject(...files) {
-  return plugins.inject(
-    gulp.src(files, {
-      read: false
-    }), {
-      transform: function (filepath) {
-        let path = normalize(filepath).split(sep);
-        arguments[0] = path.slice(3, path.length).join(sep) + `?${Date.now()}`;
-        return plugins.inject.transform.apply(plugins.inject.transform, arguments);
-      }
+    return plugins.inject(gulp.src(files, { read: false }), {
+        files,
+        transform: transformPath()
     });
 }
 
@@ -41,4 +36,12 @@ function injectJs() {
 
 function injectCss() {
   return inject(join(CSS_DEST, CSS_PROD_BUNDLE));
+}
+
+function transformPath() {
+    return function(filepath) {
+        let path = normalize(filepath).split(sep);
+        arguments[0] = path.slice(3, path.length).join(sep) + `?${Date.now()}`;
+        return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));
+    };
 }
