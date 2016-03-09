@@ -1,12 +1,25 @@
 import * as util from 'gulp-util';
 import * as chalk from 'chalk';
-import * as del from 'del';
+import * as rimraf from 'rimraf';
 
 export function clean(paths: string|string[]): (done: () => void) => void {
   return done => {
-    del(<any>paths).then((paths) => {
-      util.log('Deleted', chalk.yellow(paths && paths.join(', ') || '-'));
-      done();
+    let pathsArray: string[];
+    if (!(paths instanceof Array)) {
+      pathsArray = [<string>paths];
+    }
+    let promises = pathsArray.map(p => {
+      return new Promise(resolve => {
+        rimraf(p, e => {
+          if (e) {
+            util.log('Clean task failed with', e);
+          } else {
+            util.log('Deleted', chalk.yellow(p || '-'));
+          }
+          resolve();
+        });
+      });
     });
+    Promise.all(promises).then(() => done());
   };
 }

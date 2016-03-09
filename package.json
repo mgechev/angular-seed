@@ -38,7 +38,6 @@
     "connect": "^3.4.1",
     "connect-history-api-fallback": "^1.1.0",
     "connect-livereload": "^0.5.3",
-    "del": "^2.2.0",
     "event-stream": "^3.3.2",
     "express": "~4.13.1",
     "extend": "^3.0.0",
