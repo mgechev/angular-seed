@@ -12,19 +12,26 @@ import {ApplicationHeader} from './shared/features/application-header/applicatio
 
 import {AuthenticationService} from './shared/features/authentication/authentication.service';
 import {IRootStore} from './store/stores/root.store';
-import {AuthenticationActions} from './shared/features/authentication/authentication.actions';
 import {UiSessionStateEnum} from './shared/features/authentication/authentication.store';
+
+import {BackendChooserComponent} from './shared/features/backend/backend-chooser.component';
+import {BackendActions} from './shared/features/backend/backend.actions';
 
 @Component({
   selector: 'app',
   template: `
     <div class="container">
-      <div class="row">
+      <div class="row" *ngIf="!store.getFeatureStore('backend').backendUrlSelected">
+        <backend-chooser></backend-chooser>
+      </div>
+      <div class="row" *ngIf="store.getFeatureStore('backend').backendUrlSelected">
         <login *ngIf="!store.getFeatureStore('authentication').ui.initializing && !store.getFeatureStore('authentication').ui.loggedIn"
-        class="col-lg-4 col-md-6 col-sm-7 col-xs-8 center-block pull-xs-none m-t-3"></login>
+          class="col-lg-4 col-md-6 col-sm-7 col-xs-8 center-block pull-xs-none m-t-3"></login>
+        <a href="#" (click)="discardBackendUrl()"
+          class="col-lg-4 col-md-6 col-sm-7 col-xs-8 center-block pull-xs-none m-t-3">Change Backend URL</a>
       </div>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid" *ngIf="store.getFeatureStore('backend').backendUrlSelected">
       <div class="row">
         <section *ngIf="store.getFeatureStore('authentication').ui.state === stateSessionValid" id="applicationframe">
 
@@ -53,28 +60,35 @@ import {UiSessionStateEnum} from './shared/features/authentication/authenticatio
       </div>
     </div>
   `,
-  directives: [NgFor, LoginComponent, StartpageComponent, ManageComponent, ActivitiesComponent, AdministrationComponent, ApplicationHeader],
+  directives: [NgFor, LoginComponent, StartpageComponent, ManageComponent, ActivitiesComponent,
+               AdministrationComponent, ApplicationHeader, BackendChooserComponent],
   providers: [InitializeService, AuthenticationService]
 })
-export class AppComponent implements OnInit {
-
-  constructor(private store:Store, initializeService:InitializeService, sessionService:AuthenticationService) {
+export class AppComponent implements OnInit
+{
+  constructor(private store:Store, initializeService:InitializeService, sessionService:AuthenticationService)
+  {
   }
 
   public stateSessionValid:UiSessionStateEnum = UiSessionStateEnum.SESSION_VALID;
 
-  public ngOnInit():any {
+  public ngOnInit():any
+  {
 
     /* this ist just for testing and debugging */
     console.group('Initial Store');
     console.log(this.store.getState());
     console.groupEnd();
-    this.store.subscribe(function (rootStore:IRootStore):void {
+    this.store.subscribe(function (rootStore:IRootStore):void
+    {
       console.group('Changed Store');
       console.log(rootStore);
       console.groupEnd();
     });
+  }
 
-    this.store.dispatch(AuthenticationActions.validSessionRequired());
+  public discardBackendUrl():void
+  {
+    this.store.dispatch(BackendActions.backendUrlDiscarded());
   }
 }

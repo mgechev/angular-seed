@@ -4,18 +4,15 @@ import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {Dropdown} from '../../ui-elements/form-elements/dropdown';
 import {TenantLoginDto} from '../../stubs/dtos/tenant-login-dto';
 import {AuthenticationActions} from './authentication.actions';
-import {BackendChooserComponent} from '../backend/backend-chooser.component';
 
 @Component({
   selector: 'login',
-  directives: [DROPDOWN_DIRECTIVES, Dropdown, BackendChooserComponent],
+  directives: [DROPDOWN_DIRECTIVES, Dropdown],
   template: `
     <section>
        <h2>Login</h2>
       <!-- here could be a place, where the form-generator is used... -->
       <form class="p-y-1">
-
-       <backend-chooser></backend-chooser>
 
         <fieldset class="form-group">
           <label for="username">Username:</label>
@@ -45,24 +42,30 @@ import {BackendChooserComponent} from '../backend/backend-chooser.component';
     </section>
   `
 })
-export class LoginComponent {
-
-  constructor(private store:Store) {
+export class LoginComponent
+{
+  constructor(private store:Store)
+  {
   }
 
-  public onUsernameChanged(event:any):void {
+  public onUsernameChanged(event:any):void
+  {
     this.store.dispatch(AuthenticationActions.userProvidedUsername(event.username));
   }
 
-  public onPasswordChanged(event:any):void {
+  public onPasswordChanged(event:any):void
+  {
     this.store.dispatch(AuthenticationActions.userProvidedPassword(event.password));
   }
 
-  public onTenantSelected(tenant:TenantLoginDto):void {
+  public onTenantSelected(tenant:TenantLoginDto):void
+  {
     this.store.dispatch(AuthenticationActions.userProvidedTenant(tenant));
   }
 
-  public onLoginClicked(event:any):void {
+  public onLoginClicked(event:any):boolean
+  {
     this.store.dispatch(AuthenticationActions.userWantsToLogin());
+    return false;
   }
 }
