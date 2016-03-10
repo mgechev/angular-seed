@@ -22,6 +22,7 @@ It is something similar to the Angular Quick Start but does the entire build wit
 - Development server with Livereload.
 - Following the [best practices for your application’s structure](https://github.com/mgechev/angular2-style-guide).
 - Manager of your type definitions using [typings](https://github.com/typings/typings).
+- Has autoprefixer and css-lint support.
 - Basic Service Worker, which implements "Cache then network strategy".
 
 # How to start
