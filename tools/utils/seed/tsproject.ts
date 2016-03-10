@@ -1,7 +1,7 @@
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 const plugins = <any>gulpLoadPlugins();
 
-var _tsProject;
+let _tsProject: any;
 
 export function makeTsProject() {
   if (!_tsProject) {

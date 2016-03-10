@@ -29,7 +29,7 @@ function getInjectablesDependenciesRef(name?: string) {
     .map(mapPath);
 }
 
-function mapPath(dep) {
+function mapPath(dep: any) {
   let envPath = dep.src;
   if (envPath.startsWith(APP_SRC)) {
     envPath = join(APP_DEST, dep.src.replace(APP_SRC, ''));
@@ -38,7 +38,7 @@ function mapPath(dep) {
 }
 
 function transformPath() {
-  return function (filepath) {
+  return function (filepath: string) {
     arguments[0] = join(APP_BASE, filepath) + `?${Date.now()}`;
     return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));
   };
