@@ -1,7 +1,7 @@
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import {join} from 'path';
-import {APP_SRC, TMP_DIR, TOOLS_DIR} from '../../config';
+import {TMP_DIR, TOOLS_DIR} from '../../config';
 import {templateLocals, makeTsProject} from '../../utils';
 const plugins = <any>gulpLoadPlugins();
 
@@ -16,9 +16,7 @@ export = () => {
   let src = [
     'typings/browser.d.ts',
     TOOLS_DIR + '/manual_typings/**/*.d.ts',
-    join(APP_SRC, '**/*.ts'),
-    '!' + join(APP_SRC, '**/*.spec.ts'),
-    '!' + join(APP_SRC, '**/*.e2e.ts')
+    join(TMP_DIR, '**/*.ts')
   ];
   let result = gulp.src(src)
     .pipe(plugins.plumber())

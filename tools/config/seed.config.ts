@@ -74,7 +74,7 @@ export class SeedConfig {
 
   // Declare local files that needs to be injected
   APP_ASSETS: InjectableDependency[] = [
-    { src: `${this.ASSETS_SRC}/main.css`, inject: true }
+    { src: `${this.ASSETS_SRC}/main.css`, inject: true, vendor: false }
   ];
 
 
@@ -107,6 +107,20 @@ export class SeedConfig {
       '*': 'node_modules/*'
     }
   };
+
+  // ----------------
+  // Autoprefixer configuration.
+  BROWSER_LIST = [
+    'ie >= 10',
+    'ie_mob >= 10',
+    'ff >= 30',
+    'chrome >= 34',
+    'safari >= 7',
+    'opera >= 23',
+    'ios >= 7',
+    'android >= 4.4',
+    'bb >= 10'
+  ];
 }
 
 
