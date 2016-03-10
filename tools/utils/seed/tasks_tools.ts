@@ -15,7 +15,7 @@ function registerTask(taskname: string, path: string): void {
   const TASK = join(path, taskname);
   util.log('Registering task', chalk.yellow(TASK));
 
-  gulp.task(taskname, done => {
+  gulp.task(taskname, (done: any) => {
     const task = require(TASK);
     if (task.length > 0) {
       return task(done);
@@ -37,7 +37,7 @@ function readDir(root: string, cb: (taskname: string) => void) {
 
   walk(root);
 
-  function walk(path) {
+  function walk(path: string) {
     let files = readdirSync(path);
     for (let i = 0; i < files.length; i += 1) {
       let file = files[i];

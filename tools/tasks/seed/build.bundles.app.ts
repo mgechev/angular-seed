@@ -14,7 +14,7 @@ const BUNDLER_OPTIONS = {
   mangle: false
 };
 
-export = done => {
+export = (done: any) => {
   let builder = new Builder(SYSTEM_BUILDER_CONFIG);
   builder
     .buildStatic(join(TMP_DIR, BOOTSTRAP_MODULE),
