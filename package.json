@@ -55,7 +55,7 @@
     "gulp-plumber": "~1.1.0",
     "gulp-postcss": "^6.1.0",
     "gulp-shell": "~0.5.2",
-    "gulp-sourcemaps": "~1.6.0",
+    "gulp-sourcemaps": "git+https://github.com/floridoo/gulp-sourcemaps.git#master",
     "gulp-template": "^3.0.0",
     "gulp-tslint": "^4.3.2",
     "gulp-tslint-stylish": "^1.1.1",
