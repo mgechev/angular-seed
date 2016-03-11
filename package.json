@@ -19,7 +19,7 @@
     "karma": "karma",
     "karma.start": "karma start",
     "postinstall": "typings install && gulp check.versions && npm prune",
-    "reinstall": "npm cache clean && rimraf typings/* && rimraf node_modules/* && npm install",
+    "reinstall": "npm cache clean && rimraf typings node_modules && npm install",
     "serve.coverage": "remap-istanbul -i coverage/coverage-final.json -o coverage -t html && npm run gulp -- serve.coverage",
     "serve.dev": "gulp serve.dev",
     "serve.e2e": "gulp serve.e2e",
