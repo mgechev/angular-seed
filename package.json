@@ -34,7 +34,7 @@
   "devDependencies": {
     "async": "^1.4.2",
     "autoprefixer": "^6.3.3",
-    "browser-sync": "^2.11.1",
+    "browser-sync": "~2.10.1",
     "chalk": "^1.1.1",
     "colorguard": "^1.0.1",
     "connect": "^3.4.1",
