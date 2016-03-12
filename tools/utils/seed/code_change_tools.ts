@@ -44,7 +44,7 @@ let changed = (files: any) => {
   //   ng2HotLoader.onChange(files);
   // } else {
   //TODO: Figure out why you can't pass a file to reload
-  browserSync.reload();
+  browserSync.reload(files.path);
   //}
 };
 
