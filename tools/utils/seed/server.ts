@@ -9,6 +9,11 @@ export function serveSPA() {
   codeChangeTool.listen();
 }
 
+export function notifyLiveReload(e:any) {
+  let fileName = e.path;
+  codeChangeTool.changed(fileName);
+}
+
 export function serveDocs() {
   let server = express();
 
