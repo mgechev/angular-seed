@@ -13,7 +13,7 @@ let runServer = () => {
     baseDir = `${DIST_DIR}/empty/`;
   }
 
-  browserSync({
+  browserSync.init({
     middleware: [require('connect-history-api-fallback')({index: `${APP_BASE}index.html`})],
     port: PORT,
     startPath: APP_BASE,
@@ -43,7 +43,8 @@ let changed = (files: any) => {
   // if (ENABLE_HOT_LOADING) {
   //   ng2HotLoader.onChange(files);
   // } else {
-  browserSync.reload(files);
+  //TODO: Figure out why you can't pass a file to reload
+  browserSync.reload(files.path);
   //}
 };
 
