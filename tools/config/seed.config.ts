@@ -122,6 +122,13 @@ export class SeedConfig {
     'android >= 4.4',
     'bb >= 10'
   ];
+  getEnvDependencies() {
+    if (this.ENV === 'prod') {
+      return this.PROD_DEPENDENCIES;
+    } else {
+      return this.DEV_DEPENDENCIES;
+    }
+  }
 }
 
 

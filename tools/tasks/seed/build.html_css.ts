@@ -4,7 +4,7 @@ import * as merge from 'merge-stream';
 import * as autoprefixer from 'autoprefixer';
 import * as cssnano from 'cssnano';
 import {join} from 'path';
-import {APP_SRC, TMP_DIR, APP_ASSETS, CSS_PROD_BUNDLE, CSS_DEST, APP_DEST, BROWSER_LIST, ENV} from '../../config';
+import {APP_SRC, TMP_DIR, CSS_PROD_BUNDLE, CSS_DEST, APP_DEST, BROWSER_LIST, ENV, getEnvDependencies} from '../../config';
 const plugins = <any>gulpLoadPlugins();
 
 const processors = [
@@ -47,7 +47,7 @@ function processExternalCss() {
 }
 
 function getExternalCss() {
-  return APP_ASSETS.filter(d => /\.css$/.test(d.src));
+  return getEnvDependencies().filter(d => /\.css$/.test(d.src));
 }
 
 
