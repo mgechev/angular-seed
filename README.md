@@ -65,6 +65,7 @@ _Does not rely on any global dependencies._
 - [How to extend?](#how-to-extend)
 - [Running tests](#running-tests)
 - [Contributing](#contributing)
+- [Advanced Seed Option](#advanced-seed-option)
 - [Examples](#examples)
 - [Directory Structure](#directory-structure)
 - [Contributors](#contributors)
@@ -123,6 +124,19 @@ You can learn more about [Protractor Interactive Mode here](https://github.com/a
 # Contributing
 
 Please see the [CONTRIBUTING](https://github.com/mgechev/angular2-seed/blob/master/.github/CONTRIBUTING.md) file for guidelines.
+
+# Advanced Seed Option
+
+An [advanced option to this seed exists here](https://github.com/NathanWalker/angular2-seed-advanced) which mirrors the latest changes here but adds core support for:
+
+- [ngrx/store](https://github.com/ngrx/store) RxJS powered state management, inspired by **Redux**
+- [ngrx-store-router](https://github.com/CodeSequence/ngrx-store-router) middleware for syncing state with Angular 2 Router.
+- [ng2-translate](https://github.com/ocombe/ng2-translate) for i18n 
+- [lodash](https://lodash.com/) Helps reduce blocks of code down to single lines and enhances readability
+- [NativeScript](https://www.nativescript.org/) cross platform mobile (w/ native UI) apps.
+- More coming in the future...
+
+You may use it to learn how to extend this seed for your own use cases or use the advanced seed if your project needs those features.
 
 # Examples
 
