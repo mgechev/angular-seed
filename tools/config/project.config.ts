@@ -4,6 +4,21 @@ import {SeedConfig, normalizeDependencies} from './seed.config';
 export class ProjectConfig extends SeedConfig {
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
 
+  APP_TITLE = 'My Angular2 App';
+
+  // Autoprefixer configuration.
+  BROWSER_LIST = [
+    'ie >= 10',
+    'ie_mob >= 10',
+    'ff >= 30',
+    'chrome >= 34',
+    'safari >= 7',
+    'opera >= 23',
+    'ios >= 7',
+    'android >= 4.4',
+    'bb >= 10'
+  ];
+
   constructor() {
     super();
     // this.APP_TITLE = 'Put name of your app here';
