@@ -131,7 +131,7 @@ An [advanced option to this seed exists here](https://github.com/NathanWalker/an
 
 - [ngrx/store](https://github.com/ngrx/store) RxJS powered state management, inspired by **Redux**
 - [ngrx-store-router](https://github.com/CodeSequence/ngrx-store-router) middleware for syncing state with Angular 2 Router.
-- [ng2-translate](https://github.com/ocombe/ng2-translate) for i18n 
+- [ng2-translate](https://github.com/ocombe/ng2-translate) for i18n
 - [lodash](https://lodash.com/) Helps reduce blocks of code down to single lines and enhances readability
 - [NativeScript](https://www.nativescript.org/) cross platform mobile (w/ native UI) apps.
 - More coming in the future...
@@ -144,6 +144,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
 
  - https://github.com/justindujardin/angular2-seed - integration with [ng2-material](https://github.com/justindujardin/ng2-material)
  - https://github.com/archfirst/angular2-seed-sass - integration with [Sass](http://sass-lang.com/)
+ - https://github.com/DeviantJS/angular2-seed-material2 - integration with [Angular2-Material](https://github.com/angular/material2)
  - https://github.com/AngularShowcase/angular2-sample-app - sample Angular 2 application
  - https://github.com/AngularShowcase/ng2-bootstrap-sbadmin - ng2-bootstrap-sbadmin
  - https://github.com/AngularShowcase/angular2-seed-ng2-highcharts - Simple application including a [Highcharts](http://www.highcharts.com) graph.
