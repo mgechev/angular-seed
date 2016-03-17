@@ -13,9 +13,9 @@ export class ProjectConfig extends SeedConfig {
       // {src: 'lodash/lodash.min.js', inject: 'libs'},
     ];
 
-    const oldDeps = this.NPM_DEPENDENCIES;
+    const seedDependencies = this.NPM_DEPENDENCIES;
 
-    this.NPM_DEPENDENCIES = oldDeps.concat(additional_deps);
+    this.NPM_DEPENDENCIES = seedDependencies.concat(additional_deps);
 
     this.APP_ASSETS = [
       // {src: `${this.ASSETS_SRC}/css/toastr.min.css`, inject: true},
