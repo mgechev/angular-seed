@@ -23,8 +23,6 @@ export class SeedConfig {
 
   BOOTSTRAP_MODULE     = this.ENABLE_HOT_LOADING ? 'hot_loader_main' : 'main';
 
-  APP_TITLE            = 'My Angular2 App';
-
   APP_SRC              = 'src';
   ASSETS_SRC           = `${this.APP_SRC}/assets`;
 
@@ -109,19 +107,6 @@ export class SeedConfig {
     }
   };
 
-  // ----------------
-  // Autoprefixer configuration.
-  BROWSER_LIST = [
-    'ie >= 10',
-    'ie_mob >= 10',
-    'ff >= 30',
-    'chrome >= 34',
-    'safari >= 7',
-    'opera >= 23',
-    'ios >= 7',
-    'android >= 4.4',
-    'bb >= 10'
-  ];
   getEnvDependencies() {
     if (this.ENV === 'prod') {
       return this.PROD_DEPENDENCIES;
