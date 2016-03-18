@@ -1,13 +1,13 @@
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as merge from 'merge-stream';
-import {PROD_DEPENDENCIES, JS_PROD_SHIMS_BUNDLE, JS_DEST} from '../../config';
+import {DEPENDENCIES, JS_PROD_SHIMS_BUNDLE, JS_DEST} from '../../config';
 const plugins = <any>gulpLoadPlugins();
 
 export = () => merge(bundleShims());
 
 function getShims() {
-  let libs = PROD_DEPENDENCIES
+  let libs = DEPENDENCIES
     .filter(d => /\.js$/.test(d.src));
 
   return libs.filter(l => l.inject === 'shims')

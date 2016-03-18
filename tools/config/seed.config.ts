@@ -1,9 +1,9 @@
 import {readFileSync} from 'fs';
 import {argv} from 'yargs';
 import {normalize, join} from 'path';
-import {InjectableDependency} from './seed.config.interface';
+import {InjectableDependency, Environments} from './seed.config.interfaces';
 
-const ENVIRONMENTS = {
+export const ENVIRONMENTS: Environments = {
   DEVELOPMENT: 'dev',
   PRODUCTION: 'prod'
 };
@@ -50,27 +50,17 @@ export class SeedConfig {
 
   NG2LINT_RULES        = customRules();
 
-
-  // Declare NPM dependencies (Note that globs should not be injected).
-  DEV_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencies([
+  NPM_DEPENDENCIES: InjectableDependency[] = [
     { src: 'systemjs/dist/system-polyfills.src.js', inject: 'shims' },
     { src: 'reflect-metadata/Reflect.js', inject: 'shims' },
     { src: 'es6-shim/es6-shim.js', inject: 'shims' },
     { src: 'systemjs/dist/system.src.js', inject: 'shims' },
     { src: 'angular2/bundles/angular2-polyfills.js', inject: 'shims' },
-    { src: 'rxjs/bundles/Rx.js', inject: 'libs' },
-    { src: 'angular2/bundles/angular2.js', inject: 'libs' },
-    { src: 'angular2/bundles/router.js', inject: 'libs' },
-    { src: 'angular2/bundles/http.js', inject: 'libs' }
-  ]);
-
-  PROD_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencies([
-    { src: 'systemjs/dist/system-polyfills.src.js', inject: 'shims' },
-    { src: 'reflect-metadata/Reflect.js', inject: 'shims' },
-    { src: 'es6-shim/es6-shim.min.js', inject: 'shims' },
-    { src: 'systemjs/dist/system.js', inject: 'shims' },
-    { src: 'angular2/bundles/angular2-polyfills.min.js', inject: 'libs' }
-  ]);
+    { src: 'rxjs/bundles/Rx.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
+    { src: 'angular2/bundles/angular2.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
+    { src: 'angular2/bundles/router.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
+    { src: 'angular2/bundles/http.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT }
+  ];
 
   // Declare local files that needs to be injected
   APP_ASSETS: InjectableDependency[] = [
@@ -78,9 +68,49 @@ export class SeedConfig {
   ];
 
 
-  DEV_DEPENDENCIES = this.DEV_NPM_DEPENDENCIES.concat(this.APP_ASSETS);
-  PROD_DEPENDENCIES = this.PROD_NPM_DEPENDENCIES.concat(this.APP_ASSETS);
+  get PROD_DEPENDENCIES(): InjectableDependency[] {
+    console.warn('The property "PROD_DEPENDENCIES" is deprecated. Consider using "DEPENDENCIES" instead.');
+    return normalizeDependencies(this.NPM_DEPENDENCIES.filter(filterDependency.bind(null, ENVIRONMENTS.PRODUCTION)))
+      .concat(this.APP_ASSETS.filter(filterDependency.bind(null, ENVIRONMENTS.PRODUCTION)));
+  }
 
+  get DEV_DEPENDENCIES(): InjectableDependency[] {
+    console.warn('The property "DEV_DEPENDENCIES" is deprecated. Consider using "DEPENDENCIES" instead.');
+    return normalizeDependencies(this.NPM_DEPENDENCIES.filter(filterDependency.bind(null, ENVIRONMENTS.DEVELOPMENT)))
+      .concat(this.APP_ASSETS.filter(filterDependency.bind(null, ENVIRONMENTS.DEVELOPMENT)));
+  }
+
+  set DEV_DEPENDENCIES(val: InjectableDependency[]) {
+    console.warn('The property "DEV_DEPENDENCIES" is deprecated. Consider using "DEPENDENCIES" instead.');
+  }
+
+  set PROD_DEPENDENCIES(val: InjectableDependency[]) {
+    console.warn('The property "PROD_DEPENDENCIES" is deprecated. Consider using "DEPENDENCIES" instead.');
+  }
+
+  get DEV_NPM_DEPENDENCIES(): InjectableDependency[] {
+    console.warn('The property "DEV_NPM_DEPENDENCIES" is deprecated. Consider using "DEPENDENCIES" instead.');
+    return normalizeDependencies(this.NPM_DEPENDENCIES.filter(filterDependency.bind(null, ENVIRONMENTS.DEVELOPMENT)));
+  }
+  get PROD_NPM_DEPENDENCIES(): InjectableDependency[] {
+    console.warn('The property "PROD_NPM_DEPENDENCIES" is deprecated. Consider using "DEPENDENCIES" instead.');
+    return normalizeDependencies(this.NPM_DEPENDENCIES.filter(filterDependency.bind(null, ENVIRONMENTS.PRODUCTION)));
+  }
+  set DEV_NPM_DEPENDENCIES(value: InjectableDependency[]) {
+    console.warn('The property "DEV_NPM_DEPENDENCIES" is deprecated. Consider using "DEPENDENCIES" instead.');
+    const notDev = this.NPM_DEPENDENCIES.filter(d => !filterDependency(ENVIRONMENTS.DEVELOPMENT, d));
+    this.NPM_DEPENDENCIES = notDev.concat(value);
+  }
+  set PROD_NPM_DEPENDENCIES(value: InjectableDependency[]) {
+    console.warn('The property "PROD_NPM_DEPENDENCIES" is deprecated. Consider using "DEPENDENCIES" instead.');
+    const notProd = this.NPM_DEPENDENCIES.filter(d => !filterDependency(ENVIRONMENTS.PRODUCTION, d));
+    this.NPM_DEPENDENCIES = notProd.concat(value);
+  }
+
+  get DEPENDENCIES(): InjectableDependency[] {
+    return normalizeDependencies(this.NPM_DEPENDENCIES.filter(filterDependency.bind(null, this.ENV)))
+      .concat(this.APP_ASSETS.filter(filterDependency.bind(null, this.ENV)));
+  }
 
   // ----------------
   // SystemsJS Configuration.
@@ -123,6 +153,7 @@ export class SeedConfig {
     'bb >= 10'
   ];
   getEnvDependencies() {
+    console.warn('The "getEnvDependencies" method is deprecated. Consider using "DEPENDENCIES" instead.');
     if (this.ENV === 'prod') {
       return this.PROD_DEPENDENCIES;
     } else {
@@ -136,6 +167,16 @@ export class SeedConfig {
 
 // --------------
 // Utils.
+
+function filterDependency(env: string, d: InjectableDependency): boolean {
+  if (!d.env) {
+    d.env = Object.keys(ENVIRONMENTS).map(k => ENVIRONMENTS[k]);
+  }
+  if (!(d.env instanceof Array)) {
+    (<any>d).env = [d.env];
+  }
+  return d.env.indexOf(env) >= 0;
+}
 
 export function normalizeDependencies(deps: InjectableDependency[]) {
   deps

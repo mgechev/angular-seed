@@ -2,7 +2,7 @@ import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import {join} from 'path';
 import * as slash from 'slash';
-import {APP_SRC, APP_DEST, APP_BASE, DEV_DEPENDENCIES} from '../../config';
+import {APP_SRC, APP_DEST, APP_BASE, DEPENDENCIES} from '../../config';
 import {templateLocals} from '../../utils';
 const plugins = <any>gulpLoadPlugins();
 
@@ -24,7 +24,7 @@ function inject(name?: string) {
 }
 
 function getInjectablesDependenciesRef(name?: string) {
-  return DEV_DEPENDENCIES
+  return DEPENDENCIES
     .filter(dep => dep['inject'] && dep['inject'] === (name || true))
     .map(mapPath);
 }
