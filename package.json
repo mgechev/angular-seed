@@ -49,7 +49,7 @@
     "gulp-cached": "^1.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-filter": "^4.0.0",
-    "gulp-inject": "^3.0.0",
+    "gulp-inject": "^4.0.0",
     "gulp-inline-ng2-template": "^1.1.2",
     "gulp-load-plugins": "^1.2.0",
     "gulp-plumber": "~1.1.0",
