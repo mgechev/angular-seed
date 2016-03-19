@@ -18,7 +18,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'node_modules/zone.js/dist/zone-microtask.js',
+      'node_modules/zone.js/dist/zone.js',
       'node_modules/zone.js/dist/long-stack-trace-zone.js',
       'node_modules/zone.js/dist/jasmine-patch.js',
       'node_modules/es6-module-loader/dist/es6-module-loader.js',
@@ -87,7 +87,7 @@ module.exports = function(config) {
         flags: ['--no-sandbox']
       }
     },
-    
+
     coverageReporter: {
       dir: 'coverage/',
       reporters: [
@@ -99,7 +99,7 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false, 
+    singleRun: false,
 
     // Passing command line arguments to tests
     client: {
