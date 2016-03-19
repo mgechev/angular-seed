@@ -89,7 +89,7 @@
     "stream-series": "^0.1.1",
     "stylelint": "^4.5.1",
     "stylelint-config-standard": "^4.0.0",
-    "systemjs-builder": "^0.15.10",
+    "systemjs-builder": "^0.15.13",
     "tiny-lr": "^0.2.1",
     "traceur": "^0.0.91",
     "ts-node": "^0.5.5",
