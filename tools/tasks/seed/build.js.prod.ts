@@ -15,7 +15,6 @@ export = () => {
   let tsProject = makeTsProject();
   let src = [
     'typings/browser.d.ts',
-    'node_modules/zone.js/dist/zone.js.d.ts',
     TOOLS_DIR + '/manual_typings/**/*.d.ts',
     join(TMP_DIR, '**/*.ts')
   ];
