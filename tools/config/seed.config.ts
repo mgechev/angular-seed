@@ -7,7 +7,6 @@ export const ENVIRONMENTS: Environments = {
   DEVELOPMENT: 'dev',
   PRODUCTION: 'prod'
 };
-//test
 
 export class SeedConfig {
   PORT                 = argv['port']                        || 5555;
