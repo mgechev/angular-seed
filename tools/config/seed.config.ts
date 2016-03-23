@@ -8,7 +8,6 @@ export const ENVIRONMENTS: Environments = {
   PRODUCTION: 'prod'
 };
 
-
 export class SeedConfig {
   PORT                 = argv['port']                        || 5555;
   PROJECT_ROOT         = normalize(join(__dirname, '..'));
