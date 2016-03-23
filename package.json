@@ -34,7 +34,7 @@
   "devDependencies": {
     "async": "^1.4.2",
     "autoprefixer": "^6.3.3",
-    "browser-sync": "~2.10.1",
+    "browser-sync": "^2.11.2",
     "chalk": "^1.1.1",
     "colorguard": "^1.0.1",
     "connect": "^3.4.1",
@@ -92,7 +92,7 @@
     "systemjs-builder": "^0.15.13",
     "tiny-lr": "^0.2.1",
     "traceur": "^0.0.91",
-    "ts-node": "^0.6.2",
+    "ts-node": "^0.7.0",
     "tslint": "^3.6.0",
     "typedoc": "^0.3.12",
     "typescript": "~1.8.7",
