@@ -5,6 +5,8 @@ import {ToolbarComponent} from './toolbar.component';
 import {HomeComponent} from '../../home/components/home.component';
 import {AboutComponent} from '../../about/components/about.component';
 import {NameListService} from '../../shared/services/name-list.service';
+import {YoutubeSearchComponent} from '../../youtubeSearch/component/youtubesearch.component';
+import {Formdemo} from '../../form/component/formdemo.component';
 
 @Component({
   selector: 'sd-app',
@@ -15,6 +17,8 @@ import {NameListService} from '../../shared/services/name-list.service';
 })
 @RouteConfig([
   { path: '/',      name: 'Home',  component: HomeComponent  },
-  { path: '/about', name: 'About', component: AboutComponent }
+  { path: '/about', name: 'About', component: AboutComponent },
+  { path: '/search', name: 'Search', component: YoutubeSearchComponent},
+  { path: '/FormDemo', name: 'FormDemo', component: Formdemo}
 ])
 export class AppComponent {}
