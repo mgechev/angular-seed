@@ -102,13 +102,13 @@
     "yargs": "^4.2.0"
   },
   "dependencies": {
-    "angular2": "2.0.0-beta.9",
+    "angular2": "2.0.0-beta.12",
     "es6-module-loader": "^0.17.8",
     "es6-promise": "^3.1.2",
-    "es6-shim": "0.33.3",
+    "es6-shim": "0.35.0",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
     "systemjs": "~0.19.18",
-    "zone.js": "0.5.15"
+    "zone.js": "^0.6.6"
   }
 }
