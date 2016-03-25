@@ -46,6 +46,9 @@ npm run docs
 npm run build.dev
 # prod build
 npm run build.prod
+# prod build view
+npm run prod
+
 ```
 
 _Does not rely on any global dependencies._
