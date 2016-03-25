@@ -106,5 +106,6 @@ gulp.task('test', (done: any) =>
               done));
 
 // Serve prod content
-gulp.task('prod', done =>
-  runSequence('serve.prod'));
+gulp.task('prod', (done: any) =>
+  runSequence('serve.prod',
+               done));
