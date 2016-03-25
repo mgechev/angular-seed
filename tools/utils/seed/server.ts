@@ -3,7 +3,7 @@ import * as openResource from 'open';
 import * as serveStatic from 'serve-static';
 import * as codeChangeTool from './code_change_tools';
 import {resolve} from 'path';
-import {APP_BASE, DOCS_DEST, DOCS_PORT, COVERAGE_PORT} from '../../config';
+import {APP_BASE, DOCS_DEST, DOCS_PORT, COVERAGE_PORT, PROD_DEST, PORT} from '../../config';
 
 export function serveSPA() {
   codeChangeTool.listen();
@@ -32,5 +32,18 @@ export function serveCoverage() {
 
   server.listen(COVERAGE_PORT, () =>
     openResource('http://localhost:' + COVERAGE_PORT + APP_BASE)
+  );
+}
+
+export function serveProd() {
+  let server = express();
+
+  server.use(
+    APP_BASE,
+    serveStatic(resolve(process.cwd(), PROD_DEST))
+  );
+
+  server.listen(PORT, () =>
+    openResource('http://localhost:' + PORT + APP_BASE)
   );
 }
