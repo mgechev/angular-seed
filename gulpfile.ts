@@ -101,6 +101,7 @@ gulp.task('test', done =>
               'karma.start',
               done));
 
+// Serve prod content
 gulp.task('prod', done =>
   runSequence('serve.prod',
-    done));
+              done));
