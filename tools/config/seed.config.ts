@@ -48,7 +48,7 @@ export class SeedConfig {
   VERSION_NPM          = '2.14.2';
   VERSION_NODE         = '4.0.0';
 
-  NG2LINT_RULES        = customRules();
+  CODELYZER_RULES      = customRules();
 
   NPM_DEPENDENCIES: InjectableDependency[] = [
     { src: 'systemjs/dist/system-polyfills.src.js', inject: 'shims' },

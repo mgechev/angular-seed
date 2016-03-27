@@ -1,7 +1,7 @@
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import {join} from 'path';
-import {APP_SRC, TOOLS_DIR, NG2LINT_RULES} from '../../config';
+import {APP_SRC, TOOLS_DIR, CODELYZER_RULES} from '../../config';
 const plugins = <any>gulpLoadPlugins();
 
 export = () => {
@@ -14,7 +14,7 @@ export = () => {
 
   return gulp.src(src)
     .pipe(plugins.tslint({
-      rulesDirectory: NG2LINT_RULES
+      rulesDirectory: CODELYZER_RULES
     }))
     .pipe(plugins.tslint.report(require('tslint-stylish'), {
       emitError: require('is-ci'),

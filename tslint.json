@@ -1,5 +1,5 @@
 {
-  "rulesDirectory": ["node_modules/ng2lint/dist/src"],
+  "rulesDirectory": ["node_modules/codelyzer/dist/src"],
   "rules": {
     "class-name": true,
     "curly": false,
