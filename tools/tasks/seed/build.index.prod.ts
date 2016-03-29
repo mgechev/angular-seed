@@ -40,7 +40,7 @@ function injectCss() {
 function transformPath() {
   return function(filepath: string) {
     let path: Array<string> = normalize(filepath).split(sep);
-    arguments[0] = path.slice(3, path.length).join(sep) + `?${Date.now()}`;
+    arguments[0] = '/' + path.slice(3, path.length).join(sep) + `?${Date.now()}`;
     return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));
   };
 }
