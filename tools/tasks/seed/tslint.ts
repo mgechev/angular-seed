@@ -16,7 +16,7 @@ export = () => {
     .pipe(plugins.tslint({
       rulesDirectory: CODELYZER_RULES
     }))
-    .pipe(plugins.tslint.report(require('tslint-stylish'), {
+    .pipe(plugins.tslint.report(plugins.tslintStylish, {
       emitError: require('is-ci'),
       sort: true,
       bell: true
