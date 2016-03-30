@@ -98,6 +98,15 @@ gulp.task('serve.e2e', (done: any) =>
               'watch.e2e',
               done));
 
+
+// --------------
+// Serve prod
+gulp.task('serve.prod', (done: any) =>
+  runSequence('build.prod',
+              'server.prod',
+              done));
+
+
 // --------------
 // Test.
 gulp.task('test', (done: any) =>
