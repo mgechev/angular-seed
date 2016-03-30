@@ -1,4 +1,3 @@
-import {readFileSync} from 'fs';
 import {argv} from 'yargs';
 import {normalize, join} from 'path';
 import {InjectableDependency, Environments} from './seed.config.interfaces';
@@ -186,12 +185,12 @@ export function normalizeDependencies(deps: InjectableDependency[]) {
 }
 
 function appVersion(): number|string {
-  var pkg = JSON.parse(readFileSync('package.json').toString());
+  var pkg = require('../../package.json');
   return pkg.version;
 }
 
 function customRules(): string[] {
-  var lintConf = JSON.parse(readFileSync('tslint.json').toString());
+  var lintConf = require('../../tslint.json');
   return lintConf.rulesDirectory;
 }
 

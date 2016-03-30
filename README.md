@@ -248,6 +248,10 @@ Forks of this project demonstrate how to extend and integrate with other librari
 :---: |:---: |:---: |:---: |:---: |:---: |
 [sclausen](https://github.com/sclausen) |[Shyam-Chen](https://github.com/Shyam-Chen) |[tapas4java](https://github.com/tapas4java) |[butterfieldcons](https://github.com/butterfieldcons) |[jgolla](https://github.com/jgolla) |[ultrasonicsoft](https://github.com/ultrasonicsoft) |
 
+[<img alt="brian428" src="https://avatars.githubusercontent.com/u/140338?v=3&s=117" width="117">](https://github.com/brian428) | | | | | |
+:---: |:---: |:---: |:---: |:---: |:---: |
+[brian428](https://github.com/brian428) | | | | | |
+
 # Change Log
 
 You can follow the [Angular 2 change log here](https://github.com/angular/angular/blob/master/CHANGELOG.md).
