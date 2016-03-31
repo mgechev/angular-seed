@@ -44,8 +44,8 @@ export class SeedConfig {
   JS_PROD_SHIMS_BUNDLE = 'shims.js';
   JS_PROD_APP_BUNDLE   = 'app.js';
 
-  VERSION_NPM          = '2.14.2';
-  VERSION_NODE         = '4.0.0';
+  VERSION_NPM          = '3.0.0';
+  VERSION_NODE         = '5.0.0';
 
   CODELYZER_RULES      = customRules();
 
