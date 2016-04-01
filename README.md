@@ -60,6 +60,7 @@ _Does not rely on any global dependencies._
 - [Configuration](#configuration)
 - [How to extend?](#how-to-extend)
 - [Running tests](#running-tests)
+- [Progressive Web Apps](#progressive-web-apps)
 - [Contributing](#contributing)
 - [Advanced Seed Option](#advanced-seed-option)
 - [Examples](#examples)
@@ -116,6 +117,21 @@ npm run e2e
 npm run e2e.live
 ```
 You can learn more about [Protractor Interactive Mode here](https://github.com/angular/protractor/blob/master/docs/debugging.md#testing-out-protractor-interactively)
+
+# Progressive Web Apps
+
+`angular2-seed` supports progressive web apps with [angular/progressive](https://github.com/angular/progressive).
+
+The seed can generate a file `manifest.appcache` which lists all files included in a project's output, along with SHA1 hashes of all file contents. This file can be used directly as an AppCache manifest (for now, `index.html` must be manually edited to set this up).
+
+The manifest is also annotated for use with `angular2-service-worker`. Some manual operations are currently required to enable this usage. The package must be installed, and `worker.js` manually copied into the project src directory:
+
+```bash
+npm install angular2-service-worker
+cp node_modules/angular2-service-worker/dist/worker.js src/
+```
+
+Then, the commented snippet in `main.ts` must be uncommented to register the worker script as a service worker.
 
 # Contributing
 

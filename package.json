@@ -12,6 +12,8 @@
     "build.prod": "gulp build.prod --color",
     "build.test": "gulp build.test --color",
     "build.test.watch": "gulp build.test.watch --color",
+    "generate.manifest.dev": "gulp generate.manifest.dev --color",
+    "generate.manifest.prod": "gulp generate.manifest.prod --color",
     "docs": "npm run gulp -- build.docs --color && npm run gulp -- serve.docs --color",
     "e2e": "protractor",
     "e2e.live": "protractor --elementExplorer",
@@ -102,6 +104,7 @@
     "typings": "^0.7.12",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
+    "walk": "^2.3.9",
     "yargs": "^4.2.0"
   },
   "dependencies": {
