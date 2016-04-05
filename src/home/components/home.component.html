@@ -1,11 +1,18 @@
-<p>
-  Howdy! Here's a list of awesome computer scientists.
-  Do you know any others? Add to the list yourself.
-</p>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <p>
+        <i class="fa fa-bluetooth"></i>Howdy! Here's a list of awesome computer scientists.
+        Do you know any others? Add to the list yourself.
+      </p>
+    </div>
+  </div>
+</div>
 
 <form (submit)="addName()">
   <input [(ngModel)]="newName" placeholder="Awesome Computer Scientist">
-  <button type="submit">Add</button>
+  <button class="waves-effect" type="submit">Add</button>
 </form>
 
 

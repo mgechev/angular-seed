@@ -4,6 +4,7 @@ import {NavbarComponent} from './navbar.component';
 import {ToolbarComponent} from './toolbar.component';
 import {HomeComponent} from '../../home/components/home.component';
 import {AboutComponent} from '../../about/components/about.component';
+import {DashboardComponent} from '../../dashboard/components/dashboard.component';
 import {NameListService} from '../../shared/services/name-list.service';
 
 @Component({
@@ -15,6 +16,7 @@ import {NameListService} from '../../shared/services/name-list.service';
 })
 @RouteConfig([
   { path: '/',      name: 'Home',  component: HomeComponent  },
-  { path: '/about', name: 'About', component: AboutComponent }
+  { path: '/about', name: 'About', component: AboutComponent },
+  { path: '/dashboard', name: 'Dashboard', component: DashboardComponent }
 ])
 export class AppComponent {}

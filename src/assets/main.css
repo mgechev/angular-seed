@@ -61,3 +61,26 @@ button {
 button:hover {
   background-color: #28739e;
 }
+
+/*End of default ccc*/
+
+/*come from http://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_theme_me_complete&stacked=h*/
+.navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+}
+.navbar-nav  li a:hover {
+    color: #1abc9c !important;
+}
+
+.container-fluid {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+/*End of nav*/
