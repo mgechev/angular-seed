@@ -27,7 +27,9 @@ It is something similar to the Angular Quick Start but does the entire build wit
 
 # How to start
 
-**Note** that this seed project requires node v4.x.x or higher and npm 2.14.7. **Here is how to [speedup the build on Windows](https://github.com/mgechev/angular2-seed/wiki/Speedup-the-build-on-Windows)**.
+**Note** that this seed project requires node v4.x.x or higher and npm 2.14.7.
+
+**Here is how to [speedup the build on Windows](https://github.com/mgechev/angular2-seed/wiki/Speedup-the-build-on-Windows)**.
 
 In order to start the seed use:
 
