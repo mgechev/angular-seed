@@ -9,6 +9,7 @@ export = () => {
   let src = [
     'typings/main.d.ts',
     join(APP_SRC, '**/*.ts'),
+    '!' + join('angular2/**/*.ts'),
     '!' + join(APP_SRC, '**/*.spec.ts'),
     '!' + join(APP_SRC, '**/*.e2e.ts')
   ];
@@ -18,6 +19,7 @@ export = () => {
       // TypeScript options (see typescript docs)
       module: 'commonjs',
       target: 'es5',
+      // excludeExternals: true,
       includeDeclarations: true,
       // Output options (see typedoc docs)
       out: DOCS_DEST,
