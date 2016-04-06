@@ -106,19 +106,23 @@
   },
   "dependencies": {
     "angular2": "2.0.0-beta.13",
+    "body-parser": "^1.15.0",
     "bootstrap": "^3.3.6",
     "es6-module-loader": "^0.17.8",
     "es6-promise": "^3.1.2",
     "es6-shim": "0.35.0",
+    "express": "^4.13.4",
     "font-awesome": "^4.5.0",
     "jquery": "^2.2.2",
+    "method-override": "^2.3.5",
+    "morgan": "^1.7.0",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
     "systemjs": "~0.19.25",
     "zone.js": "^0.6.6"
   },
   "engines": {
-  "node": ">=4.0.0",
-  "npm": ">=3.7.0"
+    "node": ">=4.0.0",
+    "npm": ">=2.14.2"
   }
 }

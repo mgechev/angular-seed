@@ -6,4 +6,4 @@ applications:
   domain: mybluemix.net
   instances: 1
   memory: 256M
-  command: npm start -- --port 8080
+  command: npm run serve.prod
