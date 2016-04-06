@@ -43,7 +43,7 @@ function readDir(root: string, cb: (taskname: string) => void) {
       let file = files[i];
       let curPath = join(path, file);
       if (lstatSync(curPath).isFile() && /\.ts$/.test(file)) {
-        let taskname = file.replace(/(\.ts)/, '');
+        let taskname = file.replace(/\.ts$/, '');
         cb(taskname);
       }
     }
