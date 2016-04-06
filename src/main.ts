@@ -11,7 +11,7 @@ if ('<%= ENV %>' === 'prod') { enableProdMode(); }
 
 bootstrap(AppComponent, [
   ROUTER_PROVIDERS, // HTTP_PROVIDERS, // add to test the addition of extenrnal dependency
-  // provide(APP_BASE_HREF, { useValue: '<%= APP_BASE %>' }),
+  provide(APP_BASE_HREF, { useValue: '<%= APP_BASE %>' }),
   // provide(AuthHttp, { //add to test the addition of external dependency
   //   useFactory: (http: Http) => {
   //     return new AuthHttp(new AuthConfig(), http);
