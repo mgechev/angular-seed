@@ -17,7 +17,10 @@ export = () => {
   let result = gulp.src(src)
     .pipe(plugins.plumber())
     .pipe(plugins.sourcemaps.init())
-    .pipe(plugins.inlineNg2Template({base: APP_SRC, useRelativePaths: true}))
+    .pipe(plugins.inlineNg2Template({
+      base: APP_SRC,
+      useRelativePaths: false
+    }))
     .pipe(plugins.typescript(tsProject));
 
   return result.js
