@@ -26,7 +26,7 @@
     "serve.prod": "gulp serve.prod --color",
     "start": "gulp serve.dev --color",
     "tasks.list": "gulp --tasks-simple --color",
-    "test": "gulp test --color && gulp build.prod --color && glup gulp.js.e2e --color && glup run.e2e --color",
+    "test": "gulp test --color && gulp build.prod --color && gulp gulp.js.e2e --color && gulp run.e2e --color",
     "webdriver-start": "webdriver-manager start",
     "webdriver-update": "webdriver-manager update"
   },
