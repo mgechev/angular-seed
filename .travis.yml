@@ -4,6 +4,8 @@ node_js:
 - '4.1'
 - '5.1'
 sudo: false
+addons:
+  sauce_connect: true
 services:
 before_install:
 - npm --version
@@ -31,8 +33,6 @@ env:
   - TSD_GITHUB_TOKEN=9b18c72997769f3867ef2ec470e626d39661795d
   - SAUCE_USERNAME=Shyam-Chen  # to add your USERNAME
   - SAUCE_ACCESS_KEY=c3608032-6eff-452e-9027-602ca80a8778  # to add your ACCESS_KEY
-addons:
-  sauce_connect: true
 cache:
   directories:
     - node_modules
