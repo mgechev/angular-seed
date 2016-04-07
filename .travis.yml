@@ -29,3 +29,10 @@ env:
   # https://github.com/DefinitelyTyped/tsd#tsdrc
   # Token has no scope (read-only access to public information)
   - TSD_GITHUB_TOKEN=9b18c72997769f3867ef2ec470e626d39661795d
+  - SAUCE_USERNAME=[ angular2-seed username]  # to add USERNAME
+  - SAUCE_ACCESS_KEY=[ angular2-seed access key]  # to add ACCESS_KEY
+addons:
+  sauce_connect: true
+cache:
+  directories:
+    - node_modules
