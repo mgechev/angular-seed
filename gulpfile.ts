@@ -112,4 +112,5 @@ gulp.task('serve.prod', (done: any) =>
 gulp.task('test', (done: any) =>
   runSequence('build.test',
               'karma.start',
+              'protractor.start'  // TODO: e2e server
               done));
