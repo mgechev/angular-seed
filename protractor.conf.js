@@ -1,4 +1,4 @@
-exports.config = {
+const config = {
   baseUrl: 'http://localhost:5555',
 
   specs: [
@@ -41,3 +41,17 @@ exports.config = {
    */
   useAllAngular2AppRoots: true
 };
+
+if (process.env.TRAVIS) {
+  config.sauceUser = process.env.SAUCE_USERNAME;
+  config.sauceKey = process.env.SAUCE_ACCESS_KEY;
+  config.capabilities = {
+    browserName: 'chrome',
+    tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
+    build: process.env.TRAVIS_BUILD_NUMBER,
+    name: 'angular2-seed'
+  };
+  config.directConnect = false;
+}
+
+exports.config = config
