@@ -1,3 +1,4 @@
+/*
 describe('About', () => {
 
   beforeEach( () => {
@@ -9,3 +10,5 @@ describe('About', () => {
       .toEqual('Features');
   });
 });
+*/
+
