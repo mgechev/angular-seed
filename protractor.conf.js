@@ -6,7 +6,7 @@ const config = {
   ],
   exclude: [],
 
-  framework: 'jasmine2',
+  framework: 'jasmine',
 
   // allScriptsTimeout: 110000,
 
@@ -39,7 +39,7 @@ const config = {
    * `rootEl`
    *
    */
-  useAllAngular2AppRoots: true
+  //useAllAngular2AppRoots: true
 };
 
 if (process.env.TRAVIS) {
