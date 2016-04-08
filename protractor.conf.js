@@ -53,6 +53,7 @@ if (process.env.TRAVIS) {
   };
   config.directConnect = false;
   config.baseUrl = '';
+  config.allScriptsTimeout = null;
 }
 
 exports.config = config
