@@ -1,5 +1,5 @@
 const config = {
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'http://localhost:3000/',
 
   specs: [
     'dist/dev/**/*.e2e.js'
@@ -8,7 +8,7 @@ const config = {
 
   framework: 'jasmine',
 
-  // allScriptsTimeout: 110000,
+  allScriptsTimeout: 110000,
 
   jasmineNodeOpts: {
     showTiming: true,
@@ -39,7 +39,7 @@ const config = {
    * `rootEl`
    *
    */
-  //useAllAngular2AppRoots: true
+  useAllAngular2AppRoots: true
 };
 
 if (process.env.TRAVIS) {
@@ -48,7 +48,6 @@ if (process.env.TRAVIS) {
     'phantomjs.binary.path': require('phantomjs').path
   };
   config.directConnect = false;
-
 }
 
 exports.config = config
