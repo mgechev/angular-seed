@@ -52,7 +52,7 @@ if (process.env.TRAVIS) {
     //name: 'angular2-seed'
   };
   config.directConnect = false;
-  config.baseUrl = '',
+  config.baseUrl = '';
 }
 
 exports.config = config
