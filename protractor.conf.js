@@ -8,7 +8,7 @@ const config = {
 
   framework: 'jasmine2',
 
-  allScriptsTimeout: 110000,
+  // allScriptsTimeout: 110000,
 
   jasmineNodeOpts: {
     showTiming: true,
@@ -53,7 +53,6 @@ if (process.env.TRAVIS) {
   };
   config.directConnect = false;
   config.baseUrl = '';
-  config.allScriptsTimeout = null;
 }
 
 exports.config = config
