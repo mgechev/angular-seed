@@ -1,3 +1,4 @@
+/*
 describe('Home', () => {
 
   beforeEach( () => {
@@ -20,3 +21,4 @@ describe('Home', () => {
       .toEqual('Edsger Dijkstra\nDonald Knuth\nAlan Turing\nGrace Hopper\nTim Berners-Lee');
   });
 });
+*/
