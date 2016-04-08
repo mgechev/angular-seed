@@ -10,7 +10,7 @@ export const ENVIRONMENTS: Environments = {
 
 export class SeedConfig {
   PORT                 = argv['port']                        || 5555;
-  PROJECT_ROOT         = join(__dirname, '..');
+  PROJECT_ROOT         = join(__dirname, '../..');
   ENV                  = getEnvironment();
   DEBUG                = argv['debug']                       || false;
   DOCS_PORT            = argv['docs-port']                   || 4003;
@@ -132,6 +132,7 @@ export class SeedConfig {
 
   SYSTEM_BUILDER_CONFIG = {
     defaultJSExtensions: true,
+    packageConfigPaths: [join(this.PROJECT_ROOT, 'node_modules', '*', 'package.json')],
     paths: {
       [`${this.TMP_DIR}/*`]: `${this.TMP_DIR}/*`,
       '*': 'node_modules/*'
