@@ -46,14 +46,11 @@ if (process.env.TRAVIS) {
   //config.sauceUser = process.env.SAUCE_USERNAME;
   //config.sauceKey = process.env.SAUCE_ACCESS_KEY;
   config.capabilities = {
-    browserName: 'firefox',
-    tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
-    build: process.env.TRAVIS_BUILD_NUMBER,
-    //name: 'angular2-seed'
+    browserName: 'phantomjs',
+    'phantomjs.binary.path': require('phantomjs').path
   };
   config.directConnect = false;
-  config.baseUrl = '';
-  config.seleniumAddress = 'http://127.0.0.1:4444/wd/hub';
+
 }
 
 exports.config = config
