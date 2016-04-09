@@ -48,6 +48,7 @@ if (process.env.TRAVIS) {
     'phantomjs.binary.path': require('phantomjs').path
   };
   config.directConnect = false;
+  config.baseUrl = '';
 }
 
 exports.config = config
