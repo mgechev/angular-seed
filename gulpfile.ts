@@ -112,6 +112,9 @@ gulp.task('serve.prod', (done: any) =>
 gulp.task('test', (done: any) =>
   runSequence('build.test',
               'karma.start',
+              'build.prod',
+              'build.js.e2e',
+              'run.e2e',
               done));
 
 // --------------
@@ -147,5 +150,3 @@ gulp.task('run.e2e', (done: any) => {
         .on('end', () => { server.close(done); });
     });
 });
-
-gulp.task('protractor.start', ['build.prod', 'build.js.e2e', 'run.e2e']);
