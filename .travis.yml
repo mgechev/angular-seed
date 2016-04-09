@@ -3,8 +3,6 @@ sudo: false
 node_js:
   - 'stable'
 
-services:
-
 before_install:
   - npm --version
   - export CHROME_BIN=chromium-browser
@@ -12,8 +10,7 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 
 before_script:
-  #- nohup bash -c "./node_modules/protractor/bin/webdriver-manager start 2>&1 &"
-  - nohup bash -c "webdriver-manager start 2>&1 &"
+  # - nohup bash -c "webdriver-manager start 2>&1 &"  // use phantomjs (protractor ci)
   - sleep 1
 
 notifications:
