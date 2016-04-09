@@ -4,8 +4,10 @@ const config = {
   specs: [
     'dist/dev/**/*.e2e.js'
   ],
+
   exclude: [],
 
+  // 'jasmine' by default will use the latest jasmine framework
   framework: 'jasmine',
 
   allScriptsTimeout: 110000,
@@ -17,6 +19,7 @@ const config = {
     includeStackTrace: false,
     defaultTimeoutInterval: 400000
   },
+
   directConnect: true,
 
   capabilities: {
@@ -24,9 +27,9 @@ const config = {
   },
 
   onPrepare: function() {
-    var SpecReporter = require('jasmine-spec-reporter');
+    const SpecReporter = require('jasmine-spec-reporter');
     // add jasmine spec reporter
-    jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: true}));
+    jasmine.getEnv().addReporter(new SpecReporter({ displayStacktrace: true }));
 
     browser.ignoreSynchronization = false;
   },
