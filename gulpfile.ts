@@ -123,10 +123,9 @@ gulp.task('postinstall', webdriver_update);
 
 function e2eServer({port, dir}) {
   let app = express();
-
   app.use(express.static(dir));
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     let server = app.listen(port, () => {
       resolve(server);
     });
@@ -134,9 +133,9 @@ function e2eServer({port, dir}) {
 }
 
 gulp.task('run.e2e', (done: any) => {
-  let opts = {
+  const opts = {
     port: 3000,
-    dir: 'dist/prod'
+    dir: './dist/prod'
   };
 
   e2eServer(opts)
@@ -148,10 +147,9 @@ gulp.task('run.e2e', (done: any) => {
         .on('end', () => { server.close(done); });
     });
 });
-/*
+
 gulp.task('protractor.start', (done: any) =>
   runSequence('build.prod',
               'build.js.e2e',
               'run.e2e',
               done));
-*/
