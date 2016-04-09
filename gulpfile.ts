@@ -121,7 +121,7 @@ import { protractor, webdriver_update } from 'gulp-protractor';
 
 gulp.task('postinstall', webdriver_update);
 
-function e2eServer({port, dir}) {
+const e2eServer = function({ port, dir }) {
   let app = express();
   app.use(express.static(dir));
 
@@ -148,8 +148,4 @@ gulp.task('run.e2e', (done: any) => {
     });
 });
 
-gulp.task('protractor.start', (done: any) =>
-  runSequence('build.prod',
-              'build.js.e2e',
-              'run.e2e',
-              done));
+gulp.task('protractor.start', ['build.prod', 'build.js.e2e', 'run.e2e']);
