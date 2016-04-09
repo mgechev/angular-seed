@@ -135,8 +135,13 @@ const e2eServer = function({ port, dir }) {
   });
 }
 
+interface E2E {
+  port: number;
+  dir: string;
+}
+
 gulp.task('run.e2e', (done: any) => {
-  const opts = {
+  const opts: E2E = {
     port: 3000,
     dir: './dist/prod'
   };
