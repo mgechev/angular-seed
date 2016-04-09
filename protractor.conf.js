@@ -8,14 +8,14 @@ const config = {
 
   framework: 'jasmine',
 
-  // allScriptsTimeout: 110000,
+  allScriptsTimeout: 110000,
 
   jasmineNodeOpts: {
     showTiming: true,
     showColors: true,
     isVerbose: false,
     includeStackTrace: false,
-    // defaultTimeoutInterval: 400000
+    defaultTimeoutInterval: 400000
   },
   directConnect: true,
 
@@ -39,7 +39,7 @@ const config = {
    * `rootEl`
    *
    */
-  // useAllAngular2AppRoots: true
+  useAllAngular2AppRoots: true
 };
 
 if (process.env.TRAVIS) {
@@ -51,4 +51,4 @@ if (process.env.TRAVIS) {
   config.baseUrl = '';
 }
 
-exports.config = config
+exports.config = config;
