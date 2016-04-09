@@ -39,7 +39,7 @@ function mapPath(dep: any) {
 
 function transformPath() {
   return function (filepath: string) {
-    arguments[0] = join(APP_BASE, filepath) + `?${Date.now()}`;
+    arguments[0] = join(APP_BASE, filepath) /* + `?${Date.now()}` */ ; //comment by ross
     return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));
   };
 }
