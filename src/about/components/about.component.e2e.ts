@@ -2,7 +2,7 @@
 describe('About', () => {
   beforeEach(() => {
     browser.get('/');
-    browser.waitForAngular()
+    browser.waitForAngular();
     element(by.id('about')).click();
   });
 
