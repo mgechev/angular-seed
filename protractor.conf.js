@@ -1,12 +1,14 @@
-exports.config = {
-  baseUrl: 'http://localhost:5555',
+const config = {
+  baseUrl: 'http://localhost:5555/',
 
   specs: [
-    'dist/dev/**/*.e2e.js'
+    './dist/dev/**/*.e2e.js'
   ],
+
   exclude: [],
 
-  framework: 'jasmine2',
+  // 'jasmine' by default will use the latest jasmine framework
+  framework: 'jasmine',
 
   allScriptsTimeout: 110000,
 
@@ -17,16 +19,17 @@ exports.config = {
     includeStackTrace: false,
     defaultTimeoutInterval: 400000
   },
+
   directConnect: true,
 
   capabilities: {
-    'browserName': 'chrome'
+    browserName: 'chrome'
   },
 
   onPrepare: function() {
-    var SpecReporter = require('jasmine-spec-reporter');
+    const SpecReporter = require('jasmine-spec-reporter');
     // add jasmine spec reporter
-    jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: true}));
+    jasmine.getEnv().addReporter(new SpecReporter({ displayStacktrace: true }));
 
     browser.ignoreSynchronization = false;
   },
@@ -41,3 +44,12 @@ exports.config = {
    */
   useAllAngular2AppRoots: true
 };
+
+if (process.env.TRAVIS) {
+  config.capabilities = {
+    browserName: 'firefox'
+  };
+  config.baseUrl = '';
+}
+
+exports.config = config;

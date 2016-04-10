@@ -112,4 +112,48 @@ gulp.task('serve.prod', (done: any) =>
 gulp.task('test', (done: any) =>
   runSequence('build.test',
               'karma.start',
+              'build.prod',
+              'build.js.e2e',
+              'run.e2e',
               done));
+
+// --------------
+// try
+import * as express from 'express';
+import { protractor, webdriver_update } from 'gulp-protractor';
+
+// tools/utils/seed/server.ts
+const e2eServer = function({ port, dir }) {
+  let app = express();
+  app.use(express.static(dir));
+
+  return new Promise((resolve, reject) => {
+    let server = app.listen(port, () => {
+      resolve(server);
+    });
+  });
+}
+
+// tools/tasks/seed/protractor.start.ts
+gulp.task('postinstall', webdriver_update);
+
+gulp.task('run.e2e', (done: any) => {
+  interface E2E {
+    port: number;
+    dir: string;
+  }
+
+  const opts: E2E = {
+    port: 5555,
+    dir: './dist/prod'
+  };
+
+  e2eServer(opts)
+    .then((server: any) => {
+      gulp
+        .src('./dist/dev/**/*.e2e.js')
+        .pipe(protractor({ configFile: 'protractor.conf.js' }))
+        .on('error', (error: string) => { throw error; })
+        .on('end', () => { server.close(done); });
+    });
+});
