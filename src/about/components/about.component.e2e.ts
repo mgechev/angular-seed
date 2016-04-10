@@ -1,4 +1,3 @@
-/*
 describe('About', () => {
   beforeEach(() => {
     browser.get('/');
@@ -11,4 +10,3 @@ describe('About', () => {
     expect(el.getText()).toEqual('Features');
   });
 });
-*/
