@@ -47,10 +47,8 @@ const config = {
 
 if (process.env.TRAVIS) {
   config.capabilities = {
-    browserName: 'phantomjs',
-    'phantomjs.binary.path': require('phantomjs').path
+    browserName: 'firefox'
   };
-  config.directConnect = false;
   config.baseUrl = '';
 }
 
