@@ -122,8 +122,7 @@ gulp.task('test', (done: any) =>
 import * as express from 'express';
 import { protractor, webdriver_update } from 'gulp-protractor';
 
-gulp.task('postinstall', webdriver_update);
-
+// tools/utils/seed/server.ts
 const e2eServer = function({ port, dir }) {
   let app = express();
   app.use(express.static(dir));
@@ -135,12 +134,15 @@ const e2eServer = function({ port, dir }) {
   });
 }
 
-interface E2E {
-  port: number;
-  dir: string;
-}
+// tools/tasks/seed/protractor.start.ts
+gulp.task('postinstall', webdriver_update);
 
 gulp.task('run.e2e', (done: any) => {
+  interface E2E {
+    port: number;
+    dir: string;
+  }
+
   const opts: E2E = {
     port: 3000,
     dir: './dist/prod'
