@@ -2,7 +2,7 @@ describe('About', () => {
   beforeEach(() => {
     browser.get('/');
     browser.waitForAngular();
-    element(by.id('about')).click();
+    element.all(by.css('nav > a')).get(1).click();
   });
 
   it('should have correct feature heading', () => {
