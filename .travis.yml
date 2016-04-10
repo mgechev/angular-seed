@@ -10,7 +10,7 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 
 before_script:
-  # - nohup bash -c "webdriver-manager start 2>&1 &"  // use phantomjs (protractor ci)
+  - nohup bash -c webdriver-manager start 2>&1 &
   - sleep 1
 
 notifications:
