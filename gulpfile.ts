@@ -144,7 +144,7 @@ gulp.task('run.e2e', (done: any) => {
   }
 
   const opts: E2E = {
-    port: 3000,
+    port: 5555,
     dir: './dist/prod'
   };
 
