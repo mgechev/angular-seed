@@ -24,8 +24,9 @@ export class SeedConfig {
 
   APP_TITLE            = 'My Angular2 App';
 
-  APP_SRC              = 'src';
+  APP_SRC              = 'src/client';
   ASSETS_SRC           = `${this.APP_SRC}/assets`;
+  CSS_SRC              = `${this.APP_SRC}/css`;
 
   TOOLS_DIR            = 'tools';
   SEED_TASKS_DIR       = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'seed');
@@ -63,7 +64,7 @@ export class SeedConfig {
 
   // Declare local files that needs to be injected
   APP_ASSETS: InjectableDependency[] = [
-    { src: `${this.ASSETS_SRC}/main.css`, inject: true, vendor: false }
+    { src: `${this.CSS_SRC}/main.css`, inject: true, vendor: false }
   ];
 
 
@@ -120,6 +121,7 @@ export class SeedConfig {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
       'angular2/*': `${this.APP_BASE}angular2/*`,
       'rxjs/*': `${this.APP_BASE}rxjs/*`,
+      'app/*': `/app/*`,
       '*': `${this.APP_BASE}node_modules/*`
     },
     packages: {

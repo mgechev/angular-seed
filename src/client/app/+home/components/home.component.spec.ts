@@ -8,7 +8,7 @@ import {
 import {Component} from 'angular2/core';
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
 import {HomeComponent} from './home.component';
-import {NameListService} from '../../shared/services/name-list.service';
+import {NameListService} from '../../shared/index';
 
 
 export function main() {
