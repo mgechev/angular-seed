@@ -13,9 +13,6 @@ before_script:
   # - nohup bash -c webdriver-manager start 2>&1 &  # Protractor CI
   - sleep 1  # give server time to start
 
-notifications:
-  email: true
-
 after_failure:
   - cat /home/travis/build/mgechev/angular2-seed/npm-debug.log
 
@@ -23,6 +20,7 @@ branches:
   only: master
 
 notifications:
+  email: true
   webhooks:
     urls: https://webhooks.gitter.im/e/565e4b2fed3b96c1b964
     on_success: change  # options: [always|never|change] default: always
