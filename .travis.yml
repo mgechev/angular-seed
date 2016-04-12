@@ -35,5 +35,4 @@ env:
     - TSD_GITHUB_TOKEN=9b18c72997769f3867ef2ec470e626d39661795d
 
 cache:
-  directories:
-    - node_modules
+  directories: node_modules
