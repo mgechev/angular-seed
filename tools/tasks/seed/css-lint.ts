@@ -6,7 +6,7 @@ import * as stylelint from 'stylelint';
 import * as doiuse from 'doiuse';
 import * as colorguard from 'colorguard';
 import {join} from 'path';
-import {APP_SRC, APP_ASSETS, BROWSER_LIST, ENV} from '../../config';
+import {APP_SRC, APP_ASSETS, ASSETS_SRC, BROWSER_LIST, ENV} from '../../config';
 const plugins = <any>gulpLoadPlugins();
 
 const isProd = ENV === 'prod';
@@ -23,7 +23,7 @@ const processors = [
 function lintComponentCss() {
   return gulp.src([
       join(APP_SRC, '**', '*.css'),
-      '!' + join(APP_SRC, 'assets', '**', '*.css')
+      '!' + join(ASSETS_SRC, '**', '*.css')
     ])
     .pipe(isProd ? plugins.cached('css-lint') : plugins.util.noop())
     .pipe(plugins.postcss(processors));
