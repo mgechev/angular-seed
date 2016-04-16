@@ -140,6 +140,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
 
  - https://github.com/justindujardin/angular2-seed - integration with [ng2-material](https://github.com/justindujardin/ng2-material)
  - https://github.com/archfirst/angular2-seed-sass - integration with [Sass](http://sass-lang.com/)
+ - https://github.com/DeviantJS/angular2-seed-postcss - Extending PostCSS with precss / cssnext for Sass-like features.
  - https://github.com/DeviantJS/angular2-seed-material2 - integration with [Angular2-Material](https://github.com/angular/material2)
  - https://github.com/AngularShowcase/angular2-sample-app - sample Angular 2 application
  - https://github.com/AngularShowcase/ng2-bootstrap-sbadmin - ng2-bootstrap-sbadmin
