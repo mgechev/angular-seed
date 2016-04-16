@@ -130,6 +130,7 @@ An [advanced option to this seed exists here](https://github.com/NathanWalker/an
 - [ng2-translate](https://github.com/ocombe/ng2-translate) for i18n
 - [lodash](https://lodash.com/) Helps reduce blocks of code down to single lines and enhances readability
 - [NativeScript](https://www.nativescript.org/) cross platform mobile (w/ native UI) apps.
+- [react-native-renderer](https://github.com/angular/react-native-renderer) Use Angular 2 and React Native to build applications for Android and iOS
 - More coming in the future...
 
 You may use it to learn how to extend this seed for your own use cases or use the advanced seed if your project needs those features.
