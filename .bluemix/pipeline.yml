@@ -7,7 +7,7 @@ stages:
   triggers:
   - type: commit
   jobs:
-  - name: Build
+  - name: ng2-build
     type: builder
     artifact_dir: ./
     build_type: npm
@@ -27,7 +27,7 @@ stages:
   inputs:
   - type: job
     stage: Build
-    job: meanjs-build
+    job: ng2-build
   jobs:
   - name: Deploy
     type: deployer
