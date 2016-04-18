@@ -1,26 +1,19 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "declaration": false,
-    "removeComments": true,
-    "noLib": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "sourceMap": true,
-    /*"pretty": true,*/
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noImplicitUseStrict": false,
-    "noFallthroughCasesInSwitch": true
-  },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "typings/browser.d.ts",
-    "typings/browser"
-  ],
-  "compileOnSave": false
+    "version": "1.5.3",
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": false,
+        "removeComments": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noLib": false,
+        "sourceMap": true
+    },
+    "exclude": [
+        "node_modules", "tmp", "dist", "server",
+        "typings/main.d.ts",
+        "typings/main"
+    ],
+    "compileOnSave": false
 }

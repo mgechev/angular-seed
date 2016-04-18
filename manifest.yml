@@ -1,9 +1,9 @@
 applications:
 - disk_quota: 1024M
-  host: if-weather
-  name: if-weather
+  host: ng2-seed
+  name: ng2-seed
   path: .
   domain: mybluemix.net
   instances: 1
   memory: 256M
-  command: npm run serve.prod
+  command: "export env=prod && node ./dist/server/app"

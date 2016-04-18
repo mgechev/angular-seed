@@ -7,22 +7,22 @@ stages:
   triggers:
   - type: commit
   jobs:
-  - name: meanjs-build
+  - name: Build
     type: builder
     artifact_dir: ./
-    build_type: gulpfile
+    build_type: npm
     script: |-
       #!/bin/bash
-      # Install RVM, Ruby, and SASS
-      # Needed when running grunt build
-      # gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-      # curl -sSL https://get.rvm.io | bash -s stable --ruby --gems=sass
-      # Start RVM
-      source /home/pipeline/.rvm/scripts/rvm
-      # Build MEANJS
+      # The default Node.js version is 0.10.40
+      # To use Node.js 0.12.7, uncomment the following line:
+      #export PATH=/opt/IBM/node-v0.12/bin:$PATH
+      # To use Node.js 4.2.2, uncomment the following line:
+      # export PATH=/opt/IBM/node-v4.2/bin:$PATH
+      export PATH=/opt/IBM/node-v4.2/bin:$PATH
       npm install
-      # grunt build
-      npm run build.dev
+      # npm run postinstall
+      export env=prod
+      npm run build.prod
 - name: Deploy
   inputs:
   - type: job
@@ -38,6 +38,6 @@ stages:
       application: ${CF_APP}
     script: |-
       #!/bin/bash
-      cf push
-      # view logs
+      export env=prod
+      cf push "${CF_APP}" -b https://github.com/cloudfoundry/buildpack-nodejs.git
       #cf logs "${CF_APP}" --recent
