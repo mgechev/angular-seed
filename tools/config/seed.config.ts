@@ -112,6 +112,7 @@ export class SeedConfig {
       .concat(this.APP_ASSETS.filter(filterDependency.bind(null, this.ENV)));
   }
 
+
   // ----------------
   // SystemsJS Configuration.
   protected SYSTEM_CONFIG_DEV = {
@@ -154,6 +155,23 @@ export class SeedConfig {
     'android >= 4.4',
     'bb >= 10'
   ];
+
+  // ----------------
+  // Browser Sync configuration.
+  BROWSER_SYNC_CONFIG: any = {
+    middleware: [require('connect-history-api-fallback')({index: `${this.APP_BASE}index.html`})],
+    port: this.PORT,
+    startPath: this.APP_BASE,
+    server: {
+      baseDir: `${this.DIST_DIR}/empty/`,
+      routes: {
+        [`${this.APP_BASE}${this.APP_DEST}`]: this.APP_DEST,
+        [`${this.APP_BASE}node_modules`]: 'node_modules',
+        [`${this.APP_BASE.replace(/\/$/,'')}`]: this.APP_DEST
+      }
+    }
+  };
+
   getEnvDependencies() {
     console.warn('The "getEnvDependencies" method is deprecated. Consider using "DEPENDENCIES" instead.');
     if (this.ENV === 'prod') {
