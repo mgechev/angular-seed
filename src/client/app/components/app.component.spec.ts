@@ -1,7 +1,6 @@
 import {
   TestComponentBuilder,
   describe,
-  expect,
   injectAsync,
   it,
   beforeEachProviders
