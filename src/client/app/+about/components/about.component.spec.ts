@@ -1,7 +1,6 @@
 import {
   TestComponentBuilder,
   describe,
-  expect,
   injectAsync,
   it
 } from 'angular2/testing';
