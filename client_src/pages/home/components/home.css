@@ -1,0 +1,10 @@
+.note {
+  color: #a8a8a8;
+}
+smile {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  vertical-align: bottom;
+  background: url("./assets/img/smile.png");
+}

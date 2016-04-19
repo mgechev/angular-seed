@@ -14,6 +14,7 @@ export = function buildJSDev(gulp, plugins) {
     ];
     let result = gulp.src(src)
       .pipe(plugins.plumber())
+      .pipe(plugins.inlineNg2Template({base: APP_SRC})) // base is incorrect,
       .pipe(plugins.sourcemaps.init())
       .pipe(plugins.typescript(tsProject));
 

@@ -13,12 +13,14 @@ export const PORT                 = argv[port] || 3000;
 export const APP_SRC              = "client_src";
 export const TOOLS_DIR            = "tools";
 export const SERVER_SRC           = "server_src";
-export const APP_TITLE            = "RT3";
+export const APP_TITLE            = "NG2-Seed";
 export const ASSETS_SRC           = `${APP_SRC}/assets`;
 export const ENV                  = getEnvironment();
 export const APP_DEST             = `dist/${ENV}`;
 export const JS_DEST              = `${APP_DEST}/js`;
 export const CSS_DEST             = `${APP_DEST}/css`;
+export const FONT_DEST            = `${APP_DEST}/fonts`;
+export const ASSETS_DEST          = `${APP_DEST}/assets`;
 export const SERVER_DEST          = `dist/server`;
 export const TMP_DIR              = "tmp";
 export const CSS_PROD_BUNDLE      = "all.css";
@@ -26,6 +28,11 @@ export const JS_PROD_SHIMS_BUNDLE = "shims.js";
 export const JS_PROD_APP_BUNDLE   = "app.js";
 export const ENABLE_HOT_LOADING   = !!argv["hot-loader"];
 export const BOOTSTRAP_MODULE     = ENABLE_HOT_LOADING ? "hot_loader_main" : "main";
+
+
+export const FONTS_DEST = `${APP_DEST}/fonts`;
+export const FONTS_SRC1 = "node_modules/bootstrap/dist/fonts";
+export const FONTS_SRC2 = "node_modules/font-awesome/fonts";
 
 if (ENABLE_HOT_LOADING) {
   console.log(chalk.bgRed.white.bold("The hot loader is temporary disabled."));
@@ -45,10 +52,18 @@ export const DEV_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependencie
   { src: "es6-shim/es6-shim.min.js", inject: "shims", dest: JS_DEST },
   { src: "systemjs/dist/system.src.js", inject: "shims", dest: JS_DEST },
   { src: "angular2/bundles/angular2-polyfills.js", inject: "shims", dest: JS_DEST },
+  { src: "rxjs/bundles/Rx.js", inject: "libs", dest: JS_DEST },
+  { src: "angular2/bundles/angular2.js", inject: "libs", dest: JS_DEST },
+  { src: "angular2/bundles/router.js", inject: "libs", dest: JS_DEST },
+  { src: "angular2/bundles/http.js", inject: "libs", dest: JS_DEST },
   { src: "jquery/dist/jquery.min.js", inject: "libs", dest: JS_DEST },
-  { src: "jquery-ui/themes/base/jquery-ui.css", inject: true, dest: CSS_DEST },
-  { src: "bootstrap/dist/css/bootstrap.min.css", inject: true, dest: CSS_DEST },
-  { src: "bootstrap/dist/js/bootstrap.min.js", inject: "libs", dest: JS_DEST }
+  // { src: "jquery-ui/themes/base/jquery-ui.css", inject: true, dest: CSS_DEST },
+  // { src: "bootstrap/dist/css/bootstrap.min.css", inject: true, dest: CSS_DEST },
+  // { src: "bootstrap/dist/js/bootstrap.min.js", inject: "libs", dest: JS_DEST },
+  // { src: "moment/moment.js", inject: "libs", dest: JS_DEST },
+  // { src: "ng2-bootstrap/bundles/ng2-bootstrap.min.js", inject: "libs", dest: JS_DEST },
+  { src: "highcharts/highcharts.js", inject: "libs", dest: JS_DEST },
+  { src: "highcharts/modules/exporting.js", inject: "libs", dest: JS_DEST }
   // { src: "intl/dist/Intl.js", inject: "shims", dest: JS_DEST },  // Fixes Safari Intl support
   // { src: "intl/locale-data/jsonp/en.js", inject: "shims", dest: JS_DEST } // Need this too.
 ]);
@@ -59,17 +74,25 @@ export const PROD_NPM_DEPENDENCIES: InjectableDependency[] = normalizeDependenci
   { src: "es6-shim/es6-shim.min.js", inject: "shims" },
   { src: "systemjs/dist/system.js", inject: "shims" },
   { src: "angular2/bundles/angular2-polyfills.min.js", inject: "libs" },
+  { src: "rxjs/bundles/Rx.js", inject: "libs", dest: JS_DEST },
+  { src: "angular2/bundles/angular2.js", inject: "libs", dest: JS_DEST },
+  { src: "angular2/bundles/router.js", inject: "libs", dest: JS_DEST },
+  { src: "angular2/bundles/http.js", inject: "libs", dest: JS_DEST },
   { src: "jquery/dist/jquery.min.js", inject: "libs", dest: JS_DEST },
-  { src: "jquery-ui/themes/base/jquery-ui.css", inject: true, dest: CSS_DEST },
-  { src: "bootstrap/dist/css/bootstrap.min.css", inject: true, dest: CSS_DEST },
-  { src: "bootstrap/dist/js/bootstrap.min.js", inject: "libs", dest: JS_DEST }
+  { src: "highcharts/highcharts.js", inject: "libs", dest: JS_DEST },
+  { src: "highcharts/modules/exporting.js", inject: "libs", dest: JS_DEST }
+  // { src: "jquery-ui/themes/base/jquery-ui.css", inject: true, dest: CSS_DEST },
+  // { src: "bootstrap/dist/css/bootstrap.min.css", inject: true, dest: CSS_DEST },
+  // { src: "bootstrap/dist/js/bootstrap.min.js", inject: "libs", dest: JS_DEST }
   // { src: "intl/dist/Intl.js", inject: "shims"},  // Fixes Safari Intl support
   // { src: "intl/locale-data/jsonp/en.js", inject: "shims"} // Need this too.
 ]);
 
 // declare local files that needs to be injected
 export const APP_ASSETS: InjectableDependency[] = [
-  { src: `${ASSETS_SRC}/main.css`, inject: true, dest: CSS_DEST }
+  { src: `${ASSETS_SRC}/main.css`, inject: true, dest: CSS_DEST },
+  { src: `${ASSETS_SRC}/bootstrap/bootstrap.css`, inject: true, dest: CSS_DEST },
+  { src: `${ASSETS_SRC}/font-awesome-4.5.0/css/font-awesome.min.css`, inject: true, dest: CSS_DEST }
 ];
 
 export const DEV_DEPENDENCIES = DEV_NPM_DEPENDENCIES.concat(APP_ASSETS);
@@ -85,6 +108,9 @@ const SYSTEM_CONFIG_DEV = {
   paths: {
     [BOOTSTRAP_MODULE]: `${APP_BASE}${BOOTSTRAP_MODULE}`,
     "angular2/*": "node_modules/angular2/*",
+    "moment": "node_modules/moment/moment.js",
+    "ng2-bootstrap": "node_modules/ng2-bootstrap/bundles/*",
+    // "hot_loader_main": `${APP_ROOT}hot_loader_main`,
     // "ng-semantic": "node_modules/ng-semantic/ng-semantic.js",
     // "ng-semantic/ng-semantic/*": "node_modules/ng-semantic/ng-semantic/*.js",
     "rxjs/*": "node_modules/rxjs/*",
@@ -125,8 +151,11 @@ export const SYSTEM_BUILDER_CONFIG = {
     "angular2/src/animate/*": "node_modules/angular2/src/animate/*.js",
     "angular2/src/common/*": "node_modules/angular2/src/common/*.js",
     "angular2/src/transform/*": "node_modules/angular2/src/transform/*.js",
+    "moment": "node_modules/moment/moment.js",
+    "ng2-bootstrap/*": "node_modules/ng2-bootstrap/*",
     // "ng-semantic": "node_modules/ng-semantic/ng-semantic.js",
     // "ng-semantic/ng-semantic/*": "node_modules/ng-semantic/ng-semantic/*",
+    // "ng2-bootstrap/ng-bootstrap/*": "node_modules/ng2-bootstrap/*",
     "rxjs/*": "node_modules/rxjs/*"
     // "rxjs/operator/*" : "node_modules/rxjs/add/operator/*",
     // "d3" : "node_modules/d3/d3.js",     // For some reason on Heroku, the .js is required
@@ -139,6 +168,7 @@ export const SYSTEM_BUILDER_CONFIG = {
     // "bootstrap" : "node_modules/bootstrap/dist/js/bootstrap.min.js" // can remove
   }
 };
+
 function getEnvironment() {
   let env = "_";
   let base: string[] = argv[env];

@@ -1,7 +1,9 @@
 import {provide, enableProdMode} from "angular2/core";
 import {bootstrap} from "angular2/platform/browser";
-import {ROUTER_PROVIDERS, APP_BASE_HREF } from "angular2/router";
-import {AppComponent} from "./app/components/app.component";
+// import {ROUTER_PROVIDERS, APP_BASE_HREF } from "angular2/router";
+import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from "angular2/router";
+// import {AppComponent} from "./app/components/app.component";
+import {AppCmp} from "./layout/base/components/app";
 // // test to add external dependency
 // import {Http, HTTP_PROVIDERS} from "angular2/http";
 // import {AuthHttp, AuthConfig} from "angular2-jwt";
@@ -9,6 +11,12 @@ import {AppComponent} from "./app/components/app.component";
 
 if ("<%= ENV %>" === "prod") { enableProdMode(); }
 
+bootstrap(AppCmp, [
+  ROUTER_PROVIDERS,
+  provide(LocationStrategy, { useClass: HashLocationStrategy })
+]);
+
+/*
 bootstrap(AppComponent, [
   ROUTER_PROVIDERS, // remove HTTP_PROVIDERS, // add to test the addition of extenrnal dependency
   provide(APP_BASE_HREF, { useValue: "<%= APP_BASE %>" }), // note APP_BASE is not correct
@@ -19,6 +27,8 @@ bootstrap(AppComponent, [
   //   deps: [Http]
   // }),
 ]);
+
+*/
 
 // in order to start the Service Worker located at "./sw.js"
 // uncomment this line. More about Service Workers here

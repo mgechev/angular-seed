@@ -21,7 +21,6 @@ export = function buildJSProd(gulp, plugins) {
 
     let result = gulp.src(src)
       .pipe(plugins.plumber())
-      // .pipe(plugins.inlineNg2Template()) // base is incorrect,
       .pipe(plugins.inlineNg2Template(INLINE_OPTIONS)) // base is incorrect,
       .pipe(plugins.typescript(tsProject));
     return result.js

@@ -1,0 +1,52 @@
+<style>
+  .full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }
+</style>
+
+<div>
+  <pre>Selected date is: <em *ngIf="dt">{{ getDate() | date:'fullDate'}}</em></pre>
+  <h4>Inline</h4>
+  <div style="display:inline-block; min-height:290px;">
+    <datepicker [(ngModel)]="dt" [minDate]="minDate" [showWeeks]="true"></datepicker>
+  </div>
+
+  <hr />
+  <button type="button" class="btn btn-sm btn-info" (click)="today()">Today</button>
+  <button type="button" class="btn btn-sm btn-default btn-secondary" (click)="d20090824();">2009-08-24</button>
+  <button type="button" class="btn btn-sm btn-danger" (click)="clear()">Clear</button>
+  <button type="button" class="btn btn-sm btn-default btn-secondary" (click)="toggleMin()" tooltip="After today restriction">Min date</button>
+</div>
+<hr>
+<timepicker [(ngModel)]="mytime" (change)="changed()" [hourStep]="hstep" [minuteStep]="mstep" [showMeridian]="ismeridian"></timepicker>
+
+<pre class="alert alert-info">Time is: {{mytime}}</pre>
+<pre> (note: | date:'shortTime' and date pipe currently supported only in Chrome)</pre>
+
+<div class="row">
+  <div class="col-xs-6">
+    Hours step is:
+    <select class="form-control" [(ngModel)]="hstep">
+      <option *ngFor="#opt of options.hstep" [value]="opt">{{opt}}</option>
+    </select>
+  </div>
+  <div class="col-xs-6">
+    Minutes step is:
+    <select class="form-control form-group" [(ngModel)]="mstep">
+      <option *ngFor="#opt of options.mstep" [value]="opt">{{opt}}</option>
+    </select>
+  </div>
+</div>
+
+<hr>
+
+<button type="button" class="btn btn-info" (click)="toggleMode()">12H / 24H</button>
+<button type="button" class="btn btn-primary" (click)="update()">Set to 14:00</button>
+<button type="button" class="btn btn-danger" (click)="clear()">Clear</button>

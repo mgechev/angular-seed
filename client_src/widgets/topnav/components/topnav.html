@@ -1,0 +1,109 @@
+<nav class="navbar navbar-dark bg-inverse navbar-fixed-top topnav">
+    <div class="collapse navbar-toggleable-xs clearfix text-center">
+        <a class="navbar-brand" (click)="gotoDashboard()" >SB Admin BS 4 Angular2</a>
+        
+        <ul class="nav navbar-nav top-nav navbar-right pull-xs-right top-right-nav">
+            <li class="nav-item buy-now">
+                <a href="https://github.com/start-angular/SB-Admin-BS4-Angular-2/archive/master.zip" class="btn btn-default-outline buy-now-btn" role="button" style="padding: .375rem 1rem !important; border-color: #999;">Download Now</a>
+            </li>
+            <li class="dropdown nav-item" dropdown [isOpen]="status.isopen">
+                <!-- <div class="dropdown"> -->
+                    <a class="nav-link dropdown-toggle" href="javascript:;" id="dropdownMenu4" dropdownToggle><i class="fa fa-envelope"></i> <b class="caret"></b><span class="sr-only">(current)</span></a>
+                    <ul class="dropdown-menu message-dropdown" aria-labelledby="dropdownMenu4">
+                        <li class="message-preview">
+                            <a href="javascript:;" class="dropdown-item">
+                                <div class="media">
+                                    <span class="media-left">
+                                        <img class="media-object" src="http://i.huffpost.com/gadgets/slideshows/461162/slide_461162_6224974_sq50.jpg" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><strong>John Smith</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                        <p class="last"> Lorem ipsum dolor sit amet, consectetur...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <hr>
+                        <li class="message-preview">
+                            <a href="javascript:;" class="dropdown-item">
+                                <div class="media">
+                                    <span class="media-left">
+                                        <img class="media-object" src="http://i.huffpost.com/gadgets/slideshows/461162/slide_461162_6224974_sq50.jpg" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><strong>John Smith</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                        <p class="last"> Lorem ipsum dolor sit amet, consectetur...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <hr>
+                        <li class="message-preview">
+                            <a href="javascript:;" class="dropdown-item">
+                                <div class="media">
+                                    <span class="media-left">
+                                        <img class="media-object" src="http://i.huffpost.com/gadgets/slideshows/461162/slide_461162_6224974_sq50.jpg" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><strong>John Smith</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                        <p class="last"> Lorem ipsum dolor sit amet, consectetur...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <hr>
+                        <li class="dropdown-item message-footer">
+                            <a href="javascript:;" class="dropdown-item text-center">Read All New Messages</a>
+                        </li>
+                    </ul>
+                <!-- </div> -->
+            </li>
+            <li class="dropdown nav-item" dropdown [isOpen]="status.isopen">
+                <!-- <div class="dropdown"> -->
+                    <a href="javascript:;" id="name2" class="nav-link dropdown-toggle" dropdownToggle><i class="fa fa-bell"></i> <b class="caret"></b><span class="sr-only">(current)</span></a>
+                    <ul class="dropdown-menu alert-dropdown" aria-labelledby="name2">
+                        <li >
+                            <a href="javascript:;" class="dropdown-item">Alert Name <span class="label label-default"> Alert Badge</span></a>
+                        </li>
+                        <li >
+                            <a href="javascript:;" class="dropdown-item">Alert Name <span class="label label-default"> Alert Badge</span></a>
+                        </li>
+                        <li >
+                            <a href="javascript:;" class="dropdown-item">Alert Name <span class="label label-default"> Alert Badge</span></a>
+                        </li>
+                        <li class="dropdown-divider"></li>
+                        <li>
+                            <a href="javascript:;" class="dropdown-item">View All</a>
+                        </li>
+                    </ul>
+                <!-- </div> -->
+            </li>
+            <li class="dropdown nav-item" dropdown [isOpen]="status.isopen">
+                <a href="javascript:;" id="single-button" class="nav-link dropdown-toggle" dropdownToggle><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                <ul class="dropdown-menu" aria-labelledby="single-button">
+                    <li>
+                        <a class="dropdown-item" href="javascript:;"><i class="fa fa-fw fa-user"></i> Profile</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="javascript:;"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="javascript:;"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="dropdown-item" href="javascript:;" (click)="gotoLogin()"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+

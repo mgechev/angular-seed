@@ -1,0 +1,281 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Bootstrap Elements
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i>  <a href="Javascript:void(0);" (click)="gotoDashboard()">Dashboard</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-desktop"></i> Bootstrap Components
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="card card-block">
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>Single toggle</h4>
+            <pre class="card card-block card-header">{{singleModel}}</pre>
+            <button type="button" class="btn btn-primary"
+                    [(ngModel)]="singleModel" btnCheckbox
+                    btnCheckboxTrue="1" btnCheckboxFalse="0">
+              Single Toggle
+            </button>
+            <h4><br>Radio &amp; Uncheckable Radio</h4>
+            <pre class="card card-block card-header">{{radioModel || 'null'}}</pre>
+            <div class="btn-group">
+                <label class="btn btn-primary" [(ngModel)]="radioModel"
+                btnRadio="Left">Left</label>
+                <label class="btn btn-primary" [(ngModel)]="radioModel" btnRadio="Middle">Middle</label>
+                <label class="btn btn-primary" [(ngModel)]="radioModel"
+                btnRadio="Right">Right</label>
+            </div>
+            <div class="btn-group">
+                <label class="btn btn-success" [(ngModel)]="radioModel" btnRadio="Left"
+                uncheckable>Left</label>
+                <label class="btn btn-success" [(ngModel)]="radioModel" btnRadio="Middle"
+                uncheckable>Middle</label>
+                <label class="btn btn-success" [(ngModel)]="radioModel" btnRadio="Right"
+                uncheckable>Right</label>
+            </div>
+        </div>
+        <div class="col-sm-6">
+                <h4>Checkbox</h4>
+    <pre class="card card-block card-header">
+    Model via JsonPipe: {{checkModel | json}}</pre>
+    <pre class="card card-block card-header">
+    Left: {{checkModel.left}}
+    Middle: {{checkModel.middle}}
+    Right: {{checkModel.right}}</pre>
+                <!--<pre class="card card-block card-header">Results: {{checkResults}}</pre>-->
+                <div class="btn-group">
+                    <label class="btn btn-primary" [(ngModel)]="checkModel.left"
+                    btnCheckbox>Left</label>
+                    <label class="btn btn-primary" [(ngModel)]="checkModel.middle" btnCheckbox>Middle</label>
+                    <label class="btn btn-primary" [(ngModel)]="checkModel.right" btnCheckbox>Right</label>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- dropdown -->
+<div class="card card-block">
+    <div (click)="$event.preventDefault()">
+        <!-- Simple dropdown -->
+        <span dropdown (on-toggle)="toggled($event)">
+            <a href id="simple-dropdown" dropdownToggle>
+                Click me for a dropdown, yo!
+             </a>
+            <ul class="dropdown-menu" aria-labelledby="simple-dropdown">
+                <li *ngFor="#choice of items">
+                    <a class="dropdown-item" href="#">{{choice}}</a>
+                </li>
+            </ul>
+        </span>
+
+        <!-- Single button -->
+        <div class="btn-group" dropdown [isOpen]="status.isopen">
+            <button id="single-button" type="button" class="btn btn-primary" dropdownToggle [disabled]="disabled">
+                Button dropdown <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+                <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
+                <li class="divider dropdown-divider"></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a></li>
+            </ul>
+        </div>
+
+        <!-- Split button -->
+        <div class="btn-group" dropdown>
+            <button id="split-button" type="button" class="btn btn-danger">Action</button>
+            <button type="button" class="btn btn-danger dropdown-toggle" dropdownToggle>
+                <span class="caret"></span>
+                <span class="sr-only">Split button!</span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="split-button">
+                <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
+                <li class="divider dropdown-divider"></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a></li>
+            </ul>
+        </div>
+
+        <hr/>
+        <p>
+            <button type="button" class="btn btn-primary btn-sm" (click)="toggleDropdown($event)">Toggle button dropdown
+            </button>
+            <button type="button" class="btn btn-warning btn-sm" (click)="disabled = !disabled">Enable/Disable</button>
+        </p>
+
+        <hr>
+        <!-- Single button with keyboard nav -->
+        <div class="btn-group" dropdown keyboardNav="true">
+            <button id="simple-btn-keyboard-nav" type="button" class="btn btn-primary" dropdownToggle>
+                Dropdown with keyboard navigation <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">
+                <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
+                <li class="divider dropdown-divider"></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- End  -->
+
+<!-- Collapse -->
+<!-- <div class="card card-block collapse-block">
+    <h3>Collapse</h3>
+    <button type="button" class="btn btn-primary"
+            (click)="isCollapsed = !isCollapsed">Toggle collapse
+    </button>
+    <hr>
+    <div [collapse]="isCollapsed" class="card card-block card-header ">
+        <div class="well well-lg">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        </div>
+    </div>
+</div> -->
+<!-- End -->
+
+<!-- Pagination -->
+<div class="card card-block">
+    <div class="row">
+      <div class="col-lg-6" style="margin-top: 10px;">
+        <h4>Default</h4>
+        <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
+        <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="currentPage" class="pagination-sm"
+                    previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+        <pagination [directionLinks]="false" [boundaryLinks]="true" [totalItems]="totalItems"
+                    [(ngModel)]="currentPage"></pagination>
+        <pagination [directionLinks]="false" [totalItems]="totalItems" [(ngModel)]="currentPage"
+                    (numPages)="smallnumPages = $event"></pagination>
+        <pre class="card card-block card-header">The selected page no: {{currentPage}}/{{smallnumPages}}</pre>
+        <button type="button" class="btn btn-info" (click)="setPage(3)">Set current page to: 3</button>
+      </div>
+      <hr class="visible-md visible-xs hidden-lg-up">
+      <div class="col-lg-6" style="margin-top: 10px;">
+        <h4>Pager</h4>
+        <pager [totalItems]="totalItems" [(ngModel)]="currentPage" onPageChanged="pageChanged($event)"></pager>
+
+        <hr/>
+        <h4>Limit the maximum visible buttons</h4>
+        <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination-sm"
+                    [boundaryLinks]="true"></pagination>
+        <pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination-sm"
+                    [boundaryLinks]="true" [rotate]="false" (numPages)="numPages = $event"></pagination>
+        <pre class="card card-block card-header">Page: {{bigCurrentPage}} / {{numPages}}</pre>
+      </div>
+    </div>
+</div>
+
+<!--  Rating -->
+<div class="card card-block">
+    <h4>Default</h4>
+    <rating [(ngModel)]="rate" [max]="max" [readonly]="isReadonly"
+            (onHover)="hoveringOver($event)" (onLeave)="resetStar($event)"
+            [titles]="['one','two','three']"></rating>
+    <span class="label"
+          [ngClass]="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}"
+          [ngStyle]="{display: (overStar && !isReadonly) ? 'inline' : 'none'}">{{percent}}%</span>
+
+    <pre class="card card-block card-header" style="margin:15px 0;">Rate: <b>{{rate}}</b> - Readonly is: <i>{{isReadonly}}</i> - Hovering over: <b>{{overStar || "none"}}</b></pre>
+
+    <button type="button" class="btn btn-sm btn-danger" (click)="rate = 0"
+            [disabled]="isReadonly">Clear
+    </button>
+    <button type="button" class="btn btn-sm btn-primary"
+            (click)="isReadonly = ! isReadonly">Toggle Readonly
+    </button>
+</div>
+<!-- End -->
+
+
+<!-- Tabs -->
+<div class="card card-block">
+    <div class="row">
+        <div class="col-sm-6 card-block">
+            <div (click)="$event.preventDefault()">
+                <tabset>
+                    <tab heading="Static title">Static content</tab>
+                    <tab *ngFor="#tabz of tabs"
+                         [heading]="tabz.title"
+                         [active]="tabz.active"
+                         (select)="tabz.active = true"
+                         (deselect)="tabz.active = false"
+                         [disabled]="tabz.disabled">
+                      {{tabz?.content}}
+                    </tab>
+                    <tab (select)="alertMe()">
+                      <template tab-heading>
+                        <i class="glyphicon glyphicon-bell"></i> Alert!
+                      </template>
+                      I've got an HTML heading, and a select callback. Pretty cool!
+                    </tab>
+                </tabset>
+                <p><br>Select a tab by setting active binding to true:</p>
+                <p>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="tabs[0].active = true">Select second tab</button>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="tabs[1].active = true">Select third tab</button>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="tabs[1].disabled = ! tabs[1].disabled">Enable / Disable third tab</button>
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-6 card-block">
+            <p><i>Bootstrap 4 doesn't have justified classes</i></p>
+            <tabset [justified]="true">
+                <tab heading="Justified">Justified content</tab>
+                <tab heading="SJ">Short Labeled Justified content</tab>
+                <tab heading="Long Justified">Long Labeled Justified content</tab>
+            </tabset>
+            <hr />
+            <tabset [vertical]="true" type="pills">
+                <tab heading="Vertical 1">Vertical content 1</tab>
+                <tab heading="Vertical 2">Vertical content 2</tab>
+            </tabset>
+        </div>
+    </div>
+</div>
+
+
+<!-- TypeAhead -->
+<div class="card card-block">
+    <div class='container-fluid'>
+        <h4>Static arrays</h4>
+        <pre>Model: {{selected | json}}</pre>
+        <input [(ngModel)]="selected"
+               [typeahead]="statesComplex"
+               (typeaheadOnSelect)="typeaheadOnSelect($event)"
+               [typeaheadOptionField]="'name'"
+               class="form-control">
+        <hr>
+        <h4>Asynchronous results</h4>
+        <pre>Model: {{asyncSelected | json}}</pre>
+        <input [(ngModel)]="asyncSelected"
+               [typeahead]="getAsyncData(getContext())"
+               (typeaheadLoading)="changeTypeaheadLoading($event)"
+               (typeaheadNoResults)="changeTypeaheadNoResults($event)"
+               (typeaheadOnSelect)="typeaheadOnSelect($event)"
+               [typeaheadOptionsLimit]="7"
+               placeholder="Locations loaded with timeout"
+               class="form-control">
+        <div [hidden]="typeaheadLoading!==true">
+            <i class="fa fa-refresh ng-hide" style=""></i>
+        </div>
+        <div [hidden]="typeaheadNoResults!==true" class="" style="">
+            <i class="fa fa-times"></i> No Results Found
+        </div>
+    </div>
+</div>
+<!-- End -->

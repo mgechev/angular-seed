@@ -1,0 +1,53 @@
+<button class="btn btn-default" id="toggle-sidebar" type="button" (click)="eventCalled()">
+    &#9776;
+</button>
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+    <ul class="list-group">
+        <a [routerLink]="['Home']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i> Dashboard
+        </a>
+        <a [routerLink]="['Chart']"class="list-group-item">
+            <i class="fa fa-fw fa-bar-chart-o"></i> Charts
+        </a>
+        <a [routerLink]="['Tables']"class="list-group-item">
+            <i class="fa fa-fw fa-table"></i> Tables
+        </a>
+        <a [routerLink]="['Forms']"class="list-group-item">
+            <i class="fa fa-fw fa-edit"></i> Forms
+        </a>
+        <a [routerLink]="['BSElement']" class="list-group-item">
+            <i class="fa fa-fw fa-desktop"></i> Bootstrap Elements
+        </a>
+        <a [routerLink]="['Grid']" class="list-group-item">
+            <i class="fa fa-fw fa-wrench"></i> Bootstrap Grid
+        </a>
+        <a [routerLink]="['Component']" class="list-group-item">
+            <i class="fa fa-th-list"></i> &nbsp;Component
+        </a>
+        <!-- dropDown item -->
+        <div class="sidebar-dropdown">
+            <accordion>
+                <accordion-group heading='&#x21D5;&nbsp;&nbsp;Dropdown  &#x25BE;'>
+                    <p>
+                        <li class="list-group-item">
+                            <a href="javascript:;" >Dropdown Item 1</a><br>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="javascript:;" >Dropdown Item 2</a><br>
+                        </li>
+                        
+                    </p>    
+                </accordion-group>
+            </accordion>
+        </div>
+        <a [routerLink]="['BlankPage']" class="list-group-item">
+            <i class="fa fa-file-o"></i> &nbsp;BlankPage
+        </a>
+        <!-- <a [routerLink]="['/RTL-Dashboard']" class="list-group-item" (click)="eventCalled()">
+            <i class="fa fa-fw fa-dashboard"></i> RTL Dashboard
+        </a> -->
+        <a class="list-group-item more-themes" href="http://www.strapui.com/" >
+            More Themes
+        </a>
+    </ul>
+</nav>

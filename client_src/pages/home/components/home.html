@@ -1,0 +1,145 @@
+<div class="container-fluid">
+	<h2 class="text-muted">Dashboard <small>Statistics Overview</small></h2>
+    <div class="row">
+        <div class="col-md-12">
+            <carousel [interval]="myInterval" [noWrap]="noWrapSlides">
+                <slide *ngFor="#slidez of slides; #index=index"
+                [active]="slidez.active">
+                <img [src]="slidez.image">
+                <div class="carousel-caption">
+                    <h4>Slide {{index}}</h4>
+
+                    <p>{{slidez.text}}</p>
+                </div>
+                </slide>
+                <i class="fa fa-chevron-left left carousel-control"></i>
+                <i class="fa fa-chevron-right right carousel-control"></i>
+            </carousel>
+        </div>
+    </div>
+    <hr>
+	<div class="row">
+        <div class="col-xl-3 col-lg-6">
+            <div class="card card-primary card-inverse">
+                <div class="card-header card-primary">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-comments fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-xs-right">
+                            <div class="huge">26</div>
+                            <div>New Comments!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer card-default">
+                    <a href="javascript:;">
+                        <span class="pull-xs-left">View Details</span>
+                        <span class="pull-xs-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <div class="card card-success card-inverse">
+                <div class="card-header card-success">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-tasks fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-xs-right">
+                            <div class="huge">12</div>
+                            <div>New Tasks!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer card-green">
+                    <a class="text-success" href="javascript:void(0);">
+                        <span class="pull-xs-left">View Details</span>
+                        <span class="pull-xs-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <div class="card card-warning card-inverse">
+                <div class="card-header card-warning">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-xs-right">
+                            <div class="huge">124</div>
+                            <div>New Orders!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer card-yellow">
+                    <a  class="text-warning" href="javascript:void(0);">
+                        <span class="pull-xs-left">View Details</span>
+                        <span class="pull-xs-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <div class="card card-danger card-inverse">
+                <div class="card-header card-danger">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-support fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-xs-right">
+                            <div class="huge">13</div>
+                            <div>Support Tickets!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer card-red">
+                    <a class="text-danger" href="javascript:void(0);">
+                        <span class="pull-xs-left">View Details</span>
+                        <span class="pull-xs-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+    <alert *ngFor="#alert of alerts;#i = index" [type]="alert.type" dismissible="true" (close)="closeAlert(i)">
+      {{ alert?.msg }}
+    </alert>
+    <div class="row">
+        <div class="col-lg-8">
+        <div class="card card-default">
+        <div class="card-header">
+                    <i class="fa fa-clock-o fa-fw"></i> Responsive Timeline
+                </div>
+                <!-- /.card-header -->
+                <timeline></timeline>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col-lg-8 -->
+        <div class="col-lg-4">
+        <div class="card card-default">
+        <div class="card-header">
+        <i class="fa fa-bell fa-fw"></i> Notifications card
+                </div>
+                <!-- /.card-header -->
+                <notifications></notifications>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+            <chat></chat>
+            <!-- /.card .chat-card -->
+        </div>
+        <!-- /.col-lg-4 -->
+    </div>
+
+</div>
