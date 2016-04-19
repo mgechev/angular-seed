@@ -38,7 +38,6 @@ export class SeedConfig {
   APP_DEST             = `${this.DIST_DIR}/${this.ENV}`;
   CSS_DEST             = `${this.APP_DEST}/css`;
   JS_DEST              = `${this.APP_DEST}/js`;
-  APP_ROOT             = this.ENV === 'dev' ? `${this.APP_BASE}${this.APP_DEST}/` : `${this.APP_BASE}`;
   VERSION              = appVersion();
 
   CSS_PROD_BUNDLE      = 'all.css';
