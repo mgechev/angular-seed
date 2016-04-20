@@ -24,6 +24,7 @@ It is something similar to the Angular Quick Start but does the entire build wit
 - Manager of your type definitions using [typings](https://github.com/typings/typings).
 - Has autoprefixer and css-lint support.
 - Basic Service Worker, which implements "Cache then network strategy".
+- Use [Ani Angular 2 Theme](http://startangular.com/product/ani-angular-2-theme/). Recommends to extend to premium theme.
 - Run on IBM Bluemix
 
 # How to start
