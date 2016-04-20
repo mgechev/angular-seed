@@ -1,11 +1,11 @@
 <nav class="navbar navbar-dark bg-inverse navbar-fixed-top topnav">
     <div class="collapse navbar-toggleable-xs clearfix text-center">
-        <a class="navbar-brand" (click)="gotoDashboard()" >SB Admin BS 4 Angular2</a>
-        
+        <a class="navbar-brand" (click)="gotoDashboard()" ><%= APP_TITLE %></a>
+
         <ul class="nav navbar-nav top-nav navbar-right pull-xs-right top-right-nav">
-            <li class="nav-item buy-now">
+            <!-- <li class="nav-item buy-now">
                 <a href="https://github.com/start-angular/SB-Admin-BS4-Angular-2/archive/master.zip" class="btn btn-default-outline buy-now-btn" role="button" style="padding: .375rem 1rem !important; border-color: #999;">Download Now</a>
-            </li>
+            </li> -->
             <li class="dropdown nav-item" dropdown [isOpen]="status.isopen">
                 <!-- <div class="dropdown"> -->
                     <a class="nav-link dropdown-toggle" href="javascript:;" id="dropdownMenu4" dropdownToggle><i class="fa fa-envelope"></i> <b class="caret"></b><span class="sr-only">(current)</span></a>
@@ -105,5 +105,3 @@
         </ul>
     </div>
 </nav>
-
-
