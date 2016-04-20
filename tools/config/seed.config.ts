@@ -39,7 +39,6 @@ export class SeedConfig {
   CSS_DEST             = `${this.APP_DEST}/css`;
   JS_DEST              = `${this.APP_DEST}/js`;
   VERSION              = appVersion();
-  MANIFEST_FILE        = 'manifest.appcache';
 
   CSS_PROD_BUNDLE      = 'all.css';
   JS_PROD_SHIMS_BUNDLE = 'shims.js';
