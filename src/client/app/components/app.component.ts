@@ -9,7 +9,7 @@ import {AboutComponent} from '../+about/index';
 @Component({
   selector: 'sd-app',
   viewProviders: [NameListService],
-  templateUrl: './app/components/app.component.html',
+  templateUrl: 'app/components/app.component.html',
   directives: [ROUTER_DIRECTIVES, NavbarComponent, ToolbarComponent]
 })
 @RouteConfig([

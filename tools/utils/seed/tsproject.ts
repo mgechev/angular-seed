@@ -3,11 +3,12 @@ const plugins = <any>gulpLoadPlugins();
 
 let _tsProject: any;
 
-export function makeTsProject() {
+export function makeTsProject(options?: Object) {
   if (!_tsProject) {
-    _tsProject = plugins.typescript.createProject('tsconfig.json', {
+    const config = Object.assign({
       typescript: require('typescript')
-    });
+    }, options);
+    _tsProject = plugins.typescript.createProject('tsconfig.json', config);
   }
   return _tsProject;
 }
