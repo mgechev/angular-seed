@@ -37,6 +37,7 @@
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
   "devDependencies": {
+    "angular2-service-worker": "^0.1.1",
     "async": "^1.4.2",
     "autoprefixer": "^6.3.3",
     "browser-sync": "^2.11.2",
