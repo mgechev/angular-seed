@@ -19,11 +19,7 @@ gulp.task('build.dev', (done: any) =>
               'build.index.dev',
               done));
 
-gulp.task('generate.manifest.dev', (done: any) => {
-  runSequence('build.manifest', done);
-});
-
-gulp.task('generate.manifest.prod', (done: any) => {
+gulp.task('generate.manifest', (done: any) => {
   runSequence('build.manifest', done);
 });
 

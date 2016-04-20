@@ -1,6 +1,8 @@
 import * as gulp from 'gulp';
 import {APP_DEST} from '../../config';
 
+console.log(APP_DEST);
+
 export = () => {
   return require('angular2-service-worker')
     .gulpGenManifest({
