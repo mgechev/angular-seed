@@ -15,6 +15,7 @@ It is something similar to the Angular Quick Start but does the entire build wit
 `angular2-seed` provides the following features:
 
 - Allows you to painlessly update the seed tasks of your already existing project.
+- Integration with [angular/progressive](https://github.com/angular/progressive).
 - Ready to go, statically typed build system using gulp for working with TypeScript.
 - Production and development builds.
 - Sample unit tests with Jasmine and Karma including code coverage via [istanbul](https://gotwarlost.github.io/istanbul/).
@@ -23,7 +24,6 @@ It is something similar to the Angular Quick Start but does the entire build wit
 - Following the [best practices for your application’s structure](https://github.com/mgechev/angular2-style-guide).
 - Manager of your type definitions using [typings](https://github.com/typings/typings).
 - Has autoprefixer and css-lint support.
-- Basic Service Worker, which implements "Cache then network strategy".
 
 # How to start
 
@@ -128,7 +128,7 @@ The manifest is also annotated for use with `angular2-service-worker`. Some manu
 
 ```bash
 npm install angular2-service-worker
-cp node_modules/angular2-service-worker/dist/worker.js src/
+cp node_modules/angular2-service-worker/dist/worker.js src/client
 ```
 
 Then, the commented snippet in `main.ts` must be uncommented to register the worker script as a service worker.
