@@ -38,7 +38,7 @@
     "autoprefixer": "^6.3.3",
     "browser-sync": "^2.11.2",
     "chalk": "^1.1.3",
-    "codelyzer": "0.0.12",
+    "codelyzer": "0.0.14",
     "colorguard": "^1.1.1",
     "connect": "^3.4.1",
     "connect-history-api-fallback": "^1.1.0",
