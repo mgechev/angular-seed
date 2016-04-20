@@ -8,9 +8,7 @@
 [![Dependency Status](https://david-dm.org/mgechev/angular2-seed.svg)](https://david-dm.org/mgechev/angular2-seed)
 [![devDependency Status](https://david-dm.org/mgechev/angular2-seed/dev-status.svg)](https://david-dm.org/mgechev/angular2-seed#info=devDependencies)
 
-A modular seed project for Angular 2 apps.
-
-It is something similar to the Angular Quick Start but does the entire build with gulp.
+Provides fast, reliable and extensible starter for the development of Angular 2 projects.
 
 `angular2-seed` provides the following features:
 
@@ -20,10 +18,10 @@ It is something similar to the Angular Quick Start but does the entire build wit
 - Sample unit tests with Jasmine and Karma including code coverage via [istanbul](https://gotwarlost.github.io/istanbul/).
 - End-to-end tests with Protractor.
 - Development server with Livereload.
-- Following the [best practices for your application’s structure](https://github.com/mgechev/angular2-style-guide).
+- Following the [best practices for your application's structure](https://github.com/mgechev/angular2-style-guide).
 - Manager of your type definitions using [typings](https://github.com/typings/typings).
 - Has autoprefixer and css-lint support.
-- Basic Service Worker, which implements "Cache then network strategy".
+- Service Worker, which implements "Cache then network strategy".
 
 # How to start
 
