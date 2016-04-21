@@ -217,7 +217,8 @@ function customRules(): string[] {
 function getEnvironment() {
   let base:string[] = argv['_'];
   let prodKeyword = !!base.filter(o => o.indexOf(ENVIRONMENTS.PRODUCTION) >= 0).pop();
-  if (base && prodKeyword || argv['env'] === ENVIRONMENTS.PRODUCTION) {
+  let env = (argv['env'] || '').toLowerCase();
+  if ((base && prodKeyword) || env === ENVIRONMENTS.PRODUCTION) {
     return ENVIRONMENTS.PRODUCTION;
   } else {
     return ENVIRONMENTS.DEVELOPMENT;

@@ -13,6 +13,7 @@
     "build.prod": "gulp build.prod --color",
     "build.test": "gulp build.test --color",
     "build.test.watch": "gulp build.test.watch --color",
+    "generate.manifest": "gulp generate.manifest --color",
     "e2e": "protractor",
     "e2e.live": "protractor --elementExplorer",
     "gulp": "gulp",
@@ -34,6 +35,7 @@
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
   "devDependencies": {
+    "angular2-service-worker": "^0.1.1",
     "async": "^1.4.2",
     "autoprefixer": "^6.3.3",
     "browser-sync": "^2.11.2",
@@ -104,6 +106,7 @@
     "typings": "^0.7.12",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
+    "walk": "^2.3.9",
     "yargs": "^4.2.0"
   },
   "dependencies": {
