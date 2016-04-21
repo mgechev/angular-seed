@@ -63,7 +63,8 @@ export class SeedConfig {
 
   // Declare local files that needs to be injected
   APP_ASSETS: InjectableDependency[] = [
-    { src: `${this.CSS_SRC}/main.css`, inject: true, vendor: false }
+    { src: `${this.CSS_SRC}/main.css`, inject: true, vendor: false },
+    { src: `${this.CSS_SRC}/font-awesome.min.css`, inject: true, vendor: true }
   ];
 
   get DEPENDENCIES(): InjectableDependency[] {
@@ -81,6 +82,7 @@ export class SeedConfig {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
       'angular2/*': `${this.APP_BASE}angular2/*`,
       'rxjs/*': `${this.APP_BASE}rxjs/*`,
+      'primeng': `${this.APP_BASE}node_modules/primeng`,
       'app/*': `/app/*`,
       '*': `${this.APP_BASE}node_modules/*`
     },

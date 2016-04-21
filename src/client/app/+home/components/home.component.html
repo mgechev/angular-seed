@@ -4,10 +4,13 @@
 </p>
 
 <form (submit)="addName()">
-  <input [(ngModel)]="newName" placeholder="Awesome Computer Scientist">
-  <button type="submit">Add</button>
+  <input pInputText [(ngModel)]="newName" placeholder="Awesome Computer Scientist">
+  <button pButton type="submit" label="Add" icon="fa-plus"></button>
 </form>
 
+<p-dialog header="PrimeNG" modal="modal" visible="visible">
+    Angular2 Seed with PrimeNG
+</p-dialog>
 
 <ul>
   <li *ngFor="#name of nameListService.get()">{{name}}</li>
