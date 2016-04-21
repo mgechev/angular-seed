@@ -19,10 +19,6 @@ gulp.task('build.dev', (done: any) =>
               'build.index.dev',
               done));
 
-gulp.task('generate.manifest', (done: any) => {
-  runSequence('build.manifest', done);
-});
-
 // --------------
 // Build dev watch.
 gulp.task('build.dev.watch', (done: any) =>
