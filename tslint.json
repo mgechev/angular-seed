@@ -1,5 +1,5 @@
 {
-  "rulesDirectory": ["node_modules/codelyzer/dist/src"],
+  "rulesDirectory": ["node_modules/codelyzer"],
   "rules": {
     "class-name": true,
     "curly": false,
