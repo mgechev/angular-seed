@@ -40,7 +40,7 @@ npm install
 # watches your files and uses livereload by default
 npm start
 # api document for the app
-npm run docs
+npm run build.docs
 
 # dev build
 npm run build.dev
