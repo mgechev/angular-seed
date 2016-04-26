@@ -3,9 +3,8 @@ import {
   describe,
   expect,
   it,
-  AsyncTestCompleter,
   inject
-} from 'angular2/testing_internal';
+} from 'angular2/testing';
 import {Component} from 'angular2/core';
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
 import {HomeComponent} from './home.component';
@@ -15,7 +14,7 @@ import {NameListService} from '../../shared/index';
 export function main() {
   describe('Home component', () => {
     it('should work',
-      inject([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async: AsyncTestCompleter) => {
+      inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
         tcb.createAsync(TestComponent)
           .then(rootTC => {
             rootTC.detectChanges();
@@ -38,7 +37,6 @@ export function main() {
             expect(DOM.querySelectorAll(homeDOMEl, 'li').length).toEqual(nameListLen());
 
             expect(DOM.querySelectorAll(homeDOMEl, 'li')[4].textContent).toEqual('Minko');
-            async.done();
           });
       }));
   });

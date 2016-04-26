@@ -4,9 +4,8 @@ import {
   expect,
   inject,
   it,
-  beforeEachProviders,
-  AsyncTestCompleter
-} from 'angular2/testing_internal';
+  beforeEachProviders
+} from 'angular2/testing';
 import {Component, provide} from 'angular2/core';
 import {DirectiveResolver} from 'angular2/compiler';
 
@@ -32,13 +31,12 @@ export function main() {
     ]);
 
     it('should work',
-      inject([TestComponentBuilder, AsyncTestCompleter], (tcb: TestComponentBuilder, async: AsyncTestCompleter) => {
+      inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
         tcb.createAsync(TestComponent)
           .then(rootTC => {
             rootTC.detectChanges();
             let appDOMEl = rootTC.debugElement.children[0].nativeElement;
             expect(DOM.querySelectorAll(appDOMEl, 'sd-app > sd-navbar > nav > a')[1].href).toMatch(/http:\/\/localhost:\d+\/about/);
-            async.done();
           });
       }));
   });
