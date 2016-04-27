@@ -2,7 +2,7 @@ import {
   TestComponentBuilder,
   describe,
   expect,
-  injectAsync,
+  inject,
   it
 } from 'angular2/testing';
 import {Component} from 'angular2/core';
@@ -11,16 +11,18 @@ import {AboutComponent} from './about.component';
 
 export function main() {
   describe('About component', () => {
+
+
     it('should work',
-      injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-        return tcb.createAsync(TestComponent)
+      inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+        tcb.createAsync(TestComponent)
           .then((rootTC: any) => {
             let aboutDOMEl = rootTC.debugElement.children[0].nativeElement;
 
             expect(DOM.querySelectorAll(aboutDOMEl, 'h2')[0].textContent).toEqual('Features');
           });
-      }));
-  });
+        }));
+    });
 }
 
 @Component({

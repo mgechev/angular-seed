@@ -2,13 +2,15 @@ import {
   TestComponentBuilder,
   describe,
   expect,
-  injectAsync,
+  inject,
   it,
   beforeEachProviders
 } from 'angular2/testing';
-import {Component, provide, DirectiveResolver} from 'angular2/core';
+import {Component, provide} from 'angular2/core';
+import {DirectiveResolver} from 'angular2/compiler';
 
-import {Location, Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT} from 'angular2/router';
+import {Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT} from 'angular2/router';
+import {Location} from 'angular2/platform/common';
 import {SpyLocation} from 'angular2/src/mock/location_mock';
 import {RootRouter} from 'angular2/src/router/router';
 
@@ -29,8 +31,8 @@ export function main() {
     ]);
 
     it('should work',
-      injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-        return tcb.createAsync(TestComponent)
+      inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+        tcb.createAsync(TestComponent)
           .then(rootTC => {
             rootTC.detectChanges();
             let appDOMEl = rootTC.debugElement.children[0].nativeElement;
