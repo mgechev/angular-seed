@@ -1,7 +1,8 @@
 language: node_js
 node_js:
   - 4
-  - stable
+  - 5
+  - 6
 
 sudo: false
 
@@ -11,7 +12,7 @@ before_install:
 
 before_script:
   - sh -e /etc/init.d/xvfb start
-  # - nohup bash -c webdriver-manager start 2>&1 &  # Protractor CI
+  - nohup bash -c webdriver-manager start 2>&1 &  # Protractor CI
   - sleep 1  # give server time to start
 
 after_failure:
