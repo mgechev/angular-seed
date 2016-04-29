@@ -25,7 +25,7 @@ Provides fast, reliable and extensible starter for the development of Angular 2 
 
 # How to start
 
-**Note** that this seed project requires node v4.x.x or higher and npm 2.14.7.
+**Note** that this seed project requires node v5.10.1 or higher and npm 3.8.3.
 
 **Here is how to [speedup the build on Windows](https://github.com/mgechev/angular2-seed/wiki/Speed-up-the-build-on-Windows)**.
 
