@@ -76,7 +76,10 @@ export class SeedConfig {
   // SystemsJS Configuration.
   protected SYSTEM_CONFIG_DEV = {
     defaultJSExtensions: true,
-    packageConfigPaths: [`${this.APP_BASE}node_modules/*/package.json`],
+    packageConfigPaths: [
+      `${this.APP_BASE}node_modules/*/package.json`,
+      `${this.APP_BASE}node_modules/*/*/package.json`
+    ],
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
       'angular2/*': `${this.APP_BASE}angular2/*`,
