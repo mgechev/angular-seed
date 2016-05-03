@@ -51,14 +51,11 @@ export class SeedConfig {
 
   NPM_DEPENDENCIES: InjectableDependency[] = [
     { src: 'systemjs/dist/system-polyfills.src.js', inject: 'shims', env: ENVIRONMENTS.DEVELOPMENT },
+    { src: 'zone.js/dist/zone.js', inject: 'libs' },
     { src: 'reflect-metadata/Reflect.js', inject: 'shims' },
     { src: 'es6-shim/es6-shim.js', inject: 'shims' },
     { src: 'systemjs/dist/system.src.js', inject: 'shims', env: ENVIRONMENTS.DEVELOPMENT },
-    { src: 'angular2/bundles/angular2-polyfills.js', inject: 'shims' },
-    { src: 'rxjs/bundles/Rx.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
-    { src: 'angular2/bundles/angular2.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
-    { src: 'angular2/bundles/router.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
-    { src: 'angular2/bundles/http.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT }
+    { src: 'rxjs/bundles/Rx.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT }
   ];
 
   // Declare local files that needs to be injected
@@ -84,17 +81,16 @@ export class SeedConfig {
     defaultJSExtensions: true,
     packageConfigPaths: [
       `${this.APP_BASE}node_modules/*/package.json`,
-      `${this.APP_BASE}node_modules/**/package.json`
+      `${this.APP_BASE}node_modules/**/package.json`,
+      `${this.APP_BASE}node_modules/@angular/*/package.json`
     ],
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
-      'angular2/*': `${this.APP_BASE}angular2/*`,
       'rxjs/*': `${this.APP_BASE}rxjs/*`,
       'app/*': `/app/*`,
       '*': `${this.APP_BASE}node_modules/*`
     },
     packages: {
-      angular2: { defaultExtension: false },
       rxjs: { defaultExtension: false }
     }
   };
@@ -103,7 +99,10 @@ export class SeedConfig {
 
   SYSTEM_BUILDER_CONFIG = {
     defaultJSExtensions: true,
-    packageConfigPaths: [join(this.PROJECT_ROOT, 'node_modules', '*', 'package.json')],
+    packageConfigPaths: [
+      join(this.PROJECT_ROOT, 'node_modules', '*', 'package.json'),
+      join(this.PROJECT_ROOT, 'node_modules', '@angular', '*', 'package.json')
+    ],
     paths: {
       [`${this.TMP_DIR}/*`]: `${this.TMP_DIR}/*`,
       '*': 'node_modules/*'

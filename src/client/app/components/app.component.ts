@@ -1,5 +1,5 @@
-import {Component} from 'angular2/core';
-import {ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
+import {Component} from '@angular/core';
+import {ROUTER_DIRECTIVES, Routes} from '@angular/router';
 import {NavbarComponent} from './navbar.component';
 import {ToolbarComponent} from './toolbar.component';
 import {NameListService} from '../shared/index';
@@ -12,15 +12,13 @@ import {AboutComponent} from '../+about/index';
   templateUrl: 'app/components/app.component.html',
   directives: [ROUTER_DIRECTIVES, NavbarComponent, ToolbarComponent]
 })
-@RouteConfig([
+@Routes([
   {
     path: '/',
-    name: 'Home',
     component: HomeComponent
   },
   {
     path: '/about',
-    name: 'About',
     component: AboutComponent
   }
 ])

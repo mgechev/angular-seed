@@ -1,20 +1,16 @@
 import {
-  TestComponentBuilder,
   describe,
   expect,
   inject,
   it,
+  async,
   beforeEachProviders
-} from 'angular2/testing';
-import {Component, provide} from 'angular2/core';
-import {DirectiveResolver} from 'angular2/compiler';
+} from '@angular/core/testing';
+import {TestComponentBuilder} from '@angular/compiler/testing';
+import {Component} from '@angular/core';
 
-import {Router, RouteRegistry, ROUTER_PRIMARY_COMPONENT} from 'angular2/router';
-import {Location} from 'angular2/platform/common';
-import {SpyLocation} from 'angular2/src/mock/location_mock';
-import {RootRouter} from 'angular2/src/router/router';
+import {ROUTER_FAKE_PROVIDERS} from '@angular/router/testing';
 
-import {DOM} from 'angular2/src/platform/dom/dom_adapter';
 import {AppComponent} from './app.component';
 
 export function main() {
@@ -22,23 +18,15 @@ export function main() {
   describe('App component', () => {
 
     // Support for testing component that uses Router
-    beforeEachProviders(() => [
-      RouteRegistry,
-      DirectiveResolver,
-      provide(Location, {useClass: SpyLocation}),
-      provide(ROUTER_PRIMARY_COMPONENT, {useValue: AppComponent}),
-      provide(Router, {useClass: RootRouter})
-    ]);
+    beforeEachProviders(() => [ROUTER_FAKE_PROVIDERS]);
 
-    it('should work',
-      inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-        tcb.createAsync(TestComponent)
-          .then(rootTC => {
-            rootTC.detectChanges();
-            let appDOMEl = rootTC.debugElement.children[0].nativeElement;
-            expect(DOM.querySelectorAll(appDOMEl, 'sd-app > sd-navbar > nav > a')[1].href).toMatch(/http:\/\/localhost:\d+\/about/);
-          });
-      }));
+    it('should build without a problem',
+       async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+         tcb.createAsync(TestComponent)
+             .then((fixture) => {
+               expect(fixture.nativeElement.innerText.indexOf('HOME')).toBeTruthy();
+             });
+       })));
   });
 }
 
