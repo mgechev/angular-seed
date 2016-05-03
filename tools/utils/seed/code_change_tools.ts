@@ -1,6 +1,6 @@
 import {BROWSER_SYNC_CONFIG} from '../../config';
 import * as browserSync from 'browser-sync';
-let path = require('path');
+import * as path from 'path';
 
 let runServer = () => {
   browserSync.init(BROWSER_SYNC_CONFIG);
