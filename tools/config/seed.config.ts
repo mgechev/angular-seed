@@ -78,7 +78,7 @@ export class SeedConfig {
     defaultJSExtensions: true,
     packageConfigPaths: [
       `${this.APP_BASE}node_modules/*/package.json`,
-      `${this.APP_BASE}node_modules/*/*/package.json`
+      `${this.APP_BASE}node_modules/**/package.json`
     ],
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
