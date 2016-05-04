@@ -122,7 +122,7 @@ module.exports = function(config) {
     config.browserNoActivityTimeout = 90000; // Note: default value (10000) is not enough
   }
 
-  if (process.env.TRAVIS || process.env.CIRCLECI) {
+  if (process.env.TRAVIS) {
     config.browsers = ['Chrome_travis_ci'];
     config.singleRun = true;
   }
