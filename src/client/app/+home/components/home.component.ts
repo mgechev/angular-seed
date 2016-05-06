@@ -1,5 +1,5 @@
-import {Component} from 'angular2/core';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
+import {Component} from '@angular/core';
+import {FORM_DIRECTIVES} from '@angular/common';
 
 import {NameListService} from '../../shared/index';
 
@@ -7,7 +7,7 @@ import {NameListService} from '../../shared/index';
   selector: 'sd-home',
   templateUrl: 'app/+home/components/home.component.html',
   styleUrls: ['app/+home/components/home.component.css'],
-  directives: [FORM_DIRECTIVES, CORE_DIRECTIVES]
+  directives: [FORM_DIRECTIVES]
 })
 export class HomeComponent {
   newName: string;
