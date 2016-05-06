@@ -9,7 +9,7 @@ export function watch(taskname: string) {
   return function () {
     let paths:string[]=[
       join(APP_SRC,'**')
-    ].concat(TEMP_FILES.map((p) => { return '!'+p }));
+    ].concat(TEMP_FILES.map((p) => { return '!'+p; }));
 
     plugins.watch(paths, (e:any) =>
       runSequence(taskname, () => notifyLiveReload(e))

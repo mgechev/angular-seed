@@ -6,7 +6,7 @@ export = () => {
   let paths:string[]=[
     join(APP_SRC, '**'),
     '!' + join(APP_SRC, '**', '*.ts')
-  ].concat(TEMP_FILES.map((p) => { return '!'+p }));
+  ].concat(TEMP_FILES.map((p) => { return '!'+p; }));
 
   return gulp.src(paths)
     .pipe(gulp.dest(APP_DEST));
