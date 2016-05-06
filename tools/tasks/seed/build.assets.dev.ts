@@ -1,11 +1,13 @@
 import * as gulp from 'gulp';
 import {join} from 'path';
-import {APP_SRC, APP_DEST} from '../../config';
+import {APP_SRC, APP_DEST, TEMP_FILES} from '../../config';
 
 export = () => {
-  return gulp.src([
-      join(APP_SRC, '**'),
-      '!' + join(APP_SRC, '**', '*.ts')
-    ])
+  let paths:string[]=[
+    join(APP_SRC, '**'),
+    '!' + join(APP_SRC, '**', '*.ts')
+  ].concat(TEMP_FILES.map((p) => { return '!'+p; }));
+
+  return gulp.src(paths)
     .pipe(gulp.dest(APP_DEST));
 }

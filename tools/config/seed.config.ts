@@ -66,6 +66,12 @@ export class SeedConfig {
     { src: `${this.CSS_SRC}/main.css`, inject: true, vendor: false }
   ];
 
+  // Editor temporary files to ignore in watcher and asset builder.
+  TEMP_FILES: string[] = [
+    '**/*___jb_tmp___',
+    '**/*~',
+  ];
+
   get DEPENDENCIES(): InjectableDependency[] {
     return normalizeDependencies(this.NPM_DEPENDENCIES.filter(filterDependency.bind(null, this.ENV)))
       .concat(this.APP_ASSETS.filter(filterDependency.bind(null, this.ENV)));
