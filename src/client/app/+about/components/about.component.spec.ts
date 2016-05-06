@@ -5,7 +5,7 @@ import {
   it
 } from '@angular/core/testing';
 import {TestComponentBuilder} from '@angular/compiler/testing';
-import {Component} from '@angular/core';
+import {Component} from 'angular2/core';
 import {getDOM} from '@angular/platform-browser/src/dom/dom_adapter';
 import {AboutComponent} from './about.component';
 

@@ -80,6 +80,7 @@ export class SeedConfig {
   protected SYSTEM_CONFIG_DEV = {
     defaultJSExtensions: true,
     packageConfigPaths: [
+      `${this.APP_BASE}node_modules/@angular/*/package.json`,
       `${this.APP_BASE}node_modules/*/package.json`,
       `${this.APP_BASE}node_modules/**/package.json`
     ],
