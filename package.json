@@ -69,6 +69,8 @@
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.5",
+    "gulp-concat-css": "^2.2.0",
+    "gulp-clean-css": "^2.0.7",
     "is-ci": "^1.0.8",
     "isstream": "^0.1.2",
     "jasmine-core": "~2.4.1",

@@ -6,6 +6,7 @@ import * as cssnano from 'cssnano';
 import {join} from 'path';
 import {APP_SRC, TMP_DIR, CSS_PROD_BUNDLE, CSS_DEST, APP_DEST, BROWSER_LIST, ENV, DEPENDENCIES} from '../../config';
 const plugins = <any>gulpLoadPlugins();
+let cleanCss = require('gulp-clean-css');
 
 const processors = [
   autoprefixer({
@@ -42,7 +43,8 @@ function processExternalCss() {
   return gulp.src(getExternalCss().map(r => r.src))
     .pipe(isProd ? plugins.cached('process-external-css') : plugins.util.noop())
     .pipe(plugins.postcss(processors))
-    .pipe(isProd ? plugins.concat(CSS_PROD_BUNDLE) : plugins.util.noop())
+    .pipe(isProd ? plugins.concatCss(CSS_PROD_BUNDLE) : plugins.util.noop())
+    .pipe(isProd ? cleanCss() : plugins.util.noop())
     .pipe(gulp.dest(CSS_DEST));
 }
 
