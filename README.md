@@ -118,7 +118,7 @@ You can learn more about [Protractor Interactive Mode here](https://github.com/a
 
 # Progressive Web Apps
 
-`angular2-seed` supports progressive web apps with [angular/progressive](https://github.com/angular/progressive).
+`angular2-seed` supports progressive web apps with [angular/mobile-toolkit](https://github.com/angular/mobile-toolkit).
 
 The seed can generate a file `manifest.appcache` which lists all files included in a project's output, along with SHA1 hashes of all file contents. This file can be used directly as an AppCache manifest (for now, `index.html` must be manually edited to set this up).
 
