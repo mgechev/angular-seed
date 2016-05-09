@@ -15,6 +15,7 @@
     "glob": "github:DefinitelyTyped/DefinitelyTyped/glob/glob.d.ts#5c3e47967affa3c4128a3875d1664ba206ae1b0f",
     "gulp": "github:DefinitelyTyped/DefinitelyTyped/gulp/gulp.d.ts#5c3e47967affa3c4128a3875d1664ba206ae1b0f",
     "gulp-load-plugins": "github:DefinitelyTyped/DefinitelyTyped/gulp-load-plugins/gulp-load-plugins.d.ts#e081148d88b857d66509e3b46edbd08b3f75f96a",
+    "gulp-protractor": "registry:dt/gulp-protractor#1.0.0+20160316155526",
     "gulp-shell": "github:DefinitelyTyped/DefinitelyTyped/gulp-shell/gulp-shell.d.ts#5c3e47967affa3c4128a3875d1664ba206ae1b0f",
     "gulp-util": "github:DefinitelyTyped/DefinitelyTyped/gulp-util/gulp-util.d.ts#5a8fc5ee71701431e4fdbb80c506e3c13f85a9ff",
     "jasmine": "github:DefinitelyTyped/DefinitelyTyped/jasmine/jasmine.d.ts#26c98c8a9530c44f8c801ccc3b2057e2101187ee",

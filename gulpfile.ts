@@ -113,3 +113,33 @@ gulp.task('test', (done: any) =>
   runSequence('build.test',
               'karma.start',
               done));
+
+// try it
+import * as express from 'express';
+import { protractor, webdriver_update } from 'gulp-protractor';
+
+class Protractor {
+  server(port: number, dir: string) {
+    let app = express();
+    app.use(express.static(dir));
+    return new Promise((resolve, reject) => {
+      let server = app.listen(port, () => {
+        resolve(server);
+      });
+    });
+  }
+}
+
+gulp.task('webdriver', webdriver_update);
+
+gulp.task('e2e', (done: any) => {
+  new Protractor()
+    .server(5555, './dist/prod')
+    .then((server: any) => {
+      gulp
+        .src('./dist/dev/**/*.e2e.js')
+        .pipe(protractor({ configFile: 'protractor.conf.js' }))
+        .on('error', (error: string) => { throw error; })
+        .on('end', () => { server.close(done); });
+    });
+});
