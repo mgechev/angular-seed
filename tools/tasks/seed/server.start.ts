@@ -1,3 +1,3 @@
-import {serveSPA} from '../../utils';
+import { serveSPA } from '../../utils';
 
 export = serveSPA

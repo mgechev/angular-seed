@@ -1,9 +1,9 @@
 import * as util from 'gulp-util';
 import * as chalk from 'chalk';
 import * as rimraf from 'rimraf';
-import {readdirSync, lstatSync} from 'fs';
-import {join} from 'path';
-import {TOOLS_DIR} from '../../config';
+import { readdirSync, lstatSync } from 'fs';
+import { join } from 'path';
+import { TOOLS_DIR } from '../../config';
 
 export = (done: any) => {
   deleteAndWalk(TOOLS_DIR);

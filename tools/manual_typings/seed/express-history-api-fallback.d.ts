@@ -1,6 +1,6 @@
 declare module 'express-history-api-fallback' {
 
-  import {RequestHandler} from 'express';
+  import { RequestHandler } from 'express';
 
   interface IOptions {
     maxAge?: number,
