@@ -1,12 +1,12 @@
 import {
-  TestComponentBuilder,
   describe,
   expect,
   inject,
   it
-} from 'angular2/testing';
-import {Component} from 'angular2/core';
-import {DOM} from 'angular2/src/platform/dom/dom_adapter';
+} from '@angular/core/testing';
+import {TestComponentBuilder} from '@angular/compiler/testing';
+import {Component} from '@angular/core';
+import {getDOM} from '@angular/platform-browser/src/dom/dom_adapter';
 import {AboutComponent} from './about.component';
 
 export function main() {
@@ -19,7 +19,7 @@ export function main() {
           .then((rootTC: any) => {
             let aboutDOMEl = rootTC.debugElement.children[0].nativeElement;
 
-            expect(DOM.querySelectorAll(aboutDOMEl, 'h2')[0].textContent).toEqual('Features');
+	    expect(getDOM().querySelectorAll(aboutDOMEl, 'h2')[0].textContent).toEqual('Features');
           });
         }));
     });
