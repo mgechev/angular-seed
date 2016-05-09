@@ -1,7 +1,7 @@
 describe('Home', () => {
 
   beforeEach( () => {
-    browser.get('');
+    browser.get('/');
   });
 
   it('should have an input', () => {
