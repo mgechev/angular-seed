@@ -3,8 +3,8 @@ import * as util from 'gulp-util';
 import * as chalk from 'chalk';
 import * as isstream from 'isstream';
 import * as tildify from 'tildify';
-import {readdirSync, existsSync, lstatSync} from 'fs';
-import {join} from 'path';
+import { readdirSync, existsSync, lstatSync } from 'fs';
+import { join } from 'path';
 
 
 export function loadTasks(path: string): void {
