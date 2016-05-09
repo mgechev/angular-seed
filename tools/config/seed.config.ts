@@ -77,7 +77,7 @@ export class SeedConfig {
 
   // ----------------
   // SystemsJS Configuration.
-  protected SYSTEM_CONFIG_DEV = {
+  protected SYSTEM_CONFIG_DEV: any = {
     defaultJSExtensions: true,
     packageConfigPaths: [
       `${this.APP_BASE}node_modules/*/package.json`,
@@ -97,7 +97,7 @@ export class SeedConfig {
 
   SYSTEM_CONFIG = this.SYSTEM_CONFIG_DEV;
 
-  SYSTEM_BUILDER_CONFIG = {
+  SYSTEM_BUILDER_CONFIG: any = {
     defaultJSExtensions: true,
     packageConfigPaths: [
       join(this.PROJECT_ROOT, 'node_modules', '*', 'package.json'),
