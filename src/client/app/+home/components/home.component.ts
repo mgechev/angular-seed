@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {FORM_DIRECTIVES} from '@angular/common';
+import { Component } from '@angular/core';
+import { FORM_DIRECTIVES } from '@angular/common';
 
-import {NameListService} from '../../shared/index';
+import { NameListService } from '../../shared/index';
 
 @Component({
   selector: 'sd-home',

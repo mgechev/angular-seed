@@ -1,6 +1,6 @@
 import * as gulp from 'gulp';
-import {join} from 'path';
-import {APP_SRC, APP_DEST, ASSETS_SRC, TEMP_FILES} from '../../config';
+import { join } from 'path';
+import { APP_SRC, APP_DEST, ASSETS_SRC, TEMP_FILES } from '../../config';
 
 // TODO There should be more elegant to prevent empty directories from copying
 let es: any = require('event-stream');

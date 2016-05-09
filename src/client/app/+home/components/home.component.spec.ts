@@ -4,12 +4,11 @@ import {
   it,
   inject
 } from '@angular/core/testing';
-import {TestComponentBuilder} from '@angular/compiler/testing';
-import {Component} from '@angular/core';
-import {getDOM} from '@angular/platform-browser/src/dom/dom_adapter';
-import {HomeComponent} from './home.component';
-import {NameListService} from '../../shared/index';
-
+import { TestComponentBuilder } from '@angular/compiler/testing';
+import { Component } from '@angular/core';
+import { getDOM } from '@angular/platform-browser/src/dom/dom_adapter';
+import { HomeComponent } from './home.component';
+import { NameListService } from '../../shared/index';
 
 export function main() {
   describe('Home component', () => {

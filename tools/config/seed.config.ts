@@ -1,6 +1,6 @@
-import {argv} from 'yargs';
-import {join} from 'path';
-import {InjectableDependency, Environments} from './seed.config.interfaces';
+import { argv } from 'yargs';
+import { join } from 'path';
+import { InjectableDependency, Environments } from './seed.config.interfaces';
 
 export const ENVIRONMENTS: Environments = {
   DEVELOPMENT: 'dev',
