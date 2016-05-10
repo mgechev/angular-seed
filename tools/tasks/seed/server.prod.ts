@@ -1,3 +1,3 @@
-import {serveProd} from '../../utils';
+import { serveProd } from '../../utils';
 
 export = serveProd

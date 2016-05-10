@@ -1,3 +1,3 @@
-import {serveCoverage} from '../../utils';
+import { serveCoverage } from '../../utils';
 
 export = serveCoverage

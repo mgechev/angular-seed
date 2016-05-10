@@ -1,9 +1,9 @@
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
-import {join} from 'path';
+import { join } from 'path';
 import * as slash from 'slash';
-import {APP_SRC, APP_DEST, APP_BASE, DEPENDENCIES} from '../../config';
-import {templateLocals} from '../../utils';
+import { APP_SRC, APP_DEST, APP_BASE, DEPENDENCIES } from '../../config';
+import { templateLocals } from '../../utils';
 const plugins = <any>gulpLoadPlugins();
 
 export = () => {

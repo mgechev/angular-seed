@@ -1,8 +1,8 @@
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
-import {join} from 'path';
-import {BOOTSTRAP_MODULE, APP_SRC, APP_DEST, TOOLS_DIR} from '../../config';
-import {makeTsProject} from '../../utils';
+import { join } from 'path';
+import { BOOTSTRAP_MODULE, APP_SRC, APP_DEST, TOOLS_DIR } from '../../config';
+import { makeTsProject } from '../../utils';
 const plugins = <any>gulpLoadPlugins();
 
 export = () => {

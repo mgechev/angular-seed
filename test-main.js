@@ -43,6 +43,10 @@ System.config({
       main: 'index.js',
       defaultExtension: 'js'
     },
+    '@angular/http': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
     '@angular/platform-browser': {
       main: 'index.js',
       defaultExtension: 'js'

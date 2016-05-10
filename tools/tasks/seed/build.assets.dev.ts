@@ -1,6 +1,6 @@
 import * as gulp from 'gulp';
-import {join} from 'path';
-import {APP_SRC, APP_DEST, TEMP_FILES} from '../../config';
+import { join } from 'path';
+import { APP_SRC, APP_DEST, TEMP_FILES } from '../../config';
 
 export = () => {
   let paths:string[]=[

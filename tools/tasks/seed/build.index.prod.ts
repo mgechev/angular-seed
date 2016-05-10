@@ -1,8 +1,8 @@
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
-import {join, sep, normalize} from 'path';
+import { join, sep, normalize } from 'path';
 import * as slash from 'slash';
-import {templateLocals} from '../../utils';
+import { templateLocals } from '../../utils';
 import {
   APP_BASE,
   APP_SRC,

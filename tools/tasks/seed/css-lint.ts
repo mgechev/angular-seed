@@ -5,8 +5,8 @@ import * as reporter from 'postcss-reporter';
 import * as stylelint from 'stylelint';
 import * as doiuse from 'doiuse';
 import * as colorguard from 'colorguard';
-import {join} from 'path';
-import {APP_SRC, APP_ASSETS, BROWSER_LIST, CSS_SRC, ENV} from '../../config';
+import { join } from 'path';
+import { APP_SRC, APP_ASSETS, BROWSER_LIST, CSS_SRC, ENV } from '../../config';
 const plugins = <any>gulpLoadPlugins();
 
 const isProd = ENV === 'prod';
