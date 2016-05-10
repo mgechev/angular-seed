@@ -18,7 +18,7 @@ describe('Home', () => {
     element(by.css('sd-app sd-home form button')).click();
     /*
     let el = element.all(by.repeater('name of nameListService.get()')).row(4));
-    expect(el.getText()).toEqual('Edsger Dijkstra');
+    expect(el.getText()).toEqual('Tim Berners-Lee');
     */
     /*
     expect(element(by.css('sd-app sd-home ul')).getText())
