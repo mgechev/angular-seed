@@ -30,4 +30,4 @@ export = () => {
         reportError('NODE is not in required version! Required is ' + VERSION_NODE + ' and you\'re using ' + stdout);
       }
     });
-}
+};

@@ -10,4 +10,4 @@ export = () => {
 
   return gulp.src(paths)
     .pipe(gulp.dest(APP_DEST));
-}
+};

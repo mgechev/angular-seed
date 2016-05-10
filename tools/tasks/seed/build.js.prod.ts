@@ -26,4 +26,4 @@ export = () => {
   return result.js
     .pipe(plugins.template(templateLocals()))
     .pipe(gulp.dest(TMP_DIR));
-}
+};

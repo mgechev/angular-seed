@@ -21,4 +21,4 @@ export = () => {
     .pipe(plugins.sourcemaps.write())
     .pipe(plugins.template(templateLocals()))
     .pipe(gulp.dest('./'));
-}
+};

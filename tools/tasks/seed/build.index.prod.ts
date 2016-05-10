@@ -21,7 +21,7 @@ export = () => {
     .pipe(injectCss())
     .pipe(plugins.template(templateLocals()))
     .pipe(gulp.dest(APP_DEST));
-}
+};
 
 function inject(...files: Array<string>) {
     return plugins.inject(gulp.src(files, { read: false }), {

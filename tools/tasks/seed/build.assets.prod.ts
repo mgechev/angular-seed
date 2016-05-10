@@ -24,4 +24,4 @@ export = () => {
     ].concat(TEMP_FILES.map((p) => { return '!'+p; })))
     .pipe(onlyDirs(es))
     .pipe(gulp.dest(APP_DEST));
-}
+};
