@@ -37,3 +37,9 @@ env:
 
 cache:
   directories: node_modules
+
+script:
+  - npm test
+  - gulp build.prod
+  - gulp build.js.e2e
+  - gulp e2e
