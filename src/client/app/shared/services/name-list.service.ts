@@ -1,4 +1,5 @@
 import {Http, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {Injectable} from '@angular/core';
 
@@ -9,10 +10,10 @@ export class NameListService {
   constructor(private http: Http) {
   }
 
-  requestNames() {
-      this.http.get('./assets/json/name-list.json')
-      .map(this.mapData)
-      .subscribe(this.updateNames, this.handleError);
+  requestNames() : Observable<Response> {
+      let req = this.http.get('./assets/json/name-list.json').map(this.mapData);
+      req.subscribe(this.updateNames.bind(this), this.handleError);
+      return req;
   }
   mapData = (res: Response) => {
     return res.json();
