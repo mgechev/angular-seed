@@ -116,7 +116,7 @@ npm run e2e.live
 ```
 You can learn more about [Protractor Interactive Mode here](https://github.com/angular/protractor/blob/master/docs/debugging.md#testing-out-protractor-interactively)
 
-# Progressive Web Apps
+<!-- # Progressive Web Apps
 
 `angular2-seed` supports progressive web apps with [angular/mobile-toolkit](https://github.com/angular/mobile-toolkit).
 
@@ -135,7 +135,7 @@ In order to generate the manifest file run:
 npm run generate.manifest -- --env ENV
 ```
 
-Then, the commented snippet in `main.ts` must be uncommented to register the worker script as a service worker.
+Then, the commented snippet in `main.ts` must be uncommented to register the worker script as a service worker. -->
 
 # Contributing
 
