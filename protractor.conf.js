@@ -10,14 +10,14 @@ const config = {
   // 'jasmine' by default will use the latest jasmine framework
   framework: 'jasmine',
 
-  //allScriptsTimeout: 110000,
+  // allScriptsTimeout: 110000,
 
   jasmineNodeOpts: {
-    //showTiming: true,
+    // showTiming: true,
     showColors: true,
     isVerbose: false,
     includeStackTrace: false,
-    //defaultTimeoutInterval: 400000
+    // defaultTimeoutInterval: 400000
   },
 
   directConnect: true,
@@ -40,7 +40,6 @@ const config = {
    *
    * useAllAngular2AppRoots: tells Protractor to wait for any angular2 apps on the page instead of just the one matching
    * `rootEl`
-   *
    */
   useAllAngular2AppRoots: true
 };
