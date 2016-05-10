@@ -7,7 +7,7 @@ version: "{build}"
 
 # Test against this version of Node.js
 environment:
-  nodejs_version: "4.1.0"
+  nodejs_version: "6.1.0"
   # https://github.com/DefinitelyTyped/tsd#tsdrc
   # Token has no scope (read-only access to public information)
   TSD_GITHUB_TOKEN: "9b18c72997769f3867ef2ec470e626d39661795d"
@@ -33,7 +33,9 @@ test_script:
   # filed against Grunt. https://github.com/joyent/node/issues/3584
   - ps: "npm --version # PowerShell" # Pass comment to PS for easier debugging
   - npm test
-
+  - gulp build.prod
+  - gulp build.js.e2e
+  - gulp e2e
 
 notifications:
   - provider: Webhook
