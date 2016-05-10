@@ -1,4 +1,5 @@
 import * as gulp from 'gulp';
+
 import { APP_DEST } from '../../config';
 
 export = () => {
@@ -14,4 +15,3 @@ export = () => {
     })
     .pipe(gulp.dest(APP_DEST));
 };
-

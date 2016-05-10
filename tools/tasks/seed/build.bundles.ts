@@ -1,7 +1,9 @@
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as merge from 'merge-stream';
-import { DEPENDENCIES, JS_PROD_SHIMS_BUNDLE, JS_DEST } from '../../config';
+
+import { DEPENDENCIES, JS_DEST, JS_PROD_SHIMS_BUNDLE } from '../../config';
+
 const plugins = <any>gulpLoadPlugins();
 
 export = () => merge(bundleShims());

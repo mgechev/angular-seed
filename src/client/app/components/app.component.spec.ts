@@ -1,14 +1,13 @@
+import { TestComponentBuilder } from '@angular/compiler/testing';
+import { Component } from '@angular/core';
 import {
+  async,
+  beforeEachProviders,
   describe,
   expect,
   inject,
-  it,
-  async,
-  beforeEachProviders
+  it
 } from '@angular/core/testing';
-import { TestComponentBuilder } from '@angular/compiler/testing';
-import { Component } from '@angular/core';
-
 import { ROUTER_FAKE_PROVIDERS } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';

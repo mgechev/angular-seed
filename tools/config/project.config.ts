@@ -1,4 +1,5 @@
 import { join } from 'path';
+
 import { SeedConfig } from './seed.config';
 import { InjectableDependency } from './seed.config.interfaces';
 

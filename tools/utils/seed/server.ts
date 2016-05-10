@@ -1,10 +1,11 @@
 import * as express from 'express';
 import * as fallback from 'express-history-api-fallback';
 import * as openResource from 'open';
-import * as serveStatic from 'serve-static';
-import * as codeChangeTool from './code_change_tools';
 import { resolve } from 'path';
-import { APP_BASE, PROD_DEST, PORT, DOCS_DEST, DOCS_PORT, COVERAGE_PORT } from '../../config';
+import * as serveStatic from 'serve-static';
+
+import * as codeChangeTool from './code_change_tools';
+import { APP_BASE, COVERAGE_PORT, DOCS_DEST, DOCS_PORT, PORT, PROD_DEST } from '../../config';
 
 
 export function serveSPA() {

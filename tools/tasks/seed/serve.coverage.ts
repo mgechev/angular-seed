@@ -1,3 +1,3 @@
 import { serveCoverage } from '../../utils';
 
-export = serveCoverage
+export = serveCoverage;

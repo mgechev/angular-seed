@@ -6,4 +6,4 @@ export = (done: any) => {
     configFile: join(process.cwd(), 'karma.conf.js'),
     singleRun: true
   }).start(done);
-}
+};

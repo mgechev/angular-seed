@@ -1,12 +1,13 @@
+import { TestComponentBuilder } from '@angular/compiler/testing';
+import { Component } from '@angular/core';
 import {
   describe,
   expect,
   inject,
   it
 } from '@angular/core/testing';
-import { TestComponentBuilder } from '@angular/compiler/testing';
-import { Component } from '@angular/core';
 import { getDOM } from '@angular/platform-browser/src/dom/dom_adapter';
+
 import { AboutComponent } from './about.component';
 
 export function main() {

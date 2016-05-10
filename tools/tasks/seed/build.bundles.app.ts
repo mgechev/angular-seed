@@ -1,5 +1,6 @@
 import { join } from 'path';
 import * as Builder from 'systemjs-builder';
+
 import {
   BOOTSTRAP_MODULE,
   JS_PROD_APP_BUNDLE,
