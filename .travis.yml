@@ -37,3 +37,6 @@ env:
 
 cache:
   directories: node_modules
+
+script:
+  - npm run tests.all
