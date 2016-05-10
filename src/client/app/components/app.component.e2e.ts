@@ -1,7 +1,7 @@
 describe('App', () => {
 
   beforeEach( () => {
-      browser.get('');
+      browser.get('/');
   });
 
   it('should have a title', () => {
