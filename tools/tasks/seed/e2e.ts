@@ -1,5 +1,5 @@
-import * as gulp from 'gulp';
 import * as express from 'express';
+import * as gulp from 'gulp';
 import { protractor } from 'gulp-protractor';
 
 class Protractor {
