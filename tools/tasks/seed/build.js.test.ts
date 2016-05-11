@@ -13,7 +13,7 @@ export = () => {
     'typings/browser.d.ts',
     TOOLS_DIR + '/manual_typings/**/*.d.ts',
     join(APP_SRC, '**/*.ts'),
-    '!' + join(APP_SRC, '**/*.e2e.ts'),
+    '!' + join(APP_SRC, '**/*.e2e-spec.ts'),
     '!' + join(APP_SRC, `${BOOTSTRAP_MODULE}.ts`)
   ];
   let result = gulp.src(src)
