@@ -19,7 +19,7 @@ Provides fast, reliable and extensible starter for the development of Angular 2 
 - Sample unit tests with Jasmine and Karma including code coverage via [istanbul](https://gotwarlost.github.io/istanbul/).
 - End-to-end tests with Protractor.
 - Development server with Livereload.
-- Following the [best practices for your application's structure](https://github.com/mgechev/angular2-style-guide).
+- Following the [best practices](https://angular.io/styleguide).
 - Manager of your type definitions using [typings](https://github.com/typings/typings).
 - Has autoprefixer and css-lint support.
 
