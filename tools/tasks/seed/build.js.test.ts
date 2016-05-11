@@ -1,8 +1,10 @@
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
-import { join } from 'path';
-import { BOOTSTRAP_MODULE, APP_SRC, APP_DEST, TOOLS_DIR } from '../../config';
+import { join} from 'path';
+
+import { APP_DEST, APP_SRC, BOOTSTRAP_MODULE, TOOLS_DIR } from '../../config';
 import { makeTsProject } from '../../utils';
+
 const plugins = <any>gulpLoadPlugins();
 
 export = () => {
@@ -26,4 +28,4 @@ export = () => {
   return result.js
     .pipe(plugins.sourcemaps.write())
     .pipe(gulp.dest(APP_DEST));
-}
+};

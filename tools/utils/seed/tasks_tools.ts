@@ -1,11 +1,10 @@
+import * as chalk from 'chalk';
+import { existsSync, lstatSync, readdirSync } from 'fs';
 import * as gulp from 'gulp';
 import * as util from 'gulp-util';
-import * as chalk from 'chalk';
 import * as isstream from 'isstream';
-import * as tildify from 'tildify';
-import { readdirSync, existsSync, lstatSync } from 'fs';
 import { join } from 'path';
-
+import * as tildify from 'tildify';
 
 export function loadTasks(path: string): void {
   util.log('Loading tasks folder', chalk.yellow(path));

@@ -1,8 +1,10 @@
-import * as runSequence from 'run-sequence';
-import { notifyLiveReload } from '../../utils';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
-import { APP_SRC,TEMP_FILES } from '../../config';
+import * as runSequence from 'run-sequence';
+
+import { APP_SRC, TEMP_FILES } from '../../config';
+import { notifyLiveReload } from '../../utils';
+
 const plugins = <any>gulpLoadPlugins();
 
 export function watch(taskname: string) {

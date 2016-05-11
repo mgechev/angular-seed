@@ -1,12 +1,14 @@
+import * as colorguard from 'colorguard';
+import * as doiuse from 'doiuse';
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as merge from 'merge-stream';
 import * as reporter from 'postcss-reporter';
 import * as stylelint from 'stylelint';
-import * as doiuse from 'doiuse';
-import * as colorguard from 'colorguard';
-import { join } from 'path';
-import { APP_SRC, APP_ASSETS, BROWSER_LIST, CSS_SRC, ENV } from '../../config';
+import { join} from 'path';
+
+import { APP_ASSETS, APP_SRC, BROWSER_LIST, CSS_SRC, ENV } from '../../config';
+
 const plugins = <any>gulpLoadPlugins();
 
 const isProd = ENV === 'prod';
@@ -38,6 +40,5 @@ function lintExternalCss() {
 function getExternalCss() {
   return APP_ASSETS.filter(d => /\.css$/.test(d.src) && !d.vendor);
 }
-
 
 export = () => merge(lintComponentCss(), lintExternalCss());

@@ -1,10 +1,12 @@
+import * as autoprefixer from 'autoprefixer';
+import * as cssnano from 'cssnano';
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as merge from 'merge-stream';
-import * as autoprefixer from 'autoprefixer';
-import * as cssnano from 'cssnano';
 import { join } from 'path';
-import { APP_SRC, TMP_DIR, CSS_PROD_BUNDLE, CSS_DEST, APP_DEST, BROWSER_LIST, ENV, DEPENDENCIES } from '../../config';
+
+import { APP_DEST, APP_SRC, BROWSER_LIST, CSS_DEST, CSS_PROD_BUNDLE, DEPENDENCIES, ENV, TMP_DIR } from '../../config';
+
 const plugins = <any>gulpLoadPlugins();
 let cleanCss = require('gulp-clean-css');
 
@@ -51,6 +53,5 @@ function processExternalCss() {
 function getExternalCss() {
   return DEPENDENCIES.filter(d => /\.css$/.test(d.src));
 }
-
 
 export = () => merge(processComponentCss(), prepareTemplates(), processExternalCss());

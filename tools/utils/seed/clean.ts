@@ -1,5 +1,5 @@
-import * as util from 'gulp-util';
 import * as chalk from 'chalk';
+import * as util from 'gulp-util';
 import * as rimraf from 'rimraf';
 
 export function clean(paths: string|string[]): (done: () => void) => void {

@@ -1,3 +1,3 @@
 import { watch } from '../../utils';
 
-export = watch('build.dev')
+export = watch('build.dev');

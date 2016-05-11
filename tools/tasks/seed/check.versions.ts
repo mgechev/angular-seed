@@ -1,4 +1,4 @@
-import { VERSION_NPM, VERSION_NODE } from '../../config';
+import { VERSION_NODE, VERSION_NPM } from '../../config';
 
 function reportError(message: string) {
   console.error(require('chalk').white.bgRed.bold(message));
@@ -10,7 +10,7 @@ export = () => {
   let semver = require('semver');
 
   exec('npm --version',
-    function (error: Error, stdout: NodeBuffer, stderr: NodeBuffer) {
+    function(error: Error, stdout: NodeBuffer, stderr: NodeBuffer) {
       if (error !== null) {
         reportError('npm preinstall error: ' + error + stderr);
       }
@@ -21,7 +21,7 @@ export = () => {
     });
 
   exec('node --version',
-    function (error: Error, stdout: NodeBuffer, stderr: NodeBuffer) {
+    function(error: Error, stdout: NodeBuffer, stderr: NodeBuffer) {
       if (error !== null) {
         reportError('npm preinstall error: ' + error + stderr);
       }
@@ -30,4 +30,4 @@ export = () => {
         reportError('NODE is not in required version! Required is ' + VERSION_NODE + ' and you\'re using ' + stdout);
       }
     });
-}
+};

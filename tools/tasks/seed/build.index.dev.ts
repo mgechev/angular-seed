@@ -2,8 +2,10 @@ import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
 import * as slash from 'slash';
-import { APP_SRC, APP_DEST, APP_BASE, DEPENDENCIES } from '../../config';
+
+import { APP_BASE, APP_DEST, APP_SRC, DEPENDENCIES } from '../../config';
 import { templateLocals } from '../../utils';
+
 const plugins = <any>gulpLoadPlugins();
 
 export = () => {
@@ -14,7 +16,6 @@ export = () => {
     .pipe(plugins.template(templateLocals()))
     .pipe(gulp.dest(APP_DEST));
 };
-
 
 function inject(name?: string) {
   return plugins.inject(gulp.src(getInjectablesDependenciesRef(name), { read: false }), {
