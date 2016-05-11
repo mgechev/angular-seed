@@ -1,3 +1,3 @@
-export * from './name-list';
-export * from './navbar';
-export * from './toolbar';
+export * from './name-list/index';
+export * from './navbar/index';
+export * from './toolbar/index';
