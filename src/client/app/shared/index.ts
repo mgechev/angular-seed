@@ -1,2 +1,3 @@
-export * from './services/name-list.service';
-
+export * from './name-list';
+export * from './navbar';
+export * from './toolbar';

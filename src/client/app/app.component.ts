@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES, Routes } from '@angular/router';
 
-import { AboutComponent } from '../+about/index';
-import { HomeComponent } from '../+home/index';
-import { NameListService } from '../shared/index';
-import { NavbarComponent } from './navbar.component';
-import { ToolbarComponent } from './toolbar.component';
+import { AboutComponent } from './+about';
+import { HomeComponent } from './+home';
+import { NameListService, NavbarComponent, ToolbarComponent } from './shared';
 
 @Component({
   selector: 'sd-app',
