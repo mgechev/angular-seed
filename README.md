@@ -56,6 +56,7 @@ _Does not rely on any global dependencies._
 - [How to start](#how-to-start)
 - [Table of Content](#table-of-content)
 - [Configuration](#configuration)
+- [Tools documentation](#tools-documentation)
 - [How to extend?](#how-to-extend)
 - [Running tests](#running-tests)
 - [Progressive Web Apps](#progressive-web-apps)
@@ -83,6 +84,10 @@ Configure at runtime
 ```bash
 npm start -- --port 8080 --reload-port 4000 --base /my-app/
 ```
+
+# Tools documentation
+
+A documentation of the provided tools can be found in [tools/README.md](tools/README.md).
 
 # How to extend?
 
