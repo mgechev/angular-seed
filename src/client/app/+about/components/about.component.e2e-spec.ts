@@ -1,4 +1,5 @@
 describe('About', () => {
+
   beforeEach(() => {
     browser.get('/');
     element.all(by.css('nav > a')).get(1).click();
@@ -8,4 +9,5 @@ describe('About', () => {
     let el = element(by.css('sd-about h2'));
     expect(el.getText()).toEqual('Features');
   });
+
 });
