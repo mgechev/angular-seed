@@ -17,7 +17,7 @@ describe('Home', () => {
     element(by.css('sd-home form input')).sendKeys('Tim Berners-Lee');
     element(by.css('sd-home form button')).click();
 
-    let el = element.all(by.repeater('let name of nameListService.get()').row(4).column(name));
+    let el = element.all(by.repeater('name of nameListService.get()').row(4).column(name));
     expect(el.getText()).toEqual('Tim Berners-Lee');
   });
 
