@@ -32,19 +32,19 @@ export class SeedConfig {
    * when running `npm start`.
    * @type {number}
    */
-  PORT                 = argv['port']                        || 5555;
+  PORT = argv['port'] || 5555;
 
   /**
    * The root folder of the project (up two levels from the current directory).
    */
-  PROJECT_ROOT         = join(__dirname, '../..');
+  PROJECT_ROOT = join(__dirname, '../..');
 
   /**
    * The current environment.
    * The default environment is `dev`, which can be overriden by the `--env`
    * flag when running `npm start`.
    */
-  ENV                  = getEnvironment();
+  ENV = getEnvironment();
 
   /**
    * The flag for the debug option of the application.
@@ -52,7 +52,7 @@ export class SeedConfig {
    * when running `npm start`.
    * @type {boolean}
    */
-  DEBUG                = argv['debug']                       || false;
+  DEBUG = argv['debug'] || false;
 
   /**
    * The port where the documentation application will run.
@@ -60,7 +60,7 @@ export class SeedConfig {
    * `--docs-port` flag when running `npm start`.
    * @type {number}
    */
-  DOCS_PORT            = argv['docs-port']                   || 4003;
+  DOCS_PORT = argv['docs-port'] || 4003;
 
   /**
    * The port where the unit test coverage report application will run.
@@ -68,7 +68,7 @@ export class SeedConfig {
    * `--coverage-port` flag when running `npm start`.
    * @type {number}
    */
-  COVERAGE_PORT        = argv['coverage-port']               || 4004;
+  COVERAGE_PORT = argv['coverage-port'] || 4004;
 
   /**
    * The path for the base of the application at runtime.
@@ -76,7 +76,7 @@ export class SeedConfig {
    * running `npm start`.
    * @type {string}
    */
-  APP_BASE             = argv['base']                        || '/';
+  APP_BASE = argv['base'] || '/';
 
   /**
    * The flag for the hot-loader option of the application.
@@ -92,14 +92,14 @@ export class SeedConfig {
    * The default hot-loader port is `5578`.
    * @type {number}
    */
-  HOT_LOADER_PORT      = 5578;
+  HOT_LOADER_PORT = 5578;
 
   /**
    * The directory where the bootstrap file is located.
    * The default directory is `app`.
    * @type {string}
    */
-  BOOTSTRAP_DIR        = 'app';
+  BOOTSTRAP_DIR = 'app';
 
   /**
    * The bootstrap file to be used to boot the application.
@@ -108,102 +108,102 @@ export class SeedConfig {
    * hot-loader option enabled, the `hot_loader_main.ts` file will be used.
    * @type {string}
    */
-  BOOTSTRAP_MODULE     = `${this.BOOTSTRAP_DIR}/` + (this.ENABLE_HOT_LOADING ? 'hot_loader_main' : 'main');
+  BOOTSTRAP_MODULE = `${this.BOOTSTRAP_DIR}/` + (this.ENABLE_HOT_LOADING ? 'hot_loader_main' : 'main');
 
   /**
    * The default title of the application as used in the `<title>` tag of the
    * `index.html`.
    * @type {string}
    */
-  APP_TITLE            = 'My Angular2 App';
+  APP_TITLE = 'My Angular2 App';
 
   /**
    * The base folder of the applications source files.
    * @type {string}
    */
-  APP_SRC              = 'src/client';
+  APP_SRC = 'src/client';
 
   /**
    * The folder of the applications asset files.
    * @type {string}
    */
-  ASSETS_SRC           = `${this.APP_SRC}/assets`;
+  ASSETS_SRC = `${this.APP_SRC}/assets`;
 
   /**
    * The folder of the applications css files.
    * @type {string}
    */
-  CSS_SRC              = `${this.APP_SRC}/css`;
+  CSS_SRC = `${this.APP_SRC}/css`;
 
   /**
    * The directory of the applications tools
    * @type {string}
    */
-  TOOLS_DIR            = 'tools';
+  TOOLS_DIR = 'tools';
 
   /**
    * The directory of the tasks provided by the seed.
    */
-  SEED_TASKS_DIR       = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'seed');
+  SEED_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'seed');
 
   /**
    * The destination folder for the generated documentation.
    * @type {string}
    */
-  DOCS_DEST            = 'docs';
+  DOCS_DEST = 'docs';
 
   /**
    * The base folder for built files.
    * @type {string}
    */
-  DIST_DIR             = 'dist';
+  DIST_DIR = 'dist';
 
   /**
    * The folder for built files in the `dev` environment.
    * @type {string}
    */
-  DEV_DEST             = `${this.DIST_DIR}/dev`;
+  DEV_DEST = `${this.DIST_DIR}/dev`;
 
   /**
    * The folder for the built files in the `prod` environment.
    * @type {string}
    */
-  PROD_DEST            = `${this.DIST_DIR}/prod`;
+  PROD_DEST = `${this.DIST_DIR}/prod`;
 
   /**
    * The folder for temporary files.
    * @type {string}
    */
-  TMP_DIR              = `${this.DIST_DIR}/tmp`;
+  TMP_DIR = `${this.DIST_DIR}/tmp`;
 
   /**
    * The folder for the built files, corresponding to the current environment.
    * @type {string}
    */
-  APP_DEST             = this.ENV === ENVIRONMENTS.DEVELOPMENT ? this.DEV_DEST : this.PROD_DEST;
+  APP_DEST = this.ENV === ENVIRONMENTS.DEVELOPMENT ? this.DEV_DEST : this.PROD_DEST;
 
   /**
    * The folder for the built CSS files.
    * @type {strings}
    */
-  CSS_DEST             = `${this.APP_DEST}/css`;
+  CSS_DEST = `${this.APP_DEST}/css`;
 
   /**
    * The folder for the built JavaScript files.
    * @type {string}
    */
-  JS_DEST              = `${this.APP_DEST}/js`;
+  JS_DEST = `${this.APP_DEST}/js`;
 
   /**
-   * The version of the application as defined in the `package.json`
+   * The version of the application as defined in the `package.json`.
    */
-  VERSION              = appVersion();
+  VERSION = appVersion();
 
   /**
    * The name of the bundle file to includes all CSS files.
    * @type {string}
    */
-  CSS_PROD_BUNDLE      = 'all.css';
+  CSS_PROD_BUNDLE = 'all.css';
 
   /**
    * The name of the bundle file to include all JavaScript shims.
@@ -215,24 +215,24 @@ export class SeedConfig {
    * The name of the bundle file to include all JavaScript application files.
    * @type {string}
    */
-  JS_PROD_APP_BUNDLE   = 'app.js';
+  JS_PROD_APP_BUNDLE = 'app.js';
 
   /**
    * The required NPM version to run the application.
    * @type {string}
    */
-  VERSION_NPM          = '2.14.2';
+  VERSION_NPM = '2.14.2';
 
   /**
    * The required NodeJS version to run the application.
    * @type {string}
    */
-  VERSION_NODE         = '4.0.0';
+  VERSION_NODE = '4.0.0';
 
   /**
    * The ruleset to be used by `codelyzer` for linting the TypeScript files.
    */
-  CODELYZER_RULES      = customRules();
+  CODELYZER_RULES = customRules();
 
   /**
    * The list of NPM dependcies to be injected in the `index.html`.
@@ -356,7 +356,7 @@ export class SeedConfig {
   };
 
   /**
-   * The Autoprefixer configuration for the applicaiton.
+   * The Autoprefixer configuration for the application.
    * @type {Array}
    */
   BROWSER_LIST = [
@@ -372,7 +372,7 @@ export class SeedConfig {
   ];
 
   /**
-   * The BrowserSync configuration of the application
+   * The BrowserSync configuration of the application.
    * @type {any}
    */
   BROWSER_SYNC_CONFIG: any = {
@@ -429,7 +429,7 @@ function appVersion(): number|string {
 }
 
 /**
- * Returns the linting configuration to be used for `codelyzer`
+ * Returns the linting configuration to be used for `codelyzer`.
  * @return {string[]} the list of linting rules
  */
 function customRules(): string[] {
@@ -438,7 +438,7 @@ function customRules(): string[] {
 }
 
 /**
- * Returns the environment of the application.s
+ * Returns the environment of the application.
  */
 function getEnvironment() {
   let base:string[] = argv['_'];
