@@ -37,6 +37,8 @@
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
   "devDependencies": {
+    "@angular/compiler-cli": "^0.2.0",
+    "@angular/platform-server": "^2.0.0-rc.1",
     "async": "^1.4.2",
     "autoprefixer": "^6.3.6",
     "browser-sync": "^2.11.2",
@@ -106,7 +108,7 @@
     "tslint": "^3.7.0-dev.2",
     "tslint-stylish": "2.1.0-beta",
     "typedoc": "^0.3.12",
-    "typescript": "~1.8.10",
+    "typescript": "^1.9.0-dev.20160428-1.0",
     "typings": "^0.8.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
