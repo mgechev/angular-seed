@@ -16,7 +16,7 @@ describe('Home', () => {
   it('should add a name to the list using the form', () => {
     element(by.css('sd-home form input')).sendKeys('Tim Berners-Lee');
     element(by.css('sd-home form button')).click();
-    
+
     let el = element.all(by.repeater('let name of nameListService.get()').row(4));
     expect(el.getText()).toEqual('Tim Berners-Lee');
   });
