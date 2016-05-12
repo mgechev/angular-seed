@@ -182,45 +182,47 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   └── client
 │       ├── app
 │       │   ├── +about
-│       │   │   ├── components
-│       │   │   │   ├── about.component.css
-│       │   │   │   ├── about.component.e2e-spec.ts
-│       │   │   │   ├── about.component.html
-│       │   │   │   ├── about.component.spec.ts
-│       │   │   │   └── about.component.ts
+│       │   │   ├── about.component.css
+│       │   │   ├── about.component.e2e-spec.ts
+│       │   │   ├── about.component.html
+│       │   │   ├── about.component.spec.ts
+│       │   │   ├── about.component.ts
 │       │   │   └── index.ts
 │       │   ├── +home
-│       │   │   ├── components
-│       │   │   │   ├── home.component.css
-│       │   │   │   ├── home.component.e2e-spec.ts
-│       │   │   │   ├── home.component.html
-│       │   │   │   ├── home.component.spec.ts
-│       │   │   │   └── home.component.ts
+│       │   │   ├── home.component.css
+│       │   │   ├── home.component.e2e-spec.ts
+│       │   │   ├── home.component.html
+│       │   │   ├── home.component.spec.ts
+│       │   │   ├── home.component.ts
 │       │   │   └── index.ts
-│       │   ├── components
-│       │   │   ├── app.component.e2e-spec.ts
-│       │   │   ├── app.component.html
-│       │   │   ├── app.component.spec.ts
-│       │   │   ├── app.component.ts
-│       │   │   ├── navbar.component.css
-│       │   │   ├── navbar.component.html
-│       │   │   ├── navbar.component.ts
-│       │   │   ├── toolbar.component.css
-│       │   │   ├── toolbar.component.html
-│       │   │   └── toolbar.component.ts
+│       │   ├── app.component.e2e-spec.ts
+│       │   ├── app.component.html
+│       │   ├── app.component.spec.ts
+│       │   ├── app.component.ts
+│       │   ├── hot_loader_main.ts
+│       │   ├── main.ts
 │       │   └── shared
 │       │       ├── index.ts
-│       │       └── services
-│       │           ├── name-list.service.spec.ts
-│       │           └── name-list.service.ts
+│       │       ├── name-list
+│       │       │   ├── index.ts
+│       │       │   ├── name-list.service.spec.ts
+│       │       │   └── name-list.service.ts
+│       │       ├── navbar
+│       │       │   ├── index.ts
+│       │       │   ├── navbar.component.css
+│       │       │   ├── navbar.component.html
+│       │       │   └── navbar.component.ts
+│       │       └── toolbar
+│       │           ├── index.ts
+│       │           ├── toolbar.component.css
+│       │           ├── toolbar.component.html
+│       │           └── toolbar.component.ts
 │       ├── assets
 │       │   └── svg
 │       │       └── more.svg
 │       ├── css
 │       │   └── main.css
-│       ├── hot_loader_main.ts
 │       ├── index.html
-│       ├── main.ts
 │       ├── tsconfig.json
 │       └── typings.d.ts
 ├── test-main.js               <- testing configuration
