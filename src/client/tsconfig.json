@@ -16,5 +16,8 @@
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": true
   },
+  "angularCompilerOptions": {
+    "genDir": "."
+  },
   "compileOnSave": false
 }

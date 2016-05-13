@@ -1,16 +1,17 @@
+import {coreBootstrap, ReflectiveInjector, enableProdMode, provide} from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
-import { enableProdMode, provide } from '@angular/core';
-import { bootstrap } from '@angular/platform-browser-dynamic';
 import { ROUTER_PROVIDERS } from '@angular/router';
-
-import { AppComponent } from './app.component';
+import {browserPlatform, BROWSER_APP_STATIC_PROVIDERS} from '@angular/platform-browser';
+import {AppComponentNgFactory} from './app.component.ngfactory';
 
 if ('<%= ENV %>' === 'prod') { enableProdMode(); }
 
-bootstrap(AppComponent, [
-  ROUTER_PROVIDERS,
-  provide(APP_BASE_HREF, { useValue: '<%= APP_BASE %>' })
-]);
+const appInjector = ReflectiveInjector.resolveAndCreate([
+    BROWSER_APP_STATIC_PROVIDERS,
+    ROUTER_PROVIDERS,
+    provide(APP_BASE_HREF, { useValue: '<%= APP_BASE %>' })
+  ], browserPlatform().injector);
+coreBootstrap(appInjector, AppComponentNgFactory);
 
 // In order to start the Service Worker located at "./worker.js"
 // uncomment this line. More about Service Workers here

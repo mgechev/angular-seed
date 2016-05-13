@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'sd-about',
-  templateUrl: 'app/+about/about.component.html',
-  styleUrls: ['app/+about/about.component.css']
+  templateUrl: 'about.component.html',
+  styleUrls: ['about.component.css']
 })
 export class AboutComponent {}
