@@ -7,4 +7,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
   styleUrls: ['app/shared/navbar/navbar.component.css'],
   directives: [ROUTER_DIRECTIVES]
 })
+/**
+ * This class represents the navigation bar component.
+ */
 export class NavbarComponent {}
