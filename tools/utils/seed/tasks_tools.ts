@@ -6,11 +6,20 @@ import * as isstream from 'isstream';
 import { join } from 'path';
 import * as tildify from 'tildify';
 
+/**
+ * Loads the tasks within the given path.
+ * @param {string} path the path to load the tasks from
+ */
 export function loadTasks(path: string): void {
   util.log('Loading tasks folder', chalk.yellow(path));
   readDir(path, taskname => registerTask(taskname, path));
 }
 
+/**
+ * Registers the task by the given taskname and path.
+ * @param {string} taskname the name of the task
+ * @param {string} path     the path of the task
+ */
 function registerTask(taskname: string, path: string): void {
   const TASK = join(path, taskname);
   util.log('Registering task', chalk.yellow(tildify(TASK)));
@@ -32,8 +41,16 @@ function registerTask(taskname: string, path: string): void {
   });
 }
 
+/**
+ * Reads the files in the given root directory and executes the given
+ * callback per found file.
+ * @param {string}   root the root directory to read
+ * @param {function} cb the callback to execute per found file
+ */
 function readDir(root: string, cb: (taskname: string) => void) {
-  if (!existsSync(root)) return;
+  if (!existsSync(root)) {
+    return;
+  }
 
   walk(root);
 
