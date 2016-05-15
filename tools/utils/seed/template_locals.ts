@@ -1,6 +1,10 @@
 import * as CONFIG from '../../config';
 
-// TODO: Add an interface to register more template locals.
+/**
+ * Returns the project configuration (consisting of the base configuration
+ * provided by see.config.ts and the additional project specific overrides as
+ * defined in project.config.ts)
+ */
 export function templateLocals() {
   return CONFIG;
 }

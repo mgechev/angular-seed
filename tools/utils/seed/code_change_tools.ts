@@ -3,10 +3,17 @@ import * as path from 'path';
 
 import { BROWSER_SYNC_CONFIG } from '../../config';
 
+/**
+ * Initialises BrowserSync with the configuration defined in seed.config.ts
+ * (or if overriden: project.config.ts).
+ */
 let runServer = () => {
   browserSync.init(BROWSER_SYNC_CONFIG);
 };
 
+/**
+ * Runs BrowserSync as the listening process for the application.
+ */
 let listen = () => {
   // if (ENABLE_HOT_LOADING) {
   //   ng2HotLoader.listen({
@@ -19,6 +26,10 @@ let listen = () => {
   runServer();
 };
 
+/**
+ * Provides a flag to mark which files have changed and reloads BrowserSync
+ * accordingly.
+ */
 let changed = (files: any) => {
   if (!(files instanceof Array)) {
     files = [files];
@@ -35,7 +46,7 @@ let changed = (files: any) => {
   //TODO: Figure out why you can't pass a file to reload
   if (onlyStylesChanged === false) {
     browserSync.reload(files);
-  }else {
+  } else {
     browserSync.reload('*.css');
   }
   //}
