@@ -84,7 +84,7 @@ export class SeedConfig {
    * flag when running `npm start`.
    * @type {boolean}
    */
-  ENABLE_HOT_LOADING   = argv['hot-loader'];
+  ENABLE_HOT_LOADING = argv['hot-loader'];
 
   /**
    * The port where the application will run, if the `hot-loader` option mode
@@ -373,18 +373,23 @@ export class SeedConfig {
 
   /**
    * The BrowserSync configuration of the application.
+   * The default open behavior is to open the browser, 
+   * To prevent the browser from opening
+   * `--b`  flag when running `npm start` (tested with serve.dev)
+   * example `npm start -- --b`
    * @type {any}
    */
   BROWSER_SYNC_CONFIG: any = {
-    middleware: [require('connect-history-api-fallback')({index: `${this.APP_BASE}index.html`})],
+    middleware: [require('connect-history-api-fallback')({ index: `${this.APP_BASE}index.html` })],
     port: this.PORT,
     startPath: this.APP_BASE,
+    open: argv['b'] ? false : true,
     server: {
       baseDir: `${this.DIST_DIR}/empty/`,
       routes: {
         [`${this.APP_BASE}${this.APP_DEST}`]: this.APP_DEST,
         [`${this.APP_BASE}node_modules`]: 'node_modules',
-        [`${this.APP_BASE.replace(/\/$/,'')}`]: this.APP_DEST
+        [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST
       }
     }
   };
@@ -397,8 +402,8 @@ export class SeedConfig {
  */
 export function normalizeDependencies(deps: InjectableDependency[]) {
   deps
-    .filter((d:InjectableDependency) => !/\*/.test(d.src)) // Skip globs
-    .forEach((d:InjectableDependency) => d.src = require.resolve(d.src));
+    .filter((d: InjectableDependency) => !/\*/.test(d.src)) // Skip globs
+    .forEach((d: InjectableDependency) => d.src = require.resolve(d.src));
   return deps;
 }
 
@@ -423,7 +428,7 @@ function filterDependency(env: string, d: InjectableDependency): boolean {
  * Returns the applications version as defined in the `package.json`.
  * @return {number} the applications version
  */
-function appVersion(): number|string {
+function appVersion(): number | string {
   var pkg = require('../../package.json');
   return pkg.version;
 }
@@ -441,7 +446,7 @@ function customRules(): string[] {
  * Returns the environment of the application.
  */
 function getEnvironment() {
-  let base:string[] = argv['_'];
+  let base: string[] = argv['_'];
   let prodKeyword = !!base.filter(o => o.indexOf(ENVIRONMENTS.PRODUCTION) >= 0).pop();
   let env = (argv['env'] || '').toLowerCase();
   if ((base && prodKeyword) || env === ENVIRONMENTS.PRODUCTION) {
