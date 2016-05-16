@@ -79,10 +79,10 @@ gulp.task('build.tools', (done: any) =>
 
 // --------------
 // Docs
-gulp.task('docs', (done: any) =>
-  runSequence('build.docs',
-              'serve.docs',
-              done));
+// gulp.task('docs', (done: any) =>
+//   runSequence('build.docs',
+//               'serve.docs',
+//               done));
 
 // --------------
 // Serve dev
