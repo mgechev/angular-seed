@@ -7,6 +7,10 @@ import { notifyLiveReload } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
 
+/**
+ * Watches the task with the given taskname.
+ * @param {string} taskname the name of the task
+ */
 export function watch(taskname: string) {
   return function () {
     let paths:string[]=[

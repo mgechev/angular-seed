@@ -7,7 +7,7 @@ export = () => {
   return gulp.src([
       join(APP_SRC, '**/*.ts'),
       '!' + join(APP_SRC, '**/*.spec.ts'),
-      '!' + join(APP_SRC, '**/*.e2e.ts')
+      '!' + join(APP_SRC, '**/*.e2e-spec.ts')
     ])
     .pipe(gulp.dest(TMP_DIR));
 };
