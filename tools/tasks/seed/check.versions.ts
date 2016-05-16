@@ -5,6 +5,11 @@ function reportError(message: string) {
   process.exit(1);
 }
 
+/**
+ * Executes the build process, verifying that the installed NodeJS and NPM
+ * version matches the required versions as defined in the application
+ * configuration.
+ */
 export = () => {
   let exec = require('child_process').exec;
   let semver = require('semver');

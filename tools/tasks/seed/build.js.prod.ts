@@ -13,6 +13,10 @@ const INLINE_OPTIONS = {
   removeLineBreaks: true
 };
 
+/**
+ * Executes the build process, transpiling the TypeScript files for the
+ * production environment.
+ */
 export = () => {
   let tsProject = makeTsProject();
   let src = [

@@ -6,11 +6,19 @@ import { join } from 'path';
 
 import { TOOLS_DIR } from '../../config';
 
+/**
+ * Executes the build process, deleting all JavaScrip files (which were
+ * transpiled from the TypeScript sources) with in the `tools` directory.
+ */
 export = (done: any) => {
   deleteAndWalk(TOOLS_DIR);
   done();
 };
 
+/**
+ * Recursively walks along the given path and deletes all JavaScript files.
+ * @param {any} path the path to walk and clean
+ */
 function walk(path: any) {
   let files = readdirSync(path);
   for (let i = 0; i < files.length; i += 1) {
@@ -21,6 +29,10 @@ function walk(path: any) {
   }
 }
 
+/**
+ * Deletes the JavaScript file with the given path.
+ * @param {any} path the path of the JavaScript file to be deleted
+ */
 function deleteAndWalk(path: any) {
   try {
     rimraf.sync(join(path, '*.js'));
