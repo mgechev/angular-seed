@@ -79,6 +79,14 @@ export class SeedConfig {
   APP_BASE = argv['base'] || '/';
 
   /**
+   * The flag for the lazy template loader option of the application.
+   * Per default the option is not set, but can be set by the `--lazy-template`
+   * flag when running `npm start`.
+   * @type {boolean}
+   */
+  LAZY_TEMPLATE = argv['lazy-template'];
+
+  /**
    * The flag for the hot-loader option of the application.
    * Per default the option is not set, but can be set by the `--hot-loader`
    * flag when running `npm start`.
@@ -373,7 +381,7 @@ export class SeedConfig {
 
   /**
    * The BrowserSync configuration of the application.
-   * The default open behavior is to open the browser, 
+   * The default open behavior is to open the browser,
    * To prevent the browser from opening
    * `--b`  flag when running `npm start` (tested with serve.dev)
    * example `npm start -- --b`
