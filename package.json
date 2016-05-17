@@ -64,6 +64,7 @@
     "gulp-plumber": "~1.1.0",
     "gulp-postcss": "^6.1.1",
     "gulp-protractor": "^2.3.0",
+    "gulp-replace": "^0.5.4",
     "gulp-shell": "~0.5.2",
     "gulp-sourcemaps": "2.0.0-alpha",
     "gulp-template": "^4.0.0",
