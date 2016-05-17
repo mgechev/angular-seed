@@ -22,6 +22,9 @@ const processors = [
   reporter({clearMessages: true})
 ];
 
+/**
+ * Lints the component CSS files.
+ */
 function lintComponentCss() {
   return gulp.src([
       join(APP_SRC, '**', '*.css'),
@@ -31,14 +34,24 @@ function lintComponentCss() {
     .pipe(plugins.postcss(processors));
 }
 
+/**
+ * Lints the external CSS files.
+ */
 function lintExternalCss() {
   return gulp.src(getExternalCss().map(r => r.src))
     .pipe(isProd ? plugins.cached('css-lint') : plugins.util.noop())
     .pipe(plugins.postcss(processors));
 }
 
+/**
+ * Returns the array of external CSS files.
+ */
 function getExternalCss() {
   return APP_ASSETS.filter(d => /\.css$/.test(d.src) && !d.vendor);
 }
 
+/**
+ * Executes the build process, linting the component and external CSS files
+ * using `stylelint`.
+ */
 export = () => merge(lintComponentCss(), lintExternalCss());

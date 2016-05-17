@@ -14,6 +14,9 @@ class Protractor {
   }
 }
 
+/**
+ * Executes the build process, running all e2e specs using `protractor`.
+ */
 export = (done: any) => {
   new Protractor()
     .server(5555, './dist/prod')
