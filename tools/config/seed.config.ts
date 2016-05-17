@@ -102,6 +102,13 @@ export class SeedConfig {
   BOOTSTRAP_DIR = 'app';
 
   /**
+   * The directory where the client files are located.
+   * The default directory is `client`.
+   * @type {string}
+   */
+  APP_CLIENT = argv['client'] || 'client';
+
+  /**
    * The bootstrap file to be used to boot the application.
    * The file to be used is dependent if the hot-loader option is used or not.
    * Per default (non hot-loader mode) the `main.ts` file will be used, with the
@@ -121,7 +128,7 @@ export class SeedConfig {
    * The base folder of the applications source files.
    * @type {string}
    */
-  APP_SRC = 'src/client';
+  APP_SRC = `src/${this.APP_CLIENT}`;
 
   /**
    * The folder of the applications asset files.
