@@ -1,3 +1,49 @@
-<sd-toolbar></sd-toolbar>
+<!--<sd-toolbar></sd-toolbar>
 <sd-navbar></sd-navbar>
+<router-outlet></router-outlet>-->
+<!-- BEGIN HEADER -->
+<div class="page-header navbar navbar-fixed-top">
+  <!-- BEGIN HEADER INNER -->
+  <div class="page-header-inner ">
+    <!-- BEGIN LOGO -->
+    <div class="page-logo">
+      <a href="index.html">
+        <img src="../assets/layouts/layout4/img/logo-light.png" alt="logo" class="logo-default" /> </a>
+      <div class="menu-toggler sidebar-toggler">
+        <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+      </div>
+    </div>
+    <!-- END LOGO -->
+    <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+    <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
+    <!-- END RESPONSIVE MENU TOGGLER -->
+    <page-actions></page-actions>
+    <!-- BEGIN PAGE TOP -->
+    <div class="page-top">
+      <!-- BEGIN HEADER SEARCH BOX -->
+      <!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
+      <form class="search-form" action="page_general_search_2.html" method="GET">
+        <div class="input-group">
+          <input type="text" class="form-control input-sm" placeholder="Search..." name="query">
+          <span class="input-group-btn">
+                                <a href="javascript:;" class="btn submit">
+                                    <i class="icon-magnifier"></i>
+                                </a>
+                            </span>
+        </div>
+      </form>
+      <!-- END HEADER SEARCH BOX -->
+      <top-navigation-bar></top-navigation-bar>
+    </div>
+    <!-- END PAGE TOP -->
+  </div>
+  <!-- END HEADER INNER -->
+</div>
+<!-- END HEADER -->
+<!-- BEGIN HEADER & CONTENT DIVIDER -->
+<div class="clearfix"> </div>
+<!-- END HEADER & CONTENT DIVIDER -->
+
 <router-outlet></router-outlet>
+
+<footer></footer>
