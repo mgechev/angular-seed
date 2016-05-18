@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 //import {NgForm}    from '@angular/common';
-import {AuthInfo} from '../models/AuthInfo';
+//import {AuthInfo} from '../models/AuthInfo';
 //import { LoginService } from '../../shared/services/login.service';
 //import { Router } from '@angular/router';
 
@@ -10,9 +10,9 @@ import {AuthInfo} from '../models/AuthInfo';
     styleUrls: ['app/login/components/login.component.css']
 })
 export class LoginComponent {
-    errorMessage: string;
-    userPermission:string[];
-    private model: AuthInfo;
+    // public errorMessage: string;
+    // public userPermission: string[];
+    // private model: AuthInfo;
     // constructor(private _loginService: LoginService,private _router: Router) {
     //     this.model = new AuthInfo(0, '', '');
     // }

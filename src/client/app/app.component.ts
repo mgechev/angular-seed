@@ -3,7 +3,7 @@ import { ROUTER_DIRECTIVES, Routes, Router } from '@angular/router';
 import { HTTP_PROVIDERS} from '@angular/http';
 
 import { AboutComponent } from './+about/index';
-import { HomeComponent } from './+home/index';
+import { HomeComponent } from './home/index';
 import { NameListService, NavbarComponent, ToolbarComponent } from './shared/index';
 
 import { LoginComponent } from './login/index';
@@ -12,11 +12,10 @@ import { LoginComponent } from './login/index';
   selector: 'sd-app',
   viewProviders: [NameListService, HTTP_PROVIDERS],
   templateUrl: 'app/app.component.html',
-  styleUrls: ['app/app.component.css'],
   directives: [ROUTER_DIRECTIVES, NavbarComponent, ToolbarComponent]
 })
 @Routes([
-  { path: '/', component: HomeComponent },
+  { path: '/App', component: HomeComponent },
   { path: '/about', component: AboutComponent },
   { path: '/Login', component: LoginComponent }
 ])
@@ -31,7 +30,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this._router.navigate(['/App']);
     //this._router.navigate(['/Login']);
     // if (this._loginService.isAuthenticated()) {
     //   this._router.navigate(['/Home']);
