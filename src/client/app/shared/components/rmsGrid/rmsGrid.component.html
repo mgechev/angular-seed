@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-md-3">
+        <input id="search" (keyup)="onSearch($event.target.value)" type="text" class="form-control" placeholder="Search" />
+    </div>
+</div>
+<br/>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <!--<th data-sortable="true" *ngFor="let title of meta.headerTitle; let index = index">{{title}}</th>
+                <th>Actions</th>-->
+            <th *ngFor="let columnHeader of meta.headerTitle; let index = index">
+                <div *ngIf="!isSortable(columnHeader)" (click)="isSortedBy(columnHeader)" class="hand-cursor sort-header">
+                    {{ columnHeader }}
+                    <i *ngIf="sortType == columnHeader && !sortReverse" class="fa fa-sort-desc pull-right"></i>
+                    <i *ngIf="sortType == columnHeader && sortReverse" class="fa fa-sort-asc pull-right"></i>
+                    <i *ngIf="sortType != columnHeader" class="fa fa-sort pull-right"></i>
+                </div>
+                <span *ngIf="isSortable(columnHeader)">  {{ columnHeader }}</span>
+            </th>
+            <th *ngIf="meta.itemActions.length>0">Actions</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of meta.dataList; let index = index" (dblclick)="onRowClick($event,item)">
+            <td *ngFor="let prop of meta.properties"> {{item[prop]}} </td>
+            <td>
+                <div class="btn-group ">
+                    <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true"> Actions
+                        <i class="fa fa-angle-down"></i>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li *ngFor="let action of meta.itemActions">
+                            <a (click)="action.callback(item)">
+                                <i class="{{action.icon}}"></i> {{action.label}} </a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-md-6">
+        <pagination [totalItems]="meta.gridOptions.totalItems" [maxSize]="maxSize" [(ngModel)]="meta.gridOptions.currentPage" (pageChanged)="pageChanged($event)"></pagination>
+    </div>
+</div>

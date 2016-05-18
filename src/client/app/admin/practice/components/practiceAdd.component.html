@@ -1,0 +1,40 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!-- BEGIN PAGE HEAD-->
+        <div class="page-head">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                <h1>New Practice
+                                <small>Admin Practice Master</small>
+                            </h1>
+            </div>
+            <!-- END PAGE TITLE -->
+        </div>
+        <!-- END PAGE HEAD-->
+        <div class="row">
+            <div class="portlet light bordered">
+                <div class="portlet-body">
+                    <form (submit)="onSave()"  class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Name</label>
+                            <div class="col-md-4">
+                                <input id="practice" type="text" [(ngModel)]="practice.Practice" class="form-control" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button id="savePractice" type="submit" class="btn green">Save</button>
+                                <a  id="cancelePractice" class="btn grey" [routerLink]="['/Admin/Practice/']">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE BASE CONTENT -->
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->

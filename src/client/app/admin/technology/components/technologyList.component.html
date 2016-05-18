@@ -1,0 +1,47 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!-- BEGIN PAGE HEAD-->
+        <div class="page-head">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                <h1>Technology
+                                <small>Admin Technologies Master</small>
+                            </h1>
+            </div>
+            <!-- END PAGE TITLE -->
+        </div>
+        <!-- END PAGE HEAD-->
+        <div class="row">
+            <div class="portlet light bordered">
+                <div class="portlet-body">
+                    <a id="addNewTech" class="btn btn-circle dark btn-outline" [routerLink]="['/Admin/Technology/Add']">Add New</a>
+                    <div class="table-scrollable">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th> # </th>
+                                    <th>Technology Name</th>
+                                    <th>Edit </th>
+                                    <th>Delete </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let technology of technologyList; let index = index">
+                                    <td> {{index+1}} </td>
+                                    <td> {{technology.Technology}} </td>
+                                    <td><a [routerLink]="['/Admin/Technology/Edit/'+technology.id]"> Edit </a></td>
+                                    <td><a (click)="onDelete(technology)"> Delete </a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE BASE CONTENT -->
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->

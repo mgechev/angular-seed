@@ -1,0 +1,64 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!-- BEGIN PAGE HEAD-->
+        <div class="page-head">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                <h1>Manage Role </h1>
+            </div>
+            <!-- END PAGE TITLE -->
+        </div>
+        <!-- END PAGE HEAD-->
+        <div class="row">
+            <div class="col-md-6" *ngIf='params'>
+                <div class="portlet light bordered">
+                    <div class="portlet-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <label class="col-md-3 control-label">User Name </label>
+                                <label class="col-md-6 control-label">{{userName}} </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <label class="col-md-3 control-label">Select Role</label>
+                                <div class="col-md-6">
+                                    <select [(ngModel)]="selectedRole" class="form-control">
+                                        <option value="" selected="selected">Select</option>
+                                        <option *ngFor="let role of roleDropdown" [ngValue]="role">{{role.RoleName}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn" (click)="onAssignRole()">
+                                        Assign
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                                <tr>
+                                    <th> # </th>
+                                    <th>Role</th>
+                                    <th>Revoke</th>
+                                </tr>
+                                <tr *ngFor="let item of userRole; let index = index">
+                                    <td>{{index+1}} </td>
+                                    <td>{{item.RoleName}}</td>
+                                    <td>
+                                        <a (click)="onRevokeRole(item)" title="Revoke Permission">Revoke</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE BASE CONTENT -->
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->

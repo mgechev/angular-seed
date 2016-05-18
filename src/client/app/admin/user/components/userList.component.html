@@ -1,0 +1,44 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!-- BEGIN PAGE HEAD-->
+        <div class="page-head">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                <h1>User
+                                <small>Admin User Master</small>
+                            </h1>
+            </div>
+            <!-- END PAGE TITLE -->
+        </div>
+        <!-- END PAGE HEAD-->
+        <div class="row">
+            <div class="portlet light bordered">
+                <div class="portlet-body">
+                    <div class="table-scrollable">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th> # </th>
+                                    <th>User Name</th>
+                                    <th>Manage Role </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let user of userList; let index = index">
+                                    <td> {{index+1}} </td>
+                                    <td> {{user.UserName}} </td>
+                                    <td><a  [routerLink]="['/Admin/User/Role/'+user.Id]"> Manage Role  </a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE BASE CONTENT -->
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->

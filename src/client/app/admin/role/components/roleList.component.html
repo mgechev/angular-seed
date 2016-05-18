@@ -1,0 +1,47 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!-- BEGIN PAGE HEAD-->
+        <div class="page-head">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                <h1>Role
+                                <small>Admin Role Master</small>
+                            </h1>
+            </div>
+            <!-- END PAGE TITLE -->
+        </div>
+        <!-- END PAGE HEAD-->
+        <div class="row">
+            <div class="portlet light bordered">
+                <div class="portlet-body">
+                    <a class="btn btn-circle dark btn-outline" [routerLink]="['/Admin/Role/Add']">Add New</a>
+                    <div class="table-scrollable">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th> # </th>
+                                    <th>Role Name</th>
+                                    <th>Edit </th>
+                                    <th>Delete </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let role of roleList; let index = index">
+                                    <td> {{index+1}} </td>
+                                    <td> {{role.RoleName}} </td>
+                                    <td><a [routerLink]="['/Admin/Role/Edit/'+role.Id]"> Edit </a></td>
+                                    <td><a (click)="onDelete(role)"> Delete </a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE BASE CONTENT -->
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->

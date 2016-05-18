@@ -1,0 +1,47 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!-- BEGIN PAGE HEAD-->
+        <div class="page-head">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                <h1>Interview Round
+                                <small>Admin Interview Round Master</small>
+                            </h1>
+            </div>
+            <!-- END PAGE TITLE -->
+        </div>
+        <!-- END PAGE HEAD-->
+        <div class="row">
+            <div class="portlet light bordered">
+                <div class="portlet-body">
+                    <a class="btn btn-circle dark btn-outline" [routerLink]="['/Admin/InterviewRounds/Add']">Add New</a>
+                    <div class="table-scrollable">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th> # </th>
+                                    <th>Interview Round Name</th>
+                                    <th>Edit </th>
+                                    <th>Delete </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let interviewRound of interviewRoundList; let index = index">
+                                    <td> {{index+1}} </td>
+                                    <td> {{interviewRound.InterviewRounds}} </td>
+                                    <td><a [routerLink]="['/Admin/InterviewRounds/Edit/'+interviewRound.id]"> Edit </a></td>
+                                    <td><a (click)="onDelete(interviewRound)"> Delete </a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE BASE CONTENT -->
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
