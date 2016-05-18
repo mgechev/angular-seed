@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
 import { NameListService } from '../shared/index';
 
 @Component({
+  moduleId: module.id,
   selector: 'sd-home',
-  templateUrl: 'app/+home/home.component.html',
-  styleUrls: ['app/+home/home.component.css'],
+  templateUrl: 'home.component.html',
+  styleUrls: ['home.component.css'],
   directives: [FORM_DIRECTIVES]
 })
 /**

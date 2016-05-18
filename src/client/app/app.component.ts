@@ -7,9 +7,10 @@ import { HomeComponent } from './+home/index';
 import { NameListService, NavbarComponent, ToolbarComponent } from './shared/index';
 
 @Component({
+  moduleId: module.id,
   selector: 'sd-app',
   viewProviders: [NameListService, HTTP_PROVIDERS],
-  templateUrl: 'app/app.component.html',
+  templateUrl: 'app.component.html',
   directives: [ROUTER_DIRECTIVES, NavbarComponent, ToolbarComponent]
 })
 @Routes([
