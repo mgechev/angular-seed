@@ -2,8 +2,10 @@ import { APP_BASE_HREF, LocationStrategy, HashLocationStrategy } from '@angular/
 import { enableProdMode, provide } from '@angular/core';
 import { bootstrap } from '@angular/platform-browser-dynamic';
 import { ROUTER_PROVIDERS } from '@angular/router';
-
+import { CommonService } from './shared/services/common.service';
+import { AuthHttp } from './shared/services/authHttp.service';
 import { AppComponent } from './app.component';
+import { HTTP_PROVIDERS } from '@angular/http';
 
 if ('<%= ENV %>' === 'prod') { enableProdMode(); }
 
@@ -15,6 +17,9 @@ if ('<%= ENV %>' === 'prod') { enableProdMode(); }
  */
 bootstrap(AppComponent, [
   ROUTER_PROVIDERS,
+  AuthHttp,
+  HTTP_PROVIDERS,
+  CommonService,
   provide(APP_BASE_HREF, { useValue: '<%= APP_BASE %>' }),
   provide(LocationStrategy, { useClass: HashLocationStrategy })
 ]);
