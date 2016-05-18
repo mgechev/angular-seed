@@ -1,4 +1,4 @@
-import { APP_BASE_HREF } from '@angular/common';
+import { APP_BASE_HREF, LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { enableProdMode, provide } from '@angular/core';
 import { bootstrap } from '@angular/platform-browser-dynamic';
 import { ROUTER_PROVIDERS } from '@angular/router';
@@ -15,7 +15,8 @@ if ('<%= ENV %>' === 'prod') { enableProdMode(); }
  */
 bootstrap(AppComponent, [
   ROUTER_PROVIDERS,
-  provide(APP_BASE_HREF, { useValue: '<%= APP_BASE %>' })
+  provide(APP_BASE_HREF, { useValue: '<%= APP_BASE %>' }),
+  provide(LocationStrategy, { useClass: HashLocationStrategy })
 ]);
 
 // In order to start the Service Worker located at "./worker.js"

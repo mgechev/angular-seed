@@ -1,9 +1,9 @@
 {
-  "name": "angular2-seed",
-  "version": "0.0.0",
-  "description": "Modular seed project for Angular 2 apps with fast, statically typed build",
+  "name": "RMS",
+  "version": "0.0.1",
+  "description": "RMS",
   "repository": {
-    "url": "https://github.com/mgechev/angular2-seed"
+    "url": "https://github.com/shaggyshelar/angular2-seed"
   },
   "scripts": {
     "build.dev": "gulp build.dev --color",
@@ -30,7 +30,10 @@
     "e2e.ci": "gulp build.prod --color && gulp build.js.e2e --color && gulp e2e --color",
     "tests.all": "npm test && npm run e2e.ci",
     "webdriver-start": "webdriver-manager start",
-    "webdriver-update": "webdriver-manager update"
+    "webdriver-update": "webdriver-manager update",
+    "electron": "electron ./desktopApp/main.js",
+    "build.desktop": "electron-packager ./desktopApp/ RMS --platform=win32 --arch=x64 --out dist/ --overwrite",
+    "package.desktop": "electron-installer-windows --src dist/RMS-win32-x64/ --dest dist/installers/"
   },
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
@@ -46,6 +49,8 @@
     "connect-livereload": "^0.5.3",
     "cssnano": "^3.5.2",
     "doiuse": "^2.3.0",
+    "electron-packager": "^7.0.1",
+    "electron-prebuilt": "^0.35.4",
     "event-stream": "^3.3.2",
     "express": "~4.13.4",
     "express-history-api-fallback": "^2.0.0",
@@ -121,6 +126,9 @@
     "es6-module-loader": "^0.17.8",
     "es6-promise": "^3.1.2",
     "es6-shim": "0.35.0",
+    "moment": "^2.13.0",
+    "ng2-bootstrap": "^1.0.13",
+    "proxy-middleware": "^0.15.0",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.6",
     "systemjs": "0.19.26",

@@ -1,14 +1,55 @@
+import { PORT, APP_DEST, APP_BASE, DIST_DIR } from '../../config';
 import * as browserSync from 'browser-sync';
 import * as path from 'path';
-
-import { BROWSER_SYNC_CONFIG } from '../../config';
+const proxy = require('proxy-middleware');
 
 /**
  * Initialises BrowserSync with the configuration defined in seed.config.ts
  * (or if overriden: project.config.ts).
  */
 let runServer = () => {
-  browserSync.init(BROWSER_SYNC_CONFIG);
+  //browserSync.init(BROWSER_SYNC_CONFIG);
+  let baseDir = APP_DEST;
+  let routes: any = {
+    [`${APP_BASE}${APP_DEST}`]: APP_DEST,
+    [`${APP_BASE}node_modules`]: 'node_modules',
+  };
+
+  if (APP_BASE !== '/') {
+    routes[`${APP_BASE}`] = APP_DEST;
+    baseDir = `${DIST_DIR}/empty/`;
+  }
+
+  browserSync({
+    port: PORT,
+    startPath: APP_BASE,
+    server: {
+      baseDir: baseDir,
+      middleware: [
+        /* Connect to localhost backend server. */
+        proxy({
+          protocol: 'http:',
+          hostname: 'localhost',
+          port: 3000,
+          pathname: '/api',
+          route: '/api'
+        }),
+
+        /* Connect to Heroku backend server. */
+        // proxy({
+        //   protocol: 'https:',
+        //   hostname: 'powerful-lowlands-67740.herokuapp.com',
+        //   //port: ,
+        //   pathname: '/api',
+        //   route: '/api'
+        // }),
+
+
+        require('connect-history-api-fallback')({ index: `${APP_BASE}index.html` })
+      ],
+      routes: routes
+    }
+  });
 };
 
 /**

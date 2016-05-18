@@ -122,7 +122,7 @@ export class SeedConfig {
    * `index.html`.
    * @type {string}
    */
-  APP_TITLE = 'My Angular2 App';
+  APP_TITLE = 'RMS';
 
   /**
    * The base folder of the applications source files.

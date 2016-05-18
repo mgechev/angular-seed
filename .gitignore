@@ -46,3 +46,5 @@ tmp
 gulpfile.js
 gulpfile.js.map
 
+src/client/assets/
+desktopApp/app/
