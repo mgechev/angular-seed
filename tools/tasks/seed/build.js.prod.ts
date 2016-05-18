@@ -45,8 +45,8 @@ function copyTemplates() {
   if (INLINE_TEMPLATES) {
     return result;
   }
+
   return result.pipe(gulp.dest(join(PROD_DEST, BOOTSTRAP_DIR)));
-  
 }
 
 export = () => merge(buildTS(), copyTemplates());
