@@ -3,7 +3,7 @@ import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
 import * as merge from 'merge-stream';
 
-import { TMP_DIR, TOOLS_DIR, INLINE_TEMPLATES, BOOTSTRAP_DIR, PROD_DEST } from '../../config';
+import { BOOTSTRAP_DIR, INLINE_TEMPLATES, PROD_DEST, TMP_DIR, TOOLS_DIR } from '../../config';
 import { makeTsProject, templateLocals } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
