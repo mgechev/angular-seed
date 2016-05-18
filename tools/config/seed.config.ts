@@ -379,26 +379,50 @@ export class SeedConfig {
   ];
 
   /**
-   * The BrowserSync configuration of the application.
+   * Configurations for NPM module configurations. Add to or override in project.config.ts.
+   * If you like, use the mergeObject() method to assist with this.
+   */
+  PLUGIN_CONFIGS: any = {
+    /**
+     * The BrowserSync configuration of the application.
    * The default open behavior is to open the browser. To prevent the browser from opening use the `--b`  flag when
    * running `npm start` (tested with serve.dev).
    * Example: `npm start -- --b`
-   * @type {any}
-   */
-  BROWSER_SYNC_CONFIG: any = {
-    middleware: [require('connect-history-api-fallback')({ index: `${this.APP_BASE}index.html` })],
-    port: this.PORT,
-    startPath: this.APP_BASE,
-    open: argv['b'] ? false : true,
-    server: {
-      baseDir: `${this.DIST_DIR}/empty/`,
-      routes: {
-        [`${this.APP_BASE}${this.APP_DEST}`]: this.APP_DEST,
-        [`${this.APP_BASE}node_modules`]: 'node_modules',
-        [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST
+     * @type {any}
+     */
+    'browser-sync': {
+      middleware: [require('connect-history-api-fallback')({ index: `${this.APP_BASE}index.html` })],
+      port: this.PORT,
+      startPath: this.APP_BASE,
+      open: argv['b'] ? false : true,
+      server: {
+        baseDir: `${this.DIST_DIR}/empty/`,
+        routes: {
+          [`${this.APP_BASE}${this.APP_DEST}`]: this.APP_DEST,
+          [`${this.APP_BASE}node_modules`]: 'node_modules',
+          [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST
+        }
       }
     }
   };
+
+  /**
+   * Recursively merge source onto target.
+   */
+  mergeObject( target: any, source: any ) {
+    var deepExtend = require('deep-extend');
+    deepExtend( target, source );
+  }
+
+  /**
+   * Recursively merge source onto target.
+   */
+  getPluginConfig( pluginKey: string ): any {
+    if( this.PLUGIN_CONFIGS[ pluginKey ] ) {
+      return this.PLUGIN_CONFIGS[ pluginKey ];
+    }
+    return null;
+  }
 
 }
 
