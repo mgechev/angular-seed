@@ -3,7 +3,7 @@ import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
 import * as merge from 'merge-stream';
 
-import { TMP_DIR, TOOLS_DIR, LAZY_TEMPLATE, BOOTSTRAP_DIR, PROD_DEST } from '../../config';
+import { TMP_DIR, TOOLS_DIR, INLINE_TEMPLATES, BOOTSTRAP_DIR, PROD_DEST } from '../../config';
 import { makeTsProject, templateLocals } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
@@ -27,7 +27,7 @@ function buildTS() {
   ];
   let result = gulp.src(src)
     .pipe(plugins.plumber())
-    .pipe(LAZY_TEMPLATE ? plugins.util.noop() : plugins.inlineNg2Template(INLINE_OPTIONS))
+    .pipe(INLINE_TEMPLATES ? plugins.inlineNg2Template(INLINE_OPTIONS) : plugins.util.noop())
     .pipe(plugins.typescript(tsProject));
 
   return result.js
@@ -42,11 +42,11 @@ function copyTemplates() {
 
   let result = gulp.src([join(TMP_DIR, BOOTSTRAP_DIR, '**', '*.html')]);
 
-  if (LAZY_TEMPLATE) {
-    return result.pipe(gulp.dest(join(PROD_DEST, BOOTSTRAP_DIR)));
+  if (INLINE_TEMPLATES) {
+    return result;
   }
-
-  return result;
+  return result.pipe(gulp.dest(join(PROD_DEST, BOOTSTRAP_DIR)));
+  
 }
 
 export = () => merge(buildTS(), copyTemplates());

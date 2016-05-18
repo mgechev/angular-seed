@@ -79,12 +79,12 @@ export class SeedConfig {
   APP_BASE = argv['base'] || '/';
 
   /**
-   * The flag for the lazy template loader option of the application.
-   * Per default the option is not set, but can be set by the `--lazy-template`
-   * flag when running `npm start`.
+   * The flag to include templates into JS app prod file.
+   * Per default the option is `true`, but can it can be set to false using `--inline-template false`
+   * flag when running `npm run build.prod`.
    * @type {boolean}
    */
-  LAZY_TEMPLATE = argv['lazy-template'];
+  INLINE_TEMPLATES = argv['inline-template'] !== 'false';
 
   /**
    * The flag for the hot-loader option of the application.
