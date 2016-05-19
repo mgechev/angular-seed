@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate } from '@angular/router';
 import {MyProfilesInfo, Masters} from '../../myProfiles/model/myProfilesInfo';
 import { RecentProfilesService } from '../services/recentProfiles.service';
@@ -56,7 +56,7 @@ export class RecentProfilesListComponent implements OnActivate {
 
     onSelectStatus(statusId: number) {
         for (var i = 0; i < this.statusList.length; i++) {
-            if (this.statusList[i].Id == statusId) {
+            if (this.statusList[i].Id === statusId) {
                 this.selectedStatus = this.statusList[i];
             }
         }

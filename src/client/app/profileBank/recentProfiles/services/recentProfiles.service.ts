@@ -1,5 +1,5 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { MyProfilesInfo, Qualification, Masters } from '../../myProfiles/model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
@@ -31,7 +31,7 @@ export class RecentProfilesService {
             .map(this.extractData)
             .catch(this.handleError);
     }
-    
+
     editCandidatePersonalDetails(profile: MyProfilesInfo) {
         let url = Config.GetURL('/api/ProfileBank/AddPersonalDetails');
         return this.authHttp.post(url, { profile })

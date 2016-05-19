@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, RouteSegment, Router } from '@angular/router';
 import { MyProfilesInfo } from '../../myProfiles/model/myProfilesInfo';
 import { RecentProfilesService } from '../services/recentProfiles.service';
