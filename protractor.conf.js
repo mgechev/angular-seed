@@ -54,7 +54,7 @@ if (process.env.APPVEYOR) {
   config.capabilities = {
     browserName: 'internet explorer'
   };
-  delete config.directConnect;
+  config.directConnect = false;
 }
 
 exports.config = config;
