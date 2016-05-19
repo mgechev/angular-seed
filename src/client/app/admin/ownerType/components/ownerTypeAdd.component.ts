@@ -36,14 +36,14 @@ export class OwnerTypeAddComponent implements OnActivate {
             this._ownerTypeService.editOwnerType(this.ownerType)
                 .subscribe(
                 results=> {
-                    this._router.navigate(['/Admin/OwnerType']);
+                    this._router.navigate(['/App/Admin/OwnerType']);
                 },
                 error => this.errorMessage = <any>error);
         } else {
             this._ownerTypeService.addOwnerType(this.ownerType)
                 .subscribe(
                 results=> {
-                    this._router.navigate(['/Admin/OwnerType']);
+                    this._router.navigate(['/App/Admin/OwnerType']);
                 },
                 error => this.errorMessage = <any>error);
         }

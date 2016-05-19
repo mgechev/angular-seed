@@ -36,14 +36,14 @@ export class QualificationAddComponent implements OnActivate {
             this._qualificationService.editQualification(this.qualification)
                 .subscribe(
                 results=> {
-                    this._router.navigate(['/Admin/Qualification']);
+                    this._router.navigate(['/App/Admin/Qualification']);
                 },
                 error => this.errorMessage = <any>error);
         } else {
             this._qualificationService.addQualification(this.qualification)
                 .subscribe(
                 results=> {
-                    this._router.navigate(['/Admin/Qualification']);
+                    this._router.navigate(['/App/Admin/Qualification']);
                 },
                 error => this.errorMessage = <any>error);
         }

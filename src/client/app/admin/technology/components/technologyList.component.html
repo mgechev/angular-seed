@@ -16,7 +16,7 @@
         <div class="row">
             <div class="portlet light bordered">
                 <div class="portlet-body">
-                    <a id="addNewTech" class="btn btn-circle dark btn-outline" [routerLink]="['/Admin/Technology/Add']">Add New</a>
+                    <a id="addNewTech" class="btn btn-circle dark btn-outline" [routerLink]="['/App/Admin/Technology/Add']">Add New</a>
                     <div class="table-scrollable">
                         <table class="table table-hover">
                             <thead>
@@ -31,7 +31,7 @@
                                 <tr *ngFor="let technology of technologyList; let index = index">
                                     <td> {{index+1}} </td>
                                     <td> {{technology.Technology}} </td>
-                                    <td><a [routerLink]="['/Admin/Technology/Edit/'+technology.id]"> Edit </a></td>
+                                    <td><a [routerLink]="['/App/Admin/Technology/Edit/'+technology.id]"> Edit </a></td>
                                     <td><a (click)="onDelete(technology)"> Delete </a></td>
                                 </tr>
                             </tbody>

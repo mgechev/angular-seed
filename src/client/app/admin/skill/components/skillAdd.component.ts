@@ -36,14 +36,14 @@ export class SkillAddComponent implements OnActivate {
             this._skillService.editSkill(this.skill)
                 .subscribe(
                 results=> {
-                    this._router.navigate(['/Admin/Skill']);
+                    this._router.navigate(['/App/Admin/Skill']);
                 },
                 error => this.errorMessage = <any>error);
         } else {
             this._skillService.addSkill(this.skill)
                 .subscribe(
                 results=> {
-                    this._router.navigate(['/Admin/Skill']);
+                    this._router.navigate(['/App/Admin/Skill']);
                 },
                 error => this.errorMessage = <any>error);
         }

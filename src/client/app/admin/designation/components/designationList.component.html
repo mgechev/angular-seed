@@ -15,8 +15,8 @@
         <!-- END PAGE HEAD-->
         <div class="row">
             <div class="portlet light bordered">
-                <div class="portlet-body">
-                    <a class="btn btn-circle dark btn-outline" [routerLink]="['/Admin/Designation/Add']">Add New</a>
+                <div class="portlet-body">                   
+                     <a class="btn btn-circle dark btn-outline" [routerLink]="['/App/Admin/Designation/Add']">Add New</a>
                     <div class="table-scrollable">
                         <table class="table table-hover">
                             <thead>
@@ -31,7 +31,7 @@
                                 <tr *ngFor="let designation of designationList; let index = index">
                                     <td> {{index+1}} </td>
                                     <td> {{designation.Designation}} </td>
-                                    <td><a [routerLink]="['/Admin/Designation/Edit/'+designation.id]"> Edit </a></td>
+                                    <td><a [routerLink]="['/App/Admin/Designation/Edit/'+designation.id]"> Edit </a></td>
                                     <td><a (click)="onDelete(designation)"> Delete </a></td>
                                 </tr>
                             </tbody>

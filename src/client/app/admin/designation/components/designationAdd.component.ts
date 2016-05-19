@@ -36,14 +36,14 @@ export class DesignationAddComponent implements OnActivate {
             this._designationService.editDesignation(this.designation)
                 .subscribe(
                 results=> {
-                    this._router.navigate(['/Admin/Designation']);
+                    this._router.navigate(['/App/Admin/Designation']);
                 },
                 error => this.errorMessage = <any>error);
         } else {
             this._designationService.addDesignation(this.designation)
                 .subscribe(
                 results=> {
-                    this._router.navigate(['/Admin/Designation']);
+                    this._router.navigate(['/App/Admin/Designation']);
                 },
                 error => this.errorMessage = <any>error);
         }

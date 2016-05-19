@@ -16,7 +16,7 @@
         <div class="row">
             <div class="portlet light bordered">
                 <div class="portlet-body">
-                    <a class="btn btn-circle dark btn-outline" [routerLink]="['/Admin/OwnerType/Add']">Add New</a>
+                    <a class="btn btn-circle dark btn-outline" [routerLink]="['/App/Admin/OwnerType/Add']">Add New</a>
                     <div class="table-scrollable">
                         <table class="table table-hover">
                             <thead>
@@ -31,7 +31,7 @@
                                 <tr *ngFor="let ownerType of ownerTypeList; let index = index">
                                     <td> {{index+1}} </td>
                                     <td> {{ownerType.OwnerType}} </td>
-                                    <td><a [routerLink]="['/Admin/OwnerType/Edit/'+ownerType.id]"> Edit </a></td>
+                                    <td><a [routerLink]="['/App/Admin/OwnerType/Edit/'+ownerType.id]"> Edit </a></td>
                                     <td><a (click)="onDelete(ownerType)"> Delete </a></td>
                                 </tr>
                             </tbody>

@@ -16,7 +16,7 @@
         <div class="row">
             <div class="portlet light bordered">
                 <div class="portlet-body">
-                    <a class="btn btn-circle dark btn-outline" [routerLink]="['/Admin/Skill/Add']">Add New</a>
+                    <a class="btn btn-circle dark btn-outline" [routerLink]="['/App/Admin/Skill/Add']">Add New</a>
                     <div class="table-scrollable">
                         <table class="table table-hover">
                             <thead>
@@ -31,7 +31,7 @@
                                 <tr *ngFor="let skill of skillList; let index = index">
                                     <td> {{index+1}} </td>
                                     <td> {{skill.Skill}} </td>
-                                    <td><a [routerLink]="['/Admin/Skill/Edit/'+skill.id]"> Edit </a></td>
+                                    <td><a [routerLink]="['/App/Admin/Skill/Edit/'+skill.id]"> Edit </a></td>
                                     <td><a (click)="onDelete(skill)"> Delete </a></td>
                                 </tr>
                             </tbody>

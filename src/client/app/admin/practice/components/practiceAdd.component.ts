@@ -36,14 +36,14 @@ export class PracticeAddComponent implements OnActivate {
             this._practiceService.editPractice(this.practice)
                 .subscribe(
                 results=> {
-                    this._router.navigate(['/Admin/Practice']);
+                    this._router.navigate(['/App/Admin/Practice']);
                 },
                 error => this.errorMessage = <any>error);
         } else {
             this._practiceService.addPractice(this.practice)
                 .subscribe(
                 results=> {
-                    this._router.navigate(['/Admin/Practice']);
+                    this._router.navigate(['/App/Admin/Practice']);
                 },
                 error => this.errorMessage = <any>error);
         }

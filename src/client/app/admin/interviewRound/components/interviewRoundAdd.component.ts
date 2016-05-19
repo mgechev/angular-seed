@@ -36,14 +36,14 @@ export class InterviewRoundAddComponent implements OnActivate {
             this._interviewRoundService.editInterviewRound(this.interviewRound)
                 .subscribe(
                 results=> {
-                    this._router.navigate(['/Admin/InterviewRounds']);
+                    this._router.navigate(['/App/Admin/InterviewRounds']);
                 },
                 error => this.errorMessage = <any>error);
         } else {
             this._interviewRoundService.addInterviewRound(this.interviewRound)
                 .subscribe(
                 results=> {
-                    this._router.navigate(['/Admin/InterviewRounds']);
+                    this._router.navigate(['/App/Admin/InterviewRounds']);
                 },
                 error => this.errorMessage = <any>error);
         }

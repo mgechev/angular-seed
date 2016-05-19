@@ -36,14 +36,14 @@ export class TechnologyAddComponent implements OnActivate {
             this._technologyService.editTechnology(this.technology)
                 .subscribe(
                 results=> {
-                    this._router.navigate(['/Admin/Technology']);
+                    this._router.navigate(['/App/Admin/Technology']);
                 },
                 error => this.errorMessage = <any>error);
         } else {
             this._technologyService.addTechnology(this.technology)
                 .subscribe(
                 results=> {
-                    this._router.navigate(['/Admin/Technology']);
+                    this._router.navigate(['/App/Admin/Technology']);
                 },
                 error => this.errorMessage = <any>error);
         }
