@@ -1,7 +1,7 @@
 describe('App', () => {
 
   beforeEach( () => {
-      browser.get('/');
+    browser.get('/');
   });
 
   it('should have a title', () => {
@@ -9,15 +9,15 @@ describe('App', () => {
   });
 
   it('should have <nav>', () => {
-      expect(element(by.css('sd-app sd-navbar nav')).isPresent()).toEqual(true);
+    expect(element(by.css('sd-app sd-navbar nav')).isPresent()).toEqual(true);
   });
 
   it('should have correct nav text for Home', () => {
-      expect(element(by.css('sd-app sd-navbar nav a:first-child')).getText()).toEqual('HOME');
+    expect(element(by.css('sd-app sd-navbar nav a:first-child')).getText()).toEqual('HOME');
   });
 
   it('should have correct nav text for About', () => {
-      expect(element(by.css('sd-app sd-navbar nav a:last-child')).getText()).toEqual('ABOUT');
+    expect(element(by.css('sd-app sd-navbar nav a:last-child')).getText()).toEqual('ABOUT');
   });
 
 });
