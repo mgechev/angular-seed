@@ -7,13 +7,17 @@ import { HomeComponent } from './home/index';
 import { NameListService, NavbarComponent, ToolbarComponent } from './shared/index';
 
 import { LoginComponent } from './login/index';
+import { LoginService } from './shared/services/login.service';
 
 @Component({
   moduleId: module.id,
   selector: 'sd-app',
   viewProviders: [NameListService, HTTP_PROVIDERS],
   templateUrl: 'app.component.html',
-  directives: [ROUTER_DIRECTIVES, NavbarComponent, ToolbarComponent]
+  directives: [ROUTER_DIRECTIVES, NavbarComponent, ToolbarComponent],
+  providers: [
+    LoginService
+  ]
 })
 @Routes([
   { path: '/App', component: HomeComponent },
@@ -27,14 +31,13 @@ import { LoginComponent } from './login/index';
  * loaded components (HomeComponent, AboutComponent).
  */
 export class AppComponent implements OnInit {
-  constructor(private _router: Router) {
+  constructor(private _router: Router, private _loginService: LoginService) {
   }
 
   ngOnInit() {
-    this._router.navigate(['/App']);
-    //this._router.navigate(['/Login']);
+    this._router.navigate(['/Login']);
     // if (this._loginService.isAuthenticated()) {
-    //   this._router.navigate(['/Home']);
+    //   this._router.navigate(['/App']);
     // } else {
     //   this._router.navigate(['/Login']);
     // }

@@ -1,7 +1,14 @@
 <div class="logo"></div>
 <div class="login-block">
     <h1>Login</h1>
-    <input type="text" value="" placeholder="Username" id="username" />
+    <!--<input type="text" value="" placeholder="Username" id="username" />
     <input type="password" value="" placeholder="Password" id="password" />
-    <button>Submit</button>
+    <button>Submit</button>-->
+    <form (submit)="doLogin($event)" class="form-signin">
+        <input id="userName" [(ngModel)]="model.UserName" type="text" class="form-control" name="Username" placeholder="Username"
+            required="" autofocus="" />
+        <input id="password" [(ngModel)]="model.Password" type="password" class="form-control" name="Password" placeholder="Password"
+            required="" />
+        <button id="loginBtn" class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit">Login</button>
+    </form>
 </div>
