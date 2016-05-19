@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy,EventEmitter} from '@angular/core';
 import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 import { LoginService } from '../../shared/services/login.service';
 
@@ -12,7 +12,7 @@ import { LoginService } from '../../shared/services/login.service';
 export class TopNavigationBarComponent implements OnInit, OnDestroy {
 
     isAuthenticated: boolean;
-    subscription: any;
+    subscription: EventEmitter<boolean> = new EventEmitter<boolean>();;
     constructor(private loginService: LoginService, private _router: Router) {
         this.isAuthenticated = false;
     }
