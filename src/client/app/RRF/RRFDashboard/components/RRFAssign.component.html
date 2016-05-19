@@ -1,0 +1,91 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!-- BEGIN PAGE HEAD-->
+        <div class="page-head">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                <h1> Assign RRF</h1>
+            </div>
+            <!-- END PAGE TITLE -->
+        </div>
+        <!-- END PAGE HEAD-->
+        <div class="row">
+            <div class="portlet-body">
+                <div class="col-lg-12">
+                    <div class="portlet light bordered">
+                        <div class="table-scrollable">
+                            <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                                <thead style="word-wrap: break-word;">
+                                    <tr>
+                                        <td> <b>Raised by / Date</b> </td>
+                                        <td> <b>Position Details</b> </td>
+                                        <td> <b>Requirments </b></td>
+                                        <td> <b>Status </b></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd gradeX">
+                                        <!--remove hard code data-->
+                                        <td>
+                                            <div align="left">
+                                                {{selectedRRF.RaisedBy }}
+                                                <br> 30 Apr 2016
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div align="left">
+                                                Practice :{{selectedRRF.Practice }}
+                                                <br>Tech. : {{selectedRRF.Technology }}
+                                                <br>Position : {{selectedRRF.PositionTitle}}
+                                                <br>Designation :{{selectedRRF.Designation }}
+                                                <br>Openings :{{selectedRRF.NoOfOpenings}}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div align="left">
+                                                Skills :{{selectedRRF.SkillsRequired }}
+                                                <br>Date of Joining : {{selectedRRF.ExpDateOfJoining }}
+                                                <br>Min.EXP : {{selectedRRF.MinExp }}
+                                                <!--<br>Man.EXP : {{rrf.MaxExp }}-->
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="mt-action">
+                                                <div class="mt-action-body">
+                                                    <div class="mt-action-row">
+                                                        <div class="mt-action-datetime ">
+                                                            <span class="mt-action-dot {{selectedRRF.Status}}"></span>{{selectedRRF.Status}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+                                    <tr class="odd gradeX" colspan="4">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" >
+                                                <b>Description :</b>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                {{selectedRRF.Description}}
+
+                                            </div>
+                                        </div>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE BASE CONTENT -->
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->

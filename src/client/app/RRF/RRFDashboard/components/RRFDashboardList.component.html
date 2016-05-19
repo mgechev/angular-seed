@@ -13,11 +13,12 @@
         <!-- END PAGE HEAD-->
         <div class="row">
             <div class="portlet-body">
-
-                <div class="col-lg-12" id="divPiaChart">
-                    <div class="portlet light bordered">
+                
+                <div class="col-lg-12">
+                    <!--<div class="col-lg-12" id="divPiaChart">-->
+                    <!--<div class="portlet light bordered">
                         <div id="chartdiv"></div>
-                    </div>
+                    </div>-->
                 </div>
 
                 <div class="col-lg-12" [hidden]="!isListVisible" id="divRRFList">
@@ -104,7 +105,7 @@
                                         <td width="30%"> <b>Requirments </b></td>
                                         <td width="10%"> <b>Status </b></td>
                                         <td width="10%"><b> Action </b></td>-->
-                                         <td> <b>Raised by / Date</b> </td>
+                                        <td> <b>Raised by / Date</b> </td>
                                         <td> <b>Position Details</b> </td>
                                         <td> <b>Requirments </b></td>
                                         <td> <b>Status </b></td>
@@ -151,7 +152,7 @@
                                             </div>
 
                                         </td>
-                                        <td><a class="edit" href="javascript:;"> Assign </a></td>
+                                        <td><a class="edit" [routerLink]="['/App/RRF/RRFDashboard/Assign/'+rrf.RRFID]"> Assign </a></td>
                                     </tr>
                                 </tbody>
                             </table>

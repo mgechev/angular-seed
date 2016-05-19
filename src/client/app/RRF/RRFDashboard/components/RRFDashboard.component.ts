@@ -3,6 +3,7 @@ import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
 import { RRFDashboardListComponent } from './RRFDashboardList.component';
 import { RRFDashboardAddComponent } from './RRFDashboardAdd.component';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
+import { RRFAssignComponent } from './RRFAssign.Component';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
 
 @Component({
@@ -14,8 +15,9 @@ import { MyRRFService } from '../../myRRF/services/myRRF.service';
 
 @Routes([
     { path: '/', component: RRFDashboardListComponent },
-    { path: '/add', component: RRFDashboardAddComponent },
-    { path: '/edit/:id', component: RRFDashboardAddComponent }
+    { path: '/Add', component: RRFDashboardAddComponent },
+    { path: '/Edit/:id', component: RRFDashboardAddComponent },
+    { path: '/Assign/:id', component: RRFAssignComponent }
 ])
 export class RRFDashboardComponent {
 }

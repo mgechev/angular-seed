@@ -36,16 +36,16 @@ export class MyRRFAddComponent implements OnActivate {
 
     routerOnActivate(): void {
         //TO display Date picker
-        $('#expectedDateOfJoining').datepicker();
+        // $('#expectedDateOfJoining').datepicker();
 
         //To display up and down arrow for number selection
-        $('input[name="demo_vertica"]').TouchSpin({
-            verticalbuttons: true,
-            stepinterval: 0.5
-        });
+        // $('input[name="demo_vertica"]').TouchSpin({
+        //     verticalbuttons: true,
+        //     stepinterval: 0.5
+        // });
 
         //dropdown with multi selector and search
-        $('#cmbInterviewer').select2();
+        // $('#cmbInterviewer').select2();
     }
 
     addPanel(): void {
