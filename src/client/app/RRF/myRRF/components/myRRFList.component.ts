@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { Router, OnActivate, RouteSegment, ROUTER_DIRECTIVES } from '@angular/router';
+import { Router, OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
 import { MyRRFInfo } from '../models/myRRFInfo';
 import { MyRRFService } from '../services/myRRF.service';
 import { RRFDetails } from '../models/rrfDetails';
@@ -24,9 +24,9 @@ export class MyRRFListComponent implements OnActivate {
         this.getRRFDetails(1);
 
         //Displayed complete % graph
-        $(".knob").knob();
-        $(".knob").val(44);
-        $(".knob").trigger('change');
+        $('.knob').knob();
+        $('.knob').val(44);
+        $('.knob').trigger('change');
     }
 
     getRaisedRRF(userName: string, roleID: number) {

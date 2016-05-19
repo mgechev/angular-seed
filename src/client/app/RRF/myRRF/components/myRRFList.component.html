@@ -16,13 +16,6 @@
             <!-- BEGIN PAGE LEFT SIDE LIST OF RRF TITLE -->
             <div class="col-md-7">
                 <div class="portlet light bordered">
-                    <!--<div class="portlet-title">
-                        <div class="caption">
-                            <span class="caption-subject font-red sbold uppercase">RRF List</span>
-                        </div>
-                        <div class="actions">
-                        </div>
-                    </div>-->
                     <div class="portlet-body">
                         <!-- BEGIN ADD AND TOOLS  -->
                         <div class="table-toolbar">
@@ -30,9 +23,6 @@
                                 <div class="col-md-6">
                                     <div class="btn-group">
                                         <a class="btn btn-circle dark btn-outline" [routerLink]="['/RRF/MyRRF/Add']">Add RRF</a>
-                                        <!--<button class="btn green" id="btnAddRRF" [routerLink]="['Add']">
-                                            Add RRF <i class="fa fa-plus"></i>
-                                        </button>-->
                                     </div>
                                 </div>
                                 <div class="col-md-6 row">
@@ -99,10 +89,7 @@
                                         <td> {{rrf.NoOfOpenings}} </td>
                                         <td> {{rrf.ExpDateOfJoining}} </td>
                                         <td>
-                                            <!--<span class="label label-sm label-success">
-                                                 {{rrf.Status}} 
-                                             </span>-->
-                                             <span class="mt-action-dot {{rrf.Status}}"> </span> {{rrf.Status}}
+                                            <span class="mt-action-dot {{rrf.Status}}"> </span> {{rrf.Status}}
                                         </td>
                                         <td><a class="edit" href="javascript:;"> Edit </a></td>
                                     </tr>
@@ -129,78 +116,78 @@
                         <div class="row bordered">
                             <div class="col-md-4">Completed %</div>
                             <div class="col-md-8">
-                                <input align="middle" class="knob" id="knobProcessComp" data-width="150" data-fgColor="#32c5d2" data-skin="tron" data-thickness=".2"
-                                data-displayPrevious=true readonly="true" value="44" />
+                                <input align="middle" class="knob" id="knobProcessComp" data-width="150" data-fgcolor="#32c5d2" data-skin="tron" data-thickness=".2"
+                                data-displayprevious="true" " readonly="true " value="44 " />
                             </div>
                         </div>
                     </div>
-                    <div class="actions">
+                    <div class="actions ">
                     </div>
-                    <div class="row">
-                        <div class="col-md-5">Practice</div>
-                        <div class="col-md-1" style="align:right">:</div>
-                        <div class="col-md-6" id="lblPractice">{{selectedRRF.Practice}}</div>
+                    <div class="row ">
+                        <div class="col-md-5 ">Practice</div>
+                        <div class="col-md-1 " style="align:right ">:</div>
+                        <div class="col-md-6 " id="lblPractice ">{{selectedRRF.Practice}}</div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-5">Technology</div>
-                        <div class="col-md-1" style="align:right">:</div>
-                        <div class="col-md-6" id="lblTechnology">{{selectedRRF.Technology}}</div>
+                    <div class="row ">
+                        <div class="col-md-5 ">Technology</div>
+                        <div class="col-md-1 " style="align:right ">:</div>
+                        <div class="col-md-6 " id="lblTechnology ">{{selectedRRF.Technology}}</div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-5">Position Title</div>
-                        <div class="col-md-1" style="align:right">:</div>
-                        <div class="col-md-6" id="lblPositionTitle">{{selectedRRF.PositionTitle}}</div>
+                    <div class="row ">
+                        <div class="col-md-5 ">Position Title</div>
+                        <div class="col-md-1 " style="align:right ">:</div>
+                        <div class="col-md-6 " id="lblPositionTitle ">{{selectedRRF.PositionTitle}}</div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-5">Description</div>
-                        <div class="col-md-1" style="align:right">:</div>
-                        <div class="col-md-6" id="lblDescription">{{selectedRRF.Description}}</div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-5">No. Of Openings</div>
-                        <div class="col-md-1" style="align:right">:</div>
-                        <div class="col-md-6" id="lblNoOfOpenings">{{selectedRRF.NoOfOpenings}}</div>
+                    <div class="row ">
+                        <div class="col-md-5 ">Description</div>
+                        <div class="col-md-1 " style="align:right ">:</div>
+                        <div class="col-md-6 " id="lblDescription ">{{selectedRRF.Description}}</div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-5">Skills Required</div>
-                        <div class="col-md-1" style="align:right">:</div>
-                        <div class="col-md-6" id="lblSkillsReq">{{selectedRRF.SkillsRequired}}</div>
+                    <div class="row ">
+                        <div class="col-md-5 ">No. Of Openings</div>
+                        <div class="col-md-1 " style="align:right ">:</div>
+                        <div class="col-md-6 " id="lblNoOfOpenings ">{{selectedRRF.NoOfOpenings}}</div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-5">Designation</div>
-                        <div class="col-md-1" style="align:right">:</div>
-                        <div class="col-md-6" id="lblDesignation">{{selectedRRF.Designation}}</div>
+
+                    <div class="row ">
+                        <div class="col-md-5 ">Skills Required</div>
+                        <div class="col-md-1 " style="align:right ">:</div>
+                        <div class="col-md-6 " id="lblSkillsReq ">{{selectedRRF.SkillsRequired}}</div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-5">Minimum Exp</div>
-                        <div class="col-md-1" style="align:right">:</div>
-                        <div class="col-md-6" id="lblMinExp">{{selectedRRF.MinExp}}</div>
+                    <div class="row ">
+                        <div class="col-md-5 ">Designation</div>
+                        <div class="col-md-1 " style="align:right ">:</div>
+                        <div class="col-md-6 " id="lblDesignation ">{{selectedRRF.Designation}}</div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-5">Maximum Exp</div>
-                        <div class="col-md-1" style="align:right">:</div>
-                        <div class="col-md-6" id="lblMaxExp">{{selectedRRF.MaxExp}}</div>
+                    <div class="row ">
+                        <div class="col-md-5 ">Minimum Exp</div>
+                        <div class="col-md-1 " style="align:right ">:</div>
+                        <div class="col-md-6 " id="lblMinExp ">{{selectedRRF.MinExp}}</div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-5">Priority</div>
-                        <div class="col-md-1" style="align:right">:</div>
-                        <div class="col-md-6" id="lblPriority">{{selectedRRF.Priority}}</div>
+                    <div class="row ">
+                        <div class="col-md-5 ">Maximum Exp</div>
+                        <div class="col-md-1 " style="align:right ">:</div>
+                        <div class="col-md-6 " id="lblMaxExp ">{{selectedRRF.MaxExp}}</div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-5">Exp. Date Of Joining</div>
-                        <div class="col-md-1" style="align:right">:</div>
-                        <div class="col-md-6" id="lblExpDateOfJoining">{{selectedRRF.ExpDateOfJoining}}</div>
+                    <div class="row ">
+                        <div class="col-md-5 ">Priority</div>
+                        <div class="col-md-1 " style="align:right ">:</div>
+                        <div class="col-md-6 " id="lblPriority ">{{selectedRRF.Priority}}</div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-5">Interviewers Panel</div>
-                        <div class="col-md-1" style="align:right">:</div>
+                    <div class="row ">
+                        <div class="col-md-5 ">Exp. Date Of Joining</div>
+                        <div class="col-md-1 " style="align:right ">:</div>
+                        <div class="col-md-6 " id="lblExpDateOfJoining ">{{selectedRRF.ExpDateOfJoining}}</div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="table-scrollable">
-                                <table class="table-bordered table no-footer">
+                    <div class="row ">
+                        <div class="col-md-5 ">Interviewers Panel</div>
+                        <div class="col-md-1 " style="align:right ">:</div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-md-12 ">
+                            <div class="table-scrollable ">
+                                <table class="table-bordered table no-footer ">
                                     <thead>
                                         <tr>
                                             <td>Round </td>
@@ -210,7 +197,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="odd gradeX" *ngFor='let panel of selectedRRF.Panel'>
+                                        <tr class="odd gradeX " *ngFor='let panel of selectedRRF.Panel'>
                                             <td> {{panel.RoundNumber }}</td>
                                             <td>
                                                 <div *ngFor='let interviewer of panel.Interviewers'>

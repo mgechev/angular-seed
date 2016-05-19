@@ -4,7 +4,6 @@ import {RRFDetails, Panel, MasterData } from '../models/rrfDetails';
 import { MyRRFService } from '../services/myRRF.service';
 import { MastersService } from '../../../shared/services/masters.service';
 
-
 @Component({
     selector: 'rrf-myrrf-add',
     templateUrl: 'app/RRF/myRRF/components/myRRFAdd.component.html',
@@ -39,7 +38,7 @@ export class MyRRFAddComponent implements OnActivate {
         $('#expectedDateOfJoining').datepicker();
 
         //To display up and down arrow for number selection
-        $("input[name='demo_vertical']").TouchSpin({
+        $('input[name="demo_vertica"]').TouchSpin({
             verticalbuttons: true,
             stepinterval: 0.5
         });
@@ -63,7 +62,7 @@ export class MyRRFAddComponent implements OnActivate {
     }
 
     onCancelClick(): void {
-        this._router.navigate(['/RRF/RRFDashboard/'])
+        this._router.navigate(['/RRF/RRFDashboard/']);
     }
 
     getDesignation(): void {
@@ -120,8 +119,4 @@ export class MyRRFAddComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
-    onSave(): void {
-    }
-
-
 }
