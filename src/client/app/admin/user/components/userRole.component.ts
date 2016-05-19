@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import { ROUTER_DIRECTIVES, OnActivate, RouteSegment, Router } from '@angular/router';
-import { UserInfo } from '../models/userInfo';
+import {Component} from '@angular/core';
+import { ROUTER_DIRECTIVES, RouteSegment, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { RoleService, RoleInfo } from '../../role/index';
 
@@ -11,22 +10,18 @@ import { RoleService, RoleInfo } from '../../role/index';
     providers: [RoleService]
 })
 
-export class UserRoleComponent implements OnInit {
-    errorMessage: string
-    params: number
-    userRole: any
-    userName: string = ''
-    roleList: Array<RoleInfo>
-    roleDropdown: Array<RoleInfo>
-    selectedRole: any
+export class UserRoleComponent  {
+    errorMessage: string;
+    params: number;
+    userRole: any;
+    userName: string = '';
+    roleList: Array<RoleInfo>;
+    roleDropdown: Array<RoleInfo>;
+    selectedRole: any;
     constructor(private _userService: UserService,
         private _router: Router,
         private _roleService: RoleService
-    ) {
-    }
-
-    ngOnInit() {
-    }
+    ) {}
 
     routerOnActivate(segment: RouteSegment) {
         this.params = Number(segment.getParam('id'));
@@ -37,9 +32,9 @@ export class UserRoleComponent implements OnInit {
         this._userService.getUserRole(this.params)
             .subscribe(
             results=> {
-                this.userName = results.UserName
+                this.userName = results.UserName;
                 this.userRole = results.Roles;
-                this.setRoleDropdown()
+                this.setRoleDropdown();
             },
             error => this.errorMessage = <any>error);
     }
@@ -48,14 +43,13 @@ export class UserRoleComponent implements OnInit {
             .subscribe(
             results=> {
                 this.roleList = results;
-                this.getUserRole()
+                this.getUserRole();
             },
             error => this.errorMessage = <any>error);
     }
     onAssignRole() {
-        console.log(this.selectedRole)
-        if (this.selectedRole !== "") {
-            this.selectedRole.UserId = this.params
+        if (this.selectedRole !== '') {
+            this.selectedRole.UserId = this.params;
             this._userService.addUserRole(this.selectedRole)
                 .subscribe(
                 results=> {
@@ -67,7 +61,7 @@ export class UserRoleComponent implements OnInit {
     }
 
     onRevokeRole(role:any) {
-        role.userId = this.params
+        role.userId = this.params;
         this._userService.revokeRole(role)
             .subscribe(
             results=> {
@@ -87,10 +81,9 @@ export class UserRoleComponent implements OnInit {
                 }
             }
             if (!flag) {
-                this.roleDropdown.push(this.roleList[i])
+                this.roleDropdown.push(this.roleList[i]);
             }
             flag = false;
         }
     }
-
 }

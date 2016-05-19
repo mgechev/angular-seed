@@ -10,15 +10,15 @@ import { FeatureService } from '../services/feature.service';
 })
 
 export class FeatureAddComponent implements OnActivate {
-    feature: FeatureInfo
-    errorMessage: string
-    params: number
+    feature: FeatureInfo;
+    errorMessage: string;
+    params: number;
     constructor(private _featureService: FeatureService,
         private _router: Router) {
-        this.feature = new FeatureInfo(0, '')
+        this.feature = new FeatureInfo(0, '');
     }
 
-    routerOnActivate(segment: RouteSegment){
+    routerOnActivate(segment: RouteSegment) {
         this.params = Number(segment.getParam('id'));
         if (this.params) {
             this._featureService.getFeatureById(this.params)

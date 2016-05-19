@@ -15,7 +15,7 @@ import {GridMeta} from '../../../shared/components/rmsGrid/models/gridMeta';
 export class FeatureListComponent implements OnInit {
     featureList: Array<FeatureInfo>;
     errorMessage: string;
-    public meta: GridMeta
+    public meta: GridMeta;
     constructor(private _featureService: FeatureService, private _router: Router) {
     }
 
@@ -29,9 +29,8 @@ export class FeatureListComponent implements OnInit {
             searchCallback: this.getFeatures.bind(this),
             gridOptions: new GridOptions(0, 10, 1, '', '', ''),
             rowClickCallback:this.onEdit.bind(this)
-        }
+        };
         this.getFeatures();
-
     }
 
     getFeatures() {
@@ -56,5 +55,4 @@ export class FeatureListComponent implements OnInit {
     onEdit(item:FeatureInfo) {
         this._router.navigate(['/Admin/Feature/Edit/' + item.Id]);
     }
-    
 }

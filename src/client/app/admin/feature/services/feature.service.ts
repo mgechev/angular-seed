@@ -9,7 +9,7 @@ import { Config } from '../../../shared/config/config';
 @Injectable()
 export class FeatureService {
 
-    constructor( private authHttp: AuthHttp) { }
+    constructor(private authHttp: AuthHttp) { }
 
     addFeature(feature: FeatureInfo) {
         let url = Config.GetURL('/api/Feature/Add');
@@ -19,7 +19,7 @@ export class FeatureService {
     }
 
     getFeatures(gridOptions: GridOptions) {
-        let url =Config.GetURL('/api/Feature/GetFeatures');
+        let url = Config.GetURL('/api/Feature/GetFeatures');
         return this.authHttp.post(url, { gridOptions })
             .map(this.extractData)
             .catch(this.handleError);

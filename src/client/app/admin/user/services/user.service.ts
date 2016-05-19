@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { UserInfo } from '../models/userInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 

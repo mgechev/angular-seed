@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import { Router, OnActivate, RouteSegment, ROUTER_DIRECTIVES } from '@angular/router';
+import {Component} from '@angular/core';
+import { Router, RouteSegment, ROUTER_DIRECTIVES } from '@angular/router';
 import { RoleInfo } from '../models/roleInfo';
 import { RoleService } from '../services/role.service';
 import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
@@ -11,27 +11,24 @@ import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
     directives: [ROUTER_DIRECTIVES, TYPEAHEAD_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES]
 })
 
-export class RoleAddEditComponent implements OnInit {
-    role: RoleInfo
-    errorMessage: string
-    params: number
-    permissionList: Array<any>
-    rolePermissionList: Array<any>
-    selectedPermission: any
+export class RoleAddEditComponent {
+    role: RoleInfo;
+    errorMessage: string;
+    params: number;
+    permissionList: Array<any>;
+    rolePermissionList: Array<any>;
+    selectedPermission: any;
     constructor(private _roleService: RoleService,
         private _router: Router) {
-        this.role = new RoleInfo(0, '')
+        this.role = new RoleInfo(0, '');
     }
 
-    ngOnInit() {
-    }
-    
     routerOnActivate(segment: RouteSegment) {
         this.params = Number(segment.getParam('id'));
         if (this.params) {
             this._roleService.getRoleById(this.params)
                 .subscribe(
-                results=> {
+                results => {
                     this.role = results;
                 },
                 error => this.errorMessage = <any>error);
@@ -39,19 +36,19 @@ export class RoleAddEditComponent implements OnInit {
             this.getPermissionsByRole();
         }
     }
-    
+
     onSave(): void {
         if (this.params) {
             this._roleService.editRole(this.role)
                 .subscribe(
-                results=> {
+                results => {
                     this._router.navigate(['/Admin/Role/']);
                 },
                 error => this.errorMessage = <any>error);
         } else {
             this._roleService.addRole(this.role)
                 .subscribe(
-                results=> {
+                results => {
                     this._router.navigate(['/Admin/Role/']);
                 },
                 error => this.errorMessage = <any>error);
@@ -61,7 +58,7 @@ export class RoleAddEditComponent implements OnInit {
     getAllPermissions() {
         this._roleService.getAllPermissions()
             .subscribe(
-            results=> {
+            results => {
                 this.permissionList = results;
             },
             error => this.errorMessage = <any>error);
@@ -75,7 +72,7 @@ export class RoleAddEditComponent implements OnInit {
     getPermissionsByRole() {
         this._roleService.getPermissionsByRole(this.params)
             .subscribe(
-            results=> {
+            results => {
                 this.rolePermissionList = results;
             },
             error => this.errorMessage = <any>error);
@@ -84,17 +81,17 @@ export class RoleAddEditComponent implements OnInit {
     onAddPermission() {
         this._roleService.addPermissionToRole(this.selectedPermission)
             .subscribe(
-            results=> {
+            results => {
                 this.getPermissionsByRole();
                 this.selectedPermission = {};
             },
             error => this.errorMessage = <any>error);
     }
-    revokePermission(permission:any) {
+    revokePermission(permission: any) {
         permission.roleId = this.params;
         this._roleService.revokePermissionFromRole(permission)
             .subscribe(
-            results=> {
+            results => {
                 this.getPermissionsByRole();
             },
             error => this.errorMessage = <any>error);

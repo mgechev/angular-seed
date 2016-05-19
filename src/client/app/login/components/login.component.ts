@@ -19,21 +19,21 @@ export class LoginComponent {
         this._loginService.authenticate(this.model)
             .subscribe(
             results=> {
-               this.getLoggedInUserPermission()
+               this.getLoggedInUserPermission();
             },
             error => this.errorMessage = <any>error);
     }
-    getLoggedInUserPermission():void{
+    getLoggedInUserPermission():void {
         this._loginService.getLoggedInUserPermission()
             .subscribe(
             results=> {
                 this.userPermission = results;
-                this.setPermissions(); 
+                this.setPermissions();
             },
             error => this.errorMessage = <any>error);
     }
-    setPermissions(): void{
-       localStorage.setItem('loggedInUserPermission',JSON.stringify(this.userPermission)) 
+    setPermissions(): void {
+       localStorage.setItem('loggedInUserPermission',JSON.stringify(this.userPermission));
        this._router.navigate(['/App']);
     }
 }
