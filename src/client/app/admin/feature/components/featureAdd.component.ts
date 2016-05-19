@@ -36,14 +36,14 @@ export class FeatureAddComponent implements OnActivate {
             this._featureService.editFeature(this.feature)
                 .subscribe(
                 results=> {
-                    this._router.navigate(['/Admin/Feature/']);
+                    this._router.navigate(['/App/Admin/Feature/']);
                 },
                 error => this.errorMessage = <any>error);
         } else {
             this._featureService.addFeature(this.feature)
                 .subscribe(
                 results=> {
-                    this._router.navigate(['/Admin/Feature/']);
+                    this._router.navigate(['/App/Admin/Feature/']);
                 },
                 error => this.errorMessage = <any>error);
         }

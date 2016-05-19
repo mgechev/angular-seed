@@ -43,14 +43,14 @@ export class RoleAddEditComponent {
             this._roleService.editRole(this.role)
                 .subscribe(
                 results => {
-                    this._router.navigate(['/Admin/Role/']);
+                    this._router.navigate(['/App/Admin/Role/']);
                 },
                 error => this.errorMessage = <any>error);
         } else {
             this._roleService.addRole(this.role)
                 .subscribe(
                 results => {
-                    this._router.navigate(['/Admin/Role/']);
+                    this._router.navigate(['/App/Admin/Role/']);
                 },
                 error => this.errorMessage = <any>error);
         }

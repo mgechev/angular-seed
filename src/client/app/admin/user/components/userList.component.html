@@ -29,7 +29,7 @@
                                 <tr *ngFor="let user of userList; let index = index">
                                     <td> {{index+1}} </td>
                                     <td> {{user.UserName}} </td>
-                                    <td><a  [routerLink]="['/Admin/User/Role/'+user.Id]"> Manage Role  </a></td>
+                                    <td><a  [routerLink]="['/App/Admin/User/Role/'+user.Id]"> Manage Role  </a></td>
                                 </tr>
                             </tbody>
                         </table>

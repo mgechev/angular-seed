@@ -3,7 +3,7 @@ import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
 import { RRFDashboardListComponent } from './RRFDashboardList.component';
 import { RRFDashboardAddComponent } from './RRFDashboardAdd.component';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
-import { RRFAssignComponent } from './RRFAssign.Component';
+import { RRFAssignComponent } from './RRFAssign.component';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
 
 @Component({

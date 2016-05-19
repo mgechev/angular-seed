@@ -16,7 +16,7 @@
         <div class="row">
             <div class="portlet light bordered">
                 <div class="portlet-body">
-                    <a class="btn btn-circle dark btn-outline" [routerLink]="['/Admin/Role/Add']">Add New</a>
+                    <a class="btn btn-circle dark btn-outline" [routerLink]="['/App/Admin/Role/Add']">Add New</a>
                     <div class="table-scrollable">
                         <table class="table table-hover">
                             <thead>
@@ -31,7 +31,7 @@
                                 <tr *ngFor="let role of roleList; let index = index">
                                     <td> {{index+1}} </td>
                                     <td> {{role.RoleName}} </td>
-                                    <td><a [routerLink]="['/Admin/Role/Edit/'+role.Id]"> Edit </a></td>
+                                    <td><a [routerLink]="['/App/Admin/Role/Edit/'+role.Id]"> Edit </a></td>
                                     <td><a (click)="onDelete(role)"> Delete </a></td>
                                 </tr>
                             </tbody>

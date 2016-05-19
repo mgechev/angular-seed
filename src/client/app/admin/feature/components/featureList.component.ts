@@ -54,6 +54,6 @@ export class FeatureListComponent implements OnInit {
     }
 
     onEdit(item:FeatureInfo) {
-        this._router.navigate(['/Admin/Feature/Edit/' + item.Id]);
+        this._router.navigate(['/App/Admin/Feature/Edit/' + item.Id]);
     }
 }
