@@ -194,109 +194,109 @@ export class MyProfilesAddComponent implements OnActivate {
     }
 
     onSavePrimaryInfo(): void {
-        this.showMessage('Wait', true);
+     //   this.showMessage('Wait', true);
         if (this.params) {
             this._myProfilesService.editCandidateProfile(this.profile)
                 .subscribe(
                 results => {
-                    this.showMessage('Details Saved Sucessfully', false);
+                    //   this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => this.errorMessage = <any>error);
         }
     }
 
     onSavePersonalDetails(): void {
-        this.showMessage('Wait', true);
+     //   this.showMessage('Wait', true);
         if (this.params) {
             this._myProfilesService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.showMessage('Details Saved Sucessfully', false);
+                    //   this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.showMessage(this.errorMessage, false);
+                    //this.showMessage(this.errorMessage, false);
                 });
         }
     }
 
     onSaveProfessionalDetails(): void {
-        this.showMessage('Wait', true);
+     //   this.showMessage('Wait', true);
         if (this.params) {
             this._myProfilesService.editCandidateProfessionalDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.showMessage('Details Saved Sucessfully', false);
+                    //   this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => this.errorMessage = <any>error);
         }
     }
 
     onSaveQualificationDetails(): void {
-        this.showMessage('Wait', true);
+     //   this.showMessage('Wait', true);
         if (this.params) {
             this._myProfilesService.editCandidateQualificationDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.showMessage('Details Saved Sucessfully', false);
+                    //   this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => this.errorMessage = <any>error);
         }
     }
 
     onSaveSkillsDetails(): void {
-        this.showMessage('Wait', true);
+     //   this.showMessage('Wait', true);
         if (this.params) {
             this._myProfilesService.editCandidateSkillsDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.showMessage('Details Saved Sucessfully', false);
+                    //   this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => this.errorMessage = <any>error);
         }
     }
 
     onSaveTeamManagementDetails(): void {
-        this.showMessage('Wait', true);
+     //   this.showMessage('Wait', true);
         if (this.params) {
             this._myProfilesService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.showMessage('Details Saved Sucessfully', false);
+                    //   this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => this.errorMessage = <any>error);
         }
     }
 
     onSaveCareerProfileDetails(): void {
-        this.showMessage('Wait', true);
+     //   this.showMessage('Wait', true);
         if (this.params) {
             this._myProfilesService.editCandidateCareerDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.showMessage('Details Saved Sucessfully', false);
+                    //   this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => this.errorMessage = <any>error);
         }
     }
     onSaveSalaryDetails(): void {
-        this.showMessage('Wait', true);
+     //   this.showMessage('Wait', true);
 
         if (this.params) {
             this._myProfilesService.editCandidateSalaryDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.showMessage('Details Saved Sucessfully', false);
+                    //   this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.showMessage(this.errorMessage, false);
+                    //this.showMessage(this.errorMessage, false);
                 });
         }
     }
 
     onAddQualification(): void {
-        this.showMessage('Wait', true);
+     //   this.showMessage('Wait', true);
 
         if (this.qualification.QualificationID === undefined) {
             this.qualification.Qualification = new Array<Masters>();
@@ -317,7 +317,7 @@ export class MyProfilesAddComponent implements OnActivate {
                     },
                     error => {
                         this.errorMessage = <any>error;
-                        this.showMessage(this.errorMessage, false);
+                        //this.showMessage(this.errorMessage, false);
                     });
             }
         } else {
@@ -345,7 +345,7 @@ export class MyProfilesAddComponent implements OnActivate {
                     },
                     error => {
                         this.errorMessage = <any>error;
-                        this.showMessage(this.errorMessage, false);
+                        //this.showMessage(this.errorMessage, false);
                     });
             }
         }
@@ -358,11 +358,11 @@ export class MyProfilesAddComponent implements OnActivate {
                 results => {
                     this.profile.Qualifications = new Array<Qualification>();
                     this.profile.Qualifications = results;
-                    this.showMessage('Details Saved Sucessfully', false);
+                    //   this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.showMessage(this.errorMessage, false);
+                    //this.showMessage(this.errorMessage, false);
                 });
         }
     }

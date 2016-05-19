@@ -9,7 +9,8 @@ import * as  _ from 'lodash';
     moduleId: module.id,
     selector: 'rrf-black-listed-profile-add',
     templateUrl: 'blackListedProfilesAdd.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES],
+    styleUrls: ['app/profileBank/myProfiles/components/myProfiles.component.css']
 })
 
 export class BlackListedProfilesAddComponent implements OnActivate {
@@ -190,109 +191,109 @@ export class BlackListedProfilesAddComponent implements OnActivate {
     }
 
     onSavePrimaryInfo(): void {
-        this.showMessage('Wait', true);
+        //this.showMessage('Wait', true);
         if (this.params) {
             this._blacklistedProfilesService.editCandidateProfile(this.profile)
                 .subscribe(
                 results => {
-                    this.showMessage('Details Saved Sucessfully', false);
+                    //this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => this.errorMessage = <any>error);
         }
     }
 
     onSavePersonalDetails(): void {
-        this.showMessage('Wait', true);
+        //this.showMessage('Wait', true);
         if (this.params) {
             this._blacklistedProfilesService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.showMessage('Details Saved Sucessfully', false);
+                    //this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.showMessage(this.errorMessage, false);
+                    //this.showMessage(this.errorMessage, false);
                 });
         }
     }
 
     onSaveProfessionalDetails(): void {
-        this.showMessage('Wait', true);
+        //this.showMessage('Wait', true);
         if (this.params) {
             this._blacklistedProfilesService.editCandidateProfessionalDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.showMessage('Details Saved Sucessfully', false);
+                    //this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => this.errorMessage = <any>error);
         }
     }
 
     onSaveQualificationDetails(): void {
-        this.showMessage('Wait', true);
+        //this.showMessage('Wait', true);
         if (this.params) {
             this._blacklistedProfilesService.editCandidateQualificationDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.showMessage('Details Saved Sucessfully', false);
+                    //this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => this.errorMessage = <any>error);
         }
     }
 
     onSaveSkillsDetails(): void {
-        this.showMessage('Wait', true);
+        //this.showMessage('Wait', true);
         if (this.params) {
             this._blacklistedProfilesService.editCandidateSkillsDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.showMessage('Details Saved Sucessfully', false);
+                    //this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => this.errorMessage = <any>error);
         }
     }
 
     onSaveTeamManagementDetails(): void {
-        this.showMessage('Wait', true);
+        //this.showMessage('Wait', true);
         if (this.params) {
             this._blacklistedProfilesService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.showMessage('Details Saved Sucessfully', false);
+                    //this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => this.errorMessage = <any>error);
         }
     }
 
     onSaveCareerProfileDetails(): void {
-        this.showMessage('Wait', true);
+        //this.showMessage('Wait', true);
         if (this.params) {
             this._blacklistedProfilesService.editCandidateCareerDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.showMessage('Details Saved Sucessfully', false);
+                    //this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => this.errorMessage = <any>error);
         }
     }
     onSaveSalaryDetails(): void {
-        this.showMessage('Wait', true);
+        //this.showMessage('Wait', true);
 
         if (this.params) {
             this._blacklistedProfilesService.editCandidateSalaryDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.showMessage('Details Saved Sucessfully', false);
+                    //this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.showMessage(this.errorMessage, false);
+                    //this.showMessage(this.errorMessage, false);
                 });
         }
     }
 
     onAddQualification(): void {
-        this.showMessage('Wait', true);
+        //this.showMessage('Wait', true);
 
         if (this.qualification.QualificationID === undefined) {
             this.qualification.Qualification = new Array<Masters>();
@@ -313,7 +314,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
                     },
                     error => {
                         this.errorMessage = <any>error;
-                        this.showMessage(this.errorMessage, false);
+                        //this.showMessage(this.errorMessage, false);
                     });
             }
         } else {
@@ -341,7 +342,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
                     },
                     error => {
                         this.errorMessage = <any>error;
-                        this.showMessage(this.errorMessage, false);
+                        //this.showMessage(this.errorMessage, false);
                     });
             }
         }
@@ -354,11 +355,11 @@ export class BlackListedProfilesAddComponent implements OnActivate {
                 results => {
                     this.profile.Qualifications = new Array<Qualification>();
                     this.profile.Qualifications = results;
-                    this.showMessage('Details Saved Sucessfully', false);
+                    //this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.showMessage(this.errorMessage, false);
+                    //this.showMessage(this.errorMessage, false);
                 });
         }
     }
@@ -373,15 +374,15 @@ export class BlackListedProfilesAddComponent implements OnActivate {
         this.IsHidden = false;
     }
 
-    showMessage(msg: string, isWait: boolean) {
-        var obj = $('.Loader');
-        if (isWait) {
-            obj = obj.show().html(
-                '<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
-        } else {
-            obj = $('.Loader').html(msg).fadeIn(400).delay(1500)
-                .fadeOut(400);
-        }
-    }
+    // showMessage(msg: string, isWait: boolean) {
+    //     var obj = $('.Loader');
+    //     if (isWait) {
+    //         obj = obj.show().html(
+    //             '<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
+    //     } else {
+    //         obj = $('.Loader').html(msg).fadeIn(400).delay(1500)
+    //             .fadeOut(400);
+    //     }
+    // }
 
 }

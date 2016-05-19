@@ -9,7 +9,8 @@ import * as  _ from 'lodash';
     moduleId: module.id,
     selector: 'rrf-allprofiles-list',
     templateUrl: 'allProfilesList.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES],
+    styleUrls: ['app/profileBank/myProfiles/components/myProfiles.component.css']
 })
 
 export class AllProfilesListComponent implements OnActivate {
@@ -72,7 +73,8 @@ export class AllProfilesListComponent implements OnActivate {
         this._allProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.Comments)
             .subscribe(
             results => {
-                $('#myModal').modal('toggle');
+             //   $('#myModal').modal('toggle');
+                alert('Status Updated Sucessfully');
                 this.getAllProfiles();
             },
             error => this.errorMessage = <any>error);

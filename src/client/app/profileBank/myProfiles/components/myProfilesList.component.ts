@@ -32,7 +32,7 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     routerOnActivate() {
-        $('[data-toggle="tooltip"]').tooltip();
+     //   $('[data-toggle="tooltip"]').tooltip();
 
         this.getMyProfiles();
         this.getCandidateStatuses();
@@ -100,7 +100,8 @@ export class MyProfilesListComponent implements OnActivate {
          this._myProfilesService.updateCandidateStatus(this.seletedCandidateID,this.selectedStatus,this.Comments)
             .subscribe(
             results => {
-                $('#myModal').modal('toggle');
+               // $('#myModal').modal('toggle');
+               alert('Status updated sucessfully');
                 this.getMyProfiles();
             },
             error => this.errorMessage = <any>error);

@@ -9,7 +9,8 @@ import * as  _ from 'lodash';
     moduleId: module.id,
     selector: 'rrf-black-listed-profiles-list',
     templateUrl: 'blackListedProfilesList.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES],
+    styleUrls: ['app/profileBank/myProfiles/components/myProfiles.component.css']
 })
 
 export class BlackListedProfilesListComponent implements OnActivate {
@@ -68,7 +69,8 @@ export class BlackListedProfilesListComponent implements OnActivate {
         this._blacklistedProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.Comments)
             .subscribe(
             results => {
-                $('#myModal').modal('toggle');
+                //$('#myModal').modal('toggle');
+                alert('Status updated sucessfully');
                 this.getBlacklistedProfiles();
             },
             error => this.errorMessage = <any>error);

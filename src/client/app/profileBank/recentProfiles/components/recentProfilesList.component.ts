@@ -9,7 +9,8 @@ import * as  _ from 'lodash';
     moduleId: module.id,
     selector: 'rrf-recent-profiles-list',
     templateUrl: 'recentProfilesList.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES],
+    styleUrls: ['app/profileBank/myProfiles/components/myProfiles.component.css']
 })
 
 export class RecentProfilesListComponent implements OnActivate {
@@ -67,7 +68,7 @@ export class RecentProfilesListComponent implements OnActivate {
         this._recentProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.Comments)
             .subscribe(
             results => {
-                $('#myModal').modal('toggle');
+                alert('Status updated successfully');
                 this.getRecentProfiles();
             },
             error => this.errorMessage = <any>error);
