@@ -10,7 +10,7 @@ import * as  _ from 'lodash';
     selector: 'rrf-allprofiles-list',
     templateUrl: 'allProfilesList.component.html',
     directives: [ROUTER_DIRECTIVES],
-    styleUrls: ['app/profileBank/myProfiles/components/myProfiles.component.css']
+    styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
 
 export class AllProfilesListComponent implements OnActivate {

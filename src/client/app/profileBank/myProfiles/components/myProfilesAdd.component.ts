@@ -377,15 +377,15 @@ export class MyProfilesAddComponent implements OnActivate {
         this.IsHidden = false;
     }
 
-    showMessage(msg: string, isWait: boolean) {
-        var obj = $('.Loader');
-        if (isWait) {
-            obj = obj.show().html(
-                '<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
-        } else {
-            obj = $('.Loader').html(msg).fadeIn(400).delay(1500)
-                .fadeOut(400);
-        }
-    }
+    // showMessage(msg: string, isWait: boolean) {
+    //     var obj = $('.Loader');
+    //     if (isWait) {
+    //         obj = obj.show().html(
+    //             '<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
+    //     } else {
+    //         obj = $('.Loader').html(msg).fadeIn(400).delay(1500)
+    //             .fadeOut(400);
+    //     }
+    // }
 
 }

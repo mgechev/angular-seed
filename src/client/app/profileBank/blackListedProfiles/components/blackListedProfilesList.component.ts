@@ -10,7 +10,7 @@ import * as  _ from 'lodash';
     selector: 'rrf-black-listed-profiles-list',
     templateUrl: 'blackListedProfilesList.component.html',
     directives: [ROUTER_DIRECTIVES],
-    styleUrls: ['app/profileBank/myProfiles/components/myProfiles.component.css']
+     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
 
 export class BlackListedProfilesListComponent implements OnActivate {
