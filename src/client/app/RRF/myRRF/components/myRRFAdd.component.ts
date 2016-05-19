@@ -62,7 +62,7 @@ export class MyRRFAddComponent implements OnActivate {
     }
 
     onCancelClick(): void {
-        this._router.navigate(['/RRF/RRFDashboard/']);
+        this._router.navigate(['/App/RRF/RRFDashboard/']);
     }
 
     getDesignation(): void {

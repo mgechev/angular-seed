@@ -16,7 +16,7 @@
 
                 <div class="col-lg-12" id="divPiaChart">
                     <div class="portlet light bordered">
-                        <div id="chartdiv" ></div>
+                        <div id="chartdiv"></div>
                     </div>
                 </div>
 
@@ -32,7 +32,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="btn-group">
-                                        <a class="btn btn-circle dark btn-outline" [routerLink]="['/RRF/MyRRF/Add']">
+                                        <a class="btn btn-circle dark btn-outline" [routerLink]="['/App/RRF/MyRRF/Add']">
                                             <i class="fa fa-plus"></i> Initiate RRF
                                         </a>
                                     </div>
@@ -72,12 +72,12 @@
                                 <div class="col-lg-4 col-sm-4">
                                     <div class="mt-radio-inline">
                                         <label class="mt-radio">
-                                            <input type="radio" name="viewType" id="MyRRF" value="MyRRF" checked (click)="onViewChanged('MyRRF')"/> My RRF
+                                            <input type="radio" name="viewType" id="MyRRF" value="MyRRF" checked (click)="onViewChanged('MyRRF')" /> My RRF
                                             <span></span>
                                         </label>
                                         <label class="mt-radio">
-                                           
-                                             <input type="radio" name="viewType" id="AllRRF" value="AllRRF"  (click)="onViewChanged('AllRRF')"/> All RRF
+
+                                            <input type="radio" name="viewType" id="AllRRF" value="AllRRF" (click)="onViewChanged('AllRRF')" /> All RRF
                                             <span></span>
                                         </label>
 
@@ -99,10 +99,16 @@
                             <table class="table table-striped table-bordered table-hover table-checkable order-column">
                                 <thead style="word-wrap: break-word;">
                                     <tr>
-                                        <td width="20%"> <b>Raise by / Date</b> </td>
+                                        <!--<td width="20%"> <b>Raised by / Date</b> </td>
                                         <td width="30%"> <b>Position Details</b> </td>
                                         <td width="30%"> <b>Requirments </b></td>
-                                        <td width="20%"> <b>Status </b></td>
+                                        <td width="10%"> <b>Status </b></td>
+                                        <td width="10%"><b> Action </b></td>-->
+                                         <td> <b>Raised by / Date</b> </td>
+                                        <td> <b>Position Details</b> </td>
+                                        <td> <b>Requirments </b></td>
+                                        <td> <b>Status </b></td>
+                                        <td><b> Action </b></td>
 
                                     </tr>
                                 </thead>
@@ -145,7 +151,7 @@
                                             </div>
 
                                         </td>
-
+                                        <td><a class="edit" href="javascript:;"> Assign </a></td>
                                     </tr>
                                 </tbody>
                             </table>
