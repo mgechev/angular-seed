@@ -1,3 +1,5 @@
+const SpecReporter = require('jasmine-spec-reporter');
+
 const config = {
   baseUrl: 'http://localhost:5555/',
 
@@ -26,14 +28,12 @@ const config = {
     browserName: 'chrome'
   },
 
-  onPrepare: function() {
-    const SpecReporter = require('jasmine-spec-reporter');
+  onPrepare() {
     // add jasmine spec reporter
     jasmine.getEnv().addReporter(new SpecReporter({ displayStacktrace: true }));
 
     browser.ignoreSynchronization = false;
   },
-
 
   /**
    * Angular 2 configuration
@@ -47,6 +47,12 @@ const config = {
 if (process.env.TRAVIS) {
   config.capabilities = {
     browserName: 'firefox'
+  };
+}
+
+if (process.env.APPVEYOR) {
+  config.capabilities = {
+    browserName: 'internet explorer'
   };
 }
 
