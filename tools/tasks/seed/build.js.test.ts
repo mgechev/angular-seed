@@ -8,8 +8,8 @@ import { makeTsProject } from '../../utils';
 const plugins = <any>gulpLoadPlugins();
 
 /**
- * Executes the build process, transpiling the TypeScript files (excluding the
- * spec and e2e-spec files) for the test environment.
+ * Executes the build process, transpiling the TypeScript files (excluding the spec and e2e-spec files) for the test
+ * environment.
  */
 export = () => {
   let tsProject = makeTsProject();

@@ -35,8 +35,8 @@ function prepareTemplates() {
 }
 
 /**
- * Processes the CSS files within `src/client` excluding those in
- * `src/client/assets` using `postcss` with the configured processors.
+ * Processes the CSS files within `src/client` excluding those in `src/client/assets` using `postcss` with the
+ * configured processors.
  */
 function processComponentCss() {
   return gulp.src([
@@ -49,8 +49,7 @@ function processComponentCss() {
 }
 
 /**
- * Processes the external CSS files using `postcss` with the configured
- * processors.
+ * Processes the external CSS files using `postcss` with the configured processors.
  */
 function processExternalCss() {
   return gulp.src(getExternalCss().map(r => r.src))
@@ -62,8 +61,7 @@ function processExternalCss() {
 }
 
 /**
- * Returns the array of external CSS dependencies listed in the application
- * configuration.
+ * Returns the array of external CSS dependencies listed in the application configuration.
  */
 function getExternalCss() {
   return DEPENDENCIES.filter(d => /\.css$/.test(d.src));

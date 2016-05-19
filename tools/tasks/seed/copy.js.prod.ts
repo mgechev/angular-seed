@@ -4,8 +4,7 @@ import { join } from 'path';
 import { APP_SRC, TMP_DIR } from '../../config';
 
 /**
- * Executes the build task, copying all TypeScript files over to the `dist/tmp`
- * directory.
+ * Executes the build task, copying all TypeScript files over to the `dist/tmp` directory.
  */
 export = () => {
   return gulp.src([
