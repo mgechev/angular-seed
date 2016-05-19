@@ -7,8 +7,9 @@ import {GridOptions} from '../../../shared/components/rmsGrid/models/gridOptions
 import {GridMeta} from '../../../shared/components/rmsGrid/models/gridMeta';
 
 @Component({
+    moduleId: module.id,
     selector: 'admin-feature-list',
-    templateUrl: 'app/admin/feature/components/featureList.component.html',
+    templateUrl: 'featureList.component.html',
     directives: [ROUTER_DIRECTIVES, RMSGridComponent]
 })
 

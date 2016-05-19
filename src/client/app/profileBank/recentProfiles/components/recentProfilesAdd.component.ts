@@ -6,8 +6,9 @@ import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 
 @Component({
+    moduleId: module.id,
     selector: 'rrf-recent-profiles-add',
-    templateUrl: 'app/profileBank/recentProfiles/components/recentProfilesAdd.component.html',
+    templateUrl: 'recentProfilesAdd.component.html',
     directives: [ROUTER_DIRECTIVES],
 })
 

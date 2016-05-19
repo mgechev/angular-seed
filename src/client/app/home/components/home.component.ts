@@ -25,8 +25,9 @@ import { RRFDashboardComponent } from '../../RRF/RRFDashboard/index';
 
 
 @Component({
-    templateUrl: 'app/home/components/home.component.html',
-    styleUrls: ['app/home/components/home.component.css'],
+    moduleId: module.id,
+    templateUrl: 'home.component.html',
+    styleUrls: ['home.component.css'],
     directives: [ROUTER_DIRECTIVES, FooterComponent, PageActionsComponent, TopNavigationBarComponent,
         SideBarComponent, QuickSidebarComponent],
 })

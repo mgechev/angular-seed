@@ -6,10 +6,11 @@ import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 
 @Component({
+    moduleId: module.id,
     selector: 'rrf-myprofiles-list',
-    templateUrl: 'app/profileBank/myProfiles/components/myProfilesList.component.html',
+    templateUrl: 'myProfilesList.component.html',
     directives: [ROUTER_DIRECTIVES],
-    styleUrls: ['app/profileBank/myProfiles/components/myProfiles.component.css'],
+    styleUrls: ['myProfiles.component.css'],
 })
 
 export class MyProfilesListComponent implements OnActivate {

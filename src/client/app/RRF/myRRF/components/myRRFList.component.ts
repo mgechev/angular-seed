@@ -5,8 +5,9 @@ import { MyRRFService } from '../services/myRRF.service';
 import { RRFDetails } from '../models/rrfDetails';
 
 @Component({
+    moduleId: module.id,
     selector: 'rrf-myrrf-list',
-    templateUrl: 'app/RRF/myRRF/components/myRRFList.component.html',
+    templateUrl: 'myRRFList.component.html',
     directives: [ROUTER_DIRECTIVES],
 
 })

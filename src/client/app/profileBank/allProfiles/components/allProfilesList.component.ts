@@ -6,8 +6,9 @@ import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 
 @Component({
+    moduleId: module.id,
     selector: 'rrf-allprofiles-list',
-    templateUrl: 'app/profileBank/allProfiles/components/allProfilesList.component.html',
+    templateUrl: 'allProfilesList.component.html',
     directives: [ROUTER_DIRECTIVES]
 })
 

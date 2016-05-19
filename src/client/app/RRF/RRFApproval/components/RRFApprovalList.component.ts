@@ -4,10 +4,11 @@ import { RRFDetails } from '../../myRRF/models/rrfDetails';
 import { RRFApprovalService } from '../services/rrfApproval.service';
 
 @Component({
+    moduleId: module.id,
     selector: 'rrf-approval-list',
-    templateUrl: 'app/RRF/RRFApproval/components/RRFApprovalList.component.html',
+    templateUrl: 'RRFApprovalList.component.html',
     directives: [ROUTER_DIRECTIVES],
-    styleUrls: ['app/RRF/RRFApproval/components/RRFApproval.component.css']
+    styleUrls: ['RRFApproval.component.css']
 })
 
 export class RRFApprovalListComponent implements OnActivate {

@@ -4,8 +4,9 @@ import { UserService } from '../services/user.service';
 import { RoleService, RoleInfo } from '../../role/index';
 
 @Component({
+    moduleId: module.id,
     selector: 'admin-user-role',
-    templateUrl: 'app/admin/user/components/userRole.component.html',
+    templateUrl: 'userRole.component.html',
     directives: [ROUTER_DIRECTIVES],
     providers: [RoleService]
 })

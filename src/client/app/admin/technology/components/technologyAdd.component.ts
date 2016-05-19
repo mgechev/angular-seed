@@ -4,8 +4,9 @@ import { TechnologyInfo } from '../models/technologyInfo';
 import { TechnologyService } from '../services/technology.service';
 
 @Component({
+    moduleId: module.id,
     selector: 'admin-technology-add',
-    templateUrl: 'app/admin/technology/components/technologyAdd.component.html',
+    templateUrl: 'technologyAdd.component.html',
     directives: [ROUTER_DIRECTIVES]
 })
 

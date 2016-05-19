@@ -5,8 +5,9 @@ import { MyRRFService } from '../services/myRRF.service';
 import { MastersService } from '../../../shared/services/masters.service';
 
 @Component({
+    moduleId: module.id,
     selector: 'rrf-myrrf-add',
-    templateUrl: 'app/RRF/myRRF/components/myRRFAdd.component.html',
+    templateUrl: 'myRRFAdd.component.html',
     directives: [ROUTER_DIRECTIVES]
 })
 

@@ -4,8 +4,9 @@ import { QualificationInfo } from '../models/qualificationInfo';
 import { QualificationService } from '../services/qualification.service';
 
 @Component({
+    moduleId: module.id,
     selector: 'admin-qualification-add',
-    templateUrl: 'app/admin/qualification/components/qualificationAdd.component.html',
+    templateUrl: 'qualificationAdd.component.html',
     directives: [ROUTER_DIRECTIVES]
 })
 

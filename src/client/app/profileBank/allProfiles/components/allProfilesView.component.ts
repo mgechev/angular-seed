@@ -4,8 +4,9 @@ import { MyProfilesInfo } from '../../myProfiles/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
 
 @Component({
+    moduleId: module.id,
     selector: 'rrf-allprofiles-view',
-    templateUrl: 'app/profileBank/allProfiles/components/allProfilesView.component.html',
+    templateUrl: 'allProfilesView.component.html',
     directives: [ROUTER_DIRECTIVES]
 })
 export class AllProfilesViewComponent implements OnActivate {

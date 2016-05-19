@@ -6,8 +6,9 @@ import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
 
 @Component({
+    moduleId: module.id,
     selector: 'admin-role-add',
-    templateUrl: 'app/admin/role/components/roleAddEdit.component.html',
+    templateUrl: 'roleAddEdit.component.html',
     directives: [ROUTER_DIRECTIVES, TYPEAHEAD_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES]
 })
 

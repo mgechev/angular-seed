@@ -4,8 +4,9 @@ import { InterviewRoundInfo } from '../models/interviewRoundInfo';
 import { InterviewRoundService } from '../services/interviewRound.service';
 
 @Component({
+    moduleId: module.id,
     selector: 'admin-interview-round-add',
-    templateUrl: 'app/admin/interviewRound/components/interviewRoundAdd.component.html',
+    templateUrl: 'interviewRoundAdd.component.html',
     directives: [ROUTER_DIRECTIVES]
 })
 

@@ -2,8 +2,9 @@ import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
 @Component({
+    moduleId: module.id,
     selector: 'rrf-approval-add',
-    templateUrl: 'app/RRF/RRFApproval/components/RRFApprovalAdd.component.html',
+    templateUrl: 'RRFApprovalAdd.component.html',
     directives: [ROUTER_DIRECTIVES]
 })
 

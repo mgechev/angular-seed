@@ -4,8 +4,9 @@ import { OwnerTypeInfo } from '../models/ownerTypeInfo';
 import { OwnerTypeService } from '../services/ownerType.service';
 
 @Component({
+    moduleId: module.id,
     selector: 'admin-ownertype-add',
-    templateUrl: 'app/admin/ownerType/components/ownerTypeAdd.component.html',
+    templateUrl: 'ownerTypeAdd.component.html',
     directives: [ROUTER_DIRECTIVES]
 })
 

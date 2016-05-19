@@ -4,8 +4,9 @@ import { PracticeInfo } from '../models/practiceInfo';
 import { PracticeService } from '../services/practice.service';
 
 @Component({
+    moduleId: module.id,
     selector: 'admin-practice-list',
-    templateUrl: 'app/admin/practice/components/practiceList.component.html',
+    templateUrl: 'practiceList.component.html',
     directives: [ROUTER_DIRECTIVES]
 })
 

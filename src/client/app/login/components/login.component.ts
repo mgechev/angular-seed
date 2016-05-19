@@ -4,9 +4,10 @@ import { LoginService } from '../../shared/services/login.service';
 import { Router } from '@angular/router';
 
 @Component({
+    moduleId: module.id,
     selector: 'login',
-    templateUrl: 'app/login/components/login.component.html',
-    styleUrls: ['app/login/components/login.component.css']
+    templateUrl: 'login.component.html',
+    styleUrls: ['login.component.css']
 })
 export class LoginComponent {
     public errorMessage: string;

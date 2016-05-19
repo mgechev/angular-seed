@@ -6,8 +6,9 @@ import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 
 @Component({
+    moduleId: module.id,
     selector: 'rrf-black-listed-profiles-list',
-    templateUrl: 'app/profileBank/blackListedProfiles/components/blackListedProfilesList.component.html',
+    templateUrl: 'blackListedProfilesList.component.html',
     directives: [ROUTER_DIRECTIVES]
 })
 

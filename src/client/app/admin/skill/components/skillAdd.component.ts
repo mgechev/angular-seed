@@ -4,8 +4,9 @@ import { SkillInfo } from '../models/skillInfo';
 import { SkillService } from '../services/skill.service';
 
 @Component({
+    moduleId: module.id,
     selector: 'admin-skill-add',
-    templateUrl: 'app/admin/skill/components/skillAdd.component.html',
+    templateUrl: 'skillAdd.component.html',
     directives: [ROUTER_DIRECTIVES]
 })
 

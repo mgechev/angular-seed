@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
 
 @Component({
+  moduleId: module.id,
   selector: 'theme-panel',
-  templateUrl: 'app/layout/themePanel/themePanel.component.html'
+  templateUrl: 'themePanel.component.html'
 })
 export class ThemePanelComponent {
 }

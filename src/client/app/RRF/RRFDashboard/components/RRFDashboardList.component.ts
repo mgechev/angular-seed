@@ -5,8 +5,9 @@ import { RRFDetails, AllRRFStatusCount } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
 
 @Component({
+    moduleId: module.id,
     selector: 'rrf-dashboard-list',
-    templateUrl: 'app/RRF/RRFDashboard/components/RRFDashboardList.component.html',
+    templateUrl: 'RRFDashboardList.component.html',
     directives: [ROUTER_DIRECTIVES]
 })
 

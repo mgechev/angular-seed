@@ -3,8 +3,9 @@ import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 import { LoginService } from '../../shared/services/login.service';
 
 @Component({
+    moduleId: module.id,
     selector: 'top-navigation-bar',
-    templateUrl: 'app/layout/topNavigationBar/topNavigationBar.component.html',
+    templateUrl: 'topNavigationBar.component.html',
     directives: [ROUTER_DIRECTIVES],
 })
 

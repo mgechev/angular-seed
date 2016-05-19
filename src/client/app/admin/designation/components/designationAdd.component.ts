@@ -4,8 +4,9 @@ import { DesignationInfo } from '../models/designationInfo';
 import { DesignationService } from '../services/designation.service';
 
 @Component({
+    moduleId: module.id,
     selector: 'admin-designation-add',
-    templateUrl: 'app/admin/designation/components/designationAdd.component.html',
+    templateUrl: 'designationAdd.component.html',
     directives: [ROUTER_DIRECTIVES]
 })
 

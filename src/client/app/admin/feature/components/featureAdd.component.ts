@@ -4,8 +4,9 @@ import { FeatureInfo } from '../models/featureInfo';
 import { FeatureService } from '../services/feature.service';
 
 @Component({
+    moduleId: module.id,
     selector: 'admin-feature-add',
-    templateUrl: 'app/admin/feature/components/featureAdd.component.html',
+    templateUrl: 'featureAdd.component.html',
     directives: [ROUTER_DIRECTIVES]
 })
 

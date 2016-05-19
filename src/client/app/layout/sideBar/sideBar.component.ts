@@ -3,8 +3,9 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 import {IfAuthorizeDirective} from '../../shared/directives/ifAuthorize.directive';
 
 @Component({
+  moduleId: module.id,
   selector: 'sidebar',
-  templateUrl: 'app/layout/sideBar/sideBar.component.html',
+  templateUrl: 'sideBar.component.html',
   directives: [ROUTER_DIRECTIVES, IfAuthorizeDirective]
 })
 export class SideBarComponent {

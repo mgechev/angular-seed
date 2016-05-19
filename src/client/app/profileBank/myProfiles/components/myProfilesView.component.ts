@@ -4,10 +4,11 @@ import { MyProfilesInfo } from '../../myProfiles/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 
 @Component({
+    moduleId: module.id,
     selector: 'rrf-blacklistedprofiles-view',
-    templateUrl: 'app/profileBank/myProfiles/components/myProfilesView.component.html',
+    templateUrl: 'myProfilesView.component.html',
     directives: [ROUTER_DIRECTIVES],
-    styleUrls: ['app/profileBank/myProfiles/components/myProfiles.component.css']
+    styleUrls: ['myProfiles.component.css']
 })
 
 export class MyProfilesViewComponent implements OnActivate {

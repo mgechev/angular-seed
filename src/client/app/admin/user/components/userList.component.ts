@@ -4,8 +4,9 @@ import { UserInfo } from '../models/userInfo';
 import { UserService } from '../services/user.service';
 
 @Component({
+    moduleId: module.id,
     selector: 'admin-user-list',
-    templateUrl: 'app/admin/user/components/userList.component.html',
+    templateUrl: 'userList.component.html',
     directives: [ROUTER_DIRECTIVES]
 })
 
