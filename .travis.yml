@@ -6,6 +6,17 @@ node_js:
 
 sudo: false
 
+os:
+  - linux
+  - osx
+
+matrix:
+  exclude:
+    - os: osx
+      node_js:
+        - 4
+        - 5
+
 before_install:
   - export CHROME_BIN=chromium-browser  # Karma CI
   - export DISPLAY=:99.0
