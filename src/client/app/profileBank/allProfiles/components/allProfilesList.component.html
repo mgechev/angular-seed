@@ -1,0 +1,189 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!-- BEGIN PAGE HEAD-->
+        <div class="page-head">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                <h1>All Profiles</h1>
+            </div>
+            <!-- END PAGE TITLE  -->
+        </div>
+        <!-- END PAGE HEAD-->
+        <!--<breadcrumb></breadcrumb>-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="row">
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="dt-buttons pull-right">
+                                    <a class="dt-button buttons-print btn dark btn-outline" id="btnPrint">
+                                        <span>Print</span>
+                                    </a>
+                                    <a class="dt-button buttons-pdf buttons-html5 btn green btn-outline" id="btnPDF">
+                                        <span>PDF</span>
+                                    </a>
+                                    <a class="dt-button buttons-csv buttons-html5 btn purple btn-outline" id="btnCSV">
+                                        <span>CSV</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-toolbar">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="dataTables_length" id="sample_1_length"><label>Show <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline"><option value="5">5</option><option value="15">15</option><option value="20">20</option><option value="-1">All</option></select></label></div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div id="sample_1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm input-small input-inline" placeholder="" aria-controls="sample_1"></label></div>
+                                </div>
+                            </div>
+                            <div class="table-scrollable">
+                                <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" id="sample_1"
+                                    role="grid" aria-describedby="sample_1_info">
+                                    <thead>
+                                        <tr>
+                                            <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Name / Email / Contact</th>
+                                            <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Tag </th>
+                                            <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Professional Details </th>
+                                            <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Status </th>
+                                            <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Resume </th>
+                                            <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Actions </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="gradeX odd" *ngFor="let profile of allProfilesList; let index = index">
+                                            <td (click)='redirectToView(profile.CandidateID)'>
+                                                <tr>
+                                                    <td style="float: left;">&nbsp; {{profile.Candidate}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="float: left;">&nbsp; {{profile.Email}} </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="float: left;">&nbsp; {{profile.PrimaryContact}}</td>
+                                                </tr>
+
+                                            </td>
+                                            <td (click)='redirectToView(profile.CandidateID)'> {{profile.Tag}} </td>
+                                            <td (click)='redirectToView(profile.CandidateID)'>
+                                                <tr>
+                                                    <td style="float: left;">&nbsp; Notice Period : {{profile.NoticePeriod}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="float: left;">&nbsp; Current Salary :{{profile.CurrentSalary}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="float: left;">&nbsp; Expected Salary : {{profile.ExpectedSalary}}</td>
+                                                </tr>
+
+                                            </td>
+                                            <td (click)='redirectToView(profile.CandidateID)'>
+                                               <div *ngFor="let candidateStatus of profile.Status"><span class="mt-action-dot {{candidateStatus.CandidateStatus}}"> </span>{{candidateStatus.CandidateStatus}}</div> 
+                                            </td>
+                                            <td class="text-center"><i class="fa fa-download" aria-hidden="true"></i>{{profile.Resume_ID}} </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+                                                            <i class="fa fa-angle-down"></i>
+                                                        </button>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li>
+                                                            <a [routerLink]="['/ProfileBank/AllProfiles/Edit/'+profile.CandidateID]">   
+                                                                <i class="icon-user"></i> Edit Profile </a>
+                                                        </li>
+                                                        <li class="divider"> </li>
+                                                        <li>
+                                                            <a data-toggle="modal" data-target="#myModal"  (click)='SaveCandidateID(profile.CandidateID)' >
+                                                                <i class="icon-flag"></i> Update Status
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- Modal -->
+                                <div id="myModal" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Update Candidate Status</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form role="form" (submit)="onUpdateStauts()">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label>Status<span class="required"> * </span></label>
+                                                                <!--<select (change)="onSelect($event.target.value)" class="form-control">
+                                                               <option *ngFor="let district of districts" [value]="district">{{district}}</option>
+                                                          </select>-->
+                                                              <select (change)='onSelectStatus($event.target.value)' class="form-control" [(ngModel)]="currentStatus">
+                                                              <option *ngFor="let status of statusList" [value]="status.Id">{{status.CandidateStatus}}</option>
+                                                             </select>
+                                                            
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Comments<span class="required"> * </span> </label>
+                                                                <textarea class="form-control" rows="2" placeholder="Comments" style="resize:vertical" required=""  [(ngModel)]="Comments"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-default">Update</button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5 col-sm-5">
+                                    <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite">Showing 1 to 5 of 25 records</div>
+                                </div>
+                                <div class="col-md-7 col-sm-7">
+                                    <div class="dataTables_paginate paging_bootstrap_full_number" id="sample_1_paginate">
+                                        <ul class="pagination" style="visibility: visible;">
+                                            <li class="prev disabled"><a href="#" title="First"><i class="fa fa-angle-double-left"></i></a></li>
+                                            <li class="prev disabled"><a href="#" title="Prev"><i class="fa fa-angle-left"></i></a></li>
+                                            <li class="active"><a [routerLink]="['/ProfileBank/AllProfiles']">1</a></li>
+                                            <li><a [routerLink]="['/ProfileBank/AllProfiles']">2</a></li>
+                                            <li><a [routerLink]="['/ProfileBank/AllProfiles']">3</a></li>
+                                            <li><a [routerLink]="['/ProfileBank/AllProfiles']">4</a></li>
+                                            <li><a [routerLink]="['/ProfileBank/AllProfiles']">5</a></li>
+                                            <li class="next"><a href="#" title="Next"><i class="fa fa-angle-right"></i></a></li>
+                                            <li class="next"><a href="#" title="Last"><i class="fa fa-angle-double-right"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE BASE CONTENT -->
+            </div>
+            <!-- END CONTENT BODY -->
+        </div>
+        <!-- END CONTENT -->
+    </div>
+</div>

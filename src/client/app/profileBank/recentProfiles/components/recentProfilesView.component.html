@@ -1,0 +1,239 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!-- BEGIN PAGE HEAD-->
+        <div class="page-head">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                <h1>View Candidate's Info - {{profile.Candidate}}</h1>
+            </div>
+            <!-- END PAGE TITLE -->
+        </div>
+        <!-- END PAGE HEAD-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light bordered">
+                    <a class="btn btn-circle dark btn-outline" [routerLink]="['/ProfileBank/RecentProfiles']"> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>
+                      <div class="portlet light ">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                Primary Information
+                            </div>
+                            <div class="tools">
+                                <a href="javascript:;" class="collapse"> </a>
+                                <a href="#portlet-config" data-toggle="modal" class="config" style="display:none"> </a>
+                               
+                            </div>
+                        </div>
+                        <div class="portlet-body form">
+                            <!-- BEGIN FORM-->
+                            <form action="#" class="form-horizontal">
+                                <div class="form-body">
+                                    <!-- BEGIN FORM-->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">First Name:</label>
+                                                <div class="col-md-8">
+                                                    <p class="form-control-static"> {{profile.FirstName}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">Last Name:</label>
+                                                <div class="col-md-8">
+                                                    <p class="form-control-static"> {{profile.LastName}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                    </div>
+                                    <!--/row-->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">Email:</label>
+                                                <div class="col-md-8">
+                                                    <p class="form-control-static"> {{profile.Email}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">Primary Contact:</label>
+                                                <div class="col-md-8">
+                                                    <p class="form-control-static"> {{profile.PrimaryContact}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                    </div>
+                                    <!--/row-->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">Tagging:</label>
+                                                <div class="col-md-8">
+                                                    <p class="form-control-static"> {{profile.Tag}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">Notice Period:</label>
+                                                <div class="col-md-8">
+                                                    <p class="form-control-static"> {{profile.NoticePeriod}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                    </div>
+                                    <!--/row-->
+                                    <!--/row-->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">Current Salary:</label>
+                                                <div class="col-md-8">
+                                                    <p class="form-control-static"> {{profile.CurrentSalary}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">Expected Salary:</label>
+                                                <div class="col-md-8">
+                                                    <p class="form-control-static"> {{profile.ExpectedSalary}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                    </div>
+                                    <!--/row-->
+                                </div>
+                            </form>
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+                    <!-- Personal Info -->
+                    <div class="portlet light ">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                Personal Information
+                            </div>
+                            <div class="tools">
+                                <a href="javascript:;" class="collapse"> </a>
+                                <a href="#portlet-config" data-toggle="modal" class="config" style="display:none"> </a>
+                                <!--<a href="javascript:;" class="reload"> </a>
+                                <a href="javascript:;" class="remove"> </a>-->
+                            </div>
+                        </div>
+                        <div class="portlet-body form">
+                            <!-- BEGIN FORM-->
+                            <form action="#" class="form-horizontal">
+                                <div class="form-body">
+                                    <!-- BEGIN FORM-->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">First Name:</label>
+                                                <div class="col-md-8">
+                                                    <p class="form-control-static"> {{profile.FirstName}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">Last Name:</label>
+                                                <div class="col-md-8">
+                                                    <p class="form-control-static"> {{profile.LastName}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                    </div>
+                                    <!--/row-->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">Email:</label>
+                                                <div class="col-md-8">
+                                                    <p class="form-control-static"> {{profile.Email}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">Primary Contact:</label>
+                                                <div class="col-md-8">
+                                                    <p class="form-control-static"> {{profile.PrimaryContact}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                    </div>
+                                    <!--/row-->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">Tagging:</label>
+                                                <div class="col-md-8">
+                                                    <p class="form-control-static"> {{profile.Tag}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">Notice Period:</label>
+                                                <div class="col-md-8">
+                                                    <p class="form-control-static"> {{profile.NoticePeriod}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                    </div>
+                                    <!--/row-->
+                                    <!--/row-->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">Current Salary:</label>
+                                                <div class="col-md-8">
+                                                    <p class="form-control-static"> {{profile.CurrentSalary}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">Expected Salary:</label>
+                                                <div class="col-md-8">
+                                                    <p class="form-control-static"> {{profile.ExpectedSalary}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                    </div>
+                                    <!--/row-->
+                                </div>
+                            </form>
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE BASE CONTENT -->
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->

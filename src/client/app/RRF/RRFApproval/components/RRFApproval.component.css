@@ -1,0 +1,33 @@
+.Approved {
+    background: #32c5d2;
+}
+.On-Hold {
+    background: #c2cad8;
+}
+.Rejected {
+    background: #e7505a;
+}
+.Open
+{
+    background: #e7505a;
+}
+.closed
+{
+    background: #41CE29;
+}      
+
+.mt-action-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    
+    border-radius: 50%!important;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#chartdiv{
+    width:100%;
+     height:250px;
+     font-size:11px;
+}

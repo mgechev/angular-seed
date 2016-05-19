@@ -1,0 +1,186 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!-- BEGIN PAGE HEAD-->
+        <div class="page-head">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                <h1> Add Job Openings</h1>
+            </div>
+            <!-- END PAGE TITLE -->
+        </div>
+        <!-- END PAGE HEAD-->
+        <div>
+            <div class="portlet-body form portlet light bordered col-lg-12">
+                <form role="form">
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="form-group col-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <label>Practice<span> * </span></label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group ">
+                                            <select id="cmbPractice" class="form-control" [(ngModel)]='newRRF.Practice'>
+                                                <option *ngFor="let practice of practices" [value]="practice.Id">{{practice.Practice}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label>Technology<span> * </span></label>
+                                <!--<input type="text" [(ngModel)]='newRRF.Technology' id="txtTechnology" class="form-control" placeholder="Technology" />-->
+                                <select id="cmbTechnology" class="form-control" [(ngModel)]='newRRF.Technology'>
+                                    <option *ngFor="let technologie of technologies" [value]="technologie.Id">{{technologie.Technology}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label>Position Title<span> * </span></label>
+                                <input type="text" [(ngModel)]='newRRF.PositionTitle' id="txtPositionTitle" class="form-control" placeholder="Position Title"
+                                />
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="form-group col-lg-4">
+                                <label>Description<span> * </span></label>
+                                <textarea class="form-control" [(ngModel)]='newRRF.Description' id="txtDescription" rows="1" placeholder="Description" style="resize:vertical"
+                                required=""></textarea>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <label>Number Of Openings<span> * </span></label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" [(ngModel)]='newRRF.NoOfOpenings' id="txtNoOfOpening" value="" name="demo_vertical" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label>Skills Required<span> * </span></label>
+                                <!--<textarea class="form-control" [(ngModel)]='newRRF.SkillsRequired' id="txtSkillsReq" rows="1" placeholder="Skills Required"
+                                style="resize:vertical" required=""></textarea>-->
+                                <select id="cmbSkillsReq" class="form-control" [(ngModel)]='newRRF.SkillsRequired'>
+                                    <option *ngFor="let skill of skills" [value]="skill.Id">{{skill.Skill}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-4">
+                                <label>Designation<span> * </span></label>
+                                <!--<input type="text" [(ngModel)]='newRRF.Designation' id="txtDesignation" class="form-control" placeholder="Designation"/>-->
+                                <select id="cmbDesignation" class="form-control" [(ngModel)]='newRRF.Designation'>
+                                    <option *ngFor="let designation of designations" [value]="designation.id">{{designation.Designation}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <!--<label>Experience<small>&nbsp;(In years)</small><span class="required"> * </span></label>-->
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label>Min Exp.<small>&nbsp;(In years)</small><span> * </span></label>
+                                        <input id="txtMinExp" [(ngModel)]='newRRF.MinExp' type="text" value="" name="demo_vertical" />
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>Max Exp.<small>&nbsp;(In years)</small><span> * </span></label>
+                                        <input id="txtMaxExp" [(ngModel)]='newRRF.MaxExp' type="text" value="" name="demo_vertical" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <label>Priority<span> * </span></label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input id="txtPriority" [(ngModel)]='newRRF.Priority' type="text" value="" name="demo_vertical" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="form-group col-lg-4">
+                                <label>Expected Date Of Joining<span> * </span></label>
+                                <!--<div class="col-md-8">-->
+                                <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d" id="expectedDateOfJoining">
+                                    <input type="text" class="form-control" readonly>
+                                    <span class="input-group-btn">
+                                             <button class="btn default" type="button">
+                                                   <i class="fa fa-calendar"></i>
+                                             </button>
+                                        </span>
+                                </div>
+                                <!--</div>-->
+                            </div>
+                            <!--<div class="form-group col-lg-4">
+                                <ng2-select [multiple]="true" [items]="interviewers" [disabled]="disabled" (removed)="removed($event) " [placeholder]=" 'No city selected' "></ng2-select>
+                            </div>-->
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-12">
+                                <label>Interviewers Panel :<span> * </span></label>
+                            </div>
+                            <div class="table-scrollable">
+                                <table class="table-bordered table no-footer" id="panelTable">
+                                    <thead>
+                                        <tr>
+                                            <td width="20%"><b>Round </b></td>
+                                            <td width="50%"><b>Interviewer</b></td>
+                                            <td width="20%"><b>Comments</b> </td>
+                                            <td width="10%"><b>Action</b> </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd gradeX" *ngFor='let panel of newRRF.Panel'>
+                                        <!--<tr class="odd gradeX">-->
+                                            <td>
+                                                <div class="form-group">
+                                                    <select id="cmbIntwRound" class="form-control select2">
+                                                        <option *ngFor="let Round of interviewRound" [value]="Round.Id">{{Round.InterviewRounds}}</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <div class="input-group select2-bootstrap-append">
+                                                        <select id="cmbInterviewer" class="form-control" multiple>
+                                                            <option *ngFor="let interviewer of interviewers" [value]="interviewer.Id">{{interviewer.Interviewers}}</option>
+                                                        </select>
+                                                        <span class="input-group-btn">
+                                                         <button class="btn btn-default" type="button" data-select2-open="multi-append">
+                                                        <span class="glyphicon glyphicon-search"></span>
+                                                        </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <textarea class="form-control" id="txtComment" rows="2" placeholder="Comment" style="resize:vertical" required=""></textarea>
+                                            </td>
+                                            <td><a class="edit" id="linkAddRound" (click)='addPanel()'>Add Round </a> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit " (click)='raiseRRF()' id="btnSubmit " class="btn blue ">Submit</button>
+                            <button type="button " (click)='onCancelClick()' id="btnCancel " class="btn default ">Cancel</button>
+                            <br>
+                            <!--<ng2-select [data]="value " [multiple]="true " [items]="items " [disabled]="disabled
+                                "  [placeholder]=" 'No city selected' "></ng2-select>-->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- END PAGE BASE CONTENT -->
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
