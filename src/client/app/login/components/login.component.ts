@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
     public errorMessage: string;
-    public userPermission: string[];
     private model: AuthInfo;
     constructor(private _loginService: LoginService,private _router: Router) {
         this.model = new AuthInfo(0, '', '');
@@ -27,13 +26,8 @@ export class LoginComponent {
         this._loginService.getLoggedInUserPermission()
             .subscribe(
             results=> {
-                this.userPermission = results;
-                this.setPermissions();
+               this._router.navigate(['/App']);
             },
             error => this.errorMessage = <any>error);
-    }
-    setPermissions(): void {
-       localStorage.setItem('loggedInUserPermission',JSON.stringify(this.userPermission));
-       this._router.navigate(['/App']);
     }
 }

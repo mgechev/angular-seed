@@ -35,11 +35,18 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._router.navigate(['/Login']);
-    // if (this._loginService.isAuthenticated()) {
-    //   this._router.navigate(['/App']);
-    // } else {
-    //   this._router.navigate(['/Login']);
-    // }
+    if (this._loginService.isAuthenticated()) {
+      this.getLoggedInUserPermission();
+    } else {
+      this._router.navigate(['/Login']);
+    }
+  }
+
+  getLoggedInUserPermission(): void {
+    this._loginService.getLoggedInUserPermission()
+      .subscribe(
+      results => {
+        this._router.navigate(['/App']);
+      });
   }
 }

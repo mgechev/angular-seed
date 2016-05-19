@@ -1,8 +1,10 @@
+import {CommonService} from '../../shared/services/common.service';
+
 export class RBACService {
-    public static canAccess(permissions: Array<string>) : boolean {
+    public static canAccess(permissions: Array<string>): boolean {
         let userHasPermissions = false;
-        if (localStorage.getItem('loggedInUserPermission') !== null) {
-            let loggedInUserPermission = JSON.parse(localStorage.getItem('loggedInUserPermission'));
+        let loggedInUserPermission = new CommonService().getLoggedInUserPermission();
+        if (loggedInUserPermission.length > 0) {
             for (var i = 0; i < permissions.length; i++) {
                 if (loggedInUserPermission.indexOf(permissions[i]) === -1) {
                     return false;

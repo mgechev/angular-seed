@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ROUTER_DIRECTIVES, Routes } from '@angular/router';
 import { FooterComponent } from '../../layout/footer/footer.component';
 import { TopNavigationBarComponent } from '../../layout/topNavigationBar/topNavigationBar.component';
@@ -49,5 +49,10 @@ import { RRFDashboardComponent } from '../../RRF/RRFDashboard/index';
     { path: '/RRF/RRFApproval', component: RRFApprovalComponent },
     { path: '/RRF/RRFDashboard', component: RRFDashboardComponent }
 ])
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+    ngOnInit(): void {
+        App.init();
+        Layout.init();
+        Demo.init();
+    }
 }
