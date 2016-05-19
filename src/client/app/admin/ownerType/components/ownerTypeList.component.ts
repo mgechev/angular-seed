@@ -4,7 +4,7 @@ import { OwnerTypeInfo } from '../models/ownerTypeInfo';
 import { OwnerTypeService } from '../services/ownerType.service';
 
 @Component({
-    selector: 'admin-ownerType-list',
+    selector: 'admin-ownertype-list',
     templateUrl: 'app/admin/ownerType/components/ownerTypeList.component.html',
     directives: [ROUTER_DIRECTIVES]
 })

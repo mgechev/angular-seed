@@ -10,15 +10,15 @@ import { QualificationService } from '../services/qualification.service';
 })
 
 export class QualificationAddComponent implements OnActivate {
-    qualification: QualificationInfo
-    errorMessage: string
-    params: string
+    qualification: QualificationInfo;
+    errorMessage: string;
+    params: string;
     constructor(private _qualificationService: QualificationService,
         private _router: Router) {
-        this.qualification = new QualificationInfo(0, '')
+        this.qualification = new QualificationInfo(0, '');
     }
 
-    routerOnActivate(segment: RouteSegment){
+    routerOnActivate(segment: RouteSegment) {
         this.params = segment.getParam('id');
         if (this.params) {
             this._qualificationService.getQualificationById(this.params)

@@ -10,35 +10,35 @@ export class SkillService {
 
     constructor(private http: Http, private authHttp: AuthHttp) { }
 
-    addSkill(skill: SkillInfo) {      
+    addSkill(skill: SkillInfo) {
         let authenticateUrl = Config.GetURL('/api/Master/Skill/Add');
         return this.authHttp.post(authenticateUrl, { skill })
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    getSkills() {       
+    getSkills() {
         let authenticateUrl = Config.GetURL('/api/Masters/GetSkills');
         return this.authHttp.get(authenticateUrl)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-     getSkillById(id:string) {      
+     getSkillById(id:string) {
         let authenticateUrl = Config.GetURL('/api/Masters/Skill/GetSkillById');
         return this.authHttp.post(authenticateUrl,{ skill:{id:id} })
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    deleteSkill(skill: SkillInfo) {      
+    deleteSkill(skill: SkillInfo) {
         let authenticateUrl = Config.GetURL('/api/Master/Skill/Delete');
         return this.authHttp.post(authenticateUrl, { skill })
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    editSkill(skill: SkillInfo) {        
+    editSkill(skill: SkillInfo) {
         let authenticateUrl = Config.GetURL('/api/Master/Skill/Edit');
         return this.authHttp.post(authenticateUrl, { skill })
             .map(this.extractData)

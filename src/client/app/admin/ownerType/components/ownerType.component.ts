@@ -5,7 +5,7 @@ import { OwnerTypeAddComponent } from './ownerTypeAdd.component';
 import { OwnerTypeService } from '../services/ownerType.service';
 
 @Component({
-  selector: 'admin-ownerType',
+  selector: 'admin-ownertype',
   template: ' <router-outlet></router-outlet>',
   directives: [ROUTER_DIRECTIVES],
   providers:[OwnerTypeService]

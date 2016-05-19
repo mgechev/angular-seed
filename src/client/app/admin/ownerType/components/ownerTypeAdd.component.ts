@@ -4,21 +4,21 @@ import { OwnerTypeInfo } from '../models/ownerTypeInfo';
 import { OwnerTypeService } from '../services/ownerType.service';
 
 @Component({
-    selector: 'admin-ownerType-add',
+    selector: 'admin-ownertype-add',
     templateUrl: 'app/admin/ownerType/components/ownerTypeAdd.component.html',
     directives: [ROUTER_DIRECTIVES]
 })
 
 export class OwnerTypeAddComponent implements OnActivate {
-    ownerType: OwnerTypeInfo
-    errorMessage: string
-    params: string
+    ownerType: OwnerTypeInfo;
+    errorMessage: string;
+    params: string;
     constructor(private _ownerTypeService: OwnerTypeService,
         private _router: Router) {
-        this.ownerType = new OwnerTypeInfo(0, '')
+        this.ownerType = new OwnerTypeInfo(0, '');
     }
 
-    routerOnActivate(segment: RouteSegment){
+    routerOnActivate(segment: RouteSegment) {
         this.params = segment.getParam('id');
         if (this.params) {
             this._ownerTypeService.getOwnerTypeById(this.params)

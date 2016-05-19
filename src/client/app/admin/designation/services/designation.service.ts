@@ -10,35 +10,35 @@ export class DesignationService {
 
     constructor(private http: Http, private authHttp: AuthHttp) { }
 
-    addDesignation(designation: DesignationInfo) {     
+    addDesignation(designation: DesignationInfo) {
         let authenticateUrl = Config.GetURL('/api/Master/Designation/Add');
         return this.authHttp.post(authenticateUrl, { designation })
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    getDesignations() {     
+    getDesignations() {
         let authenticateUrl = Config.GetURL('/api/Masters/GetDesignations');
         return this.authHttp.get(authenticateUrl)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-     getDesignationById(id:string) {       
+     getDesignationById(id:string) {
         let authenticateUrl = Config.GetURL('/api/Masters/Designation/GetDesignationById');
         return this.authHttp.post(authenticateUrl,{ designation:{id:id} })
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    deleteDesignation(designation: DesignationInfo) {      
+    deleteDesignation(designation: DesignationInfo) {
         let authenticateUrl = Config.GetURL('/api/Master/Designation/Delete');
         return this.authHttp.post(authenticateUrl, { designation })
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    editDesignation(designation: DesignationInfo) {    
+    editDesignation(designation: DesignationInfo) {
         let authenticateUrl = Config.GetURL('/api/Master/Designation/Edit');
         return this.authHttp.post(authenticateUrl, { designation })
             .map(this.extractData)

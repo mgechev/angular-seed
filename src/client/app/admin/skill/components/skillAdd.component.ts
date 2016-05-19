@@ -10,15 +10,15 @@ import { SkillService } from '../services/skill.service';
 })
 
 export class SkillAddComponent implements OnActivate {
-    skill: SkillInfo
-    errorMessage: string
-    params: string
+    skill: SkillInfo;
+    errorMessage: string;
+    params: string;
     constructor(private _skillService: SkillService,
         private _router: Router) {
-        this.skill = new SkillInfo(0, '')
+        this.skill = new SkillInfo(0, '');
     }
 
-    routerOnActivate(segment: RouteSegment){
+    routerOnActivate(segment: RouteSegment) {
         this.params = segment.getParam('id');
         if (this.params) {
             this._skillService.getSkillById(this.params)
