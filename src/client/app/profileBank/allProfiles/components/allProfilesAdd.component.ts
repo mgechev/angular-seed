@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import { Router, RouteSegment, OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
 import {MyProfilesInfo, Qualification, Masters} from '../../myProfiles/model/myProfilesInfo'
 import { AllProfilesService } from '../services/allProfiles.service';
@@ -12,7 +12,7 @@ import * as  _ from 'lodash';
 })
 
 export class AllProfilesAddComponent implements OnActivate {
-    profile: MyProfilesInfo
+    profile: MyProfilesInfo;
     qualification: Qualification;
     errorMessage: string;
     params: string;
@@ -137,7 +137,7 @@ export class AllProfilesAddComponent implements OnActivate {
 
     onSelectCountry(country: number) {
         for (var i = 0; i < this.countries.length; i++) {
-            if (this.countries[i].Id == country) {
+            if (this.countries[i].Id === country) {
                 this.profile.Country = this.countries[i].Id;
             }
         }
@@ -145,7 +145,7 @@ export class AllProfilesAddComponent implements OnActivate {
 
     onSelectState(state: number) {
         for (var i = 0; i < this.states.length; i++) {
-            if (this.states[i].Id == state) {
+            if (this.states[i].Id === state) {
                 this.profile.State = this.states[i].Id;
             }
         }
@@ -153,28 +153,23 @@ export class AllProfilesAddComponent implements OnActivate {
 
     onSelectDistrict(district: number) {
         for (var i = 0; i < this.districts.length; i++) {
-            if (this.districts[i].Id == district) {
+            if (this.districts[i].Id === district) {
                 this.profile.District = this.districts[i].Id;
             }
         }
     }
 
     onSelectQualification(candidateQualification: number) {
-        try {
-            for (var i = 0; i < this.qualifications.length; i++) {
-                if (this.qualifications[i].Id == candidateQualification) {
+      for (var i = 0; i < this.qualifications.length; i++) {
+                if (this.qualifications[i].Id === candidateQualification) {
                     this.selectedQualification = this.qualifications[i];
                 }
             }
-        }
-        catch (exception) {
-            console.log('error');
-        }
     }
 
     onSelectGrade(grade: number) {
         for (var i = 0; i < this.grades.length; i++) {
-            if (this.grades[i].Id == grade) {
+            if (this.grades[i].Id === grade) {
                 this.selectedGrade = this.grades[i];
             }
         }
@@ -182,17 +177,18 @@ export class AllProfilesAddComponent implements OnActivate {
 
     onSelectYear(year: number) {
         for (var i = 0; i < this.years.length; i++) {
-            if (this.years[i].Id == year) {
+            if (this.years[i].Id === year) {
                 this.selectedYear = this.years[i];
             }
         }
     }
 
     onSameAddressChecked(value: string) {
-        if (value)
+        if (value) {
             this.profile.PermanentAddress = this.profile.CurrentAddress;
-        else
-            this.profile.PermanentAddress = "";
+        }else {
+            this.profile.PermanentAddress = '';
+        }
     }
 
     onSavePrimaryInfo(): void {
@@ -216,7 +212,7 @@ export class AllProfilesAddComponent implements OnActivate {
                     this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => {
-                    this.errorMessage = <any>error
+                    this.errorMessage = <any>error;
                     this.showMessage(this.errorMessage, false);
                 });
         }
@@ -291,7 +287,7 @@ export class AllProfilesAddComponent implements OnActivate {
                     this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => {
-                    this.errorMessage = <any>error
+                    this.errorMessage = <any>error;
                     this.showMessage(this.errorMessage, false);
                 });
         }
@@ -318,21 +314,21 @@ export class AllProfilesAddComponent implements OnActivate {
                         this.getCandidateQualifications();
                     },
                     error => {
-                        this.errorMessage = <any>error
+                        this.errorMessage = <any>error;
                         this.showMessage(this.errorMessage, false);
                     });
             }
         } else {
             //update
-            if (this.selectedQualification != undefined) {
+            if (this.selectedQualification !== undefined) {
                 this.qualification.Qualification = new Array<Masters>();
                 this.qualification.Qualification.push(this.selectedQualification);
             }
-            if (this.selectedGrade != undefined) {
+            if (this.selectedGrade !== undefined) {
                 this.qualification.Grade = new Array<Masters>();
                 this.qualification.Grade.push(this.selectedGrade);
             }
-            if (this.selectedYear != undefined) {
+            if (this.selectedYear !== undefined) {
                 this.qualification.YearOfPassing = new Array<Masters>();
                 this.qualification.YearOfPassing.push(this.selectedYear);
             }
@@ -346,7 +342,7 @@ export class AllProfilesAddComponent implements OnActivate {
                         this.getCandidateQualifications();
                     },
                     error => {
-                        this.errorMessage = <any>error
+                        this.errorMessage = <any>error;
                         this.showMessage(this.errorMessage, false);
                     });
             }
@@ -363,7 +359,7 @@ export class AllProfilesAddComponent implements OnActivate {
                     this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => {
-                    this.errorMessage = <any>error
+                    this.errorMessage = <any>error;
                     this.showMessage(this.errorMessage, false);
                 });
         }

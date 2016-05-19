@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES,OnActivate,Router } from '@angular/router';
 import { MyProfilesInfo,Masters } from '../../myProfiles/model/myProfilesInfo';
 import { BlackListedProfilesService } from '../services/blacklistedProfiles.service';
@@ -9,7 +9,6 @@ import * as  _ from 'lodash';
     selector: 'rrf-black-listed-profiles-list',
     templateUrl: 'app/profileBank/blackListedProfiles/components/blackListedProfilesList.component.html',
     directives: [ROUTER_DIRECTIVES]
-  //  providers:[MastersService]
 })
 
 export class BlackListedProfilesListComponent implements OnActivate {
@@ -37,11 +36,10 @@ export class BlackListedProfilesListComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
-    redirectToView(CandidateID:number){
+    redirectToView(CandidateID:number) {
         this._router.navigate(['/ProfileBank/BlackListedProfiles/View/'+CandidateID]);
-        
     }
-    
+
      SaveCandidateID(id: number) {
         this.seletedCandidateID = id;
         var index = _.findIndex(this.blacklistedProfilesList, { CandidateID: this.seletedCandidateID });
@@ -59,7 +57,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
 
     onSelectStatus(statusId: number) {
         for (var i = 0; i < this.statusList.length; i++) {
-            if (this.statusList[i].Id == statusId) {
+            if (this.statusList[i].Id === statusId) {
                 this.selectedStatus = this.statusList[i];
             }
         }

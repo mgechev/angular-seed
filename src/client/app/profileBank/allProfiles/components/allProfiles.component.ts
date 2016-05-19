@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
 import { AllProfilesListComponent } from './allProfilesList.component';
 import { AllProfilesAddComponent } from './allProfilesAdd.component';
-import { MyProfilesInfo } from '../../myProfiles/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
 import {AllProfilesViewComponent} from './allProfilesView.component';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -11,7 +10,7 @@ import { MastersService } from '../../../shared/services/masters.service';
     selector: 'rrf-all-profiles',
     template: ' <router-outlet></router-outlet>',
     directives: [ROUTER_DIRECTIVES],
-    providers: [AllProfilesService,MastersService] 
+    providers: [AllProfilesService,MastersService]
 })
 
 @Routes([

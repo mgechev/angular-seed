@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import { ROUTER_DIRECTIVES, OnActivate, Router, RouteSegment } from '@angular/router';
+import {Component} from '@angular/core';
+import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
 import {MyProfilesInfo, Masters} from '../../myProfiles/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -22,7 +22,6 @@ export class AllProfilesListComponent implements OnActivate {
     constructor(private _allProfilesService: AllProfilesService,
         private _router: Router,
         private _masterService: MastersService) {
-            
     }
 
     routerOnActivate() {
@@ -43,14 +42,14 @@ export class AllProfilesListComponent implements OnActivate {
     redirectToView(CandidateID: number) {
         this._router.navigate(['/ProfileBank/AllProfiles/View/' + CandidateID]);
     }
-    
+
     SaveCandidateID(id: number) {
         this.seletedCandidateID = id;
         var index = _.findIndex(this.allProfilesList, { CandidateID: this.seletedCandidateID });
         this.Comments = this.allProfilesList[index].Comments;
         this.currentStatus = this.allProfilesList[index].Status[0].Id;
     }
-    
+
     getCandidateStatuses() {
         this._masterService.getCandidateStatuses()
             .subscribe(
@@ -62,7 +61,7 @@ export class AllProfilesListComponent implements OnActivate {
 
     onSelectStatus(statusId: number) {
         for (var i = 0; i < this.statusList.length; i++) {
-            if (this.statusList[i].Id == statusId) {
+            if (this.statusList[i].Id === statusId) {
                 this.selectedStatus = this.statusList[i];
             }
         }
