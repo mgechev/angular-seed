@@ -41,7 +41,6 @@ export class RRFDashboardListComponent implements OnActivate {
             .subscribe(
             results => {
                 this.rrfStatusCount = results;
-                this.setGraphValue();
             },
             error => this.errorMessage = <any>error);
     }
@@ -68,51 +67,5 @@ export class RRFDashboardListComponent implements OnActivate {
     onViewChanged(viewMode: string) {
         //console.log(viewMode);
         this.getAllRRF();
-    }
-
-    setGraphValue() {
-         AmCharts.makeChart('chartdiv', {
-            'type': 'pie',
-            'theme': 'light',
-            'legend': {
-                'position': 'right',
-                'marginRight': 100,
-                'autoMargins': false
-            },
-            'innerRadius': '30%',
-            'dataProvider': [{
-                'status': 'Pending Approval',
-                'value': this.rrfStatusCount.PendingApproval
-            }, {
-                    'status': 'Rejected',
-                    'value': this.rrfStatusCount.Rejected
-                }, {
-                    'status': 'On-Hold',
-                    'value': 2 //TODO
-                }, {
-                    'status': 'Open',
-                    'value': this.rrfStatusCount.Open
-                }, {
-                    'status': 'Assigned',
-                    'value': this.rrfStatusCount.Assigned
-                }, {
-                    'status': 'InProgress',
-                    'value': this.rrfStatusCount.InProgress
-                }, {
-                    'status': 'Closure Approval',
-                    'value': this.rrfStatusCount.ClosureApproval
-                }, {
-                    'status': 'Closed',
-                    'value': this.rrfStatusCount.Closed
-                }],
-            'valueField': 'value',
-            'titleField': 'status',
-            'balloon': {
-                'fixedPosition': true
-            },
-            'export': {
-                'enabled': true
-            }
-        });
     }
 }

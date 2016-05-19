@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import { OnActivate, ROUTER_DIRECTIVES ,RouteSegment } from '@angular/router';
-import { RRFDetails, AllRRFStatusCount } from '../../myRRF/models/rrfDetails';
+import { RRFDetails } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
 
 
 @Component({
-    selector: 'rrf-Assign',
+    selector: 'rrf-assign',
     templateUrl: 'app/RRF/RRFDashboard/components/RRFAssign.component.html',
     directives: [ROUTER_DIRECTIVES]
 })
