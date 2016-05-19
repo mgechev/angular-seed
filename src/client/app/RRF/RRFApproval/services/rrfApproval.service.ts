@@ -1,5 +1,5 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
@@ -15,10 +15,10 @@ export class RRFApprovalService {
             .map(this.extractData)
             .catch(this.handleError);
     }
-    
-    ActionOnRaisedRRF(rrfID: number ,status:number ,comment: string) {
+
+    ActionOnRaisedRRF(rrfID: number, status: number, comment: string) {
         let url = Config.GetURL('/api/RRF/ActionOnRaisedRRF');
-        return this.authHttp.post(url, { RRFID: rrfID,Status : status ,Comments:comment})
+        return this.authHttp.post(url, { RRFID: rrfID, Status: status, Comments: comment })
             .map(this.extractData)
             .catch(this.handleError);
     }
@@ -35,5 +35,4 @@ export class RRFApprovalService {
         console.log(error);
         return Observable.throw(error.json().error || 'Server error');
     }
-
 }

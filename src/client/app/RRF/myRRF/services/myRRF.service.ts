@@ -11,7 +11,7 @@ export class MyRRFService {
 
     constructor(private authHttp: AuthHttp) { }
 
-    //Get List of RRF raise by login User
+    //Get List of RRF raised by login User
     getRaisedRRF(userName: string, roleID: Number) {
         let url = Config.GetURL('/api/RRF/GetRaisedRRF');
         return this.authHttp.post(url, { UserName: userName, Role: roleID })
