@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import { Router, ROUTER_DIRECTIVES } from '@angular/router';
+import {Component} from '@angular/core';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
 @Component({
     selector: 'rrf-approval-add',
@@ -7,13 +7,5 @@ import { Router, ROUTER_DIRECTIVES } from '@angular/router';
     directives: [ROUTER_DIRECTIVES]
 })
 
-export class RRFApprovalAddComponent implements OnInit {
-    constructor(private _router: Router) {
-    }
-
-    ngOnInit() {
-    }
-
-    onSave(): void {
-    }
+export class RRFApprovalAddComponent {
 }

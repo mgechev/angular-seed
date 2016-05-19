@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Router, OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
+import {OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
 import { RRFDetails } from '../../myRRF/models/rrfDetails';
 import { RRFApprovalService } from '../services/rrfApproval.service';
 
@@ -22,7 +22,6 @@ export class RRFApprovalListComponent implements OnActivate {
 
     routerOnActivate(): void {
         this.getRRFApprovalList('admin', 1);
-
     }
 
     getRRFApprovalList(userName: string, roleID: number): void {
@@ -39,19 +38,16 @@ export class RRFApprovalListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-
     onStateChange(e: any): void {
         if (e.target.checked) {
             this.selectedRowCount++;
-        }
-        else {
+        }else {
             this.selectedRowCount--;
         }
 
-        if (this.selectedRowCount == this.rrfApprovalList.length) {
+        if (this.selectedRowCount === this.rrfApprovalList.length) {
             this.allChecked = true;
-        }
-        else {
+        }else {
             this.allChecked = false;
         }
     }
@@ -61,8 +57,7 @@ export class RRFApprovalListComponent implements OnActivate {
         if (e.target.checked) {
             state = true;
             this.selectedRowCount = this.rrfApprovalList.length;
-        }
-        else {
+        }else {
             state = false;
             this.selectedRowCount = 0;
         }
@@ -70,7 +65,6 @@ export class RRFApprovalListComponent implements OnActivate {
         for (var index = 0; index < this.rrfApprovalList.length; index++) {
             this.rrfApprovalList[index].IsChecked = state;
         }
-
     }
 
     onStatusHold(): void {
@@ -85,7 +79,6 @@ export class RRFApprovalListComponent implements OnActivate {
     onStatusApprove(): void {
         this.onStatusChange('Approved');
     }
-
 
     onStatusChange(status: string): void {
         for (var index = 0; index < this.rrfApprovalList.length; index++) {
