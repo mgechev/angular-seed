@@ -52,9 +52,9 @@ if (process.env.TRAVIS) {
 
 if (process.env.APPVEYOR) {
   config.capabilities = {
-    browserName: 'internet explorer',
-    directConnect: false
+    browserName: 'internet explorer'
   };
+  delete config.directConnect;
 }
 
 exports.config = config;
