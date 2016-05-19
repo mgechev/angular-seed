@@ -102,6 +102,6 @@ export class MyProfilesInfo {
   public PrimaryReasonToQuitLastJob: string;
   public SecondaryReasonToQuitLastJob: string;
   public PrimaryReasonToQuitCurrentJob: string;
-  public SecondaryReasonToQuitCurrentJob: string
+  public SecondaryReasonToQuitCurrentJob: string;
 }
 

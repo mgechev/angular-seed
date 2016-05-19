@@ -9,6 +9,7 @@ import { MyProfilesService } from '../services/myProfiles.service';
     directives: [ROUTER_DIRECTIVES],
     styleUrls: ['app/profileBank/myProfiles/components/myProfiles.component.css']
 })
+
 export class MyProfilesViewComponent implements OnActivate {
     params: string;
     profile: MyProfilesInfo;

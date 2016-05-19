@@ -1,5 +1,5 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { MyProfilesInfo, Qualification,Masters } from '../model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
@@ -18,7 +18,6 @@ export class MyProfilesService {
     }
 
     addCandidateProfile(profile: MyProfilesInfo) {
-        let body = JSON.stringify({ profile });
         let url = Config.GetURL('/api/ProfileBank/addCandidateProfile');
         return this.authHttp.post(url, { profile })
             .map(this.extractData)
@@ -108,13 +107,12 @@ export class MyProfilesService {
             .map(this.extractData)
             .catch(this.handleError);
     }
-    
-     updateCandidateStatus(CandidateID:number, Status : Masters,Comments:string){
+
+     updateCandidateStatus(CandidateID:number, Status : Masters,Comments:string) {
         let url = Config.GetURL('/api/ProfileBank/UpdateStatus');
         return this.authHttp.post(url, { profile: { CandidateID: CandidateID, Status : Status, Comments:Comments } })
             .map(this.extractData)
             .catch(this.handleError);
-         
      }
 
     private extractData(res: Response) {
@@ -128,5 +126,5 @@ export class MyProfilesService {
     private handleError(error: Response) {
         console.log(error);
         return Observable.throw(error.json().error || 'Server error');
-    }
+  }
 }

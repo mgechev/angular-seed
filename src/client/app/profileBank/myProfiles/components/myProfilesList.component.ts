@@ -36,11 +36,11 @@ export class MyProfilesListComponent implements OnActivate {
         this.getMyProfiles();
         this.getCandidateStatuses();
     }
-    
-    SaveCandidateID(id : number){
+
+    SaveCandidateID(id : number) {
         this.seletedCandidateID = id;
         var index = _.findIndex(this.myProfilesList, { CandidateID: this.seletedCandidateID });
-        this.Comments = this.myProfilesList[index].Comments;     
+        this.Comments = this.myProfilesList[index].Comments;
         this.currentStatus = this.myProfilesList[index].Status[0].Id;
     }
 
@@ -62,10 +62,8 @@ export class MyProfilesListComponent implements OnActivate {
         this._myProfilesService.addCandidateProfile(this.profile)
             .subscribe(
             results => {
-                // this._router.navigate(['Dashboard']);
                 this.profile = new MyProfilesInfo();
                 this.getMyProfiles();
-
             },
             error => this.errorMessage = <any>error);
     }
@@ -78,8 +76,8 @@ export class MyProfilesListComponent implements OnActivate {
             this.psdTemplates.push(FileList.item(i));
         }
         console.log(this.psdTemplates);
-        // this.progressBarVisibility = true;
     }
+
     getCandidateStatuses() {
         this._masterService.getCandidateStatuses()
             .subscribe(
@@ -91,7 +89,7 @@ export class MyProfilesListComponent implements OnActivate {
 
     onSelectStatus(statusId: number) {
         for (var i = 0; i < this.statusList.length; i++) {
-            if (this.statusList[i].Id == statusId) {
+            if (this.statusList[i].Id === statusId) {
                 this.selectedStatus = this.statusList[i];
             }
         }
@@ -102,7 +100,7 @@ export class MyProfilesListComponent implements OnActivate {
             .subscribe(
             results => {
                 $('#myModal').modal('toggle');
-                this.getMyProfiles();                
+                this.getMyProfiles();
             },
             error => this.errorMessage = <any>error);
     }
