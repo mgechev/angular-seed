@@ -70,7 +70,7 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     setGraphValue() {
-        var chart = AmCharts.makeChart('chartdiv', {
+         AmCharts.makeChart('chartdiv', {
             'type': 'pie',
             'theme': 'light',
             'legend': {

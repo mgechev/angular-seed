@@ -3,7 +3,7 @@ import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
 import { MyRRFListComponent } from './myRRFList.component';
 import { MyRRFAddComponent } from './myRRFAdd.component';
 import { MyRRFService } from '../services/myRRF.service';
-import { MastersService } from '../../../shared/services/masters.service'
+import { MastersService } from '../../../shared/services/masters.service';
 
 @Component({
     selector: 'rrf-myrrf',

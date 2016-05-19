@@ -102,8 +102,6 @@ export class RRFApprovalListComponent implements OnActivate {
         comment: string): void {
         this._rrfApprovalService.ActionOnRaisedRRF(rrfID, status, comment)
             .subscribe(
-            results => {
-            },
             error => this.errorMessage = <any>error);
     }
 }
