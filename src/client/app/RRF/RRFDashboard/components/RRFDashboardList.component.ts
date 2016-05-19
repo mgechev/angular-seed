@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
-import { Router, OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
-import { NgClass } from '@angular/common';
+import { OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
 import { RRFDetails, AllRRFStatusCount } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
@@ -23,8 +22,8 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     routerOnActivate() {
-       this.getAllRRF();
-       this.getStatuswiseRRFCount();
+        this.getAllRRF();
+        this.getStatuswiseRRFCount();
     }
 
     getAllRRF() {
@@ -46,7 +45,7 @@ export class RRFDashboardListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-   
+
     getRRFDetails(rrfID: number) {
         this._myRRFService.getRRFDetails(rrfID)
             .subscribe(
@@ -64,54 +63,54 @@ export class RRFDashboardListComponent implements OnActivate {
     showListOfRRF() {
         this.isListVisible = true;
     }
-    
-    onViewChanged(viewMode : string){
+
+    onViewChanged(viewMode: string) {
         //console.log(viewMode);
         this.getAllRRF();
     }
 
     setGraphValue() {
-        var chart = AmCharts.makeChart("chartdiv", {
-            "type": "pie",
-            "theme": "light",
-            "legend": {
-                "position": "right",
-                "marginRight": 100,
-                "autoMargins": false
+        var chart = AmCharts.makeChart('chartdiv', {
+            'type': 'pie',
+            'theme': 'light',
+            'legend': {
+                'position': 'right',
+                'marginRight': 100,
+                'autoMargins': false
             },
-            "innerRadius": "30%",
-            "dataProvider": [{
-                "status": "Pending Approval",
-                "value": this.rrfStatusCount.PendingApproval
+            'innerRadius': '30%',
+            'dataProvider': [{
+                'status': 'Pending Approval',
+                'value': this.rrfStatusCount.PendingApproval
             }, {
-                "status": "Rejected",
-                "value": this.rrfStatusCount.Rejected
-            }, {
-                "status": "On-Hold",
-                "value": 2 //TODO
-            }, {
-                "status": "Open",
-                "value": this.rrfStatusCount.Open
-            }, {
-                "status": "Assigned",
-                "value": this.rrfStatusCount.Assigned
-            }, {
-                "status": "InProgress",
-                "value": this.rrfStatusCount.InProgress
-            }, {
-                "status": "Closure Approval",
-                "value": this.rrfStatusCount.ClosureApproval
-            }, {
-                "status": "Closed",
-                "value": this.rrfStatusCount.Closed
-            }],
-            "valueField": "value",
-            "titleField": "status",
-            "balloon": {
-                "fixedPosition": true
+                    'status': 'Rejected',
+                    'value': this.rrfStatusCount.Rejected
+                }, {
+                    'status': 'On-Hold',
+                    'value': 2 //TODO
+                }, {
+                    'status': 'Open',
+                    'value': this.rrfStatusCount.Open
+                }, {
+                    'status': 'Assigned',
+                    'value': this.rrfStatusCount.Assigned
+                }, {
+                    'status': 'InProgress',
+                    'value': this.rrfStatusCount.InProgress
+                }, {
+                    'status': 'Closure Approval',
+                    'value': this.rrfStatusCount.ClosureApproval
+                }, {
+                    'status': 'Closed',
+                    'value': this.rrfStatusCount.Closed
+                }],
+            'valueField': 'value',
+            'titleField': 'status',
+            'balloon': {
+                'fixedPosition': true
             },
-            "export": {
-                "enabled": true
+            'export': {
+                'enabled': true
             }
         });
     }

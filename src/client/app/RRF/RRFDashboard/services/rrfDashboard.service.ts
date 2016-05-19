@@ -1,5 +1,5 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
@@ -8,14 +8,15 @@ import { Config } from '../../../shared/config/config';
 
 export class RRFDashboardService {
     constructor(private authHttp: AuthHttp) { }
-    getAllRRF(){
+
+    getAllRRF() {
         let url = Config.GetURL('/api/RRF/GetAllRRF');
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);
     }
-    
-     getStatuswiseRRFCount(){
+
+    getStatuswiseRRFCount() {
         let url = Config.GetURL('/api/RRF/GetStatuswiseRRFCount');
         return this.authHttp.get(url)
             .map(this.extractData)
