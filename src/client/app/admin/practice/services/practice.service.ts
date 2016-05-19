@@ -11,7 +11,7 @@ export class PracticeService {
     constructor(private http: Http, private authHttp: AuthHttp) { }
 
     addPractice(practice: PracticeInfo) {
-        let url = Config.GetURL('api/Masters/Practice/Add');  
+        let url = Config.GetURL('api/Masters/Practice/Add');
         return this.authHttp.post(url, { practice })
             .map(this.extractData)
             .catch(this.handleError);

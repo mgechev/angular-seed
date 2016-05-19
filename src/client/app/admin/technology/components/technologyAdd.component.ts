@@ -10,15 +10,15 @@ import { TechnologyService } from '../services/technology.service';
 })
 
 export class TechnologyAddComponent implements OnActivate {
-    technology: TechnologyInfo
-    errorMessage: string
-    params: number
+    technology: TechnologyInfo;
+    errorMessage: string;
+    params: number;
     constructor(private _technologyService: TechnologyService,
         private _router: Router) {
-        this.technology = new TechnologyInfo(0, '')
+        this.technology = new TechnologyInfo(0, '');
     }
 
-    routerOnActivate(segment: RouteSegment){
+    routerOnActivate(segment: RouteSegment) {
         this.params = Number(segment.getParam('id'));
         if (this.params) {
             this._technologyService.getTechnologyById(this.params)

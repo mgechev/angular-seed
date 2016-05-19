@@ -10,15 +10,15 @@ import { PracticeService } from '../services/practice.service';
 })
 
 export class PracticeAddComponent implements OnActivate {
-    practice: PracticeInfo
-    errorMessage: string
-    params: number
+    practice: PracticeInfo;
+    errorMessage: string;
+    params: number;
     constructor(private _practiceService: PracticeService,
         private _router: Router) {
-        this.practice = new PracticeInfo(0, '')
+        this.practice = new PracticeInfo(0, '');
     }
 
-    routerOnActivate(segment: RouteSegment){
+    routerOnActivate(segment: RouteSegment) {
         this.params = Number(segment.getParam('id'));
         if (this.params) {
             this._practiceService.getPracticeById(this.params)

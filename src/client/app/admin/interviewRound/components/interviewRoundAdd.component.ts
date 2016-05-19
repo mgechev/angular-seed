@@ -10,15 +10,15 @@ import { InterviewRoundService } from '../services/interviewRound.service';
 })
 
 export class InterviewRoundAddComponent implements OnActivate {
-    interviewRound: InterviewRoundInfo
-    errorMessage: string
-    params: number
+    interviewRound: InterviewRoundInfo;
+    errorMessage: string;
+    params: number;
     constructor(private _interviewRoundService: InterviewRoundService,
         private _router: Router) {
-        this.interviewRound = new InterviewRoundInfo(0, '')
+        this.interviewRound = new InterviewRoundInfo(0, '');
     }
 
-    routerOnActivate(segment: RouteSegment){
+    routerOnActivate(segment: RouteSegment) {
         this.params = Number(segment.getParam('id'));
         if (this.params) {
             this._interviewRoundService.getInterviewRoundById(this.params)
