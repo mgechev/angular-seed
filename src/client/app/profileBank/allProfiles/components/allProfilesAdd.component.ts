@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { Router, RouteSegment, OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
-import {MyProfilesInfo, Qualification, Masters} from '../../myProfiles/model/myProfilesInfo'
+import {MyProfilesInfo, Qualification, Masters} from '../../myProfiles/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';

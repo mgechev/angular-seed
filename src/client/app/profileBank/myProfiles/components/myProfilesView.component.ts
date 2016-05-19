@@ -29,5 +29,4 @@ export class MyProfilesViewComponent implements OnActivate {
                 error => this.errorMessage = <any>error);
         }
     }
-
 }
