@@ -27,7 +27,7 @@ before_install:
 
 before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then nohup bash -c webdriver-manager start 2>&1 &; fi  # Protractor CI
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then nohup bash -c "webdriver-manager start 2>&1 &"; fi  # Protractor CI
 
 after_failure:
   - cat /home/travis/build/mgechev/angular2-seed/npm-debug.log
