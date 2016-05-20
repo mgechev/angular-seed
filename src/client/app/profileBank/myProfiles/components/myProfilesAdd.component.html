@@ -56,6 +56,10 @@
                                 </div>
                                 <div class="portlet-body">
                                     <div class="tab-content">
+                                         <alert class="alerts" *ngFor="let alert of alerts;let i = index" dismissible="true" 
+                                         [type]="alert.type" dismissOnTimeout="2000"  (close)="closeAlert(i)">
+                                             {{ alert?.msg }}
+                                         </alert>  
                                         <!-- PRIMARY INFO TAB -->
                                         <div class="tab-pane active" id="tab_primaryInfo">
                                             <form role="form" (submit)="onSavePrimaryInfo()">
@@ -685,7 +689,8 @@
                                                             <label class="control-label">Expected Salary</label>
                                                             <div class="row">
                                                                 <div class="col-md-12">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.ExpectedSalary" />
+                                                                    <!--<input type="text" placeholder="" class="form-control" [(ngModel)]="profile.ExpectedSalary" />-->
+                                                                    <span class="form-control"  tooltip="You can change this value from Primary Info Tab" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.ExpectedSalary">{{profile.ExpectedSalary}}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -695,7 +700,8 @@
                                                             <label class="control-label">Current Salary</label>
                                                             <div class="row">
                                                                 <div class="col-md-8">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CurrentSalary" />
+                                                                    <!--<input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CurrentSalary" />-->
+                                                                    <span class="form-control"  tooltip="You can change this value from Primary Info Tab" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.CurrentSalary">{{profile.CurrentSalary}}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -925,7 +931,11 @@
                                         <!--<div class='Loader' *ngIf='showSucessMessage'>Details Saved Sucessfully</div>
                                         <div class='Loader' *ngIf='showWaitMessage'><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></div>
                                         -->
+                                        <!--<div *ngIf="IsSuccess" class="Loader">
+                                            <alert [type]= 'success' dismissOnTimeout="3000">This alert will dismiss in 3s</alert>
+                                         <div>-->
                                        
+                                                                 
                                     </div>
                                 </div>
                             </div>

@@ -4,12 +4,13 @@ import { MyProfilesInfo, Qualification, Masters } from '../model/myProfilesInfo'
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
+import { TOOLTIP_DIRECTIVES, AlertComponent } from 'ng2-bootstrap';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-myprofiles-add',
     templateUrl: 'myProfilesAdd.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES, AlertComponent],
     styleUrls: ['myProfiles.component.css']
 })
 
@@ -39,12 +40,24 @@ export class MyProfilesAddComponent implements OnActivate {
     IsReadyToRelocateChecked: boolean = false;
 
     IsHidden: boolean = true;
+    IsSuccess: boolean = false;
+    public alerts: Array<Object>;
+
+    public closeAlert(i: number): void {
+        this.alerts.splice(i, 1);
+    }
+
+    // public addAlert(): void {
+    //     this.alerts.push({ msg: 'Another alert!', type: 'warning', closable: true });
+    // }
+
     constructor(private _myProfilesService: MyProfilesService,
         private _masterService: MastersService,
         private _router: Router) {
         this.profile = new MyProfilesInfo();
         this.qualification = new Qualification();
         this.createQualification();
+        this.alerts = new Array<Object>();
     }
 
     routerOnActivate(segment: RouteSegment) {
@@ -249,25 +262,25 @@ export class MyProfilesAddComponent implements OnActivate {
         }
     }
 
-    onSelectQualification(candidateQualification: number) {
+    onSelectQualification(candidateQualification: string) {
         for (var i = 0; i < this.qualifications.length; i++) {
-            if (this.qualifications[i].Id === candidateQualification) {
+            if (this.qualifications[i].Id === parseInt(candidateQualification)) {
                 this.selectedQualification = this.qualifications[i];
             }
         }
     }
 
-    onSelectGrade(grade: number) {
+    onSelectGrade(grade: string) {
         for (var i = 0; i < this.grades.length; i++) {
-            if (this.grades[i].Id === grade) {
+            if (this.grades[i].Id === parseInt(grade)) {
                 this.selectedGrade = this.grades[i];
             }
         }
     }
 
-    onSelectYear(year: number) {
+    onSelectYear(year: string) {
         for (var i = 0; i < this.years.length; i++) {
-            if (this.years[i].Id === year) {
+            if (this.years[i].Id === parseInt(year)) {
                 this.selectedYear = this.years[i];
             }
         }
@@ -287,11 +300,12 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateProfile(this.profile)
                 .subscribe(
                 results => {
+                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
                     this.getCandidateProfileById(this.params);
                 },
                 error => {
                     this.errorMessage = <any>error;
-
+                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
                 });
         }
     }
@@ -303,11 +317,12 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
                 results => {
+                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
                     this.getCandidateProfileById(this.params);
                 },
                 error => {
                     this.errorMessage = <any>error;
-
+                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
                 });
         }
     }
@@ -319,9 +334,13 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateProfessionalDetails(this.profile)
                 .subscribe(
                 results => {
+                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
                     this.getCandidateProfileById(this.params);
                 },
-                error => this.errorMessage = <any>error);
+                error => {
+                this.errorMessage = <any>error;
+                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                });
         }
     }
 
@@ -331,9 +350,13 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateQualificationDetails(this.profile)
                 .subscribe(
                 results => {
+
                     this.getCandidateProfileById(this.params);
                 },
-                error => this.errorMessage = <any>error);
+                error => {
+                this.errorMessage = <any>error;
+                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                });
         }
     }
 
@@ -343,9 +366,13 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateSkillsDetails(this.profile)
                 .subscribe(
                 results => {
+                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
                     this.getCandidateProfileById(this.params);
                 },
-                error => this.errorMessage = <any>error);
+                error => {
+                this.errorMessage = <any>error;
+                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                });
         }
     }
 
@@ -356,9 +383,13 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
                 results => {
+                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
                     this.getCandidateProfileById(this.params);
                 },
-                error => this.errorMessage = <any>error);
+                error => {
+                this.errorMessage = <any>error;
+                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                });
         }
     }
 
@@ -368,9 +399,14 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateCareerDetails(this.profile)
                 .subscribe(
                 results => {
+                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
                     this.getCandidateProfileById(this.params);
                 },
-                error => this.errorMessage = <any>error);
+                error => {
+                this.errorMessage = <any>error;
+                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                }
+                );
         }
     }
     onSaveSalaryDetails(): void {
@@ -380,11 +416,12 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateSalaryDetails(this.profile)
                 .subscribe(
                 results => {
+                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
                     this.getCandidateProfileById(this.params);
                 },
                 error => {
                     this.errorMessage = <any>error;
-
+                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
                 });
         }
     }
@@ -411,7 +448,7 @@ export class MyProfilesAddComponent implements OnActivate {
                     },
                     error => {
                         this.errorMessage = <any>error;
-
+                        this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
                     });
             }
         } else {
@@ -436,10 +473,11 @@ export class MyProfilesAddComponent implements OnActivate {
                         this.qualification = new Qualification();
                         this.IsHidden = true;
                         this.getCandidateQualifications();
+                        this.alerts.push({ msg: 'Details Updated Sucessfully!', type: 'success', closable: true });
                     },
                     error => {
                         this.errorMessage = <any>error;
-
+                        this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
                     });
             }
         }
@@ -451,10 +489,11 @@ export class MyProfilesAddComponent implements OnActivate {
                 .subscribe(
                 results => {
                     this.profile.Qualifications = new Array<Qualification>();
-                    this.profile.Qualifications = results;
+                    this.profile.Qualifications = <any>results;
                 },
                 error => {
                     this.errorMessage = <any>error;
+                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
                 });
         }
     }

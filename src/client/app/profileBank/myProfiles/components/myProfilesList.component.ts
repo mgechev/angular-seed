@@ -54,7 +54,7 @@ export class MyProfilesListComponent implements OnActivate {
         this._myProfilesService.getMyProfiles()
             .subscribe(
             results => {
-                this.myProfilesList = results;
+                this.myProfilesList = <any>results;
             },
             error => this.errorMessage = <any>error);
     }

@@ -147,3 +147,18 @@ span.select2.select2-container.select2-container--bootstrap {
     .tooltip.customClass .tooltip-arrow {
         display: none;
     }
+.alerts{
+    width: 250px;
+    height: 20px;
+    height: auto;
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+    top: 35%;
+    color: #338CD2;
+    font-family: Calibri;
+    font-size: 14px;
+    padding: 10px;
+    text-align: center;
+    z-index: 2000;
+}

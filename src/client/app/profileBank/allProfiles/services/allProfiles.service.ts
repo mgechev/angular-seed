@@ -10,7 +10,7 @@ import { SpinnerService } from '../../../shared/components/spinner/spinner';
 
 export class AllProfilesService {
 
-    constructor(private http: Http, private authHttp: AuthHttp,private _spinnerService: SpinnerService) { }
+    constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
     getAllProfiles() {
         let url = Config.GetURL('/api/ProfileBank/getOpenProfiles');
@@ -23,93 +23,119 @@ export class AllProfilesService {
 
     editCandidateProfile(profile: MyProfilesInfo) {
         let url = Config.GetURL('/api/ProfileBank/editCandidateProfile');
+        this._spinnerService.show();
         return this.authHttp.post(url, { profile })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     getCandidateProfile(id: string) {
         let url = Config.GetURL('/api/ProfileBank/getCandidateProfile');
+        this._spinnerService.show();
         return this.authHttp.post(url, { profile: { ProfileId: id } })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     editCandidatePersonalDetails(profile: MyProfilesInfo) {
         let url = Config.GetURL('/api/ProfileBank/AddPersonalDetails');
+        this._spinnerService.show();
         return this.authHttp.post(url, { profile })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     editCandidateProfessionalDetails(profile: MyProfilesInfo) {
         let url = Config.GetURL('/api/ProfileBank/AddCandidateOtherDetails');
+        this._spinnerService.show();
         return this.authHttp.post(url, { profile })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     editCandidateQualificationDetails(profile: MyProfilesInfo) {
         let url = Config.GetURL('/api/ProfileBank/AddQualificationDetails');
+        this._spinnerService.show();
         return this.authHttp.post(url, { profile })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     editCandidateCareerDetails(profile: MyProfilesInfo) {
         let url = Config.GetURL('/api/ProfileBank/AddCareerProfileDetails');
+        this._spinnerService.show();
         return this.authHttp.post(url, { profile })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     editCandidateSkillsDetails(profile: MyProfilesInfo) {
         let url = Config.GetURL('/api/ProfileBank/AddCandidateSkillsDetails');
+        this._spinnerService.show();
         return this.authHttp.post(url, { profile })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     editCandidateSalaryDetails(profile: MyProfilesInfo) {
         let url = Config.GetURL('/api/ProfileBank/AddCandidateSalaryDetails');
+        this._spinnerService.show();
         return this.authHttp.post(url, { profile })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     editCandidateTeamManagementDetails(profile: MyProfilesInfo) {
         let url = Config.GetURL('/api/ProfileBank/AddCandidateTeamManagementDetails');
+        this._spinnerService.show();
         return this.authHttp.post(url, { profile })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     addCandidateQualification(qualification: Qualification) {
         let url = Config.GetURL('/api/ProfileBank/AddQualificationDetails');
+        this._spinnerService.show();
         return this.authHttp.post(url, { qualification })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     getCandidateQualifications(id: string) {
         let url = Config.GetURL('/api/ProfileBank/getQualificationDetails');
+        this._spinnerService.show();
         return this.authHttp.post(url, { profile: { ProfileId: id } })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     editCandidateQualification(qualification: Qualification) {
         let url = Config.GetURL('/api/Masters/UpdateQualifications');
+        this._spinnerService.show();
         return this.authHttp.post(url, { qualification })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     updateCandidateStatus(CandidateID: number, Status: Masters, Comments: string) {
         let url = Config.GetURL('/api/ProfileBank/UpdateStatus');
+        this._spinnerService.show();
         return this.authHttp.post(url, { profile: { CandidateID: CandidateID, Status: Status, Comments: Comments } })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
 
     }
 
