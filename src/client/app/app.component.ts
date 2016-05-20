@@ -10,6 +10,10 @@ import { LoginComponent } from './login/index';
 import { LoginService } from './shared/services/login.service';
 import { Error400Component,Error500Component } from './errorPages/index';
 
+/**
+ * This class represents the main application component. Within the @Routes annotation is the configuration of the
+ * applications routes, configuring the paths for the lazy loaded components (HomeComponent, AboutComponent).
+ */
 @Component({
   moduleId: module.id,
   selector: 'sd-app',

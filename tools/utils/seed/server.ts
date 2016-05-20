@@ -8,18 +8,16 @@ import * as codeChangeTool from './code_change_tools';
 import { APP_BASE, COVERAGE_PORT, DOCS_DEST, DOCS_PORT, PORT, PROD_DEST } from '../../config';
 
 /**
- * Serves the Single Page Application.
- * More specifically, calls the `listen` method, which itself launches BrowserSync.
+ * Serves the Single Page Application. More specifically, calls the `listen` method, which itself launches BrowserSync.
  */
 export function serveSPA() {
   codeChangeTool.listen();
 }
 
 /**
- * This utility method is used to notify that a file change has happened and
- * subsequently calls the `changed` method, which itself initiates a BrowserSync
- * reload.
- * @param {any} e The file that has changed
+ * This utility method is used to notify that a file change has happened and subsequently calls the `changed` method,
+ * which itself initiates a BrowserSync reload.
+ * @param {any} e - The file that has changed.
  */
 export function notifyLiveReload(e:any) {
   let fileName = e.path;
@@ -43,8 +41,7 @@ export function serveDocs() {
 }
 
 /**
- * Starts a new `express` server, serving the static unit test code coverage
- * report.
+ * Starts a new `express` server, serving the static unit test code coverage report.
  */
 export function serveCoverage() {
   let server = express();

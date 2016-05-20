@@ -28,8 +28,7 @@ export class SeedConfig {
 
   /**
    * The port where the application will run.
-   * The default port is `5555`, which can be overriden by the  `--port` flag
-   * when running `npm start`.
+   * The default port is `5555`, which can be overriden by the  `--port` flag when running `npm start`.
    * @type {number}
    */
   PORT = argv['port'] || 5555;
@@ -41,54 +40,47 @@ export class SeedConfig {
 
   /**
    * The current environment.
-   * The default environment is `dev`, which can be overriden by the `--env`
-   * flag when running `npm start`.
+   * The default environment is `dev`, which can be overriden by the `--env` flag when running `npm start`.
    */
   ENV = getEnvironment();
 
   /**
    * The flag for the debug option of the application.
-   * The default value is `false`, which can be overriden by the `--debug` flag
-   * when running `npm start`.
+   * The default value is `false`, which can be overriden by the `--debug` flag when running `npm start`.
    * @type {boolean}
    */
   DEBUG = argv['debug'] || false;
 
   /**
    * The port where the documentation application will run.
-   * The default docs port is `4003`, which can be overriden by the
-   * `--docs-port` flag when running `npm start`.
+   * The default docs port is `4003`, which can be overriden by the `--docs-port` flag when running `npm start`.
    * @type {number}
    */
   DOCS_PORT = argv['docs-port'] || 4003;
 
   /**
    * The port where the unit test coverage report application will run.
-   * The default coverage port is `4004`, which can by overriden by the
-   * `--coverage-port` flag when running `npm start`.
+   * The default coverage port is `4004`, which can by overriden by the `--coverage-port` flag when running `npm start`.
    * @type {number}
    */
   COVERAGE_PORT = argv['coverage-port'] || 4004;
 
   /**
    * The path for the base of the application at runtime.
-   * The default path is `/`, which can be overriden by the `--base` flag when
-   * running `npm start`.
+   * The default path is `/`, which can be overriden by the `--base` flag when running `npm start`.
    * @type {string}
    */
   APP_BASE = argv['base'] || '/';
 
   /**
    * The flag for the hot-loader option of the application.
-   * Per default the option is not set, but can be set by the `--hot-loader`
-   * flag when running `npm start`.
+   * Per default the option is not set, but can be set by the `--hot-loader` flag when running `npm start`.
    * @type {boolean}
    */
   ENABLE_HOT_LOADING = argv['hot-loader'];
 
   /**
-   * The port where the application will run, if the `hot-loader` option mode
-   * is used.
+   * The port where the application will run, if the `hot-loader` option mode is used.
    * The default hot-loader port is `5578`.
    * @type {number}
    */
@@ -109,10 +101,10 @@ export class SeedConfig {
   APP_CLIENT = argv['client'] || 'client';
 
   /**
-   * The bootstrap file to be used to boot the application.
-   * The file to be used is dependent if the hot-loader option is used or not.
-   * Per default (non hot-loader mode) the `main.ts` file will be used, with the
-   * hot-loader option enabled, the `hot_loader_main.ts` file will be used.
+   * The bootstrap file to be used to boot the application. The file to be used is dependent if the hot-loader option is
+   * used or not.
+   * Per default (non hot-loader mode) the `main.ts` file will be used, with the hot-loader option enabled, the
+   * `hot_loader_main.ts` file will be used.
    * @type {string}
    */
   BOOTSTRAP_MODULE = `${this.BOOTSTRAP_DIR}/` + (this.ENABLE_HOT_LOADING ? 'hot_loader_main' : 'main');
@@ -273,7 +265,7 @@ export class SeedConfig {
 
   /**
    * Returns the array of injectable dependencies (npm dependencies and assets).
-   * @return {InjectableDependency[]} the array of npm dependencies and assets.
+   * @return {InjectableDependency[]} The array of npm dependencies and assets.
    */
   get DEPENDENCIES(): InjectableDependency[] {
     return normalizeDependencies(this.NPM_DEPENDENCIES.filter(filterDependency.bind(null, this.ENV)))
@@ -380,10 +372,9 @@ export class SeedConfig {
 
   /**
    * The BrowserSync configuration of the application.
-   * The default open behavior is to open the browser, 
-   * To prevent the browser from opening
-   * `--b`  flag when running `npm start` (tested with serve.dev)
-   * example `npm start -- --b`
+   * The default open behavior is to open the browser. To prevent the browser from opening use the `--b`  flag when
+   * running `npm start` (tested with serve.dev).
+   * Example: `npm start -- --b`
    * @type {any}
    */
   BROWSER_SYNC_CONFIG: any = {
@@ -405,7 +396,7 @@ export class SeedConfig {
 
 /**
  * Normalizes the given `deps` to skip globs.
- * @param {InjectableDependency[]} deps the dependencies to be normalized.
+ * @param {InjectableDependency[]} deps - The dependencies to be normalized.
  */
 export function normalizeDependencies(deps: InjectableDependency[]) {
   deps
@@ -416,10 +407,9 @@ export function normalizeDependencies(deps: InjectableDependency[]) {
 
 /**
  * Returns if the given dependency is used in the given environment.
- * @param  {string}               env the environment to be filtered for
- * @param  {InjectableDependency} d   the dependency to check
- * @return {boolean}                  `true` if the dependency is used in this
- *                                    environment, `false` otherwise
+ * @param  {string}               env - The environment to be filtered for.
+ * @param  {InjectableDependency} d   - The dependency to check.
+ * @return {boolean}                    `true` if the dependency is used in this environment, `false` otherwise.
  */
 function filterDependency(env: string, d: InjectableDependency): boolean {
   if (!d.env) {
@@ -433,7 +423,7 @@ function filterDependency(env: string, d: InjectableDependency): boolean {
 
 /**
  * Returns the applications version as defined in the `package.json`.
- * @return {number} the applications version
+ * @return {number} The applications version.
  */
 function appVersion(): number | string {
   var pkg = require('../../package.json');
@@ -442,7 +432,7 @@ function appVersion(): number | string {
 
 /**
  * Returns the linting configuration to be used for `codelyzer`.
- * @return {string[]} the list of linting rules
+ * @return {string[]} The list of linting rules.
  */
 function customRules(): string[] {
   var lintConf = require('../../tslint.json');

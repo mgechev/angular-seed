@@ -10,9 +10,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 if ('<%= ENV %>' === 'prod') { enableProdMode(); }
 
 /**
- * Bootstraps the application and makes the ROUTER_PROVIDERS
- * and the APP_BASE_HREF available to it.
- *
+ * Bootstraps the application and makes the ROUTER_PROVIDERS and the APP_BASE_HREF available to it.
  * @see https://angular.io/docs/ts/latest/api/platform-browser-dynamic/index/bootstrap-function.html
  */
 bootstrap(AppComponent, [

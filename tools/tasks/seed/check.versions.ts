@@ -6,9 +6,8 @@ function reportError(message: string) {
 }
 
 /**
- * Executes the build process, verifying that the installed NodeJS and NPM
- * version matches the required versions as defined in the application
- * configuration.
+ * Executes the build process, verifying that the installed NodeJS and NPM version matches the required versions as
+ * defined in the application configuration.
  */
 export = () => {
   let exec = require('child_process').exec;

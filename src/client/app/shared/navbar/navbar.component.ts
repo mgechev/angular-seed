@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
+/**
+ * This class represents the navigation bar component.
+ */
 @Component({
   moduleId: module.id,
   selector: 'sd-navbar',
@@ -8,7 +11,4 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
   styleUrls: ['navbar.component.css'],
   directives: [ROUTER_DIRECTIVES]
 })
-/**
- * This class represents the navigation bar component.
- */
 export class NavbarComponent {}
