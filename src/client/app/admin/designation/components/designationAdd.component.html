@@ -20,13 +20,13 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label">Name</label>
                             <div class="col-md-4">
-                                <input type="text" [(ngModel)]="designation.Designation" class="form-control" required="">
+                                <input id="addDesignation" type="text" [(ngModel)]="designation.Designation" class="form-control" required="">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <button type="submit" class="btn green">Save</button>                               
-                                <a class="btn grey" [routerLink]="['/App/Admin/Designation']">Cancel</a>
+                                <button id="saveDesignation" type="submit" class="btn green">Save</button>                               
+                                <a id="cancelDestiantion" class="btn grey" [routerLink]="['/App/Admin/Designation']">Cancel</a>
                             </div>
                         </div>
                     </form>

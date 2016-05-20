@@ -146,19 +146,19 @@
                 </a>
             </li>
             <li [ifAuthorize]="['ADMIN.SKILLS.MANAGE']" class="nav-item start ">
-                <a [routerLink]="['/App/Admin/Skill/']" class="nav-link ">
+                <a id="skillLink" [routerLink]="['/App/Admin/Skill/']" class="nav-link ">
                     <i class="icon-graph"></i>
                     <span class="title">Skills</span>
                 </a>
             </li>
             <li [ifAuthorize]="['ADMIN.QUALIFICATIONS.MANAGE']" class="nav-item start ">
-                <a [routerLink]="['/App/Admin/Qualification']" class="nav-link ">
+                <a id="qualificationLink" [routerLink]="['/App/Admin/Qualification']" class="nav-link ">
                     <i class="icon-graph"></i>
                     <span class="title">Qualifications</span>
                 </a>
             </li>
             <li [ifAuthorize]="['ADMIN.DESIGNATION.MANAGE']" class="nav-item start ">
-                <a [routerLink]="['/App/Admin/Designation/']" class="nav-link ">
+                <a id="designationLink" [routerLink]="['/App/Admin/Designation/']" class="nav-link ">
                     <i class="icon-graph"></i>
                     <span class="title">Designation</span>
                 </a>
@@ -170,7 +170,7 @@
                 </a>
             </li>
             <li [ifAuthorize]="['ADMIN.OWNERTYPE.MANAGE']" class="nav-item start ">
-                <a [routerLink]="['/App/Admin/OwnerType/']" class="nav-link ">
+                <a id="ownerTypeLink" [routerLink]="['/App/Admin/OwnerType/']" class="nav-link ">
                     <i class="icon-graph"></i>
                     <span class="title">Owner Type</span>
                 </a>
