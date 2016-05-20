@@ -3,14 +3,13 @@ import { Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment } from '@angular/ro
 import { MyProfilesInfo, Qualification, Masters } from '../model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
-import { SpinnerComponent } from '../../../shared/components/spinner/component/spinner.component';
 import * as  _ from 'lodash';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-myprofiles-add',
     templateUrl: 'myProfilesAdd.component.html',
-    directives: [ROUTER_DIRECTIVES,SpinnerComponent],
+    directives: [ROUTER_DIRECTIVES],
     styleUrls: ['myProfiles.component.css']
 })
 
