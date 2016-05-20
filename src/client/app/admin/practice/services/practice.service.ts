@@ -4,11 +4,12 @@ import { Observable } from 'rxjs/Rx';
 import { PracticeInfo } from '../models/practiceInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
+import { SpinnerService } from '../../../shared/components/spinner/spinner';
 
 @Injectable()
 export class PracticeService {
 
-    constructor(private http: Http, private authHttp: AuthHttp) { }
+    constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
     addPractice(practice: PracticeInfo) {
         let url = Config.GetURL('api/Masters/Practice/Add');
@@ -19,30 +20,38 @@ export class PracticeService {
 
     getPractices() {
         let url = Config.GetURL('api/Masters/GetPractices');
+        this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
      getPracticeById(id: number) {
         let url = Config.GetURL('api/Masters/Practice/GetPracticeById');
+        this._spinnerService.show();
         return this.authHttp.post(url,{ practice:{id:id} })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     deletePractice(practice: PracticeInfo) {
         let url = Config.GetURL('api/Masters/Practice/Delete');
+        this._spinnerService.show();
         return this.authHttp.post(url, { practice })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     editPractice(practice: PracticeInfo) {
         let url = Config.GetURL('api/Masters/Practice/Edit');
+        this._spinnerService.show();
         return this.authHttp.post(url, { practice })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     private extractData(res: Response) {

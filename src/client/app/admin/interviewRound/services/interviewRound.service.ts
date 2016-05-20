@@ -4,11 +4,12 @@ import { Observable } from 'rxjs/Rx';
 import { InterviewRoundInfo } from '../models/interviewRoundInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
+import { SpinnerService } from '../../../shared/components/spinner/spinner';
 
 @Injectable()
 export class InterviewRoundService {
 
-    constructor(private http: Http, private authHttp: AuthHttp) { }
+    constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
     addInterviewRound(interviewRound: InterviewRoundInfo) {
         let url = Config.GetURL('api/Masters/InterviewRound/Add');
@@ -19,30 +20,38 @@ export class InterviewRoundService {
 
     getInterviewRound() {
         let url = Config.GetURL('api/Masters/GetRounds');
+        this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
      getInterviewRoundById(id : number) {
         let url = Config.GetURL('api/Masters/InterviewRound/GetRoundsById');
+        this._spinnerService.show();
         return this.authHttp.post(url,{ interviewRound:{id:id} })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     deleteInterviewRound(interviewRound: InterviewRoundInfo) {
         let url = Config.GetURL('api/Masters/InterviewRound/Delete');
+        this._spinnerService.show();
         return this.authHttp.post(url, { interviewRound })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     editInterviewRound(interviewRound: InterviewRoundInfo) {
         let url = Config.GetURL('api/Masters/InterviewRound/Edit');
+        this._spinnerService.show();
         return this.authHttp.post(url, { interviewRound })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     private extractData(res: Response) {
