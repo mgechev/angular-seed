@@ -10,7 +10,7 @@ import { CollapseDirective } from 'ng2-bootstrap/components/collapse';
     moduleId: module.id,
     selector: 'rrf-myprofiles-list',
     templateUrl: 'myProfilesList.component.html',
-    directives: [ROUTER_DIRECTIVES,CollapseDirective],
+    directives: [ROUTER_DIRECTIVES, CollapseDirective],
     styleUrls: ['myProfiles.component.css']
 })
 
@@ -23,11 +23,11 @@ export class MyProfilesListComponent implements OnActivate {
     statusList: Array<Masters>;
     seletedCandidateID: number;
     selectedStatus: Masters;
-    Comments:string;
-    currentStatus : number;
-    currentCandidate:string;
+    Comments: string;
+    currentStatus: number;
+    currentCandidate: string;
 
-    public isCollapsed:boolean = false;
+    public isCollapsed: boolean = false;
     constructor(private _myProfilesService: MyProfilesService,
         private _router: Router,
         private _masterService: MastersService) {
@@ -40,13 +40,14 @@ export class MyProfilesListComponent implements OnActivate {
         this.getCandidateStatuses();
     }
 
-    SaveCandidateID(id : number) {
+    SaveCandidateID(id: number) {
         this.seletedCandidateID = id;
         var index = _.findIndex(this.myProfilesList, { CandidateID: this.seletedCandidateID });
         this.Comments = this.myProfilesList[index].Comments;
         this.currentStatus = this.myProfilesList[index].Status[0].Id;
         this.currentCandidate = this.myProfilesList[index].Candidate;
-        this.isCollapsed = !this.isCollapsed;
+        if (this.isCollapsed === false)
+            this.isCollapsed = !this.isCollapsed;
     }
 
     getMyProfiles() {
@@ -101,14 +102,21 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     onUpdateStauts() {
-         this._myProfilesService.updateCandidateStatus(this.seletedCandidateID,this.selectedStatus,this.Comments)
+        if (this.selectedStatus === undefined) {
+            var index = _.findIndex(this.myProfilesList, { CandidateID: this.seletedCandidateID });
+            this.selectedStatus = this.myProfilesList[index].Status[0];
+        }
+        this._myProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.Comments)
             .subscribe(
             results => {
-                alert('Status updated sucessfully');
-                this.isCollapsed=false;
                 this.getMyProfiles();
             },
             error => this.errorMessage = <any>error);
+        this.isCollapsed = false;
+    }
+
+    closeUpdatePanel() {
+        this.isCollapsed = false;
     }
 }
 

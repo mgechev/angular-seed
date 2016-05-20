@@ -25,7 +25,8 @@
         padding: 6px 12px !important;
     }
     .btnupdate{
-       margin: 0;  
+      margin-top: 0 !important;
+      margin-left: 0 !important;
     }
 }
 .add-new-panel {

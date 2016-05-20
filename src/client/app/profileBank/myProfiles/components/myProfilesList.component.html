@@ -97,16 +97,16 @@
                                     <div id="sample_1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm input-small input-inline" placeholder="" aria-controls="sample_1"></label></div>
                                 </div>
                             </div>
-                            <div class="row" >
+                            <div class="row" style="margin-top: 10px">
                                 <div  id="updateRow" [collapse]='!isCollapsed'>
                                     <form role="form" (submit)="onUpdateStauts()">
-                                        <div class="col-md-2">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                  <label class="control-label">Candidate Name</label>
                                                  <span class="form-control"> {{currentCandidate}}</span>
                                             </div>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Status<span class="required"> * </span></label>
                                                 <select (change)='onSelectStatus($event.target.value)' class="form-control" [(ngModel)]="currentStatus">
@@ -114,7 +114,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <div class="edit-content"></div>
                                                 <label class="control-label">Comments<span class="required"> * </span> </label>
@@ -123,6 +123,9 @@
                                         </div>
                                         <div class="col-md-1">
                                             <button type="submit" class="btn btn-info btnupdate" > Update </button>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <a class="btn btn-info btnupdate" (click)='closeUpdatePanel()' > Cancel </a>
                                         </div>
                                     </form>
                                 </div>
