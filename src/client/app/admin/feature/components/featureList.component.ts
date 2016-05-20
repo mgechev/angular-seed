@@ -37,7 +37,7 @@ export class FeatureListComponent implements OnInit {
     getFeatures() {
         this._featureService.getFeatures(this.meta.gridOptions)
             .subscribe(
-            results=> {
+            (results:any)=> {
                 this.meta.dataList = results.list;
                 this.meta.gridOptions = results.gridOptions;
             },

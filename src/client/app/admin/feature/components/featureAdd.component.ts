@@ -24,7 +24,7 @@ export class FeatureAddComponent implements OnActivate {
         if (this.params) {
             this._featureService.getFeatureById(this.params)
                 .subscribe(
-                results=> {
+                (results:FeatureInfo)=> {
                     this.feature = results;
                 },
                 error => this.errorMessage = <any>error);
