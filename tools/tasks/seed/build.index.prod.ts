@@ -18,8 +18,8 @@ import { templateLocals } from '../../utils';
 const plugins = <any>gulpLoadPlugins();
 
 /**
- * Executes the build process, injecting the JavaScript and CSS dependencies
- * into the `index.html` for the production environment.
+ * Executes the build process, injecting the JavaScript and CSS dependencies into the `index.html` for the production
+ * environment.
  */
 export = () => {
   return gulp.src(join(APP_SRC, 'index.html'))
@@ -31,7 +31,7 @@ export = () => {
 
 /**
  * Injects the given file array and transforms the path of the files.
- * @param {Array<string>} ...files the files to be injected
+ * @param {Array<string>} files - The files to be injected.
  */
 function inject(...files: Array<string>) {
     return plugins.inject(gulp.src(files, { read: false }), {
@@ -41,8 +41,7 @@ function inject(...files: Array<string>) {
 }
 
 /**
- * Injects the bundled JavaScript shims and application bundles for the
- * production environment.
+ * Injects the bundled JavaScript shims and application bundles for the production environment.
  */
 function injectJs() {
   return inject(join(JS_DEST, JS_PROD_SHIMS_BUNDLE), join(JS_DEST, JS_PROD_APP_BUNDLE));
@@ -56,8 +55,8 @@ function injectCss() {
 }
 
 /**
- * Transform the path of a dependecy to its location within the `dist` directory
- * according to the applications environment.
+ * Transform the path of a dependecy to its location within the `dist` directory according to the applications
+ * environment.
  */
 function transformPath() {
   return function(filepath: string) {

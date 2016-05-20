@@ -3,15 +3,16 @@ import { Component } from '@angular/core';
 
 import { NameListService } from '../shared/index';
 
-@Component({
-  selector: 'sd-home',
-  templateUrl: 'app/+home/home.component.html',
-  styleUrls: ['app/+home/home.component.css'],
-  directives: [FORM_DIRECTIVES]
-})
 /**
  * This class represents the lazy loaded HomeComponent.
  */
+@Component({
+  moduleId: module.id,
+  selector: 'sd-home',
+  templateUrl: 'home.component.html',
+  styleUrls: ['home.component.css'],
+  directives: [FORM_DIRECTIVES]
+})
 export class HomeComponent {
 
   newName: string;
@@ -20,13 +21,12 @@ export class HomeComponent {
    * Creates an instance of the HomeComponent with the injected
    * NameListService.
    *
-   * @param {NameListService} nameListService the injected NameListService
+   * @param {NameListService} nameListService - The injected NameListService.
    */
   constructor(public nameListService: NameListService) {}
 
   /**
-   * Calls the add method of the NameListService with the current
-   * newName value of the form.
+   * Calls the add method of the NameListService with the current newName value of the form.
    * @return {boolean} false to prevent default form submit behavior to refresh the page.
    */
   addName(): boolean {

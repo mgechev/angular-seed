@@ -10,13 +10,12 @@ const plugins = <any>gulpLoadPlugins();
 
 const INLINE_OPTIONS = {
   base: TMP_DIR,
-  useRelativePaths: false,
+  useRelativePaths: true,
   removeLineBreaks: true
 };
 
 /**
- * Executes the build process, transpiling the TypeScript files for the
- * production environment.
+ * Executes the build process, transpiling the TypeScript files for the production environment.
  */
 function buildTS() {
   let tsProject = makeTsProject();

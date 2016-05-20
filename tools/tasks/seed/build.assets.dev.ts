@@ -4,8 +4,8 @@ import { join } from 'path';
 import { APP_DEST, APP_SRC, TEMP_FILES } from '../../config';
 
 /**
- * Executes the build process, copying the assets located in `src/client/assets`
- * over to the appropiate `dist/dev/assets` directory.
+ * Executes the build process, copying the assets located in `src/client/assets` over to the appropiate
+ * `dist/dev/assets` directory.
  */
 export = () => {
   let paths: string[] = [

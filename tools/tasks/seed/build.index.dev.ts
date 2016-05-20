@@ -10,8 +10,7 @@ const plugins = <any>gulpLoadPlugins();
 
 
 /**
- * Executes the build process, injecting the shims and libs into the `index.hml`
- * for the development environment.
+ * Executes the build process, injecting the shims and libs into the `index.hml` for the development environment.
  */
 export = () => {
   return gulp.src(join(APP_SRC, 'index.html'))
@@ -24,7 +23,7 @@ export = () => {
 
 /**
  * Injects the file with the given name.
- * @param {string} name the file to be injected
+ * @param {string} name - The file to be injected.
  */
 function inject(name?: string) {
   return plugins.inject(gulp.src(getInjectablesDependenciesRef(name), { read: false }), {
@@ -35,7 +34,7 @@ function inject(name?: string) {
 
 /**
  * Returns the injectable dependency, mapping its filename to its path.
- * @param {string} name the dependency to be mapped
+ * @param {string} name - The dependency to be mapped.
  */
 function getInjectablesDependenciesRef(name?: string) {
   return DEPENDENCIES
@@ -44,9 +43,8 @@ function getInjectablesDependenciesRef(name?: string) {
 }
 
 /**
- * Maps the path of the given dependency to its path according to the
- * applications environment.
- * @param {any} dep the dependency to be mapped
+ * Maps the path of the given dependency to its path according to the applications environment.
+ * @param {any} dep - The dependency to be mapped.
  */
 function mapPath(dep: any) {
   let envPath = dep.src;
@@ -57,8 +55,8 @@ function mapPath(dep: any) {
 }
 
 /**
- * Transform the path of a dependecy to its location within the `dist` directory
- * according to the applications environment.
+ * Transform the path of a dependecy to its location within the `dist` directory according to the applications
+ * environment.
  */
 function transformPath() {
   return function (filepath: string) {

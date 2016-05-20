@@ -4,7 +4,7 @@ import * as rimraf from 'rimraf';
 
 /**
  * Cleans the given path(s) using `rimraf`.
- * @param {string or string[]} paths the path or list of paths to clean
+ * @param {string or string[]} paths - The path or list of paths to clean.
  */
 export function clean(paths: string|string[]): (done: () => void) => void {
   return done => {

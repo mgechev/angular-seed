@@ -3,8 +3,7 @@ import * as gulp from 'gulp';
 import { APP_DEST } from '../../config';
 
 /**
- * Executes the build process, generating the manifest file using
- * `angular2-service-worker`.
+ * Executes the build process, generating the manifest file using `angular2-service-worker`.
  */
 export = () => {
   return require('angular2-service-worker')

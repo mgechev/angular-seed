@@ -51,7 +51,6 @@ function getExternalCss() {
 }
 
 /**
- * Executes the build process, linting the component and external CSS files
- * using `stylelint`.
+ * Executes the build process, linting the component and external CSS files using `stylelint`.
  */
 export = () => merge(lintComponentCss(), lintExternalCss());

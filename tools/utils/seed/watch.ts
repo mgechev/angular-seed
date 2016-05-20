@@ -9,7 +9,7 @@ const plugins = <any>gulpLoadPlugins();
 
 /**
  * Watches the task with the given taskname.
- * @param {string} taskname the name of the task
+ * @param {string} taskname - The name of the task.
  */
 export function watch(taskname: string) {
   return function () {
