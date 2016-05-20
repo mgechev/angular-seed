@@ -24,7 +24,7 @@ export class OwnerTypeAddComponent implements OnActivate {
         if (this.params) {
             this._ownerTypeService.getOwnerTypeById(this.params)
                 .subscribe(
-                results=> {
+                (results:any)=> {
                     this.ownerType = results;
                 },
                 error => this.errorMessage = <any>error);

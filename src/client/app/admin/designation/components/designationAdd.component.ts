@@ -24,7 +24,7 @@ export class DesignationAddComponent implements OnActivate {
         if (this.params) {
             this._designationService.getDesignationById(this.params)
                 .subscribe(
-                results=> {
+                (results:any)=> {
                     this.designation = results;
                 },
                 error => this.errorMessage = <any>error);

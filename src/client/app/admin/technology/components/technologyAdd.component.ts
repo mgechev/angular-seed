@@ -24,7 +24,7 @@ export class TechnologyAddComponent implements OnActivate {
         if (this.params) {
             this._technologyService.getTechnologyById(this.params)
                 .subscribe(
-                results=> {
+                (results:any)=> {
                     this.technology = results;
                 },
                 error => this.errorMessage = <any>error);

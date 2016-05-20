@@ -24,7 +24,7 @@ export class InterviewRoundListComponent implements OnInit {
     getInterviewRound() {
         this._interviewRoundService.getInterviewRound()
             .subscribe(
-            results=> {
+            (results:any)=> {
                 this.interviewRoundList = results;
             },
             error => this.errorMessage = <any>error);

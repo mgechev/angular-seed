@@ -24,7 +24,7 @@ export class DesignationListComponent implements OnInit {
     getDesignations() {
         this._designationService.getDesignations()
             .subscribe(
-            results=> {
+            (results:any)=> {
                 this.designationList = results;
             },
             error => this.errorMessage = <any>error);

@@ -24,7 +24,7 @@ export class QualificationListComponent implements OnInit {
     getQualifications() {
         this._qualificationService.getQualifications()
             .subscribe(
-            results=> {
+            (results:any)=> {
                 this.qualificationList = results;
             },
             error => this.errorMessage = <any>error);

@@ -24,7 +24,7 @@ export class PraciceListComponent implements OnInit {
     getPractices() {
         this._practiceService.getPractices()
             .subscribe(
-            results=> {
+            (results:any)=> {
                 this.practiceList = results;
             },
             error => this.errorMessage = <any>error);

@@ -24,7 +24,7 @@ export class SkillAddComponent implements OnActivate {
         if (this.params) {
             this._skillService.getSkillById(this.params)
                 .subscribe(
-                results=> {
+                (results:any)=> {
                     this.skill = results;
                 },
                 error => this.errorMessage = <any>error);

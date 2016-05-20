@@ -24,7 +24,7 @@ export class OwnerTypeListComponent implements OnInit {
     getOwnerTypes() {
         this._ownerTypeService.getOwnerTypes()
             .subscribe(
-            results=> {
+            (results:any)=> {
                 this.ownerTypeList = results;
             },
             error => this.errorMessage = <any>error);

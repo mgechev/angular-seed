@@ -24,7 +24,7 @@ export class InterviewRoundAddComponent implements OnActivate {
         if (this.params) {
             this._interviewRoundService.getInterviewRoundById(this.params)
                 .subscribe(
-                results=> {
+                (results:any)=> {
                     this.interviewRound = results;
                 },
                 error => this.errorMessage = <any>error);

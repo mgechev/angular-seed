@@ -24,7 +24,7 @@ export class TechnologyListComponent implements OnInit {
     getTechnology() {
         this._technologyService.getTechnologies()
             .subscribe(
-            results=> {
+            (results:any)=> {
                 this.technologyList = results;
             },
             error => this.errorMessage = <any>error);

@@ -24,7 +24,7 @@ export class SkillListComponent implements OnInit {
     getSkills() {
         this._skillService.getSkills()
             .subscribe(
-            results=> {
+            (results:any)=> {
                 this.skillList = results;
             },
             error => this.errorMessage = <any>error);

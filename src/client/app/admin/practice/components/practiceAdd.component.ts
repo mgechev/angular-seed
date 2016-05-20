@@ -24,7 +24,7 @@ export class PracticeAddComponent implements OnActivate {
         if (this.params) {
             this._practiceService.getPracticeById(this.params)
                 .subscribe(
-                results=> {
+                (results:any)=> {
                     this.practice = results;
                 },
                 error => this.errorMessage = <any>error);

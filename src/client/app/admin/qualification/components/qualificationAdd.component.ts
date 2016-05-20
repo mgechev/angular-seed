@@ -24,7 +24,7 @@ export class QualificationAddComponent implements OnActivate {
         if (this.params) {
             this._qualificationService.getQualificationById(this.params)
                 .subscribe(
-                results=> {
+                (results:any)=> {
                     this.qualification = results;
                 },
                 error => this.errorMessage = <any>error);
