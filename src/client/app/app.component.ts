@@ -8,6 +8,7 @@ import { NameListService, NavbarComponent, ToolbarComponent } from './shared/ind
 
 import { LoginComponent } from './login/index';
 import { LoginService } from './shared/services/login.service';
+import { Error400Component,Error500Component } from './errorPages/index';
 
 @Component({
   moduleId: module.id,
@@ -22,7 +23,9 @@ import { LoginService } from './shared/services/login.service';
 @Routes([
   { path: '/App', component: HomeComponent },
   { path: '/about', component: AboutComponent },
-  { path: '/Login', component: LoginComponent }
+  { path: '/Login', component: LoginComponent },
+  { path: '/404', component: Error400Component },
+  { path: '/500', component: Error500Component }
 ])
 /**
  * This class represents the main application component.

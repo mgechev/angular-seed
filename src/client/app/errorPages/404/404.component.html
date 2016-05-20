@@ -1,0 +1,52 @@
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content" style="min-height:1269px">
+        <!-- BEGIN PAGE HEAD-->
+        <div class="page-head">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                <h1>404 Page
+                                <small>404 page </small>
+                            </h1>
+            </div>
+            <!-- END PAGE TITLE -->
+        </div>
+        <!-- END PAGE HEAD-->
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']">Home</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">System</span>
+            </li>
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+        <!-- BEGIN PAGE BASE CONTENT -->
+        <div class="row">
+            <div class="col-md-12 page-404">
+                <div class="number font-green" style="font-size: 128px;  font-weight: 300;" > 404 </div>
+                <div class="details">
+                    <h3>Oops! You're lost.</h3>
+                    <p> We can not find the page you're looking for.
+                        <br>
+                        <a [routerLink]="['/App']"> Return home </a> or try the search bar below. </p>
+                    <form action="#">
+                        <div class="input-group input-medium">
+                            <input type="text" class="form-control" placeholder="keyword...">
+                            <span class="input-group-btn">
+                                            <button type="submit" class="btn green">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </span>
+                        </div>
+                        <!-- /input-group -->
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE BASE CONTENT -->
+    </div>
+    <!-- END CONTENT BODY -->
+</div>

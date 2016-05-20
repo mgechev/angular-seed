@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ROUTER_DIRECTIVES, Routes } from '@angular/router';
+import { ROUTER_DIRECTIVES, Routes,RouteSegment,RouteTree } from '@angular/router';
 import { FooterComponent } from '../../layout/footer/footer.component';
 import { TopNavigationBarComponent } from '../../layout/topNavigationBar/topNavigationBar.component';
 import { PageActionsComponent } from '../../layout/pageActions/pageActions.component';
@@ -22,6 +22,7 @@ import { RecentProfilesComponent } from '../../profileBank/recentProfiles/index'
 import { MyRRFComponent } from '../../RRF/myRRF/index';
 import { RRFApprovalComponent } from '../../RRF/RRFApproval/index';
 import { RRFDashboardComponent } from '../../RRF/RRFDashboard/index';
+import { SpinnerComponent, SpinnerService } from '../../shared/components/spinner/spinner';
 
 
 @Component({
@@ -29,7 +30,8 @@ import { RRFDashboardComponent } from '../../RRF/RRFDashboard/index';
     templateUrl: 'home.component.html',
     styleUrls: ['home.component.css'],
     directives: [ROUTER_DIRECTIVES, FooterComponent, PageActionsComponent, TopNavigationBarComponent,
-        SideBarComponent, QuickSidebarComponent],
+        SideBarComponent, QuickSidebarComponent,SpinnerComponent],
+    providers: [SpinnerService],
 })
 @Routes([
     { path: '/Admin/Feature', component: FeatureComponent },
@@ -48,7 +50,8 @@ import { RRFDashboardComponent } from '../../RRF/RRFDashboard/index';
     { path: '/ProfileBank/RecentProfiles', component: RecentProfilesComponent },
     { path: '/RRF/MyRRF', component: MyRRFComponent },
     { path: '/RRF/RRFApproval', component: RRFApprovalComponent },
-    { path: '/RRF/RRFDashboard', component: RRFDashboardComponent }
+    { path: '/RRF/RRFDashboard', component: RRFDashboardComponent },
+
 ])
 export class HomeComponent implements OnInit {
     ngOnInit(): void {
@@ -56,4 +59,7 @@ export class HomeComponent implements OnInit {
         Layout.init();
         Demo.init();
     }
+     routerOnActivate(segment: RouteSegment,prev?: RouteSegment, currTree?: RouteTree, prevTree?: RouteTree) {
+   console.log(segment);
+  }
 }
