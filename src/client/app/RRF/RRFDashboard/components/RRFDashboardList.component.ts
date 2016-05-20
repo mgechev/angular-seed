@@ -3,12 +3,13 @@ import { OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
 import { RRFDetails, AllRRFStatusCount } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
+import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-dashboard-list',
     templateUrl: 'RRFDashboardList.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES]
 })
 
 export class RRFDashboardListComponent implements OnActivate {
@@ -18,6 +19,11 @@ export class RRFDashboardListComponent implements OnActivate {
     selectedRRF: RRFDetails = new RRFDetails();
     isListVisible: boolean = true;
     rrfStatusCount: AllRRFStatusCount = new AllRRFStatusCount();
+
+    doughnutChartLabels: string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
+    doughnutChartData: number[] = [350, 450, 100];
+    doughnutChartType: string = 'doughnut';
+
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService) {
     }
@@ -27,6 +33,13 @@ export class RRFDashboardListComponent implements OnActivate {
         this.getStatuswiseRRFCount();
     }
 
+    chartClicked(e: any): void {
+        console.log(e);
+    }
+
+    chartHovered(e: any): void {
+        console.log(e);
+    }
     getAllRRF() {
         this._rrfDashboardService.getAllRRF()
             .subscribe(
@@ -68,4 +81,6 @@ export class RRFDashboardListComponent implements OnActivate {
         //console.log(viewMode);
         this.getAllRRF();
     }
+
+
 }

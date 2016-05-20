@@ -3,12 +3,13 @@ import { Router, OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
 import {RRFDetails, Panel, MasterData } from '../models/rrfDetails';
 import { MyRRFService } from '../services/myRRF.service';
 import { MastersService } from '../../../shared/services/masters.service';
+import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-myrrf-add',
     templateUrl: 'myRRFAdd.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, SELECT_DIRECTIVES]
 })
 
 export class MyRRFAddComponent implements OnActivate {
@@ -21,6 +22,11 @@ export class MyRRFAddComponent implements OnActivate {
     skills: MasterData[];
     interviewRound: MasterData[];
     interviewers: MasterData[];
+
+    public items: Array<string> = ['ABC', 'XYZ'];
+    private value: any = ['Interviewer'];
+    private _disabledV: string = '0';
+    private disabled: boolean = false;
 
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
@@ -48,6 +54,34 @@ export class MyRRFAddComponent implements OnActivate {
         // $('#cmbInterviewer').select2();
     }
 
+    private get disabledV(): string {
+        return this._disabledV;
+    }
+
+    private set disabledV(value: string) {
+        this._disabledV = value;
+        this.disabled = this._disabledV === '1';
+    }
+
+    public selected(value: any): void {
+        console.log('Selected value is: ', value);
+    }
+
+    public removed(value: any): void {
+        console.log('Removed value is: ', value);
+    }
+
+    public refreshValue(value: any): void {
+        this.value = value;
+    }
+
+    public itemsToString(value: Array<any> = []): string {
+        return value
+            .map((item: any) => {
+                return item.text;
+            }).join(',');
+    }
+
     addPanel(): void {
         var addPanel: Panel = new Panel();
         this.newRRF.Panel.push(addPanel);
@@ -57,7 +91,7 @@ export class MyRRFAddComponent implements OnActivate {
         this._myRRFService.raiseRRF(this.newRRF)
             .subscribe(
             results => {
-                this._router.navigate(['/RRF/RRFDashboard/']);
+                this._router.navigate(['/APP/RRF/RRFDashboard/']);
             },
             error => this.errorMessage = <any>error);
     }

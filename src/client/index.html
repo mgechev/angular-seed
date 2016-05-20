@@ -2,171 +2,174 @@
 <html lang="en">
 
 <head>
-  <base href="<%= APP_BASE %>">
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>
-    <%= APP_TITLE %>
-  </title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- BEGIN GLOBAL MANDATORY STYLES -->
-  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"
-  />
-  <link href="assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-  <link href="assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-  <link href="assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
-  <!-- END GLOBAL MANDATORY STYLES -->
-  <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <base href="<%= APP_BASE %>">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>
+        <%= APP_TITLE %>
+    </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"
+    />
+    <link href="assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
     <link href="assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.css" rel="stylesheet" type="text/css" />
-    <link href="assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css"
+    />
     <link href="assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../node_modules/ng2-select/components/css/ng2-select.css" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL PLUGINS -->
-  <!-- BEGIN THEME GLOBAL STYLES -->
-  <link href="assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
-  <link href="assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
-  <!-- END THEME GLOBAL STYLES -->
-  <!-- BEGIN THEME LAYOUT STYLES -->
-  <link href="assets/layouts/layout4/css/layout.min.css" rel="stylesheet" type="text/css" />
-  <link href="assets/layouts/layout4/css/themes/light.min.css" rel="stylesheet" type="text/css" id="style_color" />
-  <link href="assets/layouts/layout4/css/custom.min.css" rel="stylesheet" type="text/css" />
-  <!-- END THEME LAYOUT STYLES -->
-  <!-- inject:css -->
-  <!-- endinject -->
-  <link rel="shortcut icon" href="favicon.ico" />
-  <link rel="manifest" href="manifest.json">
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <link href="assets/layouts/layout4/css/layout.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/layouts/layout4/css/themes/light.min.css" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="assets/layouts/layout4/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME LAYOUT STYLES -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="manifest" href="manifest.json">
 
 </head>
 
 <body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo">
 
-  <sd-app>
-    <style>
-      .logo {
-        width: 213px;
-        height: 36px;
-        background: url('assets/layouts/layout4/img/logo-light.png') no-repeat;
-        margin: 30px auto;
-      }
-      
-      .login-block {
-        width: 320px;
-        padding: 20px;
-        background: #F1EFEF;
-        border-radius: 5px;
-        border-top: 5px solid #ff656c;
-        margin: 0 auto;
-      }
-      
-      .login-block h1 {
-        text-align: center;
-        color: #000;
-        font-size: 18px;
-        text-transform: uppercase;
-        margin-top: 0;
-        margin-bottom: 20px;
-      }
-      
-      .login-block input {
-        width: 100%;
-        height: 42px;
-        box-sizing: border-box;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        margin-bottom: 20px;
-        font-size: 14px;
-        font-family: Montserrat;
-        padding: 0 20px 0 50px;
-        outline: none;
-      }
-      
-      .login-block input#username {
-        background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px top no-repeat;
-        background-size: 16px 80px;
-      }
-      
-      .login-block input#username:focus {
-        background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px bottom no-repeat;
-        background-size: 16px 80px;
-      }
-      
-      .login-block input#password {
-        background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px top no-repeat;
-        background-size: 16px 80px;
-      }
-      
-      .login-block input#password:focus {
-        background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px bottom no-repeat;
-        background-size: 16px 80px;
-      }
-      
-      .login-block input:active,
-      .login-block input:focus {
-        border: 1px solid #ff656c;
-      }
-      
-      .login-block button {
-        width: 100%;
-        height: 40px;
-        background: #ff656c;
-        box-sizing: border-box;
-        border-radius: 5px;
-        border: 1px solid #e15960;
-        color: #fff;
-        font-weight: bold;
-        text-transform: uppercase;
-        font-size: 14px;
-        font-family: Montserrat;
-        outline: none;
-        cursor: pointer;
-      }
-      
-      .login-block button:hover {
-        background: #ff7b81;
-      }
-    </style>
-    <div class="logo"></div>
-    <div class="login-block">
-      <h1>Please Wait...</h1>
-    </div>
-  </sd-app>
-  <!--[if lt IE 9]>
+    <sd-app>
+        <style>
+            .logo {
+                width: 213px;
+                height: 36px;
+                background: url('assets/layouts/layout4/img/logo-light.png') no-repeat;
+                margin: 30px auto;
+            }
+            
+            .login-block {
+                width: 320px;
+                padding: 20px;
+                background: #F1EFEF;
+                border-radius: 5px;
+                border-top: 5px solid #ff656c;
+                margin: 0 auto;
+            }
+            
+            .login-block h1 {
+                text-align: center;
+                color: #000;
+                font-size: 18px;
+                text-transform: uppercase;
+                margin-top: 0;
+                margin-bottom: 20px;
+            }
+            
+            .login-block input {
+                width: 100%;
+                height: 42px;
+                box-sizing: border-box;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                margin-bottom: 20px;
+                font-size: 14px;
+                font-family: Montserrat;
+                padding: 0 20px 0 50px;
+                outline: none;
+            }
+            
+            .login-block input#username {
+                background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px top no-repeat;
+                background-size: 16px 80px;
+            }
+            
+            .login-block input#username:focus {
+                background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px bottom no-repeat;
+                background-size: 16px 80px;
+            }
+            
+            .login-block input#password {
+                background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px top no-repeat;
+                background-size: 16px 80px;
+            }
+            
+            .login-block input#password:focus {
+                background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px bottom no-repeat;
+                background-size: 16px 80px;
+            }
+            
+            .login-block input:active,
+            .login-block input:focus {
+                border: 1px solid #ff656c;
+            }
+            
+            .login-block button {
+                width: 100%;
+                height: 40px;
+                background: #ff656c;
+                box-sizing: border-box;
+                border-radius: 5px;
+                border: 1px solid #e15960;
+                color: #fff;
+                font-weight: bold;
+                text-transform: uppercase;
+                font-size: 14px;
+                font-family: Montserrat;
+                outline: none;
+                cursor: pointer;
+            }
+            
+            .login-block button:hover {
+                background: #ff7b81;
+            }
+        </style>
+        <div class="logo"></div>
+        <div class="login-block">
+            <h1>Please Wait...</h1>
+        </div>
+    </sd-app>
+    <!--[if lt IE 9]>
     <script src="../assets/global/plugins/respond.min.js"></script>
     <script src="../assets/global/plugins/excanvas.min.js"></script> 
     <![endif]-->
-  <!-- BEGIN CORE PLUGINS -->
-  <script src="../assets/plugins/jquery.min.js" type="text/javascript"></script>
-  <script src="../assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-  <script src="../assets/plugins/js.cookie.min.js" type="text/javascript"></script>
-  <script src="../assets/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
-  <script src="../assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-  <script src="../assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-  <script src="../assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
-  <!-- END CORE PLUGINS -->
-  <!-- BEGIN PAGE LEVEL PLUGINS -->
-  <script src="../assets/global/plugins/moment.min.js" type="text/javascript"></script>
-  <script src="../assets/global/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
-  <script src="../assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script>
-  <script src="../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
-  <script src="../assets/global/plugins/jquery-knob/js/jquery.knob.js" type="text/javascript"></script>
-  <script src="../assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
-  <!--<script src="../assets/pages/scripts/components-select2.min.js" type="text/javascript"></script>-->
-  <script src="../assets/global/plugins/amcharts/amcharts/amcharts.js" type="text/javascript"></script>
-  <script src="../assets/global/plugins/amcharts/amcharts/pie.js" type="text/javascript"></script>
-  <script src="../assets/global/plugins/amcharts/amcharts/themes/light.js" type="text/javascript"></script>
-  <!-- END PAGE LEVEL PLUGINS -->
-  <!-- BEGIN THEME GLOBAL SCRIPTS -->
-  <script src="../assets/layouts/app.js" type="text/javascript"></script>
-  <!-- END THEME GLOBAL SCRIPTS -->
-  <!-- BEGIN THEME LAYOUT SCRIPTS -->
-  <script src="../assets/layouts/layout.js" type="text/javascript"></script>
-  <script src="../assets/layouts/demo.js" type="text/javascript"></script>
-  <script src="../assets/layouts/quick-sidebar.js" type="text/javascript"></script>
-  <!-- END THEME LAYOUT SCRIPTS -->
-  <script>
-    // function.name (all IE)
+    <!-- BEGIN CORE PLUGINS -->
+    <script src="../assets/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../assets/plugins/js.cookie.min.js" type="text/javascript"></script>
+    <script src="../assets/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+    <script src="../assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="../assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="../assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="../assets/global/plugins/moment.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/jquery-knob/js/jquery.knob.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+    <!--<script src="../assets/pages/scripts/components-select2.min.js" type="text/javascript"></script>-->
+    <script src="../assets/global/plugins/amcharts/amcharts/amcharts.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/amcharts/amcharts/pie.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/amcharts/amcharts/themes/light.js" type="text/javascript"></script>
+    <script src="../node_modules/chart.js/dist/Chart.bundle.min.js"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+    <script src="../assets/layouts/app.js" type="text/javascript"></script>
+    <!-- END THEME GLOBAL SCRIPTS -->
+    <!-- BEGIN THEME LAYOUT SCRIPTS -->
+    <script src="../assets/layouts/layout.js" type="text/javascript"></script>
+    <script src="../assets/layouts/demo.js" type="text/javascript"></script>
+    <script src="../assets/layouts/quick-sidebar.js" type="text/javascript"></script>
+    <!-- END THEME LAYOUT SCRIPTS -->
+    <script>
+        // function.name (all IE)
   // Remove once https://github.com/angular/angular/issues/6501 is fixed.
   /*! @source http://stackoverflow.com/questions/6903762/function-name-not-supported-in-ie*/
   if (!Object.hasOwnProperty('name')) {
@@ -181,39 +184,39 @@
       }
     });
   }
-  </script>
+    </script>
 
-  <script>
-    // Fixes undefined module function in SystemJS bundle
-  function module() {}
-  </script>
-
-  <!-- shims:js -->
-  <!-- endinject -->
-
-  <% if (ENV === 'dev') { %>
     <script>
-      System.config(<%=
+        // Fixes undefined module function in SystemJS bundle
+  function module() {}
+    </script>
+
+    <!-- shims:js -->
+    <!-- endinject -->
+
+    <% if (ENV === 'dev') { %>
+        <script>
+            System.config(<%=
       JSON.stringify(SYSTEM_CONFIG, null, 2)
     %>)
-    </script>
-    <% } %>
+        </script>
+        <% } %>
 
-      <!-- libs:js -->
-      <!-- endinject -->
+            <!-- libs:js -->
+            <!-- endinject -->
 
-      <!-- inject:js -->
-      <!-- endinject -->
+            <!-- inject:js -->
+            <!-- endinject -->
 
-      <% if (ENV === 'dev') { %>
-        <script>
-          System.import('<%= BOOTSTRAP_MODULE %>')
+            <% if (ENV === 'dev') { %>
+                <script>
+                    System.import('<%= BOOTSTRAP_MODULE %>')
     .catch(function (e) {
       console.error(e,
         'Report this error at https://github.com/mgechev/angular2-seed/issues');
     });
-        </script>
-        <% } %>
+                </script>
+                <% } %>
 
 </body>
 

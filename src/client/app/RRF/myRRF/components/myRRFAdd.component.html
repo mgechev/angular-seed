@@ -147,7 +147,7 @@
                                             </td>
                                             <td>
                                                 <div>
-                                                    <div class="input-group select2-bootstrap-append">
+                                                    <!--<div class="input-group select2-bootstrap-append">
                                                         <select id="cmbInterviewer" class="form-control" multiple>
                                                             <option *ngFor="let interviewer of interviewers" [value]="interviewer.Id">{{interviewer.Interviewers}}</option>
                                                         </select>
@@ -156,7 +156,9 @@
                                                         <span class="glyphicon glyphicon-search"></span>
                                                         </button>
                                                         </span>
-                                                    </div>
+                                                    </div>-->
+                                                    <ng-select [data]="value" [multiple]="true" [items]="items" placeholder="No city selected" (data)="refreshValue($event)"
+                                                    (selected)="selected($event)" (removed)="removed($event)"></ng-select>
                                                 </div>
                                             </td>
                                             <td>
