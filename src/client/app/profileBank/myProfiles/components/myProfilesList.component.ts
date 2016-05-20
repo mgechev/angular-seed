@@ -55,7 +55,7 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     redirectToView(CandidateID: number) {
-        this._router.navigate(['/ProfileBank/MyProfiles/View/' + CandidateID]);
+        this._router.navigate(['App/ProfileBank/MyProfiles/View/' + CandidateID]);
     }
 
     onSave(): void {
@@ -88,9 +88,9 @@ export class MyProfilesListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    onSelectStatus(statusId: number) {
+    onSelectStatus(statusId: string) {
         for (var i = 0; i < this.statusList.length; i++) {
-            if (this.statusList[i].Id === statusId) {
+            if (this.statusList[i].Id === parseInt(statusId)) {
                 this.selectedStatus = this.statusList[i];
             }
         }

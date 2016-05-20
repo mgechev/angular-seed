@@ -42,7 +42,7 @@ export class AllProfilesListComponent implements OnActivate {
     }
 
     redirectToView(CandidateID: number) {
-        this._router.navigate(['/ProfileBank/AllProfiles/View/' + CandidateID]);
+        this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID]);
     }
 
     SaveCandidateID(id: number) {
@@ -61,9 +61,9 @@ export class AllProfilesListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    onSelectStatus(statusId: number) {
+    onSelectStatus(statusId: string) {
         for (var i = 0; i < this.statusList.length; i++) {
-            if (this.statusList[i].Id === statusId) {
+            if (this.statusList[i].Id === parseInt(statusId)) {
                 this.selectedStatus = this.statusList[i];
             }
         }

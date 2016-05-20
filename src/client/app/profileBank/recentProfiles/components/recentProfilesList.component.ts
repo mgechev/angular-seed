@@ -39,7 +39,7 @@ export class RecentProfilesListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
     redirectToView(CandidateID: number) {
-        this._router.navigate(['/ProfileBank/RecentProfiles/View/' + CandidateID]);
+        this._router.navigate(['App/ProfileBank/RecentProfiles/View/' + CandidateID]);
     }
     SaveCandidateID(id: number) {
         this.seletedCandidateID = id;
@@ -56,14 +56,13 @@ export class RecentProfilesListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    onSelectStatus(statusId: number) {
+     onSelectStatus(statusId: string) {
         for (var i = 0; i < this.statusList.length; i++) {
-            if (this.statusList[i].Id === statusId) {
+            if (this.statusList[i].Id === parseInt(statusId)) {
                 this.selectedStatus = this.statusList[i];
             }
         }
     }
-
     onUpdateStauts() {
         this._recentProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.Comments)
             .subscribe(

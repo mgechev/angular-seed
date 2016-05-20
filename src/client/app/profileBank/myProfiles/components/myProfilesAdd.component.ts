@@ -3,13 +3,14 @@ import { Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment } from '@angular/ro
 import { MyProfilesInfo, Qualification, Masters } from '../model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
+import { SpinnerComponent } from '../../../shared/components/spinner/component/spinner.component';
 import * as  _ from 'lodash';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-myprofiles-add',
     templateUrl: 'myProfilesAdd.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES,SpinnerComponent],
     styleUrls: ['myProfiles.component.css']
 })
 
@@ -45,7 +46,6 @@ export class MyProfilesAddComponent implements OnActivate {
         this.profile = new MyProfilesInfo();
         this.qualification = new Qualification();
         this.createQualification();
-
     }
 
     routerOnActivate(segment: RouteSegment) {
@@ -198,13 +198,15 @@ export class MyProfilesAddComponent implements OnActivate {
         if (this.params) {
             this._myProfilesService.editCandidateProfile(this.profile)
                 .subscribe(
-                results => {
+                 results => {
                     //   this.showMessage('Details Saved Sucessfully', false);
                 },
-                error => this.errorMessage = <any>error);
+                error => {
+                    this.errorMessage = <any>error;
+                    //this.showMessage(this.errorMessage, false);
+                });
         }
     }
-
     onSavePersonalDetails(): void {
      //   this.showMessage('Wait', true);
         if (this.params) {
@@ -376,6 +378,7 @@ export class MyProfilesAddComponent implements OnActivate {
         this.qualification.CurrentYear = this.profile.Qualifications[index].YearOfPassing[0].Id;
         this.IsHidden = false;
     }
+
 
     // showMessage(msg: string, isWait: boolean) {
     //     var obj = $('.Loader');
