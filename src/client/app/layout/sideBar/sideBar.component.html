@@ -134,13 +134,13 @@
                 </a>
             </li>
             <li [ifAuthorize]="['ADMIN.PRACTICE.MANAGE']" class="nav-item start ">
-                <a [routerLink]="['/App/Admin/Practice/']" class="nav-link ">
+                <a id="practiceLink" [routerLink]="['/App/Admin/Practice/']" class="nav-link ">
                     <i class="icon-graph"></i>
                     <span class="title">Practice</span>
                 </a>
             </li>
             <li [ifAuthorize]="['ADMIN.TECHNOLOGY.MANAGE']" class="nav-item start ">
-                <a [routerLink]="['/App/Admin/Technology/']" class="nav-link ">
+                <a id="technologyLink" [routerLink]="['/App/Admin/Technology/']" class="nav-link ">
                     <i class="icon-graph"></i>
                     <span class="title">Technology</span>
                 </a>
@@ -164,7 +164,7 @@
                 </a>
             </li>
             <li [ifAuthorize]="['ADMIN.INTERVIEWROUNDS.MANAGE']" class="nav-item start ">
-                <a [routerLink]="['/App/Admin/InterviewRounds/']" class="nav-link ">
+                <a id="interviewRoundLink" [routerLink]="['/App/Admin/InterviewRounds/']" class="nav-link ">
                     <i class="icon-graph"></i>
                     <span class="title">Interview Rounds</span>
                 </a>

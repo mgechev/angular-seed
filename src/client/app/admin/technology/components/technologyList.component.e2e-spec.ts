@@ -1,32 +1,31 @@
-describe('Technologies', () => {
-  beforeEach(() => {
-    browser.get('/Home');
-    element.all(by.css('.nav-item li')).then(function(items) {
-        expect(items[9].getText()).toBe('Technology');
+describe('Technology List', () => {
+    beforeEach(() => {
+        browser.get('/Login');
+        element(by.id('userName')).sendKeys('admin');
+        element(by.id('password')).sendKeys('admin');
+        element(by.id('loginBtn')).click();
+        element(by.id('technologyLink')).click();
     });
-  });
-  it('should navigate to Technologies', () => {
-        browser.sleep(1000);
-        expect(browser.getCurrentUrl()).toContain('/Admin/Technology');
-  });
-  it('should show list of Technologies', () => {
-      element.all(by.repeater('technology in technologyList')).then(function(items) {
-          expect(items[0].getText()).toBe('Microsoft');
-      });
-  });
-  it('should click on edit', () => {
-      element.all(by.linkText('Edit')).click();
-      expect(browser.getCurrentUrl()).toContain('/Admin/Technology/Edit');
-  });
-  it('should delete when click on Delete', () => {
-      element.all(by.linkText('Delete')).click();
-      element.all(by.repeater('technology in technologyList')).count().then(function(count) {
-          expect(count).toBe(count - 1);
-      });
-  });
-  it('should click on Add New', () => {
+    it('should navigate to Technologies', () => {
+        expect(browser.getCurrentUrl()).toContain('/App/Admin/Technology');
+    });
+    it('should navigate to Technology', () => {
+         var list = element.all(by.css('tr'));
+         expect(list.count()).toBeGreaterThan(0);
+    });
+    it('should navigate to edit', () => {
+        element.all(by.css('tr td a')).get(1).click();
+        expect(browser.getCurrentUrl()).toContain('/App/Admin/Technology/Edit');
+    });
+    it('should Delete', () => {
+       var beforeDeletelist:any;
+       var afterDeletelist:any;
+       beforeDeletelist = element.all(by.css('tr')).count();
+       afterDeletelist = element.all(by.css('tr')).count();
+        expect(afterDeletelist).toEqual(beforeDeletelist - 1);
+    });
+      it('should click on Add New', () => {
       element.all(by.id('addNewTech')).click();
-      browser.sleep(500);
-      expect(browser.getCurrentUrl()).toContain('/Admin/Technology/Edit');
+      expect(browser.getCurrentUrl()).toContain('/App/Admin/Technology/Add');
   });
 });
