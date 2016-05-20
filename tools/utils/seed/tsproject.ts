@@ -5,9 +5,8 @@ const plugins = <any>gulpLoadPlugins();
 let tsProject: any;
 
 /**
- * Creates a TypeScript project with the given options using the gulp
- * typescript plugin.
- * @param {Object} options the additional options for the project configuration
+ * Creates a TypeScript project with the given options using the gulp typescript plugin.
+ * @param {Object} options - The additional options for the project configuration.
  */
 export function makeTsProject(options?: Object) {
   if (!tsProject) {

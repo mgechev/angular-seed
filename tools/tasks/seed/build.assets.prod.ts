@@ -16,8 +16,8 @@ var onlyDirs = function (es: any) {
 };
 
 /**
- * Executes the build process, copying the assets located in `src/client/assets`
- * over to the appropiate `dist/prod/assets` directory.
+ * Executes the build process, copying the assets located in `src/client/assets` over to the appropiate
+ * `dist/prod/assets` directory.
  */
 export = () => {
   return gulp.src([

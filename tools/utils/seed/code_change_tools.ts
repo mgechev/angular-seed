@@ -4,8 +4,7 @@ import * as path from 'path';
 import { BROWSER_SYNC_CONFIG } from '../../config';
 
 /**
- * Initialises BrowserSync with the configuration defined in seed.config.ts
- * (or if overriden: project.config.ts).
+ * Initialises BrowserSync with the configuration defined in seed.config.ts (or if overriden: project.config.ts).
  */
 let runServer = () => {
   browserSync.init(BROWSER_SYNC_CONFIG);
@@ -27,8 +26,7 @@ let listen = () => {
 };
 
 /**
- * Provides a flag to mark which files have changed and reloads BrowserSync
- * accordingly.
+ * Provides a flag to mark which files have changed and reloads BrowserSync accordingly.
  */
 let changed = (files: any) => {
   if (!(files instanceof Array)) {

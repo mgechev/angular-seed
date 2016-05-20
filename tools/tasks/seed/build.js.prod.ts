@@ -14,8 +14,7 @@ const INLINE_OPTIONS = {
 };
 
 /**
- * Executes the build process, transpiling the TypeScript files for the
- * production environment.
+ * Executes the build process, transpiling the TypeScript files for the production environment.
  */
 export = () => {
   let tsProject = makeTsProject();
