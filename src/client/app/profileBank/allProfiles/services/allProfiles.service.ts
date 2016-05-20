@@ -4,18 +4,21 @@ import { Observable } from 'rxjs/Rx';
 import { MyProfilesInfo, Qualification, Masters } from '../../myProfiles/model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
+import { SpinnerService } from '../../../shared/components/spinner/spinner';
 
 @Injectable()
 
 export class AllProfilesService {
 
-    constructor(private http: Http, private authHttp: AuthHttp) { }
+    constructor(private http: Http, private authHttp: AuthHttp,private _spinnerService: SpinnerService) { }
 
     getAllProfiles() {
         let url = Config.GetURL('/api/ProfileBank/getOpenProfiles');
+        this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     editCandidateProfile(profile: MyProfilesInfo) {

@@ -137,3 +137,13 @@ span.select2.select2-container.select2-container--bootstrap {
    margin-top: 25px;
    margin-left: -15px; 
 }
+/* Specify styling for tooltip contents */
+    .tooltip.customClass .tooltip-inner {
+        color: #880000;
+        background-color: #ffff66;
+        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    }
+    /* Hide arrow */
+    .tooltip.customClass .tooltip-arrow {
+        display: none;
+    }

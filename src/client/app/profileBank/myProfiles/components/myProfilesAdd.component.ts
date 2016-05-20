@@ -69,8 +69,97 @@ export class MyProfilesAddComponent implements OnActivate {
             .subscribe(
             results => {
                 this.profile = results;
+                this.convertCheckboxesValuesToBoolean();
             },
             error => this.errorMessage = <any>error);
+    }
+
+    convertCheckboxesValuesToBoolean() {
+        if (this.profile.IsCurrentSameAsPermanent === 'Yes' || this.profile.IsCurrentSameAsPermanent === 'yes') {
+            this.profile.IsCurrentSameAsPermanent = true;
+        } else {
+            this.profile.IsCurrentSameAsPermanent = false;
+        }
+
+        if (this.profile.ReadyToRelocate === 'Yes' || this.profile.ReadyToRelocate === 'yes') {
+            this.profile.ReadyToRelocate = true;
+        } else {
+            this.profile.ReadyToRelocate = false;
+        }
+
+        if (this.profile.OutstationedCandidate === 'Yes' || this.profile.OutstationedCandidate === 'yes') {
+            this.profile.OutstationedCandidate = true;
+        } else {
+            this.profile.OutstationedCandidate = false;
+        }
+
+        if (this.profile.TeamMgmt === 'Yes' || this.profile.TeamMgmt === 'yes') {
+            this.profile.TeamMgmt = true;
+        } else {
+            this.profile.TeamMgmt = false;
+        }
+
+        if (this.profile.AppliedEarlier === 'Yes' || this.profile.AppliedEarlier === 'yes') {
+            this.profile.AppliedEarlier = true;
+        } else {
+            this.profile.AppliedEarlier = false;
+        }
+
+        if (this.profile.OfferInHand === 'Yes' || this.profile.OfferInHand === 'yes') {
+            this.profile.OfferInHand = true;
+        } else {
+            this.profile.OfferInHand = false;
+        }
+
+        if (this.profile.CTCIncludeVariable === 'Yes' || this.profile.CTCIncludeVariable === 'yes') {
+            this.profile.CTCIncludeVariable = true;
+        } else {
+            this.profile.CTCIncludeVariable = false;
+        }
+    }
+
+    convertCheckboxesValues() {
+        if (this.profile.IsCurrentSameAsPermanent === true) {
+            this.profile.IsCurrentSameAsPermanent = 'Yes';
+        } else {
+            this.profile.IsCurrentSameAsPermanent = 'No';
+        }
+
+        if (this.profile.ReadyToRelocate === true) {
+            this.profile.ReadyToRelocate = 'Yes';
+        } else {
+            this.profile.ReadyToRelocate = 'No';
+        }
+
+        if (this.profile.OutstationedCandidate === true) {
+            this.profile.OutstationedCandidate = 'Yes';
+        } else {
+            this.profile.OutstationedCandidate = 'No';
+        }
+
+        if (this.profile.TeamMgmt === true) {
+            this.profile.TeamMgmt = 'Yes';
+        } else {
+            this.profile.TeamMgmt = 'No';
+        }
+
+        if (this.profile.AppliedEarlier === true) {
+            this.profile.AppliedEarlier = 'Yes';
+        } else {
+            this.profile.AppliedEarlier = 'No';
+        }
+
+        if (this.profile.OfferInHand === true) {
+            this.profile.OfferInHand = 'Yes';
+        } else {
+            this.profile.OfferInHand = 'No';
+        }
+
+        if (this.profile.CTCIncludeVariable === true) {
+            this.profile.CTCIncludeVariable = 'Yes';
+        } else {
+            this.profile.CTCIncludeVariable = 'No';
+        }
     }
 
     getCountries(): void {
@@ -187,117 +276,121 @@ export class MyProfilesAddComponent implements OnActivate {
     onSameAddressChecked(value: string) {
         if (value !== undefined) {
             this.profile.PermanentAddress = this.profile.CurrentAddress;
-        }else {
+        } else {
             this.profile.PermanentAddress = '';
         }
     }
 
     onSavePrimaryInfo(): void {
-     //   this.showMessage('Wait', true);
+        //   this.showMessage('Wait', true);
         if (this.params) {
             this._myProfilesService.editCandidateProfile(this.profile)
                 .subscribe(
-                 results => {
-                    //   this.showMessage('Details Saved Sucessfully', false);
+                results => {
+                    this.getCandidateProfileById(this.params);
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    //this.showMessage(this.errorMessage, false);
+
                 });
         }
     }
+
     onSavePersonalDetails(): void {
-     //   this.showMessage('Wait', true);
+        //   this.showMessage('Wait', true);
+        this.convertCheckboxesValues();
         if (this.params) {
             this._myProfilesService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
                 results => {
-                    //   this.showMessage('Details Saved Sucessfully', false);
+                    this.getCandidateProfileById(this.params);
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    //this.showMessage(this.errorMessage, false);
+
                 });
         }
     }
 
     onSaveProfessionalDetails(): void {
-     //   this.showMessage('Wait', true);
+        //   this.showMessage('Wait', true);
+        this.convertCheckboxesValues();
         if (this.params) {
             this._myProfilesService.editCandidateProfessionalDetails(this.profile)
                 .subscribe(
                 results => {
-                    //   this.showMessage('Details Saved Sucessfully', false);
+                    this.getCandidateProfileById(this.params);
                 },
                 error => this.errorMessage = <any>error);
         }
     }
 
     onSaveQualificationDetails(): void {
-     //   this.showMessage('Wait', true);
+        //   this.showMessage('Wait', true);
         if (this.params) {
             this._myProfilesService.editCandidateQualificationDetails(this.profile)
                 .subscribe(
                 results => {
-                    //   this.showMessage('Details Saved Sucessfully', false);
+                    this.getCandidateProfileById(this.params);
                 },
                 error => this.errorMessage = <any>error);
         }
     }
 
     onSaveSkillsDetails(): void {
-     //   this.showMessage('Wait', true);
+        //   this.showMessage('Wait', true);
         if (this.params) {
             this._myProfilesService.editCandidateSkillsDetails(this.profile)
                 .subscribe(
                 results => {
-                    //   this.showMessage('Details Saved Sucessfully', false);
+                    this.getCandidateProfileById(this.params);
                 },
                 error => this.errorMessage = <any>error);
         }
     }
 
     onSaveTeamManagementDetails(): void {
-     //   this.showMessage('Wait', true);
+        //   this.showMessage('Wait', true);
+        this.convertCheckboxesValues();
         if (this.params) {
             this._myProfilesService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
                 results => {
-                    //   this.showMessage('Details Saved Sucessfully', false);
+                    this.getCandidateProfileById(this.params);
                 },
                 error => this.errorMessage = <any>error);
         }
     }
 
     onSaveCareerProfileDetails(): void {
-     //   this.showMessage('Wait', true);
+        //   this.showMessage('Wait', true);
         if (this.params) {
             this._myProfilesService.editCandidateCareerDetails(this.profile)
                 .subscribe(
                 results => {
-                    //   this.showMessage('Details Saved Sucessfully', false);
+                    this.getCandidateProfileById(this.params);
                 },
                 error => this.errorMessage = <any>error);
         }
     }
     onSaveSalaryDetails(): void {
-     //   this.showMessage('Wait', true);
-
+        //   this.showMessage('Wait', true);
+        this.convertCheckboxesValues();
         if (this.params) {
             this._myProfilesService.editCandidateSalaryDetails(this.profile)
                 .subscribe(
                 results => {
-                    //   this.showMessage('Details Saved Sucessfully', false);
+                    this.getCandidateProfileById(this.params);
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    //this.showMessage(this.errorMessage, false);
+
                 });
         }
     }
 
     onAddQualification(): void {
-     //   this.showMessage('Wait', true);
+        //   this.showMessage('Wait', true);
 
         if (this.qualification.QualificationID === undefined) {
             this.qualification.Qualification = new Array<Masters>();
@@ -318,7 +411,7 @@ export class MyProfilesAddComponent implements OnActivate {
                     },
                     error => {
                         this.errorMessage = <any>error;
-                        //this.showMessage(this.errorMessage, false);
+
                     });
             }
         } else {
@@ -346,7 +439,7 @@ export class MyProfilesAddComponent implements OnActivate {
                     },
                     error => {
                         this.errorMessage = <any>error;
-                        //this.showMessage(this.errorMessage, false);
+
                     });
             }
         }
@@ -359,11 +452,9 @@ export class MyProfilesAddComponent implements OnActivate {
                 results => {
                     this.profile.Qualifications = new Array<Qualification>();
                     this.profile.Qualifications = results;
-                    //   this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    //this.showMessage(this.errorMessage, false);
                 });
         }
     }
@@ -377,17 +468,5 @@ export class MyProfilesAddComponent implements OnActivate {
         this.qualification.CurrentYear = this.profile.Qualifications[index].YearOfPassing[0].Id;
         this.IsHidden = false;
     }
-
-
-    // showMessage(msg: string, isWait: boolean) {
-    //     var obj = $('.Loader');
-    //     if (isWait) {
-    //         obj = obj.show().html(
-    //             '<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
-    //     } else {
-    //         obj = $('.Loader').html(msg).fadeIn(400).delay(1500)
-    //             .fadeOut(400);
-    //     }
-    // }
 
 }

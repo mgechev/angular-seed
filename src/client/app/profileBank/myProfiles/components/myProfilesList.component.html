@@ -43,32 +43,32 @@
                                     <div class="row">
                                         <div class="col-md-2 inlineForm">
                                             <div class="form-group">
-                                                <input type="text" placeholder="First Name" class="form-control" [(ngModel)]="profile.FirstName" required="" data-toggle="tooltip"
-                                                    data-placement="top" title="First Name" />
+                                                <input type="text" placeholder="First Name" class="form-control" [(ngModel)]="profile.FirstName" required="" 
+                                                    tooltip="First Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.FirstName" />
                                             </div>
                                         </div>
                                         <div class="col-md-2 inlineForm">
                                             <div class="form-group ">
-                                                <input type="text" placeholder="Last Name" class="form-control" [(ngModel)]="profile.LastName" required="" data-toggle="tooltip"
-                                                    data-placement="top" title="Last Name" /></div>
+                                                <input type="text" placeholder="Last Name" class="form-control" [(ngModel)]="profile.LastName" required="" 
+                                                    tooltip="Last Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.LastName" />
+                                             </div>
                                         </div>
                                         <div class="col-md-2 inlineForm">
                                             <div class="form-group ">
-                                                <input type="email" class="form-control" placeholder="Email Address" data-toggle="tooltip" data-placement="top" title="Email Address"
-                                                    [(ngModel)]="profile.Email" required="">
+                                                <input type="email" class="form-control" placeholder="Email Address" [(ngModel)]="profile.Email" required=""
+                                                   tooltip="Email" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.Email" >
                                             </div>
                                         </div>
                                         <div class="col-md-2 inlineForm">
                                             <div class="form-group ">
                                                 <input type="text" placeholder="8888451201" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact"
-                                                    data-toggle="tooltip" data-placement="top" title="Contact Number" required=""
-                                                    pattern="^[0-9\-\+]{9,15}$" />
+                                                    required="" pattern="^[0-9\-\+]{9,15}$" tooltip="Last Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.PrimaryContact" />
                                             </div>
                                         </div>
                                         <div class="col-md-2 inlineForm">
                                             <div class="form-group ">
-                                                <input type="text" placeholder="Tag" class="form-control" [(ngModel)]="profile.Tag" required="" data-toggle="tooltip" data-placement="top"
-                                                    title="Tag" />
+                                                <input type="text" placeholder="Tag" class="form-control" [(ngModel)]="profile.Tag" required=""
+                                                     tooltip="Tag" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.Tag" />
                                             </div>
                                         </div>
 

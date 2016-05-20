@@ -38,11 +38,11 @@ export class MyProfilesInfo {
   public CurrentAddress: string;
   public PANNumber: string;
   public PassportNumber: string;
-  public OutstationedCandidate: boolean;
-  public ReadyToRelocate: boolean;
+  public OutstationedCandidate: any;
+  public ReadyToRelocate: any;
   public CommentsAdditionalInformation: string;
   public ResumeSource: string;
-  public IsCurrentSameAsPermanent: boolean;
+  public IsCurrentSameAsPermanent: any;
 
   //properties of Qualification
   public Qualifications: Array<Qualification>;
@@ -73,18 +73,18 @@ export class MyProfilesInfo {
   public ExpectedSalary: string;
   public CurrentTakeHome: number;
   public AnyPerks: string;
-  public CTCIncludeVariable: string;
+  public CTCIncludeVariable: any;
   public HowMuchVariable: number;
 
   //properties of Candidate Team Management
-  public TeamMgmt: boolean;
+  public TeamMgmt: any;
   public HandlingTeam: number;
   public NoOfTeamMembers: number;
   public TeamMembersDesignations: string;
   public TeamHandlingChallenges: string;
 
   //Properties of Professional Details
-  public AppliedEarlier: boolean;
+  public AppliedEarlier: any;
   public AppraisalBondContractDetails: string;
   public Visa: string;
   public NoticePeriod: string;
@@ -97,7 +97,7 @@ export class MyProfilesInfo {
   public IfExstingCompanyOffers: string;
   public NoticePeriodNotCompletedCount: string;
   public LookingFor: string;
-  public OfferInHand: boolean;
+  public OfferInHand: any;
   public OfferDetails: string;
   public PrimaryReasonToQuitLastJob: string;
   public SecondaryReasonToQuitLastJob: string;
