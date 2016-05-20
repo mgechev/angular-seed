@@ -4,13 +4,14 @@ import { MyProfilesInfo, Masters } from '../model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
+import { CollapseDirective } from 'ng2-bootstrap/components/collapse';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-myprofiles-list',
     templateUrl: 'myProfilesList.component.html',
-    directives: [ROUTER_DIRECTIVES],
-    styleUrls: ['myProfiles.component.css'],
+    directives: [ROUTER_DIRECTIVES,CollapseDirective],
+    styleUrls: ['myProfiles.component.css']
 })
 
 export class MyProfilesListComponent implements OnActivate {
@@ -24,16 +25,17 @@ export class MyProfilesListComponent implements OnActivate {
     selectedStatus: Masters;
     Comments:string;
     currentStatus : number;
+    currentCandidate:string;
+
+    public isCollapsed:boolean = false;
     constructor(private _myProfilesService: MyProfilesService,
         private _router: Router,
         private _masterService: MastersService) {
         this.psdTemplates = new Array<File>();
-         this.profile = new MyProfilesInfo();
+        this.profile = new MyProfilesInfo();
     }
 
     routerOnActivate() {
-     //   $('[data-toggle="tooltip"]').tooltip();
-
         this.getMyProfiles();
         this.getCandidateStatuses();
     }
@@ -43,6 +45,8 @@ export class MyProfilesListComponent implements OnActivate {
         var index = _.findIndex(this.myProfilesList, { CandidateID: this.seletedCandidateID });
         this.Comments = this.myProfilesList[index].Comments;
         this.currentStatus = this.myProfilesList[index].Status[0].Id;
+        this.currentCandidate = this.myProfilesList[index].Candidate;
+        this.isCollapsed = !this.isCollapsed;
     }
 
     getMyProfiles() {
@@ -100,8 +104,8 @@ export class MyProfilesListComponent implements OnActivate {
          this._myProfilesService.updateCandidateStatus(this.seletedCandidateID,this.selectedStatus,this.Comments)
             .subscribe(
             results => {
-               // $('#myModal').modal('toggle');
-               alert('Status updated sucessfully');
+                alert('Status updated sucessfully');
+                this.isCollapsed=false;
                 this.getMyProfiles();
             },
             error => this.errorMessage = <any>error);
