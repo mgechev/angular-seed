@@ -55,7 +55,6 @@ if (process.env.APPVEYOR) {
     browserName: 'internet explorer',
     version: '11'
   };
-  config.directConnect = false;
 }
 
 exports.config = config;
