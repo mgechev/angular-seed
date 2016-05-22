@@ -52,7 +52,7 @@ if (process.env.TRAVIS) {
 
 if (process.env.APPVEYOR) {
   config.multiCapabilities = [{
-    'browserName': 'internet explorer'
+    browserName: 'internet explorer'
   }];
   config.directConnect = false;
 }
