@@ -55,6 +55,7 @@ if (process.env.APPVEYOR) {
     browserName: 'internet explorer',
     version: '11'
   };
+  config.seleniumArgs = ['-Dwebdriver.ie.driver=node_modules/protractor/selenium/IEDriverServer.exe'];
 }
 
 exports.config = config;
