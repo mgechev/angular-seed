@@ -54,6 +54,9 @@ if (process.env.APPVEYOR) {
   config.multiCapabilities = [{
     browserName: 'internet explorer'
   }];
+  config.capabilities = {
+    browserName: 'chrome'
+  };
   config.directConnect = false;
 }
 
