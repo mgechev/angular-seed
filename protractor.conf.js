@@ -1,3 +1,5 @@
+const SpecReporter = require('jasmine-spec-reporter');
+
 const config = {
   baseUrl: 'http://localhost:5555/',
 
@@ -10,14 +12,14 @@ const config = {
   // 'jasmine' by default will use the latest jasmine framework
   framework: 'jasmine',
 
-  // allScriptsTimeout: 110000,
+  allScriptsTimeout: 110000,
 
   jasmineNodeOpts: {
-    // showTiming: true,
+    showTiming: true,
     showColors: true,
     isVerbose: false,
     includeStackTrace: false,
-    // defaultTimeoutInterval: 400000
+    defaultTimeoutInterval: 400000
   },
 
   directConnect: true,
@@ -26,14 +28,12 @@ const config = {
     browserName: 'chrome'
   },
 
-  onPrepare: function() {
-    const SpecReporter = require('jasmine-spec-reporter');
+  onPrepare() {
     // add jasmine spec reporter
     jasmine.getEnv().addReporter(new SpecReporter({ displayStacktrace: true }));
 
     browser.ignoreSynchronization = false;
   },
-
 
   /**
    * Angular 2 configuration
