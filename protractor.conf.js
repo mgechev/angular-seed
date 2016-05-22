@@ -51,10 +51,11 @@ if (process.env.TRAVIS) {
 }
 
 if (process.env.APPVEYOR) {
-  config.multiCapabilities = [{
-    browserName: 'internet explorer'
-  }];
-  config.capabilities = false;
+  config.capabilities = {
+    browserName: 'internet explorer',
+    platform: 'ANY',
+    version: '11'
+  };
   config.directConnect = false;
 }
 
