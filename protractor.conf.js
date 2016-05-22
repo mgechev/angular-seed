@@ -53,7 +53,6 @@ if (process.env.TRAVIS) {
 if (process.env.APPVEYOR) {
   config.capabilities = {
     browserName: 'internet explorer',
-    platform: 'ANY',
     version: '11'
   };
   config.directConnect = false;
