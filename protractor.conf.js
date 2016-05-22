@@ -56,6 +56,7 @@ if (process.env.APPVEYOR) {
     version: '11'
   };
   config.seleniumArgs = ['-Dwebdriver.ie.driver=node_modules/protractor/selenium/IEDriverServer.exe'];
+  config.directConnect = false;
 }
 
 exports.config = config;
