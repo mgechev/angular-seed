@@ -1,9 +1,17 @@
-
 export class Panel {
     public RoundNumber: number;
     public Interviewers: string[];
     public Status: string;
     public Comments: string;
+}
+
+export class AssignmentDetails {
+    RRFID: number;
+    AssignedTo: MasterData ;
+    AssignedComments: string;
+    AssignedDate: Date;
+    UnassigningComment: string;
+    AssigneeLastDate: Date;
 }
 
 export class RRFDetails {
@@ -25,11 +33,12 @@ export class RRFDetails {
 
     public IsChecked: boolean;
     public Comment: string;
+    public AssignedData: AssignmentDetails[] = [];
 }
 
 export class MasterData {
     public Id: number;
-    public Value: number;
+    public Value: string;
 }
 
 export class AllRRFStatusCount {

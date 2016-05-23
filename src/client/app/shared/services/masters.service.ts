@@ -107,6 +107,12 @@ export class MastersService {
             .catch(this.handleError);
     }
 
+    GetRecruiter() {
+        let url = Config.GetURL('/api/Masters/GetRecruiter');
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
 
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
@@ -115,6 +121,7 @@ export class MastersService {
         let body = res.json();
         return body || {};
     }
+
 
     private handleError(error: Response) {
         console.log(error);

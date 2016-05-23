@@ -15,6 +15,13 @@
             <div class="portlet-body">
                 <div class="col-lg-12">
                     <div class="portlet light bordered">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <span class="caption-subject bold uppercase">RRF Details</span>
+                            </div>
+                            <div class="actions">
+                            </div>
+                        </div>
                         <div class="table-scrollable">
                             <table class="table table-striped table-bordered table-hover table-checkable order-column">
                                 <thead style="word-wrap: break-word;">
@@ -68,7 +75,7 @@
                                     </tr>
                                     <tr class="odd gradeX" colspan="4">
                                         <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" >
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                 <b>Description :</b>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -79,6 +86,122 @@
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="portlet light bordered">
+                        <div class="row" *ngIf="!unAssignRowVisible">
+                            <div class="form-group col-lg-4">
+                                <label>Assign To<span> * </span></label>
+                                <div class="input-group select2-bootstrap-append">
+                                    <select id="cmbAssignTo" class="form-control" multiple>
+                                        <option *ngFor="let recruiter of recruiterDtls" [value]="recruiter.Id">{{recruiter.Recruiter}}</option>
+                                    </select>
+                                    <span class="input-group-btn">
+                                                         <button class="btn btn-default" type="button" data-select2-open="multi-append">
+                                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-5">
+                                <label>Assigning Comment<span> * </span></label>
+                                <!--[(ngModel)]='selectedRRF.AssignedData.AssignedComments'-->
+                                <textarea class="form-control" id="txtAssigningComment" rows="1" [(ngModel)]='AssignedComments' placeholder="Assigning Comment"
+                                style="resize:vertical" required=""></textarea>
+                            </div>
+                            <div class="form-group col-lg-2">
+                                <label><span></span></label>
+                                <br>
+                                <button type="Assign " id="btnAssign " class="btn blue " (click)="onAssignRRF()">Assign</button>
+                            </div>
+
+                        </div>
+
+                        <div class="row" *ngIf="unAssignRowVisible">
+                            <div class="form-group col-lg-4">
+                                <label><span>Assignee </span></label>
+                                <br>
+                                <textarea class="form-control" readonly id="txtUnAssigneenName" rows="1" [ngModel]='UnAssignRec.AssignedTo.Value' style="resize:vertical"
+                                required=""></textarea>
+                                <!--<label><span>{{UnAssignRec.AssignedTo.Value}}</span></label>-->
+                            </div>
+
+                            <div class="form-group col-lg-5">
+                                <label>Un-Assigning Comment<span> * </span></label>
+                                <!--[(ngModel)]='selectedRRF.AssignedData.AssignedComments'-->
+                                <textarea class="form-control" id="txtUnAssigningComment" rows="1" [(ngModel)]='unAssignedComments' placeholder="Assigning Comment"
+                                style="resize:vertical" required=""></textarea>
+                            </div>
+
+                            <div class="form-group col-lg-3">
+                                <div class="col-lg-6">
+                                    <label><span></span></label>
+                                    <br>
+                                    <button type="Assign " id="btnAssign " class="btn blue " (click)="onUnAssignRRF()">Un-Assign</button>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label><span></span></label>
+                                    <br>
+                                    <button type="Assign " id="btnUnAssignCancel " class="btn blue " (click)="onUnAssignCancel()">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="table-scrollable">
+                                <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" role="grid"
+                                aria-describedby="sample_1_info">
+                                    <thead>
+                                        <tr>
+                                            <td><b>Assignee</b></td>
+                                            <td><b>Assigning Comment </b></td>
+                                            <td><b>Assigned Date</b> </td>
+                                            <td><b>Status</b> </td>
+                                            <td><b>Assignee Last Date</b> </td>
+                                            <td><b>Action</b> </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd gradeX" *ngFor='let assignee of selectedRRF.AssignedData'>
+
+                                            <td> {{assignee.AssignedTo.Value }}</td>
+                                            <td>
+                                                {{assignee.AssignedComments }}
+                                            </td>
+                                            <td>
+                                                {{assignee.AssignedDate}}
+                                            </td>
+                                            <td>{{assignee.AssigneeLastDate== "" ? "Assign" : "Un-Assign"}}</td>
+                                            <td>{{assignee.AssigneeLastDate }}</td>
+                                            <td>
+                                                <div class="btn-group" *ngIf='assignee.AssigneeLastDate== ""'>
+                                                    <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false" (click)='onUnassign(assignee)'>
+                                                        Un-Assign
+                                                        <!--<i class="fa fa-angle-down"></i>-->
+                                                    </button>
+                                                    <!--<ul class="dropdown-menu" role="menu">
+                                                        <li>
+                                                            <a>
+                                                                <i class="icon-user"></i> View RRF </a>
+                                                        </li>
+                                                        <li class="divider"> </li>
+                                                        <li>
+                                                            <a>
+                                                                <i class="icon-flag"></i> Assign
+                                                            </a>
+                                                        </li>
+                                                    </ul>-->
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -23,6 +23,27 @@ export class RRFDashboardService {
             .catch(this.handleError);
     }
 
+    getAssignedRRFDeatils(rrfId: number) {
+        let url = Config.GetURL('/api/RRF/GetAssignedRRFDeatils');
+        return this.authHttp.post(url, { RRFID: rrfId })
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    saveRRFAssignmentDeatils(rrfId: number, assignedTo: number[], comment: string) {
+        let url = Config.GetURL(' /api/RRF/SaveRRFAssignmentDeatils');
+        return this.authHttp.post(url, { RRFID: rrfId, AssignedTo: assignedTo, AssignedComments: comment })
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    unassignRRF(rrfId: number, assignedTo: number, comment: string) {
+        let url = Config.GetURL(' /api/RRF/UnassignRRF');
+        return this.authHttp.post(url, { RRFID: rrfId, AssignedTo: assignedTo, UnassigningComment: comment })
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);

@@ -23,7 +23,7 @@
                     (chartClick)="chartClicked($event)"></base-chart>-->
                 </div>
 
-                <div class="col-lg-12" [hidden]="!isListVisible" id="divRRFList">
+                <div class="col-lg-12" *ngIf="isListVisible" id="divRRFList">
 
                     <div class=" portlet light bordered">
                         <!-- BEGIN ADD AND TOOLS  -->
@@ -99,7 +99,8 @@
 
                         <!-- BEGIN LIST OF RRF  -->
                         <div class="table-scrollable">
-                            <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                            <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" role="grid"
+                            aria-describedby="sample_1_info">
                                 <thead style="word-wrap: break-word;">
                                     <tr>
                                         <!--<td width="20%"> <b>Raised by / Date</b> </td>
@@ -116,7 +117,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="odd gradeX" *ngFor="let rrf of rrfList" (click)='showRRFDetails(rrf.RRFID)'>
+                                    <tr class="odd gradeX" *ngFor="let rrf of rrfList">
                                         <!--remove hard code data-->
                                         <td>
                                             <div align="left">
@@ -154,7 +155,27 @@
                                             </div>
 
                                         </td>
-                                        <td><a class="edit" [routerLink]="['/App/RRF/RRFDashboard/Assign/'+rrf.RRFID]"> Assign </a></td>
+                                        <td>
+                                            <!--<a class="edit"s [routerLink]="['/App/RRF/RRFDashboard/Assign/'+rrf.RRFID]"> Assign </a>-->
+                                            <div class="btn-group">
+                                                <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                    Action
+                                                    <i class="fa fa-angle-down"></i>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li (click)='showRRFDetails(rrf.RRFID)'>
+                                                        <a>
+                                                            <i class="icon-user"></i> View RRF </a>
+                                                    </li>
+                                                    <li class="divider"> </li>
+                                                    <li>
+                                                        <a [routerLink]="['/App/RRF/RRFDashboard/Assign/'+rrf.RRFID]">
+                                                            <i class="icon-flag"></i> Assign
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -163,7 +184,7 @@
                     </div>
                 </div>
 
-                <div class=" col-lg-12" id="divTimeLine" [hidden]="isListVisible">
+                <div class=" col-lg-12" id="divTimeLine" *ngIf="!isListVisible">
 
                     <div class=" portlet light bordered col-lg-8 col-md-12 col-sm-12 col-xs-12">
                         <div class="table-toolbar">
