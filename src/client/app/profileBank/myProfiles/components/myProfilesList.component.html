@@ -43,32 +43,35 @@
                                     <div class="row">
                                         <div class="col-md-2 inlineForm">
                                             <div class="form-group">
-                                                <input type="text" placeholder="First Name" class="form-control" [(ngModel)]="profile.FirstName" required="" 
-                                                    tooltip="First Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.FirstName" />
+                                                <input type="text" placeholder="First Name" class="form-control" [(ngModel)]="profile.FirstName" required="" tooltip="First Name"
+                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.FirstName"
+                                                />
                                             </div>
                                         </div>
                                         <div class="col-md-2 inlineForm">
                                             <div class="form-group ">
-                                                <input type="text" placeholder="Last Name" class="form-control" [(ngModel)]="profile.LastName" required="" 
-                                                    tooltip="Last Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.LastName" />
-                                             </div>
+                                                <input type="text" placeholder="Last Name" class="form-control" [(ngModel)]="profile.LastName" required="" tooltip="Last Name"
+                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.LastName"
+                                                />
+                                            </div>
                                         </div>
                                         <div class="col-md-2 inlineForm">
                                             <div class="form-group ">
-                                                <input type="email" class="form-control" placeholder="Email Address" [(ngModel)]="profile.Email" required=""
-                                                   tooltip="Email" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.Email" >
+                                                <input type="email" class="form-control" placeholder="Email Address" [(ngModel)]="profile.Email" required="" tooltip="Email"
+                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.Email">
                                             </div>
                                         </div>
                                         <div class="col-md-2 inlineForm">
                                             <div class="form-group ">
                                                 <input type="text" placeholder="8888451201" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact"
-                                                    required="" pattern="^[0-9\-\+]{9,15}$" tooltip="Last Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.PrimaryContact" />
+                                                    required="" pattern="^[0-9\-\+]{9,15}$" tooltip="Contact No" tooltipPlacement="top"
+                                                    tooltipTrigger="mouseenter" tooltipEnable="!profile.PrimaryContact" />
                                             </div>
                                         </div>
                                         <div class="col-md-2 inlineForm">
                                             <div class="form-group ">
-                                                <input type="text" placeholder="Tag" class="form-control" [(ngModel)]="profile.Tag" required=""
-                                                     tooltip="Tag" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.Tag" />
+                                                <input type="text" placeholder="Tag" class="form-control" [(ngModel)]="profile.Tag" required="" tooltip="Tag" tooltipPlacement="top"
+                                                    tooltipTrigger="mouseenter" tooltipEnable="!profile.Tag" />
                                             </div>
                                         </div>
 
@@ -98,18 +101,19 @@
                                 </div>
                             </div>
                             <div class="row" style="margin-top: 10px">
-                                <div  id="updateRow" [collapse]='!isCollapsed'>
+                                <div id="updateRow" [collapse]='!isCollapsed'>
                                     <form role="form" (submit)="onUpdateStauts()">
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                 <label class="control-label">Candidate Name</label>
-                                                 <span class="form-control"> {{currentCandidate}}</span>
+
+                                                <span class="form-control" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"> {{currentCandidate}}</span>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Status<span class="required"> * </span></label>
-                                                <select (change)='onSelectStatus($event.target.value)' class="form-control" [(ngModel)]="currentStatus">
+                                                <!--(change)='onSelectStatus($event.target.value)' -->
+                                                <select class="form-control" (change)='onSelectStatus($event.target.value)' [(ngModel)]="profile.Status.Id" tooltip="Status"
+                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentStatus">
                                                    <option *ngFor="let status of statusList" [value]="status.Id">{{status.CandidateStatus}}</option>
                                                 </select>
                                             </div>
@@ -117,15 +121,16 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <div class="edit-content"></div>
-                                                <label class="control-label">Comments<span class="required"> * </span> </label>
-                                                <textarea class="form-control" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="Comments" required=""></textarea>
+                                                <textarea class="form-control" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.Comments" required=""
+                                                    tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.Comments">
+                                                </textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-1">
-                                            <button type="submit" class="btn btn-info btnupdate" > Update </button>
+                                            <button type="submit" class="btn btn-info "> Update </button>
                                         </div>
                                         <div class="col-md-1">
-                                            <a class="btn btn-info btnupdate" (click)='closeUpdatePanel()' > Cancel </a>
+                                            <a class="btn btn-info " (click)='closeUpdatePanel()'> Cancel </a>
                                         </div>
                                     </form>
                                 </div>
@@ -162,17 +167,18 @@
                                         <td (click)='redirectToView(myprofile.CandidateID)'> {{myprofile.Tag}} </td>
                                         <td (click)='redirectToView(myprofile.CandidateID)'>
                                             <tr>
-                                                <td style="float: left;">&nbsp; Notice Period : {{myprofile.NoticePeriod}}</td>
+                                                <td style="float: left;">&nbsp; Notice Period : {{myprofile.CandidateOtherDetails.NoticePeriod}}</td>
                                             </tr>
                                             <tr>
-                                                <td style="float: left;">&nbsp; Current Salary :{{myprofile.CurrentSalary}}</td>
+                                                <td style="float: left;">&nbsp; Current Salary :{{myprofile.CandidateSalaryDetails.CurrentSalary}}</td>
                                             </tr>
                                             <tr>
-                                                <td style="float: left;">&nbsp; Expected Salary : {{myprofile.ExpectedSalary}}</td>
+                                                <td style="float: left;">&nbsp; Expected Salary : {{myprofile.CandidateSalaryDetails.ExpectedSalary}}</td>
                                             </tr>
                                         </td>
                                         <td (click)='redirectToView(myprofile.CandidateID)'>
-                                            <div *ngFor="let candidateStatus of myprofile.Status"><span class="mt-action-dot {{candidateStatus.CandidateStatus}}"> </span>{{candidateStatus.CandidateStatus}}</div>
+                                            <!--<div *ngFor="let candidateStatus of myprofile.Status"><span class="mt-action-dot {{candidateStatus.CandidateStatus}}"> </span>{{candidateStatus.CandidateStatus}}</div>-->
+                                            <span class="mt-action-dot {{myprofile.Status.CandidateStatus}}"></span>{{myprofile.Status.CandidateStatus}}
                                         </td>
 
                                         <td class="text-center"><i class="fa fa-search" aria-hidden="true"></i> / <i class="fa fa-download" aria-hidden="true"></i></td>
@@ -191,7 +197,7 @@
                                                     <li class="divider"> </li>
                                                     <li>
                                                         <a (click)='SaveCandidateID(myprofile.CandidateID)'>
-                                                            <i class="icon-flag"></i> Update Status 
+                                                            <i class="icon-flag"></i> Update Status
                                                         </a>
                                                     </li>
                                                 </ul>

@@ -13,7 +13,7 @@ export class AllProfilesService {
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
     getAllProfiles() {
-        let url = Config.GetURL('/api/ProfileBank/getOpenProfiles');
+        let url = Config.GetURL('/api/ProfileBank/ViewCandidateInformation');
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
@@ -121,7 +121,7 @@ export class AllProfilesService {
     }
 
     editCandidateQualification(qualification: Qualification) {
-        let url = Config.GetURL('/api/Masters/UpdateQualifications');
+        let url = Config.GetURL('/api/ProfileBank/UpdateQualifications');
         this._spinnerService.show();
         return this.authHttp.post(url, { qualification })
             .map(this.extractData)

@@ -4,13 +4,13 @@ import {MyProfilesInfo, Masters} from '../../myProfiles/model/myProfilesInfo';
 import { RecentProfilesService } from '../services/recentProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
-import { CollapseDirective } from 'ng2-bootstrap/components/collapse';
+import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-recent-profiles-list',
     templateUrl: 'recentProfilesList.component.html',
-    directives: [ROUTER_DIRECTIVES, CollapseDirective],
+    directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
 
@@ -38,7 +38,7 @@ export class RecentProfilesListComponent implements OnActivate {
         this._recentProfilesService.getRecentProfiles()
             .subscribe(
             results => {
-                this.recentProfilesList = results;
+                this.recentProfilesList = <any>results;
             },
             error => this.errorMessage = <any>error);
     }

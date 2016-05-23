@@ -6,10 +6,10 @@ export class Masters {
 export class Qualification {
   public CandidateID: number;
   public QualificationID: number;
-  public Qualification: Array<Masters>;
-  public YearOfPassing: Array<Masters>;
+  public Qualification: Masters;
+  public YearOfPassing: Masters;
   public Marks: number;
-  public Grade: Array<Masters>;
+  public Grade: Masters;
   public CurrentQualification: number;
   public CurrentYear: number;
   public CurrentGrade: number;
@@ -26,8 +26,10 @@ export class MyProfilesInfo {
   public Tag: string;
   public Skills: Array<string>;
   public ResumeID: number;
-  public Status: Array<Masters>;
+  public Status: Masters;
   public Comments: string;
+  public CandidateOtherDetails: any;
+  public CandidateSalaryDetails: any;
 
   //Properties of Personal Information
   public SecondaryContact: number;

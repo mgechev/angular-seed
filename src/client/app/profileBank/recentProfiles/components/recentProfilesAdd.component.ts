@@ -282,7 +282,6 @@ export class RecentProfilesAddComponent implements OnActivate {
     }
 
     onSavePrimaryInfo(): void {
-     
         if (this.params) {
             this._recentProfilesService.editCandidateProfile(this.profile)
                 .subscribe(
@@ -294,7 +293,7 @@ export class RecentProfilesAddComponent implements OnActivate {
     }
 
     onSavePersonalDetails(): void {
-     this.convertCheckboxesValues();
+        this.convertCheckboxesValues();
         if (this.params) {
             this._recentProfilesService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
@@ -303,13 +302,13 @@ export class RecentProfilesAddComponent implements OnActivate {
                 },
                 error => {
                     this.errorMessage = <any>error;
-                   // this.showMessage(this.errorMessage, false);
+                    // this.showMessage(this.errorMessage, false);
                 });
         }
     }
 
     onSaveProfessionalDetails(): void {
-     this.convertCheckboxesValues();
+        this.convertCheckboxesValues();
         if (this.params) {
             this._recentProfilesService.editCandidateProfessionalDetails(this.profile)
                 .subscribe(
@@ -321,7 +320,7 @@ export class RecentProfilesAddComponent implements OnActivate {
     }
 
     onSaveQualificationDetails(): void {
-     // this.showMessage('Wait', true);
+        // this.showMessage('Wait', true);
         if (this.params) {
             this._recentProfilesService.editCandidateQualificationDetails(this.profile)
                 .subscribe(
@@ -333,7 +332,7 @@ export class RecentProfilesAddComponent implements OnActivate {
     }
 
     onSaveSkillsDetails(): void {
-     // this.showMessage('Wait', true);
+        // this.showMessage('Wait', true);
         if (this.params) {
             this._recentProfilesService.editCandidateSkillsDetails(this.profile)
                 .subscribe(
@@ -345,7 +344,7 @@ export class RecentProfilesAddComponent implements OnActivate {
     }
 
     onSaveTeamManagementDetails(): void {
-     this.convertCheckboxesValues();
+        this.convertCheckboxesValues();
         if (this.params) {
             this._recentProfilesService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
@@ -357,7 +356,7 @@ export class RecentProfilesAddComponent implements OnActivate {
     }
 
     onSaveCareerProfileDetails(): void {
-     this.convertCheckboxesValues();
+        this.convertCheckboxesValues();
         if (this.params) {
             this._recentProfilesService.editCandidateCareerDetails(this.profile)
                 .subscribe(
@@ -368,7 +367,7 @@ export class RecentProfilesAddComponent implements OnActivate {
         }
     }
     onSaveSalaryDetails(): void {
-     this.convertCheckboxesValues();
+        this.convertCheckboxesValues();
 
         if (this.params) {
             this._recentProfilesService.editCandidateSalaryDetails(this.profile)
@@ -378,13 +377,13 @@ export class RecentProfilesAddComponent implements OnActivate {
                 },
                 error => {
                     this.errorMessage = <any>error;
-                   // this.showMessage(this.errorMessage, false);
+                    // this.showMessage(this.errorMessage, false);
                 });
         }
     }
 
     onAddQualification(): void {
-     // this.showMessage('Wait', true);
+        // this.showMessage('Wait', true);
 
         if (this.qualification.QualificationID === undefined) {
             this.qualification.Qualification = new Array<Masters>();
@@ -405,7 +404,7 @@ export class RecentProfilesAddComponent implements OnActivate {
                     },
                     error => {
                         this.errorMessage = <any>error;
-                       // this.showMessage(this.errorMessage, false);
+                        // this.showMessage(this.errorMessage, false);
                     });
             }
         } else {
@@ -433,7 +432,7 @@ export class RecentProfilesAddComponent implements OnActivate {
                     },
                     error => {
                         this.errorMessage = <any>error;
-                       // this.showMessage(this.errorMessage, false);
+                        // this.showMessage(this.errorMessage, false);
                     });
             }
         }
@@ -445,12 +444,12 @@ export class RecentProfilesAddComponent implements OnActivate {
                 .subscribe(
                 results => {
                     this.profile.Qualifications = new Array<Qualification>();
-                    this.profile.Qualifications = results;
+                    this.profile.Qualifications = <any>results;
                     //this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => {
                     this.errorMessage = <any>error;
-                   // this.showMessage(this.errorMessage, false);
+                    // this.showMessage(this.errorMessage, false);
                 });
         }
     }

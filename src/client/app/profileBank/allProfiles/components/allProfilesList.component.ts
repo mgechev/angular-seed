@@ -4,14 +4,14 @@ import {MyProfilesInfo, Masters} from '../../myProfiles/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
-import { CollapseDirective } from 'ng2-bootstrap/components/collapse';
+import { CollapseDirective,TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-allprofiles-list',
     templateUrl: 'allProfilesList.component.html',
-    directives: [ROUTER_DIRECTIVES,CollapseDirective],
+    directives: [ROUTER_DIRECTIVES,CollapseDirective,TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
 
@@ -41,7 +41,7 @@ export class AllProfilesListComponent implements OnActivate {
         this._allProfilesService.getAllProfiles()
             .subscribe(
             results => {
-                this.allProfilesList = results;
+                this.allProfilesList = <any>results;
             },
             error => this.errorMessage = <any>error);
     }

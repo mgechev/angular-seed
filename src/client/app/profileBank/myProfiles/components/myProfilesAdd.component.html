@@ -56,10 +56,10 @@
                                 </div>
                                 <div class="portlet-body">
                                     <div class="tab-content">
-                                         <alert class="alerts" *ngFor="let alert of alerts;let i = index" dismissible="true" 
-                                         [type]="alert.type" dismissOnTimeout="2000"  (close)="closeAlert(i)">
-                                             {{ alert?.msg }}
-                                         </alert>  
+                                        <alert class="alerts" *ngFor="let alert of alerts;let i = index" dismissible="true" [type]="alert.type" dismissOnTimeout="2000"
+                                            (close)="closeAlert(i)">
+                                            {{ alert?.msg }}
+                                        </alert>
                                         <!-- PRIMARY INFO TAB -->
                                         <div class="tab-pane active" id="tab_primaryInfo">
                                             <form role="form" (submit)="onSavePrimaryInfo()">
@@ -456,8 +456,8 @@
                                                                         <br/>
                                                                         <div class="row">
                                                                             <div class="col-md-8">
-                                                                                <button type="submit" class="btn green" style="padding-top: 5px;"  *ngIf="IsHidden"> Add New </button>
-                                                                                <button type="submit" class="btn green" style="padding-top: 5px;"  *ngIf="!IsHidden"> Update </button>
+                                                                                <button type="submit" class="btn green" style="padding-top: 5px;" *ngIf="IsHidden"> Add New </button>
+                                                                                <button type="submit" class="btn green" style="padding-top: 5px;" *ngIf="!IsHidden"> Update </button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -473,17 +473,20 @@
                                                                 <th> Grade </th>
                                                                 <th> Marks </th>
                                                                 <th> Edit </th>
-                                                               </tr>
+                                                            </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr *ngFor="let Qualification of profile.Qualifications">
-                                                                <td *ngFor="let degree of Qualification.Qualification"> {{degree.Qualification}} </td>
+                                                                <!--<td *ngFor="let degree of Qualification.Qualification"> {{degree.Qualification}} </td>
                                                                 <td *ngFor="let year of Qualification.YearOfPassing"> {{year.Year}} </td>
-                                                                <td *ngFor="let grd of Qualification.Grade">{{grd.Grade}}</td>
+                                                                <td *ngFor="let grd of Qualification.Grade">{{grd.Grade}}</td>-->
+                                                                <td> {{Qualification.Qualification.Qualification}}</td>
+                                                                <td> {{Qualification.YearOfPassing.Year}}</td>
+                                                                <td> {{Qualification.Grade.Grade}}</td>
                                                                 <td class="center">{{Qualification.Marks}} </td>
                                                                 <td>
                                                                     <a class="edit" (click)='editQualidficationData(Qualification.QualificationID)'> Edit </a>
-                                                                </td>                                                               
+                                                                </td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -690,7 +693,8 @@
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <!--<input type="text" placeholder="" class="form-control" [(ngModel)]="profile.ExpectedSalary" />-->
-                                                                    <span class="form-control"  tooltip="You can change this value from Primary Info Tab" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.ExpectedSalary">{{profile.ExpectedSalary}}</span>
+                                                                    <span class="form-control" tooltip="You can change this value from Primary Info Tab" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="!profile.ExpectedSalary">{{profile.ExpectedSalary}}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -701,7 +705,8 @@
                                                             <div class="row">
                                                                 <div class="col-md-8">
                                                                     <!--<input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CurrentSalary" />-->
-                                                                    <span class="form-control"  tooltip="You can change this value from Primary Info Tab" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.CurrentSalary">{{profile.CurrentSalary}}</span>
+                                                                    <span class="form-control" tooltip="You can change this value from Primary Info Tab" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="!profile.CurrentSalary">{{profile.CurrentSalary}}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -934,8 +939,8 @@
                                         <!--<div *ngIf="IsSuccess" class="Loader">
                                             <alert [type]= 'success' dismissOnTimeout="3000">This alert will dismiss in 3s</alert>
                                          <div>-->
-                                       
-                                                                 
+
+
                                     </div>
                                 </div>
                             </div>

@@ -121,7 +121,7 @@ export class RecentProfilesService {
     }
 
     editCandidateQualification(qualification: Qualification) {
-        let url = Config.GetURL('/api/Masters/UpdateQualifications');
+        let url = Config.GetURL('/api/ProfileBank/UpdateQualifications');
         this._spinnerService.show();
         return this.authHttp.post(url, { qualification })
             .map(this.extractData)

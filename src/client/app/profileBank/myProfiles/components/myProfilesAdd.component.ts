@@ -81,7 +81,7 @@ export class MyProfilesAddComponent implements OnActivate {
         this._myProfilesService.getCandidateProfile(profileId)
             .subscribe(
             results => {
-                this.profile = results;
+                this.profile = <any>results;
                 this.convertCheckboxesValuesToBoolean();
             },
             error => this.errorMessage = <any>error);
@@ -338,7 +338,7 @@ export class MyProfilesAddComponent implements OnActivate {
                     this.getCandidateProfileById(this.params);
                 },
                 error => {
-                this.errorMessage = <any>error;
+                    this.errorMessage = <any>error;
                     this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
                 });
         }
@@ -354,7 +354,7 @@ export class MyProfilesAddComponent implements OnActivate {
                     this.getCandidateProfileById(this.params);
                 },
                 error => {
-                this.errorMessage = <any>error;
+                    this.errorMessage = <any>error;
                     this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
                 });
         }
@@ -370,7 +370,7 @@ export class MyProfilesAddComponent implements OnActivate {
                     this.getCandidateProfileById(this.params);
                 },
                 error => {
-                this.errorMessage = <any>error;
+                    this.errorMessage = <any>error;
                     this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
                 });
         }
@@ -387,7 +387,7 @@ export class MyProfilesAddComponent implements OnActivate {
                     this.getCandidateProfileById(this.params);
                 },
                 error => {
-                this.errorMessage = <any>error;
+                    this.errorMessage = <any>error;
                     this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
                 });
         }
@@ -403,7 +403,7 @@ export class MyProfilesAddComponent implements OnActivate {
                     this.getCandidateProfileById(this.params);
                 },
                 error => {
-                this.errorMessage = <any>error;
+                    this.errorMessage = <any>error;
                     this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
                 }
                 );
@@ -430,14 +430,14 @@ export class MyProfilesAddComponent implements OnActivate {
         //   this.showMessage('Wait', true);
 
         if (this.qualification.QualificationID === undefined) {
-            this.qualification.Qualification = new Array<Masters>();
-            this.qualification.Grade = new Array<Masters>();
-            this.qualification.YearOfPassing = new Array<Masters>();
+            this.qualification.Qualification = new Masters;
+            this.qualification.Grade = new Masters;
+            this.qualification.YearOfPassing = new Masters;
 
             this.qualification.CandidateID = this.profile.CandidateID;
-            this.qualification.Qualification.push(this.selectedQualification);
-            this.qualification.Grade.push(this.selectedGrade);
-            this.qualification.YearOfPassing.push(this.selectedYear);
+            this.qualification.Qualification = this.selectedQualification;
+            this.qualification.Grade = this.selectedGrade;
+            this.qualification.YearOfPassing = this.selectedYear;
 
             if (this.params) {
                 this._myProfilesService.addCandidateQualification(this.qualification)
@@ -445,6 +445,7 @@ export class MyProfilesAddComponent implements OnActivate {
                     results => {
                         this.qualification = new Qualification();
                         this.getCandidateQualifications();
+                        this.alerts.push({ msg: 'Qualification Added Sucessfully!', type: 'success', closable: true });
                     },
                     error => {
                         this.errorMessage = <any>error;
@@ -454,16 +455,16 @@ export class MyProfilesAddComponent implements OnActivate {
         } else {
             //update
             if (this.selectedQualification !== undefined) {
-                this.qualification.Qualification = new Array<Masters>();
-                this.qualification.Qualification.push(this.selectedQualification);
+                this.qualification.Qualification = new Masters;
+                this.qualification.Qualification = this.selectedQualification;
             }
             if (this.selectedGrade !== undefined) {
-                this.qualification.Grade = new Array<Masters>();
-                this.qualification.Grade.push(this.selectedGrade);
+                this.qualification.Grade = new Masters;
+                this.qualification.Grade = this.selectedGrade;
             }
             if (this.selectedYear !== undefined) {
-                this.qualification.YearOfPassing = new Array<Masters>();
-                this.qualification.YearOfPassing.push(this.selectedYear);
+                this.qualification.YearOfPassing = new Masters;
+                this.qualification.YearOfPassing = this.selectedYear;
             }
 
             if (this.params) {
@@ -502,9 +503,9 @@ export class MyProfilesAddComponent implements OnActivate {
         var index = _.findIndex(this.profile.Qualifications, { QualificationID: QID });
         this.qualification = this.profile.Qualifications[index];
         this.qualification.CandidateID = this.profile.CandidateID;
-        this.qualification.CurrentQualification = this.profile.Qualifications[index].Qualification[0].Id;
-        this.qualification.CurrentGrade = this.profile.Qualifications[index].Grade[0].Id;
-        this.qualification.CurrentYear = this.profile.Qualifications[index].YearOfPassing[0].Id;
+        this.qualification.CurrentQualification = this.profile.Qualifications[index].Qualification.Id;
+        this.qualification.CurrentGrade = this.profile.Qualifications[index].Grade.Id;
+        this.qualification.CurrentYear = this.profile.Qualifications[index].YearOfPassing.Id;
         this.IsHidden = false;
     }
 
