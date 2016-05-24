@@ -4,12 +4,13 @@ import {MyProfilesInfo, Qualification, Masters} from '../../myProfiles/model/myP
 import { AllProfilesService } from '../services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
+import { AlertComponent } from 'ng2-bootstrap';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-allprofiles-add',
     templateUrl: 'allProfilesAdd.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, AlertComponent],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
 
@@ -26,9 +27,9 @@ export class AllProfilesAddComponent implements OnActivate {
     qualifications: Array<Masters>;
     grades: Array<Masters>;
     years: Array<Masters>;
-    selectedQualification: Masters;
-    selectedYear: Masters;
-    selectedGrade: Masters;
+    selectedQualification: number;
+    selectedYear: number;
+    selectedGrade: number;
     Marks: number;
     CurrentQualification: number;
     CurrentYear: number;
@@ -39,14 +40,19 @@ export class AllProfilesAddComponent implements OnActivate {
     IsReadyToRelocateChecked: boolean = false;
 
     IsHidden: boolean = true;
+    IsSuccess: boolean = false;
+    public alerts: Array<Object>;
+
+    public closeAlert(i: number): void {
+        this.alerts.splice(i, 1);
+    }
 
     constructor(private _allProfilesService: AllProfilesService,
         private _router: Router,
         private _masterService: MastersService) {
-            this.profile = new MyProfilesInfo();
-        this.qualification = new Qualification();
+        this.profile = new MyProfilesInfo();
         this.createQualification();
-
+        this.alerts = new Array<Object>();
     }
 
     routerOnActivate(segment: RouteSegment) {
@@ -70,10 +76,13 @@ export class AllProfilesAddComponent implements OnActivate {
         this._allProfilesService.getCandidateProfile(profileId)
             .subscribe(
             results => {
-                this.profile = results;
+                this.profile = <any>results;
                 this.convertCheckboxesValuesToBoolean();
             },
-            error => this.errorMessage = <any>error);
+            error => {
+                this.errorMessage = <any>error;
+                this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+            });
     }
 
     convertCheckboxesValuesToBoolean() {
@@ -164,6 +173,7 @@ export class AllProfilesAddComponent implements OnActivate {
         }
     }
 
+
     getCountries(): void {
         this._masterService.getCountries()
             .subscribe(
@@ -221,10 +231,10 @@ export class AllProfilesAddComponent implements OnActivate {
     }
 
     createQualification() {
-        this.qualification.Qualification = new Array<Masters>();
-        this.qualification.Grade = new Array<Masters>();
-        this.qualification.YearOfPassing = new Array<Masters>();
-
+        this.qualification = new Qualification();
+        this.qualification.Qualification = new Masters;
+        this.qualification.Grade = new Masters;
+        this.qualification.YearOfPassing = new Masters;
     }
 
     onSelectCountry(country: number) {
@@ -251,136 +261,153 @@ export class AllProfilesAddComponent implements OnActivate {
         }
     }
 
-    onSelectQualification(candidateQualification: number) {
-      for (var i = 0; i < this.qualifications.length; i++) {
-                if (this.qualifications[i].Id === candidateQualification) {
-                    this.selectedQualification = this.qualifications[i];
-                }
-            }
+    onSelectQualification(candidateQualification: string) {
+        this.selectedQualification = parseInt(candidateQualification);
     }
 
-    onSelectGrade(grade: number) {
-        for (var i = 0; i < this.grades.length; i++) {
-            if (this.grades[i].Id === grade) {
-                this.selectedGrade = this.grades[i];
-            }
-        }
+    onSelectGrade(grade: string) {
+        this.selectedGrade = parseInt(grade);
     }
 
-    onSelectYear(year: number) {
-        for (var i = 0; i < this.years.length; i++) {
-            if (this.years[i].Id === year) {
-                this.selectedYear = this.years[i];
-            }
-        }
+    onSelectYear(year: string) {
+        this.selectedYear = parseInt(year);
     }
-
     onSameAddressChecked(value: string) {
         if (value) {
             this.profile.PermanentAddress = this.profile.CurrentAddress;
-        }else {
+        } else {
             this.profile.PermanentAddress = '';
         }
     }
 
     onSavePrimaryInfo(): void {
-        this.convertCheckboxesValues();
+        //   this.showMessage('Wait', true);
         if (this.params) {
             this._allProfilesService.editCandidateProfile(this.profile)
                 .subscribe(
                 results => {
-                    //this.showMessage('Details Saved Sucessfully', false);
+                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
+                    this.getCandidateProfileById(this.params);
                 },
-                error => this.errorMessage = <any>error);
+                error => {
+                    this.errorMessage = <any>error;
+                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                });
         }
     }
 
     onSavePersonalDetails(): void {
-       this.convertCheckboxesValues();
+        //   this.showMessage('Wait', true);
+        this.convertCheckboxesValues();
         if (this.params) {
             this._allProfilesService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
                 results => {
-                    //this.showMessage('Details Saved Sucessfully', false);
+                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
+                    this.getCandidateProfileById(this.params);
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    //this.showMessage(this.errorMessage, false);
+                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
                 });
         }
     }
 
     onSaveProfessionalDetails(): void {
-     this.convertCheckboxesValues();
+        //   this.showMessage('Wait', true);
+        this.convertCheckboxesValues();
         if (this.params) {
             this._allProfilesService.editCandidateProfessionalDetails(this.profile)
                 .subscribe(
                 results => {
-                    //this.showMessage('Details Saved Sucessfully', false);
+                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
+                    this.getCandidateProfileById(this.params);
                 },
-                error => this.errorMessage = <any>error);
+                error => {
+                    this.errorMessage = <any>error;
+                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                });
         }
     }
 
     onSaveQualificationDetails(): void {
-        //this.showMessage(this.errorMessage, false);
+        //   this.showMessage('Wait', true);
         if (this.params) {
             this._allProfilesService.editCandidateQualificationDetails(this.profile)
                 .subscribe(
                 results => {
-                    //this.showMessage('Details Saved Sucessfully', false);
+
+                    this.getCandidateProfileById(this.params);
                 },
-                error => this.errorMessage = <any>error);
+                error => {
+                    this.errorMessage = <any>error;
+                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                });
         }
     }
 
     onSaveSkillsDetails(): void {
-        //this.showMessage(this.errorMessage, false);
+        //   this.showMessage('Wait', true);
         if (this.params) {
             this._allProfilesService.editCandidateSkillsDetails(this.profile)
                 .subscribe(
                 results => {
-                    //this.showMessage('Details Saved Sucessfully', false);
+                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
+                    this.getCandidateProfileById(this.params);
                 },
-                error => this.errorMessage = <any>error);
+                error => {
+                    this.errorMessage = <any>error;
+                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                });
         }
     }
 
     onSaveTeamManagementDetails(): void {
+        //   this.showMessage('Wait', true);
         this.convertCheckboxesValues();
         if (this.params) {
             this._allProfilesService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
                 results => {
-                    //this.showMessage('Details Saved Sucessfully', false);
+                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
+                    this.getCandidateProfileById(this.params);
                 },
-                error => this.errorMessage = <any>error);
+                error => {
+                    this.errorMessage = <any>error;
+                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                });
         }
     }
 
     onSaveCareerProfileDetails(): void {
-       this.convertCheckboxesValues();
+        //   this.showMessage('Wait', true);
         if (this.params) {
             this._allProfilesService.editCandidateCareerDetails(this.profile)
                 .subscribe(
                 results => {
-                    //this.showMessage('Details Saved Sucessfully', false);
+                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
+                    this.getCandidateProfileById(this.params);
                 },
-                error => this.errorMessage = <any>error);
+                error => {
+                    this.errorMessage = <any>error;
+                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                }
+                );
         }
     }
-
     onSaveSalaryDetails(): void {
+        //   this.showMessage('Wait', true);
         this.convertCheckboxesValues();
         if (this.params) {
             this._allProfilesService.editCandidateSalaryDetails(this.profile)
                 .subscribe(
                 results => {
-                    //this.showMessage('Details Saved Sucessfully', false);
+                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
+                    this.getCandidateProfileById(this.params);
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    //this.showMessage(this.errorMessage, false);
+                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
                 });
         }
     }
@@ -389,53 +416,61 @@ export class AllProfilesAddComponent implements OnActivate {
         //this.showMessage(this.errorMessage, false);
 
         if (this.qualification.QualificationID === undefined) {
-            this.qualification.Qualification = new Array<Masters>();
-            this.qualification.Grade = new Array<Masters>();
-            this.qualification.YearOfPassing = new Array<Masters>();
-
             this.qualification.CandidateID = this.profile.CandidateID;
-            this.qualification.Qualification.push(this.selectedQualification);
-            this.qualification.Grade.push(this.selectedGrade);
-            this.qualification.YearOfPassing.push(this.selectedYear);
+            this.qualification.Qualification = this.selectedQualification;
+            this.qualification.Grade = this.selectedGrade;
+            this.qualification.YearOfPassing = this.selectedYear;
 
             if (this.params) {
                 this._allProfilesService.addCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
-                        this.qualification = new Qualification();
+                        this.createQualification();
                         this.getCandidateQualifications();
+                        this.alerts.push({ msg: 'Qualification Added Sucessfully!', type: 'success', closable: true });
                     },
                     error => {
+                        this.createQualification();
                         this.errorMessage = <any>error;
-                        //this.showMessage(this.errorMessage, false);
+                        this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
                     });
             }
         } else {
             //update
             if (this.selectedQualification !== undefined) {
-                this.qualification.Qualification = new Array<Masters>();
-                this.qualification.Qualification.push(this.selectedQualification);
+                this.qualification.Qualification = new Masters;
+                this.qualification.Qualification = this.selectedQualification;
+            } else {
+                this.qualification.Qualification = this.qualification.Qualification.Id;
             }
+
             if (this.selectedGrade !== undefined) {
-                this.qualification.Grade = new Array<Masters>();
-                this.qualification.Grade.push(this.selectedGrade);
+                this.qualification.Grade = new Masters;
+                this.qualification.Grade = this.selectedGrade;
+            } else {
+                this.qualification.Grade = this.qualification.Grade.Id;
             }
             if (this.selectedYear !== undefined) {
-                this.qualification.YearOfPassing = new Array<Masters>();
-                this.qualification.YearOfPassing.push(this.selectedYear);
+                this.qualification.YearOfPassing = new Masters;
+                this.qualification.YearOfPassing = this.selectedYear;
+            } else {
+                this.qualification.YearOfPassing = this.qualification.YearOfPassing.Id;
             }
 
             if (this.params) {
                 this._allProfilesService.editCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
-                        this.qualification = new Qualification();
+                        this.createQualification();
                         this.IsHidden = true;
                         this.getCandidateQualifications();
+                        this.alerts.push({ msg: 'Details Updated Sucessfully!', type: 'success', closable: true });
                     },
                     error => {
                         this.errorMessage = <any>error;
-                        //this.showMessage(this.errorMessage, false);
+                        this.createQualification();
+                        this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+
                     });
             }
         }
@@ -447,7 +482,7 @@ export class AllProfilesAddComponent implements OnActivate {
                 .subscribe(
                 results => {
                     this.profile.Qualifications = new Array<Qualification>();
-                    this.profile.Qualifications = results;
+                    this.profile.Qualifications = <any>results;
                     //this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => {
@@ -460,21 +495,6 @@ export class AllProfilesAddComponent implements OnActivate {
     editQualidficationData(QID: number) {
         var index = _.findIndex(this.profile.Qualifications, { QualificationID: QID });
         this.qualification = this.profile.Qualifications[index];
-        this.qualification.CandidateID = this.profile.CandidateID;
-        this.qualification.CurrentQualification = this.profile.Qualifications[index].Qualification[0].Id;
-        this.qualification.CurrentGrade = this.profile.Qualifications[index].Grade[0].Id;
-        this.qualification.CurrentYear = this.profile.Qualifications[index].YearOfPassing[0].Id;
         this.IsHidden = false;
     }
-
-    // showMessage(msg: string, isWait: boolean) {
-    //     var obj = $('.Loader');
-    //     if (isWait) {
-    //         obj = obj.show().html(
-    //             '<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
-    //     } else {
-    //         obj = $('.Loader').html(msg).fadeIn(400).delay(1500)
-    //             .fadeOut(400);
-    //     }
-    // }
 }

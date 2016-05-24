@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { MyProfilesInfo, Qualification, Masters } from '../../myProfiles/model/myProfilesInfo';
+import { MyProfilesInfo, Qualification } from '../../myProfiles/model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
@@ -129,10 +129,10 @@ export class AllProfilesService {
             .finally(() => this._spinnerService.hide());
     }
 
-    updateCandidateStatus(CandidateID: number, Status: Masters, Comments: string) {
+    updateCandidateStatus(CandidateID: number, StatusId: number, Comments: string) {
         let url = Config.GetURL('/api/ProfileBank/UpdateStatus');
         this._spinnerService.show();
-        return this.authHttp.post(url, { profile: { CandidateID: CandidateID, Status: Status, Comments: Comments } })
+        return this.authHttp.post(url, { profile: { CandidateID: CandidateID, StatusId: StatusId, Comments: Comments } })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

@@ -27,17 +27,17 @@ export class MyProfilesAddComponent implements OnActivate {
     qualifications: Array<Masters>;
     grades: Array<Masters>;
     years: Array<Masters>;
-    selectedQualification: Masters;
-    selectedYear: Masters;
-    selectedGrade: Masters;
+    selectedQualification: number;
+    selectedYear: number;
+    selectedGrade: number;
     Marks: number;
     CurrentQualification: number;
     CurrentYear: number;
     CurrentGrade: number;
 
-    IsCurrentAddressSameAsPermanentChecked: boolean = false;
-    IsOutstationedCandidateChecked: boolean = false;
-    IsReadyToRelocateChecked: boolean = false;
+    // IsCurrentAddressSameAsPermanentChecked: boolean = false;
+    // IsOutstationedCandidateChecked: boolean = false;
+    // IsReadyToRelocateChecked: boolean = false;
 
     IsHidden: boolean = true;
     IsSuccess: boolean = false;
@@ -55,9 +55,9 @@ export class MyProfilesAddComponent implements OnActivate {
         private _masterService: MastersService,
         private _router: Router) {
         this.profile = new MyProfilesInfo();
-        this.qualification = new Qualification();
-        this.createQualification();
+        this.createQualificationObj();
         this.alerts = new Array<Object>();
+
     }
 
     routerOnActivate(segment: RouteSegment) {
@@ -75,6 +75,13 @@ export class MyProfilesAddComponent implements OnActivate {
         }
         //dropdown with multi selector and search
         // $('select').select2();
+    }
+
+    createQualificationObj() {
+        this.qualification = new Qualification();
+        this.qualification.Qualification = new Masters;
+        this.qualification.Grade = new Masters;
+        this.qualification.YearOfPassing = new Masters;
     }
 
     getCandidateProfileById(profileId: string) {
@@ -231,13 +238,6 @@ export class MyProfilesAddComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    createQualification() {
-        this.qualification.Qualification = new Array<Masters>();
-        this.qualification.Grade = new Array<Masters>();
-        this.qualification.YearOfPassing = new Array<Masters>();
-
-    }
-
     onSelectCountry(country: number) {
         for (var i = 0; i < this.countries.length; i++) {
             if (this.countries[i].Id === country) {
@@ -263,27 +263,15 @@ export class MyProfilesAddComponent implements OnActivate {
     }
 
     onSelectQualification(candidateQualification: string) {
-        for (var i = 0; i < this.qualifications.length; i++) {
-            if (this.qualifications[i].Id === parseInt(candidateQualification)) {
-                this.selectedQualification = this.qualifications[i];
-            }
-        }
+         this.selectedQualification = parseInt(candidateQualification);
     }
 
     onSelectGrade(grade: string) {
-        for (var i = 0; i < this.grades.length; i++) {
-            if (this.grades[i].Id === parseInt(grade)) {
-                this.selectedGrade = this.grades[i];
-            }
-        }
+      this.selectedGrade =  parseInt(grade);
     }
 
     onSelectYear(year: string) {
-        for (var i = 0; i < this.years.length; i++) {
-            if (this.years[i].Id === parseInt(year)) {
-                this.selectedYear = this.years[i];
-            }
-        }
+       this.selectedYear = parseInt(year);
     }
 
     onSameAddressChecked(value: string) {
@@ -427,13 +415,8 @@ export class MyProfilesAddComponent implements OnActivate {
     }
 
     onAddQualification(): void {
-        //   this.showMessage('Wait', true);
-
+        //   Add New Qualification
         if (this.qualification.QualificationID === undefined) {
-            this.qualification.Qualification = new Masters;
-            this.qualification.Grade = new Masters;
-            this.qualification.YearOfPassing = new Masters;
-
             this.qualification.CandidateID = this.profile.CandidateID;
             this.qualification.Qualification = this.selectedQualification;
             this.qualification.Grade = this.selectedGrade;
@@ -443,7 +426,7 @@ export class MyProfilesAddComponent implements OnActivate {
                 this._myProfilesService.addCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
-                        this.qualification = new Qualification();
+                        this.createQualificationObj();
                         this.getCandidateQualifications();
                         this.alerts.push({ msg: 'Qualification Added Sucessfully!', type: 'success', closable: true });
                     },
@@ -453,31 +436,39 @@ export class MyProfilesAddComponent implements OnActivate {
                     });
             }
         } else {
-            //update
+            //update Qualification
             if (this.selectedQualification !== undefined) {
                 this.qualification.Qualification = new Masters;
                 this.qualification.Qualification = this.selectedQualification;
+            } else {
+                this.qualification.Qualification = this.qualification.Qualification.Id;
             }
+
             if (this.selectedGrade !== undefined) {
                 this.qualification.Grade = new Masters;
                 this.qualification.Grade = this.selectedGrade;
+            }else {
+                this.qualification.Grade = this.qualification.Grade.Id;
             }
             if (this.selectedYear !== undefined) {
                 this.qualification.YearOfPassing = new Masters;
                 this.qualification.YearOfPassing = this.selectedYear;
+            }else {
+                this.qualification.YearOfPassing = this.qualification.YearOfPassing.Id;
             }
 
             if (this.params) {
                 this._myProfilesService.editCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
-                        this.qualification = new Qualification();
+                        this.createQualificationObj();
                         this.IsHidden = true;
                         this.getCandidateQualifications();
                         this.alerts.push({ msg: 'Details Updated Sucessfully!', type: 'success', closable: true });
                     },
                     error => {
                         this.errorMessage = <any>error;
+                        this.createQualificationObj();
                         this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
                     });
             }
@@ -502,10 +493,6 @@ export class MyProfilesAddComponent implements OnActivate {
     editQualidficationData(QID: number) {
         var index = _.findIndex(this.profile.Qualifications, { QualificationID: QID });
         this.qualification = this.profile.Qualifications[index];
-        this.qualification.CandidateID = this.profile.CandidateID;
-        this.qualification.CurrentQualification = this.profile.Qualifications[index].Qualification.Id;
-        this.qualification.CurrentGrade = this.profile.Qualifications[index].Grade.Id;
-        this.qualification.CurrentYear = this.profile.Qualifications[index].YearOfPassing.Id;
         this.IsHidden = false;
     }
 

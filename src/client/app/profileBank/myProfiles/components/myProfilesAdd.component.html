@@ -406,7 +406,7 @@
                                                                         <div class="row">
                                                                             <div class="col-md-10">
                                                                                 <div>
-                                                                                    <select (change)='onSelectQualification($event.target.value)' class="form-control" [(ngModel)]="qualification.CurrentQualification">
+                                                                                    <select (change)='onSelectQualification($event.target.value)' class="form-control" [(ngModel)]="qualification.Qualification.Id">
                                                                                     <option *ngFor="let q of qualifications" [value]="q.Id">{{q.Qualification}}</option>
                                                                                 </select>
                                                                                 </div>
@@ -419,7 +419,7 @@
                                                                         <label class="control-label">Year Of Passing <span class="required"> * </span></label>
                                                                         <div class="row">
                                                                             <div class="col-md-10">
-                                                                                <select (change)='onSelectYear($event.target.value)' class="form-control" [(ngModel)]="qualification.CurrentYear">
+                                                                                <select (change)='onSelectYear($event.target.value)' class="form-control" [(ngModel)]="qualification.YearOfPassing.Id">
                                                                                     <option *ngFor="let year of years" [value]="year.Id">{{year.Year}}</option>
                                                                                 </select>
 
@@ -433,7 +433,7 @@
                                                                         <div class="row">
                                                                             <div class="col-md-10">
                                                                                 <!--<div *ngFor="let grd of qualification.Grade">-->
-                                                                                <select (change)='onSelectGrade($event.target.value)' class="form-control" [(ngModel)]="qualification.CurrentGrade">
+                                                                                <select (change)='onSelectGrade($event.target.value)' class="form-control" [(ngModel)]="qualification.Grade.Id">
                                                                                     <option *ngFor="let grade of grades" [value]="grade.Id">{{grade.Grade}}</option>
                                                                                 </select>
                                                                                 <!--</div>-->

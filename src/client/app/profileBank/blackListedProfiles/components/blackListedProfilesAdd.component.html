@@ -56,6 +56,10 @@
                                 </div>
                                 <div class="portlet-body">
                                     <div class="tab-content">
+                                        <alert class="alerts" *ngFor="let alert of alerts;let i = index" dismissible="true" [type]="alert.type" dismissOnTimeout="2000"
+                                            (close)="closeAlert(i)">
+                                            {{ alert?.msg }}
+                                        </alert>
                                         <!-- PRIMARY INFO TAB -->
                                         <div class="tab-pane active" id="tab_primaryInfo">
                                             <form role="form" (submit)="onSavePrimaryInfo()">
@@ -403,7 +407,7 @@
                                                                         <div class="row">
                                                                             <div class="col-md-10">
                                                                                 <div>
-                                                                                    <select (change)='onSelectQualification($event.target.value)' class="form-control" [(ngModel)]="qualification.CurrentQualification">
+                                                                                    <select (change)='onSelectQualification($event.target.value)' class="form-control" [(ngModel)]="qualification.Qualification.Id">
                                                                                     <option *ngFor="let q of qualifications" [value]="q.Id">{{q.Qualification}}</option>
                                                                                 </select>
                                                                                 </div>
@@ -416,7 +420,7 @@
                                                                         <label class="control-label">Year Of Passing <span class="required"> * </span></label>
                                                                         <div class="row">
                                                                             <div class="col-md-10">
-                                                                                <select (change)='onSelectYear($event.target.value)' class="form-control" [(ngModel)]="qualification.CurrentYear">
+                                                                                <select (change)='onSelectYear($event.target.value)' class="form-control" [(ngModel)]="qualification.YearOfPassing.Id">
                                                                                     <option *ngFor="let year of years" [value]="year.Id">{{year.Year}}</option>
                                                                                 </select>
 
@@ -430,7 +434,7 @@
                                                                         <div class="row">
                                                                             <div class="col-md-10">
                                                                                 <!--<div *ngFor="let grd of qualification.Grade">-->
-                                                                                <select (change)='onSelectGrade($event.target.value)' class="form-control" [(ngModel)]="qualification.CurrentGrade">
+                                                                                <select (change)='onSelectGrade($event.target.value)' class="form-control" [(ngModel)]="qualification.Grade.Id">
                                                                                     <option *ngFor="let grade of grades" [value]="grade.Id">{{grade.Grade}}</option>
                                                                                 </select>
                                                                                 <!--</div>-->
@@ -474,9 +478,12 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr *ngFor="let Qualification of profile.Qualifications">
-                                                                <td *ngFor="let degree of Qualification.Qualification"> {{degree.Qualification}} </td>
+                                                                <!--<td *ngFor="let degree of Qualification.Qualification"> {{degree.Qualification}} </td>
                                                                 <td *ngFor="let year of Qualification.YearOfPassing"> {{year.Year}} </td>
-                                                                <td *ngFor="let grd of Qualification.Grade">{{grd.Grade}}</td>
+                                                                <td *ngFor="let grd of Qualification.Grade">{{grd.Grade}}</td>-->
+                                                                <td> {{Qualification.Qualification.Qualification}}</td>
+                                                                <td> {{Qualification.YearOfPassing.Year}}</td>
+                                                                <td> {{Qualification.Grade.Grade}}</td>
                                                                 <td class="center">{{Qualification.Marks}} </td>
                                                                 <td>
                                                                     <a class="edit" (click)='editQualidficationData(Qualification.QualificationID)'> Edit </a>

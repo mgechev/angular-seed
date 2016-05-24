@@ -56,6 +56,10 @@
                                 </div>
                                 <div class="portlet-body">
                                     <div class="tab-content">
+                                        <alert class="alerts" *ngFor="let alert of alerts;let i = index" dismissible="true" [type]="alert.type" dismissOnTimeout="2000"
+                                            (close)="closeAlert(i)">
+                                            {{ alert?.msg }}
+                                        </alert>
                                         <!-- PRIMARY INFO TAB -->
                                         <div class="tab-pane active" id="tab_primaryInfo">
                                             <form role="form" (submit)="onSavePrimaryInfo()">
@@ -171,7 +175,7 @@
                                                 </div>
                                                 <div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
-                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/AllProfiles']"> Cancel </a>
+                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/MyProfiles']"> Cancel </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -298,7 +302,6 @@
                                                             <div class="mt-checkbox-inline ">
                                                                 <label class="mt-checkbox  mt-checkbox-outline">
                                                              <input type="checkbox" id="chkOutstationedCandidate"
-                                                              
                                                               [(ngModel)]="profile.OutstationedCandidate"> 
                                                         <span></span>
                                                     </label>
@@ -384,7 +387,7 @@
                                                 </div>
                                                 <div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
-                                                    <a class="btn default" [routerLink]="['/App/ProfileBank/AllProfiles']"> Cancel </a>
+                                                    <a class="btn default" [routerLink]="['/App/ProfileBank/MyProfiles']"> Cancel </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -403,7 +406,7 @@
                                                                         <div class="row">
                                                                             <div class="col-md-10">
                                                                                 <div>
-                                                                                    <select (change)='onSelectQualification($event.target.value)' class="form-control" [(ngModel)]="qualification.CurrentQualification">
+                                                                                    <select (change)='onSelectQualification($event.target.value)' class="form-control" [(ngModel)]="qualification.Qualification.Id">
                                                                                     <option *ngFor="let q of qualifications" [value]="q.Id">{{q.Qualification}}</option>
                                                                                 </select>
                                                                                 </div>
@@ -416,7 +419,7 @@
                                                                         <label class="control-label">Year Of Passing <span class="required"> * </span></label>
                                                                         <div class="row">
                                                                             <div class="col-md-10">
-                                                                                <select (change)='onSelectYear($event.target.value)' class="form-control" [(ngModel)]="qualification.CurrentYear">
+                                                                                <select (change)='onSelectYear($event.target.value)' class="form-control" [(ngModel)]="qualification.YearOfPassing.Id">
                                                                                     <option *ngFor="let year of years" [value]="year.Id">{{year.Year}}</option>
                                                                                 </select>
 
@@ -430,7 +433,7 @@
                                                                         <div class="row">
                                                                             <div class="col-md-10">
                                                                                 <!--<div *ngFor="let grd of qualification.Grade">-->
-                                                                                <select (change)='onSelectGrade($event.target.value)' class="form-control" [(ngModel)]="qualification.CurrentGrade">
+                                                                                <select (change)='onSelectGrade($event.target.value)' class="form-control" [(ngModel)]="qualification.Grade.Id">
                                                                                     <option *ngFor="let grade of grades" [value]="grade.Id">{{grade.Grade}}</option>
                                                                                 </select>
                                                                                 <!--</div>-->
@@ -474,9 +477,12 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr *ngFor="let Qualification of profile.Qualifications">
-                                                                <td *ngFor="let degree of Qualification.Qualification"> {{degree.Qualification}} </td>
+                                                                <!--<td *ngFor="let degree of Qualification.Qualification"> {{degree.Qualification}} </td>
                                                                 <td *ngFor="let year of Qualification.YearOfPassing"> {{year.Year}} </td>
-                                                                <td *ngFor="let grd of Qualification.Grade">{{grd.Grade}}</td>
+                                                                <td *ngFor="let grd of Qualification.Grade">{{grd.Grade}}</td>-->
+                                                                <td> {{Qualification.Qualification.Qualification}}</td>
+                                                                <td> {{Qualification.YearOfPassing.Year}}</td>
+                                                                <td> {{Qualification.Grade.Grade}}</td>
                                                                 <td class="center">{{Qualification.Marks}} </td>
                                                                 <td>
                                                                     <a class="edit" (click)='editQualidficationData(Qualification.QualificationID)'> Edit </a>
@@ -580,7 +586,7 @@
                                                 </div>
                                                 <div class="margin-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
-                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/AllProfiles']"> Cancel </a>
+                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/MyProfiles']"> Cancel </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -639,7 +645,7 @@
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <button type="submit" class="btn green"> Save Changes </button>
-                                                        <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/AllProfiles']"> Cancel </a>
+                                                        <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/MyProfiles']"> Cancel </a>
                                                     </div>
 
                                                 </div>
@@ -655,7 +661,7 @@
                                                             <label class="control-label">CTC Include Variable</label>
                                                             <div class="mt-checkbox-inline ">
                                                                 <label class="mt-checkbox  mt-checkbox-outline">
-                                                                 <input type="checkbox" id="inlineCheckbox1" [(ngModel)]="profile.CTCIncludeVariable"> <!--CTCIncludeVariable-->
+                                                                 <input type="checkbox" id="chkCTCIncludeVariable" [(ngModel)]="profile.CTCIncludeVariable" />
                                                                 <span></span>
                                                              </label>
                                                             </div>
@@ -686,7 +692,9 @@
                                                             <label class="control-label">Expected Salary</label>
                                                             <div class="row">
                                                                 <div class="col-md-12">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.ExpectedSalary" />
+                                                                    <!--<input type="text" placeholder="" class="form-control" [(ngModel)]="profile.ExpectedSalary" />-->
+                                                                    <span class="form-control" tooltip="You can change this value from Primary Info Tab" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="!profile.ExpectedSalary">{{profile.ExpectedSalary}}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -696,7 +704,9 @@
                                                             <label class="control-label">Current Salary</label>
                                                             <div class="row">
                                                                 <div class="col-md-8">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CurrentSalary" />
+                                                                    <!--<input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CurrentSalary" />-->
+                                                                    <span class="form-control" tooltip="You can change this value from Primary Info Tab" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="!profile.CurrentSalary">{{profile.CurrentSalary}}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -717,7 +727,7 @@
 
                                                 <div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
-                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/AllProfiles']"> Cancel </a>
+                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/MyProfiles']"> Cancel </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -773,7 +783,7 @@
                                                 </div>
                                                 <div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
-                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/AllProfiles']"> Cancel </a>
+                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/MyProfiles']"> Cancel </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -915,7 +925,7 @@
                                                         </div>
                                                         <div class="margiv-top-10">
                                                             <button type="submit" class="btn green"> Save Changes </button>
-                                                            <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/AllProfiles']"> Cancel </a>
+                                                            <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/MyProfiles']"> Cancel </a>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -923,7 +933,14 @@
                                             </div>
                                         </div>
                                         <!-- END OTHER INFO TAB -->
-                                        <div class='Loader' style='display: none'>Success</div>
+                                        <!--<div class='Loader' *ngIf='showSucessMessage'>Details Saved Sucessfully</div>
+                                        <div class='Loader' *ngIf='showWaitMessage'><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></div>
+                                        -->
+                                        <!--<div *ngIf="IsSuccess" class="Loader">
+                                            <alert [type]= 'success' dismissOnTimeout="3000">This alert will dismiss in 3s</alert>
+                                         <div>-->
+
+
                                     </div>
                                 </div>
                             </div>

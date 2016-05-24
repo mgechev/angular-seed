@@ -17,18 +17,22 @@ import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 
 export class BlackListedProfilesListComponent implements OnActivate {
     blacklistedProfilesList: Array<MyProfilesInfo>;
+    profile: MyProfilesInfo;
     statusList: Array<Masters>;
     seletedCandidateID: number;
-    selectedStatus: Masters;
+    selectedStatus: number;
     Comments: string;
     currentStatus: number;
     errorMessage: string;
     currentCandidate: string;
 
+
     public isCollapsed: boolean = false;
     constructor(private _blacklistedProfilesService: BlackListedProfilesService,
         private _router: Router,
         private _masterService: MastersService) {
+        this.profile = new MyProfilesInfo();
+        this.profile.Status = new Masters();
     }
 
     routerOnActivate() {
@@ -41,7 +45,9 @@ export class BlackListedProfilesListComponent implements OnActivate {
             results => {
                 this.blacklistedProfilesList = <any>results;
             },
-            error => this.errorMessage = <any>error);
+            error => {
+            this.errorMessage = <any>error;
+            });
     }
     redirectToView(CandidateID: number) {
         this._router.navigate(['/App/ProfileBank/BlackListedProfiles/View/' + CandidateID]);
@@ -50,8 +56,8 @@ export class BlackListedProfilesListComponent implements OnActivate {
     SaveCandidateID(id: number) {
         this.seletedCandidateID = id;
         var index = _.findIndex(this.blacklistedProfilesList, { CandidateID: this.seletedCandidateID });
-        this.Comments = this.blacklistedProfilesList[index].Comments;
-        this.currentStatus = this.blacklistedProfilesList[index].Status[0].Id;
+        this.profile.Comments = this.blacklistedProfilesList[index].Comments;
+        this.profile.Status = this.blacklistedProfilesList[index].Status;
         this.currentCandidate = this.blacklistedProfilesList[index].Candidate;
         if (this.isCollapsed === false)
             this.isCollapsed = !this.isCollapsed;
@@ -66,25 +72,18 @@ export class BlackListedProfilesListComponent implements OnActivate {
     }
 
     onSelectStatus(statusId: string) {
-        for (var i = 0; i < this.statusList.length; i++) {
-            if (this.statusList[i].Id === parseInt(statusId)) {
-                this.selectedStatus = this.statusList[i];
-            }
-        }
+        this.selectedStatus = parseInt(statusId);
     }
 
+
     onUpdateStauts() {
-        if (this.selectedStatus === undefined) {
-            var index = _.findIndex(this.blacklistedProfilesList, { CandidateID: this.seletedCandidateID });
-            this.selectedStatus = this.blacklistedProfilesList[index].Status[0];
-        }
-        this._blacklistedProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.Comments)
+        this._blacklistedProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
+                this.profile.Status = new Masters();
                 this.getBlacklistedProfiles();
             },
             error => this.errorMessage = <any>error);
-
         this.isCollapsed = false;
     }
 

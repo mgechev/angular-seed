@@ -129,10 +129,10 @@ export class RecentProfilesService {
             .finally(() => this._spinnerService.hide());
     }
 
-    updateCandidateStatus(CandidateID: number, Status: Masters, Comments: string) {
+    updateCandidateStatus(CandidateID: number, StatusId: number, Comments: string) {
         let url = Config.GetURL('/api/ProfileBank/UpdateStatus');
         this._spinnerService.show();
-        return this.authHttp.post(url, { profile: { CandidateID: CandidateID, Status: Status, Comments: Comments } })
+        return this.authHttp.post(url, { profile: { CandidateID: CandidateID, StatusId: StatusId, Comments: Comments } })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

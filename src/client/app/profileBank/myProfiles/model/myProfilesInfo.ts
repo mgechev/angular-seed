@@ -6,13 +6,13 @@ export class Masters {
 export class Qualification {
   public CandidateID: number;
   public QualificationID: number;
-  public Qualification: Masters;
-  public YearOfPassing: Masters;
+  public Qualification: any;
+  public YearOfPassing: any;
   public Marks: number;
-  public Grade: Masters;
-  public CurrentQualification: number;
-  public CurrentYear: number;
-  public CurrentGrade: number;
+  public Grade: any;
+  // public CurrentQualification: number;
+  // public CurrentYear: number;
+  // public CurrentGrade: number;
 }
 
 export class MyProfilesInfo {

@@ -16,9 +16,10 @@ import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 
 export class RecentProfilesListComponent implements OnActivate {
     recentProfilesList: Array<MyProfilesInfo>;
+    profile: MyProfilesInfo;
     statusList: Array<Masters>;
     seletedCandidateID: number;
-    selectedStatus: Masters;
+    selectedStatus: number;
     Comments: string;
     currentStatus: number;
     errorMessage: string;
@@ -28,6 +29,8 @@ export class RecentProfilesListComponent implements OnActivate {
     constructor(private _recentProfilesService: RecentProfilesService,
         private _router: Router,
         private _masterService: MastersService) {
+        this.profile = new MyProfilesInfo();
+        this.profile.Status = new Masters();
     }
     routerOnActivate() {
         this.getRecentProfiles();
@@ -49,8 +52,8 @@ export class RecentProfilesListComponent implements OnActivate {
     SaveCandidateID(id: number) {
         this.seletedCandidateID = id;
         var index = _.findIndex(this.recentProfilesList, { CandidateID: this.seletedCandidateID });
-        this.Comments = this.recentProfilesList[index].Comments;
-        this.currentStatus = this.recentProfilesList[index].Status[0].Id;
+        this.profile.Comments = this.recentProfilesList[index].Comments;
+        this.profile.Status = this.recentProfilesList[index].Status;
         this.currentCandidate = this.recentProfilesList[index].Candidate;
         if (this.isCollapsed === false)
             this.isCollapsed = !this.isCollapsed;
@@ -66,23 +69,20 @@ export class RecentProfilesListComponent implements OnActivate {
     }
 
     onSelectStatus(statusId: string) {
-        for (var i = 0; i < this.statusList.length; i++) {
-            if (this.statusList[i].Id === parseInt(statusId)) {
-                this.selectedStatus = this.statusList[i];
-            }
-        }
+        this.selectedStatus = parseInt(statusId);
     }
+
+
     onUpdateStauts() {
-        if (this.selectedStatus === undefined) {
-            var index = _.findIndex(this.recentProfilesList, { CandidateID: this.seletedCandidateID });
-            this.selectedStatus = this.recentProfilesList[index].Status[0];
-        }
-        this._recentProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.Comments)
+        this._recentProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
+                this.profile.Status = new Masters();
                 this.getRecentProfiles();
             },
-            error => this.errorMessage = <any>error);
+            error => {
+                this.errorMessage = <any>error;
+            });
         this.isCollapsed = false;
     }
 
