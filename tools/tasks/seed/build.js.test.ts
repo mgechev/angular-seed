@@ -14,7 +14,7 @@ const plugins = <any>gulpLoadPlugins();
 export = () => {
   let tsProject = makeTsProject();
   let src = [
-    'typings/browser.d.ts',
+    'typings/index.d.ts',
     TOOLS_DIR + '/manual_typings/**/*.d.ts',
     join(APP_SRC, '**/*.ts'),
     '!' + join(APP_SRC, '**/*.e2e-spec.ts'),
