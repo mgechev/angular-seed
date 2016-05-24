@@ -1,7 +1,6 @@
 export class Panel {
-    public RoundNumber: number;
-    public Interviewers: string[];
-    public Status: string;
+    public RoundNumber: MasterData;
+    public Interviewers: MasterData[] = [];
     public Comments: string;
 }
 
@@ -26,10 +25,10 @@ export class RRFDetails {
     public MinExp: number;
     public MaxExp: number;
     public Priority: number;
-    public ExpDateOfJoining: string;
+    public ExpDateOfJoining: Date;
     public RaisedBy: string;
     public Status: string;
-    public Panel: Panel[] = [];
+    public Panel: Panel[] =[];
 
     public IsChecked: boolean;
     public Comment: string;

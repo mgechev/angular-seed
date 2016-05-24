@@ -1,4 +1,4 @@
-import {Component, AfterViewInit  } from '@angular/core';
+import {Component, AfterViewInit, AfterContentInit  } from '@angular/core';
 import { OnActivate, ROUTER_DIRECTIVES, RouteSegment } from '@angular/router';
 import { RRFDetails, AssignmentDetails, MasterData } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
@@ -13,7 +13,7 @@ import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
     directives: [ROUTER_DIRECTIVES, DATEPICKER_DIRECTIVES, SELECT_DIRECTIVES]
 })
 
-export class RRFAssignComponent implements OnActivate, AfterViewInit {
+export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterContentInit {
     selectedRRF: RRFDetails = new RRFDetails();
     errorMessage: string;
     Id: number;
@@ -38,6 +38,11 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit {
 
     ngAfterViewInit() {
         //$('.date-picker').datepicker();
+        $('#cmbAssignTo').select2();
+    }
+
+    ngAfterContentInit() {
+        // Component content has been initialized
         $('#cmbAssignTo').select2();
     }
 
@@ -95,8 +100,13 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit {
     onUnAssignCancel(): void {
         this.unAssignRowVisible = false;
         this.UnAssignRec = new AssignmentDetails();
-        $('#cmbAssignTo').select2();
+        setTimeout(function() {
+            $('#cmbAssignTo').select2();
+        }, 20);
+
     }
+
+
 
     onUnAssignRRF(): void {
         this._rrfDashboardService.unassignRRF(this.Id, this.UnAssignRec.AssignedTo.Id, this.unAssignedComments)

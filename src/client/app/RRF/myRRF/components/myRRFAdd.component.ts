@@ -23,15 +23,13 @@ export class MyRRFAddComponent implements OnActivate {
     interviewRound: MasterData[];
     interviewers: MasterData[];
 
-    public items: Array<string> = ['ABC', 'XYZ'];
-    private value: any = ['Interviewer'];
-    private _disabledV: string = '0';
-    private disabled: boolean = false;
+    comment: string;
+    IntwRound: number = 0;
 
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
         private _mastersService: MastersService) {
-        this.newRRF.Panel.push(this.panel);
+        // this.newRRF.Panel.push(this.panel);
         this.getDesignation();
         this.getPractice();
         this.getTechnologies();
@@ -51,35 +49,11 @@ export class MyRRFAddComponent implements OnActivate {
         // });
 
         //dropdown with multi selector and search
-        // $('#cmbInterviewer').select2();
-    }
-
-    private get disabledV(): string {
-        return this._disabledV;
-    }
-
-    private set disabledV(value: string) {
-        this._disabledV = value;
-        this.disabled = this._disabledV === '1';
-    }
-
-    public selected(value: any): void {
-        console.log('Selected value is: ', value);
-    }
-
-    public removed(value: any): void {
-        console.log('Removed value is: ', value);
-    }
-
-    public refreshValue(value: any): void {
-        this.value = value;
-    }
-
-    public itemsToString(value: Array<any> = []): string {
-        return value
-            .map((item: any) => {
-                return item.text;
-            }).join(',');
+        $('#cmbInterviewer').select2();
+        this.newRRF.NoOfOpenings = 1;
+        this.newRRF.Priority = 1;
+        this.newRRF.MinExp = 0;
+        this.newRRF.MaxExp = 0;
     }
 
     addPanel(): void {
@@ -91,7 +65,7 @@ export class MyRRFAddComponent implements OnActivate {
         this._myRRFService.raiseRRF(this.newRRF)
             .subscribe(
             results => {
-                this._router.navigate(['/APP/RRF/RRFDashboard/']);
+                this._router.navigate(['/App/RRF/RRFDashboard/']);
             },
             error => this.errorMessage = <any>error);
     }
@@ -154,4 +128,39 @@ export class MyRRFAddComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
+
+    onAddPanel(): void {
+        var panel: Panel = new Panel();
+        panel.Comments = this.comment;
+        panel.RoundNumber = this.getStringValue(this.IntwRound, this.interviewRound);
+
+        if ($('#cmbInterviewer').val() !== null) {
+            var selectedInterviewer: number[] = $('#cmbInterviewer').val();
+        }
+        for (var index = 0; index < selectedInterviewer.length; index++) {
+            panel.Interviewers.push(this.getStringValue(selectedInterviewer[index], this.interviewers));
+        }
+        this.newRRF.Panel.push(panel);
+    }
+
+    getStringValue(roundID: number, list: MasterData[]): MasterData {
+        for (var index = 0; index < list.length; index++) {
+            if (list[index].Id === roundID) {
+                return list[index];
+            }
+        }
+        return new MasterData;
+    }
+
+    onDropDownValueChanged(Value: number, Id: string) {
+        // (change)='onDropDownValueChanged($event.target.value , $event.target.id)'
+        switch (Id) {
+            case 'cmbIntwRound':
+               // this.IntwRound = Value;
+                break;
+            default:
+            //alert("Wrong Grade........."); 
+        }
+    }
+
 }
