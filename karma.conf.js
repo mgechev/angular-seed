@@ -19,7 +19,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       // Polyfills.
-      'node_modules/es6-shim/es6-shim.js',
+      'node_modules/core-js/client/shim.min.js',
 
       'node_modules/reflect-metadata/Reflect.js',
 
