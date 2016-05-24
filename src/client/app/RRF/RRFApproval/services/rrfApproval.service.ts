@@ -3,24 +3,30 @@ import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
+import { SpinnerService } from '../../../shared/components/spinner/spinner';
 
 @Injectable()
 
 export class RRFApprovalService {
-    constructor(private authHttp: AuthHttp) { }
+    constructor(private authHttp: AuthHttp,
+        private _spinnerService: SpinnerService) { }
 
     getRRFApprovalList(userName: string, roleID: Number) {
         let url = Config.GetURL('/api/RRF/GetAllRaisedRRF');
+        this._spinnerService.show();
         return this.authHttp.post(url, { UserName: userName, Role: roleID })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     ActionOnRaisedRRF(rrfID: number, status: number, comment: string) {
         let url = Config.GetURL('/api/RRF/ActionOnRaisedRRF');
+        this._spinnerService.show();
         return this.authHttp.post(url, { RRFID: rrfID, Status: status, Comments: comment })
             .map(this.extractData)
-            .catch(this.handleError);
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     private extractData(res: Response) {
