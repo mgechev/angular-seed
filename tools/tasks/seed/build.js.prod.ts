@@ -20,7 +20,7 @@ const INLINE_OPTIONS = {
 function buildTS() {
   let tsProject = makeTsProject();
   let src = [
-    'typings/browser.d.ts',
+    'typings/index.d.ts',
     TOOLS_DIR + '/manual_typings/**/*.d.ts',
     join(TMP_DIR, '**/*.ts')
   ];
