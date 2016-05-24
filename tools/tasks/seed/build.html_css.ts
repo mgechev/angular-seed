@@ -5,7 +5,7 @@ import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as merge from 'merge-stream';
 import { join } from 'path';
 
-import { APP_DEST, APP_SRC, BROWSER_LIST, CSS_DEST, CSS_PROD_BUNDLE, DEPENDENCIES, ENV, TMP_DIR, getPluginConfig } from '../../config';
+import { APP_DEST, APP_SRC, BROWSER_LIST, CSS_DEST, CSS_PROD_BUNDLE, DEPENDENCIES, ENV, getPluginConfig, TMP_DIR } from '../../config';
 
 const plugins = <any>gulpLoadPlugins();
 const cleanCss = require('gulp-clean-css');

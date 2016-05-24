@@ -385,9 +385,9 @@ export class SeedConfig {
   PLUGIN_CONFIGS: any = {
     /**
      * The BrowserSync configuration of the application.
-   * The default open behavior is to open the browser. To prevent the browser from opening use the `--b`  flag when
-   * running `npm start` (tested with serve.dev).
-   * Example: `npm start -- --b`
+     * The default open behavior is to open the browser. To prevent the browser from opening use the `--b`  flag when
+     * running `npm start` (tested with serve.dev).
+     * Example: `npm start -- --b`
      * @type {any}
      */
     'browser-sync': {
@@ -408,18 +408,21 @@ export class SeedConfig {
 
   /**
    * Recursively merge source onto target.
+   * @param {any} target The target object (to receive values from source)
+   * @param {any} source The source object (to be merged onto target)
    */
-  mergeObject( target: any, source: any ) {
-    var deepExtend = require('deep-extend');
-    deepExtend( target, source );
+  mergeObject(target: any, source: any) {
+    const deepExtend = require('deep-extend');
+    deepExtend(target, source);
   }
 
   /**
-   * Recursively merge source onto target.
+   * Locate a plugin configuration object by plugin key.
+   * @param {any} pluginKey The object key to look up in PLUGIN_CONFIGS.
    */
-  getPluginConfig( pluginKey: string ): any {
-    if( this.PLUGIN_CONFIGS[ pluginKey ] ) {
-      return this.PLUGIN_CONFIGS[ pluginKey ];
+  getPluginConfig(pluginKey: string): any {
+    if (this.PLUGIN_CONFIGS[ pluginKey ]) {
+      return this.PLUGIN_CONFIGS[pluginKey];
     }
     return null;
   }
