@@ -19,8 +19,6 @@
   "exclude": [
     "node_modules",
     "dist",
-    "typings/index.d.ts",
-    "typings/modules",
     "src"
   ],
   "compileOnSave": false
