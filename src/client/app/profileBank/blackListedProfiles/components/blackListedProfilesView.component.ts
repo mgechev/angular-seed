@@ -23,7 +23,7 @@ export class BlackListedProfilesViewComponent implements OnActivate {
             this._blackListedProfilesService.getCandidateProfile(this.params)
                 .subscribe(
                 results => {
-                    this.profile = results;
+                    this.profile = <any>results;
                 },
                 error => this.errorMessage = <any>error);
         }

@@ -11,7 +11,17 @@
             <!-- END PAGE TITLE  -->
         </div>
         <!-- END PAGE HEAD-->
-        <!--<breadcrumb></breadcrumb>-->
+         <!--BEGIN breadcrumb -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']" > Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">Profile Bank</span>
+            </li>
+        </ul>
+        <!--End Breadcrumb>-->
         <div class="row">
             <div class="col-md-12">
                 <div class="portlet light bordered">
@@ -46,7 +56,7 @@
                                     <div id="sample_1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm input-small input-inline" placeholder="" aria-controls="sample_1"></label></div>
                                 </div>
                             </div>
-                           <div class="row" style="margin-top: 10px">
+                            <div class="row" style="margin-top: 10px">
                                 <div id="updateRow" [collapse]='!isCollapsed'>
                                     <form role="form" (submit)="onUpdateStauts()">
                                         <div class="col-md-3">
@@ -60,7 +70,7 @@
                                                 <!--(change)='onSelectStatus($event.target.value)' -->
                                                 <select class="form-control" (change)='onSelectStatus($event.target.value)' [(ngModel)]="profile.Status.Id" tooltip="Status"
                                                     tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentStatus">
-                                                   <option *ngFor="let status of statusList" [value]="status.Id">{{status.CandidateStatus}}</option>
+                                                   <option *ngFor="let status of statusList" [value]="status.Id">{{status.Value}}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -121,8 +131,7 @@
                                                 </tr>
                                             </td>
                                             <td (click)='redirectToView(recentProfile.CandidateID)'>
-                                                <!--<div *ngFor="let candidateStatus of recentProfile.Status"><span class="mt-action-dot {{candidateStatus.CandidateStatus}}"> </span>{{candidateStatus.CandidateStatus}}</div>-->
-                                                <span class="mt-action-dot {{recentProfile.Status.CandidateStatus}}"> </span>{{recentProfile.Status.CandidateStatus}}
+                                                <span class="mt-action-dot {{recentProfile.Status.Value}}"> </span>{{recentProfile.Status.Value}}
                                             </td>
 
                                             <td class="text-center"><i class="fa fa-download" aria-hidden="true"></i>{{recentProfile.Resume_ID}}

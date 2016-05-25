@@ -23,7 +23,7 @@ export class RecentProfilesViewComponent implements OnActivate {
             this._recentProfilesService.getCandidateProfile(this.params)
                 .subscribe(
                 results => {
-                    this.profile = results;
+                    this.profile = <any>results;
                 },
                 error => this.errorMessage = <any>error);
         }

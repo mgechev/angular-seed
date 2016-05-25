@@ -25,7 +25,7 @@ export class MyProfilesViewComponent implements OnActivate {
             this._myProfilesService.getCandidateProfile(this.params)
                 .subscribe(
                 results => {
-                    this.profile = results;
+                    this.profile = <any>results;
                 },
                 error => this.errorMessage = <any>error);
         }

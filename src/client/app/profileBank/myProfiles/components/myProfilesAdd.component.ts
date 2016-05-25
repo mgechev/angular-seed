@@ -47,10 +47,6 @@ export class MyProfilesAddComponent implements OnActivate {
         this.alerts.splice(i, 1);
     }
 
-    // public addAlert(): void {
-    //     this.alerts.push({ msg: 'Another alert!', type: 'warning', closable: true });
-    // }
-
     constructor(private _myProfilesService: MyProfilesService,
         private _masterService: MastersService,
         private _router: Router) {
@@ -79,9 +75,9 @@ export class MyProfilesAddComponent implements OnActivate {
 
     createQualificationObj() {
         this.qualification = new Qualification();
-        this.qualification.Qualification = new Masters;
-        this.qualification.Grade = new Masters;
-        this.qualification.YearOfPassing = new Masters;
+        this.qualification.Qualification = new Masters();
+        this.qualification.Grade = new Masters();
+        this.qualification.YearOfPassing = new Masters();
     }
 
     getCandidateProfileById(profileId: string) {
@@ -238,28 +234,16 @@ export class MyProfilesAddComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    onSelectCountry(country: number) {
-        for (var i = 0; i < this.countries.length; i++) {
-            if (this.countries[i].Id === country) {
-                this.profile.Country = this.countries[i].Id;
-            }
-        }
+     onSelectCountry(country: number) {
+        this.profile.Country = country;
     }
 
     onSelectState(state: number) {
-        for (var i = 0; i < this.states.length; i++) {
-            if (this.states[i].Id === state) {
-                this.profile.State = this.states[i].Id;
-            }
-        }
+        this.profile.State = state;
     }
 
     onSelectDistrict(district: number) {
-        for (var i = 0; i < this.districts.length; i++) {
-            if (this.districts[i].Id === district) {
-                this.profile.District = this.districts[i].Id;
-            }
-        }
+        this.profile.District = district;
     }
 
     onSelectQualification(candidateQualification: string) {

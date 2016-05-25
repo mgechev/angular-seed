@@ -11,7 +11,17 @@
             <!-- END PAGE TITLE  -->
         </div>
         <!-- END PAGE HEAD-->
-        <!--<breadcrumb></breadcrumb>-->
+     <!--BEGIN breadcrumb -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']" > Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">Profile Bank</span>
+            </li>
+        </ul>
+        <!--End Breadcrumb>-->
         <div class="row">
             <div class="col-md-12">
                 <div class="portlet light bordered">
@@ -59,7 +69,7 @@
                                                 <!--(change)='onSelectStatus($event.target.value)' -->
                                                 <select class="form-control" (change)='onSelectStatus($event.target.value)' [(ngModel)]="profile.Status.Id" tooltip="Status"
                                                     tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentStatus">
-                                                   <option *ngFor="let status of statusList" [value]="status.Id">{{status.CandidateStatus}}</option>
+                                                   <option *ngFor="let status of statusList" [value]="status.Id">{{status.Value}}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -123,7 +133,7 @@
                                             </td>
                                             <td (click)='redirectToView(blacklistedProfile.CandidateID)'>
                                                 <!--<div *ngFor="let candidateStatus of blacklistedProfile.Status"><span class="mt-action-dot {{candidateStatus.CandidateStatus}}"> </span>{{candidateStatus.CandidateStatus}}</div> -->
-                                                <span class="mt-action-dot {{blacklistedProfile.Status.CandidateStatus}}"> </span>{{blacklistedProfile.Status.CandidateStatus}}
+                                                <span class="mt-action-dot {{blacklistedProfile.Status.Value}}"> </span>{{blacklistedProfile.Status.Value}}
                                             </td>
                                             <td class="text-center"><i class="fa fa-download" aria-hidden="true"></i>{{blacklistedProfile.Resume_ID}}
                                             </td>

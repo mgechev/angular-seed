@@ -44,6 +44,7 @@ export class RecentProfilesAddComponent implements OnActivate {
     public closeAlert(i: number): void {
         this.alerts.splice(i, 1);
     }
+
     constructor(private _recentProfilesService: RecentProfilesService,
         private _router: Router,
         private _masterService: MastersService) {
@@ -225,33 +226,21 @@ export class RecentProfilesAddComponent implements OnActivate {
 
     createQualification() {
         this.qualification = new Qualification();
-        this.qualification.Qualification = new Masters;
-        this.qualification.Grade = new Masters;
-        this.qualification.YearOfPassing = new Masters;
+        this.qualification.Qualification = new Masters();
+        this.qualification.Grade = new Masters();
+        this.qualification.YearOfPassing = new Masters();
     }
 
     onSelectCountry(country: number) {
-        for (var i = 0; i < this.countries.length; i++) {
-            if (this.countries[i].Id === country) {
-                this.profile.Country = this.countries[i].Id;
-            }
-        }
+        this.profile.Country = country;
     }
 
     onSelectState(state: number) {
-        for (var i = 0; i < this.states.length; i++) {
-            if (this.states[i].Id === state) {
-                this.profile.State = this.states[i].Id;
-            }
-        }
+        this.profile.State = state;
     }
 
     onSelectDistrict(district: number) {
-        for (var i = 0; i < this.districts.length; i++) {
-            if (this.districts[i].Id === district) {
-                this.profile.District = this.districts[i].Id;
-            }
-        }
+        this.profile.District = district;
     }
 
     onSelectQualification(candidateQualification: string) {

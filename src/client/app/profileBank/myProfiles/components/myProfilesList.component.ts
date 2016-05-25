@@ -61,7 +61,7 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     redirectToView(CandidateID: number) {
-        this._router.navigate(['App/ProfileBank/MyProfiles/View/' + CandidateID]);
+        this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID]);
     }
 
     onSave(): void {
