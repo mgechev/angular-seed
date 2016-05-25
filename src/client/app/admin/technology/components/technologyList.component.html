@@ -30,8 +30,8 @@
                             <tbody>
                                 <tr *ngFor="let technology of technologyList; let index = index">
                                     <td> {{index+1}} </td>
-                                    <td> {{technology.Technology}} </td>
-                                    <td><a [routerLink]="['/App/Admin/Technology/Edit/'+technology.id]"> Edit </a></td>
+                                    <td> {{technology.Value}} </td>
+                                    <td><a [routerLink]="['/App/Admin/Technology/Edit/'+technology.Id]"> Edit </a></td>
                                     <td><a (click)="onDelete(technology)"> Delete </a></td>
                                 </tr>
                             </tbody>

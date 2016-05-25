@@ -1,6 +1,6 @@
 export class TechnologyInfo {
   constructor(
-    public id: number,
-    public Technology: string
+    public Id: number,
+    public Value: string
   ) {  }
 }

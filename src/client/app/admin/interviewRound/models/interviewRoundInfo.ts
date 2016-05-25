@@ -1,6 +1,6 @@
 export class InterviewRoundInfo {
   constructor(
-    public id: number,
-    public InterviewRounds: string
+    public Id: number,
+    public Value: string
   ) {  }
 }

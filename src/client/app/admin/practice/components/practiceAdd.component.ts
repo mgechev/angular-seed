@@ -20,7 +20,7 @@ export class PracticeAddComponent implements OnActivate {
     }
 
     routerOnActivate(segment: RouteSegment) {
-        this.params = Number(segment.getParam('id'));
+        this.params = Number(segment.getParam('Id'));
         if (this.params) {
             this._practiceService.getPracticeById(this.params)
                 .subscribe(

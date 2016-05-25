@@ -30,8 +30,8 @@
                             <tbody>
                                 <tr *ngFor="let practice of practiceList; let index = index">
                                     <td> {{index+1}} </td>
-                                    <td> {{practice.Practice}} </td>
-                                    <td><a [routerLink]="['/App/Admin/Practice/Edit/'+practice.id]"> Edit </a></td>
+                                    <td> {{practice.Value}} </td>
+                                    <td><a [routerLink]="['/App/Admin/Practice/Edit/'+practice.Id]"> Edit </a></td>
                                     <td><a (click)="onDelete(practice)"> Delete </a></td>
                                 </tr>
                             </tbody>

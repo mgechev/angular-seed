@@ -30,7 +30,7 @@ export class PracticeService {
      getPracticeById(id: number) {
         let url = Config.GetURL('api/Masters/Practice/GetPracticeById');
         this._spinnerService.show();
-        return this.authHttp.post(url,{ practice:{id:id} })
+        return this.authHttp.post(url,{ practice:{Id:id} })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

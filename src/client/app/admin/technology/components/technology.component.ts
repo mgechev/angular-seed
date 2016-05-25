@@ -14,7 +14,7 @@ import { TechnologyService } from '../services/technology.service';
 @Routes([
   { path: '/', component: TechnologyListComponent },
   { path: '/Add', component: TechnologyAddComponent },
-  { path: '/Edit/:id', component: TechnologyAddComponent }
+  { path: '/Edit/:Id', component: TechnologyAddComponent }
 ])
 export class TechnologyComponent {
 }

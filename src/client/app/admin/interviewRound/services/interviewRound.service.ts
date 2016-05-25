@@ -30,7 +30,7 @@ export class InterviewRoundService {
      getInterviewRoundById(id : number) {
         let url = Config.GetURL('api/Masters/InterviewRound/GetRoundsById');
         this._spinnerService.show();
-        return this.authHttp.post(url,{ interviewRound:{id:id} })
+        return this.authHttp.post(url,{ interviewRound:{Id:id} })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

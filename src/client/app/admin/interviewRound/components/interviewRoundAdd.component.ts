@@ -20,7 +20,7 @@ export class InterviewRoundAddComponent implements OnActivate {
     }
 
     routerOnActivate(segment: RouteSegment) {
-        this.params = Number(segment.getParam('id'));
+        this.params = Number(segment.getParam('Id'));
         if (this.params) {
             this._interviewRoundService.getInterviewRoundById(this.params)
                 .subscribe(

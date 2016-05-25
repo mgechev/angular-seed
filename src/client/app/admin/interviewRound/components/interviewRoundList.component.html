@@ -30,8 +30,8 @@
                             <tbody>
                                 <tr *ngFor="let interviewRound of interviewRoundList; let index = index">
                                     <td> {{index+1}} </td>
-                                    <td> {{interviewRound.InterviewRounds}} </td>
-                                    <td><a [routerLink]="['/App/Admin/InterviewRounds/Edit/'+interviewRound.id]"> Edit </a></td>
+                                    <td> {{interviewRound.Value}} </td>
+                                    <td><a [routerLink]="['/App/Admin/InterviewRounds/Edit/'+interviewRound.Id]"> Edit </a></td>
                                     <td><a (click)="onDelete(interviewRound)"> Delete </a></td>
                                 </tr>
                             </tbody>

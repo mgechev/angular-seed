@@ -30,7 +30,7 @@ export class TechnologyService {
      getTechnologyById(id: number) {
         let url = Config.GetURL('api/Masters/Technology/GetTechnologyById');
         this._spinnerService.show();
-        return this.authHttp.post(url,{ technology:{id:id} })
+        return this.authHttp.post(url,{ technology:{Id:id} })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

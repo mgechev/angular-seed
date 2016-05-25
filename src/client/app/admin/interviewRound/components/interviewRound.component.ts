@@ -14,7 +14,7 @@ import { InterviewRoundService } from '../services/interviewRound.service';
 @Routes([
   { path: '/', component: InterviewRoundListComponent },
   { path: '/Add', component: InterviewRoundAddComponent },
-  { path: '/Edit/:id', component: InterviewRoundAddComponent }
+  { path: '/Edit/:Id', component: InterviewRoundAddComponent }
 ])
 export class InterviewRoundComponent {
 }

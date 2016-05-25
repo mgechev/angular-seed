@@ -14,7 +14,7 @@ import { PracticeService } from '../services/practice.service';
 @Routes([
   { path: '/', component: PraciceListComponent },
   { path: '/Add', component: PracticeAddComponent },
-  { path: '/Edit/:id', component: PracticeAddComponent }
+  { path: '/Edit/:Id', component: PracticeAddComponent }
 ])
 export class PracticeComponent {
 }
