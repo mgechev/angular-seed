@@ -1,6 +1,6 @@
 export class DesignationInfo {
   constructor(
-    public id: number,
-    public Designation: string
+    public Id: number,
+    public Value: string
   ) {  }
 }

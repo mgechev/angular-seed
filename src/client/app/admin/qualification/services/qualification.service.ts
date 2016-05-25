@@ -29,10 +29,10 @@ export class QualificationService {
             .finally(() => this._spinnerService.hide());
     }
 
-    getQualificationById(id: string) {
+    getQualificationById(id: number) {
         let authenticateUrl = Config.GetURL('/api/Masters/Qualification/GetQualificationById');
         this._spinnerService.show();
-        return this.authHttp.post(authenticateUrl, { qualification: { id: id } })
+        return this.authHttp.post(authenticateUrl, { qualification: { Id: id } })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

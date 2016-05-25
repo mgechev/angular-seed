@@ -13,14 +13,14 @@ import { SkillService } from '../services/skill.service';
 export class SkillAddComponent implements OnActivate {
     skill: SkillInfo;
     errorMessage: string;
-    params: string;
+    params: number;
     constructor(private _skillService: SkillService,
         private _router: Router) {
         this.skill = new SkillInfo(0, '');
     }
 
     routerOnActivate(segment: RouteSegment) {
-        this.params = segment.getParam('id');
+        this.params = Number(segment.getParam('Id'));
         if (this.params) {
             this._skillService.getSkillById(this.params)
                 .subscribe(

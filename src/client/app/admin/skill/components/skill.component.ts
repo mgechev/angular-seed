@@ -14,7 +14,7 @@ import { SkillService } from '../services/skill.service';
 @Routes([
   { path: '/', component: SkillListComponent },
   { path: '/Add', component: SkillAddComponent },
-  { path: '/Edit/:id', component: SkillAddComponent }
+  { path: '/Edit/:Id', component: SkillAddComponent }
 ])
 export class SkillComponent {
 }

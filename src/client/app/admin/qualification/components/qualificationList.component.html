@@ -30,8 +30,8 @@
                             <tbody>
                                 <tr *ngFor="let qualification of qualificationList; let index = index">
                                     <td> {{index+1}} </td>
-                                    <td> {{qualification.Qualification}} </td>
-                                    <td><a [routerLink]="['/App/Admin/Qualification/Edit/'+qualification.id]"> Edit </a></td>
+                                    <td> {{qualification.Value}} </td>
+                                    <td><a [routerLink]="['/App/Admin/Qualification/Edit/'+qualification.Id]"> Edit </a></td>
                                     <td><a (click)="onDelete(qualification)"> Delete </a></td>
                                 </tr>
                             </tbody>

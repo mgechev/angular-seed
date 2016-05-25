@@ -30,8 +30,8 @@
                             <tbody>
                                 <tr *ngFor="let ownerType of ownerTypeList; let index = index">
                                     <td> {{index+1}} </td>
-                                    <td> {{ownerType.OwnerType}} </td>
-                                    <td><a [routerLink]="['/App/Admin/OwnerType/Edit/'+ownerType.id]"> Edit </a></td>
+                                    <td> {{ownerType.Value}} </td>
+                                    <td><a [routerLink]="['/App/Admin/OwnerType/Edit/'+ownerType.Id]"> Edit </a></td>
                                     <td><a (click)="onDelete(ownerType)"> Delete </a></td>
                                 </tr>
                             </tbody>

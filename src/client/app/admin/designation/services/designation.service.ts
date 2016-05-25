@@ -29,10 +29,10 @@ export class DesignationService {
             .finally(() => this._spinnerService.hide());
     }
 
-     getDesignationById(id:string) {
+     getDesignationById(id:number) {
         let authenticateUrl = Config.GetURL('/api/Masters/Designation/GetDesignationById');
         this._spinnerService.show();
-        return this.authHttp.post(authenticateUrl,{ designation:{id:id} })
+        return this.authHttp.post(authenticateUrl,{ designation:{Id:id} })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

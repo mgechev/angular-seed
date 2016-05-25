@@ -13,14 +13,14 @@ import { DesignationService } from '../services/designation.service';
 export class DesignationAddComponent implements OnActivate {
     designation: DesignationInfo;
     errorMessage: string;
-    params: string;
+    params: number;
     constructor(private _designationService: DesignationService,
         private _router: Router) {
         this.designation = new DesignationInfo(0, '');
     }
 
     routerOnActivate(segment: RouteSegment) {
-        this.params = segment.getParam('id');
+        this.params = Number(segment.getParam('Id'));
         if (this.params) {
             this._designationService.getDesignationById(this.params)
                 .subscribe(

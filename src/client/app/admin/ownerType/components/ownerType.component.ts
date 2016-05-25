@@ -14,7 +14,7 @@ import { OwnerTypeService } from '../services/ownerType.service';
 @Routes([
   { path: '/', component: OwnerTypeListComponent },
   { path: '/Add', component: OwnerTypeAddComponent },
-  { path: '/Edit/:id', component: OwnerTypeAddComponent }
+  { path: '/Edit/:Id', component: OwnerTypeAddComponent }
 ])
 export class OwnerTypeComponent {
 }

@@ -13,14 +13,14 @@ import { QualificationService } from '../services/qualification.service';
 export class QualificationAddComponent implements OnActivate {
     qualification: QualificationInfo;
     errorMessage: string;
-    params: string;
+    params: number;
     constructor(private _qualificationService: QualificationService,
         private _router: Router) {
         this.qualification = new QualificationInfo(0, '');
     }
 
     routerOnActivate(segment: RouteSegment) {
-        this.params = segment.getParam('id');
+        this.params = Number(segment.getParam('Id'));
         if (this.params) {
             this._qualificationService.getQualificationById(this.params)
                 .subscribe(

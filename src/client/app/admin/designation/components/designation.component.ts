@@ -14,7 +14,7 @@ import { DesignationService } from '../services/designation.service';
 @Routes([
   { path: '/', component: DesignationListComponent },
   { path: '/Add', component: DesignationAddComponent },
-  { path: '/Edit/:id', component: DesignationAddComponent }
+  { path: '/Edit/:Id', component: DesignationAddComponent }
 ])
 export class DesignationComponent {
 }

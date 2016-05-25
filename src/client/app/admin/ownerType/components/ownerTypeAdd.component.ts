@@ -13,14 +13,14 @@ import { OwnerTypeService } from '../services/ownerType.service';
 export class OwnerTypeAddComponent implements OnActivate {
     ownerType: OwnerTypeInfo;
     errorMessage: string;
-    params: string;
+    params: number;
     constructor(private _ownerTypeService: OwnerTypeService,
         private _router: Router) {
         this.ownerType = new OwnerTypeInfo(0, '');
     }
 
     routerOnActivate(segment: RouteSegment) {
-        this.params = segment.getParam('id');
+        this.params = Number(segment.getParam('Id'));
         if (this.params) {
             this._ownerTypeService.getOwnerTypeById(this.params)
                 .subscribe(

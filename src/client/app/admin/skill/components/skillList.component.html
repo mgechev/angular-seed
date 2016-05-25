@@ -30,8 +30,8 @@
                             <tbody>
                                 <tr *ngFor="let skill of skillList; let index = index">
                                     <td> {{index+1}} </td>
-                                    <td> {{skill.Skill}} </td>
-                                    <td><a [routerLink]="['/App/Admin/Skill/Edit/'+skill.id]"> Edit </a></td>
+                                    <td> {{skill.Value}} </td>
+                                    <td><a [routerLink]="['/App/Admin/Skill/Edit/'+skill.Id]"> Edit </a></td>
                                     <td><a (click)="onDelete(skill)"> Delete </a></td>
                                 </tr>
                             </tbody>

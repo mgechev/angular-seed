@@ -29,10 +29,10 @@ export class OwnerTypeService {
             .finally(() => this._spinnerService.hide());
     }
 
-    getOwnerTypeById(id: string) {
+    getOwnerTypeById(id: number) {
         let authenticateUrl = Config.GetURL('/api/Masters/OwnerType/GetOwnerTypeById');
         this._spinnerService.show();
-        return this.authHttp.post(authenticateUrl, { ownerType: { id: id } })
+        return this.authHttp.post(authenticateUrl, { ownerType: { Id: id } })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

@@ -14,7 +14,7 @@ import { QualificationService } from '../services/qualification.service';
 @Routes([
   { path: '/', component: QualificationListComponent },
   { path: '/Add', component: QualificationAddComponent },
-  { path: '/Edit/:id', component: QualificationAddComponent }
+  { path: '/Edit/:Id', component: QualificationAddComponent }
 ])
 export class QualificationComponent {
 }

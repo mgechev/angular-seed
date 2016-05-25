@@ -29,10 +29,10 @@ export class SkillService {
             .finally(() => this._spinnerService.hide());
     }
 
-     getSkillById(id:string) {
+     getSkillById(id:number) {
         let authenticateUrl = Config.GetURL('/api/Masters/Skill/GetSkillById');
         this._spinnerService.show();
-        return this.authHttp.post(authenticateUrl,{ skill:{id:id} })
+        return this.authHttp.post(authenticateUrl,{ skill:{Id:id} })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
