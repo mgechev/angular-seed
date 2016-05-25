@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment } from '@angular/router';
-import { MyProfilesInfo, Qualification, Masters } from '../model/myProfilesInfo';
+import { MyProfilesInfo, Qualification, Masters, Response } from '../model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -31,13 +31,6 @@ export class MyProfilesAddComponent implements OnActivate {
     selectedYear: number;
     selectedGrade: number;
     Marks: number;
-    CurrentQualification: number;
-    CurrentYear: number;
-    CurrentGrade: number;
-
-    // IsCurrentAddressSameAsPermanentChecked: boolean = false;
-    // IsOutstationedCandidateChecked: boolean = false;
-    // IsReadyToRelocateChecked: boolean = false;
 
     IsHidden: boolean = true;
     IsSuccess: boolean = false;
@@ -53,7 +46,6 @@ export class MyProfilesAddComponent implements OnActivate {
         this.profile = new MyProfilesInfo();
         this.createQualificationObj();
         this.alerts = new Array<Object>();
-
     }
 
     routerOnActivate(segment: RouteSegment) {
@@ -234,7 +226,7 @@ export class MyProfilesAddComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-     onSelectCountry(country: number) {
+    onSelectCountry(country: number) {
         this.profile.Country = country;
     }
 
@@ -247,15 +239,15 @@ export class MyProfilesAddComponent implements OnActivate {
     }
 
     onSelectQualification(candidateQualification: string) {
-         this.selectedQualification = parseInt(candidateQualification);
+        this.selectedQualification = parseInt(candidateQualification);
     }
 
     onSelectGrade(grade: string) {
-      this.selectedGrade =  parseInt(grade);
+        this.selectedGrade = parseInt(grade);
     }
 
     onSelectYear(year: string) {
-       this.selectedYear = parseInt(year);
+        this.selectedYear = parseInt(year);
     }
 
     onSameAddressChecked(value: string) {
@@ -272,8 +264,13 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateProfile(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    var result = results as Response;
+                    if (result.StatusCode === '1') {
+                        this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -289,8 +286,13 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    var result = results as Response;
+                    if (result.StatusCode === '1') {
+                        this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -306,24 +308,13 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateProfessionalDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
-                },
-                error => {
-                    this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
-                });
-        }
-    }
-
-    onSaveQualificationDetails(): void {
-        //   this.showMessage('Wait', true);
-        if (this.params) {
-            this._myProfilesService.editCandidateQualificationDetails(this.profile)
-                .subscribe(
-                results => {
-
-                    this.getCandidateProfileById(this.params);
+                    var result = results as Response;
+                    if (result.StatusCode === '1') {
+                        this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -338,8 +329,13 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateSkillsDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    var result = results as Response;
+                    if (result.StatusCode === '1') {
+                        this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -355,8 +351,13 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    var result = results as Response;
+                    if (result.StatusCode === '1') {
+                        this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -371,8 +372,13 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateCareerDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    var result = results as Response;
+                    if (result.StatusCode === '1') {
+                        this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -388,8 +394,13 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateSalaryDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    var result = results as Response;
+                    if (result.StatusCode === '1') {
+                        this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -411,8 +422,14 @@ export class MyProfilesAddComponent implements OnActivate {
                     .subscribe(
                     results => {
                         this.createQualificationObj();
-                        this.getCandidateQualifications();
-                        this.alerts.push({ msg: 'Qualification Added Sucessfully!', type: 'success', closable: true });
+
+                        var result = results as Response;
+                        if (result.StatusCode === '1') {
+                            this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                            this.getCandidateQualifications();
+                        } else {
+                            this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                        }
                     },
                     error => {
                         this.errorMessage = <any>error;
@@ -431,13 +448,13 @@ export class MyProfilesAddComponent implements OnActivate {
             if (this.selectedGrade !== undefined) {
                 this.qualification.Grade = new Masters;
                 this.qualification.Grade = this.selectedGrade;
-            }else {
+            } else {
                 this.qualification.Grade = this.qualification.Grade.Id;
             }
             if (this.selectedYear !== undefined) {
                 this.qualification.YearOfPassing = new Masters;
                 this.qualification.YearOfPassing = this.selectedYear;
-            }else {
+            } else {
                 this.qualification.YearOfPassing = this.qualification.YearOfPassing.Id;
             }
 
@@ -447,8 +464,13 @@ export class MyProfilesAddComponent implements OnActivate {
                     results => {
                         this.createQualificationObj();
                         this.IsHidden = true;
-                        this.getCandidateQualifications();
-                        this.alerts.push({ msg: 'Details Updated Sucessfully!', type: 'success', closable: true });
+                        var result = results as Response;
+                        if (result.StatusCode === '1') {
+                            this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                            this.getCandidateQualifications();
+                        } else {
+                            this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                        }
                     },
                     error => {
                         this.errorMessage = <any>error;

@@ -11,13 +11,26 @@
             <!-- END PAGE TITLE  -->
         </div>
         <!-- END PAGE HEAD-->
-        <!--<breadcrumb></breadcrumb>-->
+        <!--BEGIN breadcrumb -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']"> Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">Profile Bank</span>
+            </li>
+        </ul>
+        <!--End Breadcrumb>-->
         <div class="row">
             <div class="col-md-12">
                 <div class="portlet light bordered">
                     <div class="portlet-title">
                         <div class="row">
                             <div class="col-md-6">
+                                <div>
+                                    <button type="button" class="btn btn-info " (click)='openMailWindow()' [disabled]='!selectedRowCount'> Send Mails </button>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="dt-buttons pull-right">
@@ -50,7 +63,6 @@
                                     <form role="form" (submit)="onUpdateStauts()">
                                         <div class="col-md-3">
                                             <div class="form-group">
-
                                                 <span class="form-control" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"> {{currentCandidate}}</span>
                                             </div>
                                         </div>
@@ -59,7 +71,7 @@
                                                 <!--(change)='onSelectStatus($event.target.value)' -->
                                                 <select class="form-control" (change)='onSelectStatus($event.target.value)' [(ngModel)]="profile.Status.Id" tooltip="Status"
                                                     tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentStatus">
-                                                   <option *ngFor="let status of statusList" [value]="status.Id">{{status.CandidateStatus}}</option>
+                                                   <option *ngFor="let status of statusList" [value]="status.Id">{{status.Value}}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -85,6 +97,12 @@
                                     role="grid" aria-describedby="sample_1_info">
                                     <thead>
                                         <tr>
+                                            <td>
+                                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                                    <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" (change)="onAllSelect($event)"
+                                                     [(ngModel)]='allChecked'/><span></span>
+                                                </label>
+                                            </td>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Name / Email / Contact</th>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Tag </th>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Professional Details </th>
@@ -96,6 +114,12 @@
                                     </thead>
                                     <tbody>
                                         <tr class="gradeX odd" *ngFor="let profile of allProfilesList; let index = index">
+                                            <td>
+                                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                            <input type="checkbox" class="checkboxes" value="1" [id]='profile.CandidateID' [(ngModel)]='profile.IsChecked' (change)="onStateChange($event)"/>
+                                         <span></span>
+                                        </label>
+                                            </td>
                                             <td (click)='redirectToView(profile.CandidateID)'>
                                                 <tr>
                                                     <td style="float: left;">&nbsp; {{profile.Candidate}}</td>
@@ -123,7 +147,7 @@
                                             </td>
                                             <td (click)='redirectToView(profile.CandidateID)'>
                                                 <!--<div *ngFor="let candidateStatus of profile.Status"><span class="mt-action-dot {{candidateStatus.CandidateStatus}}"> </span>{{candidateStatus.CandidateStatus}}</div> -->
-                                                <span class="mt-action-dot {{profile.Status.CandidateStatus}}"> </span>{{profile.Status.CandidateStatus}}
+                                                <span class="mt-action-dot {{profile.Status.Value}}"> </span>{{profile.Status.Value}}
                                             </td>
                                             <td class="text-center"><i class="fa fa-download" aria-hidden="true"></i>{{profile.Resume_ID}} </td>
                                             <td>

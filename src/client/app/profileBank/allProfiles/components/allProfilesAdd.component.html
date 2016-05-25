@@ -11,6 +11,17 @@
             <!-- END PAGE TITLE -->
         </div>
         <!-- END PAGE HEAD-->
+         <!--BEGIN breadcrumb -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']" > Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">Profile Bank</span>
+            </li>
+        </ul>
+        <!--End Breadcrumb>-->
         <div class="row">
             <div class="col-md-12">
                 <!-- BEGIN PROFILE CONTENT -->
@@ -27,35 +38,39 @@
                                     </div>
                                     <ul class="nav nav-tabs">
                                         <li class="active">
-                                            <a href="#tab_primaryInfo" data-toggle="tab">Primary Info</a>
+                                            <a href="#tab_primaryInfo" data-toggle="tab" (click) = 'isDetailsSaved()'>Primary Info</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_1" data-toggle="tab">Personal Info</a>
+                                            <a href="#tab_1_1" data-toggle="tab" (click) = 'isDetailsSaved()'>Personal Info</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_7" data-toggle="tab">Professional Info</a>
+                                            <a href="#tab_1_7" data-toggle="tab" (click) = 'isDetailsSaved()'>Professional Info</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_5" data-toggle="tab">Salary Details</a>
+                                            <a href="#tab_1_5" data-toggle="tab" (click) = 'isDetailsSaved()'>Salary Details</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_3" data-toggle="tab">Skills</a>
+                                            <a href="#tab_1_3" data-toggle="tab" (click) = 'isDetailsSaved()'>Skills</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_2" data-toggle="tab">Qualification</a>
+                                            <a href="#tab_1_2" data-toggle="tab" (click) = 'isDetailsSaved()'>Qualification</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_4" data-toggle="tab">Career Profile</a>
+                                            <a href="#tab_1_4" data-toggle="tab" (click) = 'isDetailsSaved()'>Career Profile</a>
                                         </li>
 
                                         <li>
-                                            <a href="#tab_1_6" data-toggle="tab">Team Management</a>
+                                            <a href="#tab_1_6" data-toggle="tab" (click) = 'isDetailsSaved()'>Team Management</a>
                                         </li>
 
                                     </ul>
                                 </div>
                                 <div class="portlet-body">
                                     <div class="tab-content">
+                                         <alert class="alerts" *ngFor="let alert of InfoAlerts;let i = index" dismissible="true" [type]="alert.type" dismissOnTimeout="5000" style="width:350px"
+                                            (close)="closeAlert(i)">
+                                            {{ alert?.msg }}
+                                        </alert>
                                         <alert class="alerts" *ngFor="let alert of alerts;let i = index" dismissible="true" [type]="alert.type" dismissOnTimeout="2000"
                                             (close)="closeAlert(i)">
                                             {{ alert?.msg }}
@@ -69,7 +84,8 @@
                                                             <label class="control-label">First Name<span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" autofocus placeholder="John" class="form-control" [(ngModel)]="profile.FirstName" required="" />
+                                                                    <input type="text" autofocus placeholder="John" class="form-control" [(ngModel)]="profile.FirstName" required=""
+                                                                    (change)='onChangeInput($event.target.value)' />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -79,7 +95,8 @@
                                                             <label class="control-label">Middle Name</label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="Alex" class="form-control" [(ngModel)]="profile.MiddleName" />
+                                                                    <input type="text" placeholder="Alex" class="form-control" [(ngModel)]="profile.MiddleName" 
+                                                                    (change)='onChangeInput($event.target.value)'/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -89,7 +106,8 @@
                                                             <label class="control-label">Last Name<span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="Doe" class="form-control" [(ngModel)]="profile.LastName" required="" />
+                                                                    <input type="text" placeholder="Doe" class="form-control" 
+                                                                    [(ngModel)]="profile.LastName" required="" (change)='onChangeInput($event.target.value)'/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -189,7 +207,8 @@
                                                             <label class="control-label">First Name<span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" autofocus placeholder="John" class="form-control" [(ngModel)]="profile.FirstName" required="" />
+                                                                    <input type="text" autofocus placeholder="John" class="form-control" [(ngModel)]="profile.FirstName" required="" 
+                                                                    (change)='onChangeInput($event.target.value)'/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -199,7 +218,8 @@
                                                             <label class="control-label">Middle Name</label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="Alex" class="form-control" [(ngModel)]="profile.MiddleName" />
+                                                                    <input type="text" placeholder="Alex" class="form-control" [(ngModel)]="profile.MiddleName"
+                                                                    (change)='onChangeInput($event.target.value)' />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -209,7 +229,8 @@
                                                             <label class="control-label">Last Name<span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="Doe" class="form-control" [(ngModel)]="profile.LastName" required="" />
+                                                                    <input type="text" placeholder="Doe" class="form-control" [(ngModel)]="profile.LastName" required=""
+                                                                    (change)='onChangeInput($event.target.value)' />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -219,7 +240,8 @@
                                                             <label>Email <span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="email" class="form-control " placeholder="Email Address" [(ngModel)]="profile.Email" required="">
+                                                                    <input type="email" class="form-control " placeholder="Email Address" [(ngModel)]="profile.Email" required=""
+                                                                    (change)='onChangeInput($event.target.value)'>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -407,7 +429,7 @@
                                                                             <div class="col-md-10">
                                                                                 <div>
                                                                                     <select (change)='onSelectQualification($event.target.value)' class="form-control" [(ngModel)]="qualification.Qualification.Id">
-                                                                                    <option *ngFor="let q of qualifications" [value]="q.Id">{{q.Qualification}}</option>
+                                                                                    <option *ngFor="let q of qualifications" [value]="q.Id">{{q.Value}}</option>
                                                                                 </select>
                                                                                 </div>
                                                                             </div>
@@ -420,7 +442,7 @@
                                                                         <div class="row">
                                                                             <div class="col-md-10">
                                                                                 <select (change)='onSelectYear($event.target.value)' class="form-control" [(ngModel)]="qualification.YearOfPassing.Id">
-                                                                                    <option *ngFor="let year of years" [value]="year.Id">{{year.Year}}</option>
+                                                                                    <option *ngFor="let year of years" [value]="year.Id">{{year.Value}}</option>
                                                                                 </select>
 
                                                                             </div>
@@ -434,7 +456,7 @@
                                                                             <div class="col-md-10">
                                                                                 <!--<div *ngFor="let grd of qualification.Grade">-->
                                                                                 <select (change)='onSelectGrade($event.target.value)' class="form-control" [(ngModel)]="qualification.Grade.Id">
-                                                                                    <option *ngFor="let grade of grades" [value]="grade.Id">{{grade.Grade}}</option>
+                                                                                    <option *ngFor="let grade of grades" [value]="grade.Id">{{grade.Value}}</option>
                                                                                 </select>
                                                                                 <!--</div>-->
                                                                             </div>
@@ -508,7 +530,8 @@
                                                             <label class="control-label">Experience in Skill <small>&nbsp;(In years)</small></label>
                                                             <div class="row">
                                                                 <div class="col-md-6">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.ExpInSkill" />
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.ExpInSkill" 
+                                                                    (change)='onChangeInput($event.target.value)'/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -516,7 +539,8 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Any Functional Experience</label>
-                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.AnyFunctionalExp"></textarea>
+                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.AnyFunctionalExp"
+                                                            (change)='onChangeInput($event.target.value)'></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
@@ -600,7 +624,8 @@
                                                             <label class="control-label">Total Experience<br/> <small>&nbsp;(In years)</small></label>
                                                             <div class="row">
                                                                 <div class="col-md-8">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.TotalExperience" />
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.TotalExperience"
+                                                                    (change)='onChangeInput($event.target.value)' />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -610,7 +635,8 @@
                                                             <label class="control-label">Relevant Experience <small>&nbsp;(In years)</small></label>
                                                             <div class="row">
                                                                 <div class="col-md-8">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.RelevantExperience" />
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.RelevantExperience" 
+                                                                    (change)='onChangeInput($event.target.value)'/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -661,7 +687,7 @@
                                                             <label class="control-label">CTC Include Variable</label>
                                                             <div class="mt-checkbox-inline ">
                                                                 <label class="mt-checkbox  mt-checkbox-outline">
-                                                                 <input type="checkbox" id="chkCTCIncludeVariable" [(ngModel)]="profile.CTCIncludeVariable" />
+                                                                 <input type="checkbox" id="chkCTCIncludeVariable" [(ngModel)]="profile.CTCIncludeVariable" (change)='onChangeInput($event.target.value)'/>
                                                                 <span></span>
                                                              </label>
                                                             </div>
@@ -672,7 +698,7 @@
                                                             <label class="control-label">Current Take Home</label>
                                                             <div class="row">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CurrentTakeHome" />
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CurrentTakeHome" (change)='onChangeInput($event.target.value)'/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -741,7 +767,8 @@
                                                             <label class="control-label">Team Management</label>
                                                             <div class="mt-checkbox-inline ">
                                                                 <label class="mt-checkbox  mt-checkbox-outline">
-                                                        <input type="checkbox" id="chkTeamManagement" [(ngModel)]="profile.TeamMgmt"> <!--TeamMgmt-->
+                                                        <input type="checkbox" id="chkTeamManagement" [(ngModel)]="profile.TeamMgmt"
+                                                        (change)='onChangeInput($event.target.value)' /> <!--TeamMgmt-->
                                                         <span></span>
                                                     </label>
                                                             </div>
@@ -753,7 +780,7 @@
                                                             <label class="control-label">No Of Team Members</label>
                                                             <div class="row">
                                                                 <div class="col-md-8">
-                                                                    <input type="number" placeholder="0" class="form-control" [(ngModel)]="profile.NoOfTeamMembers" />
+                                                                    <input type="number" placeholder="0" class="form-control" [(ngModel)]="profile.NoOfTeamMembers" (change)='onChangeInput($event.target.value)' />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -799,7 +826,7 @@
                                                                     <label class="control-label">Applied Earlier</label>
                                                                     <div class="mt-checkbox-inline ">
                                                                         <label class="mt-checkbox  mt-checkbox-outline">
-                                                                        <input type="checkbox" id="chkAppliedEarlier" [(ngModel)] = "profile.AppliedEarlier"> <!--TeamMgmt-->
+                                                                        <input type="checkbox" id="chkAppliedEarlier" [(ngModel)] = "profile.AppliedEarlier" (change)='onChangeInput($event.target.value)'> <!--TeamMgmt-->
                                                                         <span></span>
                                                                       </label>
                                                                     </div>
@@ -819,7 +846,7 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label>Visa </label>
-                                                                    <input type="text" class="form-control" placeholder="" [(ngModel)]="profile.Visa">
+                                                                    <input type="text" class="form-control" placeholder="" [(ngModel)]="profile.Visa" (change)='onChangeInput($event.target.value)'>
                                                                 </div>
                                                             </div>
 

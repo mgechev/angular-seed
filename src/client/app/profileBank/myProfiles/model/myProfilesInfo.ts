@@ -10,9 +10,6 @@ export class Qualification {
   public YearOfPassing: any;
   public Marks: number;
   public Grade: any;
-  // public CurrentQualification: number;
-  // public CurrentYear: number;
-  // public CurrentGrade: number;
 }
 
 export class MyProfilesInfo {
@@ -26,7 +23,7 @@ export class MyProfilesInfo {
   public Tag: string;
   public Skills: Array<string>;
   public ResumeID: number;
-  public Status: Masters;
+  public Status = new Masters();
   public Comments: string;
   public CandidateOtherDetails: any;
   public CandidateSalaryDetails: any;
@@ -105,5 +102,12 @@ export class MyProfilesInfo {
   public SecondaryReasonToQuitLastJob: string;
   public PrimaryReasonToQuitCurrentJob: string;
   public SecondaryReasonToQuitCurrentJob: string;
-}
 
+   public IsChecked: boolean;
+}
+export class Response {
+   public StatusCode : string;
+   public Message : string;
+   public ReasonCode: string;
+   public ErrorMsg: string;
+}

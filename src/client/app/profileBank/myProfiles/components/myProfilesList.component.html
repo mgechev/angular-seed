@@ -11,10 +11,10 @@
             <!-- END PAGE TITLE  -->
         </div>
         <!-- END PAGE HEAD-->
-         <!--BEGIN breadcrumb -->
+        <!--BEGIN breadcrumb -->
         <ul class="page-breadcrumb breadcrumb">
             <li>
-                <a [routerLink]="['/App']" > Home </a>
+                <a [routerLink]="['/App']"> Home </a>
                 <i class="fa fa-circle"></i>
             </li>
             <li>
@@ -49,6 +49,10 @@
                     </div>
                     <div class="portlet-body">
                         <div class="table-toolbar">
+                            <alert class="alerts" *ngFor="let alert of alerts;let i = index" dismissible="true" [type]="alert.type" dismissOnTimeout="2000"
+                                (close)="closeAlert(i)">
+                                {{ alert?.msg }}
+                            </alert>
                             <div class="add-new-panel">
                                 <form role="form" (submit)="onSave()">
                                     <div class="row">
@@ -89,7 +93,9 @@
                                         <div class="col-md-1 fileInput">
                                             <div class="form-group">
                                                 <div class="fileUpload btn btn-info" data-toggle="tooltip" data-placement="top" title="Upload Resume">
+                                                    <!--<input type="file" class="upload" (change)="psdTemplateSelectionHandler($event)" /><span>Browse</span>-->
                                                     <input type="file" class="upload" (change)="psdTemplateSelectionHandler($event)" /><span>Browse</span>
+
                                                 </div>
                                             </div>
                                         </div>

@@ -23,7 +23,7 @@ export class AllProfilesViewComponent implements OnActivate {
             this._allProfilesService.getCandidateProfile(this.params)
                 .subscribe(
                 results => {
-                    this.profile = results;
+                    this.profile = <any>results;
                 },
                 error => this.errorMessage = <any>error);
         }

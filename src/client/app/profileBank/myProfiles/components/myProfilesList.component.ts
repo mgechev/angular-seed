@@ -1,16 +1,17 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import { MyProfilesInfo, Masters } from '../model/myProfilesInfo';
+import { MyProfilesInfo, Masters,Response } from '../model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
-import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
+import { CollapseDirective, TOOLTIP_DIRECTIVES,AlertComponent } from 'ng2-bootstrap';
+
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-myprofiles-list',
     templateUrl: 'myProfilesList.component.html',
-    directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES,AlertComponent],
     styleUrls: ['myProfiles.component.css']
 })
 
@@ -28,6 +29,9 @@ export class MyProfilesListComponent implements OnActivate {
     currentCandidate: string;
 
     public isCollapsed: boolean = false;
+    IsSuccess: boolean = false;
+    public alerts = new Array<Object>();
+
     constructor(private _myProfilesService: MyProfilesService,
         private _router: Router,
         private _masterService: MastersService) {
@@ -39,6 +43,10 @@ export class MyProfilesListComponent implements OnActivate {
     routerOnActivate() {
         this.getMyProfiles();
         this.getCandidateStatuses();
+    }
+
+public closeAlert(i: number): void {
+        this.alerts.splice(i, 1);
     }
 
     SaveCandidateID(id: number) {
@@ -68,8 +76,14 @@ export class MyProfilesListComponent implements OnActivate {
         this._myProfilesService.addCandidateProfile(this.profile)
             .subscribe(
             results => {
+                var result =  results as Response;
+                if(result.StatusCode === '1') {
+                    this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                    this.getMyProfiles();
+                }else {
+                    this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                }
                 this.profile = new MyProfilesInfo();
-                this.getMyProfiles();
             },
             error => this.errorMessage = <any>error);
     }
@@ -80,8 +94,10 @@ export class MyProfilesListComponent implements OnActivate {
         this.psdTemplates.length = 0;
         for (let i = 0, length = FileList.length; i < length; i++) {
             this.psdTemplates.push(FileList.item(i));
+            console.log(FileList.item(i));
         }
         console.log(this.psdTemplates);
+        console.log('Length : '+this.psdTemplates.length);
     }
 
     getCandidateStatuses() {
@@ -101,8 +117,14 @@ export class MyProfilesListComponent implements OnActivate {
         this._myProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
+                 var result =  results as Response;
+                if(result.StatusCode === '1') {
+                    this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                    this.getMyProfiles();
+                }else {
+                    this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                }
                 this.profile.Status = new Masters();
-                this.getMyProfiles();
             },
             error => this.errorMessage = <any>error);
         this.isCollapsed = false;

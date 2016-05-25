@@ -41,7 +41,9 @@ export class AllProfilesAddComponent implements OnActivate {
 
     IsHidden: boolean = true;
     IsSuccess: boolean = false;
-    public alerts: Array<Object>;
+    alerts: Array<Object>;
+    InfoAlerts: Array<Object>;
+    infoNotSavedAlert : boolean = false;
 
     public closeAlert(i: number): void {
         this.alerts.splice(i, 1);
@@ -53,8 +55,23 @@ export class AllProfilesAddComponent implements OnActivate {
         this.profile = new MyProfilesInfo();
         this.createQualification();
         this.alerts = new Array<Object>();
+         this.InfoAlerts = new Array<Object>();
     }
-
+    isDetailsSaved() {
+        if(this.infoNotSavedAlert) {
+          this.onSavePrimaryInfo();
+          this.onSaveCareerProfileDetails();
+          this.onSavePersonalDetails();
+          this.onSaveProfessionalDetails();
+          this.onSaveSalaryDetails();
+          this.onSaveSkillsDetails();
+          this.onSaveTeamManagementDetails();
+          this.infoNotSavedAlert = false;
+        }
+    }
+    onChangeInput() {
+       this.infoNotSavedAlert = true;
+    }
     routerOnActivate(segment: RouteSegment) {
         //get all master data and bind to dropdown
         this.getCountries();
@@ -288,6 +305,7 @@ export class AllProfilesAddComponent implements OnActivate {
                 results => {
                     this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
                     this.getCandidateProfileById(this.params);
+                    
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -314,7 +332,6 @@ export class AllProfilesAddComponent implements OnActivate {
     }
 
     onSaveProfessionalDetails(): void {
-        //   this.showMessage('Wait', true);
         this.convertCheckboxesValues();
         if (this.params) {
             this._allProfilesService.editCandidateProfessionalDetails(this.profile)
