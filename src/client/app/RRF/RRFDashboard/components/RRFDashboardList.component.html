@@ -19,8 +19,13 @@
                     <!--<div class="portlet light bordered">
                         <div id="chartdiv"></div>
                     </div>-->
-                    <!--<base-chart class="chart11" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)"
-                    (chartClick)="chartClicked($event)"></base-chart>-->
+                    <!--<base-chart class="chart" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" 
+                 ></base-chart>-->
+                 <!--<base-chart class="chart"
+           [data]="pieChartData"
+           [labels]="pieChartLabels"
+           [chartType]="pieChartType"
+           ></base-chart>-->
                 </div>
 
                 <div class="col-lg-12" *ngIf="isListVisible" id="divRRFList">
@@ -127,16 +132,16 @@
                                         </td>
                                         <td>
                                             <div align="left">
-                                                Practice :{{rrf.Practice }}
-                                                <br>Tech. : {{rrf.Technology }}
+                                                Practice :{{rrf.Practice.Value }}
+                                                <br>Tech. : {{rrf.Technology.Value }}
                                                 <br>Position : {{rrf.PositionTitle}}
-                                                <br>Designation :{{rrf.Designation }}
+                                                <br>Designation :{{rrf.Designation.Value }}
                                                 <br>Openings :{{rrf.NoOfOpenings}}
                                             </div>
                                         </td>
                                         <td>
                                             <div align="left">
-                                                Skills :{{rrf.SkillsRequired }}
+                                                Skills :{{rrf.SkillsRequired.Value }}
                                                 <br>Date of Joining : {{rrf.ExpDateOfJoining }}
                                                 <br>Min.EXP : {{rrf.MinExp }}
                                                 <!--<br>Man.EXP : {{rrf.maxExp }}-->
@@ -230,12 +235,12 @@
                                                 <div class="row">
                                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">Practice</div>
                                                     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="align:right">:</div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" id="lblPractice">{{selectedRRF.Practice}}</div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" id="lblPractice">{{selectedRRF.Practice.Value}}</div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-5">Technology</div>
                                                     <div class="col-md-1" style="align:right">:</div>
-                                                    <div class="col-md-6" id="lblTechnology">{{selectedRRF.Technology}}</div>
+                                                    <!--<div class="col-md-6" id="lblTechnology">{{selectedRRF.Technology.Value}}</div>-->
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-5">Position Title</div>
@@ -257,12 +262,12 @@
                                                 <div class="row">
                                                     <div class="col-md-5">Skills Required</div>
                                                     <div class="col-md-1" style="align:right">:</div>
-                                                    <div class="col-md-6" id="lblSkillsReq">{{selectedRRF.SkillsRequired}}</div>
+                                                    <!--<div class="col-md-6" id="lblSkillsReq">{{selectedRRF.SkillsRequired.Value}}</div>-->
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-5">Designation</div>
                                                     <div class="col-md-1" style="align:right">:</div>
-                                                    <div class="col-md-6" id="lblDesignation">{{selectedRRF.Designation}}</div>
+                                                    <!--<div class="col-md-6" id="lblDesignation">{{selectedRRF.Designation.VAlue}}</div>-->
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-5">Minimum Exp</div>
@@ -302,10 +307,10 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr class="odd gradeX" *ngFor='let panel of selectedRRF.Panel'>
-                                                                        <td> {{panel.RoundNumber }}</td>
+                                                                        <!--<td> {{panel.RoundNumber.Value }}</td>-->
                                                                         <td>
                                                                             <div *ngFor='let interviewer of panel.Interviewers'>
-                                                                                {{interviewer}}
+                                                                                <!--{{intervikewer.Value}}-->
                                                                             </div>
                                                                         </td>
                                                                         <td> {{panel.Comments}} </td>

@@ -1,34 +1,34 @@
 export class Panel {
-    public RoundNumber: MasterData;
+    public RoundNumber: MasterData= new MasterData();
     public Interviewers: MasterData[] = [];
     public Comments: string;
 }
 
 export class AssignmentDetails {
-    RRFID: number;
-    AssignedTo: MasterData ;
-    AssignedComments: string;
-    AssignedDate: Date;
-    UnassigningComment: string;
-    AssigneeLastDate: Date;
+    public RRFID: number;
+    public AssignedTo: MasterData= new MasterData();
+    public AssignedComments: string;
+    public AssignedDate: Date;
+    public UnassigningComment: string;
+    public AssigneeLastDate: Date;
 }
 
 export class RRFDetails {
     public RRFID: number;
-    public Practice: string;
-    public Technology: string;
+    public Practice: MasterData = new MasterData();
+    public Technology: MasterData = new MasterData();
     public PositionTitle: string;
     public Description: string;
     public NoOfOpenings: number;
-    public SkillsRequired: string;
-    public Designation: string;
+    public SkillsRequired: MasterData = new MasterData();
+    public Designation: MasterData = new MasterData();
     public MinExp: number;
     public MaxExp: number;
     public Priority: number;
     public ExpDateOfJoining: Date;
     public RaisedBy: string;
     public Status: string;
-    public Panel: Panel[] =[];
+    public Panel: Panel[] = [];
 
     public IsChecked: boolean;
     public Comment: string;
@@ -38,6 +38,8 @@ export class RRFDetails {
 export class MasterData {
     public Id: number;
     public Value: string;
+
+   
 }
 
 export class AllRRFStatusCount {

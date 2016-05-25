@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component } from '@angular/core';
 import { Router, OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
 import {RRFDetails, Panel, MasterData } from '../models/rrfDetails';
 import { MyRRFService } from '../services/myRRF.service';
@@ -22,9 +22,9 @@ export class MyRRFAddComponent implements OnActivate {
     skills: MasterData[];
     interviewRound: MasterData[];
     interviewers: MasterData[];
-
+    isNewRRF: boolean = true; //TODO
     comment: string;
-    IntwRound: number = 0;
+    IntwRound: number ;
 
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
@@ -50,10 +50,21 @@ export class MyRRFAddComponent implements OnActivate {
 
         //dropdown with multi selector and search
         $('#cmbInterviewer').select2();
-        this.newRRF.NoOfOpenings = 1;
-        this.newRRF.Priority = 1;
-        this.newRRF.MinExp = 0;
-        this.newRRF.MaxExp = 0;
+
+        if (this.isNewRRF) {
+            this.newRRF.NoOfOpenings = 1;
+            this.newRRF.Priority = 1;
+            this.newRRF.MinExp = 0;
+            this.newRRF.MaxExp = 0;
+
+            this.newRRF.Practice.Id = 0;
+            this.newRRF.Technology.Id = 0;
+            this.newRRF.SkillsRequired.Id = 0;
+            this.newRRF.Designation.Id = 0;
+            $('#cmbInterviewer').val = ['0'];
+            //this.newRRF.ExpDateOfJoining =new Date('2016-5-31'); //TODO
+        }
+
     }
 
     addPanel(): void {
@@ -62,14 +73,17 @@ export class MyRRFAddComponent implements OnActivate {
     }
 
     raiseRRF(): void {
+
         this._myRRFService.raiseRRF(this.newRRF)
             .subscribe(
             results => {
                 this._router.navigate(['/App/RRF/RRFDashboard/']);
             },
             error => this.errorMessage = <any>error);
+
     }
 
+    
     onCancelClick(): void {
         this._router.navigate(['/App/RRF/RRFDashboard/']);
     }
@@ -141,11 +155,16 @@ export class MyRRFAddComponent implements OnActivate {
             panel.Interviewers.push(this.getStringValue(selectedInterviewer[index], this.interviewers));
         }
         this.newRRF.Panel.push(panel);
+
+        this.IntwRound = 0;
+        this.comment = '';
+        $('#cmbInterviewer').select2('val', '');
+
     }
 
     getStringValue(roundID: number, list: MasterData[]): MasterData {
         for (var index = 0; index < list.length; index++) {
-            if (list[index].Id === roundID) {
+            if (+(list[index].Id) === +(roundID)) {
                 return list[index];
             }
         }
@@ -156,7 +175,7 @@ export class MyRRFAddComponent implements OnActivate {
         // (change)='onDropDownValueChanged($event.target.value , $event.target.id)'
         switch (Id) {
             case 'cmbIntwRound':
-               // this.IntwRound = Value;
+                // this.IntwRound = Value;
                 break;
             default:
             //alert("Wrong Grade........."); 

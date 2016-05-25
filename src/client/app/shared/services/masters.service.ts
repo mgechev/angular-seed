@@ -108,7 +108,7 @@ export class MastersService {
     }
 
     GetRecruiter() {
-        let url = Config.GetURL('/api/Masters/GetRecruiter');
+        let url = Config.GetURL('/api/Masters/GetRecruiters');
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);

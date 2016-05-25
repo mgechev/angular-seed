@@ -13,7 +13,8 @@
         <!-- END PAGE HEAD-->
         <div>
             <div class="portlet-body form portlet light bordered col-lg-12">
-                <form role="form">
+                <!--<form role="form">-->
+                    
                     <div class="form-body">
                         <div class="row">
                             <div class="form-group col-lg-4">
@@ -23,8 +24,9 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group ">
-                                            <select id="cmbPractice" class="form-control" [(ngModel)]='newRRF.Practice'>
-                                                <option *ngFor="let practice of practices" [value]="practice.id">{{practice.Practice}}</option>
+                                            <select id="cmbPractice" class="form-control" [(ngModel)]='newRRF.Practice.Id' required="">
+                                                <option value="0" disabled>Select Practice </option>
+                                                <option *ngFor="let practice of practices" [value]="practice.Id">{{practice.Value}}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -33,13 +35,14 @@
                             <div class="form-group col-lg-4">
                                 <label>Technology<span> * </span></label>
                                 <!--<input type="text" [(ngModel)]='newRRF.Technology' id="txtTechnology" class="form-control" placeholder="Technology" />-->
-                                <select id="cmbTechnology" class="form-control" [(ngModel)]='newRRF.Technology'>
-                                    <option *ngFor="let technologie of technologies" [value]="technologie.Id">{{technologie.Technology}}</option>
+                                <select id="cmbTechnology" class="form-control" [(ngModel)]='newRRF.Technology.Id'>
+                                    <option value="0" disabled>Select Technology </option>
+                                    <option *ngFor="let technologie of technologies" [value]="technologie.Id">{{technologie.Value}}</option>
                                 </select>
                             </div>
                             <div class="form-group col-lg-4">
                                 <label>Position Title<span> * </span></label>
-                                <input type="text" [(ngModel)]='newRRF.PositionTitle' id="txtPositionTitle" class="form-control" placeholder="Position Title"
+                                <input type="text" [(ngModel)]='newRRF.PositionTitle' id="txtPositionTitle" class="form-control" placeholder="Position Title" autocomplete="off"
                                 />
                             </div>
                         </div>
@@ -47,8 +50,9 @@
 
                             <div class="form-group col-lg-4">
                                 <label>Description<span> * </span></label>
-                                <textarea class="form-control" [(ngModel)]='newRRF.Description' id="txtDescription" rows="1" placeholder="Description" style="resize:vertical"
-                                required=""></textarea>
+                                <textarea class="form-control" [(ngModel)]='newRRF.Description' id="txtDescription" rows="1" placeholder="Description" style="resize:vertical"></textarea>
+                                <!--<input type="text" [(ngModel)]='newRRF.Description' id="txtDescription" class="form-control" placeholder="Description"
+                                />-->
                             </div>
                             <div class="form-group col-lg-4">
                                 <div class="row">
@@ -66,7 +70,8 @@
                                 <!--<textarea class="form-control" [(ngModel)]='newRRF.SkillsRequired' id="txtSkillsReq" rows="1" placeholder="Skills Required"
                                 style="resize:vertical" required=""></textarea>-->
                                 <select id="cmbSkillsReq" class="form-control" [(ngModel)]='newRRF.SkillsRequired'>
-                                    <option *ngFor="let skill of skills" [value]="skill.Id">{{skill.Skill}}</option>
+                                    <option value="0" disabled>Select Skills </option>
+                                    <option *ngFor="let skill of skills" [value]="skill.Id">{{skill.Value}}</option>
                                 </select>
                             </div>
                         </div>
@@ -75,8 +80,9 @@
                             <div class="form-group col-lg-4">
                                 <label>Designation<span> * </span></label>
                                 <!--<input type="text" [(ngModel)]='newRRF.Designation' id="txtDesignation" class="form-control" placeholder="Designation"/>-->
-                                <select id="cmbDesignation" class="form-control" [(ngModel)]='newRRF.Designation'>
-                                    <option *ngFor="let designation of designations" [value]="designation.id">{{designation.Designation}}</option>
+                                <select id="cmbDesignation" class="form-control" [(ngModel)]='newRRF.Designation.Id'>
+                                    <option value="0" disabled>Select Designation </option>
+                                    <option *ngFor="let designation of designations" [value]="designation.Id">{{designation.Value}}</option>
                                 </select>
                             </div>
                             <div class="form-group col-lg-4">
@@ -119,8 +125,8 @@
                                              </button>
                                         </span>
                                 </div>-->
-                                <div class="input-group input-medium date date-picker">
-                                    <input type="date" name="bday" id="expectedDateOfJoining" [(ngModel)]='newRRF.ExpDateOfJoining'>
+                                <div >
+                                    <input type="date" name="bday" id="expectedDateOfJoining" [(ngModel)]='newRRF.ExpDateOfJoining'/>
                                 </div>
                                 <!--</div>-->
                             </div>
@@ -133,9 +139,10 @@
                                 <label>Interviewers Panel :<span> * </span></label>
                             </div>
                             <div>
-                                <div class="form-group col-lg-2">
+                                <div class="form-group col-lg-3">
 
-                                    <select id="cmbIntwRound" placeholder="Select Interview Round"   [(ngModel)]='IntwRound'>
+                                    <select id="cmbIntwRound" placeholder="Select Interview Round" [(ngModel)]='IntwRound'>
+                                        <option value="0" disabled>Select Interview Round </option>
                                         <option *ngFor="let Round of interviewRound" [value]="Round.Id">{{Round.Value}}</option>
                                     </select>
 
@@ -143,6 +150,7 @@
                                 <div class="form-group col-lg-4">
                                     <div class="input-group select2-bootstrap-append">
                                         <select id="cmbInterviewer" class="form-control" multiple>
+                                            <option value="0" disabled>Select Interviewers </option>
                                             <option *ngFor="let interviewer of interviewers" [value]="interviewer.Id">{{interviewer.Value}}</option>
                                         </select>
                                         <span class="input-group-btn">
@@ -154,7 +162,7 @@
                                     <!--<ng-select [data]="value" [multiple]="true" [items]="items" placeholder="Select Interviewer" (data)="refreshValue($event)"
                                     (selected)="selected($event)" (removed)="removed($event)"></ng-select>-->
                                 </div>
-                                <div class="form-group col-lg-4">
+                                <div class="form-group col-lg-3">
                                     <textarea class="form-control" id="txtComment" rows="1" placeholder="Comment" style="resize:vertical" [(ngModel)]='comment'></textarea>
                                 </div>
                                 <div class="col-lg-2">
@@ -191,6 +199,7 @@
                             </div>
                         </div>
                         <div>
+                            <!--<button type="submit " (click)='raiseRRF()' id="btnSubmit " class="btn blue ">Submit</button>-->
                             <button type="submit " (click)='raiseRRF()' id="btnSubmit " class="btn blue ">Submit</button>
                             <button type="button " (click)='onCancelClick()' id="btnCancel " class="btn default ">Cancel</button>
                             <br>
@@ -198,7 +207,8 @@
                                 "  [placeholder]=" 'No city selected' "></ng2-select>-->
                         </div>
                     </div>
-                </form>
+                <!--</form>-->
+                
             </div>
         </div>
         <!-- END PAGE BASE CONTENT -->

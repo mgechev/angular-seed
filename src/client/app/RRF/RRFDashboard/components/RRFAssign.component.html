@@ -43,16 +43,16 @@
                                         </td>
                                         <td>
                                             <div align="left">
-                                                Practice :{{selectedRRF.Practice }}
-                                                <br>Tech. : {{selectedRRF.Technology }}
+                                                Practice :{{selectedRRF.Practice.Value }}
+                                                <br>Tech. : {{selectedRRF.Technology.Value }}
                                                 <br>Position : {{selectedRRF.PositionTitle}}
-                                                <br>Designation :{{selectedRRF.Designation }}
+                                                <br>Designation :{{selectedRRF.Designation.Value }}
                                                 <br>Openings :{{selectedRRF.NoOfOpenings}}
                                             </div>
                                         </td>
                                         <td>
                                             <div align="left">
-                                                Skills :{{selectedRRF.SkillsRequired }}
+                                                Skills :{{selectedRRF.SkillsRequired.Value }}
                                                 <br>Date of Joining : {{selectedRRF.ExpDateOfJoining }}
                                                 <br>Min.EXP : {{selectedRRF.MinExp }}
                                                 <!--<br>Man.EXP : {{rrf.MaxExp }}-->
@@ -96,7 +96,7 @@
                                 <label>Assign To<span> * </span></label>
                                 <div class="input-group select2-bootstrap-append">
                                     <select id="cmbAssignTo" class="form-control" multiple>
-                                        <option *ngFor="let recruiter of recruiterDtls" [value]="recruiter.Id">{{recruiter.Recruiter}}</option>
+                                        <option *ngFor="let recruiter of recruiterDtls" [value]="recruiter.Id">{{recruiter.Value}}</option>
                                     </select>
                                     <span class="input-group-btn">
                                                          <button class="btn btn-default" type="button" data-select2-open="multi-append">

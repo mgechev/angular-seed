@@ -24,6 +24,10 @@ export class RRFDashboardListComponent implements OnActivate {
     doughnutChartData: number[] = [350, 450, 100];
     doughnutChartType: string = 'doughnut';
 
+    public pieChartLabels: string[] = ['Download Sales', 'In-Store Sales', 'Mail Sales'];
+    public pieChartData: number[] = [300, 500, 100];
+    public pieChartType: string = 'pie';
+    
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService) {
     }
@@ -31,6 +35,7 @@ export class RRFDashboardListComponent implements OnActivate {
     routerOnActivate() {
         this.getAllRRF();
         this.getStatuswiseRRFCount();
+
     }
 
     chartClicked(e: any): void {
@@ -44,7 +49,7 @@ export class RRFDashboardListComponent implements OnActivate {
         this._rrfDashboardService.getAllRRF()
             .subscribe(
             results => {
-                this.rrfList = results;
+                this.rrfList = <any>results;
             },
             error => this.errorMessage = <any>error);
     }
@@ -53,7 +58,7 @@ export class RRFDashboardListComponent implements OnActivate {
         this._rrfDashboardService.getStatuswiseRRFCount()
             .subscribe(
             results => {
-                this.rrfStatusCount = results;
+                this.rrfStatusCount = <any>results;
             },
             error => this.errorMessage = <any>error);
     }
@@ -63,7 +68,7 @@ export class RRFDashboardListComponent implements OnActivate {
         this._myRRFService.getRRFDetails(rrfID)
             .subscribe(
             results => {
-                this.selectedRRF = results;
+                this.selectedRRF = <any>results;
             },
             error => this.errorMessage = <any>error);
     }

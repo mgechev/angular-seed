@@ -29,7 +29,7 @@ export class RRFApprovalListComponent implements OnActivate {
         this._rrfApprovalService.getRRFApprovalList(userName, roleID)
             .subscribe(
             results => {
-                this.rrfApprovalList = results;
+                this.rrfApprovalList = <any>results;
 
                 for (var index = 0; index < this.rrfApprovalList.length; index++) {
                     this.rrfApprovalList[index].Status = 'Approval Pending';
