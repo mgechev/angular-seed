@@ -293,7 +293,7 @@ export class SeedConfig {
     ],
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
-      'rxjs/*': `${this.APP_BASE}rxjs/*`,
+      'rxjs/*': `${this.APP_BASE}node_modules/rxjs/*`,
       'app/*': `/app/*`,
       '*': `${this.APP_BASE}node_modules/*`
     },
