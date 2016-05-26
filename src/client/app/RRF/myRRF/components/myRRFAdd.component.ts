@@ -1,5 +1,5 @@
 import {Component } from '@angular/core';
-import { Router, OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
+import { Router, OnActivate, ROUTER_DIRECTIVES, RouteSegment } from '@angular/router';
 import {RRFDetails, Panel, MasterData } from '../models/rrfDetails';
 import { MyRRFService } from '../services/myRRF.service';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -24,7 +24,11 @@ export class MyRRFAddComponent implements OnActivate {
     interviewers: MasterData[];
     isNewRRF: boolean = true; //TODO
     comment: string;
-    IntwRound: number ;
+    IntwRound: number = 0;
+
+    updatePanel: boolean = false;
+    editPanelData: Panel = new Panel();
+    Id: number;
 
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
@@ -38,7 +42,7 @@ export class MyRRFAddComponent implements OnActivate {
         this.getInterviewers();
     }
 
-    routerOnActivate(): void {
+    routerOnActivate(segment: RouteSegment): void {
         //TO display Date picker
         // $('#expectedDateOfJoining').datepicker();
 
@@ -51,6 +55,12 @@ export class MyRRFAddComponent implements OnActivate {
         //dropdown with multi selector and search
         $('#cmbInterviewer').select2();
 
+        if (segment.getParam('id') !== undefined) {
+            this.Id = +segment.getParam('id');
+            this.isNewRRF = false;
+            this.getRRFByID(this.Id);
+        }
+
         if (this.isNewRRF) {
             this.newRRF.NoOfOpenings = 1;
             this.newRRF.Priority = 1;
@@ -62,9 +72,7 @@ export class MyRRFAddComponent implements OnActivate {
             this.newRRF.SkillsRequired.Id = 0;
             this.newRRF.Designation.Id = 0;
             $('#cmbInterviewer').val = ['0'];
-            //this.newRRF.ExpDateOfJoining =new Date('2016-5-31'); //TODO
         }
-
     }
 
     addPanel(): void {
@@ -73,17 +81,15 @@ export class MyRRFAddComponent implements OnActivate {
     }
 
     raiseRRF(): void {
-
         this._myRRFService.raiseRRF(this.newRRF)
             .subscribe(
             results => {
                 this._router.navigate(['/App/RRF/RRFDashboard/']);
             },
             error => this.errorMessage = <any>error);
-
     }
 
-    
+
     onCancelClick(): void {
         this._router.navigate(['/App/RRF/RRFDashboard/']);
     }
@@ -120,7 +126,6 @@ export class MyRRFAddComponent implements OnActivate {
             .subscribe(
             results => {
                 this.skills = results;
-
             },
             error => this.errorMessage = <any>error);
     }
@@ -144,6 +149,13 @@ export class MyRRFAddComponent implements OnActivate {
     }
 
     onAddPanel(): void {
+        for (var i = 0; i < this.newRRF.Panel.length; i++) {
+            if (+this.newRRF.Panel[0].RoundNumber.Id === +this.IntwRound) {
+                alert('This interview round is all ready exist.');
+                return;
+            }
+        }
+
         var panel: Panel = new Panel();
         panel.Comments = this.comment;
         panel.RoundNumber = this.getStringValue(this.IntwRound, this.interviewRound);
@@ -155,13 +167,13 @@ export class MyRRFAddComponent implements OnActivate {
             panel.Interviewers.push(this.getStringValue(selectedInterviewer[index], this.interviewers));
         }
         this.newRRF.Panel.push(panel);
-
-        this.IntwRound = 0;
-        this.comment = '';
-        $('#cmbInterviewer').select2('val', '');
-
+        this.clearIntwPanel();
     }
 
+    clearIntwPanel() {
+        this.IntwRound = 0;
+        $('#cmbInterviewer').select2('val', '');
+    }
     getStringValue(roundID: number, list: MasterData[]): MasterData {
         for (var index = 0; index < list.length; index++) {
             if (+(list[index].Id) === +(roundID)) {
@@ -172,14 +184,63 @@ export class MyRRFAddComponent implements OnActivate {
     }
 
     onDropDownValueChanged(Value: number, Id: string) {
-        // (change)='onDropDownValueChanged($event.target.value , $event.target.id)'
         switch (Id) {
             case 'cmbIntwRound':
-                // this.IntwRound = Value;
                 break;
             default:
-            //alert("Wrong Grade........."); 
         }
+    }
+
+    onPanelEdit(panelData: Panel) {
+        this.IntwRound = panelData.RoundNumber.Id;
+        var panelId: string[] = new Array();
+        for (var index = 0; index < panelData.Interviewers.length; index++) {
+            panelId.push((panelData.Interviewers[index].Id).toString());
+        }
+        $('#cmbInterviewer').select2('val', panelId);
+
+        this.IntwRound = panelData.RoundNumber.Id;
+        this.updatePanel = true;
+        this.editPanelData = panelData;
+    }
+
+    onPanelCancel() {
+        this.updatePanel = false;
+        this.clearIntwPanel();
+    }
+
+    onUpdatePanelClick() {
+        this.editPanelData.RoundNumber = this.getStringValue(this.IntwRound, this.interviewRound);
+        if ($('#cmbInterviewer').val() !== null) {
+            var selectedInterviewer: number[] = $('#cmbInterviewer').val();
+        }
+        this.editPanelData.Interviewers = new Array();
+        for (var index = 0; index < selectedInterviewer.length; index++) {
+            this.editPanelData.Interviewers.push(this.getStringValue(selectedInterviewer[index], this.interviewers));
+        }
+
+        this.updatePanel = false;
+        this.clearIntwPanel();
+    }
+
+    onPanelDelete(panelData: Panel) {
+        for (var i = 0; i < this.newRRF.Panel.length; i++) {
+            if (+this.newRRF.Panel[i].RoundNumber.Id === +panelData.RoundNumber.Id) {
+                this.newRRF.Panel.splice(i, 1);
+            }
+        }
+        this.updatePanel = false;
+        this.clearIntwPanel();
+
+    }
+
+    getRRFByID(rrfId: number) {
+        this._myRRFService.getRRFByID(rrfId)
+            .subscribe(
+            results => {
+                this.newRRF = <any>results;
+            },
+            error => this.errorMessage = <any>error);
     }
 
 }

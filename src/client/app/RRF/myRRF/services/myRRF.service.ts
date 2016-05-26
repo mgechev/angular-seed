@@ -43,6 +43,15 @@ export class MyRRFService {
             .finally(() => this._spinnerService.hide());
     }
 
+    getRRFByID(rrfId: number) {
+        let url = Config.GetURL('/api/RRF/GetRRFByID');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { RRFID: rrfId })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);

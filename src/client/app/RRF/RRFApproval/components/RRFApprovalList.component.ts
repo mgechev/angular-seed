@@ -32,7 +32,7 @@ export class RRFApprovalListComponent implements OnActivate {
                 this.rrfApprovalList = <any>results;
 
                 for (var index = 0; index < this.rrfApprovalList.length; index++) {
-                    this.rrfApprovalList[index].Status = 'Approval Pending';
+                    this.rrfApprovalList[index].Status = 'Approval Pending'; //TODO : get it from API
                     this.rrfApprovalList[index].IsChecked = false;
                 }
             },
@@ -42,13 +42,12 @@ export class RRFApprovalListComponent implements OnActivate {
     onStateChange(e: any): void {
         if (e.target.checked) {
             this.selectedRowCount++;
-        }else {
+        } else {
             this.selectedRowCount--;
         }
-
         if (this.selectedRowCount === this.rrfApprovalList.length) {
             this.allChecked = true;
-        }else {
+        } else {
             this.allChecked = false;
         }
     }
@@ -58,11 +57,10 @@ export class RRFApprovalListComponent implements OnActivate {
         if (e.target.checked) {
             state = true;
             this.selectedRowCount = this.rrfApprovalList.length;
-        }else {
+        } else {
             state = false;
             this.selectedRowCount = 0;
         }
-
         for (var index = 0; index < this.rrfApprovalList.length; index++) {
             this.rrfApprovalList[index].IsChecked = state;
         }
@@ -91,7 +89,6 @@ export class RRFApprovalListComponent implements OnActivate {
                 //TODO : status value
                 this.ActionOnRaisedRRF(this.rrfApprovalList[index].RRFID, 1, this.comment);
             }
-
             this.comment = '';
             this.selectedRowCount = 0;
         }

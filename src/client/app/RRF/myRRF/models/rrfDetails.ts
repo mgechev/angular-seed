@@ -1,12 +1,12 @@
 export class Panel {
-    public RoundNumber: MasterData= new MasterData();
-    public Interviewers: MasterData[] = [];
+    public RoundNumber: MasterData = new MasterData(); //TODO : check on server side name
+    public Interviewers: MasterData[] = new Array();
     public Comments: string;
 }
 
 export class AssignmentDetails {
     public RRFID: number;
-    public AssignedTo: MasterData= new MasterData();
+    public AssignedTo: MasterData = new MasterData();
     public AssignedComments: string;
     public AssignedDate: Date;
     public UnassigningComment: string;
@@ -28,7 +28,7 @@ export class RRFDetails {
     public ExpDateOfJoining: Date;
     public RaisedBy: string;
     public Status: string;
-    public Panel: Panel[] = [];
+    public Panel: Panel[] = new Array();
 
     public IsChecked: boolean;
     public Comment: string;
@@ -38,8 +38,6 @@ export class RRFDetails {
 export class MasterData {
     public Id: number;
     public Value: string;
-
-   
 }
 
 export class AllRRFStatusCount {

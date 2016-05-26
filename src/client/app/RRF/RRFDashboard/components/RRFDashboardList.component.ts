@@ -9,7 +9,8 @@ import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
     moduleId: module.id,
     selector: 'rrf-dashboard-list',
     templateUrl: 'RRFDashboardList.component.html',
-    directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES],
+    styleUrls: ['../../RRFApproval/components/RRFApproval.component.css']
 })
 
 export class RRFDashboardListComponent implements OnActivate {
@@ -19,6 +20,7 @@ export class RRFDashboardListComponent implements OnActivate {
     selectedRRF: RRFDetails = new RRFDetails();
     isListVisible: boolean = true;
     rrfStatusCount: AllRRFStatusCount = new AllRRFStatusCount();
+    currentView: string = 'myRRF';
 
     doughnutChartLabels: string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
     doughnutChartData: number[] = [350, 450, 100];
@@ -27,15 +29,23 @@ export class RRFDashboardListComponent implements OnActivate {
     public pieChartLabels: string[] = ['Download Sales', 'In-Store Sales', 'Mail Sales'];
     public pieChartData: number[] = [300, 500, 100];
     public pieChartType: string = 'pie';
-    
+
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService) {
     }
 
     routerOnActivate() {
+        this.getMyRRFData();
+    }
+
+    getMyRRFData() {
+        this.getMyRRF();
+        this.getStatuswiseMyRRFCount();
+    }
+
+    getAllRRFData() {
         this.getAllRRF();
         this.getStatuswiseRRFCount();
-
     }
 
     chartClicked(e: any): void {
@@ -54,6 +64,15 @@ export class RRFDashboardListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
+    getMyRRF() {
+        this._rrfDashboardService.getMyRRF()
+            .subscribe(
+            results => {
+                this.rrfList = <any>results;
+            },
+            error => this.errorMessage = <any>error);
+    }
+
     getStatuswiseRRFCount() {
         this._rrfDashboardService.getStatuswiseRRFCount()
             .subscribe(
@@ -63,6 +82,14 @@ export class RRFDashboardListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
+    getStatuswiseMyRRFCount() {
+        this._rrfDashboardService.getStatuswiseMyRRFCount()
+            .subscribe(
+            results => {
+                this.rrfStatusCount = <any>results;
+            },
+            error => this.errorMessage = <any>error);
+    }
 
     getRRFDetails(rrfID: number) {
         this._myRRFService.getRRFDetails(rrfID)
@@ -83,9 +110,18 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     onViewChanged(viewMode: string) {
-        //console.log(viewMode);
-        this.getAllRRF();
+        if (viewMode === 'AllRRF') {
+            this.currentView = 'allRRF';
+            this.getAllRRFData();
+        } else {
+            this.currentView = 'myRRF';
+            this.getMyRRFData();
+        }
     }
 
+    onEditRRF(rrfID: number) {
+        console.log(rrfID);
+    }
 
 }
+

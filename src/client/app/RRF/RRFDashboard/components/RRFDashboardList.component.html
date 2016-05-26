@@ -21,7 +21,7 @@
                     </div>-->
                     <!--<base-chart class="chart" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" 
                  ></base-chart>-->
-                 <!--<base-chart class="chart"
+                    <!--<base-chart class="chart"
            [data]="pieChartData"
            [labels]="pieChartLabels"
            [chartType]="pieChartType"
@@ -168,6 +168,11 @@
                                                     <i class="fa fa-angle-down"></i>
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu">
+                                                    <li>
+                                                        <a [routerLink]="['/App/RRF/MyRRF/Edit/'+rrf.RRFID]">
+                                                            <i class="fa fa-edit"></i> Edit RRF </a>
+                                                    </li>
+                                                    <li class="divider"> </li>
                                                     <li (click)='showRRFDetails(rrf.RRFID)'>
                                                         <a>
                                                             <i class="icon-flag"></i> View RRF </a>
@@ -240,7 +245,7 @@
                                                 <div class="row">
                                                     <div class="col-md-5">Technology</div>
                                                     <div class="col-md-1" style="align:right">:</div>
-                                                    <!--<div class="col-md-6" id="lblTechnology">{{selectedRRF.Technology.Value}}</div>-->
+                                                    <div class="col-md-6" id="lblTechnology">{{selectedRRF.Technology.Value}}</div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-5">Position Title</div>
@@ -262,12 +267,12 @@
                                                 <div class="row">
                                                     <div class="col-md-5">Skills Required</div>
                                                     <div class="col-md-1" style="align:right">:</div>
-                                                    <!--<div class="col-md-6" id="lblSkillsReq">{{selectedRRF.SkillsRequired.Value}}</div>-->
+                                                    <div class="col-md-6" id="lblSkillsReq">{{selectedRRF.SkillsRequired.Value}}</div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-5">Designation</div>
                                                     <div class="col-md-1" style="align:right">:</div>
-                                                    <!--<div class="col-md-6" id="lblDesignation">{{selectedRRF.Designation.VAlue}}</div>-->
+                                                    <div class="col-md-6" id="lblDesignation">{{selectedRRF.Designation.VAlue}}</div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-5">Minimum Exp</div>
@@ -301,20 +306,20 @@
                                                                     <tr>
                                                                         <td>Round </td>
                                                                         <td>Interviewer</td>
-                                                                        <td>Comments </td>
-                                                                        <td>Status </td>
+
+
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr class="odd gradeX" *ngFor='let panel of selectedRRF.Panel'>
-                                                                        <!--<td> {{panel.RoundNumber.Value }}</td>-->
+                                                                        <td> {{panel.RoundNumber.Value}}</td>
                                                                         <td>
                                                                             <div *ngFor='let interviewer of panel.Interviewers'>
-                                                                                <!--{{intervikewer.Value}}-->
+                                                                                {{interviewer.Value}}
                                                                             </div>
                                                                         </td>
-                                                                        <td> {{panel.Comments}} </td>
-                                                                        <td> {{panel.Status}} </td>
+
+
                                                                     </tr>
                                                                 </tbody>
                                                             </table>

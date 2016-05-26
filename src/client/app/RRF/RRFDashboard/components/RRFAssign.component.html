@@ -175,26 +175,15 @@
                                             <td>
                                                 {{assignee.AssignedDate}}
                                             </td>
-                                            <td>{{assignee.AssigneeLastDate== "" ? "Assign" : "Un-Assign"}}</td>
+                                            <!--<td>{{assignee.AssigneeLastDate== "" ? "Assign" : "Un-Assign"}}</td>-->
+                                            <td>{{assignee.Status.Value}}</td>
                                             <td>{{assignee.AssigneeLastDate }}</td>
                                             <td>
-                                                <div class="btn-group" *ngIf='assignee.AssigneeLastDate== ""'>
+                                                <div class="btn-group" *ngIf='assignee.Status.Id == 1'>
                                                     <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false" (click)='onUnassign(assignee)'>
                                                         Un-Assign
-                                                        <!--<i class="fa fa-angle-down"></i>-->
                                                     </button>
-                                                    <!--<ul class="dropdown-menu" role="menu">
-                                                        <li>
-                                                            <a>
-                                                                <i class="icon-user"></i> View RRF </a>
-                                                        </li>
-                                                        <li class="divider"> </li>
-                                                        <li>
-                                                            <a>
-                                                                <i class="icon-flag"></i> Assign
-                                                            </a>
-                                                        </li>
-                                                    </ul>-->
+
                                                 </div>
                                             </td>
 

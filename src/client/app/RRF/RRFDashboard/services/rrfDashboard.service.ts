@@ -56,6 +56,24 @@ export class RRFDashboardService {
             .finally(() => this._spinnerService.hide());
     }
 
+    getMyRRF() {
+        let url = Config.GetURL('/api/RRF/GetMyRRF');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
+    getStatuswiseMyRRFCount() {
+        let url = Config.GetURL('/api/RRF/GetStatuswiseMyRRFCount');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);
@@ -69,3 +87,4 @@ export class RRFDashboardService {
         return Observable.throw(error.json().error || 'Server error');
     }
 }
+
