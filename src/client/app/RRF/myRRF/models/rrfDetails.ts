@@ -20,7 +20,7 @@ export class RRFDetails {
     public PositionTitle: string;
     public Description: string;
     public NoOfOpenings: number;
-    public SkillsRequired: MasterData = new MasterData();
+    public SkillsRequired: MasterData[] = new Array();
     public Designation: MasterData = new MasterData();
     public MinExp: number;
     public MaxExp: number;
