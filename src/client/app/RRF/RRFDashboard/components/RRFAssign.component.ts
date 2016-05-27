@@ -84,6 +84,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
                 //     assignmentDetails.AssignedTo.Id = selectedRec[index];
                 //     assignmentDetails.AssignedComments =this.AssignedComments;
                 //     assignmentDetails.AssignedDate = new Date();
+                // status ="Assigned";
                 //     this.selectedRRF.AssignedData.push(assignmentDetails);
                 //     }
                 // }

@@ -123,5 +123,9 @@ export class RRFDashboardListComponent implements OnActivate {
         console.log(rrfID);
     }
 
+    onCloseRRFClick(rrfID: number){
+        console.log(rrfID);
+    }
+
 }
 

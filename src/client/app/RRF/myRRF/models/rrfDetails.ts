@@ -10,6 +10,7 @@ export class AssignmentDetails {
     public AssignedComments: string;
     public AssignedDate: Date;
     public UnassigningComment: string;
+    public Status : string;
     public AssigneeLastDate: Date;
 }
 
