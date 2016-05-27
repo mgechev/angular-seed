@@ -34,7 +34,7 @@ export class MyRRFListComponent implements OnActivate {
         this._myRRFService.getRaisedRRF(userName, roleID)
             .subscribe(
             results => {
-                this.raisedRRFList = results;
+                this.raisedRRFList = <any>results;
             },
             error => this.errorMessage = <any>error);
     }
@@ -43,7 +43,7 @@ export class MyRRFListComponent implements OnActivate {
         this._myRRFService.getRRFDetails(rrfID)
             .subscribe(
             results => {
-                this.selectedRRF = results;
+                this.selectedRRF = <any>results;
             },
             error => this.errorMessage = <any>error);
     }
