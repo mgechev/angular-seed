@@ -1,0 +1,10 @@
+import { Pipe, PipeTransform } from '@angular/core';
+import { RRFDetails} from '../../myRRF/models/rrfDetails';
+
+@Pipe({name: 'RRFIDPipe'})
+export class RRFIDPipe implements PipeTransform {
+  transform(value: RRFDetails[], rrfID: number): RRFDetails[] {
+ return rrfID ? value.filter(rrfData=> rrfData.RRFID === rrfID ) : value;
+  //return rrfID ? value.filter(rrfData=> rrfData.RRFID.toLocaleLowerCase().indexOf(rrfID) != -1) : value;
+  }
+}

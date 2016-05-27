@@ -4,13 +4,15 @@ import { RRFDashboardService } from '../services/rrfDashboard.service';
 import { RRFDetails, AllRRFStatusCount } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
+import {RRFIDPipe } from './RRFIdFilter.component';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-dashboard-list',
     templateUrl: 'RRFDashboardList.component.html',
     directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES],
-    styleUrls: ['../../RRFApproval/components/RRFApproval.component.css']
+    styleUrls: ['../../RRFApproval/components/RRFApproval.component.css'],
+    pipes: [RRFIDPipe]
 })
 
 export class RRFDashboardListComponent implements OnActivate {
@@ -148,6 +150,11 @@ export class RRFDashboardListComponent implements OnActivate {
         } else {
             this.getMyRRFData();
         }
+    }
+
+    onCancelCloseRRF() {
+        this.closeRRFID = 0;
+        this.closeComment = '';
     }
 
 }

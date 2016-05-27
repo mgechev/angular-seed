@@ -134,7 +134,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="odd gradeX" *ngFor="let rrf of rrfList">
+                                    <tr class="odd gradeX" *ngFor="let rrf of rrfList | RRFIDPipe : closeRRFID">
                                         <!--remove hard code data-->
                                         <td>
                                             <div align="left">
