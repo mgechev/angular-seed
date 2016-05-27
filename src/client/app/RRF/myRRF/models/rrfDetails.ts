@@ -19,12 +19,12 @@ export class RRFDetails {
     public Technology: MasterData = new MasterData();
     public PositionTitle: string;
     public Description: string;
-    public NoOfOpenings: number;
+    public NoOfOpenings: number = 1;
     public SkillsRequired: MasterData[] = new Array();
     public Designation: MasterData = new MasterData();
-    public MinExp: number;
-    public MaxExp: number;
-    public Priority: number;
+    public MinExp: number = 0;
+    public MaxExp: number = 0;
+    public Priority: number = 1;
     public ExpDateOfJoining: Date;
     public RaisedBy: string;
     public Status: string;

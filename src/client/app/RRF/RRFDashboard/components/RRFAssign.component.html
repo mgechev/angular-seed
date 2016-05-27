@@ -52,7 +52,9 @@
                                         </td>
                                         <td>
                                             <div align="left">
-                                                Skills :{{selectedRRF.SkillsRequired.Value }}
+                                                Skills :
+                                                <label *ngFor="let skill of selectedRRF.SkillsRequired">{{skill.Value}} &#44;&nbsp;</label>
+                                                <!--{{selectedRRF.SkillsRequired.Value }}-->
                                                 <br>Date of Joining : {{selectedRRF.ExpDateOfJoining }}
                                                 <br>Min.EXP : {{selectedRRF.MinExp }}
                                                 <!--<br>Man.EXP : {{rrf.MaxExp }}-->

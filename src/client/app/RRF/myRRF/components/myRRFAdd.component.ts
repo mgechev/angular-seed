@@ -54,6 +54,8 @@ export class MyRRFAddComponent implements OnActivate {
 
         //dropdown with multi selector and search
         $('#cmbInterviewer').select2();
+        $('#cmbSkillsReq').select2();
+
 
         if (segment.getParam('id') !== undefined) {
             this.Id = +segment.getParam('id');
@@ -81,6 +83,7 @@ export class MyRRFAddComponent implements OnActivate {
     }
 
     raiseRRF(): void {
+        this.setSkillToObject();
         this._myRRFService.raiseRRF(this.newRRF)
             .subscribe(
             results => {
@@ -88,6 +91,7 @@ export class MyRRFAddComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
+
 
 
     onCancelClick(): void {
@@ -239,6 +243,36 @@ export class MyRRFAddComponent implements OnActivate {
             .subscribe(
             results => {
                 this.newRRF = <any>results;
+                this.setSkillDropdown();
+            },
+            error => this.errorMessage = <any>error);
+    }
+
+    setSkillDropdown() {
+        var panelId: string[] = new Array();
+        for (var index = 0; index < this.newRRF.SkillsRequired.length; index++) {
+            panelId.push((this.newRRF.SkillsRequired[index].Id).toString());
+        }
+        $('#cmbSkillsReq').select2('val', panelId);
+    }
+
+    setSkillToObject() {
+
+        if ($('#cmbSkillsReq').val() !== null) {
+            var selectedSkill: number[] = $('#cmbSkillsReq').val();
+        }
+        this.newRRF.SkillsRequired = new Array();
+        for (var j = 0; j < selectedSkill.length; j++) {
+            this.newRRF.SkillsRequired.push(this.getStringValue(selectedSkill[j], this.skills));
+        }
+    }
+
+    onUpdateClick() {
+        this.setSkillToObject();
+        this._myRRFService.UpdateRRF(this.newRRF)
+            .subscribe(
+            results => {
+                this._router.navigate(['/App/RRF/RRFDashboard/']);
             },
             error => this.errorMessage = <any>error);
     }

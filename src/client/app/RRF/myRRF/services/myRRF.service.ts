@@ -52,6 +52,17 @@ export class MyRRFService {
             .finally(() => this._spinnerService.hide());
     }
 
+    //Save new RRF
+    UpdateRRF(rrfDetails: RRFDetails) {
+        let url = Config.GetURL('/api/RRF/UpdateRRF');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { rrfDetails })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
+
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);
@@ -59,6 +70,8 @@ export class MyRRFService {
         let body = res.json();
         return body || {};
     }
+
+
 
     private handleError(error: Response) {
         console.log(error);
