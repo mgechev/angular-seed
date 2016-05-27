@@ -21,7 +21,7 @@ export class RRFDashboardService {
     }
 
     getStatuswiseRRFCount() {
-        let url = Config.GetURL('/api/RRF/GetStatuswiseRRFCount');
+        let url = Config.GetURL('/api/RRF/GetStatuswiseAllRRFCount');
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
@@ -69,6 +69,15 @@ export class RRFDashboardService {
         let url = Config.GetURL('/api/RRF/GetStatuswiseMyRRFCount');
         this._spinnerService.show();
         return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
+    closeRRF(rrfId: number, closeComment: string) {
+        let url = Config.GetURL('/api/RRF/CloseRRF');
+        this._spinnerService.show();
+        return this.authHttp.post(url ,{RRFID: rrfId ,CloseComment:closeComment})
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

@@ -102,8 +102,15 @@
                         </div>
                         <!-- END SHOW AND SEARCH -->
 
-                        <div class="row">
-                            
+                        <div class="row" *ngIf='closeRRFID != 0'>
+                            <div class="col-lg-9">
+                                <textarea class="form-control" id="txtCloseComment" rows="1" [(ngModel)]='closeComment' placeholder="close Comment" style="resize:vertical"
+                                required=""></textarea>
+                            </div>
+                            <div class="col-lg-3">
+                                 <button id="btnClose" class="btn blue" (click)="onbtnCloseRRF()">Close RRF</button>
+                                  <button id="btnCancel" class="btn default" (click)="onCancelCloseRRF()">cancel</button>
+                            </div>
                         </div>
 
 
@@ -160,7 +167,7 @@
                                                 <div class="mt-action-body">
                                                     <div class="mt-action-row">
                                                         <div class="mt-action-datetime ">
-                                                            <span class="mt-action-dot {{rrf.Status}}"></span>{{rrf.Status}}
+                                                            <span class="mt-action-dot {{rrf.Status.Value}}"></span>{{rrf.Status.Value}}
                                                         </div>
                                                     </div>
                                                 </div>

@@ -21,6 +21,9 @@ export class RRFDashboardListComponent implements OnActivate {
     isListVisible: boolean = true;
     rrfStatusCount: AllRRFStatusCount = new AllRRFStatusCount();
     currentView: string = 'myRRF';
+    closeComment: string = '';
+    closeRRF: boolean = false;
+    closeRRFID: number = 0;
 
     doughnutChartLabels: string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
     doughnutChartData: number[] = [350, 450, 100];
@@ -123,8 +126,28 @@ export class RRFDashboardListComponent implements OnActivate {
         console.log(rrfID);
     }
 
-    onCloseRRFClick(rrfID: number){
-        console.log(rrfID);
+    onCloseRRFClick(rrfID: number) {
+        this.closeRRF = true;
+        this.closeRRFID = rrfID;
+
+    }
+
+    onbtnCloseRRF() {
+        this._rrfDashboardService.closeRRF(this.closeRRFID, this.closeComment)
+            .subscribe(
+            results => {
+                this.rrfStatusCount = <any>results;
+            },
+            error => this.errorMessage = <any>error);
+
+        this.closeRRFID = 0;
+        this.closeComment = '';
+
+        if (this.currentView = 'allRRF') {
+            this.getAllRRFData();
+        } else {
+            this.getMyRRFData();
+        }
     }
 
 }

@@ -10,7 +10,7 @@ export class AssignmentDetails {
     public AssignedComments: string;
     public AssignedDate: Date;
     public UnassigningComment: string;
-    public Status : string;
+    public Status: string;
     public AssigneeLastDate: Date;
 }
 
@@ -28,7 +28,7 @@ export class RRFDetails {
     public Priority: number = 1;
     public ExpDateOfJoining: Date;
     public RaisedBy: string;
-    public Status: string;
+    public Status: MasterData = new MasterData();
     public Panel: Panel[] = new Array();
 
     public IsChecked: boolean;

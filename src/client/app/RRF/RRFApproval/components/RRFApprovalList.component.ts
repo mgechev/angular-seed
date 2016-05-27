@@ -32,7 +32,7 @@ export class RRFApprovalListComponent implements OnActivate {
                 this.rrfApprovalList = <any>results;
 
                 for (var index = 0; index < this.rrfApprovalList.length; index++) {
-                    this.rrfApprovalList[index].Status = 'Approval Pending'; //TODO : get it from API
+                    this.rrfApprovalList[index].Status = {'Id' :1 ,'Value' :'Pending Approval'}; //TODO : get it from API
                     this.rrfApprovalList[index].IsChecked = false;
                 }
             },
@@ -82,7 +82,7 @@ export class RRFApprovalListComponent implements OnActivate {
     onStatusChange(status: string): void {
         for (var index = 0; index < this.rrfApprovalList.length; index++) {
             if (this.rrfApprovalList[index].IsChecked) {
-                this.rrfApprovalList[index].Status = status;
+                this.rrfApprovalList[index].Status.Value = status;
                 this.rrfApprovalList[index].IsChecked = false;
                 this.rrfApprovalList[index].Comment = this.comment;
 

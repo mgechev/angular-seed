@@ -89,6 +89,8 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
                 //     }
                 // }
                 this.getRRFDetails(this.Id); //TODO
+                this.AssignedComments ='';
+                $('#cmbAssignTo').select2('val','');
             },
             error => this.errorMessage = <any>error);
     }
