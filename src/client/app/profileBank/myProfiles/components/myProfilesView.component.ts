@@ -8,7 +8,7 @@ import { MyProfilesService } from '../services/myProfiles.service';
     selector: 'rrf-blacklistedprofiles-view',
     templateUrl: 'myProfilesView.component.html',
     directives: [ROUTER_DIRECTIVES],
-    styleUrls: ['myProfiles.component.css']
+    styleUrls:['../../allProfiles/components/allProfilesView.component.css']
 })
 
 export class MyProfilesViewComponent implements OnActivate {

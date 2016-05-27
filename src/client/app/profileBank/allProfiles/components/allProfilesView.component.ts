@@ -7,7 +7,8 @@ import { AllProfilesService } from '../services/allProfiles.service';
     moduleId: module.id,
     selector: 'rrf-allprofiles-view',
     templateUrl: 'allProfilesView.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES],
+    styleUrls:['allProfilesView.component.css']
 })
 export class AllProfilesViewComponent implements OnActivate {
     params: string;
@@ -28,5 +29,4 @@ export class AllProfilesViewComponent implements OnActivate {
                 error => this.errorMessage = <any>error);
         }
     }
-
 }

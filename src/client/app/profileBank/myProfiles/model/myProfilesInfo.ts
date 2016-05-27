@@ -41,6 +41,8 @@ export class MyProfilesInfo {
   public ReadyToRelocate: any;
   public CommentsAdditionalInformation: string;
   public ResumeSource: string;
+  public ReasonToRelocate:string;
+  public FriendsRelatives:string;
   public IsCurrentSameAsPermanent: any;
 
   //properties of Qualification

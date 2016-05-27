@@ -2,15 +2,7 @@
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-        <!-- BEGIN PAGE HEAD-->
-        <div class="page-head">
-            <!-- BEGIN PAGE TITLE -->
-            <div class="page-title">
-                <h1>All Profiles</h1>
-            </div>
-            <!-- END PAGE TITLE  -->
-        </div>
-        <!-- END PAGE HEAD-->
+   
         <!--BEGIN breadcrumb -->
         <ul class="page-breadcrumb breadcrumb">
             <li>
@@ -29,11 +21,12 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div>
-                                    <button type="button" class="btn btn-info " (click)='openMailWindow()' [disabled]='!selectedRowCount'> Send Mails </button>
-                                </div>
+                                    <h3>All Profiles</h3>
+                                   </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="dt-buttons pull-right">
+                                    <button type="button" class="btn btn-info " (click)='openMailWindow()' [disabled]='!selectedRowCount'> Send Mails </button>
                                     <a class="dt-button buttons-print btn dark btn-outline" id="btnPrint">
                                         <span>Print</span>
                                     </a>
@@ -164,6 +157,12 @@
                                                         <li>
                                                             <a (click)='SaveCandidateID(profile.CandidateID)'>
                                                                 <i class="icon-flag"></i> Update Status
+                                                            </a>
+                                                        </li>
+                                                         <li class="divider"> </li>
+                                                        <li>
+                                                            <a >
+                                                                <i class="fa fa-share-square-o"></i> Assign RRF
                                                             </a>
                                                         </li>
                                                     </ul>

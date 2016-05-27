@@ -499,12 +499,9 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr *ngFor="let Qualification of profile.Qualifications">
-                                                                <!--<td *ngFor="let degree of Qualification.Qualification"> {{degree.Qualification}} </td>
-                                                                <td *ngFor="let year of Qualification.YearOfPassing"> {{year.Year}} </td>
-                                                                <td *ngFor="let grd of Qualification.Grade">{{grd.Grade}}</td>-->
-                                                                <td> {{Qualification.Qualification.Qualification}}</td>
-                                                                <td> {{Qualification.YearOfPassing.Year}}</td>
-                                                                <td> {{Qualification.Grade.Grade}}</td>
+                                                                <td> {{Qualification.Qualification.Value}}</td>
+                                                                <td> {{Qualification.YearOfPassing.Value}}</td>
+                                                                <td> {{Qualification.Grade.Value}}</td>
                                                                 <td class="center">{{Qualification.Marks}} </td>
                                                                 <td>
                                                                     <a class="edit" (click)='editQualidficationData(Qualification.QualificationID)'> Edit </a>
@@ -693,6 +690,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label class="control-label">Current Take Home</label>
@@ -703,16 +701,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label class="control-label">How Much Variable</label>
-                                                            <div class="row">
-                                                                <div class="col-md-10">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.HowMuchVariable" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                   
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label class="control-label">Expected Salary</label>
@@ -960,14 +949,6 @@
                                             </div>
                                         </div>
                                         <!-- END OTHER INFO TAB -->
-                                        <!--<div class='Loader' *ngIf='showSucessMessage'>Details Saved Sucessfully</div>
-                                        <div class='Loader' *ngIf='showWaitMessage'><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></div>
-                                        -->
-                                        <!--<div *ngIf="IsSuccess" class="Loader">
-                                            <alert [type]= 'success' dismissOnTimeout="3000">This alert will dismiss in 3s</alert>
-                                         <div>-->
-
-
                                     </div>
                                 </div>
                             </div>

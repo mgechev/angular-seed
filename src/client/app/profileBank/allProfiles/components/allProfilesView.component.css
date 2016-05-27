@@ -1,0 +1,23 @@
+
+.custom-portlet {
+    background: #E7ECF1 !important;
+    margin-left: -20px !important;
+    margin-right: -20px !important;
+      padding-top: 0 !important;
+}
+
+.details {
+    border: 1px solid #E7ECF1 !important;
+    margin-top: 15px !important;
+}
+
+.portlet.light>.portlet-title>.caption {
+    padding-left: 10px;
+}
+
+.nopadding {
+    padding-top: 0 !important;
+}
+.topmargin {
+    margin-top: -40px;
+}

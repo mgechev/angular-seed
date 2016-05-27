@@ -8,6 +8,7 @@ import { RecentProfilesService } from '../services/recentProfiles.service';
     selector: 'rrf-allprofiles-view',
     templateUrl: 'recentProfilesView.component.html',
     directives: [ROUTER_DIRECTIVES],
+        styleUrls:['../../allProfiles/components/allProfilesView.component.css']
 })
 export class RecentProfilesViewComponent implements OnActivate {
     params: string;

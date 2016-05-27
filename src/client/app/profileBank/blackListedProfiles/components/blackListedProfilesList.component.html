@@ -2,15 +2,7 @@
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-        <!-- BEGIN PAGE HEAD-->
-        <div class="page-head">
-            <!-- BEGIN PAGE TITLE -->
-            <div class="page-title">
-                <h1>BlackListed Profiles</h1>
-            </div>
-            <!-- END PAGE TITLE  -->
-        </div>
-        <!-- END PAGE HEAD-->
+       
      <!--BEGIN breadcrumb -->
         <ul class="page-breadcrumb breadcrumb">
             <li>
@@ -28,6 +20,7 @@
                     <div class="portlet-title">
                         <div class="row">
                             <div class="col-md-6">
+                                <h3>BlackListed Profiles</h3>
                             </div>
                             <div class="col-md-6">
                                 <div class="dt-buttons pull-right">
@@ -106,7 +99,7 @@
                                     </thead>
                                     <tbody>
                                         <tr class="gradeX odd" *ngFor="let blacklistedProfile of blacklistedProfilesList; let index = index">
-                                            <td (click)='redirectToView(profile.CandidateID)'>
+                                            <td (click)='redirectToView(blacklistedProfile.CandidateID)'>
                                                 <tr>
                                                     <td style="float: left;">&nbsp; {{blacklistedProfile.Candidate}}</td>
                                                 </tr>
@@ -118,8 +111,8 @@
                                                 </tr>
 
                                             </td>
-                                            <td (click)='redirectToView(profile.CandidateID)'> {{blacklistedProfile.Tag}} </td>
-                                            <td (click)='redirectToView(profile.CandidateID)'>
+                                            <td (click)='redirectToView(blacklistedProfile.CandidateID)'> {{blacklistedProfile.Tag}} </td>
+                                            <td (click)='redirectToView(blacklistedProfile.CandidateID)'>
                                                 <tr>
                                                     <td style="float: left;">&nbsp; Notice Period : {{blacklistedProfile.NoticePeriod}}</td>
                                                 </tr>
@@ -132,7 +125,6 @@
 
                                             </td>
                                             <td (click)='redirectToView(blacklistedProfile.CandidateID)'>
-                                                <!--<div *ngFor="let candidateStatus of blacklistedProfile.Status"><span class="mt-action-dot {{candidateStatus.CandidateStatus}}"> </span>{{candidateStatus.CandidateStatus}}</div> -->
                                                 <span class="mt-action-dot {{blacklistedProfile.Status.Value}}"> </span>{{blacklistedProfile.Status.Value}}
                                             </td>
                                             <td class="text-center"><i class="fa fa-download" aria-hidden="true"></i>{{blacklistedProfile.Resume_ID}}

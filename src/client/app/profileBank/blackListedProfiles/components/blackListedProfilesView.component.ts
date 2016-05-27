@@ -7,7 +7,8 @@ import { BlackListedProfilesService } from '../services/blacklistedProfiles.serv
     moduleId: module.id,
     selector: 'rrf-blacklistedprofiles-view',
     templateUrl: 'blackListedProfilesView.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES],
+    styleUrls:['../../allProfiles/components/allProfilesView.component.css']
 })
 export class BlackListedProfilesViewComponent implements OnActivate {
     params: string;
