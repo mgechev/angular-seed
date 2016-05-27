@@ -2,15 +2,19 @@
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-        <!-- BEGIN PAGE HEAD-->
-        <div class="page-head">
-            <!-- BEGIN PAGE TITLE -->
-            <div class="page-title">
-                <h1>View Candidate's Info - {{profile.Candidate}}</h1>
-            </div>
-            <!-- END PAGE TITLE -->
-        </div>
-        <!-- END PAGE HEAD-->
+         <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']" > Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                  <a [routerLink]="['/App/ProfileBank/MyProfiles']" >My Profiles</a>
+                   <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">View</span>
+            </li>
+        </ul>
         <div class="row">
             <div class="col-md-12">
 
@@ -21,7 +25,7 @@
                         <div class="portlet light nopadding">
                             <div class="portlet-title custom-portlet">
                                 <div class="caption">
-                                    Candidates Details
+                                  View Candidate's Info - {{profile.Candidate}}
                                 </div>
                             </div>
                             <div class="portlet-container">

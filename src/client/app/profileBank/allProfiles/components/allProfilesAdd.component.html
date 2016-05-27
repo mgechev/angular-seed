@@ -2,23 +2,19 @@
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-        <!-- BEGIN PAGE HEAD-->
-        <div class="page-head">
-            <!-- BEGIN PAGE TITLE -->
-            <div class="page-title">
-                <h1> Edit Profile </h1>
-            </div>
-            <!-- END PAGE TITLE -->
-        </div>
-        <!-- END PAGE HEAD-->
-         <!--BEGIN breadcrumb -->
+
+        <!--BEGIN breadcrumb -->
         <ul class="page-breadcrumb breadcrumb">
             <li>
-                <a [routerLink]="['/App']" > Home </a>
+                <a [routerLink]="['/App']"> Home </a>
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <span class="active">Profile Bank</span>
+                <a [routerLink]="['/App/ProfileBank/AllProfiles']">All Profiles</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">Edit</span>
             </li>
         </ul>
         <!--End Breadcrumb>-->
@@ -38,37 +34,37 @@
                                     </div>
                                     <ul class="nav nav-tabs">
                                         <li class="active">
-                                            <a href="#tab_primaryInfo" data-toggle="tab" (click) = 'isDetailsSaved()'>Primary Info</a>
+                                            <a href="#tab_primaryInfo" data-toggle="tab" (click)='isDetailsSaved()'>Primary Info</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_1" data-toggle="tab" (click) = 'isDetailsSaved()'>Personal Info</a>
+                                            <a href="#tab_1_1" data-toggle="tab" (click)='isDetailsSaved()'>Personal Info</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_7" data-toggle="tab" (click) = 'isDetailsSaved()'>Professional Info</a>
+                                            <a href="#tab_1_7" data-toggle="tab" (click)='isDetailsSaved()'>Professional Info</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_5" data-toggle="tab" (click) = 'isDetailsSaved()'>Salary Details</a>
+                                            <a href="#tab_1_5" data-toggle="tab" (click)='isDetailsSaved()'>Salary Details</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_3" data-toggle="tab" (click) = 'isDetailsSaved()'>Skills</a>
+                                            <a href="#tab_1_3" data-toggle="tab" (click)='isDetailsSaved()'>Skills</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_2" data-toggle="tab" (click) = 'isDetailsSaved()'>Qualification</a>
+                                            <a href="#tab_1_2" data-toggle="tab" (click)='isDetailsSaved()'>Qualification</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_4" data-toggle="tab" (click) = 'isDetailsSaved()'>Career Profile</a>
+                                            <a href="#tab_1_4" data-toggle="tab" (click)='isDetailsSaved()'>Career Profile</a>
                                         </li>
 
                                         <li>
-                                            <a href="#tab_1_6" data-toggle="tab" (click) = 'isDetailsSaved()'>Team Management</a>
+                                            <a href="#tab_1_6" data-toggle="tab" (click)='isDetailsSaved()'>Team Management</a>
                                         </li>
 
                                     </ul>
                                 </div>
                                 <div class="portlet-body">
                                     <div class="tab-content">
-                                         <alert class="alerts" *ngFor="let alert of InfoAlerts;let i = index" dismissible="true" [type]="alert.type" dismissOnTimeout="5000" style="width:350px"
-                                            (close)="closeAlert(i)">
+                                        <alert class="alerts" *ngFor="let alert of InfoAlerts;let i = index" dismissible="true" [type]="alert.type" dismissOnTimeout="5000"
+                                            style="width:350px" (close)="closeAlert(i)">
                                             {{ alert?.msg }}
                                         </alert>
                                         <alert class="alerts" *ngFor="let alert of alerts;let i = index" dismissible="true" [type]="alert.type" dismissOnTimeout="2000"
@@ -84,8 +80,8 @@
                                                             <label class="control-label">First Name<span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" autofocus placeholder="John" class="form-control" [(ngModel)]="profile.FirstName" required=""
-                                                                    (change)='onChangeInput($event.target.value)' />
+                                                                    <input type="text" autofocus placeholder="John" class="form-control" [(ngModel)]="profile.FirstName" required="" (change)='onChangeInput($event.target.value)'
+                                                                    />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -95,8 +91,8 @@
                                                             <label class="control-label">Middle Name</label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="Alex" class="form-control" [(ngModel)]="profile.MiddleName" 
-                                                                    (change)='onChangeInput($event.target.value)'/>
+                                                                    <input type="text" placeholder="Alex" class="form-control" [(ngModel)]="profile.MiddleName" (change)='onChangeInput($event.target.value)'
+                                                                    />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -106,8 +102,8 @@
                                                             <label class="control-label">Last Name<span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="Doe" class="form-control" 
-                                                                    [(ngModel)]="profile.LastName" required="" (change)='onChangeInput($event.target.value)'/>
+                                                                    <input type="text" placeholder="Doe" class="form-control" [(ngModel)]="profile.LastName" required="" (change)='onChangeInput($event.target.value)'
+                                                                    />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -207,8 +203,8 @@
                                                             <label class="control-label">First Name<span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" autofocus placeholder="John" class="form-control" [(ngModel)]="profile.FirstName" required="" 
-                                                                    (change)='onChangeInput($event.target.value)'/>
+                                                                    <input type="text" autofocus placeholder="John" class="form-control" [(ngModel)]="profile.FirstName" required="" (change)='onChangeInput($event.target.value)'
+                                                                    />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -218,8 +214,8 @@
                                                             <label class="control-label">Middle Name</label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="Alex" class="form-control" [(ngModel)]="profile.MiddleName"
-                                                                    (change)='onChangeInput($event.target.value)' />
+                                                                    <input type="text" placeholder="Alex" class="form-control" [(ngModel)]="profile.MiddleName" (change)='onChangeInput($event.target.value)'
+                                                                    />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -229,8 +225,8 @@
                                                             <label class="control-label">Last Name<span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="Doe" class="form-control" [(ngModel)]="profile.LastName" required=""
-                                                                    (change)='onChangeInput($event.target.value)' />
+                                                                    <input type="text" placeholder="Doe" class="form-control" [(ngModel)]="profile.LastName" required="" (change)='onChangeInput($event.target.value)'
+                                                                    />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -240,8 +236,7 @@
                                                             <label>Email <span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="email" class="form-control " placeholder="Email Address" [(ngModel)]="profile.Email" required=""
-                                                                    (change)='onChangeInput($event.target.value)'>
+                                                                    <input type="email" class="form-control " placeholder="Email Address" [(ngModel)]="profile.Email" required="" (change)='onChangeInput($event.target.value)'>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -527,8 +522,8 @@
                                                             <label class="control-label">Experience in Skill <small>&nbsp;(In years)</small></label>
                                                             <div class="row">
                                                                 <div class="col-md-6">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.ExpInSkill" 
-                                                                    (change)='onChangeInput($event.target.value)'/>
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.ExpInSkill" (change)='onChangeInput($event.target.value)'
+                                                                    />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -536,8 +531,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Any Functional Experience</label>
-                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.AnyFunctionalExp"
-                                                            (change)='onChangeInput($event.target.value)'></textarea>
+                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.AnyFunctionalExp" (change)='onChangeInput($event.target.value)'></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
@@ -621,8 +615,8 @@
                                                             <label class="control-label">Total Experience<br/> <small>&nbsp;(In years)</small></label>
                                                             <div class="row">
                                                                 <div class="col-md-8">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.TotalExperience"
-                                                                    (change)='onChangeInput($event.target.value)' />
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.TotalExperience" (change)='onChangeInput($event.target.value)'
+                                                                    />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -632,8 +626,8 @@
                                                             <label class="control-label">Relevant Experience <small>&nbsp;(In years)</small></label>
                                                             <div class="row">
                                                                 <div class="col-md-8">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.RelevantExperience" 
-                                                                    (change)='onChangeInput($event.target.value)'/>
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.RelevantExperience" (change)='onChangeInput($event.target.value)'
+                                                                    />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -690,18 +684,19 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label class="control-label">Current Take Home</label>
                                                             <div class="row">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CurrentTakeHome" (change)='onChangeInput($event.target.value)'/>
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CurrentTakeHome" (change)='onChangeInput($event.target.value)'
+                                                                    />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                   
+
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label class="control-label">Expected Salary</label>
@@ -769,7 +764,8 @@
                                                             <label class="control-label">No Of Team Members</label>
                                                             <div class="row">
                                                                 <div class="col-md-8">
-                                                                    <input type="number" placeholder="0" class="form-control" [(ngModel)]="profile.NoOfTeamMembers" (change)='onChangeInput($event.target.value)' />
+                                                                    <input type="number" placeholder="0" class="form-control" [(ngModel)]="profile.NoOfTeamMembers" (change)='onChangeInput($event.target.value)'
+                                                                    />
                                                                 </div>
                                                             </div>
                                                         </div>

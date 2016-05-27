@@ -2,24 +2,28 @@
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-        <!-- BEGIN PAGE HEAD-->
-        <div class="page-head">
-            <!-- BEGIN PAGE TITLE -->
-            <div class="page-title">
-                <h1>View Candidate's Info - {{profile.Candidate}}</h1>
-            </div>
-            <!-- END PAGE TITLE -->
-        </div>
-        <!-- END PAGE HEAD-->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']"> Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a [routerLink]="['/App/ProfileBank/RecentProfiles']">Recent Profiles</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">View</span>
+            </li>
+        </ul>
         <div class="row">
             <div class="col-md-12">
                 <div class="portlet light bordered">
                     <a class="btn btn-circle dark btn-outline" [routerLink]="['/App/ProfileBank/RecentProfiles']"> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>
-                         <div class="details">
+                    <div class="details">
                         <div class="portlet light nopadding">
                             <div class="portlet-title custom-portlet">
                                 <div class="caption">
-                                    Candidates Details
+                                    View Candidate's Info - {{profile.Candidate}}
                                 </div>
                             </div>
                             <div class="portlet-container">
@@ -416,7 +420,7 @@
                                                         <label class=" col-md-4 form-control-static"><b> Does your CTC include variable salary?<br/> If yes, then how much :</b></label>
                                                         <div class="col-md-8">
                                                             <p class="form-control-static"> {{profile.CTCIncludeVariable}}, &nbsp; {{profile.HowMuchVariable}}
-                                                                </p>
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -637,7 +641,7 @@
                                                         <label class=" col-md-4 form-control-static"><b> Outstationed Candidate :</b></label>
                                                         <div class="col-md-8">
                                                             <p class="form-control-static"> {{profile.OutstationedCandidate}}
-                                                                </p>
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -649,7 +653,7 @@
                                                         <label class=" col-md-4 form-control-static"><b>Are you ready to relocate,<br/> please specify the reason why :</b></label>
                                                         <div class="col-md-8">
                                                             <p class="form-control-static"> {{profile.ReadyToRelocate}} &nbsp; {{profile.ReasonToRelocate}}
-                                                                </p>
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
