@@ -102,11 +102,11 @@ export class SeedConfig {
   BOOTSTRAP_DIR = 'app';
 
   /**
-   * The directory where the client files are located.
-   * The default directory is `client`.
+   * The directory where the browser files are located.
+   * The default directory is `browser`.
    * @type {string}
    */
-  APP_CLIENT = argv['client'] || 'client';
+  APP_BROWSER = argv['browser'] || 'browser';
 
   /**
    * The bootstrap file to be used to boot the application. The file to be used is dependent if the hot-loader option is
@@ -128,7 +128,7 @@ export class SeedConfig {
    * The base folder of the applications source files.
    * @type {string}
    */
-  APP_SRC = `src/${this.APP_CLIENT}`;
+  APP_SRC = `src/${this.APP_BROWSER}`;
 
   /**
    * The folder of the applications asset files.
