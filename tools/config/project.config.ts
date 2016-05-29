@@ -22,5 +22,9 @@ export class ProjectConfig extends SeedConfig {
     const seedDependencies = this.NPM_DEPENDENCIES;
 
     this.NPM_DEPENDENCIES = seedDependencies.concat(additional_deps);
+
+    /* Add to or override NPM module configurations: */
+    //this.mergeObject( this.PLUGIN_CONFIGS['browser-sync'], { ghostMode: false } );
+
   }
 }
