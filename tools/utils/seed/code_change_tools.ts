@@ -33,20 +33,20 @@ let changed = (files: any) => {
     files = [files];
   }
 
-  let onlyStylesChanged =
-    files
-      .map((f:string) => path.parse(f).ext)
-      .reduce((prev:string, current:string) => prev && (current === '.scss' || current === '.css'), true);
-
+  //  let onlyStylesChanged =
+  //    files
+  //      .map((f:string) => path.parse(f).ext)
+  //      .reduce((prev:string, current:string) => prev && (current === '.scss' || current === '.css'), true);
+  //
   // if (ENABLE_HOT_LOADING) {
   //   ng2HotLoader.onChange(files);
   // } else {
   //TODO: Figure out why you can't pass a file to reload
-  if (onlyStylesChanged === false) {
+  // if (onlyStylesChanged === false) {
     browserSync.reload(files);
-  } else {
-    browserSync.reload('*.css');
-  }
+  // } else {
+  //   browserSync.reload('*.css');
+  // }
   //}
 };
 
