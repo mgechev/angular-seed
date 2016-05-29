@@ -21,7 +21,9 @@ const isProd = ENV === 'prod';
 if (isProd) {
   processors.push(
     cssnano({
-      discardComments: {removeAll: true}
+      discardComments: {removeAll: true},
+      discardUnused: false, // unsafe, see http://mxs.is/googmr
+      zindex: false // unsafe, see http://mxs.is/googmq
     })
   );
 }
