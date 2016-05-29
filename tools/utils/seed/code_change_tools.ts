@@ -1,5 +1,5 @@
 import * as browserSync from 'browser-sync';
-import * as path from 'path';
+// import * as path from 'path';
 
 import { getPluginConfig } from '../../config';
 
