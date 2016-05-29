@@ -22,8 +22,9 @@ if (isProd) {
   processors.push(
     cssnano({
       discardComments: {removeAll: true},
-      discardUnused: false, // unsafe, see http://mxs.is/googmr
-      zindex: false // unsafe, see http://mxs.is/googmq
+      discardUnused: false, // unsafe, see http://goo.gl/RtrzwF
+      zindex: false, // unsafe, see http://goo.gl/vZ4gbQ
+      reduceIdents: false // unsafe, see http://goo.gl/tNOPv0
     })
   );
 }
