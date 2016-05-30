@@ -293,6 +293,13 @@ export class SeedConfig {
     ],
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
+      '@angular/core': `${this.APP_BASE}node_modules/@angular/core/core.umd.js`,
+      '@angular/common': `${this.APP_BASE}node_modules/@angular/common/common.umd.js`,
+      '@angular/compiler': `${this.APP_BASE}node_modules/@angular/compiler/compiler.umd.js`,
+      '@angular/http': `${this.APP_BASE}node_modules/@angular/http/http.umd.js`,
+      '@angular/router': `${this.APP_BASE}node_modules/@angular/router/router.umd.js`,
+      '@angular/platform-browser': `${this.APP_BASE}node_modules/@angular/platform-browser/platform-browser.umd.js`,
+      '@angular/platform-browser-dynamic': `${this.APP_BASE}node_modules/@angular/platform-browser-dynamic/platform-browser-dynamic.umd.js`,
       'rxjs/*': `${this.APP_BASE}node_modules/rxjs/*`,
       'app/*': `/app/*`,
       '*': `${this.APP_BASE}node_modules/*`
