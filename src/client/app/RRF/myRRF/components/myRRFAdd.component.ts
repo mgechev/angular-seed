@@ -1,15 +1,18 @@
 import {Component } from '@angular/core';
 import { Router, OnActivate, ROUTER_DIRECTIVES, RouteSegment } from '@angular/router';
-import {RRFDetails, Panel, MasterData } from '../models/rrfDetails';
+import {RRFDetails, Panel, MasterData , ResultForAPI } from '../models/rrfDetails';
 import { MyRRFService } from '../services/myRRF.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { APIResult } from  '../../../shared/constantValue/index';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-myrrf-add',
     templateUrl: 'myRRFAdd.component.html',
-    directives: [ROUTER_DIRECTIVES, SELECT_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, SELECT_DIRECTIVES],
+    providers: [ToastsManager]
 })
 
 export class MyRRFAddComponent implements OnActivate {
@@ -32,7 +35,8 @@ export class MyRRFAddComponent implements OnActivate {
 
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
-        private _mastersService: MastersService) {
+        private _mastersService: MastersService,
+        public toastr: ToastsManager) {
         // this.newRRF.Panel.push(this.panel);
         this.getDesignation();
         this.getPractice();
@@ -87,12 +91,16 @@ export class MyRRFAddComponent implements OnActivate {
         this._myRRFService.raiseRRF(this.newRRF)
             .subscribe(
             results => {
-                this._router.navigate(['/App/RRF/RRFDashboard/']);
+                if (+ (<ResultForAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResultForAPI>results).Message, 'Success!');
+                    this._router.navigate(['/App/RRF/RRFDashboard/']);
+                }
+                else {
+                    this.toastr.error((<ResultForAPI>results).ErrorMsg);
+                }
             },
             error => this.errorMessage = <any>error);
     }
-
-
 
     onCancelClick(): void {
         this._router.navigate(['/App/RRF/RRFDashboard/']);
@@ -172,6 +180,7 @@ export class MyRRFAddComponent implements OnActivate {
         }
         this.newRRF.Panel.push(panel);
         this.clearIntwPanel();
+
     }
 
     clearIntwPanel() {
@@ -272,7 +281,13 @@ export class MyRRFAddComponent implements OnActivate {
         this._myRRFService.UpdateRRF(this.newRRF)
             .subscribe(
             results => {
-                this._router.navigate(['/App/RRF/RRFDashboard/']);
+                if ((<ResultForAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResultForAPI>results).Message);
+                    this._router.navigate(['/App/RRF/RRFDashboard/']);
+                }
+                else {
+                    this.toastr.error((<ResultForAPI>results).ErrorMsg);
+                }
             },
             error => this.errorMessage = <any>error);
     }

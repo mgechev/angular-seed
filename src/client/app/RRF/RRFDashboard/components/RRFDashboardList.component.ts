@@ -1,10 +1,13 @@
 import {Component} from '@angular/core';
 import { OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
-import { RRFDetails, AllRRFStatusCount } from '../../myRRF/models/rrfDetails';
+import { RRFDetails, AllRRFStatusCount ,ResultForAPI } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 import {RRFIDPipe } from './RRFIdFilter.component';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { APIResult } from  '../../../shared/constantValue/index';
+
 
 @Component({
     moduleId: module.id,
@@ -12,7 +15,8 @@ import {RRFIDPipe } from './RRFIdFilter.component';
     templateUrl: 'RRFDashboardList.component.html',
     directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES],
     styleUrls: ['../../RRFApproval/components/RRFApproval.component.css'],
-    pipes: [RRFIDPipe]
+    pipes: [RRFIDPipe],
+    providers: [ToastsManager]
 })
 
 export class RRFDashboardListComponent implements OnActivate {
@@ -36,7 +40,8 @@ export class RRFDashboardListComponent implements OnActivate {
     public pieChartType: string = 'pie';
 
     constructor(private _rrfDashboardService: RRFDashboardService,
-        private _myRRFService: MyRRFService) {
+        private _myRRFService: MyRRFService,
+        public toastr: ToastsManager) {
     }
 
     routerOnActivate() {
@@ -82,7 +87,7 @@ export class RRFDashboardListComponent implements OnActivate {
         this._rrfDashboardService.getStatuswiseRRFCount()
             .subscribe(
             results => {
-                this.rrfStatusCount = <any>results;
+                 this.rrfStatusCount = <any>results;
             },
             error => this.errorMessage = <any>error);
     }
@@ -138,7 +143,13 @@ export class RRFDashboardListComponent implements OnActivate {
         this._rrfDashboardService.closeRRF(this.closeRRFID, this.closeComment)
             .subscribe(
             results => {
-                this.rrfStatusCount = <any>results;
+                 if ((<ResultForAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResultForAPI>results).Message);
+                   this.rrfStatusCount = <any>results;
+                }
+                else {
+                    this.toastr.error((<ResultForAPI>results).ErrorMsg);
+                }
             },
             error => this.errorMessage = <any>error);
 

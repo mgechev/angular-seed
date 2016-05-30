@@ -1,14 +1,18 @@
 import {Component} from '@angular/core';
 import {OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
-import { RRFDetails } from '../../myRRF/models/rrfDetails';
+import { RRFDetails ,ResultForAPI} from '../../myRRF/models/rrfDetails';
 import { RRFApprovalService } from '../services/rrfApproval.service';
+import { RRFStatus } from  '../../../shared/constantValue/index';
+import { APIResult } from  '../../../shared/constantValue/index';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-approval-list',
     templateUrl: 'RRFApprovalList.component.html',
     directives: [ROUTER_DIRECTIVES],
-    styleUrls: ['RRFApproval.component.css']
+    styleUrls: ['RRFApproval.component.css'],
+    providers: [ToastsManager]
 })
 
 export class RRFApprovalListComponent implements OnActivate {
@@ -17,8 +21,10 @@ export class RRFApprovalListComponent implements OnActivate {
     comment: string;
     selectedRowCount: number = 0;
     allChecked: boolean = false;
+    statusConstant: RRFStatus = RRFStatus;
 
-    constructor(private _rrfApprovalService: RRFApprovalService) {
+    constructor(private _rrfApprovalService: RRFApprovalService,
+    public toastr: ToastsManager) {
     }
 
     routerOnActivate(): void {
@@ -32,7 +38,7 @@ export class RRFApprovalListComponent implements OnActivate {
                 this.rrfApprovalList = <any>results;
 
                 for (var index = 0; index < this.rrfApprovalList.length; index++) {
-                    this.rrfApprovalList[index].Status = {'Id' :1 ,'Value' :'PendingApproval'}; //TODO : get it from API
+                    // this.rrfApprovalList[index].Status = {'Id' :1 ,'Value' :'PendingApproval'}; //TODO : get it from API
                     this.rrfApprovalList[index].IsChecked = false;
                 }
             },
@@ -62,7 +68,10 @@ export class RRFApprovalListComponent implements OnActivate {
             this.selectedRowCount = 0;
         }
         for (var index = 0; index < this.rrfApprovalList.length; index++) {
-            this.rrfApprovalList[index].IsChecked = state;
+            if (+this.rrfApprovalList[index].Status.Id !== +RRFStatus.Rejected)
+            {
+                this.rrfApprovalList[index].IsChecked = state;
+            }
         }
     }
 
@@ -100,6 +109,13 @@ export class RRFApprovalListComponent implements OnActivate {
         comment: string): void {
         this._rrfApprovalService.ActionOnRaisedRRF(rrfID, status, comment)
             .subscribe(
+                 results => {
+                if (+ (<ResultForAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResultForAPI>results).Message, 'Success!');
+                } else {
+                    this.toastr.error((<ResultForAPI>results).ErrorMsg);
+                }
+            },
             error => this.errorMessage = <any>error);
     }
 }

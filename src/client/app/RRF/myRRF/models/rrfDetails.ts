@@ -14,6 +14,28 @@ export class AssignmentDetails {
     public AssigneeLastDate: Date;
 }
 
+export class MasterData {
+    public Id: number;
+    public Value: string;
+}
+
+export class AllRRFStatusCount {
+    public PendingApproval: number;
+    public Rejected: number;
+    public Open: number;
+    public Assigned: number;
+    public InProgress: number;
+    public ClosureApproval: number;
+    public Closed: number;
+    public OnHold: number;
+}
+
+export class Approver {
+    ApproverDetails: MasterData = new MasterData();
+    Status: MasterData = new MasterData();
+    Comment: string;
+}
+
 export class RRFDetails {
     public RRFID: number;
     public Practice: MasterData = new MasterData();
@@ -34,20 +56,14 @@ export class RRFDetails {
     public IsChecked: boolean;
     public Comment: string;
     public AssignedData: AssignmentDetails[] = [];
+    public ApproverList: Approver[] = new Array();
 }
 
-export class MasterData {
-    public Id: number;
-    public Value: string;
+export class ResultForAPI {
+   public StatusCode : number;
+   public Message : '' ;
+    public ReasonCode: string;
+   public ErrorMsg: string;
 }
 
-export class AllRRFStatusCount {
-    public PendingApproval: number;
-    public Rejected: number;
-    public Open: number;
-    public Assigned: number;
-    public InProgress: number;
-    public ClosureApproval: number;
-    public Closed: number;
-    public OnHold: number;
-}
+
