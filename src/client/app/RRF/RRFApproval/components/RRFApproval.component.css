@@ -13,6 +13,9 @@
 .closed {
   background: #41ce29;
 }
+.PendingApproval{
+    background:rgba(233, 239, 11, 0.98);
+}
 .mt-action-dot {
   display: inline-block;
   width: 10px;
