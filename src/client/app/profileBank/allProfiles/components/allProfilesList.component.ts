@@ -98,7 +98,7 @@ export class AllProfilesListComponent implements OnActivate {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
             },
-            error => this.errorMessage = <any>error);
+            error =>  this.toastr.error(<any>error));
         this.isCollapsed = false;
     }
 

@@ -5,7 +5,9 @@ import { AllProfilesService } from '../services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { AlertComponent } from 'ng2-bootstrap';
-import { MasterData } from  '../../../shared/model/index';
+import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { APIResult } from  '../../../shared/constantValue/index';
 
 @Component({
     moduleId: module.id,
@@ -42,36 +44,31 @@ export class AllProfilesAddComponent implements OnActivate {
 
     IsHidden: boolean = true;
     IsSuccess: boolean = false;
-    alerts: Array<Object>;
-    InfoAlerts: Array<Object>;
-    infoNotSavedAlert : boolean = false;
 
-    public closeAlert(i: number): void {
-        this.alerts.splice(i, 1);
-    }
+    infoNotSavedAlert: boolean = false;
 
     constructor(private _allProfilesService: AllProfilesService,
         private _router: Router,
+        public toastr: ToastsManager,
         private _masterService: MastersService) {
         this.profile = new MyProfilesInfo();
         this.createQualification();
-        this.alerts = new Array<Object>();
-         this.InfoAlerts = new Array<Object>();
     }
+
     isDetailsSaved() {
-        if(this.infoNotSavedAlert) {
-          this.onSavePrimaryInfo();
-          this.onSaveCareerProfileDetails();
-          this.onSavePersonalDetails();
-          this.onSaveProfessionalDetails();
-          this.onSaveSalaryDetails();
-          this.onSaveSkillsDetails();
-          this.onSaveTeamManagementDetails();
-          this.infoNotSavedAlert = false;
+        if (this.infoNotSavedAlert) {
+            this.onSavePrimaryInfo();
+            this.onSaveCareerProfileDetails();
+            this.onSavePersonalDetails();
+            this.onSaveProfessionalDetails();
+            this.onSaveSalaryDetails();
+            this.onSaveSkillsDetails();
+            this.onSaveTeamManagementDetails();
+            this.infoNotSavedAlert = false;
         }
     }
     onChangeInput() {
-       this.infoNotSavedAlert = true;
+        this.infoNotSavedAlert = true;
     }
     routerOnActivate(segment: RouteSegment) {
         //get all master data and bind to dropdown
@@ -99,7 +96,7 @@ export class AllProfilesAddComponent implements OnActivate {
             },
             error => {
                 this.errorMessage = <any>error;
-                this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                this.toastr.error(<any>error);
             });
     }
 
@@ -191,7 +188,6 @@ export class AllProfilesAddComponent implements OnActivate {
         }
     }
 
-
     getCountries(): void {
         this._masterService.getCountries()
             .subscribe(
@@ -256,27 +252,15 @@ export class AllProfilesAddComponent implements OnActivate {
     }
 
     onSelectCountry(country: number) {
-        for (var i = 0; i < this.countries.length; i++) {
-            if (this.countries[i].Id === country) {
-                this.profile.Country = this.countries[i].Id;
-            }
-        }
+        this.profile.Country = country;
     }
 
     onSelectState(state: number) {
-        for (var i = 0; i < this.states.length; i++) {
-            if (this.states[i].Id === state) {
-                this.profile.State = this.states[i].Id;
-            }
-        }
+        this.profile.State = state;
     }
 
     onSelectDistrict(district: number) {
-        for (var i = 0; i < this.districts.length; i++) {
-            if (this.districts[i].Id === district) {
-                this.profile.District = this.districts[i].Id;
-            }
-        }
+        this.profile.District = district;
     }
 
     onSelectQualification(candidateQualification: string) {
@@ -299,17 +283,20 @@ export class AllProfilesAddComponent implements OnActivate {
     }
 
     onSavePrimaryInfo(): void {
-         if (this.params) {
+        if (this.params) {
             this._allProfilesService.editCandidateProfile(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
-
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 });
         }
     }
@@ -321,12 +308,16 @@ export class AllProfilesAddComponent implements OnActivate {
             this._allProfilesService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 });
         }
     }
@@ -337,12 +328,16 @@ export class AllProfilesAddComponent implements OnActivate {
             this._allProfilesService.editCandidateProfessionalDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 });
         }
     }
@@ -353,12 +348,16 @@ export class AllProfilesAddComponent implements OnActivate {
             this._allProfilesService.editCandidateQualificationDetails(this.profile)
                 .subscribe(
                 results => {
-
-                    this.getCandidateProfileById(this.params);
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 });
         }
     }
@@ -369,12 +368,16 @@ export class AllProfilesAddComponent implements OnActivate {
             this._allProfilesService.editCandidateSkillsDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 });
         }
     }
@@ -386,12 +389,16 @@ export class AllProfilesAddComponent implements OnActivate {
             this._allProfilesService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 });
         }
     }
@@ -402,12 +409,16 @@ export class AllProfilesAddComponent implements OnActivate {
             this._allProfilesService.editCandidateCareerDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 }
                 );
         }
@@ -419,12 +430,16 @@ export class AllProfilesAddComponent implements OnActivate {
             this._allProfilesService.editCandidateSalaryDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 });
         }
     }
@@ -442,14 +457,18 @@ export class AllProfilesAddComponent implements OnActivate {
                 this._allProfilesService.addCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
-                        this.createQualification();
-                        this.getCandidateQualifications();
-                        this.alerts.push({ msg: 'Qualification Added Sucessfully!', type: 'success', closable: true });
+                        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                            this.toastr.success((<ResponseFromAPI>results).Message);
+                            this.createQualification();
+                            this.getCandidateQualifications();
+                        } else {
+                            this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                        }
                     },
                     error => {
                         this.createQualification();
                         this.errorMessage = <any>error;
-                        this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                        this.toastr.error(<any>error);
                     });
             }
         } else {
@@ -478,16 +497,19 @@ export class AllProfilesAddComponent implements OnActivate {
                 this._allProfilesService.editCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
-                        this.createQualification();
-                        this.IsHidden = true;
-                        this.getCandidateQualifications();
-                        this.alerts.push({ msg: 'Details Updated Sucessfully!', type: 'success', closable: true });
+                        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                            this.toastr.success((<ResponseFromAPI>results).Message);
+                            this.createQualification();
+                            this.IsHidden = true;
+                            this.getCandidateQualifications();
+                        } else {
+                            this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                        }
                     },
                     error => {
                         this.errorMessage = <any>error;
                         this.createQualification();
-                        this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
-
+                        this.toastr.error(<any>error);
                     });
             }
         }
@@ -504,7 +526,7 @@ export class AllProfilesAddComponent implements OnActivate {
                 },
                 error => {
                     this.errorMessage = <any>error;
-
+                    this.toastr.error(<any>error);
                 });
         }
     }

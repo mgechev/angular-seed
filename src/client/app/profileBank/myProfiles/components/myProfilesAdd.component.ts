@@ -4,14 +4,15 @@ import { MyProfilesInfo, Qualification} from '../model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
-import { TOOLTIP_DIRECTIVES, AlertComponent } from 'ng2-bootstrap';
+import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { MasterData,ResponseFromAPI } from  '../../../shared/model/index';
-
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { APIResult } from  '../../../shared/constantValue/index';
 @Component({
     moduleId: module.id,
     selector: 'rrf-myprofiles-add',
     templateUrl: 'myProfilesAdd.component.html',
-    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES, AlertComponent],
+    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
     styleUrls: ['myProfiles.component.css']
 })
 
@@ -35,18 +36,14 @@ export class MyProfilesAddComponent implements OnActivate {
 
     IsHidden: boolean = true;
     IsSuccess: boolean = false;
-    public alerts: Array<Object>;
-
-    public closeAlert(i: number): void {
-        this.alerts.splice(i, 1);
-    }
 
     constructor(private _myProfilesService: MyProfilesService,
         private _masterService: MastersService,
+         public toastr: ToastsManager,
         private _router: Router) {
         this.profile = new MyProfilesInfo();
         this.createQualificationObj();
-        this.alerts = new Array<Object>();
+
     }
 
     routerOnActivate(segment: RouteSegment) {
@@ -265,17 +262,16 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateProfile(this.profile)
                 .subscribe(
                 results => {
-                    var result = results as ResponseFromAPI;
-                    if (result.StatusCode === 1) {
-                        this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
-                        this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                     }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 });
         }
     }
@@ -287,17 +283,16 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
                 results => {
-                       var result = results as ResponseFromAPI;
-                    if (result.StatusCode === 1) {
-                        this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                      if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
-                        this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                     }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 });
         }
     }
@@ -309,17 +304,16 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateProfessionalDetails(this.profile)
                 .subscribe(
                 results => {
-                      var result = results as ResponseFromAPI;
-                    if (result.StatusCode === 1) {
-                        this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                      if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
-                        this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                     }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 });
         }
     }
@@ -330,17 +324,16 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateSkillsDetails(this.profile)
                 .subscribe(
                 results => {
-                      var result = results as ResponseFromAPI;
-                    if (result.StatusCode === 1) {
-                        this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                      if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
-                        this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                     }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 });
         }
     }
@@ -352,17 +345,16 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
                 results => {
-                       var result = results as ResponseFromAPI;
-                    if (result.StatusCode === 1) {
-                        this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                       if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
-                        this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                     }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 });
         }
     }
@@ -373,17 +365,16 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateCareerDetails(this.profile)
                 .subscribe(
                 results => {
-                      var result = results as ResponseFromAPI;
-                    if (result.StatusCode === 1) {
-                        this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                      if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
-                        this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                     }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 }
                 );
         }
@@ -395,17 +386,16 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateSalaryDetails(this.profile)
                 .subscribe(
                 results => {
-                       var result = results as ResponseFromAPI;
-                    if (result.StatusCode === 1) {
-                        this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                      if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
-                        this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                     }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 });
         }
     }
@@ -422,19 +412,18 @@ export class MyProfilesAddComponent implements OnActivate {
                 this._myProfilesService.addCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
-                        this.createQualificationObj();
 
-                        var result = results as ResponseFromAPI;
-                    if (result.StatusCode === 1) {
-                            this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                            this.toastr.success((<ResponseFromAPI>results).Message);
+                            this.createQualificationObj();
                             this.getCandidateQualifications();
                         } else {
-                            this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                            this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                         }
                     },
                     error => {
                         this.errorMessage = <any>error;
-                        this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                        this.toastr.error(<any>error);
                     });
             }
         } else {
@@ -463,20 +452,19 @@ export class MyProfilesAddComponent implements OnActivate {
                 this._myProfilesService.editCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
-                        this.createQualificationObj();
-                        this.IsHidden = true;
-                        var result = results as ResponseFromAPI;
-                    if (result.StatusCode === 1) {
-                            this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                       if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                            this.toastr.success((<ResponseFromAPI>results).Message);
+                            this.createQualificationObj();
+                            this.IsHidden = true;
                             this.getCandidateQualifications();
                         } else {
-                            this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                            this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                         }
                     },
                     error => {
                         this.errorMessage = <any>error;
                         this.createQualificationObj();
-                        this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                        this.toastr.error(<any>error);
                     });
             }
         }
@@ -492,7 +480,7 @@ export class MyProfilesAddComponent implements OnActivate {
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 });
         }
     }

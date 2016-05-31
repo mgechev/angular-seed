@@ -4,15 +4,16 @@ import { RecentProfilesService } from '../services/recentProfiles.service';
 import { MyProfilesInfo, Qualification } from '../../myProfiles/model/myProfilesInfo';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
-import { AlertComponent } from 'ng2-bootstrap';
-import { MasterData } from  '../../../shared/model/index';
+import { MasterData,ResponseFromAPI } from  '../../../shared/model/index';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { APIResult } from  '../../../shared/constantValue/index';
 
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-recent-profiles-add',
     templateUrl: 'recentProfilesAdd.component.html',
-    directives: [ROUTER_DIRECTIVES, AlertComponent],
+    directives: [ROUTER_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
 
@@ -40,18 +41,14 @@ export class RecentProfilesAddComponent implements OnActivate {
 
     IsHidden: boolean = true;
     IsSuccess: boolean = false;
-    public alerts: Array<Object>;
-
-    public closeAlert(i: number): void {
-        this.alerts.splice(i, 1);
-    }
 
     constructor(private _recentProfilesService: RecentProfilesService,
         private _router: Router,
+          public toastr: ToastsManager,
         private _masterService: MastersService) {
         this.profile = new MyProfilesInfo();
         this.createQualification();
-        this.alerts = new Array<Object>();
+
     }
 
     routerOnActivate(segment: RouteSegment) {
@@ -269,12 +266,16 @@ export class RecentProfilesAddComponent implements OnActivate {
             this._recentProfilesService.editCandidateProfile(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                   if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                     this.toastr.error(<any>error);
                 });
         }
     }
@@ -286,12 +287,16 @@ export class RecentProfilesAddComponent implements OnActivate {
             this._recentProfilesService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                     this.toastr.error(<any>error);
                 });
         }
     }
@@ -303,44 +308,37 @@ export class RecentProfilesAddComponent implements OnActivate {
             this._recentProfilesService.editCandidateProfessionalDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                     this.toastr.error(<any>error);
                 });
         }
     }
 
-    onSaveQualificationDetails(): void {
-        //   this.showMessage('Wait', true);
-        if (this.params) {
-            this._recentProfilesService.editCandidateQualificationDetails(this.profile)
-                .subscribe(
-                results => {
-
-                    this.getCandidateProfileById(this.params);
-                },
-                error => {
-                    this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
-                });
-        }
-    }
-
+  
     onSaveSkillsDetails(): void {
         //   this.showMessage('Wait', true);
         if (this.params) {
             this._recentProfilesService.editCandidateSkillsDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                  if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                     this.toastr.error(<any>error);
                 });
         }
     }
@@ -352,12 +350,16 @@ export class RecentProfilesAddComponent implements OnActivate {
             this._recentProfilesService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                     this.toastr.error(<any>error);
                 });
         }
     }
@@ -368,12 +370,16 @@ export class RecentProfilesAddComponent implements OnActivate {
             this._recentProfilesService.editCandidateCareerDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                     this.toastr.error(<any>error);
                 }
                 );
         }
@@ -385,12 +391,16 @@ export class RecentProfilesAddComponent implements OnActivate {
             this._recentProfilesService.editCandidateSalaryDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                     this.toastr.error(<any>error);
                 });
         }
     }
@@ -408,14 +418,18 @@ export class RecentProfilesAddComponent implements OnActivate {
                 this._recentProfilesService.addCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
-                        this.createQualification();
-                        this.getCandidateQualifications();
-                        this.alerts.push({ msg: 'Qualification Added Sucessfully!', type: 'success', closable: true });
+                         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                            this.toastr.success((<ResponseFromAPI>results).Message);
+                            this.createQualification();
+                            this.getCandidateQualifications();
+                        } else {
+                            this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                        }
                     },
                     error => {
                         this.createQualification();
                         this.errorMessage = <any>error;
-                        this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                         this.toastr.error(<any>error);
                     });
             }
         } else {
@@ -444,16 +458,19 @@ export class RecentProfilesAddComponent implements OnActivate {
                 this._recentProfilesService.editCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
-                        this.createQualification();
-                        this.IsHidden = true;
-                        this.getCandidateQualifications();
-                        this.alerts.push({ msg: 'Details Updated Sucessfully!', type: 'success', closable: true });
+                        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                            this.toastr.success((<ResponseFromAPI>results).Message);
+                            this.createQualification();
+                            this.IsHidden = true;
+                            this.getCandidateQualifications();
+                        } else {
+                            this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                        }
                     },
                     error => {
                         this.errorMessage = <any>error;
                         this.createQualification();
-                        this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
-
+                        this.toastr.error(<any>error);
                     });
             }
         }
@@ -466,11 +483,10 @@ export class RecentProfilesAddComponent implements OnActivate {
                 results => {
                     this.profile.Qualifications = new Array<Qualification>();
                     this.profile.Qualifications = <any>results;
-                    //this.showMessage('Details Saved Sucessfully', false);
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    //this.showMessage(this.errorMessage, false);
+                     this.toastr.error(<any>error);
                 });
         }
     }

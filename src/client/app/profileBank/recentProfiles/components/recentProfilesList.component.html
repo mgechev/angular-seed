@@ -113,13 +113,13 @@
                                             <td (click)='redirectToView(recentProfile.CandidateID)'> {{recentProfile.Tag}} </td>
                                             <td (click)='redirectToView(recentProfile.CandidateID)'>
                                                 <tr>
-                                                    <td style="float: left;">&nbsp; Notice Period : {{recentProfile.NoticePeriod}}</td>
+                                                    <td style="float: left;">&nbsp; Notice Period : {{recentProfile.CandidateOtherDetails.NoticePeriod}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="float: left;">&nbsp; Current Salary :{{recentProfile.CurrentSalary}}</td>
+                                                    <td style="float: left;">&nbsp; Current Salary :{{recentProfile.CandidateSalaryDetails.CurrentSalary}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="float: left;">&nbsp; Expected Salary : {{recentProfile.ExpectedSalary}}</td>
+                                                    <td style="float: left;">&nbsp; Expected Salary : {{recentProfile.CandidateSalaryDetails.ExpectedSalary}}</td>
                                                 </tr>
                                             </td>
                                             <td (click)='redirectToView(recentProfile.CandidateID)'>

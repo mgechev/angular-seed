@@ -6,6 +6,7 @@ import { AllProfilesService } from '../services/allProfiles.service';
 import {AllProfilesViewComponent} from './allProfilesView.component';
 import { MastersService } from '../../../shared/services/masters.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+
 @Component({
     selector: 'rrf-all-profiles',
     template: ' <router-outlet></router-outlet>',

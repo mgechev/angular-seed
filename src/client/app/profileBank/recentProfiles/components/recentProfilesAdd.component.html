@@ -63,11 +63,6 @@
                                 </div>
                                 <div class="portlet-body">
                                     <div class="tab-content">
-                                        <alert class="alerts" *ngFor="let alert of alerts;let i = index" dismissible="true" [type]="alert.type" dismissOnTimeout="2000"
-                                            (close)="closeAlert(i)">
-                                            {{ alert?.msg }}
-                                        </alert>
-
                                         <!-- PRIMARY INFO TAB -->
                                         <div class="tab-pane active" id="tab_primaryInfo">
                                             <form role="form" (submit)="onSavePrimaryInfo()">

@@ -5,12 +5,13 @@ import { BlackListedProfilesAddComponent } from './blackListedProfilesAdd.compon
 import { BlackListedProfilesService } from '../services/blacklistedProfiles.service';
 import {BlackListedProfilesViewComponent} from './blackListedProfilesView.component';
 import { MastersService } from '../../../shared/services/masters.service';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
     selector: 'rrf-black-listed-profiles',
     template: ' <router-outlet></router-outlet>',
     directives: [ROUTER_DIRECTIVES],
-    providers: [BlackListedProfilesService,MastersService]
+    providers: [BlackListedProfilesService,MastersService,ToastsManager]
 })
 
 @Routes([

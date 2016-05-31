@@ -4,14 +4,14 @@ import { BlackListedProfilesService } from '../services/blacklistedProfiles.serv
 import { MyProfilesInfo, Qualification } from '../../myProfiles/model/myProfilesInfo';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
-import { AlertComponent } from 'ng2-bootstrap';
-import { MasterData } from  '../../../shared/model/index';
-
+import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { APIResult } from  '../../../shared/constantValue/index';
 @Component({
     moduleId: module.id,
     selector: 'rrf-black-listed-profile-add',
     templateUrl: 'blackListedProfilesAdd.component.html',
-    directives: [ROUTER_DIRECTIVES, AlertComponent],
+    directives: [ROUTER_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
 
@@ -40,18 +40,14 @@ export class BlackListedProfilesAddComponent implements OnActivate {
 
     IsHidden: boolean = true;
     IsSuccess: boolean = false;
-    public alerts: Array<Object>;
-
-    public closeAlert(i: number): void {
-        this.alerts.splice(i, 1);
-    }
 
     constructor(private _blacklistedProfilesService: BlackListedProfilesService,
         private _router: Router,
+        public toastr: ToastsManager,
         private _masterService: MastersService) {
         this.profile = new MyProfilesInfo();
         this.createQualification();
-        this.alerts = new Array<Object>();
+
     }
 
     routerOnActivate(segment: RouteSegment) {
@@ -232,7 +228,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
         this.qualification.YearOfPassing = new MasterData();
     }
 
-     onSelectCountry(country: number) {
+    onSelectCountry(country: number) {
         this.profile.Country = country;
     }
 
@@ -269,12 +265,16 @@ export class BlackListedProfilesAddComponent implements OnActivate {
             this._blacklistedProfilesService.editCandidateProfile(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 });
         }
     }
@@ -286,12 +286,16 @@ export class BlackListedProfilesAddComponent implements OnActivate {
             this._blacklistedProfilesService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 });
         }
     }
@@ -303,28 +307,16 @@ export class BlackListedProfilesAddComponent implements OnActivate {
             this._blacklistedProfilesService.editCandidateProfessionalDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
-                });
-        }
-    }
-
-    onSaveQualificationDetails(): void {
-        //   this.showMessage('Wait', true);
-        if (this.params) {
-            this._blacklistedProfilesService.editCandidateQualificationDetails(this.profile)
-                .subscribe(
-                results => {
-
-                    this.getCandidateProfileById(this.params);
-                },
-                error => {
-                    this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 });
         }
     }
@@ -335,12 +327,16 @@ export class BlackListedProfilesAddComponent implements OnActivate {
             this._blacklistedProfilesService.editCandidateSkillsDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 });
         }
     }
@@ -352,12 +348,16 @@ export class BlackListedProfilesAddComponent implements OnActivate {
             this._blacklistedProfilesService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 });
         }
     }
@@ -368,12 +368,16 @@ export class BlackListedProfilesAddComponent implements OnActivate {
             this._blacklistedProfilesService.editCandidateCareerDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 }
                 );
         }
@@ -386,12 +390,16 @@ export class BlackListedProfilesAddComponent implements OnActivate {
             this._blacklistedProfilesService.editCandidateSalaryDetails(this.profile)
                 .subscribe(
                 results => {
-                    this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
-                    this.getCandidateProfileById(this.params);
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                    this.toastr.error(<any>error);
                 });
         }
     }
@@ -409,14 +417,19 @@ export class BlackListedProfilesAddComponent implements OnActivate {
                 this._blacklistedProfilesService.addCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
-                        this.createQualification();
-                        this.getCandidateQualifications();
-                        this.alerts.push({ msg: 'Qualification Added Sucessfully!', type: 'success', closable: true });
+                        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                            this.toastr.success((<ResponseFromAPI>results).Message);
+                            this.createQualification();
+                            this.getCandidateQualifications();
+                        } else {
+                            this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                        }
+
                     },
                     error => {
                         this.createQualification();
                         this.errorMessage = <any>error;
-                        this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
+                         this.toastr.error(<any>error);
                     });
             }
         } else {
@@ -445,16 +458,19 @@ export class BlackListedProfilesAddComponent implements OnActivate {
                 this._blacklistedProfilesService.editCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
-                        this.createQualification();
-                        this.IsHidden = true;
-                        this.getCandidateQualifications();
-                        this.alerts.push({ msg: 'Details Updated Sucessfully!', type: 'success', closable: true });
+                        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                            this.toastr.success((<ResponseFromAPI>results).Message);
+                            this.createQualification();
+                            this.IsHidden = true;
+                            this.getCandidateQualifications();
+                        } else {
+                            this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                        }
                     },
                     error => {
                         this.errorMessage = <any>error;
                         this.createQualification();
-                        this.alerts.push({ msg: 'Oops! Somthing Went Wrong', type: 'danger', closable: true });
-
+                        this.toastr.error(<any>error);
                     });
             }
         }

@@ -5,7 +5,9 @@ import { RecentProfilesService } from '../services/recentProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
-import { MasterData } from  '../../../shared/model/index';
+import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { APIResult } from  '../../../shared/constantValue/index';
 
 @Component({
     moduleId: module.id,
@@ -29,6 +31,7 @@ export class RecentProfilesListComponent implements OnActivate {
     public isCollapsed: boolean = false;
     constructor(private _recentProfilesService: RecentProfilesService,
         private _router: Router,
+        public toastr: ToastsManager,
         private _masterService: MastersService) {
         this.profile = new MyProfilesInfo();
     }
@@ -77,8 +80,13 @@ export class RecentProfilesListComponent implements OnActivate {
         this._recentProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
-                this.profile.Status = new MasterData();
-                this.getRecentProfiles();
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.profile.Status = new MasterData();
+                    this.getRecentProfiles();
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                }
             },
             error => {
                 this.errorMessage = <any>error;

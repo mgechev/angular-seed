@@ -6,6 +6,8 @@ import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES,AlertComponent } from 'ng2-bootstrap';
 import { MasterData,ResponseFromAPI } from  '../../../shared/model/index';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { APIResult } from  '../../../shared/constantValue/index';
 
 @Component({
     moduleId: module.id,
@@ -36,6 +38,7 @@ export class MyProfilesListComponent implements OnActivate {
 
     constructor(private _myProfilesService: MyProfilesService,
         private _router: Router,
+         public toastr: ToastsManager,
         private _masterService: MastersService) {
         this.psdTemplates = new Array<File>();
         this.profile = new MyProfilesInfo();
@@ -118,12 +121,12 @@ public closeAlert(i: number): void {
         this._myProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
-                 var result =  results as ResponseFromAPI;
-                if(result.StatusCode === 1) {
-                    this.alerts.push({ msg: result.Message, type: 'success', closable: true });
+                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.profile.Status = new MasterData();
                     this.getMyProfiles();
-                }else {
-                    this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
                 this.profile.Status = new MasterData();
             },

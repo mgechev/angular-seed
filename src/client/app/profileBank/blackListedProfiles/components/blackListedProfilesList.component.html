@@ -114,13 +114,13 @@
                                             <td (click)='redirectToView(blacklistedProfile.CandidateID)'> {{blacklistedProfile.Tag}} </td>
                                             <td (click)='redirectToView(blacklistedProfile.CandidateID)'>
                                                 <tr>
-                                                    <td style="float: left;">&nbsp; Notice Period : {{blacklistedProfile.NoticePeriod}}</td>
+                                                    <td style="float: left;">&nbsp; Notice Period : {{blacklistedProfile.CandidateOtherDetails.NoticePeriod}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="float: left;">&nbsp; Current Salary :{{blacklistedProfile.CurrentSalary}}</td>
+                                                    <td style="float: left;">&nbsp; Current Salary : {{blacklistedProfile.CandidateSalaryDetails.CurrentSalary}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="float: left;">&nbsp; Expected Salary : {{blacklistedProfile.ExpectedSalary}}</td>
+                                                    <td style="float: left;">&nbsp; Expected Salary : {{blacklistedProfile.CandidateSalaryDetails.ExpectedSalary}}</td>
                                                 </tr>
 
                                             </td>

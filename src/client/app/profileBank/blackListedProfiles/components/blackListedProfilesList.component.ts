@@ -5,7 +5,10 @@ import { BlackListedProfilesService } from '../services/blacklistedProfiles.serv
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
-import { MasterData } from  '../../../shared/model/index';
+import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { APIResult } from  '../../../shared/constantValue/index';
+
 
 @Component({
     moduleId: module.id,
@@ -30,6 +33,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
     public isCollapsed: boolean = false;
     constructor(private _blacklistedProfilesService: BlackListedProfilesService,
         private _router: Router,
+          public toastr: ToastsManager,
         private _masterService: MastersService) {
         this.profile = new MyProfilesInfo();
         //this.profile.Status = new MasterData();
@@ -80,8 +84,13 @@ export class BlackListedProfilesListComponent implements OnActivate {
         this._blacklistedProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
-                this.profile.Status = new MasterData();
-                this.getBlacklistedProfiles();
+               if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.profile.Status = new MasterData();
+                    this.getBlacklistedProfiles();
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                }
             },
             error => this.errorMessage = <any>error);
         this.isCollapsed = false;

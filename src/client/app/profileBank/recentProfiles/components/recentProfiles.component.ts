@@ -5,12 +5,13 @@ import {RecentProfilesAddComponent} from './recentProfilesAdd.component';
 import {RecentProfilesService } from '../services/recentProfiles.service';
 import {RecentProfilesViewComponent} from './recentProfilesView.component';
 import { MastersService } from '../../../shared/services/masters.service';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
     selector: 'rrf-recent-profiles',
     template: ' <router-outlet></router-outlet>',
     directives: [ROUTER_DIRECTIVES],
-    providers:[RecentProfilesService,MastersService]
+    providers:[RecentProfilesService,MastersService,ToastsManager]
 })
 
 @Routes([
