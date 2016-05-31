@@ -1,8 +1,4 @@
-
-export class Masters {
-  public Id: number;
-  public Value: string;
-}
+import { MasterData } from  '../../../shared/model/index';
 export class Qualification {
   public CandidateID: number;
   public QualificationID: number;
@@ -23,7 +19,7 @@ export class MyProfilesInfo {
   public Tag: string;
   public Skills: Array<string>;
   public ResumeID: number;
-  public Status = new Masters();
+  public Status = new MasterData();
   public Comments: string;
   public CandidateOtherDetails: any;
   public CandidateSalaryDetails: any;
@@ -41,8 +37,8 @@ export class MyProfilesInfo {
   public ReadyToRelocate: any;
   public CommentsAdditionalInformation: string;
   public ResumeSource: string;
-  public ReasonToRelocate:string;
-  public FriendsRelatives:string;
+  public ReasonToRelocate: string;
+  public FriendsRelatives: string;
   public IsCurrentSameAsPermanent: any;
 
   //properties of Qualification
@@ -105,11 +101,5 @@ export class MyProfilesInfo {
   public PrimaryReasonToQuitCurrentJob: string;
   public SecondaryReasonToQuitCurrentJob: string;
 
-   public IsChecked: boolean;
-}
-export class Response {
-   public StatusCode : string;
-   public Message : string;
-   public ReasonCode: string;
-   public ErrorMsg: string;
+  public IsChecked: boolean;
 }

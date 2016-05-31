@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import { MyProfilesInfo, Masters,Response } from '../model/myProfilesInfo';
+import { MyProfilesInfo } from '../model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES,AlertComponent } from 'ng2-bootstrap';
-
+import { MasterData,ResponseFromAPI } from  '../../../shared/model/index';
 
 @Component({
     moduleId: module.id,
@@ -21,12 +21,14 @@ export class MyProfilesListComponent implements OnActivate {
     errorMessage: string;
     status: number;
     psdTemplates: any;
-    statusList: Array<Masters>;
+    statusList: Array<MasterData>;
     seletedCandidateID: number;
     selectedStatus: number;
     Comments: string;
     currentStatus: number;
     currentCandidate: string;
+     selectedRowCount: number = 0;
+     allChecked: boolean = false;
 
     public isCollapsed: boolean = false;
     IsSuccess: boolean = false;
@@ -37,7 +39,6 @@ export class MyProfilesListComponent implements OnActivate {
         private _masterService: MastersService) {
         this.psdTemplates = new Array<File>();
         this.profile = new MyProfilesInfo();
-        this.profile.Status = new Masters();
     }
 
     routerOnActivate() {
@@ -76,8 +77,8 @@ public closeAlert(i: number): void {
         this._myProfilesService.addCandidateProfile(this.profile)
             .subscribe(
             results => {
-                var result =  results as Response;
-                if(result.StatusCode === '1') {
+                var result =  results as ResponseFromAPI;
+                if(result.StatusCode === 1) {
                     this.alerts.push({ msg: result.Message, type: 'success', closable: true });
                     this.getMyProfiles();
                 }else {
@@ -117,14 +118,14 @@ public closeAlert(i: number): void {
         this._myProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
-                 var result =  results as Response;
-                if(result.StatusCode === '1') {
+                 var result =  results as ResponseFromAPI;
+                if(result.StatusCode === 1) {
                     this.alerts.push({ msg: result.Message, type: 'success', closable: true });
                     this.getMyProfiles();
                 }else {
                     this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
                 }
-                this.profile.Status = new Masters();
+                this.profile.Status = new MasterData();
             },
             error => this.errorMessage = <any>error);
         this.isCollapsed = false;
@@ -132,6 +133,46 @@ public closeAlert(i: number): void {
 
     closeUpdatePanel() {
         this.isCollapsed = false;
+    }
+    onStateChange(e: any): void {
+        if (e.target.checked) {
+            this.selectedRowCount++;
+        } else {
+            this.selectedRowCount--;
+        }
+
+        if (this.selectedRowCount === this.myProfilesList.length) {
+            this.allChecked = true;
+        } else {
+            this.allChecked = false;
+        }
+    }
+
+    onAllSelect(e: any): void {
+        var state: boolean;
+        if (e.target.checked) {
+            state = true;
+            this.selectedRowCount = this.myProfilesList.length;
+        } else {
+            state = false;
+            this.selectedRowCount = 0;
+        }
+
+        for (var index = 0; index < this.myProfilesList.length; index++) {
+            this.myProfilesList[index].IsChecked = state;
+        }
+    }
+    openMailWindow() {
+        var mailto: string = '';
+        for (var index = 0; index < this.myProfilesList.length; index++) {
+            if (this.myProfilesList[index].IsChecked) {
+                mailto = mailto + this.myProfilesList[index].Email + ';';
+                this.myProfilesList[index].IsChecked = false;
+            }
+            this.selectedRowCount = 0;
+        }
+        this.allChecked = false;
+        window.location.href = 'mailto:'+mailto;
     }
 }
 

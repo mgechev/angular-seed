@@ -108,9 +108,9 @@
                                         <tr class="gradeX odd" *ngFor="let profile of allProfilesList; let index = index">
                                             <td>
                                                 <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                            <input type="checkbox" class="checkboxes" value="1" [id]='profile.CandidateID' [(ngModel)]='profile.IsChecked' (change)="onStateChange($event)"/>
-                                         <span></span>
-                                        </label>
+                                                    <input type="checkbox" class="checkboxes" value="1" [id]='profile.CandidateID' [(ngModel)]='profile.IsChecked' (change)="onStateChange($event)"/>
+                                                    <span></span>
+                                                </label>
                                             </td>
                                             <td (click)='redirectToView(profile.CandidateID)'>
                                                 <tr>
@@ -127,21 +127,22 @@
                                             <td (click)='redirectToView(profile.CandidateID)'> {{profile.Tag}} </td>
                                             <td (click)='redirectToView(profile.CandidateID)'>
                                                 <tr>
-                                                    <td style="float: left;">&nbsp; Notice Period : {{profile.NoticePeriod}}</td>
+                                                    <td style="float: left;">&nbsp; Notice Period : {{profile.CandidateOtherDetails.NoticePeriod}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="float: left;">&nbsp; Current Salary :{{profile.CurrentSalary}}</td>
+                                                    <td style="float: left;">&nbsp; Current Salary :{{profile.CandidateSalaryDetails.CurrentSalary}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="float: left;">&nbsp; Expected Salary : {{profile.ExpectedSalary}}</td>
+                                                    <td style="float: left;">&nbsp; Expected Salary : {{profile.CandidateSalaryDetails.ExpectedSalary}}</td>
                                                 </tr>
 
                                             </td>
                                             <td (click)='redirectToView(profile.CandidateID)'>
-                                                <!--<div *ngFor="let candidateStatus of profile.Status"><span class="mt-action-dot {{candidateStatus.CandidateStatus}}"> </span>{{candidateStatus.CandidateStatus}}</div> -->
                                                 <span class="mt-action-dot {{profile.Status.Value}}"> </span>{{profile.Status.Value}}
                                             </td>
-                                            <td class="text-center"><i class="fa fa-download" aria-hidden="true"></i>{{profile.Resume_ID}} </td>
+                                            <td class="text-center">
+                                                <a href="" download><i class="fa fa-download" aria-hidden="true"></i>{{profile.Resume_ID}}</a> 
+                                                </td>
                                             <td>
                                                 <div class="btn-group">
                                                     <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
@@ -190,6 +191,9 @@
                                         </ul>
                                     </div>
                                 </div>
+                            </div>
+                            <div>
+                            <!--<rms-grid [meta]="meta"></rms-grid>-->
                             </div>
                         </div>
                     </div>

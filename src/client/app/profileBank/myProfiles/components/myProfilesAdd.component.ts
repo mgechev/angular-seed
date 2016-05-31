@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
 import { Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment } from '@angular/router';
-import { MyProfilesInfo, Qualification, Masters, Response } from '../model/myProfilesInfo';
+import { MyProfilesInfo, Qualification} from '../model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { TOOLTIP_DIRECTIVES, AlertComponent } from 'ng2-bootstrap';
+import { MasterData,ResponseFromAPI } from  '../../../shared/model/index';
 
 @Component({
     moduleId: module.id,
@@ -20,13 +21,13 @@ export class MyProfilesAddComponent implements OnActivate {
     errorMessage: string;
     params: string;
 
-    countries: Array<Masters>;
-    states: Array<Masters>;
-    districts: Array<Masters>;
+    countries: Array<MasterData>;
+    states: Array<MasterData>;
+    districts: Array<MasterData>;
 
-    qualifications: Array<Masters>;
-    grades: Array<Masters>;
-    years: Array<Masters>;
+    qualifications: Array<MasterData>;
+    grades: Array<MasterData>;
+    years: Array<MasterData>;
     selectedQualification: number;
     selectedYear: number;
     selectedGrade: number;
@@ -67,9 +68,9 @@ export class MyProfilesAddComponent implements OnActivate {
 
     createQualificationObj() {
         this.qualification = new Qualification();
-        this.qualification.Qualification = new Masters();
-        this.qualification.Grade = new Masters();
-        this.qualification.YearOfPassing = new Masters();
+        this.qualification.Qualification = new MasterData();
+        this.qualification.Grade = new MasterData();
+        this.qualification.YearOfPassing = new MasterData();
     }
 
     getCandidateProfileById(profileId: string) {
@@ -264,8 +265,8 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateProfile(this.profile)
                 .subscribe(
                 results => {
-                    var result = results as Response;
-                    if (result.StatusCode === '1') {
+                    var result = results as ResponseFromAPI;
+                    if (result.StatusCode === 1) {
                         this.alerts.push({ msg: result.Message, type: 'success', closable: true });
                         this.getCandidateProfileById(this.params);
                     } else {
@@ -286,8 +287,8 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
                 results => {
-                    var result = results as Response;
-                    if (result.StatusCode === '1') {
+                       var result = results as ResponseFromAPI;
+                    if (result.StatusCode === 1) {
                         this.alerts.push({ msg: result.Message, type: 'success', closable: true });
                         this.getCandidateProfileById(this.params);
                     } else {
@@ -308,8 +309,8 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateProfessionalDetails(this.profile)
                 .subscribe(
                 results => {
-                    var result = results as Response;
-                    if (result.StatusCode === '1') {
+                      var result = results as ResponseFromAPI;
+                    if (result.StatusCode === 1) {
                         this.alerts.push({ msg: result.Message, type: 'success', closable: true });
                         this.getCandidateProfileById(this.params);
                     } else {
@@ -329,8 +330,8 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateSkillsDetails(this.profile)
                 .subscribe(
                 results => {
-                    var result = results as Response;
-                    if (result.StatusCode === '1') {
+                      var result = results as ResponseFromAPI;
+                    if (result.StatusCode === 1) {
                         this.alerts.push({ msg: result.Message, type: 'success', closable: true });
                         this.getCandidateProfileById(this.params);
                     } else {
@@ -351,8 +352,8 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
                 results => {
-                    var result = results as Response;
-                    if (result.StatusCode === '1') {
+                       var result = results as ResponseFromAPI;
+                    if (result.StatusCode === 1) {
                         this.alerts.push({ msg: result.Message, type: 'success', closable: true });
                         this.getCandidateProfileById(this.params);
                     } else {
@@ -372,8 +373,8 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateCareerDetails(this.profile)
                 .subscribe(
                 results => {
-                    var result = results as Response;
-                    if (result.StatusCode === '1') {
+                      var result = results as ResponseFromAPI;
+                    if (result.StatusCode === 1) {
                         this.alerts.push({ msg: result.Message, type: 'success', closable: true });
                         this.getCandidateProfileById(this.params);
                     } else {
@@ -394,8 +395,8 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateSalaryDetails(this.profile)
                 .subscribe(
                 results => {
-                    var result = results as Response;
-                    if (result.StatusCode === '1') {
+                       var result = results as ResponseFromAPI;
+                    if (result.StatusCode === 1) {
                         this.alerts.push({ msg: result.Message, type: 'success', closable: true });
                         this.getCandidateProfileById(this.params);
                     } else {
@@ -423,8 +424,8 @@ export class MyProfilesAddComponent implements OnActivate {
                     results => {
                         this.createQualificationObj();
 
-                        var result = results as Response;
-                        if (result.StatusCode === '1') {
+                        var result = results as ResponseFromAPI;
+                    if (result.StatusCode === 1) {
                             this.alerts.push({ msg: result.Message, type: 'success', closable: true });
                             this.getCandidateQualifications();
                         } else {
@@ -439,20 +440,20 @@ export class MyProfilesAddComponent implements OnActivate {
         } else {
             //update Qualification
             if (this.selectedQualification !== undefined) {
-                this.qualification.Qualification = new Masters;
+                this.qualification.Qualification = new MasterData();
                 this.qualification.Qualification = this.selectedQualification;
             } else {
                 this.qualification.Qualification = this.qualification.Qualification.Id;
             }
 
             if (this.selectedGrade !== undefined) {
-                this.qualification.Grade = new Masters;
+                this.qualification.Grade = new MasterData();
                 this.qualification.Grade = this.selectedGrade;
             } else {
                 this.qualification.Grade = this.qualification.Grade.Id;
             }
             if (this.selectedYear !== undefined) {
-                this.qualification.YearOfPassing = new Masters;
+                this.qualification.YearOfPassing = new MasterData();
                 this.qualification.YearOfPassing = this.selectedYear;
             } else {
                 this.qualification.YearOfPassing = this.qualification.YearOfPassing.Id;
@@ -464,8 +465,8 @@ export class MyProfilesAddComponent implements OnActivate {
                     results => {
                         this.createQualificationObj();
                         this.IsHidden = true;
-                        var result = results as Response;
-                        if (result.StatusCode === '1') {
+                        var result = results as ResponseFromAPI;
+                    if (result.StatusCode === 1) {
                             this.alerts.push({ msg: result.Message, type: 'success', closable: true });
                             this.getCandidateQualifications();
                         } else {

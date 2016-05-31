@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
-import { MyProfilesInfo, Masters } from '../../myProfiles/model/myProfilesInfo';
+import { MyProfilesInfo } from '../../myProfiles/model/myProfilesInfo';
 import { BlackListedProfilesService } from '../services/blacklistedProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
-
+import { MasterData } from  '../../../shared/model/index';
 
 @Component({
     moduleId: module.id,
@@ -18,7 +18,7 @@ import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 export class BlackListedProfilesListComponent implements OnActivate {
     blacklistedProfilesList: Array<MyProfilesInfo>;
     profile: MyProfilesInfo;
-    statusList: Array<Masters>;
+    statusList: Array<MasterData>;
     seletedCandidateID: number;
     selectedStatus: number;
     Comments: string;
@@ -32,7 +32,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
         private _router: Router,
         private _masterService: MastersService) {
         this.profile = new MyProfilesInfo();
-        this.profile.Status = new Masters();
+        //this.profile.Status = new MasterData();
     }
 
     routerOnActivate() {
@@ -80,7 +80,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
         this._blacklistedProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
-                this.profile.Status = new Masters();
+                this.profile.Status = new MasterData();
                 this.getBlacklistedProfiles();
             },
             error => this.errorMessage = <any>error);

@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate } from '@angular/router';
-import {MyProfilesInfo, Masters} from '../../myProfiles/model/myProfilesInfo';
+import {MyProfilesInfo} from '../../myProfiles/model/myProfilesInfo';
 import { RecentProfilesService } from '../services/recentProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
+import { MasterData } from  '../../../shared/model/index';
 
 @Component({
     moduleId: module.id,
@@ -17,7 +18,7 @@ import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 export class RecentProfilesListComponent implements OnActivate {
     recentProfilesList: Array<MyProfilesInfo>;
     profile: MyProfilesInfo;
-    statusList: Array<Masters>;
+    statusList: Array<MasterData>;
     seletedCandidateID: number;
     selectedStatus: number;
     Comments: string;
@@ -30,7 +31,6 @@ export class RecentProfilesListComponent implements OnActivate {
         private _router: Router,
         private _masterService: MastersService) {
         this.profile = new MyProfilesInfo();
-        this.profile.Status = new Masters();
     }
     routerOnActivate() {
         this.getRecentProfiles();
@@ -77,7 +77,7 @@ export class RecentProfilesListComponent implements OnActivate {
         this._recentProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
-                this.profile.Status = new Masters();
+                this.profile.Status = new MasterData();
                 this.getRecentProfiles();
             },
             error => {

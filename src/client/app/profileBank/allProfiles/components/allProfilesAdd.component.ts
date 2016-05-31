@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
 import { Router, RouteSegment, OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
-import {MyProfilesInfo, Qualification, Masters} from '../../myProfiles/model/myProfilesInfo';
+import {MyProfilesInfo, Qualification} from '../../myProfiles/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { AlertComponent } from 'ng2-bootstrap';
+import { MasterData } from  '../../../shared/model/index';
 
 @Component({
     moduleId: module.id,
@@ -20,13 +21,13 @@ export class AllProfilesAddComponent implements OnActivate {
     errorMessage: string;
     params: string;
 
-    countries: Array<Masters>;
-    states: Array<Masters>;
-    districts: Array<Masters>;
+    countries: Array<MasterData>;
+    states: Array<MasterData>;
+    districts: Array<MasterData>;
 
-    qualifications: Array<Masters>;
-    grades: Array<Masters>;
-    years: Array<Masters>;
+    qualifications: Array<MasterData>;
+    grades: Array<MasterData>;
+    years: Array<MasterData>;
     selectedQualification: number;
     selectedYear: number;
     selectedGrade: number;
@@ -224,7 +225,7 @@ export class AllProfilesAddComponent implements OnActivate {
         this._masterService.getQualifications()
             .subscribe(
             results => {
-                this.qualifications = results;
+                this.qualifications = <Array<MasterData>>results;
             },
             error => this.errorMessage = <any>error);
     }
@@ -249,9 +250,9 @@ export class AllProfilesAddComponent implements OnActivate {
 
     createQualification() {
         this.qualification = new Qualification();
-        this.qualification.Qualification = new Masters;
-        this.qualification.Grade = new Masters;
-        this.qualification.YearOfPassing = new Masters;
+        this.qualification.Qualification = new MasterData;
+        this.qualification.Grade = new MasterData;
+        this.qualification.YearOfPassing = new MasterData;
     }
 
     onSelectCountry(country: number) {
@@ -298,14 +299,13 @@ export class AllProfilesAddComponent implements OnActivate {
     }
 
     onSavePrimaryInfo(): void {
-        //   this.showMessage('Wait', true);
-        if (this.params) {
+         if (this.params) {
             this._allProfilesService.editCandidateProfile(this.profile)
                 .subscribe(
                 results => {
                     this.alerts.push({ msg: 'Details Saved Sucessfully!', type: 'success', closable: true });
                     this.getCandidateProfileById(this.params);
-                    
+
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -455,20 +455,20 @@ export class AllProfilesAddComponent implements OnActivate {
         } else {
             //update
             if (this.selectedQualification !== undefined) {
-                this.qualification.Qualification = new Masters;
+                this.qualification.Qualification = new MasterData;
                 this.qualification.Qualification = this.selectedQualification;
             } else {
                 this.qualification.Qualification = this.qualification.Qualification.Id;
             }
 
             if (this.selectedGrade !== undefined) {
-                this.qualification.Grade = new Masters;
+                this.qualification.Grade = new MasterData;
                 this.qualification.Grade = this.selectedGrade;
             } else {
                 this.qualification.Grade = this.qualification.Grade.Id;
             }
             if (this.selectedYear !== undefined) {
-                this.qualification.YearOfPassing = new Masters;
+                this.qualification.YearOfPassing = new MasterData;
                 this.qualification.YearOfPassing = this.selectedYear;
             } else {
                 this.qualification.YearOfPassing = this.qualification.YearOfPassing.Id;
@@ -500,11 +500,11 @@ export class AllProfilesAddComponent implements OnActivate {
                 results => {
                     this.profile.Qualifications = new Array<Qualification>();
                     this.profile.Qualifications = <any>results;
-                    //this.showMessage('Details Saved Sucessfully', false);
+
                 },
                 error => {
                     this.errorMessage = <any>error;
-                    //this.showMessage(this.errorMessage, false);
+
                 });
         }
     }

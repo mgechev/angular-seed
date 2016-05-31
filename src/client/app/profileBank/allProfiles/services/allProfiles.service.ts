@@ -13,7 +13,7 @@ export class AllProfilesService {
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
     getAllProfiles() {
-        let url = Config.GetURL('/api/ProfileBank/ViewCandidateInformation');
+        let url = Config.GetURL('/api/ProfileBank/getOpenProfiles');
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)

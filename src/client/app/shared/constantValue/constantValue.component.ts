@@ -13,6 +13,14 @@ export class RRFStatus {
 }
 
 export class APIResult {
-   public static get Success(): number { return 1; };
-   public static get Error(): number { return 2; };
+    public static get Success(): number { return 1; };
+    public static get Error(): number { return 2; };
+}
+
+export class CandidateStatus {
+    public static get Open(): number { return 1; };
+    public static get PendingScreening(): number { return 2; };
+    public static get Offered(): number { return 3; };
+    public static get Selected(): number { return 4; };
+    public static get Blacklisted(): number { return 5; };
 }

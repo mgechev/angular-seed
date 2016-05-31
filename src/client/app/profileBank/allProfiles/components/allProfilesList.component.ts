@@ -1,26 +1,30 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
-import {MyProfilesInfo, Masters} from '../../myProfiles/model/myProfilesInfo';
+import {MyProfilesInfo} from '../../myProfiles/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
-
+import { RMSGridComponent } from '../../../shared/components/rmsGrid/rmsGrid.component';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { APIResult } from  '../../../shared/constantValue/index';
+import { MasterData,ResponseFromAPI } from  '../../../shared/model/index';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-allprofiles-list',
     templateUrl: 'allProfilesList.component.html',
-    directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES, RMSGridComponent],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
 
 
 export class AllProfilesListComponent implements OnActivate {
 
+
     allProfilesList: Array<MyProfilesInfo>;
     profile: MyProfilesInfo;
-    statusList: Array<Masters>;
+    statusList: Array<MasterData>;
     seletedCandidateID: number;
     selectedStatus: number;
     Comments: string;
@@ -34,9 +38,10 @@ export class AllProfilesListComponent implements OnActivate {
 
     constructor(private _allProfilesService: AllProfilesService,
         private _router: Router,
+        public toastr: ToastsManager,
         private _masterService: MastersService) {
         this.profile = new MyProfilesInfo();
-        this.profile.Status = new Masters();
+        this.profile.Status = new MasterData();
     }
 
     routerOnActivate() {
@@ -48,8 +53,8 @@ export class AllProfilesListComponent implements OnActivate {
 
         this._allProfilesService.getAllProfiles()
             .subscribe(
-            results => {
-                this.allProfilesList = <any>results;
+            (results: any) => {
+                this.allProfilesList = <Array<MyProfilesInfo>>results;
             },
             error => this.errorMessage = <any>error);
     }
@@ -81,13 +86,17 @@ export class AllProfilesListComponent implements OnActivate {
         this.selectedStatus = parseInt(statusId);
     }
 
-
     onUpdateStauts() {
         this._allProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
-                this.profile.Status = new Masters();
-                this.getAllProfiles();
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.profile.Status = new MasterData();
+                    this.getAllProfiles();
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                }
             },
             error => this.errorMessage = <any>error);
         this.isCollapsed = false;
@@ -134,7 +143,6 @@ export class AllProfilesListComponent implements OnActivate {
             this.selectedRowCount = 0;
         }
         this.allChecked = false;
-        window.location.href = 'mailto:'+mailto;
+        window.location.href = 'mailto:' + mailto;
     }
 }
-
