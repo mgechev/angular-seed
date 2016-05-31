@@ -5,7 +5,7 @@ import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as merge from 'merge-stream';
 import { join } from 'path';
 
-import { APP_DEST, APP_SRC, BROWSER_LIST, CSS_DEST, CSS_PROD_BUNDLE, DEPENDENCIES, ENV, getPluginConfig, TMP_DIR } from '../../config';
+import { APP_DEST, APP_SRC, BROWSER_LIST, CSS_DEST, CSS_PROD_BUNDLE, DEPENDENCIES, ENV, getPluginConfig, TMP_DIR, ENABLE_SCSS } from '../../config';
 
 const plugins = <any>gulpLoadPlugins();
 const cleanCss = require('gulp-clean-css');
@@ -38,6 +38,55 @@ function prepareTemplates() {
 }
 
 /**
+ * Execute the appropriate component-stylesheet processing method based on presence of --scss flag.
+ */
+function processComponentStylesheets() {
+  return ENABLE_SCSS ? processScss('component') : processComponentCss();
+}
+
+/**
+ * Processes the SCSS files for the specified origin.
+ * @param {string} origin The origin of the SCSS files being handled. Must be either 'component' or 'external.'
+ */
+function processScss(origin: 'component'|'external') {
+  let scssSrc = getScssForOrigin(origin);
+  let scssDest = getScssDestForOrigin(origin);
+  return gulp.src(scssSrc)
+    .pipe(isProd ? plugins.cached(`process-${origin}-scss`) : plugins.util.noop())
+    .pipe(isProd ? plugins.progeny() : plugins.util.noop())
+    .pipe(plugins.sourcemaps.init())
+    .pipe(plugins.sass({includePaths: ['./node_modules/']}).on('error', plugins.sass.logError))
+    .pipe(plugins.postcss(processors))
+    .pipe(plugins.sourcemaps.write(isProd ? '.' : ''))
+    .pipe(gulp.dest(scssDest));
+}
+
+/**
+ * Get an array of SCSS files belonging to the specified origin.
+ * @param {string} origin The origin of the SCSS files being handled. Must be either 'component' or 'external.'
+ */
+function getScssForOrigin(origin: 'component'|'external') {
+  if (origin === 'component') return [join(APP_SRC, '**', '*.scss')]; else {
+    return getExternalStylesheets().map(r => r.src);
+  }
+}
+
+function getExternalStylesheets() {
+  let stylesheet = ENABLE_SCSS ? 'scss' : 'css';
+  return DEPENDENCIES.filter(d => new RegExp(`\.${stylesheet}$`).test(d.src));
+}
+
+/**
+ * Get the destination of the processed SCSS files belonging to the specified origin.
+ * @param {string} origin The origin of the SCSS files being handled. Must be either 'component' or 'external.'
+ */
+function getScssDestForOrigin(origin: 'component'|'external') {
+  if (origin === 'component') return (isProd ? TMP_DIR : APP_DEST); else {
+    return CSS_DEST;
+  }
+}
+
+/**
  * Processes the CSS files within `src/client` excluding those in `src/client/assets` using `postcss` with the
  * configured processors.
  */
@@ -48,7 +97,14 @@ function processComponentCss() {
     ])
     .pipe(isProd ? plugins.cached('process-component-css') : plugins.util.noop())
     .pipe(plugins.postcss(processors))
-    .pipe(gulp.dest(isProd ? TMP_DIR: APP_DEST));
+    .pipe(gulp.dest(isProd ? TMP_DIR : APP_DEST));
+}
+
+/**
+ * Execute external-stylesheet processing method based on presence of --scss flag.
+ */
+function processExternalStylesheets() {
+  return ENABLE_SCSS ? processScss('external') : processExternalCss();
 }
 
 /**
@@ -73,4 +129,4 @@ function getExternalCss() {
 /**
  * Executes the build process, processing the HTML and CSS files.
  */
-export = () => merge(processComponentCss(), prepareTemplates(), processExternalCss());
+export = () => merge(processComponentStylesheets(), prepareTemplates(), processExternalStylesheets());
