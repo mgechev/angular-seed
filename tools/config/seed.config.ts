@@ -242,6 +242,13 @@ export class SeedConfig {
   CODELYZER_RULES = customRules();
 
   /**
+   * The flag to enable handling of SCSS files
+   * The default value is false. Override with the '--scss' flag.
+   * @type {boolean}
+   */
+  ENABLE_SCSS = argv['scss'] || false;
+
+  /**
    * The list of NPM dependcies to be injected in the `index.html`.
    * @type {InjectableDependency[]}
    */
