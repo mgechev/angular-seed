@@ -30,10 +30,10 @@ export class AllRRFStatusCount {
     public OnHold: number;
 }
 
-export class Approver {
-    ApproverDetails: MasterData = new MasterData();
-    Status: MasterData = new MasterData();
-    Comment: string;
+export class RRFApproval {
+    Approver: MasterData = new MasterData();
+    Status: string;
+    Comments: string;
 }
 
 export class RRFDetails {
@@ -56,7 +56,7 @@ export class RRFDetails {
     public IsChecked: boolean;
     public Comment: string;
     public AssignedData: AssignmentDetails[] = [];
-    public ApproverList: Approver[] = new Array();
+    public RRFApproval: RRFApproval[] = new Array();
 }
 
 export class ResultForAPI {

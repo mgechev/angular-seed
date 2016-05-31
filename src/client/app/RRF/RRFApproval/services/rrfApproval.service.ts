@@ -11,10 +11,10 @@ export class RRFApprovalService {
     constructor(private authHttp: AuthHttp,
         private _spinnerService: SpinnerService) { }
 
-    getRRFApprovalList(userName: string, roleID: Number) {
+    getRRFApprovalList() {
         let url = Config.GetURL('/api/RRF/GetAllRaisedRRF');
         this._spinnerService.show();
-        return this.authHttp.post(url, { UserName: userName, Role: roleID })
+        return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

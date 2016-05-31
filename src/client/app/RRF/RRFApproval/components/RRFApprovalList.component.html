@@ -116,9 +116,10 @@
                                         </div>
                                     </td>
                                      <td>
-                                        <div *ngFor="let Approver of rrf.ApproverList">
-                                            {{Approver.ApproverDetails.Value}} :{{Approver.Status.Value}}
+                                        <div *ngFor="let Approver of rrf.RRFApproval">
+                                            {{Approver.Approver.Value}} :{{Approver.Status}}
                                         </div>
+                                        
                                     </td>
                                 </tr>
                             </tbody>

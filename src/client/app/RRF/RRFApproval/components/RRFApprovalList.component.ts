@@ -28,11 +28,11 @@ export class RRFApprovalListComponent implements OnActivate {
     }
 
     routerOnActivate(): void {
-        this.getRRFApprovalList('admin', 1);
+        this.getRRFApprovalList();
     }
 
-    getRRFApprovalList(userName: string, roleID: number): void {
-        this._rrfApprovalService.getRRFApprovalList(userName, roleID)
+    getRRFApprovalList(): void {
+        this._rrfApprovalService.getRRFApprovalList()
             .subscribe(
             results => {
                 this.rrfApprovalList = <any>results;
