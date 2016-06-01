@@ -101,7 +101,7 @@ export class RRFDashboardListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    getRRFDetails(rrfID: number) {
+    getRRFDetails(rrfID: string) {
         this._myRRFService.getRRFDetails(rrfID)
             .subscribe(
             results => {
@@ -110,7 +110,7 @@ export class RRFDashboardListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    showRRFDetails(rrfId: number) {
+    showRRFDetails(rrfId: string) {
         this.getRRFDetails(rrfId);
         this.isListVisible = false;
     }

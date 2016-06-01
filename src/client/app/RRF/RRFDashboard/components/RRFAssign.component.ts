@@ -20,7 +20,7 @@ import { APIResult } from  '../../../shared/constantValue/index';
 export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterContentInit {
     selectedRRF: RRFDetails = new RRFDetails();
     errorMessage: string;
-    Id: number;
+    RRFId: string;
     recruiterDtls: MasterData[];
     AssignedComments: string = '';
     unAssignRowVisible: boolean = false;
@@ -35,9 +35,9 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
     }
 
     routerOnActivate(segment: RouteSegment) {
-        this.Id = +segment.getParam('id');
+        this.RRFId = segment.getParam('id');
         this.GetRecruiter();
-        this.getRRFDetails(this.Id);
+        this.getRRFDetails(this.RRFId);
         this.UnAssignRec.AssignedTo = new MasterData();
     }
 
@@ -51,11 +51,11 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
         $('#cmbAssignTo').select2();
     }
 
-    getRRFDetails(rrfID: number): void {
+    getRRFDetails(rrfID: string): void {
         this._myRRFService.getRRFDetails(rrfID)
             .subscribe(
             results => {
-                this.selectedRRF = results;
+                this.selectedRRF = <any>results;
                 if (this.selectedRRF.AssignedData === undefined) {
                     var assignmentDetails: AssignmentDetails = new AssignmentDetails();
                     this.selectedRRF.AssignedData = new Array();
@@ -79,13 +79,13 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
             return;
         }
         var selectedRec: number[] = $('#cmbAssignTo').val();
-        this._rrfDashboardService.saveRRFAssignmentDeatils(this.Id, selectedRec, this.AssignedComments)
+        this._rrfDashboardService.saveRRFAssignmentDeatils(this.RRFId, selectedRec, this.AssignedComments)
             .subscribe(
             results => {
                 // if (results.StatusCode === 1) {
                 //     for (var index = 0; index < selectedRec.length; index++) {
                 //     var assignmentDetails: AssignmentDetails = new AssignmentDetails();
-                //     assignmentDetails.RRFID =this.Id;
+                //     assignmentDetails.RRFID =this.RRFId;
                 //     assignmentDetails.AssignedTo.Id = selectedRec[index];
                 //     assignmentDetails.AssignedComments =this.AssignedComments;
                 //     assignmentDetails.AssignedDate = new Date();
@@ -99,7 +99,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
                 } else {
                     this.toastr.error((<ResultForAPI>results).ErrorMsg);
                 }
-                this.getRRFDetails(this.Id); //TODO
+                this.getRRFDetails(this.RRFId); //TODO
                 this.AssignedComments = '';
                 $('#cmbAssignTo').select2('val', '');
             },
@@ -123,7 +123,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
 
 
     onUnAssignRRF(): void {
-        this._rrfDashboardService.unassignRRF(this.Id, this.UnAssignRec.AssignedTo.Id, this.unAssignedComments)
+        this._rrfDashboardService.unassignRRF(this.RRFId, this.UnAssignRec.AssignedTo.Id, this.unAssignedComments)
             .subscribe(
             results => {
                 if ((<ResultForAPI>results).StatusCode === APIResult.Success) {
@@ -132,7 +132,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
                     this.UnAssignRec = new AssignmentDetails();
                     this.unAssignedComments = '';
                     $('#cmbAssignTo').select2();
-                    this.getRRFDetails(this.Id); //TODO
+                    this.getRRFDetails(this.RRFId); //TODO
                     setTimeout(function() {
                         $('#cmbAssignTo').select2();
                     }, 20);

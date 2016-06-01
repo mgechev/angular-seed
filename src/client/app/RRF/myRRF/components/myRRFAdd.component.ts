@@ -31,7 +31,7 @@ export class MyRRFAddComponent implements OnActivate {
 
     updatePanel: boolean = false;
     editPanelData: Panel = new Panel();
-    Id: number;
+    RRFId: string;
 
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
@@ -62,9 +62,9 @@ export class MyRRFAddComponent implements OnActivate {
 
 
         if (segment.getParam('id') !== undefined) {
-            this.Id = +segment.getParam('id');
+            this.RRFId = segment.getParam('id');
             this.isNewRRF = false;
-            this.getRRFByID(this.Id);
+            this.getRRFByID(this.RRFId);
         }
 
         if (this.isNewRRF) {
@@ -75,7 +75,7 @@ export class MyRRFAddComponent implements OnActivate {
 
             this.newRRF.Practice.Id = 0;
             this.newRRF.Technology.Id = 0;
-            this.newRRF.SkillsRequired.Id = 0;
+            //this.newRRF.SkillsRequired.Id = 0;
             this.newRRF.Designation.Id = 0;
             $('#cmbInterviewer').val = ['0'];
         }
@@ -247,7 +247,7 @@ export class MyRRFAddComponent implements OnActivate {
 
     }
 
-    getRRFByID(rrfId: number) {
+    getRRFByID(rrfId: string) {
         this._myRRFService.getRRFByID(rrfId)
             .subscribe(
             results => {

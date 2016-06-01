@@ -3,8 +3,8 @@ import { RRFDetails} from '../../myRRF/models/rrfDetails';
 
 @Pipe({name: 'RRFIDPipe'})
 export class RRFIDPipe implements PipeTransform {
-  transform(value: RRFDetails[], rrfID: number): RRFDetails[] {
- return rrfID ? value.filter(rrfData=> rrfData.RRFID === rrfID ) : value; //TODO :when RRFID change to string
+  transform(value: RRFDetails[], rrfID: string): RRFDetails[] {
+ return rrfID ? value.filter(rrfData=> rrfData.RRFID === rrfID ) : value; 
   //return rrfID ? value.filter(rrfData=> rrfData.RRFID.toLocaleLowerCase().indexOf(rrfID) != -1) : value;
   }
 }

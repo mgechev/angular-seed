@@ -38,7 +38,7 @@ export class RRFDashboardService {
             .finally(() => this._spinnerService.hide());
     }
 
-    saveRRFAssignmentDeatils(rrfId: number, assignedTo: number[], comment: string) {
+    saveRRFAssignmentDeatils(rrfId: string, assignedTo: number[], comment: string) {
         let url = Config.GetURL(' /api/RRF/SaveRRFAssignmentDeatils');
         this._spinnerService.show();
         return this.authHttp.post(url, { RRFID: rrfId, AssignedTo: assignedTo, AssignedComments: comment })
@@ -47,7 +47,7 @@ export class RRFDashboardService {
             .finally(() => this._spinnerService.hide());
     }
 
-    unassignRRF(rrfId: number, assignedTo: number, comment: string) {
+    unassignRRF(rrfId: string, assignedTo: number, comment: string) {
         let url = Config.GetURL(' /api/RRF/UnassignRRF');
         this._spinnerService.show();
         return this.authHttp.post(url, { RRFID: rrfId, AssignedTo: assignedTo, UnassigningComment: comment })

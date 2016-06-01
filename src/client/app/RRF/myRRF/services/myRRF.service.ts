@@ -24,7 +24,7 @@ export class MyRRFService {
     }
 
     //Get details of RRF from RRFID
-    getRRFDetails(rrfId: number) {
+    getRRFDetails(rrfId: string) {
         let url = Config.GetURL('/api/RRF/ViewRRF');
         this._spinnerService.show();
         return this.authHttp.post(url, { RRFID: rrfId })
@@ -43,7 +43,7 @@ export class MyRRFService {
             .finally(() => this._spinnerService.hide());
     }
 
-    getRRFByID(rrfId: number) {
+    getRRFByID(rrfId: string) {
         let url = Config.GetURL('/api/RRF/GetRRFByID');
         this._spinnerService.show();
         return this.authHttp.post(url, { RRFID: rrfId })
