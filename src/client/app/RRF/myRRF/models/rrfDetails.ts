@@ -54,6 +54,7 @@ export class RRFDetails {
     public Comment: string;
     public AssignedData: AssignmentDetails[] = [];
     public RRFApproval: RRFApproval[] = new Array();
+    public OpenForNumberOfDays: number = 0;
 }
 
 // export class ResultForAPI {

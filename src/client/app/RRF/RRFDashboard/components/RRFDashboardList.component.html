@@ -130,6 +130,7 @@
                                         <td> <b>Requirments </b></td>
                                         <td> <b>Priority</b></td>
                                         <td> <b>Status </b></td>
+                                        <td> <b>Open for <br> no. of days</b></td>
                                         <td><b> Action </b></td>
 
                                     </tr>
@@ -177,6 +178,11 @@
                                         </td>
                                         <td>
                                             <span class="mt-action-dot {{rrf.Status.Value}}"></span>{{rrf.Status.Value}}
+                                        </td>
+                                        <td>
+                                            <div align="left">
+                                                {{rrf.OpenForNumberOfDays}}
+                                            </div>
                                         </td>
                                         <td>
                                             <!--<a class="edit"s [routerLink]="['/App/RRF/RRFDashboard/Assign/'+rrf.RRFID]"> Assign </a>-->
@@ -313,7 +319,7 @@
                                                 <div class="row">
                                                     <div class="col-md-5">Priority</div>
                                                     <div class="col-md-1" style="align:right">:</div>
-                                                    <div class="col-md-6" id="lblPriority">{{selectedRRF.Priority}}</div>
+                                                    <div class="col-md-6" id="lblPriority">{{selectedRRF.Priority.Value}}</div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-5">Exp. Date Of Joining</div>

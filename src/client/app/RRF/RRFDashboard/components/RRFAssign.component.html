@@ -26,11 +26,12 @@
                             <table class="table table-striped table-bordered table-hover table-checkable order-column">
                                 <thead style="word-wrap: break-word;">
                                     <tr>
-                                        <td> <b>Raised by / Date</b> </td>
+                                        <td> <b>Raised by/Date</b> </td>
                                         <td> <b>Position Details</b> </td>
                                         <td> <b>Requirments </b></td>
-                                        <td> <b>Priority</b></td>
+                                       <td> <b>Priority</b></td>
                                         <td> <b>Status </b></td>
+                                        <td> <b>Open for <br> no. of days</b></td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -66,6 +67,11 @@
                                         </td>
                                         <td>
                                             <span class="mt-action-dot {{selectedRRF.Status.Value}}"></span>{{selectedRRF.Status.Value}}
+                                        </td>
+                                        <td>
+                                            <div align="left">
+                                                {{selectedRRF.OpenForNumberOfDays}}
+                                            </div>
                                         </td>
 
                                     </tr>
