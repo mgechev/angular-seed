@@ -210,7 +210,7 @@ export class SeedConfig {
    * The name of the bundle file to includes all CSS files.
    * @type {string}
    */
-  CSS_PROD_BUNDLE = 'all.css';
+  CSS_PROD_BUNDLE = 'main.css';
 
   /**
    * The name of the bundle file to include all JavaScript shims.
@@ -265,7 +265,7 @@ export class SeedConfig {
    * @type {InjectableDependency[]}
    */
   APP_ASSETS: InjectableDependency[] = [
-    { src: `${this.CSS_SRC}/main.${this.ENABLE_SCSS ? 'scss' : 'css'}`, inject: true, vendor: false },
+    { src: `${this.CSS_SRC}/main.${ this.getInjectableStyleExtension() }`, inject: true, vendor: false },
   ];
 
   /**
@@ -435,6 +435,10 @@ export class SeedConfig {
       return this.PLUGIN_CONFIGS[pluginKey];
     }
     return null;
+  }
+
+  getInjectableStyleExtension() {
+    return this.ENV === ENVIRONMENTS.PRODUCTION && this.ENABLE_SCSS ? 'scss' : 'css';
   }
 
 }
