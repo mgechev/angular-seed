@@ -108,8 +108,8 @@
                                 required=""></textarea>
                             </div>
                             <div class="col-lg-3">
-                                 <button id="btnClose" class="btn blue" (click)="onbtnCloseRRF()">Close RRF</button>
-                                  <button id="btnCancel" class="btn default" (click)="onCancelCloseRRF()">cancel</button>
+                                <button id="btnClose" class="btn blue" (click)="onbtnCloseRRF()">Close RRF</button>
+                                <button id="btnCancel" class="btn default" (click)="onCancelCloseRRF()">cancel</button>
                             </div>
                         </div>
 
@@ -128,6 +128,7 @@
                                         <td> <b>Raised by / Date</b> </td>
                                         <td> <b>Position Details</b> </td>
                                         <td> <b>Requirments </b></td>
+                                        <td> <b>Priority</b></td>
                                         <td> <b>Status </b></td>
                                         <td><b> Action </b></td>
 
@@ -167,12 +168,15 @@
                                                 <div class="mt-action-body">
                                                     <div class="mt-action-row">
                                                         <div class="mt-action-datetime ">
-                                                            <span class="mt-action-dot {{rrf.Status.Value}}"></span>{{rrf.Status.Value}}
+                                                            <span class="mt-action-dot {{getPriorityClass(rrf.Priority.Id)}}"></span>{{rrf.Priority.Value}}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
+                                        </td>
+                                        <td>
+                                            <span class="mt-action-dot {{rrf.Status.Value}}"></span>{{rrf.Status.Value}}
                                         </td>
                                         <td>
                                             <!--<a class="edit"s [routerLink]="['/App/RRF/RRFDashboard/Assign/'+rrf.RRFID]"> Assign </a>-->

@@ -24,3 +24,12 @@ export class CandidateStatus {
     public static get Selected(): number { return 4; };
     public static get Blacklisted(): number { return 5; };
 }
+
+export class RRFPriority {
+    public static get One(): number { return 1; };
+    public static get Two(): number { return 2; };
+    public static get Three(): number { return 3; };
+    public static get Four(): number { return 4; };
+    public static get Five(): number { return 5; };
+}
+

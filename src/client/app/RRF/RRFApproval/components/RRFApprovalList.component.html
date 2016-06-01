@@ -72,23 +72,24 @@
                                     <td> <b>Raise by / Date</b> </td>
                                     <td> <b>Position Details</b> </td>
                                     <td> <b>Requirments </b></td>
-                                    <td> <b>Priority / Status </b></td>
-                                     <td> <b>Approver </b></td>
+                                    <td> <b>Priority</b></td>
+                                    <td> <b>Status </b></td>
+                                    <td> <b>Approver </b></td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="odd gradeX" *ngFor="let rrf of rrfApprovalList">
                                     <td>
-                                        <label *ngIf= "rrf.Status.Id != statusConstant.Rejected" class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                        <label *ngIf="rrf.Status.Id != statusConstant.Rejected" class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                             <input type="checkbox" class="checkboxes" value="1" [id]='rrf.RRFID' [(ngModel)]='rrf.IsChecked' (change)="onStateChange($event)"
-                                            /> 
+                                            />
                                             <span></span>
                                         </label>
-                                    </td>                                    
+                                    </td>
                                     <td>
                                         <div align="left">
                                             {{rrf.RaisedBy }}
-                                            <br> 30 Apr 2016 
+                                            <br> 30 Apr 2016
                                         </div>
                                     </td>
                                     <td>
@@ -111,15 +112,19 @@
                                     </td>
                                     <td>
                                         <div>
-                                            Priority:<span class="mt-action-dot {{rrf.Priority}}"></span>{{rrf.Priority}}
-                                            <br> Status : <span class="mt-action-dot {{rrf.Status.Value}}"></span>{{rrf.Status.Value}}
+                                            <span class="mt-action-dot {{getPriorityClass(rrf.Priority.Id)}}"></span>{{rrf.Priority.Value}}
                                         </div>
                                     </td>
-                                     <td>
+                                    <td>
+                                        <div>
+                                            <span class="mt-action-dot {{rrf.Status.Value}}"></span>{{rrf.Status.Value}}
+                                        </div>
+                                    </td>
+                                    <td>
                                         <div *ngFor="let Approver of rrf.RRFApproval">
                                             {{Approver.Approver.Value}} :{{Approver.Status}}
                                         </div>
-                                        
+
                                     </td>
                                 </tr>
                             </tbody>

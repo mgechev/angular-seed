@@ -1,3 +1,5 @@
+import { MasterData  } from '../../../shared/model/common.model';
+
 export class Panel {
     public RoundNumber: MasterData = new MasterData(); //TODO : check on server side name
     public Interviewers: MasterData[] = new Array();
@@ -12,11 +14,6 @@ export class AssignmentDetails {
     public UnassigningComment: string;
     public Status: string;
     public AssigneeLastDate: Date;
-}
-
-export class MasterData {
-    public Id: number;
-    public Value: string;
 }
 
 export class AllRRFStatusCount {
@@ -47,7 +44,7 @@ export class RRFDetails {
     public Designation: MasterData = new MasterData();
     public MinExp: number = 0;
     public MaxExp: number = 0;
-    public Priority: number = 1;
+    public Priority: MasterData = new MasterData();
     public ExpDateOfJoining: Date;
     public RaisedBy: string;
     public Status: MasterData = new MasterData();
@@ -59,11 +56,15 @@ export class RRFDetails {
     public RRFApproval: RRFApproval[] = new Array();
 }
 
-export class ResultForAPI {
-   public StatusCode : number;
-   public Message : '' ;
-    public ReasonCode: string;
-   public ErrorMsg: string;
-}
+// export class ResultForAPI {
+//    public StatusCode : number;
+//    public Message : '' ;
+//     public ReasonCode: string;
+//    public ErrorMsg: string;
+// }
 
+// export class MasterData {
+//     public Id: number;
+//     public Value: string;
+// }
 

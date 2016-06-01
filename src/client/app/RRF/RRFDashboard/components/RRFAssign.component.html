@@ -29,6 +29,7 @@
                                         <td> <b>Raised by / Date</b> </td>
                                         <td> <b>Position Details</b> </td>
                                         <td> <b>Requirments </b></td>
+                                        <td> <b>Priority</b></td>
                                         <td> <b>Status </b></td>
                                     </tr>
                                 </thead>
@@ -60,18 +61,11 @@
                                                 <!--<br>Man.EXP : {{rrf.MaxExp }}-->
                                             </div>
                                         </td>
-
                                         <td>
-                                            <div class="mt-action">
-                                                <div class="mt-action-body">
-                                                    <div class="mt-action-row">
-                                                        <div class="mt-action-datetime ">
-                                                            <span class="mt-action-dot {{selectedRRF.Status.Value}}"></span>{{selectedRRF.Status.Value}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
+                                            <span class="mt-action-dot {{getPriorityClass(selectedRRF.Priority.Id)}}"></span>{{selectedRRF.Priority.Value}}
+                                        </td>
+                                        <td>
+                                            <span class="mt-action-dot {{selectedRRF.Status.Value}}"></span>{{selectedRRF.Status.Value}}
                                         </td>
 
                                     </tr>

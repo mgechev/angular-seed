@@ -1,6 +1,6 @@
 import {Component, AfterViewInit, AfterContentInit  } from '@angular/core';
 import { OnActivate, ROUTER_DIRECTIVES, RouteSegment } from '@angular/router';
-import { RRFDetails, AssignmentDetails, MasterData, ResultForAPI } from '../../myRRF/models/rrfDetails';
+import { RRFDetails, AssignmentDetails } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
 import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
@@ -8,12 +8,15 @@ import { MastersService } from '../../../shared/services/masters.service';
 import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
+import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
 
 
 @Component({
+    moduleId: module.id,
     selector: 'rrf-assign',
-    templateUrl: 'app/RRF/RRFDashboard/components/RRFAssign.component.html',
+    templateUrl: 'RRFAssign.component.html',
     directives: [ROUTER_DIRECTIVES, DATEPICKER_DIRECTIVES, SELECT_DIRECTIVES],
+    styleUrls: ['../../RRFApproval/components/RRFApproval.component.css'],
     providers: [ToastsManager]
 })
 
@@ -94,10 +97,10 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
                 //     }
                 // }
 
-                if ((<ResultForAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResultForAPI>results).Message);
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
                 } else {
-                    this.toastr.error((<ResultForAPI>results).ErrorMsg);
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
                 this.getRRFDetails(this.RRFId); //TODO
                 this.AssignedComments = '';
@@ -126,8 +129,8 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
         this._rrfDashboardService.unassignRRF(this.RRFId, this.UnAssignRec.AssignedTo.Id, this.unAssignedComments)
             .subscribe(
             results => {
-                if ((<ResultForAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResultForAPI>results).Message);
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
                     this.unAssignRowVisible = false;
                     this.UnAssignRec = new AssignmentDetails();
                     this.unAssignedComments = '';
@@ -137,9 +140,13 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
                         $('#cmbAssignTo').select2();
                     }, 20);
                 } else {
-                    this.toastr.error((<ResultForAPI>results).ErrorMsg);
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
             },
             error => this.errorMessage = <any>error);
+    }
+
+    getPriorityClass(priority: string): string {
+        return 'priority' + priority;
     }
 }

@@ -1,11 +1,12 @@
 import {Component } from '@angular/core';
 import { Router, OnActivate, ROUTER_DIRECTIVES, RouteSegment } from '@angular/router';
-import {RRFDetails, Panel, MasterData , ResultForAPI } from '../models/rrfDetails';
+import {RRFDetails, Panel } from '../models/rrfDetails';
 import { MyRRFService } from '../services/myRRF.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult } from  '../../../shared/constantValue/index';
+import { APIResult, RRFPriority } from  '../../../shared/constantValue/index';
+import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
 
 @Component({
     moduleId: module.id,
@@ -69,13 +70,14 @@ export class MyRRFAddComponent implements OnActivate {
 
         if (this.isNewRRF) {
             this.newRRF.NoOfOpenings = 1;
-            this.newRRF.Priority = 1;
+
             this.newRRF.MinExp = 0;
             this.newRRF.MaxExp = 0;
 
             this.newRRF.Practice.Id = 0;
             this.newRRF.Technology.Id = 0;
             //this.newRRF.SkillsRequired.Id = 0;
+            this.newRRF.Priority.Id = RRFPriority.One;
             this.newRRF.Designation.Id = 0;
             $('#cmbInterviewer').val = ['0'];
         }
@@ -91,12 +93,12 @@ export class MyRRFAddComponent implements OnActivate {
         this._myRRFService.raiseRRF(this.newRRF)
             .subscribe(
             results => {
-                if (+ (<ResultForAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResultForAPI>results).Message, 'Success!');
+                if (+ (<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message, 'Success!');
                     this._router.navigate(['/App/RRF/RRFDashboard/']);
                 }
                 else {
-                    this.toastr.error((<ResultForAPI>results).ErrorMsg);
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
             },
             error => this.errorMessage = <any>error);
@@ -281,12 +283,12 @@ export class MyRRFAddComponent implements OnActivate {
         this._myRRFService.UpdateRRF(this.newRRF)
             .subscribe(
             results => {
-                if ((<ResultForAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResultForAPI>results).Message);
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
                     this._router.navigate(['/App/RRF/RRFDashboard/']);
                 }
                 else {
-                    this.toastr.error((<ResultForAPI>results).ErrorMsg);
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
             },
             error => this.errorMessage = <any>error);

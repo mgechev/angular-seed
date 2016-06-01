@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
 import {OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
-import { RRFDetails ,ResultForAPI} from '../../myRRF/models/rrfDetails';
+import { RRFDetails} from '../../myRRF/models/rrfDetails';
 import { RRFApprovalService } from '../services/rrfApproval.service';
 import { RRFStatus } from  '../../../shared/constantValue/index';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ResponseFromAPI } from '../../../shared/model/common.model';
 
 @Component({
     moduleId: module.id,
@@ -24,7 +25,7 @@ export class RRFApprovalListComponent implements OnActivate {
     statusConstant: RRFStatus = RRFStatus;
 
     constructor(private _rrfApprovalService: RRFApprovalService,
-    public toastr: ToastsManager) {
+        public toastr: ToastsManager) {
     }
 
     routerOnActivate(): void {
@@ -68,8 +69,7 @@ export class RRFApprovalListComponent implements OnActivate {
             this.selectedRowCount = 0;
         }
         for (var index = 0; index < this.rrfApprovalList.length; index++) {
-            if (+this.rrfApprovalList[index].Status.Id !== +RRFStatus.Rejected)
-            {
+            if (+this.rrfApprovalList[index].Status.Id !== +RRFStatus.Rejected) {
                 this.rrfApprovalList[index].IsChecked = state;
             }
         }
@@ -109,13 +109,16 @@ export class RRFApprovalListComponent implements OnActivate {
         comment: string): void {
         this._rrfApprovalService.ActionOnRaisedRRF(rrfID, status, comment)
             .subscribe(
-                 results => {
-                if (+ (<ResultForAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResultForAPI>results).Message, 'Success!');
+            results => {
+                if (+ (<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message, 'Success!');
                 } else {
-                    this.toastr.error((<ResultForAPI>results).ErrorMsg);
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
             },
             error => this.errorMessage = <any>error);
     }
-}
+
+    getPriorityClass(priority: string): string {
+        return 'priority' + priority;
+    }

@@ -1,12 +1,13 @@
 import {Component} from '@angular/core';
 import { OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
-import { RRFDetails, AllRRFStatusCount ,ResultForAPI } from '../../myRRF/models/rrfDetails';
+import { RRFDetails, AllRRFStatusCount  } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 import {RRFIDPipe } from './RRFIdFilter.component';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
+import { ResponseFromAPI } from '../../../shared/model/common.model';
 
 
 @Component({
@@ -87,7 +88,7 @@ export class RRFDashboardListComponent implements OnActivate {
         this._rrfDashboardService.getStatuswiseRRFCount()
             .subscribe(
             results => {
-                 this.rrfStatusCount = <any>results;
+                this.rrfStatusCount = <any>results;
             },
             error => this.errorMessage = <any>error);
     }
@@ -143,12 +144,12 @@ export class RRFDashboardListComponent implements OnActivate {
         this._rrfDashboardService.closeRRF(this.closeRRFID, this.closeComment)
             .subscribe(
             results => {
-                 if ((<ResultForAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResultForAPI>results).Message);
-                   this.rrfStatusCount = <any>results;
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.rrfStatusCount = <any>results;
                 }
                 else {
-                    this.toastr.error((<ResultForAPI>results).ErrorMsg);
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
             },
             error => this.errorMessage = <any>error);
@@ -166,6 +167,10 @@ export class RRFDashboardListComponent implements OnActivate {
     onCancelCloseRRF() {
         this.closeRRFID = 0;
         this.closeComment = '';
+    }
+
+    getPriorityClass(priority: string): string {
+        return 'priority' + priority;
     }
 
 }
