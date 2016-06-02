@@ -21,8 +21,9 @@ export class MyProfilesInfo {
   public ResumeID: number;
   public Status = new MasterData();
   public Comments: string;
-  public CandidateOtherDetails: any;
-  public CandidateSalaryDetails: any;
+  public CandidateOtherDetail = new OtherDetails();
+  public CandidateSalaryDetails = new SalaryDetails();
+  public CandidateSkills = new Skills();
 
   //Properties of Personal Information
   public SecondaryContact: number;
@@ -44,7 +45,23 @@ export class MyProfilesInfo {
   //properties of Qualification
   public Qualifications: Array<Qualification>;
 
-  //properties of Candidate Skills
+  //properties of Candidate Career Profile
+  public TotalExperience: number;
+  public RelevantExperience: number;
+  public CurrentCompany: string;
+  public CurrentDesignationRole: string;
+  public TimeSpentInCurrentCompany: number;
+
+  //properties of Candidate Team Management
+  public TeamMgmt: any;
+  public HandlingTeam: number;
+  public NoOfTeamMembers: number;
+  public TeamMembersDesignations: string;
+  public TeamHandlingChallenges: string;
+    public IsChecked: boolean;
+}
+
+export class Skills {
   public ExpInSkill: number;
   public AnyFunctionalExp: string;
   public PrimarySkills: string;
@@ -57,30 +74,18 @@ export class MyProfilesInfo {
   public OtherTechnology: string;
   public AwareAboutTesting: string;
   public StrongTechnicalSkills: string;
+}
 
-  //properties of Candidate Career Profile
-  public TotalExperience: number;
-  public RelevantExperience: number;
-  public CurrentCompany: string;
-  public CurrentDesignationRole: string;
-  public TimeSpentInCurrentCompany: number;
-
-  //properties of Candidate Salary Structure
+export class SalaryDetails {
   public CurrentSalary: number;
   public ExpectedSalary: string;
   public CurrentTakeHome: number;
   public AnyPerks: string;
   public CTCIncludeVariable: any;
   public HowMuchVariable: number;
+}
 
-  //properties of Candidate Team Management
-  public TeamMgmt: any;
-  public HandlingTeam: number;
-  public NoOfTeamMembers: number;
-  public TeamMembersDesignations: string;
-  public TeamHandlingChallenges: string;
-
-  //Properties of Professional Details
+export class OtherDetails {
   public AppliedEarlier: any;
   public AppraisalBondContractDetails: string;
   public Visa: string;
@@ -101,5 +106,20 @@ export class MyProfilesInfo {
   public PrimaryReasonToQuitCurrentJob: string;
   public SecondaryReasonToQuitCurrentJob: string;
 
-  public IsChecked: boolean;
+
 }
+export class ResumeMeta {
+  public Profile: any;
+  public CandidateLookupId: string;
+  public Overwrite: boolean;
+}
+
+export class AddCandidateResponse {
+  public StatusCode: number;
+  public Message: '';
+  public ReasonCode: string;
+  public ErrorMsg: string;
+  public candidateLookupId: string;
+}
+
+

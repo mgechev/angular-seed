@@ -224,18 +224,6 @@ export class MyProfilesAddComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    onSelectCountry(country: number) {
-        this.profile.Country = country;
-    }
-
-    onSelectState(state: number) {
-        this.profile.State = state;
-    }
-
-    onSelectDistrict(district: number) {
-        this.profile.District = district;
-    }
-
     onSelectQualification(candidateQualification: string) {
         this.selectedQualification = parseInt(candidateQualification);
     }
@@ -259,7 +247,7 @@ export class MyProfilesAddComponent implements OnActivate {
     onSavePrimaryInfo(): void {
         //   this.showMessage('Wait', true);
         if (this.params) {
-            this._myProfilesService.editCandidateProfile(this.profile)
+            this._myProfilesService.addCandidateProfile(this.profile)
                 .subscribe(
                 results => {
                      if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -277,7 +265,12 @@ export class MyProfilesAddComponent implements OnActivate {
     }
 
     onSavePersonalDetails(): void {
-        //   this.showMessage('Wait', true);
+        // this.profile.Country =
+        // this.profile.State = 
+        // this.profile.District = 
+        console.log('this.profile.Country'+this.profile.Country);
+        console.log('this.profile.State'+this.profile.State);
+        console.log('this.profile.District'+this.profile.District);
         this.convertCheckboxesValues();
         if (this.params) {
             this._myProfilesService.editCandidatePersonalDetails(this.profile)
@@ -379,6 +372,7 @@ export class MyProfilesAddComponent implements OnActivate {
                 );
         }
     }
+
     onSaveSalaryDetails(): void {
         //   this.showMessage('Wait', true);
         this.convertCheckboxesValues();

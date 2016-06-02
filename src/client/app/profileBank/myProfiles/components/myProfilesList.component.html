@@ -85,8 +85,8 @@
                                                 <div class="fileUpload btn btn-info" data-toggle="tooltip" data-placement="top" title="Upload Resume">
                                                     <!--<input type="file" class="upload" (change)="psdTemplateSelectionHandler($event)" /><span>Browse</span>-->
                                                     <input type="file" class="upload" (change)="psdTemplateSelectionHandler($event)" /><span>Browse</span>
-
                                                 </div>
+                                                <span *ngIf='fileUploaded'> {{fileName}}</span>
                                             </div>
                                         </div>
 
@@ -112,7 +112,6 @@
                                     <form role="form" (submit)="onUpdateStauts()">
                                         <div class="col-md-3">
                                             <div class="form-group">
-
                                                 <span class="form-control" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"> {{currentCandidate}}</span>
                                             </div>
                                         </div>
@@ -195,13 +194,9 @@
                                             </tr>
                                         </td>
                                         <td (click)='redirectToView(myprofile.CandidateID)'>
-                                            <!--<div *ngFor="let candidateStatus of myprofile.Status"><span class="mt-action-dot {{candidateStatus.CandidateStatus}}"> </span>{{candidateStatus.CandidateStatus}}</div>-->
                                             <span class="mt-action-dot {{myprofile.Status.Value}}"></span>{{myprofile.Status.Value}}
                                         </td>
-
-                                        <td class="text-center"><i class="fa fa-search" aria-hidden="true"></i> / <i class="fa fa-download" aria-hidden="true"></i></td>
-                                        <!--<td><a  [routerLink]="['Edit',{id:feature.id}]"> Edit </a></td>
-                                    <td><a (click)="onDelete(feature)"> Delete </a></td>-->
+                                            <td class="text-center"><a href="" download tooltip="Download Resume" tooltipPlacement="top" tooltipTrigger="mouseenter" ><i class="fa fa-download" aria-hidden="true"></i></a></td>
                                         <td>
                                             <div class="btn-group">
                                                 <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions

@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="portlet-body">
                                     <div class="tab-content">
-                                       
+                                        
                                         <!-- PRIMARY INFO TAB -->
                                         <div class="tab-pane active" id="tab_primaryInfo">
                                             <form role="form" (submit)="onSavePrimaryInfo()">
@@ -73,7 +73,7 @@
                                                             <label class="control-label">First Name<span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" autofocus placeholder="John" class="form-control" [(ngModel)]="profile.FirstName" required="" (change)='onChangeInput($event.target.value)'
+                                    <input type="text" autofocus placeholder="John" class="form-control" [(ngModel)]="profile.FirstName" required="" (change)='onChangeInput($event.target.value)'
                                                                     />
                                                                 </div>
                                                             </div>
@@ -84,7 +84,7 @@
                                                             <label class="control-label">Middle Name</label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="Alex" class="form-control" [(ngModel)]="profile.MiddleName" (change)='onChangeInput($event.target.value)'
+                                                                             <input type="text" placeholder="Alex" class="form-control" [(ngModel)]="profile.MiddleName" (change)='onChangeInput($event.target.value)'
                                                                     />
                                                                 </div>
                                                             </div>
@@ -95,7 +95,7 @@
                                                             <label class="control-label">Last Name<span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="Doe" class="form-control" [(ngModel)]="profile.LastName" required="" (change)='onChangeInput($event.target.value)'
+                                                                                 <input type="text" placeholder="Doe" class="form-control" [(ngModel)]="profile.LastName" required="" (change)='onChangeInput($event.target.value)'
                                                                     />
                                                                 </div>
                                                             </div>
@@ -128,17 +128,17 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label class="control-label">Skills <span class="required"> * </span></label>
+                                                            <label class="control-label">Skills&nbsp; <small> (Primary Skills) </small> <span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-12">
-                                                                    <textarea class="form-control" rows="1" placeholder="C#,ASP.net" style="resize:vertical" [(ngModel)]="profile.Skills" required=""></textarea>
+                                                                    <textarea class="form-control" rows="1" placeholder="C#,ASP.net" style="resize:vertical" [(ngModel)]="profile.PrimarySkills" required=""></textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label class="control-label">Tagging <span class="required"> * </span></label>
+                                                            <label class="control-label">Tag <span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-12">
                                                                     <textarea class="form-control" rows="1" placeholder="C#,ASP.net" style="resize:vertical" [(ngModel)]="profile.Tag" required=""></textarea>
@@ -196,8 +196,7 @@
                                                             <label class="control-label">First Name<span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" autofocus placeholder="John" class="form-control" [(ngModel)]="profile.FirstName" required="" (change)='onChangeInput($event.target.value)'
-                                                                    />
+                                                                    <input type="text" autofocus placeholder="John" class="form-control" [(ngModel)]="profile.FirstName" required="" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -207,8 +206,7 @@
                                                             <label class="control-label">Middle Name</label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="Alex" class="form-control" [(ngModel)]="profile.MiddleName" (change)='onChangeInput($event.target.value)'
-                                                                    />
+                                                                    <input type="text" placeholder="Alex" class="form-control" [(ngModel)]="profile.MiddleName" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -218,8 +216,7 @@
                                                             <label class="control-label">Last Name<span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="Doe" class="form-control" [(ngModel)]="profile.LastName" required="" (change)='onChangeInput($event.target.value)'
-                                                                    />
+                                                                    <input type="text" placeholder="Doe" class="form-control" [(ngModel)]="profile.LastName" required="" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -229,7 +226,7 @@
                                                             <label>Email <span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="email" class="form-control " placeholder="Email Address" [(ngModel)]="profile.Email" required="" (change)='onChangeInput($event.target.value)'>
+                                                                    <input type="email" class="form-control " placeholder="Email Address" [(ngModel)]="profile.Email" required="">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -323,16 +320,20 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>Country</label>
-                                                            <select (change)='onSelectCountry($event.target.value)' class="form-control" [(ngModel)]="profile.Country">
-                                                               <option *ngFor="let country of countries" [value]="country.Id">{{country.Country}}</option>
+                                                            <!-- (change)='onSelectCountry($event.target.value)' 
+                                                                (change)='onSelectState($event.target.value)'
+                                                                (change)='onSelectDistrict($event.target.value)'
+                                                                 -->
+                                                            <select class="form-control" [(ngModel)]="profile.Country">
+                                                               <option *ngFor="let country of countries" [value]="country.Id">{{country.Value}}</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>State</label>
-                                                            <select (change)='onSelectState($event.target.value)' class="form-control" [(ngModel)]="profile.State">
-                                                               <option *ngFor="let state of states" [value]="state.Id">{{state.State}}</option>
+                                                            <select  class="form-control" [(ngModel)]="profile.State">
+                                                               <option *ngFor="let state of states" [value]="state.Id">{{state.Value}}</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -340,8 +341,8 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>District</label>
-                                                            <select (change)='onSelectDistrict($event.target.value)' class="form-control" [(ngModel)]="profile.District">
-                                                               <option *ngFor="let district of districts" [value]="district.Id">{{district.District}}</option>
+                                                            <select  class="form-control" [(ngModel)]="profile.District">
+                                                               <option *ngFor="let district of districts" [value]="district.Id">{{district.Value}}</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -350,11 +351,9 @@
                                                             <label class="control-label"> Ready To Relocate </label>
                                                             <div class="mt-checkbox-inline ">
                                                                 <label class="mt-checkbox  mt-checkbox-outline">
-                                                                <input type="checkbox" id="chkReadyToRelocate"
-                                                                     
-                                                                        [(ngModel)]="profile.ReadyToRelocate"/>   
-                                                        <span></span>
-                                                    </label>
+                                                                <input type="checkbox" id="chkReadyToRelocate" [(ngModel)]="profile.ReadyToRelocate"/>   
+                                                                <span></span>
+                                                            </label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -372,8 +371,6 @@
                                                             <textarea class="form-control" rows="2" placeholder="Friends" style="resize:vertical" [(ngModel)]="profile.FriendsRelatives"></textarea>
                                                         </div>
                                                     </div>
-                                                    <!--</div>
-                                            <div class="row">-->
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Comments Additional Information</label>
@@ -487,7 +484,7 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr *ngFor="let Qualification of profile.Qualifications">
-                                                                <td> {{Qualification.Qualification.Value}}</td>
+                                                               <td> {{Qualification.Qualification.Value}}</td>
                                                                 <td> {{Qualification.YearOfPassing.Value}}</td>
                                                                 <td> {{Qualification.Grade.Value}}</td>
                                                                 <td class="center">{{Qualification.Marks}} </td>
@@ -512,31 +509,26 @@
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label class="control-label">Experience in Skill <small>&nbsp;(In years)</small></label>
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.ExpInSkill" (change)='onChangeInput($event.target.value)'
-                                                                    />
-                                                                </div>
-                                                            </div>
+                                                            <label class="control-label">Expertise in Skill </label>
+                                                               <textarea  class="form-control" rows="2" placeholder="" style="resize:vertical"  [(ngModel)]="profile.CandidateSkills.ExpInSkill"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Any Functional Experience</label>
-                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.AnyFunctionalExp" (change)='onChangeInput($event.target.value)'></textarea>
+                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.AnyFunctionalExp"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Primary Skills</label>
-                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.PrimarySkills"></textarea>
+                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.PrimarySkills"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Secondary Skills</label>
-                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.SecondarySkills"></textarea>
+                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.SecondarySkills"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -544,25 +536,25 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Other Skills</label>
-                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.OtherSkills"></textarea>
+                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.OtherSkills"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Role and Responsibility</label>
-                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.RoleAndResponsibility"></textarea>
+                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.RoleAndResponsibility"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Projects Done</label>
-                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.ProjectsDone"></textarea>
+                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.ProjectsDone"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Unit Integration Regression Testing</label>
-                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.UnitIntegressionRegressionTesting"></textarea>
+                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.UnitIntegressionRegressionTesting"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -570,25 +562,25 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Database</label>
-                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.Database"></textarea>
+                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.Database"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label class="control-label">Other Technology</label>
-                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.OtherTechnology"></textarea>
+                                                            <label class="control-label">Any Other Technology</label>
+                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.AnyOtherTechnology"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Aware About Testing</label>
-                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.AwareAboutTesting"></textarea>
+                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.AwareAboutTesting"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Strong Technical Skills</label>
-                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.StrongTechnicalSkills"></textarea>
+                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.StrongTechnicalSkills"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -608,8 +600,7 @@
                                                             <label class="control-label">Total Experience<br/> <small>&nbsp;(In years)</small></label>
                                                             <div class="row">
                                                                 <div class="col-md-8">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.TotalExperience" (change)='onChangeInput($event.target.value)'
-                                                                    />
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.TotalExperience" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -619,8 +610,7 @@
                                                             <label class="control-label">Relevant Experience <small>&nbsp;(In years)</small></label>
                                                             <div class="row">
                                                                 <div class="col-md-8">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.RelevantExperience" (change)='onChangeInput($event.target.value)'
-                                                                    />
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.RelevantExperience" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -628,7 +618,7 @@
 
                                                     <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <label class="control-label">Time Spent In CurrentCompany</label>
+                                                            <label class="control-label">Time Spent In Current Company</label>
                                                             <div class="row">
                                                                 <div class="col-md-8">
                                                                     <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.TimeSpentInCurrentCompany" />
@@ -671,25 +661,32 @@
                                                             <label class="control-label">CTC Include Variable</label>
                                                             <div class="mt-checkbox-inline ">
                                                                 <label class="mt-checkbox  mt-checkbox-outline">
-                                                                 <input type="checkbox" id="chkCTCIncludeVariable" [(ngModel)]="profile.CTCIncludeVariable" (change)='onChangeInput($event.target.value)'/>
+                                                                 <input type="checkbox" id="chkCTCIncludeVariable" [(ngModel)]="profile.CandidateSalaryDetails.CTCIncludeVariable" />
                                                                 <span></span>
                                                              </label>
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label class="control-label">Current Take Home</label>
                                                             <div class="row">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CurrentTakeHome" (change)='onChangeInput($event.target.value)'
-                                                                    />
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.CurrentTakeHome" />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label class="control-label">How Much Variable</label>
+                                                            <div class="row">
+                                                                <div class="col-md-10">
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.HowMuchVariable" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label class="control-label">Expected Salary</label>
@@ -697,7 +694,7 @@
                                                                 <div class="col-md-12">
                                                                     <!--<input type="text" placeholder="" class="form-control" [(ngModel)]="profile.ExpectedSalary" />-->
                                                                     <span class="form-control" tooltip="You can change this value from Primary Info Tab" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                        tooltipEnable="!profile.ExpectedSalary">{{profile.ExpectedSalary}}</span>
+                                                                        tooltipEnable="!profile.ExpectedSalary">{{profile.CandidateSalaryDetails.ExpectedSalary}}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -709,7 +706,7 @@
                                                                 <div class="col-md-8">
                                                                     <!--<input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CurrentSalary" />-->
                                                                     <span class="form-control" tooltip="You can change this value from Primary Info Tab" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                        tooltipEnable="!profile.CurrentSalary">{{profile.CurrentSalary}}</span>
+                                                                        tooltipEnable="!profile.CurrentSalary">{{profile.CandidateSalaryDetails.CurrentSalary}}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -721,7 +718,7 @@
                                                             <label class="control-label">Any Perks</label>
                                                             <div class="row">
                                                                 <div class="col-md-10">
-                                                                    <textarea class="form-control" rows="1" placeholder="" style="resize:vertical" [(ngModel)]="profile.AnyPerks"></textarea>
+                                                                    <textarea class="form-control" rows="1" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSalaryDetails.AnyPerks"></textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -744,8 +741,7 @@
                                                             <label class="control-label">Team Management</label>
                                                             <div class="mt-checkbox-inline ">
                                                                 <label class="mt-checkbox  mt-checkbox-outline">
-                                                        <input type="checkbox" id="chkTeamManagement" [(ngModel)]="profile.TeamMgmt"
-                                                        (change)='onChangeInput($event.target.value)' /> <!--TeamMgmt-->
+                                                        <input type="checkbox" id="chkTeamManagement" [(ngModel)]="profile.TeamMgmt"> <!--TeamMgmt-->
                                                         <span></span>
                                                     </label>
                                                             </div>
@@ -757,8 +753,7 @@
                                                             <label class="control-label">No Of Team Members</label>
                                                             <div class="row">
                                                                 <div class="col-md-8">
-                                                                    <input type="number" placeholder="0" class="form-control" [(ngModel)]="profile.NoOfTeamMembers" (change)='onChangeInput($event.target.value)'
-                                                                    />
+                                                                    <input type="number" placeholder="0" class="form-control" [(ngModel)]="profile.NoOfTeamMembers" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -804,7 +799,7 @@
                                                                     <label class="control-label">Applied Earlier</label>
                                                                     <div class="mt-checkbox-inline ">
                                                                         <label class="mt-checkbox  mt-checkbox-outline">
-                                                                        <input type="checkbox" id="chkAppliedEarlier" [(ngModel)] = "profile.AppliedEarlier" (change)='onChangeInput($event.target.value)'> <!--TeamMgmt-->
+                                                                        <input type="checkbox" id="chkAppliedEarlier" [(ngModel)] = "profile.CandidateOtherDetail.AppliedEarlier"> <!--TeamMgmt-->
                                                                         <span></span>
                                                                       </label>
                                                                     </div>
@@ -815,7 +810,7 @@
                                                                     <label class="control-label">Offer In Hand</label>
                                                                     <div class="mt-checkbox-inline ">
                                                                         <label class="mt-checkbox  mt-checkbox-outline">
-                                                                        <input type="checkbox" id="inlineCheckbox1" [(ngModel)]="profile.OfferInHand"> <!--TeamMgmt-->
+                                                                        <input type="checkbox" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetail.OfferInHand"> <!--TeamMgmt-->
                                                                         <span></span>
                                                                       </label>
                                                                     </div>
@@ -824,14 +819,14 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label>Visa </label>
-                                                                    <input type="text" class="form-control" placeholder="" [(ngModel)]="profile.Visa" (change)='onChangeInput($event.target.value)'>
+                                                                    <input type="text" class="form-control" placeholder="" [(ngModel)]="profile.CandidateOtherDetail.Visa">
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Role Expected </label>
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.RoleExpected" />
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateOtherDetail.RoleExpected" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -839,20 +834,20 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Resigned Status Of Offered Candidate</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.ResignedStatusOfOfferedCandidate"></textarea>
+                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetail.ResignedStatusOfOfferedCandidate"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Job Serach Period</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.JobSerachPeriod"></textarea>
+                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetail.JobSerachPeriod"></textarea>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Family Background</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.FamilyBackground"></textarea>
+                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetail.FamilyBackground"></textarea>
                                                                 </div>
                                                             </div>
 
@@ -861,19 +856,19 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">If Exsting Company Offers</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.IfExstingCompanyOffers"></textarea>
+                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetail.IfExstingCompanyOffers"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Strengths </label>
-                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.Strengths"></textarea>
+                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetail.Strengths"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Weekness</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.Weekness"></textarea>
+                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetail.Weekness"></textarea>
                                                                 </div>
                                                             </div>
 
@@ -882,20 +877,20 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Notice Period Not Completed Count </label>
-                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.NoticePeriodNotCompletedCount"></textarea>
+                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetail.NoticePeriodNotCompletedCount"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Looking For</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.LookingFor"></textarea>
+                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetail.LookingFor"></textarea>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Primary Reason To Quit Last Job</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.PrimaryReasonToQuitLastJob"></textarea>
+                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetail.PrimaryReasonToQuitLastJob"></textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -903,19 +898,19 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Secondary Reason To Quit Last Job</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.SecondaryReasonToQuitLastJob"></textarea>
+                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetail.SecondaryReasonToQuitLastJob"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Primary Reason To Quit Current Job</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.PrimaryReasonToQuitCurrentJob"></textarea>
+                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetail.PrimaryReasonToQuitCurrentJob"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Secondary Reason To Quit Current Job</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.SecondaryReasonToQuitCurrentJob"></textarea>
+                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetail.SecondaryReasonToQuitCurrentJob"></textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -923,7 +918,7 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Appraisal Bond Contract Details</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.AppraisalBondContractDetails"></textarea>
+                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetail.AppraisalBondContractDetails"></textarea>
                                                                 </div>
                                                             </div>
 

@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import { MyProfilesInfo } from '../model/myProfilesInfo';
+import { MyProfilesInfo, ResumeMeta,AddCandidateResponse } from '../model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
-import { CollapseDirective, TOOLTIP_DIRECTIVES,AlertComponent } from 'ng2-bootstrap';
-import { MasterData,ResponseFromAPI } from  '../../../shared/model/index';
+import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
+import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 
@@ -13,7 +13,7 @@ import { APIResult } from  '../../../shared/constantValue/index';
     moduleId: module.id,
     selector: 'rrf-myprofiles-list',
     templateUrl: 'myProfilesList.component.html',
-    directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES,AlertComponent],
+    directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
     styleUrls: ['myProfiles.component.css']
 })
 
@@ -29,19 +29,21 @@ export class MyProfilesListComponent implements OnActivate {
     Comments: string;
     currentStatus: number;
     currentCandidate: string;
-     selectedRowCount: number = 0;
-     allChecked: boolean = false;
-
-    public isCollapsed: boolean = false;
+    selectedRowCount: number = 0;
+    allChecked: boolean = false;
+    isCollapsed: boolean = false;
     IsSuccess: boolean = false;
-    public alerts = new Array<Object>();
+    resumeMeta : ResumeMeta;
+    fileUploaded:boolean = false;
+    fileName:string;
 
     constructor(private _myProfilesService: MyProfilesService,
         private _router: Router,
-         public toastr: ToastsManager,
+        public toastr: ToastsManager,
         private _masterService: MastersService) {
         this.psdTemplates = new Array<File>();
         this.profile = new MyProfilesInfo();
+        this.resumeMeta =new ResumeMeta();
     }
 
     routerOnActivate() {
@@ -49,9 +51,6 @@ export class MyProfilesListComponent implements OnActivate {
         this.getCandidateStatuses();
     }
 
-public closeAlert(i: number): void {
-        this.alerts.splice(i, 1);
-    }
 
     SaveCandidateID(id: number) {
         this.seletedCandidateID = id;
@@ -80,28 +79,43 @@ public closeAlert(i: number): void {
         this._myProfilesService.addCandidateProfile(this.profile)
             .subscribe(
             results => {
-                var result =  results as ResponseFromAPI;
-                if(result.StatusCode === 1) {
-                    this.alerts.push({ msg: result.Message, type: 'success', closable: true });
-                    this.getMyProfiles();
-                }else {
-                    this.alerts.push({ msg: result.ErrorMsg, type: 'danger', closable: true });
+                if ((<AddCandidateResponse>results).StatusCode === APIResult.Success) {
+                    this.uploadResume((<AddCandidateResponse>results).candidateLookupId);
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
                 this.profile = new MyProfilesInfo();
             },
             error => this.errorMessage = <any>error);
     }
 
+    uploadResume(CandidateLookupId : string) {
+        this.resumeMeta.CandidateLookupId =  CandidateLookupId;
+        this.resumeMeta.Overwrite = false;
+        this.resumeMeta.Profile = this.psdTemplates[0];
+        this._myProfilesService.UploadCandidateProfile(this.resumeMeta)
+            .subscribe(
+         results => {
+              if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.getMyProfiles();
+                    this.fileUploaded = false;
+                    this.fileName = '';
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                }
+         },
+           error => this.errorMessage = <any>error);
+    }
     public psdTemplateSelectionHandler(fileInput: any) {
         console.log(fileInput);
         let FileList: FileList = fileInput.target.files;
         this.psdTemplates.length = 0;
         for (let i = 0, length = FileList.length; i < length; i++) {
             this.psdTemplates.push(FileList.item(i));
-            console.log(FileList.item(i));
+            this.fileUploaded = true;
+            this.fileName = FileList.item(i).name;
         }
-        console.log(this.psdTemplates);
-        console.log('Length : '+this.psdTemplates.length);
     }
 
     getCandidateStatuses() {
@@ -121,7 +135,7 @@ public closeAlert(i: number): void {
         this._myProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
-                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.profile.Status = new MasterData();
                     this.getMyProfiles();
@@ -175,7 +189,7 @@ public closeAlert(i: number): void {
             this.selectedRowCount = 0;
         }
         this.allChecked = false;
-        window.location.href = 'mailto:'+mailto;
+        window.location.href = 'mailto:' + mailto;
     }
 }
 
