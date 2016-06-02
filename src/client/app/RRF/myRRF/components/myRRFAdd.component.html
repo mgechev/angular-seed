@@ -86,10 +86,7 @@
                         <div class="form-group col-lg-4">
                             <label>Skills Required<span class="required"> * </span></label>
 
-                            <!--<select id="cmbSkillsReq" class="form-control" >
-                                <option value="0" disabled>Select Skills </option>
-                                <option *ngFor="let skill of skills" [value]="skill.Id">{{skill.Value}}</option>
-                            </select>-->
+
                             <div class="input-group select2-bootstrap-append ">
                                 <select id="cmbSkillsReq" class="form-control " multiple [disabled]="!isNewRRF">
                                     <option value="0 " disabled>Select Skills </option>
@@ -107,7 +104,6 @@
                     <div class="row">
 
                         <div class="form-group col-lg-4">
-                            <!--<label>Experience<small>&nbsp;(In years)</small><span class="required"> * </span></label>-->
                             <div class="row">
                                 <div class="col-lg-6">
                                     <label>Min Exp.<small>&nbsp;(In years)</small><span class="required"> * </span></label>
@@ -125,15 +121,6 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <label>Expected Date Of Joining<span class="required"> * </span></label>
-                                    <!--<div class="col-md-8">-->
-                                    <!--<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d" id="expectedDateOfJoining">
-                                    <input type="text" class="form-control" readonly>
-                                    <span class="input-group-btn">
-                                             <button class="btn default" type="button">
-                                                   <i class="fa fa-calendar"></i>
-                                             </button>
-                                        </span>
-                                </div>-->
                                     <div>
                                         <input type="date" name="bday" id="expectedDateOfJoining" [(ngModel)]='newRRF.ExpDateOfJoining' />
 
@@ -186,9 +173,6 @@
                                             </button>
                                             </span>
                                         </div>
-                                        <!--<ng-select [data]="value " [multiple]="true " [items]="items " placeholder="Select
-                    Interviewer " (data)="refreshValue($event) "
-                                    (selected)="selected($event) " (removed)="removed($event) "></ng-select>-->
                                     </div>
 
                                     <div class="col-lg-3 ">
@@ -210,9 +194,6 @@
                     dataTable no-footer " role="grid " aria-describedby="sample_1_info " id="panelTable ">
                                             <thead>
                                                 <tr>
-                                                    <!--<td width="20% "><b>Round </b></td>
-                                            <td width="50% "><b>Interviewer</b></td>
-                                            <td width="20% "><b>Comments</b> </td>-->
                                                     <td><b>Interview Round </b></td>
                                                     <td><b>Panel</b></td>
                                                     <td><b>Action</b></td>
@@ -227,7 +208,6 @@
                                                             {{interviewer.Value}}
                                                         </div>
                                                     </td>
-                                                    <!--<td> {{panel.Comments}} </td>-->
                                                     <td>
                                                         <!--<a class="edit" (click)='onPanelEdit(panel)'> Edit </a>-->
                                                         <div class="btn-group">
@@ -267,12 +247,10 @@
 
                         <div class="col-lg-12"><span></span></div>
                         <br>
-                        <!--<ng2-select [data]="value " [multiple]="true " [items]="items " [disabled]="disabled
-                    "  [placeholder]=" 'No city selected' "></ng2-select>-->
+
                     </div>
                 </div>
                 <!--</form>-->
-
             </div>
         </div>
         <!-- END PAGE BASE CONTENT -->

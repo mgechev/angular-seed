@@ -9,7 +9,6 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ResponseFromAPI } from '../../../shared/model/common.model';
 
-
 @Component({
     moduleId: module.id,
     selector: 'rrf-dashboard-list',
@@ -32,13 +31,9 @@ export class RRFDashboardListComponent implements OnActivate {
     closeRRF: boolean = false;
     closeRRFID: number = 0;
 
-    doughnutChartLabels: string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
-    doughnutChartData: number[] = [350, 450, 100];
-    doughnutChartType: string = 'doughnut';
-
-    public pieChartLabels: string[] = ['Download Sales', 'In-Store Sales', 'Mail Sales'];
-    public pieChartData: number[] = [300, 500, 100];
-    public pieChartType: string = 'pie';
+    // doughnutChartLabels: string[] = ['ABC', 'BBB', 'CCC' , 'DDD'];
+    // doughnutChartData: number[] = [100, 100, 100 ,200];
+    // doughnutChartType: string = 'doughnut';
 
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService,
@@ -147,8 +142,7 @@ export class RRFDashboardListComponent implements OnActivate {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.rrfStatusCount = <any>results;
-                }
-                else {
+                } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
             },

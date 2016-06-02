@@ -46,7 +46,6 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
     }
 
     ngAfterViewInit() {
-        //$('.date-picker').datepicker();
         $('#cmbAssignTo').select2();
     }
 
@@ -86,18 +85,6 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
         this._rrfDashboardService.saveRRFAssignmentDeatils(this.RRFId, selectedRec, this.AssignedComments)
             .subscribe(
             results => {
-                // if (results.StatusCode === 1) {
-                //     for (var index = 0; index < selectedRec.length; index++) {
-                //     var assignmentDetails: AssignmentDetails = new AssignmentDetails();
-                //     assignmentDetails.RRFID =this.RRFId;
-                //     assignmentDetails.AssignedTo.Id = selectedRec[index];
-                //     assignmentDetails.AssignedComments =this.AssignedComments;
-                //     assignmentDetails.AssignedDate = new Date();
-                // status.ID ="Assigned";
-                //     this.selectedRRF.AssignedData.push(assignmentDetails);
-                //     }
-                // }
-
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                 } else {
@@ -123,8 +110,6 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
         }, 20);
 
     }
-
-
 
     onUnAssignRRF(): void {
         this._rrfDashboardService.unassignRRF(this.RRFId, this.UnAssignRec.AssignedTo.Id, this.unAssignedComments)

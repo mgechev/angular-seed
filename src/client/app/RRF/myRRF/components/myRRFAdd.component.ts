@@ -96,8 +96,7 @@ export class MyRRFAddComponent implements OnActivate {
                 if (+ (<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message, 'Success!');
                     this._router.navigate(['/App/RRF/RRFDashboard/']);
-                }
-                else {
+                } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
             },
@@ -286,8 +285,7 @@ export class MyRRFAddComponent implements OnActivate {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this._router.navigate(['/App/RRF/RRFDashboard/']);
-                }
-                else {
+                } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
             },
