@@ -11,3 +11,8 @@ export interface Environments {
   [key: string]: string;
 }
 
+export interface LazyModule {
+  src: string;
+  dest: string;
+}
+
