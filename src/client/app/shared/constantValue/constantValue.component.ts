@@ -33,3 +33,8 @@ export class RRFPriority {
     public static get Five(): number { return 5; };
 }
 
+export class RRFAssignStatus {
+    public static get Assigned(): number { return 1; };
+    public static get UnAssigned(): number { return 2; };
+}
+

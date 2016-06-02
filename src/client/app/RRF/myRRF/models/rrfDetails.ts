@@ -12,7 +12,7 @@ export class AssignmentDetails {
     public AssignedComments: string;
     public AssignedDate: Date;
     public UnassigningComment: string;
-    public Status: string;
+    public Status: MasterData = new MasterData();
     public AssigneeLastDate: Date;
 }
 
@@ -55,6 +55,7 @@ export class RRFDetails {
     public AssignedData: AssignmentDetails[] = [];
     public RRFApproval: RRFApproval[] = new Array();
     public OpenForNumberOfDays: number = 0;
+    public CreatedDate : Date;
 }
 
 // export class ResultForAPI {

@@ -40,7 +40,7 @@
                                         <td>
                                             <div align="left">
                                                 {{selectedRRF.RaisedBy }}
-                                                <br> 30 Apr 2016
+                                                <br> {{selectedRRF.CreatedDate}}
                                             </div>
                                         </td>
                                         <td>
@@ -178,10 +178,11 @@
                                                 {{assignee.AssignedDate}}
                                             </td>
                                             <!--<td>{{assignee.AssigneeLastDate== "" ? "Assign" : "Un-Assign"}}</td>-->
-                                            <td>{{assignee.Status}}</td>
+                                            <td>{{assignee.Status.Value}}</td>
                                             <td>{{assignee.AssigneeLastDate }}</td>
                                             <td>
-                                                <div class="btn-group" *ngIf='assignee.Status == "Assigned"'>
+                                                <!--<div class="btn-group" *ngIf='assignee.Status == "Assigned"'>-->
+                                                    <div class="btn-group" *ngIf='assignee.Status.Id == AssignStatus.Assigned'>
                                                     <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false" (click)='onUnassign(assignee)'>
                                                         Un-Assign
                                                     </button>

@@ -122,3 +122,4 @@ export class RRFApprovalListComponent implements OnActivate {
     getPriorityClass(priority: string): string {
         return 'priority' + priority;
     }
+}

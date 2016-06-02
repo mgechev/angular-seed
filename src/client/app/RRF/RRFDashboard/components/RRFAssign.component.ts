@@ -7,7 +7,7 @@ import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import { MastersService } from '../../../shared/services/masters.service';
 import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult } from  '../../../shared/constantValue/index';
+import { APIResult ,RRFAssignStatus } from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
 
 
@@ -30,6 +30,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
     UnAssignRec: AssignmentDetails = new AssignmentDetails();
     unAssignedComments: string = '';
     public currentDate: Date = new Date();
+    AssignStatus : RRFAssignStatus = RRFAssignStatus;
 
     constructor(private _myRRFService: MyRRFService,
         private _rrfDashboardService: RRFDashboardService,
@@ -92,7 +93,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
                 //     assignmentDetails.AssignedTo.Id = selectedRec[index];
                 //     assignmentDetails.AssignedComments =this.AssignedComments;
                 //     assignmentDetails.AssignedDate = new Date();
-                // status ="Assigned";
+                // status.ID ="Assigned";
                 //     this.selectedRRF.AssignedData.push(assignmentDetails);
                 //     }
                 // }
