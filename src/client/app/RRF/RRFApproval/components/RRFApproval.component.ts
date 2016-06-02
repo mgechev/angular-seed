@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
 import {RRFApprovalListComponent} from './RRFApprovalList.component';
-import {RRFApprovalAddComponent} from './RRFApprovalAdd.component';
 import { RRFApprovalService } from '../services/rrfApproval.service';
 
 @Component({
@@ -13,8 +12,6 @@ import { RRFApprovalService } from '../services/rrfApproval.service';
 
 @Routes([
     { path: '/', component: RRFApprovalListComponent },
-    { path: '/Add', component: RRFApprovalAddComponent },
-    { path: '/Edit/:id', component: RRFApprovalAddComponent }
 ])
 export class RRFApprovalComponent {
 }
