@@ -12,6 +12,7 @@ import {LazyModule} from '../../config/seed.config.interfaces';
 
 const BUNDLER_OPTIONS = {
   format: 'cjs',
+  minify: true,
   mangle: false
 };
 
