@@ -13,7 +13,7 @@ Provides fast, reliable and extensible starter for the development of Angular 2 
 `angular2-seed` provides the following features:
 
 - Allows you to painlessly update the seed tasks of your already existing project.
-- Out of the box ServiceWorkers and AppCache support thanks to the integration with [angular/progressive](https://github.com/angular/progressive).
+- Out of the box ServiceWorkers and AppCache support thanks to the integration with [angular/mobile-toolkit](https://github.com/angular/mobile-toolkit).
 - Ready to go, statically typed build system using gulp for working with TypeScript.
 - Production and development builds.
 - Sample unit tests with Jasmine and Karma including code coverage via [istanbul](https://gotwarlost.github.io/istanbul/).
@@ -40,7 +40,7 @@ npm install
 # watches your files and uses livereload by default
 npm start
 # api document for the app
-npm run build.docs
+# npm run build.docs
 
 # dev build
 npm run build.dev
