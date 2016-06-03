@@ -115,11 +115,3 @@ gulp.task('test', (done: any) =>
   runSequence('build.test',
               'karma.start',
               done));
-
-// --------------
-// E2E Test
-gulp.task('e2e.singleRun', (done: any) =>
-  runSequence('build.prod',
-              'build.js.e2e',
-              'e2e',
-              done));

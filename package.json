@@ -15,7 +15,7 @@
     "generate.manifest": "gulp generate.manifest --color",
     "e2e": "protractor src/browser/protractor.conf.js",
     "e2e.live": "protractor src/browser/protractor.conf.js --elementExplorer",
-    "e2e.singleRun": "gulp e2e.singleRun --color",
+    "e2e.singleRun": "gulp build.prod --color && gulp build.js.e2e --color && gulp e2e --color",
     "gulp": "gulp",
     "karma": "karma",
     "karma.start": "karma start",
