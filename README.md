@@ -179,12 +179,11 @@ Forks of this project demonstrate how to extend and integrate with other librari
 .
 ├── LICENSE
 ├── README.md
+├── appveyor.yml
 ├── gulpfile.ts                <- configuration of the gulp tasks
-├── karma.conf.js              <- configuration of the test runner
 ├── package.json               <- dependencies of the project
-├── protractor.conf.js         <- e2e tests configuration
 ├── src                        <- source code of the application
-│   └── client
+│   └── browser
 │       ├── app
 │       │   ├── +about
 │       │   │   ├── about.component.css
@@ -223,14 +222,17 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │       │           ├── toolbar.component.html
 │       │           └── toolbar.component.ts
 │       ├── assets
+│       │   ├── data.json
 │       │   └── svg
 │       │       └── more.svg
 │       ├── css
 │       │   └── main.css
 │       ├── index.html
+│       ├── karma.conf.js      <- configuration of the test runner
+│       ├── protractor.conf.js <- e2e tests configuration
+│       ├── test-main.js       <- testing configuration
 │       ├── tsconfig.json
 │       └── typings.d.ts
-├── test-main.js               <- testing configuration
 ├── tools
 │   ├── README.md              <- build documentation
 │   ├── config
@@ -314,8 +316,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
 ├── tsconfig.json              <- configuration of the typescript project (ts-node, which runs the tasks defined in gulpfile.ts)
 ├── tslint.json                <- tslint configuration
 ├── typings                    <- typings directory. Contains all the external typing definitions defined with typings
-├── typings.json
-└── appveyor.yml
+└── typings.json
 ```
 
 # Contributors

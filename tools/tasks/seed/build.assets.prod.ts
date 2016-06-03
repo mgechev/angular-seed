@@ -26,6 +26,8 @@ export = () => {
     '!' + join(APP_SRC, '**', '*.css'),
     '!' + join(APP_SRC, '**', '*.html'),
     '!' + join(APP_SRC, '**', '*.scss'),
+    '!' + join(APP_SRC, '*.js'), // Do not copy `karma.conf.js`, `protractor.conf.js`, `test-main.js`
+    '!' + join(APP_SRC, '*.json'), // Do not copy `tsconfig.json`
     '!' + join(ASSETS_SRC, '**', '*.js')
   ].concat(TEMP_FILES.map((p) => { return '!' + p; })))
     .pipe(onlyDirs(es))
