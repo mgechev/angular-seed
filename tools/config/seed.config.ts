@@ -266,6 +266,7 @@ export class SeedConfig {
    */
   APP_ASSETS: InjectableDependency[] = [
     { src: `${this.CSS_SRC}/main.${ this.getInjectableStyleExtension() }`, inject: true, vendor: false },
+    { src: `${this.CSS_SRC}/font-awesome.min.css`, inject: true, vendor: true }
   ];
 
   /**
@@ -307,6 +308,7 @@ export class SeedConfig {
       '@angular/platform-browser': `${this.APP_BASE}node_modules/@angular/platform-browser/platform-browser.umd.js`,
       '@angular/platform-browser-dynamic': `${this.APP_BASE}node_modules/@angular/platform-browser-dynamic/platform-browser-dynamic.umd.js`,
       'rxjs/*': `${this.APP_BASE}node_modules/rxjs/*`,
+      'primeng': `${this.APP_BASE}node_modules/primeng`,
       'app/*': `/app/*`,
       '*': `${this.APP_BASE}node_modules/*`
     },
