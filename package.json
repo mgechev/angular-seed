@@ -124,6 +124,7 @@
     "@angular/router": "2.0.0-rc.1",
     "core-js": "^2.4.0",
     "es6-module-loader": "^0.17.8",
+    "font-awesome": "^4.6.3",
     "primeng": "^1.0.0-beta.8",
     "primeui": "^4.1.12",
     "rxjs": "5.0.0-beta.6",

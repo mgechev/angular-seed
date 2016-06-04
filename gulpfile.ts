@@ -15,7 +15,7 @@ gulp.task('build.dev', (done: any) =>
   runSequence(//'clean.dev',
 //              'tslint',
 //              'css-lint',
-              'copy.fonts',
+              'copy.fontawesome.prod',
               'build.assets.dev',
               'build.html_css',
               'build.js.dev',
@@ -47,7 +47,7 @@ gulp.task('build.prod', (done: any) =>
               'css-lint',
               'build.assets.prod',
               'build.html_css',
-              'copy.fonts',
+              'copy.fontawesome.prod',
               'copy.js.prod',
               'build.js.prod',
               'build.bundles',
@@ -59,7 +59,7 @@ gulp.task('build.prod', (done: any) =>
 // Build test.
 gulp.task('build.test', (done: any) =>
   runSequence('clean.dev',
-              'copy.fonts',
+
               'tslint',
               'build.assets.dev',
               'build.js.test',
@@ -122,7 +122,7 @@ gulp.task('test', (done: any) =>
 
 // --------------
 // Fonts
-gulp.task('copy.fonts', function() {
-    return gulp.src(['app/bower_components/font-awesome/fonts/fontawesome-webfont.*'])
-      .pipe(gulp.dest('dist/fonts/'));
+gulp.task('copy.fontawesome.prod', function() {
+    return gulp.src(['node_modules/font-awesome/fonts/fontawesome-webfont.*'])
+      .pipe(gulp.dest('dist/prod/fonts/'));
 });
