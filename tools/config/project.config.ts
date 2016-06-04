@@ -17,6 +17,11 @@ export class ProjectConfig extends SeedConfig {
     let additional_deps: InjectableDependency[] = [
       // {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
       // {src: 'lodash/lodash.min.js', inject: 'libs'},
+
+      {src: 'primeui/themes/delta/theme.css', inject: true},
+      {src: 'primeui/primeui-ng-all.min.css', inject: true},
+      {src: 'primeui/primeui-ng-all.min.js', inject: true}
+
     ];
 
     const seedDependencies = this.NPM_DEPENDENCIES;
