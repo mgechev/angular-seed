@@ -322,7 +322,6 @@ export class RecentProfilesAddComponent implements OnActivate {
         }
     }
 
-  
     onSaveSkillsDetails(): void {
         //   this.showMessage('Wait', true);
         if (this.params) {

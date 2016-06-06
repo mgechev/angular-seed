@@ -34,29 +34,29 @@
                                     </div>
                                     <ul class="nav nav-tabs">
                                         <li class="active">
-                                            <a href="#tab_primaryInfo" data-toggle="tab" (click)='isDetailsSaved()'>Primary Info</a>
+                                            <a href="#tab_primaryInfo" data-toggle="tab">Primary Info</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_1" data-toggle="tab" (click)='isDetailsSaved()'>Personal Info</a>
+                                            <a href="#tab_1_1" data-toggle="tab">Personal Info</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_7" data-toggle="tab" (click)='isDetailsSaved()'>Professional Info</a>
+                                            <a href="#tab_1_7" data-toggle="tab">Professional Info</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_5" data-toggle="tab" (click)='isDetailsSaved()'>Salary Details</a>
+                                            <a href="#tab_1_5" data-toggle="tab">Salary Details</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_3" data-toggle="tab" (click)='isDetailsSaved()'>Skills</a>
+                                            <a href="#tab_1_3" data-toggle="tab">Skills</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_2" data-toggle="tab" (click)='isDetailsSaved()'>Qualification</a>
+                                            <a href="#tab_1_2" data-toggle="tab">Qualification</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_4" data-toggle="tab" (click)='isDetailsSaved()'>Career Profile</a>
+                                            <a href="#tab_1_4" data-toggle="tab">Career Profile</a>
                                         </li>
 
                                         <li>
-                                            <a href="#tab_1_6" data-toggle="tab" (click)='isDetailsSaved()'>Team Management</a>
+                                            <a href="#tab_1_6" data-toggle="tab">Team Management</a>
                                         </li>
 
                                     </ul>
@@ -73,7 +73,7 @@
                                                             <label class="control-label">First Name<span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                    <input type="text" autofocus placeholder="John" class="form-control" [(ngModel)]="profile.FirstName" required="" (change)='onChangeInput($event.target.value)'
+                                                                  <input type="text" autofocus placeholder="John" class="form-control" [(ngModel)]="profile.FirstName" required="" 
                                                                     />
                                                                 </div>
                                                             </div>
@@ -84,7 +84,7 @@
                                                             <label class="control-label">Middle Name</label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                             <input type="text" placeholder="Alex" class="form-control" [(ngModel)]="profile.MiddleName" (change)='onChangeInput($event.target.value)'
+                                                                             <input type="text" placeholder="Alex" class="form-control" [(ngModel)]="profile.MiddleName" 
                                                                     />
                                                                 </div>
                                                             </div>
@@ -95,7 +95,7 @@
                                                             <label class="control-label">Last Name<span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                                 <input type="text" placeholder="Doe" class="form-control" [(ngModel)]="profile.LastName" required="" (change)='onChangeInput($event.target.value)'
+                                                                                 <input type="text" placeholder="Doe" class="form-control" [(ngModel)]="profile.LastName" required="" 
                                                                     />
                                                                 </div>
                                                             </div>

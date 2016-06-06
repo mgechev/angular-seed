@@ -1,164 +1,130 @@
-@media screen and (max-width:  768px) {
-    .nav {
-        padding-left:  2px;
-        padding-right:  2px;
-    }
-    .nav li {
-        display:  block !important;
-        width:  100%;
-        margin:  0;
-    }
-    .nav li.active {
-        border-bottom:  3px solid #36c6d3 !important;
-        font-weight:  bold !important;
-        margin:  0;
-    }
-    .portlet.light > .portlet-title > .nav-tabs > li.active > a {
-        color:  #544E4E;
-    }
-    .inlineForm,
-    .add_div,
-    .fileInput {
-        padding-left:  15px !important;
-    }
-    .addNew {
-        padding: 6px 12px !important;
-    }
-    .btnupdate{
-      margin-top: 0 !important;
-      margin-left: 0 !important;
-    }
+
+@media screen and (max-width: 768px) {
+  .nav {
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+  .nav li {
+    display: block !important;
+    width: 100%;
+    margin: 0;
+  }
+  .nav li.active {
+    border-bottom: 3px solid #36c6d3 !important;
+    font-weight: bold !important;
+    margin: 0;
+  }
+  .portlet.light > .portlet-title > .nav-tabs > li.active > a {
+    color: #544e4e;
+  }
+  .inlineForm,
+  .add_div,
+  .fileInput {
+    padding-left: 15px !important;
+  }
+  .addNew {
+    padding: 6px 12px !important;
+  }
+  .btnupdate {
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+  }
 }
 .add-new-panel {
-    margin-left:  15px;
+  margin-left: 15px;
 }
 .fileUpload {
-    position:  relative;
-    overflow:  hidden;
+  position: relative;
+  overflow: hidden;
 }
 .fileUpload input.upload {
-    position:  absolute;
-    top:  0;
-    right:  0;
-    margin:  0;
-    padding:  0;
-    font-size:  20px;
-    cursor:  pointer;
-    opacity:  0;
-    filter:  alpha(opacity=0);
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
 }
-.table-checkable tr>td:first-child, .table-checkable tr>th:first-child {
-    max-width: none !important;
+.table-checkable tr >td:first-child,
+.table-checkable tr >th:first-child {
+  max-width: none !important;
 }
 .PendingScreening {
-    background:  #E43A45;
+  background: #e43a45;
 }
 .Open {
-    background:  #36c6d3;
+  background: #36c6d3;
 }
 .Selected {
-    background:  #1BBC9B;
+  background: #1bbc9b;
 }
 .Blacklisted {
-    background:  black;
+  background: black;
 }
 .Offered {
-    background:  #00F00D;
+  background: #00f00d;
 }
 .addNew,
 .fileInput {
-    padding-left:  4px;
-    padding-right:  4px;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 .inlineForm {
-    padding-left:  0px;
+  padding-left: 0px;
 }
 .add_div {
-    padding-left:  2px;
+  padding-left:  2px;
 }
 .mt-action-dot {
-    display:  inline-block;
-    width:  10px;
-    height:  10px;
-    border-radius:  50%!important;
-    margin-left:  5px;
-    margin-right:  5px;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50% !important;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 .dataTables_filter {
-    float:  right;
-    text-align:  center
+  float: right;
+  text-align: center;
 }
 .dataTables_length {
-    float:  left
+  float: left;
 }
 .dataTables_paginate {
-    float:  right;
-    text-align:  right;
-    padding-top:  0.25em;
+  float: right;
+  text-align: right;
+  padding-top: 0.25em;
 }
-@media screen and (max-width:  640px) {
+@media screen and (max-width: 640px) {
   .dataTables_paginate,
   .dataTables_length,
   .dataTables_filter {
-    float:  none;
-    text-align:  center
+    float: none;
+    text-align: center;
   }
   .dataTables_wrapper .dataTables_filter {
-    margin-top:  0.5em
+    margin-top: 0.5em;
   }
 }
 .table-checkable tr>td: first-child {
-    text-align:  left;
+  text-align: left;
 }
 span.select2.select2-container.select2-container--bootstrap {
-    width: auto !important;
+  width: auto !important;
 }
-.Loader {
-    width:  200px;
-    height:  20px;
-    height:  auto;
-    position:  absolute;
-    left:  50%;
-    margin-left:  -100px;
-    top:  35%;
-    background-color:  #383838;
-    color:  #F0F0F0;
-    font-family:  Calibri;
-    font-size:  14px;
-    padding:  10px;
-    text-align:  center;
-    border-radius:  2px;
-    -webkit-box-shadow:  0px 0px 24px -1px rgba(56, 56, 56, 1);
-    -moz-box-shadow:  0px 0px 24px -1px rgba(56, 56, 56, 1);
-    box-shadow:  0px 0px 24px -1px rgba(56, 56, 56, 1);
-    z-index:  2000;
+
+.btnupdate {
+  margin-top: 25px;
+  margin-left: -15px; 
 }
-.btnupdate{
-   margin-top: 25px;
-   margin-left: -15px; 
+.tooltip.customClass .tooltip-inner {
+  color: #880000;
+  background-color: #ffff66;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
 }
-/* Specify styling for tooltip contents */
-    .tooltip.customClass .tooltip-inner {
-        color: #880000;
-        background-color: #ffff66;
-        box-shadow: 0 6px 12px rgba(0,0,0,.175);
-    }
-    /* Hide arrow */
-    .tooltip.customClass .tooltip-arrow {
-        display: none;
-    }
-.alerts{
-    width: 250px;
-    height: 20px;
-    height: auto;
-    position: absolute;
-    left: 50%;
-    margin-left: -100px;
-    top: 35%;
-    color: #338CD2;
-    font-family: Calibri;
-    font-size: 14px;
-    padding: 10px;
-    text-align: center;
-    z-index: 2000;
+.tooltip.customClass .tooltip-arrow {
+  display: none;
 }

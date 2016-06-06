@@ -1,3 +1,4 @@
+
 .Approved {
   background: #32c5d2;
 }
@@ -17,21 +18,20 @@
   background: rgba(233, 239, 11, 0.98);
 }
 
-
-.priority1{
-     background: #e7505a;
+.priority1 {
+  background: #e7505a;
 }
-.priority2{
-    background: #337ab7;
+.priority2 {
+  background: #337ab7;
 }
-.priority3{
-    background: #41ce29;
+.priority3 {
+  background: #41ce29;
 }
-.priority4{
-     background: rgba(233, 239, 11, 0.98);
+.priority4 {
+  background: rgba(233, 239, 11, 0.98);
 }
-.priority5{
-    background: #c2cad8;
+.priority5 {
+  background: #c2cad8;
 }
 .mt-action-dot {
   display: inline-block;
@@ -46,3 +46,4 @@
   height: 250px;
   font-size: 11px;
 }
+
