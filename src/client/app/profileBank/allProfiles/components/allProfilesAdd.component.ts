@@ -83,8 +83,7 @@ export class AllProfilesAddComponent implements OnActivate {
         if (this.params) {
             this.getCandidateProfileById(this.params);
         }
-        //dropdown with multi selector and search
-        // $('select').select2();
+
     }
 
     getCandidateProfileById(profileId: string) {
