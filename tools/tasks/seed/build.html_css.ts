@@ -11,11 +11,11 @@ import {
   BROWSER_LIST,
   CSS_DEST,
   CSS_PROD_BUNDLE,
+  CSS_SRC,
   DEPENDENCIES,
+  ENABLE_SCSS,
   ENV,
-  getPluginConfig,
   TMP_DIR,
-  ENABLE_SCSS
 } from '../../config';
 
 const plugins = <any>gulpLoadPlugins();
@@ -49,52 +49,24 @@ function prepareTemplates() {
 }
 
 /**
- * Execute the appropriate component-stylesheet processing method based on presence of --scss flag.
+ * Execute the appropriate component-stylesheet processing method based on user stylesheet preference.
  */
 function processComponentStylesheets() {
-  return ENABLE_SCSS ? processScss('component') : processComponentCss();
+  return ENABLE_SCSS ? processComponentScss() : processComponentCss();
 }
 
 /**
- * Processes the SCSS files for the specified origin.
- * @param {string} origin The origin of the SCSS files being handled. Must be either 'component' or 'external.'
+ * Process scss files referenced from Angular component `styleUrls` metadata
  */
-function processScss(origin: 'component'|'external') {
-  let scssSrc = getScssForOrigin(origin);
-  let scssDest = getScssDestForOrigin(origin);
-  return gulp.src(scssSrc)
-    .pipe(isProd ? plugins.cached(`process-${origin}-scss`) : plugins.util.noop())
+function processComponentScss() {
+  return gulp.src(join(APP_SRC, '**', '*.scss'))
+    .pipe(isProd ? plugins.cached('process-component-scss') : plugins.util.noop())
     .pipe(isProd ? plugins.progeny() : plugins.util.noop())
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.sass({includePaths: ['./node_modules/']}).on('error', plugins.sass.logError))
     .pipe(plugins.postcss(processors))
     .pipe(plugins.sourcemaps.write(isProd ? '.' : ''))
-    .pipe(gulp.dest(scssDest));
-}
-
-/**
- * Get an array of SCSS files belonging to the specified origin.
- * @param {string} origin The origin of the SCSS files being handled. Must be either 'component' or 'external.'
- */
-function getScssForOrigin(origin: 'component'|'external') {
-  if (origin === 'component') return [join(APP_SRC, '**', '*.scss')]; else {
-    return getExternalStylesheets().map(r => r.src);
-  }
-}
-
-function getExternalStylesheets() {
-  let stylesheet = ENABLE_SCSS ? 'scss' : 'css';
-  return DEPENDENCIES.filter(d => new RegExp(`\.${stylesheet}$`).test(d.src));
-}
-
-/**
- * Get the destination of the processed SCSS files belonging to the specified origin.
- * @param {string} origin The origin of the SCSS files being handled. Must be either 'component' or 'external.'
- */
-function getScssDestForOrigin(origin: 'component'|'external') {
-  if (origin === 'component') return (isProd ? TMP_DIR : APP_DEST); else {
-    return CSS_DEST;
-  }
+    .pipe(gulp.dest(isProd ? TMP_DIR : APP_DEST));
 }
 
 /**
@@ -103,9 +75,9 @@ function getScssDestForOrigin(origin: 'component'|'external') {
  */
 function processComponentCss() {
   return gulp.src([
-      join(APP_SRC, '**', '*.css'),
-      '!' + join(APP_SRC, 'assets', '**', '*.css')
-    ])
+    join(APP_SRC, '**', '*.css'),
+    '!' + join(APP_SRC, 'assets', '**', '*.css')
+  ])
     .pipe(isProd ? plugins.cached('process-component-css') : plugins.util.noop())
     .pipe(plugins.postcss(processors))
     .pipe(gulp.dest(isProd ? TMP_DIR : APP_DEST));
@@ -115,26 +87,64 @@ function processComponentCss() {
  * Execute external-stylesheet processing method based on presence of --scss flag.
  */
 function processExternalStylesheets() {
-  return ENABLE_SCSS ? processScss('external') : processExternalCss();
+  return ENABLE_SCSS ? processAllExternalStylesheets() : processExternalCss();
+}
+
+/**
+ * Process scss stylesheets located in `src/client/css` and any css dependencies specified in
+ * the global project configuration.
+ */
+function processAllExternalStylesheets() {
+  return merge(getExternalCssStream(), getExternalScssStream())
+    .pipe(isProd ? plugins.concatCss(CSS_PROD_BUNDLE) : plugins.util.noop())
+    .pipe(plugins.postcss(processors))
+    .pipe(isProd ? cleanCss() : plugins.util.noop())
+    .pipe(gulp.dest(CSS_DEST));
+}
+
+/**
+ * Get a stream of external css files for subsequent processing.
+ */
+function getExternalCssStream() {
+  return gulp.src(getExternalCss())
+    .pipe(isProd ? plugins.cached('process-external-css') : plugins.util.noop());
+}
+
+/**
+ * Get an array of filenames referring to all external css stylesheets.
+ */
+function getExternalCss() {
+  return DEPENDENCIES.filter(dep => /\.css$/.test(dep.src)).map(dep => dep.src);
+}
+
+/**
+ * Get a stream of external scss files for subsequent processing.
+ */
+function getExternalScssStream() {
+  return gulp.src(getExternalScss())
+    .pipe(isProd ? plugins.cached('process-external-scss') : plugins.util.noop())
+    .pipe(isProd ? plugins.progeny() : plugins.util.noop())
+    .pipe(plugins.sass({includePaths: ['./node_modules/']}).on('error', plugins.sass.logError));
+}
+
+/**
+ * Get an array of filenames referring to external scss stylesheets located in the global DEPENDENCIES
+ * as well as in `src/css`.
+ */
+function getExternalScss() {
+  return DEPENDENCIES.filter(dep => /\.scss$/.test(dep.src)).map(dep => dep.src)
+    .concat([join(CSS_SRC, '**', '*.scss')]);
 }
 
 /**
  * Processes the external CSS files using `postcss` with the configured processors.
  */
 function processExternalCss() {
-  return gulp.src(getExternalCss().map(r => r.src))
-    .pipe(isProd ? plugins.cached('process-external-css') : plugins.util.noop())
+  return getExternalCssStream()
     .pipe(plugins.postcss(processors))
-    .pipe(isProd ? plugins.concatCss(CSS_PROD_BUNDLE, getPluginConfig('gulp-concat-css')) : plugins.util.noop())
+    .pipe(isProd ? plugins.concatCss(CSS_PROD_BUNDLE) : plugins.util.noop())
     .pipe(isProd ? cleanCss() : plugins.util.noop())
     .pipe(gulp.dest(CSS_DEST));
-}
-
-/**
- * Returns the array of external CSS dependencies listed in the application configuration.
- */
-function getExternalCss() {
-  return DEPENDENCIES.filter(d => /\.css$/.test(d.src));
 }
 
 /**
