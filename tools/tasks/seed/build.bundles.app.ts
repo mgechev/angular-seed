@@ -24,5 +24,6 @@ export = (done: any) => {
     .buildStatic(join(TMP_DIR, BOOTSTRAP_MODULE),
                  join(JS_DEST, JS_PROD_APP_BUNDLE),
                  BUNDLER_OPTIONS)
-    .then(() => done());
+    .then(() => done())
+    .catch(err => done(err));
 };

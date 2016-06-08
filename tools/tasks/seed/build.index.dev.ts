@@ -3,7 +3,7 @@ import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
 import * as slash from 'slash';
 
-import { APP_BASE, APP_DEST, APP_SRC, DEPENDENCIES } from '../../config';
+import { APP_BASE, APP_DEST, APP_SRC, DEPENDENCIES, CSS_DEST, ASSETS_SRC } from '../../config';
 import { templateLocals } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
@@ -48,8 +48,10 @@ function getInjectablesDependenciesRef(name?: string) {
  */
 function mapPath(dep: any) {
   let envPath = dep.src;
-  if (envPath.startsWith(APP_SRC)) {
-    envPath = join(APP_DEST, dep.src.replace(APP_SRC, ''));
+  if (envPath.startsWith(APP_SRC) && !envPath.endsWith('.scss')) {
+    envPath = join(APP_DEST, envPath.replace(APP_SRC, ''));
+  } else if (envPath.startsWith(APP_SRC) && envPath.endsWith('.scss')) {
+    envPath = envPath.replace(ASSETS_SRC, CSS_DEST).replace('.scss', '.css');
   }
   return envPath;
 }
