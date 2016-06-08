@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { MyProfilesInfo, Qualification } from '../../myProfiles/model/myProfilesInfo';
+import { MyProfilesInfo, SalaryDetails, Qualification, OtherDetails,Skills} from '../../myProfiles/model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
@@ -47,10 +47,10 @@ export class BlackListedProfilesService {
             .finally(() => this._spinnerService.hide());
     }
 
-    editCandidateProfessionalDetails(profile: MyProfilesInfo) {
+    editCandidateProfessionalDetails(profileOtherDetails: OtherDetails) {
         let url = Config.GetURL('/api/ProfileBank/AddCandidateOtherDetails');
         this._spinnerService.show();
-        return this.authHttp.post(url, { profile })
+        return this.authHttp.post(url, { profileOtherDetails })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
@@ -74,19 +74,20 @@ export class BlackListedProfilesService {
             .finally(() => this._spinnerService.hide());
     }
 
-    editCandidateSkillsDetails(profile: MyProfilesInfo) {
+
+      editCandidateSkillsDetails(profileSkills: Skills) {
         let url = Config.GetURL('/api/ProfileBank/AddCandidateSkillsDetails');
         this._spinnerService.show();
-        return this.authHttp.post(url, { profile })
+        return this.authHttp.post(url, { profileSkills })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
 
-    editCandidateSalaryDetails(profile: MyProfilesInfo) {
+    editCandidateSalaryDetails(profileSalryDetails: SalaryDetails) {
         let url = Config.GetURL('/api/ProfileBank/AddCandidateSalaryDetails');
         this._spinnerService.show();
-        return this.authHttp.post(url, { profile })
+        return this.authHttp.post(url, { profileSalryDetails })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

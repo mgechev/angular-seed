@@ -5,7 +5,7 @@ import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
-import { MasterData,ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 @Component({
@@ -39,7 +39,7 @@ export class MyProfilesAddComponent implements OnActivate {
 
     constructor(private _myProfilesService: MyProfilesService,
         private _masterService: MastersService,
-         public toastr: ToastsManager,
+        public toastr: ToastsManager,
         private _router: Router) {
         this.profile = new MyProfilesInfo();
         this.createQualificationObj();
@@ -105,22 +105,23 @@ export class MyProfilesAddComponent implements OnActivate {
             this.profile.TeamMgmt = false;
         }
 
-        if (this.profile.AppliedEarlier === 'Yes' || this.profile.AppliedEarlier === 'yes') {
-            this.profile.AppliedEarlier = true;
+        if (this.profile.CandidateOtherDetails.AppliedEarlier === 'Yes' || this.profile.CandidateOtherDetails.AppliedEarlier === 'yes') {
+            this.profile.CandidateOtherDetails.AppliedEarlier = true;
         } else {
-            this.profile.AppliedEarlier = false;
+            this.profile.CandidateOtherDetails.AppliedEarlier = false;
         }
 
-        if (this.profile.OfferInHand === 'Yes' || this.profile.OfferInHand === 'yes') {
-            this.profile.OfferInHand = true;
+        if (this.profile.CandidateOtherDetails.OfferInHand === 'Yes' || this.profile.CandidateOtherDetails.OfferInHand === 'yes') {
+            this.profile.CandidateOtherDetails.OfferInHand = true;
         } else {
-            this.profile.OfferInHand = false;
+            this.profile.CandidateOtherDetails.OfferInHand = false;
         }
 
-        if (this.profile.CTCIncludeVariable === 'Yes' || this.profile.CTCIncludeVariable === 'yes') {
-            this.profile.CTCIncludeVariable = true;
+        if (this.profile.CandidateSalaryDetails.CTCIncludeVariable === 'Yes' ||
+            this.profile.CandidateSalaryDetails.CTCIncludeVariable === 'yes') {
+            this.profile.CandidateSalaryDetails.CTCIncludeVariable = true;
         } else {
-            this.profile.CTCIncludeVariable = false;
+            this.profile.CandidateSalaryDetails.CTCIncludeVariable = false;
         }
     }
 
@@ -149,22 +150,22 @@ export class MyProfilesAddComponent implements OnActivate {
             this.profile.TeamMgmt = 'No';
         }
 
-        if (this.profile.AppliedEarlier === true) {
-            this.profile.AppliedEarlier = 'Yes';
+        if (this.profile.CandidateOtherDetails.AppliedEarlier === true) {
+            this.profile.CandidateOtherDetails.AppliedEarlier = 'Yes';
         } else {
-            this.profile.AppliedEarlier = 'No';
+            this.profile.CandidateOtherDetails.AppliedEarlier = 'No';
         }
 
-        if (this.profile.OfferInHand === true) {
-            this.profile.OfferInHand = 'Yes';
+        if (this.profile.CandidateOtherDetails.OfferInHand === true) {
+            this.profile.CandidateOtherDetails.OfferInHand = 'Yes';
         } else {
-            this.profile.OfferInHand = 'No';
+            this.profile.CandidateOtherDetails.OfferInHand = 'No';
         }
 
-        if (this.profile.CTCIncludeVariable === true) {
-            this.profile.CTCIncludeVariable = 'Yes';
+        if (this.profile.CandidateSalaryDetails.CTCIncludeVariable === true) {
+            this.profile.CandidateSalaryDetails.CTCIncludeVariable = 'Yes';
         } else {
-            this.profile.CTCIncludeVariable = 'No';
+            this.profile.CandidateSalaryDetails.CTCIncludeVariable = 'No';
         }
     }
 
@@ -250,7 +251,7 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.addCandidateProfile(this.profile)
                 .subscribe(
                 results => {
-                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                         this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
@@ -265,18 +266,12 @@ export class MyProfilesAddComponent implements OnActivate {
     }
 
     onSavePersonalDetails(): void {
-        // this.profile.Country =
-        // this.profile.State = 
-        // this.profile.District = 
-        console.log('this.profile.Country'+this.profile.Country);
-        console.log('this.profile.State'+this.profile.State);
-        console.log('this.profile.District'+this.profile.District);
         this.convertCheckboxesValues();
         if (this.params) {
             this._myProfilesService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
                 results => {
-                      if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                         this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
@@ -294,10 +289,11 @@ export class MyProfilesAddComponent implements OnActivate {
         //   this.showMessage('Wait', true);
         this.convertCheckboxesValues();
         if (this.params) {
-            this._myProfilesService.editCandidateProfessionalDetails(this.profile)
+            this.profile.CandidateOtherDetails.CandidateID = this.params;
+            this._myProfilesService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
                 .subscribe(
                 results => {
-                      if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                         this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
@@ -314,10 +310,11 @@ export class MyProfilesAddComponent implements OnActivate {
     onSaveSkillsDetails(): void {
         //   this.showMessage('Wait', true);
         if (this.params) {
-            this._myProfilesService.editCandidateSkillsDetails(this.profile)
+            this.profile.CandidateSkills.CandidateID = this.params;
+            this._myProfilesService.editCandidateSkillsDetails(this.profile.CandidateSkills)
                 .subscribe(
                 results => {
-                      if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                         this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
@@ -338,7 +335,7 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
                 results => {
-                       if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                         this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
@@ -358,7 +355,7 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.editCandidateCareerDetails(this.profile)
                 .subscribe(
                 results => {
-                      if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                         this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
@@ -377,10 +374,11 @@ export class MyProfilesAddComponent implements OnActivate {
         //   this.showMessage('Wait', true);
         this.convertCheckboxesValues();
         if (this.params) {
-            this._myProfilesService.editCandidateSalaryDetails(this.profile)
+            this.profile.CandidateSalaryDetails.CandidateID = this.params;
+            this._myProfilesService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)
                 .subscribe(
                 results => {
-                      if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                         this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
@@ -446,7 +444,7 @@ export class MyProfilesAddComponent implements OnActivate {
                 this._myProfilesService.editCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
-                       if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                             this.toastr.success((<ResponseFromAPI>results).Message);
                             this.createQualificationObj();
                             this.IsHidden = true;

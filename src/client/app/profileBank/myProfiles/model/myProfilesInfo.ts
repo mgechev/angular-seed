@@ -21,7 +21,7 @@ export class MyProfilesInfo {
   public ResumeID: number;
   public Status = new MasterData();
   public Comments: string;
-  public CandidateOtherDetail = new OtherDetails();
+  public CandidateOtherDetails = new OtherDetails();
   public CandidateSalaryDetails = new SalaryDetails();
   public CandidateSkills = new Skills();
 
@@ -58,11 +58,12 @@ export class MyProfilesInfo {
   public NoOfTeamMembers: number;
   public TeamMembersDesignations: string;
   public TeamHandlingChallenges: string;
-    public IsChecked: boolean;
+  public IsChecked: boolean;
 }
 
 export class Skills {
-  public ExpInSkill: number;
+  public CandidateID: string;
+  public ExpInSkill: string;
   public AnyFunctionalExp: string;
   public PrimarySkills: string;
   public SecondarySkills: string;
@@ -77,6 +78,7 @@ export class Skills {
 }
 
 export class SalaryDetails {
+  public CandidateID: string;
   public CurrentSalary: number;
   public ExpectedSalary: string;
   public CurrentTakeHome: number;
@@ -86,6 +88,7 @@ export class SalaryDetails {
 }
 
 export class OtherDetails {
+  public CandidateID: string;
   public AppliedEarlier: any;
   public AppraisalBondContractDetails: string;
   public Visa: string;

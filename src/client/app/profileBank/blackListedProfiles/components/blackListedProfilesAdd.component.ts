@@ -300,11 +300,12 @@ export class BlackListedProfilesAddComponent implements OnActivate {
         }
     }
 
+
     onSaveProfessionalDetails(): void {
-        //   this.showMessage('Wait', true);
         this.convertCheckboxesValues();
         if (this.params) {
-            this._blacklistedProfilesService.editCandidateProfessionalDetails(this.profile)
+            this.profile.CandidateOtherDetails.CandidateID = this.params;
+            this._blacklistedProfilesService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -322,9 +323,9 @@ export class BlackListedProfilesAddComponent implements OnActivate {
     }
 
     onSaveSkillsDetails(): void {
-        //   this.showMessage('Wait', true);
         if (this.params) {
-            this._blacklistedProfilesService.editCandidateSkillsDetails(this.profile)
+            this.profile.CandidateSkills.CandidateID = this.params;
+            this._blacklistedProfilesService.editCandidateSkillsDetails(this.profile.CandidateSkills)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -340,7 +341,6 @@ export class BlackListedProfilesAddComponent implements OnActivate {
                 });
         }
     }
-
     onSaveTeamManagementDetails(): void {
         //   this.showMessage('Wait', true);
         this.convertCheckboxesValues();
@@ -387,7 +387,8 @@ export class BlackListedProfilesAddComponent implements OnActivate {
         //   this.showMessage('Wait', true);
         this.convertCheckboxesValues();
         if (this.params) {
-            this._blacklistedProfilesService.editCandidateSalaryDetails(this.profile)
+            this.profile.CandidateSalaryDetails.CandidateID = this.params;
+            this._blacklistedProfilesService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -429,7 +430,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
                     error => {
                         this.createQualification();
                         this.errorMessage = <any>error;
-                         this.toastr.error(<any>error);
+                        this.toastr.error(<any>error);
                     });
             }
         } else {

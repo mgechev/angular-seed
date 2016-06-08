@@ -23,7 +23,7 @@
                         <div class="portlet light nopadding">
                             <div class="portlet-title custom-portlet">
                                 <div class="caption">
-                                    View Candidate's Info - {{profile.Candidate}}
+                                  View Candidate's Info - {{profile.Candidate}}
                                 </div>
                             </div>
                             <div class="portlet-container">
@@ -187,7 +187,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b>Exp In Skill :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.ExpInSkill}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateSkills.ExpInSkill}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -195,7 +195,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b>Any Functional Exp :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.AnyFunctionalExp}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateSkills.AnyFunctionalExp}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -207,7 +207,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b> Skills :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.Skills}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateSkills.PrimarySkills}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -228,7 +228,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b> Kinds of projects done :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.ProjectsDone}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateSkills.ProjectsDone}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -236,7 +236,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b> Testing :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.UnitIntegressionRegressionTesting}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateSkills.UnitIntegressionRegressionTesting}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -247,7 +247,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b> Database :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.Database}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateSkills.Database}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -255,7 +255,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b> Inclination towards Any other Technology :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.OtherTechnology}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateSkills.OtherTechnology}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -267,7 +267,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b> How much are you <br/>aware about testing? :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.AwareAboutTesting}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateSkills.AwareAboutTesting}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -275,7 +275,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b> Strong Technical Skills :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.StrongTechnicalSkills}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateSkills.StrongTechnicalSkills}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -377,7 +377,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b>Current Salary(CTC) :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.CurrentSalary}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateSalaryDetails.CurrentSalary}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -385,7 +385,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b>Expected Salary :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.ExpectedSalary}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateSalaryDetails.ExpectedSalary}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -397,7 +397,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-4 form-control-static"><b> What is your take home :</b></label>
                                                         <div class="col-md-8">
-                                                            <p class="form-control-static"> {{profile.CurrentTakeHome}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateSalaryDetails.CurrentTakeHome}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -409,7 +409,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-4 form-control-static"><b>What are the different perks you get :</b></label>
                                                         <div class="col-md-8">
-                                                            <p class="form-control-static"> {{profile.AnyPerks}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateSalaryDetails.AnyPerks}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -419,8 +419,8 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-4 form-control-static"><b> Does your CTC include variable salary?<br/> If yes, then how much :</b></label>
                                                         <div class="col-md-8">
-                                                            <p class="form-control-static"> {{profile.CTCIncludeVariable}}, &nbsp; {{profile.HowMuchVariable}}
-                                                            </p>
+                                                            <p class="form-control-static"> {{profile.CandidateSalaryDetails.CTCIncludeVariable}}, &nbsp; {{profile.HowMuchVariable}}
+                                                                </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -449,7 +449,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b>Applied in Earlier :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.AppliedEarlier}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.AppliedEarlier}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -457,7 +457,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b>Notice Period :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.NoticePeriod}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.NoticePeriod}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -469,7 +469,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b> Any Appraisal / Bond / On Contract Details :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.AppraisalBondContractDetails}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.AppraisalBondContractDetails}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -477,7 +477,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b>Visa :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.Visa}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.Visa}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -491,7 +491,7 @@
                                                         <label class="col-md-5 form-control-static"><b> Primary Reason to quit last job :</b></label>
 
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.PrimaryReasonToQuitLastJob}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.PrimaryReasonToQuitLastJob}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -499,7 +499,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b> Secondary Reason to quit last job:</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.SecondaryReasonToQuitLastJob}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.SecondaryReasonToQuitLastJob}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -510,7 +510,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b> Primary Reason to quit Current job :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.PrimaryReasonToQuitCurrentJob}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.PrimaryReasonToQuitCurrentJob}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -518,7 +518,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b>Secondary Reason to quit Current job :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.SecondaryReasonToQuitCurrentJob}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.SecondaryReasonToQuitCurrentJob}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -530,7 +530,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b> Role Expected  :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.RoleExpected }} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.RoleExpected }} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -538,7 +538,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b> Do you have any offer in hand? If yes, how many and what CTC you have got :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.OfferInHand}},&nbsp; {{profile.OfferDetails}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.OfferInHand}},&nbsp; {{profile.OfferDetails}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -549,7 +549,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b> Resigned Status Of Offered Candidate  :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.ResignedStatusOfOfferedCandidate}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.ResignedStatusOfOfferedCandidate}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -557,7 +557,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b> Job Serach Period :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.JobSerachPeriod}}</p>
+                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.JobSerachPeriod}}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -567,7 +567,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b>Family Background  :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.FamilyBackground}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.FamilyBackground}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -575,7 +575,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b> Any Existing Company Offers :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.IfExstingCompanyOffers}}</p>
+                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.IfExstingCompanyOffers}}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -585,7 +585,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b>Strengths  :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.Strengths}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.Strengths}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -593,7 +593,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b>Weekness :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.Weekness}}</p>
+                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.Weekness}}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -603,7 +603,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b>Looking For  :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.LookingFor}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.LookingFor}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -611,7 +611,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b>How many in your present company have left before the notice period :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.NoticePeriodNotCompletedCount}}</p>
+                                                           <p class="form-control-static"> {{profile.CandidateOtherDetails.NoticePeriodNotCompletedCount}}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -641,7 +641,7 @@
                                                         <label class=" col-md-4 form-control-static"><b> Outstationed Candidate :</b></label>
                                                         <div class="col-md-8">
                                                             <p class="form-control-static"> {{profile.OutstationedCandidate}}
-                                                            </p>
+                                                                </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -653,7 +653,7 @@
                                                         <label class=" col-md-4 form-control-static"><b>Are you ready to relocate,<br/> please specify the reason why :</b></label>
                                                         <div class="col-md-8">
                                                             <p class="form-control-static"> {{profile.ReadyToRelocate}} &nbsp; {{profile.ReasonToRelocate}}
-                                                            </p>
+                                                                </p>
                                                         </div>
                                                     </div>
                                                 </div>
