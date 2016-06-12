@@ -100,7 +100,7 @@
     "stream-series": "^0.1.1",
     "stylelint": "^6.3.3",
     "stylelint-config-standard": "^6.0.0",
-    "systemjs-builder": "^0.15.14",
+    "systemjs-builder": "0.15.14",
     "tildify": "^1.2.0",
     "tiny-lr": "^0.2.1",
     "traceur": "^0.0.91",
