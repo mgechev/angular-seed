@@ -72,97 +72,9 @@ export class BlackListedProfilesAddComponent implements OnActivate {
             .subscribe(
             results => {
                 this.profile = <any>results;
-                this.convertCheckboxesValuesToBoolean();
+                //this.convertCheckboxesValuesToBoolean();
             },
             error => this.errorMessage = <any>error);
-    }
-
-    convertCheckboxesValuesToBoolean() {
-        if (this.profile.IsCurrentSameAsPermanent === 'Yes' || this.profile.IsCurrentSameAsPermanent === 'yes') {
-            this.profile.IsCurrentSameAsPermanent = true;
-        } else {
-            this.profile.IsCurrentSameAsPermanent = false;
-        }
-
-        if (this.profile.ReadyToRelocate === 'Yes' || this.profile.ReadyToRelocate === 'yes') {
-            this.profile.ReadyToRelocate = true;
-        } else {
-            this.profile.ReadyToRelocate = false;
-        }
-
-        if (this.profile.OutstationedCandidate === 'Yes' || this.profile.OutstationedCandidate === 'yes') {
-            this.profile.OutstationedCandidate = true;
-        } else {
-            this.profile.OutstationedCandidate = false;
-        }
-
-        if (this.profile.TeamMgmt === 'Yes' || this.profile.TeamMgmt === 'yes') {
-            this.profile.TeamMgmt = true;
-        } else {
-            this.profile.TeamMgmt = false;
-        }
-
-        if (this.profile.AppliedEarlier === 'Yes' || this.profile.AppliedEarlier === 'yes') {
-            this.profile.AppliedEarlier = true;
-        } else {
-            this.profile.AppliedEarlier = false;
-        }
-
-        if (this.profile.OfferInHand === 'Yes' || this.profile.OfferInHand === 'yes') {
-            this.profile.OfferInHand = true;
-        } else {
-            this.profile.OfferInHand = false;
-        }
-
-        if (this.profile.CTCIncludeVariable === 'Yes' || this.profile.CTCIncludeVariable === 'yes') {
-            this.profile.CTCIncludeVariable = true;
-        } else {
-            this.profile.CTCIncludeVariable = false;
-        }
-    }
-
-    convertCheckboxesValues() {
-        if (this.profile.IsCurrentSameAsPermanent === true) {
-            this.profile.IsCurrentSameAsPermanent = 'Yes';
-        } else {
-            this.profile.IsCurrentSameAsPermanent = 'No';
-        }
-
-        if (this.profile.ReadyToRelocate === true) {
-            this.profile.ReadyToRelocate = 'Yes';
-        } else {
-            this.profile.ReadyToRelocate = 'No';
-        }
-
-        if (this.profile.OutstationedCandidate === true) {
-            this.profile.OutstationedCandidate = 'Yes';
-        } else {
-            this.profile.OutstationedCandidate = 'No';
-        }
-
-        if (this.profile.TeamMgmt === true) {
-            this.profile.TeamMgmt = 'Yes';
-        } else {
-            this.profile.TeamMgmt = 'No';
-        }
-
-        if (this.profile.AppliedEarlier === true) {
-            this.profile.AppliedEarlier = 'Yes';
-        } else {
-            this.profile.AppliedEarlier = 'No';
-        }
-
-        if (this.profile.OfferInHand === true) {
-            this.profile.OfferInHand = 'Yes';
-        } else {
-            this.profile.OfferInHand = 'No';
-        }
-
-        if (this.profile.CTCIncludeVariable === true) {
-            this.profile.CTCIncludeVariable = 'Yes';
-        } else {
-            this.profile.CTCIncludeVariable = 'No';
-        }
     }
 
     getCountries(): void {
@@ -281,7 +193,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
 
     onSavePersonalDetails(): void {
         //   this.showMessage('Wait', true);
-        this.convertCheckboxesValues();
+     //   this.convertCheckboxesValues();
         if (this.params) {
             this._blacklistedProfilesService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
@@ -302,7 +214,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
 
 
     onSaveProfessionalDetails(): void {
-        this.convertCheckboxesValues();
+     //   this.convertCheckboxesValues();
         if (this.params) {
             this.profile.CandidateOtherDetails.CandidateID = this.params;
             this._blacklistedProfilesService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
@@ -343,7 +255,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
     }
     onSaveTeamManagementDetails(): void {
         //   this.showMessage('Wait', true);
-        this.convertCheckboxesValues();
+     //   this.convertCheckboxesValues();
         if (this.params) {
             this._blacklistedProfilesService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
@@ -385,7 +297,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
 
     onSaveSalaryDetails(): void {
         //   this.showMessage('Wait', true);
-        this.convertCheckboxesValues();
+     //   this.convertCheckboxesValues();
         if (this.params) {
             this.profile.CandidateSalaryDetails.CandidateID = this.params;
             this._blacklistedProfilesService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)

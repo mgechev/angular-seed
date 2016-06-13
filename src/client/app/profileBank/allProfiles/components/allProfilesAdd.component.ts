@@ -78,7 +78,7 @@ export class AllProfilesAddComponent implements OnActivate {
             .subscribe(
             results => {
                 this.profile = <any>results;
-                this.convertCheckboxesValuesToBoolean();
+                //this.convertCheckboxesValuesToBoolean();
             },
             error => {
                 this.errorMessage = <any>error;
@@ -86,94 +86,6 @@ export class AllProfilesAddComponent implements OnActivate {
             });
     }
 
-      convertCheckboxesValuesToBoolean() {
-        if (this.profile.IsCurrentSameAsPermanent === 'Yes' || this.profile.IsCurrentSameAsPermanent === 'yes') {
-            this.profile.IsCurrentSameAsPermanent = true;
-        } else {
-            this.profile.IsCurrentSameAsPermanent = false;
-        }
-
-        if (this.profile.ReadyToRelocate === 'Yes' || this.profile.ReadyToRelocate === 'yes') {
-            this.profile.ReadyToRelocate = true;
-        } else {
-            this.profile.ReadyToRelocate = false;
-        }
-
-        if (this.profile.OutstationedCandidate === 'Yes' || this.profile.OutstationedCandidate === 'yes') {
-            this.profile.OutstationedCandidate = true;
-        } else {
-            this.profile.OutstationedCandidate = false;
-        }
-
-        if (this.profile.TeamMgmt === 'Yes' || this.profile.TeamMgmt === 'yes') {
-            this.profile.TeamMgmt = true;
-        } else {
-            this.profile.TeamMgmt = false;
-        }
-
-        if (this.profile.CandidateOtherDetails.AppliedEarlier === 'Yes' || this.profile.CandidateOtherDetails.AppliedEarlier === 'yes') {
-            this.profile.CandidateOtherDetails.AppliedEarlier = true;
-        } else {
-            this.profile.CandidateOtherDetails.AppliedEarlier = false;
-        }
-
-        if (this.profile.CandidateOtherDetails.OfferInHand === 'Yes' || this.profile.CandidateOtherDetails.OfferInHand === 'yes') {
-            this.profile.CandidateOtherDetails.OfferInHand = true;
-        } else {
-            this.profile.CandidateOtherDetails.OfferInHand = false;
-        }
-
-        if (this.profile.CandidateSalaryDetails.CTCIncludeVariable === 'Yes' ||
-            this.profile.CandidateSalaryDetails.CTCIncludeVariable === 'yes') {
-            this.profile.CandidateSalaryDetails.CTCIncludeVariable = true;
-        } else {
-            this.profile.CandidateSalaryDetails.CTCIncludeVariable = false;
-        }
-    }
-
-    convertCheckboxesValues() {
-        if (this.profile.IsCurrentSameAsPermanent === true) {
-            this.profile.IsCurrentSameAsPermanent = 'Yes';
-        } else {
-            this.profile.IsCurrentSameAsPermanent = 'No';
-        }
-
-        if (this.profile.ReadyToRelocate === true) {
-            this.profile.ReadyToRelocate = 'Yes';
-        } else {
-            this.profile.ReadyToRelocate = 'No';
-        }
-
-        if (this.profile.OutstationedCandidate === true) {
-            this.profile.OutstationedCandidate = 'Yes';
-        } else {
-            this.profile.OutstationedCandidate = 'No';
-        }
-
-        if (this.profile.TeamMgmt === true) {
-            this.profile.TeamMgmt = 'Yes';
-        } else {
-            this.profile.TeamMgmt = 'No';
-        }
-
-        if (this.profile.CandidateOtherDetails.AppliedEarlier === true) {
-            this.profile.CandidateOtherDetails.AppliedEarlier = 'Yes';
-        } else {
-            this.profile.CandidateOtherDetails.AppliedEarlier = 'No';
-        }
-
-        if (this.profile.CandidateOtherDetails.OfferInHand === true) {
-            this.profile.CandidateOtherDetails.OfferInHand = 'Yes';
-        } else {
-            this.profile.CandidateOtherDetails.OfferInHand = 'No';
-        }
-
-        if (this.profile.CandidateSalaryDetails.CTCIncludeVariable === true) {
-            this.profile.CandidateSalaryDetails.CTCIncludeVariable = 'Yes';
-        } else {
-            this.profile.CandidateSalaryDetails.CTCIncludeVariable = 'No';
-        }
-    }
 
     getCountries(): void {
         this._masterService.getCountries()
@@ -277,7 +189,7 @@ export class AllProfilesAddComponent implements OnActivate {
     }
 
     onSavePersonalDetails(): void {
-        this.convertCheckboxesValues();
+     //   this.convertCheckboxesValues();
         if (this.params) {
             this._allProfilesService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
@@ -297,7 +209,7 @@ export class AllProfilesAddComponent implements OnActivate {
     }
 
      onSaveProfessionalDetails(): void {
-        this.convertCheckboxesValues();
+     //   this.convertCheckboxesValues();
         if (this.params) {
             this.profile.CandidateOtherDetails.CandidateID = this.params;
             this._allProfilesService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
@@ -339,7 +251,7 @@ export class AllProfilesAddComponent implements OnActivate {
     }
     onSaveTeamManagementDetails(): void {
         //   this.showMessage('Wait', true);
-        this.convertCheckboxesValues();
+     //   this.convertCheckboxesValues();
         if (this.params) {
             this._allProfilesService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
@@ -381,7 +293,7 @@ export class AllProfilesAddComponent implements OnActivate {
 
     onSaveSalaryDetails(): void {
         //   this.showMessage('Wait', true);
-        this.convertCheckboxesValues();
+     //   this.convertCheckboxesValues();
         if (this.params) {
             this.profile.CandidateSalaryDetails.CandidateID = this.params;
             this._allProfilesService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)

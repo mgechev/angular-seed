@@ -9,7 +9,7 @@ export class Qualification {
 }
 
 export class MyProfilesInfo {
-  public CandidateID: number;
+  public CandidateID: string;
   public Candidate: string;
   public FirstName: string;
   public MiddleName: string;
@@ -24,6 +24,7 @@ export class MyProfilesInfo {
   public CandidateOtherDetails = new OtherDetails();
   public CandidateSalaryDetails = new SalaryDetails();
   public CandidateSkills = new Skills();
+  public AadharCardNo:string;
 
   //Properties of Personal Information
   public SecondaryContact: number;
@@ -123,6 +124,12 @@ export class AddCandidateResponse {
   public ReasonCode: string;
   public ErrorMsg: string;
   public candidateLookupId: string;
+}
+export class TransferOwnershipMeta {
+   public OwnerType = new MasterData();
+   public CurrentOwner = new MasterData();
+   public OwnershipComments :string;
+   public Candidate: string;
 }
 
 

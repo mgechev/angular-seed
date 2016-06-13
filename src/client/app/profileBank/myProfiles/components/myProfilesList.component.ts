@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import { MyProfilesInfo, ResumeMeta,AddCandidateResponse } from '../model/myProfilesInfo';
+import { MyProfilesInfo, ResumeMeta, AddCandidateResponse } from '../model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
+import { MyProfilesDataSharedService } from '../services/myProfilesDataShared.service';
 import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -14,7 +15,7 @@ import { APIResult } from  '../../../shared/constantValue/index';
     selector: 'rrf-myprofiles-list',
     templateUrl: 'myProfilesList.component.html',
     directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
-    styleUrls: ['myProfiles.component.css']
+    styleUrls: ['myProfiles.component.css'],
 })
 
 export class MyProfilesListComponent implements OnActivate {
@@ -29,21 +30,24 @@ export class MyProfilesListComponent implements OnActivate {
     Comments: string;
     currentStatus: number;
     currentCandidate: string;
-    selectedRowCount: number = 0;
+        selectedRowCount: number = 0;
     allChecked: boolean = false;
     isCollapsed: boolean = false;
     IsSuccess: boolean = false;
-    resumeMeta : ResumeMeta;
-    fileUploaded:boolean = false;
-    fileName:string;
+    resumeMeta: ResumeMeta;
+    fileUploaded: boolean = false;
+    fileName: string;
+    searchString: string;
+    isAddNewPanelCollapsed: boolean = false;
 
     constructor(private _myProfilesService: MyProfilesService,
         private _router: Router,
         public toastr: ToastsManager,
-        private _masterService: MastersService) {
+        private _masterService: MastersService,
+        private _myProfilesDataSharedService :MyProfilesDataSharedService) {
         this.psdTemplates = new Array<File>();
         this.profile = new MyProfilesInfo();
-        this.resumeMeta =new ResumeMeta();
+        this.resumeMeta = new ResumeMeta();
     }
 
     routerOnActivate() {
@@ -51,7 +55,9 @@ export class MyProfilesListComponent implements OnActivate {
         this.getCandidateStatuses();
     }
 
-
+    toggleAddNewPanel() {
+        this.isAddNewPanelCollapsed = !this.isAddNewPanelCollapsed;
+    }
     SaveCandidateID(id: number) {
         this.seletedCandidateID = id;
         var index = _.findIndex(this.myProfilesList, { CandidateID: this.seletedCandidateID });
@@ -76,38 +82,53 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     onSave(): void {
-        this._myProfilesService.addCandidateProfile(this.profile)
-            .subscribe(
-            results => {
-                if ((<AddCandidateResponse>results).StatusCode === APIResult.Success) {
-                    this.uploadResume((<AddCandidateResponse>results).candidateLookupId);
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
-                }
-                this.profile = new MyProfilesInfo();
-            },
-            error => this.errorMessage = <any>error);
+        if (this.chkValidations()) {
+            this._myProfilesService.addCandidateProfile(this.profile)
+                .subscribe(
+                results => {
+                    if ((<AddCandidateResponse>results).StatusCode === APIResult.Success) {
+                        this.uploadResume((<AddCandidateResponse>results).candidateLookupId);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
+                    this.profile = new MyProfilesInfo();
+                },
+                error => this.errorMessage = <any>error);
+        } else {
+            this.toastr.error('Please enter one of field : PassportNumber / PANNumber /AadhaarCardNo');
+        }
     }
 
-    uploadResume(CandidateLookupId : string) {
-        this.resumeMeta.CandidateLookupId =  CandidateLookupId;
+    chkValidations(): boolean {
+        if ((this.profile.PassportNumber !== undefined && this.profile.PassportNumber !== '')||
+             (this.profile.PANNumber !== undefined &&  this.profile.PANNumber !== '') ||
+             (this.profile.AadharCardNo !== undefined && this.profile.AadharCardNo !== '')) {
+            return true;
+        } else { return false; }
+    }
+
+
+    uploadResume(CandidateLookupId: string) {
+        this.resumeMeta.CandidateLookupId = CandidateLookupId;
         this.resumeMeta.Overwrite = false;
         this.resumeMeta.Profile = this.psdTemplates[0];
         this._myProfilesService.UploadCandidateProfile(this.resumeMeta)
             .subscribe(
-         results => {
-              if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.getMyProfiles();
                     this.fileUploaded = false;
                     this.fileName = '';
+                    this.profile = new MyProfilesInfo();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
-         },
-           error => this.errorMessage = <any>error);
+            },
+            error => this.errorMessage = <any>error);
     }
-    public psdTemplateSelectionHandler(fileInput: any) {
+
+    public uploadFile(fileInput: any) {
         console.log(fileInput);
         let FileList: FileList = fileInput.target.files;
         this.psdTemplates.length = 0;
@@ -151,6 +172,7 @@ export class MyProfilesListComponent implements OnActivate {
     closeUpdatePanel() {
         this.isCollapsed = false;
     }
+
     onStateChange(e: any): void {
         if (e.target.checked) {
             this.selectedRowCount++;
@@ -179,6 +201,7 @@ export class MyProfilesListComponent implements OnActivate {
             this.myProfilesList[index].IsChecked = state;
         }
     }
+
     openMailWindow() {
         var mailto: string = '';
         for (var index = 0; index < this.myProfilesList.length; index++) {
@@ -190,6 +213,17 @@ export class MyProfilesListComponent implements OnActivate {
         }
         this.allChecked = false;
         window.location.href = 'mailto:' + mailto;
+    }
+
+    transferOwnerShipClick() {
+        let checkedItemIds:Array<string> = new Array<string>();
+        for (var index = 0; index < this.myProfilesList.length; index++) {
+            if (this.myProfilesList[index].IsChecked) {
+              checkedItemIds.push(this.myProfilesList[index].CandidateID);
+            }
+        }
+        this._myProfilesDataSharedService.setCheckedItems(checkedItemIds);
+         this._router.navigate(['/App/ProfileBank/MyProfiles/Transfer/']);
     }
 }
 

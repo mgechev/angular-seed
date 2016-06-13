@@ -2,7 +2,7 @@
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-       
+
         <!--BEGIN breadcrumb -->
         <ul class="page-breadcrumb breadcrumb">
             <li>
@@ -26,85 +26,127 @@
 
                             <div class="col-md-8">
                                 <div class="dt-buttons pull-right">
-                                    <button type="button" class="dt-button buttons-print btn blue btn-outline" (click)='openMailWindow()' [disabled]='!selectedRowCount'> Send Mails </button>
-                                    <a class="dt-button buttons-print btn dark btn-outline" id="btnPrint">
-                                        <span>Print</span>
-                                    </a>
-                                    <a class="dt-button buttons-pdf buttons-html5 btn green btn-outline" id="btnPDF">
-                                        <span>PDF</span>
-                                    </a>
-                                    <a class="dt-button buttons-csv buttons-html5 btn purple btn-outline" id="btnCSV">
-                                        <span>CSV</span>
-                                    </a>
+
+                                    <!--<button type="button" class="dt-button buttons-print btn blue btn-outline" (click)='openMailWindow()' [disabled]='!selectedRowCount'> Send Mails </button>-->
+                                    <button class="btn btn-md green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Mass Actions
+                                              <i class="fa fa-angle-down"></i>
+                             </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li   >
+                                            <button class="btn btn-default btnLink" (click)='openMailWindow()' [disabled]='!selectedRowCount' >
+                                                <i class="fa fa-envelope-o"></i>   Send Mails </button>
+                                        </li>
+                                        <li class="divider"> </li>
+                                        <li   >
+                                        <button class="btn btn-default btnLink" [disabled]='!selectedRowCount'
+                                        (click)='transferOwnerShipClick()'>
+                                                <i class="fa fa-share"></i>     Transfer Ownership
+                                            </button>
+                                        </li>
+                                    </ul>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="portlet-body">
                         <div class="table-toolbar">
-                          
-                            <div class="add-new-panel">
-                                <form role="form" (submit)="onSave()">
-                                    <div class="row">
-                                        <div class="col-md-2 inlineForm">
-                                            <div class="form-group">
-                                                <input type="text" placeholder="First Name" class="form-control" [(ngModel)]="profile.FirstName" required="" tooltip="First Name"
-                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.FirstName"
-                                                />
+                            <!-- Add New Profile-->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <fieldset class="fsStyle">
+                                        <legend class="legendStyle">
+                                            <a data-toggle="collapse" data-target="#demo">Add New Profile</a>
+                                        </legend>
+                                        <div class="collapse in" id="demo">
+                                            <div class="add-new-panel">
+                                                <form role="form" (submit)="onSave()">
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            <div class="col-md-3 inlineForm">
+                                                                <div class="form-group">
+                                                                    <input type="text" placeholder="First Name" class="form-control" [(ngModel)]="profile.FirstName" required="" tooltip="First Name"
+                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.FirstName"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3  inlineForm">
+                                                                <div class="form-group ">
+                                                                    <input type="text" placeholder="Last Name" class="form-control" [(ngModel)]="profile.LastName" required="" tooltip="Last Name"
+                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.LastName"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3  inlineForm">
+                                                                <div class="form-group ">
+                                                                    <input type="email" class="form-control" placeholder="Email Address" [(ngModel)]="profile.Email" required="" tooltip="Email"
+                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.Email">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3 inlineForm">
+                                                                <div class="form-group ">
+                                                                    <input type="text" placeholder="8888451201" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact"
+                                                                        required="" pattern="^[0-9\-\+]{9,15}$" tooltip="Contact No" title="Enter 10 digits"
+                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.PrimaryContact"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            <div class="col-md-3 inlineForm">
+                                                                <div class="form-group ">
+                                                                    <input type="text" placeholder="Passport Number" class="form-control" [(ngModel)]="profile.PassportNumber" tooltip="Passport No"
+                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.PassportNumber" pattern="[a-zA-Z]{1})\\d{7}"
+                                                                        title="Enter valid passport number"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3  inlineForm">
+                                                                <div class="form-group ">
+                                                                    <input type="text" placeholder="Pan Number" class="form-control" [(ngModel)]="profile.PANNumber" tooltip="Pan Card No" tooltipPlacement="top"
+                                                                        tooltipTrigger="mouseenter" tooltipEnable="!profile.PANNumber" pattern="[A-Za-z]{5}\d{4}[A-Za-z]{1}" 
+                                                                        title="Enter valid PAN number"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3 inlineForm">
+                                                                <div class="form-group">
+                                                                    <input type="text" placeholder="Aadhar Card No" class="form-control" [(ngModel)]="profile.AadharCardNumber" tooltip="Aadhar Card Number"
+                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.AadharCardNumber" pattern="^\d{4}\d{4}\d{4}$"
+                                                                        title="Enter valid Aadhaar Card number"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-1 inlineForm">
+                                                                <div class="form-group">
+                                                                    <div class="fileUpload btn btn-info" data-toggle="tooltip" data-placement="top" title="Upload Resume">
+                                                                        <input type="file" class="upload" (change)="uploadFile($event)" required/><span>Browse</span>
+                                                                    </div><br/>
+                                                                     <span *ngIf='fileUploaded'> {{fileName}}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-1 inlineForm">
+                                                                <div class="form-group">
+                                                                    <button type="submit" class="btn green add addNew"> Add New</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
-                                        <div class="col-md-2 inlineForm">
-                                            <div class="form-group ">
-                                                <input type="text" placeholder="Last Name" class="form-control" [(ngModel)]="profile.LastName" required="" tooltip="Last Name"
-                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.LastName"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2 inlineForm">
-                                            <div class="form-group ">
-                                                <input type="email" class="form-control" placeholder="Email Address" [(ngModel)]="profile.Email" required="" tooltip="Email"
-                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.Email">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2 inlineForm">
-                                            <div class="form-group ">
-                                                <input type="text" placeholder="8888451201" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact"
-                                                    required="" pattern="^[0-9\-\+]{9,15}$" tooltip="Contact No" tooltipPlacement="top"
-                                                    tooltipTrigger="mouseenter" tooltipEnable="!profile.PrimaryContact" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2 inlineForm">
-                                            <div class="form-group ">
-                                                <input type="text" placeholder="Tag" class="form-control" [(ngModel)]="profile.Tag" required="" tooltip="Tag" tooltipPlacement="top"
-                                                    tooltipTrigger="mouseenter" tooltipEnable="!profile.Tag" />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-1 fileInput">
-                                            <div class="form-group">
-                                                <div class="fileUpload btn btn-info" data-toggle="tooltip" data-placement="top" title="Upload Resume">
-                                                    <!--<input type="file" class="upload" (change)="psdTemplateSelectionHandler($event)" /><span>Browse</span>-->
-                                                    <input type="file" class="upload" (change)="psdTemplateSelectionHandler($event)" /><span>Browse</span>
-                                                </div>
-                                                <span *ngIf='fileUploaded'> {{fileName}}</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-1 add_div">
-                                            <div class="form-group">
-                                                <button type="submit" class="btn green add addNew"> Add New</button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </form>
+                                    </fieldset>
+                                </div>
                             </div>
+                            <!-- Add New Profile END-->
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
-                                    <div class="dataTables_length" id="sample_1_length"><label>Show <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline"><option value="5">5</option><option value="15">15</option><option value="20">20</option><option value="-1">All</option></select></label></div>
+                                    <div class="dataTables_length" id="sample_1_length" style="margin-top:10px"><label>Show <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline"><option value="5">5</option><option value="15">15</option><option value="20">20</option><option value="-1">All</option></select></label></div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
-                                    <div id="sample_1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm input-small input-inline" placeholder="" aria-controls="sample_1"></label></div>
+                                    <div id="sample_1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm input-large input-inline" placeholder="" aria-controls="sample_1" [(ngModel)]="searchString"></label></div>
                                 </div>
                             </div>
                             <div class="row" style="margin-top: 10px">
@@ -148,11 +190,11 @@
                                 <thead>
                                     <tr>
                                         <td>
-                                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                                     <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" (change)="onAllSelect($event)"
                                                      [(ngModel)]='allChecked'/><span></span>
                                                 </label>
-                                            </td>
+                                        </td>
                                         <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Name / Email / Contact</th>
                                         <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Tag </th>
                                         <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Professional Details </th>
@@ -163,13 +205,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="gradeX odd" *ngFor="let myprofile of myProfilesList; let index = index">
-                                       <td>
-                                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                    <tr class="gradeX odd" *ngFor="let myprofile of myProfilesList ">
+                                        <td>
+                                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                                     <input type="checkbox" class="checkboxes" value="1" [id]='myprofile.CandidateID' [(ngModel)]='myprofile.IsChecked' (change)="onStateChange($event)"/>
                                                     <span></span>
                                                 </label>
-                                            </td>
+                                        </td>
                                         <td (click)='redirectToView(myprofile.CandidateID)'>
                                             <tr>
                                                 <td style="float: left;">&nbsp; {{myprofile.Candidate}}</td>
@@ -196,7 +238,9 @@
                                         <td (click)='redirectToView(myprofile.CandidateID)'>
                                             <span class="mt-action-dot {{myprofile.Status.Value}}"></span>{{myprofile.Status.Value}}
                                         </td>
-                                            <td class="text-center"><a href="" download tooltip="Download Resume" tooltipPlacement="top" tooltipTrigger="mouseenter" ><i class="fa fa-download" aria-hidden="true"></i></a></td>
+                                        <td class="text-center">
+                                            <a href="" download tooltip="Download Resume" tooltipPlacement="top" tooltipTrigger="mouseenter"><i class="fa fa-download" aria-hidden="true"></i></a>
+                                        </td>
                                         <td>
                                             <div class="btn-group">
                                                 <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions

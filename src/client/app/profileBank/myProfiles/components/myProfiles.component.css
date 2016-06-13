@@ -71,6 +71,7 @@
 .fileInput {
   padding-left: 4px;
   padding-right: 4px;
+  width: auto;
 }
 .inlineForm {
   padding-left: 0px;
@@ -127,4 +128,35 @@ span.select2.select2-container.select2-container--bootstrap {
 }
 .tooltip.customClass .tooltip-arrow {
   display: none;
+}
+legend a {
+  color: inherit;
+}
+legend.legendStyle {
+padding-left: 5px;
+padding-right: 5px;
+}
+fieldset.fsStyle {
+font-family: Verdana, Arial, sans-serif;
+font-size: small;
+font-weight: normal;
+border-top: 1px solid #999999;
+
+}
+legend.legendStyle {
+font-size: 90%;
+color: #888888;
+background-color: transparent;
+font-weight: bold;
+}
+
+legend {
+width: auto;
+border-bottom: 0px;
+}
+.btnLink {
+  text-align: left !important;
+  width: 100%;
+  border: white !important;
+  color: #888888;
 }
