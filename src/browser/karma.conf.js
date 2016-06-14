@@ -8,7 +8,7 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: './',
+    basePath: '../../',
 
 
     // frameworks to use
@@ -47,7 +47,7 @@ module.exports = function(config) {
       // suppress annoying 404 warnings for resources, images, etc.
       { pattern: 'dist/dev/assets/**/*', watched: false, included: false, served: true },
 
-      'test-main.js'
+      'src/browser/test-main.js'
     ],
 
     // must go along with above, suppress annoying 404 warnings.

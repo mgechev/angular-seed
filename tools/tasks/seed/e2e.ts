@@ -1,6 +1,10 @@
 import * as express from 'express';
 import * as gulp from 'gulp';
 import { protractor } from 'gulp-protractor';
+import { join } from 'path';
+
+import { APP_SRC } from '../../config';
+
 
 class Protractor {
   server(port: number, dir: string) {
@@ -23,7 +27,7 @@ export = (done: any) => {
     .then((server: any) => {
       gulp
         .src('./dist/dev/**/*.e2e-spec.js')
-        .pipe(protractor({ configFile: 'protractor.conf.js' }))
+        .pipe(protractor({ configFile: join(process.cwd(), APP_SRC, 'protractor.conf.js') }))
         .on('error', (error: string) => { throw error; })
         .on('end', () => { server.close(done); });
     });
