@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { MyProfilesInfo, SalaryDetails, Qualification, ResumeMeta, OtherDetails,Skills} from '../model/myProfilesInfo';
+import { MyProfilesInfo, SalaryDetails, Qualification,
+    ResumeMeta, OtherDetails, Skills} from '../model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
@@ -146,7 +147,7 @@ export class MyProfilesService {
             .finally(() => this._spinnerService.hide());
     }
 
-    updateCandidateStatus(CandidateID: number, StatusId: number, Comments: string) {
+    updateCandidateStatus(CandidateID: string, StatusId: number, Comments: string) {
         let url = Config.GetURL('/api/ProfileBank/UpdateStatus');
         this._spinnerService.show();
         return this.authHttp.post(url, { profile: { CandidateID: CandidateID, StatusId: StatusId, Comments: Comments } })
@@ -154,6 +155,15 @@ export class MyProfilesService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
 
+    }
+
+    updateFollowUpComments(CandidateID: string,Comments: string) {
+        let url = Config.GetURL('/api/ProfileBank/UpdateFollowUpComments');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { profile: { CandidateID: CandidateID, Comments: Comments } })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     private extractData(res: Response) {

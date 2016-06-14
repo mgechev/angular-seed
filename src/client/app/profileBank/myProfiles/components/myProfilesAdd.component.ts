@@ -75,7 +75,7 @@ export class MyProfilesAddComponent implements OnActivate {
             .subscribe(
             results => {
                 this.profile = <any>results;
-                //this.convertCheckboxesValuesToBoolean();
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments;
             },
             error => this.errorMessage = <any>error);
     }
@@ -157,8 +157,14 @@ export class MyProfilesAddComponent implements OnActivate {
     }
 
     onSavePrimaryInfo(): void {
-        //   this.showMessage('Wait', true);
         if (this.params) {
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.isCommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.isCommentsUpdated = false;
+            }
+
             this._myProfilesService.addCandidateProfile(this.profile)
                 .subscribe(
                 results => {
@@ -179,6 +185,12 @@ export class MyProfilesAddComponent implements OnActivate {
     onSavePersonalDetails(): void {
         //   this.convertCheckboxesValues();
         if (this.params) {
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.isCommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.isCommentsUpdated = false;
+            }
             this._myProfilesService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
                 results => {
@@ -197,9 +209,14 @@ export class MyProfilesAddComponent implements OnActivate {
     }
 
     onSaveProfessionalDetails(): void {
-        //   this.showMessage('Wait', true);
-        //   this.convertCheckboxesValues();
+
         if (this.params) {
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.isCommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.isCommentsUpdated = false;
+            }
             this.profile.CandidateOtherDetails.CandidateID = this.params;
             this._myProfilesService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
                 .subscribe(
@@ -222,6 +239,12 @@ export class MyProfilesAddComponent implements OnActivate {
         //   this.showMessage('Wait', true);
         if (this.params) {
             this.profile.CandidateSkills.CandidateID = this.params;
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.isCommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.isCommentsUpdated = false;
+            }
             this._myProfilesService.editCandidateSkillsDetails(this.profile.CandidateSkills)
                 .subscribe(
                 results => {
@@ -243,6 +266,12 @@ export class MyProfilesAddComponent implements OnActivate {
         //   this.showMessage('Wait', true);
         //   this.convertCheckboxesValues();
         if (this.params) {
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.isCommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.isCommentsUpdated = false;
+            }
             this._myProfilesService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
                 results => {
@@ -263,6 +292,12 @@ export class MyProfilesAddComponent implements OnActivate {
     onSaveCareerProfileDetails(): void {
         //   this.showMessage('Wait', true);
         if (this.params) {
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.isCommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.isCommentsUpdated = false;
+            }
             this._myProfilesService.editCandidateCareerDetails(this.profile)
                 .subscribe(
                 results => {
@@ -285,6 +320,12 @@ export class MyProfilesAddComponent implements OnActivate {
         //   this.showMessage('Wait', true);
         //   this.convertCheckboxesValues();
         if (this.params) {
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.isCommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.isCommentsUpdated = false;
+            }
             this.profile.CandidateSalaryDetails.CandidateID = this.params;
             this._myProfilesService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)
                 .subscribe(
@@ -378,8 +419,8 @@ export class MyProfilesAddComponent implements OnActivate {
             this._myProfilesService.getCandidateQualifications(this.params)
                 .subscribe(
                 results => {
-                    this.profile.Qualifications = new Array<Qualification>();
-                    this.profile.Qualifications = <any>results;
+                    this.profile.CandidateQualifications = new Array<Qualification>();
+                    this.profile.CandidateQualifications = <any>results;
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -389,9 +430,10 @@ export class MyProfilesAddComponent implements OnActivate {
     }
 
     editQualidficationData(QID: number) {
-        var index = _.findIndex(this.profile.Qualifications, { QualificationID: QID });
-        this.qualification = this.profile.Qualifications[index];
+        var index = _.findIndex(this.profile.CandidateQualifications, { QualificationID: QID });
+        this.qualification = this.profile.CandidateQualifications[index];
         this.IsHidden = false;
     }
+
 
 }

@@ -394,8 +394,8 @@ export class BlackListedProfilesAddComponent implements OnActivate {
             this._blacklistedProfilesService.getCandidateQualifications(this.params)
                 .subscribe(
                 results => {
-                    this.profile.Qualifications = new Array<Qualification>();
-                    this.profile.Qualifications = <any>results;
+                    this.profile.CandidateQualifications = new Array<Qualification>();
+                    this.profile.CandidateQualifications = <any>results;
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -404,8 +404,8 @@ export class BlackListedProfilesAddComponent implements OnActivate {
     }
 
     editQualidficationData(QID: number) {
-        var index = _.findIndex(this.profile.Qualifications, { QualificationID: QID });
-        this.qualification = this.profile.Qualifications[index];
+        var index = _.findIndex(this.profile.CandidateQualifications, { QualificationID: QID });
+        this.qualification = this.profile.CandidateQualifications[index];
         this.IsHidden = false;
     }
 }

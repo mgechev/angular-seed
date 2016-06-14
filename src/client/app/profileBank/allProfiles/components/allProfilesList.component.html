@@ -26,16 +26,22 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="dt-buttons pull-right">
-                                    <!--<button type="button" class="dt-button buttons-print btn blue btn-outline" (click)='openMailWindow()' [disabled]='!selectedRowCount'> Send Mails </button>-->
-                                    <a class="dt-button buttons-print btn dark btn-outline" id="btnPrint">
-                                        <span>Print</span>
-                                    </a>
-                                    <a class="dt-button buttons-pdf buttons-html5 btn green btn-outline" id="btnPDF">
-                                        <span>PDF</span>
-                                    </a>
-                                    <a class="dt-button buttons-csv buttons-html5 btn purple btn-outline" id="btnCSV">
-                                        <span>CSV</span>
-                                    </a>
+                                        <button class="btn btn-md green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Mass Actions
+                                              <i class="fa fa-angle-down"></i>
+                                   </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li   >
+                                            <button class="btn btn-default btnLink" (click)='openMailWindow()' [disabled]='!selectedRowCount' >
+                                                <i class="fa fa-envelope-o"></i>   Send Mails </button>
+                                        </li>
+                                        <li class="divider"> </li>
+                                        <li   >
+                                        <button class="btn btn-default btnLink" [disabled]='!selectedRowCount'
+                                        (click)='transferOwnerShipClick()'>
+                                                <i class="fa fa-share"></i>     Transfer Ownership
+                                            </button>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -90,12 +96,12 @@
                                     role="grid" aria-describedby="sample_1_info">
                                     <thead>
                                         <tr>
-                                            <!--<td>
+                                            <td>
                                                 <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                                     <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" (change)="onAllSelect($event)"
                                                      [(ngModel)]='allChecked'/><span></span>
                                                 </label>
-                                            </td>-->
+                                            </td>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Name / Email / Contact</th>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Tag </th>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Professional Details </th>
@@ -106,12 +112,12 @@
                                     </thead>
                                     <tbody>
                                         <tr class="gradeX odd" *ngFor="let profile of allProfilesList; let index = index">
-                                            <!--<td>
+                                            <td>
                                                 <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                                     <input type="checkbox" class="checkboxes" value="1" [id]='profile.CandidateID' [(ngModel)]='profile.IsChecked' (change)="onStateChange($event)"/>
                                                     <span></span>
                                                 </label>
-                                            </td>-->
+                                            </td>
                                             <td (click)='redirectToView(profile.CandidateID)'>
                                                 <tr>
                                                     <td style="float: left;">&nbsp; {{profile.Candidate}}</td>

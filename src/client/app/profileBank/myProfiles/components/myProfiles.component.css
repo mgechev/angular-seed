@@ -140,14 +140,12 @@ fieldset.fsStyle {
 font-family: Verdana, Arial, sans-serif;
 font-size: small;
 font-weight: normal;
-border-top: 1px solid #999999;
-
 }
 legend.legendStyle {
-font-size: 90%;
+font-size: 14px;
 color: #888888;
 background-color: transparent;
-font-weight: bold;
+
 }
 
 legend {
@@ -159,4 +157,10 @@ border-bottom: 0px;
   width: 100%;
   border: white !important;
   color: #888888;
+}
+.list{
+  border: white !important;
+}
+.selectedRowColor {
+  background: lightseagreen;
 }

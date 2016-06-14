@@ -388,8 +388,8 @@ export class AllProfilesAddComponent implements OnActivate {
             this._allProfilesService.getCandidateQualifications(this.params)
                 .subscribe(
                 results => {
-                    this.profile.Qualifications = new Array<Qualification>();
-                    this.profile.Qualifications = <any>results;
+                    this.profile.CandidateQualifications = new Array<Qualification>();
+                    this.profile.CandidateQualifications = <any>results;
 
                 },
                 error => {
@@ -400,8 +400,8 @@ export class AllProfilesAddComponent implements OnActivate {
     }
 
     editQualidficationData(QID: number) {
-        var index = _.findIndex(this.profile.Qualifications, { QualificationID: QID });
-        this.qualification = this.profile.Qualifications[index];
+        var index = _.findIndex(this.profile.CandidateQualifications, { QualificationID: QID });
+        this.qualification = this.profile.CandidateQualifications[index];
         this.IsHidden = false;
     }
 }

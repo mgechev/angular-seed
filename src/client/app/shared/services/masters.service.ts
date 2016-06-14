@@ -114,6 +114,13 @@ export class MastersService {
             .catch(this.handleError);
     }
 
+    GetOwnerType() {
+        let url = Config.GetURL('/api/Masters/GetOwnerTypes');
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);

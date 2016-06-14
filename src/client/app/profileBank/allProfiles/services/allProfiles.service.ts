@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { MyProfilesInfo, SalaryDetails, Qualification, OtherDetails,Skills} from '../../myProfiles/model/myProfilesInfo';
+import { MyProfilesInfo, SalaryDetails, TransferOwnershipMeta,
+    Qualification, OtherDetails, Skills} from '../../myProfiles/model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
@@ -48,7 +49,7 @@ export class AllProfilesService {
             .finally(() => this._spinnerService.hide());
     }
 
-   editCandidateProfessionalDetails(profileOtherDetails: OtherDetails) {
+    editCandidateProfessionalDetails(profileOtherDetails: OtherDetails) {
         let url = Config.GetURL('/api/ProfileBank/AddCandidateOtherDetails');
         this._spinnerService.show();
         return this.authHttp.post(url, { profileOtherDetails })
@@ -75,7 +76,7 @@ export class AllProfilesService {
             .finally(() => this._spinnerService.hide());
     }
 
-      editCandidateSkillsDetails(profileSkills: Skills) {
+    editCandidateSkillsDetails(profileSkills: Skills) {
         let url = Config.GetURL('/api/ProfileBank/AddCandidateSkillsDetails');
         this._spinnerService.show();
         return this.authHttp.post(url, { profileSkills })
@@ -138,6 +139,25 @@ export class AllProfilesService {
             .finally(() => this._spinnerService.hide());
 
     }
+
+    updateOwnership(Ownership: TransferOwnershipMeta) {
+        let url = Config.GetURL('api/ProfileBank/updateOwnership');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { Ownership })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
+    getCandidateOwnwershipInfo(candidateIds: Array<string>) {
+        let url = Config.GetURL('/api/ProfileBank/getCandidateOwnwershipInfo');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { Ids: candidateIds })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
 
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {

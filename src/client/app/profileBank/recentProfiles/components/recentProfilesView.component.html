@@ -76,7 +76,7 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr *ngFor="let Qualification of profile.Qualifications">
+                                                                <tr *ngFor="let Qualification of profile.CandidateQualifications">
                                                                     <td> {{Qualification.Qualification.Value}}</td>
                                                                     <td> {{Qualification.YearOfPassing.Value}}</td>
                                                                     <td> {{Qualification.Grade.Value}}</td>
@@ -116,7 +116,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-8 form-control-static"><b>Total Experience :</b></label>
                                                         <div class="col-md-3">
-                                                            <p class="form-control-static"> {{profile.TotalExperience}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateCareerProfile.TotalExperience}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -124,7 +124,7 @@
                                                     <div class="form-group">
                                                         <label class="col-md-8 form-control-static"><b>Relevant Experience:</b></label>
                                                         <div class="col-md-2">
-                                                            <p class="form-control-static"> {{profile.RelevantExperience}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateCareerProfile.RelevantExperience}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -133,7 +133,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b>Current Company:</b></label>
                                                         <div class="col-md-6">
-                                                            <p class="form-control-static"> {{profile.CurrentCompany}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateCareerProfile.CurrentCompany}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -145,7 +145,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-6 form-control-static"><b>Current Designation & Role:</b></label>
                                                         <div class="col-md-6">
-                                                            <p class="form-control-static"> {{profile.CurrentDesignationRole}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateCareerProfile.CurrentDesignationRole}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -153,7 +153,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-7 form-control-static"><b>Time Spent In Current Company:</b></label>
                                                         <div class="col-md-2">
-                                                            <p class="form-control-static"> {{profile.TimeSpentInCurrentCompany}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateCareerProfile.TimeSpentInCurrentCompany}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -306,7 +306,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b>Team Management :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.TeamMgmt}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateTeamManagement.TeamMgmt}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -314,7 +314,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b>No Of Team Members :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.NoOfTeamMembers}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateTeamManagement.NoOfTeamMembers}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -326,7 +326,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b> How long you have been handling a team :</b></label>
                                                         <div class="col-md-6">
-                                                            <p class="form-control-static"> {{profile.HandlingTeam}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateTeamManagement.HandlingTeam}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -338,7 +338,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b> What are designation your team members belong :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.TeamMembersDesignations}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateTeamManagement.TeamMembersDesignations}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -348,7 +348,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b> Challenges faced while handling a team :</b></label>
                                                         <div class="col-md-6">
-                                                            <p class="form-control-static"> {{profile.TeamHandlingChallenges}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateTeamManagement.TeamHandlingChallenges}} </p>
                                                         </div>
                                                     </div>
                                                 </div>

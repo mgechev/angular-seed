@@ -1,6 +1,6 @@
 import { MasterData } from  '../../../shared/model/index';
 export class Qualification {
-  public CandidateID: number;
+  public CandidateID: string;
   public QualificationID: number;
   public Qualification: any;
   public YearOfPassing: any;
@@ -24,7 +24,10 @@ export class MyProfilesInfo {
   public CandidateOtherDetails = new OtherDetails();
   public CandidateSalaryDetails = new SalaryDetails();
   public CandidateSkills = new Skills();
-  public AadharCardNo:string;
+  public AadharCardNo: string;
+  public CandidateTeamManagement = new TeamManagement();
+  public CandidateCareerProfile = new CareerProfile();
+ public IsChecked: boolean;
 
   //Properties of Personal Information
   public SecondaryContact: number;
@@ -44,22 +47,28 @@ export class MyProfilesInfo {
   public IsCurrentSameAsPermanent: any;
 
   //properties of Qualification
-  public Qualifications: Array<Qualification>;
+  public CandidateQualifications: Array<Qualification>;
+  public FollowUpComments: string;
+  public PreviousFollowupComments: string;
+  public isCommentsUpdated: boolean;
+}
 
-  //properties of Candidate Career Profile
-  public TotalExperience: number;
-  public RelevantExperience: number;
-  public CurrentCompany: string;
-  public CurrentDesignationRole: string;
-  public TimeSpentInCurrentCompany: number;
-
+export class TeamManagement {
   //properties of Candidate Team Management
   public TeamMgmt: any;
   public HandlingTeam: number;
   public NoOfTeamMembers: number;
   public TeamMembersDesignations: string;
   public TeamHandlingChallenges: string;
-  public IsChecked: boolean;
+ 
+}
+export class CareerProfile {
+  //properties of Candidate Career Profile
+  public TotalExperience: number;
+  public RelevantExperience: number;
+  public CurrentCompany: string;
+  public CurrentDesignationRole: string;
+  public TimeSpentInCurrentCompany: number;
 }
 
 export class Skills {
@@ -126,10 +135,13 @@ export class AddCandidateResponse {
   public candidateLookupId: string;
 }
 export class TransferOwnershipMeta {
-   public OwnerType = new MasterData();
-   public CurrentOwner = new MasterData();
-   public OwnershipComments :string;
-   public Candidate: string;
+  public CandidateID: string;
+  public OwnerType = new MasterData();
+  public CurrentOwner = new MasterData();
+  public OwnershipComments: string;
+  public Candidate: string;
+  public CandidateIds: Array<string> = new Array<string>();
+  public Owner = new MasterData();
 }
 
 

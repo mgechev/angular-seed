@@ -4,7 +4,6 @@ import { MyProfilesInfo, ResumeMeta, AddCandidateResponse } from '../model/myPro
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
-import { MyProfilesDataSharedService } from '../services/myProfilesDataShared.service';
 import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -30,7 +29,7 @@ export class MyProfilesListComponent implements OnActivate {
     Comments: string;
     currentStatus: number;
     currentCandidate: string;
-        selectedRowCount: number = 0;
+    selectedRowCount: number = 0;
     allChecked: boolean = false;
     isCollapsed: boolean = false;
     IsSuccess: boolean = false;
@@ -38,13 +37,13 @@ export class MyProfilesListComponent implements OnActivate {
     fileUploaded: boolean = false;
     fileName: string;
     searchString: string;
-    isAddNewPanelCollapsed: boolean = false;
-
+    isCommentsPanelCollapsed: boolean = false;
+    seletedCandidateIDForComments: string;
+    highlightRow :string ;
     constructor(private _myProfilesService: MyProfilesService,
         private _router: Router,
         public toastr: ToastsManager,
-        private _masterService: MastersService,
-        private _myProfilesDataSharedService :MyProfilesDataSharedService) {
+        private _masterService: MastersService) {
         this.psdTemplates = new Array<File>();
         this.profile = new MyProfilesInfo();
         this.resumeMeta = new ResumeMeta();
@@ -55,9 +54,6 @@ export class MyProfilesListComponent implements OnActivate {
         this.getCandidateStatuses();
     }
 
-    toggleAddNewPanel() {
-        this.isAddNewPanelCollapsed = !this.isAddNewPanelCollapsed;
-    }
     SaveCandidateID(id: number) {
         this.seletedCandidateID = id;
         var index = _.findIndex(this.myProfilesList, { CandidateID: this.seletedCandidateID });
@@ -100,13 +96,12 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     chkValidations(): boolean {
-        if ((this.profile.PassportNumber !== undefined && this.profile.PassportNumber !== '')||
-             (this.profile.PANNumber !== undefined &&  this.profile.PANNumber !== '') ||
-             (this.profile.AadharCardNo !== undefined && this.profile.AadharCardNo !== '')) {
+        if ((this.profile.PassportNumber !== undefined && this.profile.PassportNumber !== '') ||
+            (this.profile.PANNumber !== undefined && this.profile.PANNumber !== '') ||
+            (this.profile.AadharCardNo !== undefined && this.profile.AadharCardNo !== '')) {
             return true;
         } else { return false; }
     }
-
 
     uploadResume(CandidateLookupId: string) {
         this.resumeMeta.CandidateLookupId = CandidateLookupId;
@@ -215,16 +210,45 @@ export class MyProfilesListComponent implements OnActivate {
         window.location.href = 'mailto:' + mailto;
     }
 
-    transferOwnerShipClick() {
-        let checkedItemIds:Array<string> = new Array<string>();
-        for (var index = 0; index < this.myProfilesList.length; index++) {
-            if (this.myProfilesList[index].IsChecked) {
-              checkedItemIds.push(this.myProfilesList[index].CandidateID);
-            }
-        }
-        this._myProfilesDataSharedService.setCheckedItems(checkedItemIds);
-         this._router.navigate(['/App/ProfileBank/MyProfiles/Transfer/']);
+    onClickFollowUpComments(id: string) {
+        this.seletedCandidateIDForComments = id;
+        var index = _.findIndex(this.myProfilesList, { CandidateID: this.seletedCandidateIDForComments });
+        this.profile.Candidate = this.myProfilesList[index].Candidate;
+        this.profile.FollowUpComments = this.myProfilesList[index].FollowUpComments;
+        this.profile.PreviousFollowupComments = this.profile.FollowUpComments;
+        this.highlightRow = 'selectedRowColor';
+        if (this.isCommentsPanelCollapsed === false)
+            this.isCommentsPanelCollapsed = !this.isCommentsPanelCollapsed;
     }
+
+    closeCommentsPanel() {
+        this.isCommentsPanelCollapsed = !this.isCommentsPanelCollapsed;
+          this.highlightRow = '';
+    }
+
+    onSubmitFollowupComment() {
+        //check if comment is actually updated regardless of spaces
+        if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim()) {
+            //Update Comments
+            this._myProfilesService.updateFollowUpComments( this.seletedCandidateIDForComments,
+             this.profile.FollowUpComments.trim())
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getMyProfiles();
+                        this.profile = new MyProfilesInfo();
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
+                },
+                error => this.errorMessage = <any>error);
+            this.isCommentsPanelCollapsed = !this.isCommentsPanelCollapsed;
+             this.highlightRow = '';
+        }
+
+    }
+
 }
 
 

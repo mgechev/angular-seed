@@ -8,7 +8,8 @@ import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { RMSGridComponent } from '../../../shared/components/rmsGrid/rmsGrid.component';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
-import { MasterData,ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
+import { DataSharedService } from '../../shared/services/DataShared.service';
 
 @Component({
     moduleId: module.id,
@@ -37,6 +38,7 @@ export class AllProfilesListComponent implements OnActivate {
 
 
     constructor(private _allProfilesService: AllProfilesService,
+        private _dataSharedService: DataSharedService,
         private _router: Router,
         public toastr: ToastsManager,
         private _masterService: MastersService) {
@@ -98,7 +100,7 @@ export class AllProfilesListComponent implements OnActivate {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
             },
-            error =>  this.toastr.error(<any>error));
+            error => this.toastr.error(<any>error));
         this.isCollapsed = false;
     }
 
@@ -144,5 +146,15 @@ export class AllProfilesListComponent implements OnActivate {
         }
         this.allChecked = false;
         window.location.href = 'mailto:' + mailto;
+    }
+    transferOwnerShipClick() {
+        let checkedItemIds: Array<string> = new Array<string>();
+        for (var index = 0; index < this.allProfilesList.length; index++) {
+            if (this.allProfilesList[index].IsChecked) {
+                checkedItemIds.push(this.allProfilesList[index].CandidateID);
+            }
+        }
+        this._dataSharedService.setCheckedItems(checkedItemIds);
+        this._router.navigate(['/App/ProfileBank/AllProfiles/Transfer/']);
     }
 }
