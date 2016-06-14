@@ -72,7 +72,7 @@ _Does not rely on any global dependencies._
 
 Default application server configuration
 
-```javascript
+```js
 var PORT             = 5555;
 var LIVE_RELOAD_PORT = 4002;
 var DOCS_PORT        = 4003;
@@ -151,11 +151,16 @@ Please see the [CONTRIBUTING](https://github.com/mgechev/angular2-seed/blob/mast
 An [advanced option to this seed exists here](https://github.com/NathanWalker/angular2-seed-advanced) which mirrors the latest changes here but adds core support for:
 
 - [ngrx/store](https://github.com/ngrx/store) RxJS powered state management, inspired by **Redux**
-- [ngrx-store-router](https://github.com/CodeSequence/ngrx-store-router) middleware for syncing state with Angular 2 Router.
-- [ng2-translate](https://github.com/ocombe/ng2-translate) for i18n
+- [ng2-translate](https://github.com/ocombe/ng2-translate) for i18n 
+  - Usage is optional but on by default
+  - Up to you and your team how you want to utilize it. It can be easily removed if not needed. 
+- [angulartics2](https://github.com/angulartics/angulartics2) Vendor-agnostic analytics for Angular2 applications.
+  - Out of box support for [Segment](https://segment.com/)
+    - When using the seed, be sure to change your `write_key` [here](https://github.com/NathanWalker/angular2-seed-advanced/blob/master/src/client/index.html#L24)
+  - Can be changed to any vendor, [learn more here](https://github.com/angulartics/angulartics2#supported-providers)
 - [lodash](https://lodash.com/) Helps reduce blocks of code down to single lines and enhances readability
-- [NativeScript](https://www.nativescript.org/) cross platform mobile (w/ native UI) apps.
-- More coming in the future...
+- [NativeScript](https://www.nativescript.org/) cross platform mobile (w/ native UI) apps. [Setup instructions here](#nativescript-app).
+- [Electron](http://electron.atom.io/) cross platform desktop apps (Mac, Windows and Linux). [Setup instructions here](#electron-app).
 
 You may use it to learn how to extend this seed for your own use cases or use the advanced seed if your project needs those features.
 
