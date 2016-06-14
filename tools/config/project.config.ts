@@ -1,7 +1,7 @@
 import { join } from 'path';
 
 import { SeedConfig } from './seed.config';
-import { InjectableDependency } from './seed.config.interfaces';
+import {InjectableDependency, LazyModule} from './seed.config.interfaces';
 
 /**
  * This class extends the basic seed configuration, allowing for project specific overrides. A few examples can be found
@@ -10,6 +10,14 @@ import { InjectableDependency } from './seed.config.interfaces';
 export class ProjectConfig extends SeedConfig {
 
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
+
+  LAZY_MODULES: LazyModule[] = [
+    {
+      src: 'modules/+lazy/index',
+      dest: 'lazy.js'
+    }
+  ];
+
 
   constructor() {
     super();

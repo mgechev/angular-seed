@@ -1,7 +1,7 @@
 import { join } from 'path';
 import { argv } from 'yargs';
 
-import { Environments, InjectableDependency } from './seed.config.interfaces';
+import {Environments, InjectableDependency} from './seed.config.interfaces';
 
 /**
  * The enumeration of available environments.
@@ -219,6 +219,12 @@ export class SeedConfig {
   JS_PROD_SHIMS_BUNDLE = 'shims.js';
 
   /**
+   * The name of the bundle file to include all external dependencies files.
+   * @type {string}
+     */
+  JS_PROD_DEPENDENCIES_BUNDLE = 'dependencies.js';
+
+  /**
    * The name of the bundle file to include all JavaScript application files.
    * @type {string}
    */
@@ -253,11 +259,11 @@ export class SeedConfig {
    * @type {InjectableDependency[]}
    */
   NPM_DEPENDENCIES: InjectableDependency[] = [
-    { src: 'systemjs/dist/system-polyfills.src.js', inject: 'shims', env: ENVIRONMENTS.DEVELOPMENT },
+    { src: 'systemjs/dist/system-polyfills.src.js', inject: 'shims'},
     { src: 'zone.js/dist/zone.js', inject: 'libs' },
     { src: 'core-js/client/shim.min.js', inject: 'shims' },
-    { src: 'systemjs/dist/system.src.js', inject: 'shims', env: ENVIRONMENTS.DEVELOPMENT },
-    { src: 'rxjs/bundles/Rx.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT }
+    { src: 'systemjs/dist/system.src.js', inject: 'shims'},
+    { src: 'rxjs/bundles/Rx.js', inject: 'libs'}
   ];
 
   /**
@@ -316,11 +322,22 @@ export class SeedConfig {
   };
 
   /**
+   * The configuration of SystemJS for the runtime `prod` environment.
+   * @type {any}
+   */
+  protected SYSTEM_CONFIG_PROD: any = {
+    defaultJSExtensions: true,
+    packages: {
+      rxjs: { defaultExtension: false }
+    }
+  };
+
+  /**
    * The configuration of SystemJS of the application.
    * Per default, the configuration of the `dev` environment will be used.
    * @type {any}
    */
-  SYSTEM_CONFIG: any = this.SYSTEM_CONFIG_DEV;
+  SYSTEM_CONFIG: any = this.ENV === 'prod' ? this.SYSTEM_CONFIG_PROD : this.SYSTEM_CONFIG_DEV;
 
   /**
    * The system builder configuration of the application.
@@ -333,41 +350,18 @@ export class SeedConfig {
       join(this.PROJECT_ROOT, 'node_modules', '@angular', '*', 'package.json')
     ],
     paths: {
-      [`${this.TMP_DIR}/*`]: `${this.TMP_DIR}/*`,
-      '*': 'node_modules/*'
+      '@angular/core': `node_modules/@angular/core/core.umd.js`,
+      '@angular/common': `node_modules/@angular/common/common.umd.js`,
+      '@angular/compiler': `node_modules/@angular/compiler/compiler.umd.js`,
+      '@angular/http': `node_modules/@angular/http/http.umd.js`,
+      '@angular/router': `node_modules/@angular/router/router.umd.js`,
+      '@angular/platform-browser': `node_modules/@angular/platform-browser/platform-browser.umd.js`,
+      '@angular/platform-browser-dynamic': `node_modules/@angular/platform-browser-dynamic/platform-browser-dynamic.umd.js`,
+      'app/*' : `${this.TMP_DIR}/app/*`,
+      'rxjs/*': `node_modules/rxjs/*`
     },
     packages: {
-      '@angular/core': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/compiler': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/common': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/http': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/platform-browser': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/platform-browser-dynamic': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/router': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      'rxjs': {
-        defaultExtension: 'js'
-      }
+      rxjs: { defaultExtension: false }
     }
   };
 

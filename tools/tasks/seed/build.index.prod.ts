@@ -11,7 +11,8 @@ import {
   CSS_PROD_BUNDLE,
   JS_DEST,
   JS_PROD_APP_BUNDLE,
-  JS_PROD_SHIMS_BUNDLE
+  JS_PROD_SHIMS_BUNDLE,
+  JS_PROD_DEPENDENCIES_BUNDLE
 } from '../../config';
 import { templateLocals } from '../../utils';
 
@@ -23,19 +24,22 @@ const plugins = <any>gulpLoadPlugins();
  */
 export = () => {
   return gulp.src(join(APP_SRC, 'index.html'))
-    .pipe(injectJs())
+    .pipe(injectJsShim())
+    .pipe(injectJsLibs())
+    .pipe(injectJsApp())
     .pipe(injectCss())
     .pipe(plugins.template(templateLocals()))
     .pipe(gulp.dest(APP_DEST));
 };
 
 /**
- * Injects the given file array and transforms the path of the files.
+ * Injects the given file array into the corresponding inject location and transforms the path of the files.
+ * @param {string} name - The name of the inject location.
  * @param {Array<string>} files - The files to be injected.
  */
-function inject(...files: Array<string>) {
+function inject(name: string, ...files: Array<string>) {
     return plugins.inject(gulp.src(files, { read: false }), {
-        files,
+        name,
         transform: transformPath()
     });
 }
@@ -43,8 +47,16 @@ function inject(...files: Array<string>) {
 /**
  * Injects the bundled JavaScript shims and application bundles for the production environment.
  */
-function injectJs() {
-  return inject(join(JS_DEST, JS_PROD_SHIMS_BUNDLE), join(JS_DEST, JS_PROD_APP_BUNDLE));
+function injectJsShim() {
+  return inject('shims', join(JS_DEST, JS_PROD_SHIMS_BUNDLE));
+}
+
+function injectJsLibs() {
+  return inject('libs', join(JS_DEST, JS_PROD_DEPENDENCIES_BUNDLE));
+}
+
+function injectJsApp() {
+  return inject(null, join(JS_DEST, JS_PROD_APP_BUNDLE));
 }
 
 /**
