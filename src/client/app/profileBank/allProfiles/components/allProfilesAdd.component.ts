@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 import { Router, RouteSegment, OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
-import {MyProfilesInfo, Qualification} from '../../myProfiles/model/myProfilesInfo';
+import {MyProfilesInfo, Qualification} from '../../shared/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
+import { ProfileBankService } from '../../shared/services/profilebank.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { AlertComponent } from 'ng2-bootstrap';
@@ -49,6 +50,7 @@ export class AllProfilesAddComponent implements OnActivate {
 
     constructor(private _allProfilesService: AllProfilesService,
         private _router: Router,
+        private _profileBankService: ProfileBankService,
         public toastr: ToastsManager,
         private _masterService: MastersService) {
         this.profile = new MyProfilesInfo();
@@ -74,7 +76,7 @@ export class AllProfilesAddComponent implements OnActivate {
     }
 
     getCandidateProfileById(profileId: string) {
-        this._allProfilesService.getCandidateProfile(profileId)
+        this._profileBankService.getCandidateProfile(profileId)
             .subscribe(
             results => {
                 this.profile = <any>results;
@@ -171,7 +173,14 @@ export class AllProfilesAddComponent implements OnActivate {
 
     onSavePrimaryInfo(): void {
         if (this.params) {
-            this._allProfilesService.editCandidateProfile(this.profile)
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.isCommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.isCommentsUpdated = false;
+            }
+
+            this._profileBankService.editCandidateProfile(this.profile)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -189,9 +198,15 @@ export class AllProfilesAddComponent implements OnActivate {
     }
 
     onSavePersonalDetails(): void {
-     //   this.convertCheckboxesValues();
+        //   this.convertCheckboxesValues();
         if (this.params) {
-            this._allProfilesService.editCandidatePersonalDetails(this.profile)
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.isCommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.isCommentsUpdated = false;
+            }
+            this._profileBankService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -208,11 +223,17 @@ export class AllProfilesAddComponent implements OnActivate {
         }
     }
 
-     onSaveProfessionalDetails(): void {
-     //   this.convertCheckboxesValues();
+    onSaveProfessionalDetails(): void {
+
         if (this.params) {
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.isCommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.isCommentsUpdated = false;
+            }
             this.profile.CandidateOtherDetails.CandidateID = this.params;
-            this._allProfilesService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
+            this._profileBankService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -233,7 +254,13 @@ export class AllProfilesAddComponent implements OnActivate {
         //   this.showMessage('Wait', true);
         if (this.params) {
             this.profile.CandidateSkills.CandidateID = this.params;
-            this._allProfilesService.editCandidateSkillsDetails(this.profile.CandidateSkills)
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.isCommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.isCommentsUpdated = false;
+            }
+            this._profileBankService.editCandidateSkillsDetails(this.profile.CandidateSkills)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -249,11 +276,18 @@ export class AllProfilesAddComponent implements OnActivate {
                 });
         }
     }
+
     onSaveTeamManagementDetails(): void {
         //   this.showMessage('Wait', true);
-     //   this.convertCheckboxesValues();
+        //   this.convertCheckboxesValues();
         if (this.params) {
-            this._allProfilesService.editCandidateTeamManagementDetails(this.profile)
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.isCommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.isCommentsUpdated = false;
+            }
+            this._profileBankService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -273,7 +307,13 @@ export class AllProfilesAddComponent implements OnActivate {
     onSaveCareerProfileDetails(): void {
         //   this.showMessage('Wait', true);
         if (this.params) {
-            this._allProfilesService.editCandidateCareerDetails(this.profile)
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.isCommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.isCommentsUpdated = false;
+            }
+            this._profileBankService.editCandidateCareerDetails(this.profile)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -293,10 +333,16 @@ export class AllProfilesAddComponent implements OnActivate {
 
     onSaveSalaryDetails(): void {
         //   this.showMessage('Wait', true);
-     //   this.convertCheckboxesValues();
+        //   this.convertCheckboxesValues();
         if (this.params) {
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.isCommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.isCommentsUpdated = false;
+            }
             this.profile.CandidateSalaryDetails.CandidateID = this.params;
-            this._allProfilesService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)
+            this._profileBankService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -313,8 +359,8 @@ export class AllProfilesAddComponent implements OnActivate {
         }
     }
 
-
     onAddQualification(): void {
+        //   Add New Qualification
         if (this.qualification.QualificationID === undefined) {
             this.qualification.CandidateID = this.profile.CandidateID;
             this.qualification.Qualification = this.selectedQualification;
@@ -322,47 +368,47 @@ export class AllProfilesAddComponent implements OnActivate {
             this.qualification.YearOfPassing = this.selectedYear;
 
             if (this.params) {
-                this._allProfilesService.addCandidateQualification(this.qualification)
+                this._profileBankService.addCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
+
                         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                             this.toastr.success((<ResponseFromAPI>results).Message);
-                            this.createQualification();
+                            this.createQualificationObj();
                             this.getCandidateQualifications();
                         } else {
                             this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                         }
                     },
                     error => {
-                        this.createQualification();
                         this.errorMessage = <any>error;
                         this.toastr.error(<any>error);
                     });
             }
         } else {
-            //update
+            //update Qualification
             if (this.selectedQualification !== undefined) {
-                this.qualification.Qualification = new MasterData;
+                this.qualification.Qualification = new MasterData();
                 this.qualification.Qualification = this.selectedQualification;
             } else {
                 this.qualification.Qualification = this.qualification.Qualification.Id;
             }
 
             if (this.selectedGrade !== undefined) {
-                this.qualification.Grade = new MasterData;
+                this.qualification.Grade = new MasterData();
                 this.qualification.Grade = this.selectedGrade;
             } else {
                 this.qualification.Grade = this.qualification.Grade.Id;
             }
             if (this.selectedYear !== undefined) {
-                this.qualification.YearOfPassing = new MasterData;
+                this.qualification.YearOfPassing = new MasterData();
                 this.qualification.YearOfPassing = this.selectedYear;
             } else {
                 this.qualification.YearOfPassing = this.qualification.YearOfPassing.Id;
             }
 
             if (this.params) {
-                this._allProfilesService.editCandidateQualification(this.qualification)
+                this._profileBankService.editCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
                         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -385,12 +431,11 @@ export class AllProfilesAddComponent implements OnActivate {
 
     getCandidateQualifications() {
         if (this.params) {
-            this._allProfilesService.getCandidateQualifications(this.params)
+            this._profileBankService.getCandidateQualifications(this.params)
                 .subscribe(
                 results => {
                     this.profile.CandidateQualifications = new Array<Qualification>();
                     this.profile.CandidateQualifications = <any>results;
-
                 },
                 error => {
                     this.errorMessage = <any>error;

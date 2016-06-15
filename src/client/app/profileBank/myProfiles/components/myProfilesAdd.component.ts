@@ -8,6 +8,8 @@ import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
+import { ProfileBankService} from  '../../shared/services/profileBank.service';
+
 @Component({
     moduleId: module.id,
     selector: 'rrf-myprofiles-add',
@@ -39,6 +41,7 @@ export class MyProfilesAddComponent implements OnActivate {
 
     constructor(private _myProfilesService: MyProfilesService,
         private _masterService: MastersService,
+        private _profileBankService :ProfileBankService,
         public toastr: ToastsManager,
         private _router: Router) {
         this.profile = new MyProfilesInfo();
@@ -71,7 +74,7 @@ export class MyProfilesAddComponent implements OnActivate {
     }
 
     getCandidateProfileById(profileId: string) {
-        this._myProfilesService.getCandidateProfile(profileId)
+        this._profileBankService.getCandidateProfile(profileId)
             .subscribe(
             results => {
                 this.profile = <any>results;
@@ -191,7 +194,7 @@ export class MyProfilesAddComponent implements OnActivate {
             } else {
                 this.profile.isCommentsUpdated = false;
             }
-            this._myProfilesService.editCandidatePersonalDetails(this.profile)
+            this._profileBankService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -218,7 +221,7 @@ export class MyProfilesAddComponent implements OnActivate {
                 this.profile.isCommentsUpdated = false;
             }
             this.profile.CandidateOtherDetails.CandidateID = this.params;
-            this._myProfilesService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
+            this._profileBankService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -245,7 +248,7 @@ export class MyProfilesAddComponent implements OnActivate {
             } else {
                 this.profile.isCommentsUpdated = false;
             }
-            this._myProfilesService.editCandidateSkillsDetails(this.profile.CandidateSkills)
+            this._profileBankService.editCandidateSkillsDetails(this.profile.CandidateSkills)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -272,7 +275,7 @@ export class MyProfilesAddComponent implements OnActivate {
             } else {
                 this.profile.isCommentsUpdated = false;
             }
-            this._myProfilesService.editCandidateTeamManagementDetails(this.profile)
+            this._profileBankService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -298,7 +301,7 @@ export class MyProfilesAddComponent implements OnActivate {
             } else {
                 this.profile.isCommentsUpdated = false;
             }
-            this._myProfilesService.editCandidateCareerDetails(this.profile)
+            this._profileBankService.editCandidateCareerDetails(this.profile)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -327,7 +330,7 @@ export class MyProfilesAddComponent implements OnActivate {
                 this.profile.isCommentsUpdated = false;
             }
             this.profile.CandidateSalaryDetails.CandidateID = this.params;
-            this._myProfilesService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)
+            this._profileBankService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -353,7 +356,7 @@ export class MyProfilesAddComponent implements OnActivate {
             this.qualification.YearOfPassing = this.selectedYear;
 
             if (this.params) {
-                this._myProfilesService.addCandidateQualification(this.qualification)
+                this._profileBankService.addCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
 
@@ -393,7 +396,7 @@ export class MyProfilesAddComponent implements OnActivate {
             }
 
             if (this.params) {
-                this._myProfilesService.editCandidateQualification(this.qualification)
+                this._profileBankService.editCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
                         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -416,7 +419,7 @@ export class MyProfilesAddComponent implements OnActivate {
 
     getCandidateQualifications() {
         if (this.params) {
-            this._myProfilesService.getCandidateQualifications(this.params)
+            this._profileBankService.getCandidateQualifications(this.params)
                 .subscribe(
                 results => {
                     this.profile.CandidateQualifications = new Array<Qualification>();

@@ -1,7 +1,9 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, RouteSegment, Router } from '@angular/router';
-import { MyProfilesInfo } from '../../myProfiles/model/myProfilesInfo';
+import { MyProfilesInfo } from '../../shared/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
+
+import { ProfileBankService } from '../../shared/services/profilebank.service';
 
 @Component({
     moduleId: module.id,
@@ -14,14 +16,14 @@ export class AllProfilesViewComponent implements OnActivate {
     params: string;
     errorMessage: string;
     profile: MyProfilesInfo;
-    constructor(private _allProfilesService: AllProfilesService,
+    constructor(private _profileBankService:ProfileBankService,
         private _router: Router) {
         this.profile = new MyProfilesInfo();
     }
     routerOnActivate(segment: RouteSegment) {
         this.params = segment.getParam('id');
         if (this.params) {
-            this._allProfilesService.getCandidateProfile(this.params)
+            this._profileBankService.getCandidateProfile(this.params)
                 .subscribe(
                 results => {
                     this.profile = <any>results;

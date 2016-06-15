@@ -1,6 +1,6 @@
 import { Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, Router} from '@angular/router';
-import { TransferOwnershipMeta } from '../../myProfiles/model/myProfilesInfo';
+import { TransferOwnershipMeta } from '../../shared/model/myProfilesInfo';
 import { DataSharedService } from '../../shared/services/DataShared.service';
 import { AllProfilesService } from '../services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -46,8 +46,6 @@ export class TransferOwnershipComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
     onDelete(profile: any) {
-        // var index = _.findIndex(this.CheckedCandidateIds, profile.CandidateID);
-        // this.CheckedCandidateIds.splice(index, 1);
         var chkItemIndex = _.findIndex(this.candidateProfiles, profile);
         this.candidateProfiles.splice(chkItemIndex, 1);
     }

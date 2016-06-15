@@ -8,6 +8,7 @@ import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
+import { ProfileBankService} from  '../../shared/services/profileBank.service';
 
 @Component({
     moduleId: module.id,
@@ -24,7 +25,7 @@ export class MyProfilesListComponent implements OnActivate {
     status: number;
     psdTemplates: any;
     statusList: Array<MasterData>;
-    seletedCandidateID: number;
+    seletedCandidateID: string;
     selectedStatus: number;
     Comments: string;
     currentStatus: number;
@@ -42,6 +43,7 @@ export class MyProfilesListComponent implements OnActivate {
     highlightRow :string ;
     constructor(private _myProfilesService: MyProfilesService,
         private _router: Router,
+        private _profileBankService:ProfileBankService,
         public toastr: ToastsManager,
         private _masterService: MastersService) {
         this.psdTemplates = new Array<File>();
@@ -54,7 +56,7 @@ export class MyProfilesListComponent implements OnActivate {
         this.getCandidateStatuses();
     }
 
-    SaveCandidateID(id: number) {
+    SaveCandidateID(id: string) {
         this.seletedCandidateID = id;
         var index = _.findIndex(this.myProfilesList, { CandidateID: this.seletedCandidateID });
         this.profile.Comments = this.myProfilesList[index].Comments;
@@ -148,7 +150,7 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     onUpdateStauts() {
-        this._myProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
+        this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -230,7 +232,7 @@ export class MyProfilesListComponent implements OnActivate {
         //check if comment is actually updated regardless of spaces
         if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim()) {
             //Update Comments
-            this._myProfilesService.updateFollowUpComments( this.seletedCandidateIDForComments,
+            this._profileBankService.updateFollowUpComments( this.seletedCandidateIDForComments,
              this.profile.FollowUpComments.trim())
                 .subscribe(
                 results => {

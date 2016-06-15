@@ -48,10 +48,7 @@
   opacity: 0;
   filter: alpha(opacity=0);
 }
-.table-checkable tr >td:first-child,
-.table-checkable tr >th:first-child {
-  max-width: none !important;
-}
+
 .PendingScreening {
   background: #e43a45;
 }
@@ -110,9 +107,7 @@
     margin-top: 0.5em;
   }
 }
-.table-checkable tr>td: first-child {
-  text-align: left;
-}
+
 span.select2.select2-container.select2-container--bootstrap {
   width: auto !important;
 }

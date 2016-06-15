@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
-import {MyProfilesInfo} from '../../myProfiles/model/myProfilesInfo';
+import {MyProfilesInfo} from '../../shared/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -10,6 +10,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { DataSharedService } from '../../shared/services/DataShared.service';
+import { ProfileBankService } from '../../shared/services/profilebank.service';
 
 @Component({
     moduleId: module.id,
@@ -21,12 +22,10 @@ import { DataSharedService } from '../../shared/services/DataShared.service';
 
 
 export class AllProfilesListComponent implements OnActivate {
-
-
     allProfilesList: Array<MyProfilesInfo>;
     profile: MyProfilesInfo;
     statusList: Array<MasterData>;
-    seletedCandidateID: number;
+    seletedCandidateID: string;
     selectedStatus: number;
     Comments: string;
     currentStatus: number;
@@ -41,6 +40,7 @@ export class AllProfilesListComponent implements OnActivate {
         private _dataSharedService: DataSharedService,
         private _router: Router,
         public toastr: ToastsManager,
+        private _profileBankService:ProfileBankService,
         private _masterService: MastersService) {
         this.profile = new MyProfilesInfo();
         this.profile.Status = new MasterData();
@@ -65,7 +65,7 @@ export class AllProfilesListComponent implements OnActivate {
         this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID]);
     }
 
-    SaveCandidateID(id: number) {
+    SaveCandidateID(id: string) {
         this.seletedCandidateID = id;
         var index = _.findIndex(this.allProfilesList, { CandidateID: this.seletedCandidateID });
         this.profile.Comments = this.allProfilesList[index].Comments;
@@ -89,7 +89,7 @@ export class AllProfilesListComponent implements OnActivate {
     }
 
     onUpdateStauts() {
-        this._allProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
+        this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -147,6 +147,7 @@ export class AllProfilesListComponent implements OnActivate {
         this.allChecked = false;
         window.location.href = 'mailto:' + mailto;
     }
+
     transferOwnerShipClick() {
         let checkedItemIds: Array<string> = new Array<string>();
         for (var index = 0; index < this.allProfilesList.length; index++) {
