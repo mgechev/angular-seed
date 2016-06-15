@@ -374,7 +374,7 @@ export class AllProfilesAddComponent implements OnActivate {
 
                         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                             this.toastr.success((<ResponseFromAPI>results).Message);
-                            this.createQualificationObj();
+                            this.createQualification();
                             this.getCandidateQualifications();
                         } else {
                             this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
