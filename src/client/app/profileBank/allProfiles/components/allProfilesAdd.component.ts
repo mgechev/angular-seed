@@ -174,10 +174,10 @@ export class AllProfilesAddComponent implements OnActivate {
     onSavePrimaryInfo(): void {
         if (this.params) {
             if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.isCommentsUpdated = true;
+                this.profile.CommentsUpdated = true;
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
             } else {
-                this.profile.isCommentsUpdated = false;
+                this.profile.CommentsUpdated = false;
             }
 
             this._profileBankService.editCandidateProfile(this.profile)
@@ -201,10 +201,10 @@ export class AllProfilesAddComponent implements OnActivate {
         //   this.convertCheckboxesValues();
         if (this.params) {
             if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.isCommentsUpdated = true;
+                this.profile.CommentsUpdated = true;
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
             } else {
-                this.profile.isCommentsUpdated = false;
+                this.profile.CommentsUpdated = false;
             }
             this._profileBankService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
@@ -227,10 +227,10 @@ export class AllProfilesAddComponent implements OnActivate {
 
         if (this.params) {
             if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.isCommentsUpdated = true;
+                this.profile.CommentsUpdated = true;
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
             } else {
-                this.profile.isCommentsUpdated = false;
+                this.profile.CommentsUpdated = false;
             }
             this.profile.CandidateOtherDetails.CandidateID = this.params;
             this._profileBankService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
@@ -255,10 +255,10 @@ export class AllProfilesAddComponent implements OnActivate {
         if (this.params) {
             this.profile.CandidateSkills.CandidateID = this.params;
             if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.isCommentsUpdated = true;
+                this.profile.CommentsUpdated = true;
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
             } else {
-                this.profile.isCommentsUpdated = false;
+                this.profile.CommentsUpdated = false;
             }
             this._profileBankService.editCandidateSkillsDetails(this.profile.CandidateSkills)
                 .subscribe(
@@ -282,10 +282,10 @@ export class AllProfilesAddComponent implements OnActivate {
         //   this.convertCheckboxesValues();
         if (this.params) {
             if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.isCommentsUpdated = true;
+                this.profile.CommentsUpdated = true;
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
             } else {
-                this.profile.isCommentsUpdated = false;
+                this.profile.CommentsUpdated = false;
             }
             this._profileBankService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
@@ -308,10 +308,10 @@ export class AllProfilesAddComponent implements OnActivate {
         //   this.showMessage('Wait', true);
         if (this.params) {
             if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.isCommentsUpdated = true;
+                this.profile.CommentsUpdated = true;
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
             } else {
-                this.profile.isCommentsUpdated = false;
+                this.profile.CommentsUpdated = false;
             }
             this._profileBankService.editCandidateCareerDetails(this.profile)
                 .subscribe(
@@ -336,10 +336,10 @@ export class AllProfilesAddComponent implements OnActivate {
         //   this.convertCheckboxesValues();
         if (this.params) {
             if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.isCommentsUpdated = true;
+                this.profile.CommentsUpdated = true;
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
             } else {
-                this.profile.isCommentsUpdated = false;
+                this.profile.CommentsUpdated = false;
             }
             this.profile.CandidateSalaryDetails.CandidateID = this.params;
             this._profileBankService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)

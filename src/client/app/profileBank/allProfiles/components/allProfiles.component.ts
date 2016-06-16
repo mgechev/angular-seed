@@ -9,11 +9,12 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { DataSharedService } from '../../shared/services/DataShared.service';
 import {TransferOwnershipComponent} from './allProfilesTransferOwnership.component';
 import { ProfileBankService } from '../../shared/services/profilebank.service';
+
 @Component({
     selector: 'rrf-all-profiles',
-    template: ' <router-outlet></router-outlet>',
+    template: '<router-outlet></router-outlet>',
     directives: [ROUTER_DIRECTIVES],
-    providers: [AllProfilesService, MastersService, ToastsManager, 
+    providers: [AllProfilesService, MastersService, ToastsManager,
                 DataSharedService,ProfileBankService]
 })
 

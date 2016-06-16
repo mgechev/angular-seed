@@ -1,12 +1,13 @@
 import {Component } from '@angular/core';
 import { Router, RouteSegment, ROUTER_DIRECTIVES, OnActivate } from '@angular/router';
 import { BlackListedProfilesService } from '../services/blacklistedProfiles.service';
-import { MyProfilesInfo, Qualification } from '../../myProfiles/model/myProfilesInfo';
+import { MyProfilesInfo, Qualification } from '../../shared/model/myProfilesInfo';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
+import { ProfileBankService } from '../../shared/services/profilebank.service';
 @Component({
     moduleId: module.id,
     selector: 'rrf-black-listed-profile-add',
@@ -44,6 +45,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
     constructor(private _blacklistedProfilesService: BlackListedProfilesService,
         private _router: Router,
         public toastr: ToastsManager,
+        private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
         this.profile = new MyProfilesInfo();
         this.createQualification();
@@ -68,7 +70,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
     }
 
     getCandidateProfileById(profileId: string) {
-        this._blacklistedProfilesService.getCandidateProfile(profileId)
+        this._profileBankService.getCandidateProfile(profileId)
             .subscribe(
             results => {
                 this.profile = <any>results;
@@ -174,7 +176,14 @@ export class BlackListedProfilesAddComponent implements OnActivate {
 
     onSavePrimaryInfo(): void {
         if (this.params) {
-            this._blacklistedProfilesService.editCandidateProfile(this.profile)
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.CommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.CommentsUpdated = false;
+            }
+
+            this._profileBankService.editCandidateProfile(this.profile)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -192,10 +201,15 @@ export class BlackListedProfilesAddComponent implements OnActivate {
     }
 
     onSavePersonalDetails(): void {
-        //   this.showMessage('Wait', true);
-     //   this.convertCheckboxesValues();
+        //   this.convertCheckboxesValues();
         if (this.params) {
-            this._blacklistedProfilesService.editCandidatePersonalDetails(this.profile)
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.CommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.CommentsUpdated = false;
+            }
+            this._profileBankService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -212,12 +226,17 @@ export class BlackListedProfilesAddComponent implements OnActivate {
         }
     }
 
-
     onSaveProfessionalDetails(): void {
-     //   this.convertCheckboxesValues();
+
         if (this.params) {
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.CommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.CommentsUpdated = false;
+            }
             this.profile.CandidateOtherDetails.CandidateID = this.params;
-            this._blacklistedProfilesService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
+            this._profileBankService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -235,9 +254,16 @@ export class BlackListedProfilesAddComponent implements OnActivate {
     }
 
     onSaveSkillsDetails(): void {
+        //   this.showMessage('Wait', true);
         if (this.params) {
             this.profile.CandidateSkills.CandidateID = this.params;
-            this._blacklistedProfilesService.editCandidateSkillsDetails(this.profile.CandidateSkills)
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.CommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.CommentsUpdated = false;
+            }
+            this._profileBankService.editCandidateSkillsDetails(this.profile.CandidateSkills)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -253,11 +279,18 @@ export class BlackListedProfilesAddComponent implements OnActivate {
                 });
         }
     }
+
     onSaveTeamManagementDetails(): void {
         //   this.showMessage('Wait', true);
-     //   this.convertCheckboxesValues();
+        //   this.convertCheckboxesValues();
         if (this.params) {
-            this._blacklistedProfilesService.editCandidateTeamManagementDetails(this.profile)
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.CommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.CommentsUpdated = false;
+            }
+            this._profileBankService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -277,7 +310,13 @@ export class BlackListedProfilesAddComponent implements OnActivate {
     onSaveCareerProfileDetails(): void {
         //   this.showMessage('Wait', true);
         if (this.params) {
-            this._blacklistedProfilesService.editCandidateCareerDetails(this.profile)
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.CommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.CommentsUpdated = false;
+            }
+            this._profileBankService.editCandidateCareerDetails(this.profile)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -297,10 +336,16 @@ export class BlackListedProfilesAddComponent implements OnActivate {
 
     onSaveSalaryDetails(): void {
         //   this.showMessage('Wait', true);
-     //   this.convertCheckboxesValues();
+        //   this.convertCheckboxesValues();
         if (this.params) {
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.CommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.CommentsUpdated = false;
+            }
             this.profile.CandidateSalaryDetails.CandidateID = this.params;
-            this._blacklistedProfilesService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)
+            this._profileBankService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -318,8 +363,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
     }
 
     onAddQualification(): void {
-        //this.showMessage(this.errorMessage, false);
-
+        //   Add New Qualification
         if (this.qualification.QualificationID === undefined) {
             this.qualification.CandidateID = this.profile.CandidateID;
             this.qualification.Qualification = this.selectedQualification;
@@ -327,9 +371,10 @@ export class BlackListedProfilesAddComponent implements OnActivate {
             this.qualification.YearOfPassing = this.selectedYear;
 
             if (this.params) {
-                this._blacklistedProfilesService.addCandidateQualification(this.qualification)
+                this._profileBankService.addCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
+
                         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                             this.toastr.success((<ResponseFromAPI>results).Message);
                             this.createQualification();
@@ -337,16 +382,14 @@ export class BlackListedProfilesAddComponent implements OnActivate {
                         } else {
                             this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                         }
-
                     },
                     error => {
-                        this.createQualification();
                         this.errorMessage = <any>error;
                         this.toastr.error(<any>error);
                     });
             }
         } else {
-            //update
+            //update Qualification
             if (this.selectedQualification !== undefined) {
                 this.qualification.Qualification = new MasterData();
                 this.qualification.Qualification = this.selectedQualification;
@@ -368,7 +411,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
             }
 
             if (this.params) {
-                this._blacklistedProfilesService.editCandidateQualification(this.qualification)
+                this._profileBankService.editCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
                         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -391,7 +434,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
 
     getCandidateQualifications() {
         if (this.params) {
-            this._blacklistedProfilesService.getCandidateQualifications(this.params)
+            this._profileBankService.getCandidateQualifications(this.params)
                 .subscribe(
                 results => {
                     this.profile.CandidateQualifications = new Array<Qualification>();
@@ -399,6 +442,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
                 },
                 error => {
                     this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
                 });
         }
     }

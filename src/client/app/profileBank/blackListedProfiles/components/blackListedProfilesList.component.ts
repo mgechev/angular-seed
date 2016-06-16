@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
-import { MyProfilesInfo } from '../../myProfiles/model/myProfilesInfo';
+import { MyProfilesInfo } from '../../shared/model/myProfilesInfo';
 import { BlackListedProfilesService } from '../services/blacklistedProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -8,7 +8,7 @@ import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
-
+import { ProfileBankService } from '../../shared/services/profilebank.service';
 
 @Component({
     moduleId: module.id,
@@ -33,7 +33,8 @@ export class BlackListedProfilesListComponent implements OnActivate {
     public isCollapsed: boolean = false;
     constructor(private _blacklistedProfilesService: BlackListedProfilesService,
         private _router: Router,
-          public toastr: ToastsManager,
+        public toastr: ToastsManager,
+        private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
         this.profile = new MyProfilesInfo();
         //this.profile.Status = new MasterData();
@@ -50,7 +51,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
                 this.blacklistedProfilesList = <any>results;
             },
             error => {
-            this.errorMessage = <any>error;
+                this.errorMessage = <any>error;
             });
     }
     redirectToView(CandidateID: number) {
@@ -84,7 +85,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
         this._blacklistedProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
-               if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.profile.Status = new MasterData();
                     this.getBlacklistedProfiles();

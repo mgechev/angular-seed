@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import { MyProfilesInfo, ResumeMeta, AddCandidateResponse } from '../model/myProfilesInfo';
+import { MyProfilesInfo, ResumeMeta, AddCandidateResponse } from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -40,10 +40,10 @@ export class MyProfilesListComponent implements OnActivate {
     searchString: string;
     isCommentsPanelCollapsed: boolean = false;
     seletedCandidateIDForComments: string;
-    highlightRow :string ;
+    highlightRow: string;
     constructor(private _myProfilesService: MyProfilesService,
         private _router: Router,
-        private _profileBankService:ProfileBankService,
+        private _profileBankService: ProfileBankService,
         public toastr: ToastsManager,
         private _masterService: MastersService) {
         this.psdTemplates = new Array<File>();
@@ -225,15 +225,15 @@ export class MyProfilesListComponent implements OnActivate {
 
     closeCommentsPanel() {
         this.isCommentsPanelCollapsed = !this.isCommentsPanelCollapsed;
-          this.highlightRow = '';
+        this.highlightRow = '';
     }
 
     onSubmitFollowupComment() {
         //check if comment is actually updated regardless of spaces
         if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim()) {
             //Update Comments
-            this._profileBankService.updateFollowUpComments( this.seletedCandidateIDForComments,
-             this.profile.FollowUpComments.trim())
+            this._profileBankService.updateFollowUpComments(this.seletedCandidateIDForComments,
+                this.profile.FollowUpComments.trim())
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -246,7 +246,7 @@ export class MyProfilesListComponent implements OnActivate {
                 },
                 error => this.errorMessage = <any>error);
             this.isCommentsPanelCollapsed = !this.isCommentsPanelCollapsed;
-             this.highlightRow = '';
+            this.highlightRow = '';
         }
 
     }

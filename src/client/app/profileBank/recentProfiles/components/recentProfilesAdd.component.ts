@@ -1,20 +1,21 @@
 import {Component} from '@angular/core';
 import { Router, RouteSegment, OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
 import { RecentProfilesService } from '../services/recentProfiles.service';
-import { MyProfilesInfo, Qualification } from '../../myProfiles/model/myProfilesInfo';
+import { MyProfilesInfo, Qualification } from '../../shared/model/myProfilesInfo';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
-import { MasterData,ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
-
+import { ProfileBankService } from '../../shared/services/profilebank.service';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-recent-profiles-add',
     templateUrl: 'recentProfilesAdd.component.html',
     directives: [ROUTER_DIRECTIVES],
-    styleUrls: ['../../myProfiles/components/myProfiles.component.css']
+    styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
+    providers: [ProfileBankService]
 })
 
 export class RecentProfilesAddComponent implements OnActivate {
@@ -44,7 +45,8 @@ export class RecentProfilesAddComponent implements OnActivate {
 
     constructor(private _recentProfilesService: RecentProfilesService,
         private _router: Router,
-          public toastr: ToastsManager,
+        private toastr: ToastsManager,
+        private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
         this.profile = new MyProfilesInfo();
         this.createQualification();
@@ -69,11 +71,11 @@ export class RecentProfilesAddComponent implements OnActivate {
     }
 
     getCandidateProfileById(profileId: string) {
-        this._recentProfilesService.getCandidateProfile(profileId)
+        this._profileBankService.getCandidateProfile(profileId)
             .subscribe(
             results => {
                 this.profile = <any>results;
-               // this.convertCheckboxesValuesToBoolean();
+                // this.convertCheckboxesValuesToBoolean();
             },
             error => this.errorMessage = <any>error);
     }
@@ -173,30 +175,15 @@ export class RecentProfilesAddComponent implements OnActivate {
     }
 
     onSavePrimaryInfo(): void {
-        //   this.showMessage('Wait', true);
         if (this.params) {
-            this._recentProfilesService.editCandidateProfile(this.profile)
-                .subscribe(
-                results => {
-                   if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                        this.toastr.success((<ResponseFromAPI>results).Message);
-                        this.getCandidateProfileById(this.params);
-                    } else {
-                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
-                    }
-                },
-                error => {
-                    this.errorMessage = <any>error;
-                     this.toastr.error(<any>error);
-                });
-        }
-    }
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.CommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.CommentsUpdated = false;
+            }
 
-    onSavePersonalDetails(): void {
-        //   this.showMessage('Wait', true);
-     //   this.convertCheckboxesValues();
-        if (this.params) {
-            this._recentProfilesService.editCandidatePersonalDetails(this.profile)
+            this._profileBankService.editCandidateProfile(this.profile)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -208,16 +195,48 @@ export class RecentProfilesAddComponent implements OnActivate {
                 },
                 error => {
                     this.errorMessage = <any>error;
-                     this.toastr.error(<any>error);
+                    this.toastr.error(<any>error);
+                });
+        }
+    }
+
+    onSavePersonalDetails(): void {
+        //   this.convertCheckboxesValues();
+        if (this.params) {
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.CommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.CommentsUpdated = false;
+            }
+            this._profileBankService.editCandidatePersonalDetails(this.profile)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.params);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
                 });
         }
     }
 
     onSaveProfessionalDetails(): void {
-     //   this.convertCheckboxesValues();
+
         if (this.params) {
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.CommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.CommentsUpdated = false;
+            }
             this.profile.CandidateOtherDetails.CandidateID = this.params;
-            this._recentProfilesService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
+            this._profileBankService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -238,7 +257,13 @@ export class RecentProfilesAddComponent implements OnActivate {
         //   this.showMessage('Wait', true);
         if (this.params) {
             this.profile.CandidateSkills.CandidateID = this.params;
-            this._recentProfilesService.editCandidateSkillsDetails(this.profile.CandidateSkills)
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.CommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.CommentsUpdated = false;
+            }
+            this._profileBankService.editCandidateSkillsDetails(this.profile.CandidateSkills)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -257,9 +282,15 @@ export class RecentProfilesAddComponent implements OnActivate {
 
     onSaveTeamManagementDetails(): void {
         //   this.showMessage('Wait', true);
-     //   this.convertCheckboxesValues();
+        //   this.convertCheckboxesValues();
         if (this.params) {
-            this._recentProfilesService.editCandidateTeamManagementDetails(this.profile)
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.CommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.CommentsUpdated = false;
+            }
+            this._profileBankService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -271,7 +302,7 @@ export class RecentProfilesAddComponent implements OnActivate {
                 },
                 error => {
                     this.errorMessage = <any>error;
-                     this.toastr.error(<any>error);
+                    this.toastr.error(<any>error);
                 });
         }
     }
@@ -279,7 +310,13 @@ export class RecentProfilesAddComponent implements OnActivate {
     onSaveCareerProfileDetails(): void {
         //   this.showMessage('Wait', true);
         if (this.params) {
-            this._recentProfilesService.editCandidateCareerDetails(this.profile)
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.CommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.CommentsUpdated = false;
+            }
+            this._profileBankService.editCandidateCareerDetails(this.profile)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -291,18 +328,24 @@ export class RecentProfilesAddComponent implements OnActivate {
                 },
                 error => {
                     this.errorMessage = <any>error;
-                     this.toastr.error(<any>error);
+                    this.toastr.error(<any>error);
                 }
                 );
         }
     }
 
-   onSaveSalaryDetails(): void {
+    onSaveSalaryDetails(): void {
         //   this.showMessage('Wait', true);
-     //   this.convertCheckboxesValues();
+        //   this.convertCheckboxesValues();
         if (this.params) {
+            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                this.profile.CommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+            } else {
+                this.profile.CommentsUpdated = false;
+            }
             this.profile.CandidateSalaryDetails.CandidateID = this.params;
-            this._recentProfilesService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)
+            this._profileBankService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -320,8 +363,7 @@ export class RecentProfilesAddComponent implements OnActivate {
     }
 
     onAddQualification(): void {
-        //this.showMessage(this.errorMessage, false);
-
+        //   Add New Qualification
         if (this.qualification.QualificationID === undefined) {
             this.qualification.CandidateID = this.profile.CandidateID;
             this.qualification.Qualification = this.selectedQualification;
@@ -329,10 +371,11 @@ export class RecentProfilesAddComponent implements OnActivate {
             this.qualification.YearOfPassing = this.selectedYear;
 
             if (this.params) {
-                this._recentProfilesService.addCandidateQualification(this.qualification)
+                this._profileBankService.addCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
-                         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+
+                        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                             this.toastr.success((<ResponseFromAPI>results).Message);
                             this.createQualification();
                             this.getCandidateQualifications();
@@ -341,13 +384,12 @@ export class RecentProfilesAddComponent implements OnActivate {
                         }
                     },
                     error => {
-                        this.createQualification();
                         this.errorMessage = <any>error;
-                         this.toastr.error(<any>error);
+                        this.toastr.error(<any>error);
                     });
             }
         } else {
-            //update
+            //update Qualification
             if (this.selectedQualification !== undefined) {
                 this.qualification.Qualification = new MasterData();
                 this.qualification.Qualification = this.selectedQualification;
@@ -369,7 +411,7 @@ export class RecentProfilesAddComponent implements OnActivate {
             }
 
             if (this.params) {
-                this._recentProfilesService.editCandidateQualification(this.qualification)
+                this._profileBankService.editCandidateQualification(this.qualification)
                     .subscribe(
                     results => {
                         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -392,7 +434,7 @@ export class RecentProfilesAddComponent implements OnActivate {
 
     getCandidateQualifications() {
         if (this.params) {
-            this._recentProfilesService.getCandidateQualifications(this.params)
+            this._profileBankService.getCandidateQualifications(this.params)
                 .subscribe(
                 results => {
                     this.profile.CandidateQualifications = new Array<Qualification>();
@@ -400,7 +442,7 @@ export class RecentProfilesAddComponent implements OnActivate {
                 },
                 error => {
                     this.errorMessage = <any>error;
-                     this.toastr.error(<any>error);
+                    this.toastr.error(<any>error);
                 });
         }
     }

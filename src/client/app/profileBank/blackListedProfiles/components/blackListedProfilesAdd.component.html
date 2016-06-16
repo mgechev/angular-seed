@@ -11,22 +11,22 @@
             <!-- END PAGE TITLE -->
         </div>
         <!-- END PAGE HEAD-->
-         <!--BEGIN breadcrumb -->
+        <!--BEGIN breadcrumb -->
         <ul class="page-breadcrumb breadcrumb">
             <li>
-                <a [routerLink]="['/App']" > Home </a>
+                <a [routerLink]="['/App']"> Home </a>
                 <i class="fa fa-circle"></i>
             </li>
-           <li>
-                  <a [routerLink]="['/App/ProfileBank/BlackListedProfiles']" >BlackListed Profiles</a>
-                   <i class="fa fa-circle"></i>
+            <li>
+                <a [routerLink]="['/App/ProfileBank/BlackListedProfiles']">BlackListed Profiles</a>
+                <i class="fa fa-circle"></i>
             </li>
             <li>
                 <span class="active">Edit</span>
             </li>
         </ul>
         <!--End Breadcrumb>-->
-         <div class="row">
+        <div class="row">
             <div class="col-md-12">
                 <!-- BEGIN PROFILE CONTENT -->
                 <div class="profile-content">
@@ -200,7 +200,7 @@
                                                 </div>
                                                 <div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
-                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/MyProfiles']"> Cancel </a>
+                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/BlackListedProfiles']"> Cancel </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -418,7 +418,7 @@
                                                 </div>
                                                 <div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
-                                                    <a class="btn default" [routerLink]="['/App/ProfileBank/MyProfiles']"> Cancel </a>
+                                                    <a class="btn default" [routerLink]="['/App/ProfileBank/BlackListedProfiles']"> Cancel </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -577,8 +577,8 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label class="control-label">Unit Integration Regression Testing</label>
-                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.UnitIntegressionRegressionTesting"></textarea>
+                                                            <label class="control-label">Testing Skills</label>
+                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.TestingSkills"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -591,8 +591,8 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label class="control-label">Any Other Technology</label>
-                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.AnyOtherTechnology"></textarea>
+                                                            <label class="control-label">Inclination To Other Technology</label>
+                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.InclinationToOtherTechnology"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
@@ -621,7 +621,7 @@
                                                 </div>
                                                 <div class="margin-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
-                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/MyProfiles']"> Cancel </a>
+                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/BlackListedProfiles']"> Cancel </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -656,7 +656,8 @@
                                                             <label class="control-label">Time Spent In Current Company</label>
                                                             <div class="row">
                                                                 <div class="col-md-8">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.TimeSpentInCurrentCompany" />
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.TimeSpentInCurrentCompany"
+                                                                    />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -673,7 +674,8 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Current Designation Role</label><br/>&nbsp;
-                                                            <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.CurrentDesignationRole" />
+                                                            <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.CurrentDesignationRole"
+                                                            />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -691,7 +693,7 @@
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <button type="submit" class="btn green"> Save Changes </button>
-                                                        <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/MyProfiles']"> Cancel </a>
+                                                        <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/BlackListedProfiles']"> Cancel </a>
                                                     </div>
 
                                                 </div>
@@ -782,7 +784,7 @@
 
                                                 <div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
-                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/MyProfiles']"> Cancel </a>
+                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/BlackListedProfiles']"> Cancel </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -815,8 +817,8 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label class="control-label">Handling Team</label>
-                                                            <textarea class="form-control" rows="1" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateTeamManagement.HandlingTeam"></textarea>
+                                                            <label class="control-label">Team Handling Experience</label>
+                                                            <textarea class="form-control" rows="1" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateTeamManagement.TeamHandlingExperience"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
@@ -847,7 +849,7 @@
                                                 </div>
                                                 <div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
-                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/MyProfiles']"> Cancel </a>
+                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/BlackListedProfiles']"> Cancel </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -979,6 +981,32 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Appraisal Bond Contract Details</label>
+                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.AppraisalBondContractDetails"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">EarlierAppliedProcess </label>
+                                                                    <div class="row ">
+                                                                        <div class="col-md-12">
+                                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.EarlierAppliedProcess"></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Offered Candidate Status</label>
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.OfferedCandidateStatus"
+                                                                    />
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Follow Up Comments</label>
@@ -988,24 +1016,17 @@
                                                                     </textarea>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label class="control-label">Appraisal Bond Contract Details</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.AppraisalBondContractDetails"></textarea>
-                                                                </div>
-                                                            </div>
-
                                                         </div>
                                                         <div class="margiv-top-10">
                                                             <button type="submit" class="btn green"> Save Changes </button>
-                                                            <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/MyProfiles']"> Cancel </a>
+                                                            <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/BlackListedProfiles']"> Cancel </a>
                                                         </div>
                                                     </form>
                                                 </div>
 
                                             </div>
                                         </div>
-                                        <!-- END OTHER INFO TAB -->
+                                        <!-- END OTHER/PROFESSIONAL INFO TAB -->
                                     </div>
                                 </div>
                             </div>

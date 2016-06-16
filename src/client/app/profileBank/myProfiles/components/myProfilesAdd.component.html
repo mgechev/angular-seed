@@ -568,8 +568,8 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label class="control-label">Unit Integration Regression Testing</label>
-                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.UnitIntegressionRegressionTesting"></textarea>
+                                                            <label class="control-label">Testing Skills</label>
+                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.TestingSkills"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -582,8 +582,8 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label class="control-label">Any Other Technology</label>
-                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.AnyOtherTechnology"></textarea>
+                                                            <label class="control-label">Inclination To Other Technology</label>
+                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.InclinationToOtherTechnology"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
@@ -647,7 +647,8 @@
                                                             <label class="control-label">Time Spent In Current Company</label>
                                                             <div class="row">
                                                                 <div class="col-md-8">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.TimeSpentInCurrentCompany" />
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.TimeSpentInCurrentCompany"
+                                                                    />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -664,7 +665,8 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Current Designation Role</label><br/>&nbsp;
-                                                            <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.CurrentDesignationRole" />
+                                                            <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.CurrentDesignationRole"
+                                                            />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -806,8 +808,8 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label class="control-label">Handling Team</label>
-                                                            <textarea class="form-control" rows="1" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateTeamManagement.HandlingTeam"></textarea>
+                                                            <label class="control-label">Team Handling Experience</label>
+                                                            <textarea class="form-control" rows="1" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateTeamManagement.TeamHandlingExperience"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
@@ -970,6 +972,32 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Appraisal Bond Contract Details</label>
+                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.AppraisalBondContractDetails"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">EarlierAppliedProcess </label>
+                                                                    <div class="row ">
+                                                                        <div class="col-md-12">
+                                                                            <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.EarlierAppliedProcess"></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Offered Candidate Status</label>
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.OfferedCandidateStatus"
+                                                                    />
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Follow Up Comments</label>
@@ -979,13 +1007,6 @@
                                                                     </textarea>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label class="control-label">Appraisal Bond Contract Details</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.AppraisalBondContractDetails"></textarea>
-                                                                </div>
-                                                            </div>
-
                                                         </div>
                                                         <div class="margiv-top-10">
                                                             <button type="submit" class="btn green"> Save Changes </button>

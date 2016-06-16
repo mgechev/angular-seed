@@ -159,3 +159,6 @@ border-bottom: 0px;
 .selectedRowColor {
   background: lightseagreen;
 }
+.table-checkable tr>td, .table-checkable tr>th{
+  max-width: inherit !important;
+}

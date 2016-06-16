@@ -51,17 +51,17 @@ export class MyProfilesInfo {
   public CandidateQualifications: Array<Qualification>;
   public FollowUpComments: string;
   public PreviousFollowupComments: string;
-  public isCommentsUpdated: boolean;
+  public CommentsUpdated: boolean;
 }
 
 export class TeamManagement {
   //properties of Candidate Team Management
   public TeamMgmt: any;
-  public HandlingTeam: number;
+  public TeamHandlingExperience: string;
   public NoOfTeamMembers: number;
   public TeamMembersDesignations: string;
   public TeamHandlingChallenges: string;
- 
+
 }
 export class CareerProfile {
   //properties of Candidate Career Profile
@@ -81,9 +81,9 @@ export class Skills {
   public OtherSkills: string;
   public RoleAndResponsibility: string;
   public ProjectsDone: string;
-  public UnitIntegressionRegressionTesting: string;
+  public TestingSkills: string;
   public Database: string;
-  public OtherTechnology: string;
+  public InclinationToOtherTechnology: string;
   public AwareAboutTesting: string;
   public StrongTechnicalSkills: string;
 }
@@ -119,6 +119,8 @@ export class OtherDetails {
   public SecondaryReasonToQuitLastJob: string;
   public PrimaryReasonToQuitCurrentJob: string;
   public SecondaryReasonToQuitCurrentJob: string;
+  public EarlierAppliedProcess: string;
+  public OfferedCandidateStatus: string;
 
 
 }

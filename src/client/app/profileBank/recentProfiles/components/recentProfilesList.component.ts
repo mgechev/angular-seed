@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate } from '@angular/router';
-import {MyProfilesInfo} from '../../myProfiles/model/myProfilesInfo';
+import {MyProfilesInfo} from '../../shared/model/myProfilesInfo';
 import { RecentProfilesService } from '../services/recentProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -8,33 +8,37 @@ import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
+import { ProfileBankService } from '../../shared/services/profilebank.service';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-recent-profiles-list',
     templateUrl: 'recentProfilesList.component.html',
     directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
-    styleUrls: ['../../myProfiles/components/myProfiles.component.css']
+    styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
+    providers: [ProfileBankService]
 })
 
 export class RecentProfilesListComponent implements OnActivate {
     recentProfilesList: Array<MyProfilesInfo>;
-    profile: MyProfilesInfo;
+    profile: MyProfilesInfo = new MyProfilesInfo();
     statusList: Array<MasterData>;
-    seletedCandidateID: number;
+    seletedCandidateID: string;
     selectedStatus: number;
     Comments: string;
     currentStatus: number;
     errorMessage: string;
     currentCandidate: string;
+    isCollapsed: boolean = false;
 
-    public isCollapsed: boolean = false;
+    //inject services
     constructor(private _recentProfilesService: RecentProfilesService,
         private _router: Router,
-        public toastr: ToastsManager,
-        private _masterService: MastersService) {
-        this.profile = new MyProfilesInfo();
-    }
+        private toastr: ToastsManager,
+        private _profileBankService: ProfileBankService,
+        private _masterService: MastersService) { }
+
+    //Call Below methods when this page is loaded
     routerOnActivate() {
         this.getRecentProfiles();
         this.getCandidateStatuses();
@@ -48,11 +52,12 @@ export class RecentProfilesListComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
+
     redirectToView(CandidateID: number) {
         this._router.navigate(['App/ProfileBank/RecentProfiles/View/' + CandidateID]);
     }
 
-    SaveCandidateID(id: number) {
+    SaveCandidateID(id: string) {
         this.seletedCandidateID = id;
         var index = _.findIndex(this.recentProfilesList, { CandidateID: this.seletedCandidateID });
         this.profile.Comments = this.recentProfilesList[index].Comments;
@@ -75,9 +80,8 @@ export class RecentProfilesListComponent implements OnActivate {
         this.selectedStatus = parseInt(statusId);
     }
 
-
     onUpdateStauts() {
-        this._recentProfilesService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
+        this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {

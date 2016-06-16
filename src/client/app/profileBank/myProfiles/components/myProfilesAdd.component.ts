@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment } from '@angular/router';
-import { MyProfilesInfo, Qualification} from '../model/myProfilesInfo';
+import { MyProfilesInfo, Qualification} from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -41,7 +41,7 @@ export class MyProfilesAddComponent implements OnActivate {
 
     constructor(private _myProfilesService: MyProfilesService,
         private _masterService: MastersService,
-        private _profileBankService :ProfileBankService,
+        private _profileBankService: ProfileBankService,
         public toastr: ToastsManager,
         private _router: Router) {
         this.profile = new MyProfilesInfo();
@@ -162,10 +162,10 @@ export class MyProfilesAddComponent implements OnActivate {
     onSavePrimaryInfo(): void {
         if (this.params) {
             if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.isCommentsUpdated = true;
+                this.profile.CommentsUpdated = true;
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
             } else {
-                this.profile.isCommentsUpdated = false;
+                this.profile.CommentsUpdated = false;
             }
 
             this._myProfilesService.addCandidateProfile(this.profile)
@@ -189,10 +189,10 @@ export class MyProfilesAddComponent implements OnActivate {
         //   this.convertCheckboxesValues();
         if (this.params) {
             if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.isCommentsUpdated = true;
+                this.profile.CommentsUpdated = true;
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
             } else {
-                this.profile.isCommentsUpdated = false;
+                this.profile.CommentsUpdated = false;
             }
             this._profileBankService.editCandidatePersonalDetails(this.profile)
                 .subscribe(
@@ -215,10 +215,10 @@ export class MyProfilesAddComponent implements OnActivate {
 
         if (this.params) {
             if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.isCommentsUpdated = true;
+                this.profile.CommentsUpdated = true;
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
             } else {
-                this.profile.isCommentsUpdated = false;
+                this.profile.CommentsUpdated = false;
             }
             this.profile.CandidateOtherDetails.CandidateID = this.params;
             this._profileBankService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
@@ -243,10 +243,10 @@ export class MyProfilesAddComponent implements OnActivate {
         if (this.params) {
             this.profile.CandidateSkills.CandidateID = this.params;
             if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.isCommentsUpdated = true;
+                this.profile.CommentsUpdated = true;
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
             } else {
-                this.profile.isCommentsUpdated = false;
+                this.profile.CommentsUpdated = false;
             }
             this._profileBankService.editCandidateSkillsDetails(this.profile.CandidateSkills)
                 .subscribe(
@@ -270,10 +270,10 @@ export class MyProfilesAddComponent implements OnActivate {
         //   this.convertCheckboxesValues();
         if (this.params) {
             if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.isCommentsUpdated = true;
+                this.profile.CommentsUpdated = true;
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
             } else {
-                this.profile.isCommentsUpdated = false;
+                this.profile.CommentsUpdated = false;
             }
             this._profileBankService.editCandidateTeamManagementDetails(this.profile)
                 .subscribe(
@@ -296,10 +296,10 @@ export class MyProfilesAddComponent implements OnActivate {
         //   this.showMessage('Wait', true);
         if (this.params) {
             if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.isCommentsUpdated = true;
+                this.profile.CommentsUpdated = true;
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
             } else {
-                this.profile.isCommentsUpdated = false;
+                this.profile.CommentsUpdated = false;
             }
             this._profileBankService.editCandidateCareerDetails(this.profile)
                 .subscribe(
@@ -320,14 +320,13 @@ export class MyProfilesAddComponent implements OnActivate {
     }
 
     onSaveSalaryDetails(): void {
-        //   this.showMessage('Wait', true);
-        //   this.convertCheckboxesValues();
+
         if (this.params) {
             if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.isCommentsUpdated = true;
+                this.profile.CommentsUpdated = true;
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
             } else {
-                this.profile.isCommentsUpdated = false;
+                this.profile.CommentsUpdated = false;
             }
             this.profile.CandidateSalaryDetails.CandidateID = this.params;
             this._profileBankService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)
