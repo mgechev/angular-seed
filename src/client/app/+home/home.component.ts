@@ -1,5 +1,5 @@
-import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
 import { Component } from '@angular/core';
+import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms/index';
 
 import { NameListService } from '../shared/index';
 
