@@ -265,7 +265,7 @@ export class SeedConfig {
    * @type {InjectableDependency[]}
    */
   APP_ASSETS: InjectableDependency[] = [
-    { src: `${this.CSS_SRC}/main.${ this.getInjectableStyleExtension() }`, inject: true, vendor: false },
+    { src: `${this.CSS_SRC}/main.${this.getInjectableStyleExtension()}`, inject: true, vendor: false },
   ];
 
   /**
@@ -367,6 +367,22 @@ export class SeedConfig {
       },
       'rxjs': {
         defaultExtension: 'js'
+      },
+      'lodash': {
+        main: 'lodash.js',
+        defaultExtension: 'js'
+      },
+      'ng2-bootstrap': {
+        main: 'ng2-bootstrap.js',
+        defaultExtension: 'js'
+      },
+      'moment': {
+        main: 'moment.js',
+        defaultExtension: 'js'
+      },
+      'ng2-toastr': {
+        main: 'ng2-toastr/ng2-toastr.js',
+        defaultExtension: 'js'
       }
     }
   };
@@ -431,7 +447,7 @@ export class SeedConfig {
    * @param {any} pluginKey The object key to look up in PLUGIN_CONFIGS.
    */
   getPluginConfig(pluginKey: string): any {
-    if (this.PLUGIN_CONFIGS[ pluginKey ]) {
+    if (this.PLUGIN_CONFIGS[pluginKey]) {
       return this.PLUGIN_CONFIGS[pluginKey];
     }
     return null;
