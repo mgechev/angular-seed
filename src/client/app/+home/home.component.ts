@@ -1,4 +1,4 @@
-import { FORM_DIRECTIVES } from '@angular/common';
+import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
 import { Component } from '@angular/core';
 
 import { NameListService } from '../shared/index';
@@ -11,7 +11,7 @@ import { NameListService } from '../shared/index';
   selector: 'sd-home',
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.css'],
-  directives: [FORM_DIRECTIVES]
+  directives: [REACTIVE_FORM_DIRECTIVES]
 })
 export class HomeComponent {
 
