@@ -5,9 +5,13 @@
   "repository": {
     "url": "https://github.com/mgechev/angular2-seed"
   },
+  "scripts": {
+    "postinstall": "typings install && npm prune",
+    "reinstall": "npm cache clean && npm install"
+  },
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
-    "devDependencies": {
+  "devDependencies": {
     "autoprefixer": "^6.3.6",
     "browser-sync": "^2.11.2",
     "codelyzer": "0.0.20",
