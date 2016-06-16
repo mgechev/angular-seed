@@ -73,6 +73,12 @@ export class SeedConfig {
   APP_BASE = argv['base'] || '/';
 
   /**
+   * The base path of node modules.
+   * @type {string}
+   */
+  NPM_BASE = this.APP_BASE + '/node_modules/';
+
+  /**
    * The flag to include templates into JS app prod file.
    * Per default the option is `true`, but can it can be set to false using `--inline-template false`
    * flag when running `npm run build.prod`.
@@ -293,22 +299,23 @@ export class SeedConfig {
   protected SYSTEM_CONFIG_DEV: any = {
     defaultJSExtensions: true,
     packageConfigPaths: [
-      `${this.APP_BASE}node_modules/*/package.json`,
-      `${this.APP_BASE}node_modules/**/package.json`,
-      `${this.APP_BASE}node_modules/@angular/*/package.json`
+      `${this.NPM_BASE}*/package.json`,
+      `${this.NPM_BASE}**/package.json`,
+      `${this.NPM_BASE}@angular/*/package.json`
     ],
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
-      '@angular/core': `${this.APP_BASE}node_modules/@angular/core/bundles/core.umd.js`,
-      '@angular/common': `${this.APP_BASE}node_modules/@angular/common/bundles/common.umd.js`,
-      '@angular/compiler': `${this.APP_BASE}node_modules/@angular/compiler/bundles/compiler.umd.js`,
-      '@angular/http': `${this.APP_BASE}node_modules/@angular/http/bundles/http.umd.js`,
-      '@angular/router': `${this.APP_BASE}node_modules/@angular/router/index.js`,
-      '@angular/platform-browser': `${this.APP_BASE}node_modules/@angular/platform-browser/bundles/platform-browser.umd.js`,
-      '@angular/platform-browser-dynamic': `${this.APP_BASE}node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js`,
-      'rxjs/*': `${this.APP_BASE}node_modules/rxjs/*`,
+      '@angular/core': `${this.NPM_BASE}@angular/core/bundles/core.umd.js`,
+      '@angular/common': `${this.NPM_BASE}@angular/common/bundles/common.umd.js`,
+      '@angular/compiler': `${this.NPM_BASE}@angular/compiler/bundles/compiler.umd.js`,
+      '@angular/forms': `${this.NPM_BASE}@angular/forms/bundles/forms.umd.js`,
+      '@angular/http': `${this.NPM_BASE}@angular/http/bundles/http.umd.js`,
+      '@angular/router': `${this.NPM_BASE}@angular/router/index.js`,
+      '@angular/platform-browser': `${this.NPM_BASE}@angular/platform-browser/bundles/platform-browser.umd.js`,
+      '@angular/platform-browser-dynamic': `${this.NPM_BASE}@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js`,
+      'rxjs/*': `${this.NPM_BASE}rxjs/*`,
       'app/*': `/app/*`,
-      '*': `${this.APP_BASE}node_modules/*`
+      '*': `${this.NPM_BASE}*`
     },
     packages: {
       rxjs: { defaultExtension: false }
