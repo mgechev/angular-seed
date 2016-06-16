@@ -304,8 +304,10 @@ export class SeedConfig {
       '@angular/compiler': `${this.APP_BASE}node_modules/@angular/compiler/bundles/compiler.umd.js`,
       '@angular/http': `${this.APP_BASE}node_modules/@angular/http/bundles/http.umd.js`,
       '@angular/router': `${this.APP_BASE}node_modules/@angular/router/index.js`,
-      '@angular/platform-browser': `${this.APP_BASE}node_modules/@angular/platform-browser/bundles/platform-browser.umd.js`,
-      '@angular/platform-browser-dynamic': `${this.APP_BASE}node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js`,
+      '@angular/platform-browser': `${this.APP_BASE}node_modules/@angular/platform-browser/
+bundles/platform-browser.umd.js`,
+      '@angular/platform-browser-dynamic': `${this.APP_BASE}node_modules/@angular/platform-browser-dynamic/
+bundles/platform-browser-dynamic.umd.js`,
       'rxjs/*': `${this.APP_BASE}node_modules/rxjs/*`,
       'app/*': `/app/*`,
       '*': `${this.APP_BASE}node_modules/*`
