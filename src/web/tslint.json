@@ -1,4 +1,5 @@
 {
+  "rulesDirectory": ["node_modules/codelyzer"],
   "rules": {
     "class-name": true,
     "curly": false,
@@ -31,6 +32,20 @@
     "semicolon": [true],
     "trailing-comma": true,
     "triple-equals": true,
-    "variable-name": false
+    "variable-name": false,
+
+    "directive-selector-name": [true, "camelCase"],
+    "component-selector-name": [true, "kebab-case"],
+    "directive-selector-type": [true, "attribute"],
+    "component-selector-type": [true, "element"],
+    "use-input-property-decorator": true,
+    "use-output-property-decorator": true,
+    "use-host-property-decorator": true,
+    "no-input-rename": true,
+    "no-output-rename": true,
+    "use-life-cycle-interface": true,
+    "use-pipe-transform-interface": true,
+    "component-class-suffix": true,
+    "directive-class-suffix": true
   }
 }

@@ -1,4 +1,5 @@
-import { ProjectConfig } from './config/project.config';
+import { ProjectWebConfig } from './config/frameworks/web/project.web.config';
 
-const config: ProjectConfig = new ProjectConfig();
+//TODO: Concat all the configs here to make them acccessable to the seed tools
+const config: ProjectWebConfig = new ProjectWebConfig();
 export = config;
