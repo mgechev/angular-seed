@@ -1,4 +1,5 @@
 import { provide, ReflectiveInjector } from '@angular/core';
+import { disableDeprecatedForms, provideForms } from '@angular/forms/index';
 import { BaseRequestOptions, ConnectionBackend, Http, HTTP_PROVIDERS, Response, ResponseOptions } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 import { Observable } from 'rxjs/Observable';
@@ -10,9 +11,14 @@ export function main() {
     let nameListService: NameListService;
     let backend: MockBackend;
     let initialResponse: any;
+    let providerArr: any[];
 
     beforeEach(() => {
+      providerArr = [disableDeprecatedForms(), provideForms()];
+
       let injector = ReflectiveInjector.resolveAndCreate([
+        disableDeprecatedForms(),
+        provideForms(),
         HTTP_PROVIDERS,
         NameListService,
         BaseRequestOptions,
