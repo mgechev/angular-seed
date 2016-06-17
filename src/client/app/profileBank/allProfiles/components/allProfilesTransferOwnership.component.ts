@@ -9,6 +9,8 @@ import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
+import { ProfileBankService } from '../../shared/services/profilebank.service';
+
 
 @Component({
     moduleId: module.id,
@@ -27,6 +29,7 @@ export class TransferOwnershipComponent implements OnActivate {
     constructor(private _myProfilesDataSharedService: DataSharedService,
         private _allProfilesService: AllProfilesService,
         private toastr: ToastsManager,
+        private _profileBankService:ProfileBankService,
         private _router: Router,
         private _mastersService: MastersService) {
     }
@@ -38,7 +41,7 @@ export class TransferOwnershipComponent implements OnActivate {
     getCandidateIds() {
         this.CheckedCandidateIds = this._myProfilesDataSharedService.getCheckedItems();
 
-        this._allProfilesService.getCandidateOwnwershipInfo(this.CheckedCandidateIds)
+        this._profileBankService.getCandidateOwnwershipInfo(this.CheckedCandidateIds)
             .subscribe(
             results => {
                 this.candidateProfiles = <any>results;
@@ -74,7 +77,7 @@ export class TransferOwnershipComponent implements OnActivate {
             for (var index = 0; index < this.candidateProfiles.length; index++) {
                 this.TransferOwnership.CandidateIds.push(this.candidateProfiles[index].CandidateID);
             }
-            this._allProfilesService.updateOwnership(this.TransferOwnership)
+            this._profileBankService.updateOwnership(this.TransferOwnership)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {

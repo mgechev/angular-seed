@@ -27,6 +27,7 @@ export class MyProfilesInfo {
   public AadharCardNo: string;
   public CandidateTeamManagement = new TeamManagement();
   public CandidateCareerProfile = new CareerProfile();
+  //for checkboxes for list
   public IsChecked: boolean;
 
 
@@ -49,9 +50,15 @@ export class MyProfilesInfo {
 
   //properties of Qualification
   public CandidateQualifications: Array<Qualification>;
+
+  //Comments
   public FollowUpComments: string;
   public PreviousFollowupComments: string;
   public CommentsUpdated: boolean;
+
+  //for Edit access
+  public isAuthourized : boolean;
+  public Owner : MasterData = new MasterData();
 }
 
 export class TeamManagement {

@@ -14,8 +14,7 @@ import { ProfileBankService } from '../../shared/services/profilebank.service';
     selector: 'rrf-all-profiles',
     template: '<router-outlet></router-outlet>',
     directives: [ROUTER_DIRECTIVES],
-    providers: [AllProfilesService, MastersService, ToastsManager,
-                DataSharedService,ProfileBankService]
+    providers: [AllProfilesService, MastersService, ToastsManager, DataSharedService, ProfileBankService]
 })
 
 @Routes([

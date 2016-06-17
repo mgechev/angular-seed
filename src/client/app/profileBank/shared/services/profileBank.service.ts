@@ -11,6 +11,32 @@ export class ProfileBankService {
 
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
+
+    getCurrentLoggedInUser() {
+        let url = Config.GetURL('/api/user/GetCurrentLoggedInUser');
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    updateOwnership(Ownership: TransferOwnershipMeta) {
+        let url = Config.GetURL('api/ProfileBank/updateOwnership');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { Ownership })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
+    getCandidateOwnwershipInfo(candidateIds: Array<string>) {
+        let url = Config.GetURL('/api/ProfileBank/getCandidateOwnwershipInfo');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { Ids: candidateIds })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
     editCandidateProfile(profile: MyProfilesInfo) {
         let url = Config.GetURL('/api/ProfileBank/editCandidateProfile');
         this._spinnerService.show();
