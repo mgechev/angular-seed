@@ -1,5 +1,6 @@
 import { Component, provide } from '@angular/core';
 import { TestComponentBuilder } from '@angular/compiler/testing';
+import { disableDeprecatedForms, provideForms } from '@angular/forms/index';
 import {
   describe,
   expect,
@@ -20,9 +21,15 @@ import { HomeComponent } from './home.component';
 
 export function main() {
   describe('Home component', () => {
+    // Disable old forms
+    let providerArr: any[];
+
+    beforeEach(() => { providerArr = [disableDeprecatedForms(), provideForms()]; });
+
     it('should work',
       inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-        tcb.createAsync(TestComponent)
+        tcb.overrideProviders(TestComponent, providerArr)
+          .createAsync(TestComponent)
           .then((rootTC: any) => {
             rootTC.detectChanges();
 

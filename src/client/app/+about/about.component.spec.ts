@@ -1,4 +1,5 @@
 import { TestComponentBuilder } from '@angular/compiler/testing';
+import { disableDeprecatedForms, provideForms } from '@angular/forms/index';
 import { Component } from '@angular/core';
 import {
   describe,
@@ -12,11 +13,15 @@ import { AboutComponent } from './about.component';
 
 export function main() {
   describe('About component', () => {
+    // Disable old forms
+    let providerArr: any[];
 
+    beforeEach(() => { providerArr = [disableDeprecatedForms(), provideForms()]; });
 
     it('should work',
       inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-        tcb.createAsync(TestComponent)
+        tcb.overrideProviders(TestComponent, providerArr)
+          .createAsync(TestComponent)
           .then((rootTC: any) => {
             let aboutDOMEl = rootTC.debugElement.children[0].nativeElement;
 
