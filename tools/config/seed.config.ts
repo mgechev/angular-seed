@@ -275,6 +275,13 @@ export class SeedConfig {
   ];
 
   /**
+   * Enable JSON file comment stripping. (Allows comments in source .json files, which need to be removed to be
+   * parsable in the app at runtime).
+   * @type {boolean}
+   */
+  ENABLE_JSON_COMMENT_STRIPPING: boolean = false;
+
+  /**
    * The list of editor temporary files to ignore in watcher and asset builder.
    * @type {string[]}
    */
