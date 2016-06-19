@@ -1,7 +1,9 @@
 import * as gulp from 'gulp';
 import { join } from 'path';
+import * as strip from 'gulp-strip-comments';
+import * as gulpIf from 'gulp-if';
 
-import { APP_DEST, APP_SRC, ASSETS_SRC, TEMP_FILES } from '../../config';
+import { APP_DEST, APP_SRC, ASSETS_SRC, TEMP_FILES, ENABLE_JSON_COMMENT_STRIPPING } from '../../config';
 
 // TODO There should be more elegant to prevent empty directories from copying
 let es: any = require('event-stream');
@@ -29,5 +31,6 @@ export = () => {
     '!' + join(ASSETS_SRC, '**', '*.js')
   ].concat(TEMP_FILES.map((p) => { return '!' + p; })))
     .pipe(onlyDirs(es))
+    .pipe(gulpIf((file) => ENABLE_JSON_COMMENT_STRIPPING && file.path.match(/.*.json$/), strip()))
     .pipe(gulp.dest(APP_DEST));
 };
