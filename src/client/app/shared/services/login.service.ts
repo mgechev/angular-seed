@@ -24,6 +24,7 @@ export class LoginService {
             .catch(this.handleError);
     }
 
+
     getLoggedInUserPermission() {
         let url = Config.GetURL('/api/authentication/GetPermissionbyRole');
         return this.authHttp.get(url)

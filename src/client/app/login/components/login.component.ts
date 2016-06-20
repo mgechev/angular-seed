@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
     templateUrl: 'login.component.html',
     styleUrls: ['login.component.css']
 })
+
 export class LoginComponent {
     public errorMessage: string;
     private model: AuthInfo;
