@@ -35,7 +35,6 @@
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
   "devDependencies": {
-    "async": "^1.5.2",
     "autoprefixer": "^6.3.6",
     "browser-sync": "^2.13.0",
     "chalk": "^1.1.3",
