@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { MyProfilesInfo, ResumeMeta} from '../model/myProfilesInfo';
+import { MyProfilesInfo, ResumeMeta} from '../../shared/model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
@@ -19,9 +19,9 @@ export class MyProfilesService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-
+    //TODO : Chnge API URL to /api/ProfileBank/getMyProfiles
     getMyProfiles() {
-        let url = Config.GetURL('/api/ProfileBank/getOpenProfiles');
+        let url = Config.GetURL('/api/ProfileBank/getMyProfiles');
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)

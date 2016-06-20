@@ -47,6 +47,7 @@ export class AllProfilesAddComponent implements OnActivate {
     IsSuccess: boolean = false;
 
     infoNotSavedAlert: boolean = false;
+    currentUser: MasterData = new MasterData();
 
     constructor(private _allProfilesService: AllProfilesService,
         private _router: Router,
@@ -60,6 +61,7 @@ export class AllProfilesAddComponent implements OnActivate {
 
     routerOnActivate(segment: RouteSegment) {
         //get all master data and bind to dropdown
+        this.getLoggedInUser();
         this.getCountries();
         this.getStates();
         this.getDistricts();
@@ -75,20 +77,38 @@ export class AllProfilesAddComponent implements OnActivate {
         // $('select').select2();
     }
 
+    getLoggedInUser() {
+        this._profileBankService.getCurrentLoggedInUser()
+            .subscribe(
+            (results: MasterData) => {
+                this.currentUser = results;
+            },
+            error => this.errorMessage = <any>error);
+
+    }
+
+
     getCandidateProfileById(profileId: string) {
         this._profileBankService.getCandidateProfile(profileId)
             .subscribe(
-            results => {
-                this.profile = <any>results;
-                //this.convertCheckboxesValuesToBoolean();
+            (results: MyProfilesInfo) => {
+                if (this.currentUser.Value === results.Owner.Value) {
+                    this.profile = results;
+                } else {
+                    this._router.navigate(['/App/ProfileBank/AllProfiles/']);
+                }
             },
             error => {
                 this.errorMessage = <any>error;
                 this.toastr.error(<any>error);
             });
+
+
     }
 
+    isAuthorized() {
 
+    }
     getCountries(): void {
         this._masterService.getCountries()
             .subscribe(

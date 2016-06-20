@@ -26,18 +26,17 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="dt-buttons pull-right">
-                                        <button class="btn btn-md green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Mass Actions
+                                    <button class="btn btn-md green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Mass Actions
                                               <i class="fa fa-angle-down"></i>
                                    </button>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li   >
-                                            <button class="btn btn-default btnLink" (click)='openMailWindow()' [disabled]='!selectedRowCount' >
+                                        <li>
+                                            <button class="btn btn-default btnLink" (click)='openMailWindow()' [disabled]='!selectedRowCount'>
                                                 <i class="fa fa-envelope-o"></i>   Send Mails </button>
                                         </li>
                                         <li class="divider"> </li>
-                                        <li   >
-                                        <button class="btn btn-default btnLink" [disabled]='!selectedRowCount'
-                                        (click)='transferOwnerShipClick()'>
+                                        <li>
+                                            <button class="btn btn-default btnLink" [disabled]='!selectedRowCount' (click)='transferOwnerShipClick()'>
                                                 <i class="fa fa-share"></i>     Transfer Ownership
                                             </button>
                                         </li>
@@ -54,7 +53,7 @@
                                     <div class="dataTables_length" id="sample_1_length"><label>Show <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline"><option value="5">5</option><option value="15">15</option><option value="20">20</option><option value="-1">All</option></select></label></div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
-                                    <div id="sample_1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm input-small input-inline" placeholder="" aria-controls="sample_1"></label></div>
+                                    <div id="sample_1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm input-large input-inline" placeholder="" aria-controls="sample_1"></label></div>
                                 </div>
                             </div>
                             <div class="row" style="margin-top: 10px">
@@ -147,8 +146,8 @@
                                                 <span class="mt-action-dot {{profile.Status.Value}}"> </span>{{profile.Status.Value}}
                                             </td>
                                             <td class="text-center">
-                                                <a href="" download><i class="fa fa-download" aria-hidden="true"></i>{{profile.Resume_ID}}</a> 
-                                                </td>
+                                                <a href="" download><i class="fa fa-download" aria-hidden="true"></i>{{profile.Resume_ID}}</a>
+                                            </td>
                                             <td>
                                                 <div class="btn-group">
                                                     <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
@@ -156,20 +155,25 @@
                                                         </button>
                                                     <ul class="dropdown-menu" role="menu">
                                                         <li>
-                                                            <a [routerLink]="['/App/ProfileBank/AllProfiles/Edit/'+profile.CandidateID]">
-                                                                <i class="icon-user"></i> Edit Profile </a>
+                                                             <button class="btn btn-default btnLink" [disabled]='getEditAccess(profile.Owner)' (click)='redirectToEditProfile(profile.CandidateID)' >
+                                                                 <i class="icon-user"></i> Edit Profile 
+                                                             </button>
+                                                            <!--<a [routerLink]="['/App/ProfileBank/AllProfiles/Edit/'+profile.CandidateID]">
+                                                                <i class="icon-user"></i> Edit Profile </a>-->
                                                         </li>
                                                         <li class="divider"> </li>
                                                         <li>
-                                                            <a (click)='SaveCandidateID(profile.CandidateID)'>
+                                                             <button class="btn btn-default btnLink" [disabled]='getEditAccess(profile.Owner)' (click)='SaveCandidateID(profile.CandidateID)' >
+                                                                  <i class="icon-flag"></i> Update Status </button>
+                                                            <!--<a (click)='SaveCandidateID(profile.CandidateID)'>
                                                                 <i class="icon-flag"></i> Update Status
-                                                            </a>
+                                                            </a>-->
                                                         </li>
-                                                        <li class="divider"> </li>
+                                                        <!--<li class="divider"> </li>-->
                                                         <li>
-                                                            <a>
+                                                            <!--<a>
                                                                 <i class="fa fa-share-square-o"></i> Assign RRF
-                                                            </a>
+                                                            </a>-->
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -199,7 +203,7 @@
                                 </div>
                             </div>
                             <div>
-                            <!--<rms-grid [meta]="meta"></rms-grid>-->
+                                <!--<rms-grid [meta]="meta"></rms-grid>-->
                             </div>
                         </div>
                     </div>

@@ -13,27 +13,9 @@ export class AllProfilesService {
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
     getAllProfiles() {
-        let url = Config.GetURL('/api/ProfileBank/getOpenProfiles');
+        let url = Config.GetURL('/api/ProfileBank/getAllProfiles');
         this._spinnerService.show();
         return this.authHttp.get(url)
-            .map(this.extractData)
-            .catch(this.handleError)
-            .finally(() => this._spinnerService.hide());
-    }
-
-     updateOwnership(Ownership: TransferOwnershipMeta) {
-        let url = Config.GetURL('api/ProfileBank/updateOwnership');
-        this._spinnerService.show();
-        return this.authHttp.post(url, { Ownership })
-            .map(this.extractData)
-            .catch(this.handleError)
-            .finally(() => this._spinnerService.hide());
-    }
-
-    getCandidateOwnwershipInfo(candidateIds: Array<string>) {
-        let url = Config.GetURL('/api/ProfileBank/getCandidateOwnwershipInfo');
-        this._spinnerService.show();
-        return this.authHttp.post(url, { Ids: candidateIds })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

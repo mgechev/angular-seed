@@ -12,6 +12,7 @@ import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { DataSharedService } from '../../shared/services/DataShared.service';
 import { ProfileBankService } from '../../shared/services/profilebank.service';
 
+
 @Component({
     moduleId: module.id,
     selector: 'rrf-allprofiles-list',
@@ -34,35 +35,52 @@ export class AllProfilesListComponent implements OnActivate {
     selectedRowCount: number = 0;
     allChecked: boolean = false;
     isCollapsed: boolean = false;
-
+    isAuthourized: boolean = false;
+    currentUser: MasterData = new MasterData();
 
     constructor(private _allProfilesService: AllProfilesService,
+
         private _dataSharedService: DataSharedService,
         private _router: Router,
         public toastr: ToastsManager,
-        private _profileBankService:ProfileBankService,
+        private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
         this.profile = new MyProfilesInfo();
         this.profile.Status = new MasterData();
     }
 
     routerOnActivate() {
+        this.getLoggedInUser();
         this.getAllProfiles();
         this.getCandidateStatuses();
     }
 
-    getAllProfiles() {
+    getLoggedInUser() {
+        this._profileBankService.getCurrentLoggedInUser()
+            .subscribe(
+            (results: MasterData) => {
+                this.currentUser = results;
+            },
+            error => this.errorMessage = <any>error);
 
+    }
+
+    getAllProfiles() {
         this._allProfilesService.getAllProfiles()
             .subscribe(
             (results: any) => {
                 this.allProfilesList = <Array<MyProfilesInfo>>results;
+                //  this.getAllProfileEditAccess();
             },
             error => this.errorMessage = <any>error);
     }
 
-    redirectToView(CandidateID: number) {
+    redirectToView(CandidateID: string) {
         this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID]);
+    }
+
+    redirectToEditProfile(CandidateID: string) {
+        this._router.navigate(['/App/ProfileBank/AllProfiles/Edit/' + CandidateID]);
     }
 
     SaveCandidateID(id: string) {
@@ -135,6 +153,7 @@ export class AllProfilesListComponent implements OnActivate {
             this.allProfilesList[index].IsChecked = state;
         }
     }
+
     openMailWindow() {
         var mailto: string = '';
         for (var index = 0; index < this.allProfilesList.length; index++) {
@@ -158,4 +177,11 @@ export class AllProfilesListComponent implements OnActivate {
         this._dataSharedService.setCheckedItems(checkedItemIds);
         this._router.navigate(['/App/ProfileBank/AllProfiles/Transfer/']);
     }
+
+    getEditAccess(Owner: MasterData) {
+        if (Owner.Value === this.currentUser.Value) {
+            return false;
+        } else { return true; }
+    }
 }
+
