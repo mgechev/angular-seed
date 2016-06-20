@@ -89,7 +89,10 @@ export class BlackListedProfilesListComponent implements OnActivate {
             results => {
                 this.statusList = results;
             },
-            error => this.errorMessage = <any>error);
+            error => {
+                this.toastr.error(<any>error);
+                this.errorMessage = <any>error;
+            });
     }
 
     onSelectStatus(statusId: string) {
@@ -118,8 +121,14 @@ export class BlackListedProfilesListComponent implements OnActivate {
     }
 
     getEditAccess(Owner: MasterData) {
-        if (Owner.Value === this.currentUser.Value) {
-            return false;
-        } else { return true; }
+        try {
+            if (Owner.Id === this.currentUser.Id) {
+                return false;
+            } else { return true; }
+        } catch (error) {
+            this.toastr.error(error);
+            return true;
+        }
     }
+
 }

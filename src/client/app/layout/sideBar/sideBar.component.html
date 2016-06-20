@@ -31,7 +31,7 @@
                             <span class="title">All Profiles</span>
                         </a>
                     </li>
-                    <li class="nav-item start " [ifAuthorize]="['PROFILEBANK.BALCKLISTEDPROFILES.MANAGE']">
+                    <li class="nav-item start " [ifAuthorize]="['PROFILEBANK.BLACKLISTEDPROFILES.MANAGE']">
                         <a [routerLink]="['/App/ProfileBank/BlackListedProfiles']" class="nav-link ">
                             <i class="icon-bulb"></i>
                             <span class="title">Black listed Profiles</span>
@@ -65,19 +65,19 @@
                 </a>
 
                 <ul class="sub-menu">
-                    <li class="nav-item start " [ifAuthorize]="['RRF.MYRRF.Read1']">
+                    <li class="nav-item start " [ifAuthorize]="['RRF.MYRRF.MANAGE']">
                         <a [routerLink]="['/App/RRF/MyRRF/']" class="nav-link ">
                             <i class="icon-bar-chart"></i>
                             <span class="title">My RRF</span>
                         </a>
                     </li>
-                    <li class="nav-item start " [ifAuthorize]="['RRF.RRFAPPROVAL.READ']">
+                    <li class="nav-item start " [ifAuthorize]="['RRF.APPROVAL.MANAGE']">
                         <a [routerLink]="['/App/RRF/RRFApproval/']" class="nav-link ">
                             <i class="icon-bulb"></i>
                             <span class="title">RRF Approval</span>
                         </a>
                     </li>
-                    <li class="nav-item start " [ifAuthorize]="['RRF.RRFDASHBOARD.READ']">
+                    <li class="nav-item start " [ifAuthorize]="['RRF.DASHBOARD.MANAGE']">
                         <a [routerLink]="['/App/RRF/RRFDashboard/']" class="nav-link ">
                             <i class="icon-graph"></i>
                             <span class="title">RRF Dashboards</span>

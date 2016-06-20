@@ -27,7 +27,7 @@ export class AllProfilesListComponent implements OnActivate {
     profile: MyProfilesInfo;
     statusList: Array<MasterData>;
     seletedCandidateID: string;
-    selectedStatus: number;
+    selectedStatus = new MasterData();
     Comments: string;
     currentStatus: number;
     errorMessage: string;
@@ -70,7 +70,6 @@ export class AllProfilesListComponent implements OnActivate {
             .subscribe(
             (results: any) => {
                 this.allProfilesList = <Array<MyProfilesInfo>>results;
-                //  this.getAllProfileEditAccess();
             },
             error => this.errorMessage = <any>error);
     }
@@ -98,24 +97,28 @@ export class AllProfilesListComponent implements OnActivate {
             .subscribe(
             results => {
                 this.statusList = results;
-            },
-            error => this.errorMessage = <any>error);
+            }, error => {
+                this.toastr.error(<any>error);
+            });
+
     }
 
     onSelectStatus(statusId: string) {
-        this.selectedStatus = parseInt(statusId);
+        this.selectedStatus.Id = parseInt(statusId);
+        this.selectedStatus.Value = null;
     }
 
     onUpdateStauts() {
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+            (results : ResponseFromAPI )=> {
+                if (results.StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
+                    console.log((<ResponseFromAPI>results).Message);
                     this.profile.Status = new MasterData();
                     this.getAllProfiles();
                 } else {
-                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    this.toastr.error((<ResponseFromAPI>results).Message);
                 }
             },
             error => this.toastr.error(<any>error));
@@ -179,9 +182,15 @@ export class AllProfilesListComponent implements OnActivate {
     }
 
     getEditAccess(Owner: MasterData) {
-        if (Owner.Value === this.currentUser.Value) {
+        try {
+            if (Owner.Value === this.currentUser.Value) {
+                return false;
+            } else { return true; }
+        } catch (error) {
+            this.toastr.error(error);
             return false;
-        } else { return true; }
+        }
+
     }
 }
 

@@ -6,7 +6,7 @@ import { MyProfilesInfo, SalaryDetails, Qualification,
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
-
+import { MasterData } from  '../../../shared/model/index';
 @Injectable()
 export class ProfileBankService {
 
@@ -146,10 +146,10 @@ export class ProfileBankService {
             .finally(() => this._spinnerService.hide());
     }
 
-    updateCandidateStatus(CandidateID: string, StatusId: number, Comments: string) {
+    updateCandidateStatus(CandidateID: string, Status: MasterData, Comments: string) {
         let url = Config.GetURL('/api/ProfileBank/UpdateStatus');
         this._spinnerService.show();
-        return this.authHttp.post(url, { profile: { CandidateID: CandidateID, StatusId: StatusId, Comments: Comments } })
+        return this.authHttp.post(url, { CandidateID: CandidateID, Status: Status, Comments: Comments})
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

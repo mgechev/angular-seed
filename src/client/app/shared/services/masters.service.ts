@@ -101,7 +101,7 @@ export class MastersService {
     }
 
     getCandidateStatuses() {
-        let url = Config.GetURL('/api/Masters/GetCandidateStatuses');
+        let url = Config.GetURL('/api/Masters/GetCandidateStatus');
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);
