@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 @Component({
     moduleId: module.id,
-    selector: 'login',
+    selector: 'login-component',
     templateUrl: 'login.component.html',
     styleUrls: ['login.component.css']
 })
@@ -13,7 +13,7 @@ export class LoginComponent {
     public errorMessage: string;
     private model: AuthInfo;
     constructor(private _loginService: LoginService, private _router: Router) {
-        this.model = new AuthInfo(0, '', '');
+        this.model = new AuthInfo('password', '', '');
     }
     doLogin(): void {
         this._loginService.authenticate(this.model)

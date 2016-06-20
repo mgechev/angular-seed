@@ -1,7 +1,8 @@
 export class AuthInfo {
   constructor(
-    public id: number,
+    public Grant_Type:string,
     public Password: string,
     public UserName: string
   ) {  }
 }
+
