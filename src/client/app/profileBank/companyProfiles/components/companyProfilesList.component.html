@@ -2,11 +2,11 @@
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-       
-     <!--BEGIN breadcrumb -->
+
+        <!--BEGIN breadcrumb -->
         <ul class="page-breadcrumb breadcrumb">
             <li>
-                <a [routerLink]="['/App']" > Home </a>
+                <a [routerLink]="['/App']"> Home </a>
                 <i class="fa fa-circle"></i>
             </li>
             <li>
@@ -19,20 +19,29 @@
                 <div class="portlet light bordered">
                     <div class="portlet-title">
                         <div class="row">
-                            <div class="col-md-6">
-                                <h4>BlackListed Profiles</h4>
+                            <div class="col-md-4">
+                                <div>
+                                    <h4>Company Profiles</h4>
+                                </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <div class="dt-buttons pull-right">
-                                    <a class="dt-button buttons-print btn dark btn-outline" id="btnPrint">
-                                        <span>Print</span>
-                                    </a>
-                                    <a class="dt-button buttons-pdf buttons-html5 btn green btn-outline" id="btnPDF">
-                                        <span>PDF</span>
-                                    </a>
-                                    <a class="dt-button buttons-csv buttons-html5 btn purple btn-outline" id="btnCSV">
-                                        <span>CSV</span>
-                                    </a>
+                                        <button class="btn btn-md green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Mass Actions
+                                              <i class="fa fa-angle-down"></i>
+                                   </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li   >
+                                            <button class="btn btn-default btnLink" (click)='openMailWindow()' [disabled]='!selectedRowCount' >
+                                                <i class="fa fa-envelope-o"></i>   Send Mails </button>
+                                        </li>
+                                        <li class="divider"> </li>
+                                        <li   >
+                                        <button class="btn btn-default btnLink" [disabled]='!selectedRowCount'
+                                        (click)='transferOwnerShipClick()'>
+                                                <i class="fa fa-share"></i>     Transfer Ownership
+                                            </button>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +62,6 @@
                                     <form role="form" (submit)="onUpdateStauts()">
                                         <div class="col-md-3">
                                             <div class="form-group">
-
                                                 <span class="form-control" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"> {{currentCandidate}}</span>
                                             </div>
                                         </div>
@@ -88,47 +96,59 @@
                                     role="grid" aria-describedby="sample_1_info">
                                     <thead>
                                         <tr>
+                                            <td>
+                                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                                    <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" (change)="onAllSelect($event)"
+                                                     [(ngModel)]='allChecked'/><span></span>
+                                                </label>
+                                            </td>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Name / Email / Contact</th>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Tag </th>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Professional Details </th>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Status </th>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Resume </th>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Actions </th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="gradeX odd" *ngFor="let blacklistedProfile of blacklistedProfilesList; let index = index">
-                                            <td (click)='redirectToView(blacklistedProfile.CandidateID)'>
+                                        <tr class="gradeX odd" *ngFor="let profile of companyProfilesList; let index = index">
+                                            <td>
+                                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                                    <input type="checkbox" class="checkboxes" value="1" [id]='profile.CandidateID' [(ngModel)]='profile.IsChecked' (change)="onStateChange($event)"/>
+                                                    <span></span>
+                                                </label>
+                                            </td>
+                                            <td (click)='redirectToView(profile.CandidateID)'>
                                                 <tr>
-                                                    <td style="float: left;">&nbsp; {{blacklistedProfile.Candidate}}</td>
+                                                    <td style="float: left;">&nbsp; {{profile.Candidate}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="float: left;">&nbsp; {{blacklistedProfile.Email}} </td>
+                                                    <td style="float: left;">&nbsp; {{profile.Email}} </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="float: left;">&nbsp; {{blacklistedProfile.PrimaryContact}}</td>
+                                                    <td style="float: left;">&nbsp; {{profile.PrimaryContact}}</td>
                                                 </tr>
 
                                             </td>
-                                            <td (click)='redirectToView(blacklistedProfile.CandidateID)'> {{blacklistedProfile.Tag}} </td>
-                                            <td (click)='redirectToView(blacklistedProfile.CandidateID)'>
+                                            <td (click)='redirectToView(profile.CandidateID)'> {{profile.Tag}} </td>
+                                            <td (click)='redirectToView(profile.CandidateID)'>
                                                 <tr>
-                                                    <td style="float: left;">&nbsp; Notice Period : {{blacklistedProfile.CandidateOtherDetails.NoticePeriod}}</td>
+                                                    <td style="float: left;">&nbsp; Notice Period : {{profile.CandidateOtherDetails.NoticePeriod}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="float: left;">&nbsp; Current Salary : {{blacklistedProfile.CandidateSalaryDetails.CurrentSalary}}</td>
+                                                    <td style="float: left;">&nbsp; Current Salary : {{profile.CandidateSalaryDetails.CurrentSalary}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="float: left;">&nbsp; Expected Salary : {{blacklistedProfile.CandidateSalaryDetails.ExpectedSalary}}</td>
+                                                    <td style="float: left;">&nbsp; Expected Salary : {{profile.CandidateSalaryDetails.ExpectedSalary}}</td>
                                                 </tr>
 
                                             </td>
-                                            <td (click)='redirectToView(blacklistedProfile.CandidateID)'>
-                                                <span class="mt-action-dot {{blacklistedProfile.Status.Value}}"> </span>{{blacklistedProfile.Status.Value}}
+                                            <td (click)='redirectToView(profile.CandidateID)'>
+                                                <span class="mt-action-dot {{profile.Status.Value}}"> </span>{{profile.Status.Value}}
                                             </td>
-                                            <td class="text-center"><i class="fa fa-download" aria-hidden="true"></i>{{blacklistedProfile.Resume_ID}}
-                                            </td>
+                                            <td class="text-center">
+                                                <a href="" download><i class="fa fa-download" aria-hidden="true"></i>{{profile.Resume_ID}}</a> 
+                                                </td>
                                             <td>
                                                 <div class="btn-group">
                                                     <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
@@ -136,14 +156,20 @@
                                                         </button>
                                                     <ul class="dropdown-menu" role="menu">
                                                         <li>
-                                                             <button class="btn btn-default btnLink" [disabled]='getEditAccess(blacklistedProfile.Owner)' (click)='redirectToEditProfile(blacklistedProfile.CandidateID)' >
-                                                                 <i class="icon-user"></i> Edit Profile 
-                                                             </button>
-                                                            </li>
+                                                            <a [routerLink]="['/App/ProfileBank/CompanyProfiles/Edit/'+profile.CandidateID]">
+                                                                <i class="icon-user"></i> Edit Profile </a>
+                                                        </li>
                                                         <li class="divider"> </li>
                                                         <li>
-                                                             <button class="btn btn-default btnLink" [disabled]='getEditAccess(blacklistedProfile.Owner)' (click)='SaveCandidateID(blacklistedProfile.CandidateID)' >
-                                                                  <i class="icon-flag"></i> Update Status </button>
+                                                            <a (click)='SaveCandidateID(profile.CandidateID)'>
+                                                                <i class="icon-flag"></i> Update Status
+                                                            </a>
+                                                        </li>
+                                                        <li class="divider"> </li>
+                                                        <li>
+                                                            <a>
+                                                                <i class="fa fa-share-square-o"></i> Assign RRF
+                                                            </a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -161,16 +187,19 @@
                                         <ul class="pagination" style="visibility: visible;">
                                             <li class="prev disabled"><a href="#" title="First"><i class="fa fa-angle-double-left"></i></a></li>
                                             <li class="prev disabled"><a href="#" title="Prev"><i class="fa fa-angle-left"></i></a></li>
-                                            <li class="active"><a [routerLink]="['/App/ProfileBank/BlackListedProfiles']">1</a></li>
-                                            <li><a [routerLink]="['/App/ProfileBank/BlackListedProfiles']">2</a></li>
-                                            <li><a [routerLink]="['/App/ProfileBank/BlackListedProfiles']">3</a></li>
-                                            <li><a [routerLink]="['/App/ProfileBank/BlackListedProfiles']">4</a></li>
-                                            <li><a [routerLink]="['/App/ProfileBank/BlackListedProfiles']">5</a></li>
+                                            <li class="active"><a [routerLink]="['/App/ProfileBank/CompanyProfiles']">1</a></li>
+                                            <li><a [routerLink]="['/App/ProfileBank/CompanyProfiles']">2</a></li>
+                                            <li><a [routerLink]="['/App/ProfileBank/CompanyProfiles']">3</a></li>
+                                            <li><a [routerLink]="['/App/ProfileBank/CompanyProfiles']">4</a></li>
+                                            <li><a [routerLink]="['/App/ProfileBank/CompanyProfiles']">5</a></li>
                                             <li class="next"><a href="#" title="Next"><i class="fa fa-angle-right"></i></a></li>
                                             <li class="next"><a href="#" title="Last"><i class="fa fa-angle-double-right"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
+                            </div>
+                            <div>
+                            <!--<rms-grid [meta]="meta"></rms-grid>-->
                             </div>
                         </div>
                     </div>

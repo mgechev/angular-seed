@@ -18,35 +18,41 @@
                     <span class="title">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item start" [ifAuthorize]="['PROFILE.MANAGE']">
+            <li class="nav-item start" [ifAuthorize]="['PROFILEBANK.MANAGE']">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-home"></i>
                     <span class="title">Profile Bank</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item start " [ifAuthorize]="['PROFILE.ALLPROFILES.READ']">
+                    <li class="nav-item start " [ifAuthorize]="['PROFILEBANK.ALLPROFILES.MANAGE']">
                         <a [routerLink]="['/App/ProfileBank/AllProfiles']" class="nav-link ">
                             <i class="icon-bar-chart"></i>
                             <span class="title">All Profiles</span>
                         </a>
                     </li>
-                    <li class="nav-item start " [ifAuthorize]="['PROFILE.BALCKLISTEDPROFILES.READ']">
+                    <li class="nav-item start " [ifAuthorize]="['PROFILEBANK.BALCKLISTEDPROFILES.MANAGE']">
                         <a [routerLink]="['/App/ProfileBank/BlackListedProfiles']" class="nav-link ">
                             <i class="icon-bulb"></i>
                             <span class="title">Black listed Profiles</span>
                         </a>
                     </li>
-                    <li class="nav-item start " [ifAuthorize]="['PROFILE.RECENTPROFILES.READ']">
+                    <li class="nav-item start " [ifAuthorize]="['PROFILEBANK.RECENTPROFILES.MANAGE']">
                         <a [routerLink]="['/App/ProfileBank/RecentProfiles']" class="nav-link ">
                             <i class="icon-graph"></i>
                             <span class="title">Recent Profiles</span>
                         </a>
                     </li>
-                    <li class="nav-item start " [ifAuthorize]="['PROFILE.MYPROFILES.READ']">
+                    <li class="nav-item start " [ifAuthorize]="['PROFILEBANK.MYPROFILES.MANAGE']">
                         <a [routerLink]="['/App/ProfileBank/MyProfiles']" class="nav-link ">
                             <i class="icon-graph"></i>
                             <span class="title">My Profiles</span>
+                        </a>
+                    </li>
+                     <li class="nav-item start " [ifAuthorize]="['PROFILEBANK.MYPROFILES.MANAGE']">
+                        <a [routerLink]="['/App/ProfileBank/CompanyProfiles']" class="nav-link ">
+                            <i class="icon-graph"></i>
+                            <span class="title">Company Profiles</span>
                         </a>
                     </li>
                 </ul>

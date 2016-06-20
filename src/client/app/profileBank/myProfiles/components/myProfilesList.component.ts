@@ -9,6 +9,7 @@ import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
+import {MyProfilesFilterPipe} from './myProfiles.component.pipe';
 
 @Component({
     moduleId: module.id,
@@ -16,6 +17,7 @@ import { ProfileBankService} from  '../../shared/services/profileBank.service';
     templateUrl: 'myProfilesList.component.html',
     directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
     styleUrls: ['myProfiles.component.css'],
+    pipes:[MyProfilesFilterPipe]
 })
 
 export class MyProfilesListComponent implements OnActivate {
@@ -41,6 +43,7 @@ export class MyProfilesListComponent implements OnActivate {
     isCommentsPanelCollapsed: boolean = false;
     seletedCandidateIDForComments: string;
     highlightRow: string;
+
     constructor(private _myProfilesService: MyProfilesService,
         private _router: Router,
         private _profileBankService: ProfileBankService,

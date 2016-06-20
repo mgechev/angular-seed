@@ -146,7 +146,8 @@
                                     <div class="dataTables_length" id="sample_1_length"><label>Show <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline"><option value="5">5</option><option value="15">15</option><option value="20">20</option><option value="-1">All</option></select></label></div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
-                                    <div id="sample_1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm input-large input-inline" placeholder="" aria-controls="sample_1" [(ngModel)]="searchString"></label></div>
+                                    <div id="sample_1_filter" class="dataTables_filter"><label>Search:
+                                        <input type="search" class="form-control input-sm input-large input-inline" placeholder="" aria-controls="sample_1" [(ngModel)]="searchString"></label></div>
                                 </div>
                             </div>
                              <!-- Update Stauts-->
@@ -235,7 +236,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="gradeX odd " *ngFor="let myprofile of myProfilesList ">
+                                    <tr class="gradeX odd " *ngFor="let myprofile of myProfilesList | myProfilesFilter: ['Tag','Candidate','Email','PrimaryContact'] : searchString">
                                         <td>
                                             <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                                     <input type="checkbox" class="checkboxes" value="1" [id]='myprofile.CandidateID' [(ngModel)]='myprofile.IsChecked' (change)="onStateChange($event)"/>

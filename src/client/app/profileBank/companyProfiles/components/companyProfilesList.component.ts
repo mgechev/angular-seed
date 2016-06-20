@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
 import { MyProfilesInfo } from '../../shared/model/myProfilesInfo';
-import { BlackListedProfilesService } from '../services/blacklistedProfiles.service';
+import { CompanyProfilesService } from '../services/companyProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
@@ -9,17 +9,17 @@ import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService } from '../../shared/services/profilebank.service';
-
+import { DataSharedService } from '../../shared/services/DataShared.service';
 @Component({
     moduleId: module.id,
     selector: 'rrf-black-listed-profiles-list',
-    templateUrl: 'blackListedProfilesList.component.html',
+    templateUrl: 'companyProfilesList.component.html',
     directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
 
-export class BlackListedProfilesListComponent implements OnActivate {
-    blacklistedProfilesList: Array<MyProfilesInfo>;
+export class CompanyProfilesListComponent implements OnActivate {
+    companyProfilesList: Array<MyProfilesInfo>;
     profile: MyProfilesInfo;
     statusList: Array<MasterData>;
     seletedCandidateID: string;
@@ -28,58 +28,42 @@ export class BlackListedProfilesListComponent implements OnActivate {
     currentStatus: number;
     errorMessage: string;
     currentCandidate: string;
-    currentUser: MasterData = new MasterData();
-    isCollapsed: boolean = false;
 
-    constructor(private _blacklistedProfilesService: BlackListedProfilesService,
+
+    public isCollapsed: boolean = false;
+    constructor(private _companyProfilesService: CompanyProfilesService,
         private _router: Router,
         public toastr: ToastsManager,
+        private _dataSharedService: DataSharedService,
         private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
         this.profile = new MyProfilesInfo();
-
     }
 
     routerOnActivate() {
-        this.getLoggedInUser();
-        this.getBlacklistedProfiles();
+        this.getcompanyProfiles();
         this.getCandidateStatuses();
     }
-
-    getLoggedInUser() {
-        this._profileBankService.getCurrentLoggedInUser()
-            .subscribe(
-            (results: MasterData) => {
-                this.currentUser = results;
-            },
-            error => this.errorMessage = <any>error);
-
-    }
-
-    getBlacklistedProfiles() {
-        this._blacklistedProfilesService.getBlackListedProfiles()
+    getcompanyProfiles() {
+        this._companyProfilesService.getCompanyProfiles()
             .subscribe(
             results => {
-                this.blacklistedProfilesList = <any>results;
+                this.companyProfilesList = <any>results;
             },
             error => {
                 this.errorMessage = <any>error;
             });
     }
-    redirectToEditProfile(CandidateID: string) {
-        this._router.navigate(['/App/ProfileBank/BlackListedProfiles/Edit/' + CandidateID]);
-
-    }
-    redirectToView(CandidateID: string) {
-        this._router.navigate(['/App/ProfileBank/BlackListedProfiles/View/' + CandidateID]);
+    redirectToView(CandidateID: number) {
+        this._router.navigate(['/App/ProfileBank/companyProfiles/View/' + CandidateID]);
     }
 
     SaveCandidateID(id: string) {
         this.seletedCandidateID = id;
-        var index = _.findIndex(this.blacklistedProfilesList, { CandidateID: this.seletedCandidateID });
-        this.profile.Comments = this.blacklistedProfilesList[index].Comments;
-        this.profile.Status = this.blacklistedProfilesList[index].Status;
-        this.currentCandidate = this.blacklistedProfilesList[index].Candidate;
+        var index = _.findIndex(this.companyProfilesList, { CandidateID: this.seletedCandidateID });
+        this.profile.Comments = this.companyProfilesList[index].Comments;
+        this.profile.Status = this.companyProfilesList[index].Status;
+        this.currentCandidate = this.companyProfilesList[index].Candidate;
         if (this.isCollapsed === false)
             this.isCollapsed = !this.isCollapsed;
     }
@@ -104,7 +88,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.profile.Status = new MasterData();
-                    this.getBlacklistedProfiles();
+                    this.getcompanyProfiles();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
@@ -117,9 +101,14 @@ export class BlackListedProfilesListComponent implements OnActivate {
         this.isCollapsed = false;
     }
 
-    getEditAccess(Owner: MasterData) {
-        if (Owner.Value === this.currentUser.Value) {
-            return false;
-        } else { return true; }
+    transferOwnerShipClick() {
+        let checkedItemIds: Array<string> = new Array<string>();
+        for (var index = 0; index < this.companyProfilesList.length; index++) {
+            if (this.companyProfilesList[index].IsChecked) {
+                checkedItemIds.push(this.companyProfilesList[index].CandidateID);
+            }
+        }
+        this._dataSharedService.setCheckedItems(checkedItemIds);
+        this._router.navigate(['/App/ProfileBank/AllProfiles/Transfer/']);
     }
 }

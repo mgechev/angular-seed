@@ -46,7 +46,7 @@ export class AllProfilesListComponent implements OnActivate {
         private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
         this.profile = new MyProfilesInfo();
-        this.profile.Status = new MasterData();
+
     }
 
     routerOnActivate() {

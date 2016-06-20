@@ -18,6 +18,7 @@ import { OwnerTypeComponent } from '../../admin/ownerType/index';
 import { AllProfilesComponent } from '../../profileBank/allProfiles/index';
 import { BlackListedProfilesComponent } from '../../profileBank/blackListedProfiles/index';
 import { MyProfilesComponent } from '../../profileBank/myProfiles/index';
+import { CompanyProfilesComponent } from '../../profileBank/companyProfiles/index';
 import { RecentProfilesComponent } from '../../profileBank/recentProfiles/index';
 import { MyRRFComponent } from '../../RRF/myRRF/index';
 import { RRFApprovalComponent } from '../../RRF/RRFApproval/index';
@@ -47,6 +48,7 @@ import { SpinnerComponent, SpinnerService } from '../../shared/components/spinne
     { path: '/ProfileBank/AllProfiles', component: AllProfilesComponent },
     { path: '/ProfileBank/BlackListedProfiles', component: BlackListedProfilesComponent },
     { path: '/ProfileBank/MyProfiles', component: MyProfilesComponent },
+    { path: '/ProfileBank/CompanyProfiles', component: CompanyProfilesComponent },
     { path: '/ProfileBank/RecentProfiles', component: RecentProfilesComponent },
     { path: '/RRF/MyRRF', component: MyRRFComponent },
     { path: '/RRF/RRFApproval', component: RRFApprovalComponent },

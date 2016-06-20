@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { MyProfilesInfo, SalaryDetails, Qualification, OtherDetails, Skills} from '../model/myProfilesInfo';
+import { MyProfilesInfo, SalaryDetails, Qualification,
+         OtherDetails, Skills, TransferOwnershipMeta} from '../model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
@@ -13,7 +14,7 @@ export class ProfileBankService {
 
 
     getCurrentLoggedInUser() {
-        let url = Config.GetURL('/api/user/GetCurrentLoggedInUser');
+        let url = Config.GetURL('/api/authentication/getCurrentUserName');
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);
@@ -47,7 +48,7 @@ export class ProfileBankService {
     }
 
     getCandidateProfile(id: string) {
-        let url = Config.GetURL('/api/ProfileBank/getCandidateProfile');
+        let url = Config.GetURL('/api/ProfileBank/ViewCandidateInformation');
         this._spinnerService.show();
         return this.authHttp.post(url, { profile: { ProfileId: id } })
             .map(this.extractData)

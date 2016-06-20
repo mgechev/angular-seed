@@ -12,22 +12,22 @@ import { Router } from '@angular/router';
 export class LoginComponent {
     public errorMessage: string;
     private model: AuthInfo;
-    constructor(private _loginService: LoginService,private _router: Router) {
+    constructor(private _loginService: LoginService, private _router: Router) {
         this.model = new AuthInfo(0, '', '');
     }
     doLogin(): void {
         this._loginService.authenticate(this.model)
             .subscribe(
-            results=> {
-               this.getLoggedInUserPermission();
+            results => {
+                this.getLoggedInUserPermission();
             },
             error => this.errorMessage = <any>error);
     }
-    getLoggedInUserPermission():void {
+    getLoggedInUserPermission(): void {
         this._loginService.getLoggedInUserPermission()
             .subscribe(
-            results=> {
-               this._router.navigate(['/App']);
+            results => {
+                this._router.navigate(['/App']);
             },
             error => this.errorMessage = <any>error);
     }

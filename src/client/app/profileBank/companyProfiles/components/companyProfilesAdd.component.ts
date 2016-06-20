@@ -1,6 +1,6 @@
 import {Component } from '@angular/core';
 import { Router, RouteSegment, ROUTER_DIRECTIVES, OnActivate } from '@angular/router';
-import { BlackListedProfilesService } from '../services/blacklistedProfiles.service';
+import { CompanyProfilesService } from '../services/CompanyProfiles.service';
 import { MyProfilesInfo, Qualification } from '../../shared/model/myProfilesInfo';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -10,13 +10,13 @@ import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService } from '../../shared/services/profilebank.service';
 @Component({
     moduleId: module.id,
-    selector: 'rrf-black-listed-profile-add',
-    templateUrl: 'blackListedProfilesAdd.component.html',
+    selector: 'rrf-company-profile-add',
+    templateUrl: 'CompanyProfilesAdd.component.html',
     directives: [ROUTER_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
 
-export class BlackListedProfilesAddComponent implements OnActivate {
+export class CompanyProfilesAddComponent implements OnActivate {
 
     profile: MyProfilesInfo;
     qualification: Qualification;
@@ -41,9 +41,8 @@ export class BlackListedProfilesAddComponent implements OnActivate {
 
     IsHidden: boolean = true;
     IsSuccess: boolean = false;
-    currentUser: MasterData = new MasterData();
 
-    constructor(private _blacklistedProfilesService: BlackListedProfilesService,
+    constructor(private _CompanyProfilesService: CompanyProfilesService,
         private _router: Router,
         public toastr: ToastsManager,
         private _profileBankService: ProfileBankService,
@@ -54,7 +53,6 @@ export class BlackListedProfilesAddComponent implements OnActivate {
     }
 
     routerOnActivate(segment: RouteSegment) {
-        this.getLoggedInUser();
         //get all master data and bind to dropdown
         this.getCountries();
         this.getStates();
@@ -71,26 +69,11 @@ export class BlackListedProfilesAddComponent implements OnActivate {
         // $('select').select2();
     }
 
-    getLoggedInUser() {
-        this._profileBankService.getCurrentLoggedInUser()
-            .subscribe(
-            (results: MasterData) => {
-                this.currentUser = results;
-            },
-            error => this.errorMessage = <any>error);
-
-    }
-
-
     getCandidateProfileById(profileId: string) {
         this._profileBankService.getCandidateProfile(profileId)
             .subscribe(
-            (results: MyProfilesInfo) => {
-                if (this.currentUser.Value === results.Owner.Value) {
-                    this.profile = results;
-                } else {
-                    this._router.navigate(['/App/ProfileBank/BlackListedProfiles/']);
-                }
+            results => {
+                this.profile = <any>results;
                 //this.convertCheckboxesValuesToBoolean();
             },
             error => this.errorMessage = <any>error);
