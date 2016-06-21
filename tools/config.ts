@@ -1,4 +1,4 @@
-import { ProjectConfig } from './config/project.config';
+import { SeedConfig } from './config/seed.config';
 
-const config: ProjectConfig = new ProjectConfig();
+const config: SeedConfig = new SeedConfig();
 export = config;
