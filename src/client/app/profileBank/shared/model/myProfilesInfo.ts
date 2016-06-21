@@ -33,9 +33,9 @@ export class MyProfilesInfo {
 
   //Properties of Personal Information
   public SecondaryContact: number;
-  public District: number;
-  public State: number;
-  public Country: number;
+  public District = new MasterData();
+  public State = new MasterData();
+  public Country = new MasterData();
   public PermanentAddress: string;
   public CurrentAddress: string;
   public PANNumber: string;
@@ -57,26 +57,31 @@ export class MyProfilesInfo {
   public CommentsUpdated: boolean;
 
   //for Edit access
-  public isAuthourized : boolean;
-  public Owner : MasterData = new MasterData();
+  public isAuthourized: boolean;
+  public Owner: MasterData = new MasterData();
 }
 
 export class TeamManagement {
   //properties of Candidate Team Management
   public TeamMgmt: any;
+  public CandidateID: string;
   public TeamHandlingExperience: string;
   public NoOfTeamMembers: number;
   public TeamMembersDesignations: string;
   public TeamHandlingChallenges: string;
-
+  public CommentsUpdated: boolean;
+   public FollowUpComments: string;
 }
 export class CareerProfile {
   //properties of Candidate Career Profile
   public TotalExperience: number;
+  public CandidateID: string;
   public RelevantExperience: number;
   public CurrentCompany: string;
   public CurrentDesignationRole: string;
   public TimeSpentInCurrentCompany: number;
+  public CommentsUpdated: boolean;
+   public FollowUpComments: string;
 }
 
 export class Skills {
@@ -93,16 +98,20 @@ export class Skills {
   public InclinationToOtherTechnology: string;
   public AwareAboutTesting: string;
   public StrongTechnicalSkills: string;
+  public CommentsUpdated: boolean;
+   public FollowUpComments: string;
 }
 
 export class SalaryDetails {
   public CandidateID: string;
   public CurrentSalary: number;
   public ExpectedSalary: string;
-  public CurrentTakeHome: number;
+  public TakeHomePay: number;
   public AnyPerks: string;
   public CTCIncludeVariable: any;
   public HowMuchVariable: number;
+  public CommentsUpdated: boolean;
+   public FollowUpComments: string;
 }
 
 export class OtherDetails {
@@ -128,7 +137,8 @@ export class OtherDetails {
   public SecondaryReasonToQuitCurrentJob: string;
   public EarlierAppliedProcess: string;
   public OfferedCandidateStatus: string;
-
+public CommentsUpdated: boolean;
+   public FollowUpComments: string;
 
 }
 export class ResumeMeta {
@@ -142,7 +152,7 @@ export class AddCandidateResponse {
   public Message: '';
   public ReasonCode: string;
   public ErrorMsg: string;
-  public candidateLookupId: string;
+  public CandidateLookupId: string;
 }
 export class TransferOwnershipMeta {
   public CandidateID: string;

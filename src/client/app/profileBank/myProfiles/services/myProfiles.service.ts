@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { MyProfilesInfo, ResumeMeta} from '../../shared/model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
@@ -13,12 +13,38 @@ export class MyProfilesService {
 
     UploadCandidateProfile(resumeMeta: ResumeMeta) {
         let url = Config.GetURL('/api/ProfileBank/UploadCandidateProfile');
-        this._spinnerService.show();
-        return this.authHttp.post(url, { resumeMeta })
+        // this._spinnerService.show();
+        // return this.authHttp.post(url, { resumeMeta })
+        //     .map(this.extractData)
+        //     .catch(this.handleError)
+        //     .finally(() => this._spinnerService.hide());
+
+        // let body = JSON.stringify({ resumeMeta: ResumeMeta });
+        // console.log('files : '+body);
+        let headers = new Headers();
+        this.createAuthorizationHeader(headers);
+        headers.append('server_type', '');
+        headers.append('Content-Type', undefined);
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(url, resumeMeta, options)
             .map(this.extractData)
-            .catch(this.handleError)
-            .finally(() => this._spinnerService.hide());
+            .catch(this.handleError);
+
+        // let formData: FormData = new FormData(),
+        //     xhr: XMLHttpRequest = new XMLHttpRequest();
+
+        // formData.append('uploads[]', resumeMeta.Profile, resumeMeta.Profile.FileName);
+
+        // xhr.open('POST', url, true);
+        // xhr.send(formData);
     }
+
+    createAuthorizationHeader(headers: Headers) {
+        if (localStorage.getItem('access_token') !== null) {
+            headers.append('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
+        }
+    }
+
     //TODO : Chnge API URL to /api/ProfileBank/getMyProfiles
     getMyProfiles() {
         let url = Config.GetURL('/api/ProfileBank/getMyProfiles');

@@ -28,7 +28,7 @@ export class MyProfilesListComponent implements OnActivate {
     psdTemplates: any;
     statusList: Array<MasterData>;
     seletedCandidateID: string;
-    selectedStatus: number;
+    selectedStatus = new MasterData();
     Comments: string;
     currentStatus: number;
     currentCandidate: string;
@@ -88,7 +88,7 @@ export class MyProfilesListComponent implements OnActivate {
                 .subscribe(
                 results => {
                     if ((<AddCandidateResponse>results).StatusCode === APIResult.Success) {
-                        this.uploadResume((<AddCandidateResponse>results).candidateLookupId);
+                        this.uploadResume((<AddCandidateResponse>results).CandidateLookupId);
                     } else {
                         this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                     }
@@ -114,7 +114,7 @@ export class MyProfilesListComponent implements OnActivate {
         this.resumeMeta.Profile = this.psdTemplates[0];
         this._myProfilesService.UploadCandidateProfile(this.resumeMeta)
             .subscribe(
-            results => {
+            (results : ResponseFromAPI) => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.getMyProfiles();
@@ -125,7 +125,7 @@ export class MyProfilesListComponent implements OnActivate {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
             },
-            error => this.errorMessage = <any>error);
+            (error:any )=> this.errorMessage = <any>error);
     }
 
     public uploadFile(fileInput: any) {
@@ -148,10 +148,10 @@ export class MyProfilesListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    onSelectStatus(statusId: string) {
-        this.selectedStatus = parseInt(statusId);
+     onSelectStatus(statusId: string) {
+        this.selectedStatus.Id = parseInt(statusId);
+        this.selectedStatus.Value = null;
     }
-
     onUpdateStauts() {
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(

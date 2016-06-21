@@ -23,7 +23,7 @@ export class CompanyProfilesListComponent implements OnActivate {
     profile: MyProfilesInfo;
     statusList: Array<MasterData>;
     seletedCandidateID: string;
-    selectedStatus: number;
+    selectedStatus= new MasterData();
     Comments: string;
     currentStatus: number;
     errorMessage: string;
@@ -76,8 +76,9 @@ export class CompanyProfilesListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    onSelectStatus(statusId: string) {
-        this.selectedStatus = parseInt(statusId);
+   onSelectStatus(statusId: string) {
+        this.selectedStatus.Id = parseInt(statusId);
+        this.selectedStatus.Value = null;
     }
 
 
@@ -109,6 +110,6 @@ export class CompanyProfilesListComponent implements OnActivate {
             }
         }
         this._dataSharedService.setCheckedItems(checkedItemIds);
-        this._router.navigate(['/App/ProfileBank/AllProfiles/Transfer/']);
+        this._router.navigate(['/App/ProfileBank/CompanyProfiles/Transfer/']);
     }
 }

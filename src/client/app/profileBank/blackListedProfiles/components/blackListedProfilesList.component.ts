@@ -23,7 +23,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
     profile: MyProfilesInfo;
     statusList: Array<MasterData>;
     seletedCandidateID: string;
-    selectedStatus: number;
+    selectedStatus= new MasterData();
     Comments: string;
     currentStatus: number;
     errorMessage: string;
@@ -59,8 +59,8 @@ export class BlackListedProfilesListComponent implements OnActivate {
     getBlacklistedProfiles() {
         this._blacklistedProfilesService.getBlackListedProfiles()
             .subscribe(
-            results => {
-                this.blacklistedProfilesList = <any>results;
+            (results : Array<MyProfilesInfo>)=> {
+                this.blacklistedProfilesList = results;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -95,8 +95,9 @@ export class BlackListedProfilesListComponent implements OnActivate {
             });
     }
 
-    onSelectStatus(statusId: string) {
-        this.selectedStatus = parseInt(statusId);
+   onSelectStatus(statusId: string) {
+        this.selectedStatus.Id = parseInt(statusId);
+        this.selectedStatus.Value = null;
     }
 
 

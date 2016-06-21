@@ -74,7 +74,7 @@ export class TransferOwnershipComponent implements OnActivate {
             for (var index = 0; index < this.candidateProfiles.length; index++) {
                 this.TransferOwnership.CandidateIds.push(this.candidateProfiles[index].CandidateID);
             }
-            this._allProfilesService.updateOwnership(this.TransferOwnership)
+            this._profileBankService.updateOwnership(this.TransferOwnership)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {

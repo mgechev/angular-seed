@@ -183,7 +183,7 @@ export class AllProfilesListComponent implements OnActivate {
 
     getEditAccess(Owner: MasterData) {
         try {
-            if (Owner.Value === this.currentUser.Value) {
+            if (Owner.Id === this.currentUser.Id) {
                 return false;
             } else { return true; }
         } catch (error) {

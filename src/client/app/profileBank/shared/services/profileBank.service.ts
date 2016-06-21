@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { MyProfilesInfo, SalaryDetails, Qualification,
+import { MyProfilesInfo, SalaryDetails, Qualification,TeamManagement,CareerProfile,
          OtherDetails, Skills, TransferOwnershipMeta} from '../model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
 import { MasterData } from  '../../../shared/model/index';
+
 @Injectable()
+
 export class ProfileBankService {
 
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
@@ -48,9 +50,9 @@ export class ProfileBankService {
     }
 
     getCandidateProfile(id: string) {
-        let url = Config.GetURL('/api/ProfileBank/ViewCandidateInformation');
+        let url = Config.GetURL('/api/ProfileBank/ViewCandidateInformation?CandidateID='+id);
         this._spinnerService.show();
-        return this.authHttp.post(url, { profile: { ProfileId: id } })
+        return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
@@ -65,10 +67,10 @@ export class ProfileBankService {
             .finally(() => this._spinnerService.hide());
     }
 
-    editCandidateProfessionalDetails(profileOtherDetails: OtherDetails) {
+    editCandidateProfessionalDetails(CandidateOtherDetails: OtherDetails) {
         let url = Config.GetURL('/api/ProfileBank/AddCandidateOtherDetails');
         this._spinnerService.show();
-        return this.authHttp.post(url, { profileOtherDetails })
+        return this.authHttp.post(url, { CandidateOtherDetails })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
@@ -83,37 +85,37 @@ export class ProfileBankService {
             .finally(() => this._spinnerService.hide());
     }
 
-    editCandidateCareerDetails(profile: MyProfilesInfo) {
+    editCandidateCareerDetails(CandidateCareerProfile: CareerProfile) {
         let url = Config.GetURL('/api/ProfileBank/AddCareerProfileDetails');
         this._spinnerService.show();
-        return this.authHttp.post(url, { profile })
+        return this.authHttp.post(url, { CandidateCareerProfile })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
 
-    editCandidateSkillsDetails(profileSkills: Skills) {
+    editCandidateSkillsDetails(CandidateSkills: Skills) {
         let url = Config.GetURL('/api/ProfileBank/AddCandidateSkillsDetails');
         this._spinnerService.show();
-        return this.authHttp.post(url, { profileSkills })
+        return this.authHttp.post(url, { CandidateSkills })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
 
-    editCandidateSalaryDetails(profileSalryDetails: SalaryDetails) {
+    editCandidateSalaryDetails(CandidateSalaryDetails: SalaryDetails) {
         let url = Config.GetURL('/api/ProfileBank/AddCandidateSalaryDetails');
         this._spinnerService.show();
-        return this.authHttp.post(url, { profileSalryDetails })
+        return this.authHttp.post(url, { CandidateSalaryDetails })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
 
-    editCandidateTeamManagementDetails(profile: MyProfilesInfo) {
+    editCandidateTeamManagementDetails(CandidateTeamManagement: TeamManagement) {
         let url = Config.GetURL('/api/ProfileBank/AddCandidateTeamManagementDetails');
         this._spinnerService.show();
-        return this.authHttp.post(url, { profile })
+        return this.authHttp.post(url, { CandidateTeamManagement })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

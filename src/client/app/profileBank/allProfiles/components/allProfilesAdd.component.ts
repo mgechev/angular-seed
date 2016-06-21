@@ -5,16 +5,16 @@ import { AllProfilesService } from '../services/allProfiles.service';
 import { ProfileBankService } from '../../shared/services/profilebank.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
-import { AlertComponent } from 'ng2-bootstrap';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
+import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-allprofiles-add',
     templateUrl: 'allProfilesAdd.component.html',
-    directives: [ROUTER_DIRECTIVES, AlertComponent],
+    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
 
@@ -62,12 +62,13 @@ export class AllProfilesAddComponent implements OnActivate {
     routerOnActivate(segment: RouteSegment) {
         //get all master data and bind to dropdown
         this.getLoggedInUser();
-        this.getCountries();
-        this.getStates();
-        this.getDistricts();
-        this.getQualifications();
-        this.getYears();
-        this.getGrades();
+        // this.getCountries();
+        // this.getStates();
+        // this.getDistricts();
+        // this.getQualifications();
+        // this.getYears();
+        // this.getGrades();
+
         //get current profile by Id
         this.params = segment.getParam('id');
         if (this.params) {
@@ -92,11 +93,11 @@ export class AllProfilesAddComponent implements OnActivate {
         this._profileBankService.getCandidateProfile(profileId)
             .subscribe(
             (results: MyProfilesInfo) => {
-                if (this.currentUser.Value === results.Owner.Value) {
-                    this.profile = results;
-                } else {
-                    this._router.navigate(['/App/ProfileBank/AllProfiles/']);
-                }
+                //  if (this.currentUser.Id === results.Owner.Id) {
+                this.profile = results;
+                // } else {
+                //     this._router.navigate(['/App/ProfileBank/AllProfiles/']);
+                // }
             },
             error => {
                 this.errorMessage = <any>error;
@@ -106,9 +107,6 @@ export class AllProfilesAddComponent implements OnActivate {
 
     }
 
-    isAuthorized() {
-
-    }
     getCountries(): void {
         this._masterService.getCountries()
             .subscribe(
@@ -246,13 +244,16 @@ export class AllProfilesAddComponent implements OnActivate {
     onSaveProfessionalDetails(): void {
 
         if (this.params) {
+            //Check For Comments Updated
             if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.CommentsUpdated = true;
-                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+                this.profile.CommentsUpdated = this.profile.CandidateOtherDetails.CommentsUpdated=true;
+                this.profile.PreviousFollowupComments =this.profile.CandidateOtherDetails.FollowUpComments 
+                =this.profile.FollowUpComments.trim();
             } else {
-                this.profile.CommentsUpdated = false;
+                this.profile.CommentsUpdated = this.profile.CandidateOtherDetails.CommentsUpdated= false;
             }
             this.profile.CandidateOtherDetails.CandidateID = this.params;
+            //Save Data
             this._profileBankService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
                 .subscribe(
                 results => {
@@ -275,11 +276,13 @@ export class AllProfilesAddComponent implements OnActivate {
         if (this.params) {
             this.profile.CandidateSkills.CandidateID = this.params;
             if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.CommentsUpdated = true;
-                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+                this.profile.CommentsUpdated = this.profile.CandidateSkills.CommentsUpdated = true;
+                this.profile.CandidateSkills.FollowUpComments = this.profile.PreviousFollowupComments
+                    = this.profile.FollowUpComments.trim();
             } else {
-                this.profile.CommentsUpdated = false;
+                this.profile.CommentsUpdated = this.profile.CandidateSkills.CommentsUpdated = false;
             }
+            this.profile.CandidateTeamManagement.CandidateID = this.params;
             this._profileBankService.editCandidateSkillsDetails(this.profile.CandidateSkills)
                 .subscribe(
                 results => {
@@ -302,19 +305,21 @@ export class AllProfilesAddComponent implements OnActivate {
         //   this.convertCheckboxesValues();
         if (this.params) {
             if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.CommentsUpdated = true;
-                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+                this.profile.CommentsUpdated = this.profile.CandidateTeamManagement.CommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.CandidateTeamManagement.FollowUpComments =
+                    this.profile.FollowUpComments.trim();
             } else {
-                this.profile.CommentsUpdated = false;
+                this.profile.CommentsUpdated = this.profile.CandidateTeamManagement.CommentsUpdated = false;
             }
-            this._profileBankService.editCandidateTeamManagementDetails(this.profile)
+            this.profile.CandidateTeamManagement.CandidateID = this.params;
+            this._profileBankService.editCandidateTeamManagementDetails(this.profile.CandidateTeamManagement)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                         this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
-                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                        this.toastr.error((<ResponseFromAPI>results).Message);
                     }
                 },
                 error => {
@@ -328,12 +333,14 @@ export class AllProfilesAddComponent implements OnActivate {
         //   this.showMessage('Wait', true);
         if (this.params) {
             if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.CommentsUpdated = true;
-                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+                this.profile.CommentsUpdated = this.profile.CandidateCareerProfile.CommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.CandidateCareerProfile.FollowUpComments
+                    = this.profile.FollowUpComments.trim();
             } else {
-                this.profile.CommentsUpdated = false;
+                this.profile.CommentsUpdated = this.profile.CandidateCareerProfile.CommentsUpdated = false;
             }
-            this._profileBankService.editCandidateCareerDetails(this.profile)
+            this.profile.CandidateCareerProfile.CandidateID = this.params;
+            this._profileBankService.editCandidateCareerDetails(this.profile.CandidateCareerProfile)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -356,8 +363,9 @@ export class AllProfilesAddComponent implements OnActivate {
         //   this.convertCheckboxesValues();
         if (this.params) {
             if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.CommentsUpdated = true;
-                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+                this.profile.CommentsUpdated = this.profile.CandidateSalaryDetails.CommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.CandidateSalaryDetails.FollowUpComments =
+                    this.profile.FollowUpComments.trim();
             } else {
                 this.profile.CommentsUpdated = false;
             }

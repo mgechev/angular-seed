@@ -70,7 +70,7 @@
                                     </ul>
                                 </div>
                                 <div class="portlet-body">
-                                    <div class="tab-content">
+                                      <div class="tab-content">
 
                                         <!-- PRIMARY INFO TAB -->
                                         <div class="tab-pane active" id="tab_primaryInfo">
@@ -169,7 +169,7 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Follow Up Comments</label>
                                                             <textarea class="form-control" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
-                                                                required="" tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                 tooltipEnable="!profile.FollowUpComments">
                                                                     </textarea>
                                                         </div>
@@ -200,7 +200,7 @@
                                                 </div>
                                                 <div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
-                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/CompanyProfiles']"> Cancel </a>
+                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/AllProfiles']"> Cancel </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -339,7 +339,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>Country</label>
-                                                            <select class="form-control" [(ngModel)]="profile.Country">
+                                                            <select class="form-control" [(ngModel)]="profile.Country.Id">
                                                                <option *ngFor="let country of countries" [value]="country.Id">{{country.Value}}</option>
                                                             </select>
                                                         </div>
@@ -347,7 +347,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>State</label>
-                                                            <select class="form-control" [(ngModel)]="profile.State">
+                                                            <select class="form-control" [(ngModel)]="profile.State.Id">
                                                                <option *ngFor="let state of states" [value]="state.Id">{{state.Value}}</option>
                                                             </select>
                                                         </div>
@@ -356,7 +356,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>District</label>
-                                                            <select class="form-control" [(ngModel)]="profile.District">
+                                                            <select class="form-control" [(ngModel)]="profile.District.Id">
                                                                <option *ngFor="let district of districts" [value]="district.Id">{{district.Value}}</option>
                                                             </select>
                                                         </div>
@@ -404,7 +404,7 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Follow Up Comments</label>
                                                             <textarea class="form-control" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
-                                                                required="" tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                 tooltipEnable="!profile.FollowUpComments">
                                                                     </textarea>
                                                         </div>
@@ -418,7 +418,7 @@
                                                 </div>
                                                 <div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
-                                                    <a class="btn default" [routerLink]="['/App/ProfileBank/CompanyProfiles']"> Cancel </a>
+                                                    <a class="btn default" [routerLink]="['/App/ProfileBank/AllProfiles']"> Cancel </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -613,7 +613,7 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Follow Up Comments</label>
                                                             <textarea class="form-control" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
-                                                                required="" tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                 tooltipEnable="!profile.FollowUpComments">
                                                                     </textarea>
                                                         </div>
@@ -621,7 +621,7 @@
                                                 </div>
                                                 <div class="margin-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
-                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/CompanyProfiles']"> Cancel </a>
+                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/AllProfiles']"> Cancel </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -684,7 +684,7 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Follow Up Comments</label>
                                                             <textarea class="form-control" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
-                                                                required="" tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                 tooltipEnable="!profile.FollowUpComments">
                                                                     </textarea>
                                                         </div>
@@ -693,7 +693,7 @@
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <button type="submit" class="btn green"> Save Changes </button>
-                                                        <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/CompanyProfiles']"> Cancel </a>
+                                                        <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/AllProfiles']"> Cancel </a>
                                                     </div>
 
                                                 </div>
@@ -720,7 +720,7 @@
                                                             <label class="control-label">Current Take Home</label>
                                                             <div class="row">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.CurrentTakeHome" />
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.TakeHomePay" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -740,9 +740,11 @@
                                                             <label class="control-label">Expected Salary</label>
                                                             <div class="row">
                                                                 <div class="col-md-12">
-                                                                    <!--<input type="text" placeholder="" class="form-control" [(ngModel)]="profile.ExpectedSalary" />-->
+                                                                    <!--<input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.ExpectedSalary" 
+                                                                   />-->
                                                                     <span class="form-control" tooltip="You can change this value from Primary Info Tab" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                        tooltipEnable="!profile.ExpectedSalary">{{profile.CandidateSalaryDetails.ExpectedSalary}}</span>
+                                                                        tooltipEnable="!profile.ExpectedSalary">{{profile.CandidateSalaryDetails.ExpectedSalary}}
+                                                                    </span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -765,7 +767,7 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Follow Up Comments</label>
                                                             <textarea class="form-control" rows="2" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
-                                                                required="" tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                 tooltipEnable="!profile.FollowUpComments">
                                                                     </textarea>
                                                         </div>
@@ -784,7 +786,7 @@
 
                                                 <div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
-                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/CompanyProfiles']"> Cancel </a>
+                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/AllProfiles']"> Cancel </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -840,7 +842,7 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Follow Up Comments</label>
                                                             <textarea class="form-control" rows="2" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
-                                                                required="" tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                 tooltipEnable="!profile.FollowUpComments">
                                                                     </textarea>
                                                         </div>
@@ -849,7 +851,7 @@
                                                 </div>
                                                 <div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
-                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/CompanyProfiles']"> Cancel </a>
+                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/AllProfiles']"> Cancel </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -1011,22 +1013,26 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label">Follow Up Comments</label>
                                                                     <textarea class="form-control" rows="2" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
-                                                                        required="" tooltip="Comments" tooltipPlacement="top"
-                                                                        tooltipTrigger="mouseenter" tooltipEnable="!profile.FollowUpComments">
+                                                                        tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="!profile.FollowUpComments">
                                                                     </textarea>
                                                                 </div>
                                                             </div>
+                                                            <div class="col-md-6">
+
+                                                            </div>
+
                                                         </div>
                                                         <div class="margiv-top-10">
                                                             <button type="submit" class="btn green"> Save Changes </button>
-                                                            <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/CompanyProfiles']"> Cancel </a>
+                                                            <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/AllProfiles']"> Cancel </a>
                                                         </div>
                                                     </form>
                                                 </div>
 
                                             </div>
                                         </div>
-                                        <!-- END OTHER/PROFESSIONAL INFO TAB -->
+                                        <!-- END OTHER INFO TAB -->
                                     </div>
                                 </div>
                             </div>
