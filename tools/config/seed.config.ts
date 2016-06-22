@@ -299,23 +299,23 @@ export class SeedConfig {
   protected SYSTEM_CONFIG_DEV: any = {
     defaultJSExtensions: true,
     packageConfigPaths: [
-      `${this.NPM_BASE}*/package.json`,
-      `${this.NPM_BASE}**/package.json`,
-      `${this.NPM_BASE}@angular/*/package.json`
+      `node_modules/*/package.json`,
+      `node_modules/**/package.json`,
+      `node_modules/@angular/*/package.json`
     ],
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
-      '@angular/core': `${this.NPM_BASE}@angular/core/bundles/core.umd.js`,
-      '@angular/common': `${this.NPM_BASE}@angular/common/bundles/common.umd.js`,
-      '@angular/compiler': `${this.NPM_BASE}@angular/compiler/bundles/compiler.umd.js`,
-      '@angular/forms': `${this.NPM_BASE}@angular/forms/bundles/forms.umd.js`,
-      '@angular/http': `${this.NPM_BASE}@angular/http/bundles/http.umd.js`,
-      '@angular/router': `${this.NPM_BASE}@angular/router/index.js`,
-      '@angular/platform-browser': `${this.NPM_BASE}@angular/platform-browser/bundles/platform-browser.umd.js`,
-      '@angular/platform-browser-dynamic': `${this.NPM_BASE}@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js`,
-      'rxjs/*': `${this.NPM_BASE}rxjs/*`,
+      '@angular/core': `node_modules/@angular/core/bundles/core.umd.js`,
+      '@angular/common': `node_modules/@angular/common/bundles/common.umd.js`,
+      '@angular/compiler': `node_modules/@angular/compiler/bundles/compiler.umd.js`,
+      '@angular/forms': `node_modules/@angular/forms/bundles/forms.umd.js`,
+      '@angular/http': `node_modules/@angular/http/bundles/http.umd.js`,
+      '@angular/router': `node_modules/@angular/router/index.js`,
+      '@angular/platform-browser': `node_modules/@angular/platform-browser/bundles/platform-browser.umd.js`,
+      '@angular/platform-browser-dynamic': `node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js`,
+      'rxjs/*': `node_modules/rxjs/*`,
       'app/*': `/app/*`,
-      '*': `${this.NPM_BASE}*`
+      '*': `node_modules/*`
     },
     packages: {
       rxjs: { defaultExtension: false }
