@@ -10,6 +10,8 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
 import {MyProfilesFilterPipe} from './myProfiles.component.pipe';
+import { Headers, Http } from '@angular/http';
+
 
 @Component({
     moduleId: module.id,
@@ -17,7 +19,7 @@ import {MyProfilesFilterPipe} from './myProfiles.component.pipe';
     templateUrl: 'myProfilesList.component.html',
     directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
     styleUrls: ['myProfiles.component.css'],
-    pipes:[MyProfilesFilterPipe]
+    pipes: [MyProfilesFilterPipe]
 })
 
 export class MyProfilesListComponent implements OnActivate {
@@ -43,8 +45,12 @@ export class MyProfilesListComponent implements OnActivate {
     isCommentsPanelCollapsed: boolean = false;
     seletedCandidateIDForComments: string;
     highlightRow: string;
+    public file: File;
+    public url: string;
+    headers: Headers;
 
     constructor(private _myProfilesService: MyProfilesService,
+        private http: Http,
         private _router: Router,
         private _profileBankService: ProfileBankService,
         public toastr: ToastsManager,
@@ -109,12 +115,13 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     uploadResume(CandidateLookupId: string) {
+        this.psdTemplates.CandidateLookupId = CandidateLookupId;
         this.resumeMeta.CandidateLookupId = CandidateLookupId;
         this.resumeMeta.Overwrite = false;
         this.resumeMeta.Profile = this.psdTemplates[0];
         this._myProfilesService.UploadCandidateProfile(this.resumeMeta)
             .subscribe(
-            (results : ResponseFromAPI) => {
+            (results: ResponseFromAPI) => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.getMyProfiles();
@@ -125,7 +132,7 @@ export class MyProfilesListComponent implements OnActivate {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
             },
-            (error:any )=> this.errorMessage = <any>error);
+            (error: any) => this.errorMessage = <any>error);
     }
 
     public uploadFile(fileInput: any) {
@@ -136,6 +143,7 @@ export class MyProfilesListComponent implements OnActivate {
             this.psdTemplates.push(FileList.item(i));
             this.fileUploaded = true;
             this.fileName = FileList.item(i).name;
+            this.psdTemplates.Overwrite = false;
         }
     }
 
@@ -148,7 +156,7 @@ export class MyProfilesListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-     onSelectStatus(statusId: string) {
+    onSelectStatus(statusId: string) {
         this.selectedStatus.Id = parseInt(statusId);
         this.selectedStatus.Value = null;
     }
@@ -253,6 +261,30 @@ export class MyProfilesListComponent implements OnActivate {
         }
 
     }
+
+    postFile(inputValue: any): void {
+
+        try {
+            console.log(inputValue);
+            let FileList: FileList = inputValue.target.files;
+            this.psdTemplates.length = 0;
+            for (let i = 0, length = FileList.length; i < length; i++) {
+                this.psdTemplates.push(FileList.item(i));
+                this.fileUploaded = true;
+                this.fileName = FileList.item(i).name;
+                this.psdTemplates.Overwrite = false;
+            }
+            this.psdTemplates.CandidateLookupId = '55';
+            var result = this._myProfilesService.upload('http://192.168.101.123:8001/api/ProfileBank/UploadCandidateProfile'
+                , this.psdTemplates);
+            console.log(result);
+        } catch (error) {
+            document.write(error);
+        }
+
+    }
+
+
 
 }
 

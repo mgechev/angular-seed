@@ -19,7 +19,7 @@ export class MyProfilesService {
         //     .catch(this.handleError)
         //     .finally(() => this._spinnerService.hide());
 
-        // let body = JSON.stringify({ resumeMeta: ResumeMeta });
+
         // console.log('files : '+body);
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
@@ -38,6 +38,32 @@ export class MyProfilesService {
         // xhr.open('POST', url, true);
         // xhr.send(formData);
     }
+
+    public upload (url: string, files: File[]): Promise<any> {
+        return new Promise((resolve, reject) => {
+        let formData: FormData = new FormData(),
+            xhr: XMLHttpRequest = new XMLHttpRequest();
+
+        for (let i = 0; i < files.length; i++) {
+            formData.append('Profile', files[i], files[i].name);
+            formData.append('CandidateLookupId',54);
+            formData.append('Overwrite',false);
+        }
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    resolve(JSON.parse(xhr.response));
+                } else {
+                    reject(xhr.response);
+                }
+            }
+        };
+        xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+        xhr.open('POST', url, true);
+        xhr.send(formData);
+    });
+}
 
     createAuthorizationHeader(headers: Headers) {
         if (localStorage.getItem('access_token') !== null) {

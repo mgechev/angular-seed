@@ -79,7 +79,7 @@
                                                             <tbody>
                                                                 <tr *ngFor="let Qualification of profile.CandidateQualifications">
                                                                     <td> {{Qualification.Qualification.Value}}</td>
-                                                                    <td> {{Qualification.YearOfPassing.Value}}</td>
+                                                                    <td> {{Qualification.YearofPassing}}</td>
                                                                     <td> {{Qualification.Grade.Value}}</td>
                                                                     <td class="center">{{Qualification.Marks}} </td>
                                                                 </tr>
@@ -315,7 +315,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b>No Of Team Members :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.CandidateTeamManagement.NoOfTeamMembers}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateTeamManagement.NoofTeamMembers}} </p>
                                                         </div>
                                                     </div>
                                                 </div>

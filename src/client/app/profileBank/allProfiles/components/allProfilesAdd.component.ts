@@ -36,8 +36,11 @@ export class AllProfilesAddComponent implements OnActivate {
     selectedGrade: number;
     Marks: number;
     CurrentQualification: number;
-    CurrentYear: number;
     CurrentGrade: number;
+    CurrentYear: number;
+    selectedVisa: MasterData = new MasterData();
+    VisaType: Array<MasterData> = new Array<MasterData>();
+
 
     IsCurrentAddressSameAsPermanentChecked: boolean = false;
     IsOutstationedCandidateChecked: boolean = false;
@@ -62,20 +65,20 @@ export class AllProfilesAddComponent implements OnActivate {
     routerOnActivate(segment: RouteSegment) {
         //get all master data and bind to dropdown
         this.getLoggedInUser();
-        // this.getCountries();
+        this.getCountries();
         // this.getStates();
         // this.getDistricts();
-        // this.getQualifications();
-        // this.getYears();
-        // this.getGrades();
+        this.getQualifications();
 
+        this.getGrades();
+        this.getVisaType();
         //get current profile by Id
         this.params = segment.getParam('id');
         if (this.params) {
             this.getCandidateProfileById(this.params);
         }
-        //dropdown with multi selector and search
-        // $('select').select2();
+        var date = new Date();
+        this.CurrentYear = date.getFullYear();
     }
 
     getLoggedInUser() {
@@ -162,26 +165,33 @@ export class AllProfilesAddComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
-
+    getVisaType(): void {
+        this._masterService.GetVisaType()
+            .subscribe(
+            results => {
+                this.VisaType = results;
+            },
+            error => this.errorMessage = <any>error);
+    }
     createQualification() {
         this.qualification = new Qualification();
         this.qualification.Qualification = new MasterData;
         this.qualification.Grade = new MasterData;
-        this.qualification.YearOfPassing = new MasterData;
+
     }
 
     onSelectQualification(candidateQualification: string) {
         this.selectedQualification = parseInt(candidateQualification);
+    }
+    onSelectVisa(visaId: string) {
+        this.profile.CandidateOtherDetails.Visa.Id = parseInt(visaId);
     }
 
     onSelectGrade(grade: string) {
         this.selectedGrade = parseInt(grade);
     }
 
-    onSelectYear(year: string) {
-        this.selectedYear = parseInt(year);
-    }
-    onSameAddressChecked(value: string) {
+    onSameAddressChecked(value: boolean) {
         if (value) {
             this.profile.PermanentAddress = this.profile.CurrentAddress;
         } else {
@@ -205,7 +215,7 @@ export class AllProfilesAddComponent implements OnActivate {
                         this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
-                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                        this.toastr.error((<ResponseFromAPI>results).Message);
                     }
                 },
                 error => {
@@ -231,7 +241,7 @@ export class AllProfilesAddComponent implements OnActivate {
                         this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
-                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                        this.toastr.error((<ResponseFromAPI>results).Message);
                     }
                 },
                 error => {
@@ -246,11 +256,11 @@ export class AllProfilesAddComponent implements OnActivate {
         if (this.params) {
             //Check For Comments Updated
             if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.CommentsUpdated = this.profile.CandidateOtherDetails.CommentsUpdated=true;
-                this.profile.PreviousFollowupComments =this.profile.CandidateOtherDetails.FollowUpComments 
-                =this.profile.FollowUpComments.trim();
+                this.profile.CommentsUpdated = this.profile.CandidateOtherDetails.CommentsUpdated = true;
+                this.profile.PreviousFollowupComments = this.profile.CandidateOtherDetails.FollowUpComments
+                    = this.profile.FollowUpComments.trim();
             } else {
-                this.profile.CommentsUpdated = this.profile.CandidateOtherDetails.CommentsUpdated= false;
+                this.profile.CommentsUpdated = this.profile.CandidateOtherDetails.CommentsUpdated = false;
             }
             this.profile.CandidateOtherDetails.CandidateID = this.params;
             //Save Data
@@ -261,7 +271,7 @@ export class AllProfilesAddComponent implements OnActivate {
                         this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
-                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                        this.toastr.error((<ResponseFromAPI>results).Message);
                     }
                 },
                 error => {
@@ -282,7 +292,7 @@ export class AllProfilesAddComponent implements OnActivate {
             } else {
                 this.profile.CommentsUpdated = this.profile.CandidateSkills.CommentsUpdated = false;
             }
-            this.profile.CandidateTeamManagement.CandidateID = this.params;
+            this.profile.CandidateSkills.CandidateID = this.params;
             this._profileBankService.editCandidateSkillsDetails(this.profile.CandidateSkills)
                 .subscribe(
                 results => {
@@ -290,7 +300,7 @@ export class AllProfilesAddComponent implements OnActivate {
                         this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
-                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                        this.toastr.error((<ResponseFromAPI>results).Message);
                     }
                 },
                 error => {
@@ -347,7 +357,7 @@ export class AllProfilesAddComponent implements OnActivate {
                         this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
-                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                        this.toastr.error((<ResponseFromAPI>results).Message);
                     }
                 },
                 error => {
@@ -377,7 +387,7 @@ export class AllProfilesAddComponent implements OnActivate {
                         this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getCandidateProfileById(this.params);
                     } else {
-                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                        this.toastr.error((<ResponseFromAPI>results).Message);
                     }
                 },
                 error => {
@@ -391,9 +401,9 @@ export class AllProfilesAddComponent implements OnActivate {
         //   Add New Qualification
         if (this.qualification.QualificationID === undefined) {
             this.qualification.CandidateID = this.profile.CandidateID;
-            this.qualification.Qualification = this.selectedQualification;
-            this.qualification.Grade = this.selectedGrade;
-            this.qualification.YearOfPassing = this.selectedYear;
+            this.qualification.Qualification.Id = this.selectedQualification;
+            this.qualification.Grade.Id = this.selectedGrade;
+            this.qualification.Qualification.Value = this.qualification.Grade.Value = null;
 
             if (this.params) {
                 this._profileBankService.addCandidateQualification(this.qualification)
@@ -403,9 +413,9 @@ export class AllProfilesAddComponent implements OnActivate {
                         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                             this.toastr.success((<ResponseFromAPI>results).Message);
                             this.createQualification();
-                            this.getCandidateQualifications();
+                            this.getCandidateQualification();
                         } else {
-                            this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                            this.toastr.error((<ResponseFromAPI>results).Message);
                         }
                     },
                     error => {
@@ -417,23 +427,18 @@ export class AllProfilesAddComponent implements OnActivate {
             //update Qualification
             if (this.selectedQualification !== undefined) {
                 this.qualification.Qualification = new MasterData();
-                this.qualification.Qualification = this.selectedQualification;
+                this.qualification.Qualification.Id = this.selectedQualification;
             } else {
-                this.qualification.Qualification = this.qualification.Qualification.Id;
+                this.qualification.Qualification.Id = this.qualification.Qualification.Id;
             }
 
             if (this.selectedGrade !== undefined) {
                 this.qualification.Grade = new MasterData();
-                this.qualification.Grade = this.selectedGrade;
+                this.qualification.Grade.Id = this.selectedGrade;
             } else {
-                this.qualification.Grade = this.qualification.Grade.Id;
+                this.qualification.Grade.Id = this.qualification.Grade.Id;
             }
-            if (this.selectedYear !== undefined) {
-                this.qualification.YearOfPassing = new MasterData();
-                this.qualification.YearOfPassing = this.selectedYear;
-            } else {
-                this.qualification.YearOfPassing = this.qualification.YearOfPassing.Id;
-            }
+
 
             if (this.params) {
                 this._profileBankService.editCandidateQualification(this.qualification)
@@ -443,9 +448,9 @@ export class AllProfilesAddComponent implements OnActivate {
                             this.toastr.success((<ResponseFromAPI>results).Message);
                             this.createQualification();
                             this.IsHidden = true;
-                            this.getCandidateQualifications();
+                            this.getCandidateQualification();
                         } else {
-                            this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                            this.toastr.error((<ResponseFromAPI>results).Message);
                         }
                     },
                     error => {
@@ -457,13 +462,14 @@ export class AllProfilesAddComponent implements OnActivate {
         }
     }
 
-    getCandidateQualifications() {
+    getCandidateQualification() {
         if (this.params) {
             this._profileBankService.getCandidateQualifications(this.params)
                 .subscribe(
-                results => {
-                    this.profile.CandidateQualifications = new Array<Qualification>();
-                    this.profile.CandidateQualifications = <any>results;
+                (results: Array<Qualification>) => {
+                    this.profile.CandidateQualification = new Array<Qualification>();
+                    this.profile.CandidateQualification = results;
+                    this.assignQualificationID(results);
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -472,9 +478,24 @@ export class AllProfilesAddComponent implements OnActivate {
         }
     }
 
-    editQualidficationData(QID: number) {
-        var index = _.findIndex(this.profile.CandidateQualifications, { QualificationID: QID });
-        this.qualification = this.profile.CandidateQualifications[index];
-        this.IsHidden = false;
+    assignQualificationID(CandidateQualification: Array<Qualification>) {
+        for (var index = 0; index < CandidateQualification.length; index++) {
+            this.profile.CandidateQualification[index].QualificationID =
+                this.profile.CandidateQualification[index].Qualification.Id;
+        }
+    }
+
+    editQualidficationData(QID: string) {
+        if (this.params) {
+            this._profileBankService.getQualificationById(this.params, QID.toString())
+                .subscribe(
+                (results: Qualification) => {
+                    this.qualification = results;
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
+                });
+        }
     }
 }

@@ -123,6 +123,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
 
     getEditAccess(Owner: MasterData) {
         try {
+            if(Owner.Id === 0) { return false; }
             if (Owner.Id === this.currentUser.Id) {
                 return false;
             } else { return true; }

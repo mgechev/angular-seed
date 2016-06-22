@@ -2,10 +2,10 @@ import { MasterData } from  '../../../shared/model/index';
 export class Qualification {
   public CandidateID: string;
   public QualificationID: number;
-  public Qualification: any;
-  public YearOfPassing: any;
+  public Qualification: MasterData = new MasterData();
+  public YearofPassing: number;
   public Marks: number;
-  public Grade: any;
+  public Grade:MasterData = new MasterData();
 }
 
 export class MyProfilesInfo {
@@ -49,7 +49,7 @@ export class MyProfilesInfo {
   public IsCurrentSameAsPermanent: any;
 
   //properties of Qualification
-  public CandidateQualifications: Array<Qualification>;
+  public CandidateQualification: Array<Qualification>;
 
   //Comments
   public FollowUpComments: string;
@@ -66,7 +66,7 @@ export class TeamManagement {
   public TeamMgmt: any;
   public CandidateID: string;
   public TeamHandlingExperience: string;
-  public NoOfTeamMembers: number;
+  public NoofTeamMembers: number;
   public TeamMembersDesignations: string;
   public TeamHandlingChallenges: string;
   public CommentsUpdated: boolean;
@@ -118,7 +118,7 @@ export class OtherDetails {
   public CandidateID: string;
   public AppliedEarlier: any;
   public AppraisalBondContractDetails: string;
-  public Visa: string;
+  public Visa:MasterData = new MasterData();
   public NoticePeriod: string;
   public RoleExpected: string;
   public ResignedStatusOfOfferedCandidate: string;
@@ -137,8 +137,8 @@ export class OtherDetails {
   public SecondaryReasonToQuitCurrentJob: string;
   public EarlierAppliedProcess: string;
   public OfferedCandidateStatus: string;
-public CommentsUpdated: boolean;
-   public FollowUpComments: string;
+  public CommentsUpdated: boolean;
+  public FollowUpComments: string;
 
 }
 export class ResumeMeta {

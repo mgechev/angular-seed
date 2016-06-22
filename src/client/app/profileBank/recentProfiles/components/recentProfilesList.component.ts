@@ -24,12 +24,13 @@ export class RecentProfilesListComponent implements OnActivate {
     profile: MyProfilesInfo = new MyProfilesInfo();
     statusList: Array<MasterData>;
     seletedCandidateID: string;
-    selectedStatus: number;
+    selectedStatus = new MasterData();
     Comments: string;
     currentStatus: number;
     errorMessage: string;
     currentCandidate: string;
     isCollapsed: boolean = false;
+    currentUser: MasterData = new MasterData();
 
     //inject services
     constructor(private _recentProfilesService: RecentProfilesService,
@@ -40,9 +41,20 @@ export class RecentProfilesListComponent implements OnActivate {
 
     //Call Below methods when this page is loaded
     routerOnActivate() {
+        this.getLoggedInUser();
         this.getRecentProfiles();
         this.getCandidateStatuses();
     }
+    getLoggedInUser() {
+        this._profileBankService.getCurrentLoggedInUser()
+            .subscribe(
+            (results: MasterData) => {
+                this.currentUser = results;
+            },
+            error => this.errorMessage = <any>error);
+
+    }
+
 
     getRecentProfiles() {
         this._recentProfilesService.getRecentProfiles()
@@ -77,13 +89,14 @@ export class RecentProfilesListComponent implements OnActivate {
     }
 
     onSelectStatus(statusId: string) {
-        this.selectedStatus = parseInt(statusId);
+        this.selectedStatus.Id = parseInt(statusId);
+        this.selectedStatus.Value = null;
     }
 
     onUpdateStauts() {
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
-            results => {
+            (results: ResponseFromAPI) => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.profile.Status = new MasterData();
@@ -92,7 +105,7 @@ export class RecentProfilesListComponent implements OnActivate {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
             },
-            error => {
+            (error: any) => {
                 this.errorMessage = <any>error;
             });
         this.isCollapsed = false;
@@ -100,5 +113,20 @@ export class RecentProfilesListComponent implements OnActivate {
 
     closeUpdatePanel() {
         this.isCollapsed = false;
+    }
+    redirectToEditProfile(CandidateID: string) {
+        this._router.navigate(['/App/ProfileBank/RecentProfiles/Edit/' + CandidateID]);
+    }
+
+    getEditAccess(Owner: MasterData) {
+        try {
+            if (Owner.Id === this.currentUser.Id) {
+                return false;
+            } else { return true; }
+        } catch (error) {
+            this.toastr.error(error);
+            return false;
+        }
+
     }
 }

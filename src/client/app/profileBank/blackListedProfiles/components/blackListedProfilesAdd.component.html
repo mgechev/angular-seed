@@ -70,7 +70,7 @@
                                     </ul>
                                 </div>
                                 <div class="portlet-body">
-                                     <div class="tab-content">
+                                  <div class="tab-content">
 
                                         <!-- PRIMARY INFO TAB -->
                                         <div class="tab-pane active" id="tab_primaryInfo">
@@ -136,7 +136,7 @@
                                                             <label class="control-label">Skills&nbsp; <small> (Primary Skills) </small> <span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-12">
-                                                                    <textarea class="form-control" rows="1" placeholder="C#,ASP.net" style="resize:vertical" [(ngModel)]="profile.PrimarySkills"
+                                                                    <textarea class="form-control" rows="1" placeholder="C#,ASP.net" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.PrimarySkills"
                                                                         required=""></textarea>
                                                                 </div>
                                                             </div>
@@ -450,10 +450,12 @@
                                                                         <label class="control-label">Year Of Passing <span class="required"> * </span></label>
                                                                         <div class="row">
                                                                             <div class="col-md-10">
-                                                                                <select (change)='onSelectYear($event.target.value)' class="form-control" [(ngModel)]="qualification.YearOfPassing.Id">
+                                                                                <!--<select (change)='onSelectYear($event.target.value)' class="form-control" [(ngModel)]="qualification.YearofPassing.Id">
                                                                                     <option *ngFor="let year of years" [value]="year.Id">{{year.Value}}</option>
-                                                                                </select>
-
+                                                                                </select>-->
+                                                                                  <input type="number" placeholder="70" class="form-control" max="{{CurrentYear}}" maxlength="4" 
+                                                                                  [(ngModel)]="qualification.YearofPassing" required="" />
+                                                                           
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -472,12 +474,13 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-1">
+                                                                <div class="col-md-2">
                                                                     <div class="form-group">
-                                                                        <label class="control-label">Marks<span class="required"> * </span></label>
+                                                                        <label class="control-label">Marks <small>(In Percentage)</small><span class="required"> * </span></label>
                                                                         <div class="row">
-                                                                            <div class="col-md-12">
-                                                                                <input type="text" placeholder="70" class="form-control" [(ngModel)]="qualification.Marks" required="" />
+                                                                            <div class="col-md-8">
+                                                                                <input type="number" placeholder="70" class="form-control" max="100" maxlength="3"
+                                                                                [(ngModel)]="qualification.Marks" required="" />
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -507,13 +510,13 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr *ngFor="let Qualification of profile.Qualifications">
+                                                            <tr *ngFor="let Qualification of profile.CandidateQualification">
                                                                 <td> {{Qualification.Qualification.Value}}</td>
-                                                                <td> {{Qualification.YearOfPassing.Value}}</td>
+                                                                <td> {{Qualification.YearofPassing}}</td>
                                                                 <td> {{Qualification.Grade.Value}}</td>
                                                                 <td class="center">{{Qualification.Marks}} </td>
                                                                 <td>
-                                                                    <a class="edit" (click)='editQualidficationData(Qualification.QualificationID)'> Edit </a>
+                                                                    <a class="edit" (click)='editQualidficationData(Qualification.Qualification.Id)'> Edit </a>
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -812,7 +815,8 @@
                                                             <label class="control-label">No Of Team Members</label>
                                                             <div class="row">
                                                                 <div class="col-md-8">
-                                                                    <input type="number" placeholder="0" class="form-control" [(ngModel)]="profile.CandidateTeamManagement.NoOfTeamMembers" />
+                                                                    <input type="text" placeholder="0" class="form-control" 
+                                                                    [(ngModel)]="profile.CandidateTeamManagement.NoofTeamMembers" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -887,7 +891,10 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label>Visa </label>
-                                                                    <input type="text" class="form-control" placeholder="" [(ngModel)]="profile.CandidateOtherDetails.Visa">
+                                                                    <!--<input type="text" class="form-control" placeholder="" [(ngModel)]="profile.CandidateOtherDetails.Visa">-->
+                                                                <select class="form-control" [(ngModel)]="profile.CandidateOtherDetails.Visa.Id" (change)='onSelectVisa($event.target.value)'>
+                                                               <option *ngFor="let visa of VisaType" [value]="visa.Id">{{visa.Value}}</option>
+                                                            </select>
                                                                 </div>
                                                             </div>
 

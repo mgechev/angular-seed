@@ -133,16 +133,16 @@
                                                     <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
                                                             <i class="fa fa-angle-down"></i>
                                                         </button>
-                                                    <ul class="dropdown-menu" role="menu">
+                                                     <ul class="dropdown-menu" role="menu">
                                                         <li>
-                                                            <a [routerLink]="['/App/ProfileBank/RecentProfiles/Edit/'+recentProfile.CandidateID]">
-                                                                <i class="icon-user"></i> Edit Profile </a>
-                                                        </li>
+                                                             <button class="btn btn-default btnLink" [disabled]='getEditAccess(profile.Owner)' (click)='redirectToEditProfile(profile.CandidateID)' >
+                                                                 <i class="icon-user"></i> Edit Profile 
+                                                             </button>
+                                                            </li>
                                                         <li class="divider"> </li>
                                                         <li>
-                                                            <a (click)='SaveCandidateID(recentProfile.CandidateID)'>
-                                                                <i class="icon-flag"></i> Update Status
-                                                            </a>
+                                                             <button class="btn btn-default btnLink" [disabled]='getEditAccess(profile.Owner)' (click)='SaveCandidateID(profile.CandidateID)' >
+                                                                  <i class="icon-flag"></i> Update Status </button>
                                                         </li>
                                                     </ul>
                                                 </div>

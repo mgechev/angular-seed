@@ -120,6 +120,12 @@ export class MastersService {
             .map(this.extractData)
             .catch(this.handleError);
     }
+    GetVisaType() {
+         let url = Config.GetURL('/api/Masters/GetVisaTypes');
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
 
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {

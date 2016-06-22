@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { MyProfilesInfo, SalaryDetails, Qualification,TeamManagement,CareerProfile,
-         OtherDetails, Skills, TransferOwnershipMeta} from '../model/myProfilesInfo';
+import { MyProfilesInfo, SalaryDetails, Qualification, TeamManagement, CareerProfile,
+    OtherDetails, Skills, TransferOwnershipMeta} from '../model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
@@ -41,7 +41,7 @@ export class ProfileBankService {
     }
 
     editCandidateProfile(profile: MyProfilesInfo) {
-        let url = Config.GetURL('/api/ProfileBank/editCandidateProfile');
+        let url = Config.GetURL('/api/ProfileBank/UpdateCandidateIntialInfo');
         this._spinnerService.show();
         return this.authHttp.post(url, { profile })
             .map(this.extractData)
@@ -50,7 +50,7 @@ export class ProfileBankService {
     }
 
     getCandidateProfile(id: string) {
-        let url = Config.GetURL('/api/ProfileBank/ViewCandidateInformation?CandidateID='+id);
+        let url = Config.GetURL('/api/ProfileBank/ViewCandidateInformation?CandidateID=' + id);
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
@@ -121,28 +121,28 @@ export class ProfileBankService {
             .finally(() => this._spinnerService.hide());
     }
 
-    addCandidateQualification(qualification: Qualification) {
+    addCandidateQualification(CandidateQualifications: Qualification) {
         let url = Config.GetURL('/api/ProfileBank/AddQualificationDetails');
         this._spinnerService.show();
-        return this.authHttp.post(url, { qualification })
+        return this.authHttp.post(url, { CandidateQualifications })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
 
     getCandidateQualifications(id: string) {
-        let url = Config.GetURL('/api/ProfileBank/getQualificationDetails');
+        let url = Config.GetURL('/api/ProfileBank/getQualificationDetails?CandidateID=' + id);
         this._spinnerService.show();
-        return this.authHttp.post(url, { profile: { ProfileId: id } })
+        return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
 
-    editCandidateQualification(qualification: Qualification) {
+    editCandidateQualification(CandidateQualification: Qualification) {
         let url = Config.GetURL('/api/ProfileBank/UpdateQualifications');
         this._spinnerService.show();
-        return this.authHttp.post(url, { qualification })
+        return this.authHttp.post(url, { CandidateQualification })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
@@ -151,7 +151,7 @@ export class ProfileBankService {
     updateCandidateStatus(CandidateID: string, Status: MasterData, Comments: string) {
         let url = Config.GetURL('/api/ProfileBank/UpdateStatus');
         this._spinnerService.show();
-        return this.authHttp.post(url, { CandidateID: CandidateID, Status: Status, Comments: Comments})
+        return this.authHttp.post(url, { CandidateID: CandidateID, Status: Status, Comments: Comments })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
@@ -161,10 +161,20 @@ export class ProfileBankService {
     updateFollowUpComments(CandidateID: string, Comments: string) {
         let url = Config.GetURL('/api/ProfileBank/UpdateFollowUpComments');
         this._spinnerService.show();
-        return this.authHttp.post(url, { profile: { CandidateID: CandidateID, Comments: Comments } })
+        return this.authHttp.post(url, { CandidateID: CandidateID, FollowUpComments: Comments })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
+    }
+
+    getQualificationById(CandidateID: string, QualificationID: string) {
+        let url = Config.GetURL('/api/ProfileBank/getCandidateQualification?CandidateID='+CandidateID+'&QualificationID='+QualificationID);
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+
     }
 
     private extractData(res: Response) {
