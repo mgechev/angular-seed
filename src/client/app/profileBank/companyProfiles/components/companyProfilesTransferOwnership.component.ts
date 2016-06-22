@@ -12,8 +12,8 @@ import { APIResult } from  '../../../shared/constantValue/index';
 
 @Component({
     moduleId: module.id,
-    selector: 'rrf-myprofiles-trnsfer',
-    templateUrl: 'allProfilesTransferOwnership.component.html',
+    selector: 'rrf-companyprofiles-trnsfer',
+    templateUrl: 'companyProfilesTransferOwnership.component.html',
     directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })

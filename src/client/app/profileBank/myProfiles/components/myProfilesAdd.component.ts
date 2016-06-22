@@ -38,7 +38,7 @@ export class MyProfilesAddComponent implements OnActivate {
 
     IsHidden: boolean = true;
     IsSuccess: boolean = false;
-    CurrentYear: number;  
+    CurrentYear: number;
     selectedVisa: MasterData = new MasterData();
     VisaType: Array<MasterData> = new Array<MasterData>();
 
@@ -156,7 +156,7 @@ export class MyProfilesAddComponent implements OnActivate {
         this.qualification = new Qualification();
         this.qualification.Qualification = new MasterData;
         this.qualification.Grade = new MasterData;
-        
+
     }
 
     onSelectQualification(candidateQualification: string) {
@@ -456,7 +456,7 @@ export class MyProfilesAddComponent implements OnActivate {
         }
     }
 
-     editQualidficationData(QID: string) {
+    editQualidficationData(QID: string) {
         if (this.params) {
             this._profileBankService.getQualificationById(this.params, QID.toString())
                 .subscribe(

@@ -23,7 +23,7 @@ export class CompanyProfilesListComponent implements OnActivate {
     profile: MyProfilesInfo;
     statusList: Array<MasterData>;
     seletedCandidateID: string;
-    selectedStatus= new MasterData();
+    selectedStatus = new MasterData();
     Comments: string;
     currentStatus: number;
     errorMessage: string;
@@ -76,7 +76,7 @@ export class CompanyProfilesListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-   onSelectStatus(statusId: string) {
+    onSelectStatus(statusId: string) {
         this.selectedStatus.Id = parseInt(statusId);
         this.selectedStatus.Value = null;
     }

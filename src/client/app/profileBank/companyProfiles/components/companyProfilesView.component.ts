@@ -8,17 +8,17 @@ import { ProfileBankService } from '../../shared/services/profilebank.service';
     selector: 'rrf-companyprofiles-view',
     templateUrl: 'CompanyProfilesView.component.html',
     directives: [ROUTER_DIRECTIVES],
-    styleUrls:['../../allProfiles/components/allProfilesView.component.css']
+    styleUrls: ['../../allProfiles/components/allProfilesView.component.css']
 })
 export class CompanyProfilesViewComponent implements OnActivate {
     params: string;
     profile: MyProfilesInfo;
     errorMessage: string;
-    constructor(private _profileBankService:ProfileBankService,
+    constructor(private _profileBankService: ProfileBankService,
         private _router: Router) {
         this.profile = new MyProfilesInfo();
     }
-    routerOnActivate(segment:RouteSegment) {
+    routerOnActivate(segment: RouteSegment) {
         this.params = segment.getParam('id');
         if (this.params) {
             this._profileBankService.getCandidateProfile(this.params)

@@ -57,7 +57,7 @@ export class RecentProfilesAddComponent implements OnActivate {
     }
 
     routerOnActivate(segment: RouteSegment) {
-         //get all master data and bind to dropdown
+        //get all master data and bind to dropdown
         this.getCountries();
         // this.getStates();
         // this.getDistricts();
@@ -84,7 +84,7 @@ export class RecentProfilesAddComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-       getCountries(): void {
+    getCountries(): void {
         this._masterService.getCountries()
             .subscribe(
             results => {
@@ -151,7 +151,7 @@ export class RecentProfilesAddComponent implements OnActivate {
         this.qualification = new Qualification();
         this.qualification.Qualification = new MasterData;
         this.qualification.Grade = new MasterData;
-        
+
     }
 
     onSelectQualification(candidateQualification: string) {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { MyProfilesInfo, ResumeMeta} from '../../shared/model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
@@ -12,7 +12,7 @@ export class MyProfilesService {
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
     UploadCandidateProfile(resumeMeta: ResumeMeta) {
-        let url = Config.GetURL('/api/ProfileBank/UploadCandidateProfile');
+        //let url = Config.GetURL('/api/ProfileBank/UploadCandidateProfile');
         // this._spinnerService.show();
         // return this.authHttp.post(url, { resumeMeta })
         //     .map(this.extractData)
@@ -21,14 +21,14 @@ export class MyProfilesService {
 
 
         // console.log('files : '+body);
-        let headers = new Headers();
-        this.createAuthorizationHeader(headers);
-        headers.append('server_type', '');
-        headers.append('Content-Type', undefined);
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(url, resumeMeta, options)
-            .map(this.extractData)
-            .catch(this.handleError);
+        // let headers = new Headers();
+        // this.createAuthorizationHeader(headers);
+        // headers.append('server_type', '');
+        // headers.append('Content-Type', undefined);
+        // let options = new RequestOptions({ headers: headers });
+        // return this.http.post(url, resumeMeta, options)
+        //     .map(this.extractData)
+        //     .catch(this.handleError);
 
         // let formData: FormData = new FormData(),
         //     xhr: XMLHttpRequest = new XMLHttpRequest();
@@ -39,31 +39,31 @@ export class MyProfilesService {
         // xhr.send(formData);
     }
 
-    public upload (url: string, files: File[]): Promise<any> {
+    public upload(url: string, files: File[]): Promise<any> {
         return new Promise((resolve, reject) => {
-        let formData: FormData = new FormData(),
-            xhr: XMLHttpRequest = new XMLHttpRequest();
+            let formData: FormData = new FormData(),
+                xhr: XMLHttpRequest = new XMLHttpRequest();
 
-        for (let i = 0; i < files.length; i++) {
-            formData.append('Profile', files[i], files[i].name);
-            formData.append('CandidateLookupId',54);
-            formData.append('Overwrite',false);
-        }
-        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    resolve(JSON.parse(xhr.response));
-                } else {
-                    reject(xhr.response);
-                }
+            for (let i = 0; i < files.length; i++) {
+                formData.append('Profile', files[i], files[i].name);
+                formData.append('CandidateLookupId', 54);
+                formData.append('Overwrite', false);
             }
-        };
-        xhr.setRequestHeader('Content-Type', 'multipart/form-data');
-        xhr.open('POST', url, true);
-        xhr.send(formData);
-    });
-}
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        resolve(JSON.parse(xhr.response));
+                    } else {
+                        reject(xhr.response);
+                    }
+                }
+            };
+            xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+            xhr.open('POST', url, true);
+            xhr.send(formData);
+        });
+    }
 
     createAuthorizationHeader(headers: Headers) {
         if (localStorage.getItem('access_token') !== null) {

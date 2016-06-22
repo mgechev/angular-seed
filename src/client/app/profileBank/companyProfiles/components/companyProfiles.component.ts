@@ -14,7 +14,7 @@ import {TransferOwnershipComponent} from './companyProfilesTransferOwnership.com
     selector: 'rrf-black-listed-profiles',
     template: ' <router-outlet></router-outlet>',
     directives: [ROUTER_DIRECTIVES],
-    providers: [DataSharedService,CompanyProfilesService, MastersService, 
+    providers: [DataSharedService,CompanyProfilesService, MastersService,
                 ToastsManager, ProfileBankService]
 })
 

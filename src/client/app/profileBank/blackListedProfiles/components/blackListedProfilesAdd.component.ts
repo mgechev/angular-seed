@@ -39,6 +39,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
     IsCurrentAddressSameAsPermanentChecked: boolean = false;
     IsOutstationedCandidateChecked: boolean = false;
     IsReadyToRelocateChecked: boolean = false;
+    VisaType: Array<MasterData> = new Array<MasterData>();
 
     IsHidden: boolean = true;
     IsSuccess: boolean = false;
@@ -167,7 +168,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
         this.qualification = new Qualification();
         this.qualification.Qualification = new MasterData;
         this.qualification.Grade = new MasterData;
-        this.qualification.YearOfPassing = new MasterData;
+
     }
 
     onSelectQualification(candidateQualification: string) {

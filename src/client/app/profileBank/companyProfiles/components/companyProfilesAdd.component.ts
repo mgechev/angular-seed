@@ -34,9 +34,9 @@ export class CompanyProfilesAddComponent implements OnActivate {
     selectedYear: number;
     selectedGrade: number;
     Marks: number;
-     selectedVisa: MasterData = new MasterData();
+    selectedVisa: MasterData = new MasterData();
     VisaType: Array<MasterData> = new Array<MasterData>();
- CurrentYear: number;
+    CurrentYear: number;
 
     IsCurrentAddressSameAsPermanentChecked: boolean = false;
     IsOutstationedCandidateChecked: boolean = false;
@@ -63,7 +63,7 @@ export class CompanyProfilesAddComponent implements OnActivate {
         this.getQualifications();
         //this.getYears();
         this.getGrades();
-           this.getVisaType();
+        this.getVisaType();
         //get current profile by Id
         this.params = segment.getParam('id');
         if (this.params) {
@@ -84,7 +84,7 @@ export class CompanyProfilesAddComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-      getCountries(): void {
+    getCountries(): void {
         this._masterService.getCountries()
             .subscribe(
             results => {
@@ -449,7 +449,7 @@ export class CompanyProfilesAddComponent implements OnActivate {
         }
     }
 
-     editQualidficationData(QID: string) {
+    editQualidficationData(QID: string) {
         if (this.params) {
             this._profileBankService.getQualificationById(this.params, QID.toString())
                 .subscribe(

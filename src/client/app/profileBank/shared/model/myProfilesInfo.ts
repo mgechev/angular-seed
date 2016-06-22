@@ -5,7 +5,7 @@ export class Qualification {
   public Qualification: MasterData = new MasterData();
   public YearofPassing: number;
   public Marks: number;
-  public Grade:MasterData = new MasterData();
+  public Grade: MasterData = new MasterData();
 }
 
 export class MyProfilesInfo {
@@ -70,7 +70,7 @@ export class TeamManagement {
   public TeamMembersDesignations: string;
   public TeamHandlingChallenges: string;
   public CommentsUpdated: boolean;
-   public FollowUpComments: string;
+  public FollowUpComments: string;
 }
 export class CareerProfile {
   //properties of Candidate Career Profile
@@ -81,7 +81,7 @@ export class CareerProfile {
   public CurrentDesignationRole: string;
   public TimeSpentInCurrentCompany: number;
   public CommentsUpdated: boolean;
-   public FollowUpComments: string;
+  public FollowUpComments: string;
 }
 
 export class Skills {
@@ -99,7 +99,7 @@ export class Skills {
   public AwareAboutTesting: string;
   public StrongTechnicalSkills: string;
   public CommentsUpdated: boolean;
-   public FollowUpComments: string;
+  public FollowUpComments: string;
 }
 
 export class SalaryDetails {
@@ -111,14 +111,14 @@ export class SalaryDetails {
   public CTCIncludeVariable: any;
   public HowMuchVariable: number;
   public CommentsUpdated: boolean;
-   public FollowUpComments: string;
+  public FollowUpComments: string;
 }
 
 export class OtherDetails {
   public CandidateID: string;
   public AppliedEarlier: any;
   public AppraisalBondContractDetails: string;
-  public Visa:MasterData = new MasterData();
+  public Visa: MasterData = new MasterData();
   public NoticePeriod: string;
   public RoleExpected: string;
   public ResignedStatusOfOfferedCandidate: string;
