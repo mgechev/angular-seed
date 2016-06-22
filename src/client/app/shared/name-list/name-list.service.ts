@@ -3,6 +3,7 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/publishReplay';
 
 /**
  * This class provides the NameList service with methods to read names and add names.
@@ -44,7 +45,7 @@ export class NameListService {
         .map((data: string[]) => {
           this.request = null;
           return this.names = data;
-        });
+        }).publishReplay(1).refCount();
     }
     return this.request;
   }
