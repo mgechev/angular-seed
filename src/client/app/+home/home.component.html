@@ -1,14 +1,3 @@
 <p>
-  Howdy! Here's a list of awesome computer scientists.
-  Do you know any others? Add to the list yourself.
+  Hallo! De voorkant van TechyTax wordt op dit moment omgebouwd. De vorige versie (2.4.1) is <a href="http://www.techytax.org" target="other">hier</a> te vinden.
 </p>
-
-<form (submit)="addName()">
-  <input [(ngModel)]="newName" name="newName" placeholder="Awesome Computer Scientist">
-  <button type="submit">Add</button>
-</form>
-
-
-<ul>
-  <li *ngFor="let name of nameListService.get() | async">{{name}}</li>
-</ul>

@@ -21,3 +21,11 @@ more {
   margin-top: 12px;
   width: 24px;
 }
+
+logo {
+  background: url("./assets/png/business107_32.png");
+  float: left;
+  height: 32px;
+  margin-top: 5px;
+  width: 32px;
+}

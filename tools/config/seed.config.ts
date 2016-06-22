@@ -128,7 +128,7 @@ export class SeedConfig {
    * `index.html`.
    * @type {string}
    */
-  APP_TITLE = 'Welcome to angular2-seed!';
+  APP_TITLE = 'TechyTax';
 
   /**
    * The base folder of the applications source files.
@@ -315,7 +315,8 @@ export class SeedConfig {
       '@angular/platform-browser-dynamic': `${this.NPM_BASE}@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js`,
       'rxjs/*': `${this.NPM_BASE}rxjs/*`,
       'app/*': `/app/*`,
-      '*': `${this.NPM_BASE}*`
+      '*': `${this.NPM_BASE}*`,
+      'moment': `${this.APP_BASE}node_modules/moment/moment`
     },
     packages: {
       rxjs: { defaultExtension: false }
@@ -368,12 +369,19 @@ export class SeedConfig {
         main: 'index.js',
         defaultExtension: 'js'
       },
+      '@angular/router-deprecated': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
       '@angular/router': {
         main: 'index.js',
         defaultExtension: 'js'
       },
       'rxjs': {
         defaultExtension: 'js'
+      },
+      'angular2-localstorage': {
+        defaultExtension: "js"
       }
     }
   };

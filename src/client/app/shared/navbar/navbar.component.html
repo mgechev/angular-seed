@@ -1,4 +1,9 @@
-<nav>
-  <a [routerLink]="['/']">HOME</a>
-  <a [routerLink]="['/about']">ABOUT</a>
-</nav>
+<ul class="topnav">
+  <li><a [routerLink]="['/']">Home</a></li>
+  <li><a [routerLink]="['/vat']">Aangifte btw</a></li>
+  <li><a [routerLink]="['/about']">Over TechyTax</a></li>
+  <li><a [routerLink]="['/login']">Inloggen</a></li>
+  <li class="icon">
+    <a href="javascript:void(0);" (click)="myFunction()">&#9776;</a>
+  </li>
+</ul>

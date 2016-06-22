@@ -1,0 +1,16 @@
+<div class="login jumbotron center-block">
+  <h1>Login</h1>
+  <form role="form" (submit)="login($event, username.value, password.value)">
+    <div class="form-group">
+      <label for="username">Gebruikersnaam</label>
+      <input type="text" #username class="form-control" id="username" placeholder="Gebruikersnaam">
+    </div>
+    <div class="form-group">
+      <label for="password">Wachtwoord</label>
+      <input type="password" #password class="form-control" id="password" placeholder="Wachtwoord">
+    </div>
+    <button type="submit" class="btn btn-default">Verstuur</button>
+    <a href="/signup">Klik hier om te registreren</a>
+  </form>
+  <button type="button" (click)="logout()">Uitloggen</button>
+</div>
