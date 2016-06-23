@@ -1,4 +1,3 @@
-import * as chalk from 'chalk';
 import * as util from 'gulp-util';
 import * as rimraf from 'rimraf';
 
@@ -21,7 +20,7 @@ export function clean(paths: string|string[]): (done: () => void) => void {
           if (e) {
             util.log('Clean task failed with', e);
           } else {
-            util.log('Deleted', chalk.yellow(p || '-'));
+            util.log('Deleted', util.colors.yellow(p || '-'));
           }
           resolve();
         });
