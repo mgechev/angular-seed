@@ -24,7 +24,7 @@ export class RoleListComponent implements OnInit {
         this._roleService.getRoles()
             .subscribe(
             results=> {
-                this.roleList = results;
+                this.roleList = <any>results;
             },
             error => this.errorMessage = <any>error);
     }

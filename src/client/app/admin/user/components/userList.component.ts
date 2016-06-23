@@ -24,7 +24,7 @@ export class UserListComponent implements OnInit {
         this._userService.getUsers()
             .subscribe(
             results=> {
-                this.userList = results;
+             this.userList = <any>results;
             },
             error => this.errorMessage = <any>error);
     }

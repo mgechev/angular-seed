@@ -30,7 +30,7 @@ export class RoleAddEditComponent {
             this._roleService.getRoleById(this.params)
                 .subscribe(
                 results => {
-                    this.role = results;
+                    this.role = <any>results;
                 },
                 error => this.errorMessage = <any>error);
             this.getAllPermissions();
@@ -60,7 +60,7 @@ export class RoleAddEditComponent {
         this._roleService.getAllPermissions()
             .subscribe(
             results => {
-                this.permissionList = results;
+                this.permissionList = <any>results;
             },
             error => this.errorMessage = <any>error);
     }
@@ -74,7 +74,7 @@ export class RoleAddEditComponent {
         this._roleService.getPermissionsByRole(this.params)
             .subscribe(
             results => {
-                this.rolePermissionList = results;
+                this.rolePermissionList = <any>results;
             },
             error => this.errorMessage = <any>error);
     }
