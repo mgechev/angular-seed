@@ -10,7 +10,7 @@ import * as tildify from 'tildify';
  * @param {string} path - The path to load the tasks from.
  */
 export function loadTasks(path: string): void {
-  util.log('Loading tasks folder', chalk.yellow(path));
+  util.log('Loading tasks folder', util.colors.yellow(path));
   readDir(path, taskname => registerTask(taskname, path));
 }
 
