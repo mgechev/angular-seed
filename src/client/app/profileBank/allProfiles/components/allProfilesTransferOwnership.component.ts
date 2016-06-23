@@ -52,6 +52,14 @@ export class TransferOwnershipComponent implements OnActivate {
         var chkItemIndex = _.findIndex(this.candidateProfiles, profile);
         this.candidateProfiles.splice(chkItemIndex, 1);
     }
+    onSelectOwnerType(id :string) {
+        this.TransferOwnership.OwnerType.Id = parseInt(id);
+        this.TransferOwnership.OwnerType.Value = null;
+    }
+     onSelectOwner(id :string) {
+        this.TransferOwnership.Owner.Id = parseInt(id);
+        this.TransferOwnership.Owner.Value = null;
+    }
 
     getOwnerTypes() {
         this._mastersService.GetOwnerType()
@@ -84,7 +92,7 @@ export class TransferOwnershipComponent implements OnActivate {
                         this.toastr.success((<ResponseFromAPI>results).Message);
                         this._router.navigate(['/App/ProfileBank/AllProfiles/']);
                     } else {
-                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                        this.toastr.error((<ResponseFromAPI>results).Message);
                     }
                 },
                 error => this.errorMessage = <any>error);

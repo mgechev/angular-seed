@@ -59,8 +59,11 @@ export class RecentProfilesListComponent implements OnActivate {
     getRecentProfiles() {
         this._recentProfilesService.getRecentProfiles()
             .subscribe(
-            results => {
-                this.recentProfilesList = <any>results;
+            (results: any) => {
+                if (results.length !== undefined) {
+
+                    this.recentProfilesList = <any>results;
+                }
             },
             error => this.errorMessage = <any>error);
     }

@@ -24,7 +24,7 @@
                         <div class="portlet light nopadding">
                             <div class="portlet-title custom-portlet">
                                 <div class="caption">
-                                  View Candidate's Info - {{profile.Candidate}}
+                                  View Candidate's Info - {{profile.FirstName}} {{profile.LastName}}
                                 </div>
                             </div>
                             <div class="portlet-container">
@@ -63,7 +63,7 @@
                                                 <!--/span-->
                                             </div>
                                             <!--/row-->
-                                            <div class="row">
+                                            <div class="row" *ngIf='count'>
                                                 <div class="col-md-12">
                                                     <div class="table-scrollable" style="border: none !important;">
                                                         <table class="table " id="sample_editable_1 ">
@@ -77,9 +77,9 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr *ngFor="let Qualification of profile.CandidateQualifications">
+                                                                <tr *ngFor="let Qualification of profile.CandidateQualification">
                                                                     <td> {{Qualification.Qualification.Value}}</td>
-                                                                    <td> {{Qualification.YearOfPassing.Value}}</td>
+                                                                    <td> {{Qualification.YearOfPassing}}</td>
                                                                     <td> {{Qualification.Grade.Value}}</td>
                                                                     <td class="center">{{Qualification.Marks}} </td>
                                                                 </tr>

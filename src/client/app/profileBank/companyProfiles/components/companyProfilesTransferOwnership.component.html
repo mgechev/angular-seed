@@ -51,8 +51,8 @@
                                             <tbody>
                                                 <tr *ngFor="let profile of candidateProfiles; let index = index">
                                                     <td> {{index+1}} </td>
-                                                    <td> {{profile.Candidate}} </td>
-                                                    <td> {{profile.CurrentOwnership.Value}}</td>
+                                                    <td> {{profile.CandidateName}} </td>
+                                                    <td> {{profile.Owner.Value}}</td>
                                                     <td><a (click)="onDelete(profile)"> Remove <i class="fa fa-times" ></i> </a></td>
                                                 </tr>
                                             </tbody>
@@ -65,8 +65,11 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label">Owner Type<span class="required"> * </span></label>
                                 <div class="col-md-3">
-                                    <select class="form-control" [(ngModel)]="TransferOwnership.OwnerType.Id" required>
+                                    <select class="form-control" (change)='onSelectOwnerType($event.target.value)' ([ngModel])='ownerType.Id' required>
+                                        
+                                          <option></option>
                                         <option *ngFor="let item of OwnerTypes" [value]="item.Id">{{item.Value}}</option>
+
                                      </select>
                                 </div>
                             </div>
@@ -75,7 +78,8 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label">Recruiters <span class="required"> * </span></label>
                                 <div class="col-md-3">
-                                    <select class="form-control" [(ngModel)]="TransferOwnership.Owner.Id" required>
+                                    <select class="form-control" (change)='onSelectOwner($event.target.value)' ([ngModel])='TransferOwnership.Owner.Id' required>
+                                       <option></option>
                                         <option *ngFor="let item of Recruiters" [value]="item.Id">{{item.Value}}</option>
                                      </select>
                                 </div>

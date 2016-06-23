@@ -46,7 +46,7 @@ export class AllProfilesListComponent implements OnActivate {
         private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
         this.profile = new MyProfilesInfo();
-
+        this.allProfilesList = new Array<MyProfilesInfo>();
     }
 
     routerOnActivate() {
@@ -66,12 +66,19 @@ export class AllProfilesListComponent implements OnActivate {
     }
 
     getAllProfiles() {
-        this._allProfilesService.getAllProfiles()
-            .subscribe(
-            (results: any) => {
-                this.allProfilesList = <Array<MyProfilesInfo>>results;
-            },
-            error => this.errorMessage = <any>error);
+        try {
+            this._allProfilesService.getAllProfiles()
+                .subscribe(
+                (results: any) => {
+                    if (results.length !== undefined) {
+                        this.allProfilesList = <Array<MyProfilesInfo>>results;
+                    }
+                },
+                error => this.errorMessage = <any>error);
+        } catch (error) {
+            this.allProfilesList = new Array<MyProfilesInfo>();
+        }
+
     }
 
     redirectToView(CandidateID: string) {
@@ -111,7 +118,7 @@ export class AllProfilesListComponent implements OnActivate {
     onUpdateStauts() {
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
-            (results : ResponseFromAPI )=> {
+            (results: ResponseFromAPI) => {
                 if (results.StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     console.log((<ResponseFromAPI>results).Message);

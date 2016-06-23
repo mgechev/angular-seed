@@ -28,6 +28,7 @@ export class MyProfilesListComponent implements OnActivate {
     errorMessage: string;
     status: number;
     psdTemplates: any;
+    resumeFiles: any;
     statusList: Array<MasterData>;
     seletedCandidateID: string;
     selectedStatus = new MasterData();
@@ -44,10 +45,14 @@ export class MyProfilesListComponent implements OnActivate {
     searchString: string;
     isCommentsPanelCollapsed: boolean = false;
     seletedCandidateIDForComments: string;
+    seletedCandidateIDForUpload: string;
     highlightRow: string;
     public file: File;
     public url: string;
     headers: Headers;
+    isUploadPanelCollapsed: boolean = false;
+    resumeUploaded: boolean = false;
+    resumeName: string;
 
     constructor(private _myProfilesService: MyProfilesService,
         private http: Http,
@@ -56,6 +61,7 @@ export class MyProfilesListComponent implements OnActivate {
         public toastr: ToastsManager,
         private _masterService: MastersService) {
         this.psdTemplates = new Array<File>();
+        this.resumeFiles =  new Array<File>();
         this.profile = new MyProfilesInfo();
         this.resumeMeta = new ResumeMeta();
     }
@@ -78,8 +84,10 @@ export class MyProfilesListComponent implements OnActivate {
     getMyProfiles() {
         this._myProfilesService.getMyProfiles()
             .subscribe(
-            results => {
-                this.myProfilesList = <any>results;
+            (results: any) => {
+                if (results.length !== undefined) {
+                    this.myProfilesList = <any>results;
+                }
             },
             error => this.errorMessage = <any>error);
     }
@@ -90,20 +98,38 @@ export class MyProfilesListComponent implements OnActivate {
 
     onSave(): void {
         if (this.chkValidations()) {
-            this._myProfilesService.addCandidateProfile(this.profile)
-                .subscribe(
-                results => {
-                    if ((<AddCandidateResponse>results).StatusCode === APIResult.Success) {
-                        this.uploadResume((<AddCandidateResponse>results).CandidateLookupId);
-                    } else {
-                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
-                    }
-                    this.profile = new MyProfilesInfo();
-                },
-                error => this.errorMessage = <any>error);
+            if (this.fileName === '') {
+                this._myProfilesService.addCandidateProfile(this.profile)
+                    .subscribe(
+                    results => {
+                        if ((<AddCandidateResponse>results).StatusCode === APIResult.Success) {
+                            this.toastr.success((<ResponseFromAPI>results).Message);
+                            this.getMyProfiles();
+                        } else {
+                            this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                        }
+                        this.profile = new MyProfilesInfo();
+                    },
+                    error => { this.errorMessage = <any>error; this.toastr.error(this.errorMessage) });
+            } else {
+
+                //If File is Uploaded then After Adding Candidate Call API to Upload File
+                this._myProfilesService.addCandidateProfile(this.profile)
+                    .subscribe(
+                    results => {
+                        if ((<AddCandidateResponse>results).StatusCode === APIResult.Success) {
+                            this.uploadResume((<AddCandidateResponse>results).CandidateID, this.psdTemplates[0]);
+                        } else {
+                            this.toastr.error((<ResponseFromAPI>results).Message);
+                        }
+                        this.profile = new MyProfilesInfo();
+                    },
+                    error => { this.errorMessage = <any>error; this.toastr.error(this.errorMessage) });
+            }
         } else {
             this.toastr.error('Please enter one of field : PassportNumber / PANNumber /AadhaarCardNo');
         }
+
     }
 
     chkValidations(): boolean {
@@ -114,37 +140,22 @@ export class MyProfilesListComponent implements OnActivate {
         } else { return false; }
     }
 
-    uploadResume(CandidateLookupId: string) {
-        this.psdTemplates.CandidateLookupId = CandidateLookupId;
-        this.resumeMeta.CandidateLookupId = CandidateLookupId;
+    uploadResume(CandidateLookupId: string, File: any) {
+        this.resumeMeta.CandidateID = CandidateLookupId;
         this.resumeMeta.Overwrite = false;
-        this.resumeMeta.Profile = this.psdTemplates[0];
-        this._myProfilesService.UploadCandidateProfile(this.resumeMeta)
-            .subscribe(
-            (results: ResponseFromAPI) => {
+        this.resumeMeta.Profile = File;
+        this._myProfilesService.upload(this.resumeMeta).then(
+            results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.getMyProfiles();
                     this.fileUploaded = false;
                     this.fileName = '';
-                    this.profile = new MyProfilesInfo();
+                    this.getMyProfiles();
                 } else {
-                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    this.toastr.error((<ResponseFromAPI>results).Message);
                 }
             },
             (error: any) => this.errorMessage = <any>error);
-    }
-
-    public uploadFile(fileInput: any) {
-        console.log(fileInput);
-        let FileList: FileList = fileInput.target.files;
-        this.psdTemplates.length = 0;
-        for (let i = 0, length = FileList.length; i < length; i++) {
-            this.psdTemplates.push(FileList.item(i));
-            this.fileUploaded = true;
-            this.fileName = FileList.item(i).name;
-            this.psdTemplates.Overwrite = false;
-        }
     }
 
     getCandidateStatuses() {
@@ -160,6 +171,7 @@ export class MyProfilesListComponent implements OnActivate {
         this.selectedStatus.Id = parseInt(statusId);
         this.selectedStatus.Value = null;
     }
+
     onUpdateStauts() {
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
@@ -262,30 +274,52 @@ export class MyProfilesListComponent implements OnActivate {
 
     }
 
-    postFile(inputValue: any): void {
-
+    uploadFile(inputValue: any): void {
         try {
-            console.log(inputValue);
             let FileList: FileList = inputValue.target.files;
             this.psdTemplates.length = 0;
             for (let i = 0, length = FileList.length; i < length; i++) {
                 this.psdTemplates.push(FileList.item(i));
                 this.fileUploaded = true;
                 this.fileName = FileList.item(i).name;
-                this.psdTemplates.Overwrite = false;
             }
-            this.psdTemplates.CandidateLookupId = '55';
-            var result = this._myProfilesService.upload('http://192.168.101.123:8001/api/ProfileBank/UploadCandidateProfile'
-                , this.psdTemplates);
-            console.log(result);
         } catch (error) {
             document.write(error);
         }
 
     }
 
+    postFile(inputValue: any): void {
+        try {
+            let FileList: FileList = inputValue.target.files;
+            this.resumeFiles.length = 0;
+            for (let i = 0, length = FileList.length; i < length; i++) {
+                this.resumeFiles.push(FileList.item(i));
+                this.resumeUploaded = true;
+                this.resumeName = FileList.item(i).name;
+            }
+        } catch (error) {
+            document.write(error);
+        }
 
+    }
+    onClickUploadResume(CandidateId: string) {
+        this.seletedCandidateIDForUpload = CandidateId;
+        var index = _.findIndex(this.myProfilesList, { CandidateID: this.seletedCandidateIDForUpload });
+        this.profile.Candidate = this.myProfilesList[index].Candidate;
+        if (this.isUploadPanelCollapsed === false)
+            this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
+    }
 
+    closeUploadPanel() {
+         this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
+    }
+    onSubmitUploadResume() {
+        this.uploadResume(this.seletedCandidateIDForUpload, this.resumeFiles[0]);
+          this.resumeFiles = new Array<File>();
+          this.resumeName = '';
+          this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
+    }
 }
 
 

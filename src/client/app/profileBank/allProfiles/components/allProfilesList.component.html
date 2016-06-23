@@ -117,7 +117,7 @@
                                                     <span></span>
                                                 </label>
                                             </td>
-                                            <td (click)='redirectToView(profile.CandidateID)'>
+                                            <td >
                                                 <tr>
                                                     <td style="float: left;">&nbsp; {{profile.Candidate}}</td>
                                                 </tr>
@@ -129,8 +129,8 @@
                                                 </tr>
 
                                             </td>
-                                            <td (click)='redirectToView(profile.CandidateID)'> {{profile.Tag}} </td>
-                                            <td (click)='redirectToView(profile.CandidateID)'>
+                                            <td > {{profile.Tag}} </td>
+                                            <td >
                                                 <tr>
                                                     <td style="float: left;">&nbsp; Notice Period : {{profile.CandidateOtherDetails.NoticePeriod}}</td>
                                                 </tr>
@@ -142,8 +142,8 @@
                                                 </tr>
 
                                             </td>
-                                            <td (click)='redirectToView(profile.CandidateID)'>
-                                                <span class="mt-action-dot {{profile.Status.Value}}"> </span>{{profile.Status.Value}}
+                                            <td>
+                                                <span class="mt-action-dot color{{profile.Status.Id}}"> </span>{{profile.Status.Value}}
                                             </td>
                                             <td class="text-center">
                                                 <a href="" download><i class="fa fa-download" aria-hidden="true"></i>{{profile.Resume_ID}}</a>
@@ -160,10 +160,17 @@
                                                              </button>
                                                             </li>
                                                         <li class="divider"> </li>
+                                                        
                                                         <li>
                                                              <button class="btn btn-default btnLink" [disabled]='getEditAccess(profile.Owner)' (click)='SaveCandidateID(profile.CandidateID)' >
                                                                   <i class="icon-flag"></i> Update Status </button>
                                                         </li>
+                                                         <li class="divider"> </li>
+                                                        <li>
+                                                            <a (click)='redirectToView(profile.CandidateID)'> 
+                                                                <i class="fa fa-search-plus"></i>View Profile</a>
+                                                        </li>
+                                                       
                                                     </ul>
                                                 </div>
                                             </td>

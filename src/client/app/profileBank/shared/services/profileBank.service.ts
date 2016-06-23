@@ -23,7 +23,7 @@ export class ProfileBankService {
     }
 
     updateOwnership(Ownership: TransferOwnershipMeta) {
-        let url = Config.GetURL('api/ProfileBank/updateOwnership');
+        let url = Config.GetURL('/api/ProfileBank/UpdateProfileOwner');
         this._spinnerService.show();
         return this.authHttp.post(url, { Ownership })
             .map(this.extractData)
@@ -34,7 +34,7 @@ export class ProfileBankService {
     getCandidateOwnwershipInfo(candidateIds: Array<string>) {
         let url = Config.GetURL('/api/ProfileBank/getCandidateOwnwershipInfo');
         this._spinnerService.show();
-        return this.authHttp.post(url, { Ids: candidateIds })
+        return this.authHttp.post(url, { CandidateIds: candidateIds })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

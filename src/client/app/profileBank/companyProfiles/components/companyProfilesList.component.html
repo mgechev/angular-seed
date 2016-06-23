@@ -26,18 +26,17 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="dt-buttons pull-right">
-                                        <button class="btn btn-md green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Mass Actions
+                                    <button class="btn btn-md green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Mass Actions
                                               <i class="fa fa-angle-down"></i>
                                    </button>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li   >
-                                            <button class="btn btn-default btnLink" (click)='openMailWindow()' [disabled]='!selectedRowCount' >
+                                        <li>
+                                            <button class="btn btn-default btnLink" (click)='openMailWindow()' [disabled]='!selectedRowCount'>
                                                 <i class="fa fa-envelope-o"></i>   Send Mails </button>
                                         </li>
                                         <li class="divider"> </li>
-                                        <li   >
-                                        <button class="btn btn-default btnLink" [disabled]='!selectedRowCount'
-                                        (click)='transferOwnerShipClick()'>
+                                        <li>
+                                            <button class="btn btn-default btnLink" [disabled]='!selectedRowCount' (click)='transferOwnerShipClick()'>
                                                 <i class="fa fa-share"></i>     Transfer Ownership
                                             </button>
                                         </li>
@@ -118,7 +117,7 @@
                                                     <span></span>
                                                 </label>
                                             </td>
-                                            <td (click)='redirectToView(profile.CandidateID)'>
+                                            <td>
                                                 <tr>
                                                     <td style="float: left;">&nbsp; {{profile.Candidate}}</td>
                                                 </tr>
@@ -130,8 +129,8 @@
                                                 </tr>
 
                                             </td>
-                                            <td (click)='redirectToView(profile.CandidateID)'> {{profile.Tag}} </td>
-                                            <td (click)='redirectToView(profile.CandidateID)'>
+                                            <td> {{profile.Tag}} </td>
+                                            <td>
                                                 <tr>
                                                     <td style="float: left;">&nbsp; Notice Period : {{profile.CandidateOtherDetails.NoticePeriod}}</td>
                                                 </tr>
@@ -143,12 +142,12 @@
                                                 </tr>
 
                                             </td>
-                                            <td (click)='redirectToView(profile.CandidateID)'>
-                                                <span class="mt-action-dot {{profile.Status.Value}}"> </span>{{profile.Status.Value}}
+                                            <td>
+                                                <span class="mt-action-dot color{{profile.Status.Id}}"> </span>{{profile.Status.Value}}
                                             </td>
                                             <td class="text-center">
-                                                <a href="" download><i class="fa fa-download" aria-hidden="true"></i>{{profile.Resume_ID}}</a> 
-                                                </td>
+                                                <a href="" download><i class="fa fa-download" aria-hidden="true"></i>{{profile.Resume_ID}}</a>
+                                            </td>
                                             <td>
                                                 <div class="btn-group">
                                                     <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
@@ -156,19 +155,20 @@
                                                         </button>
                                                     <ul class="dropdown-menu" role="menu">
                                                         <li>
-                                                            <a [routerLink]="['/App/ProfileBank/CompanyProfiles/Edit/'+profile.CandidateID]">
-                                                                <i class="icon-user"></i> Edit Profile </a>
+                                                            <button class="btn btn-default btnLink" [disabled]='getEditAccess(profile.Owner)' (click)='redirectToEditProfile(profile.CandidateID)'>
+                                                                 <i class="icon-user"></i> Edit Profile 
+                                                             </button>
                                                         </li>
                                                         <li class="divider"> </li>
                                                         <li>
-                                                            <a (click)='SaveCandidateID(profile.CandidateID)'>
-                                                                <i class="icon-flag"></i> Update Status
-                                                            </a>
+                                                            <button class="btn btn-default btnLink" [disabled]='getEditAccess(profile.Owner)' (click)='SaveCandidateID(profile.CandidateID)'>
+                                                                  <i class="icon-flag"></i> Update Status </button>
+
                                                         </li>
                                                         <li class="divider"> </li>
                                                         <li>
-                                                            <a>
-                                                                <i class="fa fa-share-square-o"></i> Assign RRF
+                                                            <a (click)='redirectToView(profile.CandidateID)'>
+                                                                <i class="fa fa-search"></i> View Profile
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -199,7 +199,7 @@
                                 </div>
                             </div>
                             <div>
-                            <!--<rms-grid [meta]="meta"></rms-grid>-->
+                                <!--<rms-grid [meta]="meta"></rms-grid>-->
                             </div>
                         </div>
                     </div>

@@ -11,45 +11,17 @@ export class MyProfilesService {
 
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
-    UploadCandidateProfile(resumeMeta: ResumeMeta) {
-        //let url = Config.GetURL('/api/ProfileBank/UploadCandidateProfile');
-        // this._spinnerService.show();
-        // return this.authHttp.post(url, { resumeMeta })
-        //     .map(this.extractData)
-        //     .catch(this.handleError)
-        //     .finally(() => this._spinnerService.hide());
+    public upload(resumeMeta: ResumeMeta) {
 
-
-        // console.log('files : '+body);
-        // let headers = new Headers();
-        // this.createAuthorizationHeader(headers);
-        // headers.append('server_type', '');
-        // headers.append('Content-Type', undefined);
-        // let options = new RequestOptions({ headers: headers });
-        // return this.http.post(url, resumeMeta, options)
-        //     .map(this.extractData)
-        //     .catch(this.handleError);
-
-        // let formData: FormData = new FormData(),
-        //     xhr: XMLHttpRequest = new XMLHttpRequest();
-
-        // formData.append('uploads[]', resumeMeta.Profile, resumeMeta.Profile.FileName);
-
-        // xhr.open('POST', url, true);
-        // xhr.send(formData);
-    }
-
-    public upload(url: string, files: File[]): Promise<any> {
+        let url = Config.GetURL('/api/ProfileBank/UploadCandidateProfile');
         return new Promise((resolve, reject) => {
             let formData: FormData = new FormData(),
                 xhr: XMLHttpRequest = new XMLHttpRequest();
 
-            for (let i = 0; i < files.length; i++) {
-                formData.append('Profile', files[i], files[i].name);
-                formData.append('CandidateLookupId', 54);
-                formData.append('Overwrite', false);
-            }
-            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            formData.append('Profile', resumeMeta.Profile, resumeMeta.Profile.name);
+            formData.append('CandidateID', resumeMeta.CandidateID);
+            formData.append('Overwrite', resumeMeta.Overwrite);
+
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
@@ -59,19 +31,13 @@ export class MyProfilesService {
                     }
                 }
             };
-            xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+
             xhr.open('POST', url, true);
+            xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
             xhr.send(formData);
         });
     }
 
-    createAuthorizationHeader(headers: Headers) {
-        if (localStorage.getItem('access_token') !== null) {
-            headers.append('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
-        }
-    }
-
-    //TODO : Chnge API URL to /api/ProfileBank/getMyProfiles
     getMyProfiles() {
         let url = Config.GetURL('/api/ProfileBank/getMyProfiles');
         this._spinnerService.show();

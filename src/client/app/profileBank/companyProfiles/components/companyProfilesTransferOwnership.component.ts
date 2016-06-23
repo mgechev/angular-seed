@@ -22,6 +22,7 @@ export class TransferOwnershipComponent implements OnActivate {
     errorMessage: string;
     candidateProfiles: Array<TransferOwnershipMeta>;
     OwnerTypes: Array<MasterData>;
+    ownerType = new MasterData();
     Recruiters: Array<MasterData>;
     TransferOwnership: TransferOwnershipMeta = new TransferOwnershipMeta();
     constructor(private _myProfilesDataSharedService: DataSharedService,
@@ -40,7 +41,8 @@ export class TransferOwnershipComponent implements OnActivate {
 
         this._profileBankService.getCandidateOwnwershipInfo(this.CheckedCandidateIds)
             .subscribe(
-            results => {
+            (results : TransferOwnershipMeta)=> {
+                results.OwnerType = new MasterData();
                 this.candidateProfiles = <any>results;
             },
             error => this.errorMessage = <any>error);
@@ -88,5 +90,14 @@ export class TransferOwnershipComponent implements OnActivate {
         } else {
             this.toastr.error('No Candidate Selected');
         }
+    }
+
+    onSelectOwnerType(id :string) {
+        this.TransferOwnership.OwnerType.Id = parseInt(id);
+        this.TransferOwnership.OwnerType.Value = null;
+    }
+     onSelectOwner(id :string) {
+        this.TransferOwnership.Owner.Id = parseInt(id);
+        this.TransferOwnership.Owner.Value = null;
     }
 }

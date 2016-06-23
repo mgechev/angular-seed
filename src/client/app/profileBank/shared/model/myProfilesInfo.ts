@@ -59,6 +59,7 @@ export class MyProfilesInfo {
   //for Edit access
   public isAuthourized: boolean;
   public Owner: MasterData = new MasterData();
+  public GrdOperations = new GridOperations();
 }
 
 export class TeamManagement {
@@ -142,8 +143,8 @@ export class OtherDetails {
 
 }
 export class ResumeMeta {
-  public Profile: any;
-  public CandidateLookupId: string;
+  public Profile: File;
+  public CandidateID: string;
   public Overwrite: boolean;
 }
 
@@ -152,16 +153,24 @@ export class AddCandidateResponse {
   public Message: '';
   public ReasonCode: string;
   public ErrorMsg: string;
-  public CandidateLookupId: string;
+  public CandidateID: string;
 }
 export class TransferOwnershipMeta {
   public CandidateID: string;
   public OwnerType = new MasterData();
   public CurrentOwner = new MasterData();
   public OwnershipComments: string;
-  public Candidate: string;
+  public CandidateName: string;
   public CandidateIds: Array<string> = new Array<string>();
   public Owner = new MasterData();
+}
+
+export class GridOperations {
+    public TotalItems: string;
+  public ItemPerPage: string;
+  public OrderBy: string;
+  public OrderColumn: string;
+  public CurrentPage:string;
 }
 
 

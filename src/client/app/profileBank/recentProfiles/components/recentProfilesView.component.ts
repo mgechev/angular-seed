@@ -14,6 +14,8 @@ export class RecentProfilesViewComponent implements OnActivate {
     params: string;
     errorMessage: string;
     profile: MyProfilesInfo;
+    count: number = 0;
+
     constructor(private _profileBankService: ProfileBankService,
         private _router: Router) {
         this.profile = new MyProfilesInfo();
@@ -23,8 +25,9 @@ export class RecentProfilesViewComponent implements OnActivate {
         if (this.params) {
             this._profileBankService.getCandidateProfile(this.params)
                 .subscribe(
-                results => {
-                    this.profile = <any>results;
+                (results: MyProfilesInfo) => {
+                    this.profile = results;
+                    this.count = results.CandidateQualification.length;
                 },
                 error => this.errorMessage = <any>error);
         }

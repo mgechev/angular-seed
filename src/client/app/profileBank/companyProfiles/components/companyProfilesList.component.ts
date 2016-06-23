@@ -28,7 +28,9 @@ export class CompanyProfilesListComponent implements OnActivate {
     currentStatus: number;
     errorMessage: string;
     currentCandidate: string;
-
+    currentUser: MasterData = new MasterData();
+    selectedRowCount: number = 0;
+    allChecked: boolean = false;
 
     public isCollapsed: boolean = false;
     constructor(private _companyProfilesService: CompanyProfilesService,
@@ -41,14 +43,28 @@ export class CompanyProfilesListComponent implements OnActivate {
     }
 
     routerOnActivate() {
+        this.getLoggedInUser();
         this.getcompanyProfiles();
         this.getCandidateStatuses();
     }
+
+    getLoggedInUser() {
+        this._profileBankService.getCurrentLoggedInUser()
+            .subscribe(
+            (results: MasterData) => {
+                this.currentUser = results;
+            },
+            error => this.errorMessage = <any>error);
+
+    }
+
     getcompanyProfiles() {
         this._companyProfilesService.getCompanyProfiles()
             .subscribe(
-            results => {
-                this.companyProfilesList = <any>results;
+            (results: any) => {
+                if (results.length !== undefined) {
+                    this.companyProfilesList = results;
+                }
             },
             error => {
                 this.errorMessage = <any>error;
@@ -57,7 +73,10 @@ export class CompanyProfilesListComponent implements OnActivate {
     redirectToView(CandidateID: number) {
         this._router.navigate(['/App/ProfileBank/companyProfiles/View/' + CandidateID]);
     }
+    redirectToEditProfile(CandidateID: string) {
+        this._router.navigate(['/App/ProfileBank/companyProfiles/Edit/' + CandidateID]);
 
+    }
     SaveCandidateID(id: string) {
         this.seletedCandidateID = id;
         var index = _.findIndex(this.companyProfilesList, { CandidateID: this.seletedCandidateID });
@@ -101,6 +120,35 @@ export class CompanyProfilesListComponent implements OnActivate {
     closeUpdatePanel() {
         this.isCollapsed = false;
     }
+    onStateChange(e: any): void {
+        if (e.target.checked) {
+            this.selectedRowCount++;
+        } else {
+            this.selectedRowCount--;
+        }
+
+        if (this.selectedRowCount === this.companyProfilesList.length) {
+            this.allChecked = true;
+        } else {
+            this.allChecked = false;
+        }
+    }
+
+    onAllSelect(e: any): void {
+        var state: boolean;
+        if (e.target.checked) {
+            state = true;
+            this.selectedRowCount = this.companyProfilesList.length;
+        } else {
+            state = false;
+            this.selectedRowCount = 0;
+        }
+
+        for (var index = 0; index < this.companyProfilesList.length; index++) {
+            this.companyProfilesList[index].IsChecked = state;
+        }
+    }
+
 
     transferOwnerShipClick() {
         let checkedItemIds: Array<string> = new Array<string>();
@@ -111,5 +159,17 @@ export class CompanyProfilesListComponent implements OnActivate {
         }
         this._dataSharedService.setCheckedItems(checkedItemIds);
         this._router.navigate(['/App/ProfileBank/CompanyProfiles/Transfer/']);
+    }
+
+    getEditAccess(Owner: MasterData) {
+        try {
+            if (Owner.Id === 0) { return false; }
+            if (Owner.Id === this.currentUser.Id) {
+                return false;
+            } else { return true; }
+        } catch (error) {
+            this.toastr.error(error);
+            return true;
+        }
     }
 }

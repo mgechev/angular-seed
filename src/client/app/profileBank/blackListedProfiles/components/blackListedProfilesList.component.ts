@@ -23,7 +23,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
     profile: MyProfilesInfo;
     statusList: Array<MasterData>;
     seletedCandidateID: string;
-    selectedStatus= new MasterData();
+    selectedStatus = new MasterData();
     Comments: string;
     currentStatus: number;
     errorMessage: string;
@@ -59,8 +59,11 @@ export class BlackListedProfilesListComponent implements OnActivate {
     getBlacklistedProfiles() {
         this._blacklistedProfilesService.getBlackListedProfiles()
             .subscribe(
-            (results : Array<MyProfilesInfo>)=> {
-                this.blacklistedProfilesList = results;
+            (results: Array<MyProfilesInfo>) => {
+                if (results.length !== undefined) {
+
+                    this.blacklistedProfilesList = results;
+                }
             },
             error => {
                 this.errorMessage = <any>error;
@@ -95,7 +98,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
             });
     }
 
-   onSelectStatus(statusId: string) {
+    onSelectStatus(statusId: string) {
         this.selectedStatus.Id = parseInt(statusId);
         this.selectedStatus.Value = null;
     }
@@ -123,7 +126,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
 
     getEditAccess(Owner: MasterData) {
         try {
-            if(Owner.Id === 0) { return false; }
+            if (Owner.Id === 0) { return false; }
             if (Owner.Id === this.currentUser.Id) {
                 return false;
             } else { return true; }

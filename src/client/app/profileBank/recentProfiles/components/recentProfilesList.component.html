@@ -99,7 +99,7 @@
                                     </thead>
                                     <tbody>
                                         <tr class="gradeX odd" *ngFor="let recentProfile of recentProfilesList; let index = index">
-                                            <td (click)='redirectToView(recentProfile.CandidateID)'>
+                                            <td >
                                                 <tr>
                                                     <td style="float: left;">&nbsp; {{recentProfile.Candidate}}</td>
                                                 </tr>
@@ -110,8 +110,8 @@
                                                     <td style="float: left;">&nbsp; {{recentProfile.PrimaryContact}}</td>
                                                 </tr>
                                             </td>
-                                            <td (click)='redirectToView(recentProfile.CandidateID)'> {{recentProfile.Tag}} </td>
-                                            <td (click)='redirectToView(recentProfile.CandidateID)'>
+                                            <td > {{recentProfile.Tag}} </td>
+                                            <td >
                                                 <tr>
                                                     <td style="float: left;">&nbsp; Notice Period : {{recentProfile.CandidateOtherDetails.NoticePeriod}}</td>
                                                 </tr>
@@ -122,8 +122,8 @@
                                                     <td style="float: left;">&nbsp; Expected Salary : {{recentProfile.CandidateSalaryDetails.ExpectedSalary}}</td>
                                                 </tr>
                                             </td>
-                                            <td (click)='redirectToView(recentProfile.CandidateID)'>
-                                                <span class="mt-action-dot {{recentProfile.Status.Value}}"> </span>{{recentProfile.Status.Value}}
+                                            <td >
+                                                <span class="mt-action-dot color{{recentProfile.Status.Id}}"> </span>{{recentProfile.Status.Value}}
                                             </td>
 
                                             <td class="text-center"><i class="fa fa-download" aria-hidden="true"></i>{{recentProfile.Resume_ID}}
@@ -144,6 +144,12 @@
                                                              <button class="btn btn-default btnLink" [disabled]='getEditAccess(profile.Owner)' (click)='SaveCandidateID(profile.CandidateID)' >
                                                                   <i class="icon-flag"></i> Update Status </button>
                                                         </li>
+                                                        <li class="divider"> </li>
+                                                    <li>
+                                                        <a  >
+                                                            <i class="fa fa-search"></i> View RRF
+                                                        </a>
+                                                    </li>
                                                     </ul>
                                                 </div>
                                             </td>
