@@ -37,7 +37,7 @@ function deleteAndWalk(path: any) {
     rimraf.sync(join(path, '*.js'));
     util.log('Deleted', util.colors.yellow(`${path}/*.js`));
   } catch (e) {
-    util.log('Error while deleting', chalk.yellow(`${path}/*.js`), e);
+    util.log('Error while deleting', util.colors.yellow(`${path}/*.js`), e);
   }
   walk(path);
 }
