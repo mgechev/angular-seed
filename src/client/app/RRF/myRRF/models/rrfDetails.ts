@@ -3,7 +3,7 @@ import { MasterData  } from '../../../shared/model/common.model';
 export class Panel {
     public RoundNumber: MasterData = new MasterData(); //TODO : check on server side name
     public Interviewers: MasterData[] = new Array();
-    public Comments: string;
+   // public Comments: string; //As per requirement
 }
 
 export class AssignmentDetails {
@@ -40,13 +40,13 @@ export class RRFDetails {
     public PositionTitle: string;
     public Description: string;
     public NoOfOpenings: number = 1;
-    public SkillsRequired: MasterData[] = new Array();
+    public SkillsRequired= new Array<MasterData>();
     public Designation: MasterData = new MasterData();
     public MinExp: number = 0;
     public MaxExp: number = 0;
     public Priority: MasterData = new MasterData();
     public ExpDateOfJoining: Date;
-    public RaisedBy: string;
+    public RaisedBy: MasterData = new MasterData();
     public Status: MasterData = new MasterData();
     public Panel: Panel[] = new Array();
 

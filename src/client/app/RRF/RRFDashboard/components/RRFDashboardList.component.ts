@@ -68,6 +68,7 @@ export class RRFDashboardListComponent implements OnActivate {
                 this.rrfList = <any>results;
             },
             error => this.errorMessage = <any>error);
+        var temObject = this.rrfList;
     }
 
     getMyRRF() {
@@ -100,14 +101,15 @@ export class RRFDashboardListComponent implements OnActivate {
     getRRFDetails(rrfID: string) {
         this._myRRFService.getRRFDetails(rrfID)
             .subscribe(
-            results => {
-                this.selectedRRF = <any>results;
+            (results: RRFDetails) => {
+                this.selectedRRF = results;
             },
             error => this.errorMessage = <any>error);
     }
 
     showRRFDetails(rrfId: string) {
         this.getRRFDetails(rrfId);
+        console.log(this.selectedRRF);
         this.isListVisible = false;
     }
 

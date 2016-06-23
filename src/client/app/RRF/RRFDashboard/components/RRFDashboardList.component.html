@@ -131,7 +131,7 @@
                                         <!--remove hard code data-->
                                         <td>
                                             <div align="left">
-                                                {{rrf.RaisedBy }}
+                                                {{rrf.RaisedBy.Value }}
                                                 <br> {{rrf.CreatedDate}}
                                             </div>
                                         </td>
@@ -241,7 +241,7 @@
                                     <div class="timeline-body-arrow"> </div>
                                     <div class="timeline-body-head">
                                         <div class="timeline-body-head-caption">
-                                            <label href="javascript:;" class="timeline-body-title font-blue-madison">{{selectedRRF.RaisedBy}}</label>
+                                            <label href="javascript:;" class="timeline-body-title font-blue-madison">{{selectedRRF.RaisedBy.Value}}</label>
                                             <span class="timeline-body-time font-grey-cascade">Raised on : {{selectedRRF.CreatedDate}} </span>
                                         </div>
 
@@ -289,13 +289,13 @@
                                                     <div class="col-md-5">Skills Required</div>
                                                     <div class="col-md-1" style="align:right">:</div>
                                                     <div class="col-md-6" id="lblSkillsReq">
-                                                        <label *ngFor="let skill of selectedRRF.SkillsRequired">{{skill.Value}} &#44;&nbsp;</label>
+                                                        <div *ngFor="let skill of selectedRRF.SkillsRequired">{{skill.Value}} </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-5">Designation</div>
                                                     <div class="col-md-1" style="align:right">:</div>
-                                                    <div class="col-md-6" id="lblDesignation">{{selectedRRF.Designation.VAlue}}</div>
+                                                    <div class="col-md-6" id="lblDesignation">{{selectedRRF.Designation.Value}}</div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-5">Minimum Exp</div>
@@ -333,7 +333,10 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr class="odd gradeX" *ngFor='let panel of selectedRRF.Panel'>
-                                                                        <td> {{panel.RoundNumber.Value}}</td>
+                                                                        <td> 
+                                                                            {{panel.RoundNumber.Value}}
+
+                                                                        </td>
                                                                         <td>
                                                                             <div *ngFor='let interviewer of panel.Interviewers'>
                                                                                 {{interviewer.Value}}

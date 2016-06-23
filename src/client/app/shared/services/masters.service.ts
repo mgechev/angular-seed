@@ -18,7 +18,7 @@ export class MastersService {
     }
 
     getPractices() {
-        let url = Config.GetURL('api/Masters/GetPractices');
+        let url = Config.GetURL('/api/Masters/GetPractices');
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);
@@ -32,7 +32,7 @@ export class MastersService {
     }
 
     getRoles() {
-        let url = Config.GetURL('api/Role/GetRoles');
+        let url = Config.GetURL('/api/Role/GetRoles');
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);
@@ -46,7 +46,7 @@ export class MastersService {
     }
 
     getTechnologies() {
-        let url = Config.GetURL('api/Masters/GetTechnologies');
+        let url = Config.GetURL('/api/Masters/GetTechnologies');
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);
@@ -120,8 +120,15 @@ export class MastersService {
             .map(this.extractData)
             .catch(this.handleError);
     }
+
+    GetPriority() {
+        let url = Config.GetURL('/api/Masters/GetPriority');
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
     GetVisaType() {
-         let url = Config.GetURL('/api/Masters/GetVisaTypes');
+        let url = Config.GetURL('/api/Masters/GetVisaTypes');
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);

@@ -46,7 +46,7 @@
                                 <i class="fa"></i>
 
                                 <input type="text" [(ngModel)]='newRRF.PositionTitle' [disabled]="!isNewRRF" id="txtPositionTitle" class="form-control" placeholder="Position Title"
-                                autocomplete="off" /> </div>
+                                    autocomplete="off" /> </div>
                         </div>
                     </div>
                     <div class="row">
@@ -77,7 +77,11 @@
                                     </div>
                                     <div>
                                         <!--<input id="txtPriority" [(ngModel)]='newRRF.Priority.Id' type="text" value="" name="demo_vertical" />-->
-                                        <input type="number" [(ngModel)]='newRRF.Priority.Id' id="txtPriority" min="0">
+                                        <!--<input type="number" [(ngModel)]='newRRF.Priority.Id' id="txtPriority" min="0">-->
+                                        <select id="cmbPriority" class="form-control" [(ngModel)]='newRRF.Priority.Id' [disabled]="!isNewRRF">
+                                            <option value="0" disabled>Select Priority </option>
+                                            <option *ngFor="let priority of priorities" [value]="priority.Id">{{priority.Value}}</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -85,7 +89,20 @@
                         </div>
                         <div class="form-group col-lg-4">
                             <label>Skills Required<span class="required"> * </span></label>
-
+                            <multiple-demo></multiple-demo>
+                            <!--<Testing for Mulitiple dropdown>-->
+                            <!--<div style="input-group select2-bootstrap-append ">
+                                <h3>Select multiple cities</h3>
+                                <ng-select id="cmbSkillsReq" [data]="value" [multiple]="true" [items]="items" [disabled]="!isNewRRF" (data)="refreshValue($event)" (selected)="selected($event)"
+                                    (removed)="removed($event)" placeholder="No skills selected"></ng-select>
+                                <pre>{{itemsToString(value)}}</pre>
+                                <div>
+                                    <button type="button" class="btn btn-primary" [(ngModel)]="disabledV" btnCheckbox btnCheckboxTrue="1" btnCheckboxFalse="0">
+                                        {{disabled === '1' ? 'Enable' : 'Disable'}}
+                                    </button>
+                                </div>
+                            </div>-->
+                            <!--</Testing for Mulitiple dropdown>-->
 
                             <div class="input-group select2-bootstrap-append ">
                                 <select id="cmbSkillsReq" class="form-control " multiple [disabled]="!isNewRRF">
@@ -98,6 +115,7 @@
                                 </button>
                                 </span>
                             </div>
+
                         </div>
                     </div>
 
@@ -136,7 +154,7 @@
                         <div class="form-group col-lg-12">
                             <label>Description<span class="required"> * </span></label>
                             <textarea class="form-control" [(ngModel)]='newRRF.Description' [disabled]="!isNewRRF" id="txtDescription" rows="2" placeholder="Description"
-                            style="resize:vertical"></textarea>
+                                style="resize:vertical"></textarea>
                             <!--<input type="text" [(ngModel)]='newRRF.Description' id="txtDescription" class="form-control" placeholder="Description"
                                 />-->
                         </div>

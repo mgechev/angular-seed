@@ -8,11 +8,17 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult, RRFPriority } from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
 
+
+//MultipleDrodown
+import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass} from '@angular/common';
+import {BUTTON_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
+
+
 @Component({
     moduleId: module.id,
     selector: 'rrf-myrrf-add',
     templateUrl: 'myRRFAdd.component.html',
-    directives: [ROUTER_DIRECTIVES, SELECT_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, SELECT_DIRECTIVES, NgClass, CORE_DIRECTIVES, FORM_DIRECTIVES, BUTTON_DIRECTIVES],
     providers: [ToastsManager]
 })
 
@@ -29,7 +35,7 @@ export class MyRRFAddComponent implements OnActivate {
     isNewRRF: boolean = true; //TODO
     comment: string;
     IntwRound: number = 0;
-
+    priorities: MasterData[];
     updatePanel: boolean = false;
     editPanelData: Panel = new Panel();
     RRFId: string;
@@ -45,6 +51,7 @@ export class MyRRFAddComponent implements OnActivate {
         this.getSkills();
         this.getInterviewRound();
         this.getInterviewers();
+        this.GetPriority();
     }
 
     routerOnActivate(segment: RouteSegment): void {
@@ -77,7 +84,7 @@ export class MyRRFAddComponent implements OnActivate {
             this.newRRF.Practice.Id = 0;
             this.newRRF.Technology.Id = 0;
             //this.newRRF.SkillsRequired.Id = 0;
-            this.newRRF.Priority.Id = RRFPriority.One;
+            this.newRRF.Priority.Id = 0;
             this.newRRF.Designation.Id = 0;
             $('#cmbInterviewer').val = ['0'];
         }
@@ -93,11 +100,11 @@ export class MyRRFAddComponent implements OnActivate {
         this._myRRFService.raiseRRF(this.newRRF)
             .subscribe(
             results => {
-                if (+ (<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                if ( (<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message, 'Success!');
                     this._router.navigate(['/App/RRF/RRFDashboard/']);
                 } else {
-                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    this.toastr.error((<ResponseFromAPI>results).Message);
                 }
             },
             error => this.errorMessage = <any>error);
@@ -112,6 +119,15 @@ export class MyRRFAddComponent implements OnActivate {
             .subscribe(
             results => {
                 this.designations = results;
+            },
+            error => this.errorMessage = <any>error);
+    }
+
+    GetPriority(): void {
+        this._mastersService.GetPriority()
+            .subscribe(
+            results => {
+                this.priorities = results;
             },
             error => this.errorMessage = <any>error);
     }
@@ -170,7 +186,7 @@ export class MyRRFAddComponent implements OnActivate {
         }
 
         var panel: Panel = new Panel();
-        panel.Comments = this.comment;
+        //panel.Comments = this.comment; //As per request from Backend
         panel.RoundNumber = this.getStringValue(this.IntwRound, this.interviewRound);
 
         if ($('#cmbInterviewer').val() !== null) {

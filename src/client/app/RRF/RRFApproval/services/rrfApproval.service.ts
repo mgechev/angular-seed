@@ -20,7 +20,7 @@ export class RRFApprovalService {
             .finally(() => this._spinnerService.hide());
     }
 
-    ActionOnRaisedRRF(rrfID: number, status: number, comment: string) {
+    ActionOnRaisedRRF(rrfID: string, status: number, comment: string) {
         let url = Config.GetURL('/api/RRF/ActionOnRaisedRRF');
         this._spinnerService.show();
         return this.authHttp.post(url, { RRFID: rrfID, Status: status, Comments: comment })

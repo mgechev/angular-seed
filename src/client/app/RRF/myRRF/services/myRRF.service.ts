@@ -25,9 +25,9 @@ export class MyRRFService {
 
     //Get details of RRF from RRFID
     getRRFDetails(rrfId: string) {
-        let url = Config.GetURL('/api/RRF/ViewRRF');
+        let url = Config.GetURL('/api/RRF/ViewRRF?RRFID='+rrfId);
         this._spinnerService.show();
-        return this.authHttp.post(url, { RRFID: rrfId })
+        return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
@@ -44,9 +44,9 @@ export class MyRRFService {
     }
 
     getRRFByID(rrfId: string) {
-        let url = Config.GetURL('/api/RRF/GetRRFByID');
+        let url = Config.GetURL('/api/RRF/GetRRFByID?RRFID='+rrfId);
         this._spinnerService.show();
-        return this.authHttp.post(url, { RRFID: rrfId })
+        return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

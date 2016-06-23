@@ -22,7 +22,7 @@ export class MyRRFListComponent implements OnActivate {
 
     routerOnActivate() {
         this.getRaisedRRF('admin', 1);
-        this.getRRFDetails(1);
+        this.getRRFDetails('1');
 
         //Displayed complete % graph
         // $('.knob').knob();
@@ -39,7 +39,7 @@ export class MyRRFListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    getRRFDetails(rrfID: number) {
+    getRRFDetails(rrfID: string) {
         this._myRRFService.getRRFDetails(rrfID)
             .subscribe(
             results => {

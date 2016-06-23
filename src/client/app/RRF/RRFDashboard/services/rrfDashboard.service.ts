@@ -30,7 +30,7 @@ export class RRFDashboardService {
     }
 
     getAssignedRRFDeatils(rrfId: number) {
-        let url = Config.GetURL('/api/RRF/GetAssignedRRFDeatils');
+        let url = Config.GetURL('/api/RRF/GetAssignedRRFDetails');
         this._spinnerService.show();
         return this.authHttp.post(url, { RRFID: rrfId })
             .map(this.extractData)
@@ -39,7 +39,7 @@ export class RRFDashboardService {
     }
 
     saveRRFAssignmentDeatils(rrfId: string, assignedTo: number[], comment: string) {
-        let url = Config.GetURL(' /api/RRF/SaveRRFAssignmentDeatils');
+        let url = Config.GetURL('/api/RRF/SaveRRFAssignmentDetails');
         this._spinnerService.show();
         return this.authHttp.post(url, { RRFID: rrfId, AssignedTo: assignedTo, AssignedComments: comment })
             .map(this.extractData)
@@ -48,7 +48,7 @@ export class RRFDashboardService {
     }
 
     unassignRRF(rrfId: string, assignedTo: number, comment: string) {
-        let url = Config.GetURL(' /api/RRF/UnassignRRF');
+        let url = Config.GetURL('/api/RRF/UnassignRRF');
         this._spinnerService.show();
         return this.authHttp.post(url, { RRFID: rrfId, AssignedTo: assignedTo, UnassigningComment: comment })
             .map(this.extractData)

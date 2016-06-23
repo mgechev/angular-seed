@@ -1,0 +1,19 @@
+<div style="width: 300px; margin-bottom: 20px;">
+  <h3>Select multiple cities</h3>
+  <ng-select [data]="value"
+              [multiple]="true"
+              [items]="items"
+              [disabled]="disabled"
+              (data)="refreshValue($event)"
+              (selected)="selected($event)"
+              (removed)="removed($event)"
+              placeholder="No city selected"></ng-select>
+  <pre>{{itemsToString(value)}}</pre>
+  <div>
+    <button type="button" class="btn btn-primary"
+            [(ngModel)]="disabledV" btnCheckbox
+            btnCheckboxTrue="1" btnCheckboxFalse="0">
+      {{disabled === '1' ? 'Enable' : 'Disable'}}
+    </button>
+  </div>
+</div>

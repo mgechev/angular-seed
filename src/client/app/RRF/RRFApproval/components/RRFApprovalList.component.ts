@@ -89,22 +89,24 @@ export class RRFApprovalListComponent implements OnActivate {
     }
 
     onStatusChange(status: string): void {
+        var _selectedRrfDetailsList = new Array<RRFDetails>();
         for (var index = 0; index < this.rrfApprovalList.length; index++) {
             if (this.rrfApprovalList[index].IsChecked) {
                 this.rrfApprovalList[index].Status.Value = status;
                 this.rrfApprovalList[index].IsChecked = false;
                 this.rrfApprovalList[index].Comment = this.comment;
-
+               
                 //TODO : status value
                 this.ActionOnRaisedRRF(this.rrfApprovalList[index].RRFID, 1, this.comment);
             }
+
             this.comment = '';
             this.selectedRowCount = 0;
         }
         this.allChecked = false;
     }
 
-    ActionOnRaisedRRF(rrfID: number,
+    ActionOnRaisedRRF(rrfID: string,
         status: number,
         comment: string): void {
         this._rrfApprovalService.ActionOnRaisedRRF(rrfID, status, comment)
@@ -113,7 +115,7 @@ export class RRFApprovalListComponent implements OnActivate {
                 if (+ (<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message, 'Success!');
                 } else {
-                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    this.toastr.error((<ResponseFromAPI>results).Message);
                 }
             },
             error => this.errorMessage = <any>error);
