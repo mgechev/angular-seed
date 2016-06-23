@@ -85,6 +85,18 @@ Configure at runtime
 npm start -- --port 8080 --reload-port 4000 --base /my-app/
 ```
 
+## Environment configuration
+
+If you have different environments and you need to configure them to use different end points, settings, etc. you can use the `./tools/env/config.json` file. The keys in the file are the different environments.
+
+The can be specified by using:
+
+```bash
+npm start -- --config-env ENV_NAME
+```
+
+Currently the `ENV_NAME`s are `dev`, `prod`, `staging`, but you can simply add different key-value pairs to the `config.json` file in order to alter extra such environments.
+
 # Tools documentation
 
 A documentation of the provided tools can be found in [tools/README.md](tools/README.md).

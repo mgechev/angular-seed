@@ -76,7 +76,7 @@ export class SeedConfig {
    * The base path of node modules.
    * @type {string}
    */
-  NPM_BASE = join(this.APP_BASE, '/node_modules/');
+  NPM_BASE = join(this.APP_BASE, 'node_modules/');
 
   /**
    * The flag to include templates into JS app prod file.
@@ -420,7 +420,9 @@ export class SeedConfig {
           [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST
         }
       }
-    }
+    },
+    // Note: you can customize the location of the file
+    'environment-config': require('../env/config.json')
   };
 
   /**
