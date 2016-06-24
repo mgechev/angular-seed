@@ -7,7 +7,7 @@ import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult, RRFPriority } from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
-
+import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 
 //MultipleDrodown
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass} from '@angular/common';
@@ -18,7 +18,7 @@ import {BUTTON_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
     moduleId: module.id,
     selector: 'rrf-myrrf-add',
     templateUrl: 'myRRFAdd.component.html',
-    directives: [ROUTER_DIRECTIVES, SELECT_DIRECTIVES, NgClass, CORE_DIRECTIVES, FORM_DIRECTIVES, BUTTON_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, SELECT_DIRECTIVES, NgClass, CORE_DIRECTIVES, FORM_DIRECTIVES, BUTTON_DIRECTIVES,TOOLTIP_DIRECTIVES],
     providers: [ToastsManager]
 })
 

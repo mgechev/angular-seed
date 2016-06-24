@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
+import { MasterData  } from '../../../shared/model/common.model';
 
 @Injectable()
 
@@ -38,7 +39,7 @@ export class RRFDashboardService {
             .finally(() => this._spinnerService.hide());
     }
 
-    saveRRFAssignmentDeatils(rrfId: string, assignedTo: number[], comment: string) {
+    saveRRFAssignmentDeatils(rrfId: string, assignedTo: MasterData[], comment: string) {
         let url = Config.GetURL('/api/RRF/SaveRRFAssignmentDetails');
         this._spinnerService.show();
         return this.authHttp.post(url, { RRFID: rrfId, AssignedTo: assignedTo, AssignedComments: comment })

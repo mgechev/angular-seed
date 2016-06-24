@@ -7,7 +7,7 @@ import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import { MastersService } from '../../../shared/services/masters.service';
 import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult ,RRFAssignStatus } from  '../../../shared/constantValue/index';
+import { APIResult, RRFAssignStatus } from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
 
 
@@ -30,7 +30,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
     UnAssignRec: AssignmentDetails = new AssignmentDetails();
     unAssignedComments: string = '';
     public currentDate: Date = new Date();
-    AssignStatus : RRFAssignStatus = RRFAssignStatus;
+    AssignStatus: RRFAssignStatus = RRFAssignStatus;
 
     constructor(private _myRRFService: MyRRFService,
         private _rrfDashboardService: RRFDashboardService,
@@ -82,7 +82,17 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
             return;
         }
         var selectedRec: number[] = $('#cmbAssignTo').val();
-        this._rrfDashboardService.saveRRFAssignmentDeatils(this.RRFId, selectedRec, this.AssignedComments)
+        // Creating array of selected Assignee
+        var selectedRRFidsList: Array<MasterData> = new Array<MasterData>();
+        for (var index = 0; index < selectedRec.length; index++) {
+            var selectedRRF: MasterData = new MasterData();
+            selectedRRF.Id = selectedRec[index];
+            selectedRRF.Value = "";
+            selectedRRFidsList.push(selectedRRF);
+        }
+        
+        this._rrfDashboardService.saveRRFAssignmentDeatils(this.RRFId, selectedRRFidsList, this.AssignedComments)
+        //this._rrfDashboardService.saveRRFAssignmentDeatils(this.RRFId, selectedRec, this.AssignedComments)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -105,7 +115,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
     onUnAssignCancel(): void {
         this.unAssignRowVisible = false;
         this.UnAssignRec = new AssignmentDetails();
-        setTimeout(function() {
+        setTimeout(function () {
             $('#cmbAssignTo').select2();
         }, 20);
 
@@ -122,7 +132,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
                     this.unAssignedComments = '';
                     $('#cmbAssignTo').select2();
                     this.getRRFDetails(this.RRFId); //TODO
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $('#cmbAssignTo').select2();
                     }, 20);
                 } else {

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { RRFDetails} from '../../myRRF/models/rrfDetails';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
@@ -24,6 +25,15 @@ export class RRFApprovalService {
         let url = Config.GetURL('/api/RRF/ActionOnRaisedRRF');
         this._spinnerService.show();
         return this.authHttp.post(url, { RRFID: rrfID, Status: status, Comments: comment })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    //Comment:: Changed to Raised RRF Bulk approval service
+    ActionOnRaisedBulk(selectedRRFList: RRFDetails[]) {
+        let url = Config.GetURL('/api/RRF/ActionOnRaisedRRF');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { selectedRRFList })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

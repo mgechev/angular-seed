@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
-import { RRFDetails} from '../../myRRF/models/rrfDetails';
+import { RRFDetails, RRFApproval} from '../../myRRF/models/rrfDetails';
 import { RRFApprovalService } from '../services/rrfApproval.service';
 import { RRFStatus } from  '../../../shared/constantValue/index';
 import { APIResult } from  '../../../shared/constantValue/index';
@@ -95,17 +95,43 @@ export class RRFApprovalListComponent implements OnActivate {
                 this.rrfApprovalList[index].Status.Value = status;
                 this.rrfApprovalList[index].IsChecked = false;
                 this.rrfApprovalList[index].Comment = this.comment;
-               
-                //TODO : status value
-                this.ActionOnRaisedRRF(this.rrfApprovalList[index].RRFID, 1, this.comment);
-            }
 
-            this.comment = '';
+                //:: Create object of RRF details and send object to api
+                var _rrfDetails: RRFDetails = new RRFDetails();
+                _rrfDetails.RRFID = this.rrfApprovalList[index].RRFID;
+                //:: Created Approval list object
+                var _rrfApprovalList: RRFApproval = new RRFApproval();
+                _rrfApprovalList.Status = status;
+                _rrfApprovalList.Comments = this.comment;
+                //:: Adding Prepared object in array list
+                _rrfDetails.RRFApproval.push(_rrfApprovalList);
+                _selectedRrfDetailsList.push(_rrfDetails);
+                //Removed:: Added bulk approval service call
+                //this.ActionOnRaisedRRF(this.rrfApprovalList[index].RRFID, 1, this.comment);
+            }
+            //this.rrfApprovalList 
             this.selectedRowCount = 0;
         }
+        console.log(_selectedRrfDetailsList);
+        //:: Because required bulk approval service call
+        this.ActionOnRaisedRRFBulk(_selectedRrfDetailsList);
+        this.comment = '';
         this.allChecked = false;
     }
-
+    //Raised RRF Bulk approval service call
+    ActionOnRaisedRRFBulk(_selectedRrfList: RRFDetails[]): void {
+        this._rrfApprovalService.ActionOnRaisedBulk(_selectedRrfList)
+            .subscribe(
+            results => {
+                if (+ (<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message, 'Success!');
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
+            },
+            error => this.errorMessage = <any>error);
+    }
+    //Raised RRF single approval service call
     ActionOnRaisedRRF(rrfID: string,
         status: number,
         comment: string): void {

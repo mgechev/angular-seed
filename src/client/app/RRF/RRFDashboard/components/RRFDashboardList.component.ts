@@ -68,7 +68,6 @@ export class RRFDashboardListComponent implements OnActivate {
                 this.rrfList = <any>results;
             },
             error => this.errorMessage = <any>error);
-        var temObject = this.rrfList;
     }
 
     getMyRRF() {
