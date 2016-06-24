@@ -1,6 +1,6 @@
 import { Component, ComponentResolver, Injector } from '@angular/core';
 import { Location } from '@angular/common';
-import { disableDeprecatedForms, provideForms } from '@angular/forms/index';
+import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import { TestComponentBuilder } from '@angular/compiler/testing';
 import { SpyLocation } from '@angular/common/testing';
 import {

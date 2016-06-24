@@ -1,5 +1,5 @@
 import { APP_BASE_HREF } from '@angular/common';
-import { disableDeprecatedForms, provideForms } from '@angular/forms/index';
+import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import { enableProdMode } from '@angular/core';
 import { bootstrap } from '@angular/platform-browser-dynamic';
 
