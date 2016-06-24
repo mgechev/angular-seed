@@ -1,4 +1,3 @@
-import * as chalk from 'chalk';
 import { lstatSync, readdirSync } from 'fs';
 import * as util from 'gulp-util';
 import * as rimraf from 'rimraf';
@@ -36,9 +35,9 @@ function walk(path: any) {
 function deleteAndWalk(path: any) {
   try {
     rimraf.sync(join(path, '*.js'));
-    util.log('Deleted', chalk.yellow(`${path}/*.js`));
+    util.log('Deleted', util.colors.yellow(`${path}/*.js`));
   } catch (e) {
-    util.log('Error while deleting', chalk.yellow(`${path}/*.js`), e);
+    util.log('Error while deleting', util.colors.yellow(`${path}/*.js`), e);
   }
   walk(path);
 }
