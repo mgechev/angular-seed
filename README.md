@@ -56,6 +56,7 @@ _Does not rely on any global dependencies._
 - [How to start](#how-to-start)
 - [Table of Content](#table-of-content)
 - [Configuration](#configuration)
+- [Environment Configuration](#environment-configuration)
 - [Tools documentation](#tools-documentation)
 - [How to extend?](#how-to-extend)
 - [Running tests](#running-tests)

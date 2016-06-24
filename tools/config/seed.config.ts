@@ -80,8 +80,8 @@ export class SeedConfig {
 
   /**
    * The flag to include templates into JS app prod file.
-   * Per default the option is `true`, but can it can be set to false using `--inline-template false`
-   * flag when running `npm run build.prod`.
+   * Per default the option is `true`, but can it can be set to false using `--inline-template false` flag when running
+   * `npm run build.prod`.
    * @type {boolean}
    */
   INLINE_TEMPLATES = argv['inline-template'] !== 'false';
@@ -305,14 +305,14 @@ export class SeedConfig {
     ],
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
-      '@angular/core': `node_modules/@angular/core/bundles/core.umd.js`,
       '@angular/common': `node_modules/@angular/common/bundles/common.umd.js`,
       '@angular/compiler': `node_modules/@angular/compiler/bundles/compiler.umd.js`,
+      '@angular/core': `node_modules/@angular/core/bundles/core.umd.js`,
       '@angular/forms': `node_modules/@angular/forms/bundles/forms.umd.js`,
       '@angular/http': `node_modules/@angular/http/bundles/http.umd.js`,
-      '@angular/router': `node_modules/@angular/router/index.js`,
       '@angular/platform-browser': `node_modules/@angular/platform-browser/bundles/platform-browser.umd.js`,
       '@angular/platform-browser-dynamic': `node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js`,
+      '@angular/router': `node_modules/@angular/router/index.js`,
       'rxjs/*': `node_modules/rxjs/*`,
       'app/*': `/app/*`,
       '*': `node_modules/*`
@@ -344,7 +344,7 @@ export class SeedConfig {
       '*': 'node_modules/*'
     },
     packages: {
-      '@angular/core': {
+      '@angular/common': {
         main: 'index.js',
         defaultExtension: 'js'
       },
@@ -352,7 +352,7 @@ export class SeedConfig {
         main: 'index.js',
         defaultExtension: 'js'
       },
-      '@angular/common': {
+      '@angular/core': {
         main: 'index.js',
         defaultExtension: 'js'
       },
