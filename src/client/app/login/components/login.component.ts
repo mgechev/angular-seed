@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
     public errorMessage: string;
     private model: AuthInfo;
+    private LoginFailed: boolean = false;
     constructor(private _loginService: LoginService, private _router: Router) {
         this.model = new AuthInfo('password', '', '');
     }
@@ -21,7 +22,10 @@ export class LoginComponent {
             results => {
                 this.getLoggedInUserPermission();
             },
-            error => this.errorMessage = <any>error);
+            error => {
+            this.errorMessage = <any>error;
+                this.LoginFailed = true;
+            });
     }
     getLoggedInUserPermission(): void {
         this._loginService.getLoggedInUserPermission()
