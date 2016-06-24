@@ -27,7 +27,11 @@ function buildTS() {
   let result = gulp.src(src)
     .pipe(plugins.plumber())
     .pipe(INLINE_TEMPLATES ? plugins.inlineNg2Template(INLINE_OPTIONS) : plugins.util.noop())
-    .pipe(plugins.typescript(tsProject));
+    .pipe(plugins.typescript(tsProject))
+    .once('error', function () {
+      this.once('finish', () => process.exit(1));
+    });
+
 
   return result.js
     .pipe(plugins.template(templateLocals()))
