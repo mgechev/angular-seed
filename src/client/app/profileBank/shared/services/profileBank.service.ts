@@ -176,6 +176,14 @@ export class ProfileBankService {
             .finally(() => this._spinnerService.hide());
 
     }
+    getResumeById(CandidateID :string) {
+         let url = Config.GetURL('/api/ProfileBank/GetResume?CandidateID='+CandidateID);
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
 
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {

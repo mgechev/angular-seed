@@ -37,6 +37,7 @@ export class AllProfilesListComponent implements OnActivate {
     isCollapsed: boolean = false;
     isAuthourized: boolean = false;
     currentUser: MasterData = new MasterData();
+    url: any;
 
     constructor(private _allProfilesService: AllProfilesService,
 
@@ -52,6 +53,7 @@ export class AllProfilesListComponent implements OnActivate {
     routerOnActivate() {
         this.getLoggedInUser();
         this.getAllProfiles();
+
         this.getCandidateStatuses();
     }
 
@@ -72,6 +74,7 @@ export class AllProfilesListComponent implements OnActivate {
                 (results: any) => {
                     if (results.length !== undefined) {
                         this.allProfilesList = <Array<MyProfilesInfo>>results;
+
                     }
                 },
                 error => this.errorMessage = <any>error);
@@ -197,6 +200,17 @@ export class AllProfilesListComponent implements OnActivate {
             this.toastr.error(error);
             return false;
         }
+
+    }
+
+    getResume(CandidateID: string) {
+        this._profileBankService.getResumeById(CandidateID)
+            .subscribe(
+            (results: any) => {
+                this.url = results;
+
+            },
+            error => this.toastr.error(<any>error));
 
     }
 }

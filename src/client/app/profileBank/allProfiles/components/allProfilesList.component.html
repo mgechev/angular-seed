@@ -146,7 +146,7 @@
                                                 <span class="mt-action-dot color{{profile.Status.Id}}"> </span>{{profile.Status.Value}}
                                             </td>
                                             <td class="text-center">
-                                                <a href="" download><i class="fa fa-download" aria-hidden="true"></i>{{profile.Resume_ID}}</a>
+                                                <a (click)='getResume(profile.CandidateID)' download><i class="fa fa-download" aria-hidden="true"></i>{{profile.Resume_ID}}</a>
                                             </td>
                                             <td>
                                                 <div class="btn-group">
@@ -184,7 +184,7 @@
                                 </div>
                                 <div class="col-md-7 col-sm-7">
                                     <div class="dataTables_paginate paging_bootstrap_full_number" id="sample_1_paginate">
-                                        <ul class="pagination" style="visibility: visible;">
+                                        <!--<ul class="pagination" style="visibility: visible;">
                                             <li class="prev disabled"><a href="#" title="First"><i class="fa fa-angle-double-left"></i></a></li>
                                             <li class="prev disabled"><a href="#" title="Prev"><i class="fa fa-angle-left"></i></a></li>
                                             <li class="active"><a [routerLink]="['/App/ProfileBank/AllProfiles']">1</a></li>
@@ -194,7 +194,7 @@
                                             <li><a [routerLink]="['/App/ProfileBank/AllProfiles']">5</a></li>
                                             <li class="next"><a href="#" title="Next"><i class="fa fa-angle-right"></i></a></li>
                                             <li class="next"><a href="#" title="Last"><i class="fa fa-angle-double-right"></i></a></li>
-                                        </ul>
+                                        </ul>-->
                                     </div>
                                 </div>
                             </div>

@@ -17,8 +17,7 @@
         </ul>
         <div class="row">
             <div class="col-md-12">
-
-                <div class="portlet light bordered">
+            <div class="portlet light bordered">
                     <a class="btn btn-circle dark btn-outline" [routerLink]="['/App/ProfileBank/AllProfiles']"> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>
                      <div class="details">
                         <div class="portlet light nopadding">
@@ -61,6 +60,54 @@
                                                     </div>
                                                 </div>
                                                 <!--/span-->
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 form-control-static"><b>PAN Card No :</b></label>
+                                                        <div class="col-md-7" style="margin-left:-27px">
+                                                            <p class="form-control-static">  {{profile.PANNumber}}  </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-5 form-control-static"><b>Passport No:</b></label>
+                                                        <div class="col-md-7" style="margin-left:-25px">
+                                                            <p class="form-control-static"> {{profile.PassportNumber}} </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-6 form-control-static"><b>Adhaar card No:</b></label>
+                                                        <div class="col-md-6">
+                                                            <p class="form-control-static"> {{profile.AadharCardNo}} </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+
+                                              <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-4 form-control-static"><b>Current Address :</b></label>
+                                                        <div class="col-md-8" style="margin-left:-30px">
+                                                            <p class="form-control-static">  {{profile.CurrentAddress}}  </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-5 form-control-static"><b>Permanent Address:</b></label>
+                                                        <div class="col-md-7" style="margin-left:-30px">
+                                                            <p class="form-control-static"> {{profile.PermanentAddress}} </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
                                             </div>
                                             <!--/row-->
                                             <div class="row" *ngIf='count'>
@@ -478,7 +525,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b>Visa :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.Visa}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.Visa.Value}} </p>
                                                         </div>
                                                     </div>
                                                 </div>

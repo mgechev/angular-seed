@@ -18,13 +18,13 @@
         <div class="row">
             <div class="col-md-12">
 
-                <div class="portlet light bordered">
+                 <div class="portlet light bordered">
                     <a class="btn btn-circle dark btn-outline" [routerLink]="['/App/ProfileBank/BlackListedProfiles']"> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>
-                        <div class="details">
+                     <div class="details">
                         <div class="portlet light nopadding">
                             <div class="portlet-title custom-portlet">
                                 <div class="caption">
-                                  View Candidate's Info - {{profile.FirstName}} {{profile.LastName}}
+                                  View Candidate's Info - {{profile.FirstName}}  {{profile.LastName}}
                                 </div>
                             </div>
                             <div class="portlet-container">
@@ -39,7 +39,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-4 form-control-static"><b>Candidate :</b></label>
                                                         <div class="col-md-8">
-                                                            <p class="form-control-static"> {{profile.FirstName}} {{profile.LastName}} </p>
+                                                            <p class="form-control-static">  {{profile.FirstName}}  {{profile.LastName}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -62,6 +62,54 @@
                                                 </div>
                                                 <!--/span-->
                                             </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 form-control-static"><b>PAN Card No :</b></label>
+                                                        <div class="col-md-7" style="margin-left:-27px">
+                                                            <p class="form-control-static">  {{profile.PANNumber}}  </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-5 form-control-static"><b>Passport No:</b></label>
+                                                        <div class="col-md-7" style="margin-left:-25px">
+                                                            <p class="form-control-static"> {{profile.PassportNumber}} </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-6 form-control-static"><b>Adhaar card No:</b></label>
+                                                        <div class="col-md-6">
+                                                            <p class="form-control-static"> {{profile.AadharCardNo}} </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+
+                                              <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-4 form-control-static"><b>Current Address :</b></label>
+                                                        <div class="col-md-8" style="margin-left:-30px">
+                                                            <p class="form-control-static">  {{profile.CurrentAddress}}  </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-5 form-control-static"><b>Permanent Address:</b></label>
+                                                        <div class="col-md-7" style="margin-left:-30px">
+                                                            <p class="form-control-static"> {{profile.PermanentAddress}} </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
                                             <!--/row-->
                                             <div class="row" *ngIf='count'>
                                                 <div class="col-md-12">
@@ -79,7 +127,7 @@
                                                             <tbody>
                                                                 <tr *ngFor="let Qualification of profile.CandidateQualification">
                                                                     <td> {{Qualification.Qualification.Value}}</td>
-                                                                    <td> {{Qualification.YearOfPassing}}</td>
+                                                                    <td> {{Qualification.YearofPassing}}</td>
                                                                     <td> {{Qualification.Grade.Value}}</td>
                                                                     <td class="center">{{Qualification.Marks}} </td>
                                                                 </tr>
@@ -478,7 +526,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 form-control-static"><b>Visa :</b></label>
                                                         <div class="col-md-7">
-                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.Visa}} </p>
+                                                            <p class="form-control-static"> {{profile.CandidateOtherDetails.Visa.Value}} </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -680,6 +728,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
         <!-- END PAGE BASE CONTENT -->

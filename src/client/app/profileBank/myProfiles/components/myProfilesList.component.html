@@ -85,7 +85,7 @@
                                                             </div>
                                                             <div class="col-md-3 inlineForm">
                                                                 <div class="form-group ">
-                                                                    <input type="text" placeholder="8888451201" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact"
+                                                                    <input type="text" placeholder="Contact Number" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact"
                                                                         required="" pattern="^[0-9\-\+]{9,15}$" tooltip="Contact No"
                                                                         title="Enter 10 digits" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                         tooltipEnable="!profile.PrimaryContact" />
@@ -99,14 +99,14 @@
                                                                 <div class="form-group ">
                                                                     <input type="text" placeholder="Passport Number" class="form-control" [(ngModel)]="profile.PassportNumber" tooltip="Passport No"
                                                                         tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.PassportNumber"
-                                                                        pattern="[A-Za-z]{1}\\d{7}" title="Enter valid passport number" />
+                                                                        pattern="[A-Za-z]{1}[0-9]{7}" title="Enter valid passport number" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3  inlineForm">
                                                                 <div class="form-group ">
                                                                     <input type="text" placeholder="Pan Number" class="form-control" [(ngModel)]="profile.PANNumber" tooltip="Pan Card No" tooltipPlacement="top"
                                                                         tooltipTrigger="mouseenter" tooltipEnable="!profile.PANNumber"
-                                                                        pattern="[A-Za-z]{5}\\d{4}[A-Za-z]{1}" title="Enter valid PAN number"
+                                                                        pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}" title="Enter valid PAN number"
                                                                     />
                                                                 </div>
                                                             </div>

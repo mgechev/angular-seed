@@ -439,7 +439,6 @@ export class AllProfilesAddComponent implements OnActivate {
                 this.qualification.Grade.Id = this.qualification.Grade.Id;
             }
 
-
             if (this.params) {
                 this._profileBankService.editCandidateQualification(this.qualification)
                     .subscribe(

@@ -24,11 +24,12 @@ export class MyProfilesInfo {
   public CandidateOtherDetails = new OtherDetails();
   public CandidateSalaryDetails = new SalaryDetails();
   public CandidateSkills = new Skills();
-  public AadharCardNo: string;
+  public AadharCardNo: string = '';
   public CandidateTeamManagement = new TeamManagement();
   public CandidateCareerProfile = new CareerProfile();
   //for checkboxes for list
   public IsChecked: boolean;
+  public url:any;
 
 
   //Properties of Personal Information
@@ -38,8 +39,8 @@ export class MyProfilesInfo {
   public Country = new MasterData();
   public PermanentAddress: string;
   public CurrentAddress: string;
-  public PANNumber: string;
-  public PassportNumber: string;
+  public PANNumber: string= '';
+  public PassportNumber: string= '';
   public OutstationedCandidate: any;
   public ReadyToRelocate: any;
   public CommentsAdditionalInformation: string;
@@ -166,7 +167,7 @@ export class TransferOwnershipMeta {
 }
 
 export class GridOperations {
-    public TotalItems: string;
+  public TotalItems: string;
   public ItemPerPage: string;
   public OrderBy: string;
   public OrderColumn: string;
