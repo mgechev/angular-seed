@@ -79,14 +79,6 @@ export class SeedConfig {
   NPM_BASE = join(this.APP_BASE, 'node_modules/');
 
   /**
-   * The flag to include templates into JS app prod file.
-   * Per default the option is `true`, but can it can be set to false using `--inline-template false` flag when running
-   * `npm run build.prod`.
-   * @type {boolean}
-   */
-  INLINE_TEMPLATES = argv['inline-template'] !== 'false';
-
-  /**
    * The flag for the hot-loader option of the application.
    * Per default the option is not set, but can be set by the `--hot-loader` flag when running `npm start`.
    * @type {boolean}
