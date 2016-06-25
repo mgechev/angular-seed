@@ -1,0 +1,8 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "block-no-empty": null,
+    "at-rule-empty-line-before": null,
+    "rule-non-nested-empty-line-before": null
+  }
+}
