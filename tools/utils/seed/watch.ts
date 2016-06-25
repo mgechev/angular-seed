@@ -15,8 +15,8 @@ export function watch(taskname: string) {
       join(APP_SRC, '**')
     ].concat(TEMP_FILES.map((p) => { return `!${ p }`; }));
 
-    gulp.watch(paths, (err: any) =>
-      runSequence(taskname, () => notifyLiveReload(err))
+    gulp.watch(paths, (e: any) =>
+      runSequence(taskname, () => notifyLiveReload(e))
     );
   };
 }
