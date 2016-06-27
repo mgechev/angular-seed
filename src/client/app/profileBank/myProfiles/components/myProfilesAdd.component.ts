@@ -26,7 +26,6 @@ export class MyProfilesAddComponent implements OnActivate {
 
     countries: Array<MasterData>;
     states: Array<MasterData>;
-    districts: Array<MasterData>;
 
     qualifications: Array<MasterData>;
     grades: Array<MasterData>;
@@ -81,9 +80,11 @@ export class MyProfilesAddComponent implements OnActivate {
     getCandidateProfileById(profileId: string) {
         this._profileBankService.getCandidateProfile(profileId)
             .subscribe(
-            results => {
-                this.profile = <any>results;
+            (results :MyProfilesInfo)=> {
+                this.profile = results;
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments;
+                if(results.Country.Id !== 0)
+                    this.getStates(results.Country.Id);
             },
             error => this.errorMessage = <any>error);
     }
@@ -99,21 +100,12 @@ export class MyProfilesAddComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    getStates(): void {
-        this._masterService.getStates()
+    getStates(CountryId:number): void {
+        this._masterService.getStates(CountryId)
             .subscribe(
             results => {
                 this.states = results;
 
-            },
-            error => this.errorMessage = <any>error);
-    }
-
-    getDistricts(): void {
-        this._masterService.getDistricts()
-            .subscribe(
-            results => {
-                this.districts = results;
             },
             error => this.errorMessage = <any>error);
     }

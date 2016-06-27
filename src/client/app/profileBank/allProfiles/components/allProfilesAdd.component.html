@@ -320,7 +320,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <textarea class="form-control" rows="2" placeholder="Permanent Address" style="resize:vertical" [(ngModel)]="profile.PermanentAddress"
-                                                                        required=""></textarea>
+                                                                       ></textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -344,7 +344,8 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>Country</label>
-                                                            <select class="form-control" [(ngModel)]="profile.Country.Id">
+                                                            <select class="form-control" [(ngModel)]="profile.Country.Id" (change)='getStates($event.target.value)'>
+                                                                <option></option>
                                                                <option *ngFor="let country of countries" [value]="country.Id">{{country.Value}}</option>
                                                             </select>
                                                         </div>
@@ -352,7 +353,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>State</label>
-                                                            <select class="form-control" [(ngModel)]="profile.State.Id">
+                                                            <select class="form-control" [(ngModel)]="profile.State.Id" >
                                                                <option *ngFor="let state of states" [value]="state.Id">{{state.Value}}</option>
                                                             </select>
                                                         </div>
@@ -361,9 +362,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>District</label>
-                                                            <select class="form-control" [(ngModel)]="profile.District.Id">
-                                                               <option *ngFor="let district of districts" [value]="district.Id">{{district.Value}}</option>
-                                                            </select>
+                                                             <input type="text" placeholder="District" class="form-control" [(ngModel)]="profile.District"/>
                                                         </div>
                                                     </div>
                                                     <!---->

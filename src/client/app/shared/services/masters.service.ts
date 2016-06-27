@@ -60,8 +60,8 @@ export class MastersService {
             .catch(this.handleError);
     }
 
-    getStates() {
-        let url = Config.GetURL('/api/Masters/GetStates');
+    getStates(CountryID : number) {
+        let url = Config.GetURL('/api/Masters/GetStatesByCountry?CountryID='+CountryID);
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);

@@ -1,29 +1,31 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
-import {MyProfilesInfo} from '../../shared/model/myProfilesInfo';
+import {MyProfilesInfo, GridOperations} from '../../shared/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
-import { RMSGridComponent } from '../../../shared/components/rmsGrid/rmsGrid.component';
+//import { RMSGridComponent } from '../../../shared/components/rmsGrid/rmsGrid.component';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { DataSharedService } from '../../shared/services/DataShared.service';
 import { ProfileBankService } from '../../shared/services/profilebank.service';
+import {PAGINATION_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-allprofiles-list',
     templateUrl: 'allProfilesList.component.html',
-    directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES, RMSGridComponent],
+    directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES,PAGINATION_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
 
 
 export class AllProfilesListComponent implements OnActivate {
     allProfilesList: Array<MyProfilesInfo>;
+    allProfilesList_1 : Array<MyProfilesInfo>;
     profile: MyProfilesInfo;
     statusList: Array<MasterData>;
     seletedCandidateID: string;
@@ -38,6 +40,9 @@ export class AllProfilesListComponent implements OnActivate {
     isAuthourized: boolean = false;
     currentUser: MasterData = new MasterData();
     url: any;
+    //Pagination 
+    grdOptions = new GridOperations();
+    public maxSize: number = 3;
 
     constructor(private _allProfilesService: AllProfilesService,
 
@@ -74,7 +79,7 @@ export class AllProfilesListComponent implements OnActivate {
                 (results: any) => {
                     if (results.length !== undefined) {
                         this.allProfilesList = <Array<MyProfilesInfo>>results;
-
+                        this.allProfilesList_1 = <Array<MyProfilesInfo>>results;
                     }
                 },
                 error => this.errorMessage = <any>error);
@@ -213,5 +218,6 @@ export class AllProfilesListComponent implements OnActivate {
             error => this.toastr.error(<any>error));
 
     }
+   
 }
 

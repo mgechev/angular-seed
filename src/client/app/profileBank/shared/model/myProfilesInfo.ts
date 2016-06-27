@@ -29,18 +29,18 @@ export class MyProfilesInfo {
   public CandidateCareerProfile = new CareerProfile();
   //for checkboxes for list
   public IsChecked: boolean;
-  public url:any;
+  public url: any;
 
 
   //Properties of Personal Information
   public SecondaryContact: number;
-  public District = new MasterData();
+  public District: string;
   public State = new MasterData();
   public Country = new MasterData();
   public PermanentAddress: string;
   public CurrentAddress: string;
-  public PANNumber: string= '';
-  public PassportNumber: string= '';
+  public PANNumber: string = '';
+  public PassportNumber: string = '';
   public OutstationedCandidate: any;
   public ReadyToRelocate: any;
   public CommentsAdditionalInformation: string;
@@ -167,11 +167,13 @@ export class TransferOwnershipMeta {
 }
 
 export class GridOperations {
-  public TotalItems: string;
-  public ItemPerPage: string;
-  public OrderBy: string;
-  public OrderColumn: string;
-  public CurrentPage:string;
+  public TotalItems: number;
+  public ItemPerPage: number;
+  // public OrderBy: string;
+  // public OrderColumn: string;
+  public PageNumber: number;
+  public ItemID: string;
+
 }
 
 

@@ -1,10 +1,9 @@
 import {Component} from '@angular/core';
 import { Router, RouteSegment, OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
-import {MyProfilesInfo, Qualification} from '../../shared/model/myProfilesInfo';
+import {MyProfilesInfo, Qualification } from '../../shared/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
 import { ProfileBankService } from '../../shared/services/profilebank.service';
 import { MastersService } from '../../../shared/services/masters.service';
-import * as  _ from 'lodash';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
@@ -14,6 +13,7 @@ import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
     moduleId: module.id,
     selector: 'rrf-allprofiles-add',
     templateUrl: 'allProfilesAdd.component.html',
+    // templateUrl: '../../shared/views/profileBankAdd.component.html',
     directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
@@ -23,7 +23,8 @@ export class AllProfilesAddComponent implements OnActivate {
     qualification: Qualification;
     errorMessage: string;
     params: string;
-
+    allProfilesPath: string = '[/App/ProfileBank/AllProfiles]';
+    TITLE: string = 'All Profiles';
     countries: Array<MasterData>;
     states: Array<MasterData>;
     districts: Array<MasterData>;
@@ -98,6 +99,8 @@ export class AllProfilesAddComponent implements OnActivate {
             (results: MyProfilesInfo) => {
                 //  if (this.currentUser.Id === results.Owner.Id) {
                 this.profile = results;
+                if(results.Country.Id !== 0)
+                    this.getStates(results.Country.Id);
                 // } else {
                 //     this._router.navigate(['/App/ProfileBank/AllProfiles/']);
                 // }
@@ -115,29 +118,20 @@ export class AllProfilesAddComponent implements OnActivate {
             .subscribe(
             results => {
                 this.countries = results;
-
             },
             error => this.errorMessage = <any>error);
     }
 
-    getStates(): void {
-        this._masterService.getStates()
+    getStates(CountryId: number): void {
+        this._masterService.getStates(CountryId)
             .subscribe(
             results => {
                 this.states = results;
-
             },
             error => this.errorMessage = <any>error);
     }
 
-    getDistricts(): void {
-        this._masterService.getDistricts()
-            .subscribe(
-            results => {
-                this.districts = results;
-            },
-            error => this.errorMessage = <any>error);
-    }
+
 
     getQualifications(): void {
         this._masterService.getQualifications()
@@ -497,4 +491,14 @@ export class AllProfilesAddComponent implements OnActivate {
                 });
         }
     }
+    redirectToAllProfiles() {
+        this._router.navigate(['/App/ProfileBank/AllProfiles']);
+    }
+
+    // paginate() {
+    //  gridOptions.totalItems = featuresList.length
+    // startPosition = (gridOptions.currentPage - 1) * gridOptions.itemPerPage
+    // endPosition = startPosition + gridOptions.itemPerPage
+    // result = { list: featuresList.slice(startPosition, endPosition), gridOptions: gridOptions }
+    // }
 }

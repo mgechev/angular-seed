@@ -25,7 +25,7 @@ export class CompanyProfilesAddComponent implements OnActivate {
 
     countries: Array<MasterData>;
     states: Array<MasterData>;
-    districts: Array<MasterData>;
+  
 
     qualifications: Array<MasterData>;
     grades: Array<MasterData>;
@@ -77,8 +77,10 @@ export class CompanyProfilesAddComponent implements OnActivate {
     getCandidateProfileById(profileId: string) {
         this._profileBankService.getCandidateProfile(profileId)
             .subscribe(
-            results => {
-                this.profile = <any>results;
+            (results :MyProfilesInfo) => {
+                this.profile = <MyProfilesInfo>results;
+                if(results.Country.Id !== 0)
+                    this.getStates(results.Country.Id);
                 //this.convertCheckboxesValuesToBoolean();
             },
             error => this.errorMessage = <any>error);
@@ -94,8 +96,8 @@ export class CompanyProfilesAddComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    getStates(): void {
-        this._masterService.getStates()
+    getStates(CountryId:number): void {
+        this._masterService.getStates(CountryId)
             .subscribe(
             results => {
                 this.states = results;

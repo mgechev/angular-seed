@@ -93,6 +93,8 @@ export class BlackListedProfilesAddComponent implements OnActivate {
             (results: MyProfilesInfo) => {
                 //  if (this.currentUser.Value === results.Owner.Value) {
                 this.profile = results;
+                if(results.Country.Id !== 0)
+                    this.getStates(results.Country.Id);
                 // } else {
                 //     this._router.navigate(['/App/ProfileBank/BlackListedProfiles/']);
                 // }
@@ -111,24 +113,15 @@ export class BlackListedProfilesAddComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    getStates(): void {
-        this._masterService.getStates()
+    getStates(CountryId: number): void {
+        this._masterService.getStates(CountryId)
             .subscribe(
             results => {
                 this.states = results;
-
             },
             error => this.errorMessage = <any>error);
     }
 
-    getDistricts(): void {
-        this._masterService.getDistricts()
-            .subscribe(
-            results => {
-                this.districts = results;
-            },
-            error => this.errorMessage = <any>error);
-    }
 
     getQualifications(): void {
         this._masterService.getQualifications()

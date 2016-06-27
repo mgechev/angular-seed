@@ -9,7 +9,7 @@ import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
-import {MyProfilesFilterPipe} from './myProfiles.component.pipe';
+//import {MyProfilesFilterPipe} from './myProfiles.component.pipe';
 import { Headers, Http } from '@angular/http';
 
 
@@ -19,7 +19,7 @@ import { Headers, Http } from '@angular/http';
     templateUrl: 'myProfilesList.component.html',
     directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
     styleUrls: ['myProfiles.component.css'],
-    pipes: [MyProfilesFilterPipe]
+    //pipes: [MyProfilesFilterPipe]
 })
 
 export class MyProfilesListComponent implements OnActivate {

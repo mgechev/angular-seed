@@ -343,7 +343,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>Country</label>
-                                                            <select class="form-control" [(ngModel)]="profile.Country.Id">
+                                                            <select class="form-control" [(ngModel)]="profile.Country.Id" (change)='getStates($event.target.value)'>
                                                                <option *ngFor="let country of countries" [value]="country.Id">{{country.Value}}</option>
                                                             </select>
                                                         </div>
@@ -360,9 +360,10 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>District</label>
-                                                            <select class="form-control" [(ngModel)]="profile.District.Id">
+                                                            <!--<select class="form-control" [(ngModel)]="profile.District.Id">
                                                                <option *ngFor="let district of districts" [value]="district.Id">{{district.Value}}</option>
-                                                            </select>
+                                                            </select>-->
+                                                            <input type="text" placeholder="District" class="form-control" [(ngModel)]="profile.District"/>
                                                         </div>
                                                     </div>
                                                     <!---->

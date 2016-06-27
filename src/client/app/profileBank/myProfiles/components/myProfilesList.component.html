@@ -267,7 +267,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="gradeX odd " *ngFor="let myprofile of myProfilesList | myProfilesFilter: ['Tag','Candidate','Email','PrimaryContact'] : searchString">
+                                    <tr class="gradeX odd " *ngFor="let myprofile of myProfilesList ">
                                         <td>
                                             <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                                     <input type="checkbox" class="checkboxes" value="1" [id]='myprofile.CandidateID' [(ngModel)]='myprofile.IsChecked' (change)="onStateChange($event)"/>

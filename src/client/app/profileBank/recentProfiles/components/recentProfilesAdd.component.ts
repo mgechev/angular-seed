@@ -77,9 +77,11 @@ export class RecentProfilesAddComponent implements OnActivate {
     getCandidateProfileById(profileId: string) {
         this._profileBankService.getCandidateProfile(profileId)
             .subscribe(
-            results => {
-                this.profile = <any>results;
+            (results: MyProfilesInfo) => {
+                this.profile = results;
                 // this.convertCheckboxesValuesToBoolean();
+                if (results.Country.Id !== 0)
+                    this.getStates(results.Country.Id);
             },
             error => this.errorMessage = <any>error);
     }
@@ -94,8 +96,8 @@ export class RecentProfilesAddComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    getStates(): void {
-        this._masterService.getStates()
+    getStates(CountryId: number): void {
+        this._masterService.getStates(CountryId)
             .subscribe(
             results => {
                 this.states = results;
@@ -104,14 +106,6 @@ export class RecentProfilesAddComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    getDistricts(): void {
-        this._masterService.getDistricts()
-            .subscribe(
-            results => {
-                this.districts = results;
-            },
-            error => this.errorMessage = <any>error);
-    }
 
     getQualifications(): void {
         this._masterService.getQualifications()
