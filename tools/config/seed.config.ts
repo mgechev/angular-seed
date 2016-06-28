@@ -291,9 +291,9 @@ export class SeedConfig {
   protected SYSTEM_CONFIG_DEV: any = {
     defaultJSExtensions: true,
     packageConfigPaths: [
-      `node_modules/*/package.json`,
-      `node_modules/**/package.json`,
-      `node_modules/@angular/*/package.json`
+      `/node_modules/*/package.json`,
+      `/node_modules/**/package.json`,
+      `/node_modules/@angular/*/package.json`
     ],
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
