@@ -40,7 +40,7 @@ export class SeedConfig {
 
   /**
    * The current environment.
-   * The default environment is `dev`, which can be overriden by the `--env` flag when running `npm start`.
+   * The default environment is `dev`, which can be overriden by the `--config-env ENV_NAME` flag when running `npm start`.
    */
   ENV = getEnvironment();
 
