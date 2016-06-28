@@ -80,6 +80,7 @@ npm run build.prod</pre></div>
 <li><a href="#how-to-start">How to start</a></li>
 <li><a href="#table-of-content">Table of Content</a></li>
 <li><a href="#configuration">Configuration</a></li>
+<li><a href="#environment-configuration">Environment Configuration</a></li>
 <li><a href="#tools-documentation">Tools documentation</a></li>
 <li><a href="#how-to-extend">How to extend?</a></li>
 <li><a href="#running-tests">Running tests</a></li>
@@ -106,6 +107,17 @@ npm run build.prod</pre></div>
 <p>Configure at runtime</p>
 
 <div class="highlight highlight-source-shell"><pre>npm start -- --port 8080 --reload-port 4000 --base /my-app/</pre></div>
+
+<h2>
+<a id="environment-configuration" class="anchor" href="#environment-configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Environment configuration</h2>
+
+<p>If you have different environments and you need to configure them to use different end points, settings, etc. you can use the <code>./tools/env/config.json</code> file. The keys in the file are the different environments.</p>
+
+<p>The can be specified by using:</p>
+
+<div class="highlight highlight-source-shell"><pre>npm start -- --config-env ENV_NAME</pre></div>
+
+<p>Currently the <code>ENV_NAME</code>s are <code>dev</code>, <code>prod</code>, <code>staging</code>, but you can simply add different key-value pairs to the <code>config.json</code> file in order to alter extra such environments.</p>
 
 <h1>
 <a id="tools-documentation" class="anchor" href="#tools-documentation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tools documentation</h1>
