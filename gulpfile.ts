@@ -19,6 +19,7 @@ gulp.task('build.dev', (done: any) =>
               'build.html_css',
               'build.js.dev',
               'build.index.dev',
+              'gulp.stylus',
               done));
 
 // --------------
