@@ -2,15 +2,7 @@
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-        <!-- BEGIN PAGE HEAD-->
-        <div class="page-head">
-            <!-- BEGIN PAGE TITLE -->
-            <div class="page-title">
-                <h1> Edit Profile </h1>
-            </div>
-            <!-- END PAGE TITLE -->
-        </div>
-        <!-- END PAGE HEAD-->
+
         <!--BEGIN breadcrumb -->
         <ul class="page-breadcrumb breadcrumb">
             <li>
@@ -18,7 +10,7 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <a [routerLink]="['/App/ProfileBank/CompanyProfiles']">Company Profiles</a>
+                <a (click)='Back()'>{{TITLE}}</a>
                 <i class="fa fa-circle"></i>
             </li>
             <li>
@@ -37,7 +29,7 @@
                                     <div class="caption caption-md">
                                         <i class="icon-globe theme-font hide"></i>
                                         <!--<span class="caption-subject font-blue-madison bold uppercase">Edit Profile</span>-->
-                                        <a class="btn btn-circle dark btn-outline" [routerLink]="['/App/ProfileBank/CompanyProfiles']">
+                                        <a class="btn btn-circle dark btn-outline" (click)='Back()'>
                                             <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back </a>
                                     </div>
                                     <ul class="nav nav-tabs">
@@ -70,8 +62,9 @@
                                     </ul>
                                 </div>
                                 <div class="portlet-body">
-                                       <div class="tab-content">
-                                             <!-- PRIMARY INFO TAB -->
+                                    <div class="tab-content">
+
+                                        <!-- PRIMARY INFO TAB -->
                                         <div class="tab-pane active" id="tab_primaryInfo">
                                             <form role="form" (submit)="onSavePrimaryInfo()">
                                                 <div class=row>
@@ -157,7 +150,7 @@
                                                             <label class="control-label">Notice Period <small>(In Days)</small><span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-8">
-                                                                    <input type="text" placeholder="" class="form-control" placeholder="Notice Period" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod"
+                                                                    <input type="number" placeholder="" class="form-control" placeholder="Notice Period" min="0" max="120" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod"
                                                                         required="" />
                                                                 </div>
                                                             </div>
@@ -179,8 +172,8 @@
                                                             <label class="control-label">Expected Salary <span class="required"> * </span> </label>
                                                             <div class="row ">
                                                                 <div class="col-md-6">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.ExpectedSalary" required
-                                                                    />
+                                                                    <input type="number" placeholder="" class="form-control" min="0" [(ngModel)]="profile.CandidateSalaryDetails.ExpectedSalary"
+                                                                        required/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -190,8 +183,8 @@
                                                             <label class="control-label">Current Salary <span class="required"> * </span> </label>
                                                             <div class="row ">
                                                                 <div class="col-md-6">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.CurrentSalary" required=""
-                                                                    />
+                                                                    <input type="number" placeholder="" class="form-control" min="0" [(ngModel)]="profile.CandidateSalaryDetails.CurrentSalary"
+                                                                        required="" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -200,7 +193,7 @@
                                                 </div>
                                                 <div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
-                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/CompanyProfiles']"> Cancel </a>
+                                                    <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -280,23 +273,23 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Pan Card No</label>
                                                             <input type="text" placeholder="Pan Card No" class="form-control" [(ngModel)]="profile.PANNumber" title="Enter Valid PAN No. For E.g. ABCDE1234F"
-                                                             pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}" /></div>
+                                                                pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}" /></div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Passport No</label>
-                                                            <input type="text" placeholder="Passport No" class="form-control" [(ngModel)]="profile.PassportNumber" title="Enter Valid Passport No. For E.g. A1234567" 
-                                                             pattern="[A-Za-z]{1}[0-9]{7}"/></div>
+                                                            <input type="text" placeholder="Passport No" class="form-control" [(ngModel)]="profile.PassportNumber" title="Enter Valid Passport No. For E.g. A1234567"
+                                                                pattern="[A-Za-z]{1}[0-9]{7}" /></div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                      <div class="col-md-3">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>Aadhaar Card No</label>
                                                             <input type="text" placeholder="Aadhar Card No" class="form-control" [(ngModel)]="profile.AadharCardNo" tooltip="Aadhar Card Number"
-                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.AadharCardNo"
-                                                                        pattern="^[0-9\-\+]{9,15}$" title="Enter valid Aadhaar Card number For Eg. 123456789012"
-                                                                        maxlength="12" />
+                                                                tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.AadharCardNo"
+                                                                pattern="^[0-9\-\+]{9,15}$" title="Enter valid Aadhaar Card number For Eg. 123456789012"
+                                                                maxlength="12" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
@@ -332,10 +325,10 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                   
+
                                                 </div>
                                                 <div class="row">
-                                                     <div class="col-md-3">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label"> Outstationed Candidate</label>
                                                             <div class="mt-checkbox-inline ">
@@ -347,11 +340,12 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                  
+
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>Country</label>
-                                                            <select class="form-control" [(ngModel)]="profile.Country.Id" (Change)='getStates($event.target.value)'>
+                                                            <select class="form-control" [(ngModel)]="profile.Country.Id" (change)='getStates($event.target.value)'>
+                                                                <option></option>
                                                                <option *ngFor="let country of countries" [value]="country.Id">{{country.Value}}</option>
                                                             </select>
                                                         </div>
@@ -368,10 +362,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>District</label>
-                                                            <!--<select class="form-control" [(ngModel)]="profile.District.Id">
-                                                               <option *ngFor="let district of districts" [value]="district.Id">{{district.Value}}</option>
-                                                            </select>-->
-                                                             <input type="text" placeholder="District" class="form-control" [(ngModel)]="profile.District"/>
+                                                            <input type="text" placeholder="District" class="form-control" [(ngModel)]="profile.District" />
                                                         </div>
                                                     </div>
                                                     <!---->
@@ -406,16 +397,16 @@
                                                             <textarea class="form-control" rows="2" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.CommentsAdditionalInformation"></textarea>
                                                         </div>
                                                     </div>
-                                                   
+
                                                 </div>
                                                 <div class="row">
-                                                     <div class="col-md-3">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Resume Source</label>
                                                             <textarea class="form-control" rows="2" placeholder="Resume Source" style="resize:vertical" [(ngModel)]="profile.ResumeSource"></textarea>
                                                         </div>
                                                     </div>
-                                                     <div class="col-md-3">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Tagging</label>
                                                             <input type="text" placeholder="Add Tagging For E.g. ASP.Net, Salesforce" class="form-control" [(ngModel)]="profile.Tag"
@@ -431,11 +422,11 @@
                                                             </textarea>
                                                         </div>
                                                     </div>
-                                                   
+
                                                 </div>
                                                 <div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
-                                                    <a class="btn default" [routerLink]="['/App/ProfileBank/CompanyProfiles']"> Cancel </a>
+                                                    <a class="btn default" (click)='Back()'> Cancel </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -454,7 +445,8 @@
                                                                         <div class="row">
                                                                             <div class="col-md-10">
                                                                                 <div>
-                                                                                    <select (change)='onSelectQualification($event.target.value)' class="form-control" [(ngModel)]="qualification.Qualification.Id">
+                                                                                    <select (change)='onSelectQualification($event.target.value)' class="form-control" [(ngModel)]="qualification.Qualification.Id"
+                                                                                        required>
                                                                                     <option *ngFor="let q of qualifications" [value]="q.Id">{{q.Value}}</option>
                                                                                 </select>
                                                                                 </div>
@@ -483,7 +475,7 @@
                                                                         <div class="row">
                                                                             <div class="col-md-10">
                                                                                 <!--<div *ngFor="let grd of qualification.Grade">-->
-                                                                                <select (change)='onSelectGrade($event.target.value)' class="form-control" [(ngModel)]="qualification.Grade.Id">
+                                                                                <select (change)='onSelectGrade($event.target.value)' class="form-control" required [(ngModel)]="qualification.Grade.Id">
                                                                                     <option *ngFor="let grade of grades" [value]="grade.Id">{{grade.Value}}</option>
                                                                                 </select>
                                                                                 <!--</div>-->
@@ -493,10 +485,10 @@
                                                                 </div>
                                                                 <div class="col-md-2">
                                                                     <div class="form-group">
-                                                                        <label class="control-label">Marks <small>(In Percentage)</small><span class="required"> * </span></label>
+                                                                        <label class="control-label">Marks <small>(In %)</small><span class="required"> * </span></label>
                                                                         <div class="row">
                                                                             <div class="col-md-8">
-                                                                                <input type="number" placeholder="70" class="form-control" max="100" maxlength="3" min="0" [(ngModel)]="qualification.Marks"
+                                                                                <input type="number" placeholder="" class="form-control" max="100" maxlength="3" min="0" [(ngModel)]="qualification.Marks"
                                                                                     required="" />
                                                                             </div>
                                                                         </div>
@@ -641,7 +633,7 @@
                                                 </div>
                                                 <div class="margin-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
-                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/CompanyProfiles']"> Cancel </a>
+                                                    <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -714,7 +706,7 @@
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <button type="submit" class="btn green"> Save Changes </button>
-                                                        <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/CompanyProfiles']"> Cancel </a>
+                                                        <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
                                                     </div>
 
                                                 </div>
@@ -807,7 +799,7 @@
 
                                                 <div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
-                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/CompanyProfiles']"> Cancel </a>
+                                                    <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -873,7 +865,7 @@
                                                 </div>
                                                 <div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
-                                                    <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/CompanyProfiles']"> Cancel </a>
+                                                    <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -910,9 +902,10 @@
                                                                 <div class="form-group">
                                                                     <label>Visa </label>
                                                                     <!--<input type="text" class="form-control" placeholder="" [(ngModel)]="profile.CandidateOtherDetails.Visa">-->
-                                                                    <select class="form-control" [(ngModel)]="profile.CandidateOtherDetails.Visa.Id" (change)='onSelectVisa($event.target.value)'>
-                                                               <option *ngFor="let visa of VisaType" [value]="visa.Id">{{visa.Value}}</option>
-                                                            </select>
+                                                                    <select class="form-control" [(ngModel)]="profile.CandidateOtherDetails.Visa.Id" (change)='onSelectVisa($event.target.value)'>  
+                                                                      <option *ngFor="let visa of VisaType" [value]="visa.Id">{{visa.Value}}</option>
+
+                                                                    </select>
                                                                 </div>
                                                             </div>
 
@@ -926,9 +919,14 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-4">
-                                                                <div class="form-group">
+                                                                <!--
                                                                     <label class="control-label">Resigned Status Of Offered Candidate</label>
                                                                     <textarea class="form-control" rows="2" placeholder="Resigned Status" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.ResignedStatusOfOfferedCandidate"></textarea>
+                                                                -->
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Offered Candidate Status</label>
+                                                                    <input type="text" placeholder="Offered Candidate Status" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.OfferedCandidateStatus"
+                                                                    />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
@@ -1027,9 +1025,6 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label class="control-label">Offered Candidate Status</label>
-                                                                    <input type="text" placeholder="Offered Candidate Status" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.OfferedCandidateStatus"
-                                                                    />
 
                                                                 </div>
                                                             </div>
@@ -1051,7 +1046,7 @@
                                                         </div>
                                                         <div class="margiv-top-10">
                                                             <button type="submit" class="btn green"> Save Changes </button>
-                                                            <a href="javascript:;" class="btn default" [routerLink]="['/App/ProfileBank/CompanyProfiles']"> Cancel </a>
+                                                            <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
                                                         </div>
                                                     </form>
                                                 </div>

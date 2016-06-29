@@ -106,8 +106,8 @@ export class Skills {
 
 export class SalaryDetails {
   public CandidateID: string;
-  public CurrentSalary: number;
-  public ExpectedSalary: string;
+  public CurrentSalary: string='';
+  public ExpectedSalary: string='';
   public TakeHomePay: number;
   public AnyPerks: string;
   public CTCIncludeVariable: any;
@@ -121,7 +121,7 @@ export class OtherDetails {
   public AppliedEarlier: any;
   public AppraisalBondContractDetails: string;
   public Visa: MasterData = new MasterData();
-  public NoticePeriod: string;
+  public NoticePeriod: string = '';
   public RoleExpected: string;
   public ResignedStatusOfOfferedCandidate: string;
   public JobSerachPeriod: string;

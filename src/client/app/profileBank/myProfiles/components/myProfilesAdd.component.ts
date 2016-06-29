@@ -13,7 +13,8 @@ import { ProfileBankService} from  '../../shared/services/profileBank.service';
 @Component({
     moduleId: module.id,
     selector: 'rrf-myprofiles-add',
-    templateUrl: 'myProfilesAdd.component.html',
+    //templateUrl: 'myProfilesAdd.component.html',
+    templateUrl: '../../shared/views/profileBankAdd.component.html',
     directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
     styleUrls: ['myProfiles.component.css']
 })
@@ -40,7 +41,7 @@ export class MyProfilesAddComponent implements OnActivate {
     CurrentYear: number;
     selectedVisa: MasterData = new MasterData();
     VisaType: Array<MasterData> = new Array<MasterData>();
-
+    TITLE: string = 'Profiles';
 
     constructor(private _myProfilesService: MyProfilesService,
         private _masterService: MastersService,
@@ -368,68 +369,41 @@ export class MyProfilesAddComponent implements OnActivate {
         }
     }
 
-    onAddQualification(): void {
-        //   Add New Qualification
-        if (this.qualification.QualificationID === undefined) {
-            this.qualification.CandidateID = this.profile.CandidateID;
+     onAddQualification(): void {
+        this.qualification.CandidateID = this.profile.CandidateID;
+        this.qualification.Qualification.Value = this.qualification.Grade.Value = null;
+        if (this.selectedQualification !== undefined) {
+            this.qualification.Qualification = new MasterData();
             this.qualification.Qualification.Id = this.selectedQualification;
-            this.qualification.Grade.Id = this.selectedGrade;
-            this.qualification.Qualification.Value = this.qualification.Grade.Value = null;
-
-            if (this.params) {
-                this._profileBankService.addCandidateQualification(this.qualification)
-                    .subscribe(
-                    results => {
-
-                        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                            this.toastr.success((<ResponseFromAPI>results).Message);
-                            this.createQualification();
-                            this.getCandidateQualification();
-                        } else {
-                            this.toastr.error((<ResponseFromAPI>results).Message);
-                        }
-                    },
-                    error => {
-                        this.errorMessage = <any>error;
-                        this.toastr.error(<any>error);
-                    });
-            }
         } else {
-            //update Qualification
-            if (this.selectedQualification !== undefined) {
-                this.qualification.Qualification = new MasterData();
-                this.qualification.Qualification.Id = this.selectedQualification;
-            } else {
-                this.qualification.Qualification.Id = this.qualification.Qualification.Id;
-            }
+            this.qualification.Qualification.Id = this.qualification.Qualification.Id;
+        }
 
-            if (this.selectedGrade !== undefined) {
-                this.qualification.Grade = new MasterData();
-                this.qualification.Grade.Id = this.selectedGrade;
-            } else {
-                this.qualification.Grade.Id = this.qualification.Grade.Id;
-            }
+        if (this.selectedGrade !== undefined) {
+            this.qualification.Grade = new MasterData();
+            this.qualification.Grade.Id = this.selectedGrade;
+        } else {
+            this.qualification.Grade.Id = this.qualification.Grade.Id;
+        }
 
+        if (this.params) {
+            this._profileBankService.addCandidateQualification(this.qualification)
+                .subscribe(
+                results => {
 
-            if (this.params) {
-                this._profileBankService.editCandidateQualification(this.qualification)
-                    .subscribe(
-                    results => {
-                        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                            this.toastr.success((<ResponseFromAPI>results).Message);
-                            this.createQualification();
-                            this.IsHidden = true;
-                            this.getCandidateQualification();
-                        } else {
-                            this.toastr.error((<ResponseFromAPI>results).Message);
-                        }
-                    },
-                    error => {
-                        this.errorMessage = <any>error;
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
                         this.createQualification();
-                        this.toastr.error(<any>error);
-                    });
-            }
+                        this.IsHidden = true;
+                        this.getCandidateQualification();
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
+                });
         }
     }
 
@@ -454,6 +428,7 @@ export class MyProfilesAddComponent implements OnActivate {
                 .subscribe(
                 (results: Qualification) => {
                     this.qualification = results;
+                    this.IsHidden = false;
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -461,5 +436,7 @@ export class MyProfilesAddComponent implements OnActivate {
                 });
         }
     }
-
+      Back() {
+        this._router.navigate(['/App/ProfileBank/MyProfiles']);
+    }
 }

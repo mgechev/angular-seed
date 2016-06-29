@@ -6,7 +6,8 @@ import { ProfileBankService } from '../../shared/services/profilebank.service';
 @Component({
     moduleId: module.id,
     selector: 'rrf-blacklistedprofiles-view',
-    templateUrl: 'blackListedProfilesView.component.html',
+    //templateUrl: 'blackListedProfilesView.component.html',
+    templateUrl: '../../shared/views/profileBankView.component.html',
     directives: [ROUTER_DIRECTIVES],
     styleUrls: ['../../allProfiles/components/allProfilesView.component.css']
 })
@@ -75,6 +76,9 @@ export class BlackListedProfilesViewComponent implements OnActivate {
         } else {
             this.profile.CandidateSalaryDetails.CTCIncludeVariable = 'No';
         }
+    }
+    Back() {
+        this._router.navigate(['/App/ProfileBank/BlackListedProfiles']);
     }
 
 }

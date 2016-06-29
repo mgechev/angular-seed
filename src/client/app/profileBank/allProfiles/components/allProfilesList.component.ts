@@ -12,20 +12,23 @@ import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { DataSharedService } from '../../shared/services/DataShared.service';
 import { ProfileBankService } from '../../shared/services/profilebank.service';
 import {PAGINATION_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
-
+import {ProfileFilterPipe,ProfileStatusFilterPipe, ProfileNoticePeriodFilterPipe,
+    ProfileExpectedSalaryFilterPipe,ProfileSalaryFilterPipe} from './allProfilesPipe.component';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-allprofiles-list',
     templateUrl: 'allProfilesList.component.html',
-    directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES,PAGINATION_DIRECTIVES],
-    styleUrls: ['../../myProfiles/components/myProfiles.component.css']
+    directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES, PAGINATION_DIRECTIVES],
+    styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
+    pipes: [ProfileFilterPipe, ProfileSalaryFilterPipe,ProfileStatusFilterPipe
+            ,ProfileNoticePeriodFilterPipe,ProfileExpectedSalaryFilterPipe]
 })
 
 
 export class AllProfilesListComponent implements OnActivate {
     allProfilesList: Array<MyProfilesInfo>;
-    allProfilesList_1 : Array<MyProfilesInfo>;
+    allProfilesList_1: Array<MyProfilesInfo>;
     profile: MyProfilesInfo;
     statusList: Array<MasterData>;
     seletedCandidateID: string;
@@ -58,7 +61,6 @@ export class AllProfilesListComponent implements OnActivate {
     routerOnActivate() {
         this.getLoggedInUser();
         this.getAllProfiles();
-
         this.getCandidateStatuses();
     }
 
@@ -69,7 +71,6 @@ export class AllProfilesListComponent implements OnActivate {
                 this.currentUser = results;
             },
             error => this.errorMessage = <any>error);
-
     }
 
     getAllProfiles() {
@@ -99,10 +100,20 @@ export class AllProfilesListComponent implements OnActivate {
 
     SaveCandidateID(id: string) {
         this.seletedCandidateID = id;
+
         var index = _.findIndex(this.allProfilesList, { CandidateID: this.seletedCandidateID });
-        this.profile.Comments = this.allProfilesList[index].Comments;
-        this.profile.Status = this.allProfilesList[index].Status;
+        // this.profile.Comments = this.allProfilesList[index].Comments;
+        // this.profile.Status = this.allProfilesList[index].Status;
         this.currentCandidate = this.allProfilesList[index].Candidate;
+        this._profileBankService.getStatusById(id)
+            .subscribe(
+            (results: any) => {
+                this.profile.Comments = results.Comments;
+                this.profile.Status = results.Status;
+            },
+            error => this.toastr.error(<any>error));
+
+
         if (this.isCollapsed === false)
             this.isCollapsed = !this.isCollapsed;
     }
@@ -124,6 +135,8 @@ export class AllProfilesListComponent implements OnActivate {
     }
 
     onUpdateStauts() {
+        if (this.selectedStatus.Id === undefined)
+            this.selectedStatus = this.profile.Status;
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             (results: ResponseFromAPI) => {
@@ -213,11 +226,9 @@ export class AllProfilesListComponent implements OnActivate {
             .subscribe(
             (results: any) => {
                 this.url = results;
-
             },
             error => this.toastr.error(<any>error));
-
     }
-   
+
 }
 

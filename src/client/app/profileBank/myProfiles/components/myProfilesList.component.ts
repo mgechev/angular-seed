@@ -98,13 +98,13 @@ export class MyProfilesListComponent implements OnActivate {
 
     onSave(): void {
         if (this.chkValidations()) {
-            if (this.fileName === '') {
+            if (this.fileName === '' || this.fileName === undefined) {
                 this._myProfilesService.addCandidateProfile(this.profile)
                     .subscribe(
                     results => {
                         if ((<AddCandidateResponse>results).StatusCode === APIResult.Success) {
-                            this.toastr.success((<ResponseFromAPI>results).Message);
                             this.getMyProfiles();
+                            this.toastr.success((<ResponseFromAPI>results).Message);
                         } else {
                             this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                         }

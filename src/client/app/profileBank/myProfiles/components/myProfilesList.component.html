@@ -310,7 +310,7 @@
                                                         </button>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li>
-                                                        <a [routerLink]="['/App/ProfileBank/MyProfiles/Edit/'+myprofile.CandidateID]">
+                                                        <a [routerLink]="['/App/ProfileBank/MyProfiles/Edit/'+ myprofile.CandidateID]">
                                                             <i class="icon-user"></i> Edit Profile </a>
                                                     </li>
                                                     <li class="divider"> </li>
@@ -333,8 +333,8 @@
                                                     </li>
                                                    <li class="divider"> </li>
                                                     <li>
-                                                        <a  (click)='redirectToView(profile.CandidateID)'>
-                                                            <i class="fa fa-search"></i> View RRF
+                                                        <a  (click)='redirectToView(myprofile.CandidateID)'>
+                                                            <i class="fa fa-search"></i> View Profile
                                                         </a>
                                                     </li>
                                                 </ul>

@@ -12,8 +12,8 @@ import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 @Component({
     moduleId: module.id,
     selector: 'rrf-allprofiles-add',
-    templateUrl: 'allProfilesAdd.component.html',
-    // templateUrl: '../../shared/views/profileBankAdd.component.html',
+   // templateUrl: 'allProfilesAdd.component.html',
+    templateUrl: '../../shared/views/profileBankAdd.component.html',
     directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
@@ -99,7 +99,7 @@ export class AllProfilesAddComponent implements OnActivate {
             (results: MyProfilesInfo) => {
                 //  if (this.currentUser.Id === results.Owner.Id) {
                 this.profile = results;
-                if(results.Country.Id !== 0)
+                if (results.Country.Id !== 0)
                     this.getStates(results.Country.Id);
                 // } else {
                 //     this._router.navigate(['/App/ProfileBank/AllProfiles/']);
@@ -392,66 +392,40 @@ export class AllProfilesAddComponent implements OnActivate {
     }
 
     onAddQualification(): void {
-        //   Add New Qualification
-        if (this.qualification.QualificationID === undefined) {
-            this.qualification.CandidateID = this.profile.CandidateID;
+        this.qualification.CandidateID = this.profile.CandidateID;
+        this.qualification.Qualification.Value = this.qualification.Grade.Value = null;
+        if (this.selectedQualification !== undefined) {
+            this.qualification.Qualification = new MasterData();
             this.qualification.Qualification.Id = this.selectedQualification;
-            this.qualification.Grade.Id = this.selectedGrade;
-            this.qualification.Qualification.Value = this.qualification.Grade.Value = null;
-
-            if (this.params) {
-                this._profileBankService.addCandidateQualification(this.qualification)
-                    .subscribe(
-                    results => {
-
-                        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                            this.toastr.success((<ResponseFromAPI>results).Message);
-                            this.createQualification();
-                            this.getCandidateQualification();
-                        } else {
-                            this.toastr.error((<ResponseFromAPI>results).Message);
-                        }
-                    },
-                    error => {
-                        this.errorMessage = <any>error;
-                        this.toastr.error(<any>error);
-                    });
-            }
         } else {
-            //update Qualification
-            if (this.selectedQualification !== undefined) {
-                this.qualification.Qualification = new MasterData();
-                this.qualification.Qualification.Id = this.selectedQualification;
-            } else {
-                this.qualification.Qualification.Id = this.qualification.Qualification.Id;
-            }
+            this.qualification.Qualification.Id = this.qualification.Qualification.Id;
+        }
 
-            if (this.selectedGrade !== undefined) {
-                this.qualification.Grade = new MasterData();
-                this.qualification.Grade.Id = this.selectedGrade;
-            } else {
-                this.qualification.Grade.Id = this.qualification.Grade.Id;
-            }
+        if (this.selectedGrade !== undefined) {
+            this.qualification.Grade = new MasterData();
+            this.qualification.Grade.Id = this.selectedGrade;
+        } else {
+            this.qualification.Grade.Id = this.qualification.Grade.Id;
+        }
 
-            if (this.params) {
-                this._profileBankService.editCandidateQualification(this.qualification)
-                    .subscribe(
-                    results => {
-                        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                            this.toastr.success((<ResponseFromAPI>results).Message);
-                            this.createQualification();
-                            this.IsHidden = true;
-                            this.getCandidateQualification();
-                        } else {
-                            this.toastr.error((<ResponseFromAPI>results).Message);
-                        }
-                    },
-                    error => {
-                        this.errorMessage = <any>error;
+        if (this.params) {
+            this._profileBankService.addCandidateQualification(this.qualification)
+                .subscribe(
+                results => {
+
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
                         this.createQualification();
-                        this.toastr.error(<any>error);
-                    });
-            }
+                        this.IsHidden = true;
+                        this.getCandidateQualification();
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
+                });
         }
     }
 
@@ -484,6 +458,7 @@ export class AllProfilesAddComponent implements OnActivate {
                 .subscribe(
                 (results: Qualification) => {
                     this.qualification = results;
+                    this.IsHidden = false;
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -491,7 +466,7 @@ export class AllProfilesAddComponent implements OnActivate {
                 });
         }
     }
-    redirectToAllProfiles() {
+    Back() {
         this._router.navigate(['/App/ProfileBank/AllProfiles']);
     }
 

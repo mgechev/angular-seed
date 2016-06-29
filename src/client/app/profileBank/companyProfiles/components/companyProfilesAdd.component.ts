@@ -11,7 +11,8 @@ import { ProfileBankService } from '../../shared/services/profilebank.service';
 @Component({
     moduleId: module.id,
     selector: 'rrf-company-profile-add',
-    templateUrl: 'CompanyProfilesAdd.component.html',
+   // templateUrl: 'CompanyProfilesAdd.component.html',
+    templateUrl: '../../shared/views/profileBankAdd.component.html',
     directives: [ROUTER_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
@@ -25,7 +26,7 @@ export class CompanyProfilesAddComponent implements OnActivate {
 
     countries: Array<MasterData>;
     states: Array<MasterData>;
-  
+
 
     qualifications: Array<MasterData>;
     grades: Array<MasterData>;
@@ -44,6 +45,7 @@ export class CompanyProfilesAddComponent implements OnActivate {
 
     IsHidden: boolean = true;
     IsSuccess: boolean = false;
+    TITLE: string = 'Company Profiles';
 
     constructor(private _CompanyProfilesService: CompanyProfilesService,
         private _router: Router,
@@ -77,9 +79,9 @@ export class CompanyProfilesAddComponent implements OnActivate {
     getCandidateProfileById(profileId: string) {
         this._profileBankService.getCandidateProfile(profileId)
             .subscribe(
-            (results :MyProfilesInfo) => {
+            (results: MyProfilesInfo) => {
                 this.profile = <MyProfilesInfo>results;
-                if(results.Country.Id !== 0)
+                if (results.Country.Id !== 0)
                     this.getStates(results.Country.Id);
                 //this.convertCheckboxesValuesToBoolean();
             },
@@ -96,21 +98,12 @@ export class CompanyProfilesAddComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    getStates(CountryId:number): void {
+    getStates(CountryId: number): void {
         this._masterService.getStates(CountryId)
             .subscribe(
             results => {
                 this.states = results;
 
-            },
-            error => this.errorMessage = <any>error);
-    }
-
-    getDistricts(): void {
-        this._masterService.getDistricts()
-            .subscribe(
-            results => {
-                this.districts = results;
             },
             error => this.errorMessage = <any>error);
     }
@@ -463,5 +456,9 @@ export class CompanyProfilesAddComponent implements OnActivate {
                     this.toastr.error(<any>error);
                 });
         }
+    }
+
+    Back() {
+        this._router.navigate(['/App/ProfileBank/CompanyProfiles']);
     }
 }

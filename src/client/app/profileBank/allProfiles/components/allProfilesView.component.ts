@@ -6,7 +6,8 @@ import { ProfileBankService } from '../../shared/services/profilebank.service';
 @Component({
     moduleId: module.id,
     selector: 'rrf-allprofiles-view',
-    templateUrl: 'allProfilesView.component.html',
+   // templateUrl: 'allProfilesView.component.html',
+    templateUrl: '../../shared/views/profileBankView.component.html',
     directives: [ROUTER_DIRECTIVES],
     styleUrls: ['allProfilesView.component.css']
 })
@@ -15,6 +16,7 @@ export class AllProfilesViewComponent implements OnActivate {
     errorMessage: string;
     profile: MyProfilesInfo;
     count:number=0;
+    TITLE : string ='All Profiles';
     constructor(private _profileBankService: ProfileBankService,
         private _router: Router) {
         this.profile = new MyProfilesInfo();
@@ -75,5 +77,9 @@ export class AllProfilesViewComponent implements OnActivate {
         } else {
             this.profile.CandidateSalaryDetails.CTCIncludeVariable = 'No';
         }
+    }
+
+    Back() {
+        this._router.navigate(['/App/ProfileBank/AllProfiles']);
     }
 }
