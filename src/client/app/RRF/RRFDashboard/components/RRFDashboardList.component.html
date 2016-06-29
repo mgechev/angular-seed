@@ -96,7 +96,7 @@
                         <div class="row" *ngIf='closeRRFID != 0'>
                             <div class="col-lg-9">
                                 <textarea class="form-control" id="txtCloseComment" rows="1" [(ngModel)]='closeComment' placeholder="close Comment" style="resize:vertical"
-                                required=""></textarea>
+                                    required=""></textarea>
                             </div>
                             <div class="col-lg-3">
                                 <button id="btnClose" class="btn blue" (click)="onbtnCloseRRF()">Close RRF</button>
@@ -108,7 +108,7 @@
                         <!-- BEGIN LIST OF RRF  -->
                         <div class="table-scrollable">
                             <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" role="grid"
-                            aria-describedby="sample_1_info">
+                                aria-describedby="sample_1_info">
                                 <thead style="word-wrap: break-word;">
                                     <tr>
                                         <!--<td width="20%"> <b>Raised by / Date</b> </td>
@@ -184,25 +184,27 @@
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li>
-                                                        <a [routerLink]="['/App/RRF/MyRRF/Edit/'+rrf.RRFID]">
-                                                            <i class="fa fa-edit"></i> Edit RRF </a>
-                                                    </li>
-                                                    <li class="divider"> </li>
-                                                    <li (click)='showRRFDetails(rrf.RRFID)'>
-                                                        <a>
-                                                            <i class="fa fa-search-plus"></i> View RRF </a>
+                                                        <button class="btn btn-default btnLink" (click)='redirectToEditRRF(rrf.RRFID)'  [disabled]='checkIfRRFClosed(rrf.Status.Value)'>
+                                                            <i class="fa fa-edit"></i> Edit RRF 
+                                                        </button>
                                                     </li>
                                                     <li class="divider"> </li>
                                                     <li>
-                                                        <a [routerLink]="['/App/RRF/RRFDashboard/Assign/'+rrf.RRFID]">
-                                                            <i class="icon-user"></i> Assign RRF
-                                                        </a>
+                                                        <button class="btn btn-default btnLink" (click)='showRRFDetails(rrf.RRFID)'>
+                                                            <i class="fa fa-search-plus"></i> View RRF
+                                                        </button>
                                                     </li>
                                                     <li class="divider"> </li>
-                                                    <li (click)='onCloseRRFClick(rrf.RRFID)'>
-                                                        <a>
+                                                    <li>
+                                                        <button class="btn btn-default btnLink" (click)='redirectToAssignRRF(rrf.RRFID)' [disabled]='checkIfRRFClosed(rrf.Status.Value)'>
+                                                            <i class="icon-user"></i> Assign RRF
+                                                        </button>
+                                                    </li>
+                                                    <li class="divider"> </li>
+                                                    <li>
+                                                        <button class="btn btn-default btnLink" (click)='onCloseRRFClick(rrf.RRFID)' [disabled]='checkIfRRFClosed(rrf.Status.Value)'>
                                                             <i class="fa fa-times"></i> Close RRF
-                                                        </a>
+                                                        </button>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -333,7 +335,7 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr class="odd gradeX" *ngFor='let panel of selectedRRF.Panel'>
-                                                                        <td> 
+                                                                        <td>
                                                                             {{panel.RoundNumber.Value}}
 
                                                                         </td>

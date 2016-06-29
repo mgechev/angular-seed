@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
+import { OnActivate, ROUTER_DIRECTIVES,Router } from '@angular/router';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
 import { RRFDetails, AllRRFStatusCount  } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
@@ -36,7 +36,7 @@ export class RRFDashboardListComponent implements OnActivate {
     // doughnutChartType: string = 'doughnut';
 
     constructor(private _rrfDashboardService: RRFDashboardService,
-        private _myRRFService: MyRRFService,
+        private _myRRFService: MyRRFService,private _router: Router,
         public toastr: ToastsManager) {
     }
 
@@ -166,6 +166,25 @@ export class RRFDashboardListComponent implements OnActivate {
 
     getPriorityClass(priority: string): string {
         return 'priority' + priority;
+    }
+
+    checkIfRRFClosed(status : string) {
+        try {
+            if(status.toLowerCase() === 'closed') {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(error) {
+            return false;
+        }
+    }
+
+    redirectToAssignRRF(rrfID : string) {
+        this._router.navigate(['/App/RRF/RRFDashboard/Assign/'+rrfID]);
+    }
+    redirectToEditRRF(rrfID : string) {
+        this._router.navigate(['/App/RRF/MyRRF/Edit/'+rrfID]);
     }
 
 }

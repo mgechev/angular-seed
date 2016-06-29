@@ -74,7 +74,7 @@
                                     <td> <b>Requirments </b></td>
                                     <td> <b>Priority</b></td>
                                     <td> <b>Status </b></td>
-                                    <td> <b>Approver</b></td>
+                                    <!--<td> <b>Approver</b></td>-->
                                 </tr>
                             </thead>
                             <tbody>
@@ -120,12 +120,12 @@
                                             <span class="mt-action-dot {{rrf.Status.Value}}"></span>{{rrf.Status.Value}}
                                         </div>
                                     </td>
-                                    <td>
+                                    <!--<td>
                                         <div *ngFor="let Approver of rrf.RRFApproval">
                                             {{Approver.Approver.Value}} :{{Approver.Status}}
                                         </div>
 
-                                    </td>
+                                    </td>-->
                                 </tr>
                             </tbody>
                         </table>

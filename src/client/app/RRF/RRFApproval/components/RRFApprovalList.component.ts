@@ -82,10 +82,12 @@ export class RRFApprovalListComponent implements OnActivate {
 
     onStatusReject(): void {
         this.onStatusChange('Rejected');
+        this.getRRFApprovalList();
     }
 
     onStatusApprove(): void {
         this.onStatusChange('Approved');
+        this.getRRFApprovalList();
     }
 
     onStatusChange(status: string): void {

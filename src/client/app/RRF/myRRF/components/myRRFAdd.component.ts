@@ -18,7 +18,7 @@ import {BUTTON_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
     moduleId: module.id,
     selector: 'rrf-myrrf-add',
     templateUrl: 'myRRFAdd.component.html',
-    directives: [ROUTER_DIRECTIVES, SELECT_DIRECTIVES, NgClass, CORE_DIRECTIVES, FORM_DIRECTIVES, BUTTON_DIRECTIVES,TOOLTIP_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, SELECT_DIRECTIVES, NgClass, CORE_DIRECTIVES, FORM_DIRECTIVES, BUTTON_DIRECTIVES, TOOLTIP_DIRECTIVES],
     providers: [ToastsManager]
 })
 
@@ -39,6 +39,7 @@ export class MyRRFAddComponent implements OnActivate {
     updatePanel: boolean = false;
     editPanelData: Panel = new Panel();
     RRFId: string;
+    ExpDateOfJoining: any;
 
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
@@ -97,10 +98,11 @@ export class MyRRFAddComponent implements OnActivate {
 
     raiseRRF(): void {
         this.setSkillToObject();
+        if(this.newRRF.MinExp <= this.newRRF.MaxExp) {
         this._myRRFService.raiseRRF(this.newRRF)
             .subscribe(
             results => {
-                if ( (<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message, 'Success!');
                     this._router.navigate(['/App/RRF/RRFDashboard/']);
                 } else {
@@ -108,6 +110,9 @@ export class MyRRFAddComponent implements OnActivate {
                 }
             },
             error => this.errorMessage = <any>error);
+        } else {
+            this.toastr.error('MinExp should be less than MaxExp');
+        }
     }
 
     onCancelClick(): void {
@@ -267,8 +272,9 @@ export class MyRRFAddComponent implements OnActivate {
     getRRFByID(rrfId: string) {
         this._myRRFService.getRRFByID(rrfId)
             .subscribe(
-            results => {
-                this.newRRF = <any>results;
+            (results: RRFDetails) => {
+                this.newRRF = results;
+                this.ExpDateOfJoining = this.formatDate(results.ExpDateOfJoining);
                 this.setSkillDropdown();
             },
             error => this.errorMessage = <any>error);
@@ -308,4 +314,15 @@ export class MyRRFAddComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
+    formatDate(date: any) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
 }

@@ -46,4 +46,10 @@
   height: 250px;
   font-size: 11px;
 }
+.btnLink{
+  text-align: left !important;
+  width: 100%;
+  border: white !important;
+  color: #888888;
+}
 
