@@ -18,7 +18,7 @@ The subfolders provide further folders to distinguish between files which are pr
 
 ## Configuration
 
-The configuration of the seed contains of a basic configuration provided by `/config/seed.config.ts` file. You can add you own custom configuration within the `/config/project.config.ts` file, which extends the seed configuration.
+The configuration of the seed contains of a basic configuration provided by `/config/seed.config.ts` file. You can add your own custom configuration within the `/config/project.config.ts` file, which extends the seed configuration.
 
 ## Manual Typings
 
