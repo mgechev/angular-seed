@@ -1,5 +1,5 @@
 
-.Approved {
+/*.Approved {
   background: #32c5d2;
 }
 .On-Hold {
@@ -11,12 +11,35 @@
 .Open {
   background: #e7505a;
 }
-.closed {
+.Closed {
   background: #41ce29;
 }
 .PendingApproval {
   background: rgba(233, 239, 11, 0.98);
+}*/
+
+/*Pending Approval 1
+Open 2
+Rejected 3
+Assigned 4
+Closed 5*/
+
+.status1 {
+  background: #E9EF0B;
 }
+.status2 {
+  background: #32c5d2;
+}
+.status3 {
+  background: #e7505a;
+}
+.status4 {
+  background: #c2cad8;
+}
+.status5 {
+  background: #41ce29;
+}
+
 
 .priority1 {
   background: #e7505a;
@@ -52,4 +75,9 @@
   border: white !important;
   color: #888888;
 }
+
+.chart {
+    display: block; 
+    width: 50%;
+ }
 

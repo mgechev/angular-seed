@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
-import { OnActivate, ROUTER_DIRECTIVES,Router } from '@angular/router';
+import { OnActivate, ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
 import { RRFDetails, AllRRFStatusCount  } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 import {RRFIDPipe } from './RRFIdFilter.component';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult } from  '../../../shared/constantValue/index';
+import { APIResult, RRFStatus } from  '../../../shared/constantValue/index';
 import { ResponseFromAPI } from '../../../shared/model/common.model';
 
 @Component({
@@ -25,18 +25,24 @@ export class RRFDashboardListComponent implements OnActivate {
     errorMessage: string;
     selectedRRF: RRFDetails = new RRFDetails();
     isListVisible: boolean = true;
-    rrfStatusCount: AllRRFStatusCount = new AllRRFStatusCount();
+    rrfStatusCount: AllRRFStatusCount[] = [];
     currentView: string = 'myRRF';
     closeComment: string = '';
     closeRRF: boolean = false;
     closeRRFID: number = 0;
+    isChartVisible: boolean = false;
 
-    // doughnutChartLabels: string[] = ['ABC', 'BBB', 'CCC' , 'DDD'];
-    // doughnutChartData: number[] = [100, 100, 100 ,200];
-    // doughnutChartType: string = 'doughnut';
+    doughnutChartLabels: string[] = []
+    doughnutChartData: number[] = [];
+    doughnutChartType: string = 'doughnut'; //doughnut
+    doughnutChartColors: any[] = [{ backgroundColor: [] }];
+    doughnutChartOptions: any = {
+        animation: false,
+        responsive: true
+    };
 
     constructor(private _rrfDashboardService: RRFDashboardService,
-        private _myRRFService: MyRRFService,private _router: Router,
+        private _myRRFService: MyRRFService, private _router: Router,
         public toastr: ToastsManager) {
     }
 
@@ -84,6 +90,7 @@ export class RRFDashboardListComponent implements OnActivate {
             .subscribe(
             results => {
                 this.rrfStatusCount = <any>results;
+                this.setValueToChart();
             },
             error => this.errorMessage = <any>error);
     }
@@ -93,8 +100,41 @@ export class RRFDashboardListComponent implements OnActivate {
             .subscribe(
             results => {
                 this.rrfStatusCount = <any>results;
+                this.setValueToChart();
             },
             error => this.errorMessage = <any>error);
+    }
+
+    setValueToChart() {
+        this.doughnutChartLabels = [];
+        this.doughnutChartData = [];
+        var chartColor: any[] = [];
+        // doughnutChartColors: any[] = [{ backgroundColor: ["#E9EF0B", "#32c5d2" , "#e7505a" , "#c2cad8" , "#41ce29"] }];
+        this.isChartVisible = false;
+        for (var index = 0; index < this.rrfStatusCount.length; index++) {
+            this.doughnutChartLabels.push(this.rrfStatusCount[index].Status.Value);
+            this.doughnutChartData.push(this.rrfStatusCount[index].Count);
+            chartColor.push(this.getChartColor(this.rrfStatusCount[index].Status.Id));
+            this.isChartVisible = true;
+        }
+        this.doughnutChartColors[0].backgroundColor = chartColor;
+    }
+
+    getChartColor(statusID: number): string {
+        switch (statusID) {
+            case RRFStatus.PendingApproval:
+                return '#E9EF0B';
+            case RRFStatus.Open:
+                return '#32c5d2';
+            case RRFStatus.Rejected:
+                return '#e7505a';
+            case RRFStatus.Assigned:
+                return '#c2cad8';
+            case RRFStatus.Closed:
+                return '#41ce29';
+            default:
+                return '';
+        }
     }
 
     getRRFDetails(rrfID: string) {
@@ -168,23 +208,28 @@ export class RRFDashboardListComponent implements OnActivate {
         return 'priority' + priority;
     }
 
-    checkIfRRFClosed(status : string) {
+    getStatusClass(statusID: number): string {
+        return 'status' + statusID;
+    }
+
+
+    checkIfRRFClosed(status: string) {
         try {
-            if(status.toLowerCase() === 'closed') {
+            if (status.toLowerCase() === 'closed') {
                 return true;
             } else {
                 return false;
             }
-        } catch(error) {
+        } catch (error) {
             return false;
         }
     }
 
-    redirectToAssignRRF(rrfID : string) {
-        this._router.navigate(['/App/RRF/RRFDashboard/Assign/'+rrfID]);
+    redirectToAssignRRF(rrfID: string) {
+        this._router.navigate(['/App/RRF/RRFDashboard/Assign/' + rrfID]);
     }
-    redirectToEditRRF(rrfID : string) {
-        this._router.navigate(['/App/RRF/MyRRF/Edit/'+rrfID]);
+    redirectToEditRRF(rrfID: string) {
+        this._router.navigate(['/App/RRF/MyRRF/Edit/' + rrfID]);
     }
 
 }

@@ -17,15 +17,11 @@ export class AssignmentDetails {
 }
 
 export class AllRRFStatusCount {
-    public PendingApproval: number;
-    public Rejected: number;
-    public Open: number;
-    public Assigned: number;
-    public InProgress: number;
-    public ClosureApproval: number;
-    public Closed: number;
-    public OnHold: number;
+    public Count : number;
+    public Status : MasterData = new MasterData();
 }
+
+
 
 export class RRFApproval {
     Approver: MasterData = new MasterData();

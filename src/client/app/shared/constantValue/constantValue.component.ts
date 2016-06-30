@@ -4,12 +4,10 @@
 
 export class RRFStatus {
     public static get PendingApproval(): number { return 1; };
-    public static get Rejected(): number { return 2; };
-    public static get Open(): number { return 3; };
+    public static get Open(): number { return 2; };
+    public static get Rejected(): number { return 3; };
     public static get Assigned(): number { return 4; };
-    public static get InProgress(): number { return 5; };
-    public static get ClosureApproval(): number { return 6; };
-    public static get Closed(): number { return 7; };
+    public static get Closed(): number { return 5; };
 }
 
 export class APIResult {
