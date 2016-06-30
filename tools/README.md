@@ -75,10 +75,10 @@ The seed provides the following utilities:
 
 | Filename               | Description |
 | :--------------------- | :---------- |
-| `clean.ts`             | Provides an utility to clean files and directories |
+| `clean.ts`             | Provides a utility to clean files and directories |
 | `code_change_tools.ts` | Provides utilites to make use of BrowserSync to refresh the browser after a code change |
 | `server.ts`            | Provides utilites to start `express` servers for the application, the documentation and the unit test coverage |
 | `task_tools.ts`        | Provides utilites to start tasks (matching task names as string input parameters from the `gulpfile.ts` to the corresponding files) |
-| `template_locals.ts`   | Provides an utiltiy for template locals |
-| `tsproject.ts`         | Provides an utility to configure the TypeScript transpilation |
-| `watch.ts`             | Provides an utility to watch for file changes and notify live reloads |
+| `template_locals.ts`   | Provides a utiltiy for template locals |
+| `tsproject.ts`         | Provides a utility to configure the TypeScript transpilation |
+| `watch.ts`             | Provides a utility to watch for file changes and notify live reloads |
