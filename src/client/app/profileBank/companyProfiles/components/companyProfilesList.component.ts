@@ -77,12 +77,22 @@ export class CompanyProfilesListComponent implements OnActivate {
         this._router.navigate(['/App/ProfileBank/companyProfiles/Edit/' + CandidateID]);
 
     }
-    SaveCandidateID(id: string) {
+     SaveCandidateID(id: string) {
         this.seletedCandidateID = id;
+
         var index = _.findIndex(this.companyProfilesList, { CandidateID: this.seletedCandidateID });
-        this.profile.Comments = this.companyProfilesList[index].Comments;
-        this.profile.Status = this.companyProfilesList[index].Status;
+        // this.profile.Comments = this.allProfilesList[index].Comments;
+        // this.profile.Status = this.allProfilesList[index].Status;
         this.currentCandidate = this.companyProfilesList[index].Candidate;
+        this._profileBankService.getStatusById(id)
+            .subscribe(
+            (results: any) => {
+                this.profile.Comments = results.Comments;
+                this.profile.Status = results.Status;
+            },
+            error => this.toastr.error(<any>error));
+
+             window.scrollTo(0, 40);
         if (this.isCollapsed === false)
             this.isCollapsed = !this.isCollapsed;
     }
@@ -102,6 +112,9 @@ export class CompanyProfilesListComponent implements OnActivate {
 
 
     onUpdateStauts() {
+          if (this.selectedStatus.Id === undefined)
+            this.selectedStatus = this.profile.Status;
+     
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {

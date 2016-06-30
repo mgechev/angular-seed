@@ -7,8 +7,8 @@ import { ProfileBankService } from '../../shared/services/profilebank.service';
     moduleId: module.id,
     selector: 'rrf-allprofiles-view',
     //templateUrl: 'recentProfilesView.component.html',
-        templateUrl: '../../shared/views/profileBankView.component.html',
-
+    templateUrl: '../../shared/views/profileBankView.component.html',
+    providers: [ProfileBankService],
     directives: [ROUTER_DIRECTIVES],
     styleUrls: ['../../allProfiles/components/allProfilesView.component.css']
 })

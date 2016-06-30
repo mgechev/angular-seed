@@ -66,7 +66,7 @@
   background: #1bbc9b;
 }
 .color4 {
-  background: black;
+  background: darkblue;
 }
 .color5 {
   background: #00f00d;
@@ -84,7 +84,10 @@
   background: coral;
 }
 .color10 {
-  background: darkblue;
+  background: black;
+}
+.color12 {
+  background: crimson;
 }
 .addNew,
 .fileInput {
@@ -189,4 +192,9 @@ border-bottom: 0px;
 }
 .updatebtn{
   margin-left: 68px;
+}
+.header {
+  color: gray;
+    margin-left: 5px;
+    font-family: Verdana;
 }

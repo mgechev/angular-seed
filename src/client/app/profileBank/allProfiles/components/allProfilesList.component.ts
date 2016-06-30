@@ -102,8 +102,6 @@ export class AllProfilesListComponent implements OnActivate {
         this.seletedCandidateID = id;
 
         var index = _.findIndex(this.allProfilesList, { CandidateID: this.seletedCandidateID });
-        // this.profile.Comments = this.allProfilesList[index].Comments;
-        // this.profile.Status = this.allProfilesList[index].Status;
         this.currentCandidate = this.allProfilesList[index].Candidate;
         this._profileBankService.getStatusById(id)
             .subscribe(
@@ -113,7 +111,8 @@ export class AllProfilesListComponent implements OnActivate {
             },
             error => this.toastr.error(<any>error));
 
-
+        //Auto Scroll up
+        window.scrollTo(0, 40);
         if (this.isCollapsed === false)
             this.isCollapsed = !this.isCollapsed;
     }

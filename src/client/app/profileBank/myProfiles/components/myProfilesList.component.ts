@@ -61,7 +61,7 @@ export class MyProfilesListComponent implements OnActivate {
         public toastr: ToastsManager,
         private _masterService: MastersService) {
         this.psdTemplates = new Array<File>();
-        this.resumeFiles =  new Array<File>();
+        this.resumeFiles = new Array<File>();
         this.profile = new MyProfilesInfo();
         this.resumeMeta = new ResumeMeta();
     }
@@ -73,12 +73,25 @@ export class MyProfilesListComponent implements OnActivate {
 
     SaveCandidateID(id: string) {
         this.seletedCandidateID = id;
+
         var index = _.findIndex(this.myProfilesList, { CandidateID: this.seletedCandidateID });
-        this.profile.Comments = this.myProfilesList[index].Comments;
-        this.profile.Status = this.myProfilesList[index].Status;
+        // this.profile.Comments = this.allProfilesList[index].Comments;
+        // this.profile.Status = this.allProfilesList[index].Status;
         this.currentCandidate = this.myProfilesList[index].Candidate;
+        this._profileBankService.getStatusById(id)
+            .subscribe(
+            (results: any) => {
+                this.profile.Comments = results.Comments;
+                this.profile.Status = results.Status;
+            },
+            error => this.toastr.error(<any>error));
         if (this.isCollapsed === false)
             this.isCollapsed = !this.isCollapsed;
+        if (this.isCommentsPanelCollapsed === true)
+            this.isCommentsPanelCollapsed = !this.isCommentsPanelCollapsed;
+        if (this.isUploadPanelCollapsed === true)
+            this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
+        window.scrollTo(0, 40);
     }
 
     getMyProfiles() {
@@ -173,6 +186,8 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     onUpdateStauts() {
+        if (this.selectedStatus.Id === undefined)
+            this.selectedStatus = this.profile.Status;
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
@@ -241,9 +256,15 @@ export class MyProfilesListComponent implements OnActivate {
         this.profile.Candidate = this.myProfilesList[index].Candidate;
         this.profile.FollowUpComments = this.myProfilesList[index].FollowUpComments;
         this.profile.PreviousFollowupComments = this.profile.FollowUpComments;
-        this.highlightRow = 'selectedRowColor';
+        window.scrollTo(0, 40);
         if (this.isCommentsPanelCollapsed === false)
             this.isCommentsPanelCollapsed = !this.isCommentsPanelCollapsed;
+
+        //If updateStatus or Resume row is open close those
+        if (this.isCollapsed === true)
+            this.isCollapsed = !this.isCollapsed;
+        if (this.isUploadPanelCollapsed === true)
+            this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
     }
 
     closeCommentsPanel() {
@@ -303,22 +324,30 @@ export class MyProfilesListComponent implements OnActivate {
         }
 
     }
+
     onClickUploadResume(CandidateId: string) {
+        window.scrollTo(0, 40);
         this.seletedCandidateIDForUpload = CandidateId;
         var index = _.findIndex(this.myProfilesList, { CandidateID: this.seletedCandidateIDForUpload });
         this.profile.Candidate = this.myProfilesList[index].Candidate;
         if (this.isUploadPanelCollapsed === false)
             this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
+        //Close Other Panel
+        if (this.isCollapsed === true)
+            this.isCollapsed = !this.isCollapsed;
+        if (this.isCommentsPanelCollapsed === true)
+            this.isCommentsPanelCollapsed = !this.isCommentsPanelCollapsed;
+
     }
 
     closeUploadPanel() {
-         this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
+        this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
     }
     onSubmitUploadResume() {
         this.uploadResume(this.seletedCandidateIDForUpload, this.resumeFiles[0]);
-          this.resumeFiles = new Array<File>();
-          this.resumeName = '';
-          this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
+        this.resumeFiles = new Array<File>();
+        this.resumeName = '';
+        this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
     }
 }
 

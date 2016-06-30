@@ -68,20 +68,29 @@ export class RecentProfilesListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    redirectToView(CandidateID: number) {
+    redirectToView(CandidateID: string) {
         this._router.navigate(['App/ProfileBank/RecentProfiles/View/' + CandidateID]);
     }
 
     SaveCandidateID(id: string) {
         this.seletedCandidateID = id;
+
         var index = _.findIndex(this.recentProfilesList, { CandidateID: this.seletedCandidateID });
-        this.profile.Comments = this.recentProfilesList[index].Comments;
-        this.profile.Status = this.recentProfilesList[index].Status;
+        // this.profile.Comments = this.allProfilesList[index].Comments;
+        // this.profile.Status = this.allProfilesList[index].Status;
         this.currentCandidate = this.recentProfilesList[index].Candidate;
+        this._profileBankService.getStatusById(id)
+            .subscribe(
+            (results: any) => {
+                this.profile.Comments = results.Comments;
+                this.profile.Status = results.Status;
+            },
+            error => this.toastr.error(<any>error));
+        window.scrollTo(0, 40);
+
         if (this.isCollapsed === false)
             this.isCollapsed = !this.isCollapsed;
     }
-
     getCandidateStatuses() {
         this._masterService.getCandidateStatuses()
             .subscribe(
@@ -97,6 +106,9 @@ export class RecentProfilesListComponent implements OnActivate {
     }
 
     onUpdateStauts() {
+        if (this.selectedStatus.Id === undefined)
+            this.selectedStatus = this.profile.Status;
+
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             (results: ResponseFromAPI) => {

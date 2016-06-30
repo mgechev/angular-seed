@@ -99,7 +99,8 @@
                                                                 <div class="form-group ">
                                                                     <input type="text" placeholder="Passport Number" class="form-control" [(ngModel)]="profile.PassportNumber" tooltip="Passport No"
                                                                         tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.PassportNumber"
-                                                                        pattern="[A-Za-z]{1}[0-9]{7}" title="Enter valid passport number" />
+                                                                        pattern="[A-Za-z]{1}[0-9]{7}" title="Enter valid passport number"
+                                                                    />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3  inlineForm">
@@ -142,18 +143,21 @@
                             </div>
                             <!-- Add New Profile END-->
                             <div class="row">
-                                <div class="col-md-6 col-sm-6">
+                                <!--<div class="col-md-6 col-sm-6">
                                     <div class="dataTables_length" id="sample_1_length"><label>Show <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline"><option value="5">5</option><option value="15">15</option><option value="20">20</option><option value="-1">All</option></select></label></div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
                                     <div id="sample_1_filter" class="dataTables_filter"><label>Search:
                                         <input type="search" class="form-control input-sm input-large input-inline" placeholder="" aria-controls="sample_1" [(ngModel)]="searchString"></label></div>
-                                </div>
+                                </div>-->
                             </div>
                             <!-- Update Stauts-->
-                            <div class="row" style="margin-top: 10px">
-                                <div id="updateRow" [collapse]='!isCollapsed'>
-                                    <form role="form" (submit)="onUpdateStauts()">
+
+                            <div id="updateRow" *ngIf='isCollapsed'>
+                                 <span class ="header" >Update Status</span>
+                                <hr style="margin:0px 0px !important" />
+                                <form role="form" (submit)="onUpdateStauts()">
+                                    <div class="row" style="margin-top: 10px">
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <span class="form-control" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"> {{currentCandidate}}</span>
@@ -180,14 +184,18 @@
                                             <button type="submit" class="btn btn-info updatebtn"> Update </button> &nbsp;
                                             <a class="btn btn-info " (click)='closeUpdatePanel()'> Cancel </a>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
+
                             <!-- Update Status END-->
                             <!-- FollowUP Comments-->
-                            <div class="row" style="margin-top: 10px">
-                                <div id="CommentsRow" [collapse]='!isCommentsPanelCollapsed'>
-                                    <form role="form" (submit)="onSubmitFollowupComment()">
+
+                            <div id="CommentsRow" *ngIf='isCommentsPanelCollapsed'>
+                                 <span class ="header" >Add/Update FollowUp Comments</span>
+                                <hr style="margin:0px 0px !important" />
+                                <form role="form" (submit)="onSubmitFollowupComment()">
+                                    <div class="row" style="margin-top: 10px">
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <span class="form-control" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"> {{profile.Candidate}}</span>
@@ -206,42 +214,46 @@
                                             <button type="submit" class="btn btn-info "> Save </button> &nbsp;
                                             <a class="btn btn-info " (click)='closeCommentsPanel()'> Cancel </a>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
+
                             <!-- FollowUP Comments END-->
                             <!-- Upload Resume -->
-                            <div class="row" style="margin-top: 10px">
-                                <div id="UploadResume" [collapse]='!isUploadPanelCollapsed'>
-                                    <form role="form" (submit)="onSubmitUploadResume()">
+
+                            <div id="UploadResume" *ngIf='isUploadPanelCollapsed'>
+                                <span class ="header" >Upload Resume</span>
+                                <hr style="margin:0px 0px !important" />
+                                <form role="form" (submit)="onSubmitUploadResume()">
+                                    <div class="row" style="margin-top: 10px">
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <span class="form-control" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"> {{profile.Candidate}}</span>
                                             </div>
                                         </div>
-                                        <div class="col-md-1 inlineForm">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <span *ngIf='!resumeUploaded' class="form-control"> No file Choosen </span>
+                                                <span class="form-control" tooltip="Resume Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"
+                                                    *ngIf='resumeUploaded'> {{resumeName}}</span>
+                                            </div>
+                                        </div>
+                                         <div class="col-md-1 inlineForm">
                                             <div class="form-group">
                                                 <div class="fileUpload btn btn-info" data-toggle="tooltip" data-placement="top" title="Upload Resume">
                                                     <input type="file" class="upload" (change)="postFile($event)" /><span>Browse</span>
                                                 </div><br/>
-                                         
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <span *ngIf='!resumeUploaded' class="form-control"> No file Choosen </span>
-                                                <span class="form-control" tooltip="Resume Name" tooltipPlacement="top" 
-                                                tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate" 
-                                                 *ngIf='resumeUploaded'> {{resumeName}}</span>
+
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <button type="submit" class="btn btn-info "> Upload Resume </button> &nbsp;
                                             <a class="btn btn-info " (click)='closeUploadPanel()'> Cancel </a>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
+
                             <!-- Upload Resume END-->
                         </div>
 
@@ -274,7 +286,7 @@
                                                     <span></span>
                                                 </label>
                                         </td>
-                                        <td >
+                                        <td>
                                             <tr>
                                                 <td style="float: left;">&nbsp; {{myprofile.Candidate}}</td>
                                             </tr>
@@ -285,8 +297,8 @@
                                                 <td style="float: left;">&nbsp; {{myprofile.PrimaryContact}}</td>
                                             </tr>
                                         </td>
-                                        <td > {{myprofile.Tag}} </td>
-                                        <td >
+                                        <td> {{myprofile.Tag}} </td>
+                                        <td>
                                             <tr>
                                                 <td style="float: left;">&nbsp; Notice Period : {{myprofile.CandidateOtherDetails.NoticePeriod}}</td>
                                             </tr>
@@ -297,7 +309,7 @@
                                                 <td style="float: left;">&nbsp; Expected Salary : {{myprofile.CandidateSalaryDetails.ExpectedSalary}}</td>
                                             </tr>
                                         </td>
-                                        <td >
+                                        <td>
                                             <span class="mt-action-dot color{{myprofile.Status.Id}}"></span>{{myprofile.Status.Value}}
                                         </td>
                                         <td class="text-center">
@@ -325,15 +337,15 @@
                                                             <i class="fa fa-comments"></i> Follow Up Comments
                                                         </a>
                                                     </li>
-                                                     <li class="divider"> </li>
+                                                    <li class="divider"> </li>
                                                     <li>
                                                         <a (click)='onClickUploadResume(myprofile.CandidateID)'>
                                                             <i class="fa fa-upload"></i> Upload Resume
                                                         </a>
                                                     </li>
-                                                   <li class="divider"> </li>
+                                                    <li class="divider"> </li>
                                                     <li>
-                                                        <a  (click)='redirectToView(myprofile.CandidateID)'>
+                                                        <a (click)='redirectToView(myprofile.CandidateID)'>
                                                             <i class="fa fa-search"></i> View Profile
                                                         </a>
                                                     </li>
@@ -349,7 +361,7 @@
                         <!--  My Profile Grid  END-->
                         <div class="row">
                             <div class="col-md-5 col-sm-5">
-                                <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite">Showing 1 to 5 of 25 records</div>
+                                <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite"></div>
                             </div>
                             <div class="col-md-7 col-sm-7">
                                 <div class="dataTables_paginate paging_bootstrap_full_number" id="sample_1_paginate">

@@ -23,7 +23,7 @@
                                 <h4>BlackListed Profiles</h4>
                             </div>
                             <div class="col-md-6">
-                                <div class="dt-buttons pull-right">
+                                <!--<div class="dt-buttons pull-right">
                                     <a class="dt-button buttons-print btn dark btn-outline" id="btnPrint">
                                         <span>Print</span>
                                     </a>
@@ -33,7 +33,7 @@
                                     <a class="dt-button buttons-csv buttons-html5 btn purple btn-outline" id="btnCSV">
                                         <span>CSV</span>
                                     </a>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
 
@@ -41,15 +41,17 @@
                     <div class="portlet-body">
                         <div class="table-toolbar">
                             <div class="row">
-                                <div class="col-md-6 col-sm-6">
+                                <!--<div class="col-md-6 col-sm-6">
                                     <div class="dataTables_length" id="sample_1_length"><label>Show <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline"><option value="5">5</option><option value="15">15</option><option value="20">20</option><option value="-1">All</option></select></label></div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
                                     <div id="sample_1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm input-small input-inline" placeholder="" aria-controls="sample_1"></label></div>
-                                </div>
+                                </div>-->
                             </div>
                             <div class="row" style="margin-top: 10px">
-                                <div id="updateRow" [collapse]='!isCollapsed'>
+                                <div id="updateRow" *ngIf='isCollapsed'>
+                                     <span class ="header" >Update Status</span>
+                                <hr style="margin:0px 0px !important" />
                                     <form role="form" (submit)="onUpdateStauts()">
                                         <div class="col-md-3">
                                             <div class="form-group">
@@ -159,21 +161,11 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-5 col-sm-5">
-                                    <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite">Showing 1 to 5 of 25 records</div>
+                                    <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite"></div>
                                 </div>
                                 <div class="col-md-7 col-sm-7">
                                     <div class="dataTables_paginate paging_bootstrap_full_number" id="sample_1_paginate">
-                                        <ul class="pagination" style="visibility: visible;">
-                                            <li class="prev disabled"><a href="#" title="First"><i class="fa fa-angle-double-left"></i></a></li>
-                                            <li class="prev disabled"><a href="#" title="Prev"><i class="fa fa-angle-left"></i></a></li>
-                                            <li class="active"><a [routerLink]="['/App/ProfileBank/BlackListedProfiles']">1</a></li>
-                                            <li><a [routerLink]="['/App/ProfileBank/BlackListedProfiles']">2</a></li>
-                                            <li><a [routerLink]="['/App/ProfileBank/BlackListedProfiles']">3</a></li>
-                                            <li><a [routerLink]="['/App/ProfileBank/BlackListedProfiles']">4</a></li>
-                                            <li><a [routerLink]="['/App/ProfileBank/BlackListedProfiles']">5</a></li>
-                                            <li class="next"><a href="#" title="Next"><i class="fa fa-angle-right"></i></a></li>
-                                            <li class="next"><a href="#" title="Last"><i class="fa fa-angle-double-right"></i></a></li>
-                                        </ul>
+                                        
                                     </div>
                                 </div>
                             </div>

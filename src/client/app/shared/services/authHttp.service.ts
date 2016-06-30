@@ -26,6 +26,7 @@ export class AuthHttp {
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
         this.addServerType(headers);
+        this.addContentType(headers);
         let options = new RequestOptions({ headers: headers });
         return this.http.get(url, options);
     }

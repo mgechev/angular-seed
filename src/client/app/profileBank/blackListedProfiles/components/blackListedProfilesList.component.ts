@@ -79,10 +79,20 @@ export class BlackListedProfilesListComponent implements OnActivate {
 
     SaveCandidateID(id: string) {
         this.seletedCandidateID = id;
+
         var index = _.findIndex(this.blacklistedProfilesList, { CandidateID: this.seletedCandidateID });
-        this.profile.Comments = this.blacklistedProfilesList[index].Comments;
-        this.profile.Status = this.blacklistedProfilesList[index].Status;
+        // this.profile.Comments = this.allProfilesList[index].Comments;
+        // this.profile.Status = this.allProfilesList[index].Status;
         this.currentCandidate = this.blacklistedProfilesList[index].Candidate;
+        this._profileBankService.getStatusById(id)
+            .subscribe(
+            (results: any) => {
+                this.profile.Comments = results.Comments;
+                this.profile.Status = results.Status;
+            },
+            error => this.toastr.error(<any>error));
+
+        window.scrollTo(0, 40);
         if (this.isCollapsed === false)
             this.isCollapsed = !this.isCollapsed;
     }
@@ -105,6 +115,9 @@ export class BlackListedProfilesListComponent implements OnActivate {
 
 
     onUpdateStauts() {
+          if (this.selectedStatus.Id === undefined)
+            this.selectedStatus = this.profile.Status;
+
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
