@@ -19,7 +19,6 @@ import { Headers, Http } from '@angular/http';
     templateUrl: 'myProfilesList.component.html',
     directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
     styleUrls: ['myProfiles.component.css'],
-    //pipes: [MyProfilesFilterPipe]
 })
 
 export class MyProfilesListComponent implements OnActivate {
@@ -348,6 +347,19 @@ export class MyProfilesListComponent implements OnActivate {
         this.resumeFiles = new Array<File>();
         this.resumeName = '';
         this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
+    }
+
+    //Assign RRf 
+    AssignRRFClick() {
+        let checkedItemIds: string = '';
+        for (var index = 0; index < this.myProfilesList.length; index++) {
+            if (this.myProfilesList[index].IsChecked) {
+                checkedItemIds = checkedItemIds + this.myProfilesList[index].CandidateID + ',';
+            }
+        }
+        sessionStorage.setItem('CandidateIDs',checkedItemIds);
+        sessionStorage.setItem('returnPath','/App/ProfileBank/MyProfiles');
+        this._router.navigate(['/App/ProfileBank/MyProfiles/Assign']);
     }
 }
 

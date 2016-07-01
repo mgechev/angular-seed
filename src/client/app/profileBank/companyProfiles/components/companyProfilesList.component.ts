@@ -114,7 +114,6 @@ export class CompanyProfilesListComponent implements OnActivate {
     onUpdateStauts() {
           if (this.selectedStatus.Id === undefined)
             this.selectedStatus = this.profile.Status;
-     
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
@@ -184,5 +183,17 @@ export class CompanyProfilesListComponent implements OnActivate {
             this.toastr.error(error);
             return true;
         }
+    }
+
+       AssignRRFClick() {
+        let checkedItemIds: string = '';
+        for (var index = 0; index < this.companyProfilesList.length; index++) {
+            if (this.companyProfilesList[index].IsChecked) {
+                checkedItemIds = checkedItemIds + this.companyProfilesList[index].CandidateID + ',';
+            }
+        }
+        sessionStorage.setItem('CandidateIDs',checkedItemIds);
+        sessionStorage.setItem('returnPath','/App/ProfileBank/CompanyProfiles');
+        this._router.navigate(['/App/ProfileBank/CompanyProfiles/Assign']);
     }
 }

@@ -9,20 +9,23 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { ProfileBankService } from '../../shared/services/profilebank.service';
 import { DataSharedService } from '../../shared/services/DataShared.service';
 import {TransferOwnershipComponent} from './companyProfilesTransferOwnership.component';
+import {ProfileBankAssignRRFComponent} from '../../shared/component/assignRRF.component';
 
 @Component({
     selector: 'rrf-black-listed-profiles',
     template: ' <router-outlet></router-outlet>',
     directives: [ROUTER_DIRECTIVES],
-    providers: [DataSharedService,CompanyProfilesService, MastersService,
-                ToastsManager, ProfileBankService]
+    providers: [DataSharedService, CompanyProfilesService, MastersService,
+        ToastsManager, ProfileBankService]
 })
 
 @Routes([
     { path: '/', component: CompanyProfilesListComponent },
     { path: '/Edit/:id', component: CompanyProfilesAddComponent },
     { path: '/View/:id', component: CompanyProfilesViewComponent },
-      { path: '/Transfer', component: TransferOwnershipComponent }
+    { path: '/Transfer', component: TransferOwnershipComponent },
+    { path: '/Assign', component: ProfileBankAssignRRFComponent },
+
 ])
 export class CompanyProfilesComponent {
 }

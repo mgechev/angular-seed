@@ -36,13 +36,13 @@
                                             <button class="btn btn-default btnLink" (click)='openMailWindow()' [disabled]='!selectedRowCount'>
                                                 <i class="fa fa-envelope-o"></i>   Send Mails </button>
                                         </li>
-                                        <!--<li class="divider"> </li>
-                                        <li   >
+                                        <li class="divider"> </li>
+                                        <li>
                                         <button class="btn btn-default btnLink" [disabled]='!selectedRowCount'
-                                        (click)='transferOwnerShipClick()'>
-                                                <i class="fa fa-share"></i>     Transfer Ownership
+                                        (click)='AssignRRFClick()'>
+                                                <i class="fa fa-check-square-o"></i> Assign RRF
                                             </button>
-                                        </li>-->
+                                        </li>
                                     </ul>
 
                                 </div>
@@ -142,15 +142,7 @@
                                 </div>
                             </div>
                             <!-- Add New Profile END-->
-                            <div class="row">
-                                <!--<div class="col-md-6 col-sm-6">
-                                    <div class="dataTables_length" id="sample_1_length"><label>Show <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline"><option value="5">5</option><option value="15">15</option><option value="20">20</option><option value="-1">All</option></select></label></div>
-                                </div>
-                                <div class="col-md-6 col-sm-6">
-                                    <div id="sample_1_filter" class="dataTables_filter"><label>Search:
-                                        <input type="search" class="form-control input-sm input-large input-inline" placeholder="" aria-controls="sample_1" [(ngModel)]="searchString"></label></div>
-                                </div>-->
-                            </div>
+                            
                             <!-- Update Stauts-->
 
                             <div id="updateRow" *ngIf='isCollapsed'>
