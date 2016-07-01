@@ -6,7 +6,7 @@ import { ProfileBankService } from '../../shared/services/profilebank.service';
 @Component({
     moduleId: module.id,
     selector: 'rrf-companyprofiles-view',
-   // templateUrl: 'CompanyProfilesView.component.html',
+
     templateUrl: '../../shared/views/profileBankView.component.html',
     directives: [ROUTER_DIRECTIVES],
     styleUrls: ['../../allProfiles/components/allProfilesView.component.css']

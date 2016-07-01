@@ -6,7 +6,7 @@ import { ProfileBankService } from '../../shared/services/profilebank.service';
 @Component({
     moduleId: module.id,
     selector: 'rrf-allprofiles-view',
-    //templateUrl: 'recentProfilesView.component.html',
+
     templateUrl: '../../shared/views/profileBankView.component.html',
     providers: [ProfileBankService],
     directives: [ROUTER_DIRECTIVES],
@@ -31,11 +31,11 @@ export class RecentProfilesViewComponent implements OnActivate {
                     this.profile = results;
                     this.count = results.CandidateQualification.length;
                     this.convertCheckboxesValues();
-               },
+                },
                 error => this.errorMessage = <any>error);
         }
     }
-   convertCheckboxesValues() {
+    convertCheckboxesValues() {
         if (this.profile.IsCurrentSameAsPermanent === true) {
             this.profile.IsCurrentSameAsPermanent = 'Yes';
         } else {

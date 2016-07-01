@@ -11,9 +11,8 @@ import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 
 @Component({
     moduleId: module.id,
-    selector: 'rrf-allprofiles-add',
-   // templateUrl: 'allProfilesAdd.component.html',
-    templateUrl: '../../shared/views/profileBankAdd.component.html',
+    selector: 'allprofiles-add',
+     templateUrl: '../../shared/views/profileBankAdd.component.html',
     directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })

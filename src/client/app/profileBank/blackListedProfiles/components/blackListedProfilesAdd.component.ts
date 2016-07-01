@@ -12,7 +12,7 @@ import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 @Component({
     moduleId: module.id,
     selector: 'rrf-black-listed-profile-add',
-   // templateUrl: 'blackListedProfilesAdd.component.html',
+
     templateUrl: '../../shared/views/profileBankAdd.component.html',
     directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']

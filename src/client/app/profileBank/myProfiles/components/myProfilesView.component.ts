@@ -5,7 +5,6 @@ import { ProfileBankService} from  '../../shared/services/profileBank.service';
 @Component({
     moduleId: module.id,
     selector: 'rrf-blacklistedprofiles-view',
-    //templateUrl: 'myProfilesView.component.html',
         templateUrl: '../../shared/views/profileBankView.component.html',
 
     directives: [ROUTER_DIRECTIVES],
