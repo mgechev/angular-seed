@@ -26,14 +26,12 @@ export function main() {
 
     // Support for testing component that uses Router
     beforeEach(() => {
-      addProviders([config]);
-      
       let config: RouterConfig = [
         { path: '', component: HomeComponent },
         { path: 'about', component: AboutComponent }
       ];
 
-      return [
+      let rp = [
         RouterOutletMap,
         { provide: UrlSerializer, useClass: DefaultUrlSerializer },
         { provide: Location, useClass: SpyLocation },
@@ -53,6 +51,8 @@ export function main() {
         },
         { provide: ActivatedRoute, useFactory: (r: Router) => r.routerState.root, deps: [Router]}
       ];
+      
+      addProviders([rp]);
     });
 
     it('should build without a problem',
