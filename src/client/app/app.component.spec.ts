@@ -51,7 +51,7 @@ export function main() {
         },
         { provide: ActivatedRoute, useFactory: (r: Router) => r.routerState.root, deps: [Router]}
       ];
-      
+
       addProviders(rp);
     });
 
