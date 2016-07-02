@@ -1,16 +1,8 @@
 import { Component, ComponentResolver, Injector } from '@angular/core';
 import { Location } from '@angular/common';
 import { disableDeprecatedForms, provideForms } from '@angular/forms';
-import { TestComponentBuilder } from '@angular/compiler/testing';
 import { SpyLocation } from '@angular/common/testing';
-import {
-  beforeEachProviders,
-  async,
-  describe,
-  expect,
-  inject,
-  it
-} from '@angular/core/testing';
+import { TestComponentBuilder, async, inject } from '@angular/core/testing';
 import {
   UrlSerializer,
   DefaultUrlSerializer,
