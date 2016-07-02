@@ -52,7 +52,7 @@ export function main() {
         { provide: ActivatedRoute, useFactory: (r: Router) => r.routerState.root, deps: [Router]}
       ];
       
-      addProviders([rp]);
+      addProviders(rp);
     });
 
     it('should build without a problem',
