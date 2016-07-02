@@ -1,7 +1,6 @@
 import { Component, ComponentResolver, Injector } from '@angular/core';
 import { Location } from '@angular/common';
 import { disableDeprecatedForms, provideForms } from '@angular/forms';
-import { TestComponentBuilder } from '@angular/compiler/testing';
 import { SpyLocation } from '@angular/common/testing';
 import {
   beforeEachProviders,
@@ -9,7 +8,8 @@ import {
   describe,
   expect,
   inject,
-  it
+  it,
+  TestComponentBuilder
 } from '@angular/core/testing';
 import {
   UrlSerializer,
@@ -52,7 +52,7 @@ export function main() {
             location:Location,
             injector:Injector) => {
             const r = new Router(TestComponent, resolver, urlSerializer, outletMap, location, injector, config);
-            r.initialNavigation();
+            //r.initialNavigation();
             return r;
           },
           deps: [ComponentResolver, UrlSerializer, RouterOutletMap, Location, Injector]
