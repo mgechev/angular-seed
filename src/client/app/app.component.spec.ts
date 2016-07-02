@@ -2,7 +2,7 @@ import { Component, ComponentResolver, Injector } from '@angular/core';
 import { Location } from '@angular/common';
 import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import { SpyLocation } from '@angular/common/testing';
-import { TestComponentBuilder, async, inject } from '@angular/core/testing';
+import { TestComponentBuilder, async, inject, addProviders } from '@angular/core/testing';
 import {
   UrlSerializer,
   DefaultUrlSerializer,
@@ -25,31 +25,33 @@ export function main() {
     beforeEach(() => { providerArr = [disableDeprecatedForms(), provideForms()]; });
 
     // Support for testing component that uses Router
-    beforeEachProviders(() => {
-      let config:RouterConfig = [
-        {path: '', component: HomeComponent},
-        {path: 'about', component: AboutComponent}
+    beforeEach(() => {
+      addProviders([config]);
+      
+      let config: RouterConfig = [
+        { path: '', component: HomeComponent },
+        { path: 'about', component: AboutComponent }
       ];
 
       return [
         RouterOutletMap,
-        {provide: UrlSerializer, useClass: DefaultUrlSerializer},
-        {provide: Location, useClass: SpyLocation},
+        { provide: UrlSerializer, useClass: DefaultUrlSerializer },
+        { provide: Location, useClass: SpyLocation },
         {
           provide: Router,
           useFactory: (
-            resolver:ComponentResolver,
-            urlSerializer:UrlSerializer,
-            outletMap:RouterOutletMap,
-            location:Location,
-            injector:Injector) => {
+            resolver: ComponentResolver,
+            urlSerializer: UrlSerializer,
+            outletMap: RouterOutletMap,
+            location: Location,
+            injector: Injector) => {
             const r = new Router(TestComponent, resolver, urlSerializer, outletMap, location, injector, config);
             r.initialNavigation();
             return r;
           },
           deps: [ComponentResolver, UrlSerializer, RouterOutletMap, Location, Injector]
         },
-        {provide: ActivatedRoute, useFactory: (r:Router) => r.routerState.root, deps: [Router]},
+        { provide: ActivatedRoute, useFactory: (r: Router) => r.routerState.root, deps: [Router]}
       ];
     });
 
