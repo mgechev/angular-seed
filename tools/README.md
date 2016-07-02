@@ -37,7 +37,7 @@ The seed provides the following tasks:
 | `build.bundles.app.ts` | Bundles the JavaScript files using the SystemJS Builder |
 | `build.bundles.ts`     | Bundles the JavaScript shim dependencies |
 | `build.docs.ts`        | Builds the documentation for the TypeScript files using `typedoc` |
-| `build.html_css.ts`    | Builds the `html` and `css` files and applies css postprocessing |
+| `build.html_css.ts`    | Builds the `html` and `css` files and applies CSS postprocessing |
 | `build.index.dev.ts`   | Builds the `index.html` for the `dev` environment |
 | `build.index.prod.ts`  | Builds the `index.html` for the `prod` environment |
 | `build.js.dev.ts`      | Transpiles the TypeScript files (excluding specs and e2e specs) for the `dev` environment |
@@ -50,7 +50,7 @@ The seed provides the following tasks:
 | `clean.dev.ts`         | Cleans all files within the `/dist/dev` directory |
 | `clean.prod.ts`        | Cleans all files within the `/dist/prod` directory |
 | `clean.tools.ts`       | Cleans all JavaScript files (which got transpiled from the TypeScript files) within the `/tools` directory  |
-| `copy.js.prod.ts`      | Copies all TypeScript files (exluding specs and e2e specs) over to the `/tmp` dir |
+| `copy.js.prod.ts`      | Copies all TypeScript files (excluding specs and e2e specs) over to the `/tmp` dir |
 | `css-lint.ts`          | Lints all `css` files using `stylelint` |
 | `e2e.ts`               | Runs all e2e specs using `protractor` |
 | `generate.manifest.ts` | Generates a `manifest` file for the application |
@@ -76,9 +76,9 @@ The seed provides the following utilities:
 | Filename               | Description |
 | :--------------------- | :---------- |
 | `clean.ts`             | Provides a utility to clean files and directories |
-| `code_change_tools.ts` | Provides utilites to make use of BrowserSync to refresh the browser after a code change |
-| `server.ts`            | Provides utilites to start `express` servers for the application, the documentation and the unit test coverage |
-| `task_tools.ts`        | Provides utilites to start tasks (matching task names as string input parameters from the `gulpfile.ts` to the corresponding files) |
-| `template_locals.ts`   | Provides a utiltiy for template locals |
+| `code_change_tools.ts` | Provides utilities to make use of BrowserSync to refresh the browser after a code change |
+| `server.ts`            | Provides utilities to start `express` servers for the application, the documentation and the unit test coverage |
+| `task_tools.ts`        | Provides utilities to start tasks (matching task names as string input parameters from the `gulpfile.ts` to the corresponding files) |
+| `template_locals.ts`   | Provides a utility for template locals |
 | `tsproject.ts`         | Provides a utility to configure the TypeScript transpilation |
 | `watch.ts`             | Provides a utility to watch for file changes and notify live reloads |
