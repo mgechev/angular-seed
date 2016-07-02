@@ -1,12 +1,6 @@
 import { Component, provide } from '@angular/core';
-import { TestComponentBuilder } from '@angular/compiler/testing';
 import { disableDeprecatedForms, provideForms } from '@angular/forms';
-import {
-  describe,
-  expect,
-  inject,
-  it
-} from '@angular/core/testing';
+import { TestComponentBuilder, inject } from '@angular/core/testing';
 import {
   BaseRequestOptions,
   ConnectionBackend,
