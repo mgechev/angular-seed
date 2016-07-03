@@ -313,6 +313,7 @@ export class SeedConfig {
       '@angular/router': `${this.NPM_BASE}@angular/router/index.js`,
       '@angular/platform-browser': `${this.NPM_BASE}@angular/platform-browser/bundles/platform-browser.umd.js`,
       '@angular/platform-browser-dynamic': `${this.NPM_BASE}@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js`,
+      '@vaadin/angular2-polymer': `${this.NPM_BASE}@vaadin/angular2-polymer/index.js`,
       'rxjs/*': `${this.NPM_BASE}rxjs/*`,
       'app/*': `/app/*`,
       '*': `${this.NPM_BASE}*`,

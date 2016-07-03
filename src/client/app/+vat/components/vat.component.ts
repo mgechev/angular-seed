@@ -11,6 +11,7 @@ import {VatTypeSelector} from "./vat-type.selector";
 import {CostMatch, CostMatchService} from "../../shared/services/cost-match.service";
 import Collection = _.Collection;
 import {CostCharacterSelector} from "./cost-character.selector";
+import { PolymerElement } from '@vaadin/angular2-polymer';
 
 @Component({
   moduleId: module.id,
@@ -18,7 +19,7 @@ import {CostCharacterSelector} from "./cost-character.selector";
   providers: [CsvParseService, ImportListService, CostMatchService],
   templateUrl: 'vat.component.html',
   styleUrls: ['vat.component.css'],
-  directives: [NG_TABLE_DIRECTIVES, PAGINATION_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgIf, CORE_DIRECTIVES, FORM_DIRECTIVES, CostTypeSelector, VatTypeSelector, CostCharacterSelector]
+  directives: [NG_TABLE_DIRECTIVES, PAGINATION_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgIf, CORE_DIRECTIVES, FORM_DIRECTIVES, CostTypeSelector, VatTypeSelector, CostCharacterSelector, PolymerElement('vaadin-date-picker')]
 })
 export class VatComponent implements OnInit {
   uploadedFile: File;

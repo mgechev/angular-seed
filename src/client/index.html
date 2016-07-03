@@ -14,6 +14,7 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/dist/dev/css/dataTables.css">
   <link rel="stylesheet" href="/dist/dev/css/styles.css">
+  <link rel="import" href="elements.html">
   <!-- inject:css -->
   <!-- endinject -->
 </head>
@@ -47,6 +48,8 @@
   <!-- shims:js -->
   <!-- endinject -->
 
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+
   <% if (ENV === 'dev') { %>
   <script>
     System.config(<%=
@@ -63,10 +66,12 @@
 
   <% if (ENV === 'dev') { %>
   <script>
-  System.import('<%= BOOTSTRAP_MODULE %>')
-    .catch(function (e) {
-      console.error(e,
-        'Report this error at https://github.com/mgechev/angular2-seed/issues');
+    document.addEventListener('WebComponentsReady', function() {
+      System.import('<%= BOOTSTRAP_MODULE %>')
+        .catch(function (e) {
+          console.error(e,
+            'Report this error at https://github.com/mgechev/angular2-seed/issues');
+        });
     });
   </script>
   <% } %>
