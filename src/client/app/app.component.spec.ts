@@ -1,16 +1,8 @@
 import { Component, ComponentResolver, Injector } from '@angular/core';
 import { Location } from '@angular/common';
 import { disableDeprecatedForms, provideForms } from '@angular/forms';
-import { TestComponentBuilder } from '@angular/compiler/testing';
 import { SpyLocation } from '@angular/common/testing';
-import {
-  beforeEachProviders,
-  async,
-  describe,
-  expect,
-  inject,
-  it
-} from '@angular/core/testing';
+import { TestComponentBuilder, async, inject, addProviders } from '@angular/core/testing';
 import {
   UrlSerializer,
   DefaultUrlSerializer,
@@ -28,42 +20,48 @@ export function main() {
 
   describe('App component', () => {
     // Disable old forms
-    let providerArr: any[];
+    // let providerArr: any[];
 
-    beforeEach(() => { providerArr = [disableDeprecatedForms(), provideForms()]; });
+    beforeEach(() => {
+      // providerArr = [disableDeprecatedForms(), provideForms()];
+      addProviders([disableDeprecatedForms(), provideForms()]);
+    });
 
     // Support for testing component that uses Router
-    beforeEachProviders(() => {
-      let config:RouterConfig = [
-        {path: '', component: HomeComponent},
-        {path: 'about', component: AboutComponent}
+    beforeEach(() => {
+      let config: RouterConfig = [
+        { path: '', component: HomeComponent },
+        { path: 'about', component: AboutComponent }
       ];
 
-      return [
+      let rp = [
         RouterOutletMap,
-        {provide: UrlSerializer, useClass: DefaultUrlSerializer},
-        {provide: Location, useClass: SpyLocation},
+        { provide: UrlSerializer, useClass: DefaultUrlSerializer },
+        { provide: Location, useClass: SpyLocation },
         {
           provide: Router,
           useFactory: (
-            resolver:ComponentResolver,
-            urlSerializer:UrlSerializer,
-            outletMap:RouterOutletMap,
-            location:Location,
-            injector:Injector) => {
+            resolver: ComponentResolver,
+            urlSerializer: UrlSerializer,
+            outletMap: RouterOutletMap,
+            location: Location,
+            injector: Injector) => {
             const r = new Router(TestComponent, resolver, urlSerializer, outletMap, location, injector, config);
-            r.initialNavigation();
+            // r.initialNavigation();
             return r;
           },
           deps: [ComponentResolver, UrlSerializer, RouterOutletMap, Location, Injector]
         },
-        {provide: ActivatedRoute, useFactory: (r:Router) => r.routerState.root, deps: [Router]},
+        { provide: ActivatedRoute, useFactory: (r: Router) => r.routerState.root, deps: [Router]}
       ];
+
+      addProviders(rp);
     });
 
     it('should build without a problem',
-      async(inject([TestComponentBuilder], (tcb:TestComponentBuilder) => {
-        tcb.overrideProviders(TestComponent, providerArr)
+      async(inject([TestComponentBuilder], (testComponentBuilder: TestComponentBuilder) => {
+        testComponentBuilder
+          .overrideProviders(TestComponent)
           .createAsync(TestComponent)
           .then((fixture) => {
             expect(fixture.nativeElement.innerText.indexOf('HOME')).toBeTruthy();
@@ -77,5 +75,4 @@ export function main() {
   template: '<sd-app></sd-app>',
   directives: [AppComponent]
 })
-class TestComponent {
-}
+class TestComponent { }
