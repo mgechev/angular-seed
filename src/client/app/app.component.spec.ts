@@ -20,9 +20,12 @@ export function main() {
 
   describe('App component', () => {
     // Disable old forms
-    let providerArr: any[];
+    // let providerArr: any[];
 
-    beforeEach(() => { providerArr = [disableDeprecatedForms(), provideForms()]; });
+    beforeEach(() => {
+      // providerArr = [disableDeprecatedForms(), provideForms()];
+      addProviders([disableDeprecatedForms(), provideForms()]);
+    });
 
     // Support for testing component that uses Router
     beforeEach(() => {
@@ -56,8 +59,9 @@ export function main() {
     });
 
     it('should build without a problem',
-      async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-        tcb.overrideProviders(TestComponent, providerArr)
+      async(inject([TestComponentBuilder], (testComponentBuilder: TestComponentBuilder) => {
+        testComponentBuilder
+          .overrideProviders(TestComponent)
           .createAsync(TestComponent)
           .then((fixture) => {
             expect(fixture.nativeElement.innerText.indexOf('HOME')).toBeTruthy();
