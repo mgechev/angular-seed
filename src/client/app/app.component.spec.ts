@@ -56,7 +56,7 @@ export function main() {
     });
 
     it('should build without a problem',
-      async(inject([TestComponentBuilder], (tcb:TestComponentBuilder) => {
+      async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
         tcb.overrideProviders(TestComponent, providerArr)
           .createAsync(TestComponent)
           .then((fixture) => {
@@ -71,5 +71,4 @@ export function main() {
   template: '<sd-app></sd-app>',
   directives: [AppComponent]
 })
-class TestComponent {
-}
+class TestComponent { }
