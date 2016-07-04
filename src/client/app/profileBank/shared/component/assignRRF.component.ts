@@ -12,17 +12,18 @@ import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
 export class ProfileBankAssignRRFComponent implements OnActivate {
     CandidateIDs: Array<string> = new Array<string>();
     returnPath: string;
-    Title:string;
+    Title: string;
+    isRRFSelected: boolean = false;
 
     constructor(private _router: Router) { }
 
     routerOnActivate() {
         this.getCandidateIds();
         this.returnPath = sessionStorage.getItem('returnPath');
-        if(this.returnPath.includes('MyProfiles')) {
+        if (this.returnPath.includes('MyProfiles')) {
             this.Title = 'My Profiles';
         } else {
-             this.Title = 'Company Profiles';
+            this.Title = 'Company Profiles';
         }
     }
     getCandidateIds() {
@@ -34,7 +35,11 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
         sessionStorage.removeItem('CandidateIDs');
     }
     Back() {
-        if(this.returnPath !== undefined)
+        if (this.returnPath !== undefined)
             this._router.navigate([this.returnPath]);
+    }
+
+    onSelectRRF() {
+        this.isRRFSelected = true;
     }
 }

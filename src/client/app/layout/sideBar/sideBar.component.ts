@@ -4,9 +4,9 @@ import {IfAuthorizeDirective} from '../../shared/directives/ifAuthorize.directiv
 
 @Component({
   moduleId: module.id,
-  selector: 'sidebar',
+  selector: 'sidebar-component',
   templateUrl: 'sideBar.component.html',
   directives: [ROUTER_DIRECTIVES, IfAuthorizeDirective]
 })
 export class SideBarComponent {
-}
+ }

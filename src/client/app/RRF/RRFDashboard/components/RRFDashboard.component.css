@@ -1,0 +1,23 @@
+.carousel-control.right {
+    left: auto!important;
+    right: 0!important;
+    color: #dfdfdf!important;
+    border: 1px solid !important;
+    background-image:none !important;
+}
+.carousel-control.left {
+    left: auto!important;
+    right: 0!important;
+    color: #dfdfdf!important;
+    border: 1px solid!important;
+    background-image:none !important;
+}
+.chart {
+    display: block; 
+    width: 100% !important;
+ }
+ .carousel-control {
+       background-image:none !important;
+        color: #dfdfdf!important;
+    border: 1px solid!important;
+ }

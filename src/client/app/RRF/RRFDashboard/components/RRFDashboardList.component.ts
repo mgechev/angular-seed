@@ -232,5 +232,9 @@ export class RRFDashboardListComponent implements OnActivate {
         this._router.navigate(['/App/RRF/MyRRF/Edit/' + rrfID]);
     }
 
+    onViewCandidateClick (rrfID: string) {
+        this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID]);
+    }
+
 }
 

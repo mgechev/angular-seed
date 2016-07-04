@@ -14,6 +14,7 @@ import { ProfileBankService } from '../../shared/services/profilebank.service';
 import {PAGINATION_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {ProfileFilterPipe,ProfileStatusFilterPipe, ProfileNoticePeriodFilterPipe,
     ProfileExpectedSalaryFilterPipe,ProfileSalaryFilterPipe} from './allProfilesPipe.component';
+//import {CalendarComponent} from  '../../../shared/components/calendar/calendar';
 
 @Component({
     moduleId: module.id,

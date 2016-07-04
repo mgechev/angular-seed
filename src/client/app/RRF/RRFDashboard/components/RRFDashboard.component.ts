@@ -5,6 +5,7 @@ import { RRFDashboardService } from '../services/rrfDashboard.service';
 import { RRFAssignComponent } from './RRFAssign.component';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
 import { MastersService } from '../../../shared/services/masters.service';
+import { RRFCandidateListComponent } from './RRFCandidateList.component';
 
 @Component({
     selector: 'rrf-dashboard',
@@ -15,7 +16,8 @@ import { MastersService } from '../../../shared/services/masters.service';
 
 @Routes([
     { path: '/', component: RRFDashboardListComponent },
-    { path: '/Assign/:id', component: RRFAssignComponent }
+    { path: '/Assign/:id', component: RRFAssignComponent },
+    { path: '/Candidates/:id', component: RRFCandidateListComponent }
 ])
 export class RRFDashboardComponent {
 }

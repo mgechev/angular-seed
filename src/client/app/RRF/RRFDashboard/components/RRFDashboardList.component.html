@@ -201,6 +201,12 @@
                                                             <i class="icon-user"></i> Assign RRF
                                                         </button>
                                                     </li>
+                                                     <li class="divider"> </li>
+                                                    <li>
+                                                        <button class="btn btn-default btnLink" (click)='onViewCandidateClick(rrf.RRFID)' [disabled]='checkIfRRFClosed(rrf.Status.Value)'>
+                                                            <i class="fa fa-users"></i> View Candidates
+                                                        </button>
+                                                    </li>
                                                     <li class="divider"> </li>
                                                     <li>
                                                         <button class="btn btn-default btnLink" (click)='onCloseRRFClick(rrf.RRFID)' [disabled]='checkIfRRFClosed(rrf.Status.Value)'>

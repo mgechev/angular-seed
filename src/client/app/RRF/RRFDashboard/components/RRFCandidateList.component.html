@@ -6,44 +6,23 @@
         <div class="page-head">
             <!-- BEGIN PAGE TITLE -->
             <div class="page-title">
-                <h1>Assign RRF</h1>
+                <h1> RRF Candidate List</h1>
             </div>
             <!-- END PAGE TITLE -->
         </div>
         <!-- END PAGE HEAD-->
-        <!--BEGIN breadcrumb -->
-        <ul class="page-breadcrumb breadcrumb">
-            <li>
-                <a [routerLink]="['/App']"> Home </a>
-                <i class="fa fa-circle"></i>
-            </li>
-            <li>
-                <a (click)='Back()'>{{Title}}</a>
-                <i class="fa fa-circle"></i>
-            </li>
-            <li>
-                <span class="active">Assign RRF</span>
-            </li>
-        </ul>
-        <!--End Breadcrumb>-->
         <div class="row">
-            <div class="portlet light bordered">
-                <div class="portlet-body">
-                    <form role="form" class="form-horizontal">
-                        <div class="row">
-                            <label class="col-md-2 control-label">RRF <span class="required"> * </span></label>
-                            <div class="col-md-6">
-                                <select class="form-control" required (change)='onSelectRRF($event.target.value)'>
-                                    <option></option>
-                                          <option>RRF 001 - Angular JS Developer - Kunal Adhikari </option>
-                                          <option>RRF 002 - Sr.Sharepoint Developer - Aradhana C</option>
-                                </select>
+            <div class="portlet-body">
+                <div class="col-lg-12">
+                    <div class="portlet light bordered">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <span class="caption-subject bold uppercase">RRF Details</span>
                             </div>
 
                         </div>
-                        <div class="row" *ngIf='isRRFSelected'>
-                            <label class="col-md-2 control-label" style="margin-top: 15px;">RRF Details<span class="required"> * </span></label>
-                            <div class="col-md-10" style="margin-top: 15px;">
+                        <div class="portlet-body">
+                            <div class="row">
                                 <table class="table table-striped table-bordered table-hover table-checkable order-column">
                                     <thead style="word-wrap: break-word;">
                                         <tr>
@@ -52,6 +31,7 @@
                                             <td> <b>Requirments </b></td>
                                             <td> <b>Priority</b></td>
                                             <td> <b>Status </b></td>
+                                            <td> <b>Open for <br> no. of days</b></td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -97,82 +77,113 @@
                                                 <span class="mt-action-dot "></span> Approved
                                                 <!--{{selectedRRF.Status.Value}}-->
                                             </td>
+                                            <td>
+                                                <div align="left">
+                                                    <!--{{selectedRRF.OpenForNumberOfDays}}-->
+                                                </div>
+                                            </td>
+
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-md-2 control-label" style="margin-top: 15px;">Selected Candidates<span class="required"> * </span></label>
-                            <!--<div class="col-md-9 " style="margin-top: 21px;" *ngIf="!candidateProfiles">No Candidate Selected</div>
-                                <div class="col-md-9" *ngIf="candidateProfiles">-->
-
-                            <!--<div class="table-scrollable list">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <span class="caption-subject bold">Candidate Details</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- Candidate List -->
+                                <div class="col-md-6">
+                                    <div class="table-scrollable list">
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
                                                     <th> # </th>
+                                                    <th>Candidate Code</th>
                                                     <th>Candidate</th>
-                                                    <th>Current Ownership</th>
-                                                    <th>Remove </th>
+                                                    <th>Interview</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let profile of candidateProfiles; let index = index">
-                                                    <td> {{index +1}} </td>
-                                                    <td> {{profile.CandidateName}} </td>
-                                                    <td> {{profile.Owner.Value}}</td>
-                                                    <td><a (click)="onDelete(profile)"> Remove <i class="fa fa-times" ></i> </a></td>
+                                                <tr>
+                                                    <td> 1 </td>
+                                                    <td> C001</td>
+                                                    <td> <a>Jhone DEF </a> </td>
+                                                    <td><a class="btn blue btn-outline btn-circle btn-sm active"> Schedule  </a></td>
                                                 </tr>
-                                            </tbody>
+                                                <tr>
+                                                    <td> 2 </td>
+                                                    <td> C002 </td>
+                                                    <td> <a>Thomas </a> </td>
+                                                    <td><a class="btn blue btn-outline btn-circle btn-sm active"> Schedule </a></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td> 1 </td>
+                                                    <td> C001</td>
+                                                    <td> <a>Jhone DEF </a> </td>
+                                                    <td><a class="btn blue btn-outline btn-circle btn-sm active"> Schedule  </a></td>
+
+                                                </tr>
+                                              </tbody>
                                         </table>
-                                    </div>-->
-                            <div class="col-md-10">
-                                <div class="table-scrollable list">
+                                    </div>
+                                </div>
+                                <!-- Candidate List ENDS-->
+                                <!-- Candidate Details -->
+                                <div class="col-md-6" style="border-left:1px solid gray">
+                                    <span class="caption-subject bold" style="font-size : 14px">Jone DEF's' Interview Rounds History</span>
+                                    <br/> <br/>
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
                                                 <th> # </th>
-                                                <th>Candidate Code</th>
-                                                <th>Candidate</th>
-                                                <th>Remove </th>
+                                                <th>Round</th>
+                                                <th>Interviewer</th>
+                                                <th>Interview Date</th>
+                                                <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td> 1 </td>
-                                                <td> C001</td>
-                                                <td> Jhone DEF </td>
-                                                <td><a> Remove <i class="fa fa-times" ></i> </a></td>
+                                                <td> Technical 1</td>
+                                                <td> ABCD </td>
+                                                <td> 1/7/2016 </td>
+                                                <td> Selected </td>
                                             </tr>
                                             <tr>
                                                 <td> 2 </td>
-                                                <td> C002 </td>
-                                                <td> Thomas </td>
-                                                <td><a> Remove <i class="fa fa-times" ></i> </a></td>
+                                                <td> HR </td>
+                                                <td> XYZ </td>
+                                                <td> 4/7/2016 </td>
+                                                <td> Pending </td>
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <!--<carousel [interval]="myInterval" [noWrap]="noWrapSlides">
+                                        <slide *ngFor="let slidez of slides; let index=index" [active]="slidez.active">
+
+                                            <p>{{slidez.InterViewwr}}</p>
+                                            <p>{{slidez.Status}}</p>
+                                            <div class="carousel-caption">
+
+                                                <h4>Slide {{index}}</h4>
+
+                                            </div>
+                                        </slide>
+                                    </carousel>-->
+                                    <hr/>
+                                    <br/><br/>
+                                    <base-chart class="chart" style="display:block;width:100%" [options]="doughnutChartOptions" [data]="doughnutChartData" [labels]="doughnutChartLabels"
+                                        [chartType]="doughnutChartType" [colors]="doughnutChartColors"></base-chart>
+
                                 </div>
+                                <!-- Candidate Details END-->
                             </div>
                         </div>
-
-                        <div class="row">
-                            <label class="col-md-2 control-label">Comments <span class="required"> * </span></label>
-                            <div class="col-md-10">
-                                <textarea class="form-control" rows="2" placeholder="Comments" style="resize:vertical" required="">
-                                </textarea>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-9" style="padding-top:25px">
-                                <button type="submit" class="btn btn-info "> Assign RRF </button>
-                                <a class="btn btn-info" (click)='Back()'> Cancel</a>
-                            </div>
-                        </div>
-
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
