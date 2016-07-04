@@ -24,6 +24,7 @@ import { MyRRFComponent } from '../../RRF/myRRF/index';
 import { RRFApprovalComponent } from '../../RRF/RRFApproval/index';
 import { RRFDashboardComponent } from '../../RRF/RRFDashboard/index';
 import { SpinnerComponent, SpinnerService } from '../../shared/components/spinner/spinner';
+import { InterviewrsComponent } from '../../Recruitment Cycle/InterviewersTab/index';
 
 
 @Component({
@@ -53,6 +54,7 @@ import { SpinnerComponent, SpinnerService } from '../../shared/components/spinne
     { path: '/RRF/MyRRF', component: MyRRFComponent },
     { path: '/RRF/RRFApproval', component: RRFApprovalComponent },
     { path: '/RRF/RRFDashboard', component: RRFDashboardComponent },
+    { path: '/Recruitment Cycle/Interviewers', component: InterviewrsComponent },
 
 ])
 export class HomeComponent implements OnInit {

@@ -119,6 +119,7 @@ export class RRFApprovalListComponent implements OnActivate {
         this.ActionOnRaisedRRFBulk(_selectedRrfDetailsList);
         this.comment = '';
         this.allChecked = false;
+        this.getRRFApprovalList();
     }
     //Raised RRF Bulk approval service call
     ActionOnRaisedRRFBulk(_selectedRrfList: RRFDetails[]): void {

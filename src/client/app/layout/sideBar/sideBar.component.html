@@ -49,7 +49,7 @@
                             <span class="title">My Profiles</span>
                         </a>
                     </li>
-                     <li class="nav-item start " [ifAuthorize]="['PROFILEBANK.MYPROFILES.MANAGE']">
+                    <li class="nav-item start " [ifAuthorize]="['PROFILEBANK.MYPROFILES.MANAGE']">
                         <a [routerLink]="['/App/ProfileBank/CompanyProfiles']" class="nav-link ">
                             <i class="icon-graph"></i>
                             <span class="title">Company Profiles</span>
@@ -85,29 +85,33 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item start " [ifAuthorize]="['RCIC.MANAGE']">
+            <!--<li class="nav-item start " [ifAuthorize]="['RCIC.MANAGE']">-->
+            <li class="nav-item start " >
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-home"></i>
-                    <span class="title">Recruitment Cycle Interviewer Calendar</span>
+                    <span class="title">Interviewer's Actions</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item start " [ifAuthorize]="['RCIC.INTERVIEWERCALENDER.READ']">
-                        <a href="index.html" class="nav-link ">
+                    <!--<li class="nav-item start " [ifAuthorize]="['RCIC.INTERVIEWERCALENDER.READ']">-->
+                        <li class="nav-item start ">
+                        <a [routerLink]="['/App/Recruitment Cycle/Interviewers']" class="nav-link ">
                             <i class="icon-bar-chart"></i>
-                            <span class="title">Interviewer Calendar</span>
-                        </a>
-                    </li>
-                    <li class="nav-item start " [ifAuthorize]="['RCIC.MYCALENDER.READ']">
-                        <a href="index.html" class="nav-link ">
-                            <i class="icon-bar-chart"></i>
-                            <span class="title">My Calendar</span>
+                            <span class="title">Assignment & Availability</span>
                         </a>
                     </li>
                     <li class="nav-item start " [ifAuthorize]="['RCIC.SCHEDULEINTERVIEW.READ']">
-                        <a href="dashboard_2.html" class="nav-link ">
+                        <li class="nav-item start " >
+                        <a href="index.html" class="nav-link ">
                             <i class="icon-bulb"></i>
-                            <span class="title"> Schedule Interview</span>
+                            <span class="title">My Schedule</span>
+                        </a>
+                    </li>
+                    <!--<li class="nav-item start " [ifAuthorize]="['RCIC.MYCALENDER.READ']">-->
+                        <li class="nav-item start " >
+                        <a href="index.html" class="nav-link ">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">My Calendar</span>
                         </a>
                     </li>
                     <li class="nav-item start " [ifAuthorize]="['RCIC.IEF.READ']">
