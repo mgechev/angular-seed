@@ -2,7 +2,7 @@ import * as browserSync from 'browser-sync';
 // import * as path from 'path';
 
 import { getPluginConfig } from '../../config';
-
+import * as path from 'path';
 /**
  * Initialises BrowserSync with the configuration defined in seed.config.ts (or if overriden: project.config.ts).
  */
@@ -33,20 +33,22 @@ let changed = (files: any) => {
     files = [files];
   }
 
-  //  let onlyStylesChanged =
-  //    files
-  //      .map((f:string) => path.parse(f).ext)
-  //      .reduce((prev:string, current:string) => prev && (current === '.scss' || current === '.css'), true);
+   let onlyStylesChanged =
+     files
+       .map((f:string) => path.parse(f))
+       .reduce((prev:boolean, current:path.ParsedPath) => {       
+         return prev && (current.ext === '.scss' || current.ext === '.css') && !current.name.endsWith(".component")
+        }, true);
   //
   // if (ENABLE_HOT_LOADING) {
   //   ng2HotLoader.onChange(files);
   // } else {
   //TODO: Figure out why you can't pass a file to reload
-  // if (onlyStylesChanged === false) {
-    browserSync.reload(files);
-  // } else {
-  //   browserSync.reload('*.css');
-  // }
+  if (onlyStylesChanged === false) {
+    browserSync.reload();
+  } else {
+    browserSync.reload('**/*.css');
+  }
   //}
 };
 
