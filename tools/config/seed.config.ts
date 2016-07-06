@@ -406,7 +406,7 @@ export class SeedConfig {
       port: this.PORT,
       startPath: this.APP_BASE,
       open: argv['b'] ? false : true,
-      injectChanges: false,
+      injectChanges: true,
       server: {
         baseDir: `${this.DIST_DIR}/empty/`,
         routes: {
