@@ -62,6 +62,8 @@ export function serveCoverage() {
 export function serveProd() {
   let root = resolve(process.cwd(), PROD_DEST);
   let server = express();
+  let compression = require('compression');
+      server.use(compression());
 
   server.use(APP_BASE, serveStatic(root));
 
