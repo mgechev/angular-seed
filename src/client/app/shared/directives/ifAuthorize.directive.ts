@@ -8,7 +8,7 @@ export class IfAuthorizeDirective implements OnInit {
     @Input() ifAuthorize: Array<string>;
     private _element: HTMLElement;
 
-    constructor(_element: ElementRef, private _router: Router, private commonService: CommonService) {
+    constructor(_element: ElementRef, private commonService: CommonService) {
         this._element = _element.nativeElement;
     }
 
