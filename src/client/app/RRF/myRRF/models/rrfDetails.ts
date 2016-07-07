@@ -53,16 +53,3 @@ export class RRFDetails {
     public OpenForNumberOfDays: number = 0;
     public CreatedDate : Date;
 }
-
-// export class ResultForAPI {
-//    public StatusCode : number;
-//    public Message : '' ;
-//     public ReasonCode: string;
-//    public ErrorMsg: string;
-// }
-
-// export class MasterData {
-//     public Id: number;
-//     public Value: string;
-// }
-

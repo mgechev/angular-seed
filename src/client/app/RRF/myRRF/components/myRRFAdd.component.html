@@ -2,15 +2,21 @@
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-        <!-- BEGIN PAGE HEAD-->
-        <div class="page-head">
-            <!-- BEGIN PAGE TITLE -->
-            <div class="page-title">
-                <h1> Add RRF</h1>
-            </div>
-            <!-- END PAGE TITLE -->
-        </div>
-        <!-- END PAGE HEAD-->
+        <!--BEGIN breadcrumb -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']"> Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a [routerLink]="['/App/RRF/RRFDashboard']"> RRF Dashboard </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">New RRF</span>
+            </li>
+        </ul>
+        <!--End Breadcrumb>-->
         <div>
             <div class="portlet-body form portlet light bordered col-lg-12">
                 <!--<form role="form">-->
@@ -38,7 +44,7 @@
                                 <label>Technology<span class="required"> * </span></label>
                                 <!--<input type="text" [(ngModel)]='newRRF.Technology' id="txtTechnology" class="form-control" placeholder="Technology" />-->
                                 <select id="cmbTechnology" class="form-control" [(ngModel)]='newRRF.Technology.Id' [disabled]="!isNewRRF" required placeholder="Select Technology"
-                                tooltip="Select Technology" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Technology.Id">
+                                    tooltip="Select Technology" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Technology.Id">
                                  <option value="0 " disabled>Select Technology </option>
                                 <option *ngFor="let technologie of technologies" [value]="technologie.Id">{{technologie.Value}}</option>
                             </select>
@@ -59,8 +65,8 @@
                             <div class="form-group col-lg-4">
                                 <label>Designation<span class="required"> * </span></label>
                                 <!--<input type="text" [(ngModel)]='newRRF.Designation' id="txtDesignation" class="form-control" placeholder="Designation"/>-->
-                                <select id="cmbDesignation" class="form-control" [(ngModel)]='newRRF.Designation.Id' required
-                                 tooltip="Select Designation" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Designation.Id"
+                                <select id="cmbDesignation" class="form-control" [(ngModel)]='newRRF.Designation.Id' required tooltip="Select Designation"
+                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Designation.Id"
                                     [disabled]="!isNewRRF">
                                      <option value="0 " disabled>Select Designation </option>
                                 <option *ngFor="let designation of designations" [value]="designation.Id">{{designation.Value}}</option>
@@ -113,9 +119,8 @@
                                 <!--</Testing for Mulitiple dropdown>-->
 
                                 <div class="input-group select2-bootstrap-append ">
-                                    <select id="cmbSkillsReq" class="form-control " required="" multiple
-                                    tooltip="Skills Required" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!skill.Id"
-                                     [disabled]="!isNewRRF">
+                                    <select id="cmbSkillsReq" class="form-control " required="" multiple tooltip="Skills Required" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                        tooltipEnable="!skill.Id" [disabled]="!isNewRRF">
                                     <option value="0 " disabled>Select Skills </option>
                                     <option *ngFor="let skill of skills" [value]="skill.Id">{{skill.Value}}</option>
                                 </select>
@@ -136,14 +141,14 @@
                                     <div class="col-lg-6">
                                         <label>Min Exp.<small>&nbsp;(In years)</small><span class="required"> * </span></label>
                                         <!--<input id="txtMinExp" [(ngModel)]='newRRF.MinExp' type="text" value="" name="demo_vertical" />-->
-                                        <input type="number" [(ngModel)]='newRRF.MinExp' required
-                                        [disabled]="!isNewRRF" id="txtMinExp" min="0" 
-                                        tooltip="Min Exp." tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.MinExp">
+                                        <input type="number" [(ngModel)]='newRRF.MinExp' required [disabled]="!isNewRRF" id="txtMinExp" min="0" tooltip="Min Exp."
+                                            tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.MinExp">
                                     </div>
                                     <div class="col-lg-6">
                                         <label>Max Exp.<small>&nbsp;(In years)</small><span class="required"> * </span></label>
                                         <!--<input id="txtMaxExp" [(ngModel)]='newRRF.MaxExp' type="text" value="" name="demo_vertical" />-->
-                                        <input type="number" required="" [(ngModel)]='newRRF.MaxExp' [disabled]="!isNewRRF" id="txtMaxExp" min="0"  tooltip="Max Exp." tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.MaxExp">
+                                        <input type="number" required="" [(ngModel)]='newRRF.MaxExp' [disabled]="!isNewRRF" id="txtMaxExp" min="0" tooltip="Max Exp."
+                                            tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.MaxExp">
                                     </div>
                                 </div>
                             </div>
@@ -152,9 +157,9 @@
                                     <div class="col-lg-12">
                                         <label>Expected Date Of Joining<span class="required"> * </span></label>
                                         <div>
-                                            <input type="date" name="bday" id="expectedDateOfJoining" required="" value='{{ExpDateOfJoining}}'
-                                            [(ngModel)]='newRRF.ExpDateOfJoining' tooltip="Expected Date Of Joining" 
-                                            tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.ExpDateOfJoining" />
+                                            <input type="date" name="bday" id="expectedDateOfJoining" required="" value='{{ExpDateOfJoining}}' [(ngModel)]='newRRF.ExpDateOfJoining'
+                                                tooltip="Expected Date Of Joining" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                tooltipEnable="!newRRF.ExpDateOfJoining" />
 
                                         </div>
                                         <!--</div>-->
@@ -180,98 +185,100 @@
                             </div>
                         </div>
                         <form role="form" (submit)='onAddPanel()'>
-                         <div class="row">
-                            <div class="col-lg-10">
-                                <div class="form-group portlet-body portlet light bordered  ">
-                                    <div class="row">
-                                        <div class="form-group "></div>
-                                        <div class="form-group col-lg-4 ">
-                                            <label>Interview Round<span class="required"> * </span></label>
-                                            <select id="cmbIntwRound " class="form-control" required="" placeholder="Select Interview Round " [(ngModel)]='IntwRound'
-                                             tooltip="Select Interview Round" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!IntwRound" 
-                                            >
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-group portlet-body portlet light bordered  ">
+                                        <div class="row">
+                                            <div class="form-group "></div>
+                                            <div class="form-group col-lg-4 ">
+                                                <label>Interview Round<span class="required"> * </span></label>
+                                                <select id="cmbIntwRound " class="form-control" required="" placeholder="Select Interview Round " [(ngModel)]='IntwRound'
+                                                    tooltip="Select Interview Round" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                    tooltipEnable="!IntwRound">
                                             <option value="0 " disabled>Select Interview Round </option>
                                             <option *ngFor="let Round of interviewRound " [value]="Round.Id ">{{Round.Value}}</option>
                                         </select>
 
-                                        </div>
-                                        <div class="form-group col-lg-5 ">
-                                            <label>Panel<span class="required"> * </span></label>
-                                            <div class="input-group select2-bootstrap-append ">
-                                                <select id="cmbInterviewer" class="form-control " required="" multiple tooltip="Select Interviewers" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!0" >
+                                            </div>
+                                            <div class="form-group col-lg-5 ">
+                                                <label>Panel<span class="required"> * </span></label>
+                                                <div class="input-group select2-bootstrap-append ">
+                                                    <select id="cmbInterviewer" class="form-control " required="" multiple tooltip="Select Interviewers" tooltipPlacement="top"
+                                                        tooltipTrigger="mouseenter" tooltipEnable="!0">
                                                 <option value="0 " disabled>Select Interviewers </option>
                                                 <option *ngFor="let interviewer of interviewers " [value]="interviewer.Id ">{{interviewer.Value}}</option>
                                             </select>
-                                                <span class="input-group-btn ">
+                                                    <span class="input-group-btn ">
                                              <button class="btn btn-default " type="button " data-select2-open="multi-append ">
                                               <span class="glyphicon glyphicon-search "></span>
-                                                </button>
-                                                </span>
+                                                    </button>
+                                                    </span>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-lg-3 ">
-                                            <div>
-                                                <label><span>  </span></label>
-                                            </div>
-                                            <div *ngIf='!updatePanel'>
-                                                <button type="submit " id="btnAssign " class="btn blue ">Add Panel</button>
-                                            </div>
-                                            <div *ngIf='updatePanel'>
-                                                <button type="Update" id="btnUpdatePanel " class="btn blue " (click)='onUpdatePanelClick()'>Update</button>
-                                                <button type="Cancel" id="btnCancel " class="btn default " (click)='onPanelCancel()'>Cancel</button>
+                                            <div class="col-lg-3 ">
+                                                <div>
+                                                    <label><span>  </span></label>
+                                                </div>
+                                                <div *ngIf='!updatePanel'>
+                                                    <button type="submit " id="btnAssign " class="btn blue ">Add Panel</button>
+                                                </div>
+                                                <div *ngIf='updatePanel'>
+                                                    <button type="Update" id="btnUpdatePanel " class="btn blue " (click)='onUpdatePanelClick()'>Update</button>
+                                                    <button type="Cancel" id="btnCancel " class="btn default " (click)='onPanelCancel()'>Cancel</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class=" row ">
-                                        <div class="table-scrollable " *ngIf="newRRF.Panel.length > 0">
-                                            <table class="table table-striped table-bordered table-hover table-checkable order-column
-                                                      dataTable no-footer " role="grid " aria-describedby="sample_1_info " id="panelTable ">
-                                                <thead>
-                                                    <tr>
-                                                        <td><b>Interview Round </b></td>
-                                                        <td><b>Panel</b></td>
-                                                        <td><b>Action</b></td>
-                                                        <!--<td><b>Comments</b> </td>-->
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr class="odd gradeX " *ngFor='let panel of newRRF.Panel'>
-                                                        <td> {{panel.RoundNumber.Value }}</td>
-                                                        <td>
-                                                            <div *ngFor='let interviewer of panel.Interviewers'>
-                                                                {{interviewer.Value}}
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <!--<a class="edit" (click)='onPanelEdit(panel)'> Edit </a>-->
-                                                            <div class="btn-group">
-                                                                <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                        <div class=" row ">
+                                            <div class="table-scrollable " *ngIf="newRRF.Panel.length > 0">
+                                                <table class="table table-striped table-bordered table-hover table-checkable order-column
+                                                      dataTable no-footer " role="grid " aria-describedby="sample_1_info "
+                                                    id="panelTable ">
+                                                    <thead>
+                                                        <tr>
+                                                            <td><b>Interview Round </b></td>
+                                                            <td><b>Panel</b></td>
+                                                            <td><b>Action</b></td>
+                                                            <!--<td><b>Comments</b> </td>-->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="odd gradeX " *ngFor='let panel of newRRF.Panel'>
+                                                            <td> {{panel.RoundNumber.Value }}</td>
+                                                            <td>
+                                                                <div *ngFor='let interviewer of panel.Interviewers'>
+                                                                    {{interviewer.Value}}
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <!--<a class="edit" (click)='onPanelEdit(panel)'> Edit </a>-->
+                                                                <div class="btn-group">
+                                                                    <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                                                                 Action
                                                                 <i class="fa fa-angle-down"></i>
                                                             </button>
-                                                                <ul class="dropdown-menu" role="menu">
-                                                                    <li (click)='onPanelEdit(panel)'>
-                                                                        <a>
-                                                                            <i class="fa fa-edit"></i> Edit </a>
-                                                                    </li>
-                                                                    <li class="divider"> </li>
-                                                                    <li (click)='onPanelDelete(panel)'>
-                                                                        <a>
-                                                                            <i class="fa fa-trash"></i> Delete
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                                                    <ul class="dropdown-menu" role="menu">
+                                                                        <li (click)='onPanelEdit(panel)'>
+                                                                            <a>
+                                                                                <i class="fa fa-edit"></i> Edit </a>
+                                                                        </li>
+                                                                        <li class="divider"> </li>
+                                                                        <li (click)='onPanelDelete(panel)'>
+                                                                            <a>
+                                                                                <i class="fa fa-trash"></i> Delete
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         </form>
                         <div class="col-lg-12">
                         </div>

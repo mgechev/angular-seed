@@ -38,8 +38,7 @@
                                         </li>
                                         <li class="divider"> </li>
                                         <li>
-                                        <button class="btn btn-default btnLink" [disabled]='!selectedRowCount'
-                                        (click)='AssignRRFClick()'>
+                                            <button class="btn btn-default btnLink" [disabled]='!selectedRowCount' (click)='AssignRRFClick()'>
                                                 <i class="fa fa-check-square-o"></i> Assign RRF
                                             </button>
                                         </li>
@@ -142,11 +141,11 @@
                                 </div>
                             </div>
                             <!-- Add New Profile END-->
-                            
+
                             <!-- Update Stauts-->
 
                             <div id="updateRow" *ngIf='isCollapsed'>
-                                 <span class ="header" >Update Status</span>
+                                <span class="header">Update Status</span>
                                 <hr style="margin:0px 0px !important" />
                                 <form role="form" (submit)="onUpdateStauts()">
                                     <div class="row" style="margin-top: 10px">
@@ -184,7 +183,7 @@
                             <!-- FollowUP Comments-->
 
                             <div id="CommentsRow" *ngIf='isCommentsPanelCollapsed'>
-                                 <span class ="header" >Add/Update FollowUp Comments</span>
+                                <span class="header">Add/Update FollowUp Comments</span>
                                 <hr style="margin:0px 0px !important" />
                                 <form role="form" (submit)="onSubmitFollowupComment()">
                                     <div class="row" style="margin-top: 10px">
@@ -214,7 +213,7 @@
                             <!-- Upload Resume -->
 
                             <div id="UploadResume" *ngIf='isUploadPanelCollapsed'>
-                                <span class ="header" >Upload Resume</span>
+                                <span class="header">Upload Resume</span>
                                 <hr style="margin:0px 0px !important" />
                                 <form role="form" (submit)="onSubmitUploadResume()">
                                     <div class="row" style="margin-top: 10px">
@@ -230,7 +229,7 @@
                                                     *ngIf='resumeUploaded'> {{resumeName}}</span>
                                             </div>
                                         </div>
-                                         <div class="col-md-1 inlineForm">
+                                        <div class="col-md-1 inlineForm">
                                             <div class="form-group">
                                                 <div class="fileUpload btn btn-info" data-toggle="tooltip" data-placement="top" title="Upload Resume">
                                                     <input type="file" class="upload" (change)="postFile($event)" /><span>Browse</span>
