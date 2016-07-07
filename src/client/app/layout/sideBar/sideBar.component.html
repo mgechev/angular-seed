@@ -88,7 +88,7 @@
             <!--<li class="nav-item start " [ifAuthorize]="['RCIC.MANAGE']">-->
             <li class="nav-item start " >
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-home"></i>
+                    <i class="icon-users"></i>
                     <span class="title">Interviewer's Actions</span>
                     <span class="arrow"></span>
                 </a>
@@ -102,7 +102,7 @@
                     </li>
                     <li class="nav-item start " [ifAuthorize]="['RCIC.SCHEDULEINTERVIEW.READ']">
                         <li class="nav-item start " >
-                        <a href="index.html" class="nav-link ">
+                        <a [routerLink]="['/App/Recruitment Cycle/Interviewers/schedule']" class="nav-link ">
                             <i class="icon-bulb"></i>
                             <span class="title">My Schedule</span>
                         </a>
