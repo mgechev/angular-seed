@@ -86,7 +86,7 @@
                 </ul>
             </li>
             <!--<li class="nav-item start " [ifAuthorize]="['RCIC.MANAGE']">-->
-            <li class="nav-item start " >
+            <li class="nav-item start ">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-users"></i>
                     <span class="title">Interviewer's Actions</span>
@@ -94,7 +94,7 @@
                 </a>
                 <ul class="sub-menu">
                     <!--<li class="nav-item start " [ifAuthorize]="['RCIC.INTERVIEWERCALENDER.READ']">-->
-                        <li class="nav-item start ">
+                    <li class="nav-item start ">
                         <a [routerLink]="['/App/Recruitment Cycle/Interviewers']" class="nav-link ">
                             <i class="icon-bar-chart"></i>
                             <span class="title">Assignment & Availability</span>
@@ -120,71 +120,72 @@
                             <span class="title">IEF</span>
                         </a>
                     </li>
+
                 </ul>
-            </li>
-            <li [ifAuthorize]="['ADMIN.MANAGE']" class="heading">
-                <h3 class="uppercase">Administration</h3>
-            </li>
-            <li [ifAuthorize]="['ADMIN.ROLE.READ']" class="nav-item start ">
-                <a class="nav-link " [routerLink]="['/App/Admin/Role/']">
-                    <i class="icon-graph"></i>
-                    <span class="title">Roles</span>
-                </a>
-            </li>
-            <li [ifAuthorize]="['ADMIN.FEATURE.READ']" class="nav-item start ">
-                <a [routerLink]="['/App/Admin/Feature/']" class="nav-link ">
-                    <i class="icon-graph"></i>
-                    <span class="title">Features</span>
-                </a>
-            </li>
-            <li [ifAuthorize]="['ADMIN.USER.MANAGE']" class="nav-item start ">
-                <a [routerLink]="['/App/Admin/User/']" class="nav-link ">
-                    <i class="icon-graph"></i>
-                    <span class="title">User</span>
-                </a>
-            </li>
-            <li [ifAuthorize]="['ADMIN.PRACTICE.MANAGE']" class="nav-item start ">
-                <a id="practiceLink" [routerLink]="['/App/Admin/Practice/']" class="nav-link ">
-                    <i class="icon-graph"></i>
-                    <span class="title">Practice</span>
-                </a>
-            </li>
-            <li [ifAuthorize]="['ADMIN.TECHNOLOGY.MANAGE']" class="nav-item start ">
-                <a id="technologyLink" [routerLink]="['/App/Admin/Technology/']" class="nav-link ">
-                    <i class="icon-graph"></i>
-                    <span class="title">Technology</span>
-                </a>
-            </li>
-            <li [ifAuthorize]="['ADMIN.SKILLS.MANAGE']" class="nav-item start ">
-                <a id="skillLink" [routerLink]="['/App/Admin/Skill/']" class="nav-link ">
-                    <i class="icon-graph"></i>
-                    <span class="title">Skills</span>
-                </a>
-            </li>
-            <li [ifAuthorize]="['ADMIN.QUALIFICATIONS.MANAGE']" class="nav-item start ">
-                <a id="qualificationLink" [routerLink]="['/App/Admin/Qualification']" class="nav-link ">
-                    <i class="icon-graph"></i>
-                    <span class="title">Qualifications</span>
-                </a>
-            </li>
-            <li [ifAuthorize]="['ADMIN.DESIGNATION.MANAGE']" class="nav-item start ">
-                <a id="designationLink" [routerLink]="['/App/Admin/Designation/']" class="nav-link ">
-                    <i class="icon-graph"></i>
-                    <span class="title">Designation</span>
-                </a>
-            </li>
-            <li [ifAuthorize]="['ADMIN.INTERVIEWROUNDS.MANAGE']" class="nav-item start ">
-                <a id="interviewRoundLink" [routerLink]="['/App/Admin/InterviewRounds/']" class="nav-link ">
-                    <i class="icon-graph"></i>
-                    <span class="title">Interview Rounds</span>
-                </a>
-            </li>
-            <li [ifAuthorize]="['ADMIN.OWNERTYPE.MANAGE']" class="nav-item start ">
-                <a id="ownerTypeLink" [routerLink]="['/App/Admin/OwnerType/']" class="nav-link ">
-                    <i class="icon-graph"></i>
-                    <span class="title">Owner Type</span>
-                </a>
-            </li>
+                </li>
+                <li [ifAuthorize]="['ADMIN.MANAGE']" class="heading">
+                    <h3 class="uppercase">Administration</h3>
+                </li>
+                <li [ifAuthorize]="['ADMIN.ROLE.READ']" class="nav-item start ">
+                    <a class="nav-link " [routerLink]="['/App/Admin/Role/']">
+                        <i class="icon-graph"></i>
+                        <span class="title">Roles</span>
+                    </a>
+                </li>
+                <li [ifAuthorize]="['ADMIN.FEATURE.READ']" class="nav-item start ">
+                    <a [routerLink]="['/App/Admin/Feature/']" class="nav-link ">
+                        <i class="icon-graph"></i>
+                        <span class="title">Features</span>
+                    </a>
+                </li>
+                <li [ifAuthorize]="['ADMIN.USER.MANAGE']" class="nav-item start ">
+                    <a [routerLink]="['/App/Admin/User/']" class="nav-link ">
+                        <i class="icon-graph"></i>
+                        <span class="title">User</span>
+                    </a>
+                </li>
+                <li [ifAuthorize]="['ADMIN.PRACTICE.MANAGE']" class="nav-item start ">
+                    <a id="practiceLink" [routerLink]="['/App/Admin/Practice/']" class="nav-link ">
+                        <i class="icon-graph"></i>
+                        <span class="title">Practice</span>
+                    </a>
+                </li>
+                <li [ifAuthorize]="['ADMIN.TECHNOLOGY.MANAGE']" class="nav-item start ">
+                    <a id="technologyLink" [routerLink]="['/App/Admin/Technology/']" class="nav-link ">
+                        <i class="icon-graph"></i>
+                        <span class="title">Technology</span>
+                    </a>
+                </li>
+                <li [ifAuthorize]="['ADMIN.SKILLS.MANAGE']" class="nav-item start ">
+                    <a id="skillLink" [routerLink]="['/App/Admin/Skill/']" class="nav-link ">
+                        <i class="icon-graph"></i>
+                        <span class="title">Skills</span>
+                    </a>
+                </li>
+                <li [ifAuthorize]="['ADMIN.QUALIFICATIONS.MANAGE']" class="nav-item start ">
+                    <a id="qualificationLink" [routerLink]="['/App/Admin/Qualification']" class="nav-link ">
+                        <i class="icon-graph"></i>
+                        <span class="title">Qualifications</span>
+                    </a>
+                </li>
+                <li [ifAuthorize]="['ADMIN.DESIGNATION.MANAGE']" class="nav-item start ">
+                    <a id="designationLink" [routerLink]="['/App/Admin/Designation/']" class="nav-link ">
+                        <i class="icon-graph"></i>
+                        <span class="title">Designation</span>
+                    </a>
+                </li>
+                <li [ifAuthorize]="['ADMIN.INTERVIEWROUNDS.MANAGE']" class="nav-item start ">
+                    <a id="interviewRoundLink" [routerLink]="['/App/Admin/InterviewRounds/']" class="nav-link ">
+                        <i class="icon-graph"></i>
+                        <span class="title">Interview Rounds</span>
+                    </a>
+                </li>
+                <li [ifAuthorize]="['ADMIN.OWNERTYPE.MANAGE']" class="nav-item start ">
+                    <a id="ownerTypeLink" [routerLink]="['/App/Admin/OwnerType/']" class="nav-link ">
+                        <i class="icon-graph"></i>
+                        <span class="title">Owner Type</span>
+                    </a>
+                </li>
         </ul>
         <!-- END SIDEBAR MENU -->
     </div>

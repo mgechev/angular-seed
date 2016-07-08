@@ -3,12 +3,12 @@ import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
 
 @Component({
     moduleId: module.id,
-    selector: 'interviewers-availability',
-    templateUrl: 'interviewers.availability.component.html',
+    selector: 'recruiter-ief',
+    templateUrl: 'Candidate.IEF.component.html',
     directives: [ROUTER_DIRECTIVES]
 })
 
-export class RecruitmentInterviewAvailabilityComponent implements OnActivate {
+export class RecruitmentIEFComponent implements OnActivate {
     returnPath: string;
     Title: string;
     InterviewerID: string;
@@ -16,19 +16,10 @@ export class RecruitmentInterviewAvailabilityComponent implements OnActivate {
     }
     //Router method overrid from OnActivate class
     routerOnActivate() {
-        // this.getCandidateIds();
         this.returnPath = sessionStorage.getItem('returnPath');
     }
     Back() {
         if(this.returnPath !== undefined)
             this._router.navigate([this.returnPath]);
     }
-
-    //Get all RRF details assigned to interviewers
-    getAllAssignedRRF(_interviewerId: string) {
-        /** add logic to get all RRF */
-    }
-
-
-
-}// End Class
+}

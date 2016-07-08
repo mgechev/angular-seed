@@ -1,11 +1,8 @@
 import {Component  } from '@angular/core';
-import { OnActivate, ROUTER_DIRECTIVES, RouteSegment } from '@angular/router';
-//import { RRFDetails, AssignmentDetails } from '../../myRRF/models/rrfDetails';
+import { OnActivate, ROUTER_DIRECTIVES, RouteSegment, Router } from '@angular/router';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
-//import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import { MastersService } from '../../../shared/services/masters.service';
-//import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 //import { APIResult, RRFAssignStatus } from  '../../../shared/constantValue/index';
 //import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
@@ -38,6 +35,7 @@ export class RRFCandidateListComponent implements OnActivate {
     public slides: Array<any> = [];
 
     constructor(private _myRRFService: MyRRFService,
+        private _router: Router,
         private _rrfDashboardService: RRFDashboardService,
         private _mastersService: MastersService,
         public toastr: ToastsManager) {
@@ -53,10 +51,11 @@ export class RRFCandidateListComponent implements OnActivate {
         for (let i = 0; i < 4; i++) {
             this.addSlide();
         }
-        this.slides[0].active=true;
-        // this.GetRecruiter();
-        // this.getRRFDetails(this.RRFId);
-        // this.UnAssignRec.AssignedTo = new MasterData();
+        this.slides[0].active = true;
+    }
+    onScheduleInterviewClick() {
+        localStorage.setItem('RRFID', this.RRFId);
+        this._router.navigate(['/App//Recruitment Cycle/Schedule']);
     }
 
     chartClicked(e: any): void {
@@ -70,8 +69,8 @@ export class RRFCandidateListComponent implements OnActivate {
     public addSlide(): void {
         let newWidth = this.slides.length + 1;
         this.slides.push({
-            InterViewwr: 'InterViewer : ABCD '+newWidth,
-            Status : 'Status : Selected'
+            InterViewwr: 'InterViewer : ABCD ' + newWidth,
+            Status: 'Status : Selected'
         });
     }
 }

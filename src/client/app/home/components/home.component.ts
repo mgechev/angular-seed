@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ROUTER_DIRECTIVES, Routes,RouteSegment,RouteTree } from '@angular/router';
+import { ROUTER_DIRECTIVES, Routes, RouteSegment, RouteTree } from '@angular/router';
 import { FooterComponent } from '../../layout/footer/footer.component';
 import { TopNavigationBarComponent } from '../../layout/topNavigationBar/topNavigationBar.component';
 import { PageActionsComponent } from '../../layout/pageActions/pageActions.component';
@@ -25,17 +25,19 @@ import { RRFApprovalComponent } from '../../RRF/RRFApproval/index';
 import { RRFDashboardComponent } from '../../RRF/RRFDashboard/index';
 import { SpinnerComponent, SpinnerService } from '../../shared/components/spinner/spinner';
 import { InterviewrsComponent } from '../../Recruitment Cycle/InterviewersTab/index';
-
+import {ScheduleInterviewComponent} from '../../Recruitment Cycle/ScheduleInterview/index';
+import {DashboardComponent} from '../../Dashboard/component/dashboard.component';
 
 @Component({
     moduleId: module.id,
     templateUrl: 'home.component.html',
     styleUrls: ['home.component.css'],
     directives: [ROUTER_DIRECTIVES, FooterComponent, PageActionsComponent, TopNavigationBarComponent,
-        SideBarComponent, QuickSidebarComponent,SpinnerComponent],
+        SideBarComponent, QuickSidebarComponent, SpinnerComponent, DashboardComponent],
     providers: [SpinnerService],
 })
 @Routes([
+    { path: '/', component: DashboardComponent },
     { path: '/Admin/Feature', component: FeatureComponent },
     { path: '/Admin/Practice', component: PracticeComponent },
     { path: '/Admin/Skill', component: SkillComponent },
@@ -55,6 +57,7 @@ import { InterviewrsComponent } from '../../Recruitment Cycle/InterviewersTab/in
     { path: '/RRF/RRFApproval', component: RRFApprovalComponent },
     { path: '/RRF/RRFDashboard', component: RRFDashboardComponent },
     { path: '/Recruitment Cycle/Interviewers', component: InterviewrsComponent },
+    { path: '/Recruitment Cycle/Schedule', component: ScheduleInterviewComponent },
 
 ])
 export class HomeComponent implements OnInit {
@@ -63,7 +66,7 @@ export class HomeComponent implements OnInit {
         Layout.init();
         Demo.init();
     }
-     routerOnActivate(segment: RouteSegment,prev?: RouteSegment, currTree?: RouteTree, prevTree?: RouteTree) {
-   console.log(segment);
-  }
+    routerOnActivate(segment: RouteSegment, prev?: RouteSegment, currTree?: RouteTree, prevTree?: RouteTree) {
+        console.log(segment);
+    }
 }

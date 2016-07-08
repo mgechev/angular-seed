@@ -1,0 +1,26 @@
+.align {
+    text-align: right !important;
+}
+.select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field {
+    width:auto !important;
+}
+input.select2-search__field{
+        width:auto !important;
+}
+.hrClass {
+    margin-bottom:0px;
+    margin-top:0px
+}
+.fc-license-message {
+    display: none;
+}
+.tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%; /* To the left of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+}

@@ -5,7 +5,7 @@ import {CommonService} from '../../shared/services/common.service';
 })
 export class IfAuthorizeDirective implements OnInit {
 
-    @Input() ifAuthorize:Array<string>;
+    @Input() ifAuthorize: Array<string>;
     private _element: HTMLElement;
 
     constructor(_element: ElementRef, private commonService: CommonService) {
@@ -27,7 +27,7 @@ export class IfAuthorizeDirective implements OnInit {
             if (!userHasPermissions) {
                 this._element.style.display = 'none';
             }
-        }else {
+        } else {
             this._element.style.display = 'none';
         }
     }

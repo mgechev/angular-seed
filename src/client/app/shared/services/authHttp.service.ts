@@ -20,6 +20,7 @@ export class AuthHttp {
 
     addContentType(headers: Headers) {
         headers.append('Content-Type', 'application/json');
+        headers.append('Accept','application/json');
     }
 
     get(url:string) {

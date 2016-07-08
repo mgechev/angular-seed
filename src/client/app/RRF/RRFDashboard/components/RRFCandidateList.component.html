@@ -2,15 +2,21 @@
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-        <!-- BEGIN PAGE HEAD-->
-        <div class="page-head">
-            <!-- BEGIN PAGE TITLE -->
-            <div class="page-title">
-                <h1> RRF Candidate List</h1>
-            </div>
-            <!-- END PAGE TITLE -->
-        </div>
-        <!-- END PAGE HEAD-->
+        <!--BEGIN breadcrumb -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']"> Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a [routerLink]="['/App/RRF/RRFDashboard']"> RRF Dashboard </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">Candidates</span>
+            </li>
+        </ul>
+        <!--End Breadcrumb>-->
         <div class="row">
             <div class="portlet-body">
                 <div class="col-lg-12">
@@ -110,7 +116,7 @@
                                                     <td> 1 </td>
                                                     <td> C001</td>
                                                     <td> <a>Jhone DEF </a> </td>
-                                                    <td><a class="btn blue btn-outline btn-circle btn-sm active"> Schedule  </a></td>
+                                                    <td><a class="btn blue btn-outline btn-circle btn-sm active" (click)='onScheduleInterviewClick()'> Schedule  </a></td>
                                                 </tr>
                                                 <tr>
                                                     <td> 2 </td>
@@ -126,7 +132,7 @@
                                                     <td><a class="btn blue btn-outline btn-circle btn-sm active"> Schedule  </a></td>
 
                                                 </tr>
-                                              </tbody>
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>

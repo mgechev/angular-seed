@@ -17,7 +17,7 @@ import { RRFCandidateListComponent } from './RRFCandidateList.component';
 @Routes([
     { path: '/', component: RRFDashboardListComponent },
     { path: '/Assign/:id', component: RRFAssignComponent },
-    { path: '/Candidates/:id', component: RRFCandidateListComponent }
+    { path: '/Candidates/:id', component: RRFCandidateListComponent },
 ])
 export class RRFDashboardComponent {
 }
