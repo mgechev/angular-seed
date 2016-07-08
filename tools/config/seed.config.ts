@@ -91,7 +91,7 @@ export class SeedConfig {
    * @type {number}
    */
   HOT_LOADER_PORT = 5578;
-  
+
   /**
    * The build interval which will force the TypeScript compiler to perform a typed compile run.
    * Between the typed runs, a typeless compile is run, which is typically much faster.
