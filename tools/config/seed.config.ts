@@ -91,6 +91,17 @@ export class SeedConfig {
    * @type {number}
    */
   HOT_LOADER_PORT = 5578;
+  
+  /**
+   * The build interval which will force the TypeScript compiler to perform a typed compile run.
+   * Between the typed runs, a typeless compile is run, which is typically much faster.
+   * For example, if set to 5, the initial compile will be typed, followed by 5 typeless runs,
+   * then another typed run, and so on.
+   * If a compile error is encountered, the build will use typed compilation until the error is resolved.
+   * The default value is `0`, meaning typed compilation will always be performed.
+   * @type {number}
+   */
+  TYPED_COMPILE_INTERVAL = 0;
 
   /**
    * The directory where the bootstrap file is located.

@@ -13,6 +13,9 @@ export class ProjectConfig extends SeedConfig {
   constructor() {
     super();
     // this.APP_TITLE = 'Put name of your app here';
+    
+    /* Enable typeless compiler runs (faster) between typed compiler runs. */
+    this.TYPED_COMPILE_INTERVAL = 3;
 
     // Add `NPM` third-party libraries to be injected/bundled.
     this.NPM_DEPENDENCIES = [
@@ -29,7 +32,7 @@ export class ProjectConfig extends SeedConfig {
     ];
 
     /* Add to or override NPM module configurations: */
-    //this.mergeObject(this.PLUGIN_CONFIGS['browser-sync'], { ghostMode: false });
+    // this.mergeObject(this.PLUGIN_CONFIGS['browser-sync'], { ghostMode: false });
   }
 
 }
