@@ -35,11 +35,10 @@ export = () => {
   if (typedBuildCounter < TYPED_COMPILE_INTERVAL) {
     isFullCompile = false;
     tsProject = makeTsProject({isolatedModules: true});
+    projectFiles = projectFiles.pipe(plugins.cached());
+    util.log('Performing typeless TypeScript compile.');
   } else {
     tsProject = makeTsProject();
-    if(TYPED_COMPILE_INTERVAL <= 0) {
-      projectFiles = projectFiles.pipe(plugins.cached());
-    }
     projectFiles = merge(typings, projectFiles);
   }
 
@@ -55,7 +54,6 @@ export = () => {
     typedBuildCounter = 0;
   } else {
     typedBuildCounter++;
-    util.log('Performing typeless TypeScript compile.');
   }
 
   return result.js
