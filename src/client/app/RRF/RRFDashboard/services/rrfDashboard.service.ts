@@ -78,7 +78,7 @@ export class RRFDashboardService {
     closeRRF(rrfId: number, closeComment: string) {
         let url = Config.GetURL('/api/RRF/CloseRRF');
         this._spinnerService.show();
-        return this.authHttp.post(url ,{RRFID: rrfId ,CloseComment:closeComment})
+        return this.authHttp.post(url, { RRFID: rrfId, CloseComment: closeComment })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
@@ -96,5 +96,13 @@ export class RRFDashboardService {
         console.log(error);
         return Observable.throw(error.json().error || 'Server error');
     }
+
+    getCurrentLoggedInUser() {
+        let url = Config.GetURL('/api/authentication/getCurrentUserName');
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
 }
 

@@ -7,13 +7,14 @@ import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 import {RRFIDPipe } from './RRFIdFilter.component';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult, RRFStatus } from  '../../../shared/constantValue/index';
-import { ResponseFromAPI } from '../../../shared/model/common.model';
+import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
+import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-dashboard-list',
     templateUrl: 'RRFDashboardList.component.html',
-    directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES, IfAuthorizeDirective],
     styleUrls: ['../../RRFApproval/components/RRFApproval.component.css'],
     pipes: [RRFIDPipe],
     providers: [ToastsManager]
@@ -31,6 +32,7 @@ export class RRFDashboardListComponent implements OnActivate {
     closeRRF: boolean = false;
     closeRRFID: number = 0;
     isChartVisible: boolean = false;
+    logedInUser: MasterData = new MasterData();
 
     doughnutChartLabels: string[] = []
     doughnutChartData: number[] = [];
@@ -44,9 +46,11 @@ export class RRFDashboardListComponent implements OnActivate {
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService, private _router: Router,
         public toastr: ToastsManager) {
+            this.currentView = 'myRRF';
     }
 
     routerOnActivate() {
+        this.getLoggedInUser();
         this.getMyRRFData();
     }
 
@@ -148,16 +152,21 @@ export class RRFDashboardListComponent implements OnActivate {
 
     showRRFDetails(rrfId: string) {
         this.getRRFDetails(rrfId);
-        console.log(this.selectedRRF);
+        //console.log(this.selectedRRF);
         this.isListVisible = false;
     }
 
     showListOfRRF() {
         this.isListVisible = true;
+        if (this.currentView === 'allRRF') {
+            this.getAllRRFData();
+        } else {
+            this.getMyRRFData();
+        }
     }
 
     onViewChanged(viewMode: string) {
-        if (viewMode === 'AllRRF') {
+        if (viewMode === 'allRRF') {
             this.currentView = 'allRRF';
             this.getAllRRFData();
         } else {
@@ -213,12 +222,36 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
 
-    checkIfRRFClosed(status: string) {
+    checkIfRRFClosed(statusId: number) {
         try {
-            if (status.toLowerCase() === 'closed') {
+            if (statusId === RRFStatus.Closed) {
                 return true;
             } else {
                 return false;
+            }
+        } catch (error) {
+            return false;
+        }
+    }
+
+    allowEditRRF(statusId: number, raisedBy: number) {
+        try {
+            if (raisedBy === this.logedInUser.Id && statusId === RRFStatus.PendingApproval) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (error) {
+            return false;
+        }
+    }
+
+    allowAssignRRF(statusId: number) {
+        try {
+            if (statusId === RRFStatus.Open || statusId === RRFStatus.Assigned) {
+                return false;
+            } else {
+                return true;
             }
         } catch (error) {
             return false;
@@ -232,8 +265,18 @@ export class RRFDashboardListComponent implements OnActivate {
         this._router.navigate(['/App/RRF/MyRRF/Edit/' + rrfID]);
     }
 
-    onViewCandidateClick (rrfID: string) {
+    onViewCandidateClick(rrfID: string) {
         this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID]);
+    }
+
+    getLoggedInUser() {
+        this._rrfDashboardService.getCurrentLoggedInUser()
+            .subscribe(
+            (results: MasterData) => {
+                this.logedInUser = results;
+            },
+            error => this.errorMessage = <any>error);
+
     }
 
 }

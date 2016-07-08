@@ -19,7 +19,7 @@
                 <div class="col-lg-12" *ngIf="isChartVisible">
                     <div class=" portlet light bordered">
                         <base-chart class="chart" [options]="doughnutChartOptions" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
-                            [colors]="doughnutChartColors"></base-chart>
+                        [colors]="doughnutChartColors"></base-chart>
                     </div>
                 </div>
 
@@ -34,7 +34,7 @@
                         <div class="table-toolbar">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="btn-group">
+                                    <div class="btn-group" [ifAuthorize]="['RRF.INITIATERRF.MANAGE']">
                                         <a class="btn btn-circle dark btn-outline" [routerLink]="['/App/RRF/MyRRF/Add']">
                                             <i class="fa fa-plus"></i> Initiate RRF
                                         </a>
@@ -75,21 +75,22 @@
                                 <div class="col-lg-4 col-sm-4">
                                     <div class="mt-radio-inline">
                                         <label class="mt-radio">
-                                            <input type="radio" name="viewType" id="MyRRF" value="MyRRF" checked (click)="onViewChanged('MyRRF')" /> My RRF
+                                            <input type="radio" name="viewType" value="myRRF" [checked]="currentView == 'myRRF'" (click)="onViewChanged('myRRF')"
+                                            /> My RRF
                                             <span></span>
                                         </label>
                                         <label class="mt-radio">
 
-                                            <input type="radio" name="viewType" id="AllRRF" value="AllRRF" (click)="onViewChanged('AllRRF')" /> All RRF
+                                            <input type="radio" name="viewType" value="allRRF" [checked]="currentView == 'allRRF'" (click)="onViewChanged('allRRF') " /> All RRF
                                             <span></span>
                                         </label>
 
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-sm-4">
-                                    <div class="dataTables_filter pull-right">
+                                <div class="col-lg-4 col-sm-4 ">
+                                    <div class="dataTables_filter pull-right ">
                                         <label>Search:
-                                            <input class="form-control input-sm input-small input-inline" />
+                                            <input class="form-control input-sm input-small input-inline " />
                                         </label>
                                     </div>
                                 </div>
@@ -97,29 +98,30 @@
                         </div>
                         <!-- END SHOW AND SEARCH -->
 
-                        <div class="row" *ngIf='closeRRFID != 0'>
-                            <div class="col-lg-9">
-                                <textarea class="form-control" id="txtCloseComment" rows="1" [(ngModel)]='closeComment' placeholder="close Comment" style="resize:vertical"
-                                    required=""></textarea>
+                        <div class="row " *ngIf='closeRRFID != 0'>
+                            <div class="col-lg-9 ">
+                                <textarea class="form-control " id="txtCloseComment " rows="1
+                                            " [(ngModel)]='closeComment' placeholder="close Comment " style="resize:vertical "
+                                required=" "></textarea>
                             </div>
-                            <div class="col-lg-3">
-                                <button id="btnClose" class="btn blue" (click)="onbtnCloseRRF()">Close RRF</button>
-                                <button id="btnCancel" class="btn default" (click)="onCancelCloseRRF()">cancel</button>
+                            <div class="col-lg-3 ">
+                                <button id="btnClose " class="btn blue " (click)="onbtnCloseRRF() ">Close RRF</button>
+                                <button id="btnCancel " class="btn default " (click)="onCancelCloseRRF() ">cancel</button>
                             </div>
                         </div>
 
 
                         <!-- BEGIN LIST OF RRF  -->
-                        <div class="table-scrollable">
-                            <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" role="grid"
-                                aria-describedby="sample_1_info">
-                                <thead style="word-wrap: break-word;">
+                        <div class="table-scrollable ">
+                            <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable
+                                            no-footer " role="grid " aria-describedby="sample_1_info ">
+                                <thead style="word-wrap: break-word; ">
                                     <tr>
-                                        <!--<td width="20%"> <b>Raised by / Date</b> </td>
-                                        <td width="30%"> <b>Position Details</b> </td>
-                                        <td width="30%"> <b>Requirments </b></td>
-                                        <td width="10%"> <b>Status </b></td>
-                                        <td width="10%"><b> Action </b></td>-->
+                                        <!--<td width="20% "> <b>Raised by / Date</b> </td>
+                                        <td width="30% "> <b>Position Details</b> </td>
+                                        <td width="30% "> <b>Requirments </b></td>
+                                        <td width="10% "> <b>Status </b></td>
+                                        <td width="10% "><b> Action </b></td>-->
                                         <td> <b>Raised by / Date</b> </td>
                                         <td> <b>Position Details</b> </td>
                                         <td> <b>Requirments </b></td>
@@ -131,16 +133,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="odd gradeX" *ngFor="let rrf of rrfList | RRFIDPipe : closeRRFID">
+                                    <tr class="odd gradeX " *ngFor="let rrf of rrfList | RRFIDPipe : closeRRFID ">
                                         <!--remove hard code data-->
                                         <td>
-                                            <div align="left">
+                                            <div align="left ">
                                                 {{rrf.RaisedBy.Value }}
                                                 <br> {{rrf.CreatedDate}}
                                             </div>
                                         </td>
                                         <td>
-                                            <div align="left">
+                                            <div align="left ">
                                                 Practice :{{rrf.Practice.Value }}
                                                 <br>Tech. : {{rrf.Technology.Value }}
                                                 <br>Position : {{rrf.PositionTitle}}
@@ -149,9 +151,9 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div align="left">
+                                            <div align="left ">
                                                 Skills :
-                                                <label *ngFor="let skill of rrf.SkillsRequired">{{skill.Value}} &#44;&nbsp;</label>
+                                                <label *ngFor="let skill of rrf.SkillsRequired ">{{skill.Value}} &#44;&nbsp;</label>
                                                 <!--{{rrf.SkillsRequired.Value }}-->
                                                 <br>Date of Joining : {{rrf.ExpDateOfJoining }}
                                                 <br>Min.EXP : {{rrf.MinExp }}
@@ -160,11 +162,11 @@
                                         </td>
 
                                         <td>
-                                            <div class="mt-action">
-                                                <div class="mt-action-body">
-                                                    <div class="mt-action-row">
+                                            <div class="mt-action ">
+                                                <div class="mt-action-body ">
+                                                    <div class="mt-action-row ">
                                                         <div class="mt-action-datetime ">
-                                                            <span class="mt-action-dot {{getPriorityClass(rrf.Priority.Id)}}"></span>{{rrf.Priority.Value}}
+                                                            <span class="mt-action-dot {{getPriorityClass(rrf.Priority.Id)}} "></span>{{rrf.Priority.Value}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -172,48 +174,54 @@
 
                                         </td>
                                         <td>
-                                            <span class="mt-action-dot {{getStatusClass(rrf.Status.Id)}}"></span>{{rrf.Status.Value}}
+                                            <span class="mt-action-dot {{getStatusClass(rrf.Status.Id)}} "></span>{{rrf.Status.Value}}
                                         </td>
                                         <td>
-                                            <div align="left">
+                                            <div align="left ">
                                                 {{rrf.OpenForNumberOfDays}}
                                             </div>
                                         </td>
                                         <td>
-                                            <!--<a class="edit"s [routerLink]="['/App/RRF/RRFDashboard/Assign/'+rrf.RRFID]"> Assign </a>-->
-                                            <div class="btn-group">
+                                            <!--<a class="edit" [routerLink]="[ '/App/RRF/RRFDashboard/Assign/'+rrf.RRFID] "> Assign </a>-->
+                                            <div class="btn-group ">
                                                 <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                                                     Action
-                                                    <i class="fa fa-angle-down"></i>
+                                                    <i class="fa fa-angle-down "></i>
                                                 </button>
-                                                <ul class="dropdown-menu" role="menu">
+                                                <ul class="dropdown-menu " role="menu ">
                                                     <li>
-                                                        <button class="btn btn-default btnLink" (click)='redirectToEditRRF(rrf.RRFID)' [disabled]='checkIfRRFClosed(rrf.Status.Value)'>
-                                                            <i class="fa fa-edit"></i> Edit RRF 
+                                                        <button class="btn btn-default btnLink
+                                            " (click)='redirectToEditRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] "
+                                                        [disabled]='allowEditRRF(rrf.Status.Id , rrf.RaisedBy.Id)'>
+                                                            <i class="fa fa-edit "></i> Edit RRF
                                                         </button>
                                                     </li>
-                                                    <li class="divider"> </li>
+                                                    <li class="divider " [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] "> </li>
                                                     <li>
-                                                        <button class="btn btn-default btnLink" (click)='showRRFDetails(rrf.RRFID)'>
-                                                            <i class="fa fa-search-plus"></i> View RRF
+                                                        <button class="btn btn-default btnLink " (click)='showRRFDetails(rrf.RRFID)'>
+                                                            <i class="fa fa-search-plus "></i> View RRF
                                                         </button>
                                                     </li>
-                                                    <li class="divider"> </li>
+                                                    <li class="divider " [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "> </li>
                                                     <li>
-                                                        <button class="btn btn-default btnLink" (click)='redirectToAssignRRF(rrf.RRFID)' [disabled]='checkIfRRFClosed(rrf.Status.Value)'>
-                                                            <i class="icon-user"></i> Assign RRF
+                                                        <button class="btn btn-default btnLink
+                                            " (click)='redirectToAssignRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "
+                                                        [disabled]='allowAssignRRF(rrf.Status.Id)'>
+                                                            <i class="icon-user "></i> Assign RRF
                                                         </button>
                                                     </li>
-                                                    <li class="divider"> </li>
+                                                    <li class="divider "> </li>
                                                     <li>
-                                                        <button class="btn btn-default btnLink" (click)='onViewCandidateClick(rrf.RRFID)' [disabled]='checkIfRRFClosed(rrf.Status.Value)'>
-                                                            <i class="fa fa-users"></i> View Candidates
+                                                        <button class="btn btn-default btnLink " (click)='onViewCandidateClick(rrf.RRFID)' [disabled]='checkIfRRFClosed(rrf.Status.Id)'>
+                                                            <i class="fa fa-users "></i> View Candidates
                                                         </button>
                                                     </li>
-                                                    <li class="divider"> </li>
+                                                    <li class="divider " [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] "> </li>
                                                     <li>
-                                                        <button class="btn btn-default btnLink" (click)='onCloseRRFClick(rrf.RRFID)' [disabled]='checkIfRRFClosed(rrf.Status.Value)'>
-                                                            <i class="fa fa-times"></i> Close RRF
+                                                        <button class="btn btn-default btnLink
+                                            " (click)='onCloseRRFClick(rrf.RRFID)' [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] "
+                                                        [disabled]='checkIfRRFClosed(rrf.Status.Id)'>
+                                                            <i class="fa fa-times "></i> Close RRF
                                                         </button>
                                                     </li>
                                                 </ul>
@@ -227,116 +235,116 @@
                     </div>
                 </div>
 
-                <div class=" col-lg-12" id="divTimeLine" *ngIf="!isListVisible">
+                <div class=" col-lg-12 " id="divTimeLine " *ngIf="!isListVisible ">
 
-                    <div class=" portlet light bordered col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                        <div class="table-toolbar">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="btn-group">
-                                        <a class="btn btn-circle dark btn-outline" (click)='showListOfRRF()'>Back</a>
+                    <div class=" portlet light bordered col-lg-8 col-md-12 col-sm-12 col-xs-12 ">
+                        <div class="table-toolbar ">
+                            <div class="row ">
+                                <div class="col-md-6 ">
+                                    <div class="btn-group ">
+                                        <a class="btn btn-circle dark btn-outline " (click)='showListOfRRF()'>Back</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="timeline">
+                        <div class="timeline ">
                             <!-- TIMELINE ITEM -->
-                            <div class="timeline-item">
-                                <div class="timeline-badge">
-                                    <!--<img class="timeline-badge-userpic" src="../assets/pages/media/users/avatar80_1.jpg">-->
-                                    <div class="timeline-icon">
-                                        <i class="icon-user-following font-green-haze"></i>
+                            <div class="timeline-item ">
+                                <div class="timeline-badge ">
+                                    <!--<img class="timeline-badge-userpic " src="../assets/pages/media/users/avatar80_1.jpg ">-->
+                                    <div class="timeline-icon ">
+                                        <i class="icon-user-following font-green-haze "></i>
                                     </div>
                                 </div>
                                 <!-- RRF DETAILS START -->
-                                <div class="timeline-body">
-                                    <div class="timeline-body-arrow"> </div>
-                                    <div class="timeline-body-head">
-                                        <div class="timeline-body-head-caption">
-                                            <label href="javascript:;" class="timeline-body-title font-blue-madison">{{selectedRRF.RaisedBy.Value}}</label>
-                                            <span class="timeline-body-time font-grey-cascade">Raised on : {{selectedRRF.CreatedDate}} </span>
+                                <div class="timeline-body ">
+                                    <div class="timeline-body-arrow "> </div>
+                                    <div class="timeline-body-head ">
+                                        <div class="timeline-body-head-caption ">
+                                            <label href="javascript:; " class="timeline-body-title font-blue-madison ">{{selectedRRF.RaisedBy.Value}}</label>
+                                            <span class="timeline-body-time font-grey-cascade ">Raised on : {{selectedRRF.CreatedDate}} </span>
                                         </div>
 
                                     </div>
-                                    <div class="timeline-body-content">
-                                        <div class="portlet-title">
-                                            <div class="caption">
-                                                <span class="caption-subject bold uppercase">Job Opening Details</span>
+                                    <div class="timeline-body-content ">
+                                        <div class="portlet-title ">
+                                            <div class="caption ">
+                                                <span class="caption-subject bold uppercase ">Job Opening Details</span>
                                             </div>
-                                            <div class="actions">
+                                            <div class="actions ">
                                             </div>
                                         </div>
-                                        <div class="portlet light bordered">
-                                            <div class="portlet   bordered">
-                                                <div class="actions">
+                                        <div class="portlet light bordered ">
+                                            <div class="portlet bordered ">
+                                                <div class="actions ">
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">Practice</div>
-                                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" style="align:right">:</div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" id="lblPractice">{{selectedRRF.Practice.Value}}</div>
+                                                <div class="row ">
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ">Practice</div>
+                                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 " style="align:right ">:</div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 " id="lblPractice ">{{selectedRRF.Practice.Value}}</div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-5">Technology</div>
-                                                    <div class="col-md-1" style="align:right">:</div>
-                                                    <div class="col-md-6" id="lblTechnology">{{selectedRRF.Technology.Value}}</div>
+                                                <div class="row ">
+                                                    <div class="col-md-5 ">Technology</div>
+                                                    <div class="col-md-1 " style="align:right ">:</div>
+                                                    <div class="col-md-6 " id="lblTechnology ">{{selectedRRF.Technology.Value}}</div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-5">Position Title</div>
-                                                    <div class="col-md-1" style="align:right">:</div>
-                                                    <div class="col-md-6" id="lblPositionTitle">{{selectedRRF.PositionTitle}}</div>
+                                                <div class="row ">
+                                                    <div class="col-md-5 ">Position Title</div>
+                                                    <div class="col-md-1 " style="align:right ">:</div>
+                                                    <div class="col-md-6 " id="lblPositionTitle ">{{selectedRRF.PositionTitle}}</div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-5">Description</div>
-                                                    <div class="col-md-1" style="align:right">:</div>
-                                                    <div class="col-md-6" id="lblDescription">{{selectedRRF.Description}}</div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-5">No. Of Openings</div>
-                                                    <div class="col-md-1" style="align:right">:</div>
-                                                    <div class="col-md-6" id="lblNoOfOpenings">{{selectedRRF.NoOfOpenings}}</div>
+                                                <div class="row ">
+                                                    <div class="col-md-5 ">Description</div>
+                                                    <div class="col-md-1 " style="align:right ">:</div>
+                                                    <div class="col-md-6 " id="lblDescription ">{{selectedRRF.Description}}</div>
                                                 </div>
 
-                                                <div class="row">
-                                                    <div class="col-md-5">Skills Required</div>
-                                                    <div class="col-md-1" style="align:right">:</div>
-                                                    <div class="col-md-6" id="lblSkillsReq">
-                                                        <div *ngFor="let skill of selectedRRF.SkillsRequired">{{skill.Value}} </div>
+                                                <div class="row ">
+                                                    <div class="col-md-5 ">No. Of Openings</div>
+                                                    <div class="col-md-1 " style="align:right ">:</div>
+                                                    <div class="col-md-6 " id="lblNoOfOpenings ">{{selectedRRF.NoOfOpenings}}</div>
+                                                </div>
+
+                                                <div class="row ">
+                                                    <div class="col-md-5 ">Skills Required</div>
+                                                    <div class="col-md-1 " style="align:right ">:</div>
+                                                    <div class="col-md-6 " id="lblSkillsReq ">
+                                                        <div *ngFor="let skill of selectedRRF.SkillsRequired ">{{skill.Value}} </div>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-5">Designation</div>
-                                                    <div class="col-md-1" style="align:right">:</div>
-                                                    <div class="col-md-6" id="lblDesignation">{{selectedRRF.Designation.Value}}</div>
+                                                <div class="row ">
+                                                    <div class="col-md-5 ">Designation</div>
+                                                    <div class="col-md-1 " style="align:right ">:</div>
+                                                    <div class="col-md-6 " id="lblDesignation ">{{selectedRRF.Designation.Value}}</div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-5">Minimum Exp</div>
-                                                    <div class="col-md-1" style="align:right">:</div>
-                                                    <div class="col-md-6" id="lblMinExp">{{selectedRRF.MinExp}}</div>
+                                                <div class="row ">
+                                                    <div class="col-md-5 ">Minimum Exp</div>
+                                                    <div class="col-md-1 " style="align:right ">:</div>
+                                                    <div class="col-md-6 " id="lblMinExp ">{{selectedRRF.MinExp}}</div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-5">Maximum Exp</div>
-                                                    <div class="col-md-1" style="align:right">:</div>
-                                                    <div class="col-md-6" id="lblMaxExp">{{selectedRRF.MaxExp}}</div>
+                                                <div class="row ">
+                                                    <div class="col-md-5 ">Maximum Exp</div>
+                                                    <div class="col-md-1 " style="align:right ">:</div>
+                                                    <div class="col-md-6 " id="lblMaxExp ">{{selectedRRF.MaxExp}}</div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-5">Priority</div>
-                                                    <div class="col-md-1" style="align:right">:</div>
-                                                    <div class="col-md-6" id="lblPriority">{{selectedRRF.Priority.Value}}</div>
+                                                <div class="row ">
+                                                    <div class="col-md-5 ">Priority</div>
+                                                    <div class="col-md-1 " style="align:right ">:</div>
+                                                    <div class="col-md-6 " id="lblPriority ">{{selectedRRF.Priority.Value}}</div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-5">Exp. Date Of Joining</div>
-                                                    <div class="col-md-1" style="align:right">:</div>
-                                                    <div class="col-md-6" id="lblExpDateOfJoining">{{selectedRRF.ExpDateOfJoining}}</div>
+                                                <div class="row ">
+                                                    <div class="col-md-5 ">Exp. Date Of Joining</div>
+                                                    <div class="col-md-1 " style="align:right ">:</div>
+                                                    <div class="col-md-6 " id="lblExpDateOfJoining ">{{selectedRRF.ExpDateOfJoining}}</div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-5">Interviewers Panel</div>
-                                                    <div class="col-md-1" style="align:right">:</div>
+                                                <div class="row ">
+                                                    <div class="col-md-5 ">Interviewers Panel</div>
+                                                    <div class="col-md-1 " style="align:right ">:</div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="table-scrollable">
-                                                            <table class="table-bordered table no-footer">
+                                                <div class="row ">
+                                                    <div class="col-md-12 ">
+                                                        <div class="table-scrollable ">
+                                                            <table class="table-bordered table no-footer ">
                                                                 <thead>
                                                                     <tr>
                                                                         <td>Round </td>
@@ -344,7 +352,7 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <tr class="odd gradeX" *ngFor='let panel of selectedRRF.Panel'>
+                                                                    <tr class="odd gradeX " *ngFor='let panel of selectedRRF.Panel'>
                                                                         <td>
                                                                             {{panel.RoundNumber.Value}}
 
@@ -367,25 +375,25 @@
                                 </div>
                                 <!-- END TIMELINE ITEM -->
                                 <!-- TIMELINE ITEM -->
-                                <div class="timeline-item">
-                                    <div class="timeline-badge">
-                                        <!--<img class="timeline-badge-userpic" src="../assets/pages/media/users/avatar80_2.jpg">-->
-                                        <div class="timeline-icon">
-                                            <i class="icon-user-following font-green-haze"></i>
+                                <div class="timeline-item ">
+                                    <div class="timeline-badge ">
+                                        <!--<img class="timeline-badge-userpic " src="../assets/pages/media/users/avatar80_2.jpg ">-->
+                                        <div class="timeline-icon ">
+                                            <i class="icon-user-following font-green-haze "></i>
                                         </div>
                                     </div>
 
-                                    <div class="timeline-body">
-                                        <div class="timeline-body-arrow"> </div>
-                                        <div class="timeline-body-head">
-                                            <div class="timeline-body-head-caption">
-                                                <label href="javascript:;" class="timeline-body-title font-blue-madison">Abcd Xyz</label>
-                                                <span class="timeline-body-time font-grey-cascade">Approved on : 5 MAy 2016</span>
+                                    <div class="timeline-body ">
+                                        <div class="timeline-body-arrow "> </div>
+                                        <div class="timeline-body-head ">
+                                            <div class="timeline-body-head-caption ">
+                                                <label href="javascript:; " class="timeline-body-title font-blue-madison ">Abcd Xyz</label>
+                                                <span class="timeline-body-time font-grey-cascade ">Approved on : 5 MAy 2016</span>
                                             </div>
-                                            <div class="timeline-body-head-actions"> </div>
+                                            <div class="timeline-body-head-actions "> </div>
                                         </div>
-                                        <div class="timeline-body-content">
-                                            <span class="font-grey-cascade">
+                                        <div class="timeline-body-content ">
+                                            <span class="font-grey-cascade ">
                                                 <p> comments....</p>        
                                        </span>
                                         </div>
@@ -393,23 +401,23 @@
                                 </div>
                                 <!-- END TIMELINE ITEM -->
                                 <!-- TIMELINE ITEM WITH GOOGLE MAP -->
-                                <div class="timeline-item">
-                                    <div class="timeline-badge">
-                                        <!--<img class="timeline-badge-userpic" src="../assets/pages/media/users/avatar80_3.jpg">                                   -->
-                                        <div class="timeline-icon">
-                                            <i class="icon-user-following font-green-haze"></i>
+                                <div class="timeline-item ">
+                                    <div class="timeline-badge ">
+                                        <!--<img class="timeline-badge-userpic " src="../assets/pages/media/users/avatar80_3.jpg ">                                   -->
+                                        <div class="timeline-icon ">
+                                            <i class="icon-user-following font-green-haze "></i>
                                         </div>
                                     </div>
-                                    <div class="timeline-body">
-                                        <div class="timeline-body-arrow"> </div>
-                                        <div class="timeline-body-head">
-                                            <div class="timeline-body-head-caption">
-                                                <label class="timeline-body-title font-blue-madison">Abcd xyz</label>
-                                                <span class="timeline-body-time font-grey-cascade">Assigned On : 6 May 2016</span>
+                                    <div class="timeline-body ">
+                                        <div class="timeline-body-arrow "> </div>
+                                        <div class="timeline-body-head ">
+                                            <div class="timeline-body-head-caption ">
+                                                <label class="timeline-body-title font-blue-madison ">Abcd xyz</label>
+                                                <span class="timeline-body-time font-grey-cascade ">Assigned On : 6 May 2016</span>
                                             </div>
                                         </div>
-                                        <div class="timeline-body-content">
-                                            <span class="font-grey-cascade">
+                                        <div class="timeline-body-content ">
+                                            <span class="font-grey-cascade ">
                                                 <p> Details to whome it is Assigned</p>        
                                        </span>
                                         </div>
