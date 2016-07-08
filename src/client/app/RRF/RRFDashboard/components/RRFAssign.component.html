@@ -2,15 +2,21 @@
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-        <!-- BEGIN PAGE HEAD-->
-        <div class="page-head">
-            <!-- BEGIN PAGE TITLE -->
-            <div class="page-title">
-                <h1> Assign RRF</h1>
-            </div>
-            <!-- END PAGE TITLE -->
-        </div>
-        <!-- END PAGE HEAD-->
+        <!--BEGIN breadcrumb -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']"> Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a [routerLink]="['/App/RRF/RRFDashboard/']"> RRF Dashboard </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">Assign RRF</span>
+            </li>
+        </ul>
+        <!--End Breadcrumb>-->
         <div class="row">
             <div class="portlet-body">
                 <div class="col-lg-12">
@@ -29,7 +35,7 @@
                                         <td> <b>Raised by/Date</b> </td>
                                         <td> <b>Position Details</b> </td>
                                         <td> <b>Requirments </b></td>
-                                       <td> <b>Priority</b></td>
+                                        <td> <b>Priority</b></td>
                                         <td> <b>Status </b></td>
                                         <td> <b>Open for <br> no. of days</b></td>
                                     </tr>
@@ -182,7 +188,7 @@
                                             <td>{{assignee.AssigneeLastDate }}</td>
                                             <td>
                                                 <!--<div class="btn-group" *ngIf='assignee.Status == "Assigned"'>-->
-                                                    <div class="btn-group" *ngIf='assignee.Status.Id == AssignStatus.Assigned'>
+                                                <div class="btn-group" *ngIf='assignee.Status.Id == AssignStatus.Assigned'>
                                                     <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false" (click)='onUnassign(assignee)'>
                                                         Un-Assign
                                                     </button>

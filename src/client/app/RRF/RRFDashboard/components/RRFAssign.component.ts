@@ -46,12 +46,12 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
     }
 
     ngAfterViewInit() {
-        $('#cmbAssignTo').select2();
+        (<any>$('#cmbAssignTo')).select2();
     }
 
     ngAfterContentInit() {
         // Component content has been initialized
-        ('#cmbAssignTo').select2();
+        (<any>$('#cmbAssignTo')).select2();
     }
 
     getRRFDetails(rrfID: string): void {
