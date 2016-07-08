@@ -94,9 +94,7 @@ export class RRFApprovalListComponent implements OnActivate {
         var _selectedRrfDetailsList = new Array<RRFDetails>();
         for (var index = 0; index < this.rrfApprovalList.length; index++) {
             if (this.rrfApprovalList[index].IsChecked) {
-                this.rrfApprovalList[index].Status.Value = status;
                 this.rrfApprovalList[index].IsChecked = false;
-                this.rrfApprovalList[index].Comment = this.comment;
 
                 //:: Create object of RRF details and send object to api
                 var _rrfDetails: RRFDetails = new RRFDetails();
