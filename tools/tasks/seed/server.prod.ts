@@ -1,3 +1,6 @@
-import {serveProd} from '../../utils';
+import { serveProd } from '../../utils';
 
-export = serveProd
+/**
+ * Executes the build process, serving the files of the production environment using an `express` server.
+ */
+export = serveProd;

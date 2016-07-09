@@ -1,7 +1,9 @@
 import * as gulp from 'gulp';
 import * as runSequence from 'run-sequence';
-import {loadTasks} from './tools/utils';
-import {SEED_TASKS_DIR, PROJECT_TASKS_DIR} from './tools/config';
+
+import { PROJECT_TASKS_DIR, SEED_TASKS_DIR } from './tools/config';
+import { loadTasks } from './tools/utils';
+
 
 loadTasks(SEED_TASKS_DIR);
 loadTasks(PROJECT_TASKS_DIR);
@@ -10,9 +12,9 @@ loadTasks(PROJECT_TASKS_DIR);
 // --------------
 // Build dev.
 gulp.task('build.dev', (done: any) =>
-  runSequence('clean.dev',
-              'tslint',
-              'css-lint',
+  runSequence(//'clean.dev',
+//              'tslint',
+//              'css-lint',
               'build.assets.dev',
               'build.html_css',
               'build.js.dev',
@@ -57,6 +59,7 @@ gulp.task('build.test', (done: any) =>
   runSequence('clean.dev',
               'tslint',
               'build.assets.dev',
+              'build.html_css',
               'build.js.test',
               'build.index.dev',
               done));
@@ -77,10 +80,10 @@ gulp.task('build.tools', (done: any) =>
 
 // --------------
 // Docs
-gulp.task('docs', (done: any) =>
-  runSequence('build.docs',
-              'serve.docs',
-              done));
+// gulp.task('docs', (done: any) =>
+//   runSequence('build.docs',
+//               'serve.docs',
+//               done));
 
 // --------------
 // Serve dev

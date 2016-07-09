@@ -1,3 +1,6 @@
+/**
+ * This barrel file provides the export for the utilities provided by the seed.
+ */
 export * from './seed/clean';
 export * from './seed/code_change_tools';
 export * from './seed/server';
