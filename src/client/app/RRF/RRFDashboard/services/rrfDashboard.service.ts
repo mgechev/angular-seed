@@ -48,7 +48,7 @@ export class RRFDashboardService {
             .finally(() => this._spinnerService.hide());
     }
 
-    unassignRRF(rrfId: string, assignedTo: number, comment: string) {
+    unassignRRF(rrfId: string, assignedTo: MasterData, comment: string) {
         let url = Config.GetURL('/api/RRF/UnassignRRF');
         this._spinnerService.show();
         return this.authHttp.post(url, { RRFID: rrfId, AssignedTo: assignedTo, UnassigningComment: comment })
