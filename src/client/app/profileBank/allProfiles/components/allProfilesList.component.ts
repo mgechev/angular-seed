@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
-import {MyProfilesInfo, GridOperations} from '../../shared/model/myProfilesInfo';
+import {CandidateProfile, GridOperations} from '../../shared/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -28,9 +28,9 @@ import {ProfileFilterPipe,ProfileStatusFilterPipe, ProfileNoticePeriodFilterPipe
 
 
 export class AllProfilesListComponent implements OnActivate {
-    allProfilesList: Array<MyProfilesInfo>;
-    allProfilesList_1: Array<MyProfilesInfo>;
-    profile: MyProfilesInfo;
+    allProfilesList: Array<CandidateProfile>;
+    allProfilesList_1: Array<CandidateProfile>;
+    profile: CandidateProfile;
     statusList: Array<MasterData>;
     seletedCandidateID: string;
     selectedStatus = new MasterData();
@@ -55,8 +55,8 @@ export class AllProfilesListComponent implements OnActivate {
         public toastr: ToastsManager,
         private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
-        this.profile = new MyProfilesInfo();
-        this.allProfilesList = new Array<MyProfilesInfo>();
+        this.profile = new CandidateProfile();
+        this.allProfilesList = new Array<CandidateProfile>();
     }
 
     routerOnActivate() {
@@ -80,13 +80,13 @@ export class AllProfilesListComponent implements OnActivate {
                 .subscribe(
                 (results: any) => {
                     if (results.length !== undefined) {
-                        this.allProfilesList = <Array<MyProfilesInfo>>results;
-                        this.allProfilesList_1 = <Array<MyProfilesInfo>>results;
+                        this.allProfilesList = <Array<CandidateProfile>>results;
+                        this.allProfilesList_1 = <Array<CandidateProfile>>results;
                     }
                 },
                 error => this.errorMessage = <any>error);
         } catch (error) {
-            this.allProfilesList = new Array<MyProfilesInfo>();
+            this.allProfilesList = new Array<CandidateProfile>();
         }
 
     }

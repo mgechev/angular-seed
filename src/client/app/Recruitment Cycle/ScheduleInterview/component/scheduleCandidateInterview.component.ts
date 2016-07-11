@@ -3,7 +3,7 @@ import {Router, ROUTER_DIRECTIVES} from '@angular/router';
 import { FullCalendarComponent} from  '../../../shared/components/calendar/fullCalendar';
 import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import {CalendarDataService} from '../service/calendarDataService';
-import {MyEvent} from '../model/CalendarDetails';
+import {MyEvent, Resource} from '../model/CalendarDetails';
 
 @Component({
     moduleId: module.id,
@@ -14,10 +14,10 @@ import {MyEvent} from '../model/CalendarDetails';
 })
 
 export class ScheduleCandidateInterviewComponent implements OnInit {
-    resources = [{ id: 'a', title: 'InterViewer A', eventColor: '#a64110' },
-        { id: 'b', title: 'InterViewer B', eventColor: 'green' },
-        { id: 'c', title: 'InterViewer C', eventColor: '#85c110' }];
+    resources: Array<Resource> = new Array<Resource>();
 
+    resource:Resource;
+    cmbInterviewer: any = $('#cmbInterviewers');
     events: any[];
     data: any;
     header: any;
@@ -30,7 +30,7 @@ export class ScheduleCandidateInterviewComponent implements OnInit {
     InterviewerMultiselect: any = $('#cmbInterviewers');
 
     constructor(private _router: Router, private _calendarDataService: CalendarDataService, private cd: ChangeDetectorRef) {
-
+           this.resource = new Resource();
     }
 
 
@@ -43,7 +43,24 @@ export class ScheduleCandidateInterviewComponent implements OnInit {
             right: 'month,agendaWeek,agendaDay'
         };
         this.data = this._calendarDataService.getDropDown();
-        $('#cmbInterviewers').select2();
+        this.resources = this._calendarDataService.getResources();
+        let cmb: any = $('#cmbInterviewers');
+        this.resource = new Resource();
+        cmb.select2();
+        cmb.on('change', function () {
+            let value: any = $(this);
+            // this.getResources(value.val());
+
+            this.resources = new Array<Resource>();
+            for (let index = 0; index <= value.val().length; index++) {
+                 this.resource = new Resource();
+                this.resource.id = parseInt(value.val()[index]);
+                this.resource.eventColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+                this.resources.push(this.resource);
+                console.log(this.resource);
+            }
+
+        });
     }
 
     handleDayClick(event: any) {
@@ -51,7 +68,7 @@ export class ScheduleCandidateInterviewComponent implements OnInit {
         this.event.start = event.date.format();
         this.dialogVisible = true;
         $('#fullCalModal').modal();
-        //trigger detection manually as somehow only moving the mouse quickly after
+        // trigger detection manually as somehow only moving the mouse quickly after
         // click triggers the automatic detection
         this.cd.detectChanges();
     }
@@ -126,5 +143,22 @@ export class ScheduleCandidateInterviewComponent implements OnInit {
     }
     redirectToPreviousView() {
         //  this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + this.RRFID]);
+    }
+
+    generateHexColors() {
+        return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+    }
+    //on("change")
+
+
+    // onSelectInterviewer(id: string) {
+    //     this.resource.id = parseInt(id);
+    //     this.resource.title = 'abcd';
+    //     this.resource.eventColor = this.generateHexColors();
+    //     this.resources.push(this.resource);
+    //     console.log(this.resources);
+    // }
+    getResources(resourceIds: Array<string>) {
+
     }
 }

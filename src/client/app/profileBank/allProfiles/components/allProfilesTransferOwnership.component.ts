@@ -29,15 +29,17 @@ export class TransferOwnershipComponent implements OnActivate {
     constructor(private _myProfilesDataSharedService: DataSharedService,
         private _allProfilesService: AllProfilesService,
         private toastr: ToastsManager,
-        private _profileBankService:ProfileBankService,
+        private _profileBankService: ProfileBankService,
         private _router: Router,
         private _mastersService: MastersService) {
     }
+
     routerOnActivate() {
         this.getCandidateIds();
         this.getOwnerTypes();
         this.getRecruiters();
     }
+
     getCandidateIds() {
         this.CheckedCandidateIds = this._myProfilesDataSharedService.getCheckedItems();
 
@@ -52,11 +54,11 @@ export class TransferOwnershipComponent implements OnActivate {
         var chkItemIndex = _.findIndex(this.candidateProfiles, profile);
         this.candidateProfiles.splice(chkItemIndex, 1);
     }
-    onSelectOwnerType(id :string) {
+    onSelectOwnerType(id: string) {
         this.TransferOwnership.OwnerType.Id = parseInt(id);
         this.TransferOwnership.OwnerType.Value = null;
     }
-     onSelectOwner(id :string) {
+    onSelectOwner(id: string) {
         this.TransferOwnership.Owner.Id = parseInt(id);
         this.TransferOwnership.Owner.Value = null;
     }

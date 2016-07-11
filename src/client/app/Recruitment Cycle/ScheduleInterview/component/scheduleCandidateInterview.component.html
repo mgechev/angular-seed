@@ -75,12 +75,13 @@
                                         <label class="col-md-3 control-label align">Interviewers <span class="required"> * </span></label>
                                         <div class="col-md-6">
                                             <div class="input-group select2-bootstrap-append" style="width:233px !important">
-                                                <select id="cmbInterviewers" class="form-control" multiple style="width:233px !important">
+                                                <select id="cmbInterviewers" class="form-control" multiple style="width:233px !important" 
+                                                    (change)='onSelectInterviewer($event.target.value)'>
                                                     <optgroup label="Nominations">
-                                                        <option  *ngFor="let recruiter of data.Nominations">{{recruiter.value}}</option>
+                                                        <option  *ngFor="let recruiter of data.Nominations" [value]="recruiter.id">{{recruiter.value}}</option>
                                                     </optgroup>
                                                     <optgroup label="Other">
-                                                        <option  *ngFor="let recruiter of data.Others">{{recruiter.value}}</option>
+                                                        <option  *ngFor="let recruiter of data.Others" [value]="recruiter.id">{{recruiter.value}}</option>
                                                     </optgroup>
                                               </select>
                                             </div>
