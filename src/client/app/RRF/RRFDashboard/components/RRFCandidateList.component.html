@@ -112,24 +112,32 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <!--<tr *ngFor="let candidate of Candidates; let index = index">
+                                                    <td> {{index+1}} </td>
+                                                    <td> {{candidate.CandidateID}}</td>
+                                                    <td> <a (click)='getCandidatesRoundHistory(candidate.CandidateID)'> {{candidate.Candidate}}</a></td>
+                                                    <td><a class="btn blue btn-outline btn-circle btn-sm active" 
+                                                           (click)='onScheduleInterviewClick()'> Schedule </a></td>
+                                                </tr>-->
                                                 <tr>
                                                     <td> 1 </td>
                                                     <td> C001</td>
                                                     <td> <a>Jhone DEF </a> </td>
-                                                    <td><a class="btn blue btn-outline btn-circle btn-sm active" (click)='onScheduleInterviewClick()'> Schedule  </a></td>
+                                                    <td><a class="btn blue btn-outline btn-circle btn-sm active"> Schedule  </a></td>
                                                 </tr>
                                                 <tr>
                                                     <td> 2 </td>
                                                     <td> C002 </td>
                                                     <td> <a>Thomas </a> </td>
-                                                    <td><a class="btn blue btn-outline btn-circle btn-sm active"> Schedule </a></td>
+                                                    <td><a class="btn blue btn-outline btn-circle btn-sm active" (click)='onScheduleInterviewClick()'> Schedule </a></td>
 
                                                 </tr>
                                                 <tr>
                                                     <td> 1 </td>
                                                     <td> C001</td>
                                                     <td> <a>Jhone DEF </a> </td>
-                                                    <td><a class="btn blue btn-outline btn-circle btn-sm active"> Schedule  </a></td>
+                                                    <td><a class="btn blue btn-outline btn-circle btn-sm active" (click)='onScheduleInterviewClick()'
+                                                    > Schedule  </a></td>
 
                                                 </tr>
                                             </tbody>
@@ -152,7 +160,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            <tr id="round" (mouseover)='showPopOver()'>
                                                 <td> 1 </td>
                                                 <td> Technical 1</td>
                                                 <td> ABCD </td>

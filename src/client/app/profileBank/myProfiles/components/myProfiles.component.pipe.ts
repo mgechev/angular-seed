@@ -1,5 +1,5 @@
 import {PipeTransform, Pipe} from '@angular/core';
-import { MyProfilesInfo, ResumeMeta, AddCandidateResponse } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, ResumeMeta, AddCandidateResponse } from '../../shared/model/myProfilesInfo';
 
 @Pipe({
   name: 'myProfilesFilter'
@@ -16,18 +16,18 @@ export class MyProfilesFilterPipe implements PipeTransform {
   //     ));
   // }
 
-  // transform(value: MyProfilesInfo[],
-  //   args: string[]): MyProfilesInfo[] {
+  // transform(value: CandidateProfile[],
+  //   args: string[]): CandidateProfile[] {
   //   if (args.length !== undefined) {
   //     let filter: string = args[0] ? args[0].toLocaleLowerCase() : null;
-  //     return filter ? value.filter((product: MyProfilesInfo) =>
+  //     return filter ? value.filter((product: CandidateProfile) =>
   //       product.FirstName.toLocaleLowerCase().indexOf(filter) !== -1) : value;
   //   }
   //   return value;
   // }
 
-  transform(value: MyProfilesInfo[],
-    args: string[]): MyProfilesInfo[] {
+  transform(value: CandidateProfile[],
+    args: string[]): CandidateProfile[] {
     if (args.length !== undefined) {
       return value;
     }

@@ -1,7 +1,7 @@
 import {Component } from '@angular/core';
 import { Router, RouteSegment, ROUTER_DIRECTIVES, OnActivate } from '@angular/router';
 import { CompanyProfilesService } from '../services/CompanyProfiles.service';
-import { MyProfilesInfo, Qualification } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, Qualification } from '../../shared/model/myProfilesInfo';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
@@ -19,7 +19,7 @@ import { ProfileBankService } from '../../shared/services/profilebank.service';
 
 export class CompanyProfilesAddComponent implements OnActivate {
 
-    profile: MyProfilesInfo;
+    profile: CandidateProfile;
     qualification: Qualification;
     errorMessage: string;
     params: string;
@@ -52,7 +52,7 @@ export class CompanyProfilesAddComponent implements OnActivate {
         public toastr: ToastsManager,
         private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
-        this.profile = new MyProfilesInfo();
+        this.profile = new CandidateProfile();
         this.createQualification();
 
     }
@@ -79,8 +79,8 @@ export class CompanyProfilesAddComponent implements OnActivate {
     getCandidateProfileById(profileId: string) {
         this._profileBankService.getCandidateProfile(profileId)
             .subscribe(
-            (results: MyProfilesInfo) => {
-                this.profile = <MyProfilesInfo>results;
+            (results: CandidateProfile) => {
+                this.profile = <CandidateProfile>results;
                 if (results.Country.Id !== 0)
                     this.getStates(results.Country.Id);
                 //this.convertCheckboxesValuesToBoolean();

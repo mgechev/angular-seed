@@ -21,8 +21,6 @@ export class AllRRFStatusCount {
     public Status : MasterData = new MasterData();
 }
 
-
-
 export class RRFApproval {
     Approver: MasterData = new MasterData();
     Status: string;
@@ -53,3 +51,5 @@ export class RRFDetails {
     public OpenForNumberOfDays: number = 0;
     public CreatedDate : Date;
 }
+
+

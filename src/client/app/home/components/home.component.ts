@@ -37,7 +37,7 @@ import {DashboardComponent} from '../../Dashboard/component/dashboard.component'
     providers: [SpinnerService],
 })
 @Routes([
-    { path: '/', component: DashboardComponent },
+    //{ path: '/', component: DashboardComponent },
     { path: '/Admin/Feature', component: FeatureComponent },
     { path: '/Admin/Practice', component: PracticeComponent },
     { path: '/Admin/Skill', component: SkillComponent },

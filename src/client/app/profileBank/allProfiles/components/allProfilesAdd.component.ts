@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { Router, RouteSegment, OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
-import {MyProfilesInfo, Qualification } from '../../shared/model/myProfilesInfo';
+import {CandidateProfile, Qualification } from '../../shared/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
 import { ProfileBankService } from '../../shared/services/profilebank.service';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -18,7 +18,7 @@ import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 })
 
 export class AllProfilesAddComponent implements OnActivate {
-    profile: MyProfilesInfo;
+    profile: CandidateProfile;
     qualification: Qualification;
     errorMessage: string;
     params: string;
@@ -57,7 +57,7 @@ export class AllProfilesAddComponent implements OnActivate {
         private _profileBankService: ProfileBankService,
         public toastr: ToastsManager,
         private _masterService: MastersService) {
-        this.profile = new MyProfilesInfo();
+        this.profile = new CandidateProfile();
         this.createQualification();
     }
 
@@ -95,7 +95,7 @@ export class AllProfilesAddComponent implements OnActivate {
     getCandidateProfileById(profileId: string) {
         this._profileBankService.getCandidateProfile(profileId)
             .subscribe(
-            (results: MyProfilesInfo) => {
+            (results: CandidateProfile) => {
                 //  if (this.currentUser.Id === results.Owner.Id) {
                 this.profile = results;
                 if (results.Country.Id !== 0)

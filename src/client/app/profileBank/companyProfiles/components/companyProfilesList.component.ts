@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
-import { MyProfilesInfo } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile } from '../../shared/model/myProfilesInfo';
+import { Candidate } from '../../shared/model/RRF';
 import { CompanyProfilesService } from '../services/companyProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -19,8 +20,8 @@ import { DataSharedService } from '../../shared/services/DataShared.service';
 })
 
 export class CompanyProfilesListComponent implements OnActivate {
-    companyProfilesList: Array<MyProfilesInfo>;
-    profile: MyProfilesInfo;
+    companyProfilesList: Array<CandidateProfile>;
+    profile: CandidateProfile;
     statusList: Array<MasterData>;
     seletedCandidateID: string;
     selectedStatus = new MasterData();
@@ -31,15 +32,18 @@ export class CompanyProfilesListComponent implements OnActivate {
     currentUser: MasterData = new MasterData();
     selectedRowCount: number = 0;
     allChecked: boolean = false;
-
+    selectedCandidates: Array<Candidate>;
     public isCollapsed: boolean = false;
+    Candidate: Candidate;
     constructor(private _companyProfilesService: CompanyProfilesService,
         private _router: Router,
         public toastr: ToastsManager,
         private _dataSharedService: DataSharedService,
         private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
-        this.profile = new MyProfilesInfo();
+        this.profile = new CandidateProfile();
+        this.selectedCandidates = new Array<Candidate>();
+        this.Candidate = new Candidate();
     }
 
     routerOnActivate() {
@@ -77,7 +81,7 @@ export class CompanyProfilesListComponent implements OnActivate {
         this._router.navigate(['/App/ProfileBank/companyProfiles/Edit/' + CandidateID]);
 
     }
-     SaveCandidateID(id: string) {
+    SaveCandidateID(id: string) {
         this.seletedCandidateID = id;
 
         var index = _.findIndex(this.companyProfilesList, { CandidateID: this.seletedCandidateID });
@@ -92,7 +96,7 @@ export class CompanyProfilesListComponent implements OnActivate {
             },
             error => this.toastr.error(<any>error));
 
-             window.scrollTo(0, 40);
+        window.scrollTo(0, 40);
         if (this.isCollapsed === false)
             this.isCollapsed = !this.isCollapsed;
     }
@@ -112,7 +116,7 @@ export class CompanyProfilesListComponent implements OnActivate {
 
 
     onUpdateStauts() {
-          if (this.selectedStatus.Id === undefined)
+        if (this.selectedStatus.Id === undefined)
             this.selectedStatus = this.profile.Status;
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
@@ -161,7 +165,6 @@ export class CompanyProfilesListComponent implements OnActivate {
         }
     }
 
-
     transferOwnerShipClick() {
         let checkedItemIds: Array<string> = new Array<string>();
         for (var index = 0; index < this.companyProfilesList.length; index++) {
@@ -185,15 +188,17 @@ export class CompanyProfilesListComponent implements OnActivate {
         }
     }
 
-       AssignRRFClick() {
-        let checkedItemIds: string = '';
+    AssignRRFClick() {
         for (var index = 0; index < this.companyProfilesList.length; index++) {
             if (this.companyProfilesList[index].IsChecked) {
-                checkedItemIds = checkedItemIds + this.companyProfilesList[index].CandidateID + ',';
+                this.Candidate.CandidateID = this.companyProfilesList[index].CandidateID;
+                this.Candidate.Candidate = this.companyProfilesList[index].Candidate;
+                this.selectedCandidates.push(this.Candidate);
+                this.Candidate = new Candidate();
             }
         }
-        sessionStorage.setItem('CandidateIDs',checkedItemIds);
-        sessionStorage.setItem('returnPath','/App/ProfileBank/CompanyProfiles');
+        sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));
+        sessionStorage.setItem('returnPath', '/App/ProfileBank/CompanyProfiles');
         this._router.navigate(['/App/ProfileBank/CompanyProfiles/Assign']);
     }
 }

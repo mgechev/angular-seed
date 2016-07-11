@@ -8,7 +8,7 @@ export class Qualification {
   public Grade: MasterData = new MasterData();
 }
 
-export class MyProfilesInfo {
+export class CandidateProfile {
   public CandidateID: string;
   public Candidate: string;
   public FirstName: string;

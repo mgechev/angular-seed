@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { MyProfilesInfo, SalaryDetails, Qualification, TeamManagement, CareerProfile,
+import { CandidateProfile, SalaryDetails, Qualification, TeamManagement, CareerProfile,
     OtherDetails, Skills, TransferOwnershipMeta} from '../model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
@@ -40,7 +40,7 @@ export class ProfileBankService {
             .finally(() => this._spinnerService.hide());
     }
 
-    editCandidateProfile(profile: MyProfilesInfo) {
+    editCandidateProfile(profile: CandidateProfile) {
         let url = Config.GetURL('/api/ProfileBank/UpdateCandidateIntialInfo');
         this._spinnerService.show();
         return this.authHttp.post(url, { profile })
@@ -58,7 +58,7 @@ export class ProfileBankService {
             .finally(() => this._spinnerService.hide());
     }
 
-    editCandidatePersonalDetails(profile: MyProfilesInfo) {
+    editCandidatePersonalDetails(profile: CandidateProfile) {
         let url = Config.GetURL('/api/ProfileBank/AddPersonalDetails');
         this._spinnerService.show();
         return this.authHttp.post(url, { profile })
@@ -76,7 +76,7 @@ export class ProfileBankService {
             .finally(() => this._spinnerService.hide());
     }
 
-    editCandidateQualificationDetails(profile: MyProfilesInfo) {
+    editCandidateQualificationDetails(profile: CandidateProfile) {
         let url = Config.GetURL('/api/ProfileBank/AddQualificationDetails');
         this._spinnerService.show();
         return this.authHttp.post(url, { profile })

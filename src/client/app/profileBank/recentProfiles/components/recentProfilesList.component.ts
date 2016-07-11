@@ -76,8 +76,6 @@ export class RecentProfilesListComponent implements OnActivate {
         this.seletedCandidateID = id;
 
         var index = _.findIndex(this.recentProfilesList, { CandidateID: this.seletedCandidateID });
-        // this.profile.Comments = this.allProfilesList[index].Comments;
-        // this.profile.Status = this.allProfilesList[index].Status;
         this.currentCandidate = this.recentProfilesList[index].Candidate;
         this._profileBankService.getStatusById(id)
             .subscribe(

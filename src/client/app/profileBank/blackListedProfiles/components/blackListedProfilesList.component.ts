@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
-import { MyProfilesInfo } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile } from '../../shared/model/myProfilesInfo';
 import { BlackListedProfilesService } from '../services/blacklistedProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -19,8 +19,8 @@ import { ProfileBankService } from '../../shared/services/profilebank.service';
 })
 
 export class BlackListedProfilesListComponent implements OnActivate {
-    blacklistedProfilesList: Array<MyProfilesInfo>;
-    profile: MyProfilesInfo;
+    blacklistedProfilesList: Array<CandidateProfile>;
+    profile: CandidateProfile;
     statusList: Array<MasterData>;
     seletedCandidateID: string;
     selectedStatus = new MasterData();
@@ -36,7 +36,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
         public toastr: ToastsManager,
         private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
-        this.profile = new MyProfilesInfo();
+        this.profile = new CandidateProfile();
 
     }
 
@@ -59,7 +59,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
     getBlacklistedProfiles() {
         this._blacklistedProfilesService.getBlackListedProfiles()
             .subscribe(
-            (results: Array<MyProfilesInfo>) => {
+            (results: Array<CandidateProfile>) => {
                 if (results.length !== undefined) {
 
                     this.blacklistedProfilesList = results;

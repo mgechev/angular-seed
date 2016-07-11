@@ -1,7 +1,7 @@
 import {Component } from '@angular/core';
 import { Router, RouteSegment, ROUTER_DIRECTIVES, OnActivate } from '@angular/router';
 import { BlackListedProfilesService } from '../services/blacklistedProfiles.service';
-import { MyProfilesInfo, Qualification } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, Qualification } from '../../shared/model/myProfilesInfo';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
@@ -20,7 +20,7 @@ import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 
 export class BlackListedProfilesAddComponent implements OnActivate {
 
-    profile: MyProfilesInfo;
+    profile: CandidateProfile;
     qualification: Qualification;
     errorMessage: string;
     params: string;
@@ -51,7 +51,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
         public toastr: ToastsManager,
         private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
-        this.profile = new MyProfilesInfo();
+        this.profile = new CandidateProfile();
         this.createQualification();
 
     }
@@ -91,7 +91,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
     getCandidateProfileById(profileId: string) {
         this._profileBankService.getCandidateProfile(profileId)
             .subscribe(
-            (results: MyProfilesInfo) => {
+            (results: CandidateProfile) => {
                 //  if (this.currentUser.Value === results.Owner.Value) {
                 this.profile = results;
                 if(results.Country.Id !== 0)

@@ -16,7 +16,7 @@ export class MyEvent {
     allDay: boolean = true;
 }
 export class Resource {
-    Id: number;
-    Resource: string;
+    id: number;
+    title: string;
     eventColor: string;
 }

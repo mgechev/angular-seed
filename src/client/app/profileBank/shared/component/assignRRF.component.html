@@ -2,15 +2,6 @@
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-        <!-- BEGIN PAGE HEAD-->
-        <div class="page-head">
-            <!-- BEGIN PAGE TITLE -->
-            <div class="page-title">
-                <h1>Assign RRF</h1>
-            </div>
-            <!-- END PAGE TITLE -->
-        </div>
-        <!-- END PAGE HEAD-->
         <!--BEGIN breadcrumb -->
         <ul class="page-breadcrumb breadcrumb">
             <li>
@@ -29,12 +20,15 @@
         <div class="row">
             <div class="portlet light bordered">
                 <div class="portlet-body">
-                    <form role="form" class="form-horizontal">
+                      <h4>Assign RRF</h4>
+                      <hr class="hrClass"/>
+                    <form role="form" class="form-horizontal"  (submit)="onAssignRRF()">
                         <div class="row">
                             <label class="col-md-2 control-label">RRF <span class="required"> * </span></label>
                             <div class="col-md-6">
                                 <select class="form-control" required (change)='onSelectRRF($event.target.value)'>
                                     <option></option>
+                                    <!-- <option *ngFor="let rrf of CandidateAssignment.AssignedRRF" [value]="rrf.RRFID">{{rrf.ID}} - {{rrf.PositionTitle}} - {{rrf.RaisedBy.Value}}</option> -->
                                           <option>RRF 001 - Angular JS Developer - Kunal Adhikari </option>
                                           <option>RRF 002 - Sr.Sharepoint Developer - Aradhana C</option>
                                 </select>
@@ -139,7 +133,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            <tr *ngFor="let candidate of  CandidateAssigment.Candidates; let index = index">
+                                                <td> {{index+1}} </td>
+                                                <td> {{candidate.CandidateID}}</td>
+                                                <td> {{candidate.Candidate}}</td>
+                                                <td><a (click)='onDelete(candidate)'> Remove <i class="fa fa-times" ></i> </a></td>
+
+
+                                                <!--<tr>
                                                 <td> 1 </td>
                                                 <td> C001</td>
                                                 <td> Jhone DEF </td>
@@ -150,7 +151,7 @@
                                                 <td> C002 </td>
                                                 <td> Thomas </td>
                                                 <td><a> Remove <i class="fa fa-times" ></i> </a></td>
-                                            </tr>
+                                            </tr>-->
                                         </tbody>
                                     </table>
                                 </div>
@@ -160,7 +161,7 @@
                         <div class="row">
                             <label class="col-md-2 control-label">Comments <span class="required"> * </span></label>
                             <div class="col-md-10">
-                                <textarea class="form-control" rows="2" placeholder="Comments" style="resize:vertical" required="">
+                                <textarea class="form-control" rows="2" placeholder="Comments" style="resize:vertical" required="" [(ngModel)]='CandidateAssigment.Comments'>
                                 </textarea>
                             </div>
                         </div>

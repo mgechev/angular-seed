@@ -1,15 +1,15 @@
 import {PipeTransform, Pipe} from '@angular/core';
-import {MyProfilesInfo } from '../../shared/model/myProfilesInfo';
+import {CandidateProfile } from '../../shared/model/myProfilesInfo';
 
 @Pipe({
     name: 'statusFilter'
 })
 
 export class ProfileStatusFilterPipe implements PipeTransform {
-    transform(value: MyProfilesInfo[],
-        args: string): MyProfilesInfo[] {
+    transform(value: CandidateProfile[],
+        args: string): CandidateProfile[] {
         if (args !== undefined) {
-            return args ? value.filter((profile: MyProfilesInfo) =>
+            return args ? value.filter((profile: CandidateProfile) =>
                 profile.Status.Value.toLocaleLowerCase().indexOf(args) !== -1) : value;
         }
         return value;
@@ -45,12 +45,12 @@ export class ProfileFilterPipe implements PipeTransform {
 })
 
 export class ProfileSalaryFilterPipe implements PipeTransform {
-    transform(value: MyProfilesInfo[],
-        args: string): MyProfilesInfo[] {
+    transform(value: CandidateProfile[],
+        args: string): CandidateProfile[] {
         if (args !== undefined && args !== null) {
             return args
                 ? value.filter(
-                    (profile: MyProfilesInfo) =>
+                    (profile: CandidateProfile) =>
                         String(profile.CandidateSalaryDetails.CurrentSalary).toLowerCase().indexOf(args) !== -1)
                 : value;
         }
@@ -64,12 +64,12 @@ export class ProfileSalaryFilterPipe implements PipeTransform {
 })
 
 export class ProfileExpectedSalaryFilterPipe implements PipeTransform {
-    transform(value: MyProfilesInfo[],
-        args: string): MyProfilesInfo[] {
+    transform(value: CandidateProfile[],
+        args: string): CandidateProfile[] {
         if (args !== undefined && args !== null) {
             return args
                 ? value.filter(
-                    (profile: MyProfilesInfo) =>
+                    (profile: CandidateProfile) =>
                         String(profile.CandidateSalaryDetails.ExpectedSalary).toLowerCase().indexOf(args) !== -1)
                 : value;
         }
@@ -81,12 +81,12 @@ export class ProfileExpectedSalaryFilterPipe implements PipeTransform {
 })
 
 export class ProfileNoticePeriodFilterPipe implements PipeTransform {
-    transform(value: MyProfilesInfo[],
-        args: string): MyProfilesInfo[] {
+    transform(value: CandidateProfile[],
+        args: string): CandidateProfile[] {
         if (args !== undefined && args !== null) {
             return args
                 ? value.filter(
-                    (profile: MyProfilesInfo) =>
+                    (profile: CandidateProfile) =>
                         String(profile.CandidateOtherDetails.NoticePeriod).toLowerCase().indexOf(args) !== -1)
                 : value;
         }

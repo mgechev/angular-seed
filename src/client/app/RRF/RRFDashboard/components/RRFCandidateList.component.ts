@@ -1,4 +1,4 @@
-import {Component  } from '@angular/core';
+import {Component } from '@angular/core';
 import { OnActivate, ROUTER_DIRECTIVES, RouteSegment, Router } from '@angular/router';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
@@ -6,23 +6,24 @@ import { MastersService } from '../../../shared/services/masters.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 //import { APIResult, RRFAssignStatus } from  '../../../shared/constantValue/index';
 //import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
+import { CandidateProfile } from  '../../../ProfileBank/shared/model/myProfilesInfo';
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
-import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap';
-
+//import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap';
+import {RRFCandidateListService} from '../services/RRFCandidatesList.service';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-candidate-list',
     templateUrl: 'RRFCandidateList.component.html',
-    directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES, CAROUSEL_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES],
     styleUrls: ['RRFDashboard.component.css'],
     providers: [ToastsManager]
 })
 
 export class RRFCandidateListComponent implements OnActivate {
-    RRFId: string;
-    Candidate: 'Jhone DEF';
-    doughnutChartLabels: string[] = []
+    RRFID: string;
+    Candidate: string = 'Jhone DEF';
+    doughnutChartLabels: string[] = [];
     doughnutChartData: number[] = [];
     doughnutChartType: string = 'doughnut'; //doughnut
     doughnutChartColors: any[] = [{ backgroundColor: [] }];
@@ -30,31 +31,30 @@ export class RRFCandidateListComponent implements OnActivate {
         animation: false,
         responsive: true
     };
-    public myInterval: number = 5000;
-    public noWrapSlides: boolean = false;
-    public slides: Array<any> = [];
-
+    errorMessage: string;
+    Candidates: Array<CandidateProfile>;
+   
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
         private _rrfDashboardService: RRFDashboardService,
         private _mastersService: MastersService,
+        private _rrfCandidatesList: RRFCandidateListService,
         public toastr: ToastsManager) {
-
+        this.Candidates = new Array<CandidateProfile>();
     }
 
     routerOnActivate(segment: RouteSegment) {
-        this.RRFId = segment.getParam('id');
+        this.RRFID = segment.getParam('id');
         this.doughnutChartLabels = ['Technical 1', 'HR'];
         this.doughnutChartData = [50, 50];
         this.doughnutChartColors = [{ backgroundColor: ['#E9EF0B', '#32c5d2'] }];
 
-        for (let i = 0; i < 4; i++) {
-            this.addSlide();
-        }
-        this.slides[0].active = true;
+        //TODO : Call API to get Candidates Specific to SelectedRRF
+        //  this.getCanidatesForRRF();
+
     }
     onScheduleInterviewClick() {
-        localStorage.setItem('RRFID', this.RRFId);
+        localStorage.setItem('RRFID', this.RRFID);
         this._router.navigate(['/App//Recruitment Cycle/Schedule']);
     }
 
@@ -66,11 +66,28 @@ export class RRFCandidateListComponent implements OnActivate {
         console.log(e);
     }
 
-    public addSlide(): void {
-        let newWidth = this.slides.length + 1;
-        this.slides.push({
-            InterViewwr: 'InterViewer : ABCD ' + newWidth,
-            Status: 'Status : Selected'
+    getCanidatesForRRF() {
+        this._rrfCandidatesList.getCandidatesForRRF(this.RRFID)
+            .subscribe(
+            results => {
+                this.Candidates = <any>results;
+            },
+            error => this.errorMessage = <any>error);
+    }
+
+    getCandidatesRoundHistory(CandidateID: string) {
+        console.log('Inside Rounds History');
+    }
+
+    showPopOver() {
+        let row :any = $('#round');
+        row.popover({
+            placement: 'bottom',
+            toggle: 'popover',
+            title: 'Comments',
+            html: true,
+            trigger: 'hover',
+            content: this.Candidate
         });
     }
 }

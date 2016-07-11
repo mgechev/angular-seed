@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, RouteSegment, Router } from '@angular/router';
-import { MyProfilesInfo } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile } from '../../shared/model/myProfilesInfo';
 import { ProfileBankService } from '../../shared/services/profilebank.service';
 
 @Component({
@@ -13,19 +13,19 @@ import { ProfileBankService } from '../../shared/services/profilebank.service';
 export class AllProfilesViewComponent implements OnActivate {
     params: string;
     errorMessage: string;
-    profile: MyProfilesInfo;
+    profile: CandidateProfile;
     count:number=0;
     TITLE : string ='All Profiles';
     constructor(private _profileBankService: ProfileBankService,
         private _router: Router) {
-        this.profile = new MyProfilesInfo();
+        this.profile = new CandidateProfile();
     }
     routerOnActivate(segment: RouteSegment) {
         this.params = segment.getParam('id');
         if (this.params) {
             this._profileBankService.getCandidateProfile(this.params)
                 .subscribe(
-                (results : MyProfilesInfo)=> {
+                (results : CandidateProfile)=> {
                     this.profile = results;
                     this.count = results.CandidateQualification.length;
                     this.convertCheckboxesValues();

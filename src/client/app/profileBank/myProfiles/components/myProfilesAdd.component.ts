@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment } from '@angular/router';
-import { MyProfilesInfo, Qualification} from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, Qualification} from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 //import * as  _ from 'lodash';
@@ -20,7 +20,7 @@ import { ProfileBankService} from  '../../shared/services/profileBank.service';
 })
 
 export class MyProfilesAddComponent implements OnActivate {
-    profile: MyProfilesInfo;
+    profile: CandidateProfile;
     qualification: Qualification;
     errorMessage: string;
     params: string;
@@ -48,7 +48,7 @@ export class MyProfilesAddComponent implements OnActivate {
         private _profileBankService: ProfileBankService,
         public toastr: ToastsManager,
         private _router: Router) {
-        this.profile = new MyProfilesInfo();
+        this.profile = new CandidateProfile();
         this.createQualificationObj();
 
     }
@@ -81,7 +81,7 @@ export class MyProfilesAddComponent implements OnActivate {
     getCandidateProfileById(profileId: string) {
         this._profileBankService.getCandidateProfile(profileId)
             .subscribe(
-            (results :MyProfilesInfo)=> {
+            (results :CandidateProfile)=> {
                 this.profile = results;
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments;
                 if(results.Country.Id !== 0)

@@ -6,12 +6,13 @@ import { RRFAssignComponent } from './RRFAssign.component';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import { RRFCandidateListComponent } from './RRFCandidateList.component';
+import {RRFCandidateListService} from '../services/RRFCandidatesList.service';
 
 @Component({
     selector: 'rrf-dashboard',
     template: ' <router-outlet></router-outlet>',
     directives: [ROUTER_DIRECTIVES],
-    providers: [RRFDashboardService, MyRRFService, MastersService]
+    providers: [RRFDashboardService, MyRRFService, MastersService,RRFCandidateListService]
 })
 
 @Routes([

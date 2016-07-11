@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import { MyProfilesInfo, ResumeMeta, AddCandidateResponse } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, ResumeMeta, AddCandidateResponse } from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -11,6 +11,7 @@ import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
 //import {MyProfilesFilterPipe} from './myProfiles.component.pipe';
 import { Headers, Http } from '@angular/http';
+import { Candidate } from '../../shared/model/RRF';
 
 
 @Component({
@@ -22,8 +23,8 @@ import { Headers, Http } from '@angular/http';
 })
 
 export class MyProfilesListComponent implements OnActivate {
-    myProfilesList: Array<MyProfilesInfo>;
-    profile: MyProfilesInfo;
+    myProfilesList: Array<CandidateProfile>;
+    profile: CandidateProfile;
     errorMessage: string;
     status: number;
     psdTemplates: any;
@@ -52,6 +53,8 @@ export class MyProfilesListComponent implements OnActivate {
     isUploadPanelCollapsed: boolean = false;
     resumeUploaded: boolean = false;
     resumeName: string;
+    Candidate: Candidate;
+    selectedCandidates: Array<Candidate>;
 
     constructor(private _myProfilesService: MyProfilesService,
         private http: Http,
@@ -61,8 +64,10 @@ export class MyProfilesListComponent implements OnActivate {
         private _masterService: MastersService) {
         this.psdTemplates = new Array<File>();
         this.resumeFiles = new Array<File>();
-        this.profile = new MyProfilesInfo();
+        this.profile = new CandidateProfile();
         this.resumeMeta = new ResumeMeta();
+        this.selectedCandidates = new Array<Candidate>();
+        this.Candidate = new Candidate();
     }
 
     routerOnActivate() {
@@ -120,7 +125,7 @@ export class MyProfilesListComponent implements OnActivate {
                         } else {
                             this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                         }
-                        this.profile = new MyProfilesInfo();
+                        this.profile = new CandidateProfile();
                     },
                     error => { this.errorMessage = <any>error; this.toastr.error(this.errorMessage) });
             } else {
@@ -134,7 +139,7 @@ export class MyProfilesListComponent implements OnActivate {
                         } else {
                             this.toastr.error((<ResponseFromAPI>results).Message);
                         }
-                        this.profile = new MyProfilesInfo();
+                        this.profile = new CandidateProfile();
                     },
                     error => { this.errorMessage = <any>error; this.toastr.error(this.errorMessage) });
             }
@@ -282,7 +287,7 @@ export class MyProfilesListComponent implements OnActivate {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                         this.toastr.success((<ResponseFromAPI>results).Message);
                         this.getMyProfiles();
-                        this.profile = new MyProfilesInfo();
+                        this.profile = new CandidateProfile();
                     } else {
                         this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                     }
@@ -351,15 +356,30 @@ export class MyProfilesListComponent implements OnActivate {
 
     //Assign RRf 
     AssignRRFClick() {
-        let checkedItemIds: string = '';
+        let chkStatus = false;
         for (var index = 0; index < this.myProfilesList.length; index++) {
             if (this.myProfilesList[index].IsChecked) {
-                checkedItemIds = checkedItemIds + this.myProfilesList[index].CandidateID + ',';
+                //Check for open / rejected Status
+                if (this.myProfilesList[index].Status.Value.toLowerCase() === 'open' ||
+                    this.myProfilesList[index].Status.Value.toLowerCase() === 'rejected') {
+                    //Add to selectedCandidates array
+                    this.Candidate.CandidateID = this.myProfilesList[index].CandidateID;
+                    this.Candidate.Candidate = this.myProfilesList[index].Candidate;
+                    this.selectedCandidates.push(this.Candidate);
+                    this.Candidate = new Candidate();
+                } else {
+                    chkStatus = true;
+                    break;
+                }
             }
         }
-        sessionStorage.setItem('CandidateIDs',checkedItemIds);
-        sessionStorage.setItem('returnPath','/App/ProfileBank/MyProfiles');
-        this._router.navigate(['/App/ProfileBank/MyProfiles/Assign']);
+        if (chkStatus) {
+            this.toastr.warning('Only Open / Rejected status candidates can be Assigned to RRF');
+        } else {
+            sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));
+            sessionStorage.setItem('returnPath', '/App/ProfileBank/MyProfiles');
+            this._router.navigate(['/App/ProfileBank/MyProfiles/Assign']);
+        }
     }
 }
 
