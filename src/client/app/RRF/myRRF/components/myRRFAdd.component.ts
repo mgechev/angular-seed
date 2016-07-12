@@ -104,7 +104,7 @@ export class MyRRFAddComponent implements OnActivate {
                     .subscribe(
                     results => {
                         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                            this.toastr.success((<ResponseFromAPI>results).Message, 'Success!');
+                            this.toastr.success((<ResponseFromAPI>results).Message);
                             this._router.navigate(['/App/RRF/RRFDashboard/']);
                         } else {
                             this.toastr.error((<ResponseFromAPI>results).Message);

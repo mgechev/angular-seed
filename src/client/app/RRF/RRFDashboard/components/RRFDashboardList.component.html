@@ -74,14 +74,14 @@
                                 </div>
                                 <div class="col-lg-4 col-sm-4">
                                     <div class="mt-radio-inline">
-                                        <label class="mt-radio">
-                                            <input type="radio" name="viewType" value="myRRF" [checked]="currentView == 'myRRF'" (click)="onViewChanged('myRRF')"
-                                            /> My RRF
+                                        <label class="mt-radio" [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']">
+                                            <input type="radio" name="viewType" value="myRRF" [checked]="currentView == 'myRRF'" (click)="onViewChanged('myRRF')" /> My RRF
                                             <span></span>
                                         </label>
-                                        <label class="mt-radio">
+                                        <label class="mt-radio" [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']">
 
-                                            <input type="radio" name="viewType" value="allRRF" [checked]="currentView == 'allRRF'" (click)="onViewChanged('allRRF') " /> All RRF
+                                            <input type="radio" name="viewType" value="allRRF" [checked]="currentView == 'allRRF'" (click)="onViewChanged('allRRF') "
+                                            /> All RRF
                                             <span></span>
                                         </label>
 
@@ -127,6 +127,7 @@
                                         <td> <b>Requirments </b></td>
                                         <td> <b>Priority</b></td>
                                         <td> <b>Status </b></td>
+                                        <td> <b>Approver</b></td>
                                         <td> <b>Open for <br> no. of days</b></td>
                                         <td><b> Action </b></td>
 
@@ -136,7 +137,7 @@
                                     <tr class="odd gradeX " *ngFor="let rrf of rrfList | RRFIDPipe : closeRRFID ">
                                         <!--remove hard code data-->
                                         <td>
-                                            <div align="left ">
+                                            <div class="wraptext" style="word-wrap: break-word; " align="left ">
                                                 {{rrf.RaisedBy.Value }}
                                                 <br> {{rrf.CreatedDate}}
                                             </div>
@@ -173,8 +174,17 @@
                                             </div>
 
                                         </td>
+                                        <!--<td (mouseover)="onStatusRowHover(this)">-->
                                         <td>
                                             <span class="mt-action-dot {{getStatusClass(rrf.Status.Id)}} "></span>{{rrf.Status.Value}}
+                                        </td>
+                                        <td>
+                                            <div *ngIf="rrf.Status.Id == 1">
+                                                <div *ngFor="let Approvaldetails of rrf.RRFApproval">
+                                                    {{Approvaldetails.Approver.Value}}
+                                                    <br>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td>
                                             <div align="left ">
@@ -237,7 +247,7 @@
 
                 <div class=" col-lg-12 " id="divTimeLine " *ngIf="!isListVisible ">
 
-                    <div class=" portlet light bordered col-lg-8 col-md-12 col-sm-12 col-xs-12 ">
+                    <div class="portlet light bordered col-lg-8 col-md-12 col-sm-12 col-xs-12 ">
                         <div class="table-toolbar ">
                             <div class="row ">
                                 <div class="col-md-6 ">
@@ -269,13 +279,13 @@
                                     <div class="timeline-body-content ">
                                         <div class="portlet-title ">
                                             <div class="caption ">
-                                                <span class="caption-subject bold uppercase ">Job Opening Details</span>
+                                                <span class="caption-subject bold uppercase ">RRF Details</span>
                                             </div>
                                             <div class="actions ">
                                             </div>
                                         </div>
-                                        <div class="portlet light bordered ">
-                                            <div class="portlet bordered ">
+                                        <div class=" light bordered ">
+                                            <div class=" bordered ">
                                                 <div class="actions ">
                                                 </div>
                                                 <div class="row ">
@@ -341,7 +351,7 @@
                                                     <div class="col-md-5 ">Interviewers Panel</div>
                                                     <div class="col-md-1 " style="align:right ">:</div>
                                                 </div>
-                                                <div class="row ">
+                                                <div class="row " *ngIf="selectedRRF.Panel.count">
                                                     <div class="col-md-12 ">
                                                         <div class="table-scrollable ">
                                                             <table class="table-bordered table no-footer ">
@@ -389,6 +399,7 @@
                                             <div class="timeline-body-head-caption ">
                                                 <label href="javascript:; " class="timeline-body-title font-blue-madison ">Abcd Xyz</label>
                                                 <span class="timeline-body-time font-grey-cascade ">Approved on : 5 MAy 2016</span>
+
                                             </div>
                                             <div class="timeline-body-head-actions "> </div>
                                         </div>
