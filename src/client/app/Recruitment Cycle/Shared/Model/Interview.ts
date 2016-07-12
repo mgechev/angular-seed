@@ -2,24 +2,26 @@ import { MasterData } from  '../../../shared/model/index';
 
 //Interview master
 export class Interview {
-    public CandidateId: string;
-    public InterviewId: number;
-    public Date: string;
-    public FromTime: string;
-    public ToTime: string;
-    public Type: MasterData = new MasterData();
-    public Mode: MasterData = new MasterData();
-    public Round: MasterData = new MasterData();
+    public CandidateID: string;
+    public InterviewID: number;
+    public InterviewDate: string;
+    public InterviewFromTime: string;
+    public InterviewToTime: string;
+    public InterviewType: MasterData = new MasterData();
+    public InterviewMode: MasterData = new MasterData();
+    public InterviewRound: MasterData = new MasterData();
     public DisplayCandidateInfo: boolean;
-    public Status: string;
+    public Status: MasterData = new MasterData();
     public Comments: string;
     public ProceedOfferGeneration: string;
+    public RRFID: string;
     public InterviewAvailabilityComments: InterviewAvailability = new InterviewAvailability();
     public CandidateInformation: CandidateDetails = new CandidateDetails();
+    public Interviewer: Array<MasterData> = new Array<MasterData>();
 }
 //Interviewrs Availability comments
 export class InterviewAvailability {
-    public Id: number;
+    public ID: number;
     public Interviewer: number;
     public ConfirmationStatus: number;
     public Comments: number;
@@ -29,9 +31,9 @@ export class CandidateDetails {
     public CandidateID: string;
     public FirstName: string;
     public LastName: string;
-    public FullName: string;
+    public Candidate: string; // Candidate =>Full Name
     public Email: string;
     public Tag: string;
-    public ResumeId: string;
+    public ResumeID: string;
     public Contact: string;
 }
