@@ -11,8 +11,19 @@ export class RRFCandidateListService {
     constructor(private authHttp: AuthHttp,
         private _spinnerService: SpinnerService) { }
 
-    getCandidatesForRRF(RRFID:string) {
-        let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF?RRFID'+RRFID);
+    //Get RRf Specific Candidates by RRFID - API will return list of Candidates
+    getCandidatesForRRF(RRFID: string) {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF?RRFID' + RRFID);
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    //This Method is used to get Interview rounds history by passing CandidateID and RRFID
+    getInterviewRoundHistorybyCandidateId(CandidateID: string, RRFID: string) {
+        //ASK backend team - IS API READY? Change URL
+        let url = Config.GetURL('/api/RecruitmentCycle/GetCandidateInterviewHistory?CandidateID' + CandidateID + '&RRFID' + RRFID);
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)

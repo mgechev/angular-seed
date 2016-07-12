@@ -60,8 +60,8 @@ export class MastersService {
             .catch(this.handleError);
     }
 
-    getStates(CountryID : number) {
-        let url = Config.GetURL('/api/Masters/GetStatesByCountry?CountryID='+CountryID);
+    getStates(CountryID: number) {
+        let url = Config.GetURL('/api/Masters/GetStatesByCountry?CountryID=' + CountryID);
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);
@@ -133,6 +133,25 @@ export class MastersService {
             .map(this.extractData)
             .catch(this.handleError);
     }
+    GetInterviewTypes() {
+        let url = Config.GetURL('/api/Masters/GetInterviewTypes');
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    GetRoundsByInterviewType(TypeID: number) {
+        let url = Config.GetURL('api/Masters/GetRoundsByInterviewType?TypeID=' + TypeID);
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+    GetInterviewModes() {
+        let url = Config.GetURL(' /api/Masters/GetInterviewMode');
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
 
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
@@ -141,7 +160,6 @@ export class MastersService {
         let body = res.json();
         return body || {};
     }
-
 
     private handleError(error: Response) {
         console.log(error);

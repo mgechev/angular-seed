@@ -10,6 +10,7 @@ import { CandidateProfile } from  '../../../ProfileBank/shared/model/myProfilesI
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 //import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap';
 import {RRFCandidateListService} from '../services/RRFCandidatesList.service';
+import {RRFSpecificCandidateList} from '../model/RRFCandidateList';
 
 @Component({
     moduleId: module.id,
@@ -33,7 +34,8 @@ export class RRFCandidateListComponent implements OnActivate {
     };
     errorMessage: string;
     Candidates: Array<CandidateProfile>;
-   
+    CanidatesHistory : RRFSpecificCandidateList[];
+
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
         private _rrfDashboardService: RRFDashboardService,
@@ -41,6 +43,7 @@ export class RRFCandidateListComponent implements OnActivate {
         private _rrfCandidatesList: RRFCandidateListService,
         public toastr: ToastsManager) {
         this.Candidates = new Array<CandidateProfile>();
+        this.CanidatesHistory = new Array<RRFSpecificCandidateList>();
     }
 
     routerOnActivate(segment: RouteSegment) {
@@ -76,7 +79,12 @@ export class RRFCandidateListComponent implements OnActivate {
     }
 
     getCandidatesRoundHistory(CandidateID: string) {
-        console.log('Inside Rounds History');
+        this._rrfCandidatesList.getInterviewRoundHistorybyCandidateId(CandidateID,this.RRFID)
+            .subscribe(
+            results => {
+              this.CanidatesHistory = <any>results;
+            },
+            error => this.errorMessage = <any>error);
     }
 
     showPopOver() {

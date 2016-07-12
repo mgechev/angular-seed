@@ -32,41 +32,61 @@
                                 <div class="row">
                                     <div class="form-group">
                                         <label class="col-md-3 control-label align">Candidate Code<span class="required"> * </span></label>
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             CJD001
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row" style="margin-top:15px">
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label align">Candidate <span class="required"> * </span></label>
-                                        <div class="col-md-6">
+                                         <label class="col-md-2 control-label align">Candidate <span class="required"> * </span></label>
+                                        <div class="col-md-3">
                                             Jhone Doe
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row" style="margin-top:15px">
                                     <div class="form-group">
+
                                         <label class="col-md-3 control-label align">Interview Type <span class="required"> * </span></label>
-                                        <div class="col-md-5">
+                                        <div class="col-md-3">
                                             <select class="form-control">
                                         <option></option>
                                         <option>Technical</option>
                                         <option>HR</option>
                                         </select>
+                                            <!--<select class="form-control" [(ngModel)]="Interview.InterviewType.Id" (change)='getInterviewRoundsbyInterviewType($event.target.value)'>
+                                                                <option></option>
+                                                               <option *ngFor="let Type of InterviewTypes" [value]="Type.Id">{{Type.Value}}</option>
+                                                </select>-->
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row" style="margin-top:15px">
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label align">Round <span class="required"> * </span></label>
-                                        <div class="col-md-5">
+                                        <label class="col-md-2 control-label align">Round <span class="required"> * </span></label>
+                                        <div class="col-md-3">
                                             <select class="form-control">
                                         <option></option>
                                         <option>Technical 1</option>
                                          <option>Technical 2</option>
                                         <option>HR</option>
                                         </select>
+                                            <!--<select class="form-control" [(ngModel)]="Interview.Round.Id">
+                                                                <option></option>
+                                                               <option *ngFor="let round of InterviewRounds" [value]="round.Id">{{round.Value}}</option>
+                                                </select>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:15px">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label align">Interviewe Mode <span class="required"> * </span></label>
+                                        <div class="col-md-6">
+                                            <div class="input-group select2-bootstrap-append" style="width:233px !important">
+                                                <select class="form-control">
+                                                 <option></option>
+                                                 <option>Skype </option>
+                                                 <option>Telephonic</option>
+                                                 <option>Face To Face</option>
+                                                </select>
+                                                <!--<select id="cmbInterviewers" class="form-control" >
+                                                        <option  *ngFor="let mode of InterviewModes" [value]="mode.id">{{mode.value}}</option>
+                                              </select>-->
+                                                <!--<multiple-demo></multiple-demo>-->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -75,8 +95,7 @@
                                         <label class="col-md-3 control-label align">Interviewers <span class="required"> * </span></label>
                                         <div class="col-md-6">
                                             <div class="input-group select2-bootstrap-append" style="width:233px !important">
-                                                <select id="cmbInterviewers" class="form-control" multiple style="width:233px !important" 
-                                                    (change)='onSelectInterviewer($event.target.value)'>
+                                                <select id="cmbInterviewers" class="form-control" multiple style="width:233px !important" (change)='onSelectInterviewer($event.target.value)'>
                                                     <optgroup label="Nominations">
                                                         <option  *ngFor="let recruiter of data.Nominations" [value]="recruiter.id">{{recruiter.value}}</option>
                                                     </optgroup>
@@ -84,6 +103,7 @@
                                                         <option  *ngFor="let recruiter of data.Others" [value]="recruiter.id">{{recruiter.value}}</option>
                                                     </optgroup>
                                               </select>
+                                                <!--<multiple-demo></multiple-demo>-->
                                             </div>
                                         </div>
                                     </div>
@@ -149,9 +169,9 @@
                         </div>
                     </div>
                     <div class="col-md-5" style="border-left:1px solid #c6cdd5">
-                        
-                        <full-calendar [resources]="resources" [events]="events" [header]="header" defaultDate="2016-01-12" [eventLimit]="4" [editable]="true" 
-                        (onDayClick)="handleDayClick($event)" (onEventClick)="handleEventClick($event)" ></full-calendar>
+
+                        <full-calendar [resources]="resources" [events]="events" [header]="header" defaultDate="2016-01-12" [eventLimit]="4" [editable]="true"
+                            (onEventClick)="handleEventClick($event)" [selectable]="true" [selectHelper]="true" (onSelect)="handleDayClick($event)"></full-calendar>
                         <!--<full-calendar [FullCalendarConfiguration]="calendarConfiguration" (onCalendarReady)="onCalendarReady($event)"></full-calendar>-->
 
                     </div>
@@ -189,9 +209,9 @@
                         Event : {{event.title}} Date: {{event.start}} Date: {{event.end}} All Day: {{event.allDay}}
                     </div>
                     <div class="modal-footer">
-                        <button type="button"  icon="fa-close" (click)="deleteEvent()" label="">Delete</button>
-                        <button type="button"  icon="fa-check" (click)="saveEvent()" label="">Save</button>
-              
+                        <button type="button" icon="fa-close" (click)="deleteEvent()" label="">Delete</button>
+                        <button type="button" icon="fa-check" (click)="saveEvent()" label="">Save</button>
+
                     </div>
                 </div>
             </div>

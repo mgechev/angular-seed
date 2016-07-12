@@ -4,11 +4,13 @@ import {BUTTON_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 
 // webpack html imports
-let template = require('./MultipleDrodown.Component.html');
+//let template = require('./MultipleDrodown.Component.html');
 
 @Component({
+    moduleId : module.id,
     selector: 'multiple-demo',
-    template: template,
+    //template: template,
+    templateUrl:'MultipleDrodown.Component.html',
     directives: [SELECT_DIRECTIVES, NgClass, CORE_DIRECTIVES, FORM_DIRECTIVES, BUTTON_DIRECTIVES]
 })
 export class MultipleDemoComponent {

@@ -79,6 +79,10 @@ export class FullCalendarComponent implements AfterViewInit, OnDestroy, DoCheck 
 
     @Input() locale: any;
 
+    @Input() selectable: any;
+    
+    @Input() selectHelper: any;
+
     @Output() onDayClick: EventEmitter<any> = new EventEmitter();
 
     @Output() onEventClick: EventEmitter<any> = new EventEmitter();
@@ -100,6 +104,7 @@ export class FullCalendarComponent implements AfterViewInit, OnDestroy, DoCheck 
     @Output() onEventResize: EventEmitter<any> = new EventEmitter();
 
     @Output() viewRender: EventEmitter<any> = new EventEmitter();
+     @Output() onSelect: EventEmitter<any> = new EventEmitter();
 
     initialized: boolean;
 
@@ -109,11 +114,9 @@ export class FullCalendarComponent implements AfterViewInit, OnDestroy, DoCheck 
 
     schedule: any;
 
-    // @Input() FullCalendarConfiguration: Object;
-    // @Input() FullCalendarClass: string;
     @Output() onCalendarReady = new EventEmitter<any>();
 
-    @ViewChild('FullCalendar') private _selector: ElementRef;
+    // @ViewChild('FullCalendar') private _selector: ElementRef;
 
 
     constructor(private el: ElementRef, differs: IterableDiffers) {
@@ -122,7 +125,7 @@ export class FullCalendarComponent implements AfterViewInit, OnDestroy, DoCheck 
     }
 
     ngAfterViewInit() {
-        this.schedule = $(this._selector.nativeElement);
+        this.schedule = $(this.el.nativeElement.children[0]);
         let options = {
             theme: true,
             header: this.header,
@@ -156,6 +159,8 @@ export class FullCalendarComponent implements AfterViewInit, OnDestroy, DoCheck 
             eventOverlap: this.eventOverlap,
             eventConstraint: this.eventConstraint,
             resources: this.resources,
+            selectable:this.selectable,
+            selectHelper:this.selectHelper,
             events: (start: any, end: any, timezone: any, callback: any) => {
                 callback(this.events);
             },
@@ -173,6 +178,15 @@ export class FullCalendarComponent implements AfterViewInit, OnDestroy, DoCheck 
                     'view': view
                 });
             },
+            select: (start: any, end: any, jsEvent: any, view: any, resource: any)=> {
+                 this.onSelect.emit({
+                    'start': start,
+                    'end':end,
+                    'jsEvent': jsEvent,
+                    'view': view,
+                    'resource':resource
+                });
+			},
             eventMouseover: (calEvent: any, jsEvent: any, view: any) => {
                 this.onEventMouseover.emit({
                     'calEvent': calEvent,
@@ -261,7 +275,7 @@ export class FullCalendarComponent implements AfterViewInit, OnDestroy, DoCheck 
     }
 
     ngOnDestroy() {
-        $(this._selector.nativeElement).fullCalendar('destroy');
+        $(this.el.nativeElement.children[0]).fullCalendar('destroy');
         this.initialized = false;
         this.schedule = null;
     }

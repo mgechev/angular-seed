@@ -160,6 +160,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                              <!--<tr id="round" *ngFor="let candidateHistory of CanidatesHistory; let index = index" (mouseover)='showPopOver()'>
+                                                    <td> {{index+1}} </td>
+                                                    <td> {{candidateHistory.Round.Value}}</td>
+                                                    <td> {{candidateHistory.Interviewer.Value}}</a></td>
+                                                    <td> {{candidateHistory.InterviewDate}}</td>
+                                                    <td> {{candidateHistory.Status.Value}}</td>
+                                                </tr>-->
                                             <tr id="round" (mouseover)='showPopOver()'>
                                                 <td> 1 </td>
                                                 <td> Technical 1</td>
@@ -176,18 +183,6 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <!--<carousel [interval]="myInterval" [noWrap]="noWrapSlides">
-                                        <slide *ngFor="let slidez of slides; let index=index" [active]="slidez.active">
-
-                                            <p>{{slidez.InterViewwr}}</p>
-                                            <p>{{slidez.Status}}</p>
-                                            <div class="carousel-caption">
-
-                                                <h4>Slide {{index}}</h4>
-
-                                            </div>
-                                        </slide>
-                                    </carousel>-->
                                     <hr/>
                                     <br/><br/>
                                     <base-chart class="chart" style="display:block;width:100%" [options]="doughnutChartOptions" [data]="doughnutChartData" [labels]="doughnutChartLabels"
