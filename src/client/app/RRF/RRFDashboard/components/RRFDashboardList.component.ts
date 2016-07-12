@@ -40,13 +40,17 @@ export class RRFDashboardListComponent implements OnActivate {
     doughnutChartColors: any[] = [{ backgroundColor: [] }];
     doughnutChartOptions: any = {
         animation: false,
-        responsive: true
-    };
-
+        responsive: true,
+        legend: {
+            onClick: function(event : any, legendItem : any) {
+                //console.log("legend click");
+            }
+        }
+    }
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService, private _router: Router,
         public toastr: ToastsManager) {
-            this.currentView = 'myRRF';
+        this.currentView = 'myRRF';
     }
 
     routerOnActivate() {

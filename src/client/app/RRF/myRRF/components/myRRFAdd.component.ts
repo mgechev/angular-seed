@@ -97,21 +97,23 @@ export class MyRRFAddComponent implements OnActivate {
     }
 
     raiseRRF(): void {
-        this.setSkillToObject();
-        if(this.newRRF.MinExp <= this.newRRF.MaxExp) {
-        this._myRRFService.raiseRRF(this.newRRF)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message, 'Success!');
-                    this._router.navigate(['/App/RRF/RRFDashboard/']);
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).Message);
-                }
-            },
-            error => this.errorMessage = <any>error);
-        } else {
-            this.toastr.error('MinExp should be less than MaxExp');
+        if (this.isNewRRF) {
+            this.setSkillToObject();
+            if (this.newRRF.MinExp <= this.newRRF.MaxExp) {
+                this._myRRFService.raiseRRF(this.newRRF)
+                    .subscribe(
+                    results => {
+                        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                            this.toastr.success((<ResponseFromAPI>results).Message, 'Success!');
+                            this._router.navigate(['/App/RRF/RRFDashboard/']);
+                        } else {
+                            this.toastr.error((<ResponseFromAPI>results).Message);
+                        }
+                    },
+                    error => this.errorMessage = <any>error);
+            } else {
+                this.toastr.error('MinExp should be less than MaxExp');
+            }
         }
     }
 

@@ -122,7 +122,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
     }
 
     onUnAssignRRF(): void {
-        this._rrfDashboardService.unassignRRF(this.RRFId, this.UnAssignRec.AssignedTo.Id, this.unAssignedComments)
+        this._rrfDashboardService.unassignRRF(this.RRFId, this.UnAssignRec.AssignedTo, this.unAssignedComments)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
