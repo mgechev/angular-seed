@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http,  Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { MyProfilesInfo, ResumeMeta} from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, ResumeMeta} from '../../shared/model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
@@ -47,7 +47,7 @@ export class MyProfilesService {
             .finally(() => this._spinnerService.hide());
     }
 
-    addCandidateProfile(profile: MyProfilesInfo) {
+    addCandidateProfile(profile: CandidateProfile) {
         let url = Config.GetURL('/api/ProfileBank/addCandidateProfile');
         this._spinnerService.show();
         return this.authHttp.post(url, { profile })

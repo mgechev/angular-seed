@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate } from '@angular/router';
-import {MyProfilesInfo} from '../../shared/model/myProfilesInfo';
+import {CandidateProfile} from '../../shared/model/myProfilesInfo';
 import { RecentProfilesService } from '../services/recentProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -20,8 +20,8 @@ import { ProfileBankService } from '../../shared/services/profilebank.service';
 })
 
 export class RecentProfilesListComponent implements OnActivate {
-    recentProfilesList: Array<MyProfilesInfo>;
-    profile: MyProfilesInfo = new MyProfilesInfo();
+    recentProfilesList: Array<CandidateProfile>;
+    profile: CandidateProfile = new CandidateProfile();
     statusList: Array<MasterData>;
     seletedCandidateID: string;
     selectedStatus = new MasterData();
