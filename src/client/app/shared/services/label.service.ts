@@ -20,6 +20,7 @@ export class LabelService {
     BUSINESS_FOOD: 'Eten & drinken',
     BUSINESS_CAR: 'Auto',
     FROM_SAVINGS_ACCOUNT: 'Van spaarrekening',
+    TO_SAVINGS_ACCOUNT: 'Naar spaarrekening',
     TO_PRIVATE_ACCOUNT: 'Opname naar prive',
     FROM_PRIVATE_ACCOUNT: 'Inleg vanuit prive',
     INCOME_TAX: 'Inkomstenbelasting',

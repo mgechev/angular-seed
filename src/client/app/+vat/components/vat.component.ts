@@ -12,6 +12,7 @@ import {CostMatch, CostMatchService} from "../../shared/services/cost-match.serv
 import Collection = _.Collection;
 import {CostCharacterSelector} from "./cost-character.selector";
 import { PolymerElement } from '@vaadin/angular2-polymer';
+import {LabelService} from "../../shared/services/label.service";
 
 @Component({
   moduleId: module.id,
@@ -25,7 +26,7 @@ export class VatComponent implements OnInit {
   uploadedFile: File;
   importedText: string;
 
-  costMatches: Collection<CostMatch>;
+  private costMatches: Collection<CostMatch>;
 
   transactionsLoaded: number = 0;
   transactionsUnmatched: number;
@@ -56,14 +57,24 @@ export class VatComponent implements OnInit {
   // TODO: extract cost match component
   public costMatch: CostMatch;
 
-  constructor(private importListService: ImportListService, private costMatchService: CostMatchService) {
+  constructor(private importListService: ImportListService, private costMatchService: CostMatchService, private labelService: LabelService) {
     this.uploadedFile = null;
     this.length = 0;
     this.costMatch = new CostMatch();
   }
 
   ngOnInit() {
-    this.costMatches = this.costMatchService.getMatches();
+    this.costMatches = this.costMatchService.getMatches()
+      .subscribe(
+        costMatchData => {
+          this.costMatches = costMatchData;
+        },
+        error => {
+          alert(error.text());
+          console.log(error.text());
+        },
+        () => console.log('Costmatches retrieved')
+      )
   }
 
   displayVatTypeSelector() {
@@ -93,6 +104,7 @@ export class VatComponent implements OnInit {
       var contents: any = file.target;
       this.importedText = contents.result;
       this.transactions = this.importListService.convert(this.importedText);
+      this.transactions = this.costMatchService.match(this.transactions, this.costMatches);
       this.transactionsLoaded = this.transactions.length;
       this.length = this.transactions.length;
       this.onChangeTable(this.config);
@@ -107,16 +119,21 @@ export class VatComponent implements OnInit {
   public addMatch():void {
     this.costMatch.matchString = this.config.filtering.filterString;
     this.costMatchService.addMatch(this.costMatch);
+    this.costMatches = (<CostMatch[]>this.costMatches).concat(this.costMatch);
+    this.transactions = this.costMatchService.match(this.transactions, this.costMatches);
 
     for (let i = 0; i < this.transactions.length; i++) {
       if (this.transactions[i].description.indexOf(this.config.filtering.filterString) > -1) {
         switch (this.costMatch.costType) {
           case '3':
             this.transactions[i].costCharacter = CostCharacter.PRIVATE;
+            this.transactions[i].costCharacterDescription = this.labelService.get(CostCharacter[this.transactions[i].costCharacter]);
             break;
           default: {
             this.transactions[i].costType = this.costMatch.costType;
+            this.transactions[i].costTypeDescription = this.labelService.get(CostType[this.transactions[i].costType]);
             this.transactions[i].costCharacter = CostCharacter.BUSINESS;
+            this.transactions[i].costCharacterDescription = this.labelService.get(CostCharacter[this.transactions[i].costCharacter]);
           }
         }
       }
