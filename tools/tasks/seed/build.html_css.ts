@@ -16,6 +16,7 @@ import {
   ENABLE_SCSS,
   ENV,
   TMP_DIR,
+  getPluginConfig,
 } from '../../config';
 
 const plugins = <any>gulpLoadPlugins();
@@ -63,7 +64,7 @@ function processComponentScss() {
     .pipe(isProd ? plugins.cached('process-component-scss') : plugins.util.noop())
     .pipe(isProd ? plugins.progeny() : plugins.util.noop())
     .pipe(plugins.sourcemaps.init())
-    .pipe(plugins.sass({includePaths: ['./node_modules/']}).on('error', plugins.sass.logError))
+    .pipe(plugins.sass(getPluginConfig('gulp-sass')).on('error', plugins.sass.logError))
     .pipe(plugins.postcss(processors))
     .pipe(plugins.sourcemaps.write(isProd ? '.' : ''))
     .pipe(gulp.dest(isProd ? TMP_DIR : APP_DEST));
@@ -124,7 +125,7 @@ function getExternalScssStream() {
   return gulp.src(getExternalScss())
     .pipe(isProd ? plugins.cached('process-external-scss') : plugins.util.noop())
     .pipe(isProd ? plugins.progeny() : plugins.util.noop())
-    .pipe(plugins.sass({includePaths: ['./node_modules/']}).on('error', plugins.sass.logError));
+    .pipe(plugins.sass(getPluginConfig('gulp-sass')).on('error', plugins.sass.logError));
 }
 
 /**
