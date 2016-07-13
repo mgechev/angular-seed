@@ -21,7 +21,7 @@
                     <div class=" portlet light bordered">
 
                         <base-chart class="chart" [options]="doughnutChartOptions" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
-                            [colors]="doughnutChartColors"></base-chart>
+                        [colors]="doughnutChartColors"></base-chart>
                     </div>
                 </div>
 
@@ -35,6 +35,11 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- BEGIN ADD AND TOOLS  -->
+                        <div class="table-toolbar">
+                        </div>
+                        <!-- END ADD AND TOOLS -->
+
                         <div class="table-toolbar">
                             <div class="row">
                                 <div class="col-md-6">
@@ -45,7 +50,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 row">
-                                    <!--<div class="dt-buttons pull-right">
+                                    <div class="dt-buttons pull-right">
                                         <a class="dt-button buttons-print btn dark btn-outline" id="btnPrint">
                                             <span>Print</span>
                                         </a>
@@ -55,7 +60,7 @@
                                         <a class="dt-button buttons-csv buttons-html5 btn purple btn-outline" id="btnCSV">
                                             <span>CSV</span>
                                         </a>
-                                    </div>-->
+                                    </div>
 
                                 </div>
                             </div>
@@ -63,11 +68,34 @@
 
                         <!-- BEGIN SHOW AND SEARCH  -->
                         <div class="dataTables_wrapper no-footer">
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-6">
+                                    <div class="dataTables_length ">
+                                        <label>show
+                                            <select class="form-control input-sm input-xsmall input-inline">
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="15">15</option>
+                                                <option value="-1">All</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-sm-6 ">
+                                    <div class="dataTables_filter pull-right ">
+                                        <label>Search:
+                                            <input class="form-control input-sm input-small input-inline " />
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-lg-12 col-sm-12 row bordered ">
-                                <div class="mt-radio-inline col-lg-2 col-sm-2">
+                                <div class="mt-radio-inline col-lg-1 col-sm-1">
 
                                 </div>
-                                <div class="mt-radio-inline col-lg-6 col-sm-6">
+                                <div class="mt-radio-inline col-lg-7 col-sm-7">
                                     <div class="col-lg-4 col-sm-4">
                                         <label class="mt-radio" [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']">
                                             <input type="radio" name="viewType" value="myRRF" [checked]="currentView == 'myRRF'" (click)="onViewChanged('myRRF')" /> My RRF
@@ -81,13 +109,21 @@
                                             <span></span>
                                         </label>
                                     </div>
+                                    <!--<div class="col-lg-3 col-sm-3" [ifAuthorize]="['RRF.RECRUITERUNASSIGNEDRRF12']">
+                                        <label class="mt-radio" >
+                                            <input type="radio" name="viewType" value="unAssignRRF" [checked]="currentView == 'unAssignRRF'" (click)="onViewChanged('unAssignRRF') "
+                                            /> Unassigned RRF
+                                            <span></span>
+                                        </label>
+                                    </div>-->
                                     <div class="col-lg-4 col-sm-4">
-                                        <label class="mt-radio">
+                                        <label class="mt-radio"  [ifAuthorize]="['RRF.RECRUITERASSIGNEDRRF.MANAGE']">
                                             <input type="radio" name="viewType" value="assignRRF" [checked]="currentView == 'assignRRF'" (click)="onViewChanged('assignRRF') "
                                             /> Assigned RRF
                                             <span></span>
                                         </label>
                                     </div>
+                                    
 
                                 </div>
                                 <div class="form-group col-lg-2 col-sm-2" *ngIf="currentView =='assignRRF'">
@@ -105,7 +141,7 @@
                             <div class="col-lg-9 ">
                                 <textarea class="form-control " id="txtCloseComment " rows="1
                                             " [(ngModel)]='closeComment' placeholder="close Comment " style="resize:vertical "
-                                    required=" "></textarea>
+                                required=" "></textarea>
                             </div>
                             <div class="col-lg-3 ">
                                 <button id="btnClose " class="btn blue " (click)="onbtnCloseRRF() ">Close RRF</button>
@@ -216,7 +252,7 @@
                                                     <li>
                                                         <button class="btn btn-default btnLink
                                             " (click)='redirectToEditRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] "
-                                                            [disabled]='allowEditRRF(rrf.Status.Id , rrf.RaisedBy.Id)'>
+                                                        [disabled]='allowEditRRF(rrf.Status.Id , rrf.RaisedBy.Id)'>
                                                             <i class="fa fa-edit "></i> Edit RRF
                                                         </button>
                                                     </li>
@@ -228,20 +264,23 @@
                                                     </li>
                                                     <li class="divider " [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "> </li>
                                                     <li>
-                                                        <button class="btn btn-default btnLink" (click)='redirectToAssignRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "
-                                                            [disabled]='allowAssignRRF(rrf.Status.Id)'>
+                                                        <button class="btn btn-default btnLink
+                                            " (click)='redirectToAssignRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "
+                                                        [disabled]='allowAssignRRF(rrf.Status.Id)'>
                                                             <i class="icon-user "></i> Assign RRF
                                                         </button>
                                                     </li>
-                                                    <!--<li class="divider "> </li>
+                                                    <li class="divider "> </li>
                                                     <li>
                                                         <button class="btn btn-default btnLink " (click)='onViewCandidateClick(rrf.RRFID)' [disabled]='checkIfRRFClosed(rrf.Status.Id)'>
                                                             <i class="fa fa-users "></i> View Candidates
                                                         </button>
-                                                    </li>-->
+                                                    </li>
                                                     <li class="divider " [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] "> </li>
                                                     <li>
-                                                        <button class="btn btn-default btnLink" (click)='onCloseRRFClick(rrf.RRFID)' [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] " [disabled]='checkIfRRFClosed(rrf.Status.Id)'>
+                                                        <button class="btn btn-default btnLink
+                                            " (click)='onCloseRRFClick(rrf.RRFID)' [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] "
+                                                        [disabled]='allowCloseRRF(rrf.Status.Id)'>
                                                             <i class="fa fa-times "></i> Close RRF
                                                         </button>
                                                     </li>
@@ -395,10 +434,9 @@
                                     <!-- RRF DETAILS END -->
                                 </div>
                                 <!-- END TIMELINE ITEM -->
-                                <!-- TIMELINE ITEM -->
-                                <div class="timeline-item ">
+                                <!-- TIMELINE ITEM *Approval*-->
+                                <!--<div class="timeline-item ">
                                     <div class="timeline-badge ">
-                                        <!--<img class="timeline-badge-userpic " src="../assets/pages/media/users/avatar80_2.jpg ">-->
                                         <div class="timeline-icon ">
                                             <i class="icon-user-following font-green-haze "></i>
                                         </div>
@@ -420,12 +458,11 @@
                                        </span>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                                 <!-- END TIMELINE ITEM -->
-                                <!-- TIMELINE ITEM WITH GOOGLE MAP -->
-                                <div class="timeline-item ">
+                                <!-- TIMELINE ITEM *Assigned* -->
+                                <!--<div class="timeline-item ">
                                     <div class="timeline-badge ">
-                                        <!--<img class="timeline-badge-userpic " src="../assets/pages/media/users/avatar80_3.jpg ">                                   -->
                                         <div class="timeline-icon ">
                                             <i class="icon-user-following font-green-haze "></i>
                                         </div>
@@ -444,7 +481,7 @@
                                        </span>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                                 <!-- END TIMELINE ITEM WITH GOOGLE MAP -->
                             </div>
                         </div>

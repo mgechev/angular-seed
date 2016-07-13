@@ -6,7 +6,7 @@ import { MyRRFService } from '../../myRRF/services/myRRF.service';
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 import {RRFIDPipe } from './RRFIdFilter.component';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult, RRFStatus ,RRFAssignStatus} from  '../../../shared/constantValue/index';
+import { APIResult, RRFStatus, RRFAssignStatus} from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
 import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -36,7 +36,7 @@ export class RRFDashboardListComponent implements OnActivate {
     logedInUser: MasterData = new MasterData();
     recruiterList: MasterData[] = [];
     selectedRecruiter: MasterData = new MasterData();
-     AssignStatus: RRFAssignStatus = RRFAssignStatus;
+    AssignStatus: RRFAssignStatus = RRFAssignStatus;
 
     doughnutChartLabels: string[] = []
     doughnutChartData: number[] = [];
@@ -74,11 +74,16 @@ export class RRFDashboardListComponent implements OnActivate {
         this.getStatuswiseRRFCount();
     }
 
-    getAssignedData() {
+    getAssignedRRFData() {
         this.GetRRFAssignedToRecruiter();
-        //this.getStatuswiseAssignedRRFCount();
-        //this.getMyRRF();
-        this.getStatuswiseAssignedRRFCount();
+       // this.getStatuswiseAssignedRRFCount();
+         this.isChartVisible =false;
+    }
+
+    getUnAssignedRRFData() {
+        //this.getStatuswiseUnAssignedRRFCount();
+        this.GetAllUnAssignedRRF();
+          this.isChartVisible =false;
     }
 
     chartClicked(e: any): void {
@@ -115,6 +120,15 @@ export class RRFDashboardListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
+    GetAllUnAssignedRRF() {
+        this._rrfDashboardService.GetAllUnAssignedRRF()
+            .subscribe(
+            results => {
+                this.rrfList = <any>results;
+            },
+            error => this.errorMessage = <any>error);
+    }
+
 
     getStatuswiseRRFCount() {
         this._rrfDashboardService.getStatuswiseRRFCount()
@@ -136,15 +150,15 @@ export class RRFDashboardListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    getStatuswiseAssignedRRFCount(){
-           this._rrfDashboardService.getStatuswiseAssignedRRFCount()
+    getStatuswiseAssignedRRFCount() {
+        this._rrfDashboardService.getStatuswiseAssignedRRFCount()
             .subscribe(
             results => {
                 this.rrfStatusCount = <any>results;
                 this.setValueToChart();
             },
             error => this.errorMessage = <any>error);
-    
+
     }
 
     setValueToChart() {
@@ -198,8 +212,14 @@ export class RRFDashboardListComponent implements OnActivate {
         this.isListVisible = true;
         if (this.currentView === 'allRRF') {
             this.getAllRRFData();
-        } else {
+        } else if (this.currentView === 'myRRF') {
             this.getMyRRFData();
+        } else if (this.currentView === 'unAssignRRF') {
+            this.getUnAssignedRRFData();
+          
+        } else {
+            // this.setDefaultValueToRecrCmb();
+            this.getAssignedRRFData();
         }
     }
 
@@ -210,10 +230,13 @@ export class RRFDashboardListComponent implements OnActivate {
         } else if (viewMode === 'myRRF') {
             this.currentView = 'myRRF';
             this.getMyRRFData();
+        } else if (viewMode === 'unAssignRRF') {
+            this.currentView = 'unAssignRRF';
+            this.getUnAssignedRRFData();
         } else {
             this.currentView = 'assignRRF';
             this.setDefaultValueToRecrCmb();
-            this.getAssignedData();
+            this.getAssignedRRFData();
         }
     }
 
@@ -237,17 +260,19 @@ export class RRFDashboardListComponent implements OnActivate {
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
+                 this.showListOfRRF();
             },
             error => this.errorMessage = <any>error);
 
         this.closeRRFID = 0;
         this.closeComment = '';
 
-        if (this.currentView = 'allRRF') {
-            this.getAllRRFData();
-        } else {
-            this.getMyRRFData();
-        }
+        // if (this.currentView = 'allRRF') {
+        //     this.getAllRRFData();
+        // } else {
+        //     this.getMyRRFData();
+        // }
+       
     }
 
     onCancelCloseRRF() {
@@ -299,6 +324,19 @@ export class RRFDashboardListComponent implements OnActivate {
             return false;
         }
     }
+    
+      allowCloseRRF(statusId: number) {
+        try {
+            if (statusId === RRFStatus.Open  || statusId === RRFStatus.Assigned) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (error) {
+            return false;
+        }
+    }
+
 
     redirectToAssignRRF(rrfID: string) {
         this._router.navigate(['/App/RRF/RRFDashboard/Assign/' + rrfID]);
@@ -337,7 +375,7 @@ export class RRFDashboardListComponent implements OnActivate {
 
     onRecChange(recID: any) {
         this.selectedRecruiter.Id = recID;
-        this.getAssignedData();
+        this.getAssignedRRFData();
     }
 }
 

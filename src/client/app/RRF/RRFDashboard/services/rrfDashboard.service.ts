@@ -107,6 +107,15 @@ export class RRFDashboardService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+    
+    GetAllUnAssignedRRF() {
+        let url = Config.GetURL('/api/RRF/GetMyRRF');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
 
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
