@@ -38,7 +38,7 @@ export class VatComponent implements OnInit {
     {title: 'Bedrag', name: 'amount'},
     {title: 'Omschrijving', name: 'description'},
     {title: 'Type', name: 'costTypeDescription'},
-    {title: 'Prive/Zakelijk', name: 'costCharacterDescription', sort: 'asc'}
+    {title: 'Zakelijk/Prive', name: 'costCharacterDescription', sort: 'asc'}
   ];
   public page:number = 1;
   public itemsPerPage:number = 10;
@@ -49,7 +49,7 @@ export class VatComponent implements OnInit {
   public config:any = {
     paging: true,
     sorting: {columns: this.columns, sortType: 'alphabetic'},
-    filtering: {filterString: '', columnName: 'description'}
+    filtering: {filterString: '', columnName: 'description', onlyUnknown: false}
   };
 
   private transactions:Array<Transaction> = [];
@@ -92,7 +92,10 @@ export class VatComponent implements OnInit {
         this.transactionsLongDescription++;
       }
     }
-    if (this.transactionsUnmatched === 0 && this.transactionsLongDescription > 0) {
+    this.config.filtering.onlyUnknown = false;
+    if (this.transactionsUnmatched > 0) {
+      this.config.filtering.onlyUnknown = true;
+    } else if (this.transactionsUnmatched === 0 && this.transactionsLongDescription > 0) {
       this.config.sorting.sortType = 'length';
     }
   }
@@ -107,9 +110,9 @@ export class VatComponent implements OnInit {
       this.transactions = this.costMatchService.match(this.transactions, this.costMatches);
       this.transactionsLoaded = this.transactions.length;
       this.length = this.transactions.length;
-      this.onChangeTable(this.config);
       if (this.transactionsLoaded) {
         this.checkTransactions();
+        this.onChangeTable(this.config);
       }
     };
     reader.readAsText(this.uploadedFile);
@@ -124,18 +127,8 @@ export class VatComponent implements OnInit {
 
     for (let i = 0; i < this.transactions.length; i++) {
       if (this.transactions[i].description.indexOf(this.config.filtering.filterString) > -1) {
-        switch (this.costMatch.costType) {
-          case '3':
-            this.transactions[i].costCharacter = CostCharacter.PRIVATE;
-            this.transactions[i].costCharacterDescription = this.labelService.get(CostCharacter[this.transactions[i].costCharacter]);
-            break;
-          default: {
-            this.transactions[i].costType = this.costMatch.costType;
-            this.transactions[i].costTypeDescription = this.labelService.get(CostType[this.transactions[i].costType]);
-            this.transactions[i].costCharacter = CostCharacter.BUSINESS;
-            this.transactions[i].costCharacterDescription = this.labelService.get(CostCharacter[this.transactions[i].costCharacter]);
-          }
-        }
+        this.transactions[i].costTypeDescription = this.labelService.get(CostType[this.transactions[i].costType]);
+        this.transactions[i].costCharacterDescription = this.labelService.get(CostCharacter[this.transactions[i].costCharacter]);
       }
     }
     this.checkTransactions();
@@ -185,7 +178,7 @@ export class VatComponent implements OnInit {
           return sort === 'asc' ? -1 : 1;
         }
         return 0;
-      } else { // sort on length
+      } else if (this.config.sorting.sortType === 'length') {
         if (previous[columnName].length > current[columnName].length) {
           return sort === 'desc' ? -1 : 1;
         } else if (previous[columnName].length < current[columnName].length) {
@@ -202,8 +195,9 @@ export class VatComponent implements OnInit {
     }
 
     let filteredData:Array<any> = data.filter((item:any) =>
-      item[config.filtering.columnName].match(this.config.filtering.filterString));
-
+      item[config.filtering.columnName].match(this.config.filtering.filterString)
+        && (!config.filtering.onlyUnknown || item.costCharacter === CostCharacter.UNKNOWN)
+    );
     return filteredData;
   }
 
