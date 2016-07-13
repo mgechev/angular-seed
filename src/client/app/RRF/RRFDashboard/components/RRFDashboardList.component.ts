@@ -6,9 +6,10 @@ import { MyRRFService } from '../../myRRF/services/myRRF.service';
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 import {RRFIDPipe } from './RRFIdFilter.component';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult, RRFStatus } from  '../../../shared/constantValue/index';
+import { APIResult, RRFStatus ,RRFAssignStatus} from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
 import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
+import { MastersService } from '../../../shared/services/masters.service';
 
 @Component({
     moduleId: module.id,
@@ -33,6 +34,9 @@ export class RRFDashboardListComponent implements OnActivate {
     closeRRFID: number = 0;
     isChartVisible: boolean = false;
     logedInUser: MasterData = new MasterData();
+    recruiterList: MasterData[] = [];
+    selectedRecruiter: MasterData = new MasterData();
+     AssignStatus: RRFAssignStatus = RRFAssignStatus;
 
     doughnutChartLabels: string[] = []
     doughnutChartData: number[] = [];
@@ -42,20 +46,22 @@ export class RRFDashboardListComponent implements OnActivate {
         animation: false,
         responsive: true,
         legend: {
-            onClick: function(event : any, legendItem : any) {
+            onClick: function(event: any, legendItem: any) {
                 //console.log("legend click");
             }
         }
     }
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService, private _router: Router,
-        public toastr: ToastsManager) {
+        public toastr: ToastsManager,
+        private _mastersService: MastersService, ) {
         this.currentView = 'myRRF';
     }
 
     routerOnActivate() {
         this.getLoggedInUser();
         this.getMyRRFData();
+        this.GetRecruiter();
     }
 
     getMyRRFData() {
@@ -66,6 +72,13 @@ export class RRFDashboardListComponent implements OnActivate {
     getAllRRFData() {
         this.getAllRRF();
         this.getStatuswiseRRFCount();
+    }
+
+    getAssignedData() {
+        this.GetRRFAssignedToRecruiter();
+        //this.getStatuswiseAssignedRRFCount();
+        //this.getMyRRF();
+        this.getStatuswiseAssignedRRFCount();
     }
 
     chartClicked(e: any): void {
@@ -93,6 +106,16 @@ export class RRFDashboardListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
+    GetRRFAssignedToRecruiter() {
+        this._rrfDashboardService.GetRRFAssignedToRecruiter(this.selectedRecruiter)
+            .subscribe(
+            results => {
+                this.rrfList = <any>results;
+            },
+            error => this.errorMessage = <any>error);
+    }
+
+
     getStatuswiseRRFCount() {
         this._rrfDashboardService.getStatuswiseRRFCount()
             .subscribe(
@@ -111,6 +134,17 @@ export class RRFDashboardListComponent implements OnActivate {
                 this.setValueToChart();
             },
             error => this.errorMessage = <any>error);
+    }
+
+    getStatuswiseAssignedRRFCount(){
+           this._rrfDashboardService.getStatuswiseAssignedRRFCount()
+            .subscribe(
+            results => {
+                this.rrfStatusCount = <any>results;
+                this.setValueToChart();
+            },
+            error => this.errorMessage = <any>error);
+    
     }
 
     setValueToChart() {
@@ -173,9 +207,13 @@ export class RRFDashboardListComponent implements OnActivate {
         if (viewMode === 'allRRF') {
             this.currentView = 'allRRF';
             this.getAllRRFData();
-        } else {
+        } else if (viewMode === 'myRRF') {
             this.currentView = 'myRRF';
             this.getMyRRFData();
+        } else {
+            this.currentView = 'assignRRF';
+            this.setDefaultValueToRecrCmb();
+            this.getAssignedData();
         }
     }
 
@@ -283,5 +321,23 @@ export class RRFDashboardListComponent implements OnActivate {
 
     }
 
+    GetRecruiter() {
+        this._mastersService.GetRecruiter()
+            .subscribe(
+            results => {
+                this.recruiterList = results;
+            },
+            error => this.errorMessage = <any>error);
+    }
+
+    setDefaultValueToRecrCmb() {
+        this.selectedRecruiter.Id = 0;
+        this.selectedRecruiter.Value = 'All';
+    }
+
+    onRecChange(recID: any) {
+        this.selectedRecruiter.Id = recID;
+        this.getAssignedData();
+    }
 }
 

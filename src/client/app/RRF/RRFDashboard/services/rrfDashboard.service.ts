@@ -74,11 +74,35 @@ export class RRFDashboardService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+    getStatuswiseAssignedRRFCount() {
+        let url = Config.GetURL('/api/RRF/GetStatuswiseMyRRFCount');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
 
     closeRRF(rrfId: number, closeComment: string) {
         let url = Config.GetURL('/api/RRF/CloseRRF');
         this._spinnerService.show();
         return this.authHttp.post(url, { RRFID: rrfId, CloseComment: closeComment })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
+    getCurrentLoggedInUser() {
+        let url = Config.GetURL('/api/authentication/getCurrentUserName');
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    GetRRFAssignedToRecruiter(recruiterDtls: MasterData) {
+        let url = Config.GetURL('/api/RRF/GetRRFAssignedToRecruiter');
+        this._spinnerService.show();
+        return this.authHttp.post(url, recruiterDtls)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
@@ -97,12 +121,7 @@ export class RRFDashboardService {
         return Observable.throw(error.json().error || 'Server error');
     }
 
-    getCurrentLoggedInUser() {
-        let url = Config.GetURL('/api/authentication/getCurrentUserName');
-        return this.authHttp.get(url)
-            .map(this.extractData)
-            .catch(this.handleError);
-    }
+
 
 }
 

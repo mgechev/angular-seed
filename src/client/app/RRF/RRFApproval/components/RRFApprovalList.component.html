@@ -2,7 +2,7 @@
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-         <!--BEGIN breadcrumb -->
+        <!--BEGIN breadcrumb -->
         <ul class="page-breadcrumb breadcrumb">
             <li>
                 <a [routerLink]="['/App']"> Home </a>
@@ -15,6 +15,13 @@
         <!--End Breadcrumb>-->
         <div class="row">
             <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4>RRF Approval</h4>
+                        </div>
+                    </div>
+                </div>
                 <div class="portlet-title">
                     <div>
                         <button type="submit" id="btnApprove" class="btn green" [disabled]='!selectedRowCount' (click)='onStatusApprove()'>Approve</button>
