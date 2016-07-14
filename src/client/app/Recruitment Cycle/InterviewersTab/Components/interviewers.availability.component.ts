@@ -1,34 +1,65 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
+import {Interview} from '../../Shared/model/Interview';
+import {InterviewersAvailabilityService} from '../services/interviewers.availability.service';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { DetailRRF } from '../../Shared/model/detailRRF';
 
 @Component({
     moduleId: module.id,
     selector: 'interviewers-availability',
     templateUrl: 'interviewers.availability.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES],
+    providers: [Interview, ToastsManager, InterviewersAvailabilityService]
 })
 
 export class RecruitmentInterviewAvailabilityComponent implements OnActivate {
     returnPath: string;
     Title: string;
-    InterviewerID: string;
-    constructor(private _router: Router) {
+    errorMessage: string;
+    _rrfDetails: Array<DetailRRF> = new Array<DetailRRF>();;
+    _rrfId: string;
+    _showSlots: boolean;
+    constructor(private _router: Router,
+        private toastr: ToastsManager,
+        private _interviewService: InterviewersAvailabilityService) {
+        this._rrfDetails = new Array<DetailRRF>();
+        this._showSlots = true;
     }
     //Router method overrid from OnActivate class
     routerOnActivate() {
-        // this.getCandidateIds();
+        this.getMyAssignedRRF();
         this.returnPath = sessionStorage.getItem('returnPath');
     }
     Back() {
-        if(this.returnPath !== undefined)
+        if (this.returnPath !== undefined)
             this._router.navigate([this.returnPath]);
     }
 
-    //Get all RRF details assigned to interviewers
-    getAllAssignedRRF(_interviewerId: string) {
+    /** Get availability slots by specific RRF id
+     * if (true) 
+     *  Show availability on screen for edit
+     * else
+     *  Add new availability from screen
+     */
+    getAvailabilitySlots(_rrfId: string) {
         /** add logic to get all RRF */
     }
+    //Get all interviews assigned and accepted by current logged in user from service.
+    getMyAssignedRRF() {
+        this._interviewService.getAssignedRRF()
+            .subscribe(
+            (results: any) => {
+                this._rrfDetails = results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+    }
 
-
-
-}// End Class
+    showSlots(_rrfId: string, _isHidenSlot:boolean) {
+        /** show slots information area */
+        this._showSlots = _isHidenSlot;
+    }
+}

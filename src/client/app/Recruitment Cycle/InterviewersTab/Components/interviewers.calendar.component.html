@@ -1,0 +1,52 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+
+        <!--BEGIN breadcrumb -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']"> Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">My Calendar</span>
+            </li>
+        </ul>
+        <!--End Breadcrumb>-->
+        <!--<breadcrumb></breadcrumb>-->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- My Calendar-->
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption font-dark">
+                            <span class="caption-subject bold uppercase">My Calendar</span>
+                        </div>
+                        <div class="tools">
+                            <button class="btn btn-sm green table-group-action-submit pull-right">Add New Slot</button>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-container">
+                            <!--My Calendar Content-->
+                            <full-calendar draggable="false"
+                            [resources]="resources" 
+                            [events]="events" 
+                            [header]="header" defaultDate="2016-01-12" 
+                            [eventLimit]="4" 
+                            [editable]="true"
+                            (onEventClick)="handleEventClick($event)" 
+                            [selectable]="true" 
+                            [selectHelper]="true" (onSelect)="handleDayClick($event)"></full-calendar>
+                            <!--/My Calendar Content-->
+                        </div>
+                    </div>
+                </div>
+                <!-- /My Calendar-->
+            </div>
+            <!-- END PAGE BASE CONTENT -->
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->

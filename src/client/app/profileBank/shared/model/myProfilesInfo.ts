@@ -10,7 +10,7 @@ export class Qualification {
 
 export class CandidateProfile {
   public CandidateID: string;
-  public Candidate: string;
+  public Candidate: string;//Candidate prop holds Full name of candidate
   public FirstName: string;
   public MiddleName: string;
   public LastName: string;

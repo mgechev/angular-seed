@@ -24,7 +24,7 @@ import { MyRRFComponent } from '../../RRF/myRRF/index';
 import { RRFApprovalComponent } from '../../RRF/RRFApproval/index';
 import { RRFDashboardComponent } from '../../RRF/RRFDashboard/index';
 import { SpinnerComponent, SpinnerService } from '../../shared/components/spinner/spinner';
-import { InterviewrsComponent } from '../../Recruitment Cycle/InterviewersTab/index';
+import { InterviewrsComponent, RecruitmentInterviewerCalenderComponent } from '../../Recruitment Cycle/InterviewersTab/index';
 import {ScheduleInterviewComponent} from '../../Recruitment Cycle/ScheduleInterview/index';
 import {DashboardComponent} from '../../Dashboard/component/dashboard.component';
 
@@ -58,6 +58,7 @@ import {DashboardComponent} from '../../Dashboard/component/dashboard.component'
     { path: '/RRF/RRFDashboard', component: RRFDashboardComponent },
     { path: '/Recruitment Cycle/Interviewers', component: InterviewrsComponent },
     { path: '/Recruitment Cycle/Schedule', component: ScheduleInterviewComponent },
+    { path: '/Recruitment Cycle/mycalendar', component: RecruitmentInterviewerCalenderComponent },
 
 ])
 export class HomeComponent implements OnInit {

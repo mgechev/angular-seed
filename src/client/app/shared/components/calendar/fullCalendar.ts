@@ -71,7 +71,7 @@ export class FullCalendarComponent implements AfterViewInit, OnDestroy, DoCheck 
 
     @Input() dragOpacity: number = .75;
 
-    @Input() dragScroll: boolean = true;
+    @Input() dragScroll: boolean = false;
 
     @Input() eventOverlap: any;
 

@@ -3,7 +3,7 @@ import { DetailRRF } from  './detailRRF';
 
 //Interview master
 export class Interview {
-    public detailsRRF: DetailRRF= new DetailRRF();
+    public detailsRRF: DetailRRF = new DetailRRF();
     public CandidateID: MasterData = new MasterData();
     public CANDIDATECODE: string;
     public InterviewID: string;//MasterData = new MasterData();
@@ -28,9 +28,9 @@ export class Interview {
 //Interviewrs Availability comments
 export class InterviewAvailability {
     public ID: number;
-    public Interviewer: MasterData = new MasterData();;
-    public ConfirmationStatus: string;
-    public Comments: string;
+    public Interviewer: MasterData = new MasterData();
+    public InterviewerConfirmation: string;
+    public AvailabilityComments: string;
 }
 //Candidate primary information for interviewers
 export class CandidatePrimaryDetails {
@@ -51,5 +51,10 @@ export class IEFTransactionDetails {
     public Ratings: string;
     public Remarks: string;
     public FunctionName: MasterData = new MasterData();
-
+}
+export class AwaitedInterview {
+    public InterviewID: MasterData = new MasterData();
+    public Interviewer: MasterData = new MasterData();
+    public InterviewConfirmation: string;
+    public AvailabilityComments: string;
 }

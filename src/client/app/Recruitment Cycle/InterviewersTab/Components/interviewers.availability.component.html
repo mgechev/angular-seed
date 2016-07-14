@@ -18,36 +18,35 @@
         <div class="row">
             <div class="col-md-12">
                 <!--Slot Table-->
-                <div class="portlet light bordered">
+                <div class="portlet light bordered" [hidden]=_showSlots>
                     <div class="portlet-title">
                         <div class="caption font-dark">
                             <span class="caption-subject bold uppercase">Availablity slots for : RRFJuly2016</span>
                         </div>
-                        <div class="tools"> 
+                        <div class="tools">
                             <button class="btn btn-sm green table-group-action-submit pull-right">Add New Slot</button>
                         </div>
                     </div>
                     <div class="portlet-body">
                         <div class="table-container">
                             <!--Slot Table Toolbar Actions-->
-                             
+
                             <!--/Slot Table Toolbar Actions-->
                             <!--Slot Table Content-->
                             <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_ajax" role="grid">
                                 <thead>
                                     <tr role="row" class="heading">
-                                        <th width="5%"> Slots&nbsp;# </th>
-                                        <th width="40%"> Date </th>
-                                        <th width="40%"> Time </th>
-                                        <th width="10%"> Actions </th>
+                                        <th width="2%"> Slots&nbsp;# </th>
+                                        <th width="40%"> Title </th>
+                                        <th width="20%"> Date </th>
+                                        <th width="20%"> Time </th>
+                                        <th width="8%"> Actions </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td> 1. </td>
-                                        <!--check box field-->
-                                        <!--<td>
-                                        <input type="text" class="form-control form-filter input-sm" name="order_id"> </td>-->
+                                        <td>Test Title 1</td>
                                         <!--Date field-->
                                         <td>
                                             <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
@@ -95,9 +94,8 @@
 
                                     <tr>
                                         <td>2.</td>
-                                        <!--check box field-->
-                                        <!--<td>
-                                        <input type="text" class="form-control form-filter input-sm" name="order_id"> </td>-->
+                                        <td>Test Title 2</td>
+
                                         <!--Date field-->
                                         <td>
                                             <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
@@ -143,57 +141,12 @@
                                         </td>
                                     </tr>
 
-                                    <!--<tr>
-                                    <td> 3. </td>
-                                    <td>
-                                        <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                            <input type="text" class="form-control form-filter input-sm" readonly name="order_date_from" placeholder="From">
-                                            <span class="input-group-btn">
-                                                                <button class="btn btn-sm default" type="button">
-                                                                    <i class="fa fa-calendar"></i>
-                                                                </button>
-                                                            </span>
-                                        </div>
-                                        <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                                            <input type="text" class="form-control form-filter input-sm" readonly name="order_date_to" placeholder="To">
-                                            <span class="input-group-btn">
-                                                                <button class="btn btn-sm default" type="button">
-                                                                    <i class="fa fa-calendar"></i>
-                                                                </button>
-                                                            </span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                            <input type="text" class="form-control form-filter input-sm" readonly name="order_date_from" placeholder="From">
-                                            <span class="input-group-btn">
-                                            <button class="btn btn-sm default" type="button">
-                                        <i class="fa fa-calendar"></i>
-                                        </button>
-                                        </span>
-                                        </div>
-                                        <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                                            <input type="text" class="form-control form-filter input-sm" readonly name="order_date_to" placeholder="To">
-                                            <span class="input-group-btn">
-                                        <button class="btn btn-sm default" type="button">
-                                        <i class="fa fa-calendar"></i>
-                                        </button>
-                                        </span>
-                                        </div>
-                                    </td>
-
-                                    <td>
-                                        <button class="btn btn-sm red btn-outline filter-cancel">
-                                              <i class="fa fa-times"></i> Remove</button>
-                                    </td>
-                                </tr>-->
-
                                 </tbody>
                             </table>
                             <!--/Slot Table Content-->
                             <div>
                                 <button type="submit" class="btn btn-info "> Save </button>
-                                <button type="reset" class="btn btn-info "> Cancel </button>
+                                <button type="reset" class="btn btn-info " (click)='showSlots(_rrf.RRFID,false)'> Cancel </button>
                             </div>
                         </div>
                     </div>
@@ -219,93 +172,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>RRFJuly2016</td>
-                                    <td>Practice :EBS
-                                        <br>Tech. : Microsoft
-                                        <br>Position : sadasdsad
-                                        <br>Designation :SSE
-                                        <br>Openings :1
+                                <!-- ng code -->
+                                <tr class="gradeX odd " *ngFor="let _rrf of _rrfDetails ">
+                                    <td>{{_rrf.RRFCODE}}</td>
+                                    <td>Practice :{{_rrf.Practice.Value}}
+                                        <br>Tech. :{{_rrf.Technology.Value}}
+                                        <br>Position : {{_rrf.PositionTitle}}
+                                        <br>Designation :{{_rrf.Designation.Value}}
+                                        <br>Openings :{{_rrf.NoOfOpenings}}
                                     </td>
                                     <td>
-                                        <br>Skills : C# ,
-                                        <br>Date of Joining : 6/30/2016
-                                        <br>Min.EXP : 0
+                                        <br>Skills:
+                                        <span *ngFor="let _skill of _rrf.SkillsRequired ">
+                                            {{_skill.Value}}    
+                                            </span>
+                                        <br>Date of Joining : {{_rrf.ExpDateOfJoining}}
+                                        <br>Min.EXP : {{_rrf.MinExp}}
                                     </td>
-                                    <td>High</td>
-                                    <td><button class="btn btn-sm green btn-outline filter-submit margin-bottom">
+                                    <td>{{_rrf.Priority.Value}}</td>
+                                    <td><button class="btn btn-sm green btn-outline filter-submit margin-bottom" (click)='showSlots(_rrf.RRFID,false)'>
                                                                   Show Slots</button></td>
                                 </tr>
-                                <tr>
-                                    <td>RRFApril2016</td>
-                                    <td>Practice :EBS
-                                        <br>Tech. : Microsoft
-                                        <br>Position : sadasdsad
-                                        <br>Designation :SSE
-                                        <br>Openings :1
-                                    </td>
-                                    <td>
-                                        <br>Skills : C# ,
-                                        <br>Date of Joining : 6/30/2016
-                                        <br>Min.EXP : 0
-                                    </td>
-                                    <td>High</td>
-                                    <td><button class="btn btn-sm green btn-outline filter-submit margin-bottom">
-                                                                  Show Slots</button></td>
-                                </tr>
-                                <tr>
-                                    <td>RRFApril2016-1</td>
-                                    <td>Practice :EBS
-                                        <br>Tech. : Microsoft
-                                        <br>Position : sadasdsad
-                                        <br>Designation :SSE
-                                        <br>Openings :1
-                                    </td>
-                                    <td>
-                                        <br>Skills : C# ,
-                                        <br>Date of Joining : 6/30/2016
-                                        <br>Min.EXP : 0
-                                    </td>
-                                    <td>High</td>
-                                    <td><button class="btn btn-sm green btn-outline filter-submit margin-bottom">
-                                                                  Show Slots</button></td>
-                                </tr>
-                                <tr>
-                                    <td>RRFDec2015</td>
-                                    <td>Practice :EBS
-                                        <br>Tech. : Microsoft
-                                        <br>Position : sadasdsad
-                                        <br>Designation :SSE
-                                        <br>Openings :1
-                                    </td>
-                                    <td>
-                                        <br>Skills : C# ,
-                                        <br>Date of Joining : 6/30/2016
-                                        <br>Min.EXP : 4
-                                    </td>
-                                    <td>High</td>
-                                    <td><button class="btn btn-sm green btn-outline filter-submit margin-bottom">
-                                                                  Show Slots</button></td>
-                                </tr>
-                                <tr>
-                                    <td>RRFMarch2016</td>
-                                    <td>Practice :EBS
-                                        <br>Tech. : Microsoft
-                                        <br>Position : sadasdsad
-                                        <br>Designation :SSE
-                                        <br>Openings :2
-                                    </td>
-                                    <td>
-                                        <br>Skills : C# ,
-                                        <br>Date of Joining : 6/30/2016
-                                        <br>Min.EXP : 3
-                                    </td>
-                                    <td>Low</td>
-                                    <td><button class="btn btn-sm green btn-outline filter-submit margin-bottom">
-                                                                  Show Slots</button></td>
-                                </tr>
-
-
+                                <!-- /ng code-->
                             </tbody>
                         </table>
                     </div>

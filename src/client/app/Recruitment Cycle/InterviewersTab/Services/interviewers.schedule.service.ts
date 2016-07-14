@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
+// import { MasterData } from  '../../../shared/model/index';
+// import { AwaitedInterview} from '../../Shared/model/Interview';
 
 @Injectable()
 
@@ -29,6 +31,33 @@ export class InterviewersScheduleService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+
+    //Get interviewer's all booking to display in calendar
+    getMyInterviewsOfCalendar() {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewerAwaitingConfirmationInterviews');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+/**Commenting as this fuctionality is depricated */
+    // acceptAwaitedInterview(_rrfID: MasterData) {
+    //     let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewerAwaitingConfirmationInterviews');
+    //     this._spinnerService.show();
+    //     return this.authHttp.post(url, { _rrfID })
+    //         .map(this.extractData)
+    //         .catch(this.handleError)
+    //         .finally(() => this._spinnerService.hide());
+    // }
+    // rejectAwaitedInterview(_awaitedRRF: AwaitedInterview) {
+    //     let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewerAwaitingConfirmationInterviews');
+    //     this._spinnerService.show();
+    //     return this.authHttp.post(url, { _awaitedRRF })
+    //         .map(this.extractData)
+    //         .catch(this.handleError)
+    //         .finally(() => this._spinnerService.hide());
+    // }
 
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {

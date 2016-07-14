@@ -10,7 +10,7 @@ export class CalendarDataService {
             'resourceId': 3,
             'title': 'All Day Event',
             'start': '2016-01-01'
-            },
+        },
             {
                 'id': 2,
                 'resourceId': 1,
@@ -110,8 +110,8 @@ export class CalendarDataService {
 
     getResources() {
         return [{ id: 1, title: 'InterViewer A', eventColor: this.generateHexColors() },
-        { id: 2, title: 'InterViewer B', eventColor: this.generateHexColors() },
-        { id: 3, title: 'InterViewer C', eventColor: this.generateHexColors() }];
+            { id: 2, title: 'InterViewer B', eventColor: this.generateHexColors() },
+            { id: 3, title: 'InterViewer C', eventColor: this.generateHexColors() }];
     }
     getCalendarEventData() {
         // return [
@@ -173,11 +173,10 @@ export class CalendarDataService {
         return this.Events;
     }
 
-    SaveEvent(index:number,Event:any) {
+    SaveEvent(index: number, Event: any) {
         this.Events[index] = Event;
     }
     generateHexColors() {
         return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
     }
-    
 }
