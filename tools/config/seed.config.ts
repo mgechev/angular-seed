@@ -423,8 +423,18 @@ export class SeedConfig {
         }
       }
     },
+
     // Note: you can customize the location of the file
-    'environment-config': require('../env/config.json')
+    'environment-config': require('../env/config.json'),
+
+    /**
+     * The options to pass to gulp-sass (and then to node-sass).
+     * Reference: https://github.com/sass/node-sass#options
+     * @type {object}
+     */
+    'gulp-sass': {
+      includePaths: ['./node_modules/']
+    },
   };
 
   /**
