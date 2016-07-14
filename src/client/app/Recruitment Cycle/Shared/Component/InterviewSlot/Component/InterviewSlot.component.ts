@@ -1,4 +1,4 @@
-import {Component, Input, AfterViewInit, OnChanges } from '@angular/core';
+import {Component, Input,Output, AfterViewInit, EventEmitter ,OnChanges } from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate } from '@angular/router';
 import {CalenderSlot} from '../Model/interviewSlot';
 import {InterviewSlotService } from '../Service/InterviewSlot.service';
@@ -18,6 +18,7 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
     //@Input() test :string;
     @Input() RRFID: MasterData = new MasterData();
     @Input() RRFCode: string;
+    //@Output() HideSlot = new EventEmitter();
     meta: CalenderSlot[] = [];
     errorMessage: string = '';
 
@@ -26,6 +27,7 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
         private _interviewSlotService: InterviewSlotService,
         public toastr: ToastsManager) {
         // this.getRRFSlot();
+        //this.HideSlot.emit('hideit');
     }
 
     routerOnActivate() {
@@ -64,20 +66,17 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
     getRRFSlot() {
         this._interviewSlotService.getSlotForRRF(this.RRFID)
             .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.meta = <any>results;
-                    if (this.meta.length == 0) {
-                        this.addNewSlot();
-                    }
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).Message);
-                    this.addNewSlot(); //************TODO-delete this
+            (results: any) => {
+                //this.meta = <any>results;
+                this.addNewSlot();
+                if (this.meta.length == 0) {
+                    this.addNewSlot(); //TODO 
                 }
             },
-            error => this.errorMessage = <any>error);
-    }
-    onCancelClick() {
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
 
     }
 

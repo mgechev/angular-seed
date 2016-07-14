@@ -24,21 +24,32 @@
                             <span class="caption-subject bold uppercase">My Calendar</span>
                         </div>
                         <div class="tools">
-                            <button class="btn btn-sm green table-group-action-submit pull-right">Add New Slot</button>
+                            <div class="col-lg-12">
+                                <div class="form-group ">
+                                     <!--<select id="cmbPractice" [disabled]="!isNewRRF" required="" class="form-control" [(ngModel)]='newRRF.Practice.Id' tooltip="Select Practice"
+                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Practice.Id">
+                                        <option value="0 " disabled>Select Practices </option>
+                                        <option *ngFor="let practice of practices" [value]="practice.Id">{{practice.Value}}</option>
+                                    </select>-->
+                                    <select id="cmbRRF"  class="form-control" [(ngModel)]="selectedRRFID" [disabled]="showSlotForRRF">
+                                        <option value="0"  disabled>Select RRF </option>
+                                        <option *ngFor="let rrf of myAssignedRRF" [value]="rrf.RRFID.Id" >{{rrf.RRFCODE}} - {{rrf.PositionTitle}} - {{rrf.RaisedBy.Value}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tools">
+                            <button class="btn btn-sm green table-group-action-submit " (click)="addNewSlot()" >{{AddNewSlotText}}</button>
                         </div>
                     </div>
+                     <interview-slot [RRFID]="RRFIdTOShowSlot" [RRFCode]="RRFCode" *ngIf="showSlotForRRF" (HideSlot)="hideSlot($event)"></interview-slot>
                     <div class="portlet-body">
                         <div class="table-container">
                             <!--My Calendar Content-->
-                            <full-calendar draggable="false"
-                            [resources]="resources" 
-                            [events]="events" 
-                            [header]="header" defaultDate="2016-01-12" 
-                            [eventLimit]="4" 
-                            [editable]="true"
-                            (onEventClick)="handleEventClick($event)" 
-                            [selectable]="true" 
-                            [selectHelper]="true" (onSelect)="handleDayClick($event)"></full-calendar>
+                            <full-calendar draggable="false" [resources]="resources" [events]="events" [header]="header" defaultDate="2016-01-12" [eventLimit]="4"
+                            [editable]="true" (onEventClick)="handleEventClick($event)" [selectable]="true" [selectHelper]="true"
+                            (onSelect)="handleDayClick($event)"></full-calendar>
                             <!--/My Calendar Content-->
                         </div>
                     </div>

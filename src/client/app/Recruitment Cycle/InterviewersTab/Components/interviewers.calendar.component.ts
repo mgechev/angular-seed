@@ -5,17 +5,23 @@ import {InterviewersCalendarService} from '../services/interviewers.calendar.ser
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { FullCalendarComponent} from  '../../../shared/components/calendar/fullCalendar';
 import { Resource} from '../../ScheduleInterview/model/CalendarDetails';
+import {InterviewersAvailabilityService} from '../services/interviewers.availability.service';
+import { ResponseFromAPI, MasterData} from '../../../shared/model/common.model';
+import { APIResult} from  '../../../shared/constantValue/index';
+import { DetailRRF } from '../../Shared/model/detailRRF';
+import {InterviewSlotComponent } from '../../Shared/Component/InterviewSlot/Component/InterviewSlot.component';
+
 
 @Component({
     moduleId: module.id,
     selector: 'interviewers-mycalendar',
     templateUrl: 'interviewers.calendar.component.html',
-    directives: [ROUTER_DIRECTIVES, FullCalendarComponent],
-    providers: [Interview, ToastsManager, InterviewersCalendarService]
+    directives: [ROUTER_DIRECTIVES, FullCalendarComponent, InterviewSlotComponent],
+    providers: [Interview, ToastsManager, InterviewersCalendarService,InterviewersAvailabilityService]
 })
 
 /** RecruitmentInterviewerCalenderComponent implements OnActivate*/
-export class RecruitmentInterviewerCalenderComponent implements OnActivate {
+export class RecruitmentInterviewerCalenderComponent implements OnActivate{
     returnPath: string;
     Title: string;
     errorMessage: string;
@@ -23,10 +29,20 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate {
     events: any[];
     header: any;
     resources: Array<Resource> = new Array<Resource>();
+    myAssignedRRF: DetailRRF[] = [];
+
+    RRFIdTOShowSlot: MasterData = new MasterData();
+    RRFCode: string;
+    showSlotForRRF: boolean = false;
+    selectedRRFID: number=0;
+    AddNewSlotText: string = "Add New Slot";
+   
 
     constructor(private _router: Router,
         private toastr: ToastsManager,
-        private _interviewService: InterviewersCalendarService) {
+        private _interviewService: InterviewersCalendarService,
+        private _interviewAvailabilityService: InterviewersAvailabilityService) {
+        this.getListOfAssignedRRF();
     }
     routerOnActivate() {
         //Get Events to show on Calendar
@@ -63,4 +79,36 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate {
     getAddSlots() {
         /** send current users selected slot information to the service */
     }
+
+    getListOfAssignedRRF() {
+        this._interviewAvailabilityService.getAssignedRRF()
+            .subscribe(
+            (results: any) => {
+                this.myAssignedRRF = results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+    }
+
+    addNewSlot() {
+        if (this.showSlotForRRF == false){
+            this.showSlotForRRF = true;
+            this.AddNewSlotText = "Hide Slot"
+            for (var index = 0; index < this.myAssignedRRF.length; index++) {
+                //TODO : implement below code
+                // if (this.myAssignedRRF[index].RRFID.Id == this.selectedRRFID) {
+                // }
+
+            }
+        }
+        else {
+            this.showSlotForRRF = false;
+            this.AddNewSlotText = "Add New Slot"
+        }
+
+    }
+    
+   
 }

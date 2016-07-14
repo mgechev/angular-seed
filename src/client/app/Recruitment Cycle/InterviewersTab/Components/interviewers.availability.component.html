@@ -15,142 +15,12 @@
         </ul>
         <!--End Breadcrumb>-->
         <!--<breadcrumb></breadcrumb>-->
+
         <div class="row">
             <div class="col-md-12">
                 <!--Slot Table-->
-                <div class="portlet light bordered" [hidden]=_showSlots>
-                    <div class="portlet-title">
-                        <div class="caption font-dark">
-                            <span class="caption-subject bold uppercase">Availablity slots for : RRFJuly2016</span>
-                        </div>
-                        <div class="tools">
-                            <button class="btn btn-sm green table-group-action-submit pull-right">Add New Slot</button>
-                        </div>
-                    </div>
-                    <div class="portlet-body">
-                        <div class="table-container">
-                            <!--Slot Table Toolbar Actions-->
 
-                            <!--/Slot Table Toolbar Actions-->
-                            <!--Slot Table Content-->
-                            <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_ajax" role="grid">
-                                <thead>
-                                    <tr role="row" class="heading">
-                                        <th width="2%"> Slots&nbsp;# </th>
-                                        <th width="40%"> Title </th>
-                                        <th width="20%"> Date </th>
-                                        <th width="20%"> Time </th>
-                                        <th width="8%"> Actions </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td> 1. </td>
-                                        <td>Test Title 1</td>
-                                        <!--Date field-->
-                                        <td>
-                                            <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                                <input type="text" class="form-control form-filter input-sm" readonly name="order_date_from" placeholder="From">
-                                                <span class="input-group-btn">
-                                                                <button class="btn btn-sm default" type="button">
-                                                                    <i class="fa fa-calendar"></i>
-                                                                </button>
-                                                            </span>
-                                            </div>
-                                            <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                                                <input type="text" class="form-control form-filter input-sm" readonly name="order_date_to" placeholder="To">
-                                                <span class="input-group-btn">
-                                                                <button class="btn btn-sm default" type="button">
-                                                                    <i class="fa fa-calendar"></i>
-                                                                </button>
-                                                            </span>
-                                            </div>
-                                        </td>
-                                        <!--Time field-->
-                                        <td>
-                                            <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                                <input type="text" class="form-control form-filter input-sm" readonly name="order_date_from" placeholder="From">
-                                                <span class="input-group-btn">
-                                            <button class="btn btn-sm default" type="button">
-                                        <i class="fa fa-calendar"></i>
-                                        </button>
-                                        </span>
-                                            </div>
-                                            <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                                                <input type="text" class="form-control form-filter input-sm" readonly name="order_date_to" placeholder="To">
-                                                <span class="input-group-btn">
-                                        <button class="btn btn-sm default" type="button">
-                                        <i class="fa fa-calendar"></i>
-                                        </button>
-                                        </span>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <button class="btn btn-sm red btn-outline filter-cancel">
-                                              <i class="fa fa-times"></i> Remove</button>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>2.</td>
-                                        <td>Test Title 2</td>
-
-                                        <!--Date field-->
-                                        <td>
-                                            <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                                <input type="text" class="form-control form-filter input-sm" readonly name="order_date_from" placeholder="From">
-                                                <span class="input-group-btn">
-                                                                <button class="btn btn-sm default" type="button">
-                                                                    <i class="fa fa-calendar"></i>
-                                                                </button>
-                                                            </span>
-                                            </div>
-                                            <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                                                <input type="text" class="form-control form-filter input-sm" readonly name="order_date_to" placeholder="To">
-                                                <span class="input-group-btn">
-                                                                <button class="btn btn-sm default" type="button">
-                                                                    <i class="fa fa-calendar"></i>
-                                                                </button>
-                                                            </span>
-                                            </div>
-                                        </td>
-                                        <!--Time field-->
-                                        <td>
-                                            <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                                <input type="text" class="form-control form-filter input-sm" readonly name="order_date_from" placeholder="From">
-                                                <span class="input-group-btn">
-                                            <button class="btn btn-sm default" type="button">
-                                        <i class="fa fa-calendar"></i>
-                                        </button>
-                                        </span>
-                                            </div>
-                                            <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                                                <input type="text" class="form-control form-filter input-sm" readonly name="order_date_to" placeholder="To">
-                                                <span class="input-group-btn">
-                                        <button class="btn btn-sm default" type="button">
-                                        <i class="fa fa-calendar"></i>
-                                        </button>
-                                        </span>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <button class="btn btn-sm red btn-outline filter-cancel">
-                                              <i class="fa fa-times"></i> Remove</button>
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                            <!--/Slot Table Content-->
-                            <div>
-                                <button type="submit" class="btn btn-info "> Save </button>
-                                <button type="reset" class="btn btn-info " (click)='showSlots(_rrf.RRFID,false)'> Cancel </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <interview-slot [RRFID]="RRFIdTOShowSlot" [RRFCode]="RRFCode" *ngIf="showSlotForRRF"></interview-slot>
                 <!--/Slot Table-->
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet light bordered">
@@ -158,7 +28,10 @@
                         <div class="caption font-dark">
                             <span class="caption-subject bold uppercase">Assigned RRF's</span>
                         </div>
-                        <div class="tools"> </div>
+                        <div class="tools">
+                            <button class="btn btn-sm green table-group-action-submit pull-right" (click)="hideSlot()" *ngIf="showSlotForRRF">Hide Slot</button>
+                        </div>
+                        <!--<div class="tools"> </div>-->
                     </div>
                     <div class="portlet-body">
                         <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="sample_1">
@@ -190,8 +63,10 @@
                                         <br>Min.EXP : {{_rrf.MinExp}}
                                     </td>
                                     <td>{{_rrf.Priority.Value}}</td>
-                                    <td><button class="btn btn-sm green btn-outline filter-submit margin-bottom" (click)='showSlots(_rrf.RRFID,false)'>
-                                                                  Show Slots</button></td>
+                                    <td>
+                                        <button class="btn btn-sm green btn-outline filter-submit margin-bottom" (click)='showSlots(_rrf.RRFID,_rrf.RRFCODE)'>
+                                            Show Slots</button>
+                                    </td>
                                 </tr>
                                 <!-- /ng code-->
                             </tbody>

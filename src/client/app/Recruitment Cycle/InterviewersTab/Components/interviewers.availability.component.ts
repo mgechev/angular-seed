@@ -4,13 +4,16 @@ import {Interview} from '../../Shared/model/Interview';
 import {InterviewersAvailabilityService} from '../services/interviewers.availability.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { DetailRRF } from '../../Shared/model/detailRRF';
+import {InterviewSlotComponent } from '../../Shared/Component/InterviewSlot/Component/InterviewSlot.component';
+import {CalenderSlot, CalenderDetails} from '../../shared/Component/InterviewSlot/Model/interviewSlot';
+import { MasterData} from '../../../shared/model/common.model';
 
 @Component({
     moduleId: module.id,
     selector: 'interviewers-availability',
     templateUrl: 'interviewers.availability.component.html',
-    directives: [ROUTER_DIRECTIVES],
-    providers: [Interview, ToastsManager, InterviewersAvailabilityService]
+    directives: [ROUTER_DIRECTIVES, InterviewSlotComponent],
+    providers: [Interview, ToastsManager,InterviewersAvailabilityService]
 })
 
 export class RecruitmentInterviewAvailabilityComponent implements OnActivate {
@@ -20,11 +23,15 @@ export class RecruitmentInterviewAvailabilityComponent implements OnActivate {
     _rrfDetails: Array<DetailRRF> = new Array<DetailRRF>();;
     _rrfId: string;
     _showSlots: boolean;
+    RRFIdTOShowSlot: MasterData = new MasterData();
+    RRFCode: string;
+    showSlotForRRF: boolean = false;
+
     constructor(private _router: Router,
         private toastr: ToastsManager,
         private _interviewService: InterviewersAvailabilityService) {
         this._rrfDetails = new Array<DetailRRF>();
-        this._showSlots = true;
+        // this._showSlots =true;
     }
     //Router method overrid from OnActivate class
     routerOnActivate() {
@@ -58,8 +65,17 @@ export class RecruitmentInterviewAvailabilityComponent implements OnActivate {
             });
     }
 
-    showSlots(_rrfId: string, _isHidenSlot:boolean) {
+    showSlots(_rrfId: MasterData, RRFCode: string) {
         /** show slots information area */
-        this._showSlots = _isHidenSlot;
+        this.RRFIdTOShowSlot = _rrfId;
+        this.RRFCode = RRFCode;
+        this.showSlotForRRF = true;
+
+        // this._showSlots = _isHidenSlot;
     }
+    
+    hideSlot(){
+        this.showSlotForRRF = false;
+    }
+
 }
