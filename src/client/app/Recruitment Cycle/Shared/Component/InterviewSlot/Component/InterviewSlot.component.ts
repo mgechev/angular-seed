@@ -45,7 +45,7 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
     onSaveClick() {
         var newAddedCalenderSlot: CalenderSlot[] = [];
         for (var index = 0; index < this.meta.length; index++) {
-            if (this.meta[index].ID == undefined) {
+            if (this.meta[index].ID === undefined) {
                 newAddedCalenderSlot.push(this.meta[index]);
             }
         }
@@ -67,10 +67,9 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
         this._interviewSlotService.getSlotForRRF(this.RRFID)
             .subscribe(
             (results: any) => {
-                //this.meta = <any>results;
-                this.addNewSlot();
-                if (this.meta.length == 0) {
-                    this.addNewSlot(); //TODO 
+                this.meta = <any>results;
+                if (this.meta.length === 0) {
+                    this.addNewSlot();
                 }
             },
             error => {
