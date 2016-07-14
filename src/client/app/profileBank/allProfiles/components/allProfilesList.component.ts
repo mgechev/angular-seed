@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
-import {CandidateProfile, GridOperations} from '../../shared/model/myProfilesInfo';
+import {CandidateProfile, GridOperations, AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -12,8 +12,8 @@ import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { DataSharedService } from '../../shared/services/DataShared.service';
 import { ProfileBankService } from '../../shared/services/profilebank.service';
 import {PAGINATION_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
-import {ProfileFilterPipe,ProfileStatusFilterPipe, ProfileNoticePeriodFilterPipe,
-    ProfileExpectedSalaryFilterPipe,ProfileSalaryFilterPipe} from './allProfilesPipe.component';
+import {ProfileFilterPipe, ProfileStatusFilterPipe, ProfileNoticePeriodFilterPipe,
+    ProfileExpectedSalaryFilterPipe, ProfileSalaryFilterPipe} from './allProfilesPipe.component';
 //import {CalendarComponent} from  '../../../shared/components/calendar/calendar';
 
 @Component({
@@ -22,13 +22,14 @@ import {ProfileFilterPipe,ProfileStatusFilterPipe, ProfileNoticePeriodFilterPipe
     templateUrl: 'allProfilesList.component.html',
     directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES, PAGINATION_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
-    pipes: [ProfileFilterPipe, ProfileSalaryFilterPipe,ProfileStatusFilterPipe
-            ,ProfileNoticePeriodFilterPipe,ProfileExpectedSalaryFilterPipe]
+    pipes: [ProfileFilterPipe, ProfileSalaryFilterPipe, ProfileStatusFilterPipe
+        , ProfileNoticePeriodFilterPipe, ProfileExpectedSalaryFilterPipe]
 })
 
 
 export class AllProfilesListComponent implements OnActivate {
     allProfilesList: Array<CandidateProfile>;
+    AllCheckedItemIds: Array<string> = new Array<string>();
     allProfilesList_1: Array<CandidateProfile>;
     profile: CandidateProfile;
     statusList: Array<MasterData>;
@@ -44,6 +45,7 @@ export class AllProfilesListComponent implements OnActivate {
     isAuthourized: boolean = false;
     currentUser: MasterData = new MasterData();
     url: any;
+    CandidateProfiles: AllCandidateProfiles = new AllCandidateProfiles();
     //Pagination 
     grdOptions = new GridOperations();
     public maxSize: number = 3;
@@ -57,14 +59,21 @@ export class AllProfilesListComponent implements OnActivate {
         private _masterService: MastersService) {
         this.profile = new CandidateProfile();
         this.allProfilesList = new Array<CandidateProfile>();
+
     }
 
     routerOnActivate() {
+        this.setPaginationValues();
         this.getLoggedInUser();
-        this.getAllProfiles();
+        //this.getAllProfiles();
+        this.getAllProfiles_1();
         this.getCandidateStatuses();
     }
 
+    setPaginationValues() {
+        this.CandidateProfiles.GrdOperations.ButtonClicked = 0;
+        this.CandidateProfiles.GrdOperations.PerPageCount = 3;
+    }
     getLoggedInUser() {
         this._profileBankService.getCurrentLoggedInUser()
             .subscribe(
@@ -81,7 +90,7 @@ export class AllProfilesListComponent implements OnActivate {
                 (results: any) => {
                     if (results.length !== undefined) {
                         this.allProfilesList = <Array<CandidateProfile>>results;
-                        this.allProfilesList_1 = <Array<CandidateProfile>>results;
+                        //this.allProfilesList_1 = <Array<CandidateProfile>>results;
                     }
                 },
                 error => this.errorMessage = <any>error);
@@ -90,7 +99,22 @@ export class AllProfilesListComponent implements OnActivate {
         }
 
     }
+    //Method for With Pagination
+     getAllProfiles_1() {
+        try {
+            this._allProfilesService.getOpenProfiles(this.CandidateProfiles.GrdOperations)
+                .subscribe(
+                (results: any) => {
+                    if (results.Profiles.length !== undefined) {
+                        this.CandidateProfiles = <AllCandidateProfiles>results;
+                    }
+                },
+                error => this.errorMessage = <any>error);
+        } catch (error) {
+            this.allProfilesList = new Array<CandidateProfile>();
+        }
 
+    }
     redirectToView(CandidateID: string) {
         this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID]);
     }
@@ -199,14 +223,21 @@ export class AllProfilesListComponent implements OnActivate {
     }
 
     transferOwnerShipClick() {
-        let checkedItemIds: Array<string> = new Array<string>();
-        for (var index = 0; index < this.allProfilesList.length; index++) {
-            if (this.allProfilesList[index].IsChecked) {
-                checkedItemIds.push(this.allProfilesList[index].CandidateID);
+        // let checkedItemIds: Array<string> = new Array<string>();
+        // for (var index = 0; index < this.allProfilesList.length; index++) {
+        //     if (this.allProfilesList[index].IsChecked) {
+        //         checkedItemIds.push(this.allProfilesList[index].CandidateID);
+        //     }
+        // }
+        for (var index = 0; index < this.CandidateProfiles.Profiles.length; index++) {
+            if (this.CandidateProfiles.Profiles[index].IsChecked) {
+                this.AllCheckedItemIds.push(this.CandidateProfiles.Profiles[index].CandidateID);
             }
         }
-        this._dataSharedService.setCheckedItems(checkedItemIds);
-        this._router.navigate(['/App/ProfileBank/AllProfiles/Transfer/']);
+        if (this.AllCheckedItemIds.length > 0) {
+            this._dataSharedService.setCheckedItems(this.AllCheckedItemIds);
+            this._router.navigate(['/App/ProfileBank/AllProfiles/Transfer/']);
+        }
     }
 
     getEditAccess(Owner: MasterData) {
@@ -230,5 +261,16 @@ export class AllProfilesListComponent implements OnActivate {
             error => this.toastr.error(<any>error));
     }
 
+    OnPaginationClick(ButtonClicked: string) {
+        /* ButtonClicked 
+                i. Initial - 0
+                ii.Next - 1
+                iii.Prev - (-1)
+            PerPageCount = No of items shown per page
+                */
+        this.CandidateProfiles.GrdOperations.ButtonClicked = parseInt(ButtonClicked);
+        this.CandidateProfiles.GrdOperations.PerPageCount = 3;
+        this.getAllProfiles_1();
+    }
 }
 

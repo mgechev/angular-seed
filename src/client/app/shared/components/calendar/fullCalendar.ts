@@ -80,7 +80,7 @@ export class FullCalendarComponent implements AfterViewInit, OnDestroy, DoCheck 
     @Input() locale: any;
 
     @Input() selectable: any;
-    
+
     @Input() selectHelper: any;
 
     @Output() onDayClick: EventEmitter<any> = new EventEmitter();
@@ -104,8 +104,10 @@ export class FullCalendarComponent implements AfterViewInit, OnDestroy, DoCheck 
     @Output() onEventResize: EventEmitter<any> = new EventEmitter();
 
     @Output() viewRender: EventEmitter<any> = new EventEmitter();
-     @Output() onSelect: EventEmitter<any> = new EventEmitter();
 
+    @Output() onSelect: EventEmitter<any> = new EventEmitter();
+    @Output() onEventRender: EventEmitter<any> = new EventEmitter();
+        @Output() onEventOverlap: EventEmitter<any>= new EventEmitter();
     initialized: boolean;
 
     stopNgOnChangesPropagation: boolean;
@@ -156,11 +158,12 @@ export class FullCalendarComponent implements AfterViewInit, OnDestroy, DoCheck 
             dragRevertDuration: this.dragRevertDuration,
             dragOpacity: this.dragOpacity,
             dragScroll: this.dragScroll,
-            eventOverlap: this.eventOverlap,
+        //    eventOverlap: this.eventOverlap,
             eventConstraint: this.eventConstraint,
             resources: this.resources,
-            selectable:this.selectable,
-            selectHelper:this.selectHelper,
+            selectable: this.selectable,
+            selectHelper: this.selectHelper,
+            timeFormat:'h:mm',
             events: (start: any, end: any, timezone: any, callback: any) => {
                 callback(this.events);
             },
@@ -171,6 +174,12 @@ export class FullCalendarComponent implements AfterViewInit, OnDestroy, DoCheck 
                     'view': view
                 });
             },
+            eventOverlap : (stillEvent:any, movingEvent:any)=>{
+                this.onEventOverlap.emit({
+                    'stillEvent': stillEvent,
+                    'movingEvent': movingEvent,
+             });
+            },
             eventClick: (calEvent: any, jsEvent: any, view: any) => {
                 this.onEventClick.emit({
                     'calEvent': calEvent,
@@ -178,15 +187,15 @@ export class FullCalendarComponent implements AfterViewInit, OnDestroy, DoCheck 
                     'view': view
                 });
             },
-            select: (start: any, end: any, jsEvent: any, view: any, resource: any)=> {
-                 this.onSelect.emit({
+            select: (start: any, end: any, jsEvent: any, view: any, resource: any) => {
+                this.onSelect.emit({
                     'start': start,
-                    'end':end,
+                    'end': end,
                     'jsEvent': jsEvent,
                     'view': view,
-                    'resource':resource
+                    'resource': resource
                 });
-			},
+            },
             eventMouseover: (calEvent: any, jsEvent: any, view: any) => {
                 this.onEventMouseover.emit({
                     'calEvent': calEvent,
@@ -250,6 +259,12 @@ export class FullCalendarComponent implements AfterViewInit, OnDestroy, DoCheck 
             viewRender: (view: any, element: any) => {
                 this.viewRender.emit({
                     'view': view,
+                    'element': element
+                });
+            },
+            eventRender: (event: any, element: any) => {
+                this.onEventRender.emit({
+                    'event': event,
                     'element': element
                 });
             }

@@ -1,82 +1,66 @@
 import { Injectable } from '@angular/core';
+import { MasterData  } from '../../../shared/model/common.model';
+import { Response } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
+import { AuthHttp } from '../../../shared/services/authHttp.service';
+import { Config } from '../../../shared/config/config';
+import { SpinnerService } from '../../../shared/components/spinner/spinner';
+import {CalendarDetails} from '../model/CalendarDetails';
 
 @Injectable()
 export class CalendarDataService {
     checkedItemIds: Array<string> = [];
     Events: any[];
-    constructor() {
-        this.Events = [{
-            'id': 1,
-            'resourceId': 3,
-            'title': 'All Day Event',
-            'start': '2016-01-01'
-        },
-            {
-                'id': 2,
-                'resourceId': 1,
-                'title': 'Long Event',
-                'start': '2016-01-07',
-                'end': '2016-01-10'
+    InterviewCalendarDetails: CalendarDetails = new CalendarDetails();
+    constructor(private authHttp: AuthHttp,
+        private _spinnerService: SpinnerService) {
+        this.InterviewCalendarDetails.Events = [
+             {
+                "id": 40,
+                "resourceId": 1,
+                "title": "EBS - Mahesh Nagawade",
+                "start": "2016-07-13T11:00:00",
+                "end": "2016-07-13T13:00:00"
             },
             {
-                'id': 3,
-                'resourceId': 2,
-                'title': 'Repeating Event',
-                'start': '2016-01-09T16:00:00'
+                "id": 41,
+                "resourceId": 2,
+                "title": "EBS - Mahesh Nagawade",
+                "start": "2016-07-14T11:00:00",
+                "end": "2016-07-14T13:00:00"
             },
             {
-                'id': 4,
-                'resourceId': 1,
-                'title': 'Repeating Event',
-                'start': '2016-01-16T16:00:00'
+                "id": 42,
+                "resourceId": 1,
+                "title": "ebs - Shrikant Mane",
+                "start": "2016-07-13T11:00:00",
+                "end": "2016-07-13T14:00:00"
             },
             {
-                'id': 5,
-                'resourceId': 1,
-                'title': 'Conference',
-                'start': '2016-01-11',
-                'end': '2016-01-13'
-            },
-            {
-                'id': 6,
-                'resourceId': 3,
-                'title': 'Meeting',
-                'start': '2016-01-12T10:30:00',
-                'end': '2016-01-12T12:30:00'
-            },
-            {
-                'id': 7,
-                'resourceId': 2,
-                'title': 'Lunch',
-                'start': '2016-01-12T12:00:00'
-            },
-            {
-                'id': 8,
-                'resourceId': 1,
-                'title': 'Meeting',
-                'start': '2016-01-12T14:30:00'
-            },
-            {
-                'id': 9,
-                'title': 'Happy Hour',
-                'start': '2016-01-12T17:30:00'
-            },
-            {
-                'id': 10,
-                'title': 'Dinner',
-                'start': '2016-01-12T20:00:00'
-            },
-            {
-                'id': 11,
-                'title': 'Birthday Party',
-                'start': '2016-01-13T07:00:00'
-            },
-            {
-                'id': 12,
-                'title': 'Click for Google',
-                'url': 'http://google.com/',
-                'start': '2016-01-28'
+                "id": 43,
+                "resourceId": 2,
+                "title": "ebs - Shrikant Mane",
+                "start": "2016-07-12T13:00:00",
+                "end": "2016-07-12T14:00:00"
             }
+            // {
+            //     'id': 5,
+            //     'resourceId': 1,
+            //     'title': 'Conference',
+            //     'start': '2016-01-11',
+            //     'end': '2016-01-13'
+            // },
+            // {
+            //     'id': 6,
+            //     'resourceId': 2,
+            //     'title': 'Meeting',
+            //     'start': '2016-01-12T10:30:00',
+            //     'end': '2016-01-12T12:30:00'
+            // }
+        ];
+        this.InterviewCalendarDetails.Resources = [
+            { id: 1, title: 'Available', eventColor: 'Green' },
+            { id: 2, title: 'Booked', eventColor: 'Red' }
         ];
     }
     getDropDown() {
@@ -178,5 +162,38 @@ export class CalendarDataService {
     }
     generateHexColors() {
         return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+    }
+    //Get InterViewer's All Events Available And Booked Slots by InterViewerID
+    GetInterviewerCalendarByID(InterViewerID: MasterData) {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewerByIdCalendar');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { InterviewerId: InterViewerID })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    //Get All InterViewer's All Events Available And Booked Slots 
+    GetInterviewerCalendarDetail(InterViewers: Array<MasterData>) {
+        //TODO : Change URL
+        /*  let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewerByIdCalendar');
+          this._spinnerService.show();
+          return this.authHttp.post(url, { InterViewers })
+              .map(this.extractData)
+              .catch(this.handleError)
+              .finally(() => this._spinnerService.hide());*/
+        return this.InterviewCalendarDetails;
+    }
+
+    private extractData(res: Response) {
+        if (res.status < 200 || res.status >= 300) {
+            throw new Error('Bad response status: ' + res.status);
+        }
+        let body = res.json();
+        return body || {};
+    }
+
+    private handleError(error: Response) {
+        console.log(error);
+        return Observable.throw(error.json().error || 'Server error');
     }
 }

@@ -1,11 +1,8 @@
 import { MasterData } from  '../../../shared/model/index';
-export class Qualification {
-  public CandidateID: string;
-  public QualificationID: number;
-  public Qualification: MasterData = new MasterData();
-  public YearofPassing: number;
-  public Marks: number;
-  public Grade: MasterData = new MasterData();
+
+export class AllCandidateProfiles {
+   public GrdOperations = new GridOperations();
+   public Profiles : Array<CandidateProfile> = new Array<CandidateProfile>();
 }
 
 export class CandidateProfile {
@@ -60,7 +57,18 @@ export class CandidateProfile {
   //for Edit access
   public isAuthourized: boolean;
   public Owner: MasterData = new MasterData();
-  public GrdOperations = new GridOperations();
+  public CandidateCode: string;
+  public isRRFAssigned: boolean;
+
+}
+
+export class Qualification {
+  public CandidateID: string;
+  public QualificationID: number;
+  public Qualification: MasterData = new MasterData();
+  public YearofPassing: number;
+  public Marks: number;
+  public Grade: MasterData = new MasterData();
 }
 
 export class TeamManagement {
@@ -167,13 +175,11 @@ export class TransferOwnershipMeta {
 }
 
 export class GridOperations {
-  public TotalItems: number;
-  public ItemPerPage: number;
+  public IDColl: Array<number> = new Array<number>();
+  public ButtonClicked: number;
+  public NextButton: boolean;
+  public PreviousButton: boolean;
+  public PerPageCount: number;
   // public OrderBy: string;
   // public OrderColumn: string;
-  public PageNumber: number;
-  public ItemID: string;
-
 }
-
-

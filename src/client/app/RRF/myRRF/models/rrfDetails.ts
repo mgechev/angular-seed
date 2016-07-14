@@ -29,6 +29,7 @@ export class RRFApproval {
 
 export class RRFDetails {
     public RRFID: string;
+    public RRFCode: string;
     public Practice: MasterData = new MasterData();
     public Technology: MasterData = new MasterData();
     public PositionTitle: string;

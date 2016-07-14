@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 //import { TransferOwnershipMeta} from '../../shared/model/myProfilesInfo';
+import { GridOperations} from '../../shared/model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
@@ -21,6 +22,16 @@ export class AllProfilesService {
             .finally(() => this._spinnerService.hide());
     }
 
+    getOpenProfiles(grdOptions : GridOperations) {
+        ///api/ProfileBank/GetOpenProfiles1?PerPageCount=3&ButtonClicked=-1&IDs=90,106,109
+        let url = Config.GetURL('/api/ProfileBank/GetOpenProfiles1?PerPageCount='+grdOptions.PerPageCount+
+                '&ButtonClicked='+grdOptions.ButtonClicked+'&IDs='+grdOptions.IDColl);
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
 
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {

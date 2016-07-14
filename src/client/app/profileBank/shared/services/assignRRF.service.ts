@@ -20,7 +20,7 @@ export class AssignRRFService {
     }
 
     assignRRFToCandidates(candidateAssignment: AssignRRFDetails) {
-        let url = Config.GetURL('api/RecruitmentCycle/AssignRRFToCandidates');
+        let url = Config.GetURL('/api/RecruitmentCycle/AssignRRFToCandidates');
         this._spinnerService.show();
         return this.authHttp.post(url, { CandidateAssigment: candidateAssignment })
             .map(this.extractData)

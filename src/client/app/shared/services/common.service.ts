@@ -5,15 +5,12 @@ export class CommonService {
     userPermissions: Array<string> = [];
 
     getLoggedInUserPermission() {
-        if (this.userPermissions.length > 0) {
-            return this.userPermissions;
-        } else {
-            window.location.assign('index.html');
-            return new Array<string>();
-        }
+        this.userPermissions = JSON.parse(sessionStorage.getItem('UserPermissions'));
+        return this.userPermissions;
     }
 
     setLoggedInUserPermission(permissions: Array<string>) {
-        this.userPermissions = permissions;
+        //this.userPermissions = permissions;
+        sessionStorage.setItem('UserPermissions',JSON.stringify(permissions));
     }
 }

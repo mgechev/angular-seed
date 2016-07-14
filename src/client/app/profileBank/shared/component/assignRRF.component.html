@@ -28,9 +28,9 @@
                             <div class="col-md-6">
                                 <select class="form-control" required (change)='onSelectRRF($event.target.value)'>
                                     <option></option>
-                                    <!-- <option *ngFor="let rrf of CandidateAssignment.AssignedRRF" [value]="rrf.RRFID">{{rrf.ID}} - {{rrf.PositionTitle}} - {{rrf.RaisedBy.Value}}</option> -->
-                                          <option>RRF 001 - Angular JS Developer - Kunal Adhikari </option>
-                                          <option>RRF 002 - Sr.Sharepoint Developer - Aradhana C</option>
+                                     <option *ngFor="let rrf of RRFList" [value]="rrf.RRFID">{{rrf.RRFID}} - {{rrf.PositionTitle}} - {{rrf.RaisedBy.Value}}</option> 
+                                          <!--<option>RRF 001 - Angular JS Developer - Kunal Adhikari </option>
+                                          <option>RRF 002 - Sr.Sharepoint Developer - Aradhana C</option>-->
                                 </select>
                             </div>
 
@@ -53,15 +53,15 @@
                                             <!--remove hard code data-->
                                             <td>
                                                 <div align="left">
-                                                    <!--{{selectedRRF.RaisedBy.Value }}
-                                                    <br> {{selectedRRF.CreatedDate}}-->
-                                                    Aradhana Chindhade
+                                                    {{selectedRRF.RaisedBy.Value }}
+                                                    <br> {{selectedRRF.CreatedDate}}
+                                                    <!--Aradhana Chindhade-->
                                                 </div>
                                             </td>
                                             <td>
                                                 <div align="left">
-                                                    Tech. : SharePoint
-                                                    <br>Position : Sr. SharePoint Developer
+                                                    Tech. : {{selectedRRF.Technology.Value }}
+                                                    <br>Position : {{selectedRRF.PositionTitle}}
                                                     <!--<br>Designation :
                                                     <br>Openings :-->
                                                     <!--{{selectedRRF.Practice.Value }}
@@ -73,22 +73,24 @@
                                             </td>
                                             <td>
                                                 <div align="left">
-                                                    Skills :
+                                                    Skills :<label *ngFor="let skill of selectedRRF.SkillsRequired"> 
+                                                               {{skill.Value}}
+                                                            </label>
                                                     <!--<label *ngFor="let skill of selectedRRF.SkillsRequired"> &#44;&nbsp;</label>-->
                                                     <!--{{skill.Value}}-->
                                                     <!--{{selectedRRF.SkillsRequired.Value }}-->
-                                                    <br>Date of Joining : 5/8/2016
-                                                    <br>Min.EXP : 4
-                                                    <!--<br>Man.EXP : {{rrf.MaxExp }} {{selectedRRF.MinExp }}
-                                                    {{selectedRRF.ExpDateOfJoining }}-->
+                                                    <br>Date of Joining : {{selectedRRF.ExpDateOfJoining }}
+                                                    <br>Min.EXP : {{selectedRRF.MinExp }}
+                                                    <br>Max.EXP : {{selectedRRF.MaxExp }}
+                                                    <!--{{selectedRRF.ExpDateOfJoining }}-->
                                                 </div>
                                             </td>
                                             <td>
-                                                <span class="mt-action-dot "></span> High
+                                                <span class="mt-action-dot "></span> {{selectedRRF.Priority.Value}}   
                                                 <!--{{selectedRRF.Priority.Value}}    {{getPriorityClass(selectedRRF.Priority.Id)}}-->
                                             </td>
                                             <td>
-                                                <span class="mt-action-dot "></span> Approved
+                                                <span class="mt-action-dot "></span> {{selectedRRF.Status.Value}}
                                                 <!--{{selectedRRF.Status.Value}}-->
                                             </td>
                                         </tr>

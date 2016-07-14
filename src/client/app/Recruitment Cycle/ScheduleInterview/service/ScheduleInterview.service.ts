@@ -5,39 +5,33 @@ import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
 //import { MasterData  } from '../../../shared/model/common.model';
+import { Interview } from '../../Shared/Model/Interview';
+
 
 @Injectable()
-export class RRFCandidateListService {
+export class ScheduleInterviewService {
     constructor(private authHttp: AuthHttp,
         private _spinnerService: SpinnerService) { }
-
-    //Get RRf Specific Candidates by RRFID - API will return list of Candidates
-    getCandidatesForRRF(RRFID: string) {
-        let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF?rrfID=' + RRFID);
+    //Post Method to ScheduleInterview
+    ScheduleInterviewForCandidate(ScheduleInterview: Interview) {
+        let url = Config.GetURL('/api/RecruitmentCycle/ScheduleCandidateInterview');
         this._spinnerService.show();
-        return this.authHttp.get(url)
-            .map(this.extractData)
-            .catch(this.handleError)
-            .finally(() => this._spinnerService.hide());
-    }
-    //This Method is used to get Interview rounds history by passing CandidateID and RRFID
-    getInterviewRoundHistorybyCandidateId(CandidateID: string, RRFID: string) {
-        //ASK backend team - IS API READY? Change URL
-        let url = Config.GetURL('/api/RecruitmentCycle/ViewCandidateInterviewSchedule?CandidateID=' + CandidateID + '&RRFID=' + RRFID);
-        this._spinnerService.show();
-        return this.authHttp.get(url)
+        return this.authHttp.post(url, { InterviewDetails: ScheduleInterview })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
 
-    getRRFByID(RRFID: string) {
-        let url = Config.GetURL('/api/RRF/GetRRFByID?RRFID='+RRFID);
+   // GetNominatedInterviewersByRRFID(RRFID: string,RoundID:string) {
+       GetNominatedInterviewersByRRFID(RRFID: string){
+     //   let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewersByRRF?RRFID='+ RRFID+'&RoundID='+RoundID);
+        let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewersByRRF?RRFID='+ RRFID);
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
+
     }
 
     private extractData(res: Response) {

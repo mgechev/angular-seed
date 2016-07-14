@@ -11,6 +11,8 @@ import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 //import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap';
 import {RRFCandidateListService} from '../services/RRFCandidatesList.service';
 import {RRFSpecificCandidateList} from '../model/RRFCandidateList';
+import {Interview} from '../../../Recruitment Cycle/Shared/Model/Interview';
+import { RRFDetails } from '../../myRRF/models/rrfDetails';
 
 @Component({
     moduleId: module.id,
@@ -23,6 +25,8 @@ import {RRFSpecificCandidateList} from '../model/RRFCandidateList';
 
 export class RRFCandidateListComponent implements OnActivate {
     RRFID: string;
+    selectedRRF: RRFDetails;
+    isNull: boolean = false;
     Candidate: string = 'Jhone DEF';
     doughnutChartLabels: string[] = [];
     doughnutChartData: number[] = [];
@@ -34,8 +38,8 @@ export class RRFCandidateListComponent implements OnActivate {
     };
     errorMessage: string;
     Candidates: Array<CandidateProfile>;
-    CanidatesHistory : RRFSpecificCandidateList[];
-
+    CanidatesHistory: RRFSpecificCandidateList[];
+    CandidateRoundHistory: Array<Interview>;
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
         private _rrfDashboardService: RRFDashboardService,
@@ -44,20 +48,26 @@ export class RRFCandidateListComponent implements OnActivate {
         public toastr: ToastsManager) {
         this.Candidates = new Array<CandidateProfile>();
         this.CanidatesHistory = new Array<RRFSpecificCandidateList>();
+        this.CandidateRoundHistory = new Array<Interview>();
     }
 
     routerOnActivate(segment: RouteSegment) {
         this.RRFID = segment.getParam('id');
+        console.log(this.RRFID.split('ID'));
         this.doughnutChartLabels = ['Technical 1', 'HR'];
         this.doughnutChartData = [50, 50];
         this.doughnutChartColors = [{ backgroundColor: ['#E9EF0B', '#32c5d2'] }];
-
+        this.selectedRRF = new RRFDetails();
         //TODO : Call API to get Candidates Specific to SelectedRRF
-        //  this.getCanidatesForRRF();
+        this.getCanidatesForRRF();
+        this.getRRFDetails();
 
     }
-    onScheduleInterviewClick() {
-        localStorage.setItem('RRFID', this.RRFID);
+
+    onScheduleInterviewClick(Candidate: any) {
+        //onScheduleInterviewClick(Candidate:any) 
+        sessionStorage.setItem('RRFID', this.RRFID);
+        // sessionStorage.setItem('Candidate', JSON.stringify(Candidate));
         this._router.navigate(['/App//Recruitment Cycle/Schedule']);
     }
 
@@ -72,23 +82,39 @@ export class RRFCandidateListComponent implements OnActivate {
     getCanidatesForRRF() {
         this._rrfCandidatesList.getCandidatesForRRF(this.RRFID)
             .subscribe(
-            results => {
-                this.Candidates = <any>results;
+            (results: any) => {
+                if (results.length !== undefined) {
+                    this.Candidates = results;
+                } else {
+                    //If No data present
+                    this.isNull = true;
+                }
+            },
+            error => this.errorMessage = <any>error);
+    }
+
+    getRRFDetails() {
+        //this.RRFID
+        this._rrfCandidatesList.getRRFByID(this.RRFID)
+            .subscribe(
+            (results: any) => {
+                this.selectedRRF = results;
             },
             error => this.errorMessage = <any>error);
     }
 
     getCandidatesRoundHistory(CandidateID: string) {
-        this._rrfCandidatesList.getInterviewRoundHistorybyCandidateId(CandidateID,this.RRFID)
+        //this._rrfCandidatesList.getInterviewRoundHistorybyCandidateId(CandidateID, this.RRFID)
+        this._rrfCandidatesList.getInterviewRoundHistorybyCandidateId('C6132737023', 'RRF6194789912')
             .subscribe(
             results => {
-              this.CanidatesHistory = <any>results;
+                this.CandidateRoundHistory = <any>results;
             },
             error => this.errorMessage = <any>error);
     }
 
     showPopOver() {
-        let row :any = $('#round');
+        let row: any = $('#round');
         row.popover({
             placement: 'bottom',
             toggle: 'popover',
@@ -97,5 +123,34 @@ export class RRFCandidateListComponent implements OnActivate {
             trigger: 'hover',
             content: this.Candidate
         });
+    }
+
+    setValueToChart() {
+        this.doughnutChartLabels = [];
+        this.doughnutChartData = [];
+        var chartColor: any[] = [];
+        // doughnutChartColors: any[] = [{ backgroundColor: ["#E9EF0B", "#32c5d2" , "#e7505a" , "#c2cad8" , "#41ce29"] }];
+        for (var index = 0; index < this.CandidateRoundHistory.length; index++) {
+            this.doughnutChartLabels.push(this.CandidateRoundHistory[index].Status);
+            // this.doughnutChartData.push(this.CandidateRoundHistory[index].);
+            // chartColor.push(this.getChartColor(this.rrfStatusCount[index].Status.Id));
+        }
+        this.doughnutChartColors[0].backgroundColor = chartColor;
+    }
+    getChartColor(statusID: number): string {
+        switch (statusID) {
+            case 1:
+                return '#E9EF0B';
+            case 2:
+                return '#32c5d2';
+            case 3:
+                return '#e7505a';
+            case 4:
+                return '#c2cad8';
+            case 5:
+                return '#41ce29';
+            default:
+                return '';
+        }
     }
 }

@@ -29,14 +29,21 @@ export class ProfileStatusFilterPipe implements PipeTransform {
     name: 'nameFilter'
 })
 export class ProfileFilterPipe implements PipeTransform {
+    tmp:any[] = new Array<any>();
     transform(value: any, fields: any[], searchString: string) {
         if (!searchString || searchString === '') {
             return value;
         }
-        return value.filter((item: any) =>
+       return value.filter((item: any) =>
             fields.some((field) =>
-                item[field] ? (item[field]).toLowerCase().includes(searchString.toLowerCase()) : value
-         ));
+                (item[field] !== '') ? (item[field]).toLowerCase().includes(searchString.toLowerCase()) : value
+            ));
+        // for (var i = 0; i < arr.length; ++i) {
+        //     if (arr[i] !== null && arr[i] !== undefined && arr[i] !== '') {
+        //         this.tmp.push(arr[i]);
+        //     }
+        // }
+        // return this.tmp;
     }
 }
 

@@ -36,12 +36,12 @@
                                             <button class="btn btn-default btnLink" (click)='openMailWindow()' [disabled]='!selectedRowCount'>
                                                 <i class="fa fa-envelope-o"></i>   Send Mails </button>
                                         </li>
-                                        <!--<li class="divider"> </li>
+                                        <li class="divider"> </li>
                                         <li>
                                             <button class="btn btn-default btnLink" [disabled]='!selectedRowCount' (click)='AssignRRFClick()'>
                                                 <i class="fa fa-check-square-o"></i> Assign RRF
                                             </button>
-                                        </li>-->
+                                        </li>
                                     </ul>
 
                                 </div>
@@ -320,6 +320,12 @@
                                                     <li>
                                                         <a (click)='SaveCandidateID(myprofile.CandidateID)'>
                                                             <i class="icon-flag"></i> Update Status
+                                                        </a>
+                                                    </li>
+                                                    <li class="divider"> </li>
+                                                    <li>
+                                                        <a (click)='onClickScheduleInterview(myprofile.CandidateID)'>
+                                                            <i class="fa fa-calendar-check-o"></i> Schedule Interview
                                                         </a>
                                                     </li>
                                                     <li class="divider"> </li>

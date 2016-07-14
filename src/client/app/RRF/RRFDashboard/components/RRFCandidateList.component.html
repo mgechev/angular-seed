@@ -37,7 +37,6 @@
                                             <td> <b>Requirments </b></td>
                                             <td> <b>Priority</b></td>
                                             <td> <b>Status </b></td>
-                                            <td> <b>Open for <br> no. of days</b></td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -45,15 +44,15 @@
                                             <!--remove hard code data-->
                                             <td>
                                                 <div align="left">
-                                                    <!--{{selectedRRF.RaisedBy.Value }}
-                                                    <br> {{selectedRRF.CreatedDate}}-->
-                                                    Aradhana Chindhade
+                                                    {{selectedRRF.RaisedBy.Value }}
+                                                    <br> {{selectedRRF.CreatedDate}}
+                                                    <!--Aradhana Chindhade-->
                                                 </div>
                                             </td>
                                             <td>
                                                 <div align="left">
-                                                    Tech. : SharePoint
-                                                    <br>Position : Sr. SharePoint Developer
+                                                    Tech. : {{selectedRRF.Technology.Value }}
+                                                    <br>Position : {{selectedRRF.PositionTitle}}
                                                     <!--<br>Designation :
                                                     <br>Openings :-->
                                                     <!--{{selectedRRF.Practice.Value }}
@@ -65,30 +64,26 @@
                                             </td>
                                             <td>
                                                 <div align="left">
-                                                    Skills :
+                                                    Skills :<label *ngFor="let skill of selectedRRF.SkillsRequired"> 
+                                                               {{skill.Value}}
+                                                            </label>
                                                     <!--<label *ngFor="let skill of selectedRRF.SkillsRequired"> &#44;&nbsp;</label>-->
                                                     <!--{{skill.Value}}-->
                                                     <!--{{selectedRRF.SkillsRequired.Value }}-->
-                                                    <br>Date of Joining : 5/8/2016
-                                                    <br>Min.EXP : 4
-                                                    <!--<br>Man.EXP : {{rrf.MaxExp }} {{selectedRRF.MinExp }}
-                                                    {{selectedRRF.ExpDateOfJoining }}-->
+                                                    <br>Date of Joining : {{selectedRRF.ExpDateOfJoining }}
+                                                    <br>Min.EXP : {{selectedRRF.MinExp }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    Max.EXP : {{selectedRRF.MaxExp }}
+                                                    <!--{{selectedRRF.ExpDateOfJoining }}-->
                                                 </div>
                                             </td>
                                             <td>
-                                                <span class="mt-action-dot "></span> High
+                                                <span class="mt-action-dot "></span> {{selectedRRF.Priority.Value}}   
                                                 <!--{{selectedRRF.Priority.Value}}    {{getPriorityClass(selectedRRF.Priority.Id)}}-->
                                             </td>
                                             <td>
-                                                <span class="mt-action-dot "></span> Approved
+                                                <span class="mt-action-dot "></span> {{selectedRRF.Status.Value}}
                                                 <!--{{selectedRRF.Status.Value}}-->
                                             </td>
-                                            <td>
-                                                <div align="left">
-                                                    <!--{{selectedRRF.OpenForNumberOfDays}}-->
-                                                </div>
-                                            </td>
-
                                         </tr>
                                     </tbody>
                                 </table>
@@ -102,7 +97,7 @@
                                 <!-- Candidate List -->
                                 <div class="col-md-6">
                                     <div class="table-scrollable list">
-                                        <table class="table table-hover">
+                                        <table class="table table-hover" >
                                             <thead>
                                                 <tr>
                                                     <th> # </th>
@@ -112,36 +107,16 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <!--<tr *ngFor="let candidate of Candidates; let index = index">
+                                                <tr *ngFor="let candidate of Candidates; let index = index">
                                                     <td> {{index+1}} </td>
                                                     <td> {{candidate.CandidateID}}</td>
                                                     <td> <a (click)='getCandidatesRoundHistory(candidate.CandidateID)'> {{candidate.Candidate}}</a></td>
                                                     <td><a class="btn blue btn-outline btn-circle btn-sm active" 
-                                                           (click)='onScheduleInterviewClick()'> Schedule </a></td>
-                                                </tr>-->
-                                                <tr>
-                                                    <td> 1 </td>
-                                                    <td> C001</td>
-                                                    <td> <a>Jhone DEF </a> </td>
-                                                    <td><a class="btn blue btn-outline btn-circle btn-sm active"> Schedule  </a></td>
+                                                           (click)='onScheduleInterviewClick(candidate)'> Schedule </a></td>
                                                 </tr>
-                                                <tr>
-                                                    <td> 2 </td>
-                                                    <td> C002 </td>
-                                                    <td> <a>Thomas </a> </td>
-                                                    <td><a class="btn blue btn-outline btn-circle btn-sm active" (click)='onScheduleInterviewClick()'> Schedule </a></td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td> 1 </td>
-                                                    <td> C001</td>
-                                                    <td> <a>Jhone DEF </a> </td>
-                                                    <td><a class="btn blue btn-outline btn-circle btn-sm active" (click)='onScheduleInterviewClick()'
-                                                    > Schedule  </a></td>
-
-                                                </tr>
-                                            </tbody>
+                                             </tbody>
                                         </table>
+                                        <span *ngIf='isNull'>No Candidates Found</span>
                                     </div>
                                 </div>
                                 <!-- Candidate List ENDS-->
@@ -160,14 +135,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                              <!--<tr id="round" *ngFor="let candidateHistory of CanidatesHistory; let index = index" (mouseover)='showPopOver()'>
+                                              <tr id="round" *ngFor="let candidateHistory of CandidateRoundHistory; let index = index" (mouseover)='showPopOver()'>
                                                     <td> {{index+1}} </td>
                                                     <td> {{candidateHistory.Round.Value}}</td>
-                                                    <td> {{candidateHistory.Interviewer.Value}}</a></td>
+                                                    <td> <span *ngFor="let interviewer of candidateHistory.InterviewerAvailability" >{{interviewer.Interviewer.Value}} ,</span></td>
                                                     <td> {{candidateHistory.InterviewDate}}</td>
-                                                    <td> {{candidateHistory.Status.Value}}</td>
-                                                </tr>-->
-                                            <tr id="round" (mouseover)='showPopOver()'>
+                                                    <td> {{candidateHistory.Status}}</td>
+                                                </tr>
+                                            <!--<tr id="round" (mouseover)='showPopOver()'>
                                                 <td> 1 </td>
                                                 <td> Technical 1</td>
                                                 <td> ABCD </td>
@@ -181,6 +156,7 @@
                                                 <td> 4/7/2016 </td>
                                                 <td> Pending </td>
                                             </tr>
+                                        -->
                                         </tbody>
                                     </table>
                                     <hr/>

@@ -375,11 +375,42 @@ export class MyProfilesListComponent implements OnActivate {
         }
         if (chkStatus) {
             this.toastr.warning('Only Open / Rejected status candidates can be Assigned to RRF');
+            this.selectedCandidates = new Array<CandidateProfile>();
         } else {
             sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));
             sessionStorage.setItem('returnPath', '/App/ProfileBank/MyProfiles');
             this._router.navigate(['/App/ProfileBank/MyProfiles/Assign']);
         }
+    }
+
+    onClickScheduleInterview(CandidateID: string) {
+        var index = _.findIndex(this.myProfilesList, { CandidateID: CandidateID });
+        let chkStatus = false;
+        let selectedCandidate: CandidateProfile = this.myProfilesList[index];
+
+        if (selectedCandidate.isRRFAssigned) {
+            this._router.navigate(['/App/Recruitment Cycle/Schedule']);
+        } else {
+            if (selectedCandidate.Status.Value.toLowerCase() === 'open' ||
+                selectedCandidate.Status.Value.toLowerCase() === 'rejected') {
+                this.Candidate = new Candidate();
+                this.Candidate.CandidateID = this.myProfilesList[index].CandidateID;
+                this.Candidate.Candidate = this.myProfilesList[index].Candidate;
+                this.selectedCandidates.push(this.Candidate);
+            } else {
+                chkStatus = true;
+            }
+            if (chkStatus) {
+                this.toastr.warning('Candidate must be assigned to RRF. Only Open / Rejected status candidates can be Assigned to RRF');
+                this.selectedCandidates = new Array<CandidateProfile>();
+            } else {
+                sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));
+                sessionStorage.setItem('returnPath', '/App/Recruitment Cycle/Schedule');
+                this._router.navigate(['/App/ProfileBank/MyProfiles/Assign']);
+            }
+
+        }
+
     }
 }
 

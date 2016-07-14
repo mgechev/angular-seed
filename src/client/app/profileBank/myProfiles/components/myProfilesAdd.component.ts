@@ -13,7 +13,6 @@ import { ProfileBankService} from  '../../shared/services/profileBank.service';
 @Component({
     moduleId: module.id,
     selector: 'rrf-myprofiles-add',
-    
     templateUrl: '../../shared/views/profileBankAdd.component.html',
     directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
     styleUrls: ['myProfiles.component.css']
@@ -75,7 +74,6 @@ export class MyProfilesAddComponent implements OnActivate {
         this.qualification = new Qualification();
         this.qualification.Qualification = new MasterData();
         this.qualification.Grade = new MasterData();
-
     }
 
     getCandidateProfileById(profileId: string) {
@@ -106,7 +104,6 @@ export class MyProfilesAddComponent implements OnActivate {
             .subscribe(
             results => {
                 this.states = results;
-
             },
             error => this.errorMessage = <any>error);
     }

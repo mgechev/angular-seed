@@ -58,7 +58,7 @@
                             </div>
 
                             <div id="updateRow" *ngIf='isCollapsed'>
-                                <span class ="header" >Update Status</span>
+                                <span class="header">Update Status</span>
                                 <hr style="margin:0px 0px !important" />
                                 <form role="form" (submit)="onUpdateStauts()">
                                     <div class="row" style="margin-top: 10px">
@@ -114,8 +114,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
-                                        <tr class="gradeX odd" *ngFor="let profile of allProfilesList ">
+<!--CandidateProfiles   allProfilesList.Profiles-->
+                                        <tr class="gradeX odd" *ngFor="let profile of CandidateProfiles.Profiles">
                                             <td>
                                                 <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                                     <input type="checkbox" class="checkboxes" value="1" [id]='profile.CandidateID' [(ngModel)]='profile.IsChecked' (change)="onStateChange($event)"/>
@@ -151,7 +151,7 @@
                                                 <span class="mt-action-dot color{{profile.Status.Id}}"> </span>{{profile.Status.Value}}
                                             </td>
                                             <td class="text-center">
-                                                <a (click)='getResume(profile.CandidateID)' ><i class="fa fa-download" aria-hidden="true"></i>{{profile.Resume_ID}}</a>
+                                                <a (click)='getResume(profile.CandidateID)'><i class="fa fa-download" aria-hidden="true"></i>{{profile.Resume_ID}}</a>
                                             </td>
                                             <td style="width:8%">
                                                 <div class="btn-group">
@@ -184,16 +184,16 @@
                                 </table>
                             </div>
                             <div class="row">
-                                <div class="col-md-5 col-sm-5">
-                                    <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite"></div>
+                                <div class="col-md-5">
                                 </div>
-                                <div class="col-md-7 col-sm-7">
-                                    <div class="dataTables_paginate paging_bootstrap_full_number" id="sample_1_paginate">
-                                    </div>
+                                <div class="col-md-4 ">
+                                    <button type="button" class="btn btn-default" [disabled]="!CandidateProfiles.GrdOperations.PreviousButton" (click)="OnPaginationClick(-1)">
+                                        &laquo; Prev</button> &nbsp;&nbsp;
+                                    <button type="button" class="btn btn-default" [disabled]="!CandidateProfiles.GrdOperations.NextButton" (click)="OnPaginationClick(1)">
+                                        Next &raquo;</button>
                                 </div>
                             </div>
                             <div>
-                               
                                 <!--<rms-grid [meta]="meta"></rms-grid>-->
                             </div>
                         </div>

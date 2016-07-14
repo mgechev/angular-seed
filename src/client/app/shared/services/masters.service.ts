@@ -141,13 +141,13 @@ export class MastersService {
     }
 
     GetRoundsByInterviewType(TypeID: number) {
-        let url = Config.GetURL('api/Masters/GetRoundsByInterviewType?TypeID=' + TypeID);
+        let url = Config.GetURL('/api/Masters/GetRoundsByInterviewType?TypeID='+TypeID);
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);
     }
     GetInterviewModes() {
-        let url = Config.GetURL(' /api/Masters/GetInterviewMode');
+        let url = Config.GetURL('/api/Masters/GetInterviewMode');
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);
