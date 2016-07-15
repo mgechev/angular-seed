@@ -112,7 +112,7 @@ export class RRFApprovalListComponent implements OnActivate {
             //this.rrfApprovalList 
             this.selectedRowCount = 0;
         }
-        console.log(_selectedRrfDetailsList);
+        //console.log(_selectedRrfDetailsList);
         //:: Because required bulk approval service call
         this.ActionOnRaisedRRFBulk(_selectedRrfDetailsList);
         this.comment = '';

@@ -137,7 +137,7 @@
                         </div>
                         <!-- END SHOW AND SEARCH -->
 
-                        <div class="row " *ngIf='closeRRFID != 0'>
+                        <div class="row " *ngIf="closeRRFID.Id != 0">
                             <div class="col-lg-9 ">
                                 <textarea class="form-control " id="txtCloseComment " rows="1
                                             " [(ngModel)]='closeComment' placeholder="close Comment " style="resize:vertical "
@@ -174,7 +174,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="odd gradeX " *ngFor="let rrf of rrfList | RRFIDPipe : closeRRFID ">
+                                    <tr class="odd gradeX " *ngFor="let rrf of rrfList | RRFIDPipe : closeRRFID.Value">
                                         <!--remove hard code data-->
                                         <td>
                                             <div class="wraptext" style="word-wrap: break-word; " align="left ">

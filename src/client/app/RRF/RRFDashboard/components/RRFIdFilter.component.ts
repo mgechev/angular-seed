@@ -4,7 +4,7 @@ import { RRFDetails} from '../../myRRF/models/rrfDetails';
 @Pipe({name: 'RRFIDPipe'})
 export class RRFIDPipe implements PipeTransform {
   transform(value: RRFDetails[], rrfID: string): RRFDetails[] {
- return rrfID ? value.filter(rrfData=> rrfData.RRFID === rrfID ) : value;
+ return rrfID ? value.filter(rrfData=> rrfData.RRFID.Value  === rrfID ) : value;
   //return rrfID ? value.filter(rrfData=> rrfData.RRFID.toLocaleLowerCase().indexOf(rrfID) != -1) : value;
   }
 }

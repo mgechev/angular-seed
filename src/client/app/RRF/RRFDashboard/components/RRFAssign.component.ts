@@ -23,7 +23,7 @@ import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model'
 export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterContentInit {
     selectedRRF: RRFDetails = new RRFDetails();
     errorMessage: string;
-    RRFId: string;
+    RRFId: MasterData = new MasterData();
     recruiterDtls: MasterData[];
     AssignedComments: string = '';
     unAssignRowVisible: boolean = false;
@@ -39,7 +39,12 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
     }
 
     routerOnActivate(segment: RouteSegment) {
-        this.RRFId = segment.getParam('id');
+       var params = segment.getParam('id');
+            if (params) {
+                this.RRFId.Id = parseInt(params.split('ID')[1]);
+                this.RRFId.Value = params.split('ID')[0];
+            }
+        //this.RRFId = segment.getParam('id');
         this.GetRecruiter();
         this.getRRFDetails(this.RRFId);
         this.UnAssignRec.AssignedTo = new MasterData();
@@ -54,8 +59,8 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
         (<any>$('#cmbAssignTo')).select2();
     }
 
-    getRRFDetails(rrfID: string): void {
-        this._myRRFService.getRRFDetails(rrfID)
+    getRRFDetails(rrfID: MasterData): void {
+        this._myRRFService.getRRFDetails(rrfID.Value)
             .subscribe(
             results => {
                 this.selectedRRF = <any>results;

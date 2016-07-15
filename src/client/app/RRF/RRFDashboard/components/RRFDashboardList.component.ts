@@ -31,7 +31,7 @@ export class RRFDashboardListComponent implements OnActivate {
     currentView: string = 'myRRF';
     closeComment: string = '';
     closeRRF: boolean = false;
-    closeRRFID: number = 0;
+    closeRRFID: MasterData = new MasterData();
     isChartVisible: boolean = false;
     logedInUser: MasterData = new MasterData();
     recruiterList: MasterData[] = [];
@@ -62,6 +62,7 @@ export class RRFDashboardListComponent implements OnActivate {
         this.getLoggedInUser();
         this.getMyRRFData();
         this.GetRecruiter();
+        this.setDefaultcloseRRFID();
     }
 
     getMyRRFData() {
@@ -76,14 +77,14 @@ export class RRFDashboardListComponent implements OnActivate {
 
     getAssignedRRFData() {
         this.GetRRFAssignedToRecruiter();
-       // this.getStatuswiseAssignedRRFCount();
-         this.isChartVisible =false;
+        // this.getStatuswiseAssignedRRFCount();
+        this.isChartVisible = false;
     }
 
     getUnAssignedRRFData() {
         //this.getStatuswiseUnAssignedRRFCount();
         this.GetAllUnAssignedRRF();
-          this.isChartVisible =false;
+        this.isChartVisible = false;
     }
 
     chartClicked(e: any): void {
@@ -193,8 +194,8 @@ export class RRFDashboardListComponent implements OnActivate {
         }
     }
 
-    getRRFDetails(rrfID: string) {
-        this._myRRFService.getRRFDetails(rrfID)
+    getRRFDetails(rrfID: MasterData) {
+        this._myRRFService.getRRFDetails(rrfID.Value)
             .subscribe(
             (results: RRFDetails) => {
                 this.selectedRRF = results;
@@ -202,7 +203,7 @@ export class RRFDashboardListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    showRRFDetails(rrfId: string) {
+    showRRFDetails(rrfId: MasterData) {
         this.getRRFDetails(rrfId);
         //console.log(this.selectedRRF);
         this.isListVisible = false;
@@ -216,7 +217,7 @@ export class RRFDashboardListComponent implements OnActivate {
             this.getMyRRFData();
         } else if (this.currentView === 'unAssignRRF') {
             this.getUnAssignedRRFData();
-          
+
         } else {
             // this.setDefaultValueToRecrCmb();
             this.getAssignedRRFData();
@@ -244,7 +245,7 @@ export class RRFDashboardListComponent implements OnActivate {
         console.log(rrfID);
     }
 
-    onCloseRRFClick(rrfID: number) {
+    onCloseRRFClick(rrfID: MasterData) {
         this.closeRRF = true;
         this.closeRRFID = rrfID;
 
@@ -260,11 +261,12 @@ export class RRFDashboardListComponent implements OnActivate {
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
-                 this.showListOfRRF();
+                this.showListOfRRF();
             },
             error => this.errorMessage = <any>error);
 
-        this.closeRRFID = 0;
+        // this.closeRRFID = 0;
+        this.setDefaultcloseRRFID();
         this.closeComment = '';
 
         // if (this.currentView = 'allRRF') {
@@ -272,11 +274,17 @@ export class RRFDashboardListComponent implements OnActivate {
         // } else {
         //     this.getMyRRFData();
         // }
-       
+
+    }
+
+    setDefaultcloseRRFID() {
+        this.closeRRFID.Id = 0;
+        this.closeRRFID.Value = '';
     }
 
     onCancelCloseRRF() {
-        this.closeRRFID = 0;
+        //this.closeRRFID = 0;
+        this.setDefaultcloseRRFID();
         this.closeComment = '';
     }
 
@@ -324,10 +332,10 @@ export class RRFDashboardListComponent implements OnActivate {
             return false;
         }
     }
-    
-      allowCloseRRF(statusId: number) {
+
+    allowCloseRRF(statusId: number) {
         try {
-            if (statusId === RRFStatus.Open  || statusId === RRFStatus.Assigned) {
+            if (statusId === RRFStatus.Open || statusId === RRFStatus.Assigned) {
                 return false;
             } else {
                 return true;
@@ -338,11 +346,11 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
 
-    redirectToAssignRRF(rrfID: string) {
-        this._router.navigate(['/App/RRF/RRFDashboard/Assign/' + rrfID]);
+    redirectToAssignRRF(rrfID: MasterData) {
+        this._router.navigate(['/App/RRF/RRFDashboard/Assign/' + rrfID.Value + 'ID' + rrfID.Id]);
     }
-    redirectToEditRRF(rrfID: string) {
-        this._router.navigate(['/App/RRF/MyRRF/Edit/' + rrfID]);
+    redirectToEditRRF(rrfID: MasterData) {
+        this._router.navigate(['/App/RRF/MyRRF/Edit/' + rrfID.Value + 'ID' + rrfID.Id]);
     }
 
     onViewCandidateClick(rrfID: string) {

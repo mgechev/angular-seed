@@ -38,8 +38,10 @@ export class MyRRFAddComponent implements OnActivate {
     priorities: MasterData[];
     updatePanel: boolean = false;
     editPanelData: Panel = new Panel();
-    RRFId: string;
+    RRFId: MasterData = new MasterData();
     ExpDateOfJoining: any;
+    params: string;
+
 
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
@@ -71,7 +73,12 @@ export class MyRRFAddComponent implements OnActivate {
 
 
         if (segment.getParam('id') !== undefined) {
-            this.RRFId = segment.getParam('id');
+            this.params = segment.getParam('id');
+            if (this.params) {
+                this.RRFId.Id = parseInt(this.params.split('ID')[1]);
+                this.RRFId.Value = this.params.split('ID')[0];
+            }
+            //this.RRFId = segment.getParam('id');
             this.isNewRRF = false;
             this.getRRFByID(this.RRFId);
         }
@@ -271,8 +278,8 @@ export class MyRRFAddComponent implements OnActivate {
 
     }
 
-    getRRFByID(rrfId: string) {
-        this._myRRFService.getRRFByID(rrfId)
+    getRRFByID(rrfId: MasterData) {
+        this._myRRFService.getRRFByID(rrfId.Value)
             .subscribe(
             (results: RRFDetails) => {
                 this.newRRF = results;

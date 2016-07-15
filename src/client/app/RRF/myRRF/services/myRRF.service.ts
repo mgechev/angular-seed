@@ -5,6 +5,7 @@ import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { RRFDetails } from '../models/rrfDetails';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
+import { MasterData } from '../../../shared/model/common.model';
 
 @Injectable()
 
