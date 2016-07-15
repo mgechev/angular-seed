@@ -15,7 +15,7 @@ export class CalendarDataService {
     constructor(private authHttp: AuthHttp,
         private _spinnerService: SpinnerService) {
         this.InterviewCalendarDetails.Events = [
-             {
+            {
                 "id": 40,
                 "resourceId": 1,
                 "title": "EBS - Mahesh Nagawade",
@@ -33,14 +33,14 @@ export class CalendarDataService {
                 "id": 42,
                 "resourceId": 1,
                 "title": "ebs - Shrikant Mane",
-                "start": "2016-07-13T11:00:00",
-                "end": "2016-07-13T14:00:00"
+                "start": "2016-07-13T12:00:00",
+                "end": "2016-07-13T15:00:00"
             },
             {
                 "id": 43,
                 "resourceId": 2,
                 "title": "ebs - Shrikant Mane",
-                "start": "2016-07-12T13:00:00",
+                "start": "2016-07-12T12:00:00",
                 "end": "2016-07-12T14:00:00"
             }
             // {
@@ -59,8 +59,16 @@ export class CalendarDataService {
             // }
         ];
         this.InterviewCalendarDetails.Resources = [
-            { id: 1, title: 'Available', eventColor: 'Green' },
-            { id: 2, title: 'Booked', eventColor: 'Red' }
+            {
+                "id": 1,
+                "title": "Available",
+                "eventColor": "Green"
+            },
+            {
+                "id": 2,
+                "title": "Booked",
+                "eventColor": "Red"
+            }
         ];
     }
     getDropDown() {
@@ -92,7 +100,7 @@ export class CalendarDataService {
         };
     }
 
-    getResources() {
+    getResources1() {
         return [{ id: 1, title: 'InterViewer A', eventColor: this.generateHexColors() },
             { id: 2, title: 'InterViewer B', eventColor: this.generateHexColors() },
             { id: 3, title: 'InterViewer C', eventColor: this.generateHexColors() }];
@@ -175,13 +183,23 @@ export class CalendarDataService {
     //Get All InterViewer's All Events Available And Booked Slots 
     GetInterviewerCalendarDetail(InterViewers: Array<MasterData>) {
         //TODO : Change URL
-        /*  let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewerByIdCalendar');
-          this._spinnerService.show();
-          return this.authHttp.post(url, { InterViewers })
-              .map(this.extractData)
-              .catch(this.handleError)
-              .finally(() => this._spinnerService.hide());*/
+        //  let url = Config.GetURL('api/RecruitmentCycle/CalendarViewGetInterviewCalendarByMultipleInterviewers');
+        //   this._spinnerService.show();
+        //   return this.authHttp.post(url, { InterViewers })
+        //       .map(this.extractData)
+        //       .catch(this.handleError)
+        //       .finally(() => this._spinnerService.hide());
         return this.InterviewCalendarDetails;
+    }
+
+    GetResources() {
+        //  let url = Config.GetURL('/api/RecruitmentCycle/CalendarViewGetResources');
+        // this._spinnerService.show();
+        // return this.authHttp.get(url)
+        //     .map(this.extractData)
+        //     .catch(this.handleError)
+        //     .finally(() => this._spinnerService.hide());
+        return this.InterviewCalendarDetails.Resources;
     }
 
     private extractData(res: Response) {

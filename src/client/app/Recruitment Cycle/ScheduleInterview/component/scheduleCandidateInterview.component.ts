@@ -7,7 +7,7 @@ import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import {CalendarDataService} from '../service/calendarDataService';
 import {CalendarDetails, Event, Resource} from '../model/CalendarDetails';
 import { MastersService } from '../../../shared/services/masters.service';
-import { Interview } from '../../Shared/Model/Interview';
+import { InterviewAvailability, Interview } from '../../Shared/Model/Interview';
 import { ScheduleInterviewService} from '../service/ScheduleInterview.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 //import { APIResult } from  '../../../shared/constantValue/index';
@@ -91,10 +91,8 @@ export class ScheduleCandidateInterviewComponent implements OnInit, OnActivate {
         this.getInterviewTypes();
         this.getInterviewModes();
         this.getOtherInterviewers();
-        //Get Events to show on Calendar
-
-        this.InterviewerCalendarDetails.Resources =
-            this._calendarDataService.GetInterviewerCalendarDetail(this.SelectedInterviewers).Resources;
+        //Get Resources for Calendar
+        this.getResources();
 
         //Pass Headers
         this.header = {
@@ -120,6 +118,17 @@ export class ScheduleCandidateInterviewComponent implements OnInit, OnActivate {
         // this.ScheduleInterView.CandidateID = candidate.CandidateID;
         // this.ScheduleInterView.CandidateInformation.Candidate = candidate.Candidate;
         // this.ChangeEvent();
+    }
+
+    getResources() {
+        // this._calendarDataService.GetResources()
+        //     .subscribe(
+        //     (results:any) => {
+        //         if(results!== null)
+        //             this.InterviewerCalendarDetails.Resources = <any>results;
+        //     },
+        //     error => this.errorMessage = <any>error);
+        this.InterviewerCalendarDetails.Resources = this._calendarDataService.GetResources();
     }
 
     handleDayClick(event: any) {
@@ -214,12 +223,21 @@ export class ScheduleCandidateInterviewComponent implements OnInit, OnActivate {
 
     //Call Service to Save ScheduleInterview
     onScheduleInterviewClick() {
-
-        if (this.checkAvailability())
+        let cmb: any = $('#cmbInterviewers');
+        let value = cmb.val();
+        if (value!== null && this.ScheduleInterView.InterviewerAvailability.length < value.length) {
+            this.getOtherSelectedInterviewers(value);
+        }
+        //Get Events Data if "Show Availability"
+        if (this.InterviewerCalendarDetails.Events.length === 0)
+            this.ShowAvailabilityOnCalendar();
+        if (this.checkAvailability()) {
             this.toastr.success('TimeSlot Valid');
-        else
+        } else {
             this.toastr.error('TimeSlot InValid');
+        }
 
+        console.log(JSON.stringify(this.ScheduleInterView));
 
         // this._ScheduleInterviewService.ScheduleInterviewForCandidate(this.ScheduleInterView)
         //     .subscribe(
@@ -236,30 +254,36 @@ export class ScheduleCandidateInterviewComponent implements OnInit, OnActivate {
         //         this.toastr.error(<any>error);
         //     });
     }
-
+    getOtherSelectedInterviewers(InterviewerIds: Array<string>) {
+        this.ScheduleInterView.InterviewerAvailability = new Array<InterviewAvailability>();
+        for (var index = 0; index < this.OtherInterviewers.length; index++) {
+            let i = _.findIndex(this.OtherInterviewers, { Id: parseInt(InterviewerIds[index]) });
+            //Push Interviewers In InterviewerAvailability Obj
+            if (i >= 0) {
+                var interviewAvailability: InterviewAvailability = new InterviewAvailability();
+                interviewAvailability.Interviewer = this.OtherInterviewers[i];
+                this.ScheduleInterView.InterviewerAvailability.push(interviewAvailability);
+                if (this.ScheduleInterView.InterviewerAvailability.length === InterviewerIds.length)
+                    break;
+            }
+        }
+        return this.SelectedInterviewers;
+    }
     getNominatedInterviewers() {
         //(roundId: string)
         // this._ScheduleInterviewService.GetNominatedInterviewersByRRFID(this.ScheduleInterView.RRFID.Value,roundId)
-        this._ScheduleInterviewService.GetNominatedInterviewersByRRFID(this.ScheduleInterView.RRFID.Value)
-            .subscribe(
-            (results: any) => {
-                this.NominatedInterviewers = results[0].Interviewers;
-                this.setInterviewer(results[0].Interviewers);
-                this.removeDuplicateInterviewers(results[0].Interviewers);
-            },
-            error => this.errorMessage = <any>error);
+        // this._ScheduleInterviewService.GetNominatedInterviewersByRRFID(this.ScheduleInterView.RRFID.Value)
+        //     .subscribe(
+        //     (results: any) => {
+        //         this.NominatedInterviewers = results[0].Interviewers;
+        //         this.setInterviewer(results[0].Interviewers);
+        //         this.removeDuplicateInterviewers(results[0].Interviewers);
+        //     },
+        //     error => this.errorMessage = <any>error);
+        this.NominatedInterviewers = this._ScheduleInterviewService.GetNominatedInterviewersByRRFID(this.ScheduleInterView.RRFID.Value);
     }
 
     removeDuplicateInterviewers(NominatedInterviewers: Array<MasterData>) {
-
-        // var Array1 = ['1', '2', '3', '4', '5'];
-        // var Array2 = ['4', '5'];
-        // for (var i = 0; i < Array2.length; i++) {
-        //     let Index = Array1.indexOf(Array2[i]);
-        //     if (Index > -1) {
-        //         Array1.splice(Index, 1);
-        //     }
-        // }
         for (var i = 0; i < NominatedInterviewers.length; i++) {
             let Index = this.OtherInterviewers.indexOf(NominatedInterviewers[i]);
             if (Index > -1) {
@@ -281,17 +305,18 @@ export class ScheduleCandidateInterviewComponent implements OnInit, OnActivate {
         if (value !== undefined && value !== null) {
             //get SelectedInterviewers
             this.SelectedInterviewers = this.getSelectedInterviewers(value);
+
             //Call API to get SelectedInterviewers Calendar Details.
-            /* this._calendarDataService.GetInterviewerCalendarDetail(this.SelectedInterviewers)
-             .subscribe(
-             results => {
-                 this.InterviewerCalendarDetails = <any>results;
-             },
-             error => this.errorMessage = <any>error);*/
+            //  this._calendarDataService.GetInterviewerCalendarDetail(this.SelectedInterviewers)
+            //  .subscribe(
+            //  (results :any) => {
+            //      this.InterviewerCalendarDetails = <any>results;
+            //  },
+            //  (error:any) => {this.errorMessage = <any>error});
 
             this.InterviewerCalendarDetails.Events =
                 this._calendarDataService.GetInterviewerCalendarDetail(this.SelectedInterviewers).Events;
-            this.resources = this._calendarDataService.getResources();
+            this.resources = this._calendarDataService.GetResources();
             console.log(this.SelectedInterviewers);
         }
     }
@@ -300,15 +325,25 @@ export class ScheduleCandidateInterviewComponent implements OnInit, OnActivate {
         this.SelectedInterviewers = new Array<MasterData>();
         for (var index = 0; index < this.NominatedInterviewers.length; index++) {
             let i = _.findIndex(this.NominatedInterviewers, { Id: parseInt(InterviewerIds[index]) });
-            this.SelectedInterviewers.push(this.NominatedInterviewers[i]);
+            if (i >= 0) {
+                this.SelectedInterviewers.push(this.NominatedInterviewers[i]);
+                //Push Interviewers In InterviewerAvailability Obj
+                var interviewAvailability: InterviewerAvailability = new InterviewerAvailability();
+                interviewAvailability.Interviewer = this.NominatedInterviewers[i];
+                this.ScheduleInterView.InterviewerAvailability.push(interviewAvailability);
+            }
         }
         return this.SelectedInterviewers;
     }
 
     showDetails(e: any) {
         var StartTime = e.event.start._i.split('T')[1];
-        var EndTime = e.event.end._i.split('T')[1];// this.formatDate(e.event.start);
-        $(e.element).tooltip({ title: 'Interviewer : ' + e.event.title + 'Time From :' + StartTime + ' To ' + EndTime });
+        var EndTime = e.event.end._i.split('T')[1];
+        let element: any = $(e.element);
+        element.tooltip({
+            title: 'Interviewer : ' + e.event.title +
+            + ' Time From :' + StartTime + ' To ' + EndTime
+        });
     }
 
     formatDate(date: any) {
@@ -321,9 +356,8 @@ export class ScheduleCandidateInterviewComponent implements OnInit, OnActivate {
         if (month.length < 2) month = '0' + month;
         if (day.length < 2) day = '0' + day;
 
-        return [h, m].join(':');
+        return [day, month, year].join('-');
     }
-    // eventMouseover: (calEvent: any, jsEvent: any, view: any) => {
 
     //Check For Valid And Invalid Slots
     checkAvailability() {
@@ -353,7 +387,16 @@ export class ScheduleCandidateInterviewComponent implements OnInit, OnActivate {
         return true;
     }
 
-
+    getNominatedInterviewers_1(RoundID: string) {
+        var i = _.findIndex(this.InterviewRounds, { Id: parseInt(RoundID) });
+        if (i >= 0)
+            this.ScheduleInterView.Round = this.InterviewRounds[i];
+    }
+    setSelectedMode(ModeId: string) {
+        var i = _.findIndex(this.InterviewModes, { Id: parseInt(ModeId) });
+        if (i >= 0)
+            this.ScheduleInterView.InterviewMode = this.InterviewModes[i];
+    }
     /*---------------------------- MasterData Service Methods -----------------------------*/
     // Get All Interviewers from Service
     getOtherInterviewers() {
@@ -375,8 +418,12 @@ export class ScheduleCandidateInterviewComponent implements OnInit, OnActivate {
     }
 
     // Get All Interview Rounds from Service by InterviewType
-    getInterviewRoundsbyInterviewType(TypeID: number) {
-        this._mastersService.GetRoundsByInterviewType(TypeID)
+    getInterviewRoundsbyInterviewType(TypeID: string) {
+        var i = _.findIndex(this.InterviewTypes, { Id: parseInt(TypeID) });
+        if (i >= 0)
+            this.ScheduleInterView.InterviewType = this.InterviewTypes[i];
+        //this.ScheduleInterView.InterviewType.Value 
+        this._mastersService.GetRoundsByInterviewType(parseInt(TypeID))
             .subscribe(
             results => {
                 this.InterviewRounds = <any>results;

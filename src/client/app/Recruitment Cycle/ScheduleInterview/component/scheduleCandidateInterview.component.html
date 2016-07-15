@@ -54,7 +54,7 @@
                                         </div>
                                         <label class="col-md-2 control-label align">Round <span class="required"> * </span></label>
                                         <div class="col-md-3">
-                                            <select class="form-control" [(ngModel)]="ScheduleInterView.Round.Id" (change)='getNominatedInterviewers($event.target.value)'>
+                                            <select class="form-control" [(ngModel)]="ScheduleInterView.Round.Id" (change)='getNominatedInterviewers_1($event.target.value)'>
                                                     <option></option>
                                                     <option *ngFor="let round of InterviewRounds" [value]="round.Id">{{round.Value}}</option>
                                             </select>
@@ -67,7 +67,7 @@
                                         <div class="col-md-6">
                                             <div class="input-group select2-bootstrap-append" style="width:233px !important">
 
-                                                <select class="form-control" [(ngModel)]="ScheduleInterView.InterviewMode.Id">
+                                                <select class="form-control" [(ngModel)]="ScheduleInterView.InterviewMode.Id"  (change)='setSelectedMode($event.target.value)'>
                                                         <option  *ngFor="let mode of InterviewModes" [value]="mode.Id">{{mode.Value}}</option>
                                               </select>
 

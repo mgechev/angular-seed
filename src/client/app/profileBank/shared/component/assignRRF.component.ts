@@ -3,7 +3,7 @@ import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
 import {AssignRRFDetails} from '../model/RRF';
 import {AssignRRFService} from '../services/assignRRF.service';
 import { APIResult } from  '../../../shared/constantValue/index';
-import { ResponseFromAPI } from  '../../../shared/model/index';
+import { ResponseFromAPI,MasterData } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { RRFDetails } from  '../../../RRF/myRRF/index';
 import * as  _ from 'lodash';
@@ -74,7 +74,7 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
             this._router.navigate([this.returnPath]);
     }
 
-    onSelectRRF(RRFID: string) {
+    onSelectRRF(RRFID: MasterData) {
       //  this.CandidateAssigment.RRFID = RRFID;
         var index = _.findIndex(this.RRFList, { RRFID:RRFID });
         this.selectedRRF = this.RRFList[index];
@@ -90,8 +90,9 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
     }
 
     onAssignRRF() {
-        //TODO :  Call AssignRRF() to post Data --> Uncomment following Block
-        this.CandidateAssigment.RRFID = this.selectedRRF.RRFID;
+        //TODO :  Call AssignRRF() to post Data 
+        this.CandidateAssigment.RRFID.Id=66;
+        this.CandidateAssigment.RRFID.Value = 'RRF6980895965';
         this._assignRRFService.assignRRFToCandidates(this.CandidateAssigment)
             .subscribe(
             results => {

@@ -165,13 +165,14 @@
                                                         </button>
                                                     <ul class="dropdown-menu" role="menu">
                                                         <li>
-                                                            <button class="btn btn-default btnLink" [disabled]='getEditAccess(profile.Owner)' (click)='redirectToEditProfile(profile.CandidateID)'>
+                                                            <!--[disabled]='getEditAccess(profile.Owner)'-->
+                                                            <button class="btn btn-default btnLink"  (click)='redirectToEditProfile(profile.CandidateID)'>
                                                                  <i class="icon-user"></i> Edit Profile 
                                                              </button>
                                                         </li>
                                                         <li class="divider"> </li>
                                                         <li>
-                                                            <button class="btn btn-default btnLink" [disabled]='getEditAccess(profile.Owner)' (click)='SaveCandidateID(profile.CandidateID)'>
+                                                            <button class="btn btn-default btnLink"  (click)='SaveCandidateID(profile.CandidateID)'>
                                                                   <i class="icon-flag"></i> Update Status </button>
 
                                                         </li>

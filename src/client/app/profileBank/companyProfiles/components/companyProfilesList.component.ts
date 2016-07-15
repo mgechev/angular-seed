@@ -16,14 +16,15 @@ import { DataSharedService } from '../../shared/services/DataShared.service';
     selector: 'rrf-black-listed-profiles-list',
     templateUrl: 'companyProfilesList.component.html',
     directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
-    styleUrls: ['../../myProfiles/components/myProfiles.component.css']
+    styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
+    providers:[CompanyProfilesService]
 })
 
 export class CompanyProfilesListComponent implements OnActivate {
     companyProfilesList: Array<CandidateProfile>;
     profile: CandidateProfile;
     statusList: Array<MasterData>;
-    seletedCandidateID: string;
+    seletedCandidateID: MasterData=new MasterData();
     selectedStatus = new MasterData();
     Comments: string;
     currentStatus: number;
@@ -74,21 +75,22 @@ export class CompanyProfilesListComponent implements OnActivate {
                 this.errorMessage = <any>error;
             });
     }
-    redirectToView(CandidateID: number) {
-        this._router.navigate(['/App/ProfileBank/companyProfiles/View/' + CandidateID]);
+    redirectToView(CandidateID: MasterData) {
+        this._router.navigate(['/App/ProfileBank/CompanyProfiles/View/' + CandidateID.Value+'ID'+CandidateID.Id]);
     }
-    redirectToEditProfile(CandidateID: string) {
-        this._router.navigate(['/App/ProfileBank/companyProfiles/Edit/' + CandidateID]);
+    redirectToEditProfile(CandidateID: MasterData) {
+        this._router.navigate(['/App/ProfileBank/CompanyProfiles/Edit/'+ CandidateID.Value+'ID'+CandidateID.Id]);
 
     }
-    SaveCandidateID(id: string) {
-        this.seletedCandidateID = id;
+    SaveCandidateID(id: MasterData) {
+        //this.seletedCandidateID = id;
 
-        var index = _.findIndex(this.companyProfilesList, { CandidateID: this.seletedCandidateID });
+        var index = _.findIndex(this.companyProfilesList, { CandidateID: id });
+        this.seletedCandidateID = this.companyProfilesList[index].CandidateID;
         // this.profile.Comments = this.allProfilesList[index].Comments;
         // this.profile.Status = this.allProfilesList[index].Status;
         this.currentCandidate = this.companyProfilesList[index].Candidate;
-        this._profileBankService.getStatusById(id)
+        this._profileBankService.getStatusById(id.Value)
             .subscribe(
             (results: any) => {
                 this.profile.Comments = results.Comments;
@@ -166,13 +168,14 @@ export class CompanyProfilesListComponent implements OnActivate {
     }
 
     transferOwnerShipClick() {
-        let checkedItemIds: Array<string> = new Array<string>();
+        let checkedItemIds: Array<MasterData> = new Array<MasterData>();
         for (var index = 0; index < this.companyProfilesList.length; index++) {
             if (this.companyProfilesList[index].IsChecked) {
                 checkedItemIds.push(this.companyProfilesList[index].CandidateID);
             }
         }
-        this._dataSharedService.setCheckedItems(checkedItemIds);
+      //  this._dataSharedService.setCheckedItems(checkedItemIds);
+         sessionStorage.setItem('CheckedItemIds',JSON.stringify(checkedItemIds));
         this._router.navigate(['/App/ProfileBank/CompanyProfiles/Transfer/']);
     }
 

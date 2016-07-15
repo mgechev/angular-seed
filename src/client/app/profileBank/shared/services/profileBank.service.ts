@@ -148,7 +148,7 @@ export class ProfileBankService {
             .finally(() => this._spinnerService.hide());
     }
 
-    updateCandidateStatus(CandidateID: string, Status: MasterData, Comments: string) {
+    updateCandidateStatus(CandidateID: MasterData, Status: MasterData, Comments: string) {
         let url = Config.GetURL('/api/ProfileBank/UpdateStatus');
         this._spinnerService.show();
         return this.authHttp.post(url, { CandidateID: CandidateID, Status: Status, Comments: Comments })

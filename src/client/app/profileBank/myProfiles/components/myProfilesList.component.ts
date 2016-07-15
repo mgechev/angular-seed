@@ -23,6 +23,7 @@ import { Candidate } from '../../shared/model/RRF';
 })
 
 export class MyProfilesListComponent implements OnActivate {
+    CandidateID:MasterData = new MasterData();
     myProfilesList: Array<CandidateProfile>;
     profile: CandidateProfile;
     errorMessage: string;

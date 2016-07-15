@@ -1,13 +1,15 @@
 import { MasterData } from  '../../../shared/model/index';
 
 export class AllCandidateProfiles {
-   public GrdOperations = new GridOperations();
-   public Profiles : Array<CandidateProfile> = new Array<CandidateProfile>();
+  public GrdOperations = new GridOperations();
+  public Profiles: Array<CandidateProfile> = new Array<CandidateProfile>();
 }
 
 export class CandidateProfile {
-  public CandidateID: string;
+  //public CandidateID: string;
+  public CandidateID: MasterData = new MasterData();
   public Candidate: string;//Candidate prop holds Full name of candidate
+  public CANDIDATECODE: string;
   public FirstName: string;
   public MiddleName: string;
   public LastName: string;
@@ -63,7 +65,7 @@ export class CandidateProfile {
 }
 
 export class Qualification {
-  public CandidateID: string;
+  public CandidateID: MasterData = new MasterData();
   public QualificationID: number;
   public Qualification: MasterData = new MasterData();
   public YearofPassing: number;
@@ -74,7 +76,7 @@ export class Qualification {
 export class TeamManagement {
   //properties of Candidate Team Management
   public TeamMgmt: any;
-  public CandidateID: string;
+  public CandidateID: MasterData = new MasterData();
   public TeamHandlingExperience: string;
   public NoofTeamMembers: number;
   public TeamMembersDesignations: string;
@@ -85,7 +87,7 @@ export class TeamManagement {
 export class CareerProfile {
   //properties of Candidate Career Profile
   public TotalExperience: number;
-  public CandidateID: string;
+  public CandidateID: MasterData = new MasterData();
   public RelevantExperience: number;
   public CurrentCompany: string;
   public CurrentDesignationRole: string;
@@ -95,7 +97,7 @@ export class CareerProfile {
 }
 
 export class Skills {
-  public CandidateID: string;
+  public CandidateID: MasterData = new MasterData();
   public ExpInSkill: string;
   public AnyFunctionalExp: string;
   public PrimarySkills: string;
@@ -113,9 +115,9 @@ export class Skills {
 }
 
 export class SalaryDetails {
-  public CandidateID: string;
-  public CurrentSalary: string='';
-  public ExpectedSalary: string='';
+  public CandidateID: MasterData = new MasterData();
+  public CurrentSalary: string = '';
+  public ExpectedSalary: string = '';
   public TakeHomePay: number;
   public AnyPerks: string;
   public CTCIncludeVariable: any;
@@ -125,7 +127,7 @@ export class SalaryDetails {
 }
 
 export class OtherDetails {
-  public CandidateID: string;
+  public CandidateID: MasterData = new MasterData();
   public AppliedEarlier: any;
   public AppraisalBondContractDetails: string;
   public Visa: MasterData = new MasterData();
@@ -165,7 +167,7 @@ export class AddCandidateResponse {
   public CandidateID: string;
 }
 export class TransferOwnershipMeta {
-  public CandidateID: string;
+  public CandidateID: MasterData = new MasterData();
   public OwnerType = new MasterData();
   public CurrentOwner = new MasterData();
   public OwnershipComments: string;

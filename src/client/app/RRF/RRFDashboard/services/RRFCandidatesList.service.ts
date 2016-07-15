@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
-//import { MasterData  } from '../../../shared/model/common.model';
+import { MasterData  } from '../../../shared/model/common.model';
 
 @Injectable()
 export class RRFCandidateListService {
@@ -12,10 +12,11 @@ export class RRFCandidateListService {
         private _spinnerService: SpinnerService) { }
 
     //Get RRf Specific Candidates by RRFID - API will return list of Candidates
-    getCandidatesForRRF(RRFID: string) {
-        let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF?rrfID=' + RRFID);
+    getCandidatesForRRF(RRFID: MasterData) {
+       // let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF?rrfID=' + RRFID);
+       let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF');
         this._spinnerService.show();
-        return this.authHttp.get(url)
+        return this.authHttp.post(url,{RRFID:RRFID})
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

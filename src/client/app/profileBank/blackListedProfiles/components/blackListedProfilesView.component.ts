@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, RouteSegment, Router } from '@angular/router';
 import { CandidateProfile } from '../../shared/model/myProfilesInfo';
-
+import { MasterData } from  '../../../shared/model/index';
 import { ProfileBankService } from '../../shared/services/profilebank.service';
 @Component({
     moduleId: module.id,
@@ -12,6 +12,8 @@ import { ProfileBankService } from '../../shared/services/profilebank.service';
 })
 export class BlackListedProfilesViewComponent implements OnActivate {
     params: string;
+    CandidateID: MasterData = new MasterData();
+    TITLE:string ='BlackListed Profiles';
     profile: CandidateProfile;
     errorMessage: string;
     count: number = 0;
@@ -21,16 +23,18 @@ export class BlackListedProfilesViewComponent implements OnActivate {
     }
     routerOnActivate(segment: RouteSegment) {
         this.params = segment.getParam('id');
-        if (this.params) {
-            this._profileBankService.getCandidateProfile(this.params)
-                .subscribe(
-                (results: CandidateProfile) => {
-                    this.profile = results;
-                    this.count = results.CandidateQualification.length;
-                    this.convertCheckboxesValues();
-                },
-                error => this.errorMessage = <any>error);
-        }
+        this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
+        this.CandidateID.Value = this.params.split('ID')[0];
+
+        this._profileBankService.getCandidateProfile(this.CandidateID.Value)
+            .subscribe(
+            (results: CandidateProfile) => {
+                this.profile = results;
+                this.count = results.CandidateQualification.length;
+                this.convertCheckboxesValues();
+            },
+            error => this.errorMessage = <any>error);
+
     }
 
     convertCheckboxesValues() {

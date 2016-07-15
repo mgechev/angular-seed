@@ -5,7 +5,7 @@ import { RRFDashboardService } from '../services/rrfDashboard.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 //import { APIResult, RRFAssignStatus } from  '../../../shared/constantValue/index';
-//import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
+import { MasterData} from '../../../shared/model/common.model';
 import { CandidateProfile } from  '../../../ProfileBank/shared/model/myProfilesInfo';
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 //import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap';
@@ -24,7 +24,7 @@ import { RRFDetails } from '../../myRRF/models/rrfDetails';
 })
 
 export class RRFCandidateListComponent implements OnActivate {
-    RRFID: string;
+    RRFID: MasterData = new MasterData();
     selectedRRF: RRFDetails;
     isNull: boolean = false;
     Candidate: string = 'Jhone DEF';
@@ -52,8 +52,10 @@ export class RRFCandidateListComponent implements OnActivate {
     }
 
     routerOnActivate(segment: RouteSegment) {
-        this.RRFID = segment.getParam('id');
-        console.log(this.RRFID.split('ID'));
+        this.RRFID.Id = parseInt((segment.getParam('id')).split('ID')[1]);
+        this.RRFID.Value = (segment.getParam('id')).split('ID')[0];
+
+
         this.doughnutChartLabels = ['Technical 1', 'HR'];
         this.doughnutChartData = [50, 50];
         this.doughnutChartColors = [{ backgroundColor: ['#E9EF0B', '#32c5d2'] }];
@@ -66,7 +68,7 @@ export class RRFCandidateListComponent implements OnActivate {
 
     onScheduleInterviewClick(Candidate: any) {
         //onScheduleInterviewClick(Candidate:any) 
-        sessionStorage.setItem('RRFID', this.RRFID);
+        sessionStorage.setItem('RRFID', JSON.stringify(this.RRFID));
         // sessionStorage.setItem('Candidate', JSON.stringify(Candidate));
         this._router.navigate(['/App//Recruitment Cycle/Schedule']);
     }
@@ -95,7 +97,7 @@ export class RRFCandidateListComponent implements OnActivate {
 
     getRRFDetails() {
         //this.RRFID
-        this._rrfCandidatesList.getRRFByID(this.RRFID)
+        this._rrfCandidatesList.getRRFByID(this.RRFID.Value)
             .subscribe(
             (results: any) => {
                 this.selectedRRF = results;

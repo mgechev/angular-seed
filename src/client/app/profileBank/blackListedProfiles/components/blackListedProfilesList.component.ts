@@ -22,7 +22,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
     blacklistedProfilesList: Array<CandidateProfile>;
     profile: CandidateProfile;
     statusList: Array<MasterData>;
-    seletedCandidateID: string;
+    seletedCandidateID: MasterData = new MasterData();
     selectedStatus = new MasterData();
     Comments: string;
     currentStatus: number;
@@ -61,7 +61,6 @@ export class BlackListedProfilesListComponent implements OnActivate {
             .subscribe(
             (results: Array<CandidateProfile>) => {
                 if (results.length !== undefined) {
-
                     this.blacklistedProfilesList = results;
                 }
             },
@@ -69,22 +68,23 @@ export class BlackListedProfilesListComponent implements OnActivate {
                 this.errorMessage = <any>error;
             });
     }
-    redirectToEditProfile(CandidateID: string) {
-        this._router.navigate(['/App/ProfileBank/BlackListedProfiles/Edit/' + CandidateID]);
 
+    redirectToEditProfile(CandidateID: MasterData) {
+        this._router.navigate(['/App/ProfileBank/BlackListedProfiles/Edit/' + CandidateID.Value+'ID'+CandidateID.Id]);
     }
-    redirectToView(CandidateID: string) {
-        this._router.navigate(['/App/ProfileBank/BlackListedProfiles/View/' + CandidateID]);
+    redirectToView(CandidateID: MasterData) {
+        this._router.navigate(['/App/ProfileBank/BlackListedProfiles/View/' + CandidateID.Value+'ID'+CandidateID.Id]);
     }
 
-    SaveCandidateID(id: string) {
-        this.seletedCandidateID = id;
+    SaveCandidateID(id: MasterData) {
+        //this.seletedCandidateID = id;
 
-        var index = _.findIndex(this.blacklistedProfilesList, { CandidateID: this.seletedCandidateID });
+        var index = _.findIndex(this.blacklistedProfilesList, { CandidateID: id });
+        this.seletedCandidateID = this.blacklistedProfilesList[index].CandidateID;
         // this.profile.Comments = this.allProfilesList[index].Comments;
         // this.profile.Status = this.allProfilesList[index].Status;
         this.currentCandidate = this.blacklistedProfilesList[index].Candidate;
-        this._profileBankService.getStatusById(id)
+        this._profileBankService.getStatusById(id.Value)
             .subscribe(
             (results: any) => {
                 this.profile.Comments = results.Comments;
@@ -112,7 +112,6 @@ export class BlackListedProfilesListComponent implements OnActivate {
         this.selectedStatus.Id = parseInt(statusId);
         this.selectedStatus.Value = null;
     }
-
 
     onUpdateStauts() {
           if (this.selectedStatus.Id === undefined)

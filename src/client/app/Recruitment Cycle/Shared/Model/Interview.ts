@@ -21,6 +21,7 @@ export class Interview {
     public RRFCODE: string;
     public Round: MasterData = new MasterData();
     public InterviewAvailabilityComments: InterviewAvailability = new InterviewAvailability();
+    public InterviewerAvailability: Array<InterviewAvailability> = new Array<InterviewAvailability>();
     public CandidatePrimaryDetails: CandidatePrimaryDetails = new CandidatePrimaryDetails();
     public Interviewer: Array<MasterData> = new Array<MasterData>();
     public IEFTransactionDetails: Array<IEFTransactionDetails> = new Array<IEFTransactionDetails>();

@@ -29,8 +29,6 @@
                                 <select class="form-control" required (change)='onSelectRRF($event.target.value)'>
                                     <option></option>
                                      <option *ngFor="let rrf of RRFList" [value]="rrf.RRFID">{{rrf.RRFID}} - {{rrf.PositionTitle}} - {{rrf.RaisedBy.Value}}</option> 
-                                          <!--<option>RRF 001 - Angular JS Developer - Kunal Adhikari </option>
-                                          <option>RRF 002 - Sr.Sharepoint Developer - Aradhana C</option>-->
                                 </select>
                             </div>
 
