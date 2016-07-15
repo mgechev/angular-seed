@@ -95,7 +95,6 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
             selectedRRF.Value = "";
             selectedRRFidsList.push(selectedRRF);
         }
-        
         this._rrfDashboardService.saveRRFAssignmentDeatils(this.RRFId, selectedRRFidsList, this.AssignedComments)
         //this._rrfDashboardService.saveRRFAssignmentDeatils(this.RRFId, selectedRec, this.AssignedComments)
             .subscribe(

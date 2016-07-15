@@ -31,7 +31,7 @@ export class MyProfilesListComponent implements OnActivate {
     psdTemplates: any;
     resumeFiles: any;
     statusList: Array<MasterData>;
-    seletedCandidateID: string;
+    seletedCandidateID: MasterData = new MasterData();
     selectedStatus = new MasterData();
     Comments: string;
     currentStatus: number;
@@ -45,8 +45,8 @@ export class MyProfilesListComponent implements OnActivate {
     fileName: string;
     searchString: string;
     isCommentsPanelCollapsed: boolean = false;
-    seletedCandidateIDForComments: string;
-    seletedCandidateIDForUpload: string;
+    seletedCandidateIDForComments: MasterData = new MasterData();
+    seletedCandidateIDForUpload: MasterData = new MasterData();
     highlightRow: string;
     public file: File;
     public url: string;
@@ -76,14 +76,14 @@ export class MyProfilesListComponent implements OnActivate {
         this.getCandidateStatuses();
     }
 
-    SaveCandidateID(id: string) {
+    SaveCandidateID(id: MasterData) {
         this.seletedCandidateID = id;
 
         var index = _.findIndex(this.myProfilesList, { CandidateID: this.seletedCandidateID });
         // this.profile.Comments = this.allProfilesList[index].Comments;
         // this.profile.Status = this.allProfilesList[index].Status;
         this.currentCandidate = this.myProfilesList[index].Candidate;
-        this._profileBankService.getStatusById(id)
+        this._profileBankService.getStatusById(id.Value)
             .subscribe(
             (results: any) => {
                 this.profile.Comments = results.Comments;
@@ -110,8 +110,8 @@ export class MyProfilesListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    redirectToView(CandidateID: number) {
-        this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID]);
+    redirectToView(CandidateID: MasterData) {
+        this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value+'ID'+CandidateID.Id]);
     }
 
     onSave(): void {
@@ -158,7 +158,7 @@ export class MyProfilesListComponent implements OnActivate {
         } else { return false; }
     }
 
-    uploadResume(CandidateLookupId: string, File: any) {
+    uploadResume(CandidateLookupId: MasterData, File: any) {
         this.resumeMeta.CandidateID = CandidateLookupId;
         this.resumeMeta.Overwrite = false;
         this.resumeMeta.Profile = File;
@@ -255,7 +255,7 @@ export class MyProfilesListComponent implements OnActivate {
         window.location.href = 'mailto:' + mailto;
     }
 
-    onClickFollowUpComments(id: string) {
+    onClickFollowUpComments(id: MasterData) {
         this.seletedCandidateIDForComments = id;
         var index = _.findIndex(this.myProfilesList, { CandidateID: this.seletedCandidateIDForComments });
         this.profile.Candidate = this.myProfilesList[index].Candidate;
@@ -330,7 +330,7 @@ export class MyProfilesListComponent implements OnActivate {
 
     }
 
-    onClickUploadResume(CandidateId: string) {
+    onClickUploadResume(CandidateId: MasterData) {
         window.scrollTo(0, 40);
         this.seletedCandidateIDForUpload = CandidateId;
         var index = _.findIndex(this.myProfilesList, { CandidateID: this.seletedCandidateIDForUpload });
@@ -348,6 +348,7 @@ export class MyProfilesListComponent implements OnActivate {
     closeUploadPanel() {
         this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
     }
+
     onSubmitUploadResume() {
         this.uploadResume(this.seletedCandidateIDForUpload, this.resumeFiles[0]);
         this.resumeFiles = new Array<File>();

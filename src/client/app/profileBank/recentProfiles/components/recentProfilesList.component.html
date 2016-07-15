@@ -139,13 +139,13 @@
                                                         </button>
                                                     <ul class="dropdown-menu" role="menu">
                                                         <li>
-                                                            <button class="btn btn-default btnLink" [disabled]='getEditAccess(profile.Owner)' (click)='redirectToEditProfile(profile.CandidateID)'>
+                                                            <button class="btn btn-default btnLink" [disabled]='getEditAccess(recentProfile.Owner)' (click)='redirectToEditProfile(recentProfile.CandidateID)'>
                                                                  <i class="icon-user"></i> Edit Profile 
                                                              </button>
                                                         </li>
                                                         <li class="divider"> </li>
                                                         <li>
-                                                            <button class="btn btn-default btnLink" [disabled]='getEditAccess(profile.Owner)' (click)='SaveCandidateID(profile.CandidateID)'>
+                                                            <button class="btn btn-default btnLink" [disabled]='getEditAccess(recentProfile.Owner)' (click)='SaveCandidateID(recentProfile.CandidateID)'>
                                                                   <i class="icon-flag"></i> Update Status </button>
                                                         </li>
                                                         <li class="divider"> </li>

@@ -174,7 +174,6 @@ export class CompanyProfilesListComponent implements OnActivate {
                 checkedItemIds.push(this.companyProfilesList[index].CandidateID);
             }
         }
-      //  this._dataSharedService.setCheckedItems(checkedItemIds);
          sessionStorage.setItem('CheckedItemIds',JSON.stringify(checkedItemIds));
         this._router.navigate(['/App/ProfileBank/CompanyProfiles/Transfer/']);
     }

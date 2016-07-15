@@ -1,8 +1,8 @@
-import {Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import {Router, ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
+import {Component, ChangeDetectorRef } from '@angular/core';
+import {Router, RouteSegment, ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
 import { FullCalendarComponent} from  '../../../shared/components/calendar/fullCalendar';
 //import { MultipleDemoComponent} from  '../../../shared/components/MultiselectDropdown/MultipleDrodown.Component';
-import { MasterData } from  '../../../shared/model/index';//ResponseFromAPI
+import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';//ResponseFromAPI
 import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import {CalendarDataService} from '../service/calendarDataService';
 import {CalendarDetails, Event, Resource} from '../model/CalendarDetails';
@@ -10,7 +10,7 @@ import { MastersService } from '../../../shared/services/masters.service';
 import { InterviewAvailability, Interview } from '../../Shared/Model/Interview';
 import { ScheduleInterviewService} from '../service/ScheduleInterview.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-//import { APIResult } from  '../../../shared/constantValue/index';
+import { APIResult } from  '../../../shared/constantValue/index';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass} from '@angular/common';
 import {BUTTON_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 import * as  _ from 'lodash';
@@ -26,7 +26,7 @@ import * as  _ from 'lodash';
     styleUrls: ['ScheduleCandidateInterviewComponent.css'],
 })
 
-export class ScheduleCandidateInterviewComponent implements OnInit, OnActivate {
+export class ScheduleCandidateInterviewComponent implements OnActivate {
     ScheduleInterView: Interview;
     resources: Array<Resource> = new Array<Resource>();
     errorMessage: string;
@@ -82,7 +82,11 @@ export class ScheduleCandidateInterviewComponent implements OnInit, OnActivate {
 
     }
 
-    routerOnActivate() {
+    routerOnActivate(segment: RouteSegment) {
+        //  this.RRFID.Id = parseInt((segment.getParam('id')).split('ID')[1]);
+        // this.RRFID.Value = (segment.getParam('id')).split('ID')[0];
+
+
         //Get RRFID From Local Storage
         this.ScheduleInterView.RRFID.Value = sessionStorage.getItem('RRFID');
         //Get Nominated Interviewers and other Interviewwers
@@ -107,17 +111,13 @@ export class ScheduleCandidateInterviewComponent implements OnInit, OnActivate {
         //For MultiselectDropdown
         let cmb: any = $('#cmbInterviewers');
         cmb.select2();
+        if (segment.getParam('id') !== 'New') {
+            this.ScheduleInterView.InterviewID.Id = parseInt((segment.getParam('id')).split('ID')[1]);
+            this.ScheduleInterView.InterviewID.Value = (segment.getParam('id')).split('ID')[0];
+            this.getInterviewDetailsByID(this.ScheduleInterView.InterviewID);
+        }
 
-    }
 
-    ngOnInit() {
-
-        // sessionStorage.removeItem('RRFID');
-        // cmb.select = this.ChangeEvent();
-        // let candidate = JSON.parse(sessionStorage.getItem('Candidate'));
-        // this.ScheduleInterView.CandidateID = candidate.CandidateID;
-        // this.ScheduleInterView.CandidateInformation.Candidate = candidate.Candidate;
-        // this.ChangeEvent();
     }
 
     getResources() {
@@ -161,6 +161,9 @@ export class ScheduleCandidateInterviewComponent implements OnInit, OnActivate {
         this.event.resourceId = e.calEvent.resourceId;
         this.event.id = e.calEvent.id;
         this.event.start = start.format();
+        var i = _.findIndex(this.InterviewerCalendarDetails.Resources,{id:e.resourceId});
+        if(i>=0)
+            this.event.Resource = this.InterviewerCalendarDetails.Resources[i].title;
         // this.event.allDay = e.calEvent.allDay;
         this.dialogVisible = true;
         this.cd.detectChanges();
@@ -225,7 +228,7 @@ export class ScheduleCandidateInterviewComponent implements OnInit, OnActivate {
     onScheduleInterviewClick() {
         let cmb: any = $('#cmbInterviewers');
         let value = cmb.val();
-        if (value!== null && this.ScheduleInterView.InterviewerAvailability.length < value.length) {
+        if (value !== null && this.ScheduleInterView.InterviewerAvailability.length < value.length) {
             this.getOtherSelectedInterviewers(value);
         }
         //Get Events Data if "Show Availability"
@@ -239,21 +242,22 @@ export class ScheduleCandidateInterviewComponent implements OnInit, OnActivate {
 
         console.log(JSON.stringify(this.ScheduleInterView));
 
-        // this._ScheduleInterviewService.ScheduleInterviewForCandidate(this.ScheduleInterView)
-        //     .subscribe(
-        //     results => {
-        //         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-        //             this.toastr.success((<ResponseFromAPI>results).Message);
-        //             this.redirectToPreviousView();
-        //         } else {
-        //             this.toastr.error((<ResponseFromAPI>results).Message);
-        //         }
-        //     },
-        //     error => {
-        //         this.errorMessage = <any>error;
-        //         this.toastr.error(<any>error);
-        //     });
+        this._ScheduleInterviewService.ScheduleInterviewForCandidate(this.ScheduleInterView)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.redirectToPreviousView();
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
     }
+    //Get All Other selected Interviewers from multiselect Dropdown
     getOtherSelectedInterviewers(InterviewerIds: Array<string>) {
         this.ScheduleInterView.InterviewerAvailability = new Array<InterviewAvailability>();
         for (var index = 0; index < this.OtherInterviewers.length; index++) {
@@ -269,34 +273,29 @@ export class ScheduleCandidateInterviewComponent implements OnInit, OnActivate {
         }
         return this.SelectedInterviewers;
     }
+    //Get All Nominated Interviewers from Service
     getNominatedInterviewers() {
         //(roundId: string)
         // this._ScheduleInterviewService.GetNominatedInterviewersByRRFID(this.ScheduleInterView.RRFID.Value,roundId)
-        // this._ScheduleInterviewService.GetNominatedInterviewersByRRFID(this.ScheduleInterView.RRFID.Value)
-        //     .subscribe(
-        //     (results: any) => {
-        //         this.NominatedInterviewers = results[0].Interviewers;
-        //         this.setInterviewer(results[0].Interviewers);
-        //         this.removeDuplicateInterviewers(results[0].Interviewers);
-        //     },
-        //     error => this.errorMessage = <any>error);
-        this.NominatedInterviewers = this._ScheduleInterviewService.GetNominatedInterviewersByRRFID(this.ScheduleInterView.RRFID.Value);
+        this._ScheduleInterviewService.GetNominatedInterviewersByRRFID(this.ScheduleInterView.RRFID.Value)
+            .subscribe(
+            (results: any) => {
+                this.NominatedInterviewers = results[0].Interviewers;
+            },
+            error => this.errorMessage = <any>error);
+        // this.NominatedInterviewers = this._ScheduleInterviewService.GetNominatedInterviewersByRRFID(this.ScheduleInterView.RRFID.Value);
     }
 
-    removeDuplicateInterviewers(NominatedInterviewers: Array<MasterData>) {
-        for (var i = 0; i < NominatedInterviewers.length; i++) {
-            let Index = this.OtherInterviewers.indexOf(NominatedInterviewers[i]);
-            if (Index > -1) {
-                this.OtherInterviewers.splice(Index, 1);
-            }
-        }
+    // removeDuplicateInterviewers(NominatedInterviewers: Array<MasterData>) {
+    //     for (var i = 0; i < NominatedInterviewers.length; i++) {
+    //         let Index = this.OtherInterviewers.indexOf(NominatedInterviewers[i]);
+    //         if (Index > -1) {
+    //             this.OtherInterviewers.splice(Index, 1);
+    //         }
+    //     }
 
-    }
-
-    setInterviewer(test: any) {
-        this.NominatedInterviewers = test;
-    }
-
+    // }
+    //Shows Availability of Selected Nominated interviewers On Calendar 
     ShowAvailabilityOnCalendar() {
         this.InterviewerCalendarDetails.Events =
             this._calendarDataService.GetInterviewerCalendarDetail(this.SelectedInterviewers).Events;
@@ -321,6 +320,7 @@ export class ScheduleCandidateInterviewComponent implements OnInit, OnActivate {
         }
     }
 
+    //Get All Nominated selected Interviewers from multiselect Dropdown
     getSelectedInterviewers(InterviewerIds: Array<string>) {
         this.SelectedInterviewers = new Array<MasterData>();
         for (var index = 0; index < this.NominatedInterviewers.length; index++) {
@@ -328,14 +328,14 @@ export class ScheduleCandidateInterviewComponent implements OnInit, OnActivate {
             if (i >= 0) {
                 this.SelectedInterviewers.push(this.NominatedInterviewers[i]);
                 //Push Interviewers In InterviewerAvailability Obj
-                var interviewAvailability: InterviewerAvailability = new InterviewerAvailability();
+                var interviewAvailability: InterviewAvailability = new InterviewAvailability();
                 interviewAvailability.Interviewer = this.NominatedInterviewers[i];
                 this.ScheduleInterView.InterviewerAvailability.push(interviewAvailability);
             }
         }
         return this.SelectedInterviewers;
     }
-
+    //Shows Tooltip on calendar
     showDetails(e: any) {
         var StartTime = e.event.start._i.split('T')[1];
         var EndTime = e.event.end._i.split('T')[1];
@@ -359,7 +359,7 @@ export class ScheduleCandidateInterviewComponent implements OnInit, OnActivate {
         return [day, month, year].join('-');
     }
 
-    //Check For Valid And Invalid Slots
+    //Check For Valid And Invalid Slots while scheduling interview
     checkAvailability() {
         var Booked = this.InterviewerCalendarDetails.Resources
         [_.findIndex(this.InterviewerCalendarDetails.Resources, { title: 'Booked' })].id;
@@ -397,6 +397,17 @@ export class ScheduleCandidateInterviewComponent implements OnInit, OnActivate {
         if (i >= 0)
             this.ScheduleInterView.InterviewMode = this.InterviewModes[i];
     }
+
+    getInterviewDetailsByID(InterviewId:MasterData) {
+        //Call Service GetInterviewDetailsByInterviewID
+          this._ScheduleInterviewService.GetInterviewDetailsByInterviewID(InterviewId)
+            .subscribe(
+            (results: any) => {
+                this.ScheduleInterView = results;
+            },
+            error => this.errorMessage = <any>error);
+    }
+
     /*---------------------------- MasterData Service Methods -----------------------------*/
     // Get All Interviewers from Service
     getOtherInterviewers() {

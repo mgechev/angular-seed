@@ -23,7 +23,7 @@ export class RecentProfilesListComponent implements OnActivate {
     recentProfilesList: Array<CandidateProfile>;
     profile: CandidateProfile = new CandidateProfile();
     statusList: Array<MasterData>;
-    seletedCandidateID: string;
+    seletedCandidateID: MasterData = new MasterData();;
     selectedStatus = new MasterData();
     Comments: string;
     currentStatus: number;
@@ -68,16 +68,16 @@ export class RecentProfilesListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    redirectToView(CandidateID: string) {
-        this._router.navigate(['App/ProfileBank/RecentProfiles/View/' + CandidateID]);
+    redirectToView(CandidateID: MasterData) {
+        this._router.navigate(['App/ProfileBank/RecentProfiles/View/' +  CandidateID.Value+'ID'+CandidateID.Id]);
     }
 
-    SaveCandidateID(id: string) {
+    SaveCandidateID(id: MasterData) {
         this.seletedCandidateID = id;
 
         var index = _.findIndex(this.recentProfilesList, { CandidateID: this.seletedCandidateID });
         this.currentCandidate = this.recentProfilesList[index].Candidate;
-        this._profileBankService.getStatusById(id)
+        this._profileBankService.getStatusById(id.Value)
             .subscribe(
             (results: any) => {
                 this.profile.Comments = results.Comments;
@@ -127,8 +127,8 @@ export class RecentProfilesListComponent implements OnActivate {
     closeUpdatePanel() {
         this.isCollapsed = false;
     }
-    redirectToEditProfile(CandidateID: string) {
-        this._router.navigate(['/App/ProfileBank/RecentProfiles/Edit/' + CandidateID]);
+    redirectToEditProfile(CandidateID: MasterData) {
+        this._router.navigate(['/App/ProfileBank/RecentProfiles/Edit/' + CandidateID.Value+'ID'+CandidateID.Id]);
     }
 
     getEditAccess(Owner: MasterData) {

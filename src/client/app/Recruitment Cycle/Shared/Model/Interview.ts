@@ -6,7 +6,7 @@ export class Interview {
     public detailsRRF: DetailRRF = new DetailRRF();
     public CandidateID: MasterData = new MasterData();
     public CANDIDATECODE: string;
-    public InterviewID: string;//MasterData = new MasterData();
+    public InterviewID: MasterData = new MasterData();
     public InterviewDate: string;
     public InterviewFromTime: string;
     public InterviewToTime: string;
@@ -14,7 +14,7 @@ export class Interview {
     public InterviewMode: MasterData = new MasterData();
     public InterviewRound: MasterData = new MasterData();
     public DisplayCandidateInfo: boolean;
-    public Status: string;
+    public Status: string = '';
     public Comments: string;
     public ProceedOfferGeneration: boolean;
     public RRFID: MasterData = new MasterData();

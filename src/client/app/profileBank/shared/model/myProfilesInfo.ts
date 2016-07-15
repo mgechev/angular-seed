@@ -155,7 +155,7 @@ export class OtherDetails {
 }
 export class ResumeMeta {
   public Profile: File;
-  public CandidateID: string;
+  public CandidateID: MasterData = new MasterData();
   public Overwrite: boolean;
 }
 
@@ -164,7 +164,7 @@ export class AddCandidateResponse {
   public Message: '';
   public ReasonCode: string;
   public ErrorMsg: string;
-  public CandidateID: string;
+  public CandidateID: MasterData = new MasterData();
 }
 export class TransferOwnershipMeta {
   public CandidateID: MasterData = new MasterData();
@@ -172,7 +172,7 @@ export class TransferOwnershipMeta {
   public CurrentOwner = new MasterData();
   public OwnershipComments: string;
   public CandidateName: string;
-  public CandidateIds: Array<string> = new Array<string>();
+  public CandidateIds: Array<MasterData> = new Array<MasterData>();
   public Owner = new MasterData();
 }
 

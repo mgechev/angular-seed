@@ -2,10 +2,12 @@ import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, RouteSegment, Router, OnActivate} from '@angular/router';
 import { CandidateProfile } from '../../shared/model/myProfilesInfo';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
+import { MasterData } from  '../../../shared/model/index';
+
 @Component({
     moduleId: module.id,
     selector: 'rrf-blacklistedprofiles-view',
-        templateUrl: '../../shared/views/profileBankView.component.html',
+    templateUrl: '../../shared/views/profileBankView.component.html',
 
     directives: [ROUTER_DIRECTIVES],
     styleUrls: ['../../allProfiles/components/allProfilesView.component.css']
@@ -13,8 +15,10 @@ import { ProfileBankService} from  '../../shared/services/profileBank.service';
 
 export class MyProfilesViewComponent implements OnActivate {
     params: string;
+    CandidateID: MasterData = new MasterData();
     profile: CandidateProfile;
     errorMessage: string;
+    TITLE:string ='Profiles';
     count: number = 0;
     constructor(private _profileBankService: ProfileBankService,
         private _router: Router) {
@@ -22,17 +26,18 @@ export class MyProfilesViewComponent implements OnActivate {
     }
     routerOnActivate(segment: RouteSegment) {
         this.params = segment.getParam('id');
-        if (this.params) {
-            this._profileBankService.getCandidateProfile(this.params)
-                .subscribe(
-                (results: CandidateProfile) => {
-                    this.profile = results;
-                    this.count = results.CandidateQualification.length;
-                    this.convertCheckboxesValues();
+        this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
+        this.CandidateID.Value = this.params.split('ID')[0];
 
-                },
-                error => this.errorMessage = <any>error);
-        }
+        this._profileBankService.getCandidateProfile(this.CandidateID.Value)
+            .subscribe(
+            (results: CandidateProfile) => {
+                this.profile = results;
+                this.count = results.CandidateQualification.length;
+                this.convertCheckboxesValues();
+            },
+            error => this.errorMessage = <any>error);
+
     }
 
     convertCheckboxesValues() {
@@ -79,5 +84,6 @@ export class MyProfilesViewComponent implements OnActivate {
         }
     }
     Back() {
-        this._router.navigate(['/App/ProfileBank/MyProfiles']);    }
+        this._router.navigate(['/App/ProfileBank/MyProfiles']);
+    }
 }

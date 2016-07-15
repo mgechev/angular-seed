@@ -18,7 +18,7 @@ import { APIResult } from  '../../../shared/constantValue/index';
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
 export class TransferOwnershipComponent implements OnActivate {
-    CheckedCandidateIds: Array<string>;
+    CheckedCandidateIds: Array<MasterData>;
     errorMessage: string;
     candidateProfiles: Array<TransferOwnershipMeta>;
     OwnerTypes: Array<MasterData>;
@@ -37,7 +37,7 @@ export class TransferOwnershipComponent implements OnActivate {
         this.getRecruiters();
     }
     getCandidateIds() {
-        this.CheckedCandidateIds = this._myProfilesDataSharedService.getCheckedItems();
+        this.CheckedCandidateIds = JSON.parse(sessionStorage.getItem('CheckedItemIds'));
 
         this._profileBankService.getCandidateOwnwershipInfo(this.CheckedCandidateIds)
             .subscribe(
@@ -81,7 +81,7 @@ export class TransferOwnershipComponent implements OnActivate {
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                         this.toastr.success((<ResponseFromAPI>results).Message);
-                        this._router.navigate(['/App/ProfileBank/AllProfiles/']);
+                        this._router.navigate(['/App/ProfileBank/CompanyProfiles/']);
                     } else {
                         this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                     }

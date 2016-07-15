@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, RouteSegment, Router } from '@angular/router';
 import { CandidateProfile } from '../../shared/model/myProfilesInfo';
 import { ProfileBankService } from '../../shared/services/profilebank.service';
-
+import { MasterData } from  '../../../shared/model/index';
 @Component({
     moduleId: module.id,
     selector: 'rrf-allprofiles-view',
@@ -17,6 +17,8 @@ export class RecentProfilesViewComponent implements OnActivate {
     errorMessage: string;
     profile: CandidateProfile;
     count: number = 0;
+    CandidateID: MasterData = new MasterData();
+    TITLE: string = 'Recent Profiles';
 
     constructor(private _profileBankService: ProfileBankService,
         private _router: Router) {
@@ -24,16 +26,17 @@ export class RecentProfilesViewComponent implements OnActivate {
     }
     routerOnActivate(segment: RouteSegment) {
         this.params = segment.getParam('id');
-        if (this.params) {
-            this._profileBankService.getCandidateProfile(this.params)
-                .subscribe(
-                (results: CandidateProfile) => {
-                    this.profile = results;
-                    this.count = results.CandidateQualification.length;
-                    this.convertCheckboxesValues();
-                },
-                error => this.errorMessage = <any>error);
-        }
+        this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
+        this.CandidateID.Value = this.params.split('ID')[0];
+
+        this._profileBankService.getCandidateProfile(this.CandidateID.Value)
+            .subscribe(
+            (results: CandidateProfile) => {
+                this.profile = results;
+                this.count = results.CandidateQualification.length;
+                this.convertCheckboxesValues();
+            },
+            error => this.errorMessage = <any>error);
     }
     convertCheckboxesValues() {
         if (this.profile.IsCurrentSameAsPermanent === true) {

@@ -3,7 +3,7 @@ import { Router, RouteSegment, ROUTER_DIRECTIVES, OnActivate } from '@angular/ro
 import { CompanyProfilesService } from '../services/CompanyProfiles.service';
 import { CandidateProfile, Qualification } from '../../shared/model/myProfilesInfo';
 import { MastersService } from '../../../shared/services/masters.service';
-import * as  _ from 'lodash';
+//import * as  _ from 'lodash';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';

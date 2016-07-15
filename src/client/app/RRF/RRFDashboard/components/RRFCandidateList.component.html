@@ -77,7 +77,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <span class="mt-action-dot "></span> {{selectedRRF.Priority.Value}}   
+                                                <span class="mt-action-dot "></span> {{selectedRRF.Priority.Value}}
                                                 <!--{{selectedRRF.Priority.Value}}    {{getPriorityClass(selectedRRF.Priority.Id)}}-->
                                             </td>
                                             <td>
@@ -95,33 +95,41 @@
                             </div>
                             <div class="row">
                                 <!-- Candidate List -->
-                                <div class="col-md-6">
+                                <div class="col-md-7">
                                     <div class="table-scrollable list">
-                                        <table class="table table-hover" >
+                                        <table class="table table-hover">
                                             <thead>
                                                 <tr>
                                                     <th> # </th>
-                                                    <th>Candidate Code</th>
+                                                    <!--<th>Candidate Code</th>-->
                                                     <th>Candidate</th>
+                                                    <th>Status</th>
+                                                    <th>Last Round Scheduled</th>
                                                     <th>Interview</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let candidate of Candidates; let index = index">
+                                                <tr *ngFor="let selectedcandidate of AllCandidatesForRRF; let index = index">
                                                     <td> {{index+1}} </td>
-                                                    <td> {{candidate.CandidateID}}</td>
-                                                    <td> <a (click)='getCandidatesRoundHistory(candidate.CandidateID)'> {{candidate.Candidate}}</a></td>
-                                                    <td><a class="btn blue btn-outline btn-circle btn-sm active" 
-                                                           (click)='onScheduleInterviewClick(candidate)'> Schedule </a></td>
+                                                    <td> <a (click)='getCandidatesRoundHistory(selectedcandidate.CandidateID)'> {{selectedcandidate.Candidate}}</a></td>
+
+                                                    <td> {{selectedcandidate.InterviewDetails.Status}} </td>
+                                                    <!--{{AllCandidatesForRRF.InterviewDetails.Status}}   {{AllCandidatesForRRF.InterviewDetails.Round.Value}} -->
+                                                    <td> {{selectedcandidate.InterviewDetails.Round.Value}}</td>
+                                                    <td> <a class="btn blue btn-outline btn-circle btn-sm active" *ngIf="!isInterviewSchedule"
+                                                            (click)='onScheduleInterviewClick(selectedcandidate.Candidate)'> Schedule </a>
+
+                                                        <a class="btn blue btn-outline btn-circle btn-sm active" *ngIf="isInterviewSchedule" (click)='onReScheduleInterviewClick(selectedcandidate)'> Re-Schedule </a>
+                                                    </td>
                                                 </tr>
-                                             </tbody>
+                                            </tbody>
                                         </table>
                                         <span *ngIf='isNull'>No Candidates Found</span>
                                     </div>
                                 </div>
                                 <!-- Candidate List ENDS-->
                                 <!-- Candidate Details -->
-                                <div class="col-md-6" style="border-left:1px solid gray">
+                                <div class="col-md-5" style="border-left:1px solid gray">
                                     <span class="caption-subject bold" style="font-size : 14px">Jone DEF's' Interview Rounds History</span>
                                     <br/> <br/>
                                     <table class="table table-hover">
@@ -135,13 +143,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                              <tr id="round" *ngFor="let candidateHistory of CandidateRoundHistory; let index = index" (mouseover)='showPopOver()'>
-                                                    <td> {{index+1}} </td>
-                                                    <td> {{candidateHistory.Round.Value}}</td>
-                                                    <td> <span *ngFor="let interviewer of candidateHistory.InterviewerAvailability" >{{interviewer.Interviewer.Value}} ,</span></td>
-                                                    <td> {{candidateHistory.InterviewDate}}</td>
-                                                    <td> {{candidateHistory.Status}}</td>
-                                                </tr>
+                                            <tr id="round" *ngFor="let candidateHistory of CandidateRoundHistory; let index = index" (mouseover)='showPopOver()'>
+                                                <td> {{index+1}} </td>
+                                                <td> {{candidateHistory.Round.Value}}</td>
+                                                <td> <span *ngFor="let interviewer of candidateHistory.InterviewerAvailability">{{interviewer.Interviewer.Value}} ,</span></td>
+                                                <td> {{candidateHistory.InterviewDate}}</td>
+                                                <td> {{candidateHistory.Status}}</td>
+                                            </tr>
                                             <!--<tr id="round" (mouseover)='showPopOver()'>
                                                 <td> 1 </td>
                                                 <td> Technical 1</td>
@@ -159,6 +167,8 @@
                                         -->
                                         </tbody>
                                     </table>
+                                    <span *ngIf='isRoundHistoryPresent'>No Candidates Round History Found</span>
+
                                     <hr/>
                                     <br/><br/>
                                     <base-chart class="chart" style="display:block;width:100%" [options]="doughnutChartOptions" [data]="doughnutChartData" [labels]="doughnutChartLabels"

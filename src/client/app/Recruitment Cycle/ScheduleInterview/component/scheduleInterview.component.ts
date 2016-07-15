@@ -15,7 +15,7 @@ import { MastersService } from '../../../shared/services/masters.service';
 })
 
 @Routes([
-    { path: '/', component: ScheduleCandidateInterviewComponent }
+    { path: '/:id', component: ScheduleCandidateInterviewComponent }
 ])
 export class ScheduleInterviewComponent {
 }

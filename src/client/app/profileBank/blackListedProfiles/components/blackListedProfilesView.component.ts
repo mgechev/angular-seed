@@ -13,7 +13,7 @@ import { ProfileBankService } from '../../shared/services/profilebank.service';
 export class BlackListedProfilesViewComponent implements OnActivate {
     params: string;
     CandidateID: MasterData = new MasterData();
-    TITLE:string ='BlackListed Profiles';
+    TITLE:string ='Blacklisted Profiles';
     profile: CandidateProfile;
     errorMessage: string;
     count: number = 0;

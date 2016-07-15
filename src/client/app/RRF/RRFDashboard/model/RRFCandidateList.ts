@@ -1,11 +1,13 @@
-import { MasterData  } from '../../../shared/model/common.model';
-import { RRFDetails  } from '../../myRRF/models/rrfDetails';
+// import { MasterData  } from '../../../shared/model/common.model';
+// import { RRFDetails  } from '../../myRRF/models/rrfDetails';
 import { CandidateProfile } from  '../../../ProfileBank/shared/model/myProfilesInfo';
-import {InterviewAvailability} from '../../../Recruitment Cycle/Shared/Model/Interview';
+import {Interview} from '../../../Recruitment Cycle/Shared/Model/Interview';
+
+
 export class RRFSpecificCandidateList {
     Candidate: CandidateProfile;
-    AssignedRRF: RRFDetails;
     CandidateList: Array<CandidateProfile> = new Array<CandidateProfile>();
+    InterviewDetails : Interview = new Interview();
     //CandidateInterviewRoundHistory: Array<InterviewRoundHistory> = new Array<InterviewRoundHistory>();
 }
 // export class InterviewRoundHistory {

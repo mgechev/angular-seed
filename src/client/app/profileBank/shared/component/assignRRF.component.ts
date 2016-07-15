@@ -3,7 +3,7 @@ import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
 import {AssignRRFDetails} from '../model/RRF';
 import {AssignRRFService} from '../services/assignRRF.service';
 import { APIResult } from  '../../../shared/constantValue/index';
-import { ResponseFromAPI,MasterData } from  '../../../shared/model/index';
+import { ResponseFromAPI, MasterData } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { RRFDetails } from  '../../../RRF/myRRF/index';
 import * as  _ from 'lodash';
@@ -17,14 +17,14 @@ import * as  _ from 'lodash';
 })
 
 export class ProfileBankAssignRRFComponent implements OnActivate {
-    CandidateIDs: Array<string> = new Array<string>();
+    CandidateIDs: Array<MasterData> = new Array<MasterData>();
     returnPath: string;
     Title: string;
     errorMessage: string;
     isRRFSelected: boolean = false;
     CandidateAssigment: AssignRRFDetails;
-    RRFList : Array<RRFDetails>;
-    selectedRRF : RRFDetails;
+    RRFList: Array<RRFDetails>;
+    selectedRRF: RRFDetails;
 
 
     constructor(private _router: Router,
@@ -45,23 +45,23 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
         this.getCandidateIDs();
 
         //TODO :  call getMyOpenRRF to fill RRf Dropdown
-         this.getMyOpenAssignedRRF();
+        this.getMyOpenAssignedRRF();
     }
 
     getCandidateIDs() {
         this.CandidateAssigment.Candidates = JSON.parse(sessionStorage.getItem('Candidates'));
-        this.CandidateAssigment.CandidateIDs = new Array<string>();
+        this.CandidateAssigment.CandidateIDs = new Array<MasterData>();
         for (var index = 0; index < this.CandidateAssigment.Candidates.length; index++) {
             this.CandidateAssigment.CandidateIDs.push(this.CandidateAssigment.Candidates[index].CandidateID);
         }
-        sessionStorage.removeItem('CandidateIDs');
+
     }
 
     getMyOpenAssignedRRF() {
         this._assignRRFService.getMyOpenRRF()
             .subscribe(
             (results: any) => {
-               this.RRFList = results;
+                this.RRFList = results;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -70,14 +70,20 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
     }
 
     Back() {
+        sessionStorage.removeItem('CandidateIDs');
         if (this.returnPath !== undefined)
             this._router.navigate([this.returnPath]);
     }
 
-    onSelectRRF(RRFID: MasterData) {
-      //  this.CandidateAssigment.RRFID = RRFID;
-        var index = _.findIndex(this.RRFList, { RRFID:RRFID });
-        this.selectedRRF = this.RRFList[index];
+    onSelectRRF(RRFID: string) {
+        //  this.CandidateAssigment.RRFID = RRFID;
+        for (var index = 0; index < this.RRFList.length; index++) {
+            if (this.RRFList[index].RRFID.Id === parseInt(RRFID)) {
+                this.selectedRRF = this.RRFList[index];
+            }
+        }
+        // var index = _.findIndex(this.RRFList, { RRFID: { Id: RRFID } });
+        // this.selectedRRF = this.RRFList[index];
         this.isRRFSelected = true;
     }
 
@@ -90,9 +96,10 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
     }
 
     onAssignRRF() {
+        sessionStorage.removeItem('CandidateIDs');
         //TODO :  Call AssignRRF() to post Data 
-        this.CandidateAssigment.RRFID.Id=66;
-        this.CandidateAssigment.RRFID.Value = 'RRF6980895965';
+         this.CandidateAssigment.RRFID =this.selectedRRF.RRFID;
+
         this._assignRRFService.assignRRFToCandidates(this.CandidateAssigment)
             .subscribe(
             results => {

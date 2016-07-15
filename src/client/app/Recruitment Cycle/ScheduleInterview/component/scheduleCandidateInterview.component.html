@@ -38,7 +38,7 @@
                                         </div>
                                         <label class="col-md-2 control-label align">Candidate <span class="required"> * </span></label>
                                         <div class="col-md-3">
-                                            Jhone Doe 
+                                            Jhone Doe
                                             <!--{{ScheduleInterView.CandidateInformation.Candidate}}-->
                                         </div>
                                     </div>
@@ -67,7 +67,7 @@
                                         <div class="col-md-6">
                                             <div class="input-group select2-bootstrap-append" style="width:233px !important">
 
-                                                <select class="form-control" [(ngModel)]="ScheduleInterView.InterviewMode.Id"  (change)='setSelectedMode($event.target.value)'>
+                                                <select class="form-control" [(ngModel)]="ScheduleInterView.InterviewMode.Id" (change)='setSelectedMode($event.target.value)'>
                                                         <option  *ngFor="let mode of InterviewModes" [value]="mode.Id">{{mode.Value}}</option>
                                               </select>
 
@@ -93,7 +93,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                          <button type="button" class="btn btn-info" (click)="ShowAvailabilityOnCalendar()"> Show Availability </button> 
+                                            <button type="button" class="btn btn-info" (click)="ShowAvailabilityOnCalendar()"> Show Availability </button>
                                         </div>
                                     </div>
                                 </div>
@@ -152,21 +152,18 @@
                         </div>
                     </div>
                     <div class="col-md-5" style="border-left:1px solid #c6cdd5">
-                     <!--<full-calendar [resources]="resources" [events]="events" [header]="header" defaultDate="2016-01-12" [eventLimit]="4" [editable]="true"
+                        <!--<full-calendar [resources]="resources" [events]="events" [header]="header" defaultDate="2016-01-12" [eventLimit]="4" [editable]="true"
                             (onEventClick)="handleEventClick($event)" [selectable]="true" [selectHelper]="true" (onSelect)="handleDayClick($event)"></full-calendar>-->
-                            <full-calendar [resources]="InterviewerCalendarDetails.Resources"
-                                           [events]="InterviewerCalendarDetails.Events" 
-                                           [header]="header" 
-                                           defaultDate="2016-07-12"
-                                           (onEventRender)="showDetails($event)" 
-                                           [eventLimit]="4" [editable]="true">
-                            </full-calendar>
-                            
+                        <full-calendar [resources]="InterviewerCalendarDetails.Resources" [events]="InterviewerCalendarDetails.Events" [header]="header"
+                            defaultDate="2016-07-12" (onEventClick)="handleEventClick($event)" (onEventRender)="showDetails($event)"
+                            [eventLimit]="4" [editable]="true">
+                        </full-calendar>
+
                     </div>
                 </div>
             </div>
         </div>
-      
+
         <div id="fullCalModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -177,28 +174,35 @@
                     <div id="modalBody" class="modal-body" *ngIf="event">
                         <div class="row" style="margin-top:15px">
                             <div class="form-group">
-                                <div class="col-md-4 align"><label>Title *</label></div>
-                                <div class="col-md-8"><input type="text" id="title" [(ngModel)]="event.title" /></div>
+                                <div class="col-md-4 align"><label>Title <span class="required">*</span></label></div>
+                                <div class="col-md-8">{{event.title}}</div>
                             </div>
                         </div>
                         <div class="row" style="margin-top:15px">
                             <div class="form-group">
-                                <div class="col-md-4 align"><label>Start Date *</label></div>
-                                <div class="col-md-8"><input type="date" id="title" [(ngModel)]="event.start" /></div>
+                                <div class="col-md-4 align"><label>Start Date <span class="required">*</span></label></div>
+                                <div class="col-md-8"> {{event.start}} </div>
                             </div>
                         </div>
                         <div class="row" style="margin-top:15px">
                             <div class="form-group">
-                                <div class="col-md-4 align"><label>End Date</label></div>
-                                <div class="col-md-8"><input type="date" id="title" [(ngModel)]="event.end" /></div>
+                                <div class="col-md-4 align"><label>End Date <span class="required">*</span></label></div>
+                                <div class="col-md-8">{{event.end}}</div>
                             </div>
                         </div>
 
-                        Event : {{event.title}} Date: {{event.start}} Date: {{event.end}} All Day: {{event.allDay}}
+                        <div class="row" style="margin-top:15px">
+                            <div class="form-group">
+                                <div class="col-md-4 align"><label>Availability <span class="required">*</span></label></div>
+                                <div class="col-md-8">{{event.Resource}}</div>
+                            </div>
+                        </div>
+
+                        <!--Event : {{event.title}} Date: {{event.start}} Date: {{event.end}} All Day: {{event.allDay}}-->
                     </div>
                     <div class="modal-footer">
-                        <button type="button" icon="fa-close" (click)="deleteEvent()" label="">Delete</button>
-                        <button type="button" icon="fa-check" (click)="saveEvent()" label="">Save</button>
+                        <!--<button type="button" icon="fa-close" (click)="deleteEvent()" label="">Delete</button>-->
+                        <button type="button" icon="fa-check" data-dismiss="modal" label="">Ok</button>
 
                     </div>
                 </div>

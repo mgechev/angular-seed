@@ -36,10 +36,13 @@ export class RRFCandidateListComponent implements OnActivate {
         animation: false,
         responsive: true
     };
+    isInterviewSchedule: boolean = false;
     errorMessage: string;
     Candidates: Array<CandidateProfile>;
-    CanidatesHistory: RRFSpecificCandidateList[];
+    AllCandidatesForRRF: RRFSpecificCandidateList[];
     CandidateRoundHistory: Array<Interview>;
+    isRoundHistoryPresent:boolean=false;
+
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
         private _rrfDashboardService: RRFDashboardService,
@@ -47,14 +50,13 @@ export class RRFCandidateListComponent implements OnActivate {
         private _rrfCandidatesList: RRFCandidateListService,
         public toastr: ToastsManager) {
         this.Candidates = new Array<CandidateProfile>();
-        this.CanidatesHistory = new Array<RRFSpecificCandidateList>();
+        this.AllCandidatesForRRF = new Array<RRFSpecificCandidateList>();
         this.CandidateRoundHistory = new Array<Interview>();
     }
 
     routerOnActivate(segment: RouteSegment) {
         this.RRFID.Id = parseInt((segment.getParam('id')).split('ID')[1]);
         this.RRFID.Value = (segment.getParam('id')).split('ID')[0];
-
 
         this.doughnutChartLabels = ['Technical 1', 'HR'];
         this.doughnutChartData = [50, 50];
@@ -69,8 +71,8 @@ export class RRFCandidateListComponent implements OnActivate {
     onScheduleInterviewClick(Candidate: any) {
         //onScheduleInterviewClick(Candidate:any) 
         sessionStorage.setItem('RRFID', JSON.stringify(this.RRFID));
-        // sessionStorage.setItem('Candidate', JSON.stringify(Candidate));
-        this._router.navigate(['/App//Recruitment Cycle/Schedule']);
+        sessionStorage.setItem('Candidate', JSON.stringify(Candidate));
+        this._router.navigate(['/App//Recruitment Cycle/Schedule/New']);
     }
 
     chartClicked(e: any): void {
@@ -80,13 +82,14 @@ export class RRFCandidateListComponent implements OnActivate {
     chartHovered(e: any): void {
         console.log(e);
     }
-
+    //Get All Canidate List Along with Interview Data 
     getCanidatesForRRF() {
-        this._rrfCandidatesList.getCandidatesForRRF(this.RRFID)
+        this._rrfCandidatesList.getCandidatesForRRF(this.RRFID.Value)
             .subscribe(
             (results: any) => {
                 if (results.length !== undefined) {
-                    this.Candidates = results;
+                   // this.AllCandidatesForRRF = results;
+                    this.CheckInterviewStatus(results);
                 } else {
                     //If No data present
                     this.isNull = true;
@@ -105,12 +108,17 @@ export class RRFCandidateListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    getCandidatesRoundHistory(CandidateID: string) {
-        //this._rrfCandidatesList.getInterviewRoundHistorybyCandidateId(CandidateID, this.RRFID)
-        this._rrfCandidatesList.getInterviewRoundHistorybyCandidateId('C6132737023', 'RRF6194789912')
+    getCandidatesRoundHistory(CandidateID: MasterData) {
+        this._rrfCandidatesList.getInterviewRoundHistorybyCandidateId(CandidateID, this.RRFID)
+        //this._rrfCandidatesList.getInterviewRoundHistorybyCandidateId('C6132737023', 'RRF6194789912')
             .subscribe(
-            results => {
-                this.CandidateRoundHistory = <any>results;
+            (results :any)=> {
+                if(results !== null && results.length>0) {
+                   this.CandidateRoundHistory = <any>results;
+                   this.isRoundHistoryPresent = false;
+                }else {
+                    this.isRoundHistoryPresent = true;
+                }
             },
             error => this.errorMessage = <any>error);
     }
@@ -154,5 +162,35 @@ export class RRFCandidateListComponent implements OnActivate {
             default:
                 return '';
         }
+    }
+
+    onReScheduleInterviewClick(Candidate: RRFSpecificCandidateList) {
+        console.log('Re-Schedule');
+
+    }
+
+    CheckInterviewStatus(CandidateDetails: Array<RRFSpecificCandidateList>) {
+        for (var index = 0; index < CandidateDetails.length; index++) {
+            if (CandidateDetails[index].InterviewDetails.Status !== null) {
+                switch (CandidateDetails[index].InterviewDetails.Status.toLowerCase()) {
+                    case 'selected':
+                    case 'on-hold':
+                    case 'rejected':
+                        this.isInterviewSchedule = true;
+                        break;
+                    case 'scheduled':
+                    case 're-scheduled':
+                        this.isInterviewSchedule = false;
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                CandidateDetails[index].InterviewDetails.Status = 'Not Scheduled';
+                if(CandidateDetails[index].InterviewDetails.Round.Value === null)
+                    CandidateDetails[index].InterviewDetails.Round.Value = '--';
+            }
+        }
+        this.AllCandidatesForRRF = CandidateDetails;
     }
 }

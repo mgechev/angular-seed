@@ -25,22 +25,32 @@ export class ScheduleInterviewService {
     // GetNominatedInterviewersByRRFID(RRFID: string,RoundID:string) {
     GetNominatedInterviewersByRRFID(RRFID: string) {
         //   let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewersByRRF?RRFID='+ RRFID+'&RoundID='+RoundID);
-        // let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewersByRRF?RRFID='+ RRFID);
-        // this._spinnerService.show();
-        // return this.authHttp.get(url)
-        //     .map(this.extractData)
-        //     .catch(this.handleError)
-        //     .finally(() => this._spinnerService.hide());
-        let interviewers: Array<MasterData> = [{
-            "Id": 11,
-            "Value": "Rohit Sevaramani"
-        },
-            {
-                "Id": 2,
-                "Value": "Bharati Shinde"
-            }];
-        return interviewers;
+        let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewersByRRF?RRFID='+ RRFID);
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+        // let interviewers: Array<MasterData> = [{
+        //     "Id": 11,
+        //     "Value": "Rohit Sevaramani"
+        // },
+        //     {
+        //         "Id": 2,
+        //         "Value": "Bharati Shinde"
+        //     }];
+        // return interviewers;
 
+    }
+
+       //Post Method to ScheduleInterview
+    GetInterviewDetailsByInterviewID(InterviewID: MasterData) {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetCandidateInterviewSchedule');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { InterviewID })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     private extractData(res: Response) {

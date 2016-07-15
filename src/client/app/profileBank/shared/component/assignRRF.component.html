@@ -28,7 +28,7 @@
                             <div class="col-md-6">
                                 <select class="form-control" required (change)='onSelectRRF($event.target.value)'>
                                     <option></option>
-                                     <option *ngFor="let rrf of RRFList" [value]="rrf.RRFID">{{rrf.RRFID}} - {{rrf.PositionTitle}} - {{rrf.RaisedBy.Value}}</option> 
+                                     <option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Id">{{rrf.RRFID.Value}} - {{rrf.PositionTitle}} - {{rrf.RaisedBy.Value}}</option> 
                                 </select>
                             </div>
 
@@ -135,7 +135,7 @@
                                         <tbody>
                                             <tr *ngFor="let candidate of  CandidateAssigment.Candidates; let index = index">
                                                 <td> {{index+1}} </td>
-                                                <td> {{candidate.CandidateID}}</td>
+                                                <td> {{candidate.CandidateID.Value}}</td>
                                                 <td> {{candidate.Candidate}}</td>
                                                 <td><a (click)='onDelete(candidate)'> Remove <i class="fa fa-times" ></i> </a></td>
 

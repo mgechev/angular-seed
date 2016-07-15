@@ -13,6 +13,7 @@ export class Event {
     start: string;
     end: string;
     resourceId: any;
+    Resource:string;
    // allDay: boolean = true;
 }
 export class Resource {

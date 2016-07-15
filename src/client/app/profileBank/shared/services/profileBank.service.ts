@@ -31,7 +31,7 @@ export class ProfileBankService {
             .finally(() => this._spinnerService.hide());
     }
 
-    getCandidateOwnwershipInfo(candidateIds: Array<string>) {
+    getCandidateOwnwershipInfo(candidateIds: Array<MasterData>) {
         let url = Config.GetURL('/api/ProfileBank/getCandidateOwnwershipInfo');
         this._spinnerService.show();
         return this.authHttp.post(url, { CandidateIds: candidateIds })
@@ -158,7 +158,7 @@ export class ProfileBankService {
 
     }
 
-    updateFollowUpComments(CandidateID: string, Comments: string) {
+    updateFollowUpComments(CandidateID: MasterData, Comments: string) {
         let url = Config.GetURL('/api/ProfileBank/UpdateFollowUpComments');
         this._spinnerService.show();
         return this.authHttp.post(url, { CandidateID: CandidateID, FollowUpComments: Comments })
