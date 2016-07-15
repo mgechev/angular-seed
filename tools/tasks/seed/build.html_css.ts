@@ -97,7 +97,7 @@ function processExternalStylesheets() {
  */
 function processAllExternalStylesheets() {
   return merge(getExternalCssStream(), getExternalScssStream())
-    .pipe(isProd ? plugins.concatCss(CSS_PROD_BUNDLE) : plugins.util.noop())
+    .pipe(isProd ? plugins.concatCss(CSS_PROD_BUNDLE,{rebaseUrls: false}) : plugins.util.noop())
     .pipe(plugins.postcss(processors))
     .pipe(isProd ? cleanCss() : plugins.util.noop())
     .pipe(gulp.dest(CSS_DEST));
@@ -143,7 +143,7 @@ function getExternalScss() {
 function processExternalCss() {
   return getExternalCssStream()
     .pipe(plugins.postcss(processors))
-    .pipe(isProd ? plugins.concatCss(CSS_PROD_BUNDLE) : plugins.util.noop())
+    .pipe(isProd ? plugins.concatCss(CSS_PROD_BUNDLE,{rebaseUrls: false}) : plugins.util.noop())
     .pipe(isProd ? cleanCss() : plugins.util.noop())
     .pipe(gulp.dest(CSS_DEST));
 }
