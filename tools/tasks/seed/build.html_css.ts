@@ -10,7 +10,6 @@ import {
   APP_SRC,
   BROWSER_LIST,
   CSS_DEST,
-  CSS_PROD_BUNDLE,
   CSS_SRC,
   DEPENDENCIES,
   ENABLE_SCSS,
@@ -21,6 +20,7 @@ import {
 
 const plugins = <any>gulpLoadPlugins();
 const cleanCss = require('gulp-clean-css');
+const gulpConcatCssConfig = getPluginConfig('gulp-concat-css');
 
 const processors = [
   autoprefixer({
@@ -97,7 +97,7 @@ function processExternalStylesheets() {
  */
 function processAllExternalStylesheets() {
   return merge(getExternalCssStream(), getExternalScssStream())
-    .pipe(isProd ? plugins.concatCss(CSS_PROD_BUNDLE) : plugins.util.noop())
+    .pipe(isProd ? plugins.concatCss(gulpConcatCssConfig.targetFile, gulpConcatCssConfig.options) : plugins.util.noop())
     .pipe(plugins.postcss(processors))
     .pipe(isProd ? cleanCss() : plugins.util.noop())
     .pipe(gulp.dest(CSS_DEST));
@@ -143,7 +143,7 @@ function getExternalScss() {
 function processExternalCss() {
   return getExternalCssStream()
     .pipe(plugins.postcss(processors))
-    .pipe(isProd ? plugins.concatCss(CSS_PROD_BUNDLE) : plugins.util.noop())
+    .pipe(isProd ? plugins.concatCss(gulpConcatCssConfig.targetFile, gulpConcatCssConfig.options) : plugins.util.noop())
     .pipe(isProd ? cleanCss() : plugins.util.noop())
     .pipe(gulp.dest(CSS_DEST));
 }
