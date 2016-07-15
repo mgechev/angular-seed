@@ -4,12 +4,14 @@ import {Interview} from '../../Shared/model/Interview';
 import {InterviewersScheduleService} from '../services/interviewers.schedule.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { MasterData } from  '../../../shared/model/index';
+import { FullCalendarComponent} from  '../../../shared/components/calendar/fullCalendar';
+import {CalendarDetails, Event, Resource} from '../../ScheduleInterview/model/CalendarDetails';
 
 @Component({
     moduleId: module.id,
     selector: 'interviewers-shedule',
     templateUrl: 'interviewers.schedule.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, FullCalendarComponent],
     providers: [Interview, ToastsManager, InterviewersScheduleService]
 })
 
@@ -21,18 +23,30 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
     AwaitedInterviewInformation: Array<Interview> = new Array<Interview>();
     InterviewInformationForCalendar: Array<Interview> = new Array<Interview>();
     interviewdd: Interview = new Interview();
+    InterviewerCalendarDetails: CalendarDetails = new CalendarDetails();
+    header: any = {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+    };
+
+
     constructor(private _router: Router,
         private toastr: ToastsManager,
         private _interviewService: InterviewersScheduleService) {
         this.InterviewInformation = new Array<Interview>();
         this.AwaitedInterviewInformation = new Array<Interview>();
         this.InterviewInformationForCalendar = new Array<Interview>();
+        //this.getMyAllInterviewsDetailsOfCalendar();
+
     }
     //Router method overrid from OnActivate class
     routerOnActivate() {
         this.getMyInterviews();
-        this.getAwaitedInterviews();
-        //this.getMyInterviewsForCalenar();
+        this.InterviewerCalendarDetails.Events = <any>this._interviewService.getEvent();
+        this.InterviewerCalendarDetails.Resources = <any>this._interviewService.getResources();
+
+        this.getMyAllInterviewsDetailsOfCalendar();
         this.returnPath = sessionStorage.getItem('returnPath');
     }
     Back() {
@@ -53,32 +67,22 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
             });
     }
 
-    getMyInterviewsForCalenar() {
-        this._interviewService.getMyInterviewsOfCalendar()
+    //used for calender view
+    getMyAllInterviewsDetailsOfCalendar() {
+        this._interviewService.getMyAllInterviewsDetailsOfCalendar()
             .subscribe(
             (results: any) => {
-                this.InterviewInformationForCalendar = results;
+                this.InterviewerCalendarDetails = results;
             },
             error => {
                 this.errorMessage = <any>error;
                 this.toastr.error(<any>error);
             });
     }
-
-    getAwaitedInterviews() {
-        this._interviewService.getAwaitedInterviews()
-            .subscribe(
-            (results: any) => {
-                this.AwaitedInterviewInformation = results;
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.toastr.error(<any>error);
-            });
-    }
+    
     showIEF(_interviewID: string) {
         console.log('showing IEF form..!');
-        this._router.navigate(['/App/Recruitment Cycle/Interviewers/ief/'+ _interviewID]);
+        this._router.navigate(['/App/Recruitment Cycle/Interviewers/ief/' + _interviewID]);
     }
 
     rejectInterview(_rrfID: MasterData) {

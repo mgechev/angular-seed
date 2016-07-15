@@ -234,8 +234,13 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div style="height:250px; text-align-last: center;">
-                            In Progress...
+                        <div style=" text-align-last: center;">
+                            <full-calendar [resources]="InterviewerCalendarDetails.Resources"
+                                           [events]="InterviewerCalendarDetails.Events" 
+                                           [header]="header" 
+                                           defaultDate="2016-07-12"
+                                           [eventLimit]="4" [editable]="true">
+                            </full-calendar>
                         </div>
                     </div>
                 </div>

@@ -32,16 +32,7 @@ export class InterviewersScheduleService {
             .finally(() => this._spinnerService.hide());
     }
 
-    //Get interviewer's all booking to display in calendar
-    getMyInterviewsOfCalendar() {
-        let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewerAwaitingConfirmationInterviews');
-        this._spinnerService.show();
-        return this.authHttp.get(url)
-            .map(this.extractData)
-            .catch(this.handleError)
-            .finally(() => this._spinnerService.hide());
-    }
-/**Commenting as this fuctionality is depricated */
+    /**Commenting as this fuctionality is depricated */
     // acceptAwaitedInterview(_rrfID: MasterData) {
     //     let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewerAwaitingConfirmationInterviews');
     //     this._spinnerService.show();
@@ -59,6 +50,33 @@ export class InterviewersScheduleService {
     //         .finally(() => this._spinnerService.hide());
     // }
 
+    getMyAllInterviewsDetailsOfCalendar() {
+        let url = Config.GetURL('/api/RecruitmentCycle/CalendarViewGetMyBookedCalendar');
+        this._spinnerService.show();
+        return this.authHttp.post(url, 'sda')
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
+    getResources() {
+        return [{ id: 1, title: 'InterViewer A', eventColor: this.generateHexColors() },
+            { id: 2, title: 'InterViewer B', eventColor: this.generateHexColors() },
+            { id: 3, title: 'InterViewer C', eventColor: this.generateHexColors() }];
+    }
+
+    getEvent() {
+        return [{
+            'id': 1,
+            'resourceId': 3,
+            'title': 'All Day EventAll Day EventAll Day EventAll Day EventAll Day EventAll Day EventAll Day Event',
+            'start': '2016-01-01'
+        }]
+    }
+
+    generateHexColors() {
+        return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+    }
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);
