@@ -67,7 +67,8 @@ export class SeedConfig {
 
   /**
    * The path for the base of the application at runtime.
-   * The default path is `/`, which can be overriden by the `--base` flag when running `npm start`.
+   * The default path is based on the environment ('/' for development and '' for production),
+   * which can be overriden by the `--base` flag when running `npm start`.
    * @type {string}
    */
   APP_BASE = argv['base'] || (this.ENV === ENVIRONMENTS.DEVELOPMENT ? '/' : '');
@@ -435,6 +436,18 @@ export class SeedConfig {
     'gulp-sass': {
       includePaths: ['./node_modules/']
     },
+
+    /**
+     * The options to pass to gulp-concat-css
+     * Reference: https://github.com/mariocasciaro/gulp-concat-css
+     * @type {object}
+     */
+    'gulp-concat-css': {
+      targetFile: this.CSS_PROD_BUNDLE,
+      options: {
+        rebaseUrls: false
+      }
+    }
   };
 
   /**
