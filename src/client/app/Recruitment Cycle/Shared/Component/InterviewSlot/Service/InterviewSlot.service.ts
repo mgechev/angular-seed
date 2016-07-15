@@ -23,7 +23,7 @@ export class InterviewSlotService {
     }
 
     deleteCalenderSlot(CalenderSlots: CalenderSlot) {
-        let url = Config.GetURL('/api/RecruitmentCycle/RemoveInterviewerAvailability');
+        let url = Config.GetURL('/api/RecruitmentCycle/RemoveAvailability');
         this._spinnerService.show();
         return this.authHttp.post(url, CalenderSlots)
             .map(this.extractData)

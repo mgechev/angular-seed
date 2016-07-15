@@ -24,7 +24,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor='let slot of meta; let slotindex = index'>
+                    <tr *ngFor='let slot of meta; let slotindex = index' >
                         <td> {{slot.ID}} </td>
                         <td >
                              <input type="text" [(ngModel)]='slot.Title' [disabled]="slot.ID != undefined" id="slotTitle" class="form-control" placeholder="Slot Title"
@@ -32,12 +32,12 @@
                         </td>
                         <td>
                             <div>
-                                <input type="date" [(ngModel)]='slot.StartDate' [disabled]="slot.ID != undefined" tooltip="Start Date" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!slot.StartTime"
+                                <input type="date" [(ngModel)]='slot.StartDate' [disabled]="slot.ID != undefined" tooltip="Start Date" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!slot.StartDate"
                                 />
                             </div>
 
                             <div>
-                                <input type="date" [(ngModel)]='slot.EndDate' [disabled]="slot.ID != undefined" tooltip="End Date" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!slot.EndTime"
+                                <input type="date" [(ngModel)]='slot.EndDate' [disabled]="slot.ID != undefined" tooltip="End Date" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!slot.EndDate"
                                 />
                             </div>
                         </td>
@@ -45,10 +45,10 @@
                         <td>
 
                             <div class="">
-                                <input type="time" name="" id=""[disabled]="slot.ID != undefined" required="" step="900" [(ngModel)]="slot.CalendarDetails.StartTime" />
+                                <input type="time" name="" id=""[disabled]="slot.ID != undefined" required="" step="900" [(ngModel)]="slot.CalendarDetails[0].StartTime" />
                             </div>
                             <div class="">
-                                <input type="time" name="" id="" [disabled]="slot.ID != undefined" required="" step="900" [(ngModel)]="slot.CalendarDetails.EndTime" />
+                                <input type="time" name="" id="" [disabled]="slot.ID != undefined" required="" step="900" [(ngModel)]="slot.CalendarDetails[0].EndTime" />
                             </div>
                         </td>
                         <td>

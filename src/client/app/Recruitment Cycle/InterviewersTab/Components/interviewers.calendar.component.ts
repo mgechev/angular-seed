@@ -1,27 +1,25 @@
-import {Component} from '@angular/core';
+import { Component, OnInit,AfterViewInit} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import {Interview} from '../../Shared/model/Interview';
-import {InterviewersCalendarService} from '../services/interviewers.calendar.service';
+import { Interview} from '../../Shared/model/Interview';
+import { InterviewersCalendarService} from '../services/interviewers.calendar.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { FullCalendarComponent} from  '../../../shared/components/calendar/fullCalendar';
-import { Resource} from '../../ScheduleInterview/model/CalendarDetails';
-import {InterviewersAvailabilityService} from '../services/interviewers.availability.service';
-import { ResponseFromAPI, MasterData} from '../../../shared/model/common.model';
-import { APIResult} from  '../../../shared/constantValue/index';
+import { Resource, Event, CalendarDetails} from '../../ScheduleInterview/model/CalendarDetails';
+import { InterviewersAvailabilityService} from '../services/interviewers.availability.service';
+import { MasterData} from '../../../shared/model/common.model';
 import { DetailRRF } from '../../Shared/model/detailRRF';
-import {InterviewSlotComponent } from '../../Shared/Component/InterviewSlot/Component/InterviewSlot.component';
-
+import { InterviewSlotComponent } from '../../Shared/Component/InterviewSlot/Component/InterviewSlot.component';
 
 @Component({
     moduleId: module.id,
     selector: 'interviewers-mycalendar',
     templateUrl: 'interviewers.calendar.component.html',
     directives: [ROUTER_DIRECTIVES, FullCalendarComponent, InterviewSlotComponent],
-    providers: [Interview, ToastsManager, InterviewersCalendarService,InterviewersAvailabilityService]
+    providers: [Interview, ToastsManager, InterviewersCalendarService, InterviewersAvailabilityService]
 })
 
 /** RecruitmentInterviewerCalenderComponent implements OnActivate*/
-export class RecruitmentInterviewerCalenderComponent implements OnActivate{
+export class RecruitmentInterviewerCalenderComponent implements OnActivate,OnInit,AfterViewInit {
     returnPath: string;
     Title: string;
     errorMessage: string;
@@ -34,9 +32,10 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate{
     RRFIdTOShowSlot: MasterData = new MasterData();
     RRFCode: string;
     showSlotForRRF: boolean = false;
-    selectedRRFID: number=0;
-    AddNewSlotText: string = "Add New Slot";
-   
+    selectedRRFID: number = 0;
+    AddNewSlotText: string = "Add Slot";
+     _myCalendarDetails: CalendarDetails = new CalendarDetails();
+
 
     constructor(private _router: Router,
         private toastr: ToastsManager,
@@ -46,8 +45,8 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate{
     }
     routerOnActivate() {
         //Get Events to show on Calendar
-        this.events = this._interviewService.getCalendarEventData();
-        this.resources = this._interviewService.getResources();
+        //this.events = this._interviewService.getCalendarEventData();
+        //this.resources = this._interviewService.getResources();
         //Pass Headers
         this.header = {
             left: 'prev,next today',
@@ -67,7 +66,8 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate{
         this._interviewService.getMyAvailability()
             .subscribe(
             (results: any) => {
-                this.InterviewAvailabilityInformation = results;
+               // this.InterviewAvailabilityInformation = results;
+               this._myCalendarDetails = results;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -93,22 +93,30 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate{
     }
 
     addNewSlot() {
-        if (this.showSlotForRRF == false){
+        if (this.showSlotForRRF === false) {
             this.showSlotForRRF = true;
             this.AddNewSlotText = "Hide Slot"
-            for (var index = 0; index < this.myAssignedRRF.length; index++) {
-                //TODO : implement below code
-                // if (this.myAssignedRRF[index].RRFID.Id == this.selectedRRFID) {
-                // }
-
+            for (var i = 0; i < this.myAssignedRRF.length; i++) {
+                if (this.myAssignedRRF[i].RRFID.Id == this.selectedRRFID) {
+                    this.RRFIdTOShowSlot = this.myAssignedRRF[i].RRFID;
+                    break;
+                }
             }
         }
         else {
             this.showSlotForRRF = false;
-            this.AddNewSlotText = "Add New Slot"
+            this.AddNewSlotText = "Add Slot"
         }
 
     }
     
-   
+    ngOnInit() {
+        //this.getMyInterviews();
+    }
+    
+    ngAfterViewInit() {
+        this.getMyInterviews();
+    }
+
+
 }

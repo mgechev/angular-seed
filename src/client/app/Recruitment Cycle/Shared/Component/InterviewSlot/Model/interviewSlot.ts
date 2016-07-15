@@ -7,7 +7,7 @@ export class CalenderSlot {
     public Title: string;
     public StartDate: Date;
     public EndDate: Date;
-    public CalendarDetails: CalenderDetails = new CalenderDetails();
+    public CalendarDetails: CalenderDetails[] = [];
 }
 
 export class CalenderDetails {

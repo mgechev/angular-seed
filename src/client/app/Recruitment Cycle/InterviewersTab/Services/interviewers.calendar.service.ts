@@ -89,7 +89,7 @@ export class InterviewersCalendarService {
     /**Get Current Logged in user availability and booked slot information to display in calendar */
     /**API needs to be update */
     getMyAvailability() {
-        let url = Config.GetURL('/api/RecruitmentCycle/GetUserInterviewDetails');
+        let url = Config.GetURL('/api/RecruitmentCycle/CalendarViewGetMyInterviewCalendar');
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
