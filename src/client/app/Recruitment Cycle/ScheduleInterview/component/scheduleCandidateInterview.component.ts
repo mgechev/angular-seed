@@ -50,8 +50,12 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     modal: any = $('#fullCalModal');
     SelectedInterviewers: Array<Interviewers>;
     TodaysDate: Date = new Date();
-
+    isBookedSlot: boolean = false;
+    isAvailableSlot: boolean = false;
+    showConfirmation: boolean = false;
     InterviewerMultiselect: any = $('#cmbInterviewers');
+
+
 
     constructor(private _router: Router,
         private _calendarDataService: CalendarDataService,
@@ -71,7 +75,9 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         this.OtherInterviewers = new Array<MasterData>();
         this.SelectedInterviewers = new Array<Interviewers>();
         this.InterviewerCalendarDetails = new CalendarDetails();
+        this.getResources();
     }
+
 
     AddResources(value: any) {
         // this.resources = new Array<Resource>();
@@ -101,9 +107,10 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         this.getInterviewTypes();
         this.getInterviewModes();
         this.getOtherInterviewers();
-        //Get Resources for Calendar
-        this.getResources();
 
+        //get Resources
+        //this.getResources();
+        this.InterviewerCalendarDetails.Resources = JSON.parse(localStorage.getItem('resources'));
         //Pass Headers
         this.header = {
             left: 'prev,next today',
@@ -127,16 +134,17 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     }
 
     getResources() {
-        // this._calendarDataService.GetResources()
-        //     .subscribe(
-        //     (results:any) => {
-        //         if(results!== null) {
-        //             this.setResources(results);
-        //          //   this.InterviewerCalendarDetails.Resources = <any>results;
-        //         }
-        //     },
-        //     error => this.errorMessage = <any>error);
-        this.InterviewerCalendarDetails.Resources = this._calendarDataService.GetResources();
+        this._calendarDataService.GetResources()
+            .subscribe(
+            (results: any) => {
+                if (results !== null) {
+                    // this.setResources(results);
+                    // this.InterviewerCalendarDetails.Resources = <any>results;
+                    localStorage.setItem('resources', JSON.stringify(results));
+                }
+            },
+            error => this.errorMessage = <any>error);
+        // this.InterviewerCalendarDetails.Resources = this._calendarDataService.GetResources();
     }
     setResources(results: any) {
         this.InterviewerCalendarDetails.Resources = results;
@@ -249,26 +257,31 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             this.getOtherSelectedInterviewers(value);
         }
 
-        console.log(JSON.stringify(this.ScheduleInterView));
-
-
-
-        if (this.checkAvailability()) {
-            this.toastr.success('TimeSlot Valid');
-            this.ScheduleCandidateInterView();
-        } else {
+        var CheckOverlapping = this.checkAvailability();
+        if (!CheckOverlapping && this.showConfirmation === true) {
             let cnfrmBox: any = $('#confirmSlot');
             cnfrmBox.modal('toggle');
-            //this.toastr.error('TimeSlot InValid');
+        } else if (CheckOverlapping && this.isBookedSlot === false && this.isAvailableSlot === true) {
+            this.toastr.success('Timeslot Valid');
+            this.ScheduleCandidateInterView();
+        } else if (CheckOverlapping && this.isBookedSlot === false && this.isAvailableSlot === false) {
+            let cnfrmBox: any = $('#confirmSlot');
+            cnfrmBox.modal('toggle');
+        } else {
+            this.toastr.warning('You can not schedule interview in booked slot');
         }
     }
 
     ScheduleCandidateInterView() {
+        let cnfrmBox: any = $('#confirmSlot');
+        cnfrmBox.modal('hide');
+        this.changeStatus(this.ScheduleInterView.Status);
         this._ScheduleInterviewService.ScheduleInterviewForCandidate(this.ScheduleInterView)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
+
                     this.redirectToPreviousView();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
@@ -339,7 +352,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
 
             // this.InterviewerCalendarDetails.Events =
             //     this._calendarDataService.GetInterviewerCalendarDetail(this.SelectedInterviewers).Events;
-            this.resources = this._calendarDataService.GetResources();
+            //  this.resources = this._calendarDataService.GetResources();
             console.log(this.SelectedInterviewers);
         }
     }
@@ -387,8 +400,12 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
 
     //Check For Valid And Invalid Slots while scheduling interview
     checkAvailability() {
+        this.isAvailableSlot = this.isBookedSlot = this.showConfirmation = false;
+
         var Booked = this.InterviewerCalendarDetails.Resources
         [_.findIndex(this.InterviewerCalendarDetails.Resources, { title: 'Booked' })].id;
+        var Available = this.InterviewerCalendarDetails.Resources
+        [_.findIndex(this.InterviewerCalendarDetails.Resources, { title: 'Available' })].id;
 
         for (var index = 0; index < this.InterviewerCalendarDetails.Events.length; index++) {
 
@@ -403,18 +420,44 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             if (givenStrtDate < givenendDate) {
                 if (InterviewersStartDt <= givenStrtDate && InterviewersEndDt >= givenendDate) {
                     if (this.InterviewerCalendarDetails.Events[index].resourceId === Booked) {
+                        this.isBookedSlot = true;
                         return false;
+                    } else if (this.InterviewerCalendarDetails.Events[index].resourceId === Available) {
+                        this.isAvailableSlot = true;
+                        return true;
                     }
-                } else return false;
-                // else if (InterviewersStartDt.getDate() === givenStrtDate.getDate()) {
-                //     return false;
-                // }
+                } else if (InterviewersStartDt.getDate() === givenStrtDate.getDate()) {
+                    if (this.InterviewerCalendarDetails.Events[index].resourceId === Booked) {
+                        //Booked Time should not overlap
+                        if ((InterviewersStartDt >= givenStrtDate && InterviewersStartDt >= givenendDate) ||
+                            (InterviewersEndDt <= givenendDate && InterviewersEndDt <= givenStrtDate)) {
+                            this.showConfirmation = true;
+                            return false;
+                        } else return false;
+                    } else { this.showConfirmation = true; return false; }
+                }
             } else return false;
-
         }
+
         return true;
     }
 
+    changeStatus(status: string) {
+        if (status !== null) {
+            switch (status.toLowerCase()) {
+                case '':
+                    this.ScheduleInterView.Status = 'Scheduled';
+                    break;
+                case 'scheduled':
+                    this.ScheduleInterView.Status = 'Re-Scheduled';
+                    break;
+                case 're-scheduled':
+                    this.ScheduleInterView.Status = 'Re-Scheduled';
+                    break;
+            }
+        }
+
+    }
     getNominatedInterviewers_1(RoundID: string) {
         var i = _.findIndex(this.InterviewRounds, { Id: parseInt(RoundID) });
         if (i >= 0)

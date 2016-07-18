@@ -116,10 +116,11 @@
                                                     <td> {{selectedcandidate.InterviewDetails.Status}} </td>
                                                     <!--{{AllCandidatesForRRF.InterviewDetails.Status}}   {{AllCandidatesForRRF.InterviewDetails.Round.Value}} -->
                                                     <td> {{selectedcandidate.InterviewDetails.Round.Value}}</td>
-                                                    <td> <a class="btn blue btn-outline btn-circle btn-sm active" *ngIf="!isInterviewSchedule"
+                                                    <td> <a class="btn blue btn-outline btn-circle btn-sm active" *ngIf="!selectedcandidate.isInterviewScheduled"
                                                             (click)='onScheduleInterviewClick(selectedcandidate)'> Schedule </a>
 
-                                                        <a class="btn blue btn-outline btn-circle btn-sm active" *ngIf="isInterviewSchedule" (click)='onReScheduleInterviewClick(selectedcandidate)'> Re-Schedule </a>
+                                                        <a class="btn blue btn-outline btn-circle btn-sm active" *ngIf="selectedcandidate.isInterviewScheduled" 
+                                                        (click)='onReScheduleInterviewClick(selectedcandidate)'> Re-Schedule </a>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -138,7 +139,7 @@
                                                 <th> # </th>
                                                 <th style="width:20% !important"   >Round</th>
                                                 <th>Interviewer</th>
-                                                <th>Date</th>
+                                                <th style="width:20% !important">Date</th>
                                                 <th style="width:20% !important">Status</th>
                                             </tr>
                                         </thead>
