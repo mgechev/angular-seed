@@ -96,35 +96,34 @@
 
                                 </div>
                                 <div class="mt-radio-inline col-lg-7 col-sm-7">
-                                    <div class="col-lg-4 col-sm-4">
+                                    <div class="col-lg-3 col-sm-3">
                                         <label class="mt-radio" [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']">
                                             <input type="radio" name="viewType" value="myRRF" [checked]="currentView == 'myRRF'" (click)="onViewChanged('myRRF')" /> My RRF
                                             <span></span>
                                         </label>
                                     </div>
-                                    <div class="col-lg-4 col-sm-4">
+                                    <div class="col-lg-3 col-sm-3">
                                         <label class="mt-radio" [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']">
                                             <input type="radio" name="viewType" value="allRRF" [checked]="currentView == 'allRRF'" (click)="onViewChanged('allRRF') "
                                             /> All RRF
                                             <span></span>
                                         </label>
                                     </div>
-                                    <!--<div class="col-lg-3 col-sm-3" [ifAuthorize]="['RRF.RECRUITERUNASSIGNEDRRF12']">
-                                        <label class="mt-radio" >
+                                    <div class="col-lg-3 col-sm-3">
+                                        <!--<div class="col-lg-3 col-sm-3">-->
+                                        <label class="mt-radio" [ifAuthorize]="['RRF.RECRUITERUNASSIGNEDRRF.MANAGE']">
                                             <input type="radio" name="viewType" value="unAssignRRF" [checked]="currentView == 'unAssignRRF'" (click)="onViewChanged('unAssignRRF') "
-                                            /> Unassigned RRF
-                                            <span></span>
-                                        </label>
-                                    </div>-->
-                                    <div class="col-lg-4 col-sm-4">
-                                        <label class="mt-radio"  [ifAuthorize]="['RRF.RECRUITERASSIGNEDRRF.MANAGE']">
-                                            <input type="radio" name="viewType" value="assignRRF" [checked]="currentView == 'assignRRF'" (click)="onViewChanged('assignRRF') "
-                                            /> Assigned RRF
+                                            /> Unassigned
                                             <span></span>
                                         </label>
                                     </div>
-                                    
-
+                                    <div class="col-lg-3 col-sm-3">
+                                        <label class="mt-radio" [ifAuthorize]="['RRF.RECRUITERASSIGNEDRRF.MANAGE']">
+                                            <input type="radio" name="viewType" value="assignRRF" [checked]="currentView == 'assignRRF'" (click)="onViewChanged('assignRRF') "
+                                            /> Assigned
+                                            <span></span>
+                                        </label>
+                                    </div>
                                 </div>
                                 <div class="form-group col-lg-2 col-sm-2" *ngIf="currentView =='assignRRF'">
                                     <select id="cmbAssignedTo" class="form-control" [(ngModel)]="selectedRecruiter.Id" (change)="onRecChange($event.target.value)">

@@ -109,7 +109,7 @@ export class RRFDashboardService {
     }
     
     GetAllUnAssignedRRF() {
-        let url = Config.GetURL('/api/RRF/GetMyRRF');
+        let url = Config.GetURL('/api/RRF/GetRRFUnAssignedToRecruiter');
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)

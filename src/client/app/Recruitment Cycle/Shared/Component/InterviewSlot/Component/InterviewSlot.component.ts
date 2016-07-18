@@ -76,10 +76,11 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
                 this.meta = <any>results;
                 if (this.meta.length === 0) {
                     this.addNewSlot();
-                } else{
+                } else {
                     for (var i = 0; i < this.meta.length; i++) {
-                    this.meta[i].StartDate =<any>this.formatDate(this.meta[i].StartDate);
-                    this.meta[i].EndDate =<any>this.formatDate(this.meta[i].EndDate);
+                        this.meta[i].StartDate = <any>this.formatDate(this.meta[i].StartDate);
+                        this.meta[i].EndDate = <any>this.formatDate(this.meta[i].EndDate);
+                    }
                 }
             },
             error => {
@@ -114,7 +115,7 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                     this.getRRFSlot();
+                    this.getRRFSlot();
                     this.toastr.success((<ResponseFromAPI>results).Message);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
@@ -125,7 +126,7 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
 
     ngOnChanges(changes: any) {
         // if (changes.RRFCode != undefined && changes.RRFID != undefined) { //TODO when RRFCODE implemented uncommit this line and commit below line
-            if ( changes.RRFID != undefined) {
+        if (changes.RRFID != undefined) {
             this.getRRFSlot();
         }
 
