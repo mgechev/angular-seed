@@ -14,3 +14,19 @@ export class MasterData {
     public Id: number;
     public Value: string;
 }
+
+export class GrdOptions {
+    public IDs: string="";
+    public ButtonClicked: number;
+    /* ButtonClicked 
+                 i. Initial - 0
+                 ii.Next - 1
+                 iii.Prev - (-1)
+             PerPageCount = No of items shown per page
+                 */
+    public NextButton: boolean;
+    public PreviousButton: boolean;
+    public PerPageCount: number;
+    public OrderBy: string = 'Modified';
+    public Order: string = 'asc';
+}
