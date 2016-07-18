@@ -194,13 +194,13 @@ export class CalendarDataService {
     }
 
     GetResources() {
-        //  let url = Config.GetURL('/api/RecruitmentCycle/CalendarViewGetResources');
-        // this._spinnerService.show();
-        // return this.authHttp.get(url)
-        //     .map(this.extractData)
-        //     .catch(this.handleError)
-        //     .finally(() => this._spinnerService.hide());
-        return this.InterviewCalendarDetails.Resources;
+         let url = Config.GetURL('/api/RecruitmentCycle/CalendarViewGetResources');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+        //return this.InterviewCalendarDetails.Resources;
     }
 
     private extractData(res: Response) {

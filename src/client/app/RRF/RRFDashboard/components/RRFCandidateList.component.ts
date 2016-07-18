@@ -41,8 +41,8 @@ export class RRFCandidateListComponent implements OnActivate {
     Candidates: Array<CandidateProfile>;
     AllCandidatesForRRF: RRFSpecificCandidateList[];
     CandidateRoundHistory: Array<Interview>;
-    isRoundHistoryPresent:boolean=false;
-    selectedCandidate : string;
+    isRoundHistoryPresent: boolean = false;
+    selectedCandidate: string;
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
         private _rrfDashboardService: RRFDashboardService,
@@ -88,7 +88,7 @@ export class RRFCandidateListComponent implements OnActivate {
             .subscribe(
             (results: any) => {
                 if (results.length !== undefined) {
-                   // this.AllCandidatesForRRF = results;
+                    // this.AllCandidatesForRRF = results;
                     this.CheckInterviewStatus(results);
                 } else {
                     //If No data present
@@ -108,27 +108,27 @@ export class RRFCandidateListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    getCandidatesRoundHistory(CandidateID: MasterData,CandidateName:string) {
-     this.CandidateRoundHistory = new Array<Interview>();
-     this.selectedCandidate = CandidateName;
+    getCandidatesRoundHistory(CandidateID: MasterData, CandidateName: string) {
+        this.CandidateRoundHistory = new Array<Interview>();
+        this.selectedCandidate = CandidateName;
         this._rrfCandidatesList.getInterviewRoundHistorybyCandidateId(CandidateID, this.RRFID)
             .subscribe(
-            (results :any)=> {
-                if(results !== null && results.length>0) {
-                   this.CandidateRoundHistory = <any>results;
-                   this.isRoundHistoryPresent = false;
-                }else {
+            (results: any) => {
+                if (results !== null && results.length > 0) {
+                    this.CandidateRoundHistory = <any>results;
+                    this.isRoundHistoryPresent = false;
+                } else {
                     this.isRoundHistoryPresent = true;
                 }
             },
             error => this.errorMessage = <any>error);
     }
 
-    showPopOver(Comments  :string,index:string) {
-        let rowId :any = 'round'+index;
-        let row: any = $('#'+rowId);
+    showPopOver(Comments: string, index: string) {
+        let rowId: any = 'round' + index;
+        let row: any = $('#' + rowId);
         row.popover({
-            placement: 'bottom',
+            placement: 'top',
             toggle: 'popover',
             title: 'Comments',
             html: true,
@@ -168,36 +168,40 @@ export class RRFCandidateListComponent implements OnActivate {
 
     onReScheduleInterviewClick(Candidate: RRFSpecificCandidateList) {
         console.log('Re-Schedule');
-
+        sessionStorage.setItem('RRFID', JSON.stringify(this.RRFID));
+        sessionStorage.setItem('Candidate', JSON.stringify(Candidate));
+        this._router.navigate(['/App/Recruitment Cycle/Schedule/'+
+        Candidate.InterviewDetails.InterviewID.Value+'ID'+Candidate.InterviewDetails.InterviewID.Id]);
     }
 
     CheckInterviewStatus(CandidateDetails: Array<RRFSpecificCandidateList>) {
+        this.AllCandidatesForRRF = CandidateDetails;
         for (var index = 0; index < CandidateDetails.length; index++) {
             if (CandidateDetails[index].InterviewDetails.Status !== null) {
                 switch (CandidateDetails[index].InterviewDetails.Status.toLowerCase()) {
                     case 'selected':
                     case 'on-hold':
                     case 'rejected':
-                        this.isInterviewSchedule = true;
+                        this.AllCandidatesForRRF[index].isInterviewScheduled = false;
                         break;
                     case 'scheduled':
                     case 're-scheduled':
-                        this.isInterviewSchedule = false;
+                        this.AllCandidatesForRRF[index].isInterviewScheduled = true;
                         break;
                     default:
                         break;
                 }
             } else {
                 CandidateDetails[index].InterviewDetails.Status = 'Not Scheduled';
-                if(CandidateDetails[index].InterviewDetails.Round.Value === null)
+                if (CandidateDetails[index].InterviewDetails.Round.Value === null)
                     CandidateDetails[index].InterviewDetails.Round.Value = '--';
             }
         }
-        this.AllCandidatesForRRF = CandidateDetails;
+
     }
 
-    getDate(interviewDate:string) {
-           var d = new Date(interviewDate),
+    getDate(interviewDate: string) {
+        var d = new Date(interviewDate),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
             year = d.getFullYear();

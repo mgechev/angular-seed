@@ -8,6 +8,7 @@ export class RRFSpecificCandidateList {
     Candidate: CandidateProfile;
     CandidateList: Array<CandidateProfile> = new Array<CandidateProfile>();
     InterviewDetails : Interview = new Interview();
+    isInterviewScheduled:boolean=false;
     //CandidateInterviewRoundHistory: Array<InterviewRoundHistory> = new Array<InterviewRoundHistory>();
 }
 // export class InterviewRoundHistory {
