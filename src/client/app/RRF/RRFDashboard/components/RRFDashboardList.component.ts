@@ -353,9 +353,9 @@ export class RRFDashboardListComponent implements OnActivate {
         this._router.navigate(['/App/RRF/MyRRF/Edit/' + rrfID.Value + 'ID' + rrfID.Id]);
     }
 
-    onViewCandidateClick(rrfID: string) {
-        rrfID = 'RRF6866237939ID76';
-        this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID]);
+    onViewCandidateClick(rrfID: MasterData) {
+       // rrfID = 'RRF6866237939ID76';
+        this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID.Value + 'ID' + rrfID.Id]);
     }
 
     getLoggedInUser() {

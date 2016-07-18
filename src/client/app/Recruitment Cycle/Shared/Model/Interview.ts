@@ -5,6 +5,7 @@ import { DetailRRF } from  './detailRRF';
 export class Interview {
     public detailsRRF: DetailRRF = new DetailRRF();
     public CandidateID: MasterData = new MasterData();
+    public Candidate : string;
     public CANDIDATECODE: string;
     public InterviewID: MasterData = new MasterData();
     public InterviewDate: string;

@@ -16,7 +16,7 @@ export class ScheduleInterviewService {
     ScheduleInterviewForCandidate(ScheduleInterview: Interview) {
         let url = Config.GetURL('/api/RecruitmentCycle/ScheduleCandidateInterview');
         this._spinnerService.show();
-        return this.authHttp.post(url, { InterviewDetails: ScheduleInterview })
+        return this.authHttp.post(url, { InterviewDetails:ScheduleInterview })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

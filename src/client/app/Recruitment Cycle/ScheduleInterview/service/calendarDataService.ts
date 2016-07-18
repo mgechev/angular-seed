@@ -6,6 +6,7 @@ import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
 import {CalendarDetails} from '../model/CalendarDetails';
+import {InterviewersPanel, Interviewers} from '../model/scheduleInterview';
 
 @Injectable()
 export class CalendarDataService {
@@ -181,15 +182,15 @@ export class CalendarDataService {
             .finally(() => this._spinnerService.hide());
     }
     //Get All InterViewer's All Events Available And Booked Slots 
-    GetInterviewerCalendarDetail(InterViewers: Array<MasterData>) {
+    GetInterviewerCalendarDetail(Interviewers: Array<Interviewers>) {
         //TODO : Change URL
-        //  let url = Config.GetURL('api/RecruitmentCycle/CalendarViewGetInterviewCalendarByMultipleInterviewers');
-        //   this._spinnerService.show();
-        //   return this.authHttp.post(url, { InterViewers })
-        //       .map(this.extractData)
-        //       .catch(this.handleError)
-        //       .finally(() => this._spinnerService.hide());
-        return this.InterviewCalendarDetails;
+         let url = Config.GetURL('/api/RecruitmentCycle/CalendarViewGetInterviewCalendarByMultipleInterviewers');
+          this._spinnerService.show();
+          return this.authHttp.post(url, { Interviewers })
+              .map(this.extractData)
+              .catch(this.handleError)
+              .finally(() => this._spinnerService.hide());
+        //return this.InterviewCalendarDetails;
     }
 
     GetResources() {

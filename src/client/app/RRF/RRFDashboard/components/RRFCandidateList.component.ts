@@ -42,7 +42,7 @@ export class RRFCandidateListComponent implements OnActivate {
     AllCandidatesForRRF: RRFSpecificCandidateList[];
     CandidateRoundHistory: Array<Interview>;
     isRoundHistoryPresent:boolean=false;
-
+    selectedCandidate : string;
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
         private _rrfDashboardService: RRFDashboardService,
@@ -72,7 +72,7 @@ export class RRFCandidateListComponent implements OnActivate {
         //onScheduleInterviewClick(Candidate:any) 
         sessionStorage.setItem('RRFID', JSON.stringify(this.RRFID));
         sessionStorage.setItem('Candidate', JSON.stringify(Candidate));
-        this._router.navigate(['/App//Recruitment Cycle/Schedule/New']);
+        this._router.navigate(['/App/Recruitment Cycle/Schedule/New']);
     }
 
     chartClicked(e: any): void {
@@ -108,9 +108,10 @@ export class RRFCandidateListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    getCandidatesRoundHistory(CandidateID: MasterData) {
+    getCandidatesRoundHistory(CandidateID: MasterData,CandidateName:string) {
+     this.CandidateRoundHistory = new Array<Interview>();
+     this.selectedCandidate = CandidateName;
         this._rrfCandidatesList.getInterviewRoundHistorybyCandidateId(CandidateID, this.RRFID)
-        //this._rrfCandidatesList.getInterviewRoundHistorybyCandidateId('C6132737023', 'RRF6194789912')
             .subscribe(
             (results :any)=> {
                 if(results !== null && results.length>0) {
@@ -123,15 +124,16 @@ export class RRFCandidateListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    showPopOver() {
-        let row: any = $('#round');
+    showPopOver(Comments  :string,index:string) {
+        let rowId :any = 'round'+index;
+        let row: any = $('#'+rowId);
         row.popover({
             placement: 'bottom',
             toggle: 'popover',
             title: 'Comments',
             html: true,
             trigger: 'hover',
-            content: this.Candidate
+            content: Comments
         });
     }
 
@@ -192,5 +194,16 @@ export class RRFCandidateListComponent implements OnActivate {
             }
         }
         this.AllCandidatesForRRF = CandidateDetails;
+    }
+
+    getDate(interviewDate:string) {
+           var d = new Date(interviewDate),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [day, month, year].join('-');
     }
 }

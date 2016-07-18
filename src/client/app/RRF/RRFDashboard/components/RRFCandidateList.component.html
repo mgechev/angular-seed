@@ -111,13 +111,13 @@
                                             <tbody>
                                                 <tr *ngFor="let selectedcandidate of AllCandidatesForRRF; let index = index">
                                                     <td> {{index+1}} </td>
-                                                    <td> <a (click)='getCandidatesRoundHistory(selectedcandidate.CandidateID)'> {{selectedcandidate.Candidate}}</a></td>
+                                                    <td> <a (click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate)'> {{selectedcandidate.Candidate}}</a></td>
 
                                                     <td> {{selectedcandidate.InterviewDetails.Status}} </td>
                                                     <!--{{AllCandidatesForRRF.InterviewDetails.Status}}   {{AllCandidatesForRRF.InterviewDetails.Round.Value}} -->
                                                     <td> {{selectedcandidate.InterviewDetails.Round.Value}}</td>
                                                     <td> <a class="btn blue btn-outline btn-circle btn-sm active" *ngIf="!isInterviewSchedule"
-                                                            (click)='onScheduleInterviewClick(selectedcandidate.Candidate)'> Schedule </a>
+                                                            (click)='onScheduleInterviewClick(selectedcandidate)'> Schedule </a>
 
                                                         <a class="btn blue btn-outline btn-circle btn-sm active" *ngIf="isInterviewSchedule" (click)='onReScheduleInterviewClick(selectedcandidate)'> Re-Schedule </a>
                                                     </td>
@@ -130,24 +130,24 @@
                                 <!-- Candidate List ENDS-->
                                 <!-- Candidate Details -->
                                 <div class="col-md-5" style="border-left:1px solid gray">
-                                    <span class="caption-subject bold" style="font-size : 14px">Jone DEF's' Interview Rounds History</span>
+                                    <span class="caption-subject bold" style="font-size : 14px">{{selectedCandidate}} Interview Rounds History</span>
                                     <br/> <br/>
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
                                                 <th> # </th>
-                                                <th>Round</th>
+                                                <th style="width:20% !important"   >Round</th>
                                                 <th>Interviewer</th>
-                                                <th>Interview Date</th>
-                                                <th>Status</th>
+                                                <th>Date</th>
+                                                <th style="width:20% !important">Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr id="round" *ngFor="let candidateHistory of CandidateRoundHistory; let index = index" (mouseover)='showPopOver()'>
+                                            <tr  *ngFor="let candidateHistory of CandidateRoundHistory; let index = index" (mouseover)='showPopOver(candidateHistory.Comments,index+1)' id="round{{index+1}}">
                                                 <td> {{index+1}} </td>
                                                 <td> {{candidateHistory.Round.Value}}</td>
                                                 <td> <span *ngFor="let interviewer of candidateHistory.InterviewerAvailability">{{interviewer.Interviewer.Value}} ,</span></td>
-                                                <td> {{candidateHistory.InterviewDate}}</td>
+                                                <td> {{getDate(candidateHistory.InterviewDate)}}</td>
                                                 <td> {{candidateHistory.Status}}</td>
                                             </tr>
                                             <!--<tr id="round" (mouseover)='showPopOver()'>
