@@ -6,18 +6,19 @@ export class RRFPipe implements PipeTransform {
     transform(value: RRFDetails[], stringToSearh: string): RRFDetails[] {
         return stringToSearh ? value.filter(rrfData =>
             (
-                rrfData.Priority.Value.includes(stringToSearh) ||
-                rrfData.Status.Value.includes(stringToSearh) ||
-                rrfData.RaisedBy.Value.includes(stringToSearh) ||
-                rrfData.Practice.Value.includes(stringToSearh) ||
-                rrfData.Technology.Value.includes(stringToSearh) ||
-                rrfData.PositionTitle.includes(stringToSearh) ||
-                rrfData.Designation.Value.includes(stringToSearh) ||
-                rrfData.Technology.Value.includes(stringToSearh) ||
-                (<any>(rrfData.MinExp)).includes(stringToSearh) ||
-                (<any>(rrfData.CreatedDate)).includes(stringToSearh) ||
-                (<any>(rrfData.ExpDateOfJoining)).includes(stringToSearh) ||
+                rrfData.Priority.Value.search(new RegExp(stringToSearh, 'i')) !== -1 ||
+                rrfData.Status.Value.search(new RegExp(stringToSearh, 'i')) !== -1 ||
+                rrfData.RaisedBy.Value.search(new RegExp(stringToSearh, 'i')) !== -1 ||
+                rrfData.Practice.Value.search(new RegExp(stringToSearh, 'i')) !== -1 ||
+                rrfData.Technology.Value.search(new RegExp(stringToSearh, 'i')) !== -1 ||
+                rrfData.PositionTitle.search(new RegExp(stringToSearh, 'i')) !== -1 ||
+                rrfData.Designation.Value.search(new RegExp(stringToSearh, 'i')) !== -1 ||
+                rrfData.Technology.Value.search(new RegExp(stringToSearh, 'i')) !== -1 ||
+                (<any>(rrfData.MinExp)).search(new RegExp(stringToSearh, 'i')) !== -1 ||
+                (<any>(rrfData.CreatedDate)).search(new RegExp(stringToSearh, 'i')) !== -1 ||
+                (<any>(rrfData.ExpDateOfJoining)).search(new RegExp(stringToSearh, 'i')) !== -1 ||
                 this.checkForSkill(rrfData, stringToSearh)
+                // rrfData.Priority.Value.includes(stringToSearh) ||
             )
         ) : value;
     }
@@ -25,7 +26,7 @@ export class RRFPipe implements PipeTransform {
     checkForSkill(value: RRFDetails, stringToSearh: string) {
         var result: boolean = false;
         for (var i = 0; i < value.SkillsRequired.length; i++) {
-            if (value.SkillsRequired[i].Value.includes(stringToSearh)) {
+            if (value.SkillsRequired[i].Value.search(new RegExp(stringToSearh, 'i')) !== -1 ) {
                 result = true;
                 return result;
             }
