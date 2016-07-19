@@ -58,7 +58,7 @@
     "gulp-concat-css": "^2.3.0",
     "gulp-filter": "^4.0.0",
     "gulp-inject": "^4.1.0",
-    "gulp-inline-ng2-template": "^2.0.4",
+    "gulp-inline-ng2-template": "^2.0.5",
     "gulp-load-plugins": "^1.2.4",
     "gulp-plumber": "~1.1.0",
     "gulp-postcss": "^6.1.1",
