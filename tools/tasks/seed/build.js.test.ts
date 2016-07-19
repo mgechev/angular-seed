@@ -3,7 +3,7 @@ import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join} from 'path';
 
 import { APP_DEST, APP_SRC, BOOTSTRAP_MODULE, TOOLS_DIR, ENABLE_SCSS } from '../../config';
-import { makeTsProject } from '../../utils';
+import { makeTsProject, templateLocals } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
 
@@ -32,5 +32,6 @@ export = () => {
 
   return result.js
     .pipe(plugins.sourcemaps.write())
+    .pipe(plugins.template(templateLocals()))
     .pipe(gulp.dest(APP_DEST));
 };
