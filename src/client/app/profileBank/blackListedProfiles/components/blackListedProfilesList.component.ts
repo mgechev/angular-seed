@@ -9,13 +9,16 @@ import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
+import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-black-listed-profiles-list',
     templateUrl: 'blackListedProfilesList.component.html',
     directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
-    styleUrls: ['../../myProfiles/components/myProfiles.component.css']
+    styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
+        pipes: [ProfileBankPipe]
+
 })
 
 export class BlackListedProfilesListComponent implements OnActivate {

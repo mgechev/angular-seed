@@ -44,7 +44,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         this.InterviewerCalendarDetails.Resources = <any>this._interviewService.getResources();
 
         this.getMyAllInterviewsDetailsOfCalendar();
-        this.returnPath = sessionStorage.getItem('returnPath');
+        //this.returnPath = sessionStorage.getItem('returnPath');
     }
     Back() {
         if (this.returnPath !== undefined)
@@ -90,6 +90,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         _iefParameters.InterviewType = _interviewType;
         _iefParameters.InterviewID = _interviewId;
         sessionStorage.setItem('SubmitIef', JSON.stringify(_iefParameters));
+        sessionStorage.setItem('onReturnPath','/App/Recruitment Cycle/Interviewers/schedule');
         this._router.navigate(['/App/Recruitment Cycle/Interviewers/ief']);
     }
 

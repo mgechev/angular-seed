@@ -79,10 +79,10 @@ export class AllProfilesListComponent implements OnActivate {
 
     getAllProfiles() {
         try {
-            this._allProfilesService.getAllProfiles(this.CandidateProfiles.GrdOperations)
+            this._allProfilesService.getAllProfiles(this.allProfilesList.GrdOperations)
                 .subscribe(
                 (results: any) => {
-                    if (results.length !== undefined) {
+                    if (results.Profiles.length !== undefined) {
                         this.allProfilesList = <AllCandidateProfiles>results;
                     }
                 },

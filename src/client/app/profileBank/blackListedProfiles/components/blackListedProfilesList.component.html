@@ -136,7 +136,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="gradeX odd" *ngFor="let blacklistedProfile of blacklistedProfilesList.Profiles | ProfileBankPipe : searchString">
+                                                            <!-- *ngFor="let profile of allProfilesList.Profiles | ProfileBankPipe:searchString-->
+                                        <tr class="gradeX odd" *ngFor="let blacklistedProfile of blacklistedProfilesList.Profiles | ProfileBankPipe : searchString ">
                                             <td>
                                                 <tr>
                                                     <td style="float: left;">&nbsp; {{blacklistedProfile.Candidate}}</td>
@@ -196,9 +197,9 @@
                                 </table>
                             </div>
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-10">
                                 </div>
-                                <div class="col-md-4 ">
+                                <div class="col-md-2 ">
                                     <button type="button" class="btn btn-default" [disabled]="!blacklistedProfilesList.GrdOperations.PreviousButton" (click)="OnPaginationClick(-1)">
                                         &laquo; Prev</button> &nbsp;&nbsp;
                                     <button type="button" class="btn btn-default" [disabled]="!blacklistedProfilesList.GrdOperations.NextButton" (click)="OnPaginationClick(1)">

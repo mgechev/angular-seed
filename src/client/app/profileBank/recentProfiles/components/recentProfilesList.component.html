@@ -40,15 +40,6 @@
                     </div>
                     <div class="portlet-body">
                         <div class="table-toolbar">
-                            <div class="row">
-                                <!--<div class="col-md-6 col-sm-6">
-                                    <div class="dataTables_length" id="sample_1_length"><label>Show <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline"><option value="5">5</option><option value="15">15</option><option value="20">20</option><option value="-1">All</option></select></label></div>
-                                </div>
-                                <div class="col-md-6 col-sm-6">
-                                    <div id="sample_1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm input-small input-inline" placeholder="" aria-controls="sample_1"></label></div>
-                                </div>-->
-                            </div>
-
                             <div id="updateRow" [collapse]='!isCollapsed'>
                                 <span class="header">Update Status</span>
                                 <hr style="margin:0px 0px !important" />
@@ -86,6 +77,38 @@
                                     </div>
                                 </form>
                             </div>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-3">
+                                    <div class="dataTables_length" id="sample_1_length">
+                                        <label>Show :
+                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
+                                            [(ngModel)]="recentProfilesList.GrdOperations.PerPageCount" 
+                                            (ngModelChange)="onChange()">
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="20">20</option>
+                                                <option value="50">50</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3">
+                                    
+                                </div>
+                                <div class="col-md-3 col-sm-3">
+                                   
+                                </div>
+
+                                <div class="col-md-3 col-sm-4">
+                                    <div id="sample_1_filter" class="dataTables_filter">
+                                        <label>Search 
+                                            <input type="search" [(ngModel)]="searchString" class="form-control input-sm input-small input-inline " placeholder="" aria-controls="sample_1">
+                                            </label>
+                                    </div>
+                                </div>
+                            </div>
+
+
 
                             <div class="table-scrollable">
                                 <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" id="sample_1"
@@ -163,15 +186,15 @@
                             </div>
                             <!--  Recent Profile pagination Start-->
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-10">
                                 </div>
-                                <div class="col-md-4 ">
+                                <div class="col-md-2 ">
                                     <button type="button" class="btn btn-default" [disabled]="!recentProfilesList.GrdOperations.PreviousButton" (click)="OnPaginationClick(-1)">
                                         &laquo; Prev</button> &nbsp;&nbsp;
                                     <button type="button" class="btn btn-default" [disabled]="!recentProfilesList.GrdOperations.NextButton" (click)="OnPaginationClick(1)">
                                         Next &raquo;</button>
                                 </div>
-                                </div>
+                            </div>
                             <!--  Recent Profile pagination END-->
                         </div>
                     </div>

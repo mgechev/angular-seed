@@ -35,6 +35,7 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
         this.requestedIef = this.getSessionOf<iefModel>('SubmitIef');
         this.getIEFDetails(this.requestedIef);
         this.getIEFHistory(this.requestedIef);
+        this.returnPath = sessionStorage.getItem('onReturnPath');
     }
     ngOnInit() {
         this.getIEFFunctions(this.requestedIef.InterviewType.Id);

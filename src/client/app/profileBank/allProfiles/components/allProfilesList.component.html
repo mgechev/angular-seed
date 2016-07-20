@@ -48,48 +48,6 @@
                     </div>
                     <div class="portlet-body">
                         <div class="table-toolbar">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-3">
-                                    <div class="dataTables_length" id="sample_1_length">
-                                        <label>Show :
-                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" [(ngModel)]="allProfilesList.GrdOperations.PerPageCount" 
-                                            (change)="onChange()">
-                                                <option value="5">5</option>
-                                                <option value="15">10</option>
-                                                <option value="20">20</option>
-                                                <option value="50">50</option>
-                                            </select>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-3">
-                                    <label>Sort By
-                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" [(ngModel)]="allProfilesList.GrdOperations.Order"  
-                                            (change)='onChange()'>
-                                                <option value="asc">ASC</option>
-                                                <option value="desc">DESC</option>
-                                            </select> 
-                                            </label>
-                                </div>
-                                  <div class="col-md-3 col-sm-3">
-                                    <label>Order By  
-                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline" [(ngModel)]="allProfilesList.GrdOperations.OrderBy"
-                                            (change)="onChange()" >
-                                                <option value="modified">Modified</option>
-                                                <option value="status">Status</option>
-                                            </select>
-                                        </label>
-                                </div>
-
-                                <div class="col-md-3 col-sm-4">
-                                    <div id="sample_1_filter" class="dataTables_filter">
-                                        <label>Search 
-                                            <input type="search" [(ngModel)]="searchString" class="form-control input-sm input-small input-inline " placeholder="" aria-controls="sample_1">
-                                            </label>
-                                    </div>
-                                </div>
-                            </div>
-
 
                             <div id="updateRow" *ngIf='isCollapsed'>
                                 <span class="header">Update Status</span>
@@ -126,6 +84,51 @@
                                         </div>
                                     </div>
                                 </form>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3 col-sm-3">
+                                    <div class="dataTables_length" id="sample_1_length">
+                                        <label>Show :
+                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
+                                            [(ngModel)]="allProfilesList.GrdOperations.PerPageCount" 
+                                            (ngModelChange)="onChange()">
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="20">20</option>
+                                                <option value="50">50</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3">
+                                    <label>Sort By
+                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
+                                            [(ngModel)]="allProfilesList.GrdOperations.Order"  
+                                            (ngModelChange)='onChange()'>
+                                                <option value="asc">ASC</option>
+                                                <option value="desc">DESC</option>
+                                            </select> 
+                                            </label>
+                                </div>
+                                <div class="col-md-3 col-sm-3">
+                                    <label>Order By  
+                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline" 
+                                            [(ngModel)]="allProfilesList.GrdOperations.OrderBy"
+                                            (ngModelChange)="onChange()" >
+                                                <option value="modified">Modified</option>
+                                                <option value="status">Status</option>
+                                            </select>
+                                        </label>
+                                </div>
+
+                                <div class="col-md-3 col-sm-4">
+                                    <div id="sample_1_filter" class="dataTables_filter">
+                                        <label>Search 
+                                            <input type="search" [(ngModel)]="searchString" class="form-control input-sm input-small input-inline " placeholder="" aria-controls="sample_1">
+                                            </label>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="table-scrollable">
@@ -221,9 +224,9 @@
                                 <div class="col-md-10">
                                 </div>
                                 <div class="col-md-2 ">
-                                    <button type="button" class="btn btn-default" [disabled]="!CandidateProfiles.GrdOperations.PreviousButton" (click)="OnPaginationClick(-1)">
+                                    <button type="button" class="btn btn-default" [disabled]="!allProfilesList.GrdOperations.PreviousButton" (click)="OnPaginationClick(-1)">
                                         &laquo; Prev</button> &nbsp;&nbsp;
-                                    <button type="button" class="btn btn-default" [disabled]="!CandidateProfiles.GrdOperations.NextButton" (click)="OnPaginationClick(1)">
+                                    <button type="button" class="btn btn-default" [disabled]="!allProfilesList.GrdOperations.NextButton" (click)="OnPaginationClick(1)">
                                         Next &raquo;</button>
                                 </div>
                             </div>

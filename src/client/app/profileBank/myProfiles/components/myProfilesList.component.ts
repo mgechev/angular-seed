@@ -105,7 +105,7 @@ export class MyProfilesListComponent implements OnActivate {
         this._myProfilesService.getMyProfiles(this.myProfilesList.GrdOperations)
             .subscribe(
             (results: any) => {
-                if (results.length !== undefined) {
+                if (results.Profiles.length !== undefined) {
                     this.myProfilesList = <any>results;
                 }
             },

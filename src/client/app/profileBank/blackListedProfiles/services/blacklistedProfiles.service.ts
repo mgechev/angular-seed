@@ -13,7 +13,7 @@ export class BlackListedProfilesService {
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
     getBlackListedProfiles(grdOptions: GrdOptions) {
-        let url = Config.GetURL('/api/ProfileBank/getBlacklistedCandidates');
+        let url = Config.GetURL('/api/ProfileBank/GetBlacklistedCandidates');
         this._spinnerService.show();
         return this.authHttp.post(url,{ grdOptions })
             .map(this.extractData)
