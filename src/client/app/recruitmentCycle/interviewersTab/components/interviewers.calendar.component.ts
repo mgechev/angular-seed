@@ -1,14 +1,14 @@
-import { Component, OnInit,AfterViewInit} from '@angular/core';
+import { Component, OnInit, AfterViewInit} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import { Interview} from '../../shared/model/interview';
+import { Interview} from '../../Shared/model/Interview';
 import { InterviewersCalendarService} from '../services/interviewers.calendar.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { FullCalendarComponent} from  '../../../shared/components/calendar/fullCalendar';
-import { Resource, Event, CalendarDetails} from '../../scheduleInterview/model/calendarDetails';
+import { Resource, Event, CalendarDetails} from '../../ScheduleInterview/model/CalendarDetails';
 import { InterviewersAvailabilityService} from '../services/interviewers.availability.service';
 import { MasterData} from '../../../shared/model/common.model';
-import { DetailRRF } from '../../shared/model/detailRRF';
-import { InterviewSlotComponent } from '../../shared/component/InterviewSlot/Component/InterviewSlot.component';
+import { DetailRRF } from '../../Shared/model/detailRRF';
+import { InterviewSlotComponent } from '../../Shared/Component/InterviewSlot/Component/InterviewSlot.component';
 
 @Component({
     moduleId: module.id,
@@ -19,7 +19,7 @@ import { InterviewSlotComponent } from '../../shared/component/InterviewSlot/Com
 })
 
 /** RecruitmentInterviewerCalenderComponent implements OnActivate*/
-export class RecruitmentInterviewerCalenderComponent implements OnActivate,OnInit,AfterViewInit {
+export class RecruitmentInterviewerCalenderComponent implements OnActivate, OnInit, AfterViewInit {
     returnPath: string;
     Title: string;
     errorMessage: string;
@@ -34,7 +34,7 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate,OnIni
     showSlotForRRF: boolean = false;
     selectedRRFID: number = 0;
     AddNewSlotText: string = "Add Slot";
-     _myCalendarDetails: CalendarDetails = new CalendarDetails();
+    _myCalendarDetails: CalendarDetails = new CalendarDetails();
 
 
     constructor(private _router: Router,
@@ -53,21 +53,37 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate,OnIni
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         };
-        this.getMyInterviews();
+
         this.returnPath = sessionStorage.getItem('returnPath');
+        this.getResources();
+        this.getMyInterviews();
     }
     Back() {
         if (this.returnPath !== undefined)
             this._router.navigate([this.returnPath]);
     }
+
+    getResources() {
+        this._interviewService.GetResources()
+            .subscribe(
+            (results: any) => {
+                // this.InterviewAvailabilityInformation = results;
+                this._myCalendarDetails.Resources = results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+    }
+
     /**Get Interviewers(Current Logged in user) availability and booked slot information to display in calendar */
     getMyInterviews() {
         /**Get Interviewers availability and booked slot information to display in calendar */
         this._interviewService.getMyAvailability()
             .subscribe(
             (results: any) => {
-               // this.InterviewAvailabilityInformation = results;
-               this._myCalendarDetails = results;
+                // this.InterviewAvailabilityInformation = results;
+                this._myCalendarDetails = results;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -109,14 +125,22 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate,OnIni
         }
 
     }
-    
+
     ngOnInit() {
         //this.getMyInterviews();
     }
-    
+
     ngAfterViewInit() {
         this.getMyInterviews();
     }
-
+    //Shows Tooltip on calendar
+    showDetails(e: any) {
+        var StartTime = e.event.start._i.split('T')[1];
+        var EndTime = e.event.end._i.split('T')[1];
+        let element: any = $(e.element);
+        element.tooltip({
+            title: '' + e.event.title
+        });
+    }
 
 }

@@ -22,15 +22,16 @@ export class InterviewersScheduleService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+    /**Comenting this Funcations as this feature is deprecated */
     //Get interviews list which are in waiting for resopnse. 
-    getAwaitedInterviews() {
-        let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewerAwaitingConfirmationInterviews');
-        this._spinnerService.show();
-        return this.authHttp.get(url)
-            .map(this.extractData)
-            .catch(this.handleError)
-            .finally(() => this._spinnerService.hide());
-    }
+    // getAwaitedInterviews() {
+    //     let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewerAwaitingConfirmationInterviews');
+    //     this._spinnerService.show();
+    //     return this.authHttp.get(url)
+    //         .map(this.extractData)
+    //         .catch(this.handleError)
+    //         .finally(() => this._spinnerService.hide());
+    // }
 
     /**Commenting as this fuctionality is depricated */
     // acceptAwaitedInterview(_rrfID: MasterData) {
@@ -53,7 +54,7 @@ export class InterviewersScheduleService {
     getMyAllInterviewsDetailsOfCalendar() {
         let url = Config.GetURL('/api/RecruitmentCycle/CalendarViewGetMyBookedCalendar');
         this._spinnerService.show();
-        return this.authHttp.post(url, 'sda')
+        return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

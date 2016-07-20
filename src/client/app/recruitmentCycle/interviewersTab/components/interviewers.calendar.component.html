@@ -46,7 +46,7 @@
                         <div class="table-container">
                             <!--My Calendar Content-->
                             <full-calendar draggable="false" [resources]="_myCalendarDetails.Resources" [events]="_myCalendarDetails.Events" [header]="header" defaultDate="2016-07-12" [eventLimit]="4"
-                            [editable]="true" (onEventClick)="handleEventClick($event)" [selectable]="true" [selectHelper]="true"
+                            [editable]="true" (onEventClick)="handleEventClick($event)" [selectable]="true" [selectHelper]="true" (onEventRender)="showDetails($event)"
                             (onSelect)="handleDayClick($event)"></full-calendar>
                             <!--/My Calendar Content-->
                         </div>

@@ -133,6 +133,14 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, OnIn
     ngAfterViewInit() {
         this.getMyInterviews();
     }
-
+    //Shows Tooltip on calendar
+    showDetails(e: any) {
+        var StartTime = e.event.start._i.split('T')[1];
+        var EndTime = e.event.end._i.split('T')[1];
+        let element: any = $(e.element);
+        element.tooltip({
+            title: '' + e.event.title
+        });
+    }
 
 }

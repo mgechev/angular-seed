@@ -6,6 +6,8 @@ import { ROUTER_DIRECTIVES, Router, OnActivate, RouteSegment} from '@angular/rou
 import { IEFFunctionComponent} from './IEFFuncations/Component/IEFFunction.component';
 import { InterviewSlotComponent} from './InterviewSlot/Component/InterviewSlot.component';
 import { IEFInformation, iefModel, IEFFunction, IEFSubmission} from '../../Shared/model/ief';
+import { ResponseFromAPI, MasterData} from '../../../shared/model/common.model';
+import { APIResult} from  '../../../shared/constantValue/index';
 
 @Component({
     moduleId: module.id,
@@ -44,13 +46,6 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
 
     /** Get selected cadidate IEF static inforamtion*/
     getIEFDetails(objIEFid: iefModel) {
-        //var objIEFid: iefModel = new iefModel();
-        // objIEFid.RRFID.Id = 66;
-        // objIEFid.RRFID.Value = 'RRF6980895965';
-        // objIEFid.CandidateID.Id = 88;
-        // objIEFid.CandidateID.Value = 'C6698096384';
-        // objIEFid.DisplayCandidateInfo = true;
-        //end test data
         this._candidateIEFService.getCurrentIEFDetails(objIEFid)
             .subscribe(
             (results: any) => {
@@ -66,8 +61,14 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
         currentIefDetails = this.createIEF(updatedIefFunctions);
         this._candidateIEFService.saveCurrentIEFDetails(currentIefDetails)
             .subscribe(
-            (results: any) => {
-                this.candidateIEFDetails = results;
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+
+                    this.Back();
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
             },
             error => {
                 this.errorMessage = <any>error;
@@ -75,11 +76,6 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
             });
     }
     getIEFHistory(objIEFid: iefModel) {
-        // objIEFid.RRFID.Id = 66;
-        // objIEFid.RRFID.Value = 'RRF6980895965';
-        // objIEFid.CandidateID.Id = 88;
-        // objIEFid.CandidateID.Value = 'C6698096384';
-
         this._candidateIEFService.getIEFHistory(objIEFid)
             .subscribe(
             (results: any) => {
@@ -102,7 +98,6 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
                 this.toastr.error(<any>error);
             });
     }
-    //onUpdate(_updatedFunctions: IEFFunction[]) {
     onUpdate() {
         //console.log('Printing updated functions from Parent ::');
         console.log(this.functions);

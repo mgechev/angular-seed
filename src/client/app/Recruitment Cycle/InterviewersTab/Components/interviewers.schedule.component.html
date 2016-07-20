@@ -68,12 +68,6 @@
                                 </tr>
                                 <!-- /NgBinding-->
                                 <tr class="odd gradeX">
-                                    <!--<td>
-                                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                                        <input type="checkbox" class="checkboxes" value="1" />
-                                                        <span></span>
-                                                    </label>
-                                    </td>-->
                                     <td> shuxer </td>
                                     <td class="center"> +91 9923123456 </td>
                                     <td>
@@ -235,7 +229,7 @@
                     </div>
                     <div class="portlet-body">
                         <div style=" text-align-last: center;">
-                            <full-calendar [resources]="InterviewerCalendarDetails.Resources" [events]="InterviewerCalendarDetails.Events" [header]="header"
+                            <full-calendar [resources]="InterviewerCalendarDetails.Resources" (onEventRender)="showDetails($event)" [events]="InterviewerCalendarDetails.Events" [header]="header"
                                 defaultDate="2016-07-12" [eventLimit]="4" [editable]="true">
                             </full-calendar>
                         </div>

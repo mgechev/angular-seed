@@ -22,7 +22,7 @@ export class InterviewersScheduleService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-    /**Coomenting this Funcations as this feature is deprecated */
+    /**Comenting this Funcations as this feature is deprecated */
     //Get interviews list which are in waiting for resopnse. 
     // getAwaitedInterviews() {
     //     let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewerAwaitingConfirmationInterviews');

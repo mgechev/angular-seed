@@ -5,7 +5,7 @@ import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
 import { MasterData  } from '../../../shared/model/common.model';
-import { Interview } from '../../shared/model/interview';
+import { Interview } from '../../Shared/Model/Interview';
 
 
 @Injectable()

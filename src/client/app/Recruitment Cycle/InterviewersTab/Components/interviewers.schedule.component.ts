@@ -34,7 +34,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         private _interviewService: InterviewersScheduleService) {
         this.InterviewInformation = new Array<Interview>();
         this.InterviewInformationForCalendar = new Array<Interview>();
-        /**Commeting as this functionality is deprecated */
+        /**Commenting as this functionality is deprecated */
         // this.AwaitedInterviewInformation = new Array<Interview>();
     }
     /**Router method overrid from OnActivate class */
@@ -92,7 +92,18 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         sessionStorage.setItem('SubmitIef', JSON.stringify(_iefParameters));
         this._router.navigate(['/App/Recruitment Cycle/Interviewers/ief']);
     }
-    /**Commeting as this functionality is deprecated */
+
+    //Shows Tooltip on calendar
+    showDetails(e: any) {
+        var StartTime = e.event.start._i.split('T')[1];
+        var EndTime = e.event.end._i.split('T')[1];
+        let element: any = $(e.element);
+        element.tooltip({
+            title: ':' + e.event.title
+        });
+    }
+
+    /**Commenting as this functionality is deprecated */
     // rejectInterview(_rrfID: MasterData) {
     //     let modalpopup: any = $('#rejectInterview');
     //     modalpopup.modal();
