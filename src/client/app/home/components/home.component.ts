@@ -24,8 +24,8 @@ import { MyRRFComponent } from '../../RRF/myRRF/index';
 import { RRFApprovalComponent } from '../../RRF/RRFApproval/index';
 import { RRFDashboardComponent } from '../../RRF/RRFDashboard/index';
 import { SpinnerComponent, SpinnerService } from '../../shared/components/spinner/spinner';
-import { InterviewrsComponent, RecruitmentInterviewerCalenderComponent } from '../../Recruitment Cycle/InterviewersTab/index';
-import {ScheduleInterviewComponent} from '../../Recruitment Cycle/ScheduleInterview/index';
+import { InterviewrsComponent, RecruitmentInterviewerCalenderComponent } from '../../recruitmentCycle/interviewersTab/index';
+import {ScheduleInterviewComponent} from '../../recruitmentCycle/scheduleInterview/index';
 import {DashboardComponent} from '../../Dashboard/component/dashboard.component';
 
 @Component({

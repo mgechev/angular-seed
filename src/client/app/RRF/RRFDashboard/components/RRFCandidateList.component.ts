@@ -6,12 +6,12 @@ import { MastersService } from '../../../shared/services/masters.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 //import { APIResult, RRFAssignStatus } from  '../../../shared/constantValue/index';
 import { MasterData} from '../../../shared/model/common.model';
-import { CandidateProfile } from  '../../../ProfileBank/shared/model/myProfilesInfo';
+import { CandidateProfile } from  '../../../profileBank/shared/model/myProfilesInfo';
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 //import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap';
 import {RRFCandidateListService} from '../services/RRFCandidatesList.service';
 import {RRFSpecificCandidateList} from '../model/RRFCandidateList';
-import {Interview} from '../../../Recruitment Cycle/Shared/Model/Interview';
+import {Interview} from '../../../recruitmentCycle/shared/model/interview';
 import { RRFDetails } from '../../myRRF/models/rrfDetails';
 
 @Component({

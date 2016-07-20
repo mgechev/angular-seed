@@ -1,7 +1,8 @@
 import {Component, OnInit, OnDestroy, EventEmitter} from '@angular/core';
 import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 import { LoginService } from '../../shared/services/login.service';
-import { ProfileBankService } from '../../profilebank/shared/services/profilebank.service';
+//import { ProfileBankService } from '../../profilebank/shared/services/profileBank.service';
+import { ProfileBankService } from '../../profileBank/shared/services/profileBank.service';
 import { MasterData } from  '../../shared/model/index';
 
 @Component({

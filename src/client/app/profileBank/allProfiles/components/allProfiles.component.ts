@@ -6,9 +6,9 @@ import { AllProfilesService } from '../services/allProfiles.service';
 import {AllProfilesViewComponent} from './allProfilesView.component';
 import { MastersService } from '../../../shared/services/masters.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { DataSharedService } from '../../shared/services/DataShared.service';
+import { DataSharedService } from '../../shared/services/dataShared.service';
 import {TransferOwnershipComponent} from './allProfilesTransferOwnership.component';
-import { ProfileBankService } from '../../shared/services/profilebank.service';
+import { ProfileBankService } from '../../shared/services/profileBank.service';
 
 @Component({
     selector: 'rrf-all-profiles',

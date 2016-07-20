@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, RouteSegment, Router } from '@angular/router';
 import { CandidateProfile } from '../../shared/model/myProfilesInfo';
 import { MasterData } from  '../../../shared/model/index';
-import { ProfileBankService } from '../../shared/services/profilebank.service';
+import { ProfileBankService } from '../../shared/services/profileBank.service';
 @Component({
     moduleId: module.id,
     selector: 'rrf-companyprofiles-view',

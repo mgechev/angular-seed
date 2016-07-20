@@ -1,7 +1,7 @@
 // import { MasterData  } from '../../../shared/model/common.model';
 // import { RRFDetails  } from '../../myRRF/models/rrfDetails';
-import { CandidateProfile } from  '../../../ProfileBank/shared/model/myProfilesInfo';
-import {Interview} from '../../../Recruitment Cycle/Shared/Model/Interview';
+import { CandidateProfile } from  '../../../profileBank/shared/model/myProfilesInfo';
+import {Interview} from '../../../recruitmentCycle/shared/model/interview';
 
 
 export class RRFSpecificCandidateList {

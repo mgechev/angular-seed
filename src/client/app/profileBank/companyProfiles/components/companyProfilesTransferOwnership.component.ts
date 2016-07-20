@@ -1,8 +1,8 @@
 import { Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, Router} from '@angular/router';
 import { TransferOwnershipMeta } from '../../shared/model/myProfilesInfo';
-import { DataSharedService } from '../../shared/services/DataShared.service';
-import { ProfileBankService } from '../../shared/services/profilebank.service';
+import { DataSharedService } from '../../shared/services/dataShared.service';
+import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';

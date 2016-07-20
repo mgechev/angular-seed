@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import { Router, RouteSegment, OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
 import {CandidateProfile, Qualification } from '../../shared/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
-import { ProfileBankService } from '../../shared/services/profilebank.service';
+import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';

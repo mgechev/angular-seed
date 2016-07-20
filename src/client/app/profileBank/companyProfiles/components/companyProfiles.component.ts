@@ -6,8 +6,8 @@ import { CompanyProfilesService } from '../services/companyProfiles.service';
 import {CompanyProfilesViewComponent} from './companyProfilesView.component';
 import { MastersService } from '../../../shared/services/masters.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { ProfileBankService } from '../../shared/services/profilebank.service';
-import { DataSharedService } from '../../shared/services/DataShared.service';
+import { ProfileBankService } from '../../shared/services/profileBank.service';
+import { DataSharedService } from '../../shared/services/dataShared.service';
 import {TransferOwnershipComponent} from './companyProfilesTransferOwnership.component';
 import {ProfileBankAssignRRFComponent} from '../../shared/component/assignRRF.component';
 

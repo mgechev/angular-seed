@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, RouteSegment, Router } from '@angular/router';
 import { CandidateProfile } from '../../shared/model/myProfilesInfo';
-import { ProfileBankService } from '../../shared/services/profilebank.service';
+import { ProfileBankService } from '../../shared/services/profileBank.service';
 
 @Component({
     moduleId: module.id,

@@ -1,13 +1,13 @@
 import {Component } from '@angular/core';
 import { Router, RouteSegment, ROUTER_DIRECTIVES, OnActivate } from '@angular/router';
-import { CompanyProfilesService } from '../services/CompanyProfiles.service';
+import { CompanyProfilesService } from '../services/companyProfiles.service';
 import { CandidateProfile, Qualification } from '../../shared/model/myProfilesInfo';
 import { MastersService } from '../../../shared/services/masters.service';
 //import * as  _ from 'lodash';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
-import { ProfileBankService } from '../../shared/services/profilebank.service';
+import { ProfileBankService } from '../../shared/services/profileBank.service';
 @Component({
     moduleId: module.id,
     selector: 'rrf-company-profile-add',

@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import {Interview} from '../../Shared/model/Interview';
+import {Interview} from '../../shared/model/interview';
 import {InterviewersAvailabilityService} from '../services/interviewers.availability.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { DetailRRF } from '../../Shared/model/detailRRF';
-import {InterviewSlotComponent } from '../../Shared/Component/InterviewSlot/Component/InterviewSlot.component';
-import {CalenderSlot, CalenderDetails} from '../../shared/Component/InterviewSlot/Model/interviewSlot';
+import { DetailRRF } from '../../shared/model/detailRRF';
+import {InterviewSlotComponent } from '../../shared/component/InterviewSlot/Component/InterviewSlot.component';
+import {CalenderSlot, CalenderDetails} from '../../shared/component/InterviewSlot/Model/interviewSlot';
 import { MasterData} from '../../../shared/model/common.model';
 
 @Component({
