@@ -16,7 +16,7 @@ export class MasterData {
 }
 
 export class GrdOptions {
-    public IDs: string="";
+    //public IDs: string="";
     public ButtonClicked: number = 0;
     /* ButtonClicked 
                  i. Initial - 0
@@ -29,5 +29,5 @@ export class GrdOptions {
     public PerPageCount: number = 5;
     public OrderBy: string = 'Modified';
     public Order: string = 'asc';
-    
+    public NextPageUrl: string[]=[];
 }
