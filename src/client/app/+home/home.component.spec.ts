@@ -2,10 +2,8 @@ import { Component, provide } from '@angular/core';
 import { TestComponentBuilder } from '@angular/compiler/testing';
 import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import {
-  describe,
-  expect,
-  inject,
-  it
+  async,
+  inject
 } from '@angular/core/testing';
 import {
   BaseRequestOptions,
@@ -27,10 +25,11 @@ export function main() {
     beforeEach(() => { providerArr = [disableDeprecatedForms(), provideForms()]; });
 
     it('should work',
-      inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+      async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
         tcb.overrideProviders(TestComponent, providerArr)
           .createAsync(TestComponent)
           .then((rootTC: any) => {
+
             rootTC.detectChanges();
 
             let homeInstance = rootTC.debugElement.children[0].componentInstance;
@@ -41,13 +40,13 @@ export function main() {
 
             homeInstance.newName = 'Minko';
             homeInstance.addName();
+
             rootTC.detectChanges();
 
             expect(getDOM().querySelectorAll(homeDOMEl, 'li').length).toEqual(1);
-
             expect(getDOM().querySelectorAll(homeDOMEl, 'li')[0].textContent).toEqual('Minko');
           });
-      }));
+      })));
   });
 }
 
