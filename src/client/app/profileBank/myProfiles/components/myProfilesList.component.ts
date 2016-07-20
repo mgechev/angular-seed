@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import { CandidateProfile, ResumeMeta, AddCandidateResponse,AllCandidateProfiles } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, ResumeMeta, AddCandidateResponse, AllCandidateProfiles } from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
-import { MasterData, GrdOptions,ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
@@ -21,11 +21,11 @@ import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
     templateUrl: 'myProfilesList.component.html',
     directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
     styleUrls: ['myProfiles.component.css'],
-    pipes:[ProfileBankPipe]
+    pipes: [ProfileBankPipe]
 })
 
 export class MyProfilesListComponent implements OnActivate {
-    CandidateID:MasterData = new MasterData();
+    CandidateID: MasterData = new MasterData();
     myProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
     profile: CandidateProfile;
     errorMessage: string;
@@ -113,7 +113,7 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     redirectToView(CandidateID: MasterData) {
-        this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value+'ID'+CandidateID.Id]);
+        this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
 
     onSave(): void {
@@ -361,16 +361,20 @@ export class MyProfilesListComponent implements OnActivate {
     //Assign RRf 
     AssignRRFClick() {
         let chkStatus = false;
+        let chkRRFAssigned = false;
+
         for (var index = 0; index < this.myProfilesList.Profiles.length; index++) {
             if (this.myProfilesList.Profiles[index].IsChecked) {
                 //Check for open / rejected Status
                 if (this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'open' ||
                     this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'rejected') {
-                    //Add to selectedCandidates array
-                    this.Candidate.CandidateID = this.myProfilesList.Profiles[index].CandidateID;
-                    this.Candidate.Candidate = this.myProfilesList.Profiles[index].Candidate;
-                    this.selectedCandidates.push(this.Candidate);
-                    this.Candidate = new Candidate();
+                    if (this.myProfilesList.Profiles[index].isRRFAssigned) {
+                        //Add to selectedCandidates array
+                        this.Candidate.CandidateID = this.myProfilesList.Profiles[index].CandidateID;
+                        this.Candidate.Candidate = this.myProfilesList.Profiles[index].Candidate;
+                        this.selectedCandidates.push(this.Candidate);
+                        this.Candidate = new Candidate();
+                    } else { chkRRFAssigned = true; break; }
                 } else {
                     chkStatus = true;
                     break;
@@ -379,6 +383,9 @@ export class MyProfilesListComponent implements OnActivate {
         }
         if (chkStatus) {
             this.toastr.warning('Only Open / Rejected status candidates can be Assigned to RRF');
+            this.selectedCandidates = new Array<CandidateProfile>();
+        } else if (chkRRFAssigned) {
+            this.toastr.warning('Candidate already assigned to RRF');
             this.selectedCandidates = new Array<CandidateProfile>();
         } else {
             sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));
@@ -418,10 +425,10 @@ export class MyProfilesListComponent implements OnActivate {
     }
     onChange() {
         this.myProfilesList.GrdOperations.ButtonClicked = 0;
-        this.myProfilesList.GrdOperations.NextPageUrl=new Array<string>();
+        this.myProfilesList.GrdOperations.NextPageUrl = new Array<string>();
         this.getMyProfiles();
     }
-      OnPaginationClick(ButtonClicked: string) {
+    OnPaginationClick(ButtonClicked: string) {
         /* ButtonClicked 
                 i. Initial - 0
                 ii.Next - 1

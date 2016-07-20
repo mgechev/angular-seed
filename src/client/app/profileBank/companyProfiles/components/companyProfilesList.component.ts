@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
-import { CandidateProfile ,AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
 import { Candidate } from '../../shared/model/RRF';
 import { CompanyProfilesService } from '../services/companyProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
-import { MasterData,GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
@@ -19,15 +19,15 @@ import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
     templateUrl: 'companyProfilesList.component.html',
     directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
-    providers:[CompanyProfilesService],
-    pipes:[ProfileBankPipe]
+    providers: [CompanyProfilesService],
+    pipes: [ProfileBankPipe]
 })
 
 export class CompanyProfilesListComponent implements OnActivate {
     companyProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
     profile: CandidateProfile;
     statusList: Array<MasterData>;
-    seletedCandidateID: MasterData=new MasterData();
+    seletedCandidateID: MasterData = new MasterData();
     selectedStatus = new MasterData();
     Comments: string;
     currentStatus: number;
@@ -80,10 +80,10 @@ export class CompanyProfilesListComponent implements OnActivate {
             });
     }
     redirectToView(CandidateID: MasterData) {
-        this._router.navigate(['/App/ProfileBank/CompanyProfiles/View/' + CandidateID.Value+'ID'+CandidateID.Id]);
+        this._router.navigate(['/App/ProfileBank/CompanyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
     redirectToEditProfile(CandidateID: MasterData) {
-        this._router.navigate(['/App/ProfileBank/CompanyProfiles/Edit/'+ CandidateID.Value+'ID'+CandidateID.Id]);
+        this._router.navigate(['/App/ProfileBank/CompanyProfiles/Edit/' + CandidateID.Value + 'ID' + CandidateID.Id]);
 
     }
     SaveCandidateID(id: MasterData) {
@@ -178,7 +178,7 @@ export class CompanyProfilesListComponent implements OnActivate {
                 checkedItemIds.push(this.companyProfilesList.Profiles[index].CandidateID);
             }
         }
-        sessionStorage.setItem('CheckedItemIds',JSON.stringify(checkedItemIds));
+        sessionStorage.setItem('CheckedItemIds', JSON.stringify(checkedItemIds));
         this._router.navigate(['/App/ProfileBank/CompanyProfiles/Transfer/']);
     }
 
@@ -195,24 +195,34 @@ export class CompanyProfilesListComponent implements OnActivate {
     }
 
     AssignRRFClick() {
+        let chkRRFAssigned = false;
+
         for (var index = 0; index < this.companyProfilesList.Profiles.length; index++) {
             if (this.companyProfilesList.Profiles[index].IsChecked) {
-                this.Candidate.CandidateID = this.companyProfilesList.Profiles[index].CandidateID;
-                this.Candidate.Candidate = this.companyProfilesList.Profiles[index].Candidate;
-                this.selectedCandidates.push(this.Candidate);
-                this.Candidate = new Candidate();
+                if (this.companyProfilesList.Profiles[index].isRRFAssigned) {
+                    this.Candidate.CandidateID = this.companyProfilesList.Profiles[index].CandidateID;
+                    this.Candidate.Candidate = this.companyProfilesList.Profiles[index].Candidate;
+                    this.selectedCandidates.push(this.Candidate);
+                    this.Candidate = new Candidate();
+                } else { chkRRFAssigned = true; break; }
             }
         }
-        sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));
-        sessionStorage.setItem('returnPath', '/App/ProfileBank/CompanyProfiles');
-        this._router.navigate(['/App/ProfileBank/CompanyProfiles/Assign']);
+        if (chkRRFAssigned) {
+            this.toastr.warning('Candidate already assigned to RRF');
+            this.selectedCandidates = new Array<CandidateProfile>();
+        } else {
+            sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));
+            sessionStorage.setItem('returnPath', '/App/ProfileBank/CompanyProfiles');
+            this._router.navigate(['/App/ProfileBank/CompanyProfiles/Assign']);
+        }
+
     }
-     onChange() {
+    onChange() {
         this.companyProfilesList.GrdOperations.ButtonClicked = 0;
-        this.companyProfilesList.GrdOperations.NextPageUrl=new Array<string>();
+        this.companyProfilesList.GrdOperations.NextPageUrl = new Array<string>();
         this.getcompanyProfiles();
     }
-      OnPaginationClick(ButtonClicked: string) {
+    OnPaginationClick(ButtonClicked: string) {
         /* ButtonClicked 
                 i. Initial - 0
                 ii.Next - 1
