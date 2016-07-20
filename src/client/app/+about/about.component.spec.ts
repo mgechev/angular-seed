@@ -2,10 +2,8 @@ import { TestComponentBuilder } from '@angular/compiler/testing';
 import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import { Component } from '@angular/core';
 import {
-  describe,
-  expect,
   inject,
-  it
+  async
 } from '@angular/core/testing';
 import { getDOM } from '@angular/platform-browser/src/dom/dom_adapter';
 
@@ -19,7 +17,7 @@ export function main() {
     beforeEach(() => { providerArr = [disableDeprecatedForms(), provideForms()]; });
 
     it('should work',
-      inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+      async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
         tcb.overrideProviders(TestComponent, providerArr)
           .createAsync(TestComponent)
           .then((rootTC: any) => {
@@ -27,7 +25,7 @@ export function main() {
 
 	    expect(getDOM().querySelectorAll(aboutDOMEl, 'h2')[0].textContent).toEqual('Features');
           });
-        }));
+        })));
     });
 }
 
