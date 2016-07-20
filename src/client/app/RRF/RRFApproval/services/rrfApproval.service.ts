@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
+import { GrdOptions } from '../../../shared/model/common.model';
 
 @Injectable()
 
@@ -12,10 +13,10 @@ export class RRFApprovalService {
     constructor(private authHttp: AuthHttp,
         private _spinnerService: SpinnerService) { }
 
-    getRRFApprovalList() {
+    getRRFApprovalList(grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/RRF/GetAllRaisedRRF');
         this._spinnerService.show();
-        return this.authHttp.get(url)
+         return this.authHttp.post(url ,{grdOptions})
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

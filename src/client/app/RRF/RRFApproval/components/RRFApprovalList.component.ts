@@ -5,7 +5,8 @@ import { RRFApprovalService } from '../services/rrfApproval.service';
 import { RRFStatus } from  '../../../shared/constantValue/index';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { ResponseFromAPI } from '../../../shared/model/common.model';
+import { ResponseFromAPI, GrdOptions } from '../../../shared/model/common.model';
+import {RRFPipe } from '../../shared/Filters/RRFFilter.component';
 
 @Component({
     moduleId: module.id,
@@ -13,7 +14,8 @@ import { ResponseFromAPI } from '../../../shared/model/common.model';
     templateUrl: 'RRFApprovalList.component.html',
     directives: [ROUTER_DIRECTIVES],
     styleUrls: ['RRFApproval.component.css'],
-    providers: [ToastsManager]
+    providers: [ToastsManager],
+    pipes: [RRFPipe],
 })
 
 export class RRFApprovalListComponent implements OnActivate {
@@ -23,6 +25,8 @@ export class RRFApprovalListComponent implements OnActivate {
     selectedRowCount: number = 0;
     allChecked: boolean = false;
     statusConstant: RRFStatus = RRFStatus;
+    grdOptions: GrdOptions = new GrdOptions();
+    searchText : string ='';
 
     constructor(private _rrfApprovalService: RRFApprovalService,
         public toastr: ToastsManager) {
@@ -33,10 +37,12 @@ export class RRFApprovalListComponent implements OnActivate {
     }
 
     getRRFApprovalList(): void {
-        this._rrfApprovalService.getRRFApprovalList()
+        this._rrfApprovalService.getRRFApprovalList(this.grdOptions)
             .subscribe(
             results => {
-                this.rrfApprovalList = <any>results;
+                this.grdOptions = (<any>(results)).GrdOperations;
+                this.rrfApprovalList = (<any>(results)).RRFs;
+                //this.rrfApprovalList = <any>results;
 
                 for (var index = 0; index < this.rrfApprovalList.length; index++) {
                     // this.rrfApprovalList[index].Status = {'Id' :1 ,'Value' :'PendingApproval'}; //TODO : get it from API
@@ -154,5 +160,24 @@ export class RRFApprovalListComponent implements OnActivate {
 
     getStatusClass(statusID: number): string {
         return 'status' + statusID;
+    }
+
+    resetToDefaultGridOptions() {
+        this.grdOptions.ButtonClicked = 0;
+        this.grdOptions.NextPageUrl = [];
+    }
+
+    OnPaginationClick(page: number) {
+        this.grdOptions.ButtonClicked = page;
+        //call APIResult
+        this.getRRFApprovalList();
+    }
+
+    bindGridData() {
+        //First set grid option
+        this.resetToDefaultGridOptions();
+
+        //call APIResult
+        this.getRRFApprovalList();
     }
 }

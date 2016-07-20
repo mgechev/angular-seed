@@ -29,25 +29,22 @@
 
                     <div class=" portlet light bordered">
                         <div class="portlet-title">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <h4>RRF List</h4>
-                                </div>
+                            <!--<div class="row">-->
+                            <div class="col-md-4">
+                                <h4>RRF List</h4>
                             </div>
+                            <div class="btn-group pull-right" [ifAuthorize]="['RRF.INITIATERRF.MANAGE']">
+                                <a class="btn green" [routerLink]="['/App/RRF/MyRRF/Add']">
+                                    <i class="fa fa-plus"></i> Initiate RRF
+                                </a>
+                            </div>
+                            <!--</div>-->
                         </div>
-                        <!-- BEGIN ADD AND TOOLS  -->
-                        <div class="table-toolbar">
-                        </div>
-                        <!-- END ADD AND TOOLS -->
 
-                        <div class="table-toolbar">
+                        <!--<div class="table-toolbar">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="btn-group" [ifAuthorize]="['RRF.INITIATERRF.MANAGE']">
-                                        <a class="btn btn-circle dark btn-outline" [routerLink]="['/App/RRF/MyRRF/Add']">
-                                            <i class="fa fa-plus"></i> Initiate RRF
-                                        </a>
-                                    </div>
+                                    
                                 </div>
                                 <div class="col-md-6 row">
                                     <div class="dt-buttons pull-right">
@@ -64,37 +61,14 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
 
                         <!-- BEGIN SHOW AND SEARCH  -->
                         <div class="dataTables_wrapper no-footer">
-                            <div class="row">
-                                <div class="col-lg-6 col-sm-6">
-                                    <div class="dataTables_length ">
-                                        <label>show
-                                            <select class="form-control input-sm input-xsmall input-inline">
-                                                <option value="5">5</option>
-                                                <option value="10">10</option>
-                                                <option value="15">15</option>
-                                                <option value="-1">All</option>
-                                            </select>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 col-sm-6 ">
-                                    <div class="dataTables_filter pull-right ">
-                                        <label>Search:
-                                            <input class="form-control input-sm input-small input-inline " />
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="col-lg-12 col-sm-12 row bordered ">
-                                <div class="mt-radio-inline col-lg-1 col-sm-1">
+                                <!--<div class="mt-radio-inline col-lg-1 col-sm-1">
 
-                                </div>
+                                </div>-->
                                 <div class="mt-radio-inline col-lg-7 col-sm-7">
                                     <div class="col-lg-3 col-sm-3">
                                         <label class="mt-radio" [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']">
@@ -133,8 +107,58 @@
                                 </div>
 
                             </div>
+                            <div class="portlet-title">
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-3">
+                                    <div class="dataTables_length ">
+                                        <label>show
+                                            <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.PerPageCount" (ngModelChange)="bindGridData()">
+                                                <option value="2">2</option>
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="20">20</option>
+                                                <option value="50">50</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-3">
+                                    <div class="dataTables_length ">
+                                        <label>Sort By
+                                            <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.OrderBy" (ngModelChange)="bindGridData()">
+                                                <option value="Modified">Modified</option>
+                                                <option value="Status">Status</option>
+                                                <option value="Priority">Priority</option>
+                                                <option value="DateOfJoining">Date of Joining</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-3">
+                                    <div class="dataTables_length ">
+                                        <label>Order by
+                                            <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.Order" (ngModelChange)="bindGridData()">
+                                                <option value="asc">Ascending</option>
+                                                <option value="desc">Descending</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-3 ">
+                                    <div class="dataTables_filter pull-right ">
+                                        <label>Search:
+                                            <input class="form-control input-sm input-small input-inline " [(ngModel)]='searchText' />
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                         <!-- END SHOW AND SEARCH -->
+
 
                         <div class="row " *ngIf="closeRRFID.Id != 0">
                             <div class="col-lg-9 ">
@@ -173,7 +197,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="odd gradeX " *ngFor="let rrf of rrfList | RRFIDPipe : closeRRFID.Value">
+                                    <tr class="odd gradeX " *ngFor="let rrf of rrfList | RRFPipe :searchText |RRFIDPipe :closeRRFID.Value ">
                                         <!--remove hard code data-->
                                         <td>
                                             <div class="wraptext" style="word-wrap: break-word; " align="left ">
@@ -291,6 +315,19 @@
                             </table>
                         </div>
                         <!-- END LIST OF RRF -->
+
+                        <!-- START NAVIGATION BUTTON -->
+                        <div class="table-toolbar">
+                            <div class="pull-right ">
+                                <button type="button " class="btn btn-default " [disabled]="!grdOptions.PreviousButton
+                        " (click)="OnPaginationClick(-1) ">
+                                    &laquo; Prev</button> &nbsp;&nbsp;
+                                <button type="button " class="btn btn-default " [disabled]="!grdOptions.NextButton
+                        " (click)="OnPaginationClick(1) ">
+                                    Next &raquo;</button>
+                            </div>
+                        </div>
+                        <!-- END NAVIGATION BUTTON-->
                     </div>
                 </div>
 
@@ -400,7 +437,7 @@
                                                     <div class="col-md-5 ">Interviewers Panel</div>
                                                     <div class="col-md-1 " style="align:right ">:</div>
                                                 </div>
-                                                <div class="row " *ngIf="selectedRRF.Panel.count">
+                                                <div class="row " *ngIf="selectedRRF.Panel.count ">
                                                     <div class="col-md-12 ">
                                                         <div class="table-scrollable ">
                                                             <table class="table-bordered table no-footer ">

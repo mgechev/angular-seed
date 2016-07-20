@@ -39,22 +39,46 @@
                     <!-- BEGIN SHOW AND SEARCH  -->
                     <div class="dataTables_wrapper no-footer">
                         <div class="row">
-                            <div class="col-md-6 col-sm-6">
+                            <div class="col-lg-3 col-sm-3">
                                 <div class="dataTables_length ">
                                     <label>show
-                                        <select class="form-control input-sm input-xsmall input-inline">
+                                        <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.PerPageCount" (ngModelChange)="bindGridData()">
+                                            <option value="2">2</option>
                                             <option value="5">5</option>
                                             <option value="10">10</option>
-                                            <option value="15">15</option>
+                                            <option value="20">20</option>
+                                            <option value="50">50</option>
                                             <option value="-1">All</option>
                                         </select>
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="dataTables_filter pull-right">
+                            <div class="col-lg-3 col-sm-3">
+                                <div class="dataTables_length ">
+                                    <label>Sort By
+                                        <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.OrderBy" (ngModelChange)="bindGridData()">
+                                            <option value="Modified">Modified</option>
+                                            <option value="Status">Status</option>
+                                            <option value="Priority">Priority</option>
+                                            <option value="DateOfJoining">Date of Joining</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-3">
+                                <div class="dataTables_length ">
+                                    <label>Order by
+                                        <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.Order" (ngModelChange)="bindGridData()">
+                                            <option value="asc">Ascending</option>
+                                            <option value="desc">Descending</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-3 ">
+                                <div class="dataTables_filter pull-right ">
                                     <label>Search:
-                                        <input class="form-control input-sm input-small input-inline" />
+                                        <input class="form-control input-sm input-small input-inline " [(ngModel)]='searchText' />
                                     </label>
                                 </div>
                             </div>
@@ -87,7 +111,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="odd gradeX" *ngFor="let rrf of rrfApprovalList">
+                                <tr class="odd gradeX" *ngFor="let rrf of rrfApprovalList | RRFPipe : searchText ">
                                     <td>
                                         <label *ngIf="rrf.Status.Id != statusConstant.Rejected" class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                             <input type="checkbox" class="checkboxes" value="1" [id]='rrf.RRFID' [(ngModel)]='rrf.IsChecked' (change)="onStateChange($event)"
@@ -140,6 +164,19 @@
                         </table>
                     </div>
                     <!-- END LIST OF RRF -->
+                    <!-- START NAVIGATION BUTTON -->
+                    <div class="table-toolbar">
+                        <div class="pull-right ">
+                            <button type="button " class="btn btn-default " [disabled]="!grdOptions.PreviousButton
+                        " (click)="OnPaginationClick(-1) ">
+                                &laquo; Prev</button> &nbsp;&nbsp;
+                            <button type="button " class="btn btn-default " [disabled]="!grdOptions.NextButton
+                        " (click)="OnPaginationClick(1) ">
+                                Next &raquo;</button>
+                        </div>
+                    </div>
+                    <!-- END NAVIGATION BUTTON-->
+
                 </div>
             </div>
         </div>

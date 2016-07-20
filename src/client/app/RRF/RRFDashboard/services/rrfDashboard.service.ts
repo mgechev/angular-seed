@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
-import { MasterData  } from '../../../shared/model/common.model';
+import { MasterData, GrdOptions } from '../../../shared/model/common.model';
 
 @Injectable()
 
@@ -12,10 +12,10 @@ export class RRFDashboardService {
     constructor(private authHttp: AuthHttp,
         private _spinnerService: SpinnerService) { }
 
-    getAllRRF() {
+    getAllRRF(grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/RRF/GetAllRRF');
         this._spinnerService.show();
-        return this.authHttp.get(url)
+         return this.authHttp.post(url ,{grdOptions})
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
@@ -57,10 +57,13 @@ export class RRFDashboardService {
             .finally(() => this._spinnerService.hide());
     }
 
-    getMyRRF() {
+    getMyRRF(grdOptions: GrdOptions) {
+        // let url = Config.GetURL('/api/RRF/GetMyRRF?PerPageCount=' + gridOperations.PerPageCount +
+        //     '&ButtonClicked=' + gridOperations.ButtonClicked + '&IDs=' + gridOperations.IDColl +
+        //     '&OrderBy=' + gridOperations.OrderBy + '&Order=' + gridOperations.Order);
         let url = Config.GetURL('/api/RRF/GetMyRRF');
         this._spinnerService.show();
-        return this.authHttp.get(url)
+        return this.authHttp.post(url ,{grdOptions})
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
@@ -99,19 +102,19 @@ export class RRFDashboardService {
             .catch(this.handleError);
     }
 
-    GetRRFAssignedToRecruiter(recruiterDtls: MasterData) {
+    GetRRFAssignedToRecruiter(recruiter: MasterData , grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/RRF/GetRRFAssignedToRecruiter');
         this._spinnerService.show();
-        return this.authHttp.post(url, recruiterDtls)
+        return this.authHttp.post(url, {RecruiterRRFs : {recruiter ,grdOptions}})
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-    
-    GetAllUnAssignedRRF() {
+
+    GetAllUnAssignedRRF(grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/RRF/GetRRFUnAssignedToRecruiter');
         this._spinnerService.show();
-        return this.authHttp.get(url)
+        return this.authHttp.post(url ,{grdOptions})
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

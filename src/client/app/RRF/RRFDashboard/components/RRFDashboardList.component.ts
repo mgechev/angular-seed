@@ -4,12 +4,13 @@ import { RRFDashboardService } from '../services/rrfDashboard.service';
 import { RRFDetails, AllRRFStatusCount  } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
-import {RRFIDPipe } from './RRFIdFilter.component';
+import {RRFIDPipe } from '../../shared/Filters/RRFIdFilter.component';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult, RRFStatus, RRFAssignStatus} from  '../../../shared/constantValue/index';
-import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
+import { MasterData, ResponseFromAPI, GrdOptions} from '../../../shared/model/common.model';
 import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
 import { MastersService } from '../../../shared/services/masters.service';
+import {RRFPipe } from '../../shared/Filters/RRFFilter.component';
 
 @Component({
     moduleId: module.id,
@@ -17,7 +18,7 @@ import { MastersService } from '../../../shared/services/masters.service';
     templateUrl: 'RRFDashboardList.component.html',
     directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES, IfAuthorizeDirective],
     styleUrls: ['../../RRFApproval/components/RRFApproval.component.css'],
-    pipes: [RRFIDPipe],
+    pipes: [RRFIDPipe, RRFPipe],
     providers: [ToastsManager]
 })
 
@@ -37,8 +38,15 @@ export class RRFDashboardListComponent implements OnActivate {
     recruiterList: MasterData[] = [];
     selectedRecruiter: MasterData = new MasterData();
     AssignStatus: RRFAssignStatus = RRFAssignStatus;
+    grdOptions: GrdOptions = new GrdOptions();
 
-    doughnutChartLabels: string[] = []
+    //required for pagination
+    // showRecord: number = 5;
+    // orderByRecord : string = "";
+    // sortByRecord : string = "";
+    //buttonClick: number = 0;
+
+    doughnutChartLabels: string[] = [];
     doughnutChartData: number[] = [];
     doughnutChartType: string = 'doughnut'; //doughnut
     doughnutChartColors: any[] = [{ backgroundColor: [] }];
@@ -54,7 +62,7 @@ export class RRFDashboardListComponent implements OnActivate {
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService, private _router: Router,
         public toastr: ToastsManager,
-        private _mastersService: MastersService, ) {
+        private _mastersService: MastersService) {
         this.currentView = 'myRRF';
     }
 
@@ -95,37 +103,41 @@ export class RRFDashboardListComponent implements OnActivate {
         console.log(e);
     }
     getAllRRF() {
-        this._rrfDashboardService.getAllRRF()
+        this._rrfDashboardService.getAllRRF(this.grdOptions)
             .subscribe(
             results => {
-                this.rrfList = <any>results;
+                this.grdOptions = (<any>(results)).GrdOperations;
+                this.rrfList = (<any>(results)).RRFs;
             },
             error => this.errorMessage = <any>error);
     }
 
     getMyRRF() {
-        this._rrfDashboardService.getMyRRF()
+        this._rrfDashboardService.getMyRRF(this.grdOptions)
             .subscribe(
             results => {
-                this.rrfList = <any>results;
+                this.grdOptions = (<any>(results)).GrdOperations;
+                this.rrfList = (<any>(results)).RRFs;
             },
             error => this.errorMessage = <any>error);
     }
 
     GetRRFAssignedToRecruiter() {
-        this._rrfDashboardService.GetRRFAssignedToRecruiter(this.selectedRecruiter)
+        this._rrfDashboardService.GetRRFAssignedToRecruiter(this.selectedRecruiter, this.grdOptions)
             .subscribe(
             results => {
-                this.rrfList = <any>results;
+                this.grdOptions = (<any>(results)).GrdOperations;
+                this.rrfList = (<any>(results)).RRFs;
             },
             error => this.errorMessage = <any>error);
     }
 
     GetAllUnAssignedRRF() {
-        this._rrfDashboardService.GetAllUnAssignedRRF()
+        this._rrfDashboardService.GetAllUnAssignedRRF(this.grdOptions)
             .subscribe(
             results => {
-                this.rrfList = <any>results;
+                this.grdOptions = (<any>(results)).GrdOperations;
+                this.rrfList = (<any>(results)).RRFs;
             },
             error => this.errorMessage = <any>error);
     }
@@ -225,6 +237,7 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     onViewChanged(viewMode: string) {
+        this.resetToDefaultGridOptions();
         if (viewMode === 'allRRF') {
             this.currentView = 'allRRF';
             this.getAllRRFData();
@@ -248,7 +261,6 @@ export class RRFDashboardListComponent implements OnActivate {
     onCloseRRFClick(rrfID: MasterData) {
         this.closeRRF = true;
         this.closeRRFID = rrfID;
-
     }
 
     onbtnCloseRRF() {
@@ -268,13 +280,6 @@ export class RRFDashboardListComponent implements OnActivate {
         // this.closeRRFID = 0;
         this.setDefaultcloseRRFID();
         this.closeComment = '';
-
-        // if (this.currentView = 'allRRF') {
-        //     this.getAllRRFData();
-        // } else {
-        //     this.getMyRRFData();
-        // }
-
     }
 
     setDefaultcloseRRFID() {
@@ -354,7 +359,7 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     onViewCandidateClick(rrfID: MasterData) {
-       // rrfID = 'RRF6866237939ID76';
+        // rrfID = 'RRF6866237939ID76';
         this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID.Value + 'ID' + rrfID.Id]);
     }
 
@@ -385,6 +390,30 @@ export class RRFDashboardListComponent implements OnActivate {
     onRecChange(recID: any) {
         this.selectedRecruiter.Id = recID;
         this.getAssignedRRFData();
+    }
+
+    resetToDefaultGridOptions() {
+        //this.grdOptions = new GrdOptions();
+        this.grdOptions.ButtonClicked = 0;
+        this.grdOptions.NextPageUrl = [];
+    }
+
+    setGrdOptions() {
+        // this.grdOptions.PerPageCount = this.showRecord; //TODO
+        // this.grdOptions.ButtonClicked = this.buttonClick;
+        //  this.grdOptions.Order = this.orderByRecord;
+    }
+
+    OnPaginationClick(page: number) {
+        this.grdOptions.ButtonClicked = page;
+        this.showListOfRRF();
+    }
+    bindGridData() {
+        //First set grid option
+        this.resetToDefaultGridOptions();
+
+        //call APIResult
+        this.showListOfRRF();
     }
 }
 
