@@ -1,5 +1,6 @@
 import { MasterData } from  '../../../shared/model/index';
 import { DetailRRF } from  './detailRRF';
+import { IEFFunction } from  './ief';
 
 //Interview master
 export class Interview {
@@ -25,7 +26,7 @@ export class Interview {
     public InterviewerAvailability: Array<InterviewAvailability> = new Array<InterviewAvailability>();
     public CandidatePrimaryDetails: CandidatePrimaryDetails = new CandidatePrimaryDetails();
     public Interviewer: Array<MasterData> = new Array<MasterData>();
-    public IEFTransactionDetails: Array<IEFTransactionDetails> = new Array<IEFTransactionDetails>();
+    public IEFTransactionDetails: Array<IEFFunction> = new Array<IEFFunction>();
 }
 //Interviewrs Availability comments
 export class InterviewAvailability {

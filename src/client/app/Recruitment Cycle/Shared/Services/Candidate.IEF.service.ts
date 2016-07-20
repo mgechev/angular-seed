@@ -4,7 +4,8 @@ import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
-import { MasterData } from  '../../../shared/model/index';
+//import { MasterData } from  '../../../shared/model/index';
+import { IEFSubmission, iefModel} from '../../Shared/model/ief';
 
 @Injectable()
 
@@ -12,11 +13,38 @@ export class CandidateIEFService {
     constructor(private http: Http,
         private authHttp: AuthHttp,
         private _spinnerService: SpinnerService) { }
-
-    getIEFHistory(_interviewID: MasterData) {
-        let url = Config.GetURL('/api/RecruitmentCycle/GetCandidateIEFForm');
+    /**Get current candidate's IEF and interview history details */
+    getIEFHistory(_interviewID: iefModel) {
+        let url = Config.GetURL('/api/RecruitmentCycle/ViewCandidateAllInterviewDetails');
         this._spinnerService.show();
         return this.authHttp.post(url, _interviewID)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    /**Get candidates current interview and RRF details*/
+    getCurrentIEFDetails(_iefModel: iefModel) {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetCandidateIEFInfo');
+        this._spinnerService.show();
+        return this.authHttp.post(url, _iefModel)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    /**submit candidates current ief details */
+    saveCurrentIEFDetails(iefDetails: IEFSubmission) {
+        let url = Config.GetURL(' /api/RecruitmentCycle/UpdateCandidateIEFForm');
+        this._spinnerService.show();
+        return this.authHttp.post(url, iefDetails)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    /**Get ief funtions from masters */
+    getIEFFunctions(interviewType: number) {
+        let url = Config.GetURL('/api/Masters/GetIEFFuntionsByInterviewType?TypeID=' + interviewType);
+        this._spinnerService.show();
+        return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

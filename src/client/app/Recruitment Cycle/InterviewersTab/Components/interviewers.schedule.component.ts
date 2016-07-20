@@ -1,11 +1,12 @@
-import {Component} from '@angular/core';
+import { Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import {Interview} from '../../Shared/model/Interview';
-import {InterviewersScheduleService} from '../services/interviewers.schedule.service';
+import { Interview} from '../../Shared/model/Interview';
+import { InterviewersScheduleService} from '../services/interviewers.schedule.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { MasterData } from  '../../../shared/model/index';
 import { FullCalendarComponent} from  '../../../shared/components/calendar/fullCalendar';
-import {CalendarDetails, Event, Resource} from '../../ScheduleInterview/model/CalendarDetails';
+import { CalendarDetails} from '../../ScheduleInterview/model/CalendarDetails';
+import { iefModel} from '../../Shared/model/ief';
 
 @Component({
     moduleId: module.id,
@@ -20,7 +21,6 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
     Title: string;
     errorMessage: string;
     InterviewInformation: Array<Interview> = new Array<Interview>();
-    AwaitedInterviewInformation: Array<Interview> = new Array<Interview>();
     InterviewInformationForCalendar: Array<Interview> = new Array<Interview>();
     interviewdd: Interview = new Interview();
     InterviewerCalendarDetails: CalendarDetails = new CalendarDetails();
@@ -29,18 +29,15 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
     };
-
-
     constructor(private _router: Router,
         private toastr: ToastsManager,
         private _interviewService: InterviewersScheduleService) {
         this.InterviewInformation = new Array<Interview>();
-        this.AwaitedInterviewInformation = new Array<Interview>();
         this.InterviewInformationForCalendar = new Array<Interview>();
-        //this.getMyAllInterviewsDetailsOfCalendar();
-
+        /**Commeting as this functionality is deprecated */
+        // this.AwaitedInterviewInformation = new Array<Interview>();
     }
-    //Router method overrid from OnActivate class
+    /**Router method overrid from OnActivate class */
     routerOnActivate() {
         this.getMyInterviews();
         this.InterviewerCalendarDetails.Events = <any>this._interviewService.getEvent();
@@ -54,7 +51,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
             this._router.navigate([this.returnPath]);
     }
 
-    //Get all interviews assigned and accepted by current logged in user from service.
+    /**Get all interviews assigned and accepted by current logged in user from service. */
     getMyInterviews() {
         this._interviewService.getMyInterviews()
             .subscribe(
@@ -67,7 +64,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
             });
     }
 
-    //used for calender view
+    /**used for calender view */
     getMyAllInterviewsDetailsOfCalendar() {
         this._interviewService.getMyAllInterviewsDetailsOfCalendar()
             .subscribe(
@@ -79,18 +76,25 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
                 this.toastr.error(<any>error);
             });
     }
-    
-    showIEF(_interviewID: string) {
-        console.log('showing IEF form..!');
-        this._router.navigate(['/App/Recruitment Cycle/Interviewers/ief/' + _interviewID]);
+    showIEF(
+        _rrfId: MasterData,
+        _candidateId: MasterData,
+        _displayCandidateInfo: boolean,
+        _interviewType: MasterData,
+        _interviewId: MasterData
+    ) {
+        var _iefParameters: iefModel = new iefModel();
+        _iefParameters.RRFID = _rrfId;
+        _iefParameters.CandidateID = _candidateId;
+        _iefParameters.DisplayCandidateInfo = _displayCandidateInfo;
+        _iefParameters.InterviewType = _interviewType;
+        _iefParameters.InterviewID = _interviewId;
+        sessionStorage.setItem('SubmitIef', JSON.stringify(_iefParameters));
+        this._router.navigate(['/App/Recruitment Cycle/Interviewers/ief']);
     }
-
-    rejectInterview(_rrfID: MasterData) {
-        let modalpopup: any = $('#rejectInterview');
-        modalpopup.modal();
-    }
-
-    acceptInterview(_rrfID: MasterData) {
-        /** */
-    }
+    /**Commeting as this functionality is deprecated */
+    // rejectInterview(_rrfID: MasterData) {
+    //     let modalpopup: any = $('#rejectInterview');
+    //     modalpopup.modal();
+    // }
 }

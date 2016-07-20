@@ -14,7 +14,7 @@
             </li>
         </ul>
 
-        <div class="row">
+        <div class="row" *ngIf="false">
             <div class="col-md-12">
                 <!-- AWAITING FOR APPROVAL GRID-->
 
@@ -206,7 +206,7 @@
                                                         <i class="icon-download"></i> Download Resume </a>
                                                 </li>
                                                 <li>
-                                                    <a (click)='showIEF("_myInterview.InterviewID.Id _myInterview.InterviewID.Value")'>
+                                                    <a (click)='showIEF(_myInterview.RRFID, _myInterview.CandidateID, _myInterview.DisplayCandidateInfo, _myInterview.InterviewType, _myInterview.InterviewID)'>
                                                         <i class="icon-tag"></i> Submit IEF
                                                     </a>
                                                 </li>
@@ -235,11 +235,8 @@
                     </div>
                     <div class="portlet-body">
                         <div style=" text-align-last: center;">
-                            <full-calendar [resources]="InterviewerCalendarDetails.Resources"
-                                           [events]="InterviewerCalendarDetails.Events" 
-                                           [header]="header" 
-                                           defaultDate="2016-07-12"
-                                           [eventLimit]="4" [editable]="true">
+                            <full-calendar [resources]="InterviewerCalendarDetails.Resources" [events]="InterviewerCalendarDetails.Events" [header]="header"
+                                defaultDate="2016-07-12" [eventLimit]="4" [editable]="true">
                             </full-calendar>
                         </div>
                     </div>

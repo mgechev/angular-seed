@@ -1,4 +1,4 @@
-import { Component, OnInit,AfterViewInit} from '@angular/core';
+import { Component, OnInit, AfterViewInit} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
 import { Interview} from '../../Shared/model/Interview';
 import { InterviewersCalendarService} from '../services/interviewers.calendar.service';
@@ -19,7 +19,7 @@ import { InterviewSlotComponent } from '../../Shared/Component/InterviewSlot/Com
 })
 
 /** RecruitmentInterviewerCalenderComponent implements OnActivate*/
-export class RecruitmentInterviewerCalenderComponent implements OnActivate,OnInit,AfterViewInit {
+export class RecruitmentInterviewerCalenderComponent implements OnActivate, OnInit, AfterViewInit {
     returnPath: string;
     Title: string;
     errorMessage: string;
@@ -34,7 +34,7 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate,OnIni
     showSlotForRRF: boolean = false;
     selectedRRFID: number = 0;
     AddNewSlotText: string = "Add Slot";
-     _myCalendarDetails: CalendarDetails = new CalendarDetails();
+    _myCalendarDetails: CalendarDetails = new CalendarDetails();
 
 
     constructor(private _router: Router,
@@ -53,21 +53,37 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate,OnIni
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         };
-        this.getMyInterviews();
+
         this.returnPath = sessionStorage.getItem('returnPath');
+        this.getResources();
+        this.getMyInterviews();
     }
     Back() {
         if (this.returnPath !== undefined)
             this._router.navigate([this.returnPath]);
     }
+
+    getResources() {
+        this._interviewService.GetResources()
+            .subscribe(
+            (results: any) => {
+                // this.InterviewAvailabilityInformation = results;
+                this._myCalendarDetails.Resources = results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+    }
+
     /**Get Interviewers(Current Logged in user) availability and booked slot information to display in calendar */
     getMyInterviews() {
         /**Get Interviewers availability and booked slot information to display in calendar */
         this._interviewService.getMyAvailability()
             .subscribe(
             (results: any) => {
-               // this.InterviewAvailabilityInformation = results;
-               this._myCalendarDetails = results;
+                // this.InterviewAvailabilityInformation = results;
+                this._myCalendarDetails = results;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -109,11 +125,11 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate,OnIni
         }
 
     }
-    
+
     ngOnInit() {
         //this.getMyInterviews();
     }
-    
+
     ngAfterViewInit() {
         this.getMyInterviews();
     }

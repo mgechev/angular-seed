@@ -15,17 +15,164 @@
         <!--End Breadcrumb>-->
         <div class="row">
             <div class="col-md-12">
+                <form class="form-horizontal form-bordered" (submit)="submitIEFDetails(functions)">
+                    <div class="portlet light bordered">
+                        <div class="portlet-title">
+                            <div class="caption font-dark">
+                                <span class="caption-subject bold uppercase">Evalution form for {{candidateIEFDetails.CandidateName}} </span>
+                            </div>
+                            <div class="pull-right">
+                                <table>
+                                    <tr>
+                                        <td style="width:50%">
+                                            <div class="pull-center">
+                                                <span><strong>Experience</strong></span>
+                                            </div>
+                                            <div>
+                                                <label class="control-label"><strong>Total : </strong>{{ candidateIEFDetails.Experience.TotalExperience}} </label>
+                                            </div>
+                                            <div>
+                                                <label class="control-label"><strong>Relevant : </strong>{{candidateIEFDetails.Experience.RelevantExperience}} </label>
+                                            </div>
+                                        </td>
+                                        <td style="width:50%" *ngIf="!requestedIef.DisplayCandidateInfo">
+                                            <div>
+                                                <span class="pull-center"><strong> Salary</strong></span>
+                                            </div>
+                                            <div>
+                                                <label class="control-label"><strong>Current : </strong> <i class="fa fa-inr"></i> {{candidateIEFDetails.Salary.Current}} </label>
+                                            </div>
+                                            <div>
+                                                <label class="control-label"><strong>Expected : </strong> <i class="fa fa-inr"></i> {{candidateIEFDetails.Salary.Expected}} </label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="portlet-body form">
+                            <table style="width:100%">
+                                <tr class="form-group">
+                                    <td style="width:33%">
+                                        <label class="control-label"><strong>Name : </strong> {{ candidateIEFDetails.CandidateName}}</label>
+                                    </td>
+                                    <td style="width:33%">
+
+                                    </td>
+                                    <td style="width:33%">
+
+                                    </td>
+
+                                </tr>
+                                <tr class="form-group">
+                                    <td style="width:33%">
+                                        <label class="control-label"><strong>Role : </strong>{{ candidateIEFDetails.RRFDetailsIEF.Role}} </label>
+                                    </td>
+                                    <td style="width:33%">
+                                        <label class="control-label"><strong>COE/Functions : </strong>{{ candidateIEFDetails.RRFDetailsIEF.FunctionName}} </label>
+                                    </td>
+                                    <td style="width:33%">
+                                        <label class="control-label"><strong>Location : </strong>{{ candidateIEFDetails.Location}} </label>
+                                    </td>
+                                </tr>
+
+                                <tr class="form-group">
+                                    <td style="width:33%">
+                                        <label class="control-label"><strong>Primary Skills : </strong>{{ candidateIEFDetails.Skills.PrimarySkills}} </label>
+                                    </td>
+                                    <td style="width:33%">
+                                        <label class="control-label"><strong>Secondary Skills : </strong>{{ candidateIEFDetails.Skills.SecondarySkills}}</label>
+                                    </td>
+                                    <td style="width:33%">
+                                        <label class="control-label"><strong>Other special skills : </strong>{{  candidateIEFDetails.Skills.OtherSkills}}</label>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div>
+                                <label class="control-label"><strong>Additional Comments : </strong>{{  candidateIEFDetails.AdditionalInformation}}</label>
+                            </div>
+                            <hr>
+                            <!-- BEGIN EVALUTATION FORM-->
+
+                            <!--form add in component -->
+                            <div *ngFor="let _function of functions; let i = index">
+                                <ief-function (functionUpdate)="onUpdate($event)" [recordCount]="i" [functionsCollection]="functions"></ief-function>
+                            </div>
+                            <!--<form class="form-horizontal form-bordered" (submit)="submitIEFDetails(functions)">-->
+                            <div class="form-body form-group">
+                                <label class="control-label col-md-2">Status<span class="required">*</span> :</label>
+                                <div class="col-md-2">
+                                    <select class="form-control" [(ngModel)]='iefStatus' required>
+                                        <option >Selected</option>
+                                        <option >Rejected</option>
+                                        <option >On Hold</option>
+                                    </select>
+                                </div>
+                                <label class="control-label col-md-2">General Comments<span class="required">*</span>:</label>
+                                <div class="col-md-6">
+                                    <textarea class="form-control" required id="txtComment" rows="3" placeholder="Enter comment..." style="resize:vertical" [(ngModel)]='iefComments'></textarea>
+                                </div>
+                            </div>
+                            <!--</form>-->
+                            <!-- END EVALUTATION FORM-->
+                        </div>
+                        <div>
+                            <!--<button type="submit" class="btn green" (click)="submitIEFDetails(functions)"> Save </button>-->
+                            <button type="submit" class="btn green"> Save </button>
+                            <button type="reset" class="btn default" (click)="Back()"> Cancel </button>
+                        </div>
+                    </div>
+                </form>
+                <!-- BEGIN IEF HISTORY-->
                 <div class="portlet light bordered">
                     <div class="portlet-title">
                         <div class="caption font-dark">
-                            <span class="caption-subject bold uppercase">Evalution Form for UserFirstName LastName </span>
+                            <span class="caption-subject bold uppercase">Candidate recruitment history </span>
                         </div>
                     </div>
-                    <div class="portlet-body">
-                        Google.com
-                                              
+                    <div class="portlet-body form">
+                        <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+                            <thead>
+                                <tr>
+                                    <th> Interviewers </th>
+                                    <th> Interview Mode </th>
+                                    <th> Interview Date </th>
+                                    <th> Status </th>
+                                    <th> Feedback </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="gradeX odd " *ngFor="let _IEFHistory of candidateIEFHistory">
+                                    <td>
+                                        <!--<ul>-->
+                                        <p *ngFor="let _interviewers of _IEFHistory.InterviewerAvailability">
+                                            {{_interviewers.Interviewer.Value}}
+                                        </p>
+                                        <!--</ul>-->
+                                    </td>
+                                    <td> {{_IEFHistory.InterviewMode.Value}} </td>
+                                    <td class="center"> {{_IEFHistory.InterviewDate}} </td>
+                                    <td>
+                                        <span class="label label-sm label-success"> {{_IEFHistory.Status}} </span>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <ul>
+                                                <li *ngFor="let _iefRecord of _IEFHistory.IEFTransactionDetails">
+                                                    <strong> {{_iefRecord.FunctionLabel}} : </strong>{{_iefRecord.FunctionValue}}
+                                                    <span class="badge badge-danger">{{_iefRecord.Rating}}</span>
+                                                </li>
+                                            </ul>
+                                          
+                                            <br>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+                <!-- END IEF HISTORY-->
             </div>
         </div>
         <!-- END CONTENT BODY -->

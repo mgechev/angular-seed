@@ -107,10 +107,20 @@ export class InterviewersCalendarService {
             .finally(() => this._spinnerService.hide());
     }
 
+     GetResources() {
+         let url = Config.GetURL('/api/RecruitmentCycle/CalendarViewGetResources');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+      //  return this.InterviewCalendarDetails.Resources;
+    }
+
     getCalendarEventData() {
         return this.Events;
     }
-    getResources() {
+    getResources_1() {
         return [{ id: 1, title: 'InterViewer A', eventColor: this.generateHexColors() },
             { id: 2, title: 'InterViewer B', eventColor: this.generateHexColors() },
             { id: 3, title: 'InterViewer C', eventColor: this.generateHexColors() }];

@@ -18,7 +18,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
     { path: '/', component: RecruitmentInterviewAvailabilityComponent },
     { path: '/availability', component: RecruitmentInterviewAvailabilityComponent },
     { path: '/schedule', component: RecruitmentInterviewScheduleComponent },
-    { path: '/ief/:id', component: RecruitmentIEFComponent },
+    { path: '/ief', component: RecruitmentIEFComponent },
     { path: '/mycalendar', component: RecruitmentInterviewerCalenderComponent },
 ])
 export class InterviewrsComponent {
