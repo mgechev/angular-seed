@@ -1,7 +1,10 @@
 export class Config {
     public static GetURL(apiURL: string): string {
-        //let baseURL= 'http://localhost:3000';
-        let baseURL= '';
+        //  Production URL
+        //  let baseURL= 'http://192.168.101.124:8010';
+
+        //  Dev URL
+        let baseURL = 'http://192.168.101.124:8001';
         return baseURL + apiURL;
     }
 }
