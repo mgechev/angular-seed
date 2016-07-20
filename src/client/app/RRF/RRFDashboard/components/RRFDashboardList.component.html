@@ -16,10 +16,8 @@
         <div class="row">
 
             <div class="portlet-body">
-
                 <div class="col-lg-12" *ngIf="isChartVisible">
                     <div class=" portlet light bordered">
-
                         <base-chart class="chart" [options]="doughnutChartOptions" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
                         [colors]="doughnutChartColors"></base-chart>
                     </div>

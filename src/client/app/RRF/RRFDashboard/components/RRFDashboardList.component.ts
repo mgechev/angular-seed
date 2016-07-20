@@ -40,12 +40,6 @@ export class RRFDashboardListComponent implements OnActivate {
     AssignStatus: RRFAssignStatus = RRFAssignStatus;
     grdOptions: GrdOptions = new GrdOptions();
 
-    //required for pagination
-    // showRecord: number = 5;
-    // orderByRecord : string = "";
-    // sortByRecord : string = "";
-    //buttonClick: number = 0;
-
     doughnutChartLabels: string[] = [];
     doughnutChartData: number[] = [];
     doughnutChartType: string = 'doughnut'; //doughnut

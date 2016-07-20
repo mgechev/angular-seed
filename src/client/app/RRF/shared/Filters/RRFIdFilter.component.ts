@@ -7,3 +7,4 @@ export class RRFIDPipe implements PipeTransform {
         return rrfID ? value.filter(rrfData=> (rrfData.RRFID.Value.includes(rrfID))) : value;
     }
 }
+
