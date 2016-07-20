@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { OnActivate } from '@angular/router';
-import { IEFFunction} from '../../../../Shared/model/ief';
+import { IEFFunction} from '../../../../shared/model/ief';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 

@@ -1,5 +1,5 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {IEFFunction} from '../../../Shared/model/ief';
+import {IEFFunction} from '../../../shared/model/ief';
 import { MasterData } from  '../../../../shared/model/index';
 
 @Component({

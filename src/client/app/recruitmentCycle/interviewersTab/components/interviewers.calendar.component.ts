@@ -1,14 +1,14 @@
 import { Component, OnInit, AfterViewInit} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import { Interview} from '../../Shared/model/Interview';
+import { Interview} from '../../shared/model/interview';
 import { InterviewersCalendarService} from '../services/interviewers.calendar.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { FullCalendarComponent} from  '../../../shared/components/calendar/fullCalendar';
-import { Resource, Event, CalendarDetails} from '../../ScheduleInterview/model/CalendarDetails';
+import { Resource, Event, CalendarDetails} from '../../scheduleInterview/model/calendarDetails';
 import { InterviewersAvailabilityService} from '../services/interviewers.availability.service';
 import { MasterData} from '../../../shared/model/common.model';
-import { DetailRRF } from '../../Shared/model/detailRRF';
-import { InterviewSlotComponent } from '../../Shared/Component/InterviewSlot/Component/InterviewSlot.component';
+import { DetailRRF } from '../../shared/model/detailRRF';
+import { InterviewSlotComponent } from '../../shared/component/InterviewSlot/Component/InterviewSlot.component';
 
 @Component({
     moduleId: module.id,

@@ -1,6 +1,6 @@
 import { MasterData } from  '../../../shared/model/index';
 import { CandidateProfile } from  '../../../profileBank/shared/model/myProfilesInfo';
-import { Interview, InterviewAvailability, IEFTransactionDetails } from  './Interview';
+import { Interview, InterviewAvailability, IEFTransactionDetails } from  './interview';
 
 export class IEFDetails {
     public DetailRRFID: MasterData = new MasterData();

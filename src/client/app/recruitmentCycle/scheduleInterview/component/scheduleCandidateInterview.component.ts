@@ -5,9 +5,9 @@ import { FullCalendarComponent} from  '../../../shared/components/calendar/fullC
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';//ResponseFromAPI
 import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import {CalendarDataService} from '../service/calendarDataService';
-import {CalendarDetails, Event, Resource} from '../model/CalendarDetails';
+import {CalendarDetails, Event, Resource} from '../model/calendarDetails';
 import { MastersService } from '../../../shared/services/masters.service';
-import { InterviewAvailability, Interview } from '../../Shared/Model/Interview';
+import { InterviewAvailability, Interview } from '../../shared/model/interview';
 import { ScheduleInterviewService} from '../service/ScheduleInterview.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
-import {CalendarDetails} from '../model/CalendarDetails';
+import {CalendarDetails} from '../model/calendarDetails';
 import {InterviewersPanel, Interviewers} from '../model/scheduleInterview';
 
 @Injectable()

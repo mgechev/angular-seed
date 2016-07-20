@@ -1,11 +1,11 @@
 import { Component, OnInit} from '@angular/core';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { Interview } from  '../../Shared/model/Interview';
-import { CandidateIEFService } from  '../Services/Candidate.IEF.service';
+import { Interview } from  '../../shared/model/interview';
+import { CandidateIEFService } from  '../services/Candidate.IEF.service';
 import { ROUTER_DIRECTIVES, Router, OnActivate, RouteSegment} from '@angular/router';
 import { IEFFunctionComponent} from './IEFFuncations/Component/IEFFunction.component';
 import { InterviewSlotComponent} from './InterviewSlot/Component/InterviewSlot.component';
-import { IEFInformation, iefModel, IEFFunction, IEFSubmission} from '../../Shared/model/ief';
+import { IEFInformation, iefModel, IEFFunction, IEFSubmission} from '../../shared/model/ief';
 import { ResponseFromAPI, MasterData} from '../../../shared/model/common.model';
 import { APIResult} from  '../../../shared/constantValue/index';
 

@@ -1,12 +1,12 @@
 import { Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import { Interview} from '../../Shared/model/Interview';
+import { Interview} from '../../shared/model/interview';
 import { InterviewersScheduleService} from '../services/interviewers.schedule.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { MasterData } from  '../../../shared/model/index';
 import { FullCalendarComponent} from  '../../../shared/components/calendar/fullCalendar';
-import { CalendarDetails} from '../../ScheduleInterview/model/CalendarDetails';
-import { iefModel} from '../../Shared/model/ief';
+import { CalendarDetails} from '../../scheduleInterview/model/calendarDetails';
+import { iefModel} from '../../shared/model/ief';
 
 @Component({
     moduleId: module.id,
