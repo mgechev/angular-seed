@@ -12,13 +12,14 @@ import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 @Component({
     moduleId: module.id,
     selector: 'allprofiles-add',
-     templateUrl: '../../shared/views/profileBankAdd.component.html',
+    templateUrl: '../../shared/views/profileBankAdd.component.html',
     directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
 
 export class AllProfilesAddComponent implements OnActivate {
     profile: CandidateProfile;
+    CandidateID: MasterData = new MasterData();
     qualification: Qualification;
     errorMessage: string;
     params: string;
@@ -75,7 +76,9 @@ export class AllProfilesAddComponent implements OnActivate {
         //get current profile by Id
         this.params = segment.getParam('id');
         if (this.params) {
-            this.getCandidateProfileById(this.params);
+            this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
+            this.CandidateID.Value = this.params.split('ID')[0];
+            this.getCandidateProfileById(this.CandidateID.Value);
         }
         var date = new Date();
         this.CurrentYear = date.getFullYear();
@@ -193,201 +196,189 @@ export class AllProfilesAddComponent implements OnActivate {
     }
 
     onSavePrimaryInfo(): void {
-        if (this.params) {
-            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.CommentsUpdated = true;
-                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
-            } else {
-                this.profile.CommentsUpdated = false;
-            }
-
-            this._profileBankService.editCandidateProfile(this.profile)
-                .subscribe(
-                results => {
-                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                        this.toastr.success((<ResponseFromAPI>results).Message);
-                        this.getCandidateProfileById(this.params);
-                    } else {
-                        this.toastr.error((<ResponseFromAPI>results).Message);
-                    }
-                },
-                error => {
-                    this.errorMessage = <any>error;
-                    this.toastr.error(<any>error);
-                });
+        if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+            this.profile.CommentsUpdated = true;
+            this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+        } else {
+            this.profile.CommentsUpdated = false;
         }
+
+        this._profileBankService.editCandidateProfile(this.profile)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.getCandidateProfileById(this.CandidateID.Value);
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+
     }
 
     onSavePersonalDetails(): void {
-        //   this.convertCheckboxesValues();
-        if (this.params) {
-            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.CommentsUpdated = true;
-                this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
-            } else {
-                this.profile.CommentsUpdated = false;
-            }
-            this._profileBankService.editCandidatePersonalDetails(this.profile)
-                .subscribe(
-                results => {
-                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                        this.toastr.success((<ResponseFromAPI>results).Message);
-                        this.getCandidateProfileById(this.params);
-                    } else {
-                        this.toastr.error((<ResponseFromAPI>results).Message);
-                    }
-                },
-                error => {
-                    this.errorMessage = <any>error;
-                    this.toastr.error(<any>error);
-                });
+        if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+            this.profile.CommentsUpdated = true;
+            this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+        } else {
+            this.profile.CommentsUpdated = false;
         }
+        this._profileBankService.editCandidatePersonalDetails(this.profile)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.getCandidateProfileById(this.CandidateID.Value);
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+
     }
 
     onSaveProfessionalDetails(): void {
-
-        if (this.params) {
-            //Check For Comments Updated
-            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.CommentsUpdated = this.profile.CandidateOtherDetails.CommentsUpdated = true;
-                this.profile.PreviousFollowupComments = this.profile.CandidateOtherDetails.FollowUpComments
-                    = this.profile.FollowUpComments.trim();
-            } else {
-                this.profile.CommentsUpdated = this.profile.CandidateOtherDetails.CommentsUpdated = false;
-            }
-            this.profile.CandidateOtherDetails.CandidateID = this.params;
-            //Save Data
-            this._profileBankService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
-                .subscribe(
-                results => {
-                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                        this.toastr.success((<ResponseFromAPI>results).Message);
-                        this.getCandidateProfileById(this.params);
-                    } else {
-                        this.toastr.error((<ResponseFromAPI>results).Message);
-                    }
-                },
-                error => {
-                    this.errorMessage = <any>error;
-                    this.toastr.error(<any>error);
-                });
+        //Check For Comments Updated
+        if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+            this.profile.CommentsUpdated = this.profile.CandidateOtherDetails.CommentsUpdated = true;
+            this.profile.PreviousFollowupComments = this.profile.CandidateOtherDetails.FollowUpComments
+                = this.profile.FollowUpComments.trim();
+        } else {
+            this.profile.CommentsUpdated = this.profile.CandidateOtherDetails.CommentsUpdated = false;
         }
+        this.profile.CandidateOtherDetails.CandidateID = this.CandidateID;
+        //Save Data
+        this._profileBankService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.getCandidateProfileById(this.CandidateID.Value);
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+
     }
 
-    onSaveSkillsDetails(): void {
-        //   this.showMessage('Wait', true);
-        if (this.params) {
-            this.profile.CandidateSkills.CandidateID = this.params;
-            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.CommentsUpdated = this.profile.CandidateSkills.CommentsUpdated = true;
-                this.profile.CandidateSkills.FollowUpComments = this.profile.PreviousFollowupComments
-                    = this.profile.FollowUpComments.trim();
-            } else {
-                this.profile.CommentsUpdated = this.profile.CandidateSkills.CommentsUpdated = false;
-            }
-            this.profile.CandidateSkills.CandidateID = this.params;
-            this._profileBankService.editCandidateSkillsDetails(this.profile.CandidateSkills)
-                .subscribe(
-                results => {
-                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                        this.toastr.success((<ResponseFromAPI>results).Message);
-                        this.getCandidateProfileById(this.params);
-                    } else {
-                        this.toastr.error((<ResponseFromAPI>results).Message);
-                    }
-                },
-                error => {
-                    this.errorMessage = <any>error;
-                    this.toastr.error(<any>error);
-                });
+    onSaveSkillsDetails() {
+
+        this.profile.CandidateSkills.CandidateID = this.CandidateID;
+
+        if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+            this.profile.CommentsUpdated = this.profile.CandidateSkills.CommentsUpdated = true;
+            this.profile.CandidateSkills.FollowUpComments = this.profile.PreviousFollowupComments
+                = this.profile.FollowUpComments.trim();
+        } else {
+            this.profile.CommentsUpdated = this.profile.CandidateSkills.CommentsUpdated = false;
         }
+        this._profileBankService.editCandidateSkillsDetails(this.profile.CandidateSkills)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.getCandidateProfileById(this.CandidateID.Value);
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+
     }
 
     onSaveTeamManagementDetails(): void {
-        //   this.showMessage('Wait', true);
-        //   this.convertCheckboxesValues();
-        if (this.params) {
-            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.CommentsUpdated = this.profile.CandidateTeamManagement.CommentsUpdated = true;
-                this.profile.PreviousFollowupComments = this.profile.CandidateTeamManagement.FollowUpComments =
-                    this.profile.FollowUpComments.trim();
-            } else {
-                this.profile.CommentsUpdated = this.profile.CandidateTeamManagement.CommentsUpdated = false;
-            }
-            this.profile.CandidateTeamManagement.CandidateID = this.params;
-            this._profileBankService.editCandidateTeamManagementDetails(this.profile.CandidateTeamManagement)
-                .subscribe(
-                results => {
-                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                        this.toastr.success((<ResponseFromAPI>results).Message);
-                        this.getCandidateProfileById(this.params);
-                    } else {
-                        this.toastr.error((<ResponseFromAPI>results).Message);
-                    }
-                },
-                error => {
-                    this.errorMessage = <any>error;
-                    this.toastr.error(<any>error);
-                });
+
+        if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+            this.profile.CommentsUpdated = this.profile.CandidateTeamManagement.CommentsUpdated = true;
+            this.profile.PreviousFollowupComments = this.profile.CandidateTeamManagement.FollowUpComments =
+                this.profile.FollowUpComments.trim();
+        } else {
+            this.profile.CommentsUpdated = this.profile.CandidateTeamManagement.CommentsUpdated = false;
         }
+        this.profile.CandidateTeamManagement.CandidateID = this.CandidateID;
+        this._profileBankService.editCandidateTeamManagementDetails(this.profile.CandidateTeamManagement)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.getCandidateProfileById(this.CandidateID.Value);
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+
     }
 
     onSaveCareerProfileDetails(): void {
-        //   this.showMessage('Wait', true);
-        if (this.params) {
-            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.CommentsUpdated = this.profile.CandidateCareerProfile.CommentsUpdated = true;
-                this.profile.PreviousFollowupComments = this.profile.CandidateCareerProfile.FollowUpComments
-                    = this.profile.FollowUpComments.trim();
-            } else {
-                this.profile.CommentsUpdated = this.profile.CandidateCareerProfile.CommentsUpdated = false;
-            }
-            this.profile.CandidateCareerProfile.CandidateID = this.params;
-            this._profileBankService.editCandidateCareerDetails(this.profile.CandidateCareerProfile)
-                .subscribe(
-                results => {
-                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                        this.toastr.success((<ResponseFromAPI>results).Message);
-                        this.getCandidateProfileById(this.params);
-                    } else {
-                        this.toastr.error((<ResponseFromAPI>results).Message);
-                    }
-                },
-                error => {
-                    this.errorMessage = <any>error;
-                    this.toastr.error(<any>error);
-                }
-                );
+
+        if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+            this.profile.CommentsUpdated = this.profile.CandidateCareerProfile.CommentsUpdated = true;
+            this.profile.PreviousFollowupComments = this.profile.CandidateCareerProfile.FollowUpComments
+                = this.profile.FollowUpComments.trim();
+        } else {
+            this.profile.CommentsUpdated = this.profile.CandidateCareerProfile.CommentsUpdated = false;
         }
+        this.profile.CandidateCareerProfile.CandidateID = this.CandidateID;
+        this._profileBankService.editCandidateCareerDetails(this.profile.CandidateCareerProfile)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.getCandidateProfileById(this.CandidateID.Value);
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            }
+            );
+
     }
 
     onSaveSalaryDetails(): void {
-        //   this.showMessage('Wait', true);
-        //   this.convertCheckboxesValues();
-        if (this.params) {
-            if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-                this.profile.CommentsUpdated = this.profile.CandidateSalaryDetails.CommentsUpdated = true;
-                this.profile.PreviousFollowupComments = this.profile.CandidateSalaryDetails.FollowUpComments =
-                    this.profile.FollowUpComments.trim();
-            } else {
-                this.profile.CommentsUpdated = false;
-            }
-            this.profile.CandidateSalaryDetails.CandidateID = this.params;
-            this._profileBankService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)
-                .subscribe(
-                results => {
-                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                        this.toastr.success((<ResponseFromAPI>results).Message);
-                        this.getCandidateProfileById(this.params);
-                    } else {
-                        this.toastr.error((<ResponseFromAPI>results).Message);
-                    }
-                },
-                error => {
-                    this.errorMessage = <any>error;
-                    this.toastr.error(<any>error);
-                });
+        if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+            this.profile.CommentsUpdated = this.profile.CandidateSalaryDetails.CommentsUpdated = true;
+            this.profile.PreviousFollowupComments = this.profile.CandidateSalaryDetails.FollowUpComments =
+                this.profile.FollowUpComments.trim();
+        } else {
+            this.profile.CommentsUpdated = false;
         }
+        this.profile.CandidateSalaryDetails.CandidateID = this.CandidateID;
+        this._profileBankService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.getCandidateProfileById(this.CandidateID.Value);
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+
     }
 
     onAddQualification(): void {
@@ -429,35 +420,24 @@ export class AllProfilesAddComponent implements OnActivate {
     }
 
     getCandidateQualification() {
-        if (this.params) {
-            this._profileBankService.getCandidateQualifications(this.params)
-                .subscribe(
-                (results: Array<Qualification>) => {
-                    this.profile.CandidateQualification = new Array<Qualification>();
-                    this.profile.CandidateQualification = results;
-                    this.assignQualificationID(results);
-                },
-                error => {
-                    this.errorMessage = <any>error;
-                    this.toastr.error(<any>error);
-                });
-        }
-    }
-
-    assignQualificationID(CandidateQualification: Array<Qualification>) {
-        for (var index = 0; index < CandidateQualification.length; index++) {
-            this.profile.CandidateQualification[index].QualificationID =
-                this.profile.CandidateQualification[index].Qualification.Id;
-        }
+        this._profileBankService.getCandidateQualifications(this.CandidateID.Value)
+            .subscribe(
+            results => {
+                this.profile.CandidateQualification = new Array<Qualification>();
+                this.profile.CandidateQualification = <any>results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
     }
 
     editQualidficationData(QID: string) {
         if (this.params) {
-            this._profileBankService.getQualificationById(this.params, QID.toString())
+            this._profileBankService.getQualificationById(this.CandidateID.Value, QID.toString())
                 .subscribe(
                 (results: Qualification) => {
                     this.qualification = results;
-                    this.IsHidden = false;
                 },
                 error => {
                     this.errorMessage = <any>error;

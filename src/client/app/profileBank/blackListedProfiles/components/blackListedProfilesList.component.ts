@@ -69,7 +69,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
             .subscribe(
             (results: AllCandidateProfiles) => {
                 if (results.Profiles.length !== undefined) {
-                     this.blacklistedProfilesList = results;
+                    this.blacklistedProfilesList = results;
                     //this.CandidateProfiles = results;
                 }
             },
@@ -90,7 +90,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
 
         var index = _.findIndex(this.blacklistedProfilesList.Profiles, { CandidateID: id });
         this.seletedCandidateID = this.blacklistedProfilesList.Profiles[index].CandidateID;
-       // var index = _.findIndex(this.CandidateProfiles.Profiles, { CandidateID: id });
+        // var index = _.findIndex(this.CandidateProfiles.Profiles, { CandidateID: id });
         // this.seletedCandidateID = this.CandidateProfiles.Profiles[index].CandidateID;
         // this.profile.Comments = this.allProfilesList[index].Comments;
         // this.profile.Status = this.allProfilesList[index].Status;
@@ -159,15 +159,20 @@ export class BlackListedProfilesListComponent implements OnActivate {
         }
     }
 
+    onChange() {
+        this.blacklistedProfilesList.GrdOperations.ButtonClicked = 0;
+        this.blacklistedProfilesList.GrdOperations.NextPageUrl = new Array<string>();
+        this.getBlacklistedProfiles();
+    }
     OnPaginationClick(ButtonClicked: string) {
         /* ButtonClicked 
                 i. Initial - 0
                 ii.Next - 1
                 iii.Prev - (-1)
-            PerPageCount = No of items shown per page
+           PerPageCount = No of items shown per page
                 */
-        this.CandidateProfiles.GrdOperations.ButtonClicked = parseInt(ButtonClicked);
-        this.CandidateProfiles.GrdOperations.PerPageCount = 3;
+        this.blacklistedProfilesList.GrdOperations.ButtonClicked = parseInt(ButtonClicked);
         this.getBlacklistedProfiles();
     }
 }
+

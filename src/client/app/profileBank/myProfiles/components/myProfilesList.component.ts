@@ -12,6 +12,7 @@ import { ProfileBankService} from  '../../shared/services/profileBank.service';
 //import {MyProfilesFilterPipe} from './myProfiles.component.pipe';
 import { Headers, Http } from '@angular/http';
 import { Candidate } from '../../shared/model/RRF';
+import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
 
 
 @Component({
@@ -20,6 +21,7 @@ import { Candidate } from '../../shared/model/RRF';
     templateUrl: 'myProfilesList.component.html',
     directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
     styleUrls: ['myProfiles.component.css'],
+    pipes:[ProfileBankPipe]
 })
 
 export class MyProfilesListComponent implements OnActivate {
@@ -414,6 +416,22 @@ export class MyProfilesListComponent implements OnActivate {
         }
 
     }
+    onChange() {
+        this.myProfilesList.GrdOperations.ButtonClicked = 0;
+        this.myProfilesList.GrdOperations.NextPageUrl=new Array<string>();
+        this.getMyProfiles();
+    }
+      OnPaginationClick(ButtonClicked: string) {
+        /* ButtonClicked 
+                i. Initial - 0
+                ii.Next - 1
+                iii.Prev - (-1)
+           PerPageCount = No of items shown per page
+                */
+        this.myProfilesList.GrdOperations.ButtonClicked = parseInt(ButtonClicked);
+        this.getMyProfiles();
+    }
+
 }
 
 

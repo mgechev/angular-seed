@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate } from '@angular/router';
-import {CandidateProfile} from '../../shared/model/myProfilesInfo';
+import {CandidateProfile, AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
 import { RecentProfilesService } from '../services/recentProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -20,7 +20,7 @@ import { ProfileBankService } from '../../shared/services/profileBank.service';
 })
 
 export class RecentProfilesListComponent implements OnActivate {
-    recentProfilesList: Array<CandidateProfile>;
+    recentProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
     profile: CandidateProfile = new CandidateProfile();
     statusList: Array<MasterData>;
     seletedCandidateID: MasterData = new MasterData();;
@@ -57,7 +57,7 @@ export class RecentProfilesListComponent implements OnActivate {
 
 
     getRecentProfiles() {
-        this._recentProfilesService.getRecentProfiles()
+        this._recentProfilesService.getRecentProfiles(this.recentProfilesList.GrdOperations)
             .subscribe(
             (results: any) => {
                 if (results.length !== undefined) {
@@ -69,14 +69,14 @@ export class RecentProfilesListComponent implements OnActivate {
     }
 
     redirectToView(CandidateID: MasterData) {
-        this._router.navigate(['App/ProfileBank/RecentProfiles/View/' +  CandidateID.Value+'ID'+CandidateID.Id]);
+        this._router.navigate(['App/ProfileBank/RecentProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
 
     SaveCandidateID(id: MasterData) {
         this.seletedCandidateID = id;
 
-        var index = _.findIndex(this.recentProfilesList, { CandidateID: this.seletedCandidateID });
-        this.currentCandidate = this.recentProfilesList[index].Candidate;
+        var index = _.findIndex(this.recentProfilesList.Profiles, { CandidateID: this.seletedCandidateID });
+        this.currentCandidate = this.recentProfilesList.Profiles[index].Candidate;
         this._profileBankService.getStatusById(id.Value)
             .subscribe(
             (results: any) => {
@@ -128,7 +128,7 @@ export class RecentProfilesListComponent implements OnActivate {
         this.isCollapsed = false;
     }
     redirectToEditProfile(CandidateID: MasterData) {
-        this._router.navigate(['/App/ProfileBank/RecentProfiles/Edit/' + CandidateID.Value+'ID'+CandidateID.Id]);
+        this._router.navigate(['/App/ProfileBank/RecentProfiles/Edit/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
 
     getEditAccess(Owner: MasterData) {
@@ -141,5 +141,20 @@ export class RecentProfilesListComponent implements OnActivate {
             return false;
         }
 
+    }
+    onChange() {
+        this.recentProfilesList.GrdOperations.ButtonClicked = 0;
+        this.recentProfilesList.GrdOperations.NextPageUrl = new Array<string>();
+        this.getRecentProfiles();
+    }
+    OnPaginationClick(ButtonClicked: string) {
+        /* ButtonClicked 
+                i. Initial - 0
+                ii.Next - 1
+                iii.Prev - (-1)
+           PerPageCount = No of items shown per page
+                */
+        this.recentProfilesList.GrdOperations.ButtonClicked = parseInt(ButtonClicked);
+        this.getRecentProfiles();
     }
 }

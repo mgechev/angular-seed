@@ -2,11 +2,11 @@
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-       
-     <!--BEGIN breadcrumb -->
+
+        <!--BEGIN breadcrumb -->
         <ul class="page-breadcrumb breadcrumb">
             <li>
-                <a [routerLink]="['/App']" > Home </a>
+                <a [routerLink]="['/App']"> Home </a>
                 <i class="fa fa-circle"></i>
             </li>
             <li>
@@ -41,17 +41,53 @@
                     <div class="portlet-body">
                         <div class="table-toolbar">
                             <div class="row">
-                                <!--<div class="col-md-6 col-sm-6">
-                                    <div class="dataTables_length" id="sample_1_length"><label>Show <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline"><option value="5">5</option><option value="15">15</option><option value="20">20</option><option value="-1">All</option></select></label></div>
+                                <div class="col-md-3 col-sm-3">
+                                    <div class="dataTables_length" id="sample_1_length">
+                                        <label>Show :
+                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
+                                            [(ngModel)]="blacklistedProfilesList.GrdOperations.PerPageCount"  (ngModelChange)="onChange()">
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="20">20</option>
+                                                <option value="50">50</option>
+                                            </select>
+                                        </label>
+                                    </div>
                                 </div>
-                                <div class="col-md-6 col-sm-6">
-                                    <div id="sample_1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm input-small input-inline" placeholder="" aria-controls="sample_1"></label></div>
-                                </div>-->
+                                <div class="col-md-3 col-sm-3">
+                                    <label>Sort By
+                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline"
+                                             [(ngModel)]="blacklistedProfilesList.GrdOperations.Order"  
+                                            (ngModelChange)='onChange()'>
+                                                <option value="asc">ASC</option>
+                                                <option value="desc">DESC</option>
+                                            </select> 
+                                            </label>
+                                </div>
+                                <div class="col-md-3 col-sm-3">
+                                    <label>Order By  
+                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
+                                            [(ngModel)]="blacklistedProfilesList.GrdOperations.OrderBy"
+                                            (ngModelChange)="onChange()" >
+                                                <option value="Modified">Modified</option>
+                                                <option value="Status">Status</option>
+                                            </select>
+                                        </label>
+                                </div>
+
+                                <div class="col-md-3 col-sm-4">
+                                    <div id="sample_1_filter" class="dataTables_filter">
+                                        <label>Search 
+                                            <input type="search" class="form-control input-sm input-small input-inline " [(ngModel)] = "searchString"
+                                            placeholder="" aria-controls="sample_1">
+                                            </label>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row" style="margin-top: 10px">
                                 <div id="updateRow" *ngIf='isCollapsed'>
-                                     <span class ="header" >Update Status</span>
-                                <hr style="margin:0px 0px !important" />
+                                    <span class="header">Update Status</span>
+                                    <hr style="margin:0px 0px !important" />
                                     <form role="form" (submit)="onUpdateStauts()">
                                         <div class="col-md-3">
                                             <div class="form-group">
@@ -100,8 +136,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="gradeX odd" *ngFor="let blacklistedProfile of blacklistedProfilesList.Profiles; let index = index">
-                                            <td >
+                                        <tr class="gradeX odd" *ngFor="let blacklistedProfile of blacklistedProfilesList.Profiles | ProfileBankPipe : searchString">
+                                            <td>
                                                 <tr>
                                                     <td style="float: left;">&nbsp; {{blacklistedProfile.Candidate}}</td>
                                                 </tr>
@@ -113,8 +149,8 @@
                                                 </tr>
 
                                             </td>
-                                            <td > {{blacklistedProfile.Tag}} </td>
-                                            <td >
+                                            <td> {{blacklistedProfile.Tag}} </td>
+                                            <td>
                                                 <tr>
                                                     <td style="float: left;">&nbsp; Notice Period : {{blacklistedProfile.CandidateOtherDetails.NoticePeriod}}</td>
                                                 </tr>
@@ -126,7 +162,7 @@
                                                 </tr>
 
                                             </td>
-                                            <td >
+                                            <td>
                                                 <span class="mt-action-dot color{{blacklistedProfile.Status.Id}}"> </span>{{blacklistedProfile.Status.Value}}
                                             </td>
                                             <td class="text-center"><i class="fa fa-download" aria-hidden="true"></i>{{blacklistedProfile.Resume_ID}}
@@ -138,18 +174,18 @@
                                                         </button>
                                                     <ul class="dropdown-menu" role="menu">
                                                         <li>
-                                                             <button class="btn btn-default btnLink" [disabled]='getEditAccess(blacklistedProfile.Owner)' (click)='redirectToEditProfile(blacklistedProfile.CandidateID)' >
+                                                            <button class="btn btn-default btnLink" [disabled]='getEditAccess(blacklistedProfile.Owner)' (click)='redirectToEditProfile(blacklistedProfile.CandidateID)'>
                                                                  <i class="icon-user"></i> Edit Profile 
                                                              </button>
-                                                            </li>
+                                                        </li>
                                                         <li class="divider"> </li>
                                                         <li>
-                                                             <button class="btn btn-default btnLink" [disabled]='getEditAccess(blacklistedProfile.Owner)' (click)='SaveCandidateID(blacklistedProfile.CandidateID)' >
+                                                            <button class="btn btn-default btnLink" [disabled]='getEditAccess(blacklistedProfile.Owner)' (click)='SaveCandidateID(blacklistedProfile.CandidateID)'>
                                                                   <i class="icon-flag"></i> Update Status </button>
                                                         </li>
-                                                         <li class="divider"> </li>
+                                                        <li class="divider"> </li>
                                                         <li>
-                                                            <a (click)='redirectToView(blacklistedProfile.CandidateID)'> 
+                                                            <a (click)='redirectToView(blacklistedProfile.CandidateID)'>
                                                                 <i class="fa fa-search-plus"></i>View Profile</a>
                                                         </li>
                                                     </ul>
@@ -159,7 +195,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                             <div class="row">
+                            <div class="row">
                                 <div class="col-md-5">
                                 </div>
                                 <div class="col-md-4 ">

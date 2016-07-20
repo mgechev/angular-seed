@@ -208,7 +208,7 @@ export class AllProfilesListComponent implements OnActivate {
         }
         if (this.AllCheckedItemIds.length > 0) {
             //this._dataSharedService.setCheckedItems(this.AllCheckedItemIds);
-            sessionStorage.setItem('CheckedItemIds',JSON.stringify(this.AllCheckedItemIds));
+            sessionStorage.setItem('CheckedItemIds', JSON.stringify(this.AllCheckedItemIds));
             this._router.navigate(['/App/ProfileBank/AllProfiles/Transfer/']);
         }
     }
@@ -242,21 +242,15 @@ export class AllProfilesListComponent implements OnActivate {
            PerPageCount = No of items shown per page
                 */
         this.allProfilesList.GrdOperations.ButtonClicked = parseInt(ButtonClicked);
-        //this.allProfilesList.GrdOperations.PerPageCount = 3;
-        this.getAllProfiles();
-    }
-    onShowChange(perPageCount:string) {
-        this.allProfilesList.GrdOperations = new GrdOptions();
-        this.allProfilesList.GrdOperations.PerPageCount = parseInt(perPageCount);
-        //this.allProfilesList.GrdOperations.ButtonClicked = 0;
         this.getAllProfiles();
     }
     onChange() {
         this.allProfilesList.GrdOperations.ButtonClicked = 0;
-        this.allProfilesList.GrdOperations.IDs='';
+        this.allProfilesList.GrdOperations.NextPageUrl = new Array<string>();
         this.getAllProfiles();
     }
 }
+
 
 /**
  * //Method for With Pagination

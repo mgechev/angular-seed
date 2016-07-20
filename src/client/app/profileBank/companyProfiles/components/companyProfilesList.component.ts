@@ -209,7 +209,7 @@ export class CompanyProfilesListComponent implements OnActivate {
     }
      onChange() {
         this.companyProfilesList.GrdOperations.ButtonClicked = 0;
-        this.companyProfilesList.GrdOperations.IDs='';
+        this.companyProfilesList.GrdOperations.NextPageUrl=new Array<string>();
         this.getcompanyProfiles();
     }
       OnPaginationClick(ButtonClicked: string) {
@@ -220,7 +220,6 @@ export class CompanyProfilesListComponent implements OnActivate {
            PerPageCount = No of items shown per page
                 */
         this.companyProfilesList.GrdOperations.ButtonClicked = parseInt(ButtonClicked);
-        this.companyProfilesList.GrdOperations.PerPageCount = 5;
         this.getcompanyProfiles();
     }
 }
