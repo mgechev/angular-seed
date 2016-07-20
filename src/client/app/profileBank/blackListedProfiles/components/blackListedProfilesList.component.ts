@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
-import { CandidateProfile } from '../../shared/model/myProfilesInfo';
+import { AllCandidateProfiles, CandidateProfile } from '../../shared/model/myProfilesInfo';
 import { BlackListedProfilesService } from '../services/blacklistedProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -19,7 +19,7 @@ import { ProfileBankService } from '../../shared/services/profilebank.service';
 })
 
 export class BlackListedProfilesListComponent implements OnActivate {
-    blacklistedProfilesList: Array<CandidateProfile>;
+    blacklistedProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
     profile: CandidateProfile;
     statusList: Array<MasterData>;
     seletedCandidateID: MasterData = new MasterData();
@@ -30,6 +30,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
     currentCandidate: string;
     currentUser: MasterData = new MasterData();
     isCollapsed: boolean = false;
+    CandidateProfiles: AllCandidateProfiles = new AllCandidateProfiles();
 
     constructor(private _blacklistedProfilesService: BlackListedProfilesService,
         private _router: Router,
@@ -41,6 +42,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
     }
 
     routerOnActivate() {
+        this.setPaginationValues();
         this.getLoggedInUser();
         this.getBlacklistedProfiles();
         this.getCandidateStatuses();
@@ -56,12 +58,19 @@ export class BlackListedProfilesListComponent implements OnActivate {
 
     }
 
+    setPaginationValues() {
+        //this.CandidateProfiles.GrdOperations.
+        this.blacklistedProfilesList.GrdOperations.ButtonClicked = 0;
+        this.blacklistedProfilesList.GrdOperations.PerPageCount = 3;
+    }
+
     getBlacklistedProfiles() {
-        this._blacklistedProfilesService.getBlackListedProfiles()
+        this._blacklistedProfilesService.getBlackListedProfiles(this.blacklistedProfilesList.GrdOperations)
             .subscribe(
-            (results: Array<CandidateProfile>) => {
-                if (results.length !== undefined) {
-                    this.blacklistedProfilesList = results;
+            (results: AllCandidateProfiles) => {
+                if (results.Profiles.length !== undefined) {
+                     this.blacklistedProfilesList = results;
+                    //this.CandidateProfiles = results;
                 }
             },
             error => {
@@ -70,20 +79,22 @@ export class BlackListedProfilesListComponent implements OnActivate {
     }
 
     redirectToEditProfile(CandidateID: MasterData) {
-        this._router.navigate(['/App/ProfileBank/BlackListedProfiles/Edit/' + CandidateID.Value+'ID'+CandidateID.Id]);
+        this._router.navigate(['/App/ProfileBank/BlackListedProfiles/Edit/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
     redirectToView(CandidateID: MasterData) {
-        this._router.navigate(['/App/ProfileBank/BlackListedProfiles/View/' + CandidateID.Value+'ID'+CandidateID.Id]);
+        this._router.navigate(['/App/ProfileBank/BlackListedProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
 
     SaveCandidateID(id: MasterData) {
         //this.seletedCandidateID = id;
 
-        var index = _.findIndex(this.blacklistedProfilesList, { CandidateID: id });
-        this.seletedCandidateID = this.blacklistedProfilesList[index].CandidateID;
+        var index = _.findIndex(this.blacklistedProfilesList.Profiles, { CandidateID: id });
+        this.seletedCandidateID = this.blacklistedProfilesList.Profiles[index].CandidateID;
+       // var index = _.findIndex(this.CandidateProfiles.Profiles, { CandidateID: id });
+        // this.seletedCandidateID = this.CandidateProfiles.Profiles[index].CandidateID;
         // this.profile.Comments = this.allProfilesList[index].Comments;
         // this.profile.Status = this.allProfilesList[index].Status;
-        this.currentCandidate = this.blacklistedProfilesList[index].Candidate;
+        this.currentCandidate = this.CandidateProfiles.Profiles[index].Candidate;
         this._profileBankService.getStatusById(id.Value)
             .subscribe(
             (results: any) => {
@@ -114,7 +125,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
     }
 
     onUpdateStauts() {
-          if (this.selectedStatus.Id === undefined)
+        if (this.selectedStatus.Id === undefined)
             this.selectedStatus = this.profile.Status;
 
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
@@ -148,4 +159,15 @@ export class BlackListedProfilesListComponent implements OnActivate {
         }
     }
 
+    OnPaginationClick(ButtonClicked: string) {
+        /* ButtonClicked 
+                i. Initial - 0
+                ii.Next - 1
+                iii.Prev - (-1)
+            PerPageCount = No of items shown per page
+                */
+        this.CandidateProfiles.GrdOperations.ButtonClicked = parseInt(ButtonClicked);
+        this.CandidateProfiles.GrdOperations.PerPageCount = 3;
+        this.getBlacklistedProfiles();
+    }
 }

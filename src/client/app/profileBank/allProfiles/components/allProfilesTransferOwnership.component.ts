@@ -20,7 +20,7 @@ import { ProfileBankService } from '../../shared/services/profilebank.service';
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
 export class TransferOwnershipComponent implements OnActivate {
-    CheckedCandidateIds: Array<string>;
+    CheckedCandidateIds: Array<MasterData> = new Array<MasterData>();
     errorMessage: string;
     candidateProfiles: Array<TransferOwnershipMeta>;
     OwnerTypes: Array<MasterData>;
@@ -41,14 +41,21 @@ export class TransferOwnershipComponent implements OnActivate {
     }
 
     getCandidateIds() {
-        this.CheckedCandidateIds = this._myProfilesDataSharedService.getCheckedItems();
+        // this.CheckedCandidateIds = this._myProfilesDataSharedService.getCheckedItems();
+        this.CheckedCandidateIds = JSON.parse(sessionStorage.getItem('CheckedItemIds'));
 
+        // this._profileBankService.getCandidateOwnwershipInfo(this.CheckedCandidateIds)
+        //     .subscribe(
+        //     results => {
+        //         this.candidateProfiles = <any>results;
+        //     },
+        //     error => this.errorMessage = <any>error);
         this._profileBankService.getCandidateOwnwershipInfo(this.CheckedCandidateIds)
             .subscribe(
-            results => {
+            (results: TransferOwnershipMeta) => {
                 this.candidateProfiles = <any>results;
             },
-            error => this.errorMessage = <any>error);
+            (error: any) => this.errorMessage = <any>error);
     }
     onDelete(profile: any) {
         var chkItemIndex = _.findIndex(this.candidateProfiles, profile);

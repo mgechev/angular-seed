@@ -5,6 +5,7 @@ import { CandidateProfile, ResumeMeta} from '../../shared/model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
+import { GrdOptions } from  '../../../shared/model/index';
 
 @Injectable()
 export class MyProfilesService {
@@ -38,10 +39,10 @@ export class MyProfilesService {
         });
     }
 
-    getMyProfiles() {
+    getMyProfiles(grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/ProfileBank/getMyProfiles');
         this._spinnerService.show();
-        return this.authHttp.get(url)
+        return this.authHttp.post(url,{grdOptions})
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

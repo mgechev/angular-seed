@@ -1,7 +1,7 @@
-import { MasterData } from  '../../../shared/model/index';
+import { MasterData,GrdOptions } from  '../../../shared/model/index';
 
 export class AllCandidateProfiles {
-  public GrdOperations = new GridOperations();
+  public GrdOperations = new GrdOptions();
   public Profiles: Array<CandidateProfile> = new Array<CandidateProfile>();
 }
 
@@ -176,12 +176,12 @@ export class TransferOwnershipMeta {
   public Owner = new MasterData();
 }
 
-export class GridOperations {
-  public IDColl: Array<number> = new Array<number>();
-  public ButtonClicked: number;
-  public NextButton: boolean;
-  public PreviousButton: boolean;
-  public PerPageCount: number;
-  // public OrderBy: string;
-  // public OrderColumn: string;
-}
+// export class GridOperations {
+//   public IDColl: Array<number> = new Array<number>();
+//   public ButtonClicked: number;
+//   public NextButton: boolean;
+//   public PreviousButton: boolean;
+//   public PerPageCount: number;
+//   // public OrderBy: string;
+//   // public OrderColumn: string;
+// }

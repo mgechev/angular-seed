@@ -167,7 +167,6 @@ export class RRFCandidateListComponent implements OnActivate {
     }
 
     onReScheduleInterviewClick(Candidate: RRFSpecificCandidateList) {
-        console.log('Re-Schedule');
         sessionStorage.setItem('RRFID', JSON.stringify(this.RRFID));
         sessionStorage.setItem('Candidate', JSON.stringify(Candidate));
         this._router.navigate(['/App/Recruitment Cycle/Schedule/'+

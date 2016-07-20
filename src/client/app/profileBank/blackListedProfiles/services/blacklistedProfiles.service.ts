@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
+import { GrdOptions } from  '../../../shared/model/index';
 
 
 @Injectable()
@@ -11,14 +12,15 @@ export class BlackListedProfilesService {
 
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
-    getBlackListedProfiles() {
+    getBlackListedProfiles(grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/ProfileBank/getBlacklistedCandidates');
         this._spinnerService.show();
-        return this.authHttp.get(url)
+        return this.authHttp.post(url,{ grdOptions })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);

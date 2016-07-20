@@ -100,7 +100,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="gradeX odd" *ngFor="let blacklistedProfile of blacklistedProfilesList; let index = index">
+                                        <tr class="gradeX odd" *ngFor="let blacklistedProfile of blacklistedProfilesList.Profiles; let index = index">
                                             <td >
                                                 <tr>
                                                     <td style="float: left;">&nbsp; {{blacklistedProfile.Candidate}}</td>
@@ -159,14 +159,14 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="row">
-                                <div class="col-md-5 col-sm-5">
-                                    <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite"></div>
+                             <div class="row">
+                                <div class="col-md-5">
                                 </div>
-                                <div class="col-md-7 col-sm-7">
-                                    <div class="dataTables_paginate paging_bootstrap_full_number" id="sample_1_paginate">
-                                        
-                                    </div>
+                                <div class="col-md-4 ">
+                                    <button type="button" class="btn btn-default" [disabled]="!blacklistedProfilesList.GrdOperations.PreviousButton" (click)="OnPaginationClick(-1)">
+                                        &laquo; Prev</button> &nbsp;&nbsp;
+                                    <button type="button" class="btn btn-default" [disabled]="!blacklistedProfilesList.GrdOperations.NextButton" (click)="OnPaginationClick(1)">
+                                        Next &raquo;</button>
                                 </div>
                             </div>
                         </div>

@@ -270,7 +270,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="gradeX odd " *ngFor="let myprofile of myProfilesList ">
+                                    <tr class="gradeX odd " *ngFor="let myprofile of myProfilesList.Profiles">
                                         <td>
                                             <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                                     <input type="checkbox" class="checkboxes" value="1" [id]='myprofile.CandidateID' [(ngModel)]='myprofile.IsChecked' (change)="onStateChange($event)"/>
@@ -356,26 +356,18 @@
                             <!-- Modal -->
                         </div>
                         <!--  My Profile Grid  END-->
+                        <!--  My Profile pagination Start-->
                         <div class="row">
-                            <div class="col-md-5 col-sm-5">
-                                <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite"></div>
-                            </div>
-                            <div class="col-md-7 col-sm-7">
-                                <div class="dataTables_paginate paging_bootstrap_full_number" id="sample_1_paginate">
-                                    <ul class="pagination" style="visibility: visible;">
-                                        <!--<li class="prev disabled"><a href="#" title="First"><i class="fa fa-angle-double-left"></i></a></li>
-                                        <li class="prev disabled"><a href="#" title="Prev"><i class="fa fa-angle-left"></i></a></li>
-                                        <li class="active"><a [routerLink]="['/App/ProfileBank/MyProfiles']">1</a></li>
-                                        <li><a [routerLink]="['/App/ProfileBank/MyProfiles']">2</a></li>
-                                        <li><a [routerLink]="['/App/ProfileBank/MyProfiles']">3</a></li>
-                                        <li><a [routerLink]="['/App/ProfileBank/MyProfiles']">4</a></li>
-                                        <li><a [routerLink]="['/App/ProfileBank/MyProfiles']">5</a></li>
-                                        <li class="next"><a href="#" title="Next"><i class="fa fa-angle-right"></i></a></li>
-                                        <li class="next"><a href="#" title="Last"><i class="fa fa-angle-double-right"></i></a></li>-->
-                                    </ul>
+                           <div class="col-md-5">
                                 </div>
-                            </div>
+                                <div class="col-md-4 ">
+                                    <button type="button" class="btn btn-default" [disabled]="!myProfilesList.GrdOperations.PreviousButton" (click)="OnPaginationClick(-1)">
+                                        &laquo; Prev</button> &nbsp;&nbsp;
+                                    <button type="button" class="btn btn-default" [disabled]="!myProfilesList.GrdOperations.NextButton" (click)="OnPaginationClick(1)">
+                                        Next &raquo;</button>
+                                </div>
                         </div>
+                        <!--  My Profile pagination END-->
                     </div>
                 </div>
             </div>

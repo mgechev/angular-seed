@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
+import { GrdOptions } from  '../../../shared/model/index';
 
 @Injectable()
 
@@ -12,10 +13,10 @@ export class RecentProfilesService {
     constructor(private authHttp: AuthHttp,
         private _spinnerService: SpinnerService) { }
 
-    getRecentProfiles() {
+    getRecentProfiles(grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/ProfileBank/getRecentProfiles');
         this._spinnerService.show();
-        return this.authHttp.get(url)
+        return this.authHttp.post(url,{grdOptions})
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

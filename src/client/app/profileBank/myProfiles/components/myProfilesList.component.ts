@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import { CandidateProfile, ResumeMeta, AddCandidateResponse } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, ResumeMeta, AddCandidateResponse,AllCandidateProfiles } from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
-import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData, GrdOptions,ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
@@ -24,7 +24,7 @@ import { Candidate } from '../../shared/model/RRF';
 
 export class MyProfilesListComponent implements OnActivate {
     CandidateID:MasterData = new MasterData();
-    myProfilesList: Array<CandidateProfile>;
+    myProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
     profile: CandidateProfile;
     errorMessage: string;
     status: number;
@@ -79,10 +79,10 @@ export class MyProfilesListComponent implements OnActivate {
     SaveCandidateID(id: MasterData) {
         this.seletedCandidateID = id;
 
-        var index = _.findIndex(this.myProfilesList, { CandidateID: this.seletedCandidateID });
+        var index = _.findIndex(this.myProfilesList.Profiles, { CandidateID: this.seletedCandidateID });
         // this.profile.Comments = this.allProfilesList[index].Comments;
         // this.profile.Status = this.allProfilesList[index].Status;
-        this.currentCandidate = this.myProfilesList[index].Candidate;
+        this.currentCandidate = this.myProfilesList.Profiles[index].Candidate;
         this._profileBankService.getStatusById(id.Value)
             .subscribe(
             (results: any) => {
@@ -100,7 +100,7 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     getMyProfiles() {
-        this._myProfilesService.getMyProfiles()
+        this._myProfilesService.getMyProfiles(this.myProfilesList.GrdOperations)
             .subscribe(
             (results: any) => {
                 if (results.length !== undefined) {
@@ -220,7 +220,7 @@ export class MyProfilesListComponent implements OnActivate {
             this.selectedRowCount--;
         }
 
-        if (this.selectedRowCount === this.myProfilesList.length) {
+        if (this.selectedRowCount === this.myProfilesList.Profiles.length) {
             this.allChecked = true;
         } else {
             this.allChecked = false;
@@ -231,23 +231,23 @@ export class MyProfilesListComponent implements OnActivate {
         var state: boolean;
         if (e.target.checked) {
             state = true;
-            this.selectedRowCount = this.myProfilesList.length;
+            this.selectedRowCount = this.myProfilesList.Profiles.length;
         } else {
             state = false;
             this.selectedRowCount = 0;
         }
 
-        for (var index = 0; index < this.myProfilesList.length; index++) {
-            this.myProfilesList[index].IsChecked = state;
+        for (var index = 0; index < this.myProfilesList.Profiles.length; index++) {
+            this.myProfilesList.Profiles[index].IsChecked = state;
         }
     }
 
     openMailWindow() {
         var mailto: string = '';
-        for (var index = 0; index < this.myProfilesList.length; index++) {
-            if (this.myProfilesList[index].IsChecked) {
-                mailto = mailto + this.myProfilesList[index].Email + ';';
-                this.myProfilesList[index].IsChecked = false;
+        for (var index = 0; index < this.myProfilesList.Profiles.length; index++) {
+            if (this.myProfilesList.Profiles[index].IsChecked) {
+                mailto = mailto + this.myProfilesList.Profiles[index].Email + ';';
+                this.myProfilesList.Profiles[index].IsChecked = false;
             }
             this.selectedRowCount = 0;
         }
@@ -257,9 +257,9 @@ export class MyProfilesListComponent implements OnActivate {
 
     onClickFollowUpComments(id: MasterData) {
         this.seletedCandidateIDForComments = id;
-        var index = _.findIndex(this.myProfilesList, { CandidateID: this.seletedCandidateIDForComments });
-        this.profile.Candidate = this.myProfilesList[index].Candidate;
-        this.profile.FollowUpComments = this.myProfilesList[index].FollowUpComments;
+        var index = _.findIndex(this.myProfilesList.Profiles, { CandidateID: this.seletedCandidateIDForComments });
+        this.profile.Candidate = this.myProfilesList.Profiles[index].Candidate;
+        this.profile.FollowUpComments = this.myProfilesList.Profiles[index].FollowUpComments;
         this.profile.PreviousFollowupComments = this.profile.FollowUpComments;
         window.scrollTo(0, 40);
         if (this.isCommentsPanelCollapsed === false)
@@ -333,8 +333,8 @@ export class MyProfilesListComponent implements OnActivate {
     onClickUploadResume(CandidateId: MasterData) {
         window.scrollTo(0, 40);
         this.seletedCandidateIDForUpload = CandidateId;
-        var index = _.findIndex(this.myProfilesList, { CandidateID: this.seletedCandidateIDForUpload });
-        this.profile.Candidate = this.myProfilesList[index].Candidate;
+        var index = _.findIndex(this.myProfilesList.Profiles, { CandidateID: this.seletedCandidateIDForUpload });
+        this.profile.Candidate = this.myProfilesList.Profiles[index].Candidate;
         if (this.isUploadPanelCollapsed === false)
             this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
         //Close Other Panel
@@ -359,14 +359,14 @@ export class MyProfilesListComponent implements OnActivate {
     //Assign RRf 
     AssignRRFClick() {
         let chkStatus = false;
-        for (var index = 0; index < this.myProfilesList.length; index++) {
-            if (this.myProfilesList[index].IsChecked) {
+        for (var index = 0; index < this.myProfilesList.Profiles.length; index++) {
+            if (this.myProfilesList.Profiles[index].IsChecked) {
                 //Check for open / rejected Status
-                if (this.myProfilesList[index].Status.Value.toLowerCase() === 'open' ||
-                    this.myProfilesList[index].Status.Value.toLowerCase() === 'rejected') {
+                if (this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'open' ||
+                    this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'rejected') {
                     //Add to selectedCandidates array
-                    this.Candidate.CandidateID = this.myProfilesList[index].CandidateID;
-                    this.Candidate.Candidate = this.myProfilesList[index].Candidate;
+                    this.Candidate.CandidateID = this.myProfilesList.Profiles[index].CandidateID;
+                    this.Candidate.Candidate = this.myProfilesList.Profiles[index].Candidate;
                     this.selectedCandidates.push(this.Candidate);
                     this.Candidate = new Candidate();
                 } else {
@@ -386,9 +386,9 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     onClickScheduleInterview(CandidateID: string) {
-        var index = _.findIndex(this.myProfilesList, { CandidateID: CandidateID });
+        var index = _.findIndex(this.myProfilesList.Profiles, { CandidateID: CandidateID });
         let chkStatus = false;
-        let selectedCandidate: CandidateProfile = this.myProfilesList[index];
+        let selectedCandidate: CandidateProfile = this.myProfilesList.Profiles[index];
 
         if (selectedCandidate.isRRFAssigned) {
             this._router.navigate(['/App/Recruitment Cycle/Schedule']);
@@ -396,8 +396,8 @@ export class MyProfilesListComponent implements OnActivate {
             if (selectedCandidate.Status.Value.toLowerCase() === 'open' ||
                 selectedCandidate.Status.Value.toLowerCase() === 'rejected') {
                 this.Candidate = new Candidate();
-                this.Candidate.CandidateID = this.myProfilesList[index].CandidateID;
-                this.Candidate.Candidate = this.myProfilesList[index].Candidate;
+                this.Candidate.CandidateID = this.myProfilesList.Profiles[index].CandidateID;
+                this.Candidate.Candidate = this.myProfilesList.Profiles[index].Candidate;
                 this.selectedCandidates.push(this.Candidate);
             } else {
                 chkStatus = true;

@@ -54,7 +54,6 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
         for (var index = 0; index < this.CandidateAssigment.Candidates.length; index++) {
             this.CandidateAssigment.CandidateIDs.push(this.CandidateAssigment.Candidates[index].CandidateID);
         }
-
     }
 
     getMyOpenAssignedRRF() {

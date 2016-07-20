@@ -1,39 +1,34 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
-import {CandidateProfile, GridOperations, AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
+import {CandidateProfile, AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
-//import { RMSGridComponent } from '../../../shared/components/rmsGrid/rmsGrid.component';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
-import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
 import { DataSharedService } from '../../shared/services/DataShared.service';
 import { ProfileBankService } from '../../shared/services/profilebank.service';
-import {PAGINATION_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
-import {ProfileFilterPipe, ProfileStatusFilterPipe, ProfileNoticePeriodFilterPipe,
-    ProfileExpectedSalaryFilterPipe, ProfileSalaryFilterPipe} from './allProfilesPipe.component';
-//import {CalendarComponent} from  '../../../shared/components/calendar/calendar';
+import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-allprofiles-list',
     templateUrl: 'allProfilesList.component.html',
-    directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES, PAGINATION_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
-    pipes: [ProfileFilterPipe, ProfileSalaryFilterPipe, ProfileStatusFilterPipe
-        , ProfileNoticePeriodFilterPipe, ProfileExpectedSalaryFilterPipe]
+    pipes: [ProfileBankPipe]
 })
 
 
 export class AllProfilesListComponent implements OnActivate {
-    allProfilesList: Array<CandidateProfile>;
-    AllCheckedItemIds: Array<string> = new Array<string>();
+    allProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
+    AllCheckedItemIds: Array<MasterData> = new Array<MasterData>();
     allProfilesList_1: Array<CandidateProfile>;
     profile: CandidateProfile;
     statusList: Array<MasterData>;
-    seletedCandidateID: string;
+    seletedCandidateID: MasterData = new MasterData();
     selectedStatus = new MasterData();
     Comments: string;
     currentStatus: number;
@@ -47,7 +42,7 @@ export class AllProfilesListComponent implements OnActivate {
     url: any;
     CandidateProfiles: AllCandidateProfiles = new AllCandidateProfiles();
     //Pagination 
-    grdOptions = new GridOperations();
+    grdOptions = new GrdOptions();
     public maxSize: number = 3;
 
     constructor(private _allProfilesService: AllProfilesService,
@@ -58,22 +53,21 @@ export class AllProfilesListComponent implements OnActivate {
         private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
         this.profile = new CandidateProfile();
-        this.allProfilesList = new Array<CandidateProfile>();
-
     }
 
     routerOnActivate() {
-        this.setPaginationValues();
+        //this.setPaginationValues();
         this.getLoggedInUser();
-        //this.getAllProfiles();
-        this.getAllProfiles_1();
+        this.getAllProfiles();
         this.getCandidateStatuses();
     }
 
     setPaginationValues() {
+        //this.CandidateProfiles.GrdOperations.
         this.CandidateProfiles.GrdOperations.ButtonClicked = 0;
         this.CandidateProfiles.GrdOperations.PerPageCount = 3;
     }
+
     getLoggedInUser() {
         this._profileBankService.getCurrentLoggedInUser()
             .subscribe(
@@ -85,36 +79,20 @@ export class AllProfilesListComponent implements OnActivate {
 
     getAllProfiles() {
         try {
-            this._allProfilesService.getAllProfiles()
+            this._allProfilesService.getAllProfiles(this.CandidateProfiles.GrdOperations)
                 .subscribe(
                 (results: any) => {
                     if (results.length !== undefined) {
-                        this.allProfilesList = <Array<CandidateProfile>>results;
-                        //this.allProfilesList_1 = <Array<CandidateProfile>>results;
+                        this.allProfilesList = <AllCandidateProfiles>results;
                     }
                 },
                 error => this.errorMessage = <any>error);
         } catch (error) {
-            this.allProfilesList = new Array<CandidateProfile>();
+            this.allProfilesList = new AllCandidateProfiles();
         }
 
     }
-    //Method for With Pagination
-     getAllProfiles_1() {
-        try {
-            this._allProfilesService.getOpenProfiles(this.CandidateProfiles.GrdOperations)
-                .subscribe(
-                (results: any) => {
-                    if (results.Profiles.length !== undefined) {
-                        this.CandidateProfiles = <AllCandidateProfiles>results;
-                    }
-                },
-                error => this.errorMessage = <any>error);
-        } catch (error) {
-            this.allProfilesList = new Array<CandidateProfile>();
-        }
 
-    }
     redirectToView(CandidateID: string) {
         this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID]);
     }
@@ -123,12 +101,12 @@ export class AllProfilesListComponent implements OnActivate {
         this._router.navigate(['/App/ProfileBank/AllProfiles/Edit/' + CandidateID]);
     }
 
-    SaveCandidateID(id: string) {
+    SaveCandidateID(id: MasterData) {
         this.seletedCandidateID = id;
 
-        var index = _.findIndex(this.allProfilesList, { CandidateID: this.seletedCandidateID });
-        this.currentCandidate = this.allProfilesList[index].Candidate;
-        this._profileBankService.getStatusById(id)
+        var index = _.findIndex(this.allProfilesList.Profiles, { CandidateID: this.seletedCandidateID });
+        this.currentCandidate = this.allProfilesList.Profiles[index].Candidate;
+        this._profileBankService.getStatusById(id.Value)
             .subscribe(
             (results: any) => {
                 this.profile.Comments = results.Comments;
@@ -187,7 +165,7 @@ export class AllProfilesListComponent implements OnActivate {
             this.selectedRowCount--;
         }
 
-        if (this.selectedRowCount === this.allProfilesList.length) {
+        if (this.selectedRowCount === this.allProfilesList.Profiles.length) {
             this.allChecked = true;
         } else {
             this.allChecked = false;
@@ -198,23 +176,23 @@ export class AllProfilesListComponent implements OnActivate {
         var state: boolean;
         if (e.target.checked) {
             state = true;
-            this.selectedRowCount = this.allProfilesList.length;
+            this.selectedRowCount = this.allProfilesList.Profiles.length;
         } else {
             state = false;
             this.selectedRowCount = 0;
         }
 
-        for (var index = 0; index < this.allProfilesList.length; index++) {
-            this.allProfilesList[index].IsChecked = state;
+        for (var index = 0; index < this.allProfilesList.Profiles.length; index++) {
+            this.allProfilesList.Profiles[index].IsChecked = state;
         }
     }
 
     openMailWindow() {
         var mailto: string = '';
-        for (var index = 0; index < this.allProfilesList.length; index++) {
-            if (this.allProfilesList[index].IsChecked) {
-                mailto = mailto + this.allProfilesList[index].Email + ';';
-                this.allProfilesList[index].IsChecked = false;
+        for (var index = 0; index < this.allProfilesList.Profiles.length; index++) {
+            if (this.allProfilesList.Profiles[index].IsChecked) {
+                mailto = mailto + this.allProfilesList.Profiles[index].Email + ';';
+                this.allProfilesList.Profiles[index].IsChecked = false;
             }
             this.selectedRowCount = 0;
         }
@@ -223,19 +201,14 @@ export class AllProfilesListComponent implements OnActivate {
     }
 
     transferOwnerShipClick() {
-        // let checkedItemIds: Array<string> = new Array<string>();
-        // for (var index = 0; index < this.allProfilesList.length; index++) {
-        //     if (this.allProfilesList[index].IsChecked) {
-        //         checkedItemIds.push(this.allProfilesList[index].CandidateID);
-        //     }
-        // }
         for (var index = 0; index < this.CandidateProfiles.Profiles.length; index++) {
             if (this.CandidateProfiles.Profiles[index].IsChecked) {
                 this.AllCheckedItemIds.push(this.CandidateProfiles.Profiles[index].CandidateID);
             }
         }
         if (this.AllCheckedItemIds.length > 0) {
-            this._dataSharedService.setCheckedItems(this.AllCheckedItemIds);
+            //this._dataSharedService.setCheckedItems(this.AllCheckedItemIds);
+            sessionStorage.setItem('CheckedItemIds',JSON.stringify(this.AllCheckedItemIds));
             this._router.navigate(['/App/ProfileBank/AllProfiles/Transfer/']);
         }
     }
@@ -266,11 +239,40 @@ export class AllProfilesListComponent implements OnActivate {
                 i. Initial - 0
                 ii.Next - 1
                 iii.Prev - (-1)
-            PerPageCount = No of items shown per page
+           PerPageCount = No of items shown per page
                 */
-        this.CandidateProfiles.GrdOperations.ButtonClicked = parseInt(ButtonClicked);
-        this.CandidateProfiles.GrdOperations.PerPageCount = 3;
-        this.getAllProfiles_1();
+        this.allProfilesList.GrdOperations.ButtonClicked = parseInt(ButtonClicked);
+        //this.allProfilesList.GrdOperations.PerPageCount = 3;
+        this.getAllProfiles();
+    }
+    onShowChange(perPageCount:string) {
+        this.allProfilesList.GrdOperations = new GrdOptions();
+        this.allProfilesList.GrdOperations.PerPageCount = parseInt(perPageCount);
+        //this.allProfilesList.GrdOperations.ButtonClicked = 0;
+        this.getAllProfiles();
+    }
+    onChange() {
+        this.allProfilesList.GrdOperations.ButtonClicked = 0;
+        this.allProfilesList.GrdOperations.IDs='';
+        this.getAllProfiles();
     }
 }
 
+/**
+ * //Method for With Pagination
+     getAllProfiles_1() {
+        try {
+            this._allProfilesService.getOpenProfiles(this.CandidateProfiles.GrdOperations)
+                .subscribe(
+                (results: any) => {
+                    if (results.Profiles.length !== undefined) {
+                        this.CandidateProfiles = <AllCandidateProfiles>results;
+                    }
+                },
+                error => this.errorMessage = <any>error);
+        } catch (error) {
+            this.allProfilesList = new Array<CandidateProfile>();
+        }
+
+    }
+ */

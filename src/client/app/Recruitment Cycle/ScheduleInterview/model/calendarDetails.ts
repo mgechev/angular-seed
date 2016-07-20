@@ -1,4 +1,4 @@
-// import { MasterData } from  '../../../shared/model/index';
+ import { MasterData } from  '../../../shared/model/index';
 // import { CandidateProfile } from  '../../../ProfileBank/shared/model/myProfilesInfo';
 
 export class CalendarDetails {
@@ -8,12 +8,13 @@ export class CalendarDetails {
     public RRFID: string;
 }
 export class Event {
-    id: number;
-    title: string;
-    start: string;
-    end: string;
-    resourceId: any;
-    Resource:string;
+    public id: number;
+    public title: string;
+    public start: string;
+    public end: string;
+    public resourceId: any;
+    public Resource:string;
+    public InterviewID : MasterData = new MasterData();
    // allDay: boolean = true;
 }
 export class Resource {
