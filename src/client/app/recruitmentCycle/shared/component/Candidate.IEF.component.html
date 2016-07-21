@@ -24,7 +24,7 @@
                             <div class="pull-right">
                                 <table>
                                     <tr>
-                                        <td style="width:50%">
+                                        <td style="width:50%" *ngIf="candidateIEFDetails.Experience!=null">
                                             <div class="pull-center">
                                                 <span><strong>Experience</strong></span>
                                             </div>
@@ -35,7 +35,7 @@
                                                 <label class="control-label"><strong>Relevant : </strong>{{candidateIEFDetails.Experience.RelevantExperience}} </label>
                                             </div>
                                         </td>
-                                        <td style="width:50%" *ngIf="!requestedIef.DisplayCandidateInfo">
+                                        <td style="width:50%" *ngIf="candidateIEFDetails.Salary!=null" *ngIf="!requestedIef.DisplayCandidateInfo">
                                             <div>
                                                 <span class="pull-center"><strong> Salary</strong></span>
                                             </div>
@@ -124,7 +124,7 @@
                     </div>
                 </form>
                 <!-- BEGIN IEF HISTORY-->
-                <div class="portlet light bordered">
+                <div class="portlet light bordered" *ngIf="candidateIEFHistory.Length>=null">
                     <div class="portlet-title">
                         <div class="caption font-dark">
                             <span class="caption-subject bold uppercase">Candidate recruitment history </span>
