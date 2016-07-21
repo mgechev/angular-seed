@@ -206,12 +206,18 @@
     </script>
     <script src="propel-client.js"></script>
     <script >
-      var PropelClient = window.goog.propel.PropelClient;
-      // Check if push is supported by the current browsers
-      if (PropelClient.isSupported()) {
-        // Initialise Push Client
-        var propelClient = new PropelClient('./sw.js');
-      }
+    var PropelClient = window.goog.propel.PropelClient;
+    var propelClient
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/worker.js').then(function(reg) {
+        if (PropelClient.isSupported()) {
+            propelClient = new PropelClient(reg);
+        }
+        }).catch(function(error) {
+         // registration failed
+         console.log('Registration failed with ' + error);
+        })
+    }
     </script>
     <script>
         // Fixes undefined module function in SystemJS bundle

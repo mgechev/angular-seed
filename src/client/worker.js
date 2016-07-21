@@ -8627,7 +8627,7 @@ $__System.registerDynamic("e", [], true, function($__require, exports, module) {
   }
   exports.isJsObject = isJsObject;
   function print(obj) {
-    console.log(obj);
+   // console.log(obj);
   }
   exports.print = print;
   function warn(obj) {
@@ -10635,7 +10635,7 @@ $__System.register("5c", ["b", "5", "c"], function(exports_1, context_1) {
             }
             return Observable_1.Observable.of(action);
           }).do(function(action) {
-            return console.log('setup', action.describe());
+            return //console.log('setup', action.describe());
           }).mergeMap(function(action) {
             return action.execute(cache, fetch);
           });
@@ -10950,7 +10950,7 @@ $__System.register("6", ["a", "b", "4", "5", "7", "8", "5c", "c"], function(expo
           this._manifest = null;
           this.manifestReq = adapter.newRequest(MANIFEST_URL);
           events.install.subscribe(function(ev) {
-            console.log('ngsw: Event - install');
+            //console.log('ngsw: Event - install');
             var init = _this.checkDiffs(ManifestSource.NETWORK).let(setup_1.buildCaches(cache, fetch)).let(operator_1.doAsync(function(delta) {
               return cache.store(CACHE_INSTALLING, MANIFEST_URL, adapter.newResponse(delta.currentStr));
             })).map(function(delta) {
@@ -10958,12 +10958,12 @@ $__System.register("6", ["a", "b", "4", "5", "7", "8", "5c", "c"], function(expo
             }).do(function(manifest) {
               return _this._manifest = manifest;
             }).do(function() {
-              return console.log('ngsw: Event - install complete');
+              return //console.log('ngsw: Event - install complete');
             });
             ev.waitUntil(init.toPromise());
           });
           events.activate.subscribe(function(ev) {
-            console.log('ngsw: Event - activate');
+           // console.log('ngsw: Event - activate');
             var init = _this.checkDiffs(ManifestSource.INSTALLING).let(setup_1.cleanupCaches(cache)).let(operator_1.doAsync(function(delta) {
               return cache.store(CACHE_ACTIVE, MANIFEST_URL, adapter.newResponse(delta.currentStr));
             })).map(function(delta) {
@@ -10991,7 +10991,7 @@ $__System.register("6", ["a", "b", "4", "5", "7", "8", "5c", "c"], function(expo
         ServiceWorker.prototype.handleFetch = function(request, options) {
           var _this = this;
           return this.init.let(_handleRequest(request, options)).do(function(instruction) {
-            return console.log("ngsw: executing " + instruction.describe());
+            return //console.log("ngsw: executing " + instruction.describe());
           }).concatMap(function(instruction) {
             return instruction.execute(_this);
           }).filter(function(resp) {
@@ -15134,4 +15134,55 @@ $__System.register("1", ["2", "a", "3", "6", "9"], function(exports_1, context_1
     module.exports = factory();
   else
     factory();
+});
+
+self.addEventListener('install', function (event) {
+    self.skipWaiting();
+});
+
+self.addEventListener('activate', function (event) {
+});
+self.addEventListener('push', function (event) {
+    console.log('Push message', event);
+    var title = 'Yay a message.';
+    var body = 'We have received a push message.';
+   // var icon = 'assets/images/jarvis96.png';
+    var tag = 'simple-push-demo-notification-tag';
+
+    event.waitUntil(
+        self.registration.showNotification(title, {
+            body: body,
+           // icon: icon,
+            tag: tag
+        })
+    );
+});
+
+self.addEventListener('notificationclick', function (event) {
+    console.log('Notification click: tag', event.notification.tag);
+    // Android doesn't close the notification when you click it
+    // See http://crbug.com/463146
+    event.notification.close();
+    var url = 'https://youtu.be/gYMkEMCHtJ4';
+    // Check if there's already a tab open with this URL.
+    // If yes: focus on the tab.
+    // If no: open a tab with the URL.
+    event.waitUntil(
+        clients.matchAll({
+            type: 'window'
+        })
+            .then(function (windowClients) {
+                console.log('WindowClients', windowClients);
+                for (var i = 0; i < windowClients.length; i++) {
+                    var client = windowClients[i];
+                    console.log('WindowClient', client);
+                    if (client.url === url && 'focus' in client) {
+                        return client.focus();
+                    }
+                }
+                if (clients.openWindow) {
+                    return clients.openWindow(url);
+                }
+            })
+    );
 });
