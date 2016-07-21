@@ -16,7 +16,7 @@ import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model'
     selector: 'rrf-assign',
     templateUrl: 'RRFAssign.component.html',
     directives: [ROUTER_DIRECTIVES, DATEPICKER_DIRECTIVES, SELECT_DIRECTIVES],
-    styleUrls: ['../../RRFApproval/components/RRFApproval.component.css'],
+    styleUrls: ['../../shared/css/RRF.component.css'],
     providers: [ToastsManager]
 })
 

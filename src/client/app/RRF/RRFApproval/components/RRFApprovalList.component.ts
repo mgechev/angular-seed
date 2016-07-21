@@ -13,7 +13,7 @@ import {RRFPipe } from '../../shared/Filters/RRFFilter.component';
     selector: 'rrf-approval-list',
     templateUrl: 'RRFApprovalList.component.html',
     directives: [ROUTER_DIRECTIVES],
-    styleUrls: ['RRFApproval.component.css'],
+    styleUrls: ['../../shared/css/RRF.component.css'],
     providers: [ToastsManager],
     pipes: [RRFPipe],
 })

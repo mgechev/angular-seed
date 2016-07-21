@@ -18,7 +18,7 @@ import {ViewRRFComponent} from '../../shared/components/viewRRF/viewRRF.componen
     selector: 'rrf-dashboard-list',
     templateUrl: 'RRFDashboardList.component.html',
     directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES, IfAuthorizeDirective, ViewRRFComponent],
-    styleUrls: ['../../RRFApproval/components/RRFApproval.component.css'],
+    styleUrls: ['../../shared/css/RRF.component.css'],
     pipes: [RRFIDPipe, RRFPipe],
     providers: [ToastsManager]
 })
