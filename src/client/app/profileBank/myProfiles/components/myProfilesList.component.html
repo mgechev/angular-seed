@@ -120,10 +120,10 @@
                                                                         maxlength="12" />
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-1 inlineForm">
+                                                            <div class="col-md-2 inlineForm">
                                                                 <div class="form-group">
                                                                     <div class="fileUpload btn btn-info" data-toggle="tooltip" data-placement="top" title="Upload Resume">
-                                                                        <input type="file" class="upload" (change)="uploadFile($event)" /><span>Browse</span>
+                                                                        <input type="file" class="upload" (change)="uploadFile($event)" /><span>Upload resume</span>
 
                                                                     </div><br/>
                                                                     <span *ngIf='fileUploaded'> {{fileName}}</span>
@@ -131,7 +131,7 @@
                                                             </div>
                                                             <div class="col-md-1 inlineForm">
                                                                 <div class="form-group">
-                                                                    <button type="submit" class="btn green add addNew"> Add New</button>
+                                                                    <button type="submit" class="btn green"> Save</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -264,22 +264,22 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-3">
-                                    <label>Sort By
-                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline"
+                                    <label>Order By  
+                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
                                              [(ngModel)]="myProfilesList.GrdOperations.Order"  
                                             (ngModelChange)='onChange()'>
-                                                <option value="asc">ASC</option>
-                                                <option value="desc">DESC</option>
+                                                <option value="asc">Ascending</option>
+                                                <option value="desc">Descending</option>
                                             </select> 
                                             </label>
                                 </div>
                                 <div class="col-md-3 col-sm-3">
-                                    <label>Order By  
+                                    <label>Sort By
                                             <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
                                             [(ngModel)]="myProfilesList.GrdOperations.OrderBy"
                                             (ngModelChange)="onChange()" >
                                                 <option value="Modified">Modified</option>
-                                                <option value="Status">Status</option>
+                                                <option value="Status/Status">Status</option>
                                             </select>
                                         </label>
                                 </div>

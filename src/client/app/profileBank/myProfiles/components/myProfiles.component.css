@@ -89,12 +89,7 @@
 .color12 {
   background: crimson;
 }
-.addNew,
-.fileInput {
-  padding-left: 4px;
-  padding-right: 4px;
-  width: auto;
-}
+
 .inlineForm {
   padding-left: 0px;
 }

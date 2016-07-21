@@ -102,22 +102,22 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-3">
-                                    <label>Sort By
-                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
+                                    <label>Order By
+                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline" 
                                             [(ngModel)]="allProfilesList.GrdOperations.Order"  
                                             (ngModelChange)='onChange()'>
-                                                <option value="asc">ASC</option>
-                                                <option value="desc">DESC</option>
+                                                <option value="asc">Ascending</option>
+                                                <option value="desc">Descending</option>
                                             </select> 
                                             </label>
                                 </div>
                                 <div class="col-md-3 col-sm-3">
-                                    <label>Order By  
+                                    <label>Sort By
                                             <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline" 
                                             [(ngModel)]="allProfilesList.GrdOperations.OrderBy"
                                             (ngModelChange)="onChange()" >
-                                                <option value="modified">Modified</option>
-                                                <option value="status">Status</option>
+                                                <option value="Modified">Modified</option>
+                                                <option value="Status/Status">Status</option>
                                             </select>
                                         </label>
                                 </div>

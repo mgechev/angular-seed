@@ -74,6 +74,7 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     routerOnActivate() {
+        this.myProfilesList.GrdOperations = new GrdOptions();
         this.getMyProfiles();
         this.getCandidateStatuses();
     }
@@ -123,6 +124,7 @@ export class MyProfilesListComponent implements OnActivate {
                     .subscribe(
                     results => {
                         if ((<AddCandidateResponse>results).StatusCode === APIResult.Success) {
+                            this.myProfilesList.GrdOperations = new GrdOptions();
                             this.getMyProfiles();
                             this.toastr.success((<ResponseFromAPI>results).Message);
                         } else {
@@ -170,6 +172,7 @@ export class MyProfilesListComponent implements OnActivate {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.fileUploaded = false;
                     this.fileName = '';
+                    this.myProfilesList.GrdOperations = new GrdOptions();
                     this.getMyProfiles();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
@@ -201,6 +204,7 @@ export class MyProfilesListComponent implements OnActivate {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.profile.Status = new MasterData();
+                    this.myProfilesList.GrdOperations = new GrdOptions();
                     this.getMyProfiles();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
@@ -289,6 +293,7 @@ export class MyProfilesListComponent implements OnActivate {
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                         this.toastr.success((<ResponseFromAPI>results).Message);
+                          this.myProfilesList.GrdOperations = new GrdOptions();
                         this.getMyProfiles();
                         this.profile = new CandidateProfile();
                     } else {
@@ -368,7 +373,7 @@ export class MyProfilesListComponent implements OnActivate {
                 //Check for open / rejected Status
                 if (this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'open' ||
                     this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'rejected') {
-                    if (this.myProfilesList.Profiles[index].isRRFAssigned) {
+                    if (!this.myProfilesList.Profiles[index].isRRFAssigned) {
                         //Add to selectedCandidates array
                         this.Candidate.CandidateID = this.myProfilesList.Profiles[index].CandidateID;
                         this.Candidate.Candidate = this.myProfilesList.Profiles[index].Candidate;
@@ -416,7 +421,7 @@ export class MyProfilesListComponent implements OnActivate {
                 this.selectedCandidates = new Array<CandidateProfile>();
             } else {
                 sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));
-                sessionStorage.setItem('returnPath', '/App/Recruitment Cycle/Schedule');
+                sessionStorage.setItem('returnPath', '/App/Recruitment Cycle/Schedule/New');
                 this._router.navigate(['/App/ProfileBank/MyProfiles/Assign']);
             }
 

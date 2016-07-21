@@ -125,7 +125,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="gradeX odd" *ngFor="let recentProfile of recentProfilesList; let index = index">
+                                        <tr class="gradeX odd" *ngFor="let recentProfile of recentProfilesList.Profiles|ProfileBankPipe:searchString">
                                             <td>
                                                 <tr>
                                                     <td style="float: left;">&nbsp; {{recentProfile.Candidate}}</td>

@@ -33,7 +33,7 @@ export class CandidateIEFService {
     }
     /**submit candidates current ief details */
     saveCurrentIEFDetails(iefDetails: IEFSubmission) {
-        let url = Config.GetURL(' /api/RecruitmentCycle/UpdateCandidateIEFForm');
+        let url = Config.GetURL('/api/RecruitmentCycle/UpdateCandidateIEFForm');
         this._spinnerService.show();
         return this.authHttp.post(url, iefDetails)
             .map(this.extractData)
