@@ -11,12 +11,13 @@ import { MasterData, ResponseFromAPI, GrdOptions} from '../../../shared/model/co
 import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
 import { MastersService } from '../../../shared/services/masters.service';
 import {RRFPipe } from '../../shared/Filters/RRFFilter.component';
+import {ViewRRFComponent} from '../../shared/components/viewRRF/viewRRF.component';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-dashboard-list',
     templateUrl: 'RRFDashboardList.component.html',
-    directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES, IfAuthorizeDirective],
+    directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES, IfAuthorizeDirective, ViewRRFComponent],
     styleUrls: ['../../RRFApproval/components/RRFApproval.component.css'],
     pipes: [RRFIDPipe, RRFPipe],
     providers: [ToastsManager]
@@ -39,7 +40,7 @@ export class RRFDashboardListComponent implements OnActivate {
     selectedRecruiter: MasterData = new MasterData();
     AssignStatus: RRFAssignStatus = RRFAssignStatus;
     grdOptions: GrdOptions = new GrdOptions();
-
+    viewDetailsRRFId: MasterData = new MasterData();
     doughnutChartLabels: string[] = [];
     doughnutChartData: number[] = [];
     doughnutChartType: string = 'doughnut'; //doughnut
@@ -210,9 +211,11 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     showRRFDetails(rrfId: MasterData) {
-        this.getRRFDetails(rrfId);
+        //this.getRRFDetails(rrfId);
         //console.log(this.selectedRRF);
+        this.viewDetailsRRFId = rrfId;
         this.isListVisible = false;
+        
     }
 
     showListOfRRF() {
