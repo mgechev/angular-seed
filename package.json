@@ -97,7 +97,7 @@
     "stream-series": "^0.1.1",
     "stylelint": "^7.0.2",
     "stylelint-config-standard": "^11.0.0",
-    "systemjs-builder": "0.15.23",
+    "systemjs-builder": "0.15.14",
     "tildify": "^1.2.0",
     "tiny-lr": "^0.2.1",
     "traceur": "^0.0.111",
@@ -122,7 +122,7 @@
     "@angular/router": "3.0.0-beta.2",
     "es6-module-loader": "^0.17.8",
     "core-js": "^2.4.0",
-    "rxjs": "5.0.0-beta.10",
+    "rxjs": "5.0.0-beta.6",
     "systemjs": "0.19.31",
     "zone.js": "^0.6.12"
   }
