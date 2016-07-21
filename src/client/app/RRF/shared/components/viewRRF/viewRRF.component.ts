@@ -11,6 +11,7 @@ import { MasterData} from '../../../../shared/model/common.model';
     selector: 'view-RRF',
     templateUrl: 'viewRRF.component.html',
     directives: [ROUTER_DIRECTIVES],
+    styleUrls: ['viewRRF.component.css'],
     providers: [MyRRFService]
 })
 

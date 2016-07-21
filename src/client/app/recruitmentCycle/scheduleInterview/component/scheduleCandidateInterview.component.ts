@@ -74,6 +74,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         this.SelectedInterviewers = new Array<Interviewers>();
         this.InterviewerCalendarDetails = new CalendarDetails();
         this.getResources();
+
     }
 
     routerOnActivate(segment: RouteSegment) {
@@ -81,16 +82,16 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         this.ScheduleInterView.Candidate = JSON.parse(sessionStorage.getItem('Candidate')).Candidate;
         this.ScheduleInterView.CandidateID = JSON.parse(sessionStorage.getItem('Candidate')).CandidateID;
 
+        //Get All Interviewers     
+        this.getOtherInterviewers();
         //Get Nominated Interviewers and other Interviewwers
         this.getNominatedInterviewers();
         //Get  Interview Types
         this.getInterviewTypes();
         //Get  Interview Modes       
         this.getInterviewModes();
-        //Get All Interviewers     
-        this.getOtherInterviewers();
 
-        this.InterviewerCalendarDetails.Resources = JSON.parse(localStorage.getItem('resources'));
+
         //Pass Headers
         this.header = {
             left: 'prev,next today',
@@ -115,17 +116,24 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     }
 
     getResources() {
-        this._calendarDataService.GetResources()
-            .subscribe(
-            (results: any) => {
-                if (results !== null) {
-                    // this.setResources(results);
-                    // this.InterviewerCalendarDetails.Resources = <any>results;
-                    localStorage.setItem('resources', JSON.stringify(results));
-                }
-            },
-            error => this.errorMessage = <any>error);
+        // this._calendarDataService.GetResources()
+        //     .subscribe(
+        //     (results: any) => {
+        //         if (results !== null) {
+        //             // this.setResources(results);
+        //             // this.InterviewerCalendarDetails.Resources = <any>results;
+        //             localStorage.setItem('resources', JSON.stringify(results));
+        //         }
+        //     },
+        //     error => this.errorMessage = <any>error);
+
         // this.InterviewerCalendarDetails.Resources = this._calendarDataService.GetResources();
+        this._calendarDataService.GetResources().then(
+            results => {
+                this.InterviewerCalendarDetails.Resources = results;
+            },
+            (error: any) => this.errorMessage = <any>error);
+
     }
     setResources(results: any) {
         this.InterviewerCalendarDetails.Resources = results;
@@ -207,20 +215,22 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     }
     //Get All Nominated Interviewers from Service
     getNominatedInterviewers() {
-        this._ScheduleInterviewService.GetNominatedInterviewersByRRFID(this.ScheduleInterView.RRFID.Value)
-            .subscribe(
-            (results: any) => {
-                this.setValueNominatedInterviewers(results);
-                this.AllNominatedInterviewers = results;
-            },
-            error => this.errorMessage = <any>error);
+        if (this.ScheduleInterView.RRFID !== undefined) {
+            this._ScheduleInterviewService.GetNominatedInterviewersByRRFID(this.ScheduleInterView.RRFID.Value)
+                .subscribe(
+                (results: any) => {
+                    this.setValueNominatedInterviewers(results);
+                    this.AllNominatedInterviewers = results;
+                },
+                error => this.errorMessage = <any>error);
+        }
         // this.NominatedInterviewers = this._ScheduleInterviewService.GetNominatedInterviewersByRRFID(this.ScheduleInterView.RRFID.Value);
     }
 
     setValueNominatedInterviewers(results: Array<InterviewersPanel>) {
         this.AllNominatedInterviewers = new Array<InterviewersPanel>();
         this.AllNominatedInterviewers = results;
-        if (this.ScheduleInterView.Round.Id !== 0) {
+        if (this.ScheduleInterView.Round.Id !== undefined) {
             this.getNominatedInterviewersByRound(this.ScheduleInterView.Round.Id.toString());
         }
     }
@@ -290,7 +300,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         let element: any = $(e.element);
         element.tooltip({
             title: 'Interviewer : ' + e.event.title +
-            + ' Time From :' + StartTime + ' To ' + EndTime
+            + 'Time From :' + StartTime + ' To ' + EndTime
         });
     }
     //Format date in "yyyy-mm-dd" format
@@ -405,7 +415,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             this.getInterviewRoundsbyInterviewType(this.ScheduleInterView.InterviewType.Id.toString());
         //Set selected Nominated Interviewers
         if (this.ScheduleInterView.Round.Id !== 0) {
-            this.getNominatedInterviewers();
+            //this.getNominatedInterviewers();
             this.getNominatedInterviewersByRound(this.ScheduleInterView.Round.Id.toString());
         }
         //Change Date Format to yyyy-mm-dd
@@ -421,6 +431,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             .subscribe(
             results => {
                 this.OtherInterviewers = <any>results;
+                //  this.AllNominatedInterviewers = results;
             },
             error => this.errorMessage = <any>error);
     }
@@ -462,6 +473,34 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     clearSession(key: string) {
         sessionStorage.removeItem(key);
     }
+    handleEventClick(e: any) {
+        this.event = new Event();
+        this.event.title = e.calEvent.title;
+
+        let start = e.calEvent.start;
+        let end = e.calEvent.end;
+        if (e.view.name === 'month') {
+            start.stripTime();
+        }
+
+        if (end) {
+            end.stripTime();
+            this.event.end = end.format();
+        }
+
+        this.event.resourceId = e.calEvent.resourceId;
+        this.event.id = e.calEvent.id;
+        this.event.start = start.format();
+        var i = _.findIndex(this.InterviewerCalendarDetails.Resources, { id: e.resourceId });
+        if (i >= 0)
+            this.event.Resource = this.InterviewerCalendarDetails.Resources[i].title;
+        // this.event.allDay = e.calEvent.allDay;
+        this.dialogVisible = true;
+        this.cd.detectChanges();
+        let modalPopup: any = $('#fullCalModal');
+        modalPopup.modal();
+    }
+
 }
 
 /* handleDayClick(event: any) {

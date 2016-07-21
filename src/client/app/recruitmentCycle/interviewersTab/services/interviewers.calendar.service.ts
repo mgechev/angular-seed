@@ -17,7 +17,7 @@ export class InterviewersCalendarService {
             'resourceId': 3,
             'title': 'All Day EventAll Day EventAll Day EventAll Day EventAll Day EventAll Day EventAll Day Event',
             'start': '2016-01-01'
-        },
+           },
             {
                 'id': 2,
                 'resourceId': 1,

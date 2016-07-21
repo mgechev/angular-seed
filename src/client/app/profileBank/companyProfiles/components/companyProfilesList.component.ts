@@ -199,7 +199,7 @@ export class CompanyProfilesListComponent implements OnActivate {
 
         for (var index = 0; index < this.companyProfilesList.Profiles.length; index++) {
             if (this.companyProfilesList.Profiles[index].IsChecked) {
-                if (this.companyProfilesList.Profiles[index].isRRFAssigned) {
+                if (!this.companyProfilesList.Profiles[index].isRRFAssigned) {
                     this.Candidate.CandidateID = this.companyProfilesList.Profiles[index].CandidateID;
                     this.Candidate.Candidate = this.companyProfilesList.Profiles[index].Candidate;
                     this.selectedCandidates.push(this.Candidate);

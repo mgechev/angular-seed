@@ -13,8 +13,8 @@ export class CompanyProfilesService {
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
     getCompanyProfiles(grdOptions: GrdOptions) {
-        //let url = Config.GetURL('/api/ProfileBank/getOpenProfiles');
-        let url = Config.GetURL('/api/ProfileBankPaging/GetOpenProfiles');
+
+        let url = Config.GetURL('/api/ProfileBank/GetOpenProfiles');
         this._spinnerService.show();
         return this.authHttp.post(url, { grdOptions })
             .map(this.extractData)

@@ -215,7 +215,6 @@ export class RRFDashboardListComponent implements OnActivate {
         //console.log(this.selectedRRF);
         this.viewDetailsRRFId = rrfId;
         this.isListVisible = false;
-        
     }
 
     showListOfRRF() {
@@ -235,6 +234,10 @@ export class RRFDashboardListComponent implements OnActivate {
 
     onViewChanged(viewMode: string) {
         this.resetToDefaultGridOptions();
+        this.grdOptions.OrderBy = 'Modified';
+        this.grdOptions.Order = 'asc';
+        this.grdOptions.PerPageCount = 5;
+
         if (viewMode === 'allRRF') {
             this.currentView = 'allRRF';
             this.getAllRRFData();

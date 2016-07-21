@@ -13,7 +13,7 @@
             <div class="timeline-body-head ">
                 <div class="timeline-body-head-caption ">
                     <label href="javascript:; " class="timeline-body-title font-blue-madison ">{{selectedRRF.RaisedBy.Value}}</label>
-                    <span class="timeline-body-time font-grey-cascade ">Raised on : {{selectedRRF.CreatedDate}} </span>
+                    <span class="timeline-body-time">Raised on : {{selectedRRF.CreatedDate}} </span>
                 </div>
 
             </div>
@@ -92,14 +92,14 @@
                             <div class="col-md-5 ">Interviewers Panel</div>
                             <div class="col-md-1 " style="align:right ">:</div>
                         </div>
-                        <div class="row " *ngIf="selectedRRF.Panel.count ">
+                        <div class="row" *ngIf="selectedRRF.Panel.length">
                             <div class="col-md-12 ">
                                 <div class="table-scrollable ">
-                                    <table class="table-bordered table no-footer ">
+                                    <table class="table-bordered table no-footer tableTimelinecolor">
                                         <thead>
                                             <tr>
-                                                <td>Round </td>
-                                                <td>Interviewer</td>
+                                                <td><b>Round</b> </td>
+                                                <td><b>Interviewer</b></td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -125,54 +125,85 @@
             <!-- RRF DETAILS END -->
         </div>
         <!-- END TIMELINE ITEM -->
+
         <!-- TIMELINE ITEM *Approval*-->
         <!--<div class="timeline-item ">
-                                    <div class="timeline-badge ">
-                                        <div class="timeline-icon ">
-                                            <i class="icon-user-following font-green-haze "></i>
-                                        </div>
-                                    </div>
+            <div class="timeline-badge ">
+                <div class="timeline-icon ">
+                    <i class="icon-user-following font-green-haze "></i>
+                </div>
+            </div>
 
-                                    <div class="timeline-body ">
-                                        <div class="timeline-body-arrow "> </div>
-                                        <div class="timeline-body-head ">
-                                            <div class="timeline-body-head-caption ">
-                                                <label href="javascript:; " class="timeline-body-title font-blue-madison ">Abcd Xyz</label>
-                                                <span class="timeline-body-time font-grey-cascade ">Approved on : 5 MAy 2016</span>
+            <div class="timeline-body ">
+                <div class="timeline-body-arrow "> </div>
+                <div class="timeline-body-head ">
+                    <div class="timeline-body-head-caption ">
+                        <label href="javascript:; " class="timeline-body-title font-blue-madison ">Abcd Xyz</label>
+                        <span class="timeline-body-time font-grey-cascade ">Approved on : 5 MAy 2016</span>
 
-                                            </div>
-                                            <div class="timeline-body-head-actions "> </div>
-                                        </div>
-                                        <div class="timeline-body-content ">
-                                            <span class="font-grey-cascade ">
+                    </div>
+                    <div class="timeline-body-head-actions "> </div>
+                </div>
+                <div class="timeline-body-content ">
+                    <span class="font-grey-cascade ">
                                                 <p> comments....</p>        
                                        </span>
-                                        </div>
-                                    </div>
-                                </div>-->
+                </div>
+            </div>
+        </div>-->
         <!-- END TIMELINE ITEM -->
+
         <!-- TIMELINE ITEM *Assigned* -->
-        <!--<div class="timeline-item ">
-                                    <div class="timeline-badge ">
-                                        <div class="timeline-icon ">
-                                            <i class="icon-user-following font-green-haze "></i>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-body ">
-                                        <div class="timeline-body-arrow "> </div>
-                                        <div class="timeline-body-head ">
-                                            <div class="timeline-body-head-caption ">
-                                                <label class="timeline-body-title font-blue-madison ">Abcd xyz</label>
-                                                <span class="timeline-body-time font-grey-cascade ">Assigned On : 6 May 2016</span>
-                                            </div>
-                                        </div>
-                                        <div class="timeline-body-content ">
-                                            <span class="font-grey-cascade ">
-                                                <p> Details to whome it is Assigned</p>        
-                                       </span>
-                                        </div>
-                                    </div>
-                                </div>-->
-        <!-- END TIMELINE ITEM WITH GOOGLE MAP -->
+        <div class="timeline-item ">
+            <div class="timeline-badge ">
+                <div class="timeline-icon ">
+                    <i class="icon-user-following font-green-haze "></i>
+                </div>
+            </div>
+            <div class="timeline-body ">
+                <div class="timeline-body-arrow "> </div>
+                <div class="timeline-body-head ">
+                    <div class="timeline-body-head-caption ">
+                        <label class="timeline-body-title font-blue-madison ">RRF Assignment Details :</label>
+                        <span class="timeline-body-time"></span>
+                    </div>
+                </div>
+                <div class="timeline-body-content ">
+                    <span class="">
+                         <div class="table-scrollable">
+                                <table class="table table-bordered tableTimelinecolor" role="grid"
+                                aria-describedby="sample_1_info">
+                                    <thead>
+                                        <tr>
+                                            <td><b>Assignee</b></td>
+                                            <td><b>Assigning Comment </b></td>
+                                            <td><b>Assigned Date</b> </td>
+                                            <td><b>Status</b> </td>
+                                            <td><b>Assignee Last Date</b> </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd gradeX" *ngFor='let assignee of selectedRRF.AssignedData'>
+
+                                            <td> {{assignee.AssignedTo.Value }}</td>
+                                            <td>
+                                                {{assignee.AssignedComments }}
+                                            </td>
+                                            <td>
+                                                {{assignee.AssignedDate}}
+                                            </td>
+                                            <!--<td>{{assignee.AssigneeLastDate== "" ? "Assign" : "Un-Assign"}}</td>-->
+                                            <td>{{assignee.Status.Value}}</td>
+                                            <td>{{assignee.AssigneeLastDate }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- END TIMELINE ITEM-->
+
     </div>
 </div>
