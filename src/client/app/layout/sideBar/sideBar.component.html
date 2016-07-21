@@ -71,16 +71,16 @@
                             <span class="title">My RRF</span>
                         </a>
                     </li>-->
-                    <li class="nav-item start " [ifAuthorize]="['RRF.APPROVAL.MANAGE']">
-                        <a [routerLink]="['/App/RRF/RRFApproval/']" class="nav-link ">
-                            <i class="icon-bulb"></i>
-                            <span class="title">RRF Approval</span>
-                        </a>
-                    </li>
                     <li class="nav-item start " [ifAuthorize]="['RRF.DASHBOARD.MANAGE']">
                         <a [routerLink]="['/App/RRF/RRFDashboard/']" class="nav-link ">
                             <i class="icon-graph"></i>
                             <span class="title">RRF Dashboards</span>
+                        </a>
+                    </li>
+                    <li class="nav-item start " [ifAuthorize]="['RRF.APPROVAL.MANAGE']">
+                        <a [routerLink]="['/App/RRF/RRFApproval/']" class="nav-link ">
+                            <i class="icon-bulb"></i>
+                            <span class="title">RRF Approval</span>
                         </a>
                     </li>
                 </ul>
@@ -101,25 +101,25 @@
                         </a>
                     </li>
                     <li class="nav-item start " [ifAuthorize]="['RCIC.SCHEDULEINTERVIEW.READ']">
-                        <li class="nav-item start " >
-                        <a [routerLink]="['/App/Recruitment Cycle/Interviewers/schedule']" class="nav-link ">
-                            <i class="icon-bulb"></i>
-                            <span class="title">My Schedule</span>
-                        </a>
-                    </li>
-                    <!--<li class="nav-item start " [ifAuthorize]="['RCIC.MYCALENDER.READ']">-->
-                        <li class="nav-item start " >
-                        <a [routerLink]="['/App/Recruitment Cycle/Interviewers/mycalendar']" class="nav-link ">
-                            <i class="icon-bar-chart"></i>
-                            <span class="title">My Calendar</span>
-                        </a>
-                    </li>
-                    <li class="nav-item start " [ifAuthorize]="['RCIC.IEF.READ']">
-                        <a class="nav-link ">
-                            <i class="icon-graph"></i>
-                            <span class="title">IEF</span>
-                        </a>
-                    </li>
+                        <li class="nav-item start ">
+                            <a [routerLink]="['/App/Recruitment Cycle/Interviewers/schedule']" class="nav-link ">
+                                <i class="icon-bulb"></i>
+                                <span class="title">My Schedule</span>
+                            </a>
+                        </li>
+                        <!--<li class="nav-item start " [ifAuthorize]="['RCIC.MYCALENDER.READ']">-->
+                        <li class="nav-item start ">
+                            <a [routerLink]="['/App/Recruitment Cycle/Interviewers/mycalendar']" class="nav-link ">
+                                <i class="icon-bar-chart"></i>
+                                <span class="title">My Calendar</span>
+                            </a>
+                        </li>
+                        <li class="nav-item start " [ifAuthorize]="['RCIC.IEF.READ']">
+                            <a class="nav-link ">
+                                <i class="icon-graph"></i>
+                                <span class="title">IEF</span>
+                            </a>
+                        </li>
 
                 </ul>
                 </li>
