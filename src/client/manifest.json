@@ -1,7 +1,7 @@
 {
     "name": "Recruitment Managemet System",
     "short_name": "RMS",
-    "gcm_sender_id": "",
+    "gcm_sender_id": "994315037246",
     "start_url": "./#/App",
     "display": "standalone",
     "icons": [

@@ -204,7 +204,15 @@
     });
   }
     </script>
-
+    <script src="propel-client.js"></script>
+    <script >
+      var PropelClient = window.goog.propel.PropelClient;
+      // Check if push is supported by the current browsers
+      if (PropelClient.isSupported()) {
+        // Initialise Push Client
+        var propelClient = new PropelClient('./sw.js');
+      }
+    </script>
     <script>
         // Fixes undefined module function in SystemJS bundle
   function module() {}

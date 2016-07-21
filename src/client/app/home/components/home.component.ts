@@ -66,6 +66,25 @@ export class HomeComponent implements OnInit {
         App.init();
         Layout.init();
         Demo.init();
+        
+        if (propelClient) {
+            //TODO : propelClient.subscribe() should be call when user clicks on enable notification
+            propelClient.subscribe();
+            propelClient.addEventListener('statuschange', function (event) {
+                if (event.permissionStatus === 'denied') {
+                    // Disable UI
+                } else if (event.currentSubscription) {
+                    if (!localStorage.getItem('currentSubscription')) {
+                        let registrationID = event.currentSubscription.endpoint.split('https://android.googleapis.com/gcm/send/')[1];
+                        console.log(registrationID);
+                        localStorage.setItem("currentSubscription", event.currentSubscription);
+                    }
+                } else {
+                    // Enable UI
+                    // Show that user is not subscribed
+                }
+            });
+        }
     }
     routerOnActivate(segment: RouteSegment, prev?: RouteSegment, currTree?: RouteTree, prevTree?: RouteTree) {
         console.log(segment);
