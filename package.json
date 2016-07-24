@@ -123,7 +123,7 @@
     "es6-module-loader": "^0.17.8",
     "core-js": "^2.4.0",
     "rxjs": "5.0.0-beta.6",
-    "systemjs": "0.19.31",
+    "systemjs": "0.19.27",
     "zone.js": "^0.6.12"
   }
 }
