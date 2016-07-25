@@ -13,6 +13,7 @@ import { MastersService } from '../../../shared/services/masters.service';
 import {RRFPipe } from '../../shared/Filters/RRFFilter.component';
 import {ViewRRFComponent} from '../../shared/components/viewRRF/viewRRF.component';
 
+
 @Component({
     moduleId: module.id,
     selector: 'rrf-dashboard-list',

@@ -12,12 +12,13 @@ import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { DataSharedService } from '../../shared/services/dataShared.service';
 import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
+import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-black-listed-profiles-list',
     templateUrl: 'companyProfilesList.component.html',
-    directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES,IfAuthorizeDirective, CollapseDirective, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
     providers: [CompanyProfilesService],
     pipes: [ProfileBankPipe]
@@ -39,6 +40,7 @@ export class CompanyProfilesListComponent implements OnActivate {
     selectedCandidates: Array<Candidate>;
     public isCollapsed: boolean = false;
     Candidate: Candidate;
+    NORECORDSFOUND :boolean =false;
     constructor(private _companyProfilesService: CompanyProfilesService,
         private _router: Router,
         public toastr: ToastsManager,
@@ -71,9 +73,9 @@ export class CompanyProfilesListComponent implements OnActivate {
         this._companyProfilesService.getCompanyProfiles(this.companyProfilesList.GrdOperations)
             .subscribe(
             (results: any) => {
-                if (results.Profiles.length !== undefined) {
+                if (results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.companyProfilesList = results;
-                }
+                } else {this.NORECORDSFOUND = true;}
             },
             error => {
                 this.errorMessage = <any>error;

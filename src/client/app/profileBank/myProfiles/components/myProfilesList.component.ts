@@ -13,13 +13,13 @@ import { ProfileBankService} from  '../../shared/services/profileBank.service';
 import { Headers, Http } from '@angular/http';
 import { Candidate } from '../../shared/model/RRF';
 import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
-
+import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-myprofiles-list',
     templateUrl: 'myProfilesList.component.html',
-    directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES, IfAuthorizeDirective],
     styleUrls: ['myProfiles.component.css'],
     pipes: [ProfileBankPipe]
 })
@@ -58,6 +58,7 @@ export class MyProfilesListComponent implements OnActivate {
     resumeName: string;
     Candidate: Candidate;
     selectedCandidates: Array<Candidate>;
+    NORECORDSFOUND: boolean = false;
 
     constructor(private _myProfilesService: MyProfilesService,
         private http: Http,
@@ -106,9 +107,9 @@ export class MyProfilesListComponent implements OnActivate {
         this._myProfilesService.getMyProfiles(this.myProfilesList.GrdOperations)
             .subscribe(
             (results: any) => {
-                if (results.Profiles.length !== undefined) {
+                if (results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.myProfilesList = <any>results;
-                }
+                } else { this.NORECORDSFOUND = true; }
             },
             error => this.errorMessage = <any>error);
     }
@@ -293,7 +294,7 @@ export class MyProfilesListComponent implements OnActivate {
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                         this.toastr.success((<ResponseFromAPI>results).Message);
-                          this.myProfilesList.GrdOperations = new GrdOptions();
+                        this.myProfilesList.GrdOperations = new GrdOptions();
                         this.getMyProfiles();
                         this.profile = new CandidateProfile();
                     } else {

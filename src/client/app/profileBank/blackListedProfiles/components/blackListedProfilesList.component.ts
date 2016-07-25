@@ -17,7 +17,7 @@ import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
     templateUrl: 'blackListedProfilesList.component.html',
     directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
-        pipes: [ProfileBankPipe]
+    pipes: [ProfileBankPipe]
 
 })
 
@@ -33,6 +33,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
     currentCandidate: string;
     currentUser: MasterData = new MasterData();
     isCollapsed: boolean = false;
+    NORECORDSFOUND: boolean = false;
     CandidateProfiles: AllCandidateProfiles = new AllCandidateProfiles();
 
     constructor(private _blacklistedProfilesService: BlackListedProfilesService,
@@ -71,10 +72,10 @@ export class BlackListedProfilesListComponent implements OnActivate {
         this._blacklistedProfilesService.getBlackListedProfiles(this.blacklistedProfilesList.GrdOperations)
             .subscribe(
             (results: AllCandidateProfiles) => {
-                if (results.Profiles.length !== undefined) {
+                if (results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.blacklistedProfilesList = results;
                     //this.CandidateProfiles = results;
-                }
+                } else { this.NORECORDSFOUND = true; }
             },
             error => {
                 this.errorMessage = <any>error;
@@ -93,11 +94,8 @@ export class BlackListedProfilesListComponent implements OnActivate {
 
         var index = _.findIndex(this.blacklistedProfilesList.Profiles, { CandidateID: id });
         this.seletedCandidateID = this.blacklistedProfilesList.Profiles[index].CandidateID;
-        // var index = _.findIndex(this.CandidateProfiles.Profiles, { CandidateID: id });
-        // this.seletedCandidateID = this.CandidateProfiles.Profiles[index].CandidateID;
-        // this.profile.Comments = this.allProfilesList[index].Comments;
-        // this.profile.Status = this.allProfilesList[index].Status;
-        this.currentCandidate = this.CandidateProfiles.Profiles[index].Candidate;
+
+        this.currentCandidate =this.blacklistedProfilesList.Profiles[index].Candidate;
         this._profileBankService.getStatusById(id.Value)
             .subscribe(
             (results: any) => {

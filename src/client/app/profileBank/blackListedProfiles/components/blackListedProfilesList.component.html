@@ -40,7 +40,8 @@
                     </div>
                     <div class="portlet-body">
                         <div class="table-toolbar">
-                            <div class="row">
+                                 <!--Hide Pagination / sorting / filtering if No records found-->
+                            <div class="row" *ngIf="!NORECORDSFOUND">
                                 <div class="col-md-3 col-sm-3">
                                     <div class="dataTables_length" id="sample_1_length">
                                         <label>Show :
@@ -55,16 +56,6 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-3">
-                                    <label>Order By 
-                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
-                                             [(ngModel)]="blacklistedProfilesList.GrdOperations.Order"  
-                                            (ngModelChange)='onChange()'>
-                                                 <option value="asc">Ascending</option>
-                                                <option value="desc">Descending</option>
-                                            </select> 
-                                            </label>
-                                </div>
-                                <div class="col-md-3 col-sm-3">
                                     <label>Sort By
                                             <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
                                             [(ngModel)]="blacklistedProfilesList.GrdOperations.OrderBy"
@@ -74,7 +65,16 @@
                                             </select>
                                         </label>
                                 </div>
-
+                                <div class="col-md-3 col-sm-3">
+                                    <label>Order By 
+                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
+                                             [(ngModel)]="blacklistedProfilesList.GrdOperations.Order"  
+                                            (ngModelChange)='onChange()'>
+                                                 <option value="asc">Ascending</option>
+                                                <option value="desc">Descending</option>
+                                            </select> 
+                                            </label>
+                                </div>
                                 <div class="col-md-3 col-sm-4">
                                     <div id="sample_1_filter" class="dataTables_filter">
                                         <label>Search 
@@ -195,8 +195,10 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                                <span style = "margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Candidates Found</span>
+
                             </div>
-                            <div class="row">
+                            <div class="row" *ngIf="!NORECORDSFOUND">
                                 <div class="col-md-10">
                                 </div>
                                 <div class="col-md-2 ">

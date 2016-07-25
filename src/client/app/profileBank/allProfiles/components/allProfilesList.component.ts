@@ -11,12 +11,13 @@ import { MasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/
 import { DataSharedService } from '../../shared/services/dataShared.service';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
+import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-allprofiles-list',
     templateUrl: 'allProfilesList.component.html',
-    directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, IfAuthorizeDirective, CollapseDirective, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
     pipes: [ProfileBankPipe]
 })
@@ -44,6 +45,7 @@ export class AllProfilesListComponent implements OnActivate {
     //Pagination 
     grdOptions = new GrdOptions();
     public maxSize: number = 3;
+    NORECORDSFOUND: boolean = false;
 
     constructor(private _allProfilesService: AllProfilesService,
 
@@ -82,9 +84,9 @@ export class AllProfilesListComponent implements OnActivate {
             this._allProfilesService.getAllProfiles(this.allProfilesList.GrdOperations)
                 .subscribe(
                 (results: any) => {
-                    if (results.Profiles.length !== undefined) {
+                 if (results.Profiles !== undefined && results.Profiles.length > 0) {
                         this.allProfilesList = <AllCandidateProfiles>results;
-                    }
+                   } else { this.NORECORDSFOUND = true; }
                 },
                 error => this.errorMessage = <any>error);
         } catch (error) {
@@ -93,12 +95,12 @@ export class AllProfilesListComponent implements OnActivate {
 
     }
 
-    redirectToView(CandidateID: string) {
-        this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID]);
+    redirectToView(CandidateID: MasterData) {
+        this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
 
-    redirectToEditProfile(CandidateID: string) {
-        this._router.navigate(['/App/ProfileBank/AllProfiles/Edit/' + CandidateID]);
+    redirectToEditProfile(CandidateID: MasterData) {
+        this._router.navigate(['/App/ProfileBank/AllProfiles/Edit/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
 
     SaveCandidateID(id: MasterData) {
@@ -225,13 +227,14 @@ export class AllProfilesListComponent implements OnActivate {
 
     }
 
-    getResume(CandidateID: string) {
-        this._profileBankService.getResumeById(CandidateID)
-            .subscribe(
-            (results: any) => {
-                this.url = results;
-            },
-            error => this.toastr.error(<any>error));
+    getResume(CandidateID: MasterData) {
+        // this._profileBankService.getResumeById(CandidateID)
+        //     .subscribe(
+        //     (results: any) => {
+        //         this.url = results;
+        //     },
+        //     error => this.toastr.error(<any>error));
+        // this._profileBankService.getResumeById(CandidateID);
     }
 
     OnPaginationClick(ButtonClicked: string) {

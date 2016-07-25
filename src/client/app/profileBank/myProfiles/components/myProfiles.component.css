@@ -193,3 +193,6 @@ border-bottom: 0px;
     margin-left: 5px;
     font-family: Verdana;
 }
+.thead{
+  border-bottom:solid 1px rgb(231, 236, 241) !important;
+}

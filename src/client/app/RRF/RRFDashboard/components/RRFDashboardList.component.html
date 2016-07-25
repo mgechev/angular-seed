@@ -271,8 +271,7 @@
                                                 </button>
                                                 <ul class="dropdown-menu " role="menu ">
                                                     <li>
-                                                        <button class="btn btn-default btnLink
-                                            " (click)='redirectToEditRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] "
+                                                        <button class="btn btn-default btnLink" (click)='redirectToEditRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] "
                                                         [disabled]='allowEditRRF(rrf.Status.Id , rrf.RaisedBy.Id)'>
                                                             <i class="fa fa-edit "></i> Edit RRF
                                                         </button>
@@ -285,22 +284,20 @@
                                                     </li>
                                                     <li class="divider " [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "> </li>
                                                     <li>
-                                                        <button class="btn btn-default btnLink
-                                            " (click)='redirectToAssignRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "
+                                                        <button class="btn btn-default btnLink" (click)='redirectToAssignRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "
                                                         [disabled]='allowAssignRRF(rrf.Status.Id)'>
                                                             <i class="icon-user "></i> Assign RRF
                                                         </button>
                                                     </li>
                                                     <li class="divider "> </li>
                                                     <li>
-                                                        <button class="btn btn-default btnLink " (click)='onViewCandidateClick(rrf.RRFID)' [disabled]='checkIfRRFClosed(rrf.Status.Id)'>
+                                                        <button class="btn btn-default btnLink " [ifAuthorize]="[ 'RC.VIEWRRFCANDIDATES.MANAGE'] " (click)='onViewCandidateClick(rrf.RRFID)' [disabled]='checkIfRRFClosed(rrf.Status.Id)'>
                                                             <i class="fa fa-users "></i> View Candidates
                                                         </button>
                                                     </li>
                                                     <li class="divider " [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] "> </li>
                                                     <li>
-                                                        <button class="btn btn-default btnLink
-                                            " (click)='onCloseRRFClick(rrf.RRFID)' [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] "
+                                                        <button class="btn btn-default btnLink" (click)='onCloseRRFClick(rrf.RRFID)' [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] "
                                                         [disabled]='allowCloseRRF(rrf.Status.Id)'>
                                                             <i class="fa fa-times "></i> Close RRF
                                                         </button>

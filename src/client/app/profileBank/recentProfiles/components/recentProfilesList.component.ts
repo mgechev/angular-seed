@@ -33,6 +33,7 @@ export class RecentProfilesListComponent implements OnActivate {
     currentCandidate: string;
     isCollapsed: boolean = false;
     currentUser: MasterData = new MasterData();
+        NORECORDSFOUND: boolean = false;
 
     //inject services
     constructor(private _recentProfilesService: RecentProfilesService,
@@ -62,10 +63,9 @@ export class RecentProfilesListComponent implements OnActivate {
         this._recentProfilesService.getRecentProfiles(this.recentProfilesList.GrdOperations)
             .subscribe(
             (results: any) => {
-                if (results.Profiles.length !== undefined) {
-
+                if (results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.recentProfilesList = <any>results;
-                }
+                } else { this.NORECORDSFOUND = true; }
             },
             error => this.errorMessage = <any>error);
     }
