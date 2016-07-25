@@ -50,7 +50,10 @@ export class RRFApprovalListComponent implements OnActivate {
                         // this.rrfApprovalList[index].Status = {'Id' :1 ,'Value' :'PendingApproval'}; //TODO : get it from API
                         this.rrfApprovalList[index].IsChecked = false;
                     }
-                } else { this.NORECORDSFOUND = true; }
+                } else {
+                     this.NORECORDSFOUND = true;
+                     this.rrfApprovalList = [];
+                     }
 
             },
             error => this.errorMessage = <any>error);
@@ -127,7 +130,7 @@ export class RRFApprovalListComponent implements OnActivate {
         this.ActionOnRaisedRRFBulk(_selectedRrfDetailsList);
         this.comment = '';
         this.allChecked = false;
-        this.getRRFApprovalList();
+
     }
     //Raised RRF Bulk approval service call
     ActionOnRaisedRRFBulk(_selectedRrfList: RRFDetails[]): void {
@@ -139,6 +142,7 @@ export class RRFApprovalListComponent implements OnActivate {
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
+                 this.getRRFApprovalList();
             },
             error => this.errorMessage = <any>error);
     }

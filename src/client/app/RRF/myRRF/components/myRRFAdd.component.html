@@ -218,7 +218,6 @@
                                                 <div class="input-group select2-bootstrap-append ">
                                                     <select id="cmbInterviewer" class="form-control " required="" multiple tooltip="Select Interviewers" tooltipPlacement="top"
                                                     tooltipTrigger="mouseenter" tooltipEnable="!0">
-                                                        <option value="" disabled>Select Interviewers </option>
                                                         <option *ngFor="let interviewer of interviewers " [value]="interviewer.Id ">{{interviewer.Value}}</option>
                                                     </select>
                                                     <span class="input-group-btn ">
