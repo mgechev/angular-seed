@@ -41,7 +41,7 @@ export class RRFApprovalListComponent implements OnActivate {
         this._rrfApprovalService.getRRFApprovalList(this.grdOptions)
             .subscribe(
             (results: any) => {
-                if (results.rrfApprovalList !== undefined && results.rrfApprovalList.length > 0) {
+                if (results.RRFs !== undefined && results.RRFs.length > 0) {
                     this.grdOptions = (<any>(results)).GrdOperations;
                     this.rrfApprovalList = (<any>(results)).RRFs;
                     //this.rrfApprovalList = <any>results;

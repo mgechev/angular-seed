@@ -30,7 +30,7 @@
                     </div>
                     <br>
                     <div>
-                        <textarea class="form-control" id="txtComment" rows="3" placeholder="Enter comment..." style="resize:vertical" [(ngModel)]='comment'
+                        <textarea class="form-control" id="txtComment" [disabled]='!selectedRowCount' rows="3" placeholder="Enter comment..." style="resize:vertical" [(ngModel)]='comment'
                         required=""></textarea>
                     </div>
                 </div>
