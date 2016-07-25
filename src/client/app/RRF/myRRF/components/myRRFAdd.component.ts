@@ -107,6 +107,10 @@ export class MyRRFAddComponent implements OnActivate {
     }
 
     raiseRRF(): void {
+        if(this.newRRF.Panel.length == 0){
+            this.toastr.error("Please select interview panel Details");
+            return ;
+        }
         if (this.isNewRRF) {
             this.setSkillToObject();
             if (this.newRRF.MinExp <= this.newRRF.MaxExp) {
