@@ -41,6 +41,7 @@ export class MyRRFAddComponent implements OnActivate {
     RRFId: MasterData = new MasterData();
     ExpDateOfJoining: any;
     params: string;
+    mindate : Date;
 
 
     constructor(private _myRRFService: MyRRFService,
@@ -67,6 +68,8 @@ export class MyRRFAddComponent implements OnActivate {
         //     stepinterval: 0.5
         // });
 
+        this.setMinDateToCalender();
+        
         //dropdown with multi selector and search
         $('#cmbInterviewer').select2();
         $('#cmbSkillsReq').select2();
@@ -333,5 +336,10 @@ export class MyRRFAddComponent implements OnActivate {
         if (day.length < 2) day = '0' + day;
 
         return [year, month, day].join('-');
+    }
+
+    setMinDateToCalender() {
+        var todayDate = new Date();
+        this.mindate = (<any>this.formatDate(todayDate));
     }
 }
