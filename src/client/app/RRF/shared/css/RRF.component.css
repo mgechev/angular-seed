@@ -23,7 +23,9 @@ Open 2
 Rejected 3
 Assigned 4
 Closed 5*/
-
+.thead{
+  border-bottom:solid 1px rgb(231, 236, 241) !important;
+}
 .status1 {
   background: #E9EF0B;
 }

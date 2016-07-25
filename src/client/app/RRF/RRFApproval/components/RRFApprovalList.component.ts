@@ -13,7 +13,7 @@ import {RRFPipe } from '../../shared/Filters/RRFFilter.component';
     selector: 'rrf-approval-list',
     templateUrl: 'RRFApprovalList.component.html',
     directives: [ROUTER_DIRECTIVES],
-    styleUrls: ['RRFApproval.component.css'],
+    styleUrls: ['../../shared/css/RRF.component.css'],
     providers: [ToastsManager],
     pipes: [RRFPipe],
 })
@@ -26,7 +26,8 @@ export class RRFApprovalListComponent implements OnActivate {
     allChecked: boolean = false;
     statusConstant: RRFStatus = RRFStatus;
     grdOptions: GrdOptions = new GrdOptions();
-    searchText : string ='';
+    searchText: string = '';
+    NORECORDSFOUND: boolean = false;
 
     constructor(private _rrfApprovalService: RRFApprovalService,
         public toastr: ToastsManager) {
@@ -39,15 +40,18 @@ export class RRFApprovalListComponent implements OnActivate {
     getRRFApprovalList(): void {
         this._rrfApprovalService.getRRFApprovalList(this.grdOptions)
             .subscribe(
-            results => {
-                this.grdOptions = (<any>(results)).GrdOperations;
-                this.rrfApprovalList = (<any>(results)).RRFs;
-                //this.rrfApprovalList = <any>results;
+            (results: any) => {
+                if (results.rrfApprovalList !== undefined && results.rrfApprovalList.length > 0) {
+                    this.grdOptions = (<any>(results)).GrdOperations;
+                    this.rrfApprovalList = (<any>(results)).RRFs;
+                    //this.rrfApprovalList = <any>results;
 
-                for (var index = 0; index < this.rrfApprovalList.length; index++) {
-                    // this.rrfApprovalList[index].Status = {'Id' :1 ,'Value' :'PendingApproval'}; //TODO : get it from API
-                    this.rrfApprovalList[index].IsChecked = false;
-                }
+                    for (var index = 0; index < this.rrfApprovalList.length; index++) {
+                        // this.rrfApprovalList[index].Status = {'Id' :1 ,'Value' :'PendingApproval'}; //TODO : get it from API
+                        this.rrfApprovalList[index].IsChecked = false;
+                    }
+                } else { this.NORECORDSFOUND = true; }
+
             },
             error => this.errorMessage = <any>error);
     }

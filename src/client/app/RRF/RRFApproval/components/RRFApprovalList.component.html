@@ -38,7 +38,7 @@
 
                     <!-- BEGIN SHOW AND SEARCH  -->
                     <div class="dataTables_wrapper no-footer">
-                        <div class="row">
+                        <div class="row" *ngIf="!NORECORDSFOUND">
                             <div class="col-lg-3 col-sm-3">
                                 <div class="dataTables_length ">
                                     <label>show
@@ -89,7 +89,7 @@
                     <!-- BEGIN LIST OF RRF  -->
                     <div class="table-scrollable">
                         <table class="table table-striped table-bordered table-hover table-checkable order-column">
-                            <thead style="word-wrap: break-word;">
+                            <thead style="word-wrap: break-word;" class="thead">
                                 <tr width="5%">
                                     <td>
                                         <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
@@ -162,16 +162,16 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <span style = "margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Records Found</span>
+
                     </div>
                     <!-- END LIST OF RRF -->
                     <!-- START NAVIGATION BUTTON -->
-                    <div class="table-toolbar">
+                    <div class="table-toolbar" *ngIf="!NORECORDSFOUND">
                         <div class="pull-right ">
-                            <button type="button " class="btn btn-default " [disabled]="!grdOptions.PreviousButton
-                        " (click)="OnPaginationClick(-1) ">
+                            <button type="button " class="btn btn-default " [disabled]="!grdOptions.PreviousButton" (click)="OnPaginationClick(-1) ">
                                 &laquo; Prev</button> &nbsp;&nbsp;
-                            <button type="button " class="btn btn-default " [disabled]="!grdOptions.NextButton
-                        " (click)="OnPaginationClick(1) ">
+                            <button type="button " class="btn btn-default " [disabled]="!grdOptions.NextButton" (click)="OnPaginationClick(1) ">
                                 Next &raquo;</button>
                         </div>
                     </div>

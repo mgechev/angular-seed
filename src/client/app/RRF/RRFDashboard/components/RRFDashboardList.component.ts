@@ -13,12 +13,13 @@ import { MastersService } from '../../../shared/services/masters.service';
 import {RRFPipe } from '../../shared/Filters/RRFFilter.component';
 import {ViewRRFComponent} from '../../shared/components/viewRRF/viewRRF.component';
 
+
 @Component({
     moduleId: module.id,
     selector: 'rrf-dashboard-list',
     templateUrl: 'RRFDashboardList.component.html',
     directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES, IfAuthorizeDirective, ViewRRFComponent],
-    styleUrls: ['../../RRFApproval/components/RRFApproval.component.css'],
+    styleUrls: ['../../shared/css/RRF.component.css'],
     pipes: [RRFIDPipe, RRFPipe],
     providers: [ToastsManager]
 })
@@ -49,11 +50,12 @@ export class RRFDashboardListComponent implements OnActivate {
         animation: false,
         responsive: true,
         legend: {
-            onClick: function(event: any, legendItem: any) {
+            onClick: function (event: any, legendItem: any) {
                 //console.log("legend click");
             }
         }
-    }
+    };
+    NORECORDSFOUND: boolean = false;
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService, private _router: Router,
         public toastr: ToastsManager,
@@ -98,41 +100,53 @@ export class RRFDashboardListComponent implements OnActivate {
         console.log(e);
     }
     getAllRRF() {
+        this.NORECORDSFOUND = false;
         this._rrfDashboardService.getAllRRF(this.grdOptions)
             .subscribe(
-            results => {
-                this.grdOptions = (<any>(results)).GrdOperations;
-                this.rrfList = (<any>(results)).RRFs;
+            (results: any) => {
+                if (results.RRFs !== undefined && results.RRFs.length > 0) {
+                    this.grdOptions = (<any>(results)).GrdOperations;
+                    this.rrfList = (<any>(results)).RRFs;
+                } else { this.NORECORDSFOUND = true; }
             },
             error => this.errorMessage = <any>error);
     }
 
     getMyRRF() {
+        this.NORECORDSFOUND = false;
         this._rrfDashboardService.getMyRRF(this.grdOptions)
             .subscribe(
-            results => {
-                this.grdOptions = (<any>(results)).GrdOperations;
-                this.rrfList = (<any>(results)).RRFs;
+            (results: any) => {
+                if (results.RRFs !== undefined && results.RRFs.length > 0) {
+                    this.grdOptions = (<any>(results)).GrdOperations;
+                    this.rrfList = (<any>(results)).RRFs;
+                } else { this.NORECORDSFOUND = true; }
             },
             error => this.errorMessage = <any>error);
     }
 
     GetRRFAssignedToRecruiter() {
+        this.NORECORDSFOUND = false;
         this._rrfDashboardService.GetRRFAssignedToRecruiter(this.selectedRecruiter, this.grdOptions)
             .subscribe(
-            results => {
-                this.grdOptions = (<any>(results)).GrdOperations;
-                this.rrfList = (<any>(results)).RRFs;
+            (results: any) => {
+                if (results.RRFs !== undefined && results.RRFs.length > 0) {
+                    this.grdOptions = (<any>(results)).GrdOperations;
+                    this.rrfList = (<any>(results)).RRFs;
+                } else { this.NORECORDSFOUND = true; }
             },
             error => this.errorMessage = <any>error);
     }
 
     GetAllUnAssignedRRF() {
+        this.NORECORDSFOUND = false;
         this._rrfDashboardService.GetAllUnAssignedRRF(this.grdOptions)
             .subscribe(
-            results => {
-                this.grdOptions = (<any>(results)).GrdOperations;
-                this.rrfList = (<any>(results)).RRFs;
+            (results: any) => {
+                if (results.RRFs !== undefined && results.RRFs.length > 0) {
+                    this.grdOptions = (<any>(results)).GrdOperations;
+                    this.rrfList = (<any>(results)).RRFs;
+                } else { this.NORECORDSFOUND = true; }
             },
             error => this.errorMessage = <any>error);
     }
@@ -237,6 +251,8 @@ export class RRFDashboardListComponent implements OnActivate {
         this.grdOptions.OrderBy = 'Modified';
         this.grdOptions.Order = 'asc';
         this.grdOptions.PerPageCount = 5;
+        //Clear RRF List
+        this.rrfList = new Array<RRFDetails>();
 
         if (viewMode === 'allRRF') {
             this.currentView = 'allRRF';

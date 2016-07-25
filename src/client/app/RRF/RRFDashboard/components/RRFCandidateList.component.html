@@ -42,7 +42,6 @@
                                         </thead>
                                         <tbody>
                                             <tr class="odd gradeX">
-                                                <!--remove hard code data-->
                                                 <td>
                                                     <div align="left">
                                                         {{selectedRRF.RaisedBy.Value }}
@@ -89,7 +88,6 @@
                                             <thead>
                                                 <tr>
                                                     <th> # </th>
-                                                    <!--<th>Candidate Code</th>-->
                                                     <th>Candidate</th>
                                                     <th>Status</th>
                                                     <th>Last Round Scheduled</th>
@@ -102,7 +100,6 @@
                                                     <td> <a (click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate)'> {{selectedcandidate.Candidate}}</a></td>
 
                                                     <td> {{selectedcandidate.InterviewDetails.Status}} </td>
-                                                    <!--{{AllCandidatesForRRF.InterviewDetails.Status}}   {{AllCandidatesForRRF.InterviewDetails.Round.Value}} -->
                                                     <td> {{selectedcandidate.InterviewDetails.Round.Value}}</td>
                                                     <td> <a class="btn blue btn-outline btn-circle btn-sm active" *ngIf="!selectedcandidate.isInterviewScheduled"
                                                             (click)='onScheduleInterviewClick(selectedcandidate)'> Schedule </a>
@@ -139,21 +136,6 @@
                                                 <td> {{getDate(candidateHistory.InterviewDate)}}</td>
                                                 <td> {{candidateHistory.Status}}</td>
                                             </tr>
-                                            <!--<tr id="round" (mouseover)='showPopOver()'>
-                                                <td> 1 </td>
-                                                <td> Technical 1</td>
-                                                <td> ABCD </td>
-                                                <td> 1/7/2016 </td>
-                                                <td> Selected </td>
-                                            </tr>
-                                            <tr>
-                                                <td> 2 </td>
-                                                <td> HR </td>
-                                                <td> XYZ </td>
-                                                <td> 4/7/2016 </td>
-                                                <td> Pending </td>
-                                            </tr>
-                                        -->
                                         </tbody>
                                     </table>
                                     <span *ngIf='isRoundHistoryPresent'>No Candidates Round History Found</span>

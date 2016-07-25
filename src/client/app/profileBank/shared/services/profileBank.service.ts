@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, BrowserXhr } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { CandidateProfile, SalaryDetails, Qualification, TeamManagement, CareerProfile,
     OtherDetails, Skills, TransferOwnershipMeta} from '../model/myProfilesInfo';
@@ -168,7 +168,8 @@ export class ProfileBankService {
     }
 
     getQualificationById(CandidateID: string, QualificationID: string) {
-        let url = Config.GetURL('/api/ProfileBank/getCandidateQualification?CandidateID='+CandidateID+'&QualificationID='+QualificationID);
+        let url = Config.GetURL('/api/ProfileBank/getCandidateQualification?CandidateID=' +
+            CandidateID + '&QualificationID=' + QualificationID);
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
@@ -176,17 +177,44 @@ export class ProfileBankService {
             .finally(() => this._spinnerService.hide());
 
     }
-    getResumeById(CandidateID :string) {
-         let url = Config.GetURL('/api/ProfileBank/GetResume?CandidateID='+CandidateID);
-        this._spinnerService.show();
-        return this.authHttp.get(url)
-            .map(this.extractData)
-            .catch(this.handleError)
-            .finally(() => this._spinnerService.hide());
+    getResumeById(CandidateID: MasterData) {
+        //  let url = Config.GetURL('/api/ProfileBank/GetResume?CandidateID='+CandidateID);
+        // this._spinnerService.show();
+        // return this.authHttp.get(url)
+        //     .map(this.extractData)
+        //     .catch(this.handleError)
+        //     .finally(() => this._spinnerService.hide());
+        // return this.http.get('https://static.pexels.com/photos/4825/red-love-romantic-flowers.jpg')
+        //     .map(this.ChangeResponseType)
+        //     .catch(this.handleError)
+        //     .finally(() => this._spinnerService.hide());
+        // let formData: FormData = new FormData();
+
+
+        // formData.append('CandidateID', resumeMeta.Profile, resumeMeta.Profile.name);
+        // formData.append('CandidateID', resumeMeta.CandidateID.Value);
+        // formData.append('Overwrite', resumeMeta.Overwrite);
+
+        // var xhr = new XMLHttpRequest();
+        // let url = Config.GetURL('/api/ProfileBank/GetResume?CandidateID=' + CandidateID.Value);
+        // xhr.open('GET', url, true);
+        // xhr.responseType = 'blob';
+        // xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
+        // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        // xhr.send();
+        // xhr.onreadystatechange = function () {//Call a function when the state changes.
+        //     if (xhr.readyState === 4 && xhr.status === 200) {
+        //         var blob = new Blob([this.response], { type: 'application/jpg' });
+        //         saveAs(blob, 'Report.jpg');
+        //     } else {
+        //         console.log('Error');
+        //     }
+        // }
+
     }
 
-     getStatusById(CandidateID :string) {
-         let url = Config.GetURL('/api/ProfileBank/GetStatus?CandidateID='+CandidateID);
+    getStatusById(CandidateID: string) {
+        let url = Config.GetURL('/api/ProfileBank/GetStatus?CandidateID=' + CandidateID);
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)

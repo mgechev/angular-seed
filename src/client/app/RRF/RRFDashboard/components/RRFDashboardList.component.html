@@ -108,7 +108,8 @@
                             <div class="portlet-title">
                                
                             </div>
-                            <div class="row">
+                            <!--Hide Sorting / filtering if No Data Found-->
+                            <div class="row"  *ngIf="!NORECORDSFOUND">
                                 <div class="col-lg-3 col-sm-3">
                                     <div class="dataTables_length ">
                                         <label>show
@@ -175,7 +176,7 @@
                         <div class="table-scrollable ">
                             <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable
                                             no-footer " role="grid " aria-describedby="sample_1_info ">
-                                <thead style="word-wrap: break-word; ">
+                                <thead style="word-wrap: break-word; " class="thead">
                                     <tr>
                                         <!--<td width="20% "> <b>Raised by / Date</b> </td>
                                         <td width="30% "> <b>Position Details</b> </td>
@@ -271,8 +272,7 @@
                                                 </button>
                                                 <ul class="dropdown-menu " role="menu ">
                                                     <li>
-                                                        <button class="btn btn-default btnLink
-                                            " (click)='redirectToEditRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] "
+                                                        <button class="btn btn-default btnLink" (click)='redirectToEditRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] "
                                                         [disabled]='allowEditRRF(rrf.Status.Id , rrf.RaisedBy.Id)'>
                                                             <i class="fa fa-edit "></i> Edit RRF
                                                         </button>
@@ -285,22 +285,20 @@
                                                     </li>
                                                     <li class="divider " [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "> </li>
                                                     <li>
-                                                        <button class="btn btn-default btnLink
-                                            " (click)='redirectToAssignRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "
+                                                        <button class="btn btn-default btnLink" (click)='redirectToAssignRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "
                                                         [disabled]='allowAssignRRF(rrf.Status.Id)'>
                                                             <i class="icon-user "></i> Assign RRF
                                                         </button>
                                                     </li>
                                                     <li class="divider "> </li>
                                                     <li>
-                                                        <button class="btn btn-default btnLink " (click)='onViewCandidateClick(rrf.RRFID)' [disabled]='checkIfRRFClosed(rrf.Status.Id)'>
+                                                        <button class="btn btn-default btnLink " [ifAuthorize]="[ 'RC.VIEWRRFCANDIDATES.MANAGE'] " (click)='onViewCandidateClick(rrf.RRFID)' [disabled]='checkIfRRFClosed(rrf.Status.Id)'>
                                                             <i class="fa fa-users "></i> View Candidates
                                                         </button>
                                                     </li>
                                                     <li class="divider " [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] "> </li>
                                                     <li>
-                                                        <button class="btn btn-default btnLink
-                                            " (click)='onCloseRRFClick(rrf.RRFID)' [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] "
+                                                        <button class="btn btn-default btnLink" (click)='onCloseRRFClick(rrf.RRFID)' [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] "
                                                         [disabled]='allowCloseRRF(rrf.Status.Id)'>
                                                             <i class="fa fa-times "></i> Close RRF
                                                         </button>
@@ -310,18 +308,21 @@
                                         </td>
                                     </tr>
                                 </tbody>
+
                             </table>
+                            <span style = "margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Records Found</span>
+
                         </div>
                         <!-- END LIST OF RRF -->
 
                         <!-- START NAVIGATION BUTTON -->
-                        <div class="table-toolbar">
+                        <div class="table-toolbar"  *ngIf="!NORECORDSFOUND">
                             <div class="pull-right ">
                                 <button type="button " class="btn btn-default " [disabled]="!grdOptions.PreviousButton
-                        " (click)="OnPaginationClick(-1) ">
+                                  " (click)="OnPaginationClick(-1) ">
                                     &laquo; Prev</button> &nbsp;&nbsp;
                                 <button type="button " class="btn btn-default " [disabled]="!grdOptions.NextButton
-                        " (click)="OnPaginationClick(1) ">
+                                  " (click)="OnPaginationClick(1) ">
                                     Next &raquo;</button>
                             </div>
                         </div>
