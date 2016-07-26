@@ -24,6 +24,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
     InterviewInformationForCalendar: Array<Interview> = new Array<Interview>();
     interviewdd: Interview = new Interview();
     InterviewerCalendarDetails: CalendarDetails = new CalendarDetails();
+        NORECORDSFOUND: boolean = false;
     header: any = {
         left: 'prev,next today',
         center: 'title',
@@ -56,7 +57,9 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         this._interviewService.getMyInterviews()
             .subscribe(
             (results: any) => {
+                if(results.length !== undefined && results.length > 0) {
                 this.InterviewInformation = results;
+                } else {this.NORECORDSFOUND=true;}
             },
             error => {
                 this.errorMessage = <any>error;

@@ -26,6 +26,7 @@ export class RecruitmentInterviewAvailabilityComponent implements OnActivate {
     RRFIdTOShowSlot: MasterData = new MasterData();
     RRFCode: string;
     showSlotForRRF: boolean = false;
+    NORECORDSFOUND: boolean = false;
 
     constructor(private _router: Router,
         private toastr: ToastsManager,
@@ -57,7 +58,9 @@ export class RecruitmentInterviewAvailabilityComponent implements OnActivate {
         this._interviewService.getAssignedRRF()
             .subscribe(
             (results: any) => {
-                this._rrfDetails = results;
+                if (results.length !== undefined && results.length > 0) {
+                    this._rrfDetails = results;
+                } else { this.NORECORDSFOUND = true; }
             },
             error => {
                 this.errorMessage = <any>error;
@@ -77,5 +80,5 @@ export class RecruitmentInterviewAvailabilityComponent implements OnActivate {
     hideSlot() {
         this.showSlotForRRF = false;
     }
-   
+
 }
