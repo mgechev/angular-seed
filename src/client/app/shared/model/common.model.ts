@@ -31,3 +31,8 @@ export class GrdOptions {
     public Order: string = 'asc';
     public NextPageUrl: string[]=[];
 }
+
+export class SortingMasterData {
+    public Id: string;
+    public Value: string;
+}
