@@ -24,8 +24,15 @@
         <div class="portlet-body">
             <div class="portlet light bordered">
                 <div class="row">
-                    <h4> &nbsp;&nbsp; Schdule Interview </h4>
-                    <hr style="hrClass" />
+                    <div class="col-md-4">
+                        <h4> &nbsp;&nbsp; Schdule Interview </h4>
+                    </div>
+                    <div class="col-md-8" *ngIf="ifInvalidInterview ">
+                        <div style="color:red;margin-top:10px" class="control-label align"> Note *: This Interview Will Be Scheduled After Approval. </div>
+                    </div>
+                </div>
+                <hr style="hrClass" />
+                <div class="row">
                     <div class="col-md-7">
                         <div class="row">
                             <form role="form" (submit)="onScheduleInterviewClick()">
@@ -33,7 +40,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label align">Candidate <span class="required"> * </span></label>
                                         <div class="col-md-3">
-                                          
+
                                             {{ScheduleInterView.Candidate}}
                                         </div>
                                     </div>
@@ -123,11 +130,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row" style="margin-top:15px">
+                                <div class="row" style="margin-top:15px" *ngIf="ifInvalidInterview">
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label align">Comments <span class="required"> * </span></label>
+                                        <label class="col-md-3 control-label align">Reason <span class="required"> * </span></label>
                                         <div class="col-md-8">
-                                            <textarea class="form-control" rows="2" placeholder="Comments" style="resize:vertical" [(ngModel)]="ScheduleInterView.Comments"> </textarea>
+                                            <textarea class="form-control" rows="2" placeholder="Reson to send for approval" style="resize:vertical" [(ngModel)]="ScheduleInterView.Reason"> </textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -135,7 +142,8 @@
                                     <br/>
                                     <div class="col-md-3"></div>
                                     <div class="col-md-6">
-                                        <button type="submit" class="btn btn-info "> Schedule </button> &nbsp;&nbsp;
+                                        <button type="submit" class="btn btn-info" *ngIf="!ifInvalidInterview" [disabled]='ifInterviewScheduled'> Schedule </button>
+                                        <button type="submit" class="btn btn-info" *ngIf="ifInvalidInterview"> Send For Approval </button>&nbsp;&nbsp;
                                         <a class="btn btn-info" (click)='redirectToPreviousView()'> Cancel</a>
                                     </div>
                                 </div>
@@ -147,7 +155,8 @@
                         </div>
                     </div>
                     <div class="col-md-5" style="border-left:1px solid #c6cdd5">
-                        <!--<full-calendar [resources]="resources" [events]="events" [header]="header" defaultDate="2016-01-12" [eventLimit]="4" [editable]="true"
+                        <!--
+                            <full-calendar [resources]="resources" [events]="events" [header]="header" defaultDate="2016-01-12" [eventLimit]="4" [editable]="true"
                             (onEventClick)="handleEventClick($event)" [selectable]="true" [selectHelper]="true" (onSelect)="handleDayClick($event)"></full-calendar>-->
                         <full-calendar [resources]="InterviewerCalendarDetails.Resources" [events]="InterviewerCalendarDetails.Events" [header]="header"
                             defaultDate="2016-07-12" (onEventClick)="handleEventClick($event)" (onEventRender)="showDetails($event)"
@@ -211,13 +220,30 @@
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
                     </div>
                     <div id="modalBody" class="modal-body">
-                        You hav selected un-available time slot to schedule interview.<br/>
-                        Do you want to continue?  
+                        You hav selected un-available time slot to schedule interview.<br/> Do you want to continue?
                     </div>
                     <div class="modal-footer">
                         <button type="button" icon="fa-check" class="btn btn-info" (click)="ScheduleCandidateInterView()" label="">Yes</button>
                         <button type="button" icon="fa-check" class="btn btn-default" data-dismiss="modal" label="">No</button>
-                   </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="skippingRound" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <b>Skipping Round </b>
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                    </div>
+                    <div id="modalBody" class="modal-body">
+                        You are skipping interview round.<br/> Do you want to continue?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" icon="fa-check" class="btn btn-info" (click)="onForceInterviewSchedule()" label="">Yes</button>
+                        <button type="button" icon="fa-check" class="btn btn-default" (click)="onClearSelection()"  label="">No</button>
+                    </div>
                 </div>
             </div>
         </div>

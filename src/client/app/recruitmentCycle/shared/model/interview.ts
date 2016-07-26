@@ -6,7 +6,8 @@ import { IEFFunction } from  './ief';
 export class Interview {
     public detailsRRF: DetailRRF = new DetailRRF();
     public CandidateID: MasterData = new MasterData();
-    public Candidate : string;
+    public Candidate: string;
+    public CandidateStatus: MasterData = new MasterData();
     public CANDIDATECODE: string;
     public InterviewID: MasterData = new MasterData();
     public InterviewDate: string;
@@ -27,6 +28,10 @@ export class Interview {
     public CandidatePrimaryDetails: CandidatePrimaryDetails = new CandidatePrimaryDetails();
     public Interviewer: Array<MasterData> = new Array<MasterData>();
     public IEFTransactionDetails: Array<IEFFunction> = new Array<IEFFunction>();
+    public ApprovalType :string;
+    public ApproverComments :string;
+    public Reason:string;
+    public Approver:string;
 }
 //Interviewrs Availability comments
 export class InterviewAvailability {

@@ -34,6 +34,7 @@ export class RRFDetails {
     public Technology: MasterData = new MasterData();
     public PositionTitle: string;
     public Description: string;
+    
     public NoOfOpenings: number = 1;
     public SkillsRequired= new Array<MasterData>();
     public Designation: MasterData = new MasterData();
@@ -51,6 +52,11 @@ export class RRFDetails {
     public RRFApproval: RRFApproval[] = new Array();
     public OpenForNumberOfDays: number = 0;
     public CreatedDate : Date;
+
+    public PreferredSkills: string;
+    public Competencies: string;
+    public GoodToHave: string;
+    public QualCertRquired : string;
 }
 
 

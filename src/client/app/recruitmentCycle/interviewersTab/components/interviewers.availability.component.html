@@ -34,43 +34,46 @@
                         <!--<div class="tools"> </div>-->
                     </div>
                     <div class="portlet-body">
-                        <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="sample_1">
-                            <thead>
-                                <tr>
-                                    <th class="all">RRF Code</th>
-                                    <th class="all">Position Details</th>
-                                    <th class="min-phone-l">Requirements</th>
-                                    <th class="min-tablet">Priority</th>
-                                    <th class="none">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- ng code -->
-                                <tr class="gradeX odd " *ngFor="let _rrf of _rrfDetails ">
-                                    <td>{{_rrf.RRFCODE}}</td>
-                                    <td>Practice :{{_rrf.Practice.Value}}
-                                        <br>Tech. :{{_rrf.Technology.Value}}
-                                        <br>Position : {{_rrf.PositionTitle}}
-                                        <br>Designation :{{_rrf.Designation.Value}}
-                                        <br>Openings :{{_rrf.NoOfOpenings}}
-                                    </td>
-                                    <td>
-                                        <br>Skills:
-                                        <span *ngFor="let _skill of _rrf.SkillsRequired ">
+                        <div class="table-scrollable">
+                            <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="sample_1">
+                                <thead style="border-bottom:solid 1px rgb(231, 236, 241) !important;">
+                                    <tr>
+                                        <th class="all">RRF Code</th>
+                                        <th class="all">Position Details</th>
+                                        <th class="min-phone-l">Requirements</th>
+                                        <th class="min-tablet">Priority</th>
+                                        <th class="none">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- ng code -->
+                                    <tr class="gradeX odd " *ngFor="let _rrf of _rrfDetails ">
+                                        <td>{{_rrf.RRFCODE}}</td>
+                                        <td>Practice :{{_rrf.Practice.Value}}
+                                            <br>Tech. :{{_rrf.Technology.Value}}
+                                            <br>Position : {{_rrf.PositionTitle}}
+                                            <br>Designation :{{_rrf.Designation.Value}}
+                                            <br>Openings :{{_rrf.NoOfOpenings}}
+                                        </td>
+                                        <td>
+                                            <br>Skills:
+                                            <span *ngFor="let _skill of _rrf.SkillsRequired ">
                                             {{_skill.Value}}    
                                             </span>
-                                        <br>Date of Joining : {{_rrf.ExpDateOfJoining}}
-                                        <br>Min.EXP : {{_rrf.MinExp}}
-                                    </td>
-                                    <td>{{_rrf.Priority.Value}}</td>
-                                    <td>
-                                        <button class="btn btn-sm green btn-outline filter-submit margin-bottom" (click)='showSlots(_rrf.RRFID,_rrf.RRFCODE)'>
+                                            <br>Date of Joining : {{_rrf.ExpDateOfJoining}}
+                                            <br>Min.EXP : {{_rrf.MinExp}}
+                                        </td>
+                                        <td>{{_rrf.Priority.Value}}</td>
+                                        <td>
+                                            <button class="btn btn-sm green btn-outline filter-submit margin-bottom" (click)='showSlots(_rrf.RRFID,_rrf.RRFCODE)'>
                                             Show Slots</button>
-                                    </td>
-                                </tr>
-                                <!-- /ng code-->
-                            </tbody>
-                        </table>
+                                        </td>
+                                    </tr>
+                                    <!-- /ng code-->
+                                </tbody>
+                            </table>
+                            <span style="margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Records Found</span>
+                        </div>
                     </div>
                 </div>
                 <!-- END EXAMPLE TABLE PORTLET-->

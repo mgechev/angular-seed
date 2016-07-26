@@ -163,57 +163,60 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
-                            <thead>
-                                <tr>
-                                    <th> Name </th>
-                                    <th> Contact No. </th>
-                                    <th> RRF Code </th>
-                                    <th> Interview Mode </th>
-                                    <th> Interview Time </th>
-                                    <th> Status </th>
-                                    <th> Actions </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- NgBinding-->
-                                <tr class="gradeX" *ngFor="let _myInterview of InterviewInformation ">
-                                    <td> {{_myInterview.CandidatePrimaryDetails.FullName}}
-                                    </td>
-                                    <td class="center"> {{_myInterview.CandidatePrimaryDetails.Contact}} </td>
-                                    <td>
-                                        <a href="mailto:shuxer@gmail.com"> {{_myInterview.RRFCODE}} </a>
-                                    </td>
-                                    <td> {{_myInterview.InterviewMode.Value}} </td>
-                                    <td class="center"> {{_myInterview.InterviewDate}} on {{_myInterview.InterviewFromTime}} </td>
-                                    <td>
-                                        <span class="label label-sm label-success"> {{_myInterview.Status}} </span>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+                        <div class="table-scrollable">
+                            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+                                <thead style="border-bottom:solid 1px rgb(231, 236, 241) !important;">
+                                    <tr>
+                                        <th> Name </th>
+                                        <th> Contact No. </th>
+                                        <th> RRF Code </th>
+                                        <th> Interview Mode </th>
+                                        <th> Interview Time </th>
+                                        <th> Status </th>
+                                        <th> Actions </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- NgBinding-->
+                                    <tr class="gradeX" *ngFor="let _myInterview of InterviewInformation ">
+                                        <td> {{_myInterview.CandidatePrimaryDetails.FullName}}
+                                        </td>
+                                        <td class="center"> {{_myInterview.CandidatePrimaryDetails.Contact}} </td>
+                                        <td>
+                                            <a href="mailto:shuxer@gmail.com"> {{_myInterview.RRFCODE}} </a>
+                                        </td>
+                                        <td> {{_myInterview.InterviewMode.Value}} </td>
+                                        <td class="center"> {{_myInterview.InterviewDate}} on {{_myInterview.InterviewFromTime}} </td>
+                                        <td>
+                                            <span class="label label-sm label-success"> {{_myInterview.Status}} </span>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
                                                             <i class="fa fa-angle-down"></i>
                                                         </button>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li>
-                                                    <a href="javascript:;">
-                                                        <i class="icon-download"></i> Download Resume </a>
-                                                </li>
-                                                <li>
-                                                    <a (click)='showIEF(_myInterview.RRFID, _myInterview.CandidateID, _myInterview.DisplayCandidateInfo, _myInterview.InterviewType, _myInterview.InterviewID)'>
-                                                        <i class="icon-tag"></i> Submit IEF
-                                                    </a>
-                                                </li>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li>
+                                                        <a href="javascript:;">
+                                                            <i class="icon-download"></i> Download Resume </a>
+                                                    </li>
+                                                    <li>
+                                                        <a (click)='showIEF(_myInterview.RRFID, _myInterview.CandidateID, _myInterview.DisplayCandidateInfo, _myInterview.InterviewType, _myInterview.InterviewID)'>
+                                                            <i class="icon-tag"></i> Submit IEF
+                                                        </a>
+                                                    </li>
 
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <!-- /NgBinding-->
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <!-- /NgBinding-->
 
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                            <span style="margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Records Found</span>
+                        </div>
                     </div>
                 </div>
                 <!-- /MY SCHEDULE INTERVIEWS-->
@@ -229,8 +232,8 @@
                     </div>
                     <div class="portlet-body">
                         <div style=" text-align-last: center;">
-                            <full-calendar [resources]="InterviewerCalendarDetails.Resources" (onEventRender)="showDetails($event)" [events]="InterviewerCalendarDetails.Events" [header]="header"
-                                defaultDate="2016-07-12" [eventLimit]="4" [editable]="true">
+                            <full-calendar [resources]="InterviewerCalendarDetails.Resources" (onEventRender)="showDetails($event)" [events]="InterviewerCalendarDetails.Events"
+                                [header]="header" defaultDate="2016-07-12" [eventLimit]="4" [editable]="true">
                             </full-calendar>
                         </div>
                     </div>
