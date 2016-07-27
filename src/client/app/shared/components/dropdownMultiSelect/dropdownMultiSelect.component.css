@@ -1,0 +1,28 @@
+.selected{
+	border:solid #4CAF50 1px;
+	float:left; 
+	margin:2px;
+	padding:2px 15px;
+}
+.selected a{
+	cursor:pointer;
+	font-weight:bold;
+    
+}
+.dropdownWidth{
+  width: 100%;
+  margin-left: 0px;
+}
+.selctedItem{
+  margin-top: -15px;
+}
+.notReadonlyClass{
+      width: 100%;
+  margin-left: 0px;
+}
+.readonlyClass{
+      width: 100%;
+  margin-left: 0px;
+  pointer-events: none;
+}
+

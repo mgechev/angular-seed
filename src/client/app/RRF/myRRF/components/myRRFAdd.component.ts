@@ -8,6 +8,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult, RRFPriority } from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
+import { DropdownMultiSelectComponent } from '../../../shared/components/dropdownMultiSelect/dropdownMultiSelect.component';
 
 //MultipleDrodown
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass} from '@angular/common';
@@ -18,7 +19,8 @@ import {BUTTON_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
     moduleId: module.id,
     selector: 'rrf-myrrf-add',
     templateUrl: 'myRRFAdd.component.html',
-    directives: [ROUTER_DIRECTIVES, SELECT_DIRECTIVES, NgClass, CORE_DIRECTIVES, FORM_DIRECTIVES, BUTTON_DIRECTIVES, TOOLTIP_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, SELECT_DIRECTIVES, NgClass, CORE_DIRECTIVES, FORM_DIRECTIVES,
+    BUTTON_DIRECTIVES, TOOLTIP_DIRECTIVES,DropdownMultiSelectComponent],
     providers: [ToastsManager]
 })
 
@@ -108,7 +110,11 @@ export class MyRRFAddComponent implements OnActivate {
 
     raiseRRF(): void {
         if(this.newRRF.Panel.length == 0){
-            this.toastr.error("Please select interview panel Details");
+            this.toastr.error('Please select interview panel Details');
+            return ;
+        }
+         if(this.newRRF.SkillsRequired.length == 0){
+            this.toastr.error('Please select Required skills');
             return ;
         }
         if (this.isNewRRF) {
@@ -297,22 +303,22 @@ export class MyRRFAddComponent implements OnActivate {
     }
 
     setSkillDropdown() {
-        var panelId: string[] = new Array();
-        for (var index = 0; index < this.newRRF.SkillsRequired.length; index++) {
-            panelId.push((this.newRRF.SkillsRequired[index].Id).toString());
-        }
-        $('#cmbSkillsReq').select2('val', panelId);
+        // var panelId: string[] = new Array();
+        // for (var index = 0; index < this.newRRF.SkillsRequired.length; index++) {
+        //     panelId.push((this.newRRF.SkillsRequired[index].Id).toString());
+        // }
+        // $('#cmbSkillsReq').select2('val', panelId);
     }
 
     setSkillToObject() {
 
-        if ($('#cmbSkillsReq').val() !== null) {
-            var selectedSkill: number[] = $('#cmbSkillsReq').val();
-        }
-        this.newRRF.SkillsRequired = new Array();
-        for (var j = 0; j < selectedSkill.length; j++) {
-            this.newRRF.SkillsRequired.push(this.getStringValue(selectedSkill[j], this.skills));
-        }
+        // if ($('#cmbSkillsReq').val() !== null) {
+        //     var selectedSkill: number[] = $('#cmbSkillsReq').val();
+        // }
+        // this.newRRF.SkillsRequired = new Array();
+        // for (var j = 0; j < selectedSkill.length; j++) {
+        //     this.newRRF.SkillsRequired.push(this.getStringValue(selectedSkill[j], this.skills));
+        // }
     }
 
     onUpdateClick() {
