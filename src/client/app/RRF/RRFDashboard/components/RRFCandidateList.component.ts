@@ -168,8 +168,8 @@ export class RRFCandidateListComponent implements OnActivate {
     onReScheduleInterviewClick(Candidate: RRFSpecificCandidateList) {
         sessionStorage.setItem('RRFID', JSON.stringify(this.RRFID));
         sessionStorage.setItem('Candidate', JSON.stringify(Candidate));
-        this._router.navigate(['/App/Recruitment Cycle/Schedule/'+
-        Candidate.InterviewDetails.InterviewID.Value+'ID'+Candidate.InterviewDetails.InterviewID.Id]);
+        this._router.navigate(['/App/Recruitment Cycle/Schedule/' +
+            Candidate.InterviewDetails.InterviewID.Value + 'ID' + Candidate.InterviewDetails.InterviewID.Id]);
     }
 
     CheckInterviewStatus(CandidateDetails: Array<RRFSpecificCandidateList>) {
@@ -207,5 +207,19 @@ export class RRFCandidateListComponent implements OnActivate {
         if (day.length < 2) day = '0' + day;
 
         return [day, month, year].join('-');
+    }
+
+    isOfferGenerationVisible(lastInterviewRound: string) {
+        if (lastInterviewRound.includes('hr')) {
+            return false;
+        } else { return true; }
+    }
+
+    canCancelInterview(status: string) {
+        if (status.toLowerCase() === 'scheduled' || status.toLowerCase() === 're-scheduled' ||
+            status.toLowerCase() === 'awaiting approval') {
+            return false;
+        } else { return true; }
+
     }
 }

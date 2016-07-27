@@ -86,7 +86,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         this.ScheduleInterView.CandidateID = JSON.parse(sessionStorage.getItem('Candidate')).CandidateID;
         this.ScheduleInterView.CandidateStatus = JSON.parse(sessionStorage.getItem('Candidate')).Status;
 
-        //this.ScheduleInterView.CandidateStatus.Value = 'Rejected';
+        this.ScheduleInterView.CandidateStatus.Value = 'Rejected';
         if (this.ScheduleInterView.CandidateStatus.Value !== null &&
             this.ScheduleInterView.CandidateStatus.Value.toLowerCase() === 'rejected') {
             this.isRejectedCandidate = this.ifInvalidInterview = true;
@@ -244,7 +244,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     }
 
     getNominatedInterviewersByRound(RoundId: string) {
-        if (this.roundTobeScheduled.Id === parseInt(RoundId)) {
+        if (this.roundTobeScheduled.Id === undefined || this.roundTobeScheduled.Id === parseInt(RoundId)) {
             //Enable Schedule Button
             this.ifInterviewScheduled = false;
             this.ifInvalidInterview = false;
@@ -267,9 +267,12 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                 let cmb: any = $('#cmbInterviewers');
                 cmb.select2();
             }
-        } else {
+        }else if(this.ScheduleInterView.CandidateStatus.Value.toLowerCase() !== 'rejected') {
             let modl: any = $('#skippingRound');
             modl.modal({ 'backdrop': 'static' });
+        } else {
+            this.toastr.warning('You can not schdule interview  of rejected candidate by skipping round');
+            this.ScheduleInterView.Round = new MasterData();
         }
     }
 
@@ -309,6 +312,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         }
         return this.SelectedInterviewers;
     }
+
     //Shows Tooltip on calendar
     showDetails(e: any) {
         var StartTime = e.event.start.format();

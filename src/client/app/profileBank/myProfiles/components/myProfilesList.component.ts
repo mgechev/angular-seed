@@ -392,6 +392,7 @@ export class MyProfilesListComponent implements OnActivate {
                         //Add to selectedCandidates array
                         this.Candidate.CandidateID = this.myProfilesList.Profiles[index].CandidateID;
                         this.Candidate.Candidate = this.myProfilesList.Profiles[index].Candidate;
+                        this.Candidate.Status = this.myProfilesList.Profiles[index].Status;
                         this.selectedCandidates.push(this.Candidate);
                         this.Candidate = new Candidate();
                     } else { chkRRFAssigned = true; break; }
@@ -420,13 +421,14 @@ export class MyProfilesListComponent implements OnActivate {
         let selectedCandidate: CandidateProfile = this.myProfilesList.Profiles[index];
 
         if (selectedCandidate.isRRFAssigned) {
-            this._router.navigate(['/App/Recruitment Cycle/Schedule']);
+            this._router.navigate(['/App/Recruitment Cycle/Schedule/New']);
         } else {
             if (selectedCandidate.Status.Value.toLowerCase() === 'open' ||
                 selectedCandidate.Status.Value.toLowerCase() === 'rejected') {
                 this.Candidate = new Candidate();
                 this.Candidate.CandidateID = this.myProfilesList.Profiles[index].CandidateID;
                 this.Candidate.Candidate = this.myProfilesList.Profiles[index].Candidate;
+                this.Candidate.Status = this.myProfilesList.Profiles[index].Status;
                 this.selectedCandidates.push(this.Candidate);
             } else {
                 chkStatus = true;

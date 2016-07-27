@@ -70,6 +70,10 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
 
     Back() {
         sessionStorage.removeItem('CandidateIDs');
+        if (this.returnPath.toLowerCase().includes('schedule')) {
+            sessionStorage.setItem('RRFID', JSON.stringify(this.selectedRRF.RRFID));
+            sessionStorage.setItem('Candidate', JSON.stringify(this.CandidateAssigment.Candidates[0]));
+        }
         if (this.returnPath !== undefined)
             this._router.navigate([this.returnPath]);
     }
@@ -96,9 +100,8 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
 
     onAssignRRF() {
         sessionStorage.removeItem('CandidateIDs');
-        //TODO :  Call AssignRRF() to post Data 
-         this.CandidateAssigment.RRFID =this.selectedRRF.RRFID;
-
+        this.CandidateAssigment.RRFID = this.selectedRRF.RRFID;
+        if(this.CandidateAssigment.Candidates.length >0) {
         this._assignRRFService.assignRRFToCandidates(this.CandidateAssigment)
             .subscribe(
             results => {
@@ -113,5 +116,9 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
                 this.errorMessage = <any>error;
                 this.toastr.error(<any>error);
             });
+        } else {
+            this.toastr.error('No Candidates Selected');
+        }
+
     }
 }

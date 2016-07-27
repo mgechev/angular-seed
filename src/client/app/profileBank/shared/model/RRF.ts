@@ -12,4 +12,5 @@ export class AssignRRFDetails {
 export class Candidate {
     public CandidateID: MasterData = new MasterData();
     public Candidate: string;
+    public Status:MasterData = new MasterData();
 }

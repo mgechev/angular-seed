@@ -24,3 +24,9 @@
 .thead{
   border-bottom:solid 1px rgb(231, 236, 241) !important;
 }
+.btnLink {
+  text-align: left !important;
+  width: 100%;
+  border: white !important;
+  color: #888888;
+}
