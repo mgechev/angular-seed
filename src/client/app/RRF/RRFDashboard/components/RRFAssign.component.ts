@@ -9,13 +9,14 @@ import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult, RRFAssignStatus } from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
+import {RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
 
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-assign',
     templateUrl: 'RRFAssign.component.html',
-    directives: [ROUTER_DIRECTIVES, DATEPICKER_DIRECTIVES, SELECT_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, DATEPICKER_DIRECTIVES, SELECT_DIRECTIVES,RRFGridRowComponent],
     styleUrls: ['../../shared/css/RRF.component.css'],
     providers: [ToastsManager]
 })

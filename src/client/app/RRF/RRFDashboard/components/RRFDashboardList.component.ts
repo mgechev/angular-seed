@@ -12,13 +12,13 @@ import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.direc
 import { MastersService } from '../../../shared/services/masters.service';
 import {RRFPipe } from '../../shared/Filters/RRFFilter.component';
 import {ViewRRFComponent} from '../../shared/components/viewRRF/viewRRF.component';
-
+import {RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-dashboard-list',
     templateUrl: 'RRFDashboardList.component.html',
-    directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES, IfAuthorizeDirective, ViewRRFComponent],
+    directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES, IfAuthorizeDirective, ViewRRFComponent, RRFGridRowComponent],
     styleUrls: ['../../shared/css/RRF.component.css'],
     pipes: [RRFIDPipe, RRFPipe],
     providers: [ToastsManager]
@@ -50,12 +50,15 @@ export class RRFDashboardListComponent implements OnActivate {
         animation: false,
         responsive: true,
         legend: {
-            onClick: function (event: any, legendItem: any) {
+            onClick: function(event: any, legendItem: any) {
                 //console.log("legend click");
             }
         }
     };
     NORECORDSFOUND: boolean = false;
+    displayApproval: boolean = false;
+    displayAssignedTo: boolean = false;
+
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService, private _router: Router,
         public toastr: ToastsManager,
@@ -244,6 +247,25 @@ export class RRFDashboardListComponent implements OnActivate {
             // this.setDefaultValueToRecrCmb();
             this.getAssignedRRFData();
         }
+        
+        this.setVisibilityOFColumn();
+    }
+
+    setVisibilityOFColumn() {
+        if (this.currentView === 'allRRF') {
+            this.displayApproval = false;
+            this.displayAssignedTo = false;
+        } else if (this.currentView === 'myRRF') {
+            this.displayApproval = false;
+            this.displayAssignedTo = false;
+        } else if (this.currentView === 'unAssignRRF') {
+            this.displayApproval = false;
+            this.displayAssignedTo = false;
+
+        } else {
+            this.displayApproval = false;
+            this.displayAssignedTo = true;
+        }
     }
 
     onViewChanged(viewMode: string) {
@@ -268,6 +290,8 @@ export class RRFDashboardListComponent implements OnActivate {
             this.setDefaultValueToRecrCmb();
             this.getAssignedRRFData();
         }
+        
+        this.setVisibilityOFColumn();
     }
 
     onEditRRF(rrfID: number) {

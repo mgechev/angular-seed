@@ -7,12 +7,13 @@ import { APIResult } from  '../../../shared/constantValue/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { ResponseFromAPI, GrdOptions } from '../../../shared/model/common.model';
 import {RRFPipe } from '../../shared/Filters/RRFFilter.component';
+import {RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-approval-list',
     templateUrl: 'RRFApprovalList.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES,RRFGridRowComponent],
     styleUrls: ['../../shared/css/RRF.component.css'],
     providers: [ToastsManager],
     pipes: [RRFPipe],

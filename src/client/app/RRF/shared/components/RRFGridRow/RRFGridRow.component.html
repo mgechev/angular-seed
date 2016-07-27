@@ -1,0 +1,89 @@
+<div align="left">
+    <div class="rowHeader">
+        <b>RRF Code</b> :{{RRFData.RRFCODE }} &nbsp;
+        <b>Raised By</b> :{{RRFData.RaisedBy.Value }} &nbsp;
+        <b>Raised On</b>: {{RRFData.CreatedDate}} &nbsp;&nbsp;&nbsp;
+        <b>Priority</b> : <span class="mt-action-dot {{getPriorityClass(RRFData.Priority.Id)}} "></span>{{RRFData.Priority.Value}}
+        &nbsp;
+        <b>Status</b> :<span class="mt-action-dot {{getStatusClass(RRFData.Status.Id)}} "></span>{{RRFData.Status.Value}}
+        &nbsp;
+        <b>Open for no. of days</b> : {{RRFData.OpenForNumberOfDays}}
+
+    </div>
+    <hr style="margin: 9px 0;margin-right: 10px;">
+    <!--<br>-->
+
+    <div class="row">
+
+        <div class="col-lg-3">
+            Practice : {{RRFData.Practice.Value }}
+            <br>Techonoly : {{RRFData.Technology.Value }}
+        </div>
+        <div class="col-lg-3">
+            Position : {{RRFData.PositionTitle}}
+            <br>Designation :{{RRFData.Designation.Value }}
+        </div>
+        <div class="col-lg-3">
+            Openings :{{RRFData.NoOfOpenings}}
+            <br>Date of Joining : {{RRFData.ExpDateOfJoining }}
+        </div>
+        <div class="col-lg-3">
+            Min.EXP : {{RRFData.MinExp }}
+            <br>Max.EXP : {{RRFData.MaxExp }}
+        </div>
+    </div>
+
+    <br>
+
+    <div>
+        Skills:
+        <label *ngFor="let skill of RRFData.SkillsRequired ">{{skill.Value}} &#44;&nbsp;</label>
+    </div>
+    
+    <br>
+
+    <div class="row">
+        <!--<div>-->
+        <!--<b style="margin-left: 15px;">Job Description</b>: {{RRFData.Description}}-->
+        <label style="margin-left: 15px;">Job Description: {{RRFData.Description}}</label>
+        <!--</div>-->
+        <div>
+            <div class="col-lg-6">
+                Preferred Skills :{{RRFData.PreferredSkills}}
+                <br> Competencies :{{RRFData.Competencies}}
+            </div>
+            <div class="col-lg-6">
+                Good to Have :{{RRFData.GoodToHave}}
+                <br> Qualification/ Certifications required :{{RRFData.QualCertRquired}}
+            </div>
+        </div>
+    </div>
+
+    <br *ngIf='displayApproval'>
+
+    <!--<div [ifAuthorize]="['RRF.APPROVERCOLUMNVISIBILITY.MANAGE']"  *ngIf='displayApproval'>-->
+    <div *ngIf='displayApproval'>
+        <div *ngIf='displayApproval'>
+            <div>
+                RRF Approver:
+            </div>
+            <label *ngFor="let Approvaldetails of RRFData.RRFApproval"> {{Approvaldetails.Approver.Value}} :{{Approvaldetails.Status}}&nbsp;</label>
+        </div>
+    </div>
+
+    <br *ngIf='displayAssignedTo'>
+
+    <div *ngIf='displayAssignedTo'>
+        <div>
+            Assigned To:
+        </div>
+        <div *ngFor="let AssignedDatadetails of RRFData.AssignedData">
+            <div *ngIf="AssignedDatadetails.Status.Id == AssignStatus.Assigned">
+                {{AssignedDatadetails.AssignedTo.Value}}
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

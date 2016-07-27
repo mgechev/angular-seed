@@ -86,4 +86,7 @@ Closed 5*/
 .wraptext {
   word-wrap: break-word;
 }
+.rowHeader{
+font-size: 13px
+}
 
