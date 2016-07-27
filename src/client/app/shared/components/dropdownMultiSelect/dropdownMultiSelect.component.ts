@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, ElementRef, Input } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { MasterData} from '../../model/common.model';
+import {MastersService } from '../../services/masters.service';
 
 @Component({
     moduleId: module.id,
@@ -8,9 +9,10 @@ import { MasterData} from '../../model/common.model';
     templateUrl: 'dropdownMultiSelect.component.html',
     directives: [ROUTER_DIRECTIVES],
     styleUrls: ['dropdownMultiSelect.component.css'],
+    providers: [MastersService]
 })
 
-export class DropdownMultiSelectComponent implements AfterViewInit{
+export class DropdownMultiSelectComponent implements AfterViewInit {
     @Input() placeholder: string = ''; //Place holder
     @Input() dataToBind: MasterData[] = []; //Data to bind to dropdown
     @Input() selected: MasterData[] = [];  //List of selected value
@@ -23,8 +25,10 @@ export class DropdownMultiSelectComponent implements AfterViewInit{
     // public selected: any[] = [];
     public dropDownValue: number = 0;
     public isAddButtunDisable: boolean = true;
+    public errorMessage: string = '';
 
-    constructor(myElement: ElementRef) {
+    constructor(myElement: ElementRef,
+        private _mastersService: MastersService) {
         this.elementRef = myElement;
     }
 
@@ -75,11 +79,17 @@ export class DropdownMultiSelectComponent implements AfterViewInit{
 
 
     AddValue() {
-        //TODO
-        // this.selected.push(this.query);
-        // this.countries.push(this.query);
+        this._mastersService.addSkillToMaster(this.query)
+            .subscribe(
+            results => {
+                this.selected.push(<MasterData>results);
+                this.dataToBind.push(<MasterData>results);
+                this.query = '';
+                this.filteredList = [];
+                 this.isAddButtunDisable = true;
+            },
+            error => this.errorMessage = <any>error);
+             this.isAddButtunDisable = true;
     }
-
-
 
 }

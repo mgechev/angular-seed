@@ -3,13 +3,15 @@ import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from './authHttp.service';
 import { Config } from '../config/config';
+import { SpinnerService } from '../components/spinner/spinner';
 
 @Injectable()
 
 export class MastersService {
 
-    constructor(private authHttp: AuthHttp) { }
-
+    constructor(private authHttp: AuthHttp,
+    private _spinnerService: SpinnerService) { }
+   
     GetDesignations() {
         let authenticateUrl = Config.GetURL('/api/Masters/GetDesignations');
         return this.authHttp.get(authenticateUrl)
@@ -151,6 +153,15 @@ export class MastersService {
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);
+    }
+
+    addSkillToMaster(skill: string) {
+        let url = Config.GetURL('/api/Masters/AddSkills');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { 'Skill' : skill})
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     private extractData(res: Response) {
