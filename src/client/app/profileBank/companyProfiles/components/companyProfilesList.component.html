@@ -36,13 +36,15 @@
                                         </li>
                                         <li class="divider" [ifAuthorize]="['PROFILEBANK.TRANSFEROWNERSHIP.MANAGE']"> </li>
                                         <li>
-                                            <button class="btn btn-default btnLink" [ifAuthorize]="['PROFILEBANK.TRANSFEROWNERSHIP.MANAGE']"  [disabled]='!selectedRowCount' (click)='transferOwnerShipClick()'>
+                                            <button class="btn btn-default btnLink" [ifAuthorize]="['PROFILEBANK.TRANSFEROWNERSHIP.MANAGE']" [disabled]='!selectedRowCount'
+                                                (click)='transferOwnerShipClick()'>
                                                 <i class="fa fa-share"></i>     Transfer Ownership
                                             </button>
                                         </li>
                                         <li class="divider" [ifAuthorize]="['RC.CANDIDATEASSIGNRRF.MANAGE']"> </li>
                                         <li>
-                                            <button class="btn btn-default btnLink" [ifAuthorize]="[ 'RC.CANDIDATEASSIGNRRF.MANAGE']" [disabled]='!selectedRowCount' (click)='AssignRRFClick()'>
+                                            <button class="btn btn-default btnLink" [ifAuthorize]="[ 'RC.CANDIDATEASSIGNRRF.MANAGE']" [disabled]='!selectedRowCount'
+                                                (click)='AssignRRFClick()'>
                                                 <i class="fa fa-check-square-o"></i> Assign RRF
                                             </button>
                                         </li>
@@ -55,7 +57,7 @@
                     <div class="portlet-body">
                         <div class="table-toolbar">
                             <!--Hide Pagination / sorting / filtering if No records found-->
-                             <div class="row" *ngIf="!NORECORDSFOUND">
+                            <div class="row" *ngIf="!NORECORDSFOUND">
                                 <div class="col-md-3 col-sm-3">
                                     <div class="dataTables_length" id="sample_1_length">
                                         <label>Show :
@@ -79,7 +81,7 @@
                                             </select>
                                         </label>
                                 </div>
-                                 <div class="col-md-3 col-sm-3">
+                                <div class="col-md-3 col-sm-3">
                                     <label>Order By  
                                             <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
                                              [(ngModel)]="companyProfilesList.GrdOperations.Order"  
@@ -89,7 +91,7 @@
                                             </select> 
                                             </label>
                                 </div>
-                                 <div class="col-md-3 col-sm-4">
+                                <div class="col-md-3 col-sm-4">
                                     <div id="sample_1_filter" class="dataTables_filter">
                                         <label>Search 
                                             <input type="search" class="form-control input-sm input-small input-inline " [(ngModel)] = "searchString"
@@ -219,14 +221,23 @@
                                                                 <i class="fa fa-search"></i> View Profile
                                                             </a>
                                                         </li>
+                                                        <!-- TODO:: update Delete Permission once recive from backend -->
+                                                        <li [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] ">
+                                                            <a (click)='deleteCandidate(profile.CandidateID)' [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] ">
+                                                                <i class="fa fa-remove"></i>Delete Profile</a>
+                                                        </li>
+                                                        <li>
+                                                            <a (click)='getCandidateHistory(profile.CandidateID)'>
+                                                                <i class="fa fa-history"></i>View Interview History</a>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                
-                                 <span style = "margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Candidates Found</span>
+
+                                <span style="margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Candidates Found</span>
                             </div>
                             <div class="row" *ngIf="!NORECORDSFOUND">
                                 <div class="col-md-10">

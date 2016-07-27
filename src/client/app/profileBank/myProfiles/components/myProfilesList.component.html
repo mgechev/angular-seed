@@ -38,7 +38,8 @@
                                         </li>
                                         <li class="divider"> </li>
                                         <li>
-                                            <button class="btn btn-default btnLink" [ifAuthorize]="[ 'RC.CANDIDATEASSIGNRRF.MANAGE'] " [disabled]='!selectedRowCount' (click)='AssignRRFClick()' >
+                                            <button class="btn btn-default btnLink" [ifAuthorize]="[ 'RC.CANDIDATEASSIGNRRF.MANAGE'] " [disabled]='!selectedRowCount'
+                                                (click)='AssignRRFClick()'>
                                                 <i class="fa fa-check-square-o"></i> Assign RRF
                                             </button>
                                         </li>
@@ -263,7 +264,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md-3 col-sm-3">
                                     <label>Sort By
                                             <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
@@ -394,13 +395,22 @@
                                                             <i class="fa fa-search"></i> View Profile
                                                         </a>
                                                     </li>
+                                                    <!-- TODO:: update Delete Permission once recive from backend -->
+                                                    <li [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] ">
+                                                        <a (click)='deleteCandidate(profile.CandidateID)' [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] ">
+                                                            <i class="fa fa-remove"></i>Delete Profile</a>
+                                                    </li>
+                                                    <li>
+                                                        <a (click)='getCandidateHistory(profile.CandidateID)'>
+                                                            <i class="fa fa-history"></i>View Interview History</a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                             <span style = "margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Candidates Found</span>
+                            <span style="margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Candidates Found</span>
                         </div>
                         <!--  My Profile Grid  END-->
                         <!--  My Profile pagination Start-->

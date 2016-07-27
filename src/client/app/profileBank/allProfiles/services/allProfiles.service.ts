@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { GrdOptions } from  '../../../shared/model/index';
-
+import { MasterData, GrdOptions } from  '../../../shared/model/index';
 //import { TransferOwnershipMeta} from '../../shared/model/myProfilesInfo';
 //import { GridOperations} from '../../shared/model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
@@ -18,7 +17,7 @@ export class AllProfilesService {
     getAllProfiles(grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/ProfileBank/getAllProfiles');
         this._spinnerService.show();
-        return this.authHttp.post(url,{grdOptions})
+        return this.authHttp.post(url, { grdOptions })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

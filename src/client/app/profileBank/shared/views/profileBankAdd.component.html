@@ -23,7 +23,7 @@
                 <!-- BEGIN PROFILE CONTENT -->
                 <div class="profile-content">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-14">
                             <div class="portlet light bordered">
                                 <div class="portlet-title tabbable-line">
                                     <div class="caption caption-md">
@@ -43,6 +43,9 @@
                                             <a href="#tab_1_7" data-toggle="tab">Professional Info</a>
                                         </li>
                                         <li>
+                                            <a href="#tab_1_8" data-toggle="tab">Employer Info</a>
+                                        </li>
+                                        <li>
                                             <a href="#tab_1_5" data-toggle="tab">Salary Details</a>
                                         </li>
                                         <li>
@@ -56,7 +59,7 @@
                                         </li>
 
                                         <li>
-                                            <a href="#tab_1_6" data-toggle="tab">Team Management</a>
+                                            <a href="#tab_1_6" data-toggle="tab">Team Mgt</a>
                                         </li>
 
                                     </ul>
@@ -197,10 +200,32 @@
                                                 </div>
                                             </form>
                                         </div>
+
                                         <!-- END PRIMARY INFO TAB -->
                                         <!-- PERSONAL INFO TAB -->
                                         <div class="tab-pane" id="tab_1_1">
+
                                             <form role="form" (submit)="onSavePersonalDetails()">
+                                                <!-- Profile Picture Option -->
+                                                <div class="col-md-3 col-md-3 portlet light profile-sidebar-portlet bordered">
+                                                    <!-- SIDEBAR USERPIC -->
+                                                    <div class="profile-userpic">
+                                                        <!--[src]="profilePhoto"-->
+                                                        <img src="../assets/layouts/layout4/img/default-user.jpg" class="img-responsive" style="border-radius: 50% !important;" alt="">
+                                                    </div>
+                                                    <!-- END SIDEBAR USERPIC -->
+                                                    <!-- SIDEBAR BUTTONS -->
+                                                    <div class="profile-userbuttons">
+                                                        <!--<button type="button" (click)="uploadPhoto(profile.CandidateID)" class="btn btn-circle green btn-sm">Upload Photo</button>-->
+                                                        <div class="fileUpload btn btn-circle green btn-sm" data-toggle="tooltip" data-placement="top" title="Upload Photo">
+                                                            <input type="file" class="upload" (change)="uploadPhoto($event)" /><span>Upload</span>
+                                                        </div>
+                                                        <button type="button" (click)="removePhoto(profile.CandidateID)" class="btn btn-circle red btn-sm">Remove</button>
+                                                        <br/>
+                                                    </div>
+                                                    <!-- END SIDEBAR BUTTONS -->
+                                                </div>
+                                                <!-- END Profile Picture Option -->
                                                 <div class=row>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
@@ -223,6 +248,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <br>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Last Name<span class="required"> * </span></label>
@@ -244,6 +270,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <div class=row>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
@@ -1054,6 +1081,73 @@
                                             </div>
                                         </div>
                                         <!-- END OTHER INFO TAB -->
+                                        <!-- Employer Information -->
+                                        <div class="tab-pane" id="tab_1_8">
+                                            <form role="form" (submit)="onSaveTeamManagementDetails()">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label class="control-label">	 Information</label>
+                                                            <div class="mt-checkbox-inline ">
+                                                                <label class="mt-checkbox  mt-checkbox-outline">
+                                                        <input type="checkbox" id="chkTeamManagement" [(ngModel)]="profile.CandidateTeamManagement.TeamMgmt"> <!--TeamMgmt-->
+                                                        <span></span>
+                                                    </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+
+                                                            <label class="control-label">No Of Team Members Testingnngngngng</label>
+                                                            <div class="row">
+                                                                <div class="col-md-8">
+                                                                    <input type="number" placeholder="0" class="form-control" min="0" [(ngModel)]="profile.CandidateTeamManagement.NoofTeamMembers"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Team Handling Experience</label>
+                                                            <textarea class="form-control" rows="1" placeholder="Add Team Handling Experience<" style="resize:vertical" [(ngModel)]="profile.CandidateTeamManagement.TeamHandlingExperience"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Team Members Designations</label>
+                                                            <textarea class="form-control" rows="1" placeholder=" Add Team Members Designations" style="resize:vertical" [(ngModel)]="profile.CandidateTeamManagement.TeamMembersDesignations"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Team Handling Challenges</label>
+                                                            <textarea class="form-control" rows="2" placeholder="Add Team Handling Challenges" style="resize:vertical" [(ngModel)]="profile.CandidateTeamManagement.TeamHandlingChallenges"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Follow Up Comments</label>
+                                                            <textarea class="form-control" rows="2" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
+                                                                tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                tooltipEnable="!profile.FollowUpComments">
+                                                                    </textarea>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="margiv-top-10">
+                                                    <button type="submit" class="btn green"> Save Changes </button>
+                                                    <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- /Employer Information->
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -1062,10 +1156,10 @@
 
                 </div>
                 <!-- END PROFILE CONTENT -->
-            </div>
-        </div>
-        <!-- END PAGE BASE CONTENT -->
-    </div>
-    <!-- END CONTENT BODY -->
-</div>
-<!-- END CONTENT -->
+                                    </div>
+                                </div>
+                                <!-- END PAGE BASE CONTENT -->
+                            </div>
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->

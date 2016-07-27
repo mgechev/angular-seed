@@ -84,9 +84,9 @@ export class AllProfilesListComponent implements OnActivate {
             this._allProfilesService.getAllProfiles(this.allProfilesList.GrdOperations)
                 .subscribe(
                 (results: any) => {
-                 if (results.Profiles !== undefined && results.Profiles.length > 0) {
+                    if (results.Profiles !== undefined && results.Profiles.length > 0) {
                         this.allProfilesList = <AllCandidateProfiles>results;
-                   } else { this.NORECORDSFOUND = true; }
+                    } else { this.NORECORDSFOUND = true; }
                 },
                 error => this.errorMessage = <any>error);
         } catch (error) {
@@ -96,6 +96,21 @@ export class AllProfilesListComponent implements OnActivate {
     }
 
     redirectToView(CandidateID: MasterData) {
+        this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+    }
+    /** Delete Prfile will be available only to the Recruitment Head*/
+    deleteCandidate(CandidateID: MasterData) {
+        this._profileBankService.deleteProfile(CandidateID)
+            .subscribe(
+            (results: any) => {
+                this.profile.Comments = results.Comments;
+                this.profile.Status = results.Status;
+            },
+            error => this.toastr.error(<any>error));
+    }
+    /**Redirecting to candidate's all interview history page */
+    getCandidateHistory(CandidateID: MasterData) {
+        /** TODO:: Need to update navigation page URL */
         this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
 

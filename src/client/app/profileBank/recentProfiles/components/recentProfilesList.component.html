@@ -177,6 +177,15 @@
                                                                 <i class="fa fa-search"></i> View Profile
                                                             </a>
                                                         </li>
+                                                        <!-- TODO:: update Delete Permission once recive from backend -->
+                                                        <li [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] " >
+                                                            <a (click)='deleteCandidate(profile.CandidateID)' [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] " >
+                                                                <i class="fa fa-remove"></i>Delete Profile</a>
+                                                        </li>
+                                                        <li>
+                                                            <a (click)='getCandidateHistory(profile.CandidateID)'>
+                                                                <i class="fa fa-history"></i>View Interview History</a>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </td>

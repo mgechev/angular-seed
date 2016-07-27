@@ -81,7 +81,11 @@ export class BlackListedProfilesListComponent implements OnActivate {
                 this.errorMessage = <any>error;
             });
     }
-
+    /**Redirecting to candidate's all interview history page */
+    getCandidateHistory(CandidateID: MasterData) {
+        /** TODO:: Need to update navigation page URL */
+        this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+    }
     redirectToEditProfile(CandidateID: MasterData) {
         this._router.navigate(['/App/ProfileBank/BlackListedProfiles/Edit/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
@@ -95,7 +99,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
         var index = _.findIndex(this.blacklistedProfilesList.Profiles, { CandidateID: id });
         this.seletedCandidateID = this.blacklistedProfilesList.Profiles[index].CandidateID;
 
-        this.currentCandidate =this.blacklistedProfilesList.Profiles[index].Candidate;
+        this.currentCandidate = this.blacklistedProfilesList.Profiles[index].Candidate;
         this._profileBankService.getStatusById(id.Value)
             .subscribe(
             (results: any) => {

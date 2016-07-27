@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, BrowserXhr } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { CandidateProfile, SalaryDetails, Qualification, TeamManagement, CareerProfile,
+import { CandidateProfile, ResumeMeta, SalaryDetails, Qualification, TeamManagement, CareerProfile,
     OtherDetails, Skills, TransferOwnershipMeta} from '../model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
@@ -177,6 +177,7 @@ export class ProfileBankService {
             .finally(() => this._spinnerService.hide());
 
     }
+
     getResumeById(CandidateID: MasterData) {
         //  let url = Config.GetURL('/api/ProfileBank/GetResume?CandidateID='+CandidateID);
         // this._spinnerService.show();
@@ -211,6 +212,54 @@ export class ProfileBankService {
         //     }
         // }
 
+    }
+    uploadProfilePhoto(resumeMeta: ResumeMeta) {
+        console.log('Operaration sucessfull..! but API is pending to upload photo.');
+        /** TODO:: Update api URL Once API is ready (API is pending) */
+        let url = Config.GetURL('/api/ProfileBank/UploadCandidateProfile');
+        return new Promise((resolve, reject) => {
+            let formData: FormData = new FormData(),
+                xhr: XMLHttpRequest = new XMLHttpRequest();
+
+            formData.append('Profile', resumeMeta.Profile, resumeMeta.Profile.name);
+            formData.append('CandidateID', resumeMeta.CandidateID.Value);
+            formData.append('Overwrite', resumeMeta.Overwrite);
+
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        resolve(JSON.parse(xhr.response));
+                    } else {
+                        reject(xhr.response);
+                    }
+                }
+            };
+
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
+            xhr.send(formData);
+        });
+    }
+    /*** Remove Profile photo */
+    removeProfilePhoto(candidateID: MasterData) {
+        console.log('Operaration sucessfull..! but API is pending to remove photo.');
+        /** TODO:: Update api URL Once API is ready (API is pending) */
+        let url = Config.GetURL('/api/ProfileBank/');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { candidateID })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    deleteProfile(candidateID: MasterData) {
+        console.log('Operaration sucessfull..! but API is pending to delete profile.');
+        /** TODO:: Update api URL Once API is ready (API is pending) */
+        let url = Config.GetURL('/api/ProfileBankPaging/GetOpenProfiles');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { candidateID })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
     }
 
     getStatusById(CandidateID: string) {
