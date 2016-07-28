@@ -20,7 +20,7 @@ export class MyProfilesService {
                 xhr: XMLHttpRequest = new XMLHttpRequest();
 
             formData.append('Profile', resumeMeta.Profile, resumeMeta.Profile.name);
-            formData.append('CandidateID', resumeMeta.CandidateID.Value);
+            formData.append('CandidateID', resumeMeta.CandidateID.Id);
             formData.append('Overwrite', resumeMeta.Overwrite);
 
             xhr.onreadystatechange = () => {

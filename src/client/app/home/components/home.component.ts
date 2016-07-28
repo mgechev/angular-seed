@@ -27,6 +27,7 @@ import { SpinnerComponent, SpinnerService } from '../../shared/components/spinne
 import { InterviewrsComponent, RecruitmentInterviewerCalenderComponent } from '../../recruitmentCycle/interviewersTab/index';
 import {ScheduleInterviewComponent} from '../../recruitmentCycle/scheduleInterview/index';
 import {DashboardComponent} from '../../Dashboard/component/dashboard.component';
+import {ShowScheduleInterviewsComponent} from '../../recruitmentCycle/recruitersTab/components/interviews.component';
 
 @Component({
     moduleId: module.id,
@@ -59,6 +60,7 @@ import {DashboardComponent} from '../../Dashboard/component/dashboard.component'
     { path: '/Recruitment Cycle/Interviewers', component: InterviewrsComponent },
     { path: '/Recruitment Cycle/Schedule', component: ScheduleInterviewComponent },
     { path: '/Recruitment Cycle/mycalendar', component: RecruitmentInterviewerCalenderComponent },
+    { path: '/AllInterviews/ShowInterviews', component: ShowScheduleInterviewsComponent },
 
 ])
 export class HomeComponent implements OnInit {
@@ -66,7 +68,7 @@ export class HomeComponent implements OnInit {
         App.init();
         Layout.init();
         Demo.init();
-        
+
         if (propelClient) {
             //TODO : propelClient.subscribe() should be call when user clicks on enable notification
             propelClient.subscribe();

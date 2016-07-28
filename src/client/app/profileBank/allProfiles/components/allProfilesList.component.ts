@@ -7,7 +7,7 @@ import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
-import { MasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData, GrdOptions, ResponseFromAPI,SortingMasterData } from  '../../../shared/model/index';
 import { DataSharedService } from '../../shared/services/dataShared.service';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
@@ -46,6 +46,7 @@ export class AllProfilesListComponent implements OnActivate {
     grdOptions = new GrdOptions();
     public maxSize: number = 3;
     NORECORDSFOUND: boolean = false;
+    ColumnList : SortingMasterData = new SortingMasterData();
 
     constructor(private _allProfilesService: AllProfilesService,
 
@@ -59,6 +60,7 @@ export class AllProfilesListComponent implements OnActivate {
 
     routerOnActivate() {
         //this.setPaginationValues();
+        this.getColumnsForSorting();
         this.getLoggedInUser();
         this.getAllProfiles();
         this.getCandidateStatuses();
@@ -266,6 +268,14 @@ export class AllProfilesListComponent implements OnActivate {
         this.allProfilesList.GrdOperations.ButtonClicked = 0;
         this.allProfilesList.GrdOperations.NextPageUrl = new Array<string>();
         this.getAllProfiles();
+    }
+    getColumnsForSorting() {
+        this._profileBankService.getColumsForSorting('ALLPROFILES')
+            .subscribe(
+            (results: any) => {
+                this.ColumnList = results;
+            },
+            error => this.toastr.error(<any>error));
     }
 }
 

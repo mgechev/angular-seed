@@ -86,7 +86,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         this.ScheduleInterView.CandidateID = JSON.parse(sessionStorage.getItem('Candidate')).CandidateID;
         this.ScheduleInterView.CandidateStatus = JSON.parse(sessionStorage.getItem('Candidate')).Status;
 
-        this.ScheduleInterView.CandidateStatus.Value = 'Rejected';
+        //this.ScheduleInterView.CandidateStatus.Value = 'Rejected';
         if (this.ScheduleInterView.CandidateStatus.Value !== null &&
             this.ScheduleInterView.CandidateStatus.Value.toLowerCase() === 'rejected') {
             this.isRejectedCandidate = this.ifInvalidInterview = true;

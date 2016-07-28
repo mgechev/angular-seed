@@ -28,10 +28,11 @@ export class Interview {
     public CandidatePrimaryDetails: CandidatePrimaryDetails = new CandidatePrimaryDetails();
     public Interviewer: Array<MasterData> = new Array<MasterData>();
     public IEFTransactionDetails: Array<IEFFunction> = new Array<IEFFunction>();
-    public ApprovalType :string;
-    public ApproverComments :string;
-    public Reason:string;
-    public Approver:string;
+    public ApprovalType: string;
+    public ApproverComments: string;
+    public Reason: string;
+    public Approver: string;
+    public CandidateDetails: CandidatePrimaryDetails = new CandidatePrimaryDetails();
 }
 //Interviewrs Availability comments
 export class InterviewAvailability {

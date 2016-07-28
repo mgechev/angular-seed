@@ -213,6 +213,7 @@ export class ProfileBankService {
         // }
 
     }
+
     uploadProfilePhoto(resumeMeta: ResumeMeta) {
         console.log('Operaration sucessfull..! but API is pending to upload photo.');
         /** TODO:: Update api URL Once API is ready (API is pending) */
@@ -251,6 +252,7 @@ export class ProfileBankService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+
     deleteProfile(candidateID: MasterData) {
         console.log('Operaration sucessfull..! but API is pending to delete profile.');
         /** TODO:: Update api URL Once API is ready (API is pending) */
@@ -271,6 +273,15 @@ export class ProfileBankService {
             .finally(() => this._spinnerService.hide());
     }
 
+    /* Sorting */
+    getColumsForSorting(featureName:string) {
+         let url = Config.GetURL('/api/Masters/GetSortableColumns?Feature=' + featureName);
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);

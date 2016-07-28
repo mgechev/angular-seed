@@ -1,11 +1,9 @@
 import { Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import { Interview} from '../../shared/model/interview';
 import { InterviewersAvailabilityService} from '../services/interviewers.availability.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { DetailRRF } from '../../shared/model/detailRRF';
 import { InterviewSlotComponent } from '../../shared/component/InterviewSlot/Component/InterviewSlot.component';
-import { CalenderSlot, CalenderDetails} from '../../shared/component/InterviewSlot/Model/interviewSlot';
 import { MasterData} from '../../../shared/model/common.model';
 
 @Component({
@@ -13,7 +11,7 @@ import { MasterData} from '../../../shared/model/common.model';
     selector: 'interviewers-availability',
     templateUrl: 'interviewers.availability.component.html',
     directives: [ROUTER_DIRECTIVES, InterviewSlotComponent],
-    providers: [Interview, ToastsManager, InterviewersAvailabilityService]
+    providers: [ToastsManager, InterviewersAvailabilityService]
 })
 
 export class RecruitmentInterviewAvailabilityComponent implements OnActivate {
