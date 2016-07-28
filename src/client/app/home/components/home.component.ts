@@ -20,6 +20,7 @@ import { BlackListedProfilesComponent } from '../../profileBank/blackListedProfi
 import { MyProfilesComponent } from '../../profileBank/myProfiles/index';
 import { CompanyProfilesComponent } from '../../profileBank/companyProfiles/index';
 import { RecentProfilesComponent } from '../../profileBank/recentProfiles/index';
+import { IncompleteProfilesComponent } from '../../profileBank/incompleteProfiles/index';
 import { MyRRFComponent } from '../../RRF/myRRF/index';
 import { RRFApprovalComponent } from '../../RRF/RRFApproval/index';
 import { RRFDashboardComponent } from '../../RRF/RRFDashboard/index';
@@ -54,6 +55,7 @@ import {ShowScheduleInterviewsComponent} from '../../recruitmentCycle/recruiters
     { path: '/ProfileBank/MyProfiles', component: MyProfilesComponent },
     { path: '/ProfileBank/CompanyProfiles', component: CompanyProfilesComponent },
     { path: '/ProfileBank/RecentProfiles', component: RecentProfilesComponent },
+    { path: '/ProfileBank/IncompleteProfiles', component: IncompleteProfilesComponent },
     { path: '/RRF/MyRRF', component: MyRRFComponent },
     { path: '/RRF/RRFApproval', component: RRFApprovalComponent },
     { path: '/RRF/RRFDashboard', component: RRFDashboardComponent },

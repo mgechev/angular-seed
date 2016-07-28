@@ -93,10 +93,10 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-3">
-                                    
+
                                 </div>
                                 <div class="col-md-3 col-sm-3">
-                                   
+
                                 </div>
 
                                 <div class="col-md-3 col-sm-4">
@@ -178,8 +178,8 @@
                                                             </a>
                                                         </li>
                                                         <!-- TODO:: update Delete Permission once recive from backend -->
-                                                        <li [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] " >
-                                                            <a (click)='deleteCandidate(profile.CandidateID)' [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] " >
+                                                        <li>
+                                                            <a (click)='deleteCandidate(profile.CandidateID)'>
                                                                 <i class="fa fa-remove"></i>Delete Profile</a>
                                                         </li>
                                                         <li>
@@ -192,7 +192,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <span style = "margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Candidates Found</span>
+                                <span style="margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Candidates Found</span>
 
                             </div>
                             <!--  Recent Profile pagination Start-->

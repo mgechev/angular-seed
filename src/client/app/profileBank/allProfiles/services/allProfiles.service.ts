@@ -22,6 +22,15 @@ export class AllProfilesService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+    getIncompleteProfiles(grdOptions: GrdOptions) {
+        /** TODO:: Update API once get from back end (API is pending) */
+        let url = Config.GetURL('/api/ProfileBank/getAllProfiles');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { grdOptions })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
 
     getOpenProfiles(grdOptions: GrdOptions) {
         ///api/ProfileBank/GetOpenProfiles1?PerPageCount=3&ButtonClicked=-1&IDs=90,106,109
