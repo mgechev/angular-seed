@@ -25,7 +25,8 @@
                 </thead>
                 <tbody>
                     <tr *ngFor='let slot of meta; let slotindex = index' >
-                        <td> {{slot.ID}} </td>
+                        <td> {{slotindex + 1}} </td>
+                        <!--<td> {{slot.ID}} </td>-->
                         <td >
                              <input type="text" [(ngModel)]='slot.Title' [disabled]="slot.ID != undefined" id="slotTitle" class="form-control" placeholder="Slot Title"
                                      autocomplete="off" />

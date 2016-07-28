@@ -43,6 +43,11 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
 
 
     onSaveClick() {
+        if (!this.validateDate()) {
+            this.toastr.error('From date should be less than To date');
+            return;
+        }
+
         var newAddedCalenderSlot: CalenderSlot[] = [];
         for (var index = 0; index < this.meta.length; index++) {
             if (this.meta[index].ID === undefined) {
@@ -125,7 +130,8 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
     }
 
     ngOnChanges(changes: any) {
-        // if (changes.RRFCode != undefined && changes.RRFID != undefined) { //TODO when RRFCODE implemented uncommit this line and commit below line
+        // if (changes.RRFCode != undefined && changes.RRFID != undefined) {
+        //TODO when RRFCODE implemented uncommit this line and commit below line
         if (changes.RRFID != undefined) {
             this.getRRFSlot();
         }
@@ -141,6 +147,15 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
         if (day.length < 2) day = '0' + day;
 
         return [year, month, day].join('-');
+    }
+
+    validateDate(): boolean {
+        for (var i = 0; i < this.meta.length; i++) {
+            if (this.meta[i].EndDate < this.meta[i].StartDate) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }
