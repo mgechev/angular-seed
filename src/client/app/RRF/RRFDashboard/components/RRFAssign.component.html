@@ -49,7 +49,7 @@
                                 <label>Assign To<span> * </span></label>
                                 <div class="input-group select2-bootstrap-append">
                                     <select id="cmbAssignTo" class="form-control" multiple>
-                                        <option *ngFor="let recruiter of recruiterDtls" [value]="recruiter.Id">{{recruiter.Value}}</option>
+                                        <option *ngFor="let recruiter of recruiterDtls" [value]="recruiter.Id" [disabled]='isAlreadyAssigned(recruiter.Id)'>{{recruiter.Value}}</option>
                                     </select>
                                     <span class="input-group-btn">
                                                          <button class="btn btn-default" type="button" data-select2-open="multi-append">

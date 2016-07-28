@@ -16,7 +16,7 @@ import {RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow
     moduleId: module.id,
     selector: 'rrf-assign',
     templateUrl: 'RRFAssign.component.html',
-    directives: [ROUTER_DIRECTIVES, DATEPICKER_DIRECTIVES, SELECT_DIRECTIVES,RRFGridRowComponent],
+    directives: [ROUTER_DIRECTIVES, DATEPICKER_DIRECTIVES, SELECT_DIRECTIVES, RRFGridRowComponent],
     styleUrls: ['../../shared/css/RRF.component.css'],
     providers: [ToastsManager]
 })
@@ -40,13 +40,13 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
     }
 
     routerOnActivate(segment: RouteSegment) {
-       var params = segment.getParam('id');
-            if (params) {
-                this.RRFId.Id = parseInt(params.split('ID')[1]);
-                this.RRFId.Value = params.split('ID')[0];
-            }
+        var params = segment.getParam('id');
+        if (params) {
+            this.RRFId.Id = parseInt(params.split('ID')[1]);
+            this.RRFId.Value = params.split('ID')[0];
+        }
         //this.RRFId = segment.getParam('id');
-        this.GetRecruiter();
+       // this.GetRecruiter();
         this.getRRFDetails(this.RRFId);
         this.UnAssignRec.AssignedTo = new MasterData();
     }
@@ -70,6 +70,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
                     this.selectedRRF.AssignedData = new Array();
                     this.selectedRRF.AssignedData.push(assignmentDetails);
                 }
+                 this.GetRecruiter();
             },
             error => this.errorMessage = <any>error);
     }
@@ -97,7 +98,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
             selectedRRFidsList.push(selectedRRF);
         }
         this._rrfDashboardService.saveRRFAssignmentDeatils(this.RRFId, selectedRRFidsList, this.AssignedComments)
-        //this._rrfDashboardService.saveRRFAssignmentDeatils(this.RRFId, selectedRec, this.AssignedComments)
+            //this._rrfDashboardService.saveRRFAssignmentDeatils(this.RRFId, selectedRec, this.AssignedComments)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -120,7 +121,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
     onUnAssignCancel(): void {
         this.unAssignRowVisible = false;
         this.UnAssignRec = new AssignmentDetails();
-        setTimeout(function () {
+        setTimeout(function() {
             $('#cmbAssignTo').select2();
         }, 20);
 
@@ -137,7 +138,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
                     this.unAssignedComments = '';
                     $('#cmbAssignTo').select2();
                     this.getRRFDetails(this.RRFId); //TODO
-                    setTimeout(function () {
+                    setTimeout(function() {
                         $('#cmbAssignTo').select2();
                     }, 20);
                 } else {
@@ -149,5 +150,20 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
 
     getPriorityClass(priority: string): string {
         return 'priority' + priority;
+    }
+
+    isAlreadyAssigned(recuiterId: number): boolean {
+        if (this.selectedRRF.AssignedData === undefined) {
+            return false;
+        }
+
+        for (var index = 0; index < this.selectedRRF.AssignedData.length; index++) {
+            if (this.selectedRRF.AssignedData[index].AssignedTo.Id == recuiterId) {
+                if (this.selectedRRF.AssignedData[index].Status.Id === RRFAssignStatus.Assigned) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
