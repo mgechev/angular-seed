@@ -10,8 +10,8 @@ import { SpinnerService } from '../components/spinner/spinner';
 export class MastersService {
 
     constructor(private authHttp: AuthHttp,
-    private _spinnerService: SpinnerService) { }
-   
+        private _spinnerService: SpinnerService) { }
+
     GetDesignations() {
         let authenticateUrl = Config.GetURL('/api/Masters/GetDesignations');
         return this.authHttp.get(authenticateUrl)
@@ -143,7 +143,7 @@ export class MastersService {
     }
 
     GetRoundsByInterviewType(TypeID: number) {
-        let url = Config.GetURL('/api/Masters/GetRoundsByInterviewType?TypeID='+TypeID);
+        let url = Config.GetURL('/api/Masters/GetRoundsByInterviewType?TypeID=' + TypeID);
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);
@@ -158,7 +158,18 @@ export class MastersService {
     addSkillToMaster(skill: string) {
         let url = Config.GetURL('/api/Masters/AddSkills');
         this._spinnerService.show();
-        return this.authHttp.post(url, { 'Skill' : skill})
+        return this.authHttp.post(url, { 'Skill': skill })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
+
+    /* Sorting */
+    getColumsForSorting(featureName: string) {
+        let url = Config.GetURL('/api/Masters/GetSortableColumns?Feature=' + featureName);
+        this._spinnerService.show();
+        return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
