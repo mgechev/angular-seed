@@ -63,7 +63,7 @@
     "gulp-plumber": "~1.1.0",
     "gulp-postcss": "^6.1.1",
     "gulp-progeny": "^0.3.1",
-    "gulp-protractor": "^2.4.0",
+    "gulp-protractor": "^3.0.0",
     "gulp-replace": "^0.5.4",
     "gulp-sass": "^2.3.2",
     "gulp-sass-lint": "^1.2.0",
