@@ -20,7 +20,7 @@ import {BUTTON_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
     selector: 'rrf-myrrf-add',
     templateUrl: 'myRRFAdd.component.html',
     directives: [ROUTER_DIRECTIVES, SELECT_DIRECTIVES, NgClass, CORE_DIRECTIVES, FORM_DIRECTIVES,
-    BUTTON_DIRECTIVES, TOOLTIP_DIRECTIVES,DropdownMultiSelectComponent],
+        BUTTON_DIRECTIVES, TOOLTIP_DIRECTIVES, DropdownMultiSelectComponent],
     providers: [ToastsManager]
 })
 
@@ -43,7 +43,7 @@ export class MyRRFAddComponent implements OnActivate {
     RRFId: MasterData = new MasterData();
     ExpDateOfJoining: any;
     params: string;
-    mindate : Date;
+    mindate: Date;
 
 
     constructor(private _myRRFService: MyRRFService,
@@ -71,7 +71,7 @@ export class MyRRFAddComponent implements OnActivate {
         // });
 
         this.setMinDateToCalender();
-        
+
         //dropdown with multi selector and search
         $('#cmbInterviewer').select2();
         $('#cmbSkillsReq').select2();
@@ -108,14 +108,21 @@ export class MyRRFAddComponent implements OnActivate {
         this.newRRF.Panel.push(addPanel);
     }
 
-    raiseRRF(): void {
-        if(this.newRRF.Panel.length == 0){
+    validateForm(): boolean {
+        if (this.newRRF.Panel.length == 0) {
             this.toastr.error('Please select interview panel Details');
-            return ;
+            return false;
         }
-         if(this.newRRF.SkillsRequired.length == 0){
+        if (this.newRRF.SkillsRequired.length == 0) {
             this.toastr.error('Please select Required skills');
-            return ;
+            return false;
+        }
+        return true;;
+    }
+
+    raiseRRF(): void {
+        if (!this.validateForm()) {
+            return;
         }
         if (this.isNewRRF) {
             this.setSkillToObject();
@@ -322,6 +329,10 @@ export class MyRRFAddComponent implements OnActivate {
     }
 
     onUpdateClick() {
+        if (!this.validateForm()) {
+            return;
+        }
+
         this.setSkillToObject();
         this._myRRFService.UpdateRRF(this.newRRF)
             .subscribe(
@@ -330,7 +341,7 @@ export class MyRRFAddComponent implements OnActivate {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this._router.navigate(['/App/RRF/RRFDashboard/']);
                 } else {
-                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    this.toastr.error((<ResponseFromAPI>results).Message);
                 }
             },
             error => this.errorMessage = <any>error);
@@ -351,5 +362,13 @@ export class MyRRFAddComponent implements OnActivate {
     setMinDateToCalender() {
         var todayDate = new Date();
         this.mindate = (<any>this.formatDate(todayDate));
+    }
+
+    submitForm() {
+        if (this.isNewRRF) {
+            this.raiseRRF();
+        } else {
+            this.onUpdateClick();
+        }
     }
 }
