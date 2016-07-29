@@ -1,0 +1,142 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!--BEGIN breadcrumb -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']"> Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a [routerLink]="['/App/RRF/RRFDashboard']"> RRF Dashboard </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">Re-Schedule Interviews</span>
+            </li>
+        </ul>
+        <!--End Breadcrumb>-->
+        <div class="row">
+            <div class="portlet light bordered">
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="mt-radio-inline col-md-12">
+                            <div class="col-md-3">
+                                <label class="mt-radio">
+                                <input type="radio" name="viewType" value="myReInterviews" [checked]="currentView == 'myReInterviews'" (click)="onViewChanged('myReInterviews')" /> 
+                                My Re-Schedule Interviews
+                                <span></span>
+                            </label>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="mt-radio">
+                                 <input type="radio" name="viewType" value="allReInterviews" [checked]="currentView == 'allReInterviews'" (click)="onViewChanged('allReInterviews') "/>
+                                  All Re-Schedule Interviews
+                                  <span></span>
+                            </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="!NORECORDSFOUND">
+                        <div class="col-md-3 col-sm-3">
+                            <div class="dataTables_length" id="sample_1_length">
+                                <label>Show :
+                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
+                                            [(ngModel)]="InterviewDetailsList.GrdOperations.PerPageCount" 
+                                            (ngModelChange)="onChange()">
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="20">20</option>
+                                                <option value="50">50</option>
+                                            </select>
+                                        </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <label>Sort By
+                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline" 
+                                            [(ngModel)]="InterviewDetailsList.GrdOperations.OrderBy"
+                                            (ngModelChange)="onChange()" >
+                                                <option value="Modified">Modified</option>
+                                             <!--  <option value="Status/Status">Status</option>-->
+                                                <!--ColumnList-->
+                                                    <!--<option *ngFor="let column of ColumnList" [value]="column.Value">{{column.Id}}</option>-->
+                                                
+                                            </select>
+                                        </label>
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <label>Order By
+                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline" 
+                                            [(ngModel)]="InterviewDetailsList.GrdOperations.Order"  
+                                            (ngModelChange)='onChange()'>
+                                                <option value="asc">Ascending</option>
+                                                <option value="desc">Descending</option>
+                                            </select> 
+                                            </label>
+                        </div>
+                        <div class="col-md-3 col-sm-4">
+                            <div id="sample_1_filter" class="dataTables_filter">
+                                <label>Search 
+                                            <input type="search" [(ngModel)]="searchString" class="form-control input-sm input-small input-inline " placeholder="" aria-controls="sample_1">
+                                            </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-scrollable ">
+                        <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable
+                                            no-footer " role="grid " aria-describedby="sample_1_info ">
+                            <thead style="word-wrap: break-word; " class="thead">
+                                <tr>
+                                    <td> <b>RRF Details</b> </td>
+                                    <td> <b>Candidate Details</b> </td>
+                                    <td> <b>Interview Details </b></td>
+                                    <td> <b>Interviewers</b></td>
+                                    <td> <b>Interview Status </b></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let interview of InterviewDetailsList.AllInterviews">
+                                    <td> {{interview.RRFID.Value}} </td>
+                                    <td> Name : {{interview.CandidateDetails.FullName}} <br/> Email:{{interview.CandidateDetails.Email}}
+                                        <br/> Contact No : {{interview.CandidateDetails.Contact}}
+                                    </td>
+                                    <td>
+                                        InterviewDate : {{interview.InterviewDate}} <br/> FromTime: {{interview.InterviewFromTime}}
+                                        <br/> ToTime: {{interview.InterviewToTime}}<br/> Round : {{interview.Round.Value}}
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div *ngFor="let interviewers of interview.InterviewerAvailability">
+                                                {{interviewers.Interviewer.Value}}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{interview.Status}}
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                        <span style="margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Records Found</span>
+                    </div>
+                    <div class="row" *ngIf="!NORECORDSFOUND">
+                        <div class="col-md-10">
+                        </div>
+                        <div class="col-md-2 ">
+                            <button type="button" class="btn btn-default" [disabled]="!InterviewDetailsList.GrdOperations.PreviousButton" (click)="OnPaginationClick(-1)">
+                                        &laquo; Prev</button> &nbsp;&nbsp;
+                            <button type="button" class="btn btn-default" [disabled]="!InterviewDetailsList.GrdOperations.NextButton" (click)="OnPaginationClick(1)">
+                                        Next &raquo;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE BASE CONTENT -->
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->

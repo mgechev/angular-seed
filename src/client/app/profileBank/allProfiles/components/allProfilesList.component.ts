@@ -46,7 +46,7 @@ export class AllProfilesListComponent implements OnActivate {
     grdOptions = new GrdOptions();
     public maxSize: number = 3;
     NORECORDSFOUND: boolean = false;
-    ColumnList: SortingMasterData = new SortingMasterData();
+   ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
 
     constructor(private _allProfilesService: AllProfilesService,
 
@@ -219,9 +219,9 @@ export class AllProfilesListComponent implements OnActivate {
     }
 
     transferOwnerShipClick() {
-        for (var index = 0; index < this.CandidateProfiles.Profiles.length; index++) {
-            if (this.CandidateProfiles.Profiles[index].IsChecked) {
-                this.AllCheckedItemIds.push(this.CandidateProfiles.Profiles[index].CandidateID);
+      for (var index = 0; index < this.allProfilesList.Profiles.length; index++) {
+            if (this.allProfilesList.Profiles[index].IsChecked) {
+                this.AllCheckedItemIds.push(this.allProfilesList.Profiles[index].CandidateID);
             }
         }
         if (this.AllCheckedItemIds.length > 0) {

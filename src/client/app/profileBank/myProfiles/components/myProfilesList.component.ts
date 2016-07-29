@@ -5,7 +5,7 @@ import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
-import { MasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData,SortingMasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
@@ -59,6 +59,8 @@ export class MyProfilesListComponent implements OnActivate {
     Candidate: Candidate;
     selectedCandidates: Array<Candidate>;
     NORECORDSFOUND: boolean = false;
+            ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
+
 
     constructor(private _myProfilesService: MyProfilesService,
         private http: Http,
@@ -75,6 +77,7 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     routerOnActivate() {
+        this.getColumnsForSorting();
         this.myProfilesList.GrdOperations = new GrdOptions();
         this.getMyProfiles();
         this.getCandidateStatuses();
@@ -459,7 +462,14 @@ export class MyProfilesListComponent implements OnActivate {
         this.myProfilesList.GrdOperations.ButtonClicked = parseInt(ButtonClicked);
         this.getMyProfiles();
     }
-
+       getColumnsForSorting() {
+        this._profileBankService.getColumsForSorting('COMPANYPROFILS')
+            .subscribe(
+            (results: any) => {
+                this.ColumnList = results;
+            },
+            error => this.toastr.error(<any>error));
+    }
 }
 
 

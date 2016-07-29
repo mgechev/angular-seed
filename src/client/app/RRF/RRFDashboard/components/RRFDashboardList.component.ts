@@ -484,5 +484,9 @@ export class RRFDashboardListComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
+    onReScheduleInterviewsClick(RRFID:MasterData) {
+        //redirect to All Reschedule Interviews Screen
+        this._router.navigate(['/App/RRF/RRFDashboard/Interviews/' + RRFID.Value + 'ID' + RRFID.Id]);
+    }
 }
 

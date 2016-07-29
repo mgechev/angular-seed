@@ -1,30 +1,33 @@
 import { Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
+import { ROUTER_DIRECTIVES, OnActivate, RouteSegment} from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { RecruiterScheduleInterviewService} from '../index';
-import {InterviewsList} from '../index';
+import { RRFReScheduleInterviewService} from '../services/RRFReScheduleInterviews.service';
+import {InterviewsList} from '../../../recruitmentCycle/recruitersTab/index';
 import { GrdOptions } from  '../../../shared/model/index';
 
 @Component({
     moduleId: module.id,
-    selector: 'show-schedule-interviews',
-    templateUrl: 'scheduleInterviews.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    selector: 'show-re-schedule-interviews',
+    templateUrl: 'RRFReScheduleInterviews.component.html',
+    directives: [ROUTER_DIRECTIVES],
+    providers: [ToastsManager]
 })
 
-export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
-    currentView: string = 'myInterviews';
+export class RRFReScheduleInterviewsComponent implements OnActivate {
+    currentView: string = 'myReInterviews';
     NORECORDSFOUND: boolean = false;
     mode: string;
     errorMessage: string;
     InterviewDetailsList: InterviewsList = new InterviewsList();
-    constructor(private _recruitersInterviewService: RecruiterScheduleInterviewService,
+    constructor(private _rrfReScheduleInterviewService: RRFReScheduleInterviewService,
         private toastr: ToastsManager) {
-        this.currentView = 'myInterviews';
+        this.currentView = 'myReInterviews';
     }
 
-    routerOnActivate() {
-        this.getMyScheduleInterviewsData();
+    routerOnActivate(segment: RouteSegment) {
+        this.InterviewDetailsList.CandidateRRFIDs.RRFID.Id = parseInt((segment.getParam('id')).split('ID')[1]);
+        this.InterviewDetailsList.CandidateRRFIDs.RRFID.Value = (segment.getParam('id')).split('ID')[0];
+        this.getMyReScheduleInterviewsData();
     }
     onViewChanged(viewMode: string) {
         // this.InterviewDetailsList.GrdOperations = new GrdOptions();
@@ -35,12 +38,12 @@ export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
         //Clear RRF List
         this.InterviewDetailsList = new InterviewsList();
 
-        if (viewMode === 'allInterviews') {
-            this.currentView = 'allInterviews';
-            this.getAllScheduleInterviewsData();
-        } else if (viewMode === 'myInterviews') {
-            this.currentView = 'myInterviews';
-            this.getMyScheduleInterviewsData();
+        if (viewMode === 'allReInterviews') {
+            this.currentView = 'allReInterviews';
+            this.getAllReScheduleInterviewsData();
+        } else if (viewMode === 'myReInterviews') {
+            this.currentView = 'myReInterviews';
+            this.getAllReScheduleInterviewsData();
         }
     }
     resetToDefaultGridOptions() {
@@ -49,9 +52,11 @@ export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
         this.InterviewDetailsList.GrdOperations.NextPageUrl = [];
     }
 
-    getAllScheduleInterviewsData() {
+    getAllReScheduleInterviewsData() {
         this.NORECORDSFOUND = false;
-        this._recruitersInterviewService.getAllInterviews(this.InterviewDetailsList.GrdOperations)
+        this.setGridOptions();
+        this._rrfReScheduleInterviewService.getAllRescheduleInterviews(this.InterviewDetailsList.GrdOperations,
+            this.InterviewDetailsList.CandidateRRFIDs)
             .subscribe(
             (results: any) => {
                 if (results.AllInterviews.length !== undefined && results.AllInterviews.length > 0) {
@@ -64,10 +69,12 @@ export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
                 this.toastr.error(<any>error);
             });
     }
-    getMyScheduleInterviewsData() {
+    getMyReScheduleInterviewsData() {
 
         this.NORECORDSFOUND = false;
-        this._recruitersInterviewService.getMyInterviews(this.InterviewDetailsList.GrdOperations)
+        this.setGridOptions();
+        this._rrfReScheduleInterviewService.getMyRescheduleInterviews(this.InterviewDetailsList.GrdOperations,
+            this.InterviewDetailsList.CandidateRRFIDs)
             .subscribe(
             (results: any) => {
                 if (results.AllInterviews.length !== undefined && results.AllInterviews.length > 0) {
@@ -98,12 +105,14 @@ export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
         //Clear RRF List
         this.InterviewDetailsList = new InterviewsList();
 
-        if (this.currentView === 'allInterviews') {
-            //this.currentView = 'allInterviews';
-            this.getAllScheduleInterviewsData();
-        } else if (this.currentView === 'myInterviews') {
-            //this.currentView = 'myInterviews';
-            this.getMyScheduleInterviewsData();
+        if (this.currentView === 'allReInterviews') {
+            this.getAllReScheduleInterviewsData();
+        } else if (this.currentView === 'myReInterviews') {
+            this.getMyReScheduleInterviewsData();
         }
+    }
+    setGridOptions() {
+        this.InterviewDetailsList.GrdOperations.Order = 'desc';
+        this.InterviewDetailsList.GrdOperations.OrderBy = 'Interview_x0020_ID';
     }
 }

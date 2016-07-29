@@ -339,6 +339,12 @@
                                                             <i class="fa fa-users "></i> View Candidates
                                                         </button>
                                                     </li>
+                                                    <li class="divider" > </li>
+                                                    <li>
+                                                        <button class="btn btn-default btnLink" (click)='onReScheduleInterviewsClick(rrf.RRFID)'>
+                                                            <i class="fa fa-calendar-check-o"></i> View Re-schedule Interviews
+                                                        </button>
+                                                    </li>
                                                     <li class="divider " [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] "> </li>
                                                     <li>
                                                         <button class="btn btn-default btnLink" (click)='onCloseRRFClick(rrf.RRFID)' [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] " [disabled]='allowCloseRRF(rrf.Status.Id)'>

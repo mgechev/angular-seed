@@ -7,18 +7,22 @@ import { MyRRFService } from '../../myRRF/services/myRRF.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import { RRFCandidateListComponent } from './RRFCandidateList.component';
 import {RRFCandidateListService} from '../services/RRFCandidatesList.service';
+import { RRFReScheduleInterviewsComponent } from './RRFReScheduleInterviews.component';
+import {RRFReScheduleInterviewService} from '../services/RRFReScheduleInterviews.service';
 
 @Component({
     selector: 'rrf-dashboard',
     template: ' <router-outlet></router-outlet>',
     directives: [ROUTER_DIRECTIVES],
-    providers: [RRFDashboardService, MyRRFService, MastersService,RRFCandidateListService]
+    providers: [RRFDashboardService, MyRRFService, MastersService,
+                RRFCandidateListService,RRFReScheduleInterviewService]
 })
 
 @Routes([
     { path: '/', component: RRFDashboardListComponent },
     { path: '/Assign/:id', component: RRFAssignComponent },
     { path: '/Candidates/:id', component: RRFCandidateListComponent },
+    { path: '/Interviews/:id', component: RRFReScheduleInterviewsComponent },
 ])
 export class RRFDashboardComponent {
 }

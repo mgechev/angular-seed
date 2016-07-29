@@ -58,7 +58,7 @@
                                         </div>
                                         <label class="col-md-2 control-label align">Round <span class="required"> * </span></label>
                                         <div class="col-md-3">
-                                            <select class="form-control" [(ngModel)]="ScheduleInterView.Round.Id" (change)='getNominatedInterviewersByRound($event.target.value)'>
+                                            <select class="form-control" [(ngModel)]="ScheduleInterView.Round.Id" (change)='getNominatedInterviewersByRound($event.target.value)' [disabled]='isInterviewReschedule'>
                                                     <option></option>
                                                     <option *ngFor="let round of InterviewRounds" [value]="round.Id">{{round.Value}}</option>
                                             </select>

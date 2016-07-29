@@ -40,7 +40,7 @@
                     </div>
                     <div class="portlet-body">
                         <div class="table-toolbar">
-                                 <!--Hide Pagination / sorting / filtering if No records found-->
+                            <!--Hide Pagination / sorting / filtering if No records found-->
                             <div class="row" *ngIf="!NORECORDSFOUND">
                                 <div class="col-md-3 col-sm-3">
                                     <div class="dataTables_length" id="sample_1_length">
@@ -60,8 +60,8 @@
                                             <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
                                             [(ngModel)]="blacklistedProfilesList.GrdOperations.OrderBy"
                                             (ngModelChange)="onChange()" >
-                                                <option value="Modified">Modified</option>
-                                                <option value="Status">Status</option>
+                                                <option *ngFor="let column of ColumnList" [value]="column.Value">{{column.Id}}</option>
+
                                             </select>
                                         </label>
                                 </div>
@@ -136,7 +136,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                                            <!-- *ngFor="let profile of allProfilesList.Profiles | ProfileBankPipe:searchString-->
+                                        <!-- *ngFor="let profile of allProfilesList.Profiles | ProfileBankPipe:searchString-->
                                         <tr class="gradeX odd" *ngFor="let blacklistedProfile of blacklistedProfilesList.Profiles | ProfileBankPipe : searchString ">
                                             <td>
                                                 <tr>
@@ -199,7 +199,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <span style = "margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Candidates Found</span>
+                                <span style="margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Candidates Found</span>
 
                             </div>
                             <div class="row" *ngIf="!NORECORDSFOUND">

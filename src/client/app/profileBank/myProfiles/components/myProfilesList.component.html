@@ -270,8 +270,8 @@
                                             <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
                                             [(ngModel)]="myProfilesList.GrdOperations.OrderBy"
                                             (ngModelChange)="onChange()" >
-                                                <option value="Modified">Modified</option>
-                                                <option value="Status/Status">Status</option>
+                                                <option *ngFor="let column of ColumnList" [value]="column.Value">{{column.Id}}</option>
+
                                             </select>
                                         </label>
                                 </div>

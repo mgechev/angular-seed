@@ -5,7 +5,7 @@ import { BlackListedProfilesService } from '../services/blacklistedProfiles.serv
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
-import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData,SortingMasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
@@ -23,6 +23,7 @@ import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
 
 export class BlackListedProfilesListComponent implements OnActivate {
     blacklistedProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
+    ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
     profile: CandidateProfile;
     statusList: Array<MasterData>;
     seletedCandidateID: MasterData = new MasterData();
@@ -177,6 +178,14 @@ export class BlackListedProfilesListComponent implements OnActivate {
                 */
         this.blacklistedProfilesList.GrdOperations.ButtonClicked = parseInt(ButtonClicked);
         this.getBlacklistedProfiles();
+    }
+     getColumnsForSorting() {
+        this._profileBankService.getColumsForSorting('BLACKLISTEDPROFILES')
+            .subscribe(
+            (results: any) => {
+                this.ColumnList = results;
+            },
+            error => this.toastr.error(<any>error));
     }
 }
 

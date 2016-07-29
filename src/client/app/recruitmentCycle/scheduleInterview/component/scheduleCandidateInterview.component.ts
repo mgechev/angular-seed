@@ -60,6 +60,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     ifInterviewScheduled: boolean = true;
     ifRescheduleInterview: boolean = false;
     selectSkypeID: boolean = false;
+    isInterviewReschedule:boolean = false;
 
     constructor(private _router: Router,
         private _calendarDataService: CalendarDataService,
@@ -457,6 +458,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
 
         this.clearSession('Candidate');
         this.ifRescheduleInterview = true;
+        this.isInterviewReschedule = true;
     }
 
     onClearSelection() {
