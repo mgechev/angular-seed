@@ -18,7 +18,7 @@ import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.direc
     moduleId: module.id,
     selector: 'rrf-black-listed-profiles-list',
     templateUrl: 'companyProfilesList.component.html',
-    directives: [ROUTER_DIRECTIVES,IfAuthorizeDirective, CollapseDirective, TOOLTIP_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, IfAuthorizeDirective, CollapseDirective, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
     providers: [CompanyProfilesService],
     pipes: [ProfileBankPipe]
@@ -40,7 +40,7 @@ export class CompanyProfilesListComponent implements OnActivate {
     selectedCandidates: Array<Candidate>;
     public isCollapsed: boolean = false;
     Candidate: Candidate;
-    NORECORDSFOUND :boolean =false;
+    NORECORDSFOUND: boolean = false;
     constructor(private _companyProfilesService: CompanyProfilesService,
         private _router: Router,
         public toastr: ToastsManager,
@@ -75,7 +75,7 @@ export class CompanyProfilesListComponent implements OnActivate {
             (results: any) => {
                 if (results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.companyProfilesList = results;
-                } else {this.NORECORDSFOUND = true;}
+                } else { this.NORECORDSFOUND = true; }
             },
             error => {
                 this.errorMessage = <any>error;
@@ -96,8 +96,7 @@ export class CompanyProfilesListComponent implements OnActivate {
     }
     /**Redirecting to candidate's all interview history page */
     getCandidateHistory(CandidateID: MasterData) {
-        /** TODO:: Need to update navigation page URL */
-        this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+        this._router.navigate(['/App/ProfileBank/CompanyProfiles/History']);
     }
     redirectToEditProfile(CandidateID: MasterData) {
         this._router.navigate(['/App/ProfileBank/CompanyProfiles/Edit/' + CandidateID.Value + 'ID' + CandidateID.Id]);

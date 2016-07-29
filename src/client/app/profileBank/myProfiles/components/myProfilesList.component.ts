@@ -129,8 +129,7 @@ export class MyProfilesListComponent implements OnActivate {
     }
     /**Redirecting to candidate's all interview history page */
     getCandidateHistory(CandidateID: MasterData) {
-        /** TODO:: Need to update navigation page URL */
-        this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+        this._router.navigate(['/App/ProfileBank/MyProfiles/History']);
     }
     onSave(): void {
         if (this.chkValidations()) {

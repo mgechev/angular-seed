@@ -9,6 +9,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { DataSharedService } from '../../shared/services/dataShared.service';
 import {TransferOwnershipComponent} from './allProfilesTransferOwnership.component';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
+import { ProfileEsplHistoryListComponent } from '../../profilesEsplHistory/components/profileEsplHistoryList.component';
 
 @Component({
     selector: 'rrf-all-profiles',
@@ -21,7 +22,8 @@ import { ProfileBankService } from '../../shared/services/profileBank.service';
     { path: '/', component: AllProfilesListComponent },
     { path: '/Edit/:id', component: AllProfilesAddComponent },
     { path: '/View/:id', component: AllProfilesViewComponent },
-    { path: '/Transfer', component: TransferOwnershipComponent }
+    { path: '/Transfer', component: TransferOwnershipComponent },
+    { path: '/History', component: ProfileEsplHistoryListComponent }
 ])
 export class AllProfilesComponent {
 }

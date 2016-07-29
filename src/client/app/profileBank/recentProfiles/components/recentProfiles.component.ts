@@ -7,6 +7,7 @@ import {RecentProfilesViewComponent} from './recentProfilesView.component';
 import { MastersService } from '../../../shared/services/masters.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { ProfileBankService } from  '../../shared/services/profileBank.service';
+import { ProfileEsplHistoryListComponent } from '../../profilesEsplHistory/components/profileEsplHistoryList.component';
 
 @Component({
     selector: 'rrf-recent-profiles',
@@ -19,7 +20,8 @@ import { ProfileBankService } from  '../../shared/services/profileBank.service';
 @Routes([
     { path: '/', component: RecentProfilesListComponent },
     { path: '/Edit/:id', component: RecentProfilesAddComponent },
-    { path: '/View/:id', component: RecentProfilesViewComponent }
+    { path: '/View/:id', component: RecentProfilesViewComponent },
+    { path: '/History', component: ProfileEsplHistoryListComponent }
 ])
 export class RecentProfilesComponent {
 }

@@ -7,7 +7,7 @@ import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
-import { MasterData, GrdOptions, ResponseFromAPI,SortingMasterData } from  '../../../shared/model/index';
+import { MasterData, GrdOptions, ResponseFromAPI, SortingMasterData } from  '../../../shared/model/index';
 import { DataSharedService } from '../../shared/services/dataShared.service';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
@@ -46,7 +46,7 @@ export class AllProfilesListComponent implements OnActivate {
     grdOptions = new GrdOptions();
     public maxSize: number = 3;
     NORECORDSFOUND: boolean = false;
-    ColumnList : SortingMasterData = new SortingMasterData();
+    ColumnList: SortingMasterData = new SortingMasterData();
 
     constructor(private _allProfilesService: AllProfilesService,
 
@@ -112,8 +112,7 @@ export class AllProfilesListComponent implements OnActivate {
     }
     /**Redirecting to candidate's all interview history page */
     getCandidateHistory(CandidateID: MasterData) {
-        /** TODO:: Need to update navigation page URL */
-        this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+        this._router.navigate(['/App/ProfileBank/AllProfiles/History']);
     }
 
     redirectToEditProfile(CandidateID: MasterData) {

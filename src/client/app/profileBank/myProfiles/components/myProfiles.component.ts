@@ -8,6 +8,7 @@ import {MyProfilesViewComponent} from './myProfilesView.component';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
 import {ProfileBankAssignRRFComponent} from '../../shared/component/assignRRF.component';
+import { ProfileEsplHistoryListComponent } from '../../profilesEsplHistory/components/profileEsplHistoryList.component';
 
 @Component({
     selector: 'rrf-myprofiles',
@@ -21,6 +22,7 @@ import {ProfileBankAssignRRFComponent} from '../../shared/component/assignRRF.co
     { path: '/Edit/:id', component: MyProfilesAddComponent },
     { path: '/View/:id', component: MyProfilesViewComponent },
     { path: '/Assign', component: ProfileBankAssignRRFComponent },
+    { path: '/History', component: ProfileEsplHistoryListComponent }
 ])
 export class MyProfilesComponent {
 }
