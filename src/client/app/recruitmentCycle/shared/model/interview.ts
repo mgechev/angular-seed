@@ -33,6 +33,7 @@ export class Interview {
     public Reason: string;
     public Approver: string;
     public CandidateDetails: CandidatePrimaryDetails = new CandidatePrimaryDetails();
+    public SkypeID:string;
 }
 //Interviewrs Availability comments
 export class InterviewAvailability {

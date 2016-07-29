@@ -58,6 +58,8 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     isRejectedCandidate: boolean = false;
     roundTobeScheduled: MasterData = new MasterData();
     ifInterviewScheduled: boolean = true;
+    ifRescheduleInterview: boolean = false;
+    selectSkypeID: boolean = false;
 
     constructor(private _router: Router,
         private _calendarDataService: CalendarDataService,
@@ -84,14 +86,14 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         this.ScheduleInterView.RRFID = JSON.parse(sessionStorage.getItem('RRFID'));
         this.ScheduleInterView.Candidate = JSON.parse(sessionStorage.getItem('Candidate')).Candidate;
         this.ScheduleInterView.CandidateID = JSON.parse(sessionStorage.getItem('Candidate')).CandidateID;
-        this.ScheduleInterView.CandidateStatus = JSON.parse(sessionStorage.getItem('Candidate')).Status;
+        this.ScheduleInterView.Status = sessionStorage.getItem('Status');
 
         //this.ScheduleInterView.CandidateStatus.Value = 'Rejected';
-        if (this.ScheduleInterView.CandidateStatus.Value !== null &&
-            this.ScheduleInterView.CandidateStatus.Value.toLowerCase() === 'rejected') {
+        if (this.ScheduleInterView.Status !== null && this.ScheduleInterView.Status !== undefined &&
+            this.ScheduleInterView.Status.toLowerCase() === 'rejected') {
             this.isRejectedCandidate = this.ifInvalidInterview = true;
         }
-
+        this.getResources();
         //Get All Interviewers     
         this.getOtherInterviewers();
         //Get Nominated Interviewers and other Interviewwers
@@ -127,21 +129,19 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
 
 
     getResources() {
-
-        this._calendarDataService.GetResources().then(
-            results => {
-                this.InterviewerCalendarDetails.Resources = results;
-            },
-            (error: any) => this.errorMessage = <any>error);
-
+        //  this._calendarDataService.GetResources().then(
+        //         (results:any) => {
+        //             this.resources = results;
+        //         }).catch(
+        //             (error: any) => this.errorMessage = <any>error
+        //         );
+        this.resources = this._calendarDataService.GetResources();
     }
 
     redirectToPreviousView() {
         this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' +
             this.ScheduleInterView.RRFID.Value + 'ID' + this.ScheduleInterView.RRFID.Id]);
     }
-
-
 
     onScheduleInterviewClick() {
         //Check For Valid Interview if Valid ScheduleInterview
@@ -267,7 +267,8 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                 let cmb: any = $('#cmbInterviewers');
                 cmb.select2();
             }
-        }else if(this.ScheduleInterView.CandidateStatus.Value.toLowerCase() !== 'rejected') {
+        } else if (this.ScheduleInterView.Status !== null && this.ScheduleInterView.Status !== undefined &&
+            this.ScheduleInterView.Status.toLowerCase() !== 'rejected') {
             let modl: any = $('#skippingRound');
             modl.modal({ 'backdrop': 'static' });
         } else {
@@ -336,6 +337,13 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
 
         return [year, month, day].join('-');
     }
+    //Format Time in "hh:mm" format
+    formatTime(date: any) {
+        var d = new Date(moment(date._i).local()),
+            h = '' + d.getHours(),
+            m = '' + d.getMinutes();
+        return [h, m].join(':');
+    }
 
     //Check For Valid And Invalid Slots while scheduling interview
     checkAvailability() {
@@ -390,6 +398,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         if (status !== null) {
             switch (status.toLowerCase()) {
                 case '':
+                case 'not scheduled':
                     this.ScheduleInterView.Status = 'Scheduled';
                     break;
                 case 'scheduled':
@@ -413,6 +422,11 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         var i = _.findIndex(this.InterviewModes, { Id: parseInt(ModeId) });
         if (i >= 0)
             this.ScheduleInterView.InterviewMode = this.InterviewModes[i];
+        if (this.ScheduleInterView.InterviewMode.Value.toLowerCase().includes('skype')) {
+            this.selectSkypeID = true;
+        } else {
+             this.selectSkypeID = false;
+        }
     }
 
     getInterviewDetailsByID(InterviewId: MasterData) {
@@ -442,6 +456,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         this.ScheduleInterView.InterviewDate = this.formatDate(this.ScheduleInterView.InterviewDate);
 
         this.clearSession('Candidate');
+        this.ifRescheduleInterview = true;
     }
 
     onClearSelection() {
@@ -528,6 +543,8 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             this.event.end = start.format();
         }
 
+        this.event.startTime = this.formatTime(start);
+        this.event.endTime = this.formatTime(end);
         this.event.resourceId = e.calEvent.resourceId;
         this.event.id = e.calEvent.id;
         this.event.start = start.format();

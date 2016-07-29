@@ -89,4 +89,11 @@ Closed 5*/
 .rowHeader{
 font-size: 13px
 }
+input[type=radio]:checked ~ .check::before{
+  background: #0DFF92;
+}
+
+input[type=radio]:checked ~ label{
+  color: #0DFF92;
+}
 

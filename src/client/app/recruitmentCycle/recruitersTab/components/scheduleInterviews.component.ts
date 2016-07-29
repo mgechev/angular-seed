@@ -49,11 +49,12 @@ export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
         this.InterviewDetailsList.GrdOperations.NextPageUrl = [];
     }
     getAllScheduleInterviewsData() {
-        this.mode = 'All';
+      
+        this.NORECORDSFOUND = false;
         this._recruitersInterviewService.getAllInterviews(this.InterviewDetailsList.GrdOperations)
             .subscribe(
             (results: any) => {
-                  if (results.AllInterviews.length !== undefined && results.AllInterviews.length > 0) {
+                if (results.AllInterviews.length !== undefined && results.AllInterviews.length > 0) {
                     this.InterviewDetailsList = results;
 
                 } else { this.NORECORDSFOUND = true; }
@@ -64,7 +65,8 @@ export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
             });
     }
     getMyScheduleInterviewsData() {
-        this.mode = 'My';
+
+        this.NORECORDSFOUND = false;
         this._recruitersInterviewService.getMyInterviews(this.InterviewDetailsList.GrdOperations)
             .subscribe(
             (results: any) => {
@@ -76,5 +78,32 @@ export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
                 this.errorMessage = <any>error;
                 this.toastr.error(<any>error);
             });
+    }
+    onChange() {
+        this.InterviewDetailsList.GrdOperations.ButtonClicked = 0;
+        this.InterviewDetailsList.GrdOperations.NextPageUrl = new Array<string>();
+        this.checkViewMode();
+    }
+    OnPaginationClick(ButtonClicked: string) {
+        /* ButtonClicked 
+                i. Initial - 0
+                ii.Next - 1
+                iii.Prev - (-1)
+           PerPageCount = No of items shown per page
+                */
+        this.InterviewDetailsList.GrdOperations.ButtonClicked = parseInt(ButtonClicked);
+        this.checkViewMode();
+    }
+    checkViewMode() {
+        //Clear RRF List
+        this.InterviewDetailsList = new InterviewsList();
+
+        if (this.currentView === 'allInterviews') {
+            //this.currentView = 'allInterviews';
+            this.getAllScheduleInterviewsData();
+        } else if (this.currentView === 'myInterviews') {
+            //this.currentView = 'myInterviews';
+            this.getMyScheduleInterviewsData();
+        }
     }
 }

@@ -15,6 +15,8 @@ export class Event {
     public resourceId: any;
     public Resource:string;
     public InterviewID : MasterData = new MasterData();
+    public startTime: string;
+    public endTime: string;
    // allDay: boolean = true;
 }
 export class Resource {

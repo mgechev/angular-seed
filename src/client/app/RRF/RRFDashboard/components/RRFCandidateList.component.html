@@ -121,12 +121,13 @@
                                                                 </li>
                                                                 <li class="divider"> </li>
                                                                 <li>
-                                                                     <button class="btn btn-default btnLink " [disabled]='canCancelInterview(selectedcandidate.InterviewDetails.Status)'>
+                                                                    <button class="btn btn-default btnLink " [disabled]='canCancelInterview(selectedcandidate.InterviewDetails.Status)'>
                                                                         <i class="fa fa-times"></i>Cancel Interview</button>
                                                                 </li>
                                                                 <li class="divider"> </li>
                                                                 <li>
-                                                                    <button class="btn btn-default btnLink " [disabled]='isOfferGenerationVisible(selectedcandidate.InterviewDetails.Round.Value)' >
+                                                                    <button class="btn btn-default btnLink " [disabled]='isOfferGenerationVisible(selectedcandidate.InterviewDetails.Round.Value)'
+                                                                        (click)='OnProceedForOfferGenerationClick(selectedcandidate)'>
                                                                         <i class="fa fa-paper-plane-o"></i>Offer Generation</button>
                                                                 </li>
 
@@ -178,6 +179,24 @@
 
                                 </div>
                                 <!-- Candidate Details END-->
+                            </div>
+                            <!--Confirmation Box-->
+                            <div id="prcedfrOffrgenration" class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <b>Proceed For Offer Generation</b>
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                                        </div>
+                                        <div id="modalBody" class="modal-body">
+                                            Do you really want to proceed for Offer Generation ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" icon="fa-check" class="btn btn-info" (click)="proceedForOfferGeneration(InterviewID)" label="">Yes</button>
+                                            <button type="button" icon="fa-check" class="btn btn-default" data-dismiss="modal" label="">No</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
