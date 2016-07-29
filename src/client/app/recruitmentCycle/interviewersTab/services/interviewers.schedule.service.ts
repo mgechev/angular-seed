@@ -6,6 +6,7 @@ import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
 // import { MasterData } from  '../../../shared/model/index';
 // import { AwaitedInterview} from '../../Shared/model/Interview';
+import { GrdOptions } from '../../../shared/model/common.model';
 
 @Injectable()
 
@@ -65,7 +66,6 @@ export class InterviewersScheduleService {
             { id: 2, title: 'InterViewer B', eventColor: this.generateHexColors() },
             { id: 3, title: 'InterViewer C', eventColor: this.generateHexColors() }];
     }
-
     getEvent() {
         return [{
             'id': 1,
@@ -78,6 +78,16 @@ export class InterviewersScheduleService {
     generateHexColors() {
         return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
     }
+
+    GetMyAllConductedInerviews(grdOptions: GrdOptions) {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetMyAllConductedInerviews');
+        this._spinnerService.show();
+         return this.authHttp.post(url ,{grdOptions})
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);

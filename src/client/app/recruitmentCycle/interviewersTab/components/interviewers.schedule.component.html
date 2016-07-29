@@ -51,8 +51,8 @@
                                     <td>
                                         <div class="btn-group">
                                             <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
-                                                            <i class="fa fa-angle-down"></i>
-                                                        </button>
+                                                <i class="fa fa-angle-down"></i>
+                                            </button>
                                             <ul class="dropdown-menu" role="menu">
                                                 <li>
                                                     <a href="javascript:;">
@@ -79,8 +79,8 @@
                                     <td>
                                         <div class="btn-group">
                                             <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
-                                                            <i class="fa fa-angle-down"></i>
-                                                        </button>
+                                                <i class="fa fa-angle-down"></i>
+                                            </button>
                                             <ul class="dropdown-menu" role="menu">
                                                 <li>
                                                     <a (click)='acceptInterview()'>
@@ -106,8 +106,8 @@
                                     <td>
                                         <div class="btn-group">
                                             <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
-                                                            <i class="fa fa-angle-down"></i>
-                                                        </button>
+                                                <i class="fa fa-angle-down"></i>
+                                            </button>
                                             <ul class="dropdown-menu" role="menu">
                                                 <li>
                                                     <a href="javascript:;">
@@ -137,8 +137,12 @@
                             <div id="modalBody" class="modal-body">
                                 <div class="row" style="margin-top:15px">
                                     <div class="form-group">
-                                        <div class="col-md-4 align"><label>Reason *</label></div>
-                                        <div class="col-md-8"><input type="text" id="title" /></div>
+                                        <div class="col-md-4 align">
+                                            <label>Reason *</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="text" id="title" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -193,8 +197,8 @@
                                         <td>
                                             <div class="btn-group">
                                                 <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
-                                                            <i class="fa fa-angle-down"></i>
-                                                        </button>
+                                                    <i class="fa fa-angle-down"></i>
+                                                </button>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li>
                                                         <a href="javascript:;">
@@ -233,12 +237,54 @@
                     <div class="portlet-body">
                         <div style=" text-align-last: center;">
                             <full-calendar [resources]="InterviewerCalendarDetails.Resources" (onEventRender)="showDetails($event)" [events]="InterviewerCalendarDetails.Events"
-                                [header]="header" defaultDate="2016-07-12" [eventLimit]="4" [editable]="true">
+                            [header]="header" defaultDate="2016-07-12" [eventLimit]="4" [editable]="true">
                             </full-calendar>
                         </div>
                     </div>
                 </div>
                 <!-- /MY SCHEDULE INTERVIEWS CALENDAR-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption font-dark">
+                            <span class="caption-subject bold uppercase"> Interview History</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-scrollable">
+                            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+                                <!--<thead style="border-bottom:solid 1px rgb(231, 236, 241) !important;">
+                                    <tr>
+                                        <th> Interview Details </th>
+                                        <th> Actions </th>
+                                    </tr>
+                                </thead>-->
+                                <tbody>
+                                    <!-- NgBinding-->
+                                    <tr class="gradeX" *ngFor="let _myInterview of InterviewHistory">
+                                        <td>
+                                            <intwDetailsRow [InterviewRecord]=_myInterview></intwDetailsRow>
+                                            <!--<IEFGridRow [InterviewID]= _myInterview.InterviewID ></IEFGridRow>-->
+                                        </td>
+                                        <td style="width:80px">
+                                            <div class="btn-group">
+                                                <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> View IEF
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <!-- /NgBinding-->
+
+
+                                </tbody>
+                            </table>
+                            <span style="margin-top:5px;margin-left:15px" *ngIf='HISTORYRECORDSNOTFOUND'>No Records Found</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

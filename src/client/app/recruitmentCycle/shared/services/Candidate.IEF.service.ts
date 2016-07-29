@@ -6,6 +6,7 @@ import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
 //import { MasterData } from  '../../../shared/model/index';
 import { IEFSubmission, iefModel} from '../../Shared/model/ief';
+import { MasterData } from '../../../shared/model/common.model';
 
 @Injectable()
 
@@ -45,6 +46,15 @@ export class CandidateIEFService {
         let url = Config.GetURL('/api/Masters/GetIEFFuntionsByInterviewType?TypeID=' + interviewType);
         this._spinnerService.show();
         return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+      /**Get IEF Data by InterviewID */
+    getIEFByInterviewID(InterviewID: MasterData) {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetIEFByInterviewID');
+        this._spinnerService.show();
+        return this.authHttp.post(url ,{InterviewID})
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
