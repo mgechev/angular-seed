@@ -5,9 +5,10 @@ import { RRFApprovalService } from '../services/rrfApproval.service';
 import { RRFStatus } from  '../../../shared/constantValue/index';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { ResponseFromAPI, GrdOptions } from '../../../shared/model/common.model';
+import { ResponseFromAPI, GrdOptions ,SortingMasterData } from '../../../shared/model/common.model';
 import {RRFPipe } from '../../shared/Filters/RRFFilter.component';
 import {RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
+import { MastersService } from '../../../shared/services/masters.service';
 
 @Component({
     moduleId: module.id,
@@ -29,13 +30,16 @@ export class RRFApprovalListComponent implements OnActivate {
     grdOptions: GrdOptions = new GrdOptions();
     searchText: string = '';
     NORECORDSFOUND: boolean = false;
+    SortByList: SortingMasterData[] = [];
 
     constructor(private _rrfApprovalService: RRFApprovalService,
-        public toastr: ToastsManager) {
+        public toastr: ToastsManager,
+        private _mastersService: MastersService) {
     }
 
     routerOnActivate(): void {
         this.getRRFApprovalList();
+        this.getColumsForSorting('RRFAPPROVAL');
     }
 
     getRRFApprovalList(): void {
@@ -188,5 +192,14 @@ export class RRFApprovalListComponent implements OnActivate {
 
         //call APIResult
         this.getRRFApprovalList();
+    }
+
+    getColumsForSorting(featureName: string) {
+        this._mastersService.getColumsForSorting(featureName)
+            .subscribe(
+            results => {
+                this.SortByList = <any>results;
+            },
+            error => this.errorMessage = <any>error);
     }
 }

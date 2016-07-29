@@ -128,10 +128,7 @@
                                     <div class="dataTables_length ">
                                         <label>Sort By
                                             <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.OrderBy" (ngModelChange)="bindGridData()">
-                                                <option value="Modified">Modified</option>
-                                                <option value="Status">Status</option>
-                                                <option value="Priority">Priority</option>
-                                                <option value="DateOfJoining">Date of Joining</option>
+                                                <option *ngFor="let sortColumn of SortByList" [value]="sortColumn.Value">{{sortColumn.Id}}</option>
                                             </select>
                                         </label>
                                     </div>

@@ -7,7 +7,7 @@ import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 import {RRFIDPipe } from '../../shared/Filters/RRFIdFilter.component';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult, RRFStatus, RRFAssignStatus} from  '../../../shared/constantValue/index';
-import { MasterData, ResponseFromAPI, GrdOptions} from '../../../shared/model/common.model';
+import { MasterData, ResponseFromAPI, GrdOptions, SortingMasterData} from '../../../shared/model/common.model';
 import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
 import { MastersService } from '../../../shared/services/masters.service';
 import {RRFPipe } from '../../shared/Filters/RRFFilter.component';
@@ -58,6 +58,7 @@ export class RRFDashboardListComponent implements OnActivate {
     NORECORDSFOUND: boolean = false;
     displayApproval: boolean = false;
     displayAssignedTo: boolean = false;
+    SortByList: SortingMasterData[] = [];
 
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService, private _router: Router,
@@ -69,6 +70,7 @@ export class RRFDashboardListComponent implements OnActivate {
     routerOnActivate() {
         this.getLoggedInUser();
         this.getMyRRFData();
+        this.getColumsForSorting('MYRRF');
         this.GetRecruiter();
         this.setDefaultcloseRRFID();
     }
@@ -84,13 +86,12 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     getAssignedRRFData() {
+        this.resetToDefaultGridOptions();
         this.GetRRFAssignedToRecruiter();
-        // this.getStatuswiseAssignedRRFCount();
         this.isChartVisible = false;
     }
 
     getUnAssignedRRFData() {
-        //this.getStatuswiseUnAssignedRRFCount();
         this.GetAllUnAssignedRRF();
         this.isChartVisible = false;
     }
@@ -142,6 +143,7 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     GetAllUnAssignedRRF() {
+
         this.NORECORDSFOUND = false;
         this._rrfDashboardService.GetAllUnAssignedRRF(this.grdOptions)
             .subscribe(
@@ -247,11 +249,17 @@ export class RRFDashboardListComponent implements OnActivate {
             // this.setDefaultValueToRecrCmb();
             this.getAssignedRRFData();
         }
-        
-        this.setVisibilityOFColumn();
+
+        // this.viewWiseSetting();
     }
 
-    setVisibilityOFColumn() {
+    loadListView() {
+        this.isListVisible = true;
+        this.showListOfRRF();
+        this.loadSortDropDown();
+    }
+
+    viewWiseSetting() {
         if (this.currentView === 'allRRF') {
             this.displayApproval = false;
             this.displayAssignedTo = false;
@@ -261,10 +269,21 @@ export class RRFDashboardListComponent implements OnActivate {
         } else if (this.currentView === 'unAssignRRF') {
             this.displayApproval = false;
             this.displayAssignedTo = false;
-
         } else {
             this.displayApproval = false;
             this.displayAssignedTo = true;
+        }
+    }
+
+    loadSortDropDown() {
+        if (this.currentView === 'allRRF') {
+            this.getColumsForSorting('ALLRRF');
+        } else if (this.currentView === 'myRRF') {
+            this.getColumsForSorting('MYRRF');
+        } else if (this.currentView === 'unAssignRRF') {
+            this.getColumsForSorting('UNASSIGNEDRRF');
+        } else {
+            this.getColumsForSorting('ASSIGNEDRRF');
         }
     }
 
@@ -290,8 +309,9 @@ export class RRFDashboardListComponent implements OnActivate {
             this.setDefaultValueToRecrCmb();
             this.getAssignedRRFData();
         }
-        
-        this.setVisibilityOFColumn();
+
+        this.viewWiseSetting();
+        this.loadSortDropDown();
     }
 
     onEditRRF(rrfID: number) {
@@ -454,6 +474,15 @@ export class RRFDashboardListComponent implements OnActivate {
 
         //call APIResult
         this.showListOfRRF();
+    }
+
+    getColumsForSorting(featureName: string) {
+        this._mastersService.getColumsForSorting(featureName)
+            .subscribe(
+            results => {
+                this.SortByList = <any>results;
+            },
+            error => this.errorMessage = <any>error);
     }
 }
 
