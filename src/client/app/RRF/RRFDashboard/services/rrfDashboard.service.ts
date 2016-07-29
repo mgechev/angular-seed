@@ -105,7 +105,7 @@ export class RRFDashboardService {
     GetRRFAssignedToRecruiter(recruiter: MasterData , grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/RRF/GetRRFAssignedToRecruiter');
         this._spinnerService.show();
-        return this.authHttp.post(url, {RecruiterRRFs : {recruiter ,grdOptions}})
+        return this.authHttp.post(url, {RecruiterRRFs : {recruiter , GrdOptions : {grdOptions}}})
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

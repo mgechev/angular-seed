@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { CandidateProfile, ResumeMeta, SalaryDetails, Qualification, TeamManagement, CareerProfile,
     OtherDetails, Skills, TransferOwnershipMeta} from '../model/myProfilesInfo';
@@ -13,7 +13,7 @@ import { MasterData } from  '../../../shared/model/index';
 export class ProfileBankService {
 
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
-
+    
 
     getCurrentLoggedInUser() {
         let url = Config.GetURL('/api/authentication/getCurrentUserName');
@@ -200,17 +200,36 @@ export class ProfileBankService {
         // let url = Config.GetURL('/api/ProfileBank/GetResume?CandidateID=' + CandidateID.Value);
         // xhr.open('GET', url, true);
         // xhr.responseType = 'blob';
+        // xhr.setRequestHeader('responseType', 'bolb');
         // xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
         // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        // xhr.send();
+
+
         // xhr.onreadystatechange = function () {//Call a function when the state changes.
         //     if (xhr.readyState === 4 && xhr.status === 200) {
-        //         var blob = new Blob([this.response], { type: 'application/jpg' });
+        //         var blob = new Blob([this.response], { type: 'application/jpeg' });
         //         saveAs(blob, 'Report.jpg');
         //     } else {
         //         console.log('Error');
         //     }
-        // }
+        // };
+        // xhr.open('GET', url, true);
+        // xhr.send();
+        let url = Config.GetURL('/api/ProfileBank/GetResume?CandidateID=' + CandidateID.Value);
+        var headers = new Headers();
+        headers.append('responseType', 'bolb');
+        // headers.append('Content-Type', 'application/json');
+        // headers.append('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
+        let options = new RequestOptions({ headers: headers });
+        //'http://www.pdf995.com/samples/pdf.pdf
+        return this.http.get('http://www.pdf995.com/samples/pdf.pdf',headers)
+            .map((response:any) => {
+                var mediaType = 'application/pdf';
+                var blob = new Blob([response._body], { type: mediaType });
+                var filename = 'test.pdf';
+                saveAs(blob, filename);
+            })
+            .catch(this.handleError);
 
     }
 
@@ -274,13 +293,19 @@ export class ProfileBankService {
     }
 
     /* Sorting */
-    getColumsForSorting(featureName:string) {
-         let url = Config.GetURL('/api/Masters/GetSortableColumns?Feature=' + featureName);
+    getColumsForSorting(featureName: string) {
+        let url = Config.GetURL('/api/Masters/GetSortableColumns?Feature=' + featureName);
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
+    }
+    private createBolb(res: Response) {
+        if (res.status < 200 || res.status >= 300) {
+            throw new Error('Bad response status: ' + res.status);
+        }
+        return new Blob([res], { type: 'image/jpeg' });
     }
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {

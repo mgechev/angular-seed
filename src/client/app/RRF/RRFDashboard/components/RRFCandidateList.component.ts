@@ -4,8 +4,8 @@ import { MyRRFService } from '../../myRRF/services/myRRF.service';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-//import { APIResult, RRFAssignStatus } from  '../../../shared/constantValue/index';
-import { MasterData} from '../../../shared/model/common.model';
+import { APIResult } from  '../../../shared/constantValue/index';
+import { MasterData, ResponseFromAPI} from '../../../shared/model/common.model';
 import { CandidateProfile } from  '../../../profileBank/shared/model/myProfilesInfo';
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 //import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap';
@@ -43,6 +43,7 @@ export class RRFCandidateListComponent implements OnActivate {
     CandidateRoundHistory: Array<Interview>;
     isRoundHistoryPresent: boolean = false;
     selectedCandidate: string;
+    InterviewID:MasterData = new MasterData();
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
         private _rrfDashboardService: RRFDashboardService,
@@ -71,6 +72,7 @@ export class RRFCandidateListComponent implements OnActivate {
     onScheduleInterviewClick(Candidate: any) {
         sessionStorage.setItem('RRFID', JSON.stringify(this.RRFID));
         sessionStorage.setItem('Candidate', JSON.stringify(Candidate));
+        sessionStorage.setItem('Status', Candidate.InterviewDetails.Status);
         this._router.navigate(['/App/Recruitment Cycle/Schedule/New']);
     }
 
@@ -221,5 +223,24 @@ export class RRFCandidateListComponent implements OnActivate {
             return false;
         } else { return true; }
 
+    }
+    OnProceedForOfferGenerationClick(CandidateDetails: RRFSpecificCandidateList) {
+       this.InterviewID = CandidateDetails.InterviewDetails.InterviewID;
+       var cnfrmbx :any = $('#prcedfrOffrgenration');
+       cnfrmbx.modal();
+    }
+    proceedForOfferGeneration(InterviewID:MasterData) {
+        if(InterviewID.Id !== null && InterviewID.Id !== undefined) {
+         this._rrfCandidatesList.proceedForOfferGeneration(InterviewID)
+            .subscribe(
+            (results: any) => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                } else {
+                    this.toastr.success((<ResponseFromAPI>results).ErrorMsg);
+                }
+            },
+            error => this.errorMessage = <any>error);
+        }
     }
 }

@@ -49,10 +49,12 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label align">Interview Type <span class="required"> * </span></label>
                                         <div class="col-md-3">
-                                            <select class="form-control" [(ngModel)]="ScheduleInterView.InterviewType.Id" (change)='getInterviewRoundsbyInterviewType($event.target.value)'>
+                                            <div class="input-group select2-bootstrap-append" style="width:160px !important">
+                                                <select class="form-control" [(ngModel)]="ScheduleInterView.InterviewType.Id" (change)='getInterviewRoundsbyInterviewType($event.target.value)'>
                                                     <option></option>
                                                     <option *ngFor="let Type of InterviewTypes" [value]="Type.Id">{{Type.Value}}</option>
                                             </select>
+                                            </div>
                                         </div>
                                         <label class="col-md-2 control-label align">Round <span class="required"> * </span></label>
                                         <div class="col-md-3">
@@ -66,13 +68,20 @@
                                 <div class="row" style="margin-top:15px">
                                     <div class="form-group">
                                         <label class="col-md-3 control-label align">Interview Mode <span class="required"> * </span></label>
-                                        <div class="col-md-6">
-                                            <div class="input-group select2-bootstrap-append" style="width:233px !important">
-
+                                        <div class="col-md-3">
+                                            <div class="input-group select2-bootstrap-append" style="width:160px !important">
                                                 <select class="form-control" [(ngModel)]="ScheduleInterView.InterviewMode.Id" (change)='setSelectedMode($event.target.value)'>
                                                         <option  *ngFor="let mode of InterviewModes" [value]="mode.Id">{{mode.Value}}</option>
-                                              </select>
-
+                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="selectSkypeID">
+                                            <label class="col-md-2 control-label align">Skype ID <span class="required"> * </span></label>
+                                            <div class="col-md-3">
+                                                <select class="form-control" [(ngModel)]="ScheduleInterView.SkypeID">
+                                                    <option></option>
+                                                    <option *ngFor="let round of InterviewRounds" [value]="round.Id">{{round.Value}}</option>
+                                            </select>
                                             </div>
                                         </div>
                                     </div>
@@ -81,8 +90,8 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label align">Interviewers <span class="required"> * </span></label>
                                         <div class="col-md-5">
-                                            <div class="input-group select2-bootstrap-append" style="width:233px !important">
-                                                <select id="cmbInterviewers" class="form-control" multiple style="width:233px !important" (change)='onSelectInterviewer($event.target.value)'>
+                                            <div class="input-group select2-bootstrap-append" style="width:160px !important">
+                                                <select id="cmbInterviewers" class="form-control" multiple style="width:160px !important" (change)='onSelectInterviewer($event.target.value)'>
                                                     <optgroup label="Nominations">
                                                         <option  *ngFor="let interviewer of NominatedInterviewers" [value]="interviewer.Id" [text]="interviewer.Value">{{interviewer.Value}}</option>
                                                     </optgroup>
@@ -130,11 +139,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row" style="margin-top:15px" *ngIf="ifInvalidInterview">
+                                <div class="row" style="margin-top:15px" *ngIf="ifInvalidInterview || ifRescheduleInterview">
                                     <div class="form-group">
                                         <label class="col-md-3 control-label align">Reason <span class="required"> * </span></label>
                                         <div class="col-md-8">
-                                            <textarea class="form-control" rows="2" placeholder="Reson to send for approval" style="resize:vertical" [(ngModel)]="ScheduleInterView.Reason"> </textarea>
+                                            <textarea class="form-control" rows="2" placeholder="Reson to send for approval" style="resize:vertical" [(ngModel)]="ScheduleInterView.Reason"
+                                                required> </textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -158,9 +168,9 @@
                         <!--
                             <full-calendar [resources]="resources" [events]="events" [header]="header" defaultDate="2016-01-12" [eventLimit]="4" [editable]="true"
                             (onEventClick)="handleEventClick($event)" [selectable]="true" [selectHelper]="true" (onSelect)="handleDayClick($event)"></full-calendar>-->
-                        <full-calendar [resources]="InterviewerCalendarDetails.Resources" [events]="InterviewerCalendarDetails.Events" [header]="header"
-                            defaultDate="2016-07-12" (onEventClick)="handleEventClick($event)" (onEventRender)="showDetails($event)"
-                            [eventLimit]="4" [editable]="true">
+                        <full-calendar [resources]="resources" [events]="InterviewerCalendarDetails.Events" [header]="header" defaultDate="2016-07-12"
+                            (onEventClick)="handleEventClick($event)" (onEventRender)="showDetails($event)" [eventLimit]="4"
+                            [editable]="true">
                         </full-calendar>
 
                     </div>
@@ -173,7 +183,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                        <h4 id="modalTitle" class="modal-title"></h4>
+                        <h4 id="modalTitle" class="modal-title">Time Slot Details </h4>
                     </div>
                     <div id="modalBody" class="modal-body" *ngIf="event">
                         <div class="row" style="margin-top:15px">
@@ -185,13 +195,13 @@
                         <div class="row" style="margin-top:15px">
                             <div class="form-group">
                                 <div class="col-md-4 align"><label>Start Date <span class="required">*</span></label></div>
-                                <div class="col-md-8"> {{event.start}} </div>
+                                <div class="col-md-8"> {{event.start}} &nbsp; Start Time {{event.startTime}}</div>
                             </div>
                         </div>
                         <div class="row" style="margin-top:15px">
                             <div class="form-group">
                                 <div class="col-md-4 align"><label>End Date <span class="required">*</span></label></div>
-                                <div class="col-md-8">{{event.end}}</div>
+                                <div class="col-md-8">{{event.end}} &nbsp; End Time {{event.endTime}}</div>
                             </div>
                         </div>
 
@@ -217,6 +227,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
+
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
                     </div>
                     <div id="modalBody" class="modal-body">
@@ -242,7 +253,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" icon="fa-check" class="btn btn-info" (click)="onForceInterviewSchedule()" label="">Yes</button>
-                        <button type="button" icon="fa-check" class="btn btn-default" (click)="onClearSelection()"  label="">No</button>
+                        <button type="button" icon="fa-check" class="btn btn-default" (click)="onClearSelection()" label="">No</button>
                     </div>
                 </div>
             </div>

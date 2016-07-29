@@ -15,7 +15,8 @@ export class CalendarDataService {
     InterviewCalendarDetails: CalendarDetails = new CalendarDetails();
     constructor(private authHttp: AuthHttp,
         private _spinnerService: SpinnerService) {
-
+        this.InterviewCalendarDetails.Resources = [{ id: 1, title: 'Available', eventColor: 'green' },
+            { id: 2, title: 'Booked', eventColor: 'red' }];
     }
 
     // getResources1() {
@@ -62,13 +63,12 @@ export class CalendarDataService {
         //     .map(this.extractData)
         //     .catch(this.handleError)
         //     .finally(() => this._spinnerService.hide());
-
-        return this.authHttp.get(url)
-            .toPromise()
-            .then(this.extractData)
-            .catch(this.handleError);
-          //  .finally(() => this._spinnerService.hide());
-        //return this.InterviewCalendarDetails.Resources;
+        //return new Promise((resolve, reject) => { this.authHttp.get(url); });
+        // return this.authHttp.get(url)
+        //     .toPromise()
+        //     .then(this.extractData)
+        //     .catch(this.handleError);
+        return this.InterviewCalendarDetails.Resources;
     }
 
     private extractData(res: Response) {
