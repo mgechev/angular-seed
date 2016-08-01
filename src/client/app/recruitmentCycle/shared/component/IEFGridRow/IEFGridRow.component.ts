@@ -14,7 +14,7 @@ import {CandidateIEFService} from '../../services/Candidate.IEF.service';
 
 export class IEFGridRowComponent implements AfterViewInit {
     @Input() InterviewID: MasterData = new MasterData();
-    candidateIEFDetails: IEFFunction[] = [];
+    IEFDetails: IEFFunction[] = [];
     errorMessage: string = '';
 
     constructor(private _candidateIEFService: CandidateIEFService) {
@@ -28,7 +28,7 @@ export class IEFGridRowComponent implements AfterViewInit {
         this._candidateIEFService.getIEFByInterviewID(this.InterviewID)
             .subscribe(
             (results: any) => {
-                this.candidateIEFDetails = results;
+                this.IEFDetails = results;
             },
             error => {
                 this.errorMessage = <any>error;

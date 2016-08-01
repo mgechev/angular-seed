@@ -255,7 +255,7 @@
                     </div>
                     <div class="portlet-body">
                         <div class="table-scrollable">
-                            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+                            <table class="table table-striped table-bordered table-checkable order-column" id="sample_1">
                                 <!--<thead style="border-bottom:solid 1px rgb(231, 236, 241) !important;">
                                     <tr>
                                         <th> Interview Details </th>
@@ -267,11 +267,12 @@
                                     <tr class="gradeX" *ngFor="let _myInterview of InterviewHistory">
                                         <td>
                                             <intwDetailsRow [InterviewRecord]=_myInterview></intwDetailsRow>
-                                            <!--<IEFGridRow [InterviewID]= _myInterview.InterviewID ></IEFGridRow>-->
+                                            <IEFGridRow [InterviewID]=_myInterview.InterviewID *ngIf=_myInterview.showIEF></IEFGridRow>
+                                            
                                         </td>
                                         <td style="width:80px">
                                             <div class="btn-group">
-                                                <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> View IEF
+                                                <button class="btn btn-xs green dropdown-toggle" (click)="onIEFClick(_myInterview)" type="button" data-toggle="dropdown" aria-expanded="false"> {{_myInterview.IEFButtonText}}
                                                 </button>
                                             </div>
                                         </td>

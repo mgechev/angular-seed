@@ -1,1 +1,31 @@
-{{InterviewID.Value}}
+<hr>
+<div align="left " style="background-color: #f5f6fa;margin: 15px;margin-top: 32px;">
+    <!--<div style="margin: 10px;"><b style="margin: 10px;">IEF Details :</b></div>-->
+    <b style="margin: 10px;">IEF Details :</b>
+    <br>
+    <hr style="margin: 3px 0;margin-right: 10px;">
+    <div class="col-lg-12" style="background-color: #f5f6fa;">
+        <div class="col-lg-4">
+            <b>Function</b>
+        </div>
+        <div class="col-lg-1">
+            <b>Rating</b>
+        </div>
+        <div class="col-lg-7">
+            <b>Remark</b>
+        </div>
+    </div>
+
+    <div class="col-lg-12" *ngFor="let IEFData of IEFDetails" style="background-color: #f5f6fa;">
+        <div class="col-lg-4">
+            {{IEFData.FunctionLabel}}
+        </div>
+        <div class="col-lg-1">
+            {{IEFData.Rating}}
+        </div>
+        <div class="col-lg-7">
+            {{IEFData.FunctionValue}}
+        </div>
+    </div>
+
+</div>

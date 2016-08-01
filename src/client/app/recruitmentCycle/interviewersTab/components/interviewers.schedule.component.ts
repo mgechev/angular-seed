@@ -11,13 +11,13 @@ import { InterviewDetailsRowComponent } from '../../shared/component/InterviewDe
 import { GrdOptions } from '../../../shared/model/common.model';
 import { IEFGridRowComponent } from '../../shared/component/IEFGridRow/IEFGridRow.component';
 import { MyScheduleInterview } from '../model/myScheduleInterview';
- 
+
 
 @Component({
     moduleId: module.id,
     selector: 'interviewers-shedule',
     templateUrl: 'interviewers.schedule.component.html',
-    directives: [ROUTER_DIRECTIVES, FullCalendarComponent, InterviewDetailsRowComponent,IEFGridRowComponent],
+    directives: [ROUTER_DIRECTIVES, FullCalendarComponent, InterviewDetailsRowComponent, IEFGridRowComponent],
     providers: [Interview, ToastsManager, InterviewersScheduleService]
 })
 
@@ -39,6 +39,9 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
 
     InterviewHistory: MyScheduleInterview[] = [];
     grdOptionsIntwHistory: GrdOptions = new GrdOptions();
+    viewIEFText: string = 'View IEF';
+    hideIEFText: string = 'Hide IEF';
+    IEFButtonText: string = '';
     constructor(private _router: Router,
         private toastr: ToastsManager,
         private _interviewService: InterviewersScheduleService) {
@@ -56,6 +59,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         this.getMyAllInterviewsDetailsOfCalendar();
         //this.returnPath = sessionStorage.getItem('returnPath');
         this.GetMyAllConductedInerviewsHistory();
+        this.IEFButtonText = this.viewIEFText;
     }
     Back() {
         if (this.returnPath !== undefined)
@@ -124,9 +128,9 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
                 this.grdOptionsIntwHistory = results.GrdOperations;
                 if (results.AllInterviews !== undefined && results.AllInterviews.length > 0) {
                     this.InterviewHistory = results.AllInterviews;
-                     for (var index = 0; index <this.InterviewHistory.length; index++) {
-                        // this.rrfApprovalList[index].Status = {'Id' :1 ,'Value' :'PendingApproval'}; //TODO : get it from API
+                    for (var index = 0; index < this.InterviewHistory.length; index++) {
                         this.InterviewHistory[index].showIEF = false;
+                        this.InterviewHistory[index].IEFButtonText = this.viewIEFText;
                     }
                 } else {
                     this.HISTORYRECORDSNOTFOUND = true;
@@ -137,6 +141,19 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
                 this.errorMessage = <any>error;
                 this.toastr.error(<any>error);
             });
+    }
+
+    onIEFClick(myScheduleInterview: MyScheduleInterview) {
+        myScheduleInterview.showIEF = !myScheduleInterview.showIEF;
+        this.setIEFButtonText(myScheduleInterview);
+    }
+
+    setIEFButtonText(myScheduleInterview: MyScheduleInterview) {
+        if (myScheduleInterview.showIEF) {
+            myScheduleInterview.IEFButtonText = this.hideIEFText;
+        } else {
+            myScheduleInterview.IEFButtonText = this.viewIEFText;
+        }
     }
 
     /**Commenting as this functionality is deprecated */
