@@ -146,16 +146,16 @@
                                                 </label>
                                             </td>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Personal Info</th>
-                                            <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Tag </th>
+                                            <!--<th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Tag </th>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Professional Details </th>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Status </th>
-                                            <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Resume </th>
+                                            <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Resume </th>-->
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Actions </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <!--CandidateProfiles   allProfilesList.Profiles-->
-                                        <tr class="gradeX odd" *ngFor="let profile of allProfilesList.Profiles | ProfileBankPipe:searchString ">
+                                        <tr class="gradeX" *ngFor="let profile of allProfilesList.Profiles | ProfileBankPipe:searchString ">
                                             <td>
                                                 <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                                     <input type="checkbox" class="checkboxes" value="1" [id]='profile.CandidateID' [(ngModel)]='profile.IsChecked' (change)="onStateChange($event)"/>
@@ -163,6 +163,10 @@
                                                 </label>
                                             </td>
                                             <td>
+                                                <detail-profile></detail-profile>
+                                            </td>
+                                            <!-- ng Binding -->
+                                            <!--<td>
                                                 <tr>
                                                     <td style="float: left;">&nbsp; {{profile.Candidate}}</td>
                                                 </tr>
@@ -191,9 +195,11 @@
                                                 <span class="mt-action-dot color{{profile.Status.Id}}"> </span>{{profile.Status.Value}}
                                             </td>
                                             <td class="text-center">
-                                                <!--(click)='getResume(profile.CandidateID)'-->
+                                                
                                                 <a (click)='getResume(profile.CandidateID)'><i class="fa fa-download" aria-hidden="true" ></i>{{profile.Resume_ID}}</a>
-                                            </td>
+                                            </td>-->
+                                            <!-- ng Binding -->
+
                                             <td style="width:8%">
                                                 <div class="btn-group">
                                                     <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
