@@ -267,6 +267,7 @@
                                     <tr class="gradeX" *ngFor="let _myInterview of InterviewHistory">
                                         <td>
                                             <intwDetailsRow [InterviewRecord]=_myInterview></intwDetailsRow>
+                                            <br><br>
                                             <IEFGridRow [InterviewID]=_myInterview.InterviewID *ngIf=_myInterview.showIEF></IEFGridRow>
                                             
                                         </td>
