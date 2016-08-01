@@ -310,10 +310,10 @@
                                                 </label>
                                         </td>
                                         <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Name / Email / Contact</th>
-                                        <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Tag </th>
+                                        <!--<th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Tag </th>
                                         <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Professional Details </th>
                                         <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Status </th>
-                                        <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Resume </th>
+                                        <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Resume </th>-->
                                         <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Actions </th>
 
                                     </tr>
@@ -327,6 +327,9 @@
                                                 </label>
                                         </td>
                                         <td>
+                                            <detail-profile [selectedProfile]="myprofile"></detail-profile>
+                                        </td>
+                                        <!--<td>
                                             <tr>
                                                 <td style="float: left;">&nbsp; {{myprofile.Candidate}}</td>
                                             </tr>
@@ -354,7 +357,7 @@
                                         </td>
                                         <td class="text-center">
                                             <a href="" download tooltip="Download Resume" tooltipPlacement="top" tooltipTrigger="mouseenter"><i class="fa fa-download" aria-hidden="true"></i></a>
-                                        </td>
+                                        </td>-->
                                         <td>
                                             <div class="btn-group">
                                                 <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions

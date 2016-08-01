@@ -88,44 +88,7 @@
                                     <!-- NgBindings-->
                                     <!--<tr class="gradeX odd" *ngFor="let profile of allProfilesList.Profiles | ProfileBankPipe:searchString ">
                                             <td>
-                                                <tr>
-                                                    <td style="float: left;">&nbsp; {{profile.Candidate}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="float: left;">&nbsp; {{profile.Email}} </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="float: left;">&nbsp; {{profile.PrimaryContact}}</td>
-                                                </tr>
-                                            </td>
-                                            <td> {{profile.Tag}} </td>
-                                            <td>
-                                                <tr>
-                                                    <td style="float: left;">&nbsp; Notice Period : {{profile.CandidateOtherDetails.NoticePeriod}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="float: left;">&nbsp; Current Salary : {{profile.CandidateSalaryDetails.CurrentSalary}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="float: left;">&nbsp; Expected Salary : {{profile.CandidateSalaryDetails.ExpectedSalary}}</td>
-                                                </tr>
-                                            </td>
-                                            <td>
-                                                <tr>
-                                                    <td style="float: left;">&nbsp; Passport No : {{profile.CandidateOtherDetails.NoticePeriod}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="float: left;">&nbsp; Adhar Card No : {{profile.CandidateSalaryDetails.CurrentSalary}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="float: left;">&nbsp; Pan Card No : {{profile.CandidateSalaryDetails.ExpectedSalary}}</td>
-                                                </tr>
-                                            </td>
-                                            <td>
-                                                <span class="mt-action-dot color{{profile.Status.Id}}"> </span>{{profile.Status.Value}}
-                                            </td>
-                                            <td class="text-center">
-                                                <a><i class="fa fa-download" aria-hidden="true"></i>{{profile.Resume_ID}}</a>
+                                                <detail-profile [selectedProfile]="profile"></detail-profile>
                                             </td>
                                         </tr>-->
                                     <!-- /NgBindings-->

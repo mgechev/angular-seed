@@ -18,7 +18,12 @@
                         alt="">
                 </li>
                 <!--<li><a href="javascript:;">shaktiman@durdarshan.com</a></li>-->
-                <li> <a href="tel:9988776655">+91 9988776655</a></li>
+                <li>
+                    <span class="label label-sm label-success"> 
+                    <i class="fa fa-mobile-phone"></i>
+                    <a href="tel:{{profile.PrimaryContact}}">{{profile.PrimaryContact?profile.PrimaryContact:"N/A"}}</a>
+                    </span>
+                </li>
 
             </ul>
         </div>
@@ -28,32 +33,36 @@
         <div class="col-md-9">
             <div class="row">
                 <div class="col-md-8 profile-info">
-                    <h3 class="font-green sbold uppercase">John Doe</h3>
+                    <h3 class="font-green sbold uppercase">{{profile.Candidate}}</h3>
                     <!--<p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet
                         dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.
                     </p>-->
                     <ul class="list-unstyled">
                         <li>
-                            <label class="control-label">Current Salary : <strong><i class="fa fa-inr"></i>6,00,000.00</strong></label>
+
+                            <label class="control-label">Skills : <strong> {{profile.CandidateSkills.PrimarySkills}} ;</strong> {{profile.CandidateSkills.OtherSkills}} ; {{profile.CandidateSkills.PrimarySkills}} C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF</label>
+                            <!--<label class="control-label">Skills : <strong> C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF</strong></label>-->
                         </li>
                         <li>
-                            <label class="control-label">Expected Salary : <strong><i class="fa fa-inr"></i>9,00,000.00</strong></label>
+                            <label class="control-label">Current Salary : <strong><i class="fa fa-inr"></i>{{profile.CandidateSalaryDetails.CurrentSalary?profile.CandidateSalaryDetails.CurrentSalary:"N/A"}}</strong></label>
                         </li>
-                        <li><label class="control-label">Skills : <strong>C#, JAVA, SharePoint, WCF, WPF</strong></label>
+                        <li>
+                            <label class="control-label">Expected Salary : <strong><i class="fa fa-inr"></i>{{profile.CandidateSalaryDetails.ExpectedSalary?profile.CandidateSalaryDetails.ExpectedSalary:"N/A"}}</strong></label>
                         </li>
                     </ul>
                     <p>
-                        <a href="mailto:shaktiman@durdarshan.com?cc=shaktiman@durdarshan.com">shaktiman@durdarshan.com</a>
+                        <a href="mailto:{{profile.Email}}">{{profile.Email?profile.Email:"N/A"}} </a>
                     </p>
                     <ul class="list-inline">
                         <li>
                             <i class="fa fa-map-marker"></i> Bangloer </li>
                         <li>
-                            <i class="fa fa-briefcase"></i> 5 yr </li>
+                            <i class="fa fa-briefcase"></i>{{profile.TotalExperience?profile.TotalExperience:"N/A"}} </li>
                         <li>
-                            <i class="fa fa-tag"></i> SharePoint </li>
+                            <i class="fa fa-tag"></i> {{profile.Tag?profile.Tag:"N/A"}} </li>
                         <li>
-                            <i class="fa fa-hourglass-half"></i> 45 Days </li>
+                            <i class="fa fa-hourglass-half"></i> {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod:"N/A"}}
+                        </li>
                     </ul>
                 </div>
                 <!--end col-md-8-->
@@ -68,11 +77,14 @@
                         <div class="portlet-body">
                             <ul class="list-unstyled">
                                 <li>
-                                    <span class="mt-action-dot color2"> </span>Open
+                                    <h5 class="font-blue sbold uppercase">{{profile.Owner.Value?profile.Owner.Value:"N/A"}}</h5>
+                                </li>
+                                <li>
+                                    <span class="mt-action-dot color{{profile.Status.Id}}"> </span>{{profile.Status.Value}}
                                 </li>
                                 <li>
                                     <div class="tools">
-                                        <a class="reload" href="javascript:;" data-original-title="" title=""><i aria-hidden="true" class="fa fa-download"></i> Download Resume </a>
+                                        <a (click)='getResume(profile.CandidateID)' class="reload" data-original-title="" title=""><i aria-hidden="true" class="fa fa-download"></i>Download Resume {{profile.Resume_ID}}  </a>
                                     </div>
                                 </li>
                             </ul>

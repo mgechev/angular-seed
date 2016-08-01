@@ -140,7 +140,7 @@
                             </div>
 
                             <div class="table-scrollable">
-                                <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" id="sample_1"
+                                <table class="table table-striped table-bordered table-hover order-column dataTable no-footer" id="sample_1"
                                     role="grid" aria-describedby="sample_1_info">
                                     <thead class="thead">
                                         <tr>
@@ -151,10 +151,10 @@
                                                 </label>
                                             </td>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Name / Email / Contact</th>
-                                            <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Tag </th>
+                                            <!--<th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Tag </th>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Professional Details </th>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Status </th>
-                                            <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Resume </th>
+                                            <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Resume </th>-->
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Actions </th>
                                         </tr>
                                     </thead>
@@ -167,6 +167,9 @@
                                                 </label>
                                             </td>
                                             <td>
+                                                <detail-profile [selectedProfile]="profile"></detail-profile>
+                                            </td>
+                                            <!--<td>
                                                 <tr>
                                                     <td style="float: left;">&nbsp; {{profile.Candidate}}</td>
                                                 </tr>
@@ -196,7 +199,8 @@
                                             </td>
                                             <td class="text-center">
                                                 <a href="" download><i class="fa fa-download" aria-hidden="true"></i>{{profile.Resume_ID}}</a>
-                                            </td>
+                                            </td>-->
+
                                             <td>
                                                 <div class="btn-group">
                                                     <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions

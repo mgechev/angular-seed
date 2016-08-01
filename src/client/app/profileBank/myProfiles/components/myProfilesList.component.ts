@@ -14,12 +14,13 @@ import { Headers, Http } from '@angular/http';
 import { Candidate } from '../../shared/model/RRF';
 import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
 import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
+import { DetailProfileComponent } from '../../shared/component/detailProfile.component';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-myprofiles-list',
     templateUrl: 'myProfilesList.component.html',
-    directives: [ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES, IfAuthorizeDirective],
+    directives: [DetailProfileComponent, ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES, IfAuthorizeDirective],
     styleUrls: ['myProfiles.component.css'],
     pipes: [ProfileBankPipe]
 })

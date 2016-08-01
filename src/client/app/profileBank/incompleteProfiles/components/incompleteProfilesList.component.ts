@@ -12,12 +12,13 @@ import { DataSharedService } from '../../shared/services/dataShared.service';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
 import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
+import { DetailProfileComponent } from '../../shared/component/detailProfile.component';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-incompleteprofiles-list',
     templateUrl: 'incompleteProfilesList.component.html',
-    directives: [ROUTER_DIRECTIVES, IfAuthorizeDirective, CollapseDirective, TOOLTIP_DIRECTIVES],
+    directives: [DetailProfileComponent, ROUTER_DIRECTIVES, IfAuthorizeDirective, CollapseDirective, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
     providers: [AllProfilesService],
     pipes: [ProfileBankPipe]
