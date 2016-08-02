@@ -86,7 +86,6 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     getAssignedRRFData() {
-        this.resetToDefaultGridOptions();
         this.GetRRFAssignedToRecruiter();
         this.isChartVisible = false;
     }
@@ -449,6 +448,7 @@ export class RRFDashboardListComponent implements OnActivate {
 
     onRecChange(recID: any) {
         this.selectedRecruiter.Id = recID;
+        this.resetToDefaultGridOptions();
         this.getAssignedRRFData();
     }
 
