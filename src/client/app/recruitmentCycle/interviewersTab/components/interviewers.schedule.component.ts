@@ -156,6 +156,16 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         }
     }
 
+    OnPaginationClick(pageClicked: number) {
+        this.grdOptionsIntwHistory.ButtonClicked = pageClicked;
+        this.GetMyAllConductedInerviewsHistory();
+    }
+
+    bindGridData() {
+        this.grdOptionsIntwHistory.NextPageUrl = [];
+        this.grdOptionsIntwHistory.ButtonClicked = 0;
+        this.GetMyAllConductedInerviewsHistory();
+    }
     /**Commenting as this functionality is deprecated */
     // rejectInterview(_rrfID: MasterData) {
     //     let modalpopup: any = $('#rejectInterview');

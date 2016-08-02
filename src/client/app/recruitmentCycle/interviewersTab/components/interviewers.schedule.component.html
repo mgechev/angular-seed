@@ -254,6 +254,51 @@
                         </div>
                     </div>
                     <div class="portlet-body">
+                        <!-- BEGIN SHOW AND SEARCH  -->
+                        <div class="dataTables_wrapper no-footer">
+                            <div class="row" *ngIf="!HISTORYRECORDSNOTFOUND">
+                                <div class="col-lg-3 col-sm-3">
+                                    <div class="dataTables_length ">
+                                        <label>show
+                                            <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptionsIntwHistory.PerPageCount" (ngModelChange)="bindGridData()">
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="20">20</option>
+                                                <option value="50">50</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-3">
+                                    <div class="dataTables_length ">
+                                        <label>Sort By
+                                            <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptionsIntwHistory.OrderBy" (ngModelChange)="bindGridData()">
+                                                <!--<option *ngFor="let sortColumn of SortByList" [value]="sortColumn.Value">{{sortColumn.Id}}</option>-->
+                                                <option value="Modified">Modified</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-3">
+                                    <div class="dataTables_length ">
+                                        <label>Order by
+                                            <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptionsIntwHistory.Order" (ngModelChange)="bindGridData()">
+                                                <option value="asc">Ascending</option>
+                                                <option value="desc">Descending</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-3 ">
+                                    <div class="dataTables_filter pull-right ">
+                                        <label>Search:
+                                            <input class="form-control input-sm input-small input-inline " [(ngModel)]='searchText' />
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END SHOW AND SEARCH -->
                         <div class="table-scrollable">
                             <table class="table table-striped table-bordered table-checkable order-column" id="sample_1">
                                 <!--<thead style="border-bottom:solid 1px rgb(231, 236, 241) !important;">
@@ -267,13 +312,15 @@
                                     <tr class="gradeX" *ngFor="let _myInterview of InterviewHistory">
                                         <td>
                                             <intwDetailsRow [InterviewRecord]=_myInterview></intwDetailsRow>
-                                            <br><br>
+                                            <br>
+                                            <br>
                                             <IEFGridRow [InterviewID]=_myInterview.InterviewID *ngIf=_myInterview.showIEF></IEFGridRow>
-                                            
+
                                         </td>
                                         <td style="width:80px">
                                             <div class="btn-group">
-                                                <button class="btn btn-xs green dropdown-toggle" (click)="onIEFClick(_myInterview)" type="button" data-toggle="dropdown" aria-expanded="false"> {{_myInterview.IEFButtonText}}
+                                                <button class="btn btn-xs green dropdown-toggle" (click)="onIEFClick(_myInterview)" type="button" data-toggle="dropdown"
+                                                aria-expanded="false"> {{_myInterview.IEFButtonText}}
                                                 </button>
                                             </div>
                                         </td>
@@ -284,6 +331,17 @@
                                 </tbody>
                             </table>
                             <span style="margin-top:5px;margin-left:15px" *ngIf='HISTORYRECORDSNOTFOUND'>No Records Found</span>
+                        </div>
+
+                        <div class="table-toolbar" *ngIf="!HISTORYRECORDSNOTFOUND">
+                            <div class="pull-right ">
+                                <button type="button " class="btn btn-default " [disabled]="!grdOptionsIntwHistory.PreviousButton
+                                  " (click)="OnPaginationClick(-1) ">
+                                    &laquo; Prev</button> &nbsp;&nbsp;
+                                <button type="button " class="btn btn-default " [disabled]="!grdOptionsIntwHistory.NextButton
+                                  " (click)="OnPaginationClick(1) ">
+                                    Next &raquo;</button>
+                            </div>
                         </div>
                     </div>
                 </div>
