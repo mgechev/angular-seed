@@ -1,6 +1,6 @@
 import {Component } from '@angular/core';
 import { Router, OnActivate, ROUTER_DIRECTIVES, RouteSegment } from '@angular/router';
-import {RRFDetails, Panel } from '../models/rrfDetails';
+import {RRFDetails, Panel, IntwRoundSeqData } from '../models/rrfDetails';
 import { MyRRFService } from '../services/myRRF.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
@@ -44,7 +44,7 @@ export class MyRRFAddComponent implements OnActivate {
     ExpDateOfJoining: any;
     params: string;
     mindate: Date;
-
+    intwRoundSeq: IntwRoundSeqData[] =[];
 
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
@@ -58,6 +58,7 @@ export class MyRRFAddComponent implements OnActivate {
         this.getInterviewRound();
         this.getInterviewers();
         this.GetPriority();
+        this.getInterviewSeq();
     }
 
     routerOnActivate(segment: RouteSegment): void {
@@ -189,6 +190,15 @@ export class MyRRFAddComponent implements OnActivate {
             .subscribe(
             results => {
                 this.skills = results;
+            },
+            error => this.errorMessage = <any>error);
+    }
+
+    getInterviewSeq() {
+        this._myRRFService.intwRoundSeqData()
+            .subscribe(
+            (results: any) => {
+                this.intwRoundSeq = results;
             },
             error => this.errorMessage = <any>error);
     }
@@ -371,4 +381,42 @@ export class MyRRFAddComponent implements OnActivate {
             this.onUpdateClick();
         }
     }
+
+    InterviewRoundSelected() {
+        //Get Interview Type and Sequence of selected Round
+        var intType: number = 0;
+        var seq: number = 0;
+        for (var index = 0; index < this.intwRoundSeq.length; index++) {
+            if (+this.intwRoundSeq[index].InterviewRound.Id === +this.IntwRound) {
+                intType = this.intwRoundSeq[index].InterviewType.Id;
+                seq = this.intwRoundSeq[index].Sequence;
+            }
+        }
+
+        //Get all record of above interview type
+        var interviewType: IntwRoundSeqData[] = this.intwRoundSeq.filter(temp => (temp.InterviewType.Id == intType));
+
+        for (var i = 0; i < interviewType.length; i++) {
+            if (interviewType[i].Sequence < seq) {
+                //check is this round is already selected
+                var isPresent: boolean = false;
+                var interviewId: number = interviewType[i].InterviewRound.Id;
+
+                for (var j = 0; j < this.newRRF.Panel.length; j++) {
+                    if (+interviewId === +this.newRRF.Panel[j].RoundNumber.Id) {
+                        isPresent = true;
+                    }
+                }
+
+                if (!isPresent) {
+                    this.IntwRound = 0;
+                    this.toastr.error('Please select Interview Round in sequence');
+                    break;
+                }
+
+            }
+        }
+
+    }
+
 }

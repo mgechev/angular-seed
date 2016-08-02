@@ -216,7 +216,7 @@
                                                 <div class="form-group col-lg-4 ">
                                                     <label>Interview Round<span class="required"> * </span></label>
                                                     <select id="cmbIntwRound " class="form-control" required="" placeholder="Select Interview Round " [(ngModel)]='IntwRound'
-                                                    tooltip="Select Interview Round" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                    (ngModelChange)='InterviewRoundSelected()' tooltip="Select Interview Round" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                     tooltipEnable="!IntwRound">
                                                         <option value="" disabled>Select Interview Round </option>
                                                         <option *ngFor="let Round of interviewRound " [value]="Round.Id ">{{Round.Value}}</option>

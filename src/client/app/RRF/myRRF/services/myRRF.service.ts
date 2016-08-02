@@ -26,7 +26,7 @@ export class MyRRFService {
 
     //Get details of RRF from RRFID
     getRRFDetails(rrfId: string) {
-        let url = Config.GetURL('/api/RRF/ViewRRF?RRFID='+rrfId);
+        let url = Config.GetURL('/api/RRF/ViewRRF?RRFID=' + rrfId);
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
@@ -45,7 +45,7 @@ export class MyRRFService {
     }
 
     getRRFByID(rrfId: string) {
-        let url = Config.GetURL('/api/RRF/GetRRFByID?RRFID='+rrfId);
+        let url = Config.GetURL('/api/RRF/GetRRFByID?RRFID=' + rrfId);
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
@@ -62,7 +62,18 @@ export class MyRRFService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-  
+ 
+
+    //get Interview Round sequence
+    intwRoundSeqData() {
+        let url = Config.GetURL('/api/Masters/GetIterviewRoundsWithSequence');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);

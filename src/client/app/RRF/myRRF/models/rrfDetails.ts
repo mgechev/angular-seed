@@ -3,7 +3,7 @@ import { MasterData  } from '../../../shared/model/common.model';
 export class Panel {
     public RoundNumber: MasterData = new MasterData(); //TODO : check on server side name
     public Interviewers: MasterData[] = new Array();
-   // public Comments: string; //As per requirement
+    // public Comments: string; //As per requirement
 }
 
 export class AssignmentDetails {
@@ -17,8 +17,8 @@ export class AssignmentDetails {
 }
 
 export class AllRRFStatusCount {
-    public Count : number;
-    public Status : MasterData = new MasterData();
+    public Count: number;
+    public Status: MasterData = new MasterData();
 }
 
 export class RRFApproval {
@@ -34,9 +34,9 @@ export class RRFDetails {
     public Technology: MasterData = new MasterData();
     public PositionTitle: string;
     public Description: string;
-    
+
     public NoOfOpenings: number = 1;
-    public SkillsRequired= new Array<MasterData>();
+    public SkillsRequired = new Array<MasterData>();
     public Designation: MasterData = new MasterData();
     public MinExp: number = 0;
     public MaxExp: number = 0;
@@ -51,12 +51,17 @@ export class RRFDetails {
     public AssignedData: AssignmentDetails[] = [];
     public RRFApproval: RRFApproval[] = new Array();
     public OpenForNumberOfDays: number = 0;
-    public CreatedDate : Date;
+    public CreatedDate: Date;
 
     public PreferredSkills: string;
     public Competencies: string;
     public GoodToHave: string;
-    public QualCertRquired : string;
+    public QualCertRquired: string;
 }
 
 
+export class IntwRoundSeqData {
+    InterviewRound: MasterData = new MasterData();
+    InterviewType: MasterData = new MasterData();
+    Sequence: number;
+}
