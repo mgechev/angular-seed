@@ -19,7 +19,7 @@
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption font-dark">
-                                <span class="caption-subject bold uppercase">Evalution form for {{candidateIEFDetails.CandidateName}} </span>
+                                <span class="caption-subject bold uppercase">Evalution form for {{candidateIEFDetails.CandidateName?candidateIEFDetails.CandidateName:"N/A"}} </span>
                             </div>
                             <div class="pull-right">
                                 <table>
@@ -29,10 +29,10 @@
                                                 <span><strong>Experience</strong></span>
                                             </div>
                                             <div>
-                                                <label class="control-label"><strong>Total : </strong>{{ candidateIEFDetails.Experience.TotalExperience}} </label>
+                                                <label class="control-label"><strong>Total : </strong>{{ candidateIEFDetails.Experience.TotalExperience?candidateIEFDetails.Experience.TotalExperience:"N/A"}} </label>
                                             </div>
                                             <div>
-                                                <label class="control-label"><strong>Relevant : </strong>{{candidateIEFDetails.Experience.RelevantExperience}} </label>
+                                                <label class="control-label"><strong>Relevant : </strong>{{candidateIEFDetails.Experience.RelevantExperience?candidateIEFDetails.Experience.RelevantExperience:"N/A"}} </label>
                                             </div>
                                         </td>
                                         <td style="width:50%" *ngIf="candidateIEFDetails.Salary!=null" *ngIf="!requestedIef.DisplayCandidateInfo">
@@ -40,10 +40,10 @@
                                                 <span class="pull-center"><strong> Salary</strong></span>
                                             </div>
                                             <div>
-                                                <label class="control-label"><strong>Current : </strong> <i class="fa fa-inr"></i> {{candidateIEFDetails.Salary.Current}} </label>
+                                                <label class="control-label"><strong>Current : </strong> <i class="fa fa-inr"></i> {{candidateIEFDetails.Salary.Current?candidateIEFDetails.Salary.Current:"N/A"}} </label>
                                             </div>
                                             <div>
-                                                <label class="control-label"><strong>Expected : </strong> <i class="fa fa-inr"></i> {{candidateIEFDetails.Salary.Expected}} </label>
+                                                <label class="control-label"><strong>Expected : </strong> <i class="fa fa-inr"></i> {{candidateIEFDetails.Salary.Expected?candidateIEFDetails.Salary.Expected:"N/A"}} </label>
                                             </div>
                                         </td>
                                     </tr>
@@ -54,7 +54,7 @@
                             <table style="width:100%">
                                 <tr class="form-group">
                                     <td style="width:33%">
-                                        <label class="control-label"><strong>Name : </strong> {{ candidateIEFDetails.CandidateName}}</label>
+                                        <label class="control-label"><strong>Name : </strong> {{ candidateIEFDetails.CandidateName? candidateIEFDetails.CandidateName:"N/A"}}</label>
                                     </td>
                                     <td style="width:33%">
 
@@ -66,30 +66,30 @@
                                 </tr>
                                 <tr class="form-group">
                                     <td style="width:33%">
-                                        <label class="control-label"><strong>Role : </strong>{{ candidateIEFDetails.RRFDetailsIEF.Role}} </label>
+                                        <label class="control-label"><strong>Role : </strong>{{ candidateIEFDetails.RRFDetailsIEF?candidateIEFDetails.RRFDetailsIEF.Role:"N/A"}} </label>
                                     </td>
                                     <td style="width:33%">
-                                        <label class="control-label"><strong>COE/Functions : </strong>{{ candidateIEFDetails.RRFDetailsIEF.FunctionName}} </label>
+                                        <label class="control-label"><strong>COE/Functions : </strong>{{ candidateIEFDetails.RRFDetailsIEF?candidateIEFDetails.RRFDetailsIEF.FunctionName:"N/A"}} </label>
                                     </td>
                                     <td style="width:33%">
-                                        <label class="control-label"><strong>Location : </strong>{{ candidateIEFDetails.Location}} </label>
+                                        <label class="control-label"><strong>Location : </strong>{{ candidateIEFDetails.Location?candidateIEFDetails.Location:"N/A"}} </label>
                                     </td>
                                 </tr>
 
                                 <tr class="form-group">
                                     <td style="width:33%">
-                                        <label class="control-label"><strong>Primary Skills : </strong>{{ candidateIEFDetails.Skills.PrimarySkills}} </label>
+                                        <label class="control-label"><strong>Primary Skills : </strong>{{ candidateIEFDetails.Skills?candidateIEFDetails.Skills.PrimarySkills?candidateIEFDetails.Skills.PrimarySkills:"N/A":"N/A"}} </label>
                                     </td>
                                     <td style="width:33%">
-                                        <label class="control-label"><strong>Secondary Skills : </strong>{{ candidateIEFDetails.Skills.SecondarySkills}}</label>
+                                        <label class="control-label"><strong>Secondary Skills : </strong>{{ candidateIEFDetails.Skills.SecondarySkills?candidateIEFDetails.Skills.SecondarySkills?candidateIEFDetails.Skills.SecondarySkills:"N/A":"N/A"}}</label>
                                     </td>
                                     <td style="width:33%">
-                                        <label class="control-label"><strong>Other special skills : </strong>{{  candidateIEFDetails.Skills.OtherSkills}}</label>
+                                        <label class="control-label"><strong>Other special skills : </strong>{{  candidateIEFDetails.Skills?candidateIEFDetails.Skills.OtherSkills?candidateIEFDetails.Skills.OtherSkills:"N/A":"N/A"}}</label>
                                     </td>
                                 </tr>
                             </table>
                             <div>
-                                <label class="control-label"><strong>Additional Comments : </strong>{{  candidateIEFDetails.AdditionalInformation}}</label>
+                                <label class="control-label"><strong>Additional Comments : </strong>{{  candidateIEFDetails.AdditionalInformation?candidateIEFDetails.AdditionalInformation:"N/A"}}</label>
                             </div>
                             <hr>
                             <!-- BEGIN EVALUTATION FORM-->
