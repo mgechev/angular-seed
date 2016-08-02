@@ -418,6 +418,11 @@ export class MyProfilesAddComponent implements OnActivate {
                 .subscribe(
                 (results: Qualification) => {
                     this.qualification = results;
+
+                    //Show Update button
+                    this.IsHidden = false;
+                    this.selectedQualification = undefined;
+                    this.selectedGrade = undefined;
                 },
                 error => {
                     this.errorMessage = <any>error;
