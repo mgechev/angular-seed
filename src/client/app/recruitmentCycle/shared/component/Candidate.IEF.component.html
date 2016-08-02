@@ -160,7 +160,7 @@
                                             <ul>
                                                 <li *ngFor="let _iefRecord of _IEFHistory.IEFTransactionDetails">
                                                     <strong> {{_iefRecord.FunctionLabel}} : </strong>{{_iefRecord.FunctionValue}}
-                                                    <span class="badge badge-danger">{{_iefRecord.Rating}}</span>
+                                                    <span *ngIf="!_iefRecord.isRating" class="badge badge-danger">{{_iefRecord.Rating}}</span>
                                                 </li>
                                             </ul>
 

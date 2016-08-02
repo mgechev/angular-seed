@@ -14,8 +14,12 @@
             <br>
             <ul class="list-unstyled profile-nav text-center">
                 <li>
-                    <img src="../assets/layouts/layout4/img/default-user.jpg" class="img-responsive pic-bordered" style="border-radius: 50%!important;"
-                        alt="">
+                    <img class="img-responsive pic-bordered" *ngIf="profile.BinaryImage!==''" style="border-radius: 50%!important;" alt="" src="data:image/jpeg;base64,{{profile.BinaryImage}}">
+
+                    <img src="../assets/layouts/layout4/img/default-user.jpg" *ngIf="profile.BinaryImage===''" class="img-responsive pic-bordered"
+                        style="border-radius: 50%!important;" alt="">
+                    <br>
+
                 </li>
                 <!--<li><a href="javascript:;">shaktiman@durdarshan.com</a></li>-->
                 <li>

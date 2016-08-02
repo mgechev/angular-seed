@@ -13,6 +13,7 @@ export class DetailProfileComponent implements OnInit {
     profile: CandidateProfile;
     //Get profiles data
     @Input() selectedProfile: CandidateProfile;
+   // @Input() profilePic: any;
     @Output() updatedProfile: EventEmitter<CandidateProfile> = new EventEmitter<CandidateProfile>();
     constructor(private toastr: ToastsManager) {
         //console.log('In Contructor...');
@@ -20,6 +21,6 @@ export class DetailProfileComponent implements OnInit {
     ngOnInit() {
         /** */
         this.profile = this.selectedProfile;
-        //console.log(this.profile);
+        //console.log(this.profilePic);
     }
 }

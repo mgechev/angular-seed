@@ -62,6 +62,8 @@ export class CandidateProfile {
   public CandidateCode: string;
   public isRRFAssigned: boolean;
 
+  //property for Images results binary string
+  public BinaryImage: string;
 }
 
 export class Qualification {
