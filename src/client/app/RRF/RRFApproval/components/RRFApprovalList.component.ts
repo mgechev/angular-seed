@@ -5,7 +5,7 @@ import { RRFApprovalService } from '../services/rrfApproval.service';
 import { RRFStatus } from  '../../../shared/constantValue/index';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { ResponseFromAPI, GrdOptions ,SortingMasterData } from '../../../shared/model/common.model';
+import { ResponseFromAPI, GrdOptions, SortingMasterData } from '../../../shared/model/common.model';
 import {RRFPipe } from '../../shared/Filters/RRFFilter.component';
 import {RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -14,7 +14,7 @@ import { MastersService } from '../../../shared/services/masters.service';
     moduleId: module.id,
     selector: 'rrf-approval-list',
     templateUrl: 'RRFApprovalList.component.html',
-    directives: [ROUTER_DIRECTIVES,RRFGridRowComponent],
+    directives: [ROUTER_DIRECTIVES, RRFGridRowComponent],
     styleUrls: ['../../shared/css/RRF.component.css'],
     providers: [ToastsManager],
     pipes: [RRFPipe],
@@ -56,9 +56,9 @@ export class RRFApprovalListComponent implements OnActivate {
                         this.rrfApprovalList[index].IsChecked = false;
                     }
                 } else {
-                     this.NORECORDSFOUND = true;
-                     this.rrfApprovalList = [];
-                     }
+                    this.NORECORDSFOUND = true;
+                    this.rrfApprovalList = [];
+                }
 
             },
             error => this.errorMessage = <any>error);
@@ -147,10 +147,17 @@ export class RRFApprovalListComponent implements OnActivate {
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
-                 this.getRRFApprovalList();
+                this.setGrdOption();
+                this.getRRFApprovalList();
             },
             error => this.errorMessage = <any>error);
     }
+
+    setGrdOption() {
+        this.grdOptions.ButtonClicked = 0;
+        this.grdOptions.NextPageUrl = [];
+    }
+    
     //Raised RRF single approval service call
     ActionOnRaisedRRF(rrfID: string,
         status: number,

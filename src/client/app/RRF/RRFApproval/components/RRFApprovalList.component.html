@@ -43,12 +43,10 @@
                                 <div class="dataTables_length ">
                                     <label>show
                                         <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.PerPageCount" (ngModelChange)="bindGridData()">
-                                            <option value="2">2</option>
                                             <option value="5">5</option>
                                             <option value="10">10</option>
                                             <option value="20">20</option>
                                             <option value="50">50</option>
-                                            <option value="-1">All</option>
                                         </select>
                                     </label>
                                 </div>
@@ -85,9 +83,9 @@
 
                     <!-- BEGIN LIST OF RRF  -->
                     <div class="">
-                        <table class="table table-striped table-bordered table-hover table-checkable order-column">
-                            <!--<thead style="word-wrap: break-word;" class="thead">
-                                <tr width="5%">
+                        <table class="table table-striped table-bordered table-hover table-checkable order-column" >
+                            <thead style="word-wrap: break-word;" class="thead">
+                                <tr width="5%" *ngIf='!NORECORDSFOUND'>
                                     <td>
                                         <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                             <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" (change)="onAllSelect($event)" [(ngModel)]='allChecked'
@@ -97,7 +95,7 @@
                                     </td>
                                     <td> <b>RRF Details</b> </td>
                                 </tr>
-                            </thead>-->
+                            </thead>
                             <tbody>
                                 <tr class="odd gradeX" *ngFor="let rrf of rrfApprovalList | RRFPipe : searchText ">
                                     <td>

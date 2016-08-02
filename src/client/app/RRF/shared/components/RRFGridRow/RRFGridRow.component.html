@@ -5,19 +5,19 @@
         </div>
         <div class="row">
             <div class="col-lg-3">
-                  <b>Raised By</b> :{{RRFData.RaisedBy.Value }} &nbsp;
+                <b>Raised By</b> :{{RRFData.RaisedBy.Value }} &nbsp;
             </div>
             <div class="col-lg-3">
-                 <b>Raised On</b>: {{RRFData.CreatedDate}} &nbsp;&nbsp;&nbsp;
+                <b>Raised On</b>: {{RRFData.CreatedDate}} &nbsp;&nbsp;&nbsp;
             </div>
             <div class="col-lg-3">
                 <b>Open for no. of days</b> : {{RRFData.OpenForNumberOfDays}}
             </div>
             <div class="col-lg-3">
-                 <b>Status</b> :<span class="mt-action-dot {{getStatusClass(RRFData.Status.Id)}} "></span>{{RRFData.Status.Value}}
+                <b>Status</b> :<span class="mt-action-dot {{getStatusClass(RRFData.Status.Id)}} "></span>{{RRFData.Status.Value}}
             </div>
         </div>
-      
+
     </div>
     <hr style="margin: 9px 0;margin-right: 10px;">
     <!--<br>-->
@@ -76,7 +76,17 @@
             <div>
                 <b>RRF Approver</b>:
             </div>
-            <label *ngFor="let Approvaldetails of RRFData.RRFApproval"> {{Approvaldetails.Approver.Value}} :{{Approvaldetails.Status}}&nbsp;</label>
+            <div  class="row" *ngFor="let Approvaldetails of RRFData.RRFApproval">
+                <div class="col-lg-3">
+                    {{Approvaldetails.Approver.Value}}
+                </div>
+                <div class="col-lg-1">
+                    :
+                </div>
+                <div class="col-lg-3">
+                    {{Approvaldetails.Status}}
+                </div>
+            </div>
         </div>
     </div>
 
