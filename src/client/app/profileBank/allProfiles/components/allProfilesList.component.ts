@@ -99,7 +99,9 @@ export class AllProfilesListComponent implements OnActivate {
     }
 
     redirectToView(CandidateID: MasterData) {
-        this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+        //this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+        //Changed as per Backend Request and Bug 
+        this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID.Value]);
     }
     /** Delete Prfile will be available only to the Recruitment Head*/
     deleteCandidate(CandidateID: MasterData) {

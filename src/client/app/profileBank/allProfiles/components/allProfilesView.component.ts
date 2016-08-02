@@ -6,7 +6,7 @@ import { ProfileBankService } from '../../shared/services/profileBank.service';
 @Component({
     moduleId: module.id,
     selector: 'rrf-allprofiles-view',
-      templateUrl: '../../shared/views/profileBankView.component.html',
+    templateUrl: '../../shared/views/profileBankView.component.html',
     directives: [ROUTER_DIRECTIVES],
     styleUrls: ['allProfilesView.component.css']
 })
@@ -14,18 +14,22 @@ export class AllProfilesViewComponent implements OnActivate {
     params: string;
     errorMessage: string;
     profile: CandidateProfile;
-    count:number=0;
-    TITLE : string ='All Profiles';
+    count: number = 0;
+    TITLE: string = 'All Profiles';
     constructor(private _profileBankService: ProfileBankService,
         private _router: Router) {
         this.profile = new CandidateProfile();
     }
     routerOnActivate(segment: RouteSegment) {
         this.params = segment.getParam('id');
-        if (this.params) {
-            this._profileBankService.getCandidateProfile(this.params)
+        this.getProfileInformation(this.params);
+    }
+
+    getProfileInformation(CandidateID: string) {
+        if (CandidateID) {
+            this._profileBankService.getCandidateProfile(CandidateID)
                 .subscribe(
-                (results : CandidateProfile)=> {
+                (results: CandidateProfile) => {
                     this.profile = results;
                     this.count = results.CandidateQualification.length;
                     this.convertCheckboxesValues();
