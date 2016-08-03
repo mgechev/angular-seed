@@ -332,7 +332,7 @@
                                                             <i class="icon-user "></i> Assign RRF
                                                         </button>
                                                     </li>
-                                                    <li class="divider "> </li>
+                                                    <li class="divider " [ifAuthorize]="[ 'RC.VIEWRRFCANDIDATES.MANAGE'] "> </li>
                                                     <li>
                                                         <button class="btn btn-default btnLink " [ifAuthorize]="[ 'RC.VIEWRRFCANDIDATES.MANAGE'] " (click)='onViewCandidateClick(rrf.RRFID)'
                                                         [disabled]='checkIfRRFClosed(rrf.Status.Id)'>

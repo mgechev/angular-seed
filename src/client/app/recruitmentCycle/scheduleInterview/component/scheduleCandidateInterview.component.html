@@ -92,7 +92,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group select2-bootstrap-append" style="width:160px !important">
                                                 <select id="cmbInterviewers" class="form-control" multiple style="width:160px !important" (change)='onSelectInterviewer($event.target.value)'>
-                                                    <optgroup label="Nominations">
+                                                    <optgroup label="Nominations" *ngIf="NominatedInterviewersAvailable">
                                                         <option  *ngFor="let interviewer of NominatedInterviewers" [value]="interviewer.Id" [text]="interviewer.Value">{{interviewer.Value}}</option>
                                                     </optgroup>
                                                     <optgroup label="Other">

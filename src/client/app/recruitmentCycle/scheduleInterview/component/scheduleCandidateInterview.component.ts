@@ -60,7 +60,8 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     ifInterviewScheduled: boolean = true;
     ifRescheduleInterview: boolean = false;
     selectSkypeID: boolean = false;
-    isInterviewReschedule:boolean = false;
+    isInterviewReschedule: boolean = false;
+    NominatedInterviewersAvailable: boolean = false;
 
     constructor(private _router: Router,
         private _calendarDataService: CalendarDataService,
@@ -228,8 +229,11 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             this._ScheduleInterviewService.GetNominatedInterviewersByRRFID(this.ScheduleInterView.RRFID.Value)
                 .subscribe(
                 (results: any) => {
-                    this.setValueNominatedInterviewers(results);
-                    this.AllNominatedInterviewers = results;
+                    if (results.length > 0) {
+                        this.NominatedInterviewersAvailable = true;
+                        this.setValueNominatedInterviewers(results);
+                        this.AllNominatedInterviewers = results;
+                    } else { this.NominatedInterviewersAvailable = false; }
                 },
                 error => this.errorMessage = <any>error);
         }
@@ -257,6 +261,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                     }
                 }
             }
+            this.NominatedInterviewersAvailable = (this.NominatedInterviewers.length > 0) ? true : false;
             if (this.ScheduleInterView.InterviewID.Id !== null && this.ScheduleInterView.InterviewID.Id !== undefined) {
                 var interviewerId: string[] = new Array();
                 for (var index = 0; index < this.ScheduleInterView.InterviewerAvailability.length; index++) {
@@ -426,7 +431,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         if (this.ScheduleInterView.InterviewMode.Value.toLowerCase().includes('skype')) {
             this.selectSkypeID = true;
         } else {
-             this.selectSkypeID = false;
+            this.selectSkypeID = false;
         }
     }
 

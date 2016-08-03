@@ -34,13 +34,13 @@
                                             <button class="btn btn-default btnLink" (click)='openMailWindow()' [disabled]='!selectedRowCount'>
                                                 <i class="fa fa-envelope-o"></i>   Send Mails </button>
                                         </li>
-                                        <li class="divider" [ifAuthorize]="['PROFILEBANK.TRANSFEROWNERSHIP.MANAGE']"> </li>
+                                        <!--<li class="divider" [ifAuthorize]="['PROFILEBANK.TRANSFEROWNERSHIP.MANAGE']"> </li>
                                         <li>
                                             <button class="btn btn-default btnLink" [ifAuthorize]="['PROFILEBANK.TRANSFEROWNERSHIP.MANAGE']" [disabled]='!selectedRowCount'
                                                 (click)='transferOwnerShipClick()'>
                                                 <i class="fa fa-share"></i>     Transfer Ownership
                                             </button>
-                                        </li>
+                                        </li>-->
                                         <li class="divider" [ifAuthorize]="['RC.CANDIDATEASSIGNRRF.MANAGE']"> </li>
                                         <li>
                                             <button class="btn btn-default btnLink" [ifAuthorize]="[ 'RC.CANDIDATEASSIGNRRF.MANAGE']" [disabled]='!selectedRowCount'
