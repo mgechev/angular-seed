@@ -5,7 +5,7 @@ import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
-import { MasterData,SortingMasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData, SortingMasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
@@ -60,8 +60,8 @@ export class MyProfilesListComponent implements OnActivate {
     Candidate: Candidate;
     selectedCandidates: Array<Candidate>;
     NORECORDSFOUND: boolean = false;
-            ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
-
+    ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
+    profilePic: any;
 
     constructor(private _myProfilesService: MyProfilesService,
         private http: Http,
@@ -82,8 +82,21 @@ export class MyProfilesListComponent implements OnActivate {
         this.myProfilesList.GrdOperations = new GrdOptions();
         this.getMyProfiles();
         this.getCandidateStatuses();
+        // this.getProfilePhoto(this.CandidateID);
+        // console.log(this.profilePic);
     }
-
+    /**Get profile photo */
+    // getProfilePhoto(CandidateID: MasterData) {
+    //     this._profileBankService.getCandidateProfilePhoto(CandidateID)
+    //         .subscribe(
+    //         (results: CandidateProfile) => {
+    //             this.profilePic = results;
+    //         },
+    //         error => {
+    //             this.errorMessage = <any>error;
+    //             this.toastr.error(<any>error);
+    //         });
+    // }
     SaveCandidateID(id: MasterData) {
         this.seletedCandidateID = id;
 
@@ -164,7 +177,9 @@ export class MyProfilesListComponent implements OnActivate {
                         }
                         this.profile = new CandidateProfile();
                     },
-                    error => { this.errorMessage = <any>error; this.toastr.error(this.errorMessage) });
+                    error => {
+                    this.errorMessage = <any>error; this.toastr.error(this.errorMessage)
+                    });
             }
         } else {
             this.toastr.error('Please enter one of field : PassportNumber / PANNumber /AadhaarCardNo');
@@ -463,7 +478,7 @@ export class MyProfilesListComponent implements OnActivate {
         this.myProfilesList.GrdOperations.ButtonClicked = parseInt(ButtonClicked);
         this.getMyProfiles();
     }
-       getColumnsForSorting() {
+    getColumnsForSorting() {
         this._profileBankService.getColumsForSorting('COMPANYPROFILS')
             .subscribe(
             (results: any) => {

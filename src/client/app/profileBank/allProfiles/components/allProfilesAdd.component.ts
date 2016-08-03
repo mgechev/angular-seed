@@ -52,6 +52,8 @@ export class AllProfilesAddComponent implements OnActivate {
 
     infoNotSavedAlert: boolean = false;
     currentUser: MasterData = new MasterData();
+    /** For profile picture */
+    profilePic: any;
 
     constructor(private _allProfilesService: AllProfilesService,
         private _router: Router,
@@ -122,6 +124,7 @@ export class AllProfilesAddComponent implements OnActivate {
                 this.countries = results;
             },
             error => this.errorMessage = <any>error);
+        this.getProfilePhoto(this.CandidateID);
     }
 
     getStates(CountryId: number): void {
@@ -132,8 +135,23 @@ export class AllProfilesAddComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
+    /** post image to service */
+    uploadPhoto() {
+        /**  */
+    }
 
-
+    /**Get profile photo */
+    getProfilePhoto(CandidateID: MasterData) {
+        this._profileBankService.getCandidateProfilePhoto(CandidateID)
+            .subscribe(
+            (results: CandidateProfile) => {
+                this.profilePic = results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+    }
 
     getQualifications(): void {
         this._masterService.getQualifications()

@@ -48,6 +48,8 @@ export class MyProfilesAddComponent implements OnActivate {
     fileName: string;
     resumeMeta: ResumeMeta;
     profilePhoto: string;
+    /** For profile picture */
+    profilePic: any;
     constructor(private _myProfilesService: MyProfilesService,
         private _masterService: MastersService,
         private _profileBankService: ProfileBankService,
@@ -55,6 +57,8 @@ export class MyProfilesAddComponent implements OnActivate {
         private _router: Router) {
         this.profile = new CandidateProfile();
         this.createQualificationObj();
+        this.resumeMeta = new ResumeMeta();
+        this.uploadedPhoto = new Array<File>();
 
     }
 
@@ -76,6 +80,7 @@ export class MyProfilesAddComponent implements OnActivate {
         }
         var date = new Date();
         this.CurrentYear = date.getFullYear();
+        this.getProfilePhoto(this.CandidateID);
     }
 
     createQualificationObj() {
@@ -430,17 +435,20 @@ export class MyProfilesAddComponent implements OnActivate {
                 });
         }
     }
+    /** START Upload profile photo functionality*/
     /** Function to upload photo */
     uploadPhoto(selectedFile: any) {
         /**selected files string assing to the collection : uploadedPhoto */
         try {
             let FileList: FileList = selectedFile.target.files;
-            this.uploadedPhoto.length = 0;
+            if (this.uploadedPhoto)
+                this.uploadedPhoto.length = 0;
             for (let i = 0, length = FileList.length; i < length; i++) {
                 this.uploadedPhoto.push(FileList.item(i));
                 this.fileUploaded = true;
                 this.fileName = FileList.item(i).name;
             }
+            this.postPhoto(this.CandidateID, this.uploadedPhoto[0]);
         } catch (error) {
             document.write(error);
         }
@@ -485,10 +493,19 @@ export class MyProfilesAddComponent implements OnActivate {
             this.toastr.error('No photo found..!');
         }
     }
-
+    /**Get profile photo */
     getProfilePhoto(CandidateID: MasterData) {
-        /** write a method to get profile photo*/
+        this._profileBankService.getCandidateProfilePhoto(CandidateID)
+            .subscribe(
+            (results: CandidateProfile) => {
+                this.profilePic = results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
     }
+    /** END Upload profile photo functionality*/
 
     Back() {
         this._router.navigate(['/App/ProfileBank/MyProfiles']);

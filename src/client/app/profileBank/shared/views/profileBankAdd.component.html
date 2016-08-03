@@ -208,7 +208,11 @@
                                                     <!-- SIDEBAR USERPIC -->
                                                     <div class="profile-userpic">
                                                         <!--[src]="profilePhoto"-->
-                                                        <img src="../assets/layouts/layout4/img/default-user.jpg" class="img-responsive" style="border-radius: 50% !important;" alt="">
+                                                    
+                                                        <img class="img-responsive pic-bordered"  style="border-radius: 50%!important;"
+                                                            alt="" src="data:image/jpeg;base64,{{profilePic?profilePic._body:'N/A'}}">
+                                                        <img src="../assets/layouts/layout4/img/default-user.jpg" *ngIf="profilePic._body===null||profilePic._body===''" class="img-responsive pic-bordered"
+                                                            style="border-radius: 50%!important;" alt="">
                                                     </div>
                                                     <!-- END SIDEBAR USERPIC -->
                                                     <!-- SIDEBAR BUTTONS -->
@@ -217,7 +221,7 @@
                                                         <div class="fileUpload btn btn-circle green btn-sm" data-toggle="tooltip" data-placement="top" title="Upload Photo">
                                                             <input type="file" class="upload" (change)="uploadPhoto($event)" /><span>Upload</span>
                                                         </div>
-                                                        <button type="button" (click)="removePhoto(profile.CandidateID)" class="btn btn-circle red btn-sm">Remove</button>
+                                                        <button type="button" style="display:none" (click)="removePhoto(profile.CandidateID)" class="btn btn-circle red btn-sm">Remove</button>
                                                         <br/>
                                                     </div>
                                                     <!-- END SIDEBAR BUTTONS -->
@@ -671,7 +675,8 @@
                                                             <label class="control-label">Total Experience<small>&nbsp;(In years)</small></label>
                                                             <div class="row text-center">
                                                                 <div class="col-md-12">
-                                                                <input type="text" placeholder="" class="form-control text-right" [(ngModel)]="profile.CandidateCareerProfile.TotalExperience" />
+                                                                    <input type="text" placeholder="" class="form-control text-right" [(ngModel)]="profile.CandidateCareerProfile.TotalExperience"
+                                                                    />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -681,7 +686,8 @@
                                                             <label class="control-label">Relevant Experience <small>&nbsp;(In years)</small></label>
                                                             <div class="row text-center">
                                                                 <div class="col-md-12">
-                                                                <input type="text" placeholder="" class="form-control text-right" [(ngModel)]="profile.CandidateCareerProfile.RelevantExperience" />
+                                                                    <input type="text" placeholder="" class="form-control text-right" [(ngModel)]="profile.CandidateCareerProfile.RelevantExperience"
+                                                                    />
                                                                 </div>
                                                             </div>
                                                         </div>

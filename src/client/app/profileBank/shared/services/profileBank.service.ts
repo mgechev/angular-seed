@@ -13,7 +13,7 @@ import { MasterData } from  '../../../shared/model/index';
 export class ProfileBankService {
 
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
-    
+
 
     getCurrentLoggedInUser() {
         let url = Config.GetURL('/api/authentication/getCurrentUserName');
@@ -54,6 +54,16 @@ export class ProfileBankService {
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    /** get candidate profile picture */
+    getCandidateProfilePhoto(CandidateID: MasterData) {
+        let url = Config.GetURL('/api/ProfileBank/GetProfilePicture?CandidateID=' + CandidateID.Value);
+        //let url = Config.GetURL('/api/ProfileBank/GetProfilePicture?CandidateID=C6896190226');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractDataDefaultFormat)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
@@ -222,8 +232,8 @@ export class ProfileBankService {
         // headers.append('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
         let options = new RequestOptions({ headers: headers });
         //'http://www.pdf995.com/samples/pdf.pdf
-        return this.http.get('http://www.pdf995.com/samples/pdf.pdf',headers)
-            .map((response:any) => {
+        return this.http.get('http://www.pdf995.com/samples/pdf.pdf', headers)
+            .map((response: any) => {
                 var mediaType = 'application/pdf';
                 var blob = new Blob([response._body], { type: mediaType });
                 var filename = 'test.pdf';
@@ -234,15 +244,13 @@ export class ProfileBankService {
     }
 
     uploadProfilePhoto(resumeMeta: ResumeMeta) {
-        console.log('Operaration sucessfull..! but API is pending to upload photo.');
-        /** TODO:: Update api URL Once API is ready (API is pending) */
-        let url = Config.GetURL('/api/ProfileBank/UploadCandidateProfile');
+        let url = Config.GetURL('/api/ProfileBank/UploadProfilePhoto');
         return new Promise((resolve, reject) => {
             let formData: FormData = new FormData(),
                 xhr: XMLHttpRequest = new XMLHttpRequest();
 
             formData.append('Profile', resumeMeta.Profile, resumeMeta.Profile.name);
-            formData.append('CandidateID', resumeMeta.CandidateID.Value);
+            formData.append('CandidateID', resumeMeta.CandidateID.Id);
             formData.append('Overwrite', resumeMeta.Overwrite);
 
             xhr.onreadystatechange = () => {
@@ -312,6 +320,14 @@ export class ProfileBankService {
             throw new Error('Bad response status: ' + res.status);
         }
         let body = res.json();
+        return body || {};
+    }
+    /** method to get data in default format not json format */
+    private extractDataDefaultFormat(res: Response) {
+        if (res.status < 200 || res.status >= 300) {
+            throw new Error('Bad response status: ' + res.status);
+        }
+        let body = res;
         return body || {};
     }
 
