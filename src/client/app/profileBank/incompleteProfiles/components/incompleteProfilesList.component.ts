@@ -7,7 +7,7 @@ import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
-import { MasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData, GrdOptions, ResponseFromAPI, SortingMasterData } from  '../../../shared/model/index';
 import { DataSharedService } from '../../shared/services/dataShared.service';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
@@ -30,6 +30,7 @@ export class IncompleteProfilesListComponent implements OnActivate {
     incompleteProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
     NORECORDSFOUND: boolean = false;
     errorMessage: any;
+    ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
     constructor(private _allProfilesService: AllProfilesService,
         private _dataSharedService: DataSharedService,
         private _router: Router,
@@ -57,6 +58,8 @@ export class IncompleteProfilesListComponent implements OnActivate {
             this.incompleteProfilesList = new AllCandidateProfiles();
         }
     }
+    /** START Pagination and sorting functionality */
+
     setPaginationValues() {
         //this.CandidateProfiles.GrdOperations.
         this.CandidateProfiles.GrdOperations.ButtonClicked = 0;
@@ -71,4 +74,13 @@ export class IncompleteProfilesListComponent implements OnActivate {
         this.incompleteProfilesList.GrdOperations.NextPageUrl = new Array<string>();
         this.getIncompleteProfiles();
     }
+    getColumnsForSorting() {
+        this._profileBankService.getColumsForSorting('ALLPROFILES')
+            .subscribe(
+            (results: any) => {
+                this.ColumnList = results;
+            },
+            error => this.toastr.error(<any>error));
+    }
+    /** END Pagination and sorting functionality */
 }

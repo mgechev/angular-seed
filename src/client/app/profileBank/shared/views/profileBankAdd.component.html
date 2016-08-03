@@ -208,11 +208,10 @@
                                                     <!-- SIDEBAR USERPIC -->
                                                     <div class="profile-userpic">
                                                         <!--[src]="profilePhoto"-->
-                                                    
-                                                        <img class="img-responsive pic-bordered"  style="border-radius: 50%!important;"
-                                                            alt="" src="data:image/jpeg;base64,{{profilePic?profilePic._body:'N/A'}}">
-                                                        <img src="../assets/layouts/layout4/img/default-user.jpg" *ngIf="profilePic._body===null||profilePic._body===''" class="img-responsive pic-bordered"
-                                                            style="border-radius: 50%!important;" alt="">
+
+                                                        <img class="img-responsive pic-bordered" style="border-radius: 50%!important;" alt="" src="data:image/jpeg;base64,{{profilePic?profilePic._body:'N/A'}}">
+                                                        <img src="../assets/layouts/layout4/img/default-user.jpg" *ngIf="profilePic===null" class="img-responsive pic-bordered" style="border-radius: 50%!important;"
+                                                            alt="">
                                                     </div>
                                                     <!-- END SIDEBAR USERPIC -->
                                                     <!-- SIDEBAR BUTTONS -->
