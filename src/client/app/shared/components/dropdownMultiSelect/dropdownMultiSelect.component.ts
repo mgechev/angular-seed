@@ -53,8 +53,17 @@ export class DropdownMultiSelectComponent implements AfterViewInit {
         }
     }
 
-    select(item: any) {
-        this.selected.push(item);
+    select(item: MasterData) {
+        var isPresent: boolean = false;
+        for (var index = 0; index < this.selected.length; index++) {
+            if (+this.selected[index].Id === +item.Id) {
+                isPresent = true;
+            }
+        }
+
+        if (!isPresent) {
+            this.selected.push(item);
+        }
         this.query = '';
         this.filteredList = [];
     }
@@ -86,10 +95,10 @@ export class DropdownMultiSelectComponent implements AfterViewInit {
                 this.dataToBind.push(<MasterData>results);
                 this.query = '';
                 this.filteredList = [];
-                 this.isAddButtunDisable = true;
+                this.isAddButtunDisable = true;
             },
             error => this.errorMessage = <any>error);
-             this.isAddButtunDisable = true;
+        this.isAddButtunDisable = true;
     }
 
 }
