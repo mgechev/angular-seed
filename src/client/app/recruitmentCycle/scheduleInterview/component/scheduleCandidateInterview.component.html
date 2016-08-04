@@ -50,7 +50,7 @@
                                         <label class="col-md-3 control-label align">Interview Type <span class="required"> * </span></label>
                                         <div class="col-md-3">
                                             <div class="input-group select2-bootstrap-append" style="width:160px !important">
-                                                <select class="form-control" [(ngModel)]="ScheduleInterView.InterviewType.Id" (change)='getInterviewRoundsbyInterviewType($event.target.value)'>
+                                                <select class="form-control" [(ngModel)]="ScheduleInterView.InterviewType.Id" [disabled]='isInterviewReschedule'  (change)='getInterviewRoundsbyInterviewType($event.target.value)'>
                                                     <option></option>
                                                     <option *ngFor="let Type of InterviewTypes" [value]="Type.Id">{{Type.Value}}</option>
                                             </select>
@@ -90,8 +90,8 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label align">Interviewers <span class="required"> * </span></label>
                                         <div class="col-md-5">
-                                            <div class="input-group select2-bootstrap-append" style="width:160px !important">
-                                                <select id="cmbInterviewers" class="form-control" multiple style="width:160px !important" (change)='onSelectInterviewer($event.target.value)'>
+                                            <div class="input-group select2-bootstrap-append" style="width:240px !important">
+                                                <select id="cmbInterviewers" class="form-control" multiple style="width:240px !important" (change)='onSelectInterviewer($event.target.value)'>
                                                     <optgroup label="Nominations" *ngIf="NominatedInterviewersAvailable">
                                                         <option  *ngFor="let interviewer of NominatedInterviewers" [value]="interviewer.Id" [text]="interviewer.Value">{{interviewer.Value}}</option>
                                                     </optgroup>

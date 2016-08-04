@@ -59,10 +59,11 @@ import {ShowScheduleInterviewsComponent} from '../../recruitmentCycle/recruiters
     { path: '/RRF/MyRRF', component: MyRRFComponent },
     { path: '/RRF/RRFApproval', component: RRFApprovalComponent },
     { path: '/RRF/RRFDashboard', component: RRFDashboardComponent },
+    { path: '/AllInterviews/showInterviews', component: ShowScheduleInterviewsComponent },
     { path: '/Recruitment Cycle/Interviewers', component: InterviewrsComponent },
     { path: '/Recruitment Cycle/Schedule', component: ScheduleInterviewComponent },
     { path: '/Recruitment Cycle/mycalendar', component: RecruitmentInterviewerCalenderComponent },
-    { path: '/AllInterviews/ShowInterviews', component: ShowScheduleInterviewsComponent },
+
 
 ])
 export class HomeComponent implements OnInit {

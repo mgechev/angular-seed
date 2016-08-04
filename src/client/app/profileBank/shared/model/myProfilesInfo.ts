@@ -29,6 +29,8 @@ export class CandidateProfile {
   //for checkboxes for list
   public IsChecked: boolean;
   public url: any;
+  public RRFID: MasterData = new MasterData();
+  
 
 
   //Properties of Personal Information

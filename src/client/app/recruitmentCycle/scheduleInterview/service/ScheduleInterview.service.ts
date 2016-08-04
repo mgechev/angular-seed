@@ -53,6 +53,15 @@ export class ScheduleInterviewService {
             .finally(() => this._spinnerService.hide());
     }
 
+
+    UpdateScheduleInterviewForCandidate(ScheduleInterview: Interview) {
+        let url = Config.GetURL('/api/RecruitmentCycle/UpdateCandidateInterviewSchedule');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { InterviewDetails:ScheduleInterview })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);

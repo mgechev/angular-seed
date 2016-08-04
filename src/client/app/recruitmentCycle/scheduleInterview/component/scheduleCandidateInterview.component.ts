@@ -82,6 +82,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         this.SelectedInterviewers = new Array<Interviewers>();
         this.InterviewerCalendarDetails = new CalendarDetails();
         this.getResources();
+        //this.event = new Event();
     }
 
     routerOnActivate(segment: RouteSegment) {
@@ -124,8 +125,6 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         } else {
             this.clearSession('Candidate');
         }
-        //Clear Session Values
-        this.clearSession('RRFID');
 
     }
 
@@ -141,8 +140,11 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     }
 
     redirectToPreviousView() {
+        //Clear Session Values
+        this.clearSession('RRFID');
         this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' +
             this.ScheduleInterView.RRFID.Value + 'ID' + this.ScheduleInterView.RRFID.Id]);
+
     }
 
     onScheduleInterviewClick() {
@@ -191,20 +193,38 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     ScheduleCandidateInterView() {
         let cnfrmBox: any = $('#confirmSlot');
         cnfrmBox.modal('hide');
-        this._ScheduleInterviewService.ScheduleInterviewForCandidate(this.ScheduleInterView)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.redirectToPreviousView();
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).Message);
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.toastr.error(<any>error);
-            });
+        if (this.ScheduleInterView.InterviewID.Id === undefined) {
+            this._ScheduleInterviewService.ScheduleInterviewForCandidate(this.ScheduleInterView)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.redirectToPreviousView();
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
+                });
+        } else {
+            this._ScheduleInterviewService.UpdateScheduleInterviewForCandidate(this.ScheduleInterView)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.redirectToPreviousView();
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
+                });
+        }
+
     }
 
     //Get All Other selected Interviewers from multiselect Dropdown
@@ -305,11 +325,11 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     //Get All Nominated selected Interviewers from multiselect Dropdown
     getSelectedInterviewers(InterviewerIds: Array<string>) {
         this.SelectedInterviewers = new Array<Interviewers>();
-        for (var index = 0; index < this.NominatedInterviewers.length; index++) {
-            let i = _.findIndex(this.NominatedInterviewers, { Id: parseInt(InterviewerIds[index]) });
+        for (var index = 0; index < InterviewerIds.length; index++) {
+            let i = _.findIndex(this.OtherInterviewers, { Id: parseInt(InterviewerIds[index]) });
             if (i >= 0) {
                 var tmpInterviewer: Interviewers = new Interviewers();
-                tmpInterviewer.InterviewerId = this.NominatedInterviewers[i];
+                tmpInterviewer.InterviewerId = this.OtherInterviewers[i];
                 this.SelectedInterviewers.push(tmpInterviewer);
                 //Push Interviewers In InterviewerAvailability Obj
                 // var interviewAvailability: InterviewAvailability = new InterviewAvailability();
@@ -408,10 +428,10 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                     this.ScheduleInterView.Status = 'Scheduled';
                     break;
                 case 'scheduled':
-                    this.ScheduleInterView.Status = 'Re-Scheduled';
+                    this.ScheduleInterView.Status = 'Rescheduled';
                     break;
-                case 're-scheduled':
-                    this.ScheduleInterView.Status = 'Re-Scheduled';
+                case 'rescheduled':
+                    this.ScheduleInterView.Status = 'Rescheduled';
                     break;
             }
         }
@@ -561,9 +581,12 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             this.event.Resource = this.InterviewerCalendarDetails.Resources[i].title;
         // this.event.allDay = e.calEvent.allDay;
         this.dialogVisible = true;
+        console.log(this.event);
+
         this.cd.detectChanges();
         let modalPopup: any = $('#fullCalModal');
         modalPopup.modal();
+        console.log(this.event);
     }
 
 }

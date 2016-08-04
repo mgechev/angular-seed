@@ -5,6 +5,7 @@ import {RecruitmentInterviewScheduleComponent} from './interviewers.schedule.com
 import {RecruitmentInterviewerCalenderComponent} from './interviewers.calendar.component';
 import {RecruitmentIEFComponent} from '../../shared/component/Candidate.IEF.component';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+//import {ScheduleInterviewsForRecruitersComponent} from '../../recruitersTab/components/scheduleInterviews.component';
 
 
 @Component({
@@ -20,6 +21,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
     { path: '/schedule', component: RecruitmentInterviewScheduleComponent },
     { path: '/ief', component: RecruitmentIEFComponent },
     { path: '/mycalendar', component: RecruitmentInterviewerCalenderComponent },
+   // { path: '/showInterviews', component: ScheduleInterviewsForRecruitersComponent },
 ])
 export class InterviewrsComponent {
 }

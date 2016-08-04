@@ -185,7 +185,7 @@ export class RRFCandidateListComponent implements OnActivate {
                         this.AllCandidatesForRRF[index].isInterviewScheduled = false;
                         break;
                     case 'scheduled':
-                    case 're-scheduled':
+                    case 'rescheduled':
                         this.AllCandidatesForRRF[index].isInterviewScheduled = true;
                         break;
                     default:
@@ -218,7 +218,7 @@ export class RRFCandidateListComponent implements OnActivate {
     }
 
     canCancelInterview(status: string) {
-        if (status.toLowerCase() === 'scheduled' || status.toLowerCase() === 're-scheduled' ||
+        if (status.toLowerCase() === 'scheduled' || status.toLowerCase() === 'rescheduled' ||
             status.toLowerCase() === 'awaiting approval') {
             return false;
         } else { return true; }

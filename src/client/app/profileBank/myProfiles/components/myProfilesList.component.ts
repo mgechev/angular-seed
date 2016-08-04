@@ -178,7 +178,7 @@ export class MyProfilesListComponent implements OnActivate {
                         this.profile = new CandidateProfile();
                     },
                     error => {
-                    this.errorMessage = <any>error; this.toastr.error(this.errorMessage)
+                        this.errorMessage = <any>error; this.toastr.error(this.errorMessage)
                     });
             }
         } else {
@@ -439,6 +439,8 @@ export class MyProfilesListComponent implements OnActivate {
         let selectedCandidate: CandidateProfile = this.myProfilesList.Profiles[index];
 
         if (selectedCandidate.isRRFAssigned) {
+            sessionStorage.setItem('RRFID', JSON.stringify(selectedCandidate.RRFID));
+            sessionStorage.setItem('Candidate', JSON.stringify(selectedCandidate));
             this._router.navigate(['/App/Recruitment Cycle/Schedule/New']);
         } else {
             if (selectedCandidate.Status.Value.toLowerCase() === 'open' ||

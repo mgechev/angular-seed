@@ -223,8 +223,10 @@ export class AllProfilesListComponent implements OnActivate {
 
     transferOwnerShipClick() {
         for (var index = 0; index < this.allProfilesList.Profiles.length; index++) {
-            if (this.allProfilesList.Profiles[index].IsChecked) {
+            if (this.allProfilesList.Profiles[index].IsChecked ) {
+                //if (this.allProfilesList.Profiles[index].Owner ){
                 this.AllCheckedItemIds.push(this.allProfilesList.Profiles[index].CandidateID);
+                //}
             }
         }
         if (this.AllCheckedItemIds.length > 0) {
