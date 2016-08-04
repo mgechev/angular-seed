@@ -1,7 +1,10 @@
 <div align="left">
     <div class="rowHeader">
-        <div class="col-lg-12 row " style="color: #26a1ab;">
-            <b><label style="font-size: 22px;">RRF Code : {{RRFData.RRFCODE }}</label></b><span class="badge {{getPriorityClass(RRFData.Priority.Id)}}"><small>{{RRFData.Priority.Value}}</small></span>
+        <div class="col-lg-12 row " style="">
+            <b><label style="font-size: 22px;color: #26a1ab;">RRF Code : {{RRFData.RRFCODE }}</label></b><span class="badge {{getPriorityClass(RRFData.Priority.Id)}}"><small>{{RRFData.Priority.Value}}</small></span>
+            <div class="pull-right">
+                <b><span  style="margin-top: 15px;" class="mt-action-dot {{getStatusClass(RRFData.Status.Id)}} "></span>{{RRFData.Status.Value}}</b>
+            </div>
         </div>
         <div class="row">
             <div class="col-lg-3">
@@ -11,10 +14,10 @@
                 <b>Raised On</b>: {{RRFData.CreatedDate}} &nbsp;&nbsp;&nbsp;
             </div>
             <div class="col-lg-3">
-                <b>Open for no. of days</b> : {{RRFData.OpenForNumberOfDays}}
+                <!--<b>Open for no. of days</b> : {{RRFData.OpenForNumberOfDays}}-->
             </div>
             <div class="col-lg-3">
-                <b>Status</b> :<span class="mt-action-dot {{getStatusClass(RRFData.Status.Id)}} "></span>{{RRFData.Status.Value}}
+                <!--<b>Status</b> :<span class="mt-action-dot {{getStatusClass(RRFData.Status.Id)}} "></span>{{RRFData.Status.Value}}-->
             </div>
         </div>
 
@@ -102,7 +105,4 @@
             </div>
         </div>
     </div>
-
-
-
 </div>
