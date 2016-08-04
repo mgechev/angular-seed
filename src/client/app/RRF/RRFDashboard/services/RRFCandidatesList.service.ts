@@ -50,6 +50,15 @@ export class RRFCandidateListService {
             .finally(() => this._spinnerService.hide());
     }
 
+    UpdateCandidateIEFStatus(InterviewID : MasterData , Status : string , Comments : string){
+        let url = Config.GetURL('/api/RecruitmentCycle/UpdateCandidateIEFStatus');
+        this._spinnerService.show();
+        return this.authHttp.post(url,{InterviewID,Status,Comments})
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
 
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {

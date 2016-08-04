@@ -56,9 +56,10 @@
                                                 </td>
                                                 <td>
                                                     <div align="left">
-                                                        Skills :<label *ngFor="let skill of selectedRRF.SkillsRequired"> 
-                                                               {{skill.Value}}
-                                                            </label>
+                                                        Skills :
+                                                        <label *ngFor="let skill of selectedRRF.SkillsRequired">
+                                                            {{skill.Value}}
+                                                        </label>
                                                         <br>Date of Joining : {{selectedRRF.ExpDateOfJoining }}
                                                         <br>Min.Exp : {{selectedRRF.MinExp }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                         Max.Exp : {{selectedRRF.MaxExp }}
@@ -105,19 +106,20 @@
                                                     <td>
                                                         <div class="btn-group">
                                                             <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
-                                                            <i class="fa fa-angle-down"></i>
-                                                        </button>
+                                                                <i class="fa fa-angle-down"></i>
+                                                            </button>
                                                             <ul class="dropdown-menu" role="menu">
                                                                 <li *ngIf="!selectedcandidate.isInterviewScheduled">
                                                                     <button class="btn btn-default btnLink " (click)='onScheduleInterviewClick(selectedcandidate)'>
-                                                                 <i class="fa fa-calendar-check-o"></i> Schedule 
-                                                             </button>
+                                                                        <i class="fa fa-calendar-check-o"></i> Schedule
+                                                                    </button>
                                                                 </li>
                                                                 <li class="divider" *ngIf="selectedcandidate.isInterviewScheduled"> </li>
 
                                                                 <li>
                                                                     <button class="btn btn-default btnLink " *ngIf="selectedcandidate.isInterviewScheduled" (click)='onReScheduleInterviewClick(selectedcandidate)'>
-                                                                  <i class="fa fa-calendar-check-o"></i> Re-Schedule </button>
+                                                                        <i class="fa fa-calendar-check-o"></i> Re-Schedule
+                                                                    </button>
                                                                 </li>
                                                                 <li class="divider"> </li>
                                                                 <li>
@@ -127,7 +129,7 @@
                                                                 <li class="divider"> </li>
                                                                 <li>
                                                                     <button class="btn btn-default btnLink " [disabled]='isOfferGenerationVisible(selectedcandidate.InterviewDetails.Round.Value)'
-                                                                        (click)='OnProceedForOfferGenerationClick(selectedcandidate)'>
+                                                                    (click)='OnProceedForOfferGenerationClick(selectedcandidate)'>
                                                                         <i class="fa fa-paper-plane-o"></i>Offer Generation</button>
                                                                 </li>
 
@@ -148,7 +150,8 @@
                                 <!-- Candidate Details -->
                                 <div class="col-md-5" style="border-left:1px solid gray">
                                     <span class="caption-subject bold" style="font-size : 14px">{{selectedCandidate}} Interview Rounds History</span>
-                                    <br/> <br/>
+                                    <br/>
+                                    <br/>
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
@@ -161,21 +164,68 @@
                                         </thead>
                                         <tbody>
                                             <tr *ngFor="let candidateHistory of CandidateRoundHistory; let index = index" (mouseover)='showPopOver(candidateHistory.Comments,index+1)'
-                                                id="round{{index+1}}">
+                                            id="round{{index+1}}">
                                                 <td> {{index+1}} </td>
                                                 <td> {{candidateHistory.Round.Value}}</td>
                                                 <td> <span *ngFor="let interviewer of candidateHistory.InterviewerAvailability">{{interviewer.Interviewer.Value}} ,</span></td>
                                                 <td> {{getDate(candidateHistory.InterviewDate)}}</td>
-                                                <td> {{candidateHistory.Status}}</td>
+                                                <td *ngIf="candidateHistory.Status.toLowerCase() != 'On Hold'.toLowerCase() "> {{candidateHistory.Status}}</td>
+                                                <td *ngIf="candidateHistory.Status.toLowerCase() == 'On Hold'.toLowerCase() "> <a (click)='changeStatus(candidateHistory.InterviewID)'> {{candidateHistory.Status}}</a></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                     <span *ngIf='isRoundHistoryPresent'>No Candidates Round History Found</span>
 
                                     <hr/>
-                                    <br/><br/>
+
+                                    <!--change Interview status-->
+                                    <form role="statusForm" (submit)='onChangeStatus()' *ngIf='showChangeStatus'>
+                                        <div>
+                                            <b>Change Interview Status</b>
+                                            <br/>
+                                            <div class="row">
+                                                <div class="col-lg-4" align="right">
+                                                    Status
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <select id="cmbStaus" class="form-control" [(ngModel)]='changedStatus' required placeholder="Select status" tooltip="Select status"
+                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changedStatus" style="font-size: inherit;"
+                                                    required>
+                                                        <!--<option *ngFor="let technologie of technologies" [value]="technologie.Id">{{technologie.Value}}</option>-->
+                                                        <option value="Selected"> Selected</option>
+                                                        <option value="Rejected"> Rejected</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-lg-4" align="right">
+                                                    Comments
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <!---->
+                                                    <input type="text" [(ngModel)]='changesStatusComment' id="changesStatusComment" class="form-control" placeholder="change Status Comment"
+                                                    tooltip="comment" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                    tooltipEnable="!changesStatusComment" required="" autocomplete="off" style="font-size: inherit;"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="">
+                                                <div class="pull-right">
+                                                    <button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelChangeStatus()'>Cancel</button> &nbsp;
+                                                    <button type="submit " class="btn blue " id="btnChangeStatus">Change Status</button>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        
+                                          <hr style="margin-top: 50px;"/>
+                                    </form>
+                                    <br/>
                                     <base-chart class="chart" style="display:block;width:100%" [options]="doughnutChartOptions" [data]="doughnutChartData" [labels]="doughnutChartLabels"
-                                        [chartType]="doughnutChartType" [colors]="doughnutChartColors"></base-chart>
+                                    [chartType]="doughnutChartType" [colors]="doughnutChartColors"></base-chart>
 
                                 </div>
                                 <!-- Candidate Details END-->

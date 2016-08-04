@@ -43,7 +43,14 @@ export class RRFCandidateListComponent implements OnActivate {
     CandidateRoundHistory: Array<Interview>;
     isRoundHistoryPresent: boolean = false;
     selectedCandidate: string;
-    InterviewID:MasterData = new MasterData();
+    InterviewID: MasterData = new MasterData();
+
+    changedStatus: string = '';
+    changesStatusComment: string = '';
+    changeStatusInterviewID: MasterData = new MasterData();
+    showChangeStatus: boolean = false;
+    changeStatusCandidateID: MasterData = new MasterData();
+
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
         private _rrfDashboardService: RRFDashboardService,
@@ -66,7 +73,6 @@ export class RRFCandidateListComponent implements OnActivate {
         //TODO : Call API to get Candidates Specific to SelectedRRF
         this.getCanidatesForRRF();
         this.getRRFDetails();
-
     }
 
     onScheduleInterviewClick(Candidate: any) {
@@ -110,8 +116,10 @@ export class RRFCandidateListComponent implements OnActivate {
     }
 
     getCandidatesRoundHistory(CandidateID: MasterData, CandidateName: string) {
+        this.showChangeStatus = false;
         this.CandidateRoundHistory = new Array<Interview>();
         this.selectedCandidate = CandidateName;
+        this.changeStatusCandidateID = CandidateID;
         this._rrfCandidatesList.getInterviewRoundHistorybyCandidateId(CandidateID, this.RRFID)
             .subscribe(
             (results: any) => {
@@ -185,6 +193,7 @@ export class RRFCandidateListComponent implements OnActivate {
                         this.AllCandidatesForRRF[index].isInterviewScheduled = false;
                         break;
                     case 'scheduled':
+                    //case 're-scheduled':
                     case 'rescheduled':
                         this.AllCandidatesForRRF[index].isInterviewScheduled = true;
                         break;
@@ -218,29 +227,59 @@ export class RRFCandidateListComponent implements OnActivate {
     }
 
     canCancelInterview(status: string) {
-        if (status.toLowerCase() === 'scheduled' || status.toLowerCase() === 'rescheduled' ||
+        //if (status.toLowerCase() === 'scheduled' || status.toLowerCase() === 're-scheduled' ||
+         if (status.toLowerCase() === 'scheduled' || status.toLowerCase() === 'rescheduled' ||
             status.toLowerCase() === 'awaiting approval') {
             return false;
         } else { return true; }
 
     }
     OnProceedForOfferGenerationClick(CandidateDetails: RRFSpecificCandidateList) {
-       this.InterviewID = CandidateDetails.InterviewDetails.InterviewID;
-       var cnfrmbx :any = $('#prcedfrOffrgenration');
-       cnfrmbx.modal();
+        this.InterviewID = CandidateDetails.InterviewDetails.InterviewID;
+        var cnfrmbx: any = $('#prcedfrOffrgenration');
+        cnfrmbx.modal();
     }
-    proceedForOfferGeneration(InterviewID:MasterData) {
-        if(InterviewID.Id !== null && InterviewID.Id !== undefined) {
-         this._rrfCandidatesList.proceedForOfferGeneration(InterviewID)
+    proceedForOfferGeneration(InterviewID: MasterData) {
+        if (InterviewID.Id !== null && InterviewID.Id !== undefined) {
+            this._rrfCandidatesList.proceedForOfferGeneration(InterviewID)
+                .subscribe(
+                (results: any) => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                    } else {
+                        this.toastr.success((<ResponseFromAPI>results).ErrorMsg);
+                    }
+                },
+                error => this.errorMessage = <any>error);
+        }
+    }
+
+    changeStatus(intervieID: MasterData) {
+        this.changeStatusInterviewID = intervieID;
+        this.showChangeStatus = true;
+    }
+
+    onChangeStatus() {
+        this._rrfCandidatesList.UpdateCandidateIEFStatus(this.changeStatusInterviewID, this.changedStatus, this.changesStatusComment)
             .subscribe(
             (results: any) => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.getCanidatesForRRF();
+                    this.getCandidatesRoundHistory(this.changeStatusCandidateID, this.selectedCandidate);
+                    this.changeStatusInterviewID = new MasterData();
+                    this.showChangeStatus = false;
                 } else {
                     this.toastr.success((<ResponseFromAPI>results).ErrorMsg);
                 }
             },
             error => this.errorMessage = <any>error);
-        }
+
+        this.changedStatus = '';
+        this.changesStatusComment = '';
+    }
+
+    onCancelChangeStatus() {
+        this.showChangeStatus = false;
     }
 }

@@ -132,6 +132,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
                         this.InterviewHistory[index].showIEF = false;
                         this.InterviewHistory[index].IEFButtonText = this.viewIEFText;
                     }
+                    this.HISTORYRECORDSNOTFOUND = false;
                 } else {
                     this.HISTORYRECORDSNOTFOUND = true;
                     this.InterviewHistory = [];
