@@ -2,25 +2,28 @@
 temporary mock router provider until @angular provides one (currently not exported / experimental)
 copied from https://raw.githubusercontent.com/springboot-angular2-tutorial/angular2-app/master/src/shared/routes/router-testing-providers.ts
 */
-import {Location, LocationStrategy} from '@angular/common';
+
+import { Location, LocationStrategy } from '@angular/common';
+import { ComponentResolver, Injector, Type } from '@angular/core';
+import { SpyLocation } from '@angular/common/testing';
 import {
-  RouterOutletMap,
-  UrlSerializer,
+  ActivatedRoute,
   DefaultUrlSerializer,
   Router,
-  ActivatedRoute,
-  RouterConfig
+  RouterConfig,
+  RouterOutletMap,
+  UrlSerializer
 } from '@angular/router';
-import {SpyLocation} from '@angular/common/testing';
-import {ComponentResolver, Injector, Type} from '@angular/core';
-import {MockLocationStrategy} from './mock-location-strategy';
+
+
+import { MockLocationStrategy } from './mock-location-strategy';
 
 export const provideFakeRouter = (rootComponentType:Type, config:RouterConfig = []) => {
   return [
     RouterOutletMap,
-    {provide: UrlSerializer, useClass: DefaultUrlSerializer},
-    {provide: Location, useClass: SpyLocation},
-    {provide: LocationStrategy, useClass: MockLocationStrategy},
+    { provide: UrlSerializer, useClass: DefaultUrlSerializer },
+    { provide: Location, useClass: SpyLocation },
+    { provide: LocationStrategy, useClass: MockLocationStrategy },
     {
       provide: Router,
       useFactory: (resolver:ComponentResolver, urlSerializer:UrlSerializer,
