@@ -443,7 +443,7 @@ export class SeedConfig {
     },
 
     // Note: you can customize the location of the file
-    'environment-config': require('../env/config.json'),
+    'environment-config': join(this.PROJECT_ROOT, this.TOOLS_DIR, 'env'),
 
     /**
      * The options to pass to gulp-sass (and then to node-sass).
