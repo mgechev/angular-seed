@@ -1,0 +1,45 @@
+<!--<ul style="list-style: none;">
+    <li *ngFor="let dir of directories" style="margin-left: -17px;">
+        <span><input type="checkbox" [checked]="dir.checked" (click)="dir.check()"    /></span>
+        <span><b>{{ dir.name }}</b></span>
+        <div *ngIf="true">
+            <div style="margin-left: 35px;" *ngIf='dir.description'>(&nbsp;{{dir.description}}&nbsp;)</div>
+            <tree-view [directories]="dir.directories"></tree-view>
+        </div>
+    </li>
+</ul>-->
+
+<ul style="list-style: none;">
+    <li style="margin-left: -17px;">
+        <span><input type="checkbox" [checked]="directories.mainNodeChecked" (click)='rootChecked()'/></span>
+        <span><b>{{ directories.mainNodeName }}</b></span>
+        <div *ngFor="let dir of directories.nodes">
+            <ul style="list-style: none;">
+                <li style="margin-left: -17px;">
+                    <span><input type="checkbox" [checked]="dir.checked"  (click)='childChecked(dir)'/></span>
+                    <span><b>{{ dir.name }}</b></span>
+                    <div>
+                        <div style="margin-left: 35px;" *ngIf='dir.description'>(&nbsp;{{dir.description}}&nbsp;)</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul>
+
+
+<!--Treeview with expand /collapse functionality-->
+<!--<ul  style="list-style: none;">
+    <li *ngFor="let dir of directories">
+        <span *ngIf="!dir.expanded" (click)="dir.toggle()" > <i class="fa fa-plus"></i></span>
+        <span *ngIf="dir.expanded" (click)="dir.toggle()" ><i class="fa fa-minus"></i></span>
+        <span><input type="checkbox" [checked]="dir.checked" (click)="dir.check()"    /></span> 
+        <span (click)="dir.toggle()">{{ dir.name }}</span>
+        <div *ngIf="dir.expanded">
+            <ul  style="list-style: none;">
+                <li *ngFor="let file of dir.files">{{file}}</li>
+            </ul>
+            <tree-view [directories]="dir.directories"></tree-view>
+        </div>
+    </li>
+</ul>-->

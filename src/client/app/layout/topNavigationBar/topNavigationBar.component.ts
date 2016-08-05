@@ -51,4 +51,8 @@ export class TopNavigationBarComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.subscription.unsubscribe();
     }
+
+    pushNotificationSettings(){
+        this._router.navigate(['/App/NotificationSetting']);
+    }
 }

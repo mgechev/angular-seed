@@ -29,6 +29,7 @@ import { InterviewrsComponent, RecruitmentInterviewerCalenderComponent } from '.
 import {ScheduleInterviewComponent} from '../../recruitmentCycle/scheduleInterview/index';
 import {DashboardComponent} from '../../Dashboard/component/dashboard.component';
 import {ShowScheduleInterviewsComponent} from '../../recruitmentCycle/recruitersTab/components/interviews.component';
+import { PushNotificationComponent } from '../../settings/pushNotification/pushNotification.component';
 
 @Component({
     moduleId: module.id,
@@ -63,6 +64,7 @@ import {ShowScheduleInterviewsComponent} from '../../recruitmentCycle/recruiters
     { path: '/Recruitment Cycle/Interviewers', component: InterviewrsComponent },
     { path: '/Recruitment Cycle/Schedule', component: ScheduleInterviewComponent },
     { path: '/Recruitment Cycle/mycalendar', component: RecruitmentInterviewerCalenderComponent },
+    { path: '/NotificationSetting' , component: PushNotificationComponent},
 
 
 ])
