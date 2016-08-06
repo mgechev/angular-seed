@@ -85,8 +85,11 @@ export class RecentProfilesListComponent implements OnActivate {
             error => this.toastr.error(<any>error));
     }
     /**Redirecting to candidate's all interview history page */
-    getCandidateHistory(CandidateID: MasterData) {
-        this._router.navigate(['App/ProfileBank/RecentProfiles/History']);
+    getCandidateHistory(_candidateID: MasterData) {
+        console.log(_candidateID);
+        sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
+        sessionStorage.setItem('onReturnPath', '/App/ProfileBank/RecentProfiles');
+        this._router.navigate(['/App/ProfileBank/MyProfiles/History']);
     }
     SaveCandidateID(id: MasterData) {
         this.seletedCandidateID = id;

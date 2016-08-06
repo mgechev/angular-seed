@@ -13,12 +13,14 @@ import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
 import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
 import { DetailProfileComponent } from '../../shared/component/detailProfile.component';
+// import { PanelsAvailablityComponent } from '../../../RRF/shared/index';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-allprofiles-list',
     templateUrl: 'allProfilesList.component.html',
-    directives: [DetailProfileComponent, ROUTER_DIRECTIVES, IfAuthorizeDirective, CollapseDirective, TOOLTIP_DIRECTIVES],
+    directives: [DetailProfileComponent, ROUTER_DIRECTIVES, IfAuthorizeDirective, CollapseDirective,
+        TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
     pipes: [ProfileBankPipe]
 })
@@ -114,7 +116,9 @@ export class AllProfilesListComponent implements OnActivate {
             error => this.toastr.error(<any>error));
     }
     /**Redirecting to candidate's all interview history page */
-    getCandidateHistory(CandidateID: MasterData) {
+    getCandidateHistory(_candidateID: MasterData) {
+        sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
+        sessionStorage.setItem('onReturnPath', '/App/ProfileBank/BlackListedProfiles');
         this._router.navigate(['/App/ProfileBank/AllProfiles/History']);
     }
 
@@ -223,7 +227,7 @@ export class AllProfilesListComponent implements OnActivate {
 
     transferOwnerShipClick() {
         for (var index = 0; index < this.allProfilesList.Profiles.length; index++) {
-            if (this.allProfilesList.Profiles[index].IsChecked ) {
+            if (this.allProfilesList.Profiles[index].IsChecked) {
                 //if (this.allProfilesList.Profiles[index].Owner ){
                 this.AllCheckedItemIds.push(this.allProfilesList.Profiles[index].CandidateID);
                 //}

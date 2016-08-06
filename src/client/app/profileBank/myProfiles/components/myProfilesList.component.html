@@ -21,7 +21,7 @@
                     <div class="portlet-title">
                         <div class="row">
                             <div class="col-md-4">
-                                <h4>Profiles</h4>
+                                <h4>My Profiles</h4>
                             </div>
 
                             <div class="col-md-8">
@@ -62,7 +62,7 @@
                                         </legend>
                                         <div class="collapse in" id="demo">
                                             <div class="add-new-panel">
-                                                <form role="form" (submit)="onSave()">
+                                                <form role="form" (submit)="OnSubmitCandidate()">
                                                     <div class="container-fluid">
                                                         <div class="row">
                                                             <div class="col-md-3 inlineForm">
@@ -123,11 +123,20 @@
                                                             </div>
                                                             <div class="col-md-2 inlineForm">
                                                                 <div class="form-group">
-                                                                    <div class="fileUpload btn btn-info" data-toggle="tooltip" data-placement="top" title="Upload Resume">
-                                                                        <input type="file" class="upload" (change)="uploadFile($event)" /><span>Upload resume</span>
 
-                                                                    </div><br/>
-                                                                    <span *ngIf='fileUploaded'> {{fileName}}</span>
+                                                                    <div class="fileUpload btn btn-icon-only purple" data-placement="top" title="Upload Photo" tooltip="{{photoName?'Your selected photo is -'+photoName:'Upload Photo'}}"
+                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">
+                                                                        <input type="file" class="upload" (change)="uploadPhoto($event)" /><span><i class="fa fa-camera"></i></span>
+                                                                    </div>
+
+                                                                    <div class="fileUpload btn btn-info" data-toggle="tooltip" data-placement="top" title="Upload Resume" tooltip="Upload Resume"
+                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">
+                                                                        <input type="file" class="upload" (change)="uploadFile($event)" />
+                                                                        <i class="fa fa-file-text"></i><span> </span>
+                                                                    </div><br>
+                                                                    <span class="row" *ngIf='fileUploaded'> {{fileName}}</span>
+
+
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-1 inlineForm">
@@ -404,7 +413,7 @@
                                                             <i class="fa fa-remove"></i>Delete Profile</a>
                                                     </li>
                                                     <li>
-                                                        <a (click)='getCandidateHistory(profile.CandidateID)'>
+                                                        <a (click)='getCandidateHistory(myprofile.CandidateID)'>
                                                             <i class="fa fa-history"></i>View Interview History</a>
                                                     </li>
                                                 </ul>

@@ -19,7 +19,7 @@
                 <div class="col-lg-12" *ngIf="isChartVisible">
                     <div class=" portlet light bordered">
                         <base-chart class="chart" [options]="doughnutChartOptions" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
-                        [colors]="doughnutChartColors"></base-chart>
+                            [colors]="doughnutChartColors"></base-chart>
                     </div>
                 </div>
 
@@ -161,7 +161,7 @@
                             <div class="col-lg-9 ">
                                 <textarea class="form-control " id="txtCloseComment " rows="1
                                             " [(ngModel)]='closeComment' placeholder="close Comment " style="resize:vertical "
-                                required=" "></textarea>
+                                    required=" "></textarea>
                             </div>
                             <div class="col-lg-3 ">
                                 <button id="btnClose " class="btn blue " (click)="onbtnCloseRRF() ">Close RRF</button>
@@ -305,7 +305,7 @@
                                 <tbody>
                                     <tr class="odd gradeX " *ngFor="let rrf of rrfList | RRFPipe :searchText |RRFIDPipe :closeRRFID.Value ">
                                         <td>
-                                            <RRFGridRow [RRFData] = rrf [displayApproval]='displayApproval' [displayAssignedTo]='displayAssignedTo'></RRFGridRow>
+                                            <RRFGridRow [RRFData]=rrf [displayApproval]='displayApproval' [displayAssignedTo]='displayAssignedTo'></RRFGridRow>
                                         </td>
                                         <td style="width:80px">
                                             <div class="btn-group ">
@@ -328,18 +328,18 @@
                                                     <li class="divider " [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "> </li>
                                                     <li>
                                                         <button class="btn btn-default btnLink" (click)='redirectToAssignRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "
-                                                        [disabled]='allowAssignRRF(rrf.Status.Id)'>
+                                                            [disabled]='allowAssignRRF(rrf.Status.Id)'>
                                                             <i class="icon-user "></i> Assign RRF
                                                         </button>
                                                     </li>
                                                     <li class="divider " [ifAuthorize]="[ 'RC.VIEWRRFCANDIDATES.MANAGE'] "> </li>
                                                     <li>
                                                         <button class="btn btn-default btnLink " [ifAuthorize]="[ 'RC.VIEWRRFCANDIDATES.MANAGE'] " (click)='onViewCandidateClick(rrf.RRFID)'
-                                                        [disabled]='checkIfRRFClosed(rrf.Status.Id)'>
+                                                            [disabled]='checkIfRRFClosed(rrf.Status.Id)'>
                                                             <i class="fa fa-users "></i> View Candidates
                                                         </button>
                                                     </li>
-                                                    <li class="divider" > </li>
+                                                    <li class="divider"> </li>
                                                     <li>
                                                         <button class="btn btn-default btnLink" (click)='onReScheduleInterviewsClick(rrf.RRFID)'>
                                                             <i class="fa fa-calendar-check-o"></i> View Re-schedule Interviews
@@ -392,6 +392,7 @@
                         <view-RRF [RRFID]='viewDetailsRRFId'></view-RRF>
                     </div>
                 </div>
+                <panel-availablity></panel-availablity>
             </div>
             <!-- END PAGE BASE CONTENT -->
         </div>

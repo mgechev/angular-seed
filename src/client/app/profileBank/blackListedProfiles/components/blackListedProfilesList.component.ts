@@ -5,7 +5,7 @@ import { BlackListedProfilesService } from '../services/blacklistedProfiles.serv
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
-import { MasterData,SortingMasterData, ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData, SortingMasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
@@ -84,7 +84,9 @@ export class BlackListedProfilesListComponent implements OnActivate {
             });
     }
     /**Redirecting to candidate's all interview history page */
-    getCandidateHistory(CandidateID: MasterData) {
+    getCandidateHistory(_candidateID: MasterData) {
+        sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
+        sessionStorage.setItem('onReturnPath', '/App/ProfileBank/BlackListedProfiles');
         this._router.navigate(['/App/ProfileBank/BlackListedProfiles/History']);
     }
     redirectToEditProfile(CandidateID: MasterData) {
@@ -180,7 +182,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
         this.blacklistedProfilesList.GrdOperations.ButtonClicked = parseInt(ButtonClicked);
         this.getBlacklistedProfiles();
     }
-     getColumnsForSorting() {
+    getColumnsForSorting() {
         this._profileBankService.getColumsForSorting('BLACKLISTEDPROFILES')
             .subscribe(
             (results: any) => {

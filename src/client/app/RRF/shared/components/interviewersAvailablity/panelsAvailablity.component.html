@@ -1,0 +1,48 @@
+<div class="col-md-8 col-sm-6">
+    <div class="portlet light bordered">
+        <div class="portlet-body">
+            <!--<div class="row">
+                <div class="form-group pull-right">
+                    <a href="#" class="font-red" (click)="sendrequest('interviewerID')"><i class="fa fa-envelope"></i> Request to all</a>
+                </div>
+            </div>-->
+            <!-- BEGIN: Comments -->
+            <div class="row" *ngFor="let str of _strr">
+                <div class="mt-comments">
+                    <div class="mt-comment">
+                        <div class="mt-comment-img">
+                            <img src="../assets/pages/media/users/avatar4.jpg"> </div>
+                        <div class="mt-comment-body ">
+                            <div class="mt-comment-info">
+                                <span class="mt-comment-author">Michael Baker</span>
+                                <div class="mt-comment-details">
+                                    <ul class="mt-comment-actions">
+                                        <li>
+                                            <div tooltip="Send availablity request Email" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
+                                                <a href="#" class="font-green" (click)="sendrequest('interviewerID')"><i class="fa fa-envelope-square"></i> Request</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mt-comment-text">
+                                <ul class="mt-comment-actions">
+                                    <li>
+                                        <span>From : <strong>26 Feb 2016</strong> To : <strong>26 Feb 2016</strong> </span>
+                                        <span class="mt-comment-status">@ 2.30 PM - 4.30 PM</span>
+                                    </li>
+                                    <!--<li>
+                                        <span>From : <strong>26 Feb 2016</strong> To : <strong>26 Feb 2016</strong> </span>
+                                        <span class="mt-comment-status">@ 2.30 PM - 4.30 PM</span>
+                                    </li>-->
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Comments -->
+        </div>
+    </div>
+</div>

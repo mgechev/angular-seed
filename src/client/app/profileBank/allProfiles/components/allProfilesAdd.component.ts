@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { Router, RouteSegment, OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
-import {CandidateProfile, Qualification } from '../../shared/model/myProfilesInfo';
+import {CandidateProfile, ResumeMeta, Qualification } from '../../shared/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -52,6 +52,12 @@ export class AllProfilesAddComponent implements OnActivate {
 
     infoNotSavedAlert: boolean = false;
     currentUser: MasterData = new MasterData();
+    /***variables for Upload photo */
+    uploadedPhoto: any;
+    fileUploaded: boolean = false;
+    fileName: string;
+    resumeMeta: ResumeMeta;
+    profilePhoto: string;
     /** For profile picture */
     profilePic: any;
 
@@ -135,23 +141,7 @@ export class AllProfilesAddComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
-    /** post image to service */
-    uploadPhoto() {
-        /**  */
-    }
-
-    /**Get profile photo */
-    getProfilePhoto(CandidateID: MasterData) {
-        this._profileBankService.getCandidateProfilePhoto(CandidateID)
-            .subscribe(
-            (results: CandidateProfile) => {
-                this.profilePic = results;
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.toastr.error(<any>error);
-            });
-    }
+    
 
     getQualifications(): void {
         this._masterService.getQualifications()
@@ -463,6 +453,77 @@ export class AllProfilesAddComponent implements OnActivate {
                 });
         }
     }
+    /** START Upload profile photo functionality*/
+    /** Function to upload photo */
+    uploadPhoto(selectedFile: any) {
+        /**selected files string assing to the collection : uploadedPhoto */
+        try {
+            let FileList: FileList = selectedFile.target.files;
+            if (this.uploadedPhoto)
+                this.uploadedPhoto.length = 0;
+            for (let i = 0, length = FileList.length; i < length; i++) {
+                this.uploadedPhoto.push(FileList.item(i));
+                this.fileUploaded = true;
+                this.fileName = FileList.item(i).name;
+            }
+            this.postPhoto(this.CandidateID, this.uploadedPhoto[0]);
+        } catch (error) {
+            document.write(error);
+        }
+    }
+    /**Remove Candidate photo from data base */
+    removePhoto(CandidateID: MasterData) {
+        this._profileBankService.removeProfilePhoto(CandidateID)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.getCandidateProfileById(this.CandidateID.Value);
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+    }
+
+    postPhoto(CandidateID: MasterData, selectedFile: any) {
+        if (this.fileName !== '' || this.fileName !== undefined) {
+
+            this.resumeMeta.CandidateID = CandidateID;
+            this.resumeMeta.Overwrite = false;
+            this.resumeMeta.Profile = selectedFile;
+            this._profileBankService.uploadProfilePhoto(this.resumeMeta).then(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.fileUploaded = false;
+                        this.fileName = '';
+                        this.getProfilePhoto(CandidateID);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                (error: any) => this.errorMessage = <any>error);
+        } else {
+            this.toastr.error('No photo found..!');
+        }
+    }
+    /**Get profile photo */
+    getProfilePhoto(CandidateID: MasterData) {
+        this._profileBankService.getCandidateProfilePhoto(CandidateID)
+            .subscribe(
+            (results: CandidateProfile) => {
+                this.profilePic = results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+    }
+    /** END Upload profile photo functionality*/
     Back() {
         this._router.navigate(['/App/ProfileBank/AllProfiles']);
     }

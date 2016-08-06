@@ -13,12 +13,14 @@ import { MastersService } from '../../../shared/services/masters.service';
 import {RRFPipe } from '../../shared/Filters/RRFFilter.component';
 import {ViewRRFComponent} from '../../shared/components/viewRRF/viewRRF.component';
 import {RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
+import { PanelsAvailablityComponent } from '../../shared/components/interviewersAvailablity/panelsAvailablity.component';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-dashboard-list',
     templateUrl: 'RRFDashboardList.component.html',
-    directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES, IfAuthorizeDirective, ViewRRFComponent, RRFGridRowComponent],
+    directives: [PanelsAvailablityComponent, ROUTER_DIRECTIVES, CHART_DIRECTIVES, IfAuthorizeDirective,
+        ViewRRFComponent, RRFGridRowComponent],
     styleUrls: ['../../shared/css/RRF.component.css'],
     pipes: [RRFIDPipe, RRFPipe],
     providers: [ToastsManager]
@@ -50,7 +52,7 @@ export class RRFDashboardListComponent implements OnActivate {
         animation: false,
         responsive: true,
         legend: {
-            onClick: function(event: any, legendItem: any) {
+            onClick: function (event: any, legendItem: any) {
                 //console.log("legend click");
             }
         }
@@ -484,7 +486,7 @@ export class RRFDashboardListComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
-    onReScheduleInterviewsClick(RRFID:MasterData) {
+    onReScheduleInterviewsClick(RRFID: MasterData) {
         //redirect to All Reschedule Interviews Screen
         this._router.navigate(['/App/RRF/RRFDashboard/Interviews/' + RRFID.Value + 'ID' + RRFID.Id]);
     }

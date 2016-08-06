@@ -61,6 +61,13 @@ export class MyProfilesListComponent implements OnActivate {
     selectedCandidates: Array<Candidate>;
     NORECORDSFOUND: boolean = false;
     ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
+    /***variables for Upload photo */
+    uploadedPhoto: any;
+    photoUploaded: boolean = false;
+    photoName: string;
+    photoMeta: ResumeMeta;
+    profilePhoto: string;
+    /** For profile picture */
     profilePic: any;
 
     constructor(private _myProfilesService: MyProfilesService,
@@ -75,6 +82,8 @@ export class MyProfilesListComponent implements OnActivate {
         this.resumeMeta = new ResumeMeta();
         this.selectedCandidates = new Array<Candidate>();
         this.Candidate = new Candidate();
+        this.uploadedPhoto = new Array<File>();
+        this.photoMeta = new ResumeMeta();
     }
 
     routerOnActivate() {
@@ -82,21 +91,8 @@ export class MyProfilesListComponent implements OnActivate {
         this.myProfilesList.GrdOperations = new GrdOptions();
         this.getMyProfiles();
         this.getCandidateStatuses();
-        // this.getProfilePhoto(this.CandidateID);
-        // console.log(this.profilePic);
     }
-    /**Get profile photo */
-    // getProfilePhoto(CandidateID: MasterData) {
-    //     this._profileBankService.getCandidateProfilePhoto(CandidateID)
-    //         .subscribe(
-    //         (results: CandidateProfile) => {
-    //             this.profilePic = results;
-    //         },
-    //         error => {
-    //             this.errorMessage = <any>error;
-    //             this.toastr.error(<any>error);
-    //         });
-    // }
+
     SaveCandidateID(id: MasterData) {
         this.seletedCandidateID = id;
 
@@ -145,46 +141,85 @@ export class MyProfilesListComponent implements OnActivate {
             error => this.toastr.error(<any>error));
     }
     /**Redirecting to candidate's all interview history page */
-    getCandidateHistory(CandidateID: MasterData) {
+    getCandidateHistory(_candidateID: MasterData) {
+        console.log(_candidateID);
+        sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
+        sessionStorage.setItem('onReturnPath', '/App/ProfileBank/MyProfiles');
         this._router.navigate(['/App/ProfileBank/MyProfiles/History']);
     }
-    onSave(): void {
-        if (this.chkValidations()) {
-            if (this.fileName === '' || this.fileName === undefined) {
-                this._myProfilesService.addCandidateProfile(this.profile)
-                    .subscribe(
-                    results => {
-                        if ((<AddCandidateResponse>results).StatusCode === APIResult.Success) {
-                            this.myProfilesList.GrdOperations = new GrdOptions();
-                            this.getMyProfiles();
-                            this.toastr.success((<ResponseFromAPI>results).Message);
-                        } else {
-                            this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
-                        }
-                        this.profile = new CandidateProfile();
-                    },
-                    error => { this.errorMessage = <any>error; this.toastr.error(this.errorMessage) });
-            } else {
+    /**Modified for uploading photo 
+     * Replacing with
+     * 
+     * TODO:: Arati :: Delete after confirmation.
+     * */
+    // onSave(): void {
+    //     if (this.chkValidations()) {
+    //         if (this.fileName === '' || this.fileName === undefined) {
+    //             this._myProfilesService.addCandidateProfile(this.profile)
+    //                 .subscribe(
+    //                 results => {
+    //                     if ((<AddCandidateResponse>results).StatusCode === APIResult.Success) {
+    //                         this.myProfilesList.GrdOperations = new GrdOptions();
+    //                         this.getMyProfiles();
+    //                         this.toastr.success((<ResponseFromAPI>results).Message);
+    //                     } else {
+    //                         this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+    //                     }
+    //                     this.profile = new CandidateProfile();
+    //                 },
+    //                 error => { this.errorMessage = <any>error; this.toastr.error(this.errorMessage) });
+    //         } else {
 
-                //If File is Uploaded then After Adding Candidate Call API to Upload File
-                this._myProfilesService.addCandidateProfile(this.profile)
-                    .subscribe(
-                    results => {
-                        if ((<AddCandidateResponse>results).StatusCode === APIResult.Success) {
-                            this.uploadResume((<AddCandidateResponse>results).CandidateID, this.psdTemplates[0]);
-                        } else {
-                            this.toastr.error((<ResponseFromAPI>results).Message);
-                        }
-                        this.profile = new CandidateProfile();
-                    },
-                    error => {
-                        this.errorMessage = <any>error; this.toastr.error(this.errorMessage)
-                    });
-            }
-        } else {
-            this.toastr.error('Please enter one of field : PassportNumber / PANNumber /AadhaarCardNo');
-        }
+    //             //If File is Uploaded then After Adding Candidate Call API to Upload File
+    //             this._myProfilesService.addCandidateProfile(this.profile)
+    //                 .subscribe(
+    //                 results => {
+    //                     if ((<AddCandidateResponse>results).StatusCode === APIResult.Success) {
+    //                         this.uploadResume((<AddCandidateResponse>results).CandidateID, this.psdTemplates[0]);
+    //                         this.postProfilePhoto((<AddCandidateResponse>results).CandidateID, this.uploadedPhoto[0]);
 
+    //                     } else {
+    //                         this.toastr.error((<ResponseFromAPI>results).Message);
+    //                     }
+    //                     this.profile = new CandidateProfile();
+    //                 },
+    //                 error => {
+    //                     this.errorMessage = <any>error; this.toastr.error(this.errorMessage)
+    //                 });
+    //         }
+    //     } else {
+    //         this.toastr.error('Please enter one of field : PassportNumber / PANNumber /AadhaarCardNo');
+    //     }
+
+    // }
+
+    /**Funtion to Quick Add candidate */
+    OnSubmitCandidate(): void {
+        var _candidateID: MasterData = null;
+        /**Add condidate to profile bank */
+        this._myProfilesService.addCandidateProfile(this.profile)
+            .subscribe(
+            results => {
+                if ((<AddCandidateResponse>results).StatusCode === APIResult.Success) {
+                    _candidateID = (<AddCandidateResponse>results).CandidateID;
+                    /**upload resume of currently added canidate IFF AVAILABLE */
+                    if (this.fileName !== '' || this.fileName !== undefined) {
+                        this.uploadResume(_candidateID, this.psdTemplates[0]);
+                    }
+                    /**upload photo of currently added canidate IFF AVAILABLE */
+                    if (this.photoName !== '' || this.photoName !== undefined) {
+                        this.postProfilePhoto(_candidateID, this.uploadedPhoto[0]);
+                    }
+                    /**update Profile grid*/
+                    this.myProfilesList.GrdOperations = new GrdOptions();
+                    this.getMyProfiles();
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                }
+                this.profile = new CandidateProfile();
+            },
+            error => { this.errorMessage = <any>error; this.toastr.error(this.errorMessage); });
     }
 
     chkValidations(): boolean {
@@ -194,7 +229,9 @@ export class MyProfilesListComponent implements OnActivate {
             return true;
         } else { return false; }
     }
-
+    /** This function sends file to service to upload in library/DB
+     * after click on save buttong or Form submission
+    */
     uploadResume(CandidateLookupId: MasterData, File: any) {
         this.resumeMeta.CandidateID = CandidateLookupId;
         this.resumeMeta.Overwrite = false;
@@ -205,8 +242,8 @@ export class MyProfilesListComponent implements OnActivate {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.fileUploaded = false;
                     this.fileName = '';
-                    this.myProfilesList.GrdOperations = new GrdOptions();
-                    this.getMyProfiles();
+                    // this.myProfilesList.GrdOperations = new GrdOptions();
+                    // this.getMyProfiles();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -315,7 +352,43 @@ export class MyProfilesListComponent implements OnActivate {
         this.isCommentsPanelCollapsed = !this.isCommentsPanelCollapsed;
         this.highlightRow = '';
     }
+    /**START Upload photo funcationality*/
+    /**Function to add file in collection which will be used while uplaoding file. */
+    uploadPhoto(selectedFile: any) {
+        try {
+            let FileList: FileList = selectedFile.target.files;
+            if (this.uploadedPhoto)
+                this.uploadedPhoto.length = 0;
+            for (let i = 0, length = FileList.length; i < length; i++) {
+                this.uploadedPhoto.push(FileList.item(i));
+                this.photoUploaded = true;
+                this.photoName = FileList.item(i).name;
+            }
+        } catch (error) {
+            document.write(error);
+        }
+    }
+    /** This function sends file to service to upload in library/DB
+    * after click on save buttong or Form submission
+   */
+    postProfilePhoto(CandidateLookupId: MasterData, File: any) {
+        this.photoMeta.CandidateID = CandidateLookupId;
+        this.photoMeta.Overwrite = false;
+        this.photoMeta.Profile = File;
+        this._profileBankService.uploadProfilePhoto(this.photoMeta).then(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.photoUploaded = false;
+                    this.photoName = '';
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
+            },
+            (error: any) => this.errorMessage = <any>error);
+    }
 
+    /**END Upload photo funcationality*/
     onSubmitFollowupComment() {
         //check if comment is actually updated regardless of spaces
         if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim()) {
@@ -339,7 +412,7 @@ export class MyProfilesListComponent implements OnActivate {
         }
 
     }
-
+    /**Function to add file in collection which will be used while uplaoding file. */
     uploadFile(inputValue: any): void {
         try {
             let FileList: FileList = inputValue.target.files;

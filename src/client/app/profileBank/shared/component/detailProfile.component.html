@@ -45,7 +45,7 @@
                     <ul class="list-unstyled">
                         <li>
 
-                            <label class="control-label">Skills : <strong> {{profile.CandidateSkills.PrimarySkills}} ;</strong> {{profile.CandidateSkills.OtherSkills}} ; {{profile.CandidateSkills.PrimarySkills}} C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF</label>
+                            <label class="control-label">Skills : <strong> {{profile.CandidateSkills.PrimarySkills?profile.CandidateSkills.PrimarySkills:"N/A"}} </strong> {{profile.CandidateSkills.OtherSkills}} {{profile.CandidateSkills.PrimarySkills}} </label>
                             <!--<label class="control-label">Skills : <strong> C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF</strong></label>-->
                         </li>
                         <li>
@@ -58,7 +58,7 @@
                     <p>
                         <a href="mailto:{{profile.Email}}">{{profile.Email?profile.Email:"N/A"}} </a>
                     </p>
-                    <ul class="list-inline" style="color:#f16e50">
+                    <ul class="list-inline sbold" style="color:#f16e50">
                         <li>
                             <i class="fa fa-map-marker"></i>{{profile.District?profile.District:"N/A"}} </li>
                         <li>

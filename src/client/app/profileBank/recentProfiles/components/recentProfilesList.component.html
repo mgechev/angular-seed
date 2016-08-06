@@ -111,8 +111,8 @@
 
 
                             <div class="table-scrollable">
-                                <table class="table table-striped table-bordered table-hover order-column dataTable no-footer" id="sample_1"
-                                    role="grid" aria-describedby="sample_1_info">
+                                <table class="table table-striped table-bordered table-hover order-column dataTable no-footer" id="sample_1" role="grid"
+                                    aria-describedby="sample_1_info">
                                     <thead class="thead">
                                         <tr>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Name / Email / Contact</th>
@@ -129,7 +129,7 @@
                                             <td>
                                                 <detail-profile [selectedProfile]="recentProfile"></detail-profile>
                                             </td>
-                                           
+
                                             <!--<td>
                                                 <tr>
                                                     <td style="float: left;">&nbsp; {{recentProfile.Candidate}}</td>
@@ -183,11 +183,11 @@
                                                         </li>
                                                         <!-- TODO:: update Delete Permission once recive from backend -->
                                                         <li>
-                                                            <a (click)='deleteCandidate(profile.CandidateID)'>
+                                                            <a (click)='deleteCandidate(recentProfile.CandidateID)'>
                                                                 <i class="fa fa-remove"></i>Delete Profile</a>
                                                         </li>
                                                         <li>
-                                                            <a (click)='getCandidateHistory(profile.CandidateID)'>
+                                                            <a (click)='getCandidateHistory(recentProfile.CandidateID)'>
                                                                 <i class="fa fa-history"></i>View Interview History</a>
                                                         </li>
                                                     </ul>

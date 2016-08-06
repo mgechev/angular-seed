@@ -6,7 +6,7 @@ import { CompanyProfilesService } from '../services/companyProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
-import { MasterData,SortingMasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData, SortingMasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
@@ -27,7 +27,7 @@ import { DetailProfileComponent } from '../../shared/component/detailProfile.com
 
 export class CompanyProfilesListComponent implements OnActivate {
     companyProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
-        ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
+    ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
 
     profile: CandidateProfile;
     statusList: Array<MasterData>;
@@ -99,7 +99,10 @@ export class CompanyProfilesListComponent implements OnActivate {
             error => this.toastr.error(<any>error));
     }
     /**Redirecting to candidate's all interview history page */
-    getCandidateHistory(CandidateID: MasterData) {
+    getCandidateHistory(_candidateID: MasterData) {
+        console.log(_candidateID);
+        sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
+        sessionStorage.setItem('onReturnPath', '/App/ProfileBank/CompanyProfiles');
         this._router.navigate(['/App/ProfileBank/CompanyProfiles/History']);
     }
     redirectToEditProfile(CandidateID: MasterData) {
@@ -252,7 +255,7 @@ export class CompanyProfilesListComponent implements OnActivate {
         this.companyProfilesList.GrdOperations.ButtonClicked = parseInt(ButtonClicked);
         this.getcompanyProfiles();
     }
-      getColumnsForSorting() {
+    getColumnsForSorting() {
         this._profileBankService.getColumsForSorting('COMPANYPROFILS')
             .subscribe(
             (results: any) => {
