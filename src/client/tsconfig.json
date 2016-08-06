@@ -16,5 +16,14 @@
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": true
   },
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*.e2e-spec.ts"
+  ],
+  "files": [
+    "**/*.ts",
+    "../../typings/index.d.ts",
+    "../../tools/manual_typings/**/*.d.ts"
+  ],
   "compileOnSave": false
 }
