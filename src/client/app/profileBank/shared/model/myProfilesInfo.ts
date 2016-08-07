@@ -1,4 +1,4 @@
-import { MasterData,GrdOptions } from  '../../../shared/model/index';
+import { MasterData, GrdOptions } from  '../../../shared/model/index';
 
 export class AllCandidateProfiles {
   public GrdOperations = new GrdOptions();
@@ -30,7 +30,7 @@ export class CandidateProfile {
   public IsChecked: boolean;
   public url: any;
   public RRFID: MasterData = new MasterData();
-  
+
 
 
   //Properties of Personal Information
@@ -64,8 +64,13 @@ export class CandidateProfile {
   public CandidateCode: string;
   public isRRFAssigned: boolean;
 
-  //property for Images results binary string
+  /**property for Images results binary string */
   public BinaryImage: string;
+  /**Property for resume dowload which add to hold document in binary format */
+  public BinaryResume: string;
+  /**Property for giving file name with extection */
+  public ResumeName: string = 'TestResume.doc';
+
 }
 
 export class Qualification {
@@ -178,6 +183,18 @@ export class TransferOwnershipMeta {
   public CandidateName: string;
   public CandidateIds: Array<MasterData> = new Array<MasterData>();
   public Owner = new MasterData();
+}
+
+/**Employment history represents canidates existing and current employer information.*/
+export class EmploymentHistory {
+  public CandidateID: MasterData = new MasterData();
+  public EmploymentID: string;
+  public Designation: string;
+  public CompanyName: string;
+  public Location: string;
+  public TimeSpentInCurrentCompany: string;
+  public IsCurrent: boolean = false;
+
 }
 
 // export class GridOperations {

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment } from '@angular/router';
-import { CandidateProfile, ResumeMeta, Qualification} from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, ResumeMeta, Qualification, EmploymentHistory} from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 //import * as  _ from 'lodash';
@@ -35,14 +35,18 @@ export class MyProfilesAddComponent implements OnActivate {
     selectedYear: number;
     selectedGrade: number;
     Marks: number;
-
+    EmploymentDetailsAction: string = 'Add';
     IsHidden: boolean = true;
     IsSuccess: boolean = false;
     CurrentYear: number;
     selectedVisa: MasterData = new MasterData();
     VisaType: Array<MasterData> = new Array<MasterData>();
     TITLE: string = 'Profiles';
-    /***variables for Upload photo */
+    /**Employment History*/
+    EmployersInformation: EmploymentHistory = new EmploymentHistory();
+    /**Employment History collection */
+    EmployersInformationList: Array<EmploymentHistory> = new Array<EmploymentHistory>();
+    /**Variables for Upload photo */
     uploadedPhoto: any;
     fileUploaded: boolean = false;
     fileName: string;
@@ -365,6 +369,75 @@ export class MyProfilesAddComponent implements OnActivate {
             });
 
     }
+    /**START Candidate Employement History functionality (Candidate Employers Information) */
+    /**Save new employer related information*/
+    AddEmployersInformation() {
+        this._profileBankService.addCandidateEmploymentDetails(this.EmployersInformation)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    /**Bind new data to list */
+                    this.GetEmployersInformationList(this.CandidateID);
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+    }
+    /**Get selected candidate EmployerInformation for edit*/
+    EditEmployerInformation(_employmentID: string) {
+        this.GetEmployersInformation(_employmentID);
+        this.EmploymentDetailsAction = 'Update';
+    }
+    /**Save new employer related information*/
+    UpdateEmployersInformation() {
+        this._profileBankService.editCandidateEmploymentDetails(this.EmployersInformation)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    /**Bind new data to list */
+                    this.GetEmployersInformationList(this.CandidateID);
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+    }
+    /**Bind candidate's all employment related information */
+    GetEmployersInformationList(_candidateID: MasterData) {
+        this._profileBankService.getCandidateEmploymentHistory(_candidateID)
+            .subscribe(
+            results => {
+                this.EmployersInformationList = <any>results;
+                this.EmploymentDetailsAction = 'Add';
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+
+    }
+    /**Fetch and bing candidate's selected employment information For Update*/
+    GetEmployersInformation(_employmentID: string) {
+        this._profileBankService.getCandidateSelectedEmploymentDetails(_employmentID)
+            .subscribe(
+            results => {
+                this.EmployersInformation = <any>results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+    }
+    /**END Candidate Employement History functionality (Candidate Employers Information) */
 
     onAddQualification(): void {
         this.qualification.CandidateID = this.profile.CandidateID;

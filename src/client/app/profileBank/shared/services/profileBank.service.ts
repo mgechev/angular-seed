@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { CandidateProfile, ResumeMeta, SalaryDetails, Qualification, TeamManagement, CareerProfile,
+import { CandidateProfile, EmploymentHistory, ResumeMeta, SalaryDetails, Qualification, TeamManagement, CareerProfile,
     OtherDetails, Skills, TransferOwnershipMeta} from '../model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
@@ -148,6 +148,46 @@ export class ProfileBankService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+    /**Get candidate employement history till date. */
+    getCandidateEmploymentHistory(_candidateID: MasterData) {
+        /**TODO:: Need to Update API */
+        let url = Config.GetURL('/api/ProfileBank/getQualificationDetails?CandidateID=' + _candidateID.Value);
+        this._spinnerService.show();
+        return this.authHttp.post(url, _candidateID)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    /**Get selected employer's and employement details for update. */
+    getCandidateSelectedEmploymentDetails(_employmentID: string) {
+        /**TODO:: Need to Update API */
+        let url = Config.GetURL('/api/ProfileBank/getQualificationDetails?CandidateID=' + _employmentID);
+        this._spinnerService.show();
+        return this.authHttp.post(url, _employmentID)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    /**Save candidate's all employement information' */
+    addCandidateEmploymentDetails(_employmentHistory: EmploymentHistory) {
+        /**TODO:: Need to Update API */
+        let url = Config.GetURL('/api/ProfileBank/AddCareerProfileDetails');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { _employmentHistory })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    /**Edit candidate's employement information details */
+    editCandidateEmploymentDetails(_employmentHistory: EmploymentHistory) {
+        /**TODO:: Need to Update API */
+        let url = Config.GetURL('/api/ProfileBank/EditCareerProfileDetails');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { _employmentHistory })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
 
     editCandidateQualification(CandidateQualification: Qualification) {
         let url = Config.GetURL('/api/ProfileBank/UpdateQualifications');
@@ -225,12 +265,12 @@ export class ProfileBankService {
         // };
         // xhr.open('GET', url, true);
         // xhr.send();
-        let url = Config.GetURL('/api/ProfileBank/GetResume?CandidateID=' + CandidateID.Value);
+        //let url = Config.GetURL('/api/ProfileBank/GetResume?CandidateID=' + CandidateID.Value);
         var headers = new Headers();
         headers.append('responseType', 'bolb');
         // headers.append('Content-Type', 'application/json');
         // headers.append('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
-        let options = new RequestOptions({ headers: headers });
+        //let options = new RequestOptions({ headers: headers });
         //'http://www.pdf995.com/samples/pdf.pdf
         return this.http.get('http://www.pdf995.com/samples/pdf.pdf', headers)
             .map((response: any) => {

@@ -89,7 +89,10 @@
                                 </li>
                                 <li>
                                     <div class="tools">
-                                        <a (click)='getResume(profile.CandidateID)' class="reload" data-original-title="" title=""><i aria-hidden="true" class="fa fa-download"></i>Download Resume {{profile.Resume_ID}}  </a>
+                                        <!--(click)='getResume(profile.CandidateID)'-->
+                                        <a href="data:application/octet-stream;charset=utf-8;base64,{{profile.BinaryResume}}" download="{{profile.ResumeName?profile.ResumeName:'TestResume.doc'}}"
+                                            class="reload" data-original-title="" title=""><i aria-hidden="true" class="fa fa-download"></i>Download Resume {{profile.Resume_ID}}  </a>
+                                        <!--<a href="data:application/octet-stream;charset=utf-8;base64,{{profile.BinaryImage}}" class="btn btn-primary" download="pdftesting.pdf">Download</a>-->
                                     </div>
                                 </li>
                             </ul>

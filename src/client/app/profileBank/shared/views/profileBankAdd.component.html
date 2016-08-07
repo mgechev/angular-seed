@@ -667,7 +667,10 @@
                                         <!-- END SKILLS TAB -->
                                         <!-- CAREER PROFILE TAB -->
                                         <div class="tab-pane" id="tab_1_4">
+                                            <!--<form role="form">-->
+
                                             <form role="form" (submit)="onSaveCareerProfileDetails()">
+
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-group">
@@ -740,74 +743,93 @@
                                                     </div>
 
                                                 </div>
-
-                                                <hr>
-                                                <div class="portlet-title">
-                                                    <div class="caption font-dark">
-                                                        <span class="caption-subject bold uppercase">Employer's Information</span>
-                                                    </div>
+                                            </form>
+                                            <hr>
+                                            <div class="portlet-title">
+                                                <div class="caption font-dark">
+                                                    <span class="caption-subject bold uppercase">Employer's Information</span>
                                                 </div>
-                                                <hr>
-                                                <!-- Employer information TAB -->
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <!-- BEGIN EXAMPLE TABLE PORTLET-->
-                                                        <div class="table-toolbar">
-                                                            <form role="form" (submit)="onAddQualification()">
-                                                                <div class="row form-group">
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label class="control-label">Designation<span class="required"> * </span></label>
-                                                                            <div class="row">
-                                                                                <div class="col-md-12">
-                                                                                    <div>
-                                                                                        <input type="Text" placeholder="Designation" class="form-control" required="" />
-                                                                                    </div>
+                                            </div>
+                                            <hr>
+                                            <!-- Employer information TAB -->
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                                                    <div class="table-toolbar">
+                                                        <form role="form" (submit)="AddEmployersInformation()">
+                                                            <div class="row form-group">
+                                                                <div class="col-md-3">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Designation<span class="required"> * </span></label>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div>
+                                                                                    <input type="Text" placeholder="Designation" class="form-control" [(ngModel)]="EmployersInformation.Designation" title="Please enter Designation in specified company"
+                                                                                        required="" tooltip="Please enter Designation in specified company"
+                                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                                        tooltipEnable="!EmployersInformation.Designation"
+                                                                                    />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label class="control-label">Company Name <span class="required"> * </span></label>
-                                                                            <div class="row">
-                                                                                <div class="col-md-12">
-                                                                                    <input type="Text" placeholder="Company Name" class="form-control" required="" />
-                                                                                </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Company Name <span class="required"> * </span></label>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <input type="Text" placeholder="Company Name" class="form-control" [(ngModel)]="EmployersInformation.CompanyName" title="Please enter company name"
+                                                                                    required="" tooltip="Company Name" tooltipPlacement="top"
+                                                                                    tooltipTrigger="mouseenter" tooltipEnable="!EmployersInformation.CompanyName"
+                                                                                />
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-2">
-                                                                        <div class="form-group">
-                                                                            <label class="control-label">Location <span class="required"> * </span></label>
-                                                                            <div class="row">
-                                                                                <div class="col-md-12">
-                                                                                    <input type="Text" placeholder="Location" class="form-control" required="" />
-                                                                                </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Location <span class="required"> * </span></label>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <input type="Text" placeholder="Location" class="form-control" [(ngModel)]="EmployersInformation.Location" title="Please enter working location for specified company"
+                                                                                    required="" tooltip="Please enter working location for specified company"
+                                                                                    tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                                    tooltipEnable="!EmployersInformation.Location"
+                                                                                />
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-2">
-                                                                        <div class="form-group">
-                                                                            <label class="control-label"> Period  <span class="required"> * </span></label>
-                                                                            <div class="row">
-                                                                                <div class="col-md-12">
-                                                                                    <input type="number" placeholder="(In Month)" class="form-control" max="999" maxlength="3" min="0" required="" />
-                                                                                </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label"> Period  <span class="required"> * </span></label>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <input type="number" placeholder="(In Month)" class="form-control" max="999" maxlength="3" min="0" required="" [(ngModel)]="EmployersInformation.TimeSpentInCurrentCompany"
+                                                                                    title="Please enter time spent in current company"
+                                                                                    tooltip="Time spent in specified company in months"
+                                                                                    tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                                    tooltipEnable="!EmployersInformation.TimeSpentInCurrentCompany"
+                                                                                />
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-1">
-                                                                        <div class="form-group">
-                                                                            <label class="control-label">Current </label>
-                                                                            <div class="row">
-                                                                                <div class="col-md-1">
-                                                                                    <input type="checkbox" />
-                                                                                </div>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Current </label>
+                                                                        <div class="row">
+                                                                            <div class="col-md-1">
+                                                                                <input type="checkbox" [(ngModel)]="EmployersInformation.IsCurrent" tooltip="Check for Adding filled details as current employer/employment Details"
+                                                                                    tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                                    tooltipEnable="!EmployersInformation.IsCurrent"
+                                                                                />
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <!--<div class="col-md-3">
+                                                                </div>
+                                                                <!--<div class="col-md-3">
                                                                         <div class="form-group">
                                                                             <label class="control-label">Comments </label>
                                                                             <div class="row">
@@ -817,75 +839,75 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>-->
-                                                                    <div class="col-md-1">
-                                                                        <div class="form-group">
-                                                                            <br/>
-                                                                            <div class="row">
-                                                                                <div class="col-md-2">
-                                                                                    <button type="submit" class="btn green" style="padding-top: 5px;" *ngIf="IsHidden"> Add </button>
-                                                                                    <button type="submit" class="btn green" style="padding-top: 5px;" *ngIf="!IsHidden">Update </button>
-                                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <div class="form-group">
+                                                                        <br/>
+                                                                        <div class="row">
+                                                                            <div class="col-md-2">
+                                                                                <button type="submit" class="btn green" style="padding-top: 5px;"> {{EmploymentDetailsAction}} </button>
+                                                                                <!--<button type="submit" class="btn green" style="padding-top: 5px;">Update </button>-->
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </form>
-                                                        </div>
-                                                        <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th> Designation </th>
-                                                                    <th> Company Name </th>
-                                                                    <th> Location</th>
-                                                                    <th> Time Spent <small>(In Months)</small> </th>
-                                                                    <th> Current </th>
-                                                                    <th> Edit </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <!--<tr *ngFor="let Qualification of profile.CandidateQualification">
-                                                                <td> {{Qualification.Qualification.Value}}</td>
-                                                                <td> {{Qualification.YearofPassing}}</td>
-                                                                <td> {{Qualification.Grade.Value}}</td>
-                                                                <td class="center">{{Qualification.Marks}} </td>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                                                        <thead>
+                                                            <tr>
+                                                                <th> Designation </th>
+                                                                <th> Company Name </th>
+                                                                <th> Location</th>
+                                                                <th> Time Spent <small>(In Months)</small> </th>
+                                                                <th> Current </th>
+                                                                <th> Edit </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <!--<tr *ngFor="let EmployersInformation of EmployersInformationList">
+                                                                <td> {{EmployersInformation.Designation}}</td>
+                                                                <td> {{EmployersInformation.CompanyName}}</td>
+                                                                <td> {{EmployersInformation.Location}}</td>
+                                                                <td class="text-center"> {{EmployersInformation.TimeSpentInCurrentCompany}}</td>
+                                                                <td class="text-center"> {{EmployersInformation.IsCurrent===true?"Current":"-"}}</td>
                                                                 <td>
-                                                                    <a class="edit" (click)='editQualidficationData(Qualification.Qualification.Id)'> Edit </a>
+                                                                    <a class="edit" (click)='EditEmployerInformation(EmployersInformation.EmploymentID)'> Edit </a>
                                                                 </td>
                                                             </tr>-->
-
-                                                                <tr>
-                                                                    <td> Freshers</td>
-                                                                    <td> Axiom</td>
-                                                                    <td> Abhu Dhabi</td>
-                                                                    <td class="text-center"> 2</td>
-                                                                    <td class="text-center"> Current</td>
-                                                                    <!--<td> Candidate was on contract basis. </td>-->
-                                                                    <td>
-                                                                        <a class="edit" (click)='editQualidficationData(Qualification.Qualification.Id)'> Edit </a>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td> Assistant Engg.</td>
-                                                                    <td> Axiom</td>
-                                                                    <td> Dubai</td>
-                                                                    <td class="text-center"> 5</td>
-                                                                    <td class="text-center"> </td>
-                                                                    <!--<td> Candidate was on roll of company. </td>-->
-                                                                    <td>
-                                                                        <a class="edit" (click)='editQualidficationData(Qualification.Qualification.Id)'> Edit </a>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-
-                                                    </div>
-                                                    <!-- /Employer information TAB -->
-                                                    <!-- END EXAMPLE TABLE PORTLET-->
+                                                            <tr>
+                                                                <td> Freshers</td>
+                                                                <td> Axiom</td>
+                                                                <td> Abhu Dhabi</td>
+                                                                <td class="text-center"> 2</td>
+                                                                <td class="text-center"> Current</td>
+                                                                <!--<td> Candidate was on contract basis. </td>-->
+                                                                <td>
+                                                                    <a class="edit" (click)='EditEmployerInformation(123)'> Edit </a>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td> Assistant Engg.</td>
+                                                                <td> Axiom</td>
+                                                                <td> Dubai</td>
+                                                                <td class="text-center"> 5</td>
+                                                                <td class="text-center"> </td>
+                                                                <!--<td> Candidate was on roll of company. </td>-->
+                                                                <td>
+                                                                    <a class="edit" (click)='EditEmployerInformation(124)'> Edit </a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
 
                                                 </div>
-                                                <!-- Employer information TAB -->
+                                                <!-- /Employer information TAB -->
+                                                <!-- END EXAMPLE TABLE PORTLET-->
 
-                                            </form>
+                                            </div>
+                                            <!-- Employer information TAB -->
+
+                                            <!--</form>-->
                                         </div>
                                         <!-- END CAREER PROFILE TAB -->
                                         <!-- SALARY STRUCTURE TAB -->
