@@ -62,6 +62,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     selectSkypeID: boolean = false;
     isInterviewReschedule: boolean = false;
     NominatedInterviewersAvailable: boolean = false;
+    currentDate:string;
 
     constructor(private _router: Router,
         private _calendarDataService: CalendarDataService,
@@ -82,6 +83,8 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         this.SelectedInterviewers = new Array<Interviewers>();
         this.InterviewerCalendarDetails = new CalendarDetails();
         this.getResources();
+        var date = new Date();
+        this.currentDate = this.formatDate(date);
         //this.event = new Event();
     }
 
@@ -181,12 +184,12 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         } else {
             //if Invalid Send for Approval
 
-            // if (this.isRejectedCandidate) {
-            //     this.ScheduleInterView.ApprovalType = 'Rejected Candidate';
-            // } else { this.ScheduleInterView.ApprovalType = 'Skip Interview'; }
+            if (this.isRejectedCandidate) {
+                this.ScheduleInterView.ApprovalType = 'Rejected Candidate';
+            } else { this.ScheduleInterView.ApprovalType = 'Skip Interview'; }
 
-            // this.ScheduleInterView.Status = 'Awaiting Approval';
-            // this.ScheduleCandidateInterView();
+            this.ScheduleInterView.Status = 'Awaiting Approval';
+            this.ScheduleCandidateInterView();
         }
     }
     //Call Service to Save ScheduleInterview
@@ -424,6 +427,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         if (status !== null) {
             switch (status.toLowerCase()) {
                 case '':
+                case 'selected':
                 case 'not scheduled':
                     this.ScheduleInterView.Status = 'Scheduled';
                     break;

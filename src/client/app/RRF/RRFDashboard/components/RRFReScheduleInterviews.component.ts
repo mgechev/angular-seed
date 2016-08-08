@@ -1,9 +1,9 @@
 import { Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, OnActivate, RouteSegment} from '@angular/router';
+import { ROUTER_DIRECTIVES, Router, OnActivate, RouteSegment} from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { RRFReScheduleInterviewService} from '../services/RRFReScheduleInterviews.service';
 import {InterviewsList} from '../../../recruitmentCycle/recruitersTab/index';
-import { GrdOptions } from  '../../../shared/model/index';
+import { GrdOptions, MasterData } from  '../../../shared/model/index';
 
 @Component({
     moduleId: module.id,
@@ -17,26 +17,33 @@ export class RRFReScheduleInterviewsComponent implements OnActivate {
     currentView: string = 'myReInterviews';
     NORECORDSFOUND: boolean = false;
     mode: string;
+    RRFID: MasterData = new MasterData();
     errorMessage: string;
     InterviewDetailsList: InterviewsList = new InterviewsList();
     constructor(private _rrfReScheduleInterviewService: RRFReScheduleInterviewService,
-        private toastr: ToastsManager) {
+        private toastr: ToastsManager,
+        private _router: Router) {
         this.currentView = 'myReInterviews';
     }
 
     routerOnActivate(segment: RouteSegment) {
         this.InterviewDetailsList.CandidateRRFIDs.RRFID.Id = parseInt((segment.getParam('id')).split('ID')[1]);
         this.InterviewDetailsList.CandidateRRFIDs.RRFID.Value = (segment.getParam('id')).split('ID')[0];
+        this.RRFID = this.InterviewDetailsList.CandidateRRFIDs.RRFID;
         this.getMyReScheduleInterviewsData();
     }
+    Back() {
+        this._router.navigate(['/App/RRF/RRFDashboard']);
+    }
     onViewChanged(viewMode: string) {
-        // this.InterviewDetailsList.GrdOperations = new GrdOptions();
-        this.resetToDefaultGridOptions();
-        this.InterviewDetailsList.GrdOperations.OrderBy = 'Modified';
-        this.InterviewDetailsList.GrdOperations.Order = 'asc';
-        this.InterviewDetailsList.GrdOperations.PerPageCount = 5;
+
         //Clear RRF List
         this.InterviewDetailsList = new InterviewsList();
+        this.InterviewDetailsList.CandidateRRFIDs.RRFID.Id = this.RRFID.Id;
+        this.InterviewDetailsList.CandidateRRFIDs.RRFID.Value = this.RRFID.Value;
+        // this.InterviewDetailsList.GrdOperations = new GrdOptions();
+        this.resetToDefaultGridOptions();
+        this.setGridOptions();
 
         if (viewMode === 'allReInterviews') {
             this.currentView = 'allReInterviews';
@@ -48,8 +55,9 @@ export class RRFReScheduleInterviewsComponent implements OnActivate {
     }
     resetToDefaultGridOptions() {
         this.InterviewDetailsList.GrdOperations = new GrdOptions();
+        this.setGridOptions();
         this.InterviewDetailsList.GrdOperations.ButtonClicked = 0;
-        this.InterviewDetailsList.GrdOperations.NextPageUrl = [];
+        this.InterviewDetailsList.GrdOperations.NextPageUrl = new Array<string>();
     }
 
     getAllReScheduleInterviewsData() {
@@ -87,8 +95,8 @@ export class RRFReScheduleInterviewsComponent implements OnActivate {
             });
     }
     onChange() {
-        this.InterviewDetailsList.GrdOperations.ButtonClicked = 0;
-        this.InterviewDetailsList.GrdOperations.NextPageUrl = new Array<string>();
+        // this.InterviewDetailsList.GrdOperations.ButtonClicked = 0;
+        // this.InterviewDetailsList.GrdOperations.NextPageUrl = new Array<string>();
         this.checkViewMode();
     }
     OnPaginationClick(ButtonClicked: string) {
@@ -104,6 +112,11 @@ export class RRFReScheduleInterviewsComponent implements OnActivate {
     checkViewMode() {
         //Clear RRF List
         this.InterviewDetailsList = new InterviewsList();
+        this.InterviewDetailsList.CandidateRRFIDs.RRFID.Id = this.RRFID.Id;
+        this.InterviewDetailsList.CandidateRRFIDs.RRFID.Value = this.RRFID.Value;
+        // this.InterviewDetailsList.GrdOperations = new GrdOptions();
+        this.resetToDefaultGridOptions();
+        this.setGridOptions();
 
         if (this.currentView === 'allReInterviews') {
             this.getAllReScheduleInterviewsData();

@@ -221,14 +221,15 @@ export class MyProfilesListComponent implements OnActivate {
             },
             error => { this.errorMessage = <any>error; this.toastr.error(this.errorMessage); });
     }
-
-    chkValidations(): boolean {
+    /** Validations are removed as per requirement introducing "Incomplete Profiles"
+     * 
+     chkValidations(): boolean {
         if ((this.profile.PassportNumber !== undefined && this.profile.PassportNumber !== '') ||
             (this.profile.PANNumber !== undefined && this.profile.PANNumber !== '') ||
             (this.profile.AadharCardNo !== undefined && this.profile.AadharCardNo !== '')) {
             return true;
         } else { return false; }
-    }
+    } */
     /** This function sends file to service to upload in library/DB
      * after click on save buttong or Form submission
     */

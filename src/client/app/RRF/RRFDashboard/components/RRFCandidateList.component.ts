@@ -50,6 +50,19 @@ export class RRFCandidateListComponent implements OnActivate {
     changeStatusInterviewID: MasterData = new MasterData();
     showChangeStatus: boolean = false;
     changeStatusCandidateID: MasterData = new MasterData();
+     public barChartOptions: any = {
+        scaleShowVerticalLines: false,
+        responsive: true
+    };
+    public barChartLabels: string[] = ['Business Logic', 'Technical Skills', 'Communication'];
+    public barChartType: string = 'bar';
+    public barChartLegend: boolean = true;
+
+    public barChartData: any[] = [
+        { data: [2,5,4], label: 'Technical 1' },
+        { data: [1,3,4], label: 'Technical 2' },
+        { data: [5,3,5], label: 'HR 1' }
+    ];
 
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,

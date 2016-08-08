@@ -222,7 +222,8 @@ export class CompanyProfilesListComponent implements OnActivate {
 
         for (var index = 0; index < this.companyProfilesList.Profiles.length; index++) {
             if (this.companyProfilesList.Profiles[index].IsChecked) {
-                if (!this.companyProfilesList.Profiles[index].isRRFAssigned) {
+                if (!this.companyProfilesList.Profiles[index].isRRFAssigned &&
+                    this.companyProfilesList.Profiles[index].Status.Value.toLowerCase() !== 'incomplete' ) {
                     this.Candidate.CandidateID = this.companyProfilesList.Profiles[index].CandidateID;
                     this.Candidate.Candidate = this.companyProfilesList.Profiles[index].Candidate;
                     this.selectedCandidates.push(this.Candidate);
@@ -231,7 +232,7 @@ export class CompanyProfilesListComponent implements OnActivate {
             }
         }
         if (chkRRFAssigned) {
-            this.toastr.warning('Candidate already assigned to RRF');
+            this.toastr.warning('Candidate already assigned to RRF Or Selected Candidate is of Incompleted Status');
             this.selectedCandidates = new Array<CandidateProfile>();
         } else {
             sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));

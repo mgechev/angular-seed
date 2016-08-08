@@ -224,8 +224,14 @@
                                           <hr style="margin-top: 50px;"/>
                                     </form>
                                     <br/>
-                                    <base-chart class="chart" style="display:block;width:100%" [options]="doughnutChartOptions" [data]="doughnutChartData" [labels]="doughnutChartLabels"
-                                    [chartType]="doughnutChartType" [colors]="doughnutChartColors"></base-chart>
+                                   <base-chart class="chart"
+                                                    [datasets]="barChartData"
+                                                    [labels]="barChartLabels"
+                                                    [options]="barChartOptions"
+                                                    [legend]="barChartLegend"
+                                                    [chartType]="barChartType"
+                                                    (chartHover)="chartHovered($event)"
+                                                    (chartClick)="chartClicked($event)"></base-chart>
 
                                 </div>
                                 <!-- Candidate Details END-->
