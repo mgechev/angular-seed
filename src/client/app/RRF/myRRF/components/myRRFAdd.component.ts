@@ -415,7 +415,7 @@ export class MyRRFAddComponent implements OnActivate {
     submitForm() {
         if (this.isNewRRF) {
             this.raiseRRF();
-        } else if (!this.isNewRRF && (+this.RRFStatus !== +(RRFStatus.Rejected)) {
+        } else if (!this.isNewRRF && (+this.RRFStatus !== +(RRFStatus.Rejected))) {
             this.onUpdateClick();
         } else if (+this.RRFStatus == +(RRFStatus.Rejected)) {
             this.reRaiseRRF();

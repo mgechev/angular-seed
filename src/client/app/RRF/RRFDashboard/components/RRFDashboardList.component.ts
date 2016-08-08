@@ -378,7 +378,7 @@ export class RRFDashboardListComponent implements OnActivate {
 
     allowEditRRF(statusId: number, raisedBy: number) {
         try {
-            if (raisedBy === this.logedInUser.Id && (statusId === RRFStatus.PendingApproval || statusId === RRFStatus.Rejected) {
+            if (raisedBy === this.logedInUser.Id && (statusId === RRFStatus.PendingApproval || statusId === RRFStatus.Rejected)) {
                 return false;
             } else {
                 return true;
