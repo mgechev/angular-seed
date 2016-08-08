@@ -5,7 +5,7 @@ import { MyRRFService } from '../services/myRRF.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult, RRFPriority } from  '../../../shared/constantValue/index';
+import { APIResult, RRFPriority, RRFStatus} from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { DropdownMultiSelectComponent } from '../../../shared/components/dropdownMultiSelect/dropdownMultiSelect.component';
@@ -44,7 +44,9 @@ export class MyRRFAddComponent implements OnActivate {
     ExpDateOfJoining: any;
     params: string;
     mindate: Date;
-    intwRoundSeq: IntwRoundSeqData[] =[];
+    intwRoundSeq: IntwRoundSeqData[] = [];
+    RRFStatus: number;
+    statusConstanValue: RRFStatus = RRFStatus;
 
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
@@ -81,12 +83,19 @@ export class MyRRFAddComponent implements OnActivate {
         if (segment.getParam('id') !== undefined) {
             this.params = segment.getParam('id');
             if (this.params) {
-                this.RRFId.Id = parseInt(this.params.split('ID')[1]);
                 this.RRFId.Value = this.params.split('ID')[0];
+                var temp: string = (this.params.split('ID')[1]);
+                this.RRFId.Id = parseInt(temp.split('ST')[0]);
+                this.RRFStatus = parseInt(temp.split('ST')[1]);
+
             }
             //this.RRFId = segment.getParam('id');
             this.isNewRRF = false;
-            this.getRRFByID(this.RRFId);
+            if (+this.RRFStatus === +RRFStatus.Rejected) {
+                this.GetRRFByIDToReRaiseRRF(this.RRFId);
+            } else {
+                this.getRRFByID(this.RRFId);
+            }
         }
 
         if (this.isNewRRF) {
@@ -142,6 +151,24 @@ export class MyRRFAddComponent implements OnActivate {
             } else {
                 this.toastr.error('MinExp should be less than MaxExp');
             }
+        }
+    }
+
+    reRaiseRRF() {
+        if (this.newRRF.MinExp <= this.newRRF.MaxExp) {
+            this._myRRFService.reRaiseRRF(this.newRRF)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this._router.navigate(['/App/RRF/RRFDashboard/']);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => this.errorMessage = <any>error);
+        } else {
+            this.toastr.error('MinExp should be less than MaxExp');
         }
     }
 
@@ -319,6 +346,17 @@ export class MyRRFAddComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
+    GetRRFByIDToReRaiseRRF(rrfId: MasterData) {
+        this._myRRFService.getRRFByIDToReRaiseRRF(rrfId.Value)
+            .subscribe(
+            (results: RRFDetails) => {
+                this.newRRF = results;
+                this.ExpDateOfJoining = this.formatDate(results.ExpDateOfJoining);
+                this.setSkillDropdown();
+            },
+            error => this.errorMessage = <any>error);
+    }
+
     setSkillDropdown() {
         // var panelId: string[] = new Array();
         // for (var index = 0; index < this.newRRF.SkillsRequired.length; index++) {
@@ -377,8 +415,10 @@ export class MyRRFAddComponent implements OnActivate {
     submitForm() {
         if (this.isNewRRF) {
             this.raiseRRF();
-        } else {
+        } else if (!this.isNewRRF && (+this.RRFStatus !== +(RRFStatus.Rejected)) {
             this.onUpdateClick();
+        } else if (+this.RRFStatus == +(RRFStatus.Rejected)) {
+            this.reRaiseRRF();
         }
     }
 

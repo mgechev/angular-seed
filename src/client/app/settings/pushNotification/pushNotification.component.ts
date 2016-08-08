@@ -24,7 +24,7 @@ export class PushNotificationComponent implements OnActivate {
     }
 
     routerOnActivate() {
-        (<any>($(".make-switch"))).bootstrapSwitch();
+        (<any>($('.make-switch'))).bootstrapSwitch();
     }
 
     createRRFObject() {

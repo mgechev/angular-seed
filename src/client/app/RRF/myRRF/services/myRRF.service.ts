@@ -44,6 +44,15 @@ export class MyRRFService {
             .finally(() => this._spinnerService.hide());
     }
 
+    reRaiseRRF(rrfDetails: RRFDetails) {
+        let url = Config.GetURL('/api/RRF/ReRaiseRRF');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { rrfDetails })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
     getRRFByID(rrfId: string) {
         let url = Config.GetURL('/api/RRF/GetRRFByID?RRFID=' + rrfId);
         this._spinnerService.show();
@@ -53,6 +62,14 @@ export class MyRRFService {
             .finally(() => this._spinnerService.hide());
     }
 
+    getRRFByIDToReRaiseRRF(rrfId: string) {
+        let url = Config.GetURL('/api/RRF/GetRRFByIDToReRaiseRRF?RRFID=' + rrfId);
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     //Save new RRF
     UpdateRRF(rrfDetails: RRFDetails) {
         let url = Config.GetURL('/api/RRF/UpdateRRF');
@@ -62,7 +79,7 @@ export class MyRRFService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
- 
+
 
     //get Interview Round sequence
     intwRoundSeqData() {

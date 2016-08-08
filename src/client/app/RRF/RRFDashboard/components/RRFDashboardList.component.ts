@@ -52,7 +52,7 @@ export class RRFDashboardListComponent implements OnActivate {
         animation: false,
         responsive: true,
         legend: {
-            onClick: function (event: any, legendItem: any) {
+            onClick: function(event: any, legendItem: any) {
                 //console.log("legend click");
             }
         }
@@ -375,9 +375,10 @@ export class RRFDashboardListComponent implements OnActivate {
         }
     }
 
+
     allowEditRRF(statusId: number, raisedBy: number) {
         try {
-            if (raisedBy === this.logedInUser.Id && statusId === RRFStatus.PendingApproval) {
+            if (raisedBy === this.logedInUser.Id && (statusId === RRFStatus.PendingApproval || statusId === RRFStatus.Rejected) {
                 return false;
             } else {
                 return true;
@@ -415,8 +416,11 @@ export class RRFDashboardListComponent implements OnActivate {
     redirectToAssignRRF(rrfID: MasterData) {
         this._router.navigate(['/App/RRF/RRFDashboard/Assign/' + rrfID.Value + 'ID' + rrfID.Id]);
     }
-    redirectToEditRRF(rrfID: MasterData) {
-        this._router.navigate(['/App/RRF/MyRRF/Edit/' + rrfID.Value + 'ID' + rrfID.Id]);
+
+    redirectToEditRRF(rrfID: MasterData, status: number) {
+        // this._router.navigate(['/App/RRF/MyRRF/Edit/' + rrfID.Value + 'ID' + rrfID.Id]);
+        this._router.navigate(['/App/RRF/MyRRF/Edit/' + rrfID.Value + 'ID' + rrfID.Id + 'ST' + status]);
+
     }
 
     onViewCandidateClick(rrfID: MasterData) {

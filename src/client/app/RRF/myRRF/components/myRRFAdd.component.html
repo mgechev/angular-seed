@@ -25,8 +25,11 @@
                             <h4>New RRF</h4>
 
                         </div>
-                        <div class="col-md-4" *ngIf="!isNewRRF">
+                        <div class="col-md-4" *ngIf="!isNewRRF  && RRFStatus != statusConstanValue.Rejected">
                             <h4>Update RRF</h4>
+                        </div>
+                        <div class="col-md-4" *ngIf="!isNewRRF && RRFStatus == statusConstanValue.Rejected">
+                            <h4>Re-Raise RRF</h4>
                         </div>
                     </div>
                 </div>
@@ -34,8 +37,15 @@
                     <!--<form role="form">-->
 
                     <form role="form" (submit)='submitForm()'>
-
                         <div class="form-body">
+                            <div class="row" style="margin-top: -20px;" *ngIf='RRFStatus == statusConstanValue.Rejected'>
+                                <div class="form-group col-lg-3">
+                                    <label>Rejected By :</label>
+                                </div>
+                                <div class="col-lg-9">
+                                    <label *ngIf="newRRF.RejectionComments">Comment : {{newRRF.RejectionComments}}</label>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="form-group col-lg-4">
                                     <div class="row">
@@ -91,7 +101,7 @@
                                             <div>
 
                                                 <select id="cmbPriority" class="form-control" [(ngModel)]='newRRF.Priority.Id' required="" tooltip="Select Priority" tooltipPlacement="top"
-                                                tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Priority.Id" >
+                                                tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Priority.Id">
                                                     <option *ngFor="let priority of priorities" [value]="priority.Id">{{priority.Value}}</option>
                                                 </select>
                                             </div>
@@ -136,14 +146,14 @@
                                         <div class="col-lg-6">
                                             <label>Min Exp.<small>&nbsp;(In years)</small><span class="required"> * </span></label>
                                             <!--<input id="txtMinExp" [(ngModel)]='newRRF.MinExp' type="text" value="" name="demo_vertical" />-->
-                                            <input type="number" [(ngModel)]='newRRF.MinExp' required  id="txtMinExp" min="0" tooltip="Min Exp."
-                                            tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.MinExp">
+                                            <input type="number" [(ngModel)]='newRRF.MinExp' required id="txtMinExp" min="0" tooltip="Min Exp." tooltipPlacement="top"
+                                            tooltipTrigger="mouseenter" tooltipEnable="!newRRF.MinExp">
                                         </div>
                                         <div class="col-lg-6">
                                             <label>Max Exp.<small>&nbsp;(In years)</small><span class="required"> * </span></label>
                                             <!--<input id="txtMaxExp" [(ngModel)]='newRRF.MaxExp' type="text" value="" name="demo_vertical" />-->
-                                            <input type="number" required="" [(ngModel)]='newRRF.MaxExp'  id="txtMaxExp" min="0" tooltip="Max Exp."
-                                            tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.MaxExp">
+                                            <input type="number" required="" [(ngModel)]='newRRF.MaxExp' id="txtMaxExp" min="0" tooltip="Max Exp." tooltipPlacement="top"
+                                            tooltipTrigger="mouseenter" tooltipEnable="!newRRF.MaxExp">
                                         </div>
                                     </div>
                                 </div>
@@ -161,43 +171,42 @@
                             <div class="row">
                                 <div class="form-group col-lg-12">
                                     <label>Job description<span class="required"> * </span></label>
-                                    <textarea class="form-control" [(ngModel)]='newRRF.Description' maxlength="200"  id="txtDescription"
-                                    rows="2" tooltip="Job description" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                    tooltipEnable="!newRRF.Description" placeholder="Job description" required="" style="resize:vertical"></textarea>
+                                    <textarea class="form-control" [(ngModel)]='newRRF.Description' maxlength="200" id="txtDescription" rows="2" tooltip="Job description"
+                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Description"
+                                    placeholder="Job description" required="" style="resize:vertical"></textarea>
                                     <!--<input type="text" [(ngModel)]='newRRF.Description' id="txtDescription" class="form-control" placeholder="Description"/>-->
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-lg-12">
                                     <label>Preferred skills<span class="required"> * </span></label>
-                                    <textarea class="form-control" [(ngModel)]='newRRF.PreferredSkills' maxlength="200"  id="txtDescription"
-                                    rows="2" tooltip="Preferred skills" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                    tooltipEnable="!newRRF.Description" placeholder="Preferred skills" required="" style="resize:vertical"></textarea>
+                                    <textarea class="form-control" [(ngModel)]='newRRF.PreferredSkills' maxlength="200" id="txtDescription" rows="2" tooltip="Preferred skills"
+                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Description"
+                                    placeholder="Preferred skills" required="" style="resize:vertical"></textarea>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-lg-12">
                                     <label>Competencies<span class="required"> * </span></label>
-                                    <textarea class="form-control" [(ngModel)]='newRRF.Competencies' maxlength="200"  id="txtDescription"
-                                    rows="2" tooltip="Competencies" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Description"
+                                    <textarea class="form-control" [(ngModel)]='newRRF.Competencies' maxlength="200" id="txtDescription" rows="2" tooltip="Competencies"
+                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Description"
                                     placeholder="Competencies" required="" style="resize:vertical"></textarea>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-lg-12">
                                     <label>Good to have<span class="required"> * </span></label>
-                                    <textarea class="form-control" [(ngModel)]='newRRF.GoodToHave' maxlength="200"  id="txtDescription"
-                                    rows="2" tooltip="Good to have" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Description"
+                                    <textarea class="form-control" [(ngModel)]='newRRF.GoodToHave' maxlength="200" id="txtDescription" rows="2" tooltip="Good to have"
+                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Description"
                                     placeholder="Good to have" required="" style="resize:vertical"></textarea>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-lg-12">
                                     <label>Qualification/ Certifications required<span class="required"> * </span></label>
-                                    <textarea class="form-control" [(ngModel)]='newRRF.QualCertRquired' maxlength="200"  id="txtDescription"
-                                    rows="2" tooltip="Qualification/ Certifications required" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                    tooltipEnable="!newRRF.Description" placeholder="Qualification/ Certifications required"
-                                    required="" style="resize:vertical"></textarea>
+                                    <textarea class="form-control" [(ngModel)]='newRRF.QualCertRquired' maxlength="200" id="txtDescription" rows="2" tooltip="Qualification/ Certifications required"
+                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Description"
+                                    placeholder="Qualification/ Certifications required" required="" style="resize:vertical"></textarea>
                                 </div>
                             </div>
 
@@ -216,8 +225,8 @@
                                                 <div class="form-group col-lg-4 ">
                                                     <label>Interview Round<span class="required"> * </span></label>
                                                     <select id="cmbIntwRound " class="form-control" required="" placeholder="Select Interview Round " [(ngModel)]='IntwRound'
-                                                    (ngModelChange)='InterviewRoundSelected()' tooltip="Select Interview Round" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                    tooltipEnable="!IntwRound">
+                                                    (ngModelChange)='InterviewRoundSelected()' tooltip="Select Interview Round"
+                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!IntwRound">
                                                         <option value="" disabled>Select Interview Round </option>
                                                         <option *ngFor="let Round of interviewRound " [value]="Round.Id ">{{Round.Value}}</option>
                                                     </select>
@@ -306,7 +315,8 @@
                             <div class="table-toolbar">
                                 <!--<button type="submit " (click)='raiseRRF()' id="btnSubmit " class="btn blue ">Submit</button>-->
                                 <button type="submit " *ngIf="isNewRRF" id="btnSubmit" class="btn blue ">Submit</button>
-                                <button type="submit " *ngIf="!isNewRRF" id="btnUpdate" class="btn blue ">Update</button>
+                                <button type="submit " *ngIf="!isNewRRF  && RRFStatus != statusConstanValue.Rejected" id="btnUpdate" class="btn blue ">Update</button>
+                                <button type="submit " *ngIf="!isNewRRF && RRFStatus == statusConstanValue.Rejected" id="reRaise" class="btn blue ">Re-Raise RRF</button>
                                 <button type="button " (click)='onCancelClick()' id="btnCancel" class="btn default ">Cancel</button>
 
                                 <div class="col-lg-12"><span></span></div>

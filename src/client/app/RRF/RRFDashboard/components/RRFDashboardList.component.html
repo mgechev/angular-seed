@@ -315,7 +315,7 @@
                                                 </button>
                                                 <ul class="dropdown-menu " role="menu ">
                                                     <li>
-                                                        <button class="btn btn-default btnLink" (click)='redirectToEditRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] " [disabled]='allowEditRRF(rrf.Status.Id , rrf.RaisedBy.Id)'>
+                                                        <button class="btn btn-default btnLink" (click)='redirectToEditRRF(rrf.RRFID , rrf.Status.Id)' [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] " [disabled]='allowEditRRF(rrf.Status.Id , rrf.RaisedBy.Id)'>
                                                             <i class="fa fa-edit "></i> Edit RRF
                                                         </button>
                                                     </li>
