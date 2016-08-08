@@ -333,15 +333,17 @@
                     <a href="page_user_lock_1.html">
                         <i class="icon-lock"></i> Lock Screen </a>
                 </li>-->
+                 <li>
+
+                    <a (click)="pushNotificationSettings()">
+                        <i class="fa fa-cogs"></i> Settings </a>
+                    <hr style="margin: 2px;" />
+                </li>
                 <li>
                     <a (click)="logout()">
                         <i class="icon-key"></i> Log Out </a>
                 </li>
-                <li>
-                    <hr style="margin: 2px;" />
-                    <a (click)="pushNotificationSettings()">
-                        <i class="fa fa-cogs"></i> Settings </a>
-                </li>
+                
             </ul>
         </li>
         <!-- END USER LOGIN DROPDOWN -->
