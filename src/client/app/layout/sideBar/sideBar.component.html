@@ -3,7 +3,7 @@
     <!-- BEGIN SIDEBAR -->
     <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
     <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-    <div class="page-sidebar navbar-collapse collapse" style="position: fixed !important;margin-left: -20px;margin-top: -20px;z-index: 9995;">
+    <div class="page-sidebar navbar-collapse collapse" style="position: fixed !important;margin-left: -20px;margin-top: -15px;z-index: 9995;">
         <!-- BEGIN SIDEBAR MENU -->
         <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
         <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
@@ -20,7 +20,7 @@
             </li>
             <li class="nav-item start" [ifAuthorize]="['PROFILEBANK.MANAGE']">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-home"></i>
+                    <i class="fa fa-bank"></i>
                     <span class="title">Profile Bank</span>
                     <span class="arrow"></span>
                 </a>
@@ -65,7 +65,7 @@
             </li>
             <li class="nav-item start " [ifAuthorize]="['RRF.MANAGE']">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-home"></i>
+                    <i class="fa fa-users"></i>
                     <span class="title">RRF</span>
                     <span class="arrow"></span>
                 </a>
@@ -94,7 +94,7 @@
             <!--<li class="nav-item start " [ifAuthorize]="['RCIC.MANAGE']">-->
             <li class="nav-item start " [ifAuthorize]="['RC.INTERVIEWERACTIONS.MANAGE']">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-users"></i>
+                    <i class="fa fa-pie-chart"></i>
                     <span class="title">Interviewer's Actions</span>
                     <span class="arrow"></span>
                 </a>

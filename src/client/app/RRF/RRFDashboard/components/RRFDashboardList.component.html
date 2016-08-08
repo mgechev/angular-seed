@@ -29,11 +29,11 @@
                         <div class="portlet-title">
                             <!--<div class="row">-->
                             <div class="col-md-4">
-                                <h4>RRF List</h4>
+                                <h4>Requisition List</h4>
                             </div>
                             <div class="btn-group pull-right" [ifAuthorize]="['RRF.INITIATERRF.MANAGE']">
-                                <a class="btn green" [routerLink]="['/App/RRF/MyRRF/Add']">
-                                    <i class="fa fa-plus"></i> Initiate RRF
+                                <a class="btn btn-transparent red btn-outline btn-circle active" [routerLink]="['/App/RRF/MyRRF/Add']">
+                                    <i class="fa fa-plus-circle"></i> Initiate RRF
                                 </a>
                             </div>
                             <!--</div>-->
@@ -392,7 +392,7 @@
                         <view-RRF [RRFID]='viewDetailsRRFId'></view-RRF>
                     </div>
                 </div>
-                <panel-availablity></panel-availablity>
+                <!--<panel-availablity></panel-availablity>-->
             </div>
             <!-- END PAGE BASE CONTENT -->
         </div>
