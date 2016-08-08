@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {TreeviewData, TreeviewNode} from './models/treeviewData';
+import {TreeviewData, TreeviewNode} from '../../../settings/pushNotification/models/treeviewData';
 @Component({
     moduleId: module.id,
     selector: 'tree-view',

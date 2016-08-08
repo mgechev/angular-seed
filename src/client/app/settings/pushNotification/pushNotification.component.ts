@@ -1,31 +1,47 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate } from '@angular/router';
 import { TreeViewComponent } from '../../shared/components/treeview/treeview.component';
-import { TreeviewData, TreeviewNode } from '../../shared/components/treeview/models/treeviewData';
+import { TreeviewData, TreeviewNode } from './models/treeviewData';
+import { PushNotificationService } from './services/pushNotification.service';
 // import { UiSwitchComponent } from 'angular2-ui-switch';
 
 @Component({
     moduleId: module.id,
     selector: 'push-notification',
     templateUrl: 'pushNotification.component.html',
-    directives: [ROUTER_DIRECTIVES, TreeViewComponent]
+    directives: [ROUTER_DIRECTIVES, TreeViewComponent],
+    providers: [PushNotificationService]
 })
 
 export class PushNotificationComponent implements OnActivate {
     RRFData: TreeviewData = new TreeviewData();
     ProfileBankData: TreeviewData = new TreeviewData();
     RecruitmentCycleData: TreeviewData = new TreeviewData();
+    treeviewNodes: TreeviewNode[] = [];
 
     notificationStatus: boolean = false;
 
-    constructor() {
+    constructor(private _pushNotificationService: PushNotificationService) {
+
+        this.getSettingList();
         this.createRRFObject();
         this.createProfileBankObject();
         this.createRecCycleObject();
+        this.NotificationEnableDisable();
     }
 
     routerOnActivate() {
         (<any>($('.make-switch'))).bootstrapSwitch();
+    }
+    getSettingList() {
+        // this._pushNotificationService.getNotificationData()
+        //     .subscribe(
+        //     (results: any) => {
+        //         if (results !== undefined && results.length > 0) {
+        //             this.treeviewNodes = (<any>(results));
+        //         } else { this.treeviewNodes = []; }
+        //     },
+        //     error => this.errorMessage = <any>error);
     }
 
     createRRFObject() {
@@ -82,8 +98,37 @@ export class PushNotificationComponent implements OnActivate {
         this.RecruitmentCycleData.nodes.push(RRFsubObj2);
     }
 
-    onSaveSettings() {
 
+    NotificationEnableDisable() {
+        if (propelClient) {
+            propelClient.addEventListener('statuschange', function(event) {
+                if (event.permissionStatus === 'denied') {
+                    // Disable UI
+                } else if (event.currentSubscription) {
+                    if (!localStorage.getItem('currentSubscription')) {
+                        let registrationID = event.currentSubscription.endpoint.split('https://android.googleapis.com/gcm/send/')[1];
+                        console.log(registrationID);
+                        localStorage.setItem('currentSubscription', event.currentSubscription);
+                    }
+
+                } else {
+                    // Enable UI
+                    // Show that user is not subscribed
+                }
+            });
+        }
+    }
+
+    onSaveSettings() {
+        //
+    }
+
+    notificationStatsuChanged() {
+        if (this.notificationStatus) {
+            propelClient.subscribe();
+        } else {
+            propelClient.unsubscribe();
+        }
     }
 
 }

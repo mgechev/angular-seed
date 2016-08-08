@@ -20,11 +20,12 @@
                         <div class="col-md-4">
                             <h4>Notification Setting</h4>
                         </div>
-                        <div class="pull-right">
+                        <div class="pull-right" >
                             <div class="form-group">
+                                <!--<input type="checkbox" [(ngModel)]="notificationStatus" (click)="notificationStatsuChanged()"/>-->
                                 <div class="">
-                                    
-                                    <input type="checkbox" [(ngModel)]="notificationStatus" class="make-switch" data-on-text="&nbsp;ON&nbsp;&nbsp;" data-off-text="&nbsp;OFF&nbsp;"> </div>
+                                    <input type="checkbox"  class="make-switch" data-on-text="&nbsp;ON&nbsp;&nbsp;" data-off-text="&nbsp;OFF&nbsp;">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -57,7 +58,7 @@
                         </div>
                     </div>
                     <div class="portlet light  row" [attr.disabled]='!notificationStatus'>
-                          
+
                         <button type="button" class="btn blue pull-right" (click)='onSaveSettings()'>Save Settings</button>
                     </div>
 
