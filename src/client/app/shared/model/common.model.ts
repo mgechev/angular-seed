@@ -28,7 +28,7 @@ export class GrdOptions {
     public PreviousButton: boolean;
     public PerPageCount: number = 5;
     public OrderBy: string = 'Modified';
-    public Order: string = 'asc';
+    public Order: string = 'desc';
     public NextPageUrl: string[]=[];
 }
 
