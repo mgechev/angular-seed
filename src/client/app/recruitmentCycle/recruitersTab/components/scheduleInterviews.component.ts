@@ -4,12 +4,14 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { RecruiterScheduleInterviewService} from '../services/displayScheduleInterviews.service';
 import { InterviewsList} from '../model/interviewDetails';
 import { GrdOptions } from  '../../../shared/model/index';
+import { AllScheduleInterviewPipe } from  '../filter/scheduleInterviews.pipe';
 
 @Component({
     moduleId: module.id,
     selector: 'show-schedule-interviews-recruiter',
     templateUrl: 'scheduleInterviews.component.html',
     directives: [ROUTER_DIRECTIVES],
+    pipes:[AllScheduleInterviewPipe]
    // providers:[RecruiterScheduleInterviewService,ToastsManager]
 })
 

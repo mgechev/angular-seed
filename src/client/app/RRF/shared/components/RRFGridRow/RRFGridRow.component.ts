@@ -3,12 +3,13 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 import { RRFDetails} from '../../../myRRF/models/rrfDetails';
 import { RRFAssignStatus} from  '../../../../shared/constantValue/index';
 import {IfAuthorizeDirective} from '../../../../shared/directives/ifAuthorize.directive';
+import { PanelsAvailablityComponent } from '../interviewersAvailablity/panelsAvailablity.component';
 
 @Component({
     moduleId: module.id,
     selector: 'RRFGridRow',
     templateUrl: 'RRFGridRow.component.html',
-    directives: [ROUTER_DIRECTIVES,IfAuthorizeDirective],
+    directives: [ROUTER_DIRECTIVES,IfAuthorizeDirective,PanelsAvailablityComponent],
     styleUrls: ['../../css/RRF.component.css']
 })
 

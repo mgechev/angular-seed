@@ -98,7 +98,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let interview of InterviewDetailsList.AllInterviews">
+                                <tr *ngFor="let interview of InterviewDetailsList.AllInterviews |AllScheduleInterviewPipe:searchString">
                                     <td> {{interview.RRFID.Value}} </td>
                                     <td> Name : {{interview.CandidateDetails.FullName}} <br/> Email:{{interview.CandidateDetails.Email}}
                                         <br/> Contact No : {{interview.CandidateDetails.Contact}}

@@ -1,5 +1,5 @@
 import {PipeTransform, Pipe} from '@angular/core';
-import { CandidateProfile, ResumeMeta, AddCandidateResponse } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile } from '../../shared/model/myProfilesInfo';
 
 @Pipe({
   name: 'myProfilesFilter'
