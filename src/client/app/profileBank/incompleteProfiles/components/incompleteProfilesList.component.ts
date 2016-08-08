@@ -83,4 +83,16 @@ export class IncompleteProfilesListComponent implements OnActivate {
             error => this.toastr.error(<any>error));
     }
     /** END Pagination and sorting functionality */
+
+    //Delete candidate Profile
+    onDeleteProfile(CandidateID: MasterData) {
+        this._profileBankService.deleteProfile(CandidateID)
+            .subscribe(
+            (results: any) => {
+                //Bind Updated data to grid
+                this.getIncompleteProfiles();
+            },
+            error => this.toastr.error(<any>error));
+    }
+
 }
