@@ -235,6 +235,7 @@ export class RRFDashboardListComponent implements OnActivate {
         //console.log(this.selectedRRF);
         this.viewDetailsRRFId = rrfId;
         this.isListVisible = false;
+        this.isChartVisible = false;
     }
 
     showListOfRRF() {

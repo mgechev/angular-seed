@@ -29,68 +29,9 @@
                     <div class=" bordered ">
                         <div class="actions ">
                         </div>
-                        <!--<div class="row ">
-                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ">Practice</div>
-                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 " style="align:right ">:</div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 " id="lblPractice ">{{selectedRRF.Practice.Value}}</div>
-                        </div>
-                        <div class="row ">
-                            <div class="col-md-5 ">Technology</div>
-                            <div class="col-md-1 " style="align:right ">:</div>
-                            <div class="col-md-6 " id="lblTechnology ">{{selectedRRF.Technology.Value}}</div>
-                        </div>
-                        <div class="row ">
-                            <div class="col-md-5 ">Position Title</div>
-                            <div class="col-md-1 " style="align:right ">:</div>
-                            <div class="col-md-6 " id="lblPositionTitle ">{{selectedRRF.PositionTitle}}</div>
-                        </div>
-
-
-                        <div class="row ">
-                            <div class="col-md-5 ">No. Of Openings</div>
-                            <div class="col-md-1 " style="align:right ">:</div>
-                            <div class="col-md-6 " id="lblNoOfOpenings ">{{selectedRRF.NoOfOpenings}}</div>
-                        </div>
-
-                        <div class="row ">
-                            <div class="col-md-5 ">Skills Required</div>
-                            <div class="col-md-1 " style="align:right ">:</div>
-                            <div class="col-md-6 " id="lblSkillsReq ">
-                                <div *ngFor="let skill of selectedRRF.SkillsRequired ">{{skill.Value}} </div>
-                            </div>
-                        </div>
-                        <div class="row ">
-                            <div class="col-md-5 ">Designation</div>
-                            <div class="col-md-1 " style="align:right ">:</div>
-                            <div class="col-md-6 " id="lblDesignation ">{{selectedRRF.Designation.Value}}</div>
-                        </div>
-                        <div class="row ">
-                            <div class="col-md-5 ">Minimum Exp</div>
-                            <div class="col-md-1 " style="align:right ">:</div>
-                            <div class="col-md-6 " id="lblMinExp ">{{selectedRRF.MinExp}}</div>
-                        </div>
-                        <div class="row ">
-                            <div class="col-md-5 ">Maximum Exp</div>
-                            <div class="col-md-1 " style="align:right ">:</div>
-                            <div class="col-md-6 " id="lblMaxExp ">{{selectedRRF.MaxExp}}</div>
-                        </div>
-                        <div class="row ">
-                            <div class="col-md-5 ">Priority</div>
-                            <div class="col-md-1 " style="align:right ">:</div>
-                            <div class="col-md-6 " id="lblPriority ">{{selectedRRF.Priority.Value}}</div>
-                        </div>
-                        <div class="row ">
-                            <div class="col-md-5 ">Exp. Date Of Joining</div>
-                            <div class="col-md-1 " style="align:right ">:</div>
-                            <div class="col-md-6 " id="lblExpDateOfJoining ">{{selectedRRF.ExpDateOfJoining}}</div>
-                        </div>
-                        <div class="row ">
-                            <div class="col-md-5 ">Description</div>
-                            <div class="col-md-1 " style="align:right ">:</div>
-                            <div class="col-md-6 " id="lblDescription ">{{selectedRRF.Description}}</div>
-                        </div>-->
+                       
                         <div>
-                            <RRFGridRow [RRFData]='selectedRRF'></RRFGridRow>
+                            <RRFGridRow [RRFData]='selectedRRF' [displayJobDescDetails]='true'></RRFGridRow>
                         </div>
                         <div class="row ">
                             <div class="col-md-5 ">Interviewers Panel</div>

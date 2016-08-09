@@ -20,8 +20,8 @@
             <div class="col-lg-3">
                 <!--<b>Status</b> :<span class="mt-action-dot {{getStatusClass(RRFData.Status.Id)}} "></span>{{RRFData.Status.Value}}-->
                 <div class="pull-right">
-                    <a class = "btn-green" data-toggle="collapse" data-target="#demo{{RRFData.RRFID.Id}}">
-                       <i class="fa fa-eye" aria-hidden="true"></i> Show Availability</a>
+                    <a class="btn-green" data-toggle="collapse" data-target="#demo{{RRFData.RRFID.Id}}">
+                        <i class="fa fa-eye" aria-hidden="true"></i> Show Availability</a>
                 </div>
             </div>
         </div>
@@ -50,28 +50,52 @@
         </div>
     </div>
 
-    <br>
-
-    <div>
+    <div style="margin-top: 7px;">
         <b>Skills</b>:
         <label *ngFor="let skill of RRFData.SkillsRequired ">{{skill.Value}} &#44;&nbsp;</label>
     </div>
 
-    <br>
-
-    <div class="row">
+    <div class="row" style="margin-top: 7px;">
         <!--<div>-->
         <!--<b style="margin-left: 15px;">Job Description</b>: {{RRFData.Description}}-->
         <label style="margin-left: 15px;"><b>Job Description</b>: {{RRFData.Description}}</label>
         <!--</div>-->
-        <div>
-            <div class="col-lg-6">
-                Preferred Skills :{{RRFData.PreferredSkills}}
-                <br> Competencies :{{RRFData.Competencies}}
+        <div *ngIf="displayJobDescDetails">
+            <div>
+                <div class="col-lg-6">
+                    <div class="col-lg-4 " align="right">
+                       <b> Preferred Skills :</b>
+                    </div>
+                    <div class="col-lg-8 ">
+                        {{RRFData.PreferredSkills}}
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-4 " align="right">
+                        <b> Good to Have : </b>
+                    </div>
+                    <div class="col-lg-8 ">
+                        {{RRFData.GoodToHave}}
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-6">
-                Good to Have :{{RRFData.GoodToHave}}
-                <br> Qualification/ Certifications required :{{RRFData.QualCertRquired}}
+            <div>
+                <div class="col-lg-6">
+                    <div class="col-lg-4 " align="right">
+                        <b>Competencies :</b>
+                    </div>
+                    <div class="col-lg-8">
+                        {{RRFData.Competencies}}
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-4 " align="right">
+                        <b>Qual/ Cert req. : </b>
+                    </div>
+                    <div class="col-lg-8">
+                        {{RRFData.QualCertRquired}}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -82,10 +106,8 @@
         </div>
     </div>
 
-    <br *ngIf='displayApproval'>
-
     <!--<div [ifAuthorize]="['RRF.APPROVERCOLUMNVISIBILITY.MANAGE']"  *ngIf='displayApproval'>-->
-    <div *ngIf='displayApproval'>
+    <div *ngIf='displayApproval' style="margin-top: 7px;">
         <div *ngIf='displayApproval'>
             <div>
                 <b>RRF Approver</b>:
@@ -104,9 +126,7 @@
         </div>
     </div>
 
-    <br *ngIf='displayAssignedTo'>
-
-    <div *ngIf='displayAssignedTo'>
+    <div *ngIf='displayAssignedTo' style="margin-top: 7px;">
         <div>
             <b>Assigned To</b>:
         </div>

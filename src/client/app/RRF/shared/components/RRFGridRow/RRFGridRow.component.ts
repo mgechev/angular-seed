@@ -14,9 +14,10 @@ import { PanelsAvailablityComponent } from '../interviewersAvailablity/panelsAva
 })
 
 export class RRFGridRowComponent {
-    @Input() RRFData: RRFDetails = new RRFDetails();
-    @Input() displayApproval : boolean = false;
+    @Input() RRFData: RRFDetils = new RRFDetails();
+    @Input() displayApproval :boolean = false;
     @Input() displayAssignedTo : boolean = false;
+    @Input() displayJobDescDetails: boolean = false; 
 
     AssignStatus: RRFAssignStatus = RRFAssignStatus;
 
