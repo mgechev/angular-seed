@@ -24,9 +24,9 @@
                 </div>
                 <div class="portlet-title">
                     <div>
-                        <button type="submit" id="btnApprove" class="btn green" [disabled]='!selectedRowCount' (click)='onStatusApprove()'>Approve</button>
+                        <button type="submit" id="btnApprove" class="btn green" [disabled]='!selectedRowCount' (click)='onStatusApprove()'><i class="fa fa-check"></i>&nbsp;Approve</button>
                         <!--<button type="button" id="btnOnHold" class="btn default"  [disabled]='!selectedRowCount' (click)='onStatusHold()'>On-Hold</button>-->
-                        <button type="button" id="btnReject" class="btn red" [disabled]='!selectedRowCount' (click)='onStatusReject()'>Reject</button>
+                        <button type="button" id="btnReject" class="btn red" [disabled]='!selectedRowCount' (click)='onStatusReject()'><i class="fa fa-times" ></i>&nbsp;Reject</button>
                     </div>
                     <br>
                     <div>

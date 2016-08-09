@@ -46,7 +46,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
             this.RRFId.Value = params.split('ID')[0];
         }
         //this.RRFId = segment.getParam('id');
-       // this.GetRecruiter();
+        // this.GetRecruiter();
         this.getRRFDetails(this.RRFId);
         this.UnAssignRec.AssignedTo = new MasterData();
     }
@@ -70,7 +70,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
                     this.selectedRRF.AssignedData = new Array();
                     this.selectedRRF.AssignedData.push(assignmentDetails);
                 }
-                 this.GetRecruiter();
+                this.GetRecruiter();
             },
             error => this.errorMessage = <any>error);
     }
@@ -85,8 +85,9 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
     }
 
     onAssignRRF(): void {
-        if ($('#cmbAssignTo').val() === null) {
-            return;
+
+        if(!this.isFormValidate()){
+            return ;
         }
         var selectedRec: number[] = $('#cmbAssignTo').val();
         // Creating array of selected Assignee
@@ -111,6 +112,14 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
                 $('#cmbAssignTo').select2('val', '');
             },
             error => this.errorMessage = <any>error);
+    }
+
+    isFormValidate() {
+        if ($('#cmbAssignTo').val() === null) {
+            this.toastr.error('Please select assign To value');
+            return false;
+        }
+        return true;
     }
 
     onUnassign(recdtls: AssignmentDetails): void {
