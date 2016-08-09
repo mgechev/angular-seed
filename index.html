@@ -264,6 +264,7 @@ npm run e2e.live</pre></div>
 │       │   │   ├── about.component.html
 │       │   │   ├── about.component.spec.ts
 │       │   │   ├── about.component.ts
+│       │   │   ├── about.routes.ts
 │       │   │   └── index.ts
 │       │   ├── +home
 │       │   │   ├── home.component.css
@@ -271,14 +272,18 @@ npm run e2e.live</pre></div>
 │       │   │   ├── home.component.html
 │       │   │   ├── home.component.spec.ts
 │       │   │   ├── home.component.ts
+│       │   │   ├── home.routes.ts
 │       │   │   └── index.ts
 │       │   ├── app.component.e2e-spec.ts
 │       │   ├── app.component.html
 │       │   ├── app.component.spec.ts
 │       │   ├── app.component.ts
+│       │   ├── app.routes.ts
 │       │   ├── hot_loader_main.ts
 │       │   ├── main.ts
 │       │   └── shared
+│       │       ├── config
+│       │       │   └── env.config.ts
 │       │       ├── index.ts
 │       │       ├── name-list
 │       │       │   ├── index.ts
@@ -295,11 +300,16 @@ npm run e2e.live</pre></div>
 │       │           ├── toolbar.component.html
 │       │           └── toolbar.component.ts
 │       ├── assets
+│       │   ├── data.json
 │       │   └── svg
 │       │       └── more.svg
 │       ├── css
 │       │   └── main.css
 │       ├── index.html
+│       ├── testing
+│       │   └── router
+│       │       ├── mock-location-strategy.ts
+│       │       └── router-testing-providers.ts
 │       ├── tsconfig.json
 │       └── typings.d.ts
 ├── test-main.js               &lt;- testing configuration
@@ -311,6 +321,10 @@ npm run e2e.live</pre></div>
 │   │   └── seed.config.ts     &lt;- generic configuration of the seed project
 │   ├── config.ts              &lt;- exported configuration (merge both seed.config and project.config, project.config overrides seed.config)
 │   ├── debug.ts
+│   ├── env                    &lt;- environment configuration
+│   │   ├── base.ts
+│   │   ├── dev.ts
+│   │   └── prod.ts
 │   ├── manual_typings
 │   │   ├── project            &lt;- manual ambient typings for the project
 │   │   │   └── sample.package.d.ts
@@ -352,6 +366,7 @@ npm run e2e.live</pre></div>
 │   │       ├── build.js.tools.ts
 │   │       ├── check.versions.ts
 │   │       ├── clean.all.ts
+│   │       ├── clean.coverage.ts
 │   │       ├── clean.dev.ts
 │   │       ├── clean.prod.ts
 │   │       ├── clean.tools.ts
