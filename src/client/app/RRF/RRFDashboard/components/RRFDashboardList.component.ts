@@ -292,7 +292,7 @@ export class RRFDashboardListComponent implements OnActivate {
     onViewChanged(viewMode: string) {
         this.resetToDefaultGridOptions();
         this.grdOptions.OrderBy = 'Modified';
-        this.grdOptions.Order = 'asc';
+        this.grdOptions.Order = 'desc';
         this.grdOptions.PerPageCount = 5;
         //Clear RRF List
         this.rrfList = new Array<RRFDetails>();

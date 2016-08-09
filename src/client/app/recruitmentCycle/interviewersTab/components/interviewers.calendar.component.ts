@@ -33,8 +33,9 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, OnIn
     RRFCode: string;
     showSlotForRRF: boolean = false;
     selectedRRFID: number = 0;
-    AddNewSlotText: string = "Add Slot";
+    AddNewSlotText: string = 'Add Slot';
     _myCalendarDetails: CalendarDetails = new CalendarDetails();
+    currentDate: string;
 
 
     constructor(private _router: Router,
@@ -42,6 +43,8 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, OnIn
         private _interviewService: InterviewersCalendarService,
         private _interviewAvailabilityService: InterviewersAvailabilityService) {
         this.getListOfAssignedRRF();
+        var date = new Date();
+        this.currentDate = this.formatDate(date);
     }
     routerOnActivate() {
         //Get Events to show on Calendar
@@ -111,17 +114,16 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, OnIn
     addNewSlot() {
         if (this.showSlotForRRF === false) {
             this.showSlotForRRF = true;
-            this.AddNewSlotText = "Hide Slot"
+            this.AddNewSlotText = 'Hide Slot';
             for (var i = 0; i < this.myAssignedRRF.length; i++) {
                 if (this.myAssignedRRF[i].RRFID.Id == this.selectedRRFID) {
                     this.RRFIdTOShowSlot = this.myAssignedRRF[i].RRFID;
                     break;
                 }
             }
-        }
-        else {
+        } else {
             this.showSlotForRRF = false;
-            this.AddNewSlotText = "Add Slot"
+            this.AddNewSlotText = 'Add Slot';
         }
 
     }
@@ -141,6 +143,17 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, OnIn
         element.tooltip({
             title: '' + e.event.title
         });
+    }
+
+    formatDate(date: any) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [year, month, day].join('-');
     }
 
 }
