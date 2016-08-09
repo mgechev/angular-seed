@@ -31,6 +31,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
     InterviewerCalendarDetails: CalendarDetails = new CalendarDetails();
     NORECORDSFOUND: boolean = false;
     HISTORYRECORDSNOTFOUND: boolean = false;
+    currentDate: string;
     header: any = {
         left: 'prev,next today',
         center: 'title',
@@ -49,6 +50,8 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         this.InterviewInformationForCalendar = new Array<Interview>();
         /**Commenting as this functionality is deprecated */
         // this.AwaitedInterviewInformation = new Array<Interview>();
+        var date = new Date();
+        this.currentDate = this.formatDate(date);
     }
     /**Router method overrid from OnActivate class */
     routerOnActivate() {
@@ -172,4 +175,18 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
     //     let modalpopup: any = $('#rejectInterview');
     //     modalpopup.modal();
     // }
+
+    //Format date in "yyyy-mm-dd" format
+    formatDate(date: any) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            h = '' + d.getHours(),
+            m = '' + d.getMinutes(),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
 }

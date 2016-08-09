@@ -237,7 +237,7 @@
                     <div class="portlet-body">
                         <div style=" text-align-last: center;">
                             <full-calendar [resources]="InterviewerCalendarDetails.Resources" (onEventRender)="showDetails($event)" [events]="InterviewerCalendarDetails.Events"
-                            [header]="header" defaultDate="2016-07-12" [eventLimit]="4" [editable]="true">
+                            [header]="header" [defaultDate]="currentDate" [eventLimit]="4" [editable]="true">
                             </full-calendar>
                         </div>
                     </div>
