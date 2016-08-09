@@ -50,7 +50,7 @@ export class RRFCandidateListComponent implements OnActivate {
     changeStatusInterviewID: MasterData = new MasterData();
     showChangeStatus: boolean = false;
     changeStatusCandidateID: MasterData = new MasterData();
-     public barChartOptions: any = {
+    public barChartOptions: any = {
         scaleShowVerticalLines: false,
         responsive: true
     };
@@ -59,9 +59,9 @@ export class RRFCandidateListComponent implements OnActivate {
     public barChartLegend: boolean = true;
 
     public barChartData: any[] = [
-        { data: [2,5,4], label: 'Technical 1' },
-        { data: [1,3,4], label: 'Technical 2' },
-        { data: [5,3,5], label: 'HR 1' }
+        { data: [2, 5, 4], label: 'Technical 1' },
+        { data: [1, 3, 4], label: 'Technical 2' },
+        { data: [5, 3, 5], label: 'HR 1' }
     ];
 
     constructor(private _myRRFService: MyRRFService,
@@ -241,11 +241,20 @@ export class RRFCandidateListComponent implements OnActivate {
 
     canCancelInterview(status: string) {
         //if (status.toLowerCase() === 'scheduled' || status.toLowerCase() === 're-scheduled' ||
-         if (status.toLowerCase() === 'scheduled' || status.toLowerCase() === 'rescheduled' ||
+        if (status.toLowerCase() === 'scheduled' || status.toLowerCase() === 'rescheduled' ||
             status.toLowerCase() === 'awaiting approval') {
             return false;
         } else { return true; }
 
+    }
+
+    //If Interview Status in 'On Hold' do not allow user to schedule interview
+    canScheduleInterview(status: string) {
+        if (status.toLowerCase() === 'on hold') {
+            return true;
+        } else {
+            return false;
+        }
     }
     OnProceedForOfferGenerationClick(CandidateDetails: RRFSpecificCandidateList) {
         this.InterviewID = CandidateDetails.InterviewDetails.InterviewID;

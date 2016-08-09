@@ -110,7 +110,7 @@
                                                             </button>
                                                             <ul class="dropdown-menu" role="menu">
                                                                 <li *ngIf="!selectedcandidate.isInterviewScheduled">
-                                                                    <button class="btn btn-default btnLink " (click)='onScheduleInterviewClick(selectedcandidate)'>
+                                                                    <button class="btn btn-default btnLink " [disabled]='canScheduleInterview(selectedcandidate.InterviewDetails.Status)' (click)='onScheduleInterviewClick(selectedcandidate)'>
                                                                         <i class="fa fa-calendar-check-o"></i> Schedule
                                                                     </button>
                                                                 </li>
