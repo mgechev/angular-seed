@@ -214,10 +214,10 @@ export class MyProfilesListComponent implements OnActivate {
                     this.myProfilesList.GrdOperations = new GrdOptions();
                     this.getMyProfiles();
                     this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.profile = new CandidateProfile();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
-                this.profile = new CandidateProfile();
             },
             error => { this.errorMessage = <any>error; this.toastr.error(this.errorMessage); });
     }

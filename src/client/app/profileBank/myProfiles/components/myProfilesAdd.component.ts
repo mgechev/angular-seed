@@ -81,6 +81,7 @@ export class MyProfilesAddComponent implements OnActivate {
             this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
             this.CandidateID.Value = this.params.split('ID')[0];
             this.getCandidateProfileById(this.CandidateID.Value);
+            this.GetEmployersInformationList(this.CandidateID);
         }
         var date = new Date();
         this.CurrentYear = date.getFullYear();
@@ -371,14 +372,24 @@ export class MyProfilesAddComponent implements OnActivate {
     }
     /**START Candidate Employement History functionality (Candidate Employers Information) */
     /**Save new employer related information*/
+    AddEditEmployerHistory() {
+        if (this.EmploymentDetailsAction === 'Add') {
+            this.AddEmployersInformation();
+        } else if (this.EmploymentDetailsAction === 'Update') {
+            this.UpdateEmployersInformation();
+        }
+    }
     AddEmployersInformation() {
+        var _candidateID = this.CandidateID;
+        this.EmployersInformation.CandidateID = _candidateID;
         this._profileBankService.addCandidateEmploymentDetails(this.EmployersInformation)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     /**Bind new data to list */
-                    this.GetEmployersInformationList(this.CandidateID);
+                    this.GetEmployersInformationList(_candidateID);
+                    this.EmployersInformation = new EmploymentHistory();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -389,12 +400,13 @@ export class MyProfilesAddComponent implements OnActivate {
             });
     }
     /**Get selected candidate EmployerInformation for edit*/
-    EditEmployerInformation(_employmentID: string) {
-        this.GetEmployersInformation(_employmentID);
+    EditEmployerInformation(careerProfileID: string) {
+        this.GetEmployersInformation(careerProfileID);
         this.EmploymentDetailsAction = 'Update';
     }
     /**Save new employer related information*/
     UpdateEmployersInformation() {
+        this.EmployersInformation.CandidateID = this.CandidateID;
         this._profileBankService.editCandidateEmploymentDetails(this.EmployersInformation)
             .subscribe(
             results => {
@@ -402,6 +414,7 @@ export class MyProfilesAddComponent implements OnActivate {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     /**Bind new data to list */
                     this.GetEmployersInformationList(this.CandidateID);
+                    this.EmployersInformation = new EmploymentHistory();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -426,8 +439,8 @@ export class MyProfilesAddComponent implements OnActivate {
 
     }
     /**Fetch and bing candidate's selected employment information For Update*/
-    GetEmployersInformation(_employmentID: string) {
-        this._profileBankService.getCandidateSelectedEmploymentDetails(_employmentID)
+    GetEmployersInformation(careerProfileID: string) {
+        this._profileBankService.getCandidateSelectedEmploymentDetails(careerProfileID)
             .subscribe(
             results => {
                 this.EmployersInformation = <any>results;

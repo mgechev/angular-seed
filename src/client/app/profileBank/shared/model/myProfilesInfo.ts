@@ -188,12 +188,12 @@ export class TransferOwnershipMeta {
 /**Employment history represents canidates existing and current employer information.*/
 export class EmploymentHistory {
   public CandidateID: MasterData = new MasterData();
-  public EmploymentID: string;
-  public Designation: string;
-  public CompanyName: string;
+  public CareerProfileID: string;
+  public DesignationRole: string;
+  public Company: string;
   public Location: string;
-  public TimeSpentInCurrentCompany: string;
-  public IsCurrent: boolean = false;
+  public TimeSpentInCompany: string;
+  public IsCurrentCompany: boolean = false;
 
 }
 

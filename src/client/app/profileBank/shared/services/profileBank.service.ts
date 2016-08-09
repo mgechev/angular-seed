@@ -150,40 +150,39 @@ export class ProfileBankService {
     }
     /**Get candidate employement history till date. */
     getCandidateEmploymentHistory(_candidateID: MasterData) {
-        /**TODO:: Need to Update API */
-        let url = Config.GetURL('/api/ProfileBank/getQualificationDetails?CandidateID=' + _candidateID.Value);
+        let url = Config.GetURL('/api/ProfileBank/GetCareerProfileDetails?CandidateID=' + _candidateID.Value);
         this._spinnerService.show();
-        return this.authHttp.post(url, _candidateID)
+        return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
     /**Get selected employer's and employement details for update. */
-    getCandidateSelectedEmploymentDetails(_employmentID: string) {
+    getCandidateSelectedEmploymentDetails(CareerProfileId: string) {
         /**TODO:: Need to Update API */
-        let url = Config.GetURL('/api/ProfileBank/getQualificationDetails?CandidateID=' + _employmentID);
+        let url = Config.GetURL('/api/ProfileBank/GetCareerProfileDetailsByCareerId?CareerProfileID=' + CareerProfileId);
         this._spinnerService.show();
-        return this.authHttp.post(url, _employmentID)
+        return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
     /**Save candidate's all employement information' */
-    addCandidateEmploymentDetails(_employmentHistory: EmploymentHistory) {
+    addCandidateEmploymentDetails(CandidateCareerProfile: EmploymentHistory) {
         /**TODO:: Need to Update API */
         let url = Config.GetURL('/api/ProfileBank/AddCareerProfileDetails');
         this._spinnerService.show();
-        return this.authHttp.post(url, { _employmentHistory })
+        return this.authHttp.post(url, { CandidateCareerProfile })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
     /**Edit candidate's employement information details */
-    editCandidateEmploymentDetails(_employmentHistory: EmploymentHistory) {
+    editCandidateEmploymentDetails(CandidateCareerProfile: EmploymentHistory) {
         /**TODO:: Need to Update API */
-        let url = Config.GetURL('/api/ProfileBank/EditCareerProfileDetails');
+        let url = Config.GetURL('/api/ProfileBank/UpdateCareerProfileDetails');
         this._spinnerService.show();
-        return this.authHttp.post(url, { _employmentHistory })
+        return this.authHttp.post(url, { CandidateCareerProfile })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
