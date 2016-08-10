@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment } from '@angular/router';
-import { CandidateProfile, ResumeMeta, Qualification, EmploymentHistory} from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, ResumeMeta, Qualification, CandidateExperience, EmploymentHistory} from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 //import * as  _ from 'lodash';
@@ -42,6 +42,8 @@ export class MyProfilesAddComponent implements OnActivate {
     selectedVisa: MasterData = new MasterData();
     VisaType: Array<MasterData> = new Array<MasterData>();
     TITLE: string = 'Profiles';
+    /**Candidate Experience */
+    CandidateExperiences: CandidateExperience = new CandidateExperience();
     /**Employment History*/
     EmployersInformation: EmploymentHistory = new EmploymentHistory();
     /**Employment History collection */
@@ -82,6 +84,7 @@ export class MyProfilesAddComponent implements OnActivate {
             this.CandidateID.Value = this.params.split('ID')[0];
             this.getCandidateProfileById(this.CandidateID.Value);
             this.GetEmployersInformationList(this.CandidateID);
+            this.GetCandidateExperience(this.CandidateID);
         }
         var date = new Date();
         this.CurrentYear = date.getFullYear();
@@ -317,22 +320,39 @@ export class MyProfilesAddComponent implements OnActivate {
 
     }
 
+    /**Function to fetch candidate EXPERIENCE details */
+    GetCandidateExperience(candidateID: MasterData) {
+        this._profileBankService.getCandidateExperience(candidateID)
+            .subscribe(
+            results => {
+                this.CandidateExperiences = <any>results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+    }
+    /**Save candidate EXPERIENCE details */
     onSaveCareerProfileDetails(): void {
 
-        if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-            this.profile.CommentsUpdated = this.profile.CandidateCareerProfile.CommentsUpdated = true;
-            this.profile.PreviousFollowupComments = this.profile.CandidateCareerProfile.FollowUpComments
+        if (this.profile.PreviousFollowupComments
+            !== this.CandidateExperiences.FollowUpComments
+            ? this.CandidateExperiences.FollowUpComments.trim().replace(/ +/g, ' ') : ''
+        ) {
+            this.profile.CommentsUpdated = this.CandidateExperiences.CommentsUpdated = true;
+            this.profile.PreviousFollowupComments = this.CandidateExperiences.FollowUpComments
                 = this.profile.FollowUpComments.trim();
         } else {
-            this.profile.CommentsUpdated = this.profile.CandidateCareerProfile.CommentsUpdated = false;
+            this.profile.CommentsUpdated = this.CandidateExperiences.CommentsUpdated = false;
         }
-        this.profile.CandidateCareerProfile.CandidateID = this.CandidateID;
-        this._profileBankService.editCandidateCareerDetails(this.profile.CandidateCareerProfile)
+        this.CandidateExperiences.CandidateID = this.CandidateID;
+        this._profileBankService.editCandidateCareerDetails(this.CandidateExperiences)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.getCandidateProfileById(this.CandidateID.Value);
+                    // this.getCandidateProfileById(this.CandidateID.Value);
+                    this.GetCandidateExperience(this.CandidateID);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -371,7 +391,6 @@ export class MyProfilesAddComponent implements OnActivate {
 
     }
     /**START Candidate Employement History functionality (Candidate Employers Information) */
-    /**Save new employer related information*/
     AddEditEmployerHistory() {
         if (this.EmploymentDetailsAction === 'Add') {
             this.AddEmployersInformation();
@@ -379,6 +398,7 @@ export class MyProfilesAddComponent implements OnActivate {
             this.UpdateEmployersInformation();
         }
     }
+    /**Save new employer related information*/
     AddEmployersInformation() {
         var _candidateID = this.CandidateID;
         this.EmployersInformation.CandidateID = _candidateID;

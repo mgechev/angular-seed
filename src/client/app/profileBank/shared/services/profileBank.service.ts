@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { CandidateProfile, EmploymentHistory, ResumeMeta, SalaryDetails, Qualification, TeamManagement, CareerProfile,
+import { CandidateExperience, CandidateProfile, EmploymentHistory, ResumeMeta, SalaryDetails, Qualification, TeamManagement, CareerProfile,
     OtherDetails, Skills, TransferOwnershipMeta} from '../model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
@@ -60,7 +60,6 @@ export class ProfileBankService {
     /** get candidate profile picture */
     getCandidateProfilePhoto(CandidateID: MasterData) {
         let url = Config.GetURL('/api/ProfileBank/GetProfilePicture?CandidateID=' + CandidateID.Value);
-        //let url = Config.GetURL('/api/ProfileBank/GetProfilePicture?CandidateID=C6896190226');
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractDataDefaultFormat)
@@ -94,11 +93,11 @@ export class ProfileBankService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-
-    editCandidateCareerDetails(CandidateCareerProfile: CareerProfile) {
-        let url = Config.GetURL('/api/ProfileBank/AddCareerProfileDetails');
+    /**Save candidate Experienc details */
+    editCandidateCareerDetails(CandidateExperience: CandidateExperience) {
+        let url = Config.GetURL('/api/ProfileBank/UpdateCandidateExperience');
         this._spinnerService.show();
-        return this.authHttp.post(url, { CandidateCareerProfile })
+        return this.authHttp.post(url, { CandidateExperience })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
@@ -148,6 +147,15 @@ export class ProfileBankService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+    /**Get Candidates EXPERIENCE details */
+    getCandidateExperience(candidateID: MasterData) {
+        let url = Config.GetURL('/api/ProfileBank/GetCandidateExperience?CandidateID=' + candidateID.Value);
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     /**Get candidate employement history till date. */
     getCandidateEmploymentHistory(_candidateID: MasterData) {
         let url = Config.GetURL('/api/ProfileBank/GetCareerProfileDetails?CandidateID=' + _candidateID.Value);
@@ -159,7 +167,6 @@ export class ProfileBankService {
     }
     /**Get selected employer's and employement details for update. */
     getCandidateSelectedEmploymentDetails(CareerProfileId: string) {
-        /**TODO:: Need to Update API */
         let url = Config.GetURL('/api/ProfileBank/GetCareerProfileDetailsByCareerId?CareerProfileID=' + CareerProfileId);
         this._spinnerService.show();
         return this.authHttp.get(url)
@@ -169,7 +176,6 @@ export class ProfileBankService {
     }
     /**Save candidate's all employement information' */
     addCandidateEmploymentDetails(CandidateCareerProfile: EmploymentHistory) {
-        /**TODO:: Need to Update API */
         let url = Config.GetURL('/api/ProfileBank/AddCareerProfileDetails');
         this._spinnerService.show();
         return this.authHttp.post(url, { CandidateCareerProfile })
@@ -179,7 +185,6 @@ export class ProfileBankService {
     }
     /**Edit candidate's employement information details */
     editCandidateEmploymentDetails(CandidateCareerProfile: EmploymentHistory) {
-        /**TODO:: Need to Update API */
         let url = Config.GetURL('/api/ProfileBank/UpdateCareerProfileDetails');
         this._spinnerService.show();
         return this.authHttp.post(url, { CandidateCareerProfile })

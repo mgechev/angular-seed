@@ -196,6 +196,15 @@ export class EmploymentHistory {
   public IsCurrentCompany: boolean = false;
 
 }
+export class CandidateExperience {
+  public CandidateID: MasterData = new MasterData();
+  public TotalExperience: string;
+  public RelevantExperience: string;
+  public FollowUpComments: string;
+  public CANDIDATECODE: string;
+  public ItemID: string;
+  public CommentsUpdated: boolean = false;
+}
 
 // export class GridOperations {
 //   public IDColl: Array<number> = new Array<number>();

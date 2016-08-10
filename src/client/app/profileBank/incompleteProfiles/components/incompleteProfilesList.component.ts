@@ -44,9 +44,8 @@ export class IncompleteProfilesListComponent implements OnActivate {
     }
     /** Get ALL incomplte profiles to bind */
     getIncompleteProfiles() {
-        console.log('API integration is pending');
         try {
-            this._allProfilesService.getAllProfiles(this.incompleteProfilesList.GrdOperations)
+            this._allProfilesService.getIncompleteProfiles(this.incompleteProfilesList.GrdOperations)
                 .subscribe(
                 (results: any) => {
                     if (results.Profiles !== undefined && results.Profiles.length > 0) {

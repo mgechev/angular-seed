@@ -38,7 +38,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     NominatedInterviewers: Array<MasterData>;
     AllNominatedInterviewers: Array<InterviewersPanel>;
     OtherInterviewers: Array<MasterData>;
-    InterviewerCalendarDetails: CalendarDetails;
+    InterviewerCalendarDetails: CalendarDetails = new CalendarDetails();
     events: any[];
     data: any;
     header: any;
@@ -62,7 +62,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     selectSkypeID: boolean = false;
     isInterviewReschedule: boolean = false;
     NominatedInterviewersAvailable: boolean = false;
-    currentDate:string;
+    currentDate: string;
 
     constructor(private _router: Router,
         private _calendarDataService: CalendarDataService,
@@ -151,45 +151,51 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     }
 
     onScheduleInterviewClick() {
-        //Check For Valid Interview if Valid ScheduleInterview
-        if (!this.ifInvalidInterview) {
-            //Validate Timeslot and proceed for Schedule Interview
-            let cmb: any = $('#cmbInterviewers');
-            let value = cmb.val();
-            //Get Events Data if "Show Availability"
-            if (this.InterviewerCalendarDetails.Events.length === 0)
-                this.ShowAvailabilityOnCalendar();
-            //&& this.ScheduleInterView.InterviewerAvailability.length < value.length
-            if (value !== null) {
-                this.getOtherSelectedInterviewers(value);
+        try {
 
-                this.changeStatus(this.ScheduleInterView.Status);
 
-                var CheckOverlapping = this.checkAvailability();
+            //Check For Valid Interview if Valid ScheduleInterview
+            if (!this.ifInvalidInterview) {
+                //Validate Timeslot and proceed for Schedule Interview
+                let cmb: any = $('#cmbInterviewers');
+                let value = cmb.val();
+                //Get Events Data if "Show Availability"
+                if (this.InterviewerCalendarDetails.Events.length === 0)
+                    this.ShowAvailabilityOnCalendar();
+                //&& this.ScheduleInterView.InterviewerAvailability.length < value.length
+                if (value !== null) {
+                    this.getOtherSelectedInterviewers(value);
 
-                if (!CheckOverlapping && this.showConfirmation === true) {
-                    let cnfrmBox: any = $('#confirmSlot');
-                    cnfrmBox.modal('toggle');
-                } else if (CheckOverlapping && this.isBookedSlot === false && this.isAvailableSlot === true) {
-                    this.toastr.success('Timeslot Valid');
-                    this.ScheduleCandidateInterView();
-                } else if (CheckOverlapping && this.isBookedSlot === false && this.isAvailableSlot === false) {
-                    let cnfrmBox: any = $('#confirmSlot');
-                    cnfrmBox.modal('toggle');
-                } else {
-                    this.toastr.warning('You can not schedule interview in booked slot');
-                }
-            } else { this.toastr.warning('Please fill atleast one interviewer'); }
+                    this.changeStatus(this.ScheduleInterView.Status);
 
-        } else {
-            //if Invalid Send for Approval
+                    var CheckOverlapping = this.checkAvailability();
 
-            if (this.isRejectedCandidate) {
-                this.ScheduleInterView.ApprovalType = 'Rejected Candidate';
-            } else { this.ScheduleInterView.ApprovalType = 'Skip Interview'; }
+                    if (!CheckOverlapping && this.showConfirmation === true) {
+                        let cnfrmBox: any = $('#confirmSlot');
+                        cnfrmBox.modal('toggle');
+                    } else if (CheckOverlapping && this.isBookedSlot === false && this.isAvailableSlot === true) {
+                        this.toastr.success('Timeslot Valid');
+                        this.ScheduleCandidateInterView();
+                    } else if (CheckOverlapping && this.isBookedSlot === false && this.isAvailableSlot === false) {
+                        let cnfrmBox: any = $('#confirmSlot');
+                        cnfrmBox.modal('toggle');
+                    } else {
+                        this.toastr.warning('You can not schedule interview in booked slot');
+                    }
+                } else { this.toastr.warning('Please fill atleast one interviewer'); }
 
-            this.ScheduleInterView.Status = 'Awaiting Approval';
-            this.ScheduleCandidateInterView();
+            } else {
+                //if Invalid Send for Approval
+
+                if (this.isRejectedCandidate) {
+                    this.ScheduleInterView.ApprovalType = 'Rejected Candidate';
+                } else { this.ScheduleInterView.ApprovalType = 'Skip Interview'; }
+
+                this.ScheduleInterView.Status = 'Awaiting Approval';
+                this.ScheduleCandidateInterView();
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
     //Call Service to Save ScheduleInterview
@@ -377,11 +383,18 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     //Check For Valid And Invalid Slots while scheduling interview
     checkAvailability() {
         this.isAvailableSlot = this.isBookedSlot = this.showConfirmation = false;
+        if (this.InterviewerCalendarDetails === null) {
+            return false;
+        } else {
+            if (this.InterviewerCalendarDetails.Resources.length === 0
+                || this.InterviewerCalendarDetails.Events.length === 0)
+                return false;
+        }
+        var Booked = this.InterviewerCalendarDetails.Resources[_.findIndex(this.InterviewerCalendarDetails.Resources,
+            { title: 'Booked' })].id;
 
-        var Booked = this.InterviewerCalendarDetails.Resources
-        [_.findIndex(this.InterviewerCalendarDetails.Resources, { title: 'Booked' })].id;
-        var Available = this.InterviewerCalendarDetails.Resources
-        [_.findIndex(this.InterviewerCalendarDetails.Resources, { title: 'Available' })].id;
+        var Available = this.InterviewerCalendarDetails.Resources[_.findIndex(this.InterviewerCalendarDetails.Resources,
+            { title: 'Available' })].id;
 
         for (var index = 0; index < this.InterviewerCalendarDetails.Events.length; index++) {
 

@@ -23,7 +23,6 @@ export class AllProfilesService {
             .finally(() => this._spinnerService.hide());
     }
     getIncompleteProfiles(grdOptions: GrdOptions) {
-        /** TODO:: Update API once get from back end (API is pending) */
         let url = Config.GetURL('/api/ProfileBank/GetInCompleteProfiles');
         this._spinnerService.show();
         return this.authHttp.post(url, { grdOptions })
