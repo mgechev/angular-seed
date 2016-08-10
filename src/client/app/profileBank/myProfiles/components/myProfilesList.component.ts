@@ -120,7 +120,7 @@ export class MyProfilesListComponent implements OnActivate {
         this._myProfilesService.getMyProfiles(this.myProfilesList.GrdOperations)
             .subscribe(
             (results: any) => {
-                if (results.Profiles !== undefined && results.Profiles.length > 0) {
+                if (results.Profiles !== null && results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.myProfilesList = <any>results;
                 } else { this.NORECORDSFOUND = true; }
             },

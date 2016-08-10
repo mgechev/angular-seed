@@ -21,21 +21,21 @@
             <div class="portlet light bordered">
                 <div class="portlet-body">
                     <div class="row">
-                                 <a class="btn btn-circle dark btn-outline" (click)='Back()'> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>
+                        <a class="btn green" (click)='Back()'> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>
                         <div class="mt-radio-inline col-md-12">
                             <div class="col-md-3">
                                 <label class="mt-radio">
-                                <input type="radio" name="viewType" value="myReInterviews" [checked]="currentView == 'myReInterviews'" (click)="onViewChanged('myReInterviews')" /> 
-                                My Re-Schedule Interviews
-                                <span></span>
-                            </label>
+                                    <input type="radio" name="viewType" value="myReInterviews" [checked]="currentView == 'myReInterviews'" (click)="onViewChanged('myReInterviews')"
+                                    /> My Re-Schedule Interviews
+                                    <span></span>
+                                </label>
                             </div>
                             <div class="col-md-6">
                                 <label class="mt-radio">
-                                 <input type="radio" name="viewType" value="allReInterviews" [checked]="currentView == 'allReInterviews'" (click)="onViewChanged('allReInterviews') "/>
-                                  All Re-Schedule Interviews
-                                  <span></span>
-                            </label>
+                                    <input type="radio" name="viewType" value="allReInterviews" [checked]="currentView == 'allReInterviews'" (click)="onViewChanged('allReInterviews') "
+                                    /> All Re-Schedule Interviews
+                                    <span></span>
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -43,45 +43,42 @@
                         <div class="col-md-3 col-sm-3">
                             <div class="dataTables_length" id="sample_1_length">
                                 <label>Show :
-                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
-                                            [(ngModel)]="InterviewDetailsList.GrdOperations.PerPageCount" 
-                                            (ngModelChange)="onChange()">
-                                                <option value="5">5</option>
-                                                <option value="10">10</option>
-                                                <option value="20">20</option>
-                                                <option value="50">50</option>
-                                            </select>
-                                        </label>
+                                    <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" [(ngModel)]="InterviewDetailsList.GrdOperations.PerPageCount"
+                                    (ngModelChange)="onChange()">
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="50">50</option>
+                                    </select>
+                                </label>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3">
                             <label>Sort By
-                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline" 
-                                            [(ngModel)]="InterviewDetailsList.GrdOperations.OrderBy"
-                                            (ngModelChange)="onChange()" >
-                                                <option value="Modified">Modified</option>
-                                             <!--  <option value="Status/Status">Status</option>-->
-                                                <!--ColumnList-->
-                                                    <!--<option *ngFor="let column of ColumnList" [value]="column.Value">{{column.Id}}</option>-->
-                                                
-                                            </select>
-                                        </label>
+                                <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline" [(ngModel)]="InterviewDetailsList.GrdOperations.OrderBy"
+                                (ngModelChange)="onChange()">
+                                    <option value="Modified">Modified</option>
+                                    <!--  <option value="Status/Status">Status</option>-->
+                                    <!--ColumnList-->
+                                    <!--<option *ngFor="let column of ColumnList" [value]="column.Value">{{column.Id}}</option>-->
+
+                                </select>
+                            </label>
                         </div>
                         <div class="col-md-3 col-sm-3">
                             <label>Order By
-                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline" 
-                                            [(ngModel)]="InterviewDetailsList.GrdOperations.Order"  
-                                            (ngModelChange)='onChange()'>
-                                                <option value="asc">Ascending</option>
-                                                <option value="desc">Descending</option>
-                                            </select> 
-                                            </label>
+                                <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline" [(ngModel)]="InterviewDetailsList.GrdOperations.Order"
+                                (ngModelChange)='onChange()'>
+                                    <option value="asc">Ascending</option>
+                                    <option value="desc">Descending</option>
+                                </select>
+                            </label>
                         </div>
                         <div class="col-md-3 col-sm-4">
                             <div id="sample_1_filter" class="dataTables_filter">
-                                <label>Search 
-                                            <input type="search" [(ngModel)]="searchString" class="form-control input-sm input-small input-inline " placeholder="" aria-controls="sample_1">
-                                            </label>
+                                <label>Search
+                                    <input type="search" [(ngModel)]="searchString" class="form-control input-sm input-small input-inline " placeholder="" aria-controls="sample_1">
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -100,12 +97,15 @@
                             <tbody>
                                 <tr *ngFor="let interview of InterviewDetailsList.AllInterviews | AllScheduleInterviewPipe:searchString">
                                     <td> {{interview.RRFID.Value}} </td>
-                                    <td> Name : {{interview.CandidateDetails.FullName}} <br/> Email:{{interview.CandidateDetails.Email}}
+                                    <td> Name : {{interview.CandidateDetails.FullName}}
+                                        <br/> Email:{{interview.CandidateDetails.Email}}
                                         <br/> Contact No : {{interview.CandidateDetails.Contact}}
                                     </td>
                                     <td>
-                                        InterviewDate : {{interview.InterviewDate}} <br/> FromTime: {{interview.InterviewFromTime}}
-                                        <br/> ToTime: {{interview.InterviewToTime}}<br/> Round : {{interview.Round.Value}}
+                                        InterviewDate : {{interview.InterviewDate}}
+                                        <br/> FromTime: {{interview.InterviewFromTime}}
+                                        <br/> ToTime: {{interview.InterviewToTime}}
+                                        <br/> Round : {{interview.Round.Value}}
                                     </td>
                                     <td>
                                         <div>
@@ -128,9 +128,9 @@
                         </div>
                         <div class="col-md-2 ">
                             <button type="button" class="btn btn-default" [disabled]="!InterviewDetailsList.GrdOperations.PreviousButton" (click)="OnPaginationClick(-1)">
-                                        &laquo; Prev</button> &nbsp;&nbsp;
+                                &laquo; Prev</button> &nbsp;&nbsp;
                             <button type="button" class="btn btn-default" [disabled]="!InterviewDetailsList.GrdOperations.NextButton" (click)="OnPaginationClick(1)">
-                                        Next &raquo;</button>
+                                Next &raquo;</button>
                         </div>
                     </div>
                 </div>

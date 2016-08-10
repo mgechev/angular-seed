@@ -11,14 +11,13 @@
                 <a (click)='Back()'>{{TITLE}}</a>
                 <i class="fa fa-circle"></i>
             </li>
-            <li>
-                <span class="active">View</span>
-            </li>
-        </ul>
-        <div class="row">
+            <li><span class="active">View</span>
+</li>
+</ul>
+<div class="row">
             <div class="col-md-12">
                 <div class="portlet light bordered">
-                    <a class="btn btn-circle dark btn-outline" (click)='Back()'> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>
+                    <a class="btn green" (click)='Back()'> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>
                     <div *ngIf="profile!==null" class="details">
                         <div class="portlet light nopadding">
                             <div class="portlet-title custom-portlet">
@@ -91,23 +90,25 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label class=" col-md-4 "><b>Current Address :</b></label>
-                                                        <div class="col-md-8" style="margin-left:-30px">
+                                                        <label class=" col-md-3 "><b>Current Address :</b></label>
+                                                        <div class="col-md-5" style="margin-left:-30px">
                                                             {{profile.CurrentAddress}}
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label class="col-md-5 "><b>Permanent Address:</b></label>
-                                                        <div class="col-md-7" style="margin-left:-30px">
+                                                        <label class="col-md-3 "><b>Permanent Address:</b></label>
+                                                        <div class="col-md-5" style="margin-left:-30px">
                                                             {{profile.PermanentAddress}}
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
                                             <!--/row-->
                                             <div class="row" *ngIf='count'>
@@ -160,7 +161,7 @@
                                             <!-- BEGIN FORM-->
                                             <!--/row-->
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label class=" col-md-8 "><b>Total Experience :</b></label>
                                                         <div class="col-md-3">
@@ -177,7 +178,7 @@
                                                     </div>
                                                 </div>
                                                 <!--/span-->
-                                                <div class="col-md-5">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label class=" col-md-5 "><b>Current Company:</b></label>
                                                         <div class="col-md-6">
@@ -189,15 +190,15 @@
                                             </div>
                                             <!--/row-->
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-8">
                                                     <div class="form-group">
-                                                        <label class=" col-md-6 "><b>Current Designation & Role:</b></label>
-                                                        <div class="col-md-6">
+                                                        <label class=" col-md-4 "><b>Current Designation & Role:</b></label>
+                                                        <div class="col-md-8">
                                                             {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.CurrentDesignationRole?profile.CandidateCareerProfile.CurrentDesignationRole:"N/A":"N/A"}}
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label class=" col-md-7 "><b>Time Spent In Current Company:</b></label>
                                                         <div class="col-md-2">
