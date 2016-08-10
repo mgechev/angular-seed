@@ -195,6 +195,21 @@ export class RRFCandidateListComponent implements OnActivate {
             Candidate.InterviewDetails.InterviewID.Value + 'ID' + Candidate.InterviewDetails.InterviewID.Id]);
     }
 
+    //Cancel scheduled Inerview
+    onCancelInterviewClick(Candidate: RRFSpecificCandidateList) {
+        this._rrfCandidatesList.CancelInterview(Candidate.InterviewDetails.InterviewID, 'Cancelled', '')
+            .subscribe(
+            (results: any) => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.getCanidatesForRRF();
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
+            },
+            error => this.errorMessage = <any>error);
+    }
+
     CheckInterviewStatus(CandidateDetails: Array<RRFSpecificCandidateList>) {
         this.AllCandidatesForRRF = CandidateDetails;
         for (var index = 0; index < CandidateDetails.length; index++) {

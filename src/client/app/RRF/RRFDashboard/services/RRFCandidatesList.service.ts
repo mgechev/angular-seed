@@ -14,7 +14,7 @@ export class RRFCandidateListService {
     //Get RRf Specific Candidates by RRFID - API will return list of Candidates
     getCandidatesForRRF(RRFID: string) {
         let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF?RRFID=' + RRFID);
-       //let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF');
+        //let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF');
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
@@ -26,14 +26,14 @@ export class RRFCandidateListService {
         //ASK backend team - IS API READY? Change URL
         let url = Config.GetURL('/api/RecruitmentCycle/ViewCandidateInterviewSchedule');
         this._spinnerService.show();
-        return this.authHttp.post(url,{CandidateID:CandidateID,RRFID:RRFID})
+        return this.authHttp.post(url, { CandidateID: CandidateID, RRFID: RRFID })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
 
     getRRFByID(RRFID: string) {
-        let url = Config.GetURL('/api/RRF/GetRRFByID?RRFID='+RRFID);
+        let url = Config.GetURL('/api/RRF/GetRRFByID?RRFID=' + RRFID);
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
@@ -44,16 +44,26 @@ export class RRFCandidateListService {
     proceedForOfferGeneration(InterviewID: MasterData) {
         let url = Config.GetURL('/api/RecruitmentCycle/ProceedForOfferGeneration');
         this._spinnerService.show();
-        return this.authHttp.post(url,{InterviewID})
+        return this.authHttp.post(url, { InterviewID })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
 
-    UpdateCandidateIEFStatus(InterviewID : MasterData , Status : string , Comments : string){
+    UpdateCandidateIEFStatus(InterviewID: MasterData, Status: string, Comments: string) {
         let url = Config.GetURL('/api/RecruitmentCycle/UpdateCandidateIEFStatus');
         this._spinnerService.show();
-        return this.authHttp.post(url,{InterviewID,Status,Comments})
+        return this.authHttp.post(url, { InterviewID, Status, Comments })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
+    //Cancel scheduled Inerview
+    CancelInterview(InterviewID: MasterData, Status: string, Reason: string) {
+        let url = Config.GetURL('/api/RecruitmentCycle/CancelInterview');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { 'InterviewDetails': { InterviewID, Status, Reason } })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
