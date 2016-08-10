@@ -50,11 +50,21 @@ export class CandidateIEFService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-      /**Get IEF Data by InterviewID */
+    /**Get IEF Data by InterviewID */
     getIEFByInterviewID(InterviewID: MasterData) {
         let url = Config.GetURL('/api/RecruitmentCycle/GetIEFByInterviewID');
         this._spinnerService.show();
-        return this.authHttp.post(url ,{InterviewID})
+        return this.authHttp.post(url, { InterviewID })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
+    //Update the status of Interview
+    UpdateCandidateIEFStatus(InterviewID: MasterData, Status: string, Comments: string) {
+        let url = Config.GetURL('/api/RecruitmentCycle/UpdateCandidateIEFStatus');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { InterviewID, Status, Comments })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

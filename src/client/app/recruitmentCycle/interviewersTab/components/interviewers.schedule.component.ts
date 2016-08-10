@@ -101,7 +101,8 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         _candidateId: MasterData,
         _displayCandidateInfo: boolean,
         _interviewType: MasterData,
-        _interviewId: MasterData
+        _interviewId: MasterData,
+        _interviewStatus: string
     ) {
         var _iefParameters: iefModel = new iefModel();
         _iefParameters.RRFID = _rrfId;
@@ -111,6 +112,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         _iefParameters.InterviewID = _interviewId;
         sessionStorage.setItem('SubmitIef', JSON.stringify(_iefParameters));
         sessionStorage.setItem('onReturnPath', '/App/Recruitment Cycle/Interviewers/schedule');
+        sessionStorage.setItem('InterviewStatus', _interviewStatus);
         this._router.navigate(['/App/Recruitment Cycle/Interviewers/ief']);
     }
 
@@ -188,5 +190,13 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         if (day.length < 2) day = '0' + day;
 
         return [year, month, day].join('-');
+    }
+
+    showSubmitIEF(status: string) {
+        if (status.toLowerCase() === 'on hold') {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

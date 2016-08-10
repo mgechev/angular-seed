@@ -26,6 +26,7 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
     functions: Array<IEFFunction> = new Array<IEFFunction>();
     iefStatus: string;
     iefComments: string;
+    isChangeStatusReq: boolean = false;
     constructor(private _router: Router,
         private toastr: ToastsManager,
         private _candidateIEFService: CandidateIEFService) {
@@ -38,7 +39,14 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
         this.returnPath = sessionStorage.getItem('onReturnPath');
     }
     ngOnInit() {
-        this.getIEFFunctions(this.requestedIef.InterviewType.Id);
+        var intrviewStatus: string = sessionStorage.getItem('InterviewStatus')
+        if (intrviewStatus.toLowerCase() === 'on hold') {
+            this.getIEFPreviousData(this.requestedIef.InterviewID);
+            this.isChangeStatusReq = true;
+        } else {
+            this.getIEFFunctions(this.requestedIef.InterviewType.Id);
+        }
+
     }
     Back() {
         if (this.returnPath !== undefined)
@@ -57,24 +65,41 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
                 this.toastr.error(<any>error);
             });
     }
-    submitIEFDetails(updatedIefFunctions: IEFFunction[]) {
-        var currentIefDetails: IEFSubmission = new IEFSubmission();
-        currentIefDetails = this.createIEF(updatedIefFunctions);
-        this._candidateIEFService.saveCurrentIEFDetails(currentIefDetails)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message);
 
-                    this.Back();
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).Message);
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.toastr.error(<any>error);
-            });
+
+    submitIEFDetails(updatedIefFunctions: IEFFunction[]) {
+        if (this.isChangeStatusReq) {
+            this._candidateIEFService.UpdateCandidateIEFStatus(this.requestedIef.InterviewID, this.iefStatus, this.iefComments)
+                .subscribe(
+                (results: any) => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.Back();
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
+                },
+                error => this.errorMessage = <any>error);
+
+        } else {
+            var currentIefDetails: IEFSubmission = new IEFSubmission();
+            currentIefDetails = this.createIEF(updatedIefFunctions);
+            this._candidateIEFService.saveCurrentIEFDetails(currentIefDetails)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+
+                        this.Back();
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
+                });
+        }
     }
     getIEFHistory(objIEFid: iefModel) {
         this._candidateIEFService.getIEFHistory(objIEFid)
@@ -90,6 +115,18 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
 
     getIEFFunctions(interviewType: number) {
         this._candidateIEFService.getIEFFunctions(interviewType)
+            .subscribe(
+            (results: any) => {
+                this.functions = results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+    }
+
+    getIEFPreviousData(interviewID: MasterData) {
+        this._candidateIEFService.getIEFByInterviewID(interviewID)
             .subscribe(
             (results: any) => {
                 this.functions = results;

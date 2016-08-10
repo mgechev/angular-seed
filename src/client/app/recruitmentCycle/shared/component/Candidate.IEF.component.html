@@ -29,10 +29,12 @@
                                                 <span><strong>Experience</strong></span>
                                             </div>
                                             <div>
-                                                <label class="control-label"><strong>Total : </strong>{{ candidateIEFDetails.Experience.TotalExperience?candidateIEFDetails.Experience.TotalExperience:"N/A"}} </label>
+                                                <label class="control-label"><strong>Total : </strong>{{ candidateIEFDetails.Experience.TotalExperience?candidateIEFDetails.Experience.TotalExperience:"N/A"}}
+                                                </label>
                                             </div>
                                             <div>
-                                                <label class="control-label"><strong>Relevant : </strong>{{candidateIEFDetails.Experience.RelevantExperience?candidateIEFDetails.Experience.RelevantExperience:"N/A"}} </label>
+                                                <label class="control-label"><strong>Relevant : </strong>{{candidateIEFDetails.Experience.RelevantExperience?candidateIEFDetails.Experience.RelevantExperience:"N/A"}}
+                                                </label>
                                             </div>
                                         </td>
                                         <td style="width:50%" *ngIf="candidateIEFDetails.Salary!=null" *ngIf="!requestedIef.DisplayCandidateInfo">
@@ -40,10 +42,12 @@
                                                 <span class="pull-center"><strong> Salary</strong></span>
                                             </div>
                                             <div>
-                                                <label class="control-label"><strong>Current : </strong> <i class="fa fa-inr"></i> {{candidateIEFDetails.Salary.Current?candidateIEFDetails.Salary.Current:"N/A"}} </label>
+                                                <label class="control-label"><strong>Current : </strong> <i class="fa fa-inr"></i> {{candidateIEFDetails.Salary.Current?candidateIEFDetails.Salary.Current:"N/A"}}
+                                                </label>
                                             </div>
                                             <div>
-                                                <label class="control-label"><strong>Expected : </strong> <i class="fa fa-inr"></i> {{candidateIEFDetails.Salary.Expected?candidateIEFDetails.Salary.Expected:"N/A"}} </label>
+                                                <label class="control-label"><strong>Expected : </strong> <i class="fa fa-inr"></i> {{candidateIEFDetails.Salary.Expected?candidateIEFDetails.Salary.Expected:"N/A"}}
+                                                </label>
                                             </div>
                                         </td>
                                     </tr>
@@ -66,46 +70,50 @@
                                 </tr>
                                 <tr class="form-group">
                                     <td style="width:33%">
-                                        <label class="control-label"><strong>Role : </strong>{{ candidateIEFDetails.RRFDetailsIEF?candidateIEFDetails.RRFDetailsIEF.Role:"N/A"}} </label>
+                                        <label class="control-label"><strong>Role : </strong>{{ candidateIEFDetails.RRFDetailsIEF?candidateIEFDetails.RRFDetailsIEF.Role:"N/A"}}
+                                        </label>
                                     </td>
                                     <td style="width:33%">
-                                        <label class="control-label"><strong>COE/Functions : </strong>{{ candidateIEFDetails.RRFDetailsIEF?candidateIEFDetails.RRFDetailsIEF.FunctionName:"N/A"}} </label>
+                                        <label class="control-label"><strong>COE/Functions : </strong>{{ candidateIEFDetails.RRFDetailsIEF?candidateIEFDetails.RRFDetailsIEF.FunctionName:"N/A"}}
+                                        </label>
                                     </td>
                                     <td style="width:33%">
-                                        <label class="control-label"><strong>Location : </strong>{{ candidateIEFDetails.Location?candidateIEFDetails.Location:"N/A"}} </label>
+                                        <label class="control-label"><strong>Location : </strong>{{ candidateIEFDetails.Location?candidateIEFDetails.Location:"N/A"}}
+                                        </label>
                                     </td>
                                 </tr>
 
                                 <tr class="form-group">
                                     <td style="width:33%">
-                                        <label class="control-label"><strong>Primary Skills : </strong>{{ candidateIEFDetails.Skills?candidateIEFDetails.Skills.PrimarySkills?candidateIEFDetails.Skills.PrimarySkills:"N/A":"N/A"}} </label>
+                                        <label class="control-label"><strong>Primary Skills : </strong>{{ candidateIEFDetails.Skills?candidateIEFDetails.Skills.PrimarySkills?candidateIEFDetails.Skills.PrimarySkills:"N/A":"N/A"}}
+                                        </label>
                                     </td>
                                     <td style="width:33%">
                                         <label class="control-label"><strong>Secondary Skills : </strong>{{ candidateIEFDetails.Skills.SecondarySkills?candidateIEFDetails.Skills.SecondarySkills?candidateIEFDetails.Skills.SecondarySkills:"N/A":"N/A"}}</label>
                                     </td>
                                     <td style="width:33%">
-                                        <label class="control-label"><strong>Other special skills : </strong>{{  candidateIEFDetails.Skills?candidateIEFDetails.Skills.OtherSkills?candidateIEFDetails.Skills.OtherSkills:"N/A":"N/A"}}</label>
+                                        <label class="control-label"><strong>Other special skills : </strong>{{ candidateIEFDetails.Skills?candidateIEFDetails.Skills.OtherSkills?candidateIEFDetails.Skills.OtherSkills:"N/A":"N/A"}}</label>
                                     </td>
                                 </tr>
                             </table>
                             <div>
-                                <label class="control-label"><strong>Additional Comments : </strong>{{  candidateIEFDetails.AdditionalInformation?candidateIEFDetails.AdditionalInformation:"N/A"}}</label>
+                                <label class="control-label"><strong>Additional Comments : </strong>{{ candidateIEFDetails.AdditionalInformation?candidateIEFDetails.AdditionalInformation:"N/A"}}</label>
                             </div>
                             <hr>
                             <!-- BEGIN EVALUTATION FORM-->
 
                             <!--form add in component -->
                             <div *ngFor="let _function of functions; let i = index">
-                                <ief-function (functionUpdate)="onUpdate($event)" [recordCount]="i" [functionsCollection]="functions"></ief-function>
+                                <ief-function (functionUpdate)="onUpdate($event)" [recordCount]="i" [functionsCollection]="functions" [isDisabled]="isChangeStatusReq"></ief-function>
                             </div>
                             <!--<form class="form-horizontal form-bordered" (submit)="submitIEFDetails(functions)">-->
                             <div class="form-body form-group">
                                 <label class="control-label col-md-2">Status<span class="required">*</span> :</label>
                                 <div class="col-md-2">
                                     <select class="form-control" [(ngModel)]='iefStatus' required>
-                                        <option >Selected</option>
-                                        <option >Rejected</option>
-                                        <option >On Hold</option>
+                                        <option>Selected</option>
+                                        <option>Rejected</option>
+                                        <option *ngIf='!isChangeStatusReq'>On Hold</option>
                                     </select>
                                 </div>
                                 <label class="control-label col-md-2">General Comments<span class="required">*</span>:</label>
@@ -118,7 +126,10 @@
                         </div>
                         <div>
                             <!--<button type="submit" class="btn green" (click)="submitIEFDetails(functions)"> Save </button>-->
-                            <button type="submit" class="btn green"> Save </button>
+                            <button type="submit" class="btn green">
+                                <span *ngIf='!isChangeStatusReq'> Save</span>
+                                <span *ngIf='isChangeStatusReq'> Change Status</span>
+                            </button>
                             <button type="reset" class="btn default" (click)="Back()"> Cancel </button>
                         </div>
                     </div>
