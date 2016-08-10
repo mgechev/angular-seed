@@ -52,7 +52,6 @@ export class AllProfilesListComponent implements OnActivate {
     ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
 
     constructor(private _allProfilesService: AllProfilesService,
-
         private _dataSharedService: DataSharedService,
         private _router: Router,
         public toastr: ToastsManager,

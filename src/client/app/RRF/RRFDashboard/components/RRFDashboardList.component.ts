@@ -32,6 +32,7 @@ export class RRFDashboardListComponent implements OnActivate {
     errorMessage: string;
     selectedRRF: RRFDetails = new RRFDetails();
     isListVisible: boolean = true;
+    showAvaililityPanel: boolean = false;
     rrfStatusCount: AllRRFStatusCount[] = [];
     currentView: string = 'myRRF';
     closeComment: string = '';
@@ -52,7 +53,7 @@ export class RRFDashboardListComponent implements OnActivate {
         animation: false,
         responsive: true,
         legend: {
-            onClick: function(event: any, legendItem: any) {
+            onClick: function (event: any, legendItem: any) {
                 //console.log("legend click");
             }
         }
@@ -494,6 +495,9 @@ export class RRFDashboardListComponent implements OnActivate {
     onReScheduleInterviewsClick(RRFID: MasterData) {
         //redirect to All Reschedule Interviews Screen
         this._router.navigate(['/App/RRF/RRFDashboard/Interviews/' + RRFID.Value + 'ID' + RRFID.Id]);
+    }
+    onShowAvailabilityClick() {
+        this.showAvaililityPanel = !this.showAvaililityPanel;
     }
 }
 

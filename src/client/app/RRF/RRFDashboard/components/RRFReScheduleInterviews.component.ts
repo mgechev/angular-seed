@@ -4,13 +4,14 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { RRFReScheduleInterviewService} from '../services/RRFReScheduleInterviews.service';
 import {InterviewsList} from '../../../recruitmentCycle/recruitersTab/index';
 import { GrdOptions, MasterData } from  '../../../shared/model/index';
-
+import { AllScheduleInterviewPipe } from  '../../..//recruitmentCycle/recruitersTab/index';
 @Component({
     moduleId: module.id,
     selector: 'show-re-schedule-interviews',
     templateUrl: 'RRFReScheduleInterviews.component.html',
     directives: [ROUTER_DIRECTIVES],
-    providers: [ToastsManager]
+    providers: [ToastsManager],
+    pipes:[AllScheduleInterviewPipe]
 })
 
 export class RRFReScheduleInterviewsComponent implements OnActivate {

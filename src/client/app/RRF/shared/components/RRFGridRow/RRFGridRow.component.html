@@ -19,10 +19,10 @@
             </div>
             <div class="col-lg-3">
                 <!--<b>Status</b> :<span class="mt-action-dot {{getStatusClass(RRFData.Status.Id)}} "></span>{{RRFData.Status.Value}}-->
-                <div class="pull-right">
+                <!--<div class="pull-right">
                     <a class="btn-green" data-toggle="collapse" data-target="#demo{{RRFData.RRFID.Id}}">
                         <i class="fa fa-eye" aria-hidden="true"></i> Show Availability</a>
-                </div>
+                </div>-->
             </div>
         </div>
 
@@ -100,11 +100,11 @@
         </div>
     </div>
 
-    <div class="row">
+    <!--<div class="row">
         <div class="collapse" id="#demo{{RRFData.RRFID.Id}}">
             <panel-availablity></panel-availablity>
         </div>
-    </div>
+    </div>-->
 
     <!--<div [ifAuthorize]="['RRF.APPROVERCOLUMNVISIBILITY.MANAGE']"  *ngIf='displayApproval'>-->
     <div *ngIf='displayApproval' style="margin-top: 7px;">

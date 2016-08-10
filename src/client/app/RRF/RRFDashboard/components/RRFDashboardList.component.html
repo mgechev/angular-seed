@@ -305,7 +305,17 @@
                                 <tbody>
                                     <tr class="odd gradeX " *ngFor="let rrf of rrfList | RRFPipe :searchText |RRFIDPipe :closeRRFID.Value ">
                                         <td>
+                                            <div class="pull-right" *ngIf="currentView =='myRRF'">
+                                                <a class="btn-green" (click)='onShowAvailabilityClick()'>
+                                                    <i class="fa fa-eye" aria-hidden="true"></i> Show Availability</a>
+                                            </div>
                                             <RRFGridRow [RRFData]=rrf [displayApproval]='displayApproval' [displayAssignedTo]='displayAssignedTo'></RRFGridRow>
+                                            <div class="row" *ngIf="currentView =='myRRF' && showAvaililityPanel">
+                                                <!--<div class="collapse" id="demo{{rrf.RRFID.Id}}">-->
+                                                <div>
+                                                    <panel-availablity [selectedRRF]='rrf'></panel-availablity>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td style="width:80px">
                                             <div class="btn-group ">
@@ -315,7 +325,8 @@
                                                 </button>
                                                 <ul class="dropdown-menu " role="menu ">
                                                     <li>
-                                                        <button class="btn btn-default btnLink" (click)='redirectToEditRRF(rrf.RRFID , rrf.Status.Id)' [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] " [disabled]='allowEditRRF(rrf.Status.Id , rrf.RaisedBy.Id)'>
+                                                        <button class="btn btn-default btnLink" (click)='redirectToEditRRF(rrf.RRFID , rrf.Status.Id)' [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] "
+                                                            [disabled]='allowEditRRF(rrf.Status.Id , rrf.RaisedBy.Id)'>
                                                             <i class="fa fa-edit "></i> Edit RRF
                                                         </button>
                                                     </li>

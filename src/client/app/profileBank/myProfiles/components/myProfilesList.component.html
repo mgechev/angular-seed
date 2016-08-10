@@ -408,11 +408,13 @@
                                                             <i class="fa fa-search"></i> View Profile
                                                         </a>
                                                     </li>
+                                                    <li class="divider" [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] "> </li>
                                                     <!-- TODO:: update Delete Permission once recive from backend -->
                                                     <li [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] ">
                                                         <a (click)='deleteCandidate(profile.CandidateID)' [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] ">
                                                             <i class="fa fa-remove"></i>Delete Profile</a>
                                                     </li>
+                                                    <li class="divider"> </li>
                                                     <li>
                                                         <a (click)='getCandidateHistory(myprofile.CandidateID)'>
                                                             <i class="fa fa-history"></i>View Interview History</a>
