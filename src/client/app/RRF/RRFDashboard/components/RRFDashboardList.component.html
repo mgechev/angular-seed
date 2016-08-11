@@ -18,19 +18,14 @@
             <div class="portlet-body">
                 <!--Approve/Reject skipped interview or rejected candidate-->
 
-
-                <div class="col-lg-12 ">
-                    <!--<div class="col-lg-6">
-                        <interview-approval></interview-approval>
-                    </div>-->
-
-                    <div class="col-lg-12" *ngIf="isChartVisible">
-                        <div class=" portlet light bordered" align="center">
-                            <base-chart class="chart" [options]="doughnutChartOptions" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
-                                [colors]="doughnutChartColors"></base-chart>
-                        </div>
+                <div class="col-lg-12" *ngIf="isChartVisible">
+                    <div class=" portlet light bordered" align="center">
+                        <base-chart class="chart" [options]="doughnutChartOptions" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
+                            [colors]="doughnutChartColors"></base-chart>
                     </div>
                 </div>
+
+
 
                 <div class="col-lg-12" *ngIf="isListVisible" id="divRRFList">
 
@@ -267,10 +262,13 @@
                         <view-RRF [RRFID]='viewDetailsRRFId'></view-RRF>
                     </div>
                 </div>
-                <!--<panel-availablity></panel-availablity>-->
+
+
             </div>
-            <!-- END PAGE BASE CONTENT -->
+            <!--<panel-availablity></panel-availablity>-->
         </div>
-        <!-- END CONTENT BODY -->
+        <!-- END PAGE BASE CONTENT -->
     </div>
-    <!-- END CONTENT -->
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
