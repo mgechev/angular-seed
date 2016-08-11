@@ -214,6 +214,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │       │   │   ├── about.component.html
 │       │   │   ├── about.component.spec.ts
 │       │   │   ├── about.component.ts
+│       │   │   ├── about.module.ts
 │       │   │   ├── about.routes.ts
 │       │   │   └── index.ts
 │       │   ├── +home
@@ -222,12 +223,14 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │       │   │   ├── home.component.html
 │       │   │   ├── home.component.spec.ts
 │       │   │   ├── home.component.ts
+│       │   │   ├── home.module.ts
 │       │   │   ├── home.routes.ts
 │       │   │   └── index.ts
 │       │   ├── app.component.e2e-spec.ts
 │       │   ├── app.component.html
 │       │   ├── app.component.spec.ts
 │       │   ├── app.component.ts
+│       │   ├── app.module.ts
 │       │   ├── app.routes.ts
 │       │   ├── hot_loader_main.ts
 │       │   ├── main.ts
@@ -235,6 +238,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │       │       ├── config
 │       │       │   └── env.config.ts
 │       │       ├── index.ts
+│       │       ├── shared.module.ts
 │       │       ├── name-list
 │       │       │   ├── index.ts
 │       │       │   ├── name-list.service.spec.ts
