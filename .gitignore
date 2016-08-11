@@ -48,3 +48,6 @@ gulpfile.js.map
 
 src/client/assets/
 desktopApp/app/
+
+# OS X trash files
+.DS_Store

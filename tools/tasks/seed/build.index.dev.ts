@@ -57,7 +57,7 @@ function mapPath(dep: any) {
 }
 
 /**
- * Transform the path of a dependecy to its location within the `dist` directory according to the applications
+ * Transform the path of a dependency to its location within the `dist` directory according to the applications
  * environment.
  */
 function transformPath() {

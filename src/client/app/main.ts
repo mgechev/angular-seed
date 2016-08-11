@@ -1,12 +1,15 @@
 import { APP_BASE_HREF, LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import { enableProdMode, provide } from '@angular/core';
 import { bootstrap } from '@angular/platform-browser-dynamic';
-import { ROUTER_PROVIDERS } from '@angular/router';
+//import { ROUTER_PROVIDERS } from '@angular/router';
 import { CommonService } from './shared/services/common.service';
 import { AuthHttp } from './shared/services/authHttp.service';
+
+import { APP_ROUTER_PROVIDERS } from './app.routes';
 import { AppComponent } from './app.component';
 import { HTTP_PROVIDERS } from '@angular/http';
- import {ToastOptions} from  'ng2-toastr/ng2-toastr';
+import {ToastOptions} from  'ng2-toastr/ng2-toastr';
 
 if ('<%= ENV %>' === 'prod') { enableProdMode(); }
 
@@ -15,17 +18,26 @@ if ('<%= ENV %>' === 'prod') { enableProdMode(); }
  * @see https://angular.io/docs/ts/latest/api/platform-browser-dynamic/index/bootstrap-function.html
  */
 let toastoptions = {
-      positionClass: 'toast-bottom-right',
-    };
+  positionClass: 'toast-bottom-right',
+};
 
 bootstrap(AppComponent, [
-  ROUTER_PROVIDERS,
+  //<<<<<<< HEAD
+  //ROUTER_PROVIDERS,
   AuthHttp,
   HTTP_PROVIDERS,
   CommonService,
-  provide(APP_BASE_HREF, { useValue: '<%= APP_BASE %>' }),
-  provide(LocationStrategy, { useClass: HashLocationStrategy }),
-  provide(ToastOptions, { useValue: new ToastOptions(toastoptions)}),
+  //provide(APP_BASE_HREF, { useValue: '<%= APP_BASE %>' }),
+  //provide(LocationStrategy, { useClass: HashLocationStrategy }),
+  //provide(ToastOptions, { useValue: new ToastOptions(toastoptions) }),
+  //=======
+  disableDeprecatedForms(),
+  provideForms(),
+  APP_ROUTER_PROVIDERS,
+  { provide: APP_BASE_HREF, useValue: '<%= APP_BASE %>' },
+  { provide: LocationStrategy, useClass: HashLocationStrategy },
+  { provide: ToastOptions, useValue: new ToastOptions(toastoptions) }
+  //>>>>>>> 80ccc9aadc3699bf89f1be2216ccfe1d91fa9bf5
 ]);
 
 // In order to start the Service Worker located at "./worker.js"

@@ -1,31 +1,50 @@
-import { TestComponentBuilder } from '@angular/compiler/testing';
 import { Component } from '@angular/core';
+import { disableDeprecatedForms, provideForms } from '@angular/forms';
+import { TestComponentBuilder } from '@angular/compiler/testing';
+
 import {
+  addProviders,
   async,
-  beforeEachProviders,
-  describe,
-  expect,
-  inject,
-  it
+  inject
 } from '@angular/core/testing';
-import { ROUTER_FAKE_PROVIDERS } from '@angular/router/testing';
+import {
+  RouterConfig
+} from '@angular/router';
+
+import {provideFakeRouter} from '../testing/router/router-testing-providers';
 
 import { AppComponent } from './app.component';
+import { HomeComponent } from './+home/home.component';
+import { AboutComponent } from './+about/about.component';
 
 export function main() {
 
   describe('App component', () => {
+    // Disable old forms
+    let providerArr: any[];
 
-    // Support for testing component that uses Router
-    beforeEachProviders(() => [ROUTER_FAKE_PROVIDERS]);
+    beforeEach(() => {
+      providerArr = [disableDeprecatedForms(), provideForms()];
+
+      // Support for testing component that uses Router
+      let config:RouterConfig = [
+        {path: '', component: HomeComponent},
+        {path: 'about', component: AboutComponent}
+      ];
+
+      addProviders([
+        provideFakeRouter(TestComponent, config)
+      ]);
+    });
 
     it('should build without a problem',
-       async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-         tcb.createAsync(TestComponent)
-             .then((fixture) => {
-               expect(fixture.nativeElement.innerText.indexOf('HOME')).toBeTruthy();
-             });
-       })));
+      async(inject([TestComponentBuilder], (tcb:TestComponentBuilder) => {
+        tcb.overrideProviders(TestComponent, providerArr)
+          .createAsync(TestComponent)
+          .then((fixture) => {
+            expect(fixture.nativeElement.innerText.indexOf('HOME')).toBeTruthy();
+          });
+      })));
   });
 }
 
@@ -34,4 +53,5 @@ export function main() {
   template: '<sd-app></sd-app>',
   directives: [AppComponent]
 })
-class TestComponent {}
+class TestComponent {
+}

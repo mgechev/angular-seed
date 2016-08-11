@@ -1,5 +1,5 @@
-import { FORM_DIRECTIVES } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
 
 import { NameListService } from '../shared/index';
 
@@ -11,11 +11,13 @@ import { NameListService } from '../shared/index';
   selector: 'sd-home',
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.css'],
-  directives: [FORM_DIRECTIVES]
+  directives: [REACTIVE_FORM_DIRECTIVES]
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
-  newName: string;
+  newName: string = '';
+  errorMessage: string;
+  names: any[] = [];
 
   /**
    * Creates an instance of the HomeComponent with the injected
@@ -26,11 +28,30 @@ export class HomeComponent {
   constructor(public nameListService: NameListService) {}
 
   /**
-   * Calls the add method of the NameListService with the current newName value of the form.
+   * Get the names OnInit
+   */
+  ngOnInit() {
+    this.getNames();
+  }
+
+  /**
+   * Handle the nameListService observable
+   */
+  getNames() {
+    this.nameListService.get()
+                     .subscribe(
+                       names => this.names = names,
+                       error =>  this.errorMessage = <any>error
+                       );
+  }
+
+  /**
+   * Pushes a new name onto the names array
    * @return {boolean} false to prevent default form submit behavior to refresh the page.
    */
   addName(): boolean {
-    this.nameListService.add(this.newName);
+    // TODO: implement nameListService.post
+    this.names.push(this.newName);
     this.newName = '';
     return false;
   }
