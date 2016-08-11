@@ -1,4 +1,4 @@
-import { TestComponentBuilder } from '@angular/compiler/testing';
+import { TestComponentBuilder } from '@angular/core/testing';
 import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import { Component } from '@angular/core';
 import {
