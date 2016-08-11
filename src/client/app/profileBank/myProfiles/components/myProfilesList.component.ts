@@ -478,8 +478,9 @@ export class MyProfilesListComponent implements OnActivate {
         for (var index = 0; index < this.myProfilesList.Profiles.length; index++) {
             if (this.myProfilesList.Profiles[index].IsChecked) {
                 //Check for open / rejected Status
-                if (this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'open' ||
-                    this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'rejected') {
+
+                // || this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'rejected'  //Do not allow to assign RRF to Rejected candidate
+                if (this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'open') {
                     if (!this.myProfilesList.Profiles[index].isRRFAssigned) {
                         //Add to selectedCandidates array
                         this.Candidate.CandidateID = this.myProfilesList.Profiles[index].CandidateID;
@@ -495,7 +496,7 @@ export class MyProfilesListComponent implements OnActivate {
             }
         }
         if (chkStatus) {
-            this.toastr.warning('Only Open / Rejected status candidates can be Assigned to RRF');
+            this.toastr.warning('Only Open status candidates can be Assigned to RRF');
             this.selectedCandidates = new Array<CandidateProfile>();
         } else if (chkRRFAssigned) {
             this.toastr.warning('Candidate already assigned to RRF');
