@@ -16,10 +16,19 @@
         <div class="row">
 
             <div class="portlet-body">
-                <div class="col-lg-12" *ngIf="isChartVisible">
-                    <div class=" portlet light bordered" align="center">
-                        <base-chart class="chart" [options]="doughnutChartOptions" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
-                            [colors]="doughnutChartColors"></base-chart>
+                <!--Approve/Reject skipped interview or rejected candidate-->
+
+
+                <div class="col-lg-12 ">
+                    <!--<div class="col-lg-6">
+                        <interview-approval></interview-approval>
+                    </div>-->
+
+                    <div class="col-lg-12" *ngIf="isChartVisible">
+                        <div class=" portlet light bordered" align="center">
+                            <base-chart class="chart" [options]="doughnutChartOptions" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
+                                [colors]="doughnutChartColors"></base-chart>
+                        </div>
                     </div>
                 </div>
 
@@ -38,29 +47,6 @@
                             </div>
                             <!--</div>-->
                         </div>
-
-
-                        <!--<div class="table-toolbar">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    
-                                </div>
-                                <div class="col-md-6 row">
-                                    <div class="dt-buttons pull-right">
-                                        <a class="dt-button buttons-print btn dark btn-outline" id="btnPrint">
-                                            <span>Print</span>
-                                        </a>
-                                        <a class="dt-button buttons-pdf buttons-html5 btn green btn-outline" id="btnPDF">
-                                            <span>PDF</span>
-                                        </a>
-                                        <a class="dt-button buttons-csv buttons-html5 btn purple btn-outline" id="btnCSV">
-                                            <span>CSV</span>
-                                        </a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>-->
 
                         <!-- BEGIN SHOW AND SEARCH  -->
                         <div class="dataTables_wrapper no-footer">
@@ -172,128 +158,6 @@
 
                         <!-- BEGIN LIST OF RRF  -->
                         <div class="table-scrollable ">
-                            <!--<table class="table table-striped table-bordered table-hover table-checkable order-column dataTable
-                                            no-footer " role="grid " aria-describedby="sample_1_info ">
-                                <thead style="word-wrap: break-word; " class="thead">
-                                    <tr>
-                                        <td> <b>Raised by / Date</b> </td>
-                                        <td> <b>Position Details</b> </td>
-                                        <td> <b>Requirments </b></td>
-                                        <td> <b>Priority</b></td>
-                                        <td> <b>Status </b></td>
-                                        <td *ngIf="currentView !='assignRRF'"> <b>Approver</b></td>
-                                        <td *ngIf="currentView =='assignRRF'"> <b>Assigned To</b></td>
-                                        <td> <b>Open for <br> no. of days</b></td>
-                                        <td><b> Action </b></td>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="odd gradeX " *ngFor="let rrf of rrfList | RRFPipe :searchText |RRFIDPipe :closeRRFID.Value ">
-                                        <td>
-                                            <div class="wraptext" style="word-wrap: break-word; " align="left ">
-                                                {{rrf.RaisedBy.Value }}
-                                                <br> {{rrf.CreatedDate}}
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div align="left ">
-                                                Practice :{{rrf.Practice.Value }}
-                                                <br>Tech. : {{rrf.Technology.Value }}
-                                                <br>Position : {{rrf.PositionTitle}}
-                                                <br>Designation :{{rrf.Designation.Value }}
-                                                <br>Openings :{{rrf.NoOfOpenings}}
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div align="left ">
-                                                Skills :
-                                                <label *ngFor="let skill of rrf.SkillsRequired ">{{skill.Value}} &#44;&nbsp;</label>
-                                                <br>Date of Joining : {{rrf.ExpDateOfJoining }}
-                                                <br>Min.EXP : {{rrf.MinExp }}
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="mt-action ">
-                                                <div class="mt-action-body ">
-                                                    <div class="mt-action-row ">
-                                                        <div class="mt-action-datetime ">
-                                                            <span class="mt-action-dot {{getPriorityClass(rrf.Priority.Id)}} "></span>{{rrf.Priority.Value}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span class="mt-action-dot {{getStatusClass(rrf.Status.Id)}} "></span>{{rrf.Status.Value}}
-                                        </td>
-                                        <td *ngIf="currentView !='assignRRF'">
-                                            <div *ngIf="rrf.Status.Id == 1">
-                                                <div *ngFor="let Approvaldetails of rrf.RRFApproval">
-                                                    {{Approvaldetails.Approver.Value}}
-                                                    <br>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td *ngIf="currentView =='assignRRF'">
-                                            <div>
-                                                <div *ngFor="let AssignedDatadetails of rrf.AssignedData">
-                                                    <div *ngIf="AssignedDatadetails.Status.Id == AssignStatus.Assigned">
-                                                        {{AssignedDatadetails.AssignedTo.Value}}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div align="left ">
-                                                {{rrf.OpenForNumberOfDays}}
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="btn-group ">
-                                                <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                                                    Action
-                                                    <i class="fa fa-angle-down "></i>
-                                                </button>
-                                                <ul class="dropdown-menu " role="menu ">
-                                                    <li>
-                                                        <button class="btn btn-default btnLink" (click)='redirectToEditRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] " [disabled]='allowEditRRF(rrf.Status.Id , rrf.RaisedBy.Id)'>
-                                                            <i class="fa fa-edit "></i> Edit RRF
-                                                        </button>
-                                                    </li>
-                                                    <li class="divider " [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] "> </li>
-                                                    <li>
-                                                        <button class="btn btn-default btnLink " (click)='showRRFDetails(rrf.RRFID)'>
-                                                            <i class="fa fa-search-plus "></i> View RRF
-                                                        </button>
-                                                    </li>
-                                                    <li class="divider " [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "> </li>
-                                                    <li>
-                                                        <button class="btn btn-default btnLink" (click)='redirectToAssignRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "
-                                                        [disabled]='allowAssignRRF(rrf.Status.Id)'>
-                                                            <i class="icon-user "></i> Assign RRF
-                                                        </button>
-                                                    </li>
-                                                    <li class="divider "> </li>
-                                                    <li>
-                                                        <button class="btn btn-default btnLink " [ifAuthorize]="[ 'RC.VIEWRRFCANDIDATES.MANAGE'] " (click)='onViewCandidateClick(rrf.RRFID)'
-                                                        [disabled]='checkIfRRFClosed(rrf.Status.Id)'>
-                                                            <i class="fa fa-users "></i> View Candidates
-                                                        </button>
-                                                    </li>
-                                                    <li class="divider " [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] "> </li>
-                                                    <li>
-                                                        <button class="btn btn-default btnLink" (click)='onCloseRRFClick(rrf.RRFID)' [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] " [disabled]='allowCloseRRF(rrf.Status.Id)'>
-                                                            <i class="fa fa-times "></i> Close RRF
-                                                        </button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-
-                            </table>-->
                             <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable
                                             no-footer " role="grid " aria-describedby="sample_1_info ">
                                 <thead style="word-wrap: break-word; " class="thead">

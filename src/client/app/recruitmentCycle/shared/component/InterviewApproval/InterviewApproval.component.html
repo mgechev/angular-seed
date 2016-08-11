@@ -1,0 +1,54 @@
+<div class=" portlet light bordered">
+    <div class="portlet-title">
+        <div class="row">
+
+            <div class="col-lg-9">
+                <textarea class="form-control" id="txtComment" [disabled]='!selectedRowCount' rows="2" placeholder="Enter comment..." style="resize:vertical ; margin-bottom: 5px;"
+                    [(ngModel)]='comment' required=""></textarea>
+            </div>
+            <div class="">
+                <button type="submit" id="btnApprove" class="btn green" [disabled]='!selectedRowCount' (click)='onInterviewApprove()'  tooltip="Approve" 
+                 tooltipPlacement="top" tooltipTrigger="mouseenter">&nbsp;<i class="fa fa-check" ></i>&nbsp;</button>
+                <button type="button" id="btnReject" class="btn red" [disabled]='!selectedRowCount ' (click)='onInterviewReject()' tooltip="Reject"
+                 tooltipPlacement="top" tooltipTrigger="mouseenter">&nbsp;<i class="fa fa-times"></i>&nbsp;</button>
+            </div>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="">
+            <table class="table table-striped table-bordered table-hover table-checkable order-column" *ngIf='isRecordFound
+                    '>
+                <thead style="word-wrap: break-word;" class="thead">
+                    <tr width="50px">
+                        <td style="width: 10px;">
+                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" (change)="onAllSelect($event)" [(ngModel)]='allChecked '
+                                />
+                                <span></span>
+                            </label>
+                        </td>
+                        <td> <b>Interview Details</b> </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="odd gradeX" *ngFor="let interview of interviewApproval">
+                        <td>
+                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                <input type="checkbox" class="checkboxes" value="1" [id]='interview.InterviewID.Id
+                    ' [(ngModel)]='interview.IsChecked ' (change)="onStateChange($event)"
+                                />
+                                <span></span>
+                            </label>
+                        </td>
+                        <td>
+                            <interviewApp-gridRow [interviewDetails]=interview></interviewApp-gridRow>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-scrollable ">
+                <span style="margin-top:5px;margin-left:15px" *ngIf='!isRecordFound '>No Records Found</span>
+            </div>
+        </div>
+    </div>
+</div>

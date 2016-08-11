@@ -14,13 +14,14 @@ import {RRFPipe } from '../../shared/Filters/RRFFilter.component';
 import {ViewRRFComponent} from '../../shared/components/viewRRF/viewRRF.component';
 import {RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
 import { PanelsAvailablityComponent } from '../../shared/components/interviewersAvailablity/panelsAvailablity.component';
+import {InterviewApprovalComponent} from '../../../recruitmentCycle/shared/component/InterviewApproval/InterviewApproval.Component';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-dashboard-list',
     templateUrl: 'RRFDashboardList.component.html',
     directives: [PanelsAvailablityComponent, ROUTER_DIRECTIVES, CHART_DIRECTIVES, IfAuthorizeDirective,
-        ViewRRFComponent, RRFGridRowComponent],
+        ViewRRFComponent, RRFGridRowComponent, InterviewApprovalComponent],
     styleUrls: ['../../shared/css/RRF.component.css'],
     pipes: [RRFIDPipe, RRFPipe],
     providers: [ToastsManager]
@@ -53,7 +54,7 @@ export class RRFDashboardListComponent implements OnActivate {
         animation: false,
         responsive: true,
         legend: {
-            onClick: function (event: any, legendItem: any) {
+            onClick: function(event: any, legendItem: any) {
                 //console.log("legend click");
             }
         }
@@ -62,6 +63,7 @@ export class RRFDashboardListComponent implements OnActivate {
     displayApproval: boolean = false;
     displayAssignedTo: boolean = false;
     SortByList: SortingMasterData[] = [];
+    
 
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService, private _router: Router,
@@ -499,5 +501,6 @@ export class RRFDashboardListComponent implements OnActivate {
     onShowAvailabilityClick() {
         this.showAvaililityPanel = !this.showAvaililityPanel;
     }
+    
 }
 
