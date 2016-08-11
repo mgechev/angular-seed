@@ -11,7 +11,7 @@ const plugins = <any>gulpLoadPlugins();
  * Executes the build process, transpiling the TypeScript files within the `tools` directory.
  */
 export = () => {
-  let tsProject = makeTsProject();
+  let tsProject = makeTsProject({}, true);
   let src = [
     'typings/index.d.ts',
     TOOLS_DIR + '/manual_typings/**/*.d.ts',
