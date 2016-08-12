@@ -212,7 +212,7 @@ export class MyProfilesListComponent implements OnActivate {
                     }
                     /**update Profile grid*/
                     this.myProfilesList.GrdOperations = new GrdOptions();
-                    this.getMyProfiles();
+                    //this.getMyProfiles();
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.profile = new CandidateProfile();
                 } else {
@@ -244,7 +244,7 @@ export class MyProfilesListComponent implements OnActivate {
                     this.fileUploaded = false;
                     this.fileName = '';
                     // this.myProfilesList.GrdOperations = new GrdOptions();
-                    // this.getMyProfiles();
+                    this.getMyProfiles();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -382,6 +382,7 @@ export class MyProfilesListComponent implements OnActivate {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.photoUploaded = false;
                     this.photoName = '';
+                    this.getMyProfiles();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }

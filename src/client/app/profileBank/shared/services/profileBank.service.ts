@@ -324,12 +324,10 @@ export class ProfileBankService {
             .finally(() => this._spinnerService.hide());
     }
 
-    deleteProfile(candidateID: MasterData) {
-        console.log('Operaration sucessfull..! but API is pending to delete profile.');
-        /** TODO:: Update api URL Once API is ready (API is pending) */
-        let url = Config.GetURL('/api/ProfileBankPaging/GetOpenProfiles');
+    deleteProfile(CandidateID: MasterData) {
+        let url = Config.GetURL('/api/ProfileBank/DeleteCandidate');
         this._spinnerService.show();
-        return this.authHttp.post(url, { candidateID })
+        return this.authHttp.post(url, { CandidateID })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
