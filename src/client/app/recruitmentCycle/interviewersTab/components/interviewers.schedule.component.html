@@ -206,7 +206,7 @@
                                                     </li>
                                                     <li>
                                                         <a (click)='showIEF(_myInterview.RRFID, _myInterview.CandidateID, _myInterview.DisplayCandidateInfo, _myInterview.InterviewType, _myInterview.InterviewID ,_myInterview.Status)'>
-                                                            <span *ngIf='showSubmitIEF(_myInterview.Status)'> <i class="icon-tag"></i> Submit IEF</span>
+                                                            <span [hidden]='DisableIEF(_myInterview.InterviewDate)' *ngIf='showSubmitIEF(_myInterview.Status)'> <i class="icon-tag"></i> Submit IEF</span>
                                                             <span *ngIf='!showSubmitIEF(_myInterview.Status)'> <i class="icon-tag"></i> Change status</span>
                                                         </a>
                                                     </li>

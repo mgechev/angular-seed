@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import { CandidateProfile, ResumeMeta, AddCandidateResponse, AllCandidateProfiles } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, ResumeMeta, AddCandidateResponse, AllCandidateProfiles ,CareerProfile } from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -79,6 +79,7 @@ export class MyProfilesListComponent implements OnActivate {
         this.psdTemplates = new Array<File>();
         this.resumeFiles = new Array<File>();
         this.profile = new CandidateProfile();
+        this.profile.CandidateCareerProfile = new CareerProfile();
         this.resumeMeta = new ResumeMeta();
         this.selectedCandidates = new Array<Candidate>();
         this.Candidate = new Candidate();
@@ -534,7 +535,9 @@ export class MyProfilesListComponent implements OnActivate {
                 this.selectedCandidates = new Array<CandidateProfile>();
             } else {
                 sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));
-                sessionStorage.setItem('returnPath', '/App/Recruitment Cycle/Schedule/New');
+                //sessionStorage.setItem('returnPath', '/App/Recruitment Cycle/Schedule/New');
+                sessionStorage.setItem('returnPath', 'App/ProfileBank/MyProfiles');
+                sessionStorage.setItem('returnPathToSchedule', '/App/Recruitment Cycle/Schedule/New');
                 this._router.navigate(['/App/ProfileBank/MyProfiles/Assign']);
             }
 

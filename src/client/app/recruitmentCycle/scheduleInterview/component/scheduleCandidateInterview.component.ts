@@ -351,12 +351,12 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
 
     //Shows Tooltip on calendar
     showDetails(e: any) {
-        var StartTime = e.event.start.format();
-        var EndTime = e.event.end.format();
+        var StartTime = e.event.start.format('hh:mm A');
+        var EndTime = e.event.end.format('hh:mm A');
+        let fromTimeLabel: string = e.event.title + ' From :' + StartTime + ' To ' + EndTime;
         let element: any = $(e.element);
         element.tooltip({
-            title: 'Interviewer : ' + e.event.title +
-            + 'Time From :' + StartTime + ' To ' + EndTime
+            title: fromTimeLabel
         });
     }
     //Format date in "yyyy-mm-dd" format

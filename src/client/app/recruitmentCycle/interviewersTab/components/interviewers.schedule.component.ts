@@ -83,7 +83,10 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
                 this.toastr.error(<any>error);
             });
     }
-
+    DisableIEF(interviewDate : Date){
+        //currentDate : new Date();
+        return new Date(interviewDate) > new Date()
+    }
     /**used for calender view */
     getMyAllInterviewsDetailsOfCalendar() {
         this._interviewService.getMyAllInterviewsDetailsOfCalendar()

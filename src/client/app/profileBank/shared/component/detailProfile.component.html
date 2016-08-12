@@ -1,11 +1,3 @@
-<!-- Profile toolbar -->
-<!--<div class="portlet light bordered">
-    <div class="row">
-
-    </div>
-</div>-->
-<!-- /Profile toolbar -->
-
 <!-- Profile card -->
 <div class=" light bordered">
     <div class="row">
@@ -14,11 +6,11 @@
             <br>
             <ul class="list-unstyled profile-nav text-center">
                 <li>
-                    <img class="img-responsive pic-bordered" *ngIf="profile.BinaryImage!==''&&profile.BinaryImage!==null" style="border-radius: 50%!important;"
-                        alt="" src="data:image/jpeg;base64,{{profile.BinaryImage}}">
+                    <!--*ngIf="profile.BinaryImage!==''&&profile.BinaryImage!==null"-->
+                    <img class="img-responsive pic-bordered" *ngIf="profile.BinaryImage!==''&&profile.BinaryImage!==null" style="border-radius: 50%!important;height:150px;" alt="" src="data:image/jpeg;base64,{{profile.BinaryImage}}">
 
                     <img src="../assets/layouts/layout4/img/default-user.jpg" *ngIf="profile.BinaryImage===''||profile.BinaryImage===null" class="img-responsive pic-bordered"
-                        style="border-radius: 50%!important;" alt="">
+                    style="border-radius: 50%!important; height:150px;" alt="">
                     <br>
 
                 </li>
@@ -45,7 +37,7 @@
                     <ul class="list-unstyled">
                         <li>
 
-                            <label class="control-label">Skills : <strong> {{profile.CandidateSkills.PrimarySkills?profile.CandidateSkills.PrimarySkills:"N/A"}} </strong> {{profile.CandidateSkills.OtherSkills}} {{profile.CandidateSkills.PrimarySkills}} </label>
+                            <label class="control-label">Skills : <strong> {{profile.CandidateSkills.PrimarySkills?profile.CandidateSkills.PrimarySkills:"N/A"}} </strong>                                {{profile.CandidateSkills.OtherSkills}} {{profile.CandidateSkills.PrimarySkills}} </label>
                             <!--<label class="control-label">Skills : <strong> C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF</strong></label>-->
                         </li>
                         <li>
@@ -60,13 +52,29 @@
                     </p>
                     <ul class="list-inline sbold" style="color:#f16e50">
                         <li>
-                            <i class="fa fa-map-marker"></i>{{profile.District?profile.District:"N/A"}} </li>
+                            <!--location-->
+                            <div tooltip="Location" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Location">
+                                <i class="fa fa-map-marker"></i>{{profile.District?profile.District:"N/A"}}
+                            </div>
+                             </li>
                         <li>
-                            <i class="fa fa-briefcase"></i>{{profile.TotalExperience?profile.TotalExperience:"N/A"}} </li>
+                            <!--experience-->
+                            <div tooltip="Experience" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Experience">
+                                <i class="fa fa-briefcase"></i>{{profile.TotalExperience?profile.TotalExperience:"N/A"}}
+                            </div>
+                             </li>
                         <li>
-                            <i class="fa fa-tag"></i> {{profile.Tag?profile.Tag:"N/A"}} </li>
+                            <!--tag-->
+                            <div tooltip="Tag" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="tag">
+                                <i class="fa fa-tag"></i> {{profile.Tag?profile.Tag:"N/A"}} 
+                            </div>
+                            </li>
                         <li>
-                            <i class="fa fa-hourglass-half"></i> {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod:"N/A"}}
+                            <!--notice period-->
+                            <div tooltip="Notice period" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Notice period">
+                                <i class="fa fa-hourglass-half"></i> {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod:"N/A"}}
+                            </div>
+                            
                         </li>
                     </ul>
                 </div>
@@ -91,7 +99,7 @@
                                     <div class="tools">
                                         <!--(click)='getResume(profile.CandidateID)'-->
                                         <a href="data:application/octet-stream;charset=utf-8;base64,{{profile.BinaryResume}}" download="{{profile.ResumeName?profile.ResumeName:'TestResume.doc'}}"
-                                            class="reload" data-original-title="" title=""><i aria-hidden="true" class="fa fa-download"></i>Download Resume {{profile.Resume_ID}}  </a>
+                                        class="reload" data-original-title="" title=""><i aria-hidden="true" class="fa fa-download"></i>Download Resume {{profile.Resume_ID}}  </a>
                                         <!--<a href="data:application/octet-stream;charset=utf-8;base64,{{profile.BinaryImage}}" class="btn btn-primary" download="pdftesting.pdf">Download</a>-->
                                     </div>
                                 </li>

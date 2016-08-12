@@ -90,7 +90,7 @@
                             <span class="title">Approval Requests</span>
                         </a>
                     </li>
-                    <li class="nav-item start ">
+                    <li class="nav-item start " [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWS.MANAGE']">
                         <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
                         <a [routerLink]="['/App/AllInterviews/showInterviews']" class="nav-link ">
                             <i class="icon-bar-chart"></i>
