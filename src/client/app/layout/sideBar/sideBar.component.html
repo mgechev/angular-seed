@@ -90,6 +90,13 @@
                             <span class="title">Approval Requests</span>
                         </a>
                     </li>
+                    <li class="nav-item start ">
+                        <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
+                        <a [routerLink]="['/App/AllInterviews/showInterviews']" class="nav-link ">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">All Schedule Interviews</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <!--<li class="nav-item start " [ifAuthorize]="['RCIC.MANAGE']">-->
@@ -119,13 +126,7 @@
                                 <span class="title">My Calendar</span>
                             </a>
                         </li>
-                        <li class="nav-item start ">
-                            <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
-                            <a [routerLink]="['/App/AllInterviews/showInterviews']" class="nav-link ">
-                                <i class="icon-bar-chart"></i>
-                                <span class="title">All Schedule Interviews</span>
-                            </a>
-                        </li>
+
                         <li class="nav-item start " [ifAuthorize]="['RCIC.IEF.READ']">
                             <a class="nav-link ">
                                 <i class="icon-graph"></i>
