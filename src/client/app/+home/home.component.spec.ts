@@ -1,6 +1,7 @@
 import { Component, provide } from '@angular/core';
-import { TestComponentBuilder } from '@angular/compiler/testing';
-import { disableDeprecatedForms, provideForms } from '@angular/forms';
+import { TestComponentBuilder, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import {
   async,
   inject
@@ -22,7 +23,9 @@ export function main() {
     // Disable old forms
     let providerArr: any[];
 
-    beforeEach(() => { providerArr = [disableDeprecatedForms(), provideForms()]; });
+    beforeEach(() => {
+      TestBed.configureTestingModule({ imports: [FormsModule, RouterModule] });
+    });
 
     it('should work',
       async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
@@ -57,7 +60,7 @@ export function main() {
     BaseRequestOptions,
     MockBackend,
     provide(Http, {
-      useFactory: function(backend: ConnectionBackend, defaultOptions: BaseRequestOptions) {
+      useFactory: function (backend: ConnectionBackend, defaultOptions: BaseRequestOptions) {
         return new Http(backend, defaultOptions);
       },
       deps: [MockBackend, BaseRequestOptions]
@@ -67,4 +70,4 @@ export function main() {
   template: '<sd-home></sd-home>',
   directives: [HomeComponent]
 })
-class TestComponent {}
+class TestComponent { }
