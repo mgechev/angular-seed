@@ -1,4 +1,7 @@
-import {PROD_DEST, TMP_DIR} from '../../config';
-import {clean} from '../../utils';
+import { PROD_DEST, TMP_DIR } from '../../config';
+import { clean } from '../../utils';
 
-export = clean([PROD_DEST, TMP_DIR])
+/**
+ * Executes the build process, cleaning all files within the `/dist/dev` and `dist/tmp` directory.
+ */
+export = clean([PROD_DEST, TMP_DIR]);

@@ -1,5 +1,5 @@
-import {argv} from 'yargs';
 import * as gulp from 'gulp';
+import { argv } from 'yargs';
 
 require('../gulpfile');
 

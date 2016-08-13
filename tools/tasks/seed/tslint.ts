@@ -1,9 +1,14 @@
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
-import {join} from 'path';
-import {APP_SRC, TOOLS_DIR, NG2LINT_RULES} from '../../config';
+import { join } from 'path';
+
+import { APP_SRC, CODELYZER_RULES, TOOLS_DIR } from '../../config';
+
 const plugins = <any>gulpLoadPlugins();
 
+/**
+ * Executes the build process, linting the TypeScript files using `codelyzer`.
+ */
 export = () => {
   let src = [
     join(APP_SRC, '**/*.ts'),
@@ -14,10 +19,10 @@ export = () => {
 
   return gulp.src(src)
     .pipe(plugins.tslint({
-      rulesDirectory: NG2LINT_RULES
+      rulesDirectory: CODELYZER_RULES
     }))
-    .pipe(plugins.tslint.report(plugins.tslintStylish, {
-      emitError: true,
+    .pipe(plugins.tslint.report(require('tslint-stylish'), {
+      emitError: require('is-ci'),
       sort: true,
       bell: true
     }));
