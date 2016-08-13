@@ -214,6 +214,8 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │       │   │   ├── about.component.html
 │       │   │   ├── about.component.spec.ts
 │       │   │   ├── about.component.ts
+│       │   │   ├── about.module.ts
+│       │   │   ├── about.routes.ts
 │       │   │   └── index.ts
 │       │   ├── +home
 │       │   │   ├── home.component.css
@@ -221,15 +223,22 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │       │   │   ├── home.component.html
 │       │   │   ├── home.component.spec.ts
 │       │   │   ├── home.component.ts
+│       │   │   ├── home.module.ts
+│       │   │   ├── home.routes.ts
 │       │   │   └── index.ts
 │       │   ├── app.component.e2e-spec.ts
 │       │   ├── app.component.html
 │       │   ├── app.component.spec.ts
 │       │   ├── app.component.ts
+│       │   ├── app.module.ts
+│       │   ├── app.routes.ts
 │       │   ├── hot_loader_main.ts
 │       │   ├── main.ts
 │       │   └── shared
+│       │       ├── config
+│       │       │   └── env.config.ts
 │       │       ├── index.ts
+│       │       ├── shared.module.ts
 │       │       ├── name-list
 │       │       │   ├── index.ts
 │       │       │   ├── name-list.service.spec.ts
@@ -245,11 +254,16 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │       │           ├── toolbar.component.html
 │       │           └── toolbar.component.ts
 │       ├── assets
+│       │   ├── data.json
 │       │   └── svg
 │       │       └── more.svg
 │       ├── css
 │       │   └── main.css
 │       ├── index.html
+│       ├── testing
+│       │   └── router
+│       │       ├── mock-location-strategy.ts
+│       │       └── router-testing-providers.ts
 │       ├── tsconfig.json
 │       └── typings.d.ts
 ├── test-main.js               <- testing configuration
@@ -261,6 +275,10 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │   └── seed.config.ts     <- generic configuration of the seed project
 │   ├── config.ts              <- exported configuration (merge both seed.config and project.config, project.config overrides seed.config)
 │   ├── debug.ts
+│   ├── env                    <- environment configuration
+│   │   ├── base.ts
+│   │   ├── dev.ts
+│   │   └── prod.ts
 │   ├── manual_typings
 │   │   ├── project            <- manual ambient typings for the project
 │   │   │   └── sample.package.d.ts
@@ -302,6 +320,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │       ├── build.js.tools.ts
 │   │       ├── check.versions.ts
 │   │       ├── clean.all.ts
+│   │       ├── clean.coverage.ts
 │   │       ├── clean.dev.ts
 │   │       ├── clean.prod.ts
 │   │       ├── clean.tools.ts
