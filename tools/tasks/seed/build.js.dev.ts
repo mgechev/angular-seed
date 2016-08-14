@@ -4,7 +4,7 @@ import * as merge from 'merge-stream';
 import * as util from 'gulp-util';
 import { join } from 'path';
 
-import { APP_DEST, APP_SRC, TOOLS_DIR, TYPED_COMPILE_INTERVAL } from '../../config';
+import { APP_DEST, APP_SRC, TOOLS_DIR, TYPED_COMPILE_INTERVAL, BOOTSTRAP_PROD_MODULE } from '../../config';
 import { makeTsProject, templateLocals } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
@@ -23,6 +23,7 @@ export = () => {
   ]);
   let src = [
     join(APP_SRC, '**/*.ts'),
+    '!' + join(APP_SRC, BOOTSTRAP_PROD_MODULE + '.ts'),
     '!' + join(APP_SRC, '**/*.spec.ts'),
     '!' + join(APP_SRC, '**/*.e2e-spec.ts')
   ];

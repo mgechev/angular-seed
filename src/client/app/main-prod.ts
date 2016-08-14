@@ -2,13 +2,10 @@
  * Bootstraps the application and makes the ROUTER_PROVIDERS and the APP_BASE_HREF available to it.
  * @see https://angular.io/docs/ts/latest/api/platform-browser-dynamic/index/bootstrap-function.html
  */
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppModuleNgFactory } from './app.module.ngfactory';
+import { browserPlatform } from '@angular/platform-browser';
 
-// The app module
-import { AppModule } from './app.module';
-
-// Compile and launch the module
-platformBrowserDynamic().bootstrapModule(AppModule);
+browserPlatform().bootstrapModuleFactory(AppModuleNgFactory);
 
 // In order to start the Service Worker located at "./worker.js"
 // uncomment this line. More about Service Workers here

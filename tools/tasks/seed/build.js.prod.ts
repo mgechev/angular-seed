@@ -7,18 +7,14 @@ import { makeTsProject, templateLocals } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
 
-const INLINE_OPTIONS = {
-  base: TMP_DIR,
-  useRelativePaths: true,
-  removeLineBreaks: true
-};
-
 /**
  * Executes the build process, transpiling the TypeScript files for the production environment.
  */
 
 export = () => {
-  let tsProject = makeTsProject();
+  let tsProject = makeTsProject({
+    isolatedModules: true
+  });
   let src = [
     'typings/index.d.ts',
     TOOLS_DIR + '/manual_typings/**/*.d.ts',
@@ -26,7 +22,6 @@ export = () => {
   ];
   let result = gulp.src(src)
     .pipe(plugins.plumber())
-    .pipe(plugins.inlineNg2Template(INLINE_OPTIONS))
     .pipe(plugins.typescript(tsProject))
     .once('error', function () {
       this.once('finish', () => process.exit(1));
