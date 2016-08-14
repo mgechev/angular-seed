@@ -36,7 +36,7 @@
 
 <ul>
 <li>Allows you to painlessly update the seed tasks of your already existing project.</li>
-<li>Out of the box ServiceWorkers and AppCache support thanks to the integration with <a href="https://github.com/angular/mobile-toolkit">angular/mobile-toolkit</a>.</li>
+<li>Supports multiple Angular applications with shared codebase in a single instance of the seed.</li>
 <li>Ready to go, statically typed build system using gulp for working with TypeScript.</li>
 <li>Production and development builds.</li>
 <li>Sample unit tests with Jasmine and Karma including code coverage via <a href="https://gotwarlost.github.io/istanbul/">istanbul</a>.</li>
@@ -68,7 +68,12 @@ npm start
 <span class="pl-c"># dev build</span>
 npm run build.dev
 <span class="pl-c"># prod build</span>
-npm run build.prod</pre></div>
+npm run build.prod
+
+<span class="pl-c"># dev build of multiple applications (by default the value of --app is "app")</span>
+npm start -- --app baz
+npm start -- --app foo
+npm start -- --app bar</pre></div>
 
 <p><em>Does not rely on any global dependencies.</em></p>
 
@@ -264,6 +269,7 @@ npm run e2e.live</pre></div>
 │       │   │   ├── about.component.html
 │       │   │   ├── about.component.spec.ts
 │       │   │   ├── about.component.ts
+│       │   │   ├── about.module.ts
 │       │   │   ├── about.routes.ts
 │       │   │   └── index.ts
 │       │   ├── +home
@@ -272,12 +278,14 @@ npm run e2e.live</pre></div>
 │       │   │   ├── home.component.html
 │       │   │   ├── home.component.spec.ts
 │       │   │   ├── home.component.ts
+│       │   │   ├── home.module.ts
 │       │   │   ├── home.routes.ts
 │       │   │   └── index.ts
 │       │   ├── app.component.e2e-spec.ts
 │       │   ├── app.component.html
 │       │   ├── app.component.spec.ts
 │       │   ├── app.component.ts
+│       │   ├── app.module.ts
 │       │   ├── app.routes.ts
 │       │   ├── hot_loader_main.ts
 │       │   ├── main.ts
@@ -285,6 +293,7 @@ npm run e2e.live</pre></div>
 │       │       ├── config
 │       │       │   └── env.config.ts
 │       │       ├── index.ts
+│       │       ├── shared.module.ts
 │       │       ├── name-list
 │       │       │   ├── index.ts
 │       │       │   ├── name-list.service.spec.ts
