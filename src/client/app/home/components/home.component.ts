@@ -30,6 +30,7 @@ import {ScheduleInterviewComponent} from '../../recruitmentCycle/scheduleIntervi
 import {DashboardComponent} from '../../Dashboard/component/dashboard.component';
 import {ShowScheduleInterviewsComponent} from '../../recruitmentCycle/recruitersTab/components/interviews.component';
 import { PushNotificationComponent } from '../../settings/pushNotification/pushNotification.component';
+import {InterviewerAvalabilityComponent } from '../../RRF/InterviewerAvalability/InterviewerAvalability.component';
 
 @Component({
     moduleId: module.id,
@@ -65,6 +66,7 @@ import { PushNotificationComponent } from '../../settings/pushNotification/pushN
     { path: '/Recruitment Cycle/Schedule', component: ScheduleInterviewComponent },
     { path: '/Recruitment Cycle/mycalendar', component: RecruitmentInterviewerCalenderComponent },
     { path: '/NotificationSetting' , component: PushNotificationComponent},
+    { path: '/RRF/InterviewsAvailability' , component: InterviewerAvalabilityComponent}
 
 
 ])

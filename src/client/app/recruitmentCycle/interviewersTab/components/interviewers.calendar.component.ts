@@ -32,8 +32,8 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, OnIn
     RRFIdTOShowSlot: MasterData = new MasterData();
     RRFCode: string;
     showSlotForRRF: boolean = false;
-    selectedRRFID: number = 0;
-    AddNewSlotText: string = 'Add Slot';
+    //selectedRRFID: number = 0;
+    AddNewSlotText: string = 'Show Slot';
     _myCalendarDetails: CalendarDetails = new CalendarDetails();
     currentDate: string;
 
@@ -42,7 +42,7 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, OnIn
         private toastr: ToastsManager,
         private _interviewService: InterviewersCalendarService,
         private _interviewAvailabilityService: InterviewersAvailabilityService) {
-        this.getListOfAssignedRRF();
+       // this.getListOfAssignedRRF();
         var date = new Date();
         this.currentDate = this.formatDate(date);
     }
@@ -115,15 +115,15 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, OnIn
         if (this.showSlotForRRF === false) {
             this.showSlotForRRF = true;
             this.AddNewSlotText = 'Hide Slot';
-            for (var i = 0; i < this.myAssignedRRF.length; i++) {
-                if (this.myAssignedRRF[i].RRFID.Id == this.selectedRRFID) {
-                    this.RRFIdTOShowSlot = this.myAssignedRRF[i].RRFID;
-                    break;
-                }
-            }
+            // for (var i = 0; i < this.myAssignedRRF.length; i++) {
+            //     if (this.myAssignedRRF[i].RRFID.Id == this.selectedRRFID) {
+            //         this.RRFIdTOShowSlot = this.myAssignedRRF[i].RRFID;
+            //         break;
+            //     }
+            // }
         } else {
             this.showSlotForRRF = false;
-            this.AddNewSlotText = 'Add Slot';
+            this.AddNewSlotText = 'Show Slot';
         }
 
     }

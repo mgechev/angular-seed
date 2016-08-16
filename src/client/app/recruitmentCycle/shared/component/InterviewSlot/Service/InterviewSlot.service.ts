@@ -31,10 +31,10 @@ export class InterviewSlotService {
             .finally(() => this._spinnerService.hide());
     }
 
-    getSlotForRRF(RRFID : MasterData){
+    getSlotForRRF(){
          let url = Config.GetURL('/api/RecruitmentCycle/GetMyRRFInterviewCalendar');
         this._spinnerService.show();
-        return this.authHttp.post(url, { RRFID })
+        return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

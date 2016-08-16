@@ -20,7 +20,8 @@
             <div class="col-md-12">
                 <!--Slot Table-->
 
-                <interview-slot [RRFID]="RRFIdTOShowSlot" [RRFCode]="RRFCode" *ngIf="showSlotForRRF"></interview-slot>
+                <!--<interview-slot [RRFID]="RRFIdTOShowSlot" [RRFCode]="RRFCode" *ngIf="showSlotForRRF"></interview-slot>-->
+                <interview-slot *ngIf="showSlotForRRF"></interview-slot>
                 <!--/Slot Table-->
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet light bordered">
@@ -29,8 +30,12 @@
                             <span class="caption-subject bold uppercase">Assigned RRF's</span>
                         </div>
                         <div class="tools">
-                            <button class="btn btn-sm green table-group-action-submit pull-right" (click)="hideSlot()" *ngIf="showSlotForRRF">Hide Slot</button>
+                            <button class="btn btn-sm green table-group-action-submit " (click)="showSlot()">{{showSlotText}}</button>
                         </div>
+
+                        <!--<div class="tools">
+                            <button class="btn btn-sm green table-group-action-submit pull-right" (click)="hideSlot()" *ngIf="showSlotForRRF">Hide Slot</button>
+                        </div>-->
                         <!--<div class="tools"> </div>-->
                     </div>
                     <div class="portlet-body">
@@ -42,7 +47,7 @@
                                         <th class="all">Position Details</th>
                                         <th class="min-phone-l">Requirements</th>
                                         <th class="min-tablet">Priority</th>
-                                        <th class="none">Action</th>
+                                        <!--<th class="none">Action</th>-->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,10 +69,10 @@
                                             <br>Min.EXP : {{_rrf.MinExp}}
                                         </td>
                                         <td>{{_rrf.Priority.Value}}</td>
-                                        <td>
+                                        <!--<td>
                                             <button class="btn btn-sm green btn-outline filter-submit margin-bottom" (click)='showSlots(_rrf.RRFID,_rrf.RRFCODE)'>
                                             Show Slots</button>
-                                        </td>
+                                        </td>-->
                                     </tr>
                                     <!-- /ng code-->
                                 </tbody>

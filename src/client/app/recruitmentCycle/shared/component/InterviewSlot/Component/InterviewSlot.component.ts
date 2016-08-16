@@ -15,10 +15,9 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 })
 
 export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChanges {
-    //@Input() test :string;
-    @Input() RRFID: MasterData = new MasterData();
-    @Input() RRFCode: string;
-    //@Output() HideSlot = new EventEmitter();
+    // @Input() RRFID: MasterData = new MasterData();
+    // @Input() RRFCode: string;
+
     meta: CalenderSlot[] = [];
     errorMessage: string = '';
 
@@ -28,6 +27,8 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
         public toastr: ToastsManager) {
         // this.getRRFSlot();
         //this.HideSlot.emit('hideit');
+
+         this.getRRFSlot();
     }
 
     routerOnActivate() {
@@ -75,7 +76,7 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
     }
 
     getRRFSlot() {
-        this._interviewSlotService.getSlotForRRF(this.RRFID)
+        this._interviewSlotService.getSlotForRRF()
             .subscribe(
             (results: any) => {
                 this.meta = <any>results;
@@ -132,9 +133,9 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
     ngOnChanges(changes: any) {
         // if (changes.RRFCode != undefined && changes.RRFID != undefined) {
         //TODO when RRFCODE implemented uncommit this line and commit below line
-        if (changes.RRFID != undefined) {
-            this.getRRFSlot();
-        }
+        // if (changes.RRFID != undefined) {
+        //     this.getRRFSlot();
+        // }
 
     }
     formatDate(date: any) {
