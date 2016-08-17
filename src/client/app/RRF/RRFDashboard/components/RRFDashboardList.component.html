@@ -16,7 +16,7 @@
         <div class="row">
 
             <div class="portlet-body">
-                <!--Approve/Reject skipped interview or rejected candidate-->
+
                 <div class="col-lg-12" *ngIf="isChartVisible">
                     <div class=" portlet light bordered" align="center">
                         <base-chart class="chart" [options]="doughnutChartOptions" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
@@ -24,10 +24,11 @@
                     </div>
                 </div>
 
-
+                <!--Approve/Reject skipped interview or rejected candidate-->
                 <div class="col-lg-12 " *ngIf="isListVisible">
-                    <interview-approval ></interview-approval>
+                    <interview-approval></interview-approval>
                 </div>
+                <!--END Approve/Reject skipped interview or rejected candidate-->
 
                 <div class="col-lg-12" *ngIf="isListVisible" id="divRRFList">
 

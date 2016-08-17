@@ -1,11 +1,11 @@
 import {Component } from '@angular/core';
 import { Router, OnActivate, ROUTER_DIRECTIVES, RouteSegment } from '@angular/router';
-import {RRFDetails, Panel, IntwRoundSeqData } from '../models/rrfDetails';
+import {RRFDetails, Panel, IntwRoundSeqData, RRFFeedback } from '../models/rrfDetails';
 import { MyRRFService } from '../services/myRRF.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult, RRFPriority, RRFStatus} from  '../../../shared/constantValue/index';
+import { APIResult, RRFPriority, RRFStatus, RaiseRRFStatus } from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { DropdownMultiSelectComponent } from '../../../shared/components/dropdownMultiSelect/dropdownMultiSelect.component';
@@ -13,7 +13,6 @@ import { DropdownMultiSelectComponent } from '../../../shared/components/dropdow
 //MultipleDrodown
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass} from '@angular/common';
 import {BUTTON_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
-
 
 @Component({
     moduleId: module.id,
@@ -25,6 +24,8 @@ import {BUTTON_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 })
 
 export class MyRRFAddComponent implements OnActivate {
+
+
     newRRF: RRFDetails = new RRFDetails();
     panel: Panel = new Panel();
     errorMessage: string = '';
@@ -47,32 +48,21 @@ export class MyRRFAddComponent implements OnActivate {
     intwRoundSeq: IntwRoundSeqData[] = [];
     RRFStatus: number;
     statusConstanValue: RRFStatus = RRFStatus;
+    currentRaiseRRFStatus: number = 0;
+    raiseRRFStatus: RaiseRRFStatus = RaiseRRFStatus;
+    isDisabled: boolean = false;
+    feedbackComment: string = '';
+    previousExpectedDateValue: Date;
 
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
         private _mastersService: MastersService,
         public toastr: ToastsManager) {
         // this.newRRF.Panel.push(this.panel);
-        this.getDesignation();
-        this.getPractice();
-        this.getTechnologies();
-        this.getSkills();
-        this.getInterviewRound();
-        this.getInterviewers();
-        this.GetPriority();
-        this.getInterviewSeq();
+
     }
 
     routerOnActivate(segment: RouteSegment): void {
-        //TO display Date picker
-        // $('#expectedDateOfJoining').datepicker();
-
-        //To display up and down arrow for number selection
-        // $('input[name="demo_vertica"]').TouchSpin({
-        //     verticalbuttons: true,
-        //     stepinterval: 0.5
-        // });
-
         this.setMinDateToCalender();
 
         //dropdown with multi selector and search
@@ -93,9 +83,18 @@ export class MyRRFAddComponent implements OnActivate {
             this.isNewRRF = false;
             if (+this.RRFStatus === +RRFStatus.Rejected) {
                 this.GetRRFByIDToReRaiseRRF(this.RRFId);
+                this.currentRaiseRRFStatus = RaiseRRFStatus.UpdateRejectedRRF; //Update RRF because it is rejected
             } else {
                 this.getRRFByID(this.RRFId);
+                if (+this.RRFStatus === +RRFStatus.Open) {
+                    this.currentRaiseRRFStatus = RaiseRRFStatus.UpdateForFeedback; //Update RRF because Recruiter head need feedback
+                    this.isDisabled = true;
+                } else {
+                    this.currentRaiseRRFStatus = RaiseRRFStatus.updateRRF; //update RRF before Approve it
+                }
             }
+
+
         }
 
         if (this.isNewRRF) {
@@ -110,7 +109,18 @@ export class MyRRFAddComponent implements OnActivate {
             this.newRRF.Priority.Id = 0;
             this.newRRF.Designation.Id = 0;
             $('#cmbInterviewer').val = ['0'];
+
+            this.currentRaiseRRFStatus = RaiseRRFStatus.newRRF; //New RRF
         }
+
+        this.getDesignation();
+        this.getPractice();
+        this.getTechnologies();
+        this.getSkills();
+        this.getInterviewRound();
+        this.getInterviewers();
+        this.GetPriority();
+        this.getInterviewSeq();
     }
 
     addPanel(): void {
@@ -172,8 +182,32 @@ export class MyRRFAddComponent implements OnActivate {
         }
     }
 
+    updateForFeedback() {
+        var rrfFeedback: RRFFeedback = new RRFFeedback();
+        rrfFeedback.Feedback = this.feedbackComment;
+        rrfFeedback.RRFID = this.newRRF.RRFID;
+        rrfFeedback.PreviousValue = this.previousExpectedDateValue;
+        rrfFeedback.UpdatedValue = this.newRRF.ExpDateOfJoining;
+
+        this._myRRFService.updateForFeedback(rrfFeedback)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this._router.navigate(['/App/RRF/FeedbackPending/']);
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
+            },
+            error => this.errorMessage = <any>error);
+    }
+
     onCancelClick(): void {
-        this._router.navigate(['/App/RRF/RRFDashboard/']);
+        if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.UpdateForFeedback) {
+            this._router.navigate(['/App/RRF/FeedbackPending/']);
+        } else {
+            this._router.navigate(['/App/RRF/RRFDashboard/']);
+        }
     }
 
     getDesignation(): void {
@@ -341,6 +375,8 @@ export class MyRRFAddComponent implements OnActivate {
             (results: RRFDetails) => {
                 this.newRRF = results;
                 this.ExpDateOfJoining = this.formatDate(results.ExpDateOfJoining);
+                this.newRRF.ExpDateOfJoining = this.ExpDateOfJoining;
+                this.previousExpectedDateValue = this.ExpDateOfJoining; ////Need in case of feedback
                 this.setSkillDropdown();
             },
             error => this.errorMessage = <any>error);
@@ -352,6 +388,8 @@ export class MyRRFAddComponent implements OnActivate {
             (results: RRFDetails) => {
                 this.newRRF = results;
                 this.ExpDateOfJoining = this.formatDate(results.ExpDateOfJoining);
+                this.newRRF.ExpDateOfJoining = this.ExpDateOfJoining;
+                this.previousExpectedDateValue = this.ExpDateOfJoining; //Need in case of feedback
                 this.setSkillDropdown();
             },
             error => this.errorMessage = <any>error);
@@ -413,12 +451,14 @@ export class MyRRFAddComponent implements OnActivate {
     }
 
     submitForm() {
-        if (this.isNewRRF) {
+        if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.newRRF) {
             this.raiseRRF();
-        } else if (!this.isNewRRF && (+this.RRFStatus !== +(RRFStatus.Rejected))) {
+        } else if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.updateRRF) {
             this.onUpdateClick();
-        } else if (+this.RRFStatus == +(RRFStatus.Rejected)) {
+        } else if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.UpdateRejectedRRF) {
             this.reRaiseRRF();
+        } else if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.UpdateForFeedback) {
+            this.updateForFeedback();
         }
     }
 
@@ -458,5 +498,7 @@ export class MyRRFAddComponent implements OnActivate {
         }
 
     }
+
+
 
 }

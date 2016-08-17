@@ -57,6 +57,8 @@ export class RRFDetails {
     public Competencies: string;
     public GoodToHave: string;
     public QualCertRquired: string;
+
+    public FeedbackStatus : string;
 }
 
 
@@ -64,4 +66,14 @@ export class IntwRoundSeqData {
     InterviewRound: MasterData = new MasterData();
     InterviewType: MasterData = new MasterData();
     Sequence: number;
+}
+
+export class RRFFeedback {
+    public RRFID: MasterData = new MasterData();
+    public Feedback: string = '';
+    public PreviousValue: Date;
+    public UpdatedValue: Date;
+
+    public UpdatedDate: Date;
+    public UpdatedBy : MasterData = new MasterData();
 }

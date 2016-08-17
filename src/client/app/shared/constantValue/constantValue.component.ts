@@ -36,3 +36,10 @@ export class RRFAssignStatus {
     public static get UnAssigned(): number { return 2; };
 }
 
+export class RaiseRRFStatus {
+    public static get newRRF(): number { return 1; }; //New RRF
+    public static get updateRRF(): number { return 2; }; //update RRF beforw Approve it
+    public static get UpdateRejectedRRF(): number { return 3; }; //Update RRF because it is rejected
+    public static get UpdateForFeedback(): number { return 4; }; //Update RRF because Recruiter head need feedback
+}
+

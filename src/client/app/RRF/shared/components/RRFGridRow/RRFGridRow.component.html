@@ -23,6 +23,9 @@
                     <a class="btn-green" data-toggle="collapse" data-target="#demo{{RRFData.RRFID.Id}}">
                         <i class="fa fa-eye" aria-hidden="true"></i> Show Availability</a>
                 </div>-->
+                <div *ngIf='displayFeedBackStatus' style="color: darkblue;"  align='right'>
+                    <b>Feedback Status </b>: {{RRFData.FeedbackStatus}}
+                </div>
             </div>
         </div>
 
@@ -64,7 +67,7 @@
             <div>
                 <div class="col-lg-6">
                     <div class="col-lg-4 " align="right">
-                       <b> Preferred Skills :</b>
+                        <b> Preferred Skills :</b>
                     </div>
                     <div class="col-lg-8 ">
                         {{RRFData.PreferredSkills}}

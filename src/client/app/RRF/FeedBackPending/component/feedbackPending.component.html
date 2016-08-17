@@ -1,0 +1,164 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!--BEGIN breadcrumb -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']"> Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">Feedback Pending RRF</span>
+            </li>
+        </ul>
+        <!--End Breadcrumb>-->
+        <div class="row">
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4>Feedback Pending RRF</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div [ifAuthorize]="['RRF.CANFREEZERRF.MANAGE']">
+                        <form role="form" (submit)='onFeedback()'>
+                            <div>
+                                <button type="button" id="btnFreeze" class="btn green" [disabled]='!selectedRowCount' (click)='onRRFFreeze()'><i class="fa fa-lock"></i>&nbsp;Freeze RRF</button>
+                                <!--<button type="button" id="btnOnHold" class="btn default"  [disabled]='!selectedRowCount' (click)='onStatusHold()'>On-Hold</button>-->
+                                <button type="submit" id="btnFeedback" class="btn red" [disabled]='!selectedRowCount'><i class="fa fa-reply" ></i>&nbsp;Feedback</button>
+                            </div>
+                            <br>
+                            <div>
+                                <textarea class="form-control" required='' id="txtComment" [disabled]='!selectedRowCount' rows="3" placeholder="Enter feedback comment..."
+                                    style="resize:vertical" [(ngModel)]='comment' required=""></textarea>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="portlet-body">
+
+                    <!-- BEGIN SHOW AND SEARCH  -->
+                    <div class="dataTables_wrapper no-footer">
+                        <div class="row" *ngIf="!NORECORDSFOUND">
+                            <div class="col-lg-3 col-sm-3">
+                                <div class="dataTables_length ">
+                                    <label>show
+                                        <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.PerPageCount" (ngModelChange)="bindGridData()">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                            <option value="50">50</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-3">
+                                <div class="dataTables_length ">
+                                    <label>Sort By
+                                        <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.OrderBy" (ngModelChange)="bindGridData()">
+                                           <option *ngFor="let sortColumn of SortByList" [value]="sortColumn.Value">{{sortColumn.Id}}</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-3">
+                                <div class="dataTables_length ">
+                                    <label>Order by
+                                        <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.Order" (ngModelChange)="bindGridData()">
+                                            <option value="asc">Ascending</option>
+                                            <option value="desc">Descending</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-3 ">
+                                <div class="dataTables_filter pull-right ">
+                                    <label>Search:
+                                        <input class="form-control input-sm input-small input-inline " [(ngModel)]='searchText' />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END SHOW AND SEARCH -->
+
+                    <!-- BEGIN LIST OF RRF  -->
+                    <div class="">
+                        <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                            <thead style="word-wrap: break-word;" class="thead">
+                                <tr width="5%" *ngIf='!NORECORDSFOUND'>
+                                    <td [ifAuthorize]="['RRF.CANFREEZERRF.MANAGE']">
+                                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                            <input type="checkbox"  class="group-checkable" data-set="#sample_1 .checkboxes" (change)="onAllSelect($event)" [(ngModel)]='allChecked'
+                                            />
+                                            <span></span>
+                                        </label>
+                                    </td>
+                                    <td> <b>RRF Details</b> </td>
+                                    <td> <b>Actions</b> </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd gradeX" *ngFor="let rrf of rrfFeedbackPendingList | RRFPipe : searchText ">
+                                    <td [ifAuthorize]="['RRF.CANFREEZERRF.MANAGE']">
+                                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                            <input type="checkbox"  class="checkboxes" value="1" [id]='rrf.RRFID' [(ngModel)]='rrf.IsChecked' (change)="onStateChange($event)"
+                                            />
+                                            <span></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <RRFGridRow [RRFData]=rrf [displayFeedBackStatus]='true'></RRFGridRow>
+                                        <feedback-data [RRFID]= rrf.RRFID *ngIf='rrf.IsShowFeedback'></feedback-data>
+                                    </td>
+                                    <td style="width:80px">
+                                        <div class="btn-group ">
+                                            <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                    Action
+                                                    <i class="fa fa-angle-down "></i>
+                                                </button>
+                                            <ul class="dropdown-menu " role="menu ">
+                                                <!--*ngIf='allowEditRRF(rrf.RaisedBy.Id)'-->
+                                                <li *ngIf='allowEditRRF(rrf)'>
+                                                    <button class="btn btn-default btnLink" (click)='redirectToEditRRF(rrf.RRFID , rrf.Status.Id)'>
+                                                            <i class="fa fa-edit "></i> Edit RRF
+                                                        </button>
+                                                </li>
+                                                <li>
+                                                    <button class="btn btn-default btnLink" (click)='showAllFeedback(rrf)'>
+                                                            <i class="fa fa-reply-all"></i> {{getStringToDisplayInAction(rrf)}}
+                                                        </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="table-scrollable ">
+                            <span style="margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Records Found</span>
+                        </div>
+                    </div>
+                    <!-- END LIST OF RRF -->
+                    <!-- START NAVIGATION BUTTON -->
+                    <div class="table-toolbar" *ngIf="!NORECORDSFOUND">
+                        <div class="pull-right ">
+                            <button type="button " class="btn btn-default " [disabled]="!grdOptions.PreviousButton" (click)="OnPaginationClick(-1) ">
+                                &laquo; Prev</button> &nbsp;&nbsp;
+                            <button type="button " class="btn btn-default " [disabled]="!grdOptions.NextButton" (click)="OnPaginationClick(1) ">
+                                Next &raquo;</button>
+                        </div>
+                    </div>
+                    <!-- END NAVIGATION BUTTON-->
+
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE BASE CONTENT -->
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->

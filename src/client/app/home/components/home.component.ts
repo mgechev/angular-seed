@@ -31,6 +31,7 @@ import {DashboardComponent} from '../../Dashboard/component/dashboard.component'
 import {ShowScheduleInterviewsComponent} from '../../recruitmentCycle/recruitersTab/components/interviews.component';
 import { PushNotificationComponent } from '../../settings/pushNotification/pushNotification.component';
 import {InterviewerAvalabilityComponent } from '../../RRF/InterviewerAvalability/InterviewerAvalability.component';
+import { FeedbackPendingComponent } from '../../RRF/FeedBackPending/component/feedbackPending.component';
 
 @Component({
     moduleId: module.id,
@@ -66,7 +67,8 @@ import {InterviewerAvalabilityComponent } from '../../RRF/InterviewerAvalability
     { path: '/Recruitment Cycle/Schedule', component: ScheduleInterviewComponent },
     { path: '/Recruitment Cycle/mycalendar', component: RecruitmentInterviewerCalenderComponent },
     { path: '/NotificationSetting' , component: PushNotificationComponent},
-    { path: '/RRF/InterviewsAvailability' , component: InterviewerAvalabilityComponent}
+    { path: '/RRF/InterviewsAvailability' , component: InterviewerAvalabilityComponent},
+    { path : '/RRF/FeedbackPending', component : FeedbackPendingComponent}
 
 
 ])
@@ -75,8 +77,6 @@ export class HomeComponent implements OnInit {
         App.init();
         Layout.init();
         Demo.init();
-
-      
     }
     routerOnActivate(segment: RouteSegment, prev?: RouteSegment, currTree?: RouteTree, prevTree?: RouteTree) {
         console.log(segment);
