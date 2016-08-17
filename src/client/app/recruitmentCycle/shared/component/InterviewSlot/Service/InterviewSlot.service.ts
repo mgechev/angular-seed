@@ -32,7 +32,7 @@ export class InterviewSlotService {
     }
 
     getSlotForRRF(){
-         let url = Config.GetURL('/api/RecruitmentCycle/GetMyRRFInterviewCalendar');
+         let url = Config.GetURL('/api/RecruitmentCycle/GetMyInterviewerCalendar'); //api/RecruitmentCycle/GetMyInterviewerCalendar TODO
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
