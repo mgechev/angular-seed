@@ -57,7 +57,7 @@ export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
         this._recruitersInterviewService.getAllInterviews(this.InterviewDetailsList.GrdOperations)
             .subscribe(
             (results: any) => {
-                if (results.AllInterviews.length !== undefined && results.AllInterviews.length > 0) {
+                if (results.AllInterviews !== null && results.AllInterviews.length > 0) {
                     this.InterviewDetailsList = results;
 
                 } else {
@@ -77,9 +77,13 @@ export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
         this._recruitersInterviewService.getMyInterviews(this.InterviewDetailsList.GrdOperations)
             .subscribe(
             (results: any) => {
-                if (results.AllInterviews.length !== undefined && results.AllInterviews.length > 0) {
+                if (results.AllInterviews !== null && results.AllInterviews.length > 0) {
                     this.InterviewDetailsList = results;
-                } else { this.NORECORDSFOUND = true; }
+                } else {
+                    this.InterviewDetailsList.AllInterviews = [];
+                    this.InterviewDetailsList.GrdOperations = results.GrdOperations;
+                    this.NORECORDSFOUND = true;
+                }
             },
             error => {
                 this.errorMessage = <any>error;
