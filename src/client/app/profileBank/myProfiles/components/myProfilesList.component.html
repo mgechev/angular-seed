@@ -100,26 +100,27 @@
                                                         <div class="row">
                                                             <div class="col-md-3 inlineForm">
                                                                 <div class="form-group ">
-                                                                    <input type="text" placeholder="Total Experience" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.TotalExperience" tooltip="Total Experience"
-                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateCareerProfile.TotalExperience"
-                                                                        pattern="[0-9]" title="Enter total experience in years Eg. 2" maxlength="2"
-                                                                    />
+                                                                    <input type="text" placeholder="Total Experience" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.TotalExperience"
+                                                                        tooltip="Total Experience" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="!profile.CandidateCareerProfile.TotalExperience"
+                                                                        pattern="[0-9]" title="Enter total experience in years Eg. 2"
+                                                                        maxlength="2" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3  inlineForm">
                                                                 <div class="form-group ">
                                                                     <input type="text" placeholder="Tag" class="form-control" [(ngModel)]="profile.Tag" tooltip="Tag" tooltipPlacement="top"
                                                                         tooltipTrigger="mouseenter" tooltipEnable="!profile.Tag"
-                                                                        title="Enter Tag"
-                                                                    />
+                                                                        title="Enter Tag" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3 inlineForm">
                                                                 <div class="form-group">
-                                                                    <input type="text" placeholder="Notice Period" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod" tooltip="Notice Period"
-                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateOtherDetails.NoticePeriod"
-                                                                        pattern="[0-9]" title="Enter notice period in months Eg. 2" maxlength="2"
-                                                                        />
+                                                                    <input type="text" placeholder="Notice Period" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod"
+                                                                        tooltip="Notice Period" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="!profile.CandidateOtherDetails.NoticePeriod"
+                                                                        pattern="[0-9]" title="Enter notice period in months Eg. 2"
+                                                                        maxlength="2" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -398,10 +399,10 @@
                                         </td>-->
                                         <td>
                                             <div class="btn-group">
-                                                <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> <i class="icon-settings"></i>
+                                                <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Actions<i class="fa fa-angle-down"></i>
                                                            <!--<i class="fa fa-angle-down"></i>-->
                                                         </button>
-                                                <ul class="dropdown-menu" role="menu">
+                                                <ul class="dropdown-menu pull-right" role="menu">
                                                     <li>
                                                         <a [routerLink]="['/App/ProfileBank/MyProfiles/Edit/'+ myprofile.CandidateID.Value +'ID'+ myprofile.CandidateID.Id]">
                                                             <i class="icon-user"></i> Edit Profile </a>

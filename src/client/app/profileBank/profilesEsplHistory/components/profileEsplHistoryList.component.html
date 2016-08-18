@@ -70,7 +70,8 @@
                             </div>
                         </div>-->
                     <!-- /Grid Tools bar -->
-                    <div>
+                    <div *ngIf="profileHistoryCollection===null"><label class="control-label"><strong> No details available. </strong></label></div>
+                    <div *ngIf="profileHistoryCollection!=null">
                         <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" id="sample_1"
                             role="grid" aria-describedby="sample_1_info">
                             <!--<thead class="thead">
@@ -81,16 +82,14 @@
                             <tbody>
                                 <!-- Sample Data -->
                                 <!-- Profile interview History details-->
-                                <tr class="gradeX odd pull-left mt-element-ribbon bg-grey-steel col-md-12" style="box-shadow: 2px 2px 7px rgba(0,0,0,.4);">
+                                <tr *ngFor="let profileHistory of profileHistoryCollection; let index = index" class="gradeX odd pull-left mt-element-ribbon bg-grey-steel col-md-12"
+                                    style="box-shadow: 2px 2px 7px rgba(0,0,0,.4);">
                                     <td>
                                         <!-- RRF History Details -->
                                         <div class="col-md-12">
-                                            <div class="ribbon ribbon-shadow ribbon-color-success uppercase" style="top:-20px!important;left:-34px"><strong>RRFCODE : </strong>RRF20162807 <span class="badge badge-danger"><small>Closed</small></span></div>
+                                            <div class="ribbon ribbon-shadow ribbon-color-success uppercase" style="top:-20px!important;left:-34px"><strong>RRFCODE : </strong>{{profileHistory.RRFDetails.RRFCODE}} <span class="badge badge-danger"><small>Closed</small></span></div>
                                             <!--<div class="col-md-4">
-
-
                                                 <label class="control-label"><strong>Priority : </strong>High</label>
-
                                             </div>-->
                                             <br>
                                             <div class="col-md-4">
@@ -98,33 +97,34 @@
                                                 <span class="portlet-title"><strong>Raised : </strong></span>
                                                 <br>
 
-                                                <label class="control-label"><strong>By : </strong>Shakti Kapoor</label>
+                                                <label class="control-label"><strong>By : </strong>{{profileHistory.RRFDetails.RaisedBy?profileHistory.RRFDetails.RaisedBy.Value:"N/A"}}</label>
 
 
-                                                <label class="control-label"><strong>Date : </strong>25 January 2016</label>
+                                                <label class="control-label"><strong>Date : </strong>{{profileHistory.RRFDetails.CreatedDate?profileHistory.RRFDetails.CreatedDate:"N/A"}}</label>
 
                                             </div>
                                             <div class="col-md-4">
 
                                                 <span class="portlet-title"><strong>Details : </strong></span>
                                                 <br>
-                                                <label class="<control></control>-label"><strong>Technology : </strong>Microsoft</label>
+                                                <label class="<control></control>-label"><strong>Technology : </strong>{{profileHistory.RRFDetails.Technology?profileHistory.RRFDetails.Technology.Value:"N/A"}}</label>
 
-                                                <label class="control-label"><strong>Position : </strong>Sr. Female Exicutive</label>
+                                                <label class="control-label"><strong>Position : </strong>{{profileHistory.RRFDetails.PositionTitle?profileHistory.RRFDetails.PositionTitle:"N/A"}}</label>
                                             </div>
                                             <div class="col-md-4">
 
                                                 <span class="portlet-title"><strong>Requirement : </strong></span>
 
 
-                                                <label class="control-label"><strong>Skill : </strong>Microsoft</label>
+                                                <label class="control-label"><strong>Skill : </strong><span *ngFor="let skills of profileHistory.RRFDetails.SkillsRequired; let index = index" >{{skills.Value}}, </span></label>
 
-                                                <label class="control-label"><strong>Experience : </strong>6 - 9</label>
+                                                <label class="control-label"><strong>Experience : </strong>{{profileHistory.RRFDetails.MinExp}} - {{profileHistory.RRFDetails.MaxExp}}</label>
                                             </div>
                                         </div>
                                         <!-- /RRF History Details -->
                                         <!-- Candidate Details -->
-                                        <div class="row">
+                                        <div *ngIf='profileHistory.InterviewDetails.length===0' class="row pull-left"> <label class="control-label"><strong> No details available. </strong></label></div>
+                                        <div *ngIf='profileHistory.InterviewDetails.length>0' class="row">
 
                                             <div class="col-md-12">
                                                 <!--<span class="caption-subject bold" style="font-size : 14px">Interview History</span>-->
@@ -142,21 +142,21 @@
                                                     </thead>
                                                     <tbody>
                                                         <!-- ng binding -->
-                                                        <!--<tr *ngFor="let candidateHistory of CandidateRoundHistory; let index = index" (mouseover)='showPopOver(candidateHistory.Comments,index+1)'
-                                                                id="round{{index+1}}">
-                                                                <td> {{index+1}} </td>
-                                                                <td> {{candidateHistory.Round.Value}}</td>
-                                                                <td> <span *ngFor="let interviewer of candidateHistory.InterviewerAvailability">{{interviewer.Interviewer.Value}} ,</span></td>
-                                                                <td> {{getDate(candidateHistory.InterviewDate)}}</td>
-                                                                <td> {{candidateHistory.Status}}</td>
-                                                                <div class="row">
-                                                                    IEF Details is in progress...
-                                                                </div>
-                                                            </tr>-->
+                                                        <tr *ngFor="let candidateHistory of profileHistory.InterviewDetails; let index = index" id="round{{index+1}}">
+                                                            <td> {{index+1}} </td>
+                                                            <td> {{candidateHistory.Round.Value}}</td>
+                                                            <td> <span *ngFor="let interviewer of candidateHistory.InterviewerAvailability">{{interviewer.Interviewer.Value}} ,</span></td>
+                                                            <!--<td> {{getDate(candidateHistory.InterviewDate)}}</td>-->
+                                                            <td> {{candidateHistory.InterviewDate}}</td>
+                                                            <td> {{candidateHistory.Status}}</td>
+                                                            <div class="row">
+                                                                IEF Details is in progress...
+                                                            </div>
+                                                        </tr>
                                                         <!-- /ng binding -->
 
                                                         <!-- Interview history Sample Data -->
-                                                        <tr class="gradeX odd">
+                                                        <!--<tr class="gradeX odd">
                                                             <td> 1 </td>
                                                             <td> Technical 1 </td>
                                                             <td> <span>Amrsh Puri, Prem Chopra</span></td>
@@ -175,7 +175,7 @@
                                                             <div class="row">
                                                                 IEF Details are in progress...
                                                             </div>
-                                                        </tr>
+                                                        </tr>-->
                                                         <!-- /Interview history Sample Data -->
                                                     </tbody>
                                                 </table>
@@ -186,112 +186,7 @@
                                     </td>
                                 </tr>
                                 <!-- /Profile interview History details-->
-                                <!-- Profile interview History details 1-->
-                                <tr class="gradeX odd pull-left mt-element-ribbon bg-grey-steel col-md-12" style="box-shadow: 2px 2px 7px rgba(0,0,0,.4);">
-                                    <td>
-                                        <!-- RRF History Details -->
-                                        <div class="col-md-12">
-                                            <div class="ribbon ribbon-shadow ribbon-color-success uppercase" style="top:-20px!important;left:-34px"><strong>RRFCODE : </strong>RRF20162807 <span class="badge badge-danger"><small>Closed</small></span></div>
-                                            <!--<div class="col-md-4">
 
-
-                                                <label class="control-label"><strong>Priority : </strong>High</label>
-
-                                            </div>-->
-                                            <br>
-                                            <div class="col-md-4">
-
-                                                <span class="portlet-title"><strong>Raised : </strong></span>
-                                                <br>
-
-                                                <label class="control-label"><strong>By : </strong>Shakti Kapoor</label>
-
-
-                                                <label class="control-label"><strong>Date : </strong>25 January 2016</label>
-
-                                            </div>
-                                            <div class="col-md-4">
-
-                                                <span class="portlet-title"><strong>Details : </strong></span>
-                                                <br>
-                                                <label class="<control></control>-label"><strong>Technology : </strong>Microsoft</label>
-
-                                                <label class="control-label"><strong>Position : </strong>Sr. Female Exicutive</label>
-                                            </div>
-                                            <div class="col-md-4">
-
-                                                <span class="portlet-title"><strong>Requirement : </strong></span>
-
-
-                                                <label class="control-label"><strong>Skill : </strong>Microsoft</label>
-
-                                                <label class="control-label"><strong>Experience : </strong>6 - 9</label>
-                                            </div>
-                                        </div>
-                                        <!-- /RRF History Details -->
-                                        <!-- Candidate Details -->
-                                        <div class="row">
-
-                                            <div class="col-md-12">
-                                                <!--<span class="caption-subject bold" style="font-size : 14px">Interview History</span>-->
-                                                <br/>
-                                                <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" id="sample_1"
-                                                    role="grid" aria-describedby="sample_1_info">
-                                                    <thead class="thead">
-                                                        <tr>
-                                                            <th> # </th>
-                                                            <th tabindex="0" aria-controls="sample_1">Round</th>
-                                                            <th tabindex="0" aria-controls="sample_1">Interviewer</th>
-                                                            <th tabindex="0" aria-controls="sample_1">Date</th>
-                                                            <th tabindex="0" aria-controls="sample_1">Status</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!-- ng binding -->
-                                                        <!--<tr *ngFor="let candidateHistory of CandidateRoundHistory; let index = index" (mouseover)='showPopOver(candidateHistory.Comments,index+1)'
-                                                                id="round{{index+1}}">
-                                                                <td> {{index+1}} </td>
-                                                                <td> {{candidateHistory.Round.Value}}</td>
-                                                                <td> <span *ngFor="let interviewer of candidateHistory.InterviewerAvailability">{{interviewer.Interviewer.Value}} ,</span></td>
-                                                                <td> {{getDate(candidateHistory.InterviewDate)}}</td>
-                                                                <td> {{candidateHistory.Status}}</td>
-                                                                <div class="row">
-                                                                    IEF Details is in progress...
-                                                                </div>
-                                                            </tr>-->
-                                                        <!-- /ng binding -->
-
-                                                        <!-- Interview history Sample Data -->
-                                                        <tr class="gradeX odd">
-                                                            <td> 1 </td>
-                                                            <td> Technical 1 </td>
-                                                            <td> <span>Amrsh Puri, Prem Chopra</span></td>
-                                                            <td> 07/28/2016</td>
-                                                            <td> Selected</td>
-                                                            <div class="row">
-                                                                IEF Details are in progress...
-                                                            </div>
-                                                        </tr>
-                                                        <tr class="gradeX odd">
-                                                            <td> 1 </td>
-                                                            <td> Technical 1 </td>
-                                                            <td> <span>Shakti kapoor</span></td>
-                                                            <td> 07/28/2016</td>
-                                                            <td> Rejected</td>
-                                                            <div class="row">
-                                                                IEF Details are in progress...
-                                                            </div>
-                                                        </tr>
-                                                        <!-- /Interview history Sample Data -->
-                                                    </tbody>
-                                                </table>
-                                                <!--<span *ngIf='isRoundHistoryPresent'>No Candidates Round History Found</span>-->
-                                            </div>
-                                        </div>
-                                        <!-- /Candidate Details -->
-                                    </td>
-                                </tr>
-                                <!-- /Profile interview History details 1-->
                                 <!-- /Sample Data -->
                             </tbody>
                         </table>
