@@ -11,8 +11,8 @@ import { AllScheduleInterviewPipe } from  '../filter/scheduleInterviews.pipe';
     selector: 'show-schedule-interviews-recruiter',
     templateUrl: 'scheduleInterviews.component.html',
     directives: [ROUTER_DIRECTIVES],
-    pipes:[AllScheduleInterviewPipe]
-   // providers:[RecruiterScheduleInterviewService,ToastsManager]
+    pipes: [AllScheduleInterviewPipe]
+    // providers:[RecruiterScheduleInterviewService,ToastsManager]
 })
 
 export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
@@ -33,7 +33,7 @@ export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
         // this.InterviewDetailsList.GrdOperations = new GrdOptions();
         this.resetToDefaultGridOptions();
         this.InterviewDetailsList.GrdOperations.OrderBy = 'Modified';
-        this.InterviewDetailsList.GrdOperations.Order = 'asc';
+        this.InterviewDetailsList.GrdOperations.Order = 'desc';
         this.InterviewDetailsList.GrdOperations.PerPageCount = 5;
         //Clear RRF List
         this.InterviewDetailsList = new InterviewsList();
@@ -60,7 +60,11 @@ export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
                 if (results.AllInterviews.length !== undefined && results.AllInterviews.length > 0) {
                     this.InterviewDetailsList = results;
 
-                } else { this.NORECORDSFOUND = true; }
+                } else {
+                    this.InterviewDetailsList.AllInterviews = [];
+                    this.InterviewDetailsList.GrdOperations = results.GrdOperations;
+                    this.NORECORDSFOUND = true;
+                }
             },
             error => {
                 this.errorMessage = <any>error;
@@ -99,7 +103,7 @@ export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
     }
     checkViewMode() {
         //Clear RRF List
-        this.InterviewDetailsList = new InterviewsList();
+        //this.InterviewDetailsList = new InterviewsList();
 
         if (this.currentView === 'allInterviews') {
             //this.currentView = 'allInterviews';
