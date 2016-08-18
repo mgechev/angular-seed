@@ -92,6 +92,7 @@
                                                     <th>Candidate</th>
                                                     <th>Status</th>
                                                     <th>Last Round Scheduled</th>
+                                                    <th>Interview Mode</th>
                                                     <th>Interview</th>
                                                 </tr>
                                             </thead>
@@ -102,7 +103,10 @@
 
                                                     <td> {{selectedcandidate.InterviewDetails.Status}} </td>
                                                     <td> {{selectedcandidate.InterviewDetails.Round.Value}}</td>
-
+                                                    <td><div> {{selectedcandidate.InterviewDetails.InterviewMode.Value}}</div>
+                                                        <div *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview"> Skype ID: {{selectedcandidate.InterviewDetails.SkypeID.Value}}</div>
+                                                        <div *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview"> Password: {{selectedcandidate.InterviewDetails.SkypePassword}}</div>
+                                                    </td>          
                                                     <td>
                                                         <div class="btn-group">
                                                             <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions

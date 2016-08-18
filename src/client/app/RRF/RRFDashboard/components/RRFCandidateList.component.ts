@@ -8,6 +8,7 @@ import { APIResult } from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI} from '../../../shared/model/common.model';
 import { CandidateProfile } from  '../../../profileBank/shared/model/myProfilesInfo';
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
+import { InterviewMode } from  '../../../shared/constantValue/index';
 //import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap';
 import {RRFCandidateListService} from '../services/RRFCandidatesList.service';
 import {RRFSpecificCandidateList} from '../model/RRFCandidateList';
@@ -44,7 +45,7 @@ export class RRFCandidateListComponent implements OnActivate {
     isRoundHistoryPresent: boolean = false;
     selectedCandidate: string;
     InterviewID: MasterData = new MasterData();
-
+    modeConstant: InterviewMode = InterviewMode;
     changedStatus: string = '';
     changesStatusComment: string = '';
     changeStatusInterviewID: MasterData = new MasterData();

@@ -80,7 +80,7 @@
                                             <div class="col-md-3">
                                                 <select class="form-control" [(ngModel)]="ScheduleInterView.SkypeID">
                                                     <option></option>
-                                                    <option *ngFor="let round of InterviewRounds" [value]="round.Id">{{round.Value}}</option>
+                                                    <option *ngFor="let skypeid of InterviewSkypeId" [value]="skypeid.Id">{{skypeid.Value}}</option>
                                             </select>
                                             </div>
                                         </div>

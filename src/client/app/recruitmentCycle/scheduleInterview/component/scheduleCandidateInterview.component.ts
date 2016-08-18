@@ -34,6 +34,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     // resource: Resource;
     InterviewModes: Array<MasterData>;
     InterviewTypes: Array<MasterData>;
+    InterviewSkypeId: Array<MasterData>;
     InterviewRounds: Array<MasterData>;
     NominatedInterviewers: Array<MasterData>;
     AllNominatedInterviewers: Array<InterviewersPanel>;
@@ -73,6 +74,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         //Initialize All Variables
         this.resources = new Array<Resource>();
         this.InterviewTypes = new Array<MasterData>();
+        this.InterviewSkypeId = new Array<MasterData>();
         this.InterviewRounds = new Array<MasterData>();
         this.InterviewModes = new Array<MasterData>();
         // this.resource = new Resource();
@@ -108,7 +110,8 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         this.getInterviewTypes();
         //Get  Interview Modes       
         this.getInterviewModes();
-
+        //Get Skype Id
+        this.getInterviewSkypeId();
 
         //Pass Headers
         this.header = {
@@ -538,7 +541,15 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
-
+    // Get All Skype Id from service
+    getInterviewSkypeId() {
+        this._mastersService.GetSkypeID()
+            .subscribe(
+            results => {
+                this.InterviewSkypeId = <any>results;
+            },
+            error => this.errorMessage = <any>error);
+    }
     // Get All Interview Rounds from Service by InterviewType
     getInterviewRoundsbyInterviewType(TypeID: string) {
         var i = _.findIndex(this.InterviewTypes, { Id: parseInt(TypeID) });

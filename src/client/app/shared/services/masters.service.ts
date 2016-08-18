@@ -141,7 +141,12 @@ export class MastersService {
             .map(this.extractData)
             .catch(this.handleError);
     }
-
+    GetSkypeID () {
+        let url = Config.GetURL('/api/Masters/GetSkypeIDs');
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
     GetRoundsByInterviewType(TypeID: number) {
         let url = Config.GetURL('/api/Masters/GetRoundsByInterviewType?TypeID=' + TypeID);
         return this.authHttp.get(url)

@@ -42,4 +42,9 @@ export class RaiseRRFStatus {
     public static get UpdateRejectedRRF(): number { return 3; }; //Update RRF because it is rejected
     public static get UpdateForFeedback(): number { return 4; }; //Update RRF because Recruiter head need feedback
 }
+export class InterviewMode {
+    public static get FaceToFace(): number { return 1; };
+    public static get SkypeInterview(): number { return 3; };
+    public static get VideoConferency(): number { return 4; };
+}
 

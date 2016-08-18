@@ -6,6 +6,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { MasterData } from  '../../../shared/model/index';
 import { FullCalendarComponent} from  '../../../shared/components/calendar/fullCalendar';
 import { CalendarDetails} from '../../scheduleInterview/model/calendarDetails';
+import { InterviewMode } from  '../../../shared/constantValue/index';
 import { iefModel} from '../../shared/model/ief';
 import { InterviewDetailsRowComponent } from '../../shared/component/InterviewDetailsRow/InterviewDetailsRow.component';
 import { GrdOptions } from '../../../shared/model/common.model';
@@ -32,12 +33,13 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
     NORECORDSFOUND: boolean = false;
     HISTORYRECORDSNOTFOUND: boolean = false;
     currentDate: string;
+    modeConstant: InterviewMode = InterviewMode;
     header: any = {
         left: 'prev,next today',
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
     };
-
+    
     InterviewHistory: MyScheduleInterview[] = [];
     grdOptionsIntwHistory: GrdOptions = new GrdOptions();
     viewIEFText: string = 'View IEF';
