@@ -185,7 +185,7 @@
                                                     Action
                                                     <i class="fa fa-angle-down "></i>
                                                 </button>
-                                                <ul class="dropdown-menu " role="menu ">
+                                                <ul class="dropdown-menu pull-right" role="menu ">
                                                     <li>
                                                         <button class="btn btn-default btnLink" (click)='redirectToEditRRF(rrf.RRFID , rrf.Status.Id)' [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] "
                                                             [disabled]='allowEditRRF(rrf.Status.Id , rrf.RaisedBy.Id)'>
