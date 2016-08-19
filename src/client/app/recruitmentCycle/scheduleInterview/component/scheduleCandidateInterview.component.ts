@@ -166,8 +166,9 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                 let cmb: any = $('#cmbInterviewers');
                 let value = cmb.val();
                 //Get Events Data if "Show Availability"
-                if (this.InterviewerCalendarDetails.Events.length === 0)
-                    this.ShowAvailabilityOnCalendar();
+                if (this.InterviewerCalendarDetails.Events !== null)
+                    if (this.InterviewerCalendarDetails.Events.length === 0)
+                        this.ShowAvailabilityOnCalendar();
                 //&& this.ScheduleInterView.InterviewerAvailability.length < value.length
                 if (value !== null) {
                     this.getOtherSelectedInterviewers(value);

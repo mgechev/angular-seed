@@ -167,17 +167,16 @@
                                 <tbody>
                                     <tr class="odd gradeX " *ngFor="let rrf of rrfList | RRFPipe :searchText |RRFIDPipe :closeRRFID.Value ">
                                         <td>
-                                            <div class="pull-right" *ngIf="currentView =='myRRF'">
+                                            <!--<div class="pull-right" *ngIf="currentView =='myRRF'">
                                                 <a class="btn-green" (click)='onShowAvailabilityClick()'>
                                                     <i class="fa fa-eye" aria-hidden="true"></i> Show Availability</a>
-                                            </div>
+                                            </div>-->
                                             <RRFGridRow [RRFData]=rrf [displayApproval]='displayApproval' [displayAssignedTo]='displayAssignedTo'></RRFGridRow>
-                                            <div class="row" *ngIf="currentView =='myRRF' && showAvaililityPanel">
-                                                <!--<div class="collapse" id="demo{{rrf.RRFID.Id}}">-->
+                                            <!--<div class="row" *ngIf="currentView =='myRRF' && showAvaililityPanel">
                                                 <div>
                                                     <panel-availablity [selectedRRF]='rrf'></panel-availablity>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                         </td>
                                         <td style="width:80px">
                                             <div class="btn-group ">

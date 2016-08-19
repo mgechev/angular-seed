@@ -103,10 +103,11 @@
 
                                                     <td> {{selectedcandidate.InterviewDetails.Status}} </td>
                                                     <td> {{selectedcandidate.InterviewDetails.Round.Value}}</td>
-                                                    <td><div> {{selectedcandidate.InterviewDetails.InterviewMode.Value}}</div>
-                                                        <div *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview"> Skype ID: {{selectedcandidate.InterviewDetails.SkypeID.Value}}</div>
-                                                        <div *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview"> Password: {{selectedcandidate.InterviewDetails.SkypePassword}}</div>
-                                                    </td>          
+                                                    <td>
+                                                        <div> {{selectedcandidate.InterviewDetails.InterviewMode.Value}}</div>
+                                                        <div *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview"> Skype ID: {{selectedcandidate.InterviewDetails.SkypeID?selectedcandidate.InterviewDetails.SkypeID.Value:"N/A"}}</div>
+                                                        <div *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview"> Password: {{selectedcandidate.InterviewDetails.SkypePassword?selectedcandidate.InterviewDetails.SkypePassword:"N/A"}}</div>
+                                                    </td>
                                                     <td>
                                                         <div class="btn-group">
                                                             <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
@@ -133,7 +134,7 @@
                                                                 <li class="divider"> </li>
                                                                 <li>
                                                                     <button class="btn btn-default btnLink " [disabled]='isOfferGenerationVisible(selectedcandidate.InterviewDetails.Round.Value)'
-                                                                    (click)='OnProceedForOfferGenerationClick(selectedcandidate)'>
+                                                                        (click)='OnProceedForOfferGenerationClick(selectedcandidate)'>
                                                                         <i class="fa fa-paper-plane-o"></i>Offer Generation</button>
                                                                 </li>
 
@@ -168,7 +169,7 @@
                                         </thead>
                                         <tbody>
                                             <tr *ngFor="let candidateHistory of CandidateRoundHistory; let index = index" (mouseover)='showPopOver(candidateHistory.Comments,index+1)'
-                                            id="round{{index+1}}">
+                                                id="round{{index+1}}">
                                                 <td> {{index+1}} </td>
                                                 <td> {{candidateHistory.Round.Value}}</td>
                                                 <td> <span *ngFor="let interviewer of candidateHistory.InterviewerAvailability">{{interviewer.Interviewer.Value}} ,</span></td>
@@ -193,8 +194,8 @@
                                                 </div>
                                                 <div class="col-lg-8">
                                                     <select id="cmbStaus" class="form-control" [(ngModel)]='changedStatus' required placeholder="Select status" tooltip="Select status"
-                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changedStatus" style="font-size: inherit;"
-                                                    required>
+                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changedStatus"
+                                                        style="font-size: inherit;" required>
                                                         <!--<option *ngFor="let technologie of technologies" [value]="technologie.Id">{{technologie.Value}}</option>-->
                                                         <option value="Selected"> Selected</option>
                                                         <option value="Rejected"> Rejected</option>
@@ -209,33 +210,27 @@
                                                 <div class="col-lg-8">
                                                     <!---->
                                                     <input type="text" [(ngModel)]='changesStatusComment' id="changesStatusComment" class="form-control" placeholder="change Status Comment"
-                                                    tooltip="comment" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                    tooltipEnable="!changesStatusComment" required="" autocomplete="off" style="font-size: inherit;"
-                                                    />
+                                                        tooltip="comment" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                        tooltipEnable="!changesStatusComment" required="" autocomplete="off"
+                                                        style="font-size: inherit;" />
                                                 </div>
                                             </div>
                                             <br>
                                             <div class="">
                                                 <div class="pull-right">
-                                                    <button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelChangeStatus()'>Cancel</button> &nbsp;
+                                                    <button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelChangeStatus()'>Cancel</button>                                                    &nbsp;
                                                     <button type="submit " class="btn blue " id="btnChangeStatus">Change Status</button>
                                                 </div>
 
                                             </div>
 
                                         </div>
-                                        
-                                          <hr style="margin-top: 50px;"/>
+
+                                        <hr style="margin-top: 50px;" />
                                     </form>
                                     <br/>
-                                   <base-chart class="chart"
-                                                    [datasets]="barChartData"
-                                                    [labels]="barChartLabels"
-                                                    [options]="barChartOptions"
-                                                    [legend]="barChartLegend"
-                                                    [chartType]="barChartType"
-                                                    (chartHover)="chartHovered($event)"
-                                                    (chartClick)="chartClicked($event)"></base-chart>
+                                    <base-chart class="chart" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+                                        [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></base-chart>
 
                                 </div>
                                 <!-- Candidate Details END-->

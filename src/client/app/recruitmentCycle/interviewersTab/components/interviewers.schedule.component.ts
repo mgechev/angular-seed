@@ -85,24 +85,20 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
                 this.toastr.error(<any>error);
             });
     }
-    DisableIEF(interviewDate: Date , interviewTime: Date) {
-        if(moment(interviewDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY')){
-            if(interviewTime.split(':')[0] >= new Date().getHours()){
-                if(interviewTime.split(':')[1] >= new Date().getMinutes()){
+    DisableIEF(interviewDate: Date, interviewTime: Date) {
+        if (moment(interviewDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY')) {
+            if (interviewTime.split(':')[0] >= new Date().getHours()) {
+                if (interviewTime.split(':')[1] >= new Date().getMinutes()) {
                     return true;
-                }
-                else{
+                } else {
                     return false;
                 }
-            }
-            else{
+            } else {
                 return false;
             }
-        }
-        else{
+        } else {
             return false;
         }
-        //return (new Date(interviewDate) > new Date()) && (interviewTime.split(':')[0] > new Date().getHours()) && (interviewTime.split(':')[1] > new Date().getMinutes())
     }
     /**used for calender view */
     getMyAllInterviewsDetailsOfCalendar() {

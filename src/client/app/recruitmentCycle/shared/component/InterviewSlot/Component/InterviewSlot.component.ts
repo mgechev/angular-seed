@@ -1,8 +1,8 @@
-import {Component, Input, Output, AfterViewInit, EventEmitter, OnChanges } from '@angular/core';
+import {Component, AfterViewInit, OnChanges } from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate } from '@angular/router';
 import {CalenderSlot, CalenderDetails} from '../Model/interviewSlot';
 import {InterviewSlotService } from '../Service/InterviewSlot.service';
-import { ResponseFromAPI, MasterData} from '../../../../../shared/model/common.model';
+import { ResponseFromAPI} from '../../../../../shared/model/common.model';
 import { APIResult} from  '../../../../../shared/constantValue/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
@@ -33,7 +33,7 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
 
     routerOnActivate() {
         //console.write();
-        if (this.meta.length == 0) {
+        if (this.meta.length === 0) {
             this.addNewSlot();
         }
     }
@@ -105,8 +105,8 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
     }
     removeSlot(slotTobeRemove: number) {
         for (var index = 0; index < this.meta.length; index++) {
-            if (this.meta[index].ID == slotTobeRemove) {
-                if (this.meta[index].ID == undefined) {
+            if (this.meta[index].ID === slotTobeRemove) {
+                if (this.meta[index].ID === undefined) {
                     this.meta.splice(index, 1);
                 } else {
                     this.removeSlotFromDB(this.meta[index]);
