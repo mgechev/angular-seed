@@ -99,4 +99,9 @@ export class IncompleteProfilesListComponent implements OnActivate {
             error => this.toastr.error(<any>error));
     }
 
+    redirectToEditProfile(CandidateID: MasterData) {
+        this._router.navigate(['/App/ProfileBank/IncompleteProfiles/Edit/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+
+    }
+
 }

@@ -9,6 +9,7 @@ import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
+import {Location} from '@angular/common';
 
 @Component({
     moduleId: module.id,
@@ -60,7 +61,8 @@ export class MyProfilesAddComponent implements OnActivate {
         private _masterService: MastersService,
         private _profileBankService: ProfileBankService,
         public toastr: ToastsManager,
-        private _router: Router) {
+        private _router: Router,
+        private _location: Location) {
         this.profile = new CandidateProfile();
         this.createQualificationObj();
         this.resumeMeta = new ResumeMeta();
@@ -614,6 +616,7 @@ export class MyProfilesAddComponent implements OnActivate {
     /** END Upload profile photo functionality*/
 
     Back() {
-        this._router.navigate(['/App/ProfileBank/MyProfiles']);
+        // this._router.navigate(['/App/ProfileBank/MyProfiles']);
+        this._location.back();
     }
 }
