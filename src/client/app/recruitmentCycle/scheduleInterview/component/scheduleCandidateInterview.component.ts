@@ -304,9 +304,12 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         var result = this.CombinedInterviewRounds
             .filter(y => parseFloat(y.Sequence) < parseFloat(selectedRound.Sequence))
             .some(x => x.IsPresnetInRRF);/**returns true if there is any round mention in rrf is skipp  */
+
         return !result;
     }
     getNominatedInterviewersByRound(RoundId: string) {
+        var selectedRound = this.CombinedInterviewRounds.find(x => x.InterviewRound.Id === parseInt(RoundId));
+        this.ScheduleInterView.InterviewType = selectedRound.InterviewType;
         if (this.isRoundSkipped(RoundId)) {
             // if (this.roundTobeScheduled.Id === undefined || this.roundTobeScheduled.Id === parseInt(RoundId)) {
             //Enable Schedule Button
