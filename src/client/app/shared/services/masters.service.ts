@@ -101,7 +101,12 @@ export class MastersService {
             .map(this.extractData)
             .catch(this.handleError);
     }
-
+    GetInterviewRounds(candidateID: string, rrfId: string) {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetIterviewRoundsForScheduling?CandidateID=' + candidateID + '&RRFID=' + rrfId);
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
     getCandidateStatuses() {
         let url = Config.GetURL('/api/Masters/GetCandidateStatus');
         return this.authHttp.get(url)
@@ -141,7 +146,7 @@ export class MastersService {
             .map(this.extractData)
             .catch(this.handleError);
     }
-    GetSkypeID () {
+    GetSkypeID() {
         let url = Config.GetURL('/api/Masters/GetSkypeIDs');
         return this.authHttp.get(url)
             .map(this.extractData)
@@ -180,7 +185,7 @@ export class MastersService {
             .finally(() => this._spinnerService.hide());
     }
 
-       getCurrentLoggedInUser() {
+    getCurrentLoggedInUser() {
         let url = Config.GetURL('/api/authentication/getCurrentUserName');
         return this.authHttp.get(url)
             .map(this.extractData)

@@ -7,7 +7,7 @@ import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import {CalendarDataService} from '../service/calendarDataService';
 import {CalendarDetails, Event, Resource} from '../model/calendarDetails';
 import { MastersService } from '../../../shared/services/masters.service';
-import { InterviewAvailability, Interview } from '../../shared/model/interview';
+import { InterviewAvailability, Interview, InterviewsRounds } from '../../shared/model/interview';
 import { ScheduleInterviewService} from '../service/ScheduleInterview.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
@@ -36,6 +36,8 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     InterviewTypes: Array<MasterData>;
     InterviewSkypeId: Array<MasterData>;
     InterviewRounds: Array<MasterData>;
+    /**Get interview rounds with new format */
+    CombinedInterviewRounds: Array<InterviewsRounds>;
     NominatedInterviewers: Array<MasterData>;
     AllNominatedInterviewers: Array<InterviewersPanel>;
     OtherInterviewers: Array<MasterData>;
@@ -112,7 +114,8 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         this.getInterviewModes();
         //Get Skype Id
         this.getInterviewSkypeId();
-
+        //Get Modified Rounds
+        this.getInterviewRounds(this.ScheduleInterView.CandidateID.Value, this.ScheduleInterView.RRFID.Value);
         //Pass Headers
         this.header = {
             left: 'prev,next today',
@@ -279,21 +282,45 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             this.getNominatedInterviewersByRound(this.ScheduleInterView.Round.Id.toString());
         }
     }
+    /**Bind all interviewrs id as per rounds */
+    getNominatedInterviewersByRounds(RoundId: string) {
+        this.NominatedInterviewers = new Array<MasterData>();
+        for (var index = 0; index < this.AllNominatedInterviewers.length; index++) {
+            if (this.AllNominatedInterviewers[index].RoundNumber.Id === parseInt(RoundId)) {
+                for (var i = 0; i < this.AllNominatedInterviewers[index].Interviewers.length; i++) {
+                    this.NominatedInterviewers.push(this.AllNominatedInterviewers[index].Interviewers[i]);
+                }
+            }
+        }
+        //set is nominated interviewrs are available for current round
+        this.NominatedInterviewersAvailable = (this.NominatedInterviewers.length > 0) ? true : false;
+    }
 
+    isRoundSkipped(_interviewRound: string): boolean {
+        /**Find selected rounds object */
+        var selectedRound = this.CombinedInterviewRounds.find(x => x.InterviewRound.Id === parseInt(_interviewRound));
+        /**Find object of rounds whoes Sequence is prior (less) than selected round */
+        var result = this.CombinedInterviewRounds
+            .filter(y => parseFloat(y.Sequence) < parseFloat(selectedRound.Sequence))
+            .some(x => x.IsPresnetInRRF);/**returns true if there is any round mention in rrf is skipp  */
+        return !result;
+    }
     getNominatedInterviewersByRound(RoundId: string) {
-        if (this.roundTobeScheduled.Id === undefined || this.roundTobeScheduled.Id === parseInt(RoundId)) {
+        if (this.isRoundSkipped(RoundId)) {
+            // if (this.roundTobeScheduled.Id === undefined || this.roundTobeScheduled.Id === parseInt(RoundId)) {
             //Enable Schedule Button
             this.ifInterviewScheduled = false;
             this.ifInvalidInterview = false;
-            this.NominatedInterviewers = new Array<MasterData>();
-            for (var index = 0; index < this.AllNominatedInterviewers.length; index++) {
-                if (this.AllNominatedInterviewers[index].RoundNumber.Id === parseInt(RoundId)) {
-                    for (var i = 0; i < this.AllNominatedInterviewers[index].Interviewers.length; i++) {
-                        this.NominatedInterviewers.push(this.AllNominatedInterviewers[index].Interviewers[i]);
-                    }
-                }
-            }
-            this.NominatedInterviewersAvailable = (this.NominatedInterviewers.length > 0) ? true : false;
+            this.getNominatedInterviewersByRounds(RoundId);
+            // this.NominatedInterviewers = new Array<MasterData>();
+            // for (var index = 0; index < this.AllNominatedInterviewers.length; index++) {
+            //     if (this.AllNominatedInterviewers[index].RoundNumber.Id === parseInt(RoundId)) {
+            //         for (var i = 0; i < this.AllNominatedInterviewers[index].Interviewers.length; i++) {
+            //             this.NominatedInterviewers.push(this.AllNominatedInterviewers[index].Interviewers[i]);
+            //         }
+            //     }
+            // }
+            // this.NominatedInterviewersAvailable = (this.NominatedInterviewers.length > 0) ? true : false;
             if (this.ScheduleInterView.InterviewID.Id !== null && this.ScheduleInterView.InterviewID.Id !== undefined) {
                 var interviewerId: string[] = new Array();
                 for (var index = 0; index < this.ScheduleInterView.InterviewerAvailability.length; index++) {
@@ -547,6 +574,15 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             .subscribe(
             results => {
                 this.InterviewSkypeId = <any>results;
+            },
+            error => this.errorMessage = <any>error);
+    }
+    /** Get interview rounds*/
+    getInterviewRounds(candidateID: string, rrfID: string) {
+        this._mastersService.GetInterviewRounds(candidateID, rrfID)
+            .subscribe(
+            results => {
+                this.CombinedInterviewRounds = <any>results;
             },
             error => this.errorMessage = <any>error);
     }

@@ -33,7 +33,7 @@ export class Interview {
     public Reason: string;
     public Approver: string;
     public CandidateDetails: CandidatePrimaryDetails = new CandidatePrimaryDetails();
-    public SkypeID:string;
+    public SkypeID: string;
 }
 //Interviewrs Availability comments
 export class InterviewAvailability {
@@ -67,4 +67,10 @@ export class AwaitedInterview {
     public Interviewer: MasterData = new MasterData();
     public InterviewConfirmation: string;
     public AvailabilityComments: string;
+}
+export class InterviewsRounds {
+    public InterviewRound: MasterData = new MasterData();
+    public InterviewType: MasterData = new MasterData();
+    public Sequence: string;
+    public IsPresnetInRRF: boolean;
 }
