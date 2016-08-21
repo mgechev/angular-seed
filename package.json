@@ -11,7 +11,7 @@
     "build.e2e": "gulp build.e2e --color",
     "build.prod": "gulp build.prod --color --config-env prod",
     "build.test": "gulp build.test --color",
-    "build.test.watch": "gulp build.test.watch --color",
+    "test.watch": "gulp test.watch --color",
     "generate.manifest": "gulp generate.manifest --color",
     "e2e": "protractor",
     "e2e.live": "protractor --elementExplorer",
