@@ -117,9 +117,9 @@ Visit the [Wiki page](https://github.com/mgechev/angular2-seed/wiki) of the proj
 ```bash
 npm test
 
-# Debug - In two different shell windows
-npm run build.test.watch      # 1st window
-npm run karma.start           # 2nd window
+# Development. Your app will be watched by karma
+# on each change all your specs will be executed.
+npm run test.watch
 
 # code coverage (istanbul)
 # auto-generated at the end of `npm test`

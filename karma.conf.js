@@ -33,6 +33,7 @@ module.exports = function(config) {
       // RxJs.
       { pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false },
       { pattern: 'node_modules/rxjs/**/*.js.map', included: false, watched: false },
+      { pattern: 'node_modules/@angular/**/*.js.map', included: false, watched: false },
 
       // paths loaded via module imports
       // Angular itself
@@ -62,14 +63,11 @@ module.exports = function(config) {
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-      'dist/**/!(*spec).js': ['coverage']
-    },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['mocha', 'coverage'],
+    reporters: ['mocha'],
 
 
     // web server port
@@ -101,13 +99,6 @@ module.exports = function(config) {
         base: 'Chrome',
         flags: ['--no-sandbox']
       }
-    },
-
-    coverageReporter: {
-      dir: 'coverage/',
-      reporters: [
-        { type: 'json', subdir: '.', file: 'coverage-final.json' }
-      ]
     },
 
     // Continuous Integration mode
