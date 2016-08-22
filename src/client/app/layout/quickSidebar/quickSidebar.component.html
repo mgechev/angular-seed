@@ -47,57 +47,66 @@
                     <!--<h3 class="list-heading">Staff</h3>-->
                     <div class="media-list list-items">
                         <div class="media">
-                            <a style=" float: right;" (click)='addNewTask()'><i class="fa fa-plus-square-o" aria-hidden="true"></i> Add New Task</a>
+                            <div class="page-quick-sidebar-nav">
+                                <a href="javascript:;" class="page-quick-sidebar-back-to-list" (click)='addNewTask()'><i class="fa fa-plus-circle" aria-hidden="true"></i> New Task</a>
+                            </div>
                         </div>
                     </div>
-                    <ul class="media-list list-items">
-                        <li class="media">
-                            <!--<div class="media-status">
+                    <div>
+                        <ul class="media-list list-items">
+                            <li class="media" *ngFor="let task of MyTodoList">
+                                <!--<div class="media-status">
                                 <span class="badge badge-success">8</span>
                             </div>-->
-                            <!--<img class="media-object" src="../assets/layouts/layout4/img/avatar3.jpg" alt="...">-->
+                                <!--<img class="media-object" src="../assets/layouts/layout4/img/avatar3.jpg" alt="...">-->
 
-                            <div *ngFor="let task of MyTodoList" (click)="setCurrentTask(task)">
+                                <!--<div (click)="setCurrentTask(task)">-->
                                 <div class="row">
-                                    <div class="col-md-10">
+                                    <div class="col-md-1">
+                                        <div class="label label-sm label-info">
+                                            <i class="fa fa-bell-o" style="padding-right:5px;"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9" style="margin-top:-3%">
                                         <div class="media-body">
-                                            <h4 class="media-heading">{{task.Title}}</h4>
+                                            <h4 class="media-heading-sub">{{task.Title}}</h4>
                                         </div>
                                     </div>
                                     <div class="col-md-1">
                                         <!--<span aria-hidden="true">×</span>-->
-                                        <a (click)="RemoveTask(task)"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                        <a (click)="RemoveTask(task.ID)"><i class="fa fa-times" aria-hidden="true"></i></a>
                                     </div>
                                 </div>
-                                <hr style="border-top : 1px solid rgba(233, 236, 243, 0.29)">
-                            </div>
+                                <!--<hr style="border-top : 1px solid rgba(233, 236, 243, 0.29)">-->
+                                <!--</div>-->
 
-                        </li>
-                        <!--<li class="media">
-                            <img class="media-object" src="../assets/layouts/layout4/img/avatar1.jpg" alt="...">
-                            <div class="media-body">
-                                <h4 class="media-heading">Nick Larson</h4>
-                                <div class="media-heading-sub"> Art Director </div>
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="media-status">
-                                <span class="badge badge-danger">3</span>
-                            </div>
-                            <img class="media-object" src="../assets/layouts/layout4/img/avatar4.jpg" alt="...">
-                            <div class="media-body">
-                                <h4 class="media-heading">Deon Hubert</h4>
-                                <div class="media-heading-sub"> CTO </div>
-                            </div>
-                        </li>
-                        <li class="media">
+                            </li>
+                            <!--<li class="media">
+                                <img class="media-object" src="../assets/layouts/layout4/img/avatar1.jpg" alt="...">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Nick Larson</h4>
+                                    <div class="media-heading-sub"> Art Director </div>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <div class="media-status">
+                                    <span class="badge badge-danger">3</span>
+                                </div>
+                                <img class="media-object" src="../assets/layouts/layout4/img/avatar4.jpg" alt="...">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Deon Hubert</h4>
+                                    <div class="media-heading-sub"> CTO </div>
+                                </div>
+                            </li>
+                                <li class="media">
                             <img class="media-object" src="../assets/layouts/layout4/img/avatar2.jpg" alt="...">
                             <div class="media-body">
                                 <h4 class="media-heading">Ella Wong</h4>
                                 <div class="media-heading-sub"> CEO </div>
                             </div>
                         </li>-->
-                    </ul>
+                        </ul>
+                    </div>
                     <!--<h3 class="list-heading">Customers</h3>
                     <ul class="media-list list-items">
                         <li class="media">

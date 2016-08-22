@@ -187,28 +187,28 @@
                             <!-- Update Stauts-->
 
                             <div id="updateRow" *ngIf='isCollapsed'>
-                                <span class="header">Blacklist Candidate</span>
+                                <span class="header uppercase">Blacklist: {{currentCandidate}}</span>
                                 <hr style="margin:0px 0px !important" />
                                 <form role="form" (submit)="onUpdateStauts()">
                                     <div class="row" style="margin-top: 10px">
-                                        <div class="col-md-3">
+                                        <!--<div class="col-md-2">
                                             <div class="form-group">
                                                 <label class="sbold uppercase"> {{currentCandidate}}</label>
                                             </div>
-                                        </div>
-                                        <div class="col-md-2">
+                                        </div>-->
+                                       <!-- <div class="col-md-2">
                                             <div class="form-group">
                                                 <select class="form-control" (change)='onSelectStatus($event.target.value)' [(ngModel)]="profile.Status.Id" tooltip="Status"
                                                     tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentStatus">
                                                    <option *ngFor="let status of statusList" [value]="status.Id">{{status.Value}}</option>
                                                 </select>
                                             </div>
-                                        </div>
-                                        <div class="col-md-4">
+                                        </div> -->
+                                        <div class="col-md-9">
                                             <div class="form-group">
                                                 <div class="edit-content"></div>
-                                                <textarea class="form-control statusComments" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.Comments"
-                                                    required="" tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                <textarea class="form-control statusComments" rows="1" placeholder="Reason" style="resize:vertical; width:100%" [(ngModel)]="profile.Comments"
+                                                    required="" tooltip="Reason" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                     tooltipEnable="!profile.Comments">
                                                 </textarea>
                                             </div>
@@ -219,6 +219,7 @@
                                         </div>
                                     </div>
                                 </form>
+                                <hr style="margin:8px 0px !important" />
                             </div>
 
                             <!-- Update Status END-->

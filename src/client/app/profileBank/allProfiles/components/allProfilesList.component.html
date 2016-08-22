@@ -51,40 +51,45 @@
                         <div class="table-toolbar">
 
                             <div id="updateRow" *ngIf='isCollapsed'>
-                                <span class="header">Update Status</span>
+                                <span class="header uppercase">Blacklist: {{currentCandidate}}</span>
                                 <hr style="margin:0px 0px !important" />
                                 <form role="form" (submit)="onUpdateStauts()">
                                     <div class="row" style="margin-top: 10px">
-                                        <div class="col-md-3">
+                                        <!--<div class="col-md-3">
                                             <div class="form-group">
                                                 <span class="form-control" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"> {{currentCandidate}}</span>
                                             </div>
-                                        </div>
-                                        <div class="col-md-3">
+                                        </div>-->
+                                        <!--<div class="col-md-3">
                                             <div class="form-group">
-                                                <!--(change)='onSelectStatus($event.target.value)' -->
+                                                (change)='onSelectStatus($event.target.value)' 
                                                 <select class="form-control" (change)='onSelectStatus($event.target.value)' [(ngModel)]="profile.Status.Id" tooltip="Status"
                                                     tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentStatus">
                                                    <option *ngFor="let status of statusList" [value]="status.Id">{{status.Value}}</option>
                                                 </select>
                                             </div>
-                                        </div>
-                                        <div class="col-md-4">
+                                        </div>-->
+                                        <div class="col-md-9">
                                             <div class="form-group">
                                                 <div class="edit-content"></div>
-                                                <textarea class="form-control" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.Comments" required=""
+                                                <textarea class="form-control" rows="1" placeholder="Comments" style="resize:vertical width:100%" [(ngModel)]="profile.Comments" required=""
                                                     tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.Comments">
                                                 </textarea>
                                             </div>
                                         </div>
-                                        <div class="col-md-1">
+                                         <div class="col-md-3">
+                                            <button type="submit" class="btn btn-info updatebtn"> Update </button> &nbsp;
+                                            <a class="btn btn-info " (click)='closeUpdatePanel()'> Cancel </a>
+                                        </div>
+                                        <!--<div class="col-md-1">
                                             <button type="submit" class="btn btn-info "> Update </button>
                                         </div>
                                         <div class="col-md-1">
                                             <a class="btn btn-info " (click)='closeUpdatePanel()'> Cancel </a>
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </form>
+                                <hr style="margin:8px 0px !important" />
                             </div>
 
                             <div class="row" *ngIf="!NORECORDSFOUND">
@@ -215,7 +220,7 @@
 
                                                         <li>
                                                             <button class="btn btn-default btnLink" [disabled]='getEditAccess(profile.Owner)' (click)='SaveCandidateID(profile.CandidateID)'>
-                                                                  <i class="icon-flag"></i> Update Status </button>
+                                                                  <i class="icon-flag"></i> Blacklist Profile </button>
                                                         </li>
                                                         <li class="divider"> </li>
                                                         <li>

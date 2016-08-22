@@ -268,8 +268,8 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     onUpdateStauts() {
-        if (this.selectedStatus.Id === undefined)
-            this.selectedStatus = this.profile.Status;
+        this.selectedStatus.Id = 0;
+        this.selectedStatus.Value = "Incomplete";
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
