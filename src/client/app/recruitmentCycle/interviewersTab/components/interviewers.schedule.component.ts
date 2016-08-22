@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
+import { ROUTER_DIRECTIVES, Router, OnActivate } from '@angular/router';
 import { Interview} from '../../shared/model/interview';
 import { InterviewersScheduleService} from '../services/interviewers.schedule.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -58,7 +58,6 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
     /**Router method overrid from OnActivate class */
     routerOnActivate() {
         this.getMyInterviews();
-        this.InterviewerCalendarDetails.Events = <any>this._interviewService.getEvent();
         this.InterviewerCalendarDetails.Resources = <any>this._interviewService.getResources();
 
         this.getMyAllInterviewsDetailsOfCalendar();

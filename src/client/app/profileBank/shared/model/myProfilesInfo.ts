@@ -70,6 +70,8 @@ export class CandidateProfile {
   public BinaryResume: string;
   /**Property for giving file name with extection */
   public ResumeName: string = 'TestResume.doc';
+  /**Propety to get profiles last updated date */
+  public ModifiedOn: string;
 
 }
 

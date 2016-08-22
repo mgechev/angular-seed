@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit} from '@angular/core';
+import { Component, AfterViewInit} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
 import { Interview} from '../../shared/model/interview';
 import { InterviewersCalendarService} from '../services/interviewers.calendar.service';
@@ -19,7 +19,7 @@ import { InterviewSlotComponent } from '../../shared/component/InterviewSlot/Com
 })
 
 /** RecruitmentInterviewerCalenderComponent implements OnActivate*/
-export class RecruitmentInterviewerCalenderComponent implements OnActivate, OnInit, AfterViewInit {
+export class RecruitmentInterviewerCalenderComponent implements OnActivate, AfterViewInit {
     returnPath: string;
     Title: string;
     errorMessage: string;
@@ -42,14 +42,14 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, OnIn
         private toastr: ToastsManager,
         private _interviewService: InterviewersCalendarService,
         private _interviewAvailabilityService: InterviewersAvailabilityService) {
-       // this.getListOfAssignedRRF();
+        // this.getListOfAssignedRRF();
         var date = new Date();
         this.currentDate = this.formatDate(date);
     }
     routerOnActivate() {
         //Get Events to show on Calendar
+        this._myCalendarDetails.Resources = this._interviewService.getStaticResources();
         //this.events = this._interviewService.getCalendarEventData();
-        //this.resources = this._interviewService.getResources();
         //Pass Headers
         this.header = {
             left: 'prev,next today',
@@ -58,7 +58,7 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, OnIn
         };
 
         this.returnPath = sessionStorage.getItem('returnPath');
-        this.getResources();
+        // this.getResources();
         this.getMyInterviews();
     }
     Back() {
@@ -127,13 +127,8 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, OnIn
         }
 
     }
-
-    ngOnInit() {
-        //this.getMyInterviews();
-    }
-
     ngAfterViewInit() {
-        this.getMyInterviews();
+        //this.getMyInterviews();
     }
     //Shows Tooltip on calendar
     showDetails(e: any) {

@@ -7,10 +7,11 @@
             <ul class="list-unstyled profile-nav text-center">
                 <li>
                     <!--*ngIf="profile.BinaryImage!==''&&profile.BinaryImage!==null"-->
-                    <img class="img-responsive pic-bordered" *ngIf="profile.BinaryImage!==''&&profile.BinaryImage!==null" style="border-radius: 50%!important;height:150px;" alt="" src="data:image/jpeg;base64,{{profile.BinaryImage}}">
+                    <img class="img-responsive pic-bordered" *ngIf="profile.BinaryImage!==''&&profile.BinaryImage!==null" style="border-radius: 50%!important;height:150px;"
+                        alt="" src="data:image/jpeg;base64,{{profile.BinaryImage}}">
 
                     <img src="../assets/layouts/layout4/img/default-user.jpg" *ngIf="profile.BinaryImage===''||profile.BinaryImage===null" class="img-responsive pic-bordered"
-                    style="border-radius: 50%!important; height:150px;" alt="">
+                        style="border-radius: 50%!important; height:150px;" alt="">
                     <br>
 
                 </li>
@@ -56,25 +57,25 @@
                             <div tooltip="Location" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Location">
                                 <i class="fa fa-map-marker"></i>{{profile.District?profile.District:"N/A"}}
                             </div>
-                             </li>
+                        </li>
                         <li>
                             <!--experience-->
                             <div tooltip="Experience" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Experience">
                                 <i class="fa fa-briefcase"></i>{{profile.TotalExperience?profile.TotalExperience:"N/A"}}
                             </div>
-                             </li>
+                        </li>
                         <li>
                             <!--tag-->
                             <div tooltip="Tag" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="tag">
-                                <i class="fa fa-tag"></i> {{profile.Tag?profile.Tag:"N/A"}} 
+                                <i class="fa fa-tag"></i> {{profile.Tag?profile.Tag:"N/A"}}
                             </div>
-                            </li>
+                        </li>
                         <li>
                             <!--notice period-->
                             <div tooltip="Notice period" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Notice period">
                                 <i class="fa fa-hourglass-half"></i> {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod:"N/A"}}
                             </div>
-                            
+
                         </li>
                     </ul>
                 </div>
@@ -82,10 +83,11 @@
                 <div class="col-md-4">
                     <div class="portlet sale-summary">
                         <div class="portlet-title">
-                            <!--<div class="caption font-red sbold"> <i aria-hidden="true" class="fa fa-download"></i> Download Resume </div>
-                            <div class="tools">
+
+                            <!--<div class="tools">
                                 <a class="reload" href="javascript:;" data-original-title="" title=""> </a>
                             </div>-->
+                            <span class="font-gray sbold"> Updated On {{profile.ModifiedOn?profile.ModifiedOn:"08 june 2017"}}</span>
                         </div>
                         <div class="portlet-body">
                             <ul class="list-unstyled">
@@ -99,7 +101,7 @@
                                     <div class="tools">
                                         <!--(click)='getResume(profile.CandidateID)'-->
                                         <a href="data:application/octet-stream;charset=utf-8;base64,{{profile.BinaryResume}}" download="{{profile.ResumeName?profile.ResumeName:'TestResume.doc'}}"
-                                        class="reload" data-original-title="" title=""><i aria-hidden="true" class="fa fa-download"></i>Download Resume {{profile.Resume_ID}}  </a>
+                                            class="reload" data-original-title="" title=""><i aria-hidden="true" class="fa fa-download"></i>Download Resume {{profile.Resume_ID}}  </a>
                                         <!--<a href="data:application/octet-stream;charset=utf-8;base64,{{profile.BinaryImage}}" class="btn btn-primary" download="pdftesting.pdf">Download</a>-->
                                     </div>
                                 </li>
