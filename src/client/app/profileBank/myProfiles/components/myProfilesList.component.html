@@ -103,7 +103,7 @@
                                                                     <input type="text" placeholder="Total Experience" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.TotalExperience"
                                                                         tooltip="Total Experience" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                         tooltipEnable="!profile.CandidateCareerProfile.TotalExperience"
-                                                                        pattern="[0-9]" title="Enter total experience in years Eg. 2"
+                                                                        pattern="[0-9][1-9]" title="Enter total experience in years Eg. 02"
                                                                         maxlength="2" />
                                                                 </div>
                                                             </div>
@@ -119,7 +119,7 @@
                                                                     <input type="text" placeholder="Notice Period" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod"
                                                                         tooltip="Notice Period" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                         tooltipEnable="!profile.CandidateOtherDetails.NoticePeriod"
-                                                                        pattern="[0-9]" title="Enter notice period in months Eg. 2"
+                                                                        pattern="[0-9][1-9]" title="Enter notice period in months Eg. 02"
                                                                         maxlength="2" />
                                                                 </div>
                                                             </div>
@@ -187,13 +187,13 @@
                             <!-- Update Stauts-->
 
                             <div id="updateRow" *ngIf='isCollapsed'>
-                                <span class="header">Update Status</span>
+                                <span class="header">Blacklist Candidate</span>
                                 <hr style="margin:0px 0px !important" />
                                 <form role="form" (submit)="onUpdateStauts()">
                                     <div class="row" style="margin-top: 10px">
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <span class="form-control" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"> {{currentCandidate}}</span>
+                                                <label class="sbold uppercase"> {{currentCandidate}}</label>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
@@ -410,7 +410,7 @@
                                                     <li class="divider"> </li>
                                                     <li>
                                                         <a (click)='SaveCandidateID(myprofile.CandidateID)'>
-                                                            <i class="icon-flag"></i> Update Status
+                                                            <i class="icon-flag"></i> Blacklist Profile
                                                         </a>
                                                     </li>
                                                     <li class="divider"> </li>
