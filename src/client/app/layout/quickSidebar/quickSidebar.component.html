@@ -47,36 +47,46 @@
                     <!--<h3 class="list-heading">Staff</h3>-->
                     <div class="media-list list-items">
                         <div class="media">
-                            <div class="page-quick-sidebar-nav">
-                                <a href="javascript:;" class="page-quick-sidebar-back-to-list" (click)='addNewTask()'><i class="fa fa-plus-circle" aria-hidden="true"></i> New Task</a>
+                            <div class="page-quick-sidebar-item">
+                                <div class="page-quick-sidebar-chat-user" style="margin-left: -330px; margin-top: -25px;">
+                                    <div class="page-quick-sidebar-nav pull-left">
+                                        <a href="javascript:;" class="page-quick-sidebar-back-to-list" (click)='addNewTask()'><i class="fa fa-plus-circle" aria-hidden="true"></i> New Task</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <ul class="media-list list-items">
-                            <li class="media" *ngFor="let task of MyTodoList">
+                        <ul class="feeds list-items">
+                            <li class="" *ngFor="let task of MyTodoList">
                                 <!--<div class="media-status">
                                 <span class="badge badge-success">8</span>
                             </div>-->
                                 <!--<img class="media-object" src="../assets/layouts/layout4/img/avatar3.jpg" alt="...">-->
 
                                 <!--<div (click)="setCurrentTask(task)">-->
-                                <div class="row">
-                                    <div class="col-md-1">
-                                        <div class="label label-sm label-info">
-                                            <i class="fa fa-bell-o" style="padding-right:5px;"></i>
+
+                                <div class="col1">
+                                    <div class="cont">
+                                        <div class="cont-col1">
+                                            <div class="label label-sm label-info">
+                                                <i class="fa fa-bell-o"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-9" style="margin-top:-3%">
-                                        <div class="media-body">
-                                            <h4 class="media-heading-sub">{{task.Title}}</h4>
+                                        <div class="cont-col2">
+                                            <div class="desc">
+                                                {{task.Title}}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <!--<span aria-hidden="true">×</span>-->
-                                        <a (click)="RemoveTask(task.ID)"><i class="fa fa-times" aria-hidden="true"></i></a>
                                     </div>
                                 </div>
+                                <div class="col2">
+                                    <a (click)="RemoveTask(task.ID)"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                </div>
+
+
+
+
                                 <!--<hr style="border-top : 1px solid rgba(233, 236, 243, 0.29)">-->
                                 <!--</div>-->
 
