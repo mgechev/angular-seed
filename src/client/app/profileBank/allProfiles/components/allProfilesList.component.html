@@ -51,7 +51,7 @@
                         <div class="table-toolbar">
 
                             <div id="updateRow" *ngIf='isCollapsed'>
-                                <span class="header uppercase">Blacklist: {{currentCandidate}}</span>
+                                <span class="header font-green sbold uppercase">Blacklist: {{currentCandidate}}</span>
                                 <hr style="margin:0px 0px !important" />
                                 <form role="form" (submit)="onUpdateStauts()">
                                     <div class="row" style="margin-top: 10px">
@@ -72,12 +72,13 @@
                                         <div class="col-md-9">
                                             <div class="form-group">
                                                 <div class="edit-content"></div>
-                                                <textarea class="form-control" rows="1" placeholder="Comments" style="resize:vertical width:100%" [(ngModel)]="profile.Comments" required=""
-                                                    tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.Comments">
+                                                <textarea class="form-control" rows="1" placeholder="Enter reason" style="resize:vertical width:100%" [(ngModel)]="profile.Comments"
+                                                    required="" tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                    tooltipEnable="!profile.Comments">
                                                 </textarea>
                                             </div>
                                         </div>
-                                         <div class="col-md-3">
+                                        <div class="col-md-3">
                                             <button type="submit" class="btn btn-info updatebtn"> Update </button> &nbsp;
                                             <a class="btn btn-info " (click)='closeUpdatePanel()'> Cancel </a>
                                         </div>

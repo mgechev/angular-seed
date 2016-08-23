@@ -203,7 +203,8 @@ export class ProfileBankService {
     }
 
     updateCandidateStatus(CandidateID: MasterData, Status: MasterData, Comments: string) {
-        let url = Config.GetURL('/api/ProfileBank/UpdateStatus');
+        //let url = Config.GetURL('/api/ProfileBank/UpdateStatus');
+        let url = Config.GetURL('/api/ProfileBank/BlacklistCandidate');
         this._spinnerService.show();
         return this.authHttp.post(url, { CandidateID: CandidateID, Status: Status, Comments: Comments })
             .map(this.extractData)

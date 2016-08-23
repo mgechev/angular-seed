@@ -519,6 +519,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     setInterviewValues(results: Interview) {
         //get Result
         this.ScheduleInterView = results;
+        this.ScheduleInterView.InterviewFromTime = ""; 
         //GetCandidateName TODO://fetch Candidate Name from results
         this.ScheduleInterView.Candidate = JSON.parse(sessionStorage.getItem('Candidate')).Candidate;
         //Set Value of Round By Interview Type
