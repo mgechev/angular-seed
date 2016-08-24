@@ -11,7 +11,7 @@
     "build.e2e": "gulp build.e2e --color",
     "build.prod": "gulp build.prod --color --config-env prod",
     "build.test": "gulp build.test --color",
-    "build.test.watch": "gulp build.test.watch --color",
+    "test.watch": "gulp test.watch --color",
     "generate.manifest": "gulp generate.manifest --color",
     "e2e": "protractor",
     "e2e.live": "protractor --elementExplorer",
@@ -24,7 +24,7 @@
     "serve.dev": "gulp serve.dev --color --config-env dev",
     "serve.e2e": "gulp serve.e2e --color",
     "serve.prod": "gulp serve.prod --color --config-env prod",
-    "start": "gulp serve.dev --color --config-env dev",
+    "start": "gulp serve.dev --color",
     "tasks.list": "gulp --tasks-simple --color",
     "test": "gulp test --color",
     "e2e.ci": "gulp build.prod --color && gulp build.js.e2e --color && gulp e2e --color",
@@ -124,6 +124,6 @@
     "core-js": "^2.4.0",
     "rxjs": "5.0.0-beta.6",
     "systemjs": "0.19.27",
-    "zone.js": "^0.6.12"
+    "zone.js": "0.6.13"
   }
 }

@@ -435,6 +435,7 @@ export class SeedConfig {
       server: {
         baseDir: `${this.DIST_DIR}/empty/`,
         routes: {
+          [`${this.APP_BASE}${this.APP_SRC}`]: this.APP_SRC,
           [`${this.APP_BASE}${this.APP_DEST}`]: this.APP_DEST,
           [`${this.APP_BASE}node_modules`]: 'node_modules',
           [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST
