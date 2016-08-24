@@ -28,7 +28,7 @@
         <!-- /Profile Photo -->
 
         <!-- Profiles Details -->
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div class="row">
                 <div class="col-md-8 profile-info">
                     <h3 class="font-green sbold uppercase">{{profile.Candidate}}</h3>
@@ -38,7 +38,7 @@
                     <ul class="list-unstyled">
                         <li>
 
-                            <label class="control-label">Skills : <strong> {{profile.CandidateSkills.PrimarySkills?profile.CandidateSkills.PrimarySkills:"N/A"}} </strong>                                {{profile.CandidateSkills.OtherSkills}} {{profile.CandidateSkills.PrimarySkills}} </label>
+                            <label class="control-label">Skills : <strong> {{profile.CandidateSkills.PrimarySkills?profile.CandidateSkills.PrimarySkills:"N/A"}} </strong> {{profile.CandidateSkills.OtherSkills}} {{profile.CandidateSkills.PrimarySkills}} </label>
                             <!--<label class="control-label">Skills : <strong> C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF</strong></label>-->
                         </li>
                         <li>
@@ -87,7 +87,7 @@
                             <!--<div class="tools">
                                 <a class="reload" href="javascript:;" data-original-title="" title=""> </a>
                             </div>-->
-                            <span class="font-gray sbold"> Updated On {{profile.ModifiedOn?profile.ModifiedOn:"08 june 2017"}}</span>
+                            <span class="font-gray sbold pull-right"> Updated On {{profile.ModifiedOn?profile.ModifiedOn:"N/A"}}</span>
                         </div>
                         <div class="portlet-body">
                             <ul class="list-unstyled">
@@ -100,8 +100,10 @@
                                 <li>
                                     <div class="tools">
                                         <!--(click)='getResume(profile.CandidateID)'-->
-                                        <a href="data:application/octet-stream;charset=utf-8;base64,{{profile.BinaryResume}}" download="{{profile.ResumeName?profile.ResumeName:'TestResume.doc'}}"
-                                            class="reload" data-original-title="" title=""><i aria-hidden="true" class="fa fa-download"></i>Download Resume {{profile.Resume_ID}}  </a>
+                                        <a class="reload" data-original-title="" title="" (click)='getResume(profile.CandidateID)'><i aria-hidden="true" class="fa fa-download"></i>Download Resume</a>
+                                        <!--<br>
+                                        <a href="data:application/octet-stream;charset=utf-8;base64,{{profile.BinaryResume}}" download="{{profile.ResumeName?profile.ResumeName:'TestResume.doc '}}"
+                                            class="reload" data-original-title="" title=""><i aria-hidden="true" class="fa fa-download"></i>Download Resume {{profile.Resume_ID}}  </a>-->
                                         <!--<a href="data:application/octet-stream;charset=utf-8;base64,{{profile.BinaryImage}}" class="btn btn-primary" download="pdftesting.pdf">Download</a>-->
                                     </div>
                                 </li>

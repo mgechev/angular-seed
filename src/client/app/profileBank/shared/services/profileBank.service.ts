@@ -285,9 +285,15 @@ export class ProfileBankService {
                 saveAs(blob, filename);
             })
             .catch(this.handleError);
-
     }
-
+    getResume(CandidateID: MasterData) {
+        let url = Config.GetURL('/api/ProfileBank/GetResume?CandidateID=' + CandidateID.Value);
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     uploadProfilePhoto(resumeMeta: ResumeMeta) {
         let url = Config.GetURL('/api/ProfileBank/UploadProfilePhoto');
         return new Promise((resolve, reject) => {

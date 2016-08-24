@@ -12,6 +12,7 @@ import { InterviewDetailsRowComponent } from '../../shared/component/InterviewDe
 import { GrdOptions } from '../../../shared/model/common.model';
 import { IEFGridRowComponent } from '../../shared/component/IEFGridRow/IEFGridRow.component';
 import { MyScheduleInterview } from '../model/myScheduleInterview';
+import { ProfileBankService } from '../../../profileBank/index';
 
 
 @Component({
@@ -47,7 +48,8 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
     IEFButtonText: string = '';
     constructor(private _router: Router,
         private toastr: ToastsManager,
-        private _interviewService: InterviewersScheduleService) {
+        private _interviewService: InterviewersScheduleService,
+        private _profileBankService: ProfileBankService) {
         this.InterviewInformation = new Array<Interview>();
         this.InterviewInformationForCalendar = new Array<Interview>();
         /**Commenting as this functionality is deprecated */
@@ -213,5 +215,24 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         } else {
             return true;
         }
+    }
+    /**Get resume by candidate code */
+    getResume(candidateID: MasterData) {
+        this._profileBankService.getResume(candidateID)
+            .subscribe(
+            results => {
+                var Resume = <any>results;
+                if (Resume) {
+                    this.Download(Resume.BinaryResume, Resume.ResumeName);
+                } else { alert('Resume not available!'); }
+            },
+            error => this.errorMessage = <any>error);
+    }
+    /** Download crate file form binary and download in given fyle type */
+    Download(binaryResume: string, ResumeName: string) {
+        var link = document.createElement('a');
+        link.download = ResumeName;
+        link.href = 'data:application/octet-stream;charset=utf-8;base64,' + binaryResume;
+        link.click();
     }
 }

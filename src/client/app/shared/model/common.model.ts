@@ -29,10 +29,14 @@ export class GrdOptions {
     public PerPageCount: number = 5;
     public OrderBy: string = 'Modified';
     public Order: string = 'desc';
-    public NextPageUrl: string[]=[];
+    public NextPageUrl: string[] = [];
 }
 
 export class SortingMasterData {
     public Id: string;
     public Value: string;
+}
+export class Resume {
+    public ResumeName: string;
+    public BinaryResume: string;
 }
