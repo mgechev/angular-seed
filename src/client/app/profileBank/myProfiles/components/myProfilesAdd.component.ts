@@ -342,8 +342,9 @@ export class MyProfilesAddComponent implements OnActivate {
             ? this.CandidateExperiences.FollowUpComments.trim().replace(/ +/g, ' ') : ''
         ) {
             this.profile.CommentsUpdated = this.CandidateExperiences.CommentsUpdated = true;
+            // this.profile.PreviousFollowupComments = this.CandidateExperiences.FollowUpComments = this.profile.FollowUpComments.trim();
             this.profile.PreviousFollowupComments = this.CandidateExperiences.FollowUpComments
-                = this.profile.FollowUpComments.trim();
+                = this.CandidateExperiences.FollowUpComments.trim();
         } else {
             this.profile.CommentsUpdated = this.CandidateExperiences.CommentsUpdated = false;
         }
