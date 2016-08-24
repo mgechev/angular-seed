@@ -115,7 +115,7 @@ export class SeedConfig {
    * The default directory is `app`.
    * @type {string}
    */
-  BOOTSTRAP_DIR = 'app';
+  BOOTSTRAP_DIR = argv['app'] || 'app';
 
   /**
    * The directory where the client files are located.

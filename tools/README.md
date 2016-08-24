@@ -87,3 +87,4 @@ The seed provides the following utilities:
 | `template_locals.ts`   | Provides a utility for template locals |
 | `tsproject.ts`         | Provides a utility to configure the TypeScript transpilation |
 | `watch.ts`             | Provides a utility to watch for file changes and notify live reloads |
+
