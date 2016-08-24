@@ -123,13 +123,13 @@ npm start -- --app bar</pre></div>
 <h2>
 <a id="environment-configuration" class="anchor" href="#environment-configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Environment configuration</h2>
 
-<p>If you have different environments and you need to configure them to use different end points, settings, etc. you can use the <code>./tools/env/config.json</code> file. The keys in the file are the different environments.</p>
+<p>If you have different environments and you need to configure them to use different end points, settings, etc. you can use the files <code>dev.ts</code> or <code>prod.ts</code> in<code>./tools/env/</code>. The name of the file is environment you want to use.</p>
 
 <p>The can be specified by using:</p>
 
 <div class="highlight highlight-source-shell"><pre>npm start -- --config-env ENV_NAME</pre></div>
 
-<p>Currently the <code>ENV_NAME</code>s are <code>dev</code>, <code>prod</code>, <code>staging</code>, but you can simply add different key-value pairs to the <code>config.json</code> file in order to alter extra such environments.</p>
+<p>Currently the <code>ENV_NAME</code>s are <code>dev</code>, <code>prod</code>, <code>staging</code>, but you can simply add a different file <code>"ENV_NAME.ts".</code> file in order to alter extra such environments.</p>
 
 <h1>
 <a id="tools-documentation" class="anchor" href="#tools-documentation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tools documentation</h1>
@@ -149,6 +149,12 @@ npm start -- --app bar</pre></div>
 <span class="pl-c"># Development. Your app will be watched by karma</span>
 <span class="pl-c"># on each change all your specs will be executed.</span>
 npm run <span class="pl-c1">test</span>.watch
+<span class="pl-c"># NB: The command above might fail with a "EMFILE: too many open files" error.</span>
+<span class="pl-c"># Some OS have a small limit of opened file descriptors (256) by default</span>
+<span class="pl-c"># and will result in the EMFILE error.</span>
+<span class="pl-c"># You can raise the maximum of file descriptors by running the command below:</span>
+<span class="pl-c1">ulimit</span> -n 10480
+
 
 <span class="pl-c"># code coverage (istanbul)</span>
 <span class="pl-c"># auto-generated at the end of `npm test`</span>
