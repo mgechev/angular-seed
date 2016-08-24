@@ -6,12 +6,13 @@ import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
 import { ProfileInterviewHistory, AllInterviewsHistory }from '../models/profileEsplHistoryModel';
 import { MasterData } from  '../../../shared/model/index';
 import { ProfileEsplHistoryService } from '../services/profileEsplHistory.service';
+import { IEFGridRowComponent } from '../../../recruitmentCycle/shared/component/IEFGridRow/IEFGridRow.component';
 
 @Component({
     moduleId: module.id,
     selector: 'profile-esplhistory-list',
     templateUrl: 'profileEsplHistoryList.component.html',
-    directives: [ROUTER_DIRECTIVES, IfAuthorizeDirective],
+    directives: [ROUTER_DIRECTIVES, IfAuthorizeDirective, IEFGridRowComponent],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
     providers: [ProfileEsplHistoryService],
     pipes: [ProfileBankPipe]

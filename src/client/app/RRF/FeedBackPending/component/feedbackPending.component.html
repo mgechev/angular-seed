@@ -112,7 +112,7 @@
                                     </td>
                                     <td>
                                         <RRFGridRow [RRFData]=rrf [displayFeedBackStatus]='true'></RRFGridRow>
-                                        <feedback-data [RRFID]= rrf.RRFID *ngIf='rrf.IsShowFeedback'></feedback-data>
+                                        <feedback-data [RRFID]=rrf.RRFID *ngIf='rrf.IsShowFeedback'></feedback-data>
                                     </td>
                                     <td style="width:80px">
                                         <div class="btn-group ">
@@ -120,7 +120,7 @@
                                                     Action
                                                     <i class="fa fa-angle-down "></i>
                                                 </button>
-                                            <ul class="dropdown-menu " role="menu ">
+                                            <ul class="dropdown-menu pull-right" role="menu ">
                                                 <!--*ngIf='allowEditRRF(rrf.RaisedBy.Id)'-->
                                                 <li *ngIf='allowEditRRF(rrf)'>
                                                     <button class="btn btn-default btnLink" (click)='redirectToEditRRF(rrf.RRFID , rrf.Status.Id)'>
