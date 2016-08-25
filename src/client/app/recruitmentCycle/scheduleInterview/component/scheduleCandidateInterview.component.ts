@@ -340,6 +340,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             this.ScheduleInterView.Status.toLowerCase() !== 'rejected') {
             let modl: any = $('#skippingRound');
             modl.modal({ 'backdrop': 'static' });
+            this.getNominatedInterviewersByRounds(RoundId);
         } else {
             this.toastr.warning('You can not schdule interview  of rejected candidate by skipping round');
             this.ScheduleInterView.Round = new MasterData();
