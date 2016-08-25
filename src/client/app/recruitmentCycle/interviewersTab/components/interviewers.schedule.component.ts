@@ -20,7 +20,7 @@ import { ProfileBankService } from '../../../profileBank/index';
     selector: 'interviewers-shedule',
     templateUrl: 'interviewers.schedule.component.html',
     directives: [ROUTER_DIRECTIVES, FullCalendarComponent, InterviewDetailsRowComponent, IEFGridRowComponent],
-    providers: [Interview, ToastsManager, InterviewersScheduleService]
+    providers: [Interview, ToastsManager, ProfileBankService, InterviewersScheduleService]
 })
 
 export class RecruitmentInterviewScheduleComponent implements OnActivate {
