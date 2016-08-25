@@ -520,6 +520,8 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         //get Result
         this.ScheduleInterView = results;
         this.ScheduleInterView.InterviewFromTime = ""; 
+        //Change Date Format to yyyy-mm-dd
+        this.ScheduleInterView.InterviewDate = "";//this.formatDate(this.ScheduleInterView.InterviewDate);
         //GetCandidateName TODO://fetch Candidate Name from results
         this.ScheduleInterView.Candidate = JSON.parse(sessionStorage.getItem('Candidate')).Candidate;
         //Set Value of Round By Interview Type
@@ -530,8 +532,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             //this.getNominatedInterviewers();
             this.getNominatedInterviewersByRound(this.ScheduleInterView.Round.Id.toString());
         }
-        //Change Date Format to yyyy-mm-dd
-        this.ScheduleInterView.InterviewDate = this.formatDate(this.ScheduleInterView.InterviewDate);
+        
 
         this.clearSession('Candidate');
         this.ifRescheduleInterview = true;
