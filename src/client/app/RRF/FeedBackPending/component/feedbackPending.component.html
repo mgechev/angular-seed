@@ -26,9 +26,9 @@
                     <div [ifAuthorize]="['RRF.CANFREEZERRF.MANAGE']">
                         <form role="form" (submit)='onFeedback()'>
                             <div>
-                                <button type="button" id="btnFreeze" class="btn green" [disabled]='!selectedRowCount' (click)='onRRFFreeze()'><i class="fa fa-lock"></i>&nbsp;Freeze RRF</button>
+                                <button type="button" id="btnFreeze" class="btn green" [disabled]='!selectedRowCount' (click)='onRRFFreeze()'><i class="fa fa-lock"></i>&nbsp;RRF live</button>
                                 <!--<button type="button" id="btnOnHold" class="btn default"  [disabled]='!selectedRowCount' (click)='onStatusHold()'>On-Hold</button>-->
-                                <button type="submit" id="btnFeedback" class="btn red" [disabled]='!selectedRowCount'><i class="fa fa-reply" ></i>&nbsp;Feedback</button>
+                                <button type="submit" id="btnFeedback" class="btn red" [disabled]='!selectedRowCount'><i class="fa fa-reply" ></i>&nbsp;Validate</button>
                             </div>
                             <br>
                             <div>

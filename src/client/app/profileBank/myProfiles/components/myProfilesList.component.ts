@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import { CandidateProfile, ResumeMeta, AddCandidateResponse, AllCandidateProfiles ,CareerProfile } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, ResumeMeta, AddCandidateResponse, AllCandidateProfiles, CareerProfile } from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -360,12 +360,22 @@ export class MyProfilesListComponent implements OnActivate {
     uploadPhoto(selectedFile: any) {
         try {
             let FileList: FileList = selectedFile.target.files;
-            if (this.uploadedPhoto)
-                this.uploadedPhoto.length = 0;
-            for (let i = 0, length = FileList.length; i < length; i++) {
-                this.uploadedPhoto.push(FileList.item(i));
-                this.photoUploaded = true;
-                this.photoName = FileList.item(i).name;
+            if (selectedFile.target.files[0].size < 2000000) {
+                if (selectedFile.target.files[0].type === "image/jpeg" || selectedFile.target.files[0].type === "image/png" || selectedFile.target.files[0].type === "image/jpg") {
+                    if (this.uploadedPhoto)
+                        this.uploadedPhoto.length = 0;
+                    for (let i = 0, length = FileList.length; i < length; i++) {
+                        this.uploadedPhoto.push(FileList.item(i));
+                        this.photoUploaded = true;
+                        this.photoName = FileList.item(i).name;
+                    }
+                }
+                else {
+                    this.toastr.error('Please upload image of type .jpg, .png, .jpeg');
+                }
+            }
+            else {
+                this.toastr.error('Please upload image of size less than 2 MB');
             }
         } catch (error) {
             document.write(error);
@@ -420,11 +430,21 @@ export class MyProfilesListComponent implements OnActivate {
     uploadFile(inputValue: any): void {
         try {
             let FileList: FileList = inputValue.target.files;
-            this.psdTemplates.length = 0;
-            for (let i = 0, length = FileList.length; i < length; i++) {
-                this.psdTemplates.push(FileList.item(i));
-                this.fileUploaded = true;
-                this.fileName = FileList.item(i).name;
+            if (inputValue.target.files[0].size < 2000000) {
+                if (inputValue.target.files[0].type === "application/pdf" || inputValue.target.files[0].name.split('.')[1] === "docx" || inputValue.target.files[0].name.split('.')[1] === "doc") {
+                    this.psdTemplates.length = 0;
+                    for (let i = 0, length = FileList.length; i < length; i++) {
+                        this.psdTemplates.push(FileList.item(i));
+                        this.fileUploaded = true;
+                        this.fileName = FileList.item(i).name;
+                    }
+                }
+                else {
+                    this.toastr.error('Please upload document of type .doc, .docx, .pdf');
+                }
+            }
+            else {
+                this.toastr.error('Please upload document of size less than 2 MB');
             }
         } catch (error) {
             document.write(error);

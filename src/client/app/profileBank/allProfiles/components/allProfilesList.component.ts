@@ -111,6 +111,7 @@ export class AllProfilesListComponent implements OnActivate {
             (results: any) => {
                 this.profile.Comments = results.Comments;
                 this.profile.Status = results.Status;
+                this.toastr.success((<ResponseFromAPI>results).Message);
                 this.getAllProfiles();
             },
             error => this.toastr.error(<any>error));
