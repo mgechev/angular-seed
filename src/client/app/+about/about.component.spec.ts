@@ -1,31 +1,36 @@
-import { TestComponentBuilder } from '@angular/core/testing';
 import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import { Component } from '@angular/core';
 import {
-  inject,
-  async
+  async,
+  TestBed
 } from '@angular/core/testing';
 import { getDOM } from '@angular/platform-browser/src/dom/dom_adapter';
 
 import { AboutComponent } from './about.component';
 
 export function main() {
-  describe('About component', () => {
+   describe('About component', () => {
+    // Setting module for testing
     // Disable old forms
-    let providerArr: any[];
 
-    beforeEach(() => { providerArr = [disableDeprecatedForms(), provideForms()]; });
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        declarations: [TestComponent],
+        providers: [disableDeprecatedForms(), provideForms()]
+      });
+    });
 
     it('should work',
-      async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-        tcb.overrideProviders(TestComponent, providerArr)
-          .createAsync(TestComponent)
-          .then((rootTC: any) => {
-            let aboutDOMEl = rootTC.debugElement.children[0].nativeElement;
+      async(() => {
+        TestBed
+          .compileComponents()
+          .then(() => {
+            let fixture = TestBed.createComponent(TestComponent);
+            let aboutDOMEl = fixture.debugElement.children[0].nativeElement;
 
-	    expect(getDOM().querySelectorAll(aboutDOMEl, 'h2')[0].textContent).toEqual('Features');
+	          expect(getDOM().querySelectorAll(aboutDOMEl, 'h2')[0].textContent).toEqual('Features');
           });
-        })));
+        }));
     });
 }
 
