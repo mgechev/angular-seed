@@ -1,0 +1,226 @@
+<div class="timeline ">
+    <!-- TIMELINE ITEM -->
+    <div class="timeline-item ">
+        <div class="timeline-badge ">
+            <!--<img class="timeline-badge-userpic " src="../assets/pages/media/users/avatar80_1.jpg ">-->
+            <div class="timeline-icon ">
+                <i class="icon-user-following font-green-haze "></i>
+            </div>
+        </div>
+        <!-- RRF DETAILS START -->
+        <div class="timeline-body " style="box-shadow: 2px 2px 7px rgba(0,0,0,.4);">
+            <div class="timeline-body-arrow "> </div>
+            <div class="timeline-body-head ">
+                <div class="timeline-body-head-caption ">
+                    <label href="javascript:; " class="timeline-body-title font-blue-madison ">{{selectedRRF.RaisedBy.Value}}</label>
+                    <span class="timeline-body-time">Raised on : {{selectedRRF.CreatedDate}} </span>
+                </div>
+
+            </div>
+            <div class="timeline-body-content ">
+                <!--<div class="portlet-title ">
+                    <div class="caption ">
+                        <span class="caption-subject bold uppercase ">RRF Details</span>
+                    </div>
+                    <div class="actions ">
+                    </div>
+                </div>-->
+                <div class=" light bordered ">
+                    <div class=" bordered ">
+                        <div class="actions ">
+                        </div>
+
+                        <div>
+                            <RRFGridRow [RRFData]='selectedRRF' [displayJobDescDetails]='true'></RRFGridRow>
+                        </div>
+                        <div class="row ">
+                            <div class="col-md-5 ">Interviewers Panel</div>
+                            <div class="col-md-1 " style="align:right ">:</div>
+                        </div>
+                        <div class="row" *ngIf="selectedRRF.Panel.length">
+                            <div class="col-md-12 ">
+                                <div class="table-scrollable ">
+                                    <table class="table-bordered table no-footer tableTimelinecolor">
+                                        <thead>
+                                            <tr>
+                                                <td><b>Round</b> </td>
+                                                <td><b>Interviewer</b></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="odd gradeX " *ngFor='let panel of selectedRRF.Panel '>
+                                                <td>
+                                                    {{panel.RoundNumber.Value}}
+
+                                                </td>
+                                                <td>
+                                                    <div *ngFor='let interviewer of panel.Interviewers '>
+                                                        {{interviewer.Value}}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- RRF DETAILS END -->
+        </div>
+        <!-- END TIMELINE ITEM -->
+
+        <!-- TIMELINE ITEM *Approval*-->
+        <div class="timeline-item ">
+            <div class="timeline-badge ">
+                <div class="timeline-icon ">
+                    <i class="icon-user-following font-green-haze "></i>
+                </div>
+            </div>
+
+            <div class="timeline-body " style="box-shadow: 2px 2px 7px rgba(0,0,0,.4);">
+                <div class="timeline-body-arrow "> </div>
+                <div class="timeline-body-head ">
+                    <div class="timeline-body-head-caption" style="width:100%;">
+                        <label href="javascript:; " class="timeline-body-title font-blue-madison ">RRF Approval List :</label>
+                        <!--<span class="timeline-body-time font-grey-cascade ">Approved on : 5 MAy 2016</span>-->
+                        <button class="btn btn green" style="float: right;" *ngIf='selectedRRF.IsShowFeedback == false' (click)='showAllFeedback(selectedRRF)'>
+                               <i class="fa fa-reply-all"></i> Show Feedback History
+                          </button>
+                        <button class="btn btn green" style="float: right;" *ngIf='selectedRRF.IsShowFeedback' (click)='showAllFeedback(selectedRRF)'>
+                               <i class="fa fa-reply-all"></i> Hide Feedback History
+                          </button>
+                    </div>
+                    <div class="timeline-body-head-actions "> </div>
+                </div>
+                <div class="timeline-body-content ">
+                    <span class="">
+                        <div class="table-scrollable">
+                                <table class="table table-bordered tableTimelinecolor" role="grid"
+                                aria-describedby="sample_1_info">
+                                    <thead>
+                                        <tr>
+                                            <td><b>Approver</b></td>
+                                            <td><b>Status </b></td>
+                                            <td><b>Comment</b> </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd gradeX" *ngFor='let Approvaldetails of selectedRRF.RRFApproval '>
+
+                                            <td> {{Approvaldetails.Approver.Value}}</td>
+                                            <td>
+                                                {{Approvaldetails.Status }}
+                                            </td>
+                                            <td>
+                                                {{Approvaldetails.Comments}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>                     
+                    </span>
+                    <feedback-data [RRFID]=selectedRRF.RRFID *ngIf='selectedRRF.IsShowFeedback'></feedback-data>
+                </div>
+            </div>
+        </div>
+        <!-- END TIMELINE ITEM -->
+
+        <!-- TIMELINE ITEM *Assigned* -->
+        <div class="timeline-item " *ngIf='selectedRRF.AssignedData.length > 0'>
+            <div class="timeline-badge ">
+                <div class="timeline-icon ">
+                    <i class="icon-user-following font-green-haze "></i>
+                </div>
+            </div>
+            <div class="timeline-body " style="box-shadow: 2px 2px 7px rgba(0,0,0,.4);">
+                <div class="timeline-body-arrow "> </div>
+                <div class="timeline-body-head ">
+                    <div class="timeline-body-head-caption ">
+                        <label class="timeline-body-title font-blue-madison ">RRF Assignment Details :</label>
+                        <span class="timeline-body-time"></span>
+                    </div>
+                </div>
+                <div class="timeline-body-content ">
+                    <span class="">
+                         <div class="table-scrollable">
+                                <table class="table table-bordered tableTimelinecolor" role="grid"
+                                aria-describedby="sample_1_info">
+                                    <thead>
+                                        <tr>
+                                            <td><b>Assignee</b></td>
+                                            <td><b>Assigning Comment </b></td>
+                                            <td><b>Assigned Date</b> </td>
+                                            <td><b>Status</b> </td>
+                                            <td><b>Assignee Last Date</b> </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd gradeX" *ngFor='let assignee of selectedRRF.AssignedData '>
+
+                                            <td> {{assignee.AssignedTo.Value }}</td>
+                                            <td>
+                                                {{assignee.AssignedComments }}
+                                            </td>
+                                            <td>
+                                                {{assignee.AssignedDate}}
+                                            </td>
+                                            <!--<td>{{assignee.AssigneeLastDate== "" ? "Assign" : "Un-Assign"}}</td>-->
+                                            <td>{{assignee.Status.Value}}</td>
+                                            <td>{{assignee.AssigneeLastDate }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- END TIMELINE ITEM-->
+
+        <!-- TIMELINE ITEM *Candidate Details* -->
+        <div class="timeline-item " *ngIf='candidatelist.length >0'>
+            <div class="timeline-badge ">
+                <div class="timeline-icon ">
+                    <i class="icon-user-following font-green-haze "></i>
+                </div>
+            </div>
+            <div class="timeline-body " style="box-shadow: 2px 2px 7px rgba(0,0,0,.4);">
+                <div class="timeline-body-arrow "> </div>
+                <div class="timeline-body-head ">
+                    <div class="timeline-body-head-caption ">
+                        <label class="timeline-body-title font-blue-madison ">RRF Candidate Details :</label>
+                        <span class="timeline-body-time"></span>
+                    </div>
+                </div>
+                <div class="timeline-body-content ">
+                    <span class="">
+                      <div class="table-scrollable ">
+                         <table class="table table-bordered tableTimelinecolor">
+                           <thead>
+                               <tr>
+                                   <th> # </th>
+                                   <th>Candidate</th>                 
+                                    <th>Status</th>
+                                    <th>Last Round Scheduled</th>
+                               </tr>
+                            </thead>
+                             <tbody>
+                                <tr *ngFor="let selectedcandidate of candidatelist; let index = index">
+                                    <td> {{index+1}} </td>
+                                    <td> {{selectedcandidate.Candidate}}</td>
+                                    <td> {{selectedcandidate.InterviewDetails.Status}} </td>
+                                    <td> {{selectedcandidate.InterviewDetails.Round.Value}}</td>
+                               </tr>
+                            </tbody>
+                       </table>
+                    </div>
+                </span>
+                </div>
+            </div>
+        </div>
+        <!-- END TIMELINE ITEM-->
+
+    </div>
+</div>

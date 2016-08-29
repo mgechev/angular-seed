@@ -32,7 +32,7 @@ export class UserRoleComponent  {
     getUserRole() {
         this._userService.getUserRole(this.params)
             .subscribe(
-            results=> {
+            (results : any)=> {
                 this.userName = results.UserName;
                 this.userRole = results.Roles;
                 this.setRoleDropdown();
@@ -43,7 +43,7 @@ export class UserRoleComponent  {
         this._roleService.getRoles()
             .subscribe(
             results=> {
-                this.roleList = results;
+                this.roleList = <any>results;
                 this.getUserRole();
             },
             error => this.errorMessage = <any>error);

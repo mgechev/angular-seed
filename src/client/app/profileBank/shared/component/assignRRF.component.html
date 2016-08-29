@@ -1,0 +1,187 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!--BEGIN breadcrumb -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']"> Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a (click)='Back()'>{{Title}}</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">Assign RRF</span>
+            </li>
+        </ul>
+        <!--End Breadcrumb>-->
+        <div class="row">
+            <div class="portlet light bordered">
+                <div class="portlet-body">
+                      <h4>Assign RRF</h4>
+                      <hr class="hrClass"/>
+                    <form role="form" class="form-horizontal"  (submit)="onAssignRRF()">
+                        <div class="row">
+                            <label class="col-md-2 control-label">RRF <span class="required"> * </span></label>
+                            <div class="col-md-6" [hidden]="RRFList.length == 0">
+                                <select class="form-control" required (change)='onSelectRRF($event.target.value)'>
+                                    <option></option>
+                                     <option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Id">{{rrf.RRFID.Value}} - {{rrf.PositionTitle}} - {{rrf.RaisedBy.Value}}</option> 
+                                </select>
+                            </div>
+                             <div class="col-md-6" [hidden]="RRFList.length != 0">
+                                 <label class="col-md-6 control-label" style="text-align: left">No RRF assigned<span class="required"> </span></label>    
+                            </div>
+
+                        </div>
+                        <div class="row" *ngIf='isRRFSelected'>
+                            <label class="col-md-2 control-label" style="margin-top: 15px;">RRF Details<span class="required"> * </span></label>
+                            <div class="col-md-10" style="margin-top: 15px;">
+                                <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                                    <thead style="word-wrap: break-word;">
+                                        <tr>
+                                            <td> <b>Raised by/Date</b> </td>
+                                            <td> <b>Position Details</b> </td>
+                                            <td> <b>Requirments </b></td>
+                                            <td> <b>Priority</b></td>
+                                            <td> <b>Status </b></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd gradeX">
+                                            <!--remove hard code data-->
+                                            <td>
+                                                <div align="left">
+                                                    {{selectedRRF.RaisedBy.Value }}
+                                                    <br> {{selectedRRF.CreatedDate}}
+                                                    <!--Aradhana Chindhade-->
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div align="left">
+                                                    Tech. : {{selectedRRF.Technology.Value }}
+                                                    <br>Position : {{selectedRRF.PositionTitle}}
+                                                    <!--<br>Designation :
+                                                    <br>Openings :-->
+                                                    <!--{{selectedRRF.Practice.Value }}
+                                                    {{selectedRRF.Technology.Value }}
+                                                    {{selectedRRF.PositionTitle}}
+                                                    {{selectedRRF.Designation.Value }}
+                                                    {{selectedRRF.NoOfOpenings}}-->
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div align="left">
+                                                    Skills :<label *ngFor="let skill of selectedRRF.SkillsRequired"> 
+                                                               {{skill.Value}}
+                                                            </label>
+                                                    <!--<label *ngFor="let skill of selectedRRF.SkillsRequired"> &#44;&nbsp;</label>-->
+                                                    <!--{{skill.Value}}-->
+                                                    <!--{{selectedRRF.SkillsRequired.Value }}-->
+                                                    <br>Date of Joining : {{selectedRRF.ExpDateOfJoining }}
+                                                    <br>Min.EXP : {{selectedRRF.MinExp }}
+                                                    <br>Max.EXP : {{selectedRRF.MaxExp }}
+                                                    <!--{{selectedRRF.ExpDateOfJoining }}-->
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="mt-action-dot "></span> {{selectedRRF.Priority.Value}}   
+                                                <!--{{selectedRRF.Priority.Value}}    {{getPriorityClass(selectedRRF.Priority.Id)}}-->
+                                            </td>
+                                            <td>
+                                                <span class="mt-action-dot "></span> {{selectedRRF.Status.Value}}
+                                                <!--{{selectedRRF.Status.Value}}-->
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-md-2 control-label" style="margin-top: 15px;">Selected Candidates<span class="required"> * </span></label>
+                            <!--<div class="col-md-9 " style="margin-top: 21px;" *ngIf="!candidateProfiles">No Candidate Selected</div>
+                                <div class="col-md-9" *ngIf="candidateProfiles">-->
+
+                            <!--<div class="table-scrollable list">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th> # </th>
+                                                    <th>Candidate</th>
+                                                    <th>Current Ownership</th>
+                                                    <th>Remove </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let profile of candidateProfiles; let index = index">
+                                                    <td> {{index +1}} </td>
+                                                    <td> {{profile.CandidateName}} </td>
+                                                    <td> {{profile.Owner.Value}}</td>
+                                                    <td><a (click)="onDelete(profile)"> Remove <i class="fa fa-times" ></i> </a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>-->
+                            <div class="col-md-10">
+                                <div class="table-scrollable list">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th> # </th>
+                                                <th>Candidate Code</th>
+                                                <th>Candidate</th>
+                                                <th>Remove </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let candidate of  CandidateAssigment.Candidates; let index = index">
+                                                <td> {{index+1}} </td>
+                                                <td> {{candidate.CandidateID.Value}}</td>
+                                                <td> {{candidate.Candidate}}</td>
+                                                <td><a (click)='onDelete(candidate)'> Remove <i class="fa fa-times" ></i> </a></td>
+
+
+                                                <!--<tr>
+                                                <td> 1 </td>
+                                                <td> C001</td>
+                                                <td> Jhone DEF </td>
+                                                <td><a> Remove <i class="fa fa-times" ></i> </a></td>
+                                            </tr>
+                                            <tr>
+                                                <td> 2 </td>
+                                                <td> C002 </td>
+                                                <td> Thomas </td>
+                                                <td><a> Remove <i class="fa fa-times" ></i> </a></td>
+                                            </tr>-->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="col-md-2 control-label">Comments <span class="required"> * </span></label>
+                            <div class="col-md-10">
+                                <textarea class="form-control" rows="2" placeholder="Comments" style="resize:vertical" required="" [(ngModel)]='CandidateAssigment.Comments'>
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-9" style="padding-top:25px">
+                                <button type="submit" class="btn btn-info "> Assign RRF </button>
+                                <a class="btn btn-info" (click)='Back()'> Cancel</a>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE BASE CONTENT -->
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->

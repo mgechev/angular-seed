@@ -20,12 +20,14 @@ export class AuthHttp {
 
     addContentType(headers: Headers) {
         headers.append('Content-Type', 'application/json');
+        headers.append('Accept','application/json');
     }
 
     get(url:string) {
         let headers = new Headers();
         this.createAuthorizationHeader(headers);
         this.addServerType(headers);
+        this.addContentType(headers);
         let options = new RequestOptions({ headers: headers });
         return this.http.get(url, options);
     }

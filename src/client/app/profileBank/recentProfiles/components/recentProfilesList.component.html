@@ -24,7 +24,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <div class="dt-buttons pull-right">
+                                <!--<div class="dt-buttons pull-right">
                                     <a class="dt-button buttons-print btn dark btn-outline" id="btnPrint">
                                         <span>Print</span>
                                     </a>
@@ -34,23 +34,17 @@
                                     <a class="dt-button buttons-csv buttons-html5 btn purple btn-outline" id="btnCSV">
                                         <span>CSV</span>
                                     </a>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>
                     <div class="portlet-body">
                         <div class="table-toolbar">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="dataTables_length" id="sample_1_length"><label>Show <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline"><option value="5">5</option><option value="15">15</option><option value="20">20</option><option value="-1">All</option></select></label></div>
-                                </div>
-                                <div class="col-md-6 col-sm-6">
-                                    <div id="sample_1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm input-small input-inline" placeholder="" aria-controls="sample_1"></label></div>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top: 10px">
-                                <div id="updateRow" [collapse]='!isCollapsed'>
-                                    <form role="form" (submit)="onUpdateStauts()">
+                            <div id="updateRow" [collapse]='!isCollapsed'>
+                                <span class="header">Update Status</span>
+                                <hr style="margin:0px 0px !important" />
+                                <form role="form" (submit)="onUpdateStauts()">
+                                    <div class="row" style="margin-top: 10px">
                                         <div class="col-md-3">
                                             <div class="form-group">
 
@@ -80,26 +74,63 @@
                                         <div class="col-md-1">
                                             <a class="btn btn-info " (click)='closeUpdatePanel()'> Cancel </a>
                                         </div>
-                                    </form>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="row" *ngIf="!NORECORDSFOUND">
+                                <div class="col-md-3 col-sm-3">
+                                    <div class="dataTables_length" id="sample_1_length">
+                                        <label>Show :
+                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
+                                            [(ngModel)]="recentProfilesList.GrdOperations.PerPageCount" 
+                                            (ngModelChange)="onChange()">
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="20">20</option>
+                                                <option value="50">50</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3">
+
+                                </div>
+                                <div class="col-md-3 col-sm-3">
+
+                                </div>
+
+                                <div class="col-md-3 col-sm-4">
+                                    <div id="sample_1_filter" class="dataTables_filter">
+                                        <label>Search 
+                                            <input type="search" [(ngModel)]="searchString" class="form-control input-sm input-small input-inline " placeholder="" aria-controls="sample_1">
+                                            </label>
+                                    </div>
                                 </div>
                             </div>
+
+
+
                             <div class="table-scrollable">
-                                <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" id="sample_1"
-                                    role="grid" aria-describedby="sample_1_info">
-                                    <thead>
+                                <table class="table table-striped table-bordered table-hover order-column dataTable no-footer" id="sample_1" role="grid"
+                                    aria-describedby="sample_1_info">
+                                    <thead class="thead">
                                         <tr>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Name / Email / Contact</th>
-                                            <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Tag </th>
+                                            <!--<th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Tag </th>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Professional Details </th>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Status </th>
-                                            <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Resume </th>
+                                            <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Resume </th>-->
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Actions </th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="gradeX odd" *ngFor="let recentProfile of recentProfilesList; let index = index">
-                                            <td (click)='redirectToView(recentProfile.CandidateID)'>
+                                        <tr class="gradeX odd" *ngFor="let recentProfile of recentProfilesList.Profiles|ProfileBankPipe:searchString">
+                                            <td>
+                                                <detail-profile [selectedProfile]="recentProfile"></detail-profile>
+                                            </td>
+
+                                            <!--<td>
                                                 <tr>
                                                     <td style="float: left;">&nbsp; {{recentProfile.Candidate}}</td>
                                                 </tr>
@@ -110,8 +141,8 @@
                                                     <td style="float: left;">&nbsp; {{recentProfile.PrimaryContact}}</td>
                                                 </tr>
                                             </td>
-                                            <td (click)='redirectToView(recentProfile.CandidateID)'> {{recentProfile.Tag}} </td>
-                                            <td (click)='redirectToView(recentProfile.CandidateID)'>
+                                            <td> {{recentProfile.Tag}} </td>
+                                            <td>
                                                 <tr>
                                                     <td style="float: left;">&nbsp; Notice Period : {{recentProfile.CandidateOtherDetails.NoticePeriod}}</td>
                                                 </tr>
@@ -122,27 +153,42 @@
                                                     <td style="float: left;">&nbsp; Expected Salary : {{recentProfile.CandidateSalaryDetails.ExpectedSalary}}</td>
                                                 </tr>
                                             </td>
-                                            <td (click)='redirectToView(recentProfile.CandidateID)'>
-                                                <span class="mt-action-dot {{recentProfile.Status.Value}}"> </span>{{recentProfile.Status.Value}}
+                                            <td>
+                                                <span class="mt-action-dot color{{recentProfile.Status.Id}}"> </span>{{recentProfile.Status.Value}}
                                             </td>
 
                                             <td class="text-center"><i class="fa fa-download" aria-hidden="true"></i>{{recentProfile.Resume_ID}}
-                                            </td>
+                                            </td>-->
                                             <td>
                                                 <div class="btn-group">
                                                     <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
                                                             <i class="fa fa-angle-down"></i>
                                                         </button>
-                                                    <ul class="dropdown-menu" role="menu">
+                                                    <ul class="dropdown-menu pull-right" role="menu">
                                                         <li>
-                                                            <a [routerLink]="['/App/ProfileBank/RecentProfiles/Edit/'+recentProfile.CandidateID]">
-                                                                <i class="icon-user"></i> Edit Profile </a>
+                                                            <button class="btn btn-default btnLink" [disabled]='getEditAccess(recentProfile.Owner)' (click)='redirectToEditProfile(recentProfile.CandidateID)'>
+                                                                 <i class="icon-user"></i> Edit Profile 
+                                                             </button>
                                                         </li>
                                                         <li class="divider"> </li>
                                                         <li>
-                                                            <a (click)='SaveCandidateID(recentProfile.CandidateID)'>
-                                                                <i class="icon-flag"></i> Update Status
+                                                            <button class="btn btn-default btnLink" [disabled]='getEditAccess(recentProfile.Owner)' (click)='SaveCandidateID(recentProfile.CandidateID)'>
+                                                                  <i class="icon-flag"></i> Update Status </button>
+                                                        </li>
+                                                        <li class="divider"> </li>
+                                                        <li>
+                                                            <a (click)='redirectToView(recentProfile.CandidateID)'>
+                                                                <i class="fa fa-search"></i> View Profile
                                                             </a>
+                                                        </li>
+                                                        <!-- TODO:: update Delete Permission once recive from backend -->
+                                                        <li>
+                                                            <a (click)='deleteCandidate(recentProfile.CandidateID)'>
+                                                                <i class="fa fa-remove"></i>Delete Profile</a>
+                                                        </li>
+                                                        <li>
+                                                            <a (click)='getCandidateHistory(recentProfile.CandidateID)'>
+                                                                <i class="fa fa-history"></i>View Interview History</a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -150,27 +196,21 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                                <span style="margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Candidates Found</span>
+
                             </div>
-                            <div class="row">
-                                <div class="col-md-5 col-sm-5">
-                                    <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite">Showing 1 to 5 of 25 records</div>
+                            <!--  Recent Profile pagination Start-->
+                            <div class="row" *ngIf="!NORECORDSFOUND">
+                                <div class="col-md-10">
                                 </div>
-                                <div class="col-md-7 col-sm-7">
-                                    <div class="dataTables_paginate paging_bootstrap_full_number" id="sample_1_paginate">
-                                        <ul class="pagination" style="visibility: visible;">
-                                            <li class="prev disabled"><a href="#" title="First"><i class="fa fa-angle-double-left"></i></a></li>
-                                            <li class="prev disabled"><a href="#" title="Prev"><i class="fa fa-angle-left"></i></a></li>
-                                            <li class="active"><a [routerLink]="['/App/ProfileBank/RecentProfiles']">1</a></li>
-                                            <li><a [routerLink]="['/App/ProfileBank/RecentProfiles']">2</a></li>
-                                            <li><a [routerLink]="['/App/ProfileBank/RecentProfiles']">3</a></li>
-                                            <li><a [routerLink]="['/App/ProfileBank/RecentProfiles']">4</a></li>
-                                            <li><a [routerLink]="['/App/ProfileBank/RecentProfiles']">5</a></li>
-                                            <li class="next"><a href="#" title="Next"><i class="fa fa-angle-right"></i></a></li>
-                                            <li class="next"><a href="#" title="Last"><i class="fa fa-angle-double-right"></i></a></li>
-                                        </ul>
-                                    </div>
+                                <div class="col-md-2 ">
+                                    <button type="button" class="btn btn-default" [disabled]="!recentProfilesList.GrdOperations.PreviousButton" (click)="OnPaginationClick(-1)">
+                                        &laquo; Prev</button> &nbsp;&nbsp;
+                                    <button type="button" class="btn btn-default" [disabled]="!recentProfilesList.GrdOperations.NextButton" (click)="OnPaginationClick(1)">
+                                        Next &raquo;</button>
                                 </div>
                             </div>
+                            <!--  Recent Profile pagination END-->
                         </div>
                     </div>
                 </div>

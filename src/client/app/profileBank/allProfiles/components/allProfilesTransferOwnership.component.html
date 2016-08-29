@@ -1,0 +1,112 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!-- BEGIN PAGE HEAD-->
+        <div class="page-head">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                <h1>Transfer Ownership</h1>
+            </div>
+            <!-- END PAGE TITLE -->
+        </div>
+        <!-- END PAGE HEAD-->
+                <!--BEGIN breadcrumb -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']"> Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a [routerLink]="['/App/ProfileBank/AllProfiles']">All Profiles</a>
+	            <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">Transfer Ownership</span>
+            </li>
+        </ul>
+        <!--End Breadcrumb>-->
+        <div class="row">
+            <div class="portlet light bordered">
+                <div class="portlet-body">
+                    <a class="btn btn-circle dark btn-outline" [routerLink]="['/App/ProfileBank/AllProfiles']"> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>
+
+                    <form role="form" (submit)="onTransferOwnership()" class="form-horizontal">
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" style="margin-top: 15px;">Selected Candidates<span class="required"> * </span></label>
+                                <div class="col-md-9 " style="margin-top: 21px;" *ngIf="!candidateProfiles">No Candidate Selected</div>
+                                <div class="col-md-9" *ngIf="candidateProfiles">
+
+                                    <div class="table-scrollable list">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th> # </th>
+                                                    <th>Candidate</th>
+                                                    <th>Current Ownership</th>
+                                                    <th>Remove </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let profile of candidateProfiles; let index = index">
+                                                    <td> {{index +1}} </td>
+                                                    <td> {{profile.CandidateName}} </td>
+                                                    <td> {{profile.Owner.Value}}</td>
+                                                    <td><a (click)="onDelete(profile)"> Remove <i class="fa fa-times" ></i> </a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Commented as per discussion with Shrikant
+                            <div class="row">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Owner Type<span class="required"> * </span></label>
+                                <div class="col-md-3">
+                                    <select class="form-control" (change)='onSelectOwnerType($event.target.value)'  required>
+                                          <option></option>
+                                        <option *ngFor="let item of OwnerTypes" [value]="item.Id">{{item.Value}}</option>
+                                     </select>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Recruiters <span class="required"> * </span></label>
+                                <div class="col-md-3">
+                                    <select class="form-control" (change)='onSelectOwner($event.target.value)'  required>
+                                          <option></option>
+                                        <option *ngFor="let item of Recruiters" [value]="item.Id">{{item.Value}}</option>
+                                     </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Comments <span class="required"> * </span></label>
+                                <div class="col-md-6">
+                                    <textarea class="form-control" rows="2" placeholder="Comments" style="resize:vertical" [(ngModel)]="TransferOwnership.OwnershipComments"
+                                        required="">
+                                     </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <button type="submit" class="btn btn-info "> Transfer Ownership </button>
+                                <a class="btn btn-info" [routerLink]="['/App/ProfileBank/AllProfiles']"> Cancel</a>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE BASE CONTENT -->
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->

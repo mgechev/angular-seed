@@ -1,0 +1,17 @@
+<div align="left">
+    <div class="col-lg-12 row " style="color: #26a1ab;">
+        <b><label style="font-size: 22px;"> {{InterviewRecord.CandidateDetails.FullName}}</label></b><span class="badge {{InterviewRecord.Status}}"><small>{{InterviewRecord.Status}}</small></span>
+    </div>
+    <hr style="margin: 9px 0;margin-right: 10px;">
+    <div>
+        <div class="col-lg-4">
+            Type : {{InterviewRecord.InterviewType.Value}}
+        </div>
+        <div class="col-lg-4">
+            Mode : {{InterviewRecord.InterviewMode.Value}}
+        </div>
+        <div class="col-lg-4">
+           Date : {{InterviewRecord.InterviewDate}} on {{InterviewRecord.InterviewFromTime}}
+        </div>
+    </div>
+</div>

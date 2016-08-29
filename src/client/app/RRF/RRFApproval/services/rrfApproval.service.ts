@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import { RRFDetails} from '../../myRRF/models/rrfDetails';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
+import { GrdOptions } from '../../../shared/model/common.model';
 
 @Injectable()
 
@@ -11,19 +13,28 @@ export class RRFApprovalService {
     constructor(private authHttp: AuthHttp,
         private _spinnerService: SpinnerService) { }
 
-    getRRFApprovalList() {
+    getRRFApprovalList(grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/RRF/GetAllRaisedRRF');
         this._spinnerService.show();
-        return this.authHttp.get(url)
+         return this.authHttp.post(url ,{grdOptions})
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
 
-    ActionOnRaisedRRF(rrfID: number, status: number, comment: string) {
+    ActionOnRaisedRRF(rrfID: string, status: number, comment: string) {
         let url = Config.GetURL('/api/RRF/ActionOnRaisedRRF');
         this._spinnerService.show();
         return this.authHttp.post(url, { RRFID: rrfID, Status: status, Comments: comment })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    //Comment:: Changed to Raised RRF Bulk approval service
+    ActionOnRaisedBulk(selectedRRFList: RRFDetails[]) {
+        let url = Config.GetURL('/api/RRF/ActionOnRaisedRRF');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { selectedRRFList })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

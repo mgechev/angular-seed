@@ -3,7 +3,7 @@
     <!-- BEGIN SIDEBAR -->
     <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
     <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-    <div class="page-sidebar navbar-collapse collapse">
+    <div class="page-sidebar navbar-collapse collapse" style="position: fixed !important;margin-left: -20px;margin-top: -15px;z-index: 9995;">
         <!-- BEGIN SIDEBAR MENU -->
         <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
         <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
@@ -18,163 +18,198 @@
                     <span class="title">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item start" [ifAuthorize]="['PROFILE.MANAGE']">
+            <li class="nav-item start" [ifAuthorize]="['PROFILEBANK.MANAGE']">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-home"></i>
+                    <i class="fa fa-bank"></i>
                     <span class="title">Profile Bank</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item start " [ifAuthorize]="['PROFILE.ALLPROFILES.READ']">
+                    <li class="nav-item start " [ifAuthorize]="['PROFILEBANK.MYPROFILES.MANAGE']">
+                        <a [routerLink]="['/App/ProfileBank/MyProfiles']" class="nav-link ">
+                            <i class="fa fa-th-list"></i>
+                            <span class="title">My Profiles</span>
+                        </a>
+                    </li>
+                    <li class="nav-item start " [ifAuthorize]="['PROFILEBANK.ALLPROFILES.MANAGE']">
                         <a [routerLink]="['/App/ProfileBank/AllProfiles']" class="nav-link ">
-                            <i class="icon-bar-chart"></i>
+                            <i class="fa fa-list"></i>
                             <span class="title">All Profiles</span>
                         </a>
                     </li>
-                    <li class="nav-item start " [ifAuthorize]="['PROFILE.BALCKLISTEDPROFILES.READ']">
-                        <a [routerLink]="['/App/ProfileBank/BlackListedProfiles']" class="nav-link ">
-                            <i class="icon-bulb"></i>
-                            <span class="title">Black listed Profiles</span>
-                        </a>
-                    </li>
-                    <li class="nav-item start " [ifAuthorize]="['PROFILE.RECENTPROFILES.READ']">
+                    <!--As per discussion with Shrikant commenting-->
+                    <!--<li class="nav-item start " [ifAuthorize]="['PROFILEBANK.RECENTPROFILES.MANAGE']">
                         <a [routerLink]="['/App/ProfileBank/RecentProfiles']" class="nav-link ">
                             <i class="icon-graph"></i>
                             <span class="title">Recent Profiles</span>
                         </a>
+                    </li>-->
+                    <li class="nav-item start " [ifAuthorize]="['PROFILEBANK.MYPROFILES.MANAGE']">
+                        <a [routerLink]="['/App/ProfileBank/CompanyProfiles']" class="nav-link ">
+                            <i class="fa fa-list-ul"></i>
+                            <span class="title">Company Profiles</span>
+                        </a>
                     </li>
-                    <li class="nav-item start " [ifAuthorize]="['PROFILE.MYPROFILES.READ']">
-                        <a [routerLink]="['/App/ProfileBank/MyProfiles']" class="nav-link ">
-                            <i class="icon-graph"></i>
-                            <span class="title">My Profiles</span>
+                    <li class="nav-item start " [ifAuthorize]="['PROFILEBANK.MYPROFILES.MANAGE']">
+                        <a [routerLink]="['/App/ProfileBank/IncompleteProfiles']" class="nav-link ">
+                            <i class="fa fa-tasks"></i>
+                            <span class="title">Incomplete Profiles</span>
+                        </a>
+                    </li>
+                    <li class="nav-item start " [ifAuthorize]="['PROFILEBANK.BLACKLISTEDPROFILES.MANAGE']">
+                        <a [routerLink]="['/App/ProfileBank/BlackListedProfiles']" class="nav-link ">
+                            <i class="fa fa-black-tie"></i>
+                            <span class="title">Black listed Profiles</span>
                         </a>
                     </li>
                 </ul>
             </li>
             <li class="nav-item start " [ifAuthorize]="['RRF.MANAGE']">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-home"></i>
-                    <span class="title">RRF</span>
+                    <i class="fa fa-users"></i>
+                    <span class="title">Requisition Requests</span>
                     <span class="arrow"></span>
                 </a>
 
                 <ul class="sub-menu">
-                    <li class="nav-item start " [ifAuthorize]="['RRF.MYRRF.Read1']">
+                    <!--<li class="nav-item start " [ifAuthorize]="['RRF.MYRRF.MANAGE']">
                         <a [routerLink]="['/App/RRF/MyRRF/']" class="nav-link ">
                             <i class="icon-bar-chart"></i>
                             <span class="title">My RRF</span>
                         </a>
-                    </li>
-                    <li class="nav-item start " [ifAuthorize]="['RRF.RRFAPPROVAL.READ']">
-                        <a [routerLink]="['/App/RRF/RRFApproval/']" class="nav-link ">
-                            <i class="icon-bulb"></i>
-                            <span class="title">RRF Approval</span>
+                    </li>-->
+                    <li class="nav-item start " [ifAuthorize]="['RRF.DASHBOARD.MANAGE']">
+                        <a [routerLink]="['/App/RRF/RRFDashboard/']" class="nav-link ">
+                            <i class="fa fa-dashboard"></i>
+                            <span class="title">Dashboards</span>
                         </a>
                     </li>
-                    <li class="nav-item start " [ifAuthorize]="['RRF.RRFDASHBOARD.READ']">
-                        <a [routerLink]="['/App/RRF/RRFDashboard/']" class="nav-link ">
-                            <i class="icon-graph"></i>
-                            <span class="title">RRF Dashboards</span>
+                    <li class="nav-item start " [ifAuthorize]="['RRF.APPROVAL.MANAGE']">
+                        <a [routerLink]="['/App/RRF/RRFApproval/']" class="nav-link ">
+                            <i class="fa fa-check-square"></i>
+                            <span class="title">Approval Requests</span>
+                        </a>
+                    </li>
+                    <li class="nav-item start " [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWS.MANAGE']">
+                        <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
+                        <a [routerLink]="['/App/AllInterviews/showInterviews']" class="nav-link ">
+                            <i class="fa fa-calendar-check-o"></i>
+                            <span class="title">All Schedule Interviews</span>
+                        </a>
+                    </li>
+                    <li class="nav-item start " [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWS.MANAGE']">
+                        <a [routerLink]="['/App/RRF/InterviewsAvailability']" class="nav-link ">
+                            <i class="fa fa-signal"></i>
+                            <span class="title">Interviewers Availability</span>
+                        </a>
+                    </li>
+                    <li class="nav-item start ">
+                        <a [routerLink]="['/App/RRF/FeedbackPending']" class="nav-link ">
+                            <i class="fa fa-check-square-o"></i>
+                            <span class="title">RRF Feedback</span>
                         </a>
                     </li>
                 </ul>
             </li>
-            <li class="nav-item start " [ifAuthorize]="['RCIC.MANAGE']">
+            <!--<li class="nav-item start " [ifAuthorize]="['RCIC.MANAGE']">-->
+            <li class="nav-item start " [ifAuthorize]="['RC.INTERVIEWERACTIONS.MANAGE']">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-home"></i>
-                    <span class="title">Recruitment Cycle Interviewer Calendar</span>
+                    <i class="fa fa-pie-chart"></i>
+                    <span class="title">Interviewer's Actions</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item start " [ifAuthorize]="['RCIC.INTERVIEWERCALENDER.READ']">
-                        <a href="index.html" class="nav-link ">
-                            <i class="icon-bar-chart"></i>
-                            <span class="title">Interviewer Calendar</span>
-                        </a>
-                    </li>
-                    <li class="nav-item start " [ifAuthorize]="['RCIC.MYCALENDER.READ']">
-                        <a href="index.html" class="nav-link ">
-                            <i class="icon-bar-chart"></i>
-                            <span class="title">My Calendar</span>
-                        </a>
-                    </li>
-                    <li class="nav-item start " [ifAuthorize]="['RCIC.SCHEDULEINTERVIEW.READ']">
-                        <a href="dashboard_2.html" class="nav-link ">
-                            <i class="icon-bulb"></i>
-                            <span class="title"> Schedule Interview</span>
-                        </a>
-                    </li>
-                    <li class="nav-item start " [ifAuthorize]="['RCIC.IEF.READ']">
-                        <a class="nav-link ">
-                            <i class="icon-graph"></i>
-                            <span class="title">IEF</span>
-                        </a>
-                    </li>
+                    <li class="nav-item start ">
+                        <li class="nav-item start ">
+                            <a [routerLink]="['/App/Recruitment Cycle/Interviewers/schedule']" class="nav-link ">
+                                <i class="fa fa-calendar-check-o"></i>
+                                <span class="title">My Schedule</span>
+                            </a>
+                        </li>
+                        <li class="nav-item start ">
+                            <a [routerLink]="['/App/Recruitment Cycle/Interviewers/mycalendar']" class="nav-link ">
+                                <i class="fa fa-calendar"></i>
+                                <span class="title">My Calendar</span>
+                            </a>
+                        </li>
+                        <li class="nav-item start ">
+                            <a [routerLink]="['/App/Recruitment Cycle/Interviewers']" class="nav-link ">
+                                <i class="fa fa-chain"></i>
+                                <span class="title">Assignment & Availability</span>
+                            </a>
+                        </li>
+                        <li class="nav-item start " [ifAuthorize]="['RCIC.IEF.READ']">
+                            <a class="nav-link ">
+                                <i class="icon-graph"></i>
+                                <span class="title">IEF</span>
+                            </a>
+                        </li>
+
                 </ul>
-            </li>
-            <li [ifAuthorize]="['ADMIN.MANAGE']" class="heading">
-                <h3 class="uppercase">Administration</h3>
-            </li>
-            <li [ifAuthorize]="['ADMIN.ROLE.READ']" class="nav-item start ">
-                <a class="nav-link " [routerLink]="['/App/Admin/Role/']">
-                    <i class="icon-graph"></i>
-                    <span class="title">Roles</span>
-                </a>
-            </li>
-            <li [ifAuthorize]="['ADMIN.FEATURE.READ']" class="nav-item start ">
-                <a [routerLink]="['/App/Admin/Feature/']" class="nav-link ">
-                    <i class="icon-graph"></i>
-                    <span class="title">Features</span>
-                </a>
-            </li>
-            <li [ifAuthorize]="['ADMIN.USER.MANAGE']" class="nav-item start ">
-                <a [routerLink]="['/App/Admin/User/']" class="nav-link ">
-                    <i class="icon-graph"></i>
-                    <span class="title">User</span>
-                </a>
-            </li>
-            <li [ifAuthorize]="['ADMIN.PRACTICE.MANAGE']" class="nav-item start ">
-                <a id="practiceLink" [routerLink]="['/App/Admin/Practice/']" class="nav-link ">
-                    <i class="icon-graph"></i>
-                    <span class="title">Practice</span>
-                </a>
-            </li>
-            <li [ifAuthorize]="['ADMIN.TECHNOLOGY.MANAGE']" class="nav-item start ">
-                <a id="technologyLink" [routerLink]="['/App/Admin/Technology/']" class="nav-link ">
-                    <i class="icon-graph"></i>
-                    <span class="title">Technology</span>
-                </a>
-            </li>
-            <li [ifAuthorize]="['ADMIN.SKILLS.MANAGE']" class="nav-item start ">
-                <a id="skillLink" [routerLink]="['/App/Admin/Skill/']" class="nav-link ">
-                    <i class="icon-graph"></i>
-                    <span class="title">Skills</span>
-                </a>
-            </li>
-            <li [ifAuthorize]="['ADMIN.QUALIFICATIONS.MANAGE']" class="nav-item start ">
-                <a id="qualificationLink" [routerLink]="['/App/Admin/Qualification']" class="nav-link ">
-                    <i class="icon-graph"></i>
-                    <span class="title">Qualifications</span>
-                </a>
-            </li>
-            <li [ifAuthorize]="['ADMIN.DESIGNATION.MANAGE']" class="nav-item start ">
-                <a id="designationLink" [routerLink]="['/App/Admin/Designation/']" class="nav-link ">
-                    <i class="icon-graph"></i>
-                    <span class="title">Designation</span>
-                </a>
-            </li>
-            <li [ifAuthorize]="['ADMIN.INTERVIEWROUNDS.MANAGE']" class="nav-item start ">
-                <a id="interviewRoundLink" [routerLink]="['/App/Admin/InterviewRounds/']" class="nav-link ">
-                    <i class="icon-graph"></i>
-                    <span class="title">Interview Rounds</span>
-                </a>
-            </li>
-            <li [ifAuthorize]="['ADMIN.OWNERTYPE.MANAGE']" class="nav-item start ">
-                <a id="ownerTypeLink" [routerLink]="['/App/Admin/OwnerType/']" class="nav-link ">
-                    <i class="icon-graph"></i>
-                    <span class="title">Owner Type</span>
-                </a>
-            </li>
+                </li>
+                <li [ifAuthorize]="['ADMIN.MANAGE']" class="heading">
+                    <h3 class="uppercase">Administration</h3>
+                </li>
+                <li [ifAuthorize]="['ADMIN.ROLE.READ']" class="nav-item start ">
+                    <a class="nav-link " [routerLink]="['/App/Admin/Role/']">
+                        <i class="icon-graph"></i>
+                        <span class="title">Roles</span>
+                    </a>
+                </li>
+                <li [ifAuthorize]="['ADMIN.FEATURE.READ']" class="nav-item start ">
+                    <a [routerLink]="['/App/Admin/Feature/']" class="nav-link ">
+                        <i class="icon-graph"></i>
+                        <span class="title">Features</span>
+                    </a>
+                </li>
+                <li [ifAuthorize]="['ADMIN.USER.MANAGE']" class="nav-item start ">
+                    <a [routerLink]="['/App/Admin/User/']" class="nav-link ">
+                        <i class="icon-graph"></i>
+                        <span class="title">User</span>
+                    </a>
+                </li>
+                <li [ifAuthorize]="['ADMIN.PRACTICE.MANAGE']" class="nav-item start ">
+                    <a id="practiceLink" [routerLink]="['/App/Admin/Practice/']" class="nav-link ">
+                        <i class="icon-graph"></i>
+                        <span class="title">Practice</span>
+                    </a>
+                </li>
+                <li [ifAuthorize]="['ADMIN.TECHNOLOGY.MANAGE']" class="nav-item start ">
+                    <a id="technologyLink" [routerLink]="['/App/Admin/Technology/']" class="nav-link ">
+                        <i class="icon-graph"></i>
+                        <span class="title">Technology</span>
+                    </a>
+                </li>
+                <li [ifAuthorize]="['ADMIN.SKILLS.MANAGE']" class="nav-item start ">
+                    <a id="skillLink" [routerLink]="['/App/Admin/Skill/']" class="nav-link ">
+                        <i class="icon-graph"></i>
+                        <span class="title">Skills</span>
+                    </a>
+                </li>
+                <li [ifAuthorize]="['ADMIN.QUALIFICATIONS.MANAGE']" class="nav-item start ">
+                    <a id="qualificationLink" [routerLink]="['/App/Admin/Qualification']" class="nav-link ">
+                        <i class="icon-graph"></i>
+                        <span class="title">Qualifications</span>
+                    </a>
+                </li>
+                <li [ifAuthorize]="['ADMIN.DESIGNATION.MANAGE']" class="nav-item start ">
+                    <a id="designationLink" [routerLink]="['/App/Admin/Designation/']" class="nav-link ">
+                        <i class="icon-graph"></i>
+                        <span class="title">Designation</span>
+                    </a>
+                </li>
+                <li [ifAuthorize]="['ADMIN.INTERVIEWROUNDS.MANAGE']" class="nav-item start ">
+                    <a id="interviewRoundLink" [routerLink]="['/App/Admin/InterviewRounds/']" class="nav-link ">
+                        <i class="icon-graph"></i>
+                        <span class="title">Interview Rounds</span>
+                    </a>
+                </li>
+                <li [ifAuthorize]="['ADMIN.OWNERTYPE.MANAGE']" class="nav-item start ">
+                    <a id="ownerTypeLink" [routerLink]="['/App/Admin/OwnerType/']" class="nav-link ">
+                        <i class="icon-graph"></i>
+                        <span class="title">Owner Type</span>
+                    </a>
+                </li>
         </ul>
         <!-- END SIDEBAR MENU -->
     </div>

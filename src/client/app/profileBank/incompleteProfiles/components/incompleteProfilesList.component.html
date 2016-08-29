@@ -1,0 +1,143 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+
+        <!--BEGIN breadcrumb -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']"> Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">Profile Bank</span>
+            </li>
+        </ul>
+        <!--End Breadcrumb>-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Incomplete Profiles</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+
+                        <!-- Grid Tools bar -->
+                        <div class="row" *ngIf="!NORECORDSFOUND">
+                            <div class="col-md-3 col-sm-3">
+                                <div class="dataTables_length" id="sample_1_length">
+                                    <label>Show :
+                                        <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" [(ngModel)]="incompleteProfilesList.GrdOperations.PerPageCount"
+                                        (ngModelChange)="onChange()">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                            <option value="50">50</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <label>Sort By
+                                    <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline" [(ngModel)]="incompleteProfilesList.GrdOperations.OrderBy"
+                                    (ngModelChange)="onChange()">
+                                        <option value="Modified">Modified</option>
+                                        <option value="Status/Status">Status</option>
+                                    </select>
+                                </label>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <label>Order By
+                                    <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline" [(ngModel)]="incompleteProfilesList.GrdOperations.Order"
+                                    (ngModelChange)='onChange()'>
+                                        <option value="asc">Ascending</option>
+                                        <option value="desc">Descending</option>
+                                    </select>
+                                </label>
+                            </div>
+                            <div class="col-md-3 col-sm-4">
+                                <div id="sample_1_filter" class="dataTables_filter">
+                                    <label>Search
+                                        <input type="search" [(ngModel)]="searchString" class="form-control input-sm input-small input-inline " placeholder="" aria-controls="sample_1">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Grid Tools bar -->
+                        <div>
+                            <table class="table table-striped table-bordered table-hover order-column dataTable no-footer" id="sample_1" role="grid"
+                                aria-describedby="sample_1_info">
+                                <thead class="thead">
+                                    <tr>
+                                        <th style="displya:none" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Personal Info</th>
+                                        <td><b> Action </b></td>
+                                        <!--<th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Tag </th>
+                                        <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Professional Details </th>
+                                        <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Required Details </th>
+                                        <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Status </th>
+                                        <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Resume </th>-->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- NgBindings-->
+                                    <tr class="gradeX odd" *ngFor="let profile of incompleteProfilesList.Profiles | ProfileBankPipe:searchString ">
+                                        <td>
+                                            <detail-profile [selectedProfile]="profile"></detail-profile>
+                                        </td>
+                                        <td style="width:80px">
+                                            <!--<div class="btn-group ">
+                                                <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                    Delete
+                                                </button>
+                                            </div>-->
+
+                                            <div class="btn-group">
+                                                <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+                                                            <i class="fa fa-angle-down"></i>
+                                                        </button>
+                                                <ul class="dropdown-menu pull-right" role="menu">
+                                                    <li>
+                                                        <button class="btn btn-default btnLink" (click)='onDeleteProfile(profile.CandidateID)'>
+                                                                 <i class="fa fa-times"></i>  Delete
+                                                             </button>
+                                                    </li>
+                                                    <li class="divider"> </li>
+                                                    <li>
+                                                        <button class="btn btn-default btnLink" (click)='redirectToEditProfile(profile.CandidateID)'>
+                                                                <i class="icon-user"></i> Edit Profile 
+                                                                  </button>
+
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <span style="margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Candidates Found</span>
+
+                        </div>
+                        <div class="row" *ngIf="!NORECORDSFOUND">
+                            <div class="col-md-10">
+                            </div>
+                            <div class="col-md-2 ">
+                                <button type="button" class="btn btn-default" [disabled]="!incompleteProfilesList.GrdOperations.PreviousButton" (click)="OnPaginationClick(-1)">
+                                    &laquo; Prev</button> &nbsp;&nbsp;
+                                <button type="button" class="btn btn-default" [disabled]="!incompleteProfilesList.GrdOperations.NextButton" (click)="OnPaginationClick(1)">
+                                    Next &raquo;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE BASE CONTENT -->
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->

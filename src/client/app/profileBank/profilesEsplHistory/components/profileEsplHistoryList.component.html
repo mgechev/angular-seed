@@ -1,0 +1,213 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+
+        <!--BEGIN breadcrumb -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']"> Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">Profile History</span>
+            </li>
+        </ul>
+        <!--End Breadcrumb>-->
+        <div class="row">
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>{{historyOfCandidate.Value}} history with Eternus</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="portlet-body">
+
+                    <!-- Grid Tools bar -->
+                    <!--<div class="row" *ngIf="!NORECORDSFOUND">
+                            <div class="col-md-3 col-sm-3">
+                                <div class="dataTables_length" id="sample_1_length">
+                                    <label>Show :
+                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
+                                            [(ngModel)]="allProfilesList.GrdOperations.PerPageCount" 
+                                            (ngModelChange)="onChange()">
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="20">20</option>
+                                                <option value="50">50</option>
+                                            </select>
+                                        </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <label>Sort By
+                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline" 
+                                            [(ngModel)]="allProfilesList.GrdOperations.OrderBy"
+                                            (ngModelChange)="onChange()" >
+                                                <option value="Modified">Modified</option>
+                                                <option value="Status/Status">Status</option>
+                                            </select>
+                                        </label>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <label>Order By
+                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline" 
+                                            [(ngModel)]="allProfilesList.GrdOperations.Order"  
+                                            (ngModelChange)='onChange()'>
+                                                <option value="asc">Ascending</option>
+                                                <option value="desc">Descending</option>
+                                            </select> 
+                                            </label>
+                            </div>
+                            <div class="col-md-3 col-sm-4">
+                                <div id="sample_1_filter" class="dataTables_filter">
+                                    <label>Search 
+                                            <input type="search" [(ngModel)]="searchString" class="form-control input-sm input-small input-inline " placeholder="" aria-controls="sample_1">
+                                            </label>
+                                </div>
+                            </div>
+                        </div>-->
+                    <!-- /Grid Tools bar -->
+                    <div *ngIf="profileHistoryCollection===null"><label class="control-label"><strong> No details available. </strong></label></div>
+                    <div *ngIf="profileHistoryCollection!=null">
+                        <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" id="sample_1"
+                            role="grid" aria-describedby="sample_1_info">
+                            <!--<thead class="thead">
+                                <tr>
+                                    <th tabindex="0" aria-controls="sample_1">History</th>
+                                </tr>
+                            </thead>-->
+                            <tbody>
+                                <!-- Sample Data -->
+                                <!-- Profile interview History details-->
+                                <tr *ngFor="let profileHistory of profileHistoryCollection; let index = index" class="gradeX odd pull-left mt-element-ribbon bg-grey-steel col-md-12"
+                                    style="box-shadow: 2px 2px 7px rgba(0,0,0,.4);">
+                                    <td>
+                                        <!-- RRF History Details -->
+                                        <div class="col-md-12">
+                                            <div class="ribbon ribbon-shadow ribbon-color-success uppercase" style="top:-20px!important;left:-34px"><strong>RRFCODE : </strong>{{profileHistory.RRFDetails.RRFCODE}} <span class="badge badge-danger">
+                                                <small>{{profileHistory.RRFDetails.Status}}</small></span></div>
+                                            <!--<div class="col-md-4">
+                                                <label class="control-label"><strong>Priority : </strong>High</label>
+                                            </div>-->
+                                            <br>
+                                            <div class="col-md-4">
+
+                                                <span class="portlet-title"><strong>Raised : </strong></span>
+                                                <br>
+
+                                                <label class="control-label"><strong>By : </strong>{{profileHistory.RRFDetails.RaisedBy?profileHistory.RRFDetails.RaisedBy.Value:"N/A"}}</label>
+
+
+                                                <label class="control-label"><strong>Date : </strong>{{profileHistory.RRFDetails.CreatedDate?profileHistory.RRFDetails.CreatedDate:"N/A"}}</label>
+
+                                            </div>
+                                            <div class="col-md-4">
+
+                                                <span class="portlet-title"><strong>Details : </strong></span>
+                                                <br>
+                                                <label class="<control></control>-label"><strong>Technology : </strong>{{profileHistory.RRFDetails.Technology?profileHistory.RRFDetails.Technology.Value:"N/A"}}</label>
+
+                                                <label class="control-label"><strong>Position : </strong>{{profileHistory.RRFDetails.PositionTitle?profileHistory.RRFDetails.PositionTitle:"N/A"}}</label>
+                                            </div>
+                                            <div class="col-md-4">
+
+                                                <span class="portlet-title"><strong>Requirement : </strong></span>
+
+
+                                                <label class="control-label"><strong>Skill : </strong><span *ngFor="let skills of profileHistory.RRFDetails.SkillsRequired; let index = index" >{{skills.Value}}, </span></label>
+
+                                                <label class="control-label"><strong>Experience : </strong>{{profileHistory.RRFDetails.MinExp}} - {{profileHistory.RRFDetails.MaxExp}}</label>
+                                            </div>
+                                        </div>
+                                        <!-- /RRF History Details -->
+                                        <!-- Candidate Details -->
+                                        <div *ngIf='profileHistory.InterviewDetails.length===0' class="row pull-left"> <label class="control-label"><strong> No details available. </strong></label></div>
+                                        <div *ngIf='profileHistory.InterviewDetails.length>0' class="row">
+
+                                            <div class="col-md-12">
+                                                <!--<span class="caption-subject bold" style="font-size : 14px">Interview History</span>-->
+                                                <br/>
+                                                <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" id="sample_1"
+                                                    role="grid" aria-describedby="sample_1_info">
+                                                    <thead class="thead">
+                                                        <tr>
+                                                            <th> # </th>
+                                                            <th tabindex="0" aria-controls="sample_1">Round</th>
+                                                            <th tabindex="0" aria-controls="sample_1">Interviewer</th>
+                                                            <th tabindex="0" aria-controls="sample_1">Date</th>
+                                                            <th tabindex="0" aria-controls="sample_1">Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!-- ng binding -->
+                                                        <tr *ngFor="let candidateHistory of profileHistory.InterviewDetails; let index = index" id="round{{index+1}}">
+                                                            <td> {{index+1}} </td>
+                                                            <td> {{candidateHistory.Round.Value}}</td>
+                                                            <td> <span *ngFor="let interviewer of candidateHistory.InterviewerAvailability">{{interviewer.Interviewer.Value}} ,</span></td>
+                                                            <!--<td> {{getDate(candidateHistory.InterviewDate)}}</td>-->
+                                                            <td> {{candidateHistory.InterviewDate}}</td>
+                                                            <td> {{candidateHistory.Status}}</td>
+                                                            <td>
+                                                                <!--<IEFGridRow [InterviewID]="candidateHistory.InterviewDetails.InterviewID" [StaticIEFDetails]="candidateHistory.IEFTransactionDetails"></IEFGridRow>-->
+                                                            </td>
+                                                        </tr>
+                                                        <!-- /ng binding -->
+
+                                                        <!-- Interview history Sample Data -->
+                                                        <!--<tr class="gradeX odd">
+                                                            <td> 1 </td>
+                                                            <td> Technical 1 </td>
+                                                            <td> <span>Amrsh Puri, Prem Chopra</span></td>
+                                                            <td> 07/28/2016</td>
+                                                            <td> Selected</td>
+                                                            <div class="row">
+                                                                IEF Details are in progress...
+                                                            </div>
+                                                        </tr>
+                                                        <tr class="gradeX odd">
+                                                            <td> 1 </td>
+                                                            <td> Technical 1 </td>
+                                                            <td> <span>Shakti kapoor</span></td>
+                                                            <td> 07/28/2016</td>
+                                                            <td> Rejected</td>
+                                                            <div class="row">
+                                                                IEF Details are in progress...
+                                                            </div>
+                                                        </tr>-->
+                                                        <!-- /Interview history Sample Data -->
+                                                    </tbody>
+                                                </table>
+                                                <!--<span *ngIf='isRoundHistoryPresent '>No Candidates Round History Found</span>-->
+                                            </div>
+                                        </div>
+                                        <!-- /Candidate Details -->
+                                    </td>
+                                </tr>
+                                <!-- /Profile interview History details-->
+
+                                <!-- /Sample Data -->
+                            </tbody>
+                        </table>
+                        <!--<span style="margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND '>No Candidates Found</span>-->
+                    </div>
+                    <!--<div class="row" *ngIf="!NORECORDSFOUND">
+                            <div class="col-md-10">
+                            </div>
+                            <div class="col-md-2 ">
+                                <button type="button" class="btn btn-default" [disabled]="!allProfilesList.GrdOperations.PreviousButton" (click)="OnPaginationClick(-1)">
+                                        &laquo; Prev</button> &nbsp;&nbsp;
+                                <button type="button" class="btn btn-default" [disabled]="!allProfilesList.GrdOperations.NextButton" (click)="OnPaginationClick(1)">
+                                        Next &raquo;</button>
+                            </div>
+                        </div>-->
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE BASE CONTENT -->
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->

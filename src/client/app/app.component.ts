@@ -54,6 +54,9 @@ export class AppComponent implements OnInit {
       .subscribe(
       results => {
         this._router.navigate(['/App']);
+      },error=> {
+          localStorage.clear();
+          this._router.navigate(['/Login']);
       });
   }
 }

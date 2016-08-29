@@ -3,12 +3,14 @@ import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from './authHttp.service';
 import { Config } from '../config/config';
+import { SpinnerService } from '../components/spinner/spinner';
 
 @Injectable()
 
 export class MastersService {
 
-    constructor(private authHttp: AuthHttp) { }
+    constructor(private authHttp: AuthHttp,
+        private _spinnerService: SpinnerService) { }
 
     GetDesignations() {
         let authenticateUrl = Config.GetURL('/api/Masters/GetDesignations');
@@ -18,7 +20,7 @@ export class MastersService {
     }
 
     getPractices() {
-        let url = Config.GetURL('api/Masters/GetPractices');
+        let url = Config.GetURL('/api/Masters/GetPractices');
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);
@@ -32,7 +34,7 @@ export class MastersService {
     }
 
     getRoles() {
-        let url = Config.GetURL('api/Role/GetRoles');
+        let url = Config.GetURL('/api/Role/GetRoles');
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);
@@ -46,7 +48,7 @@ export class MastersService {
     }
 
     getTechnologies() {
-        let url = Config.GetURL('api/Masters/GetTechnologies');
+        let url = Config.GetURL('/api/Masters/GetTechnologies');
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);
@@ -60,8 +62,8 @@ export class MastersService {
             .catch(this.handleError);
     }
 
-    getStates() {
-        let url = Config.GetURL('/api/Masters/GetStates');
+    getStates(CountryID: number) {
+        let url = Config.GetURL('/api/Masters/GetStatesByCountry?CountryID=' + CountryID);
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);
@@ -99,9 +101,14 @@ export class MastersService {
             .map(this.extractData)
             .catch(this.handleError);
     }
-
+    GetInterviewRounds(candidateID: string, rrfId: string) {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetIterviewRoundsForScheduling?CandidateID=' + candidateID + '&RRFID=' + rrfId);
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
     getCandidateStatuses() {
-        let url = Config.GetURL('/api/Masters/GetCandidateStatuses');
+        let url = Config.GetURL('/api/Masters/GetCandidateStatus');
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);
@@ -114,6 +121,78 @@ export class MastersService {
             .catch(this.handleError);
     }
 
+    GetOwnerType() {
+        let url = Config.GetURL('/api/Masters/GetOwnerTypes');
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    GetPriority() {
+        let url = Config.GetURL('/api/Masters/GetPriority');
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+    GetVisaType() {
+        let url = Config.GetURL('/api/Masters/GetVisaTypes');
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+    GetInterviewTypes() {
+        let url = Config.GetURL('/api/Masters/GetInterviewTypes');
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+    GetSkypeID() {
+        let url = Config.GetURL('/api/Masters/GetSkypeIDs');
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+    GetRoundsByInterviewType(TypeID: number) {
+        let url = Config.GetURL('/api/Masters/GetRoundsByInterviewType?TypeID=' + TypeID);
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+    GetInterviewModes() {
+        let url = Config.GetURL('/api/Masters/GetInterviewMode');
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    addSkillToMaster(skill: string) {
+        let url = Config.GetURL('/api/Masters/AddSkills');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { 'Skill': skill })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
+
+    /* Sorting */
+    getColumsForSorting(featureName: string) {
+        let url = Config.GetURL('/api/Masters/GetSortableColumns?Feature=' + featureName);
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
+    getCurrentLoggedInUser() {
+        let url = Config.GetURL('/api/authentication/getCurrentUserName');
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);
@@ -121,7 +200,6 @@ export class MastersService {
         let body = res.json();
         return body || {};
     }
-
 
     private handleError(error: Response) {
         console.log(error);

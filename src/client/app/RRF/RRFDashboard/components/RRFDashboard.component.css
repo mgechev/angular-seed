@@ -1,0 +1,32 @@
+.carousel-control.right {
+    left: auto!important;
+    right: 0!important;
+    color: #dfdfdf!important;
+    border: 1px solid !important;
+    background-image:none !important;
+}
+.carousel-control.left {
+    left: auto!important;
+    right: 0!important;
+    color: #dfdfdf!important;
+    border: 1px solid!important;
+    background-image:none !important;
+}
+.chart {
+    display: block; 
+    width: 100% !important;
+ }
+ .carousel-control {
+       background-image:none !important;
+        color: #dfdfdf!important;
+    border: 1px solid!important;
+ }
+.thead{
+  border-bottom:solid 1px rgb(231, 236, 241) !important;
+}
+.btnLink {
+  text-align: left !important;
+  width: 100%;
+  border: white !important;
+  color: #888888;
+}

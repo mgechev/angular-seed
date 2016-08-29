@@ -1,0 +1,739 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']"> Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a (click)='Back()'>{{TITLE}}</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li><span class="active">View</span>
+</li>
+</ul>
+<div class="row">
+            <div class="col-md-12">
+                <div class="portlet light bordered">
+                    <a class="btn green" (click)='Back()'> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>
+                    <div *ngIf="profile!==null" class="details">
+                        <div class="portlet light nopadding">
+                            <div class="portlet-title custom-portlet">
+                                <div class="caption">
+                                    View Candidate's Info - {{profile.FirstName}} {{profile.LastName}}
+                                </div>
+                            </div>
+                            <div class="portlet-container">
+                                <div class="portlet-body">
+                                    <!-- BEGIN FORM-->
+                                    <form action="#" class="form-horizontal">
+                                        <div class="form-body">
+                                            <!-- BEGIN FORM-->
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-4 "><b>Candidate :</b></label>
+                                                        <div class="col-md-8">
+                                                            {{profile.FirstName}} {{profile.LastName}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 "><b>Email:</b></label>
+                                                        <div class="col-md-8">
+                                                            {{profile.Email}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-4 "><b>Contact:</b></label>
+                                                        <div class="col-md-8">
+                                                            {{profile.PrimaryContact}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b>PAN Card No :</b></label>
+                                                        <div class="col-md-7" style="margin-left:-27px">
+                                                            {{profile.PANNumber}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-5 "><b>Passport No:</b></label>
+                                                        <div class="col-md-7" style="margin-left:-25px">
+                                                            {{profile.PassportNumber}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b>Adhaar card No:</b></label>
+                                                        <div class="col-md-6">
+                                                            {{profile.AadharCardNo}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-3 "><b>Current Address :</b></label>
+                                                        <div class="col-md-5" style="margin-left:-30px">
+                                                            {{profile.CurrentAddress}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 "><b>Permanent Address:</b></label>
+                                                        <div class="col-md-5" style="margin-left:-30px">
+                                                            {{profile.PermanentAddress}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row" *ngIf='count'>
+                                                <div class="col-md-12">
+                                                    <div class="table-scrollable" style="border: none !important;">
+                                                        <table class="table " id="sample_editable_1 ">
+                                                            <!--style="background:#f5f6fa !important" -->
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="padding-left:0 !important"> Qualification </th>
+                                                                    <th> Year Of Passing</th>
+                                                                    <th> Grade </th>
+                                                                    <th> Marks </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let Qualification of profile.CandidateQualification">
+                                                                    <td> {{Qualification.Qualification.Value}}</td>
+                                                                    <td> {{Qualification.YearofPassing}}</td>
+                                                                    <td> {{Qualification.Grade.Value}}</td>
+                                                                    <td class="center">{{Qualification.Marks}} </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/row-->
+                                            <!--/row-->
+                                            <div class="row">
+                                            </div>
+
+                                            <!-- END FORM-->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portlet light nopadding">
+                            <div class="portlet-title  custom-portlet">
+                                <div class="caption">
+                                    Career Profile
+                                </div>
+                            </div>
+                            <div class="portlet-container">
+                                <div class="portlet-body">
+                                    <!-- BEGIN FORM-->
+                                    <form action="#" class="form-horizontal">
+                                        <div class="form-body">
+                                            <!-- BEGIN FORM-->
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-8 "><b>Total Experience :</b></label>
+                                                        <div class="col-md-3">
+                                                            {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.TotalExperience?profile.CandidateCareerProfile.TotalExperience:"N/A":"N/A"}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-8 "><b>Relevant Experience:</b></label>
+                                                        <div class="col-md-2">
+                                                            {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.RelevantExperience?profile.CandidateCareerProfile.RelevantExperience:"N/A":"N/A"}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b>Current Company:</b></label>
+                                                        <div class="col-md-6">
+                                                            {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.CurrentCompany?profile.CandidateCareerProfile.CurrentCompany:"N/A":"N/A"}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-4 "><b>Current Designation & Role:</b></label>
+                                                        <div class="col-md-8">
+                                                            {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.CurrentDesignationRole?profile.CandidateCareerProfile.CurrentDesignationRole:"N/A":"N/A"}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-7 "><b>Time Spent In Current Company:</b></label>
+                                                        <div class="col-md-2">
+                                                            {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.TimeSpentInCurrentCompany?profile.CandidateCareerProfile.TimeSpentInCurrentCompany:"N/A":"N/A"}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/row-->
+                                            <!--/row-->
+                                            <div class="row">
+                                            </div>
+
+                                            <!-- END FORM-->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portlet light nopadding topmargin">
+                            <div class="portlet-title  custom-portlet">
+                                <div class="caption">
+                                    Technology / Skills
+                                </div>
+                            </div>
+                            <div class="portlet-container">
+                                <div class="portlet-body">
+                                    <!-- BEGIN FORM-->
+                                    <form action="#" class="form-horizontal">
+                                        <div class="form-body">
+                                            <!-- BEGIN FORM-->
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b>Exp In Skill :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateSkills.ExpInSkill}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b>Any Functional Exp :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateSkills.AnyFunctionalExp}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b> Skills :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateSkills.PrimarySkills}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b>Role & Responsibility :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateSkills.RoleAndResponsibility}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!--/row-->
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b> Kinds of projects done :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateSkills.ProjectsDone}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b> Testing :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateSkills.UnitIntegressionRegressionTesting}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b> Database :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateSkills.Database}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b> Inclination towards Any other Technology :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateSkills.InclinationToOtherTechnology}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b> How much are you <br/>aware about testing? :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateSkills.AwareAboutTesting}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b> Strong Technical Skills :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateSkills.StrongTechnicalSkills}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <!--Team Management-->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portlet light nopadding topmargin">
+                            <div class="portlet-title  custom-portlet">
+                                <div class="caption">
+                                    Team Management
+                                </div>
+                            </div>
+                            <div class="portlet-container">
+                                <div class="portlet-body">
+                                    <!-- BEGIN FORM-->
+                                    <form action="#" class="form-horizontal">
+                                        <div class="form-body">
+                                            <!-- BEGIN FORM-->
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b>Team Management :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateTeamManagement.TeamMgmt}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b>No Of Team Members :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateTeamManagement.NoofTeamMembers}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b> How long you have been handling a team :</b></label>
+                                                        <div class="col-md-6">
+                                                            {{profile.CandidateTeamManagement.HandlingTeam}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/row-->
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b> What are designation your team members belong :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateTeamManagement.TeamMembersDesignations}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b> Challenges faced while handling a team :</b></label>
+                                                        <div class="col-md-6">
+                                                            {{profile.CandidateTeamManagement.TeamHandlingChallenges}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!---->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portlet light nopadding topmargin">
+                            <div class="portlet-title  custom-portlet">
+                                <div class="caption">
+                                    Salary Details
+                                </div>
+                            </div>
+                            <div class="portlet-container">
+                                <div class="portlet-body">
+                                    <!-- BEGIN FORM-->
+                                    <form action="#" class="form-horizontal">
+                                        <div class="form-body">
+                                            <!-- BEGIN FORM-->
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b>Current Salary(CTC) :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateSalaryDetails.CurrentSalary}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b>Expected Salary :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateSalaryDetails.ExpectedSalary}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-4 "><b> What is your take home :</b></label>
+                                                        <div class="col-md-8">
+                                                            {{profile.CandidateSalaryDetails.TakeHomePay}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/row-->
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-4 "><b>What are the different perks you get :</b></label>
+                                                        <div class="col-md-8">
+                                                            {{profile.CandidateSalaryDetails.AnyPerks}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-4 "><b> Does your CTC include variable salary?<br/> If yes, then how much :</b></label>
+                                                        <div class="col-md-8">
+                                                            {{profile.CandidateSalaryDetails.CTCIncludeVariable}}, &nbsp; {{profile.HowMuchVariable}}
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!---->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portlet light nopadding topmargin">
+                            <div class="portlet-title  custom-portlet">
+                                <div class="caption">
+                                    Other
+                                </div>
+                            </div>
+                            <div class="portlet-container">
+                                <div class="portlet-body">
+                                    <!-- BEGIN FORM-->
+                                    <form action="#" class="form-horizontal">
+                                        <div class="form-body">
+                                            <!-- BEGIN FORM-->
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b>Applied in Earlier :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateOtherDetails.AppliedEarlier}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b>Notice Period :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateOtherDetails.NoticePeriod}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b> Any Appraisal / Bond / On Contract Details :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateOtherDetails.AppraisalBondContractDetails}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b>Visa :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateOtherDetails.Visa.Value}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!--/row-->
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-5 "><b> Primary Reason to quit last job :</b></label>
+
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateOtherDetails.PrimaryReasonToQuitLastJob}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b> Secondary Reason to quit last job:</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateOtherDetails.SecondaryReasonToQuitLastJob}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b> Primary Reason to quit Current job :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateOtherDetails.PrimaryReasonToQuitCurrentJob}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b>Secondary Reason to quit Current job :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateOtherDetails.SecondaryReasonToQuitCurrentJob}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b> Role Expected  :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateOtherDetails.RoleExpected }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b> Do you have any offer in hand? If yes, how many and what CTC you have got :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateOtherDetails.OfferInHand}},&nbsp; {{profile.OfferDetails}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b> Resigned Status Of Offered Candidate  :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateOtherDetails.ResignedStatusOfOfferedCandidate}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b> Job Serach Period :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateOtherDetails.JobSerachPeriod}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b>Family Background  :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateOtherDetails.FamilyBackground}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b> Any Existing Company Offers :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateOtherDetails.IfExstingCompanyOffers}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b>Strengths  :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateOtherDetails.Strengths}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b>Weekness :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateOtherDetails.Weekness}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b>Looking For  :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateOtherDetails.LookingFor}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-5 "><b>How many in your present company have left before the notice period :</b></label>
+                                                        <div class="col-md-7">
+                                                            {{profile.CandidateOtherDetails.NoticePeriodNotCompletedCount}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portlet light nopadding topmargin">
+                            <div class="portlet-title  custom-portlet">
+                                <div class="caption">
+                                    Outstationed Candidate
+                                </div>
+                            </div>
+                            <div class="portlet-container">
+                                <div class="portlet-body">
+                                    <!-- BEGIN FORM-->
+                                    <form action="#" class="form-horizontal">
+                                        <div class="form-body">
+                                            <!-- BEGIN FORM-->
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-4 "><b> Outstationed Candidate :</b></label>
+                                                        <div class="col-md-8">
+                                                            {{profile.OutstationedCandidate}}
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-4 "><b>Are you ready to relocate,<br/> please specify the reason why :</b></label>
+                                                        <div class="col-md-8">
+                                                            {{profile.ReadyToRelocate}} &nbsp; {{profile.ReasonToRelocate}}
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!--/row-->
+                                            <!--/row-->
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class=" col-md-4 "><b> Any Friends / Relatives in Pune:</b></label>
+                                                        <div class="col-md-8">
+                                                            {{profile.FriendsRelatives}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="profile===null">
+                        <label class="control-label"> No profile information found..!</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END PAGE BASE CONTENT -->
+</div>
+<!-- END CONTENT BODY -->

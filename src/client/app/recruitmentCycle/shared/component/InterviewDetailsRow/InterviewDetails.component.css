@@ -1,0 +1,9 @@
+.Selected{
+    background: #0f9214; 
+}
+.Rejected{
+     background: #e43a45;
+}
+.On-Hold{
+     background: #ffff66;
+}

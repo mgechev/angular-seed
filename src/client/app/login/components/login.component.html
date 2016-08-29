@@ -11,4 +11,5 @@
             required="" />
         <button id="loginBtn" class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit">Login</button>
     </form>
+    <span *ngIf='LoginFailed' style="color:red">The username and password you entered don't match.</span>
 </div>

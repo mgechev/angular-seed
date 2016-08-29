@@ -1,19 +1,23 @@
 import {Component} from '@angular/core';
 import {OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
-import { RRFDetails} from '../../myRRF/models/rrfDetails';
+import { RRFDetails, RRFApproval} from '../../myRRF/models/rrfDetails';
 import { RRFApprovalService } from '../services/rrfApproval.service';
 import { RRFStatus } from  '../../../shared/constantValue/index';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { ResponseFromAPI } from '../../../shared/model/common.model';
+import { ResponseFromAPI, GrdOptions, SortingMasterData } from '../../../shared/model/common.model';
+import {RRFPipe } from '../../shared/Filters/RRFFilter.component';
+import {RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
+import { MastersService } from '../../../shared/services/masters.service';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-approval-list',
     templateUrl: 'RRFApprovalList.component.html',
-    directives: [ROUTER_DIRECTIVES],
-    styleUrls: ['RRFApproval.component.css'],
-    providers: [ToastsManager]
+    directives: [ROUTER_DIRECTIVES, RRFGridRowComponent],
+    styleUrls: ['../../shared/css/RRF.component.css'],
+    providers: [ToastsManager],
+    pipes: [RRFPipe],
 })
 
 export class RRFApprovalListComponent implements OnActivate {
@@ -23,25 +27,39 @@ export class RRFApprovalListComponent implements OnActivate {
     selectedRowCount: number = 0;
     allChecked: boolean = false;
     statusConstant: RRFStatus = RRFStatus;
+    grdOptions: GrdOptions = new GrdOptions();
+    searchText: string = '';
+    NORECORDSFOUND: boolean = false;
+    SortByList: SortingMasterData[] = [];
 
     constructor(private _rrfApprovalService: RRFApprovalService,
-        public toastr: ToastsManager) {
+        public toastr: ToastsManager,
+        private _mastersService: MastersService) {
     }
 
     routerOnActivate(): void {
         this.getRRFApprovalList();
+        this.getColumsForSorting('RRFAPPROVAL');
     }
 
     getRRFApprovalList(): void {
-        this._rrfApprovalService.getRRFApprovalList()
+        this._rrfApprovalService.getRRFApprovalList(this.grdOptions)
             .subscribe(
-            results => {
-                this.rrfApprovalList = <any>results;
+            (results: any) => {
+                if (results.RRFs !== undefined && results.RRFs.length > 0) {
+                    this.grdOptions = (<any>(results)).GrdOperations;
+                    this.rrfApprovalList = (<any>(results)).RRFs;
+                    //this.rrfApprovalList = <any>results;
 
-                for (var index = 0; index < this.rrfApprovalList.length; index++) {
-                    // this.rrfApprovalList[index].Status = {'Id' :1 ,'Value' :'PendingApproval'}; //TODO : get it from API
-                    this.rrfApprovalList[index].IsChecked = false;
+                    for (var index = 0; index < this.rrfApprovalList.length; index++) {
+                        // this.rrfApprovalList[index].Status = {'Id' :1 ,'Value' :'PendingApproval'}; //TODO : get it from API
+                        this.rrfApprovalList[index].IsChecked = false;
+                    }
+                } else {
+                    this.NORECORDSFOUND = true;
+                    this.rrfApprovalList = [];
                 }
+
             },
             error => this.errorMessage = <any>error);
     }
@@ -82,38 +100,75 @@ export class RRFApprovalListComponent implements OnActivate {
 
     onStatusReject(): void {
         this.onStatusChange('Rejected');
+        this.getRRFApprovalList();
     }
 
     onStatusApprove(): void {
         this.onStatusChange('Approved');
+        this.getRRFApprovalList();
     }
 
     onStatusChange(status: string): void {
+        var _selectedRrfDetailsList = new Array<RRFDetails>();
         for (var index = 0; index < this.rrfApprovalList.length; index++) {
             if (this.rrfApprovalList[index].IsChecked) {
-                this.rrfApprovalList[index].Status.Value = status;
                 this.rrfApprovalList[index].IsChecked = false;
-                this.rrfApprovalList[index].Comment = this.comment;
 
-                //TODO : status value
-                this.ActionOnRaisedRRF(this.rrfApprovalList[index].RRFID, 1, this.comment);
+                //:: Create object of RRF details and send object to api
+                var _rrfDetails: RRFDetails = new RRFDetails();
+                _rrfDetails.RRFID = this.rrfApprovalList[index].RRFID;
+                //:: Created Approval list object
+                var _rrfApprovalList: RRFApproval = new RRFApproval();
+                _rrfApprovalList.Status = status;
+                _rrfApprovalList.Comments = this.comment;
+                //:: Adding Prepared object in array list
+                _rrfDetails.RRFApproval.push(_rrfApprovalList);
+                _selectedRrfDetailsList.push(_rrfDetails);
+                //Removed:: Added bulk approval service call
+                //this.ActionOnRaisedRRF(this.rrfApprovalList[index].RRFID, 1, this.comment);
             }
-            this.comment = '';
+            //this.rrfApprovalList 
             this.selectedRowCount = 0;
         }
+        //console.log(_selectedRrfDetailsList);
+        //:: Because required bulk approval service call
+        this.ActionOnRaisedRRFBulk(_selectedRrfDetailsList);
+        this.comment = '';
         this.allChecked = false;
+
+    }
+    //Raised RRF Bulk approval service call
+    ActionOnRaisedRRFBulk(_selectedRrfList: RRFDetails[]): void {
+        this._rrfApprovalService.ActionOnRaisedBulk(_selectedRrfList)
+            .subscribe(
+            results => {
+                if (+ (<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
+                this.setGrdOption();
+                this.getRRFApprovalList();
+            },
+            error => this.errorMessage = <any>error);
     }
 
-    ActionOnRaisedRRF(rrfID: number,
+    setGrdOption() {
+        this.grdOptions.ButtonClicked = 0;
+        this.grdOptions.NextPageUrl = [];
+    }
+    
+    //Raised RRF single approval service call
+    ActionOnRaisedRRF(rrfID: string,
         status: number,
         comment: string): void {
         this._rrfApprovalService.ActionOnRaisedRRF(rrfID, status, comment)
             .subscribe(
             results => {
                 if (+ (<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message, 'Success!');
+                    this.toastr.success((<ResponseFromAPI>results).Message);
                 } else {
-                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    this.toastr.error((<ResponseFromAPI>results).Message);
                 }
             },
             error => this.errorMessage = <any>error);
@@ -121,5 +176,37 @@ export class RRFApprovalListComponent implements OnActivate {
 
     getPriorityClass(priority: string): string {
         return 'priority' + priority;
+    }
+
+    getStatusClass(statusID: number): string {
+        return 'status' + statusID;
+    }
+
+    resetToDefaultGridOptions() {
+        this.grdOptions.ButtonClicked = 0;
+        this.grdOptions.NextPageUrl = [];
+    }
+
+    OnPaginationClick(page: number) {
+        this.grdOptions.ButtonClicked = page;
+        //call APIResult
+        this.getRRFApprovalList();
+    }
+
+    bindGridData() {
+        //First set grid option
+        this.resetToDefaultGridOptions();
+
+        //call APIResult
+        this.getRRFApprovalList();
+    }
+
+    getColumsForSorting(featureName: string) {
+        this._mastersService.getColumsForSorting(featureName)
+            .subscribe(
+            results => {
+                this.SortByList = <any>results;
+            },
+            error => this.errorMessage = <any>error);
     }
 }

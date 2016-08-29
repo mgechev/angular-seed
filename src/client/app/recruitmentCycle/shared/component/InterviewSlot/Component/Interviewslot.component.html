@@ -1,0 +1,76 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption font-dark">
+            <span class="caption-subject bold uppercase">Availability slots for : {{RRFCode}}</span>
+        </div>
+        <div class="tools">
+            <button class="btn btn-sm green table-group-action-submit pull-right" (click)="addNewSlot()">Add New Slot</button>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <form role="form" (submit)='onSaveClick()'>
+            <div class="table-container">
+                <!--Slot Table Toolbar Actions-->
+
+                <!--/Slot Table Toolbar Actions-->
+                <!--Slot Table Content-->
+                <table class="table table-striped table-bordered table-hover table-checkable" id="datatable_ajax" role="grid">
+                    <thead>
+                        <tr role="row" class="heading">
+                            <th width="5%"> Slots&nbsp;# </th>
+                            <th width="30%"> Title </th>
+                            <th width="30%"> Date </th>
+                            <th width="30%"> Time </th>
+                            <th width="10%"> Actions </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let slot of meta; let slotindex = index'>
+                            <td> {{slotindex + 1}} </td>
+                            <!--<td> {{slot.ID}} </td>-->
+                            <td>
+                                <input type="text"  [(ngModel)]='slot.Title' [disabled]="slot.ID != undefined" id="slotTitle" class="form-control" placeholder="Slot Title"
+                                autocomplete="off" />
+                            </td>
+                            <td>
+                                <div>
+                                    <input type="date" required='' [(ngModel)]='slot.StartDate' [disabled]="slot.ID != undefined" tooltip="Start Date" tooltipPlacement="top"
+                                    tooltipTrigger="mouseenter" tooltipEnable="!slot.StartDate" />
+                                </div>
+
+                                <div>
+                                    <input type="date" required='' [(ngModel)]='slot.EndDate' [disabled]="slot.ID != undefined" tooltip="End Date" tooltipPlacement="top"
+                                    tooltipTrigger="mouseenter" tooltipEnable="!slot.EndDate" />
+                                </div>
+                            </td>
+                            <!--Time field-->
+                            <td>
+
+                                <div class="">
+                                    <input type="time" required='' name="" id="" [disabled]="slot.ID != undefined" required="" step="900" [(ngModel)]="slot.CalendarDetails[0].StartTime"
+                                    />
+                                </div>
+                                <div class="">
+                                    <input type="time" required='' name="" id="" [disabled]="slot.ID != undefined" required="" step="900" [(ngModel)]="slot.CalendarDetails[0].EndTime"
+                                    />
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm red btn-outline filter-cancel" (click)="removeSlot(slot.ID)">
+                                    <i class="fa fa-times"></i> Remove</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--/Slot Table Content-->
+                <div>
+                    <!--<button type="submit " class="btn btn-info" (click)="onSaveClick()"> Save </button>-->
+                    <button type="submit " class="btn btn-info"> Save </button>
+                    <!--<button type="reset" class="btn btn-info " (click)="onCancelClick()"> Cancel </button>-->
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</div>

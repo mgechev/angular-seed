@@ -1,0 +1,73 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!--BEGIN breadcrumb -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']"> Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">Notification Settings</span>
+            </li>
+        </ul>
+        <!--End Breadcrumb>-->
+        <div class="row">
+            <div class="portlet-body">
+                <div class=" portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="col-md-4">
+                            <h4>Notification Setting</h4>
+                        </div>
+                        <div class="pull-right" >
+                            <div class="form-group">
+                                <!--<input type="checkbox" [(ngModel)]="notificationStatus" (click)="notificationStatsuChanged()"/>-->
+                                <div class="">
+                                    <input type="checkbox"  class="make-switch" data-on-text="&nbsp;ON&nbsp;&nbsp;" data-off-text="&nbsp;OFF&nbsp;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" [attr.disabled]='!notificationStatus'>
+                        <div class="col-lg-4 col-md-4 col-xs-6">
+                            <div class="mt-element-ribbon bg-grey-steel">
+                                <div class="ribbon ribbon-left ribbon-color-success uppercase">RRF notification</div>
+                                <p class="ribbon-content" style="margin-left: -25px;">
+                                    <tree-view [directories]="RRFData"></tree-view>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-xs-6">
+                            <div class="mt-element-ribbon bg-grey-steel">
+                                <div class="ribbon ribbon-left ribbon-color-danger uppercase">Profile bank notification</div>
+                                <p class="ribbon-content" style="margin-left: -25px;">
+                                    <tree-view [directories]="ProfileBankData"></tree-view>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-xs-6">
+                            <div class="mt-element-ribbon bg-grey-steel">
+                                <div class="ribbon ribbon-left ribbon-color-info uppercase">Recruitment Cycle notification</div>
+                                <p class="ribbon-content" style="margin-left: -25px;">
+                                    <tree-view [directories]="RecruitmentCycleData"></tree-view>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet light  row" [attr.disabled]='!notificationStatus'>
+
+                        <button type="button" class="btn blue pull-right" (click)='onSaveSettings()'>Save Settings</button>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <!-- END PAGE BASE CONTENT -->
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->

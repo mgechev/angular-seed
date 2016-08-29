@@ -24,15 +24,24 @@ let runServer = () => {
     server: {
       baseDir: baseDir,
       middleware: [
-        /* Connect to localhost backend server. */
+        /* Connect to Sharepoint backend server. */
         proxy({
+          protocol: 'http:',
+          hostname: '192.168.101.124',
+          port: 8001,
+          pathname: '/api',
+          route: '/api'
+
+        }),
+        /*    Connect to localhost backend server. 
+        proxy({
+          proxy({
           protocol: 'http:',
           hostname: 'localhost',
           port: 3000,
           pathname: '/api',
           route: '/api'
-        }),
-
+        }),*/
         /* Connect to Heroku backend server. */
         // proxy({
         //   protocol: 'https:',
@@ -83,7 +92,7 @@ let changed = (files: any) => {
   // } else {
   //TODO: Figure out why you can't pass a file to reload
   // if (onlyStylesChanged === false) {
-    browserSync.reload(files);
+  browserSync.reload(files);
   // } else {
   //   browserSync.reload('*.css');
   // }

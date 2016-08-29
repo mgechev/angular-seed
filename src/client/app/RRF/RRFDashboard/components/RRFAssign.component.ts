@@ -7,30 +7,31 @@ import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import { MastersService } from '../../../shared/services/masters.service';
 import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult ,RRFAssignStatus } from  '../../../shared/constantValue/index';
+import { APIResult, RRFAssignStatus } from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
+import {RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
 
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-assign',
     templateUrl: 'RRFAssign.component.html',
-    directives: [ROUTER_DIRECTIVES, DATEPICKER_DIRECTIVES, SELECT_DIRECTIVES],
-    styleUrls: ['../../RRFApproval/components/RRFApproval.component.css'],
+    directives: [ROUTER_DIRECTIVES, DATEPICKER_DIRECTIVES, SELECT_DIRECTIVES, RRFGridRowComponent],
+    styleUrls: ['../../shared/css/RRF.component.css'],
     providers: [ToastsManager]
 })
 
 export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterContentInit {
     selectedRRF: RRFDetails = new RRFDetails();
     errorMessage: string;
-    RRFId: string;
+    RRFId: MasterData = new MasterData();
     recruiterDtls: MasterData[];
     AssignedComments: string = '';
     unAssignRowVisible: boolean = false;
     UnAssignRec: AssignmentDetails = new AssignmentDetails();
     unAssignedComments: string = '';
     public currentDate: Date = new Date();
-    AssignStatus : RRFAssignStatus = RRFAssignStatus;
+    AssignStatus: RRFAssignStatus = RRFAssignStatus;
 
     constructor(private _myRRFService: MyRRFService,
         private _rrfDashboardService: RRFDashboardService,
@@ -39,31 +40,43 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
     }
 
     routerOnActivate(segment: RouteSegment) {
-        this.RRFId = segment.getParam('id');
-        this.GetRecruiter();
+        var params = segment.getParam('id');
+        if (params) {
+            this.RRFId.Id = parseInt(params.split('ID')[1]);
+            this.RRFId.Value = params.split('ID')[0];
+        }
+        //this.RRFId = segment.getParam('id');
+        // this.GetRecruiter();
         this.getRRFDetails(this.RRFId);
         this.UnAssignRec.AssignedTo = new MasterData();
     }
 
     ngAfterViewInit() {
-        $('#cmbAssignTo').select2();
+        (<any>$('#cmbAssignTo')).select2();
     }
 
     ngAfterContentInit() {
         // Component content has been initialized
-        $('#cmbAssignTo').select2();
+        (<any>$('#cmbAssignTo')).select2();
     }
 
-    getRRFDetails(rrfID: string): void {
-        this._myRRFService.getRRFDetails(rrfID)
+    getRRFDetails(rrfID: MasterData): void {
+        this._myRRFService.getRRFDetails(rrfID.Value)
             .subscribe(
             results => {
                 this.selectedRRF = <any>results;
-                if (this.selectedRRF.AssignedData === undefined) {
-                    var assignmentDetails: AssignmentDetails = new AssignmentDetails();
-                    this.selectedRRF.AssignedData = new Array();
-                    this.selectedRRF.AssignedData.push(assignmentDetails);
+                this.selectedRRF.assignedData = new Array();
+                for (var index = 0; index < results.AssignedData.length; index++) {
+                    if(results.AssignedData[index].Status.Value === 'Assigned'){
+                        this.selectedRRF.assignedData.push(results.AssignedData[index]);
+                    }
                 }
+                if (this.selectedRRF.assignedData === undefined) {
+                    var assignmentDetails: AssignmentDetails = new AssignmentDetails();
+                    this.selectedRRF.assignedData = new Array();
+                    this.selectedRRF.assignedData.push(assignmentDetails);
+                }
+                this.GetRecruiter();
             },
             error => this.errorMessage = <any>error);
     }
@@ -78,11 +91,21 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
     }
 
     onAssignRRF(): void {
-        if ($('#cmbAssignTo').val() === null) {
-            return;
+
+        if(!this.isFormValidate()){
+            return ;
         }
         var selectedRec: number[] = $('#cmbAssignTo').val();
-        this._rrfDashboardService.saveRRFAssignmentDeatils(this.RRFId, selectedRec, this.AssignedComments)
+        // Creating array of selected Assignee
+        var selectedRRFidsList: Array<MasterData> = new Array<MasterData>();
+        for (var index = 0; index < selectedRec.length; index++) {
+            var selectedRRF: MasterData = new MasterData();
+            selectedRRF.Id = selectedRec[index];
+            selectedRRF.Value = "";
+            selectedRRFidsList.push(selectedRRF);
+        }
+        this._rrfDashboardService.saveRRFAssignmentDeatils(this.RRFId, selectedRRFidsList, this.AssignedComments)
+            //this._rrfDashboardService.saveRRFAssignmentDeatils(this.RRFId, selectedRec, this.AssignedComments)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -95,6 +118,18 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
                 $('#cmbAssignTo').select2('val', '');
             },
             error => this.errorMessage = <any>error);
+    }
+
+    isFormValidate() {
+        if ($('#cmbAssignTo').val() === null) {
+            this.toastr.error('Please select assign To value');
+            return false;
+        }
+        if ($('#txtAssigningComment').val() === "") {
+            this.toastr.error('Please select Assigning Comment');
+            return false;
+        }
+        return true;
     }
 
     onUnassign(recdtls: AssignmentDetails): void {
@@ -112,7 +147,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
     }
 
     onUnAssignRRF(): void {
-        this._rrfDashboardService.unassignRRF(this.RRFId, this.UnAssignRec.AssignedTo.Id, this.unAssignedComments)
+        this._rrfDashboardService.unassignRRF(this.RRFId, this.UnAssignRec.AssignedTo, this.unAssignedComments)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -134,5 +169,20 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
 
     getPriorityClass(priority: string): string {
         return 'priority' + priority;
+    }
+
+    isAlreadyAssigned(recuiterId: number): boolean {
+        if (this.selectedRRF.AssignedData === undefined) {
+            return false;
+        }
+
+        for (var index = 0; index < this.selectedRRF.AssignedData.length; index++) {
+            if (this.selectedRRF.AssignedData[index].AssignedTo.Id == recuiterId) {
+                if (this.selectedRRF.AssignedData[index].Status.Id === RRFAssignStatus.Assigned) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

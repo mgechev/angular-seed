@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" manifest="manifest.appcache">
 
 <head>
     <base href="<%= APP_BASE %>">
@@ -22,10 +22,10 @@
     <link href="assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.css" rel="stylesheet" type="text/css" />
     <link href="assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css"
     />
-    <link href="../node_modules/ng2-toastr/bundles/ng2-toastr.min.css" rel="stylesheet" />
+    <link href="assets/global/plugins/ng2-toastr.min.css" rel="stylesheet" />
     <link href="assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="../node_modules/ng2-select/components/css/ng2-select.css" rel="stylesheet" type="text/css" />
+    <!--<link href="../node_modules/ng2-select/components/css/ng2-select.css" rel="stylesheet" type="text/css" />-->
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL STYLES -->
     <link href="assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
@@ -36,6 +36,13 @@
     <link href="assets/layouts/layout4/css/themes/light.min.css" rel="stylesheet" type="text/css" id="style_color" />
     <link href="assets/layouts/layout4/css/custom.min.css" rel="stylesheet" type="text/css" />
     <!-- END THEME LAYOUT STYLES -->
+    <!-- Calendar STYLES -->
+    <link href="assets/calendar/scheduler.min.css" rel="stylesheet" />
+    <link href="assets/calendar/lib/fullcalendar.min.css" rel="stylesheet" />
+    <link href="assets/calendar/lib/fullcalendar.print.css" rel="stylesheet" media="print" />
+    <link href="assets/calendar/Calendar_theme.css"' rel="stylesheet" />
+    <!-- END Calendar STYLES -->
+
     <!-- inject:css -->
     <!-- endinject -->
     <link rel="shortcut icon" href="favicon.ico" />
@@ -150,7 +157,8 @@
     <!-- END CORE PLUGINS -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <script src="../assets/global/plugins/moment.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
+    <!--<script src="../assets/global/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>-->
+        <script src="../assets/calendar/lib/fullcalendar.min.js" type="text/javascript"></script>
     <script src="../assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script>
     <script src="../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
     <script src="../assets/global/plugins/jquery-knob/js/jquery.knob.js" type="text/javascript"></script>
@@ -161,7 +169,7 @@
     <script src="../assets/global/plugins/amcharts/amcharts/amcharts.js" type="text/javascript"></script>
     <script src="../assets/global/plugins/amcharts/amcharts/pie.js" type="text/javascript"></script>
     <script src="../assets/global/plugins/amcharts/amcharts/themes/light.js" type="text/javascript"></script>
-    <script src="../node_modules/chart.js/dist/Chart.bundle.min.js"></script>
+    <script src="../assets/global/plugins/charts/Chart.bundle.min.js"></script>
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL SCRIPTS -->
     <script src="../assets/layouts/app.js" type="text/javascript"></script>
@@ -171,6 +179,14 @@
     <script src="../assets/layouts/demo.js" type="text/javascript"></script>
     <script src="../assets/layouts/quick-sidebar.js" type="text/javascript"></script>
     <!-- END THEME LAYOUT SCRIPTS -->
+
+<!--    
+    <script src="../assets/calendar/lib/jquery.min.js"></script>
+    <script src="../assets/calendar/lib/fullcalendar.min.js"></script>-->
+    <script src="../assets/calendar/lib/moment.min.js"></script>
+    <script src="assets/calendar/scheduler.min.js"></script>
+    <!--<script src="node_modules/fullcalendar/dist/fullcalendar.min.js"></script>-->
+    
     <script>
         // function.name (all IE)
   // Remove once https://github.com/angular/angular/issues/6501 is fixed.
@@ -188,7 +204,21 @@
     });
   }
     </script>
-
+    <script src="propel-client.js"></script>
+    <script >
+    var PropelClient = window.goog.propel.PropelClient;
+    var propelClient
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/worker.js').then(function(reg) {
+        if (PropelClient.isSupported()) {
+            propelClient = new PropelClient(reg);
+        }
+        }).catch(function(error) {
+         // registration failed
+         console.log('Registration failed with ' + error);
+        })
+    }
+    </script>
     <script>
         // Fixes undefined module function in SystemJS bundle
   function module() {}

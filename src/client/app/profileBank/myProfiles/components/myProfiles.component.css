@@ -29,6 +29,13 @@
     margin-top: 0 !important;
     margin-left: 0 !important;
   }
+  .statusComments {
+   width:  258px !important;
+  }
+  
+  .updatebtn{
+  margin-left: auto!important;
+  }
 }
 .add-new-panel {
   margin-left: 15px;
@@ -48,30 +55,41 @@
   opacity: 0;
   filter: alpha(opacity=0);
 }
-.table-checkable tr >td:first-child,
-.table-checkable tr >th:first-child {
-  max-width: none !important;
-}
-.PendingScreening {
+
+.color1 {
   background: #e43a45;
 }
-.Open {
+.color2 {
   background: #36c6d3;
 }
-.Selected {
+.color3 {
   background: #1bbc9b;
 }
-.Blacklisted {
-  background: black;
+.color4 {
+  background: darkblue;
 }
-.Offered {
+.color5 {
   background: #00f00d;
 }
-.addNew,
-.fileInput {
-  padding-left: 4px;
-  padding-right: 4px;
+.color6 {
+  background: #880000;
 }
+.color7 {
+  background: #ffff66;
+}
+.color8 {
+  background: blueviolet;
+}
+.color9 {
+  background: coral;
+}
+.color10 {
+  background: black;
+}
+.color12 {
+  background: crimson;
+}
+
 .inlineForm {
   padding-left: 0px;
 }
@@ -109,9 +127,7 @@
     margin-top: 0.5em;
   }
 }
-.table-checkable tr>td: first-child {
-  text-align: left;
-}
+
 span.select2.select2-container.select2-container--bootstrap {
   width: auto !important;
 }
@@ -127,4 +143,56 @@ span.select2.select2-container.select2-container--bootstrap {
 }
 .tooltip.customClass .tooltip-arrow {
   display: none;
+}
+legend a {
+  color: inherit;
+}
+legend.legendStyle {
+padding-left: 5px;
+padding-right: 5px;
+}
+fieldset.fsStyle {
+font-family: Verdana, Arial, sans-serif;
+font-size: small;
+font-weight: normal;
+}
+legend.legendStyle {
+font-size: 14px;
+color: #888888;
+background-color: transparent;
+
+}
+
+legend {
+width: auto;
+border-bottom: 0px;
+}
+.btnLink {
+  text-align: left !important;
+  width: 100%;
+  border: white !important;
+  color: #888888;
+}
+.list{
+  border: white !important;
+}
+.selectedRowColor {
+  background: lightseagreen;
+}
+.table-checkable tr>td, .table-checkable tr>th{
+  max-width: inherit !important;
+}
+.statusComments {
+   width: 400px;
+}
+.updatebtn{
+  margin-left: 68px;
+}
+.header {
+  color: gray;
+    margin-left: 5px;
+    font-family: Verdana;
+}
+.thead{
+  border-bottom:solid 1px rgb(231, 236, 241) !important;
 }

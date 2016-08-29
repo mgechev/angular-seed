@@ -1,0 +1,275 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!--BEGIN breadcrumb -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']"> Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a [routerLink]="['/App/RRF/RRFDashboard']"> RRF Dashboard </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a (click)='redirectToPreviousView()'> Candidates </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">Schedule Interview</span>
+            </li>
+        </ul>
+        <!--End Breadcrumb>-->
+        <div class="portlet-body">
+            <div class="portlet light bordered">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4> &nbsp;&nbsp; Schdule Interview </h4>
+                    </div>
+                    <div class="col-md-8" *ngIf="ifInvalidInterview ">
+                        <div style="color:red;margin-top:10px" class="control-label align"> Note *: This Interview Will Be Scheduled After Approval. </div>
+                    </div>
+                </div>
+                <hr style="hrClass" />
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="row">
+                            <form role="form" (submit)="onScheduleInterviewClick()">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label align">Candidate <span class="required"> * </span></label>
+                                        <div class="col-md-3">
+
+                                            {{ScheduleInterView.Candidate}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:15px">
+                                    <div class="form-group">
+                                        <!--<label class="col-md-3 control-label align">Interview Type <span class="required"> * </span></label>
+                                        <div class="col-md-3">
+                                            <div class="input-group select2-bootstrap-append" style="width:160px !important">
+                                                <select class="form-control" [(ngModel)]="ScheduleInterView.InterviewType.Id" [disabled]='isInterviewReschedule'  (change)='getInterviewRoundsbyInterviewType($event.target.value)'>
+                                                    <option></option>
+                                                    <option *ngFor="let Type of InterviewTypes" [value]="Type.Id">{{Type.Value}}</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-2 control-label align">Round <span class="required"> * </span></label>
+                                        <div class="col-md-3">
+                                            <select class="form-control" [(ngModel)]="ScheduleInterView.Round.Id" (change)='getNominatedInterviewersByRound($event.target.value)' [disabled]='isInterviewReschedule'>
+                                                    <option></option>
+                                                    <option *ngFor="let round of InterviewRounds" [value]="round.Id">{{round.Value}}</option>
+                                            </select>
+                                        </div>-->
+                                        <label class="col-md-3 control-label align">Interview Round <span class="required"> * </span></label>
+                                        <div class="col-md-3">
+                                            <div class="input-group select2-bootstrap-append" style="width:160px !important">
+                                                <select class="form-control" [(ngModel)]="ScheduleInterView.Round.Id" (change)='getNominatedInterviewersByRound($event.target.value)'
+                                                    [disabled]='isInterviewReschedule'>
+                                                    <option></option>
+                                                    <option *ngFor="let round of CombinedInterviewRounds" [value]="round.InterviewRound.Id">{{round.InterviewRound.Value}}</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:15px">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label align">Interview Mode <span class="required"> * </span></label>
+                                        <div class="col-md-3">
+                                            <div class="input-group select2-bootstrap-append" style="width:160px !important">
+                                                <select class="form-control" [(ngModel)]="ScheduleInterView.InterviewMode.Id" (change)='setSelectedMode($event.target.value)'>
+                                                        <option  *ngFor="let mode of InterviewModes" [value]="mode.Id">{{mode.Value}}</option>
+                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="selectSkypeID">
+                                            <label class="col-md-2 control-label align">Skype ID <span class="required"> * </span></label>
+                                            <div class="col-md-3">
+                                                <select class="form-control" [(ngModel)]="ScheduleInterView.SkypeID">
+                                                    <option></option>
+                                                    <option *ngFor="let skypeid of InterviewSkypeId" [value]="skypeid.Id">{{skypeid.Value}}</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:15px">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label align">Interviewers <span class="required"> * </span></label>
+                                        <div class="col-md-5">
+                                            <div class="input-group select2-bootstrap-append" style="width:240px !important">
+                                                <select id="cmbInterviewers" class="form-control" multiple style="width:240px !important" (change)='onSelectInterviewer($event.target.value)'>
+                                                    <optgroup label="Nominations" *ngIf="NominatedInterviewersAvailable">
+                                                        <option  *ngFor="let interviewer of NominatedInterviewers" [value]="interviewer.Id" [text]="interviewer.Value">{{interviewer.Value}}</option>
+                                                    </optgroup>
+                                                    <optgroup label="Other">
+                                                        <option  *ngFor="let interviewer of OtherInterviewers" [value]="interviewer.Id">{{interviewer.Value}}</option>
+                                                    </optgroup>
+                                              </select>
+
+                                                <!--<multiple-demo></multiple-demo>-->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button type="button" class="btn btn-info" (click)="ShowAvailabilityOnCalendar()"> Show Availability </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:15px">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label align">Interview Date <span class="required"> * </span></label>
+                                        <div class="col-md-7">
+                                            <input type="date" name="bday" id="expectedDateOfJoining" required="" [(ngModel)]="ScheduleInterView.InterviewDate" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:15px">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label align">From <span class="required"> * </span></label>
+                                        <div class="col-md-3">
+                                            <input type="time" name="bday" id="" required="" [(ngModel)]="ScheduleInterView.InterviewFromTime" />
+                                        </div>
+                                        <label class="col-md-2 control-label align">To <span class="required"> * </span></label>
+                                        <div class="col-md-3">
+                                            <input type="time" name="bday" id="" required="" [(ngModel)]="ScheduleInterView.InterviewToTime" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:15px">
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-9">
+                                        <div class="mt-checkbox-list">
+                                            <label class="mt-checkbox mt-checkbox-outline">
+                                                   <input type="checkbox" [(ngModel)]="ScheduleInterView.DisplayCandidateInfo"> Show Candidate Information
+                                                   <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:15px" *ngIf="ifInvalidInterview || ifRescheduleInterview">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label align">Reason <span class="required"> * </span></label>
+                                        <div class="col-md-8">
+                                            <textarea class="form-control" rows="2" placeholder="Reson to send for approval" style="resize:vertical" [(ngModel)]="ScheduleInterView.Reason"
+                                                required> </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:15px">
+                                    <br/>
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-6">
+                                        <button type="submit" class="btn btn-info" *ngIf="!ifInvalidInterview" [disabled]='ifInterviewScheduled'> Schedule </button>
+                                        <button type="submit" class="btn btn-info" *ngIf="ifInvalidInterview"> Send For Approval </button>&nbsp;&nbsp;
+                                        <a class="btn btn-info" (click)='redirectToPreviousView()'> Cancel</a>
+                                    </div>
+                                </div>
+                                <br/>
+                                <br/>
+                            </form>
+                            <!--</div>
+                            </div>-->
+                        </div>
+                    </div>
+                    <div class="col-md-5" style="border-left:1px solid #c6cdd5">
+                        <!--
+                            <full-calendar [resources]="resources" [events]="events" [header]="header" defaultDate="2016-01-12" [eventLimit]="4" [editable]="true"
+                            (onEventClick)="handleEventClick($event)" [selectable]="true" [selectHelper]="true" (onSelect)="handleDayClick($event)"></full-calendar>-->
+                        <full-calendar [resources]="resources" [events]="InterviewerCalendarDetails.Events" [header]="header" [defaultDate]="currentDate"
+                            (onEventClick)="handleEventClick($event)" (onEventRender)="showDetails($event)" [eventLimit]="4"
+                            [editable]="true">
+                        </full-calendar>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="fullCalModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                        <h4 id="modalTitle" class="modal-title">Time Slot Details </h4>
+                    </div>
+                    <div id="modalBody" class="modal-body" *ngIf="event">
+                        <div class="row" style="margin-top:15px">
+                            <div class="form-group">
+                                <div class="col-md-4 align"><label>Title <span class="required">*</span></label></div>
+                                <div class="col-md-8">{{event.title}}</div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:15px">
+                            <div class="form-group">
+                                <div class="col-md-4 align"><label>Start Date <span class="required">*</span></label></div>
+                                <div class="col-md-8"> {{event.start}} &nbsp; Start Time {{event.startTime}}</div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:15px">
+                            <div class="form-group">
+                                <div class="col-md-4 align"><label>End Date <span class="required">*</span></label></div>
+                                <div class="col-md-8">{{event.end}} &nbsp; End Time {{event.endTime}}</div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top:15px">
+                            <div class="form-group">
+                                <div class="col-md-4 align"><label>Availability <span class="required">*</span></label></div>
+                                <div class="col-md-8">{{event.Resource}}</div>
+                            </div>
+                        </div>
+
+                        <!--Event : {{event.title}} Date: {{event.start}} Date: {{event.end}} All Day: {{event.allDay}}-->
+                    </div>
+                    <div class="modal-footer">
+                        <!--<button type="button" icon="fa-close" (click)="deleteEvent()" label="">Delete</button>-->
+                        <button type="button" icon="fa-check" class="btn btn-default" data-dismiss="modal" label="">Ok</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Confirmation Box-->
+        <div id="confirmSlot" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                    </div>
+                    <div id="modalBody" class="modal-body">
+                        You hav selected un-available time slot to schedule interview.<br/> Do you want to continue?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" icon="fa-check" class="btn btn-info" (click)="ScheduleCandidateInterView()" label="">Yes</button>
+                        <button type="button" icon="fa-check" class="btn btn-default" data-dismiss="modal" label="">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="skippingRound" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <b>Skipping Round </b>
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                    </div>
+                    <div id="modalBody" class="modal-body">
+                        You are skipping interview round.<br/> Do you want to continue?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" icon="fa-check" class="btn btn-info" (click)="onForceInterviewSchedule()" label="">Yes</button>
+                        <button type="button" icon="fa-check" class="btn btn-default" (click)="onClearSelection()" label="">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE BASE CONTENT -->
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->

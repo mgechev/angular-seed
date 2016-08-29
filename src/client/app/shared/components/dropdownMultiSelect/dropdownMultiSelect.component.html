@@ -1,0 +1,32 @@
+<div [class.notReadonlyClass]="!isReadOnly" [class.readonlyClass]="isReadOnly" >
+    <div class="form-group form-md-line-input">
+        <div class="col-md-12" style="padding-left: 0px;">
+            <div class="input-group col-md-12">
+                <div class="input-group-control">
+                    <input type="text" class="form-control" [placeholder]="placeholder" [(ngModel)]=query (keyup)=filter()>
+                    <div class="form-control-focus"> </div>
+                </div>
+                <span class="input-group-btn btn-right" *ngIf="isAddButtonVisible">
+                  <button type="button"  class="btn green-haze dropdown-toggle" (click)='AddValue()' aria-expanded="false" [disabled]='isAddButtunDisable'> ADD
+                 </button>
+               </span>
+            </div>
+        </div>
+    </div>
+    <div class="suggestions portlet light bordered table-scrollable" *ngIf="filteredList.length > 0" style="position: absolute ;
+    z-index:1000">
+        <div >
+            <ul *ngFor="let item of filteredList">
+                <li>
+                    <a (click)="select(item)">{{item.Value}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div *ngFor="let item of selected" class="selctedItem">
+        <div class="selected">
+            <span>{{item.Value}}</span>
+            <a (click)="remove(item)">x</a>
+        </div>
+    </div>
+</div>

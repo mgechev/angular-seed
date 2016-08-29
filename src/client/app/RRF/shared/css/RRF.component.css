@@ -1,0 +1,99 @@
+
+/*.Approved {
+  background: #32c5d2;
+}
+.On-Hold {
+  background: #c2cad8;
+}
+.Rejected {
+  background: #e7505a;
+}
+.Open {
+  background: #e7505a;
+}
+.Closed {
+  background: #41ce29;
+}
+.PendingApproval {
+  background: rgba(233, 239, 11, 0.98);
+}*/
+
+/*Pending Approval 1
+Open 2
+Rejected 3
+Assigned 4
+Closed 5*/
+.thead{
+  border-bottom:solid 1px rgb(231, 236, 241) !important;
+}
+.status1 {
+  background: #E9EF0B;
+}
+.status2 {
+  background: #32c5d2;
+}
+.status3 {
+  background: #e7505a;
+}
+.status4 {
+  background: #c2cad8;
+}
+.status5 {
+  background: #41ce29;
+}
+
+
+.priority1 {
+  background: #e7505a;
+}
+.priority2 {
+  background: #337ab7;
+}
+.priority3 {
+  background: #41ce29;
+}
+.priority4 {
+  background: rgba(233, 239, 11, 0.98);
+}
+.priority5 {
+  background: #c2cad8;
+}
+.mt-action-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 50% !important;
+}
+#chartdiv {
+  width: 100%;
+  height: 250px;
+  font-size: 11px;
+}
+.btnLink{
+  text-align: left !important;
+  width: 100%;
+  border: white !important;
+  color: #888888;
+}
+
+.chart {
+  display: block; 
+  width: 50%;
+}
+
+.wraptext {
+  word-wrap: break-word;
+}
+.rowHeader{
+font-size: 13px
+}
+input[type=radio]:checked ~ .check::before{
+  background: #0DFF92;
+}
+
+input[type=radio]:checked ~ label{
+  color: #0DFF92;
+}
+

@@ -6,11 +6,12 @@
     <div class="page-quick-sidebar">
         <ul class="nav nav-tabs">
             <li class="active">
-                <a href="javascript:;" data-target="#quick_sidebar_tab_1" data-toggle="tab"> Users
-                                <span class="badge badge-danger">2</span>
+                <a href="javascript:;" data-target="#quick_sidebar_tab_1" data-toggle="tab"> My TO-DO List
+                    <!--TODO: Count of TODO TASK-->
+                                <!--<span class="badge badge-danger">2</span>-->
                             </a>
             </li>
-            <li>
+            <!--<li>
                 <a href="javascript:;" data-target="#quick_sidebar_tab_2" data-toggle="tab"> Alerts
                                 <span class="badge badge-success">7</span>
                             </a>
@@ -38,49 +39,85 @@
                             <i class="icon-settings"></i> Settings </a>
                     </li>
                 </ul>
-            </li>
+            </li>-->
         </ul>
         <div class="tab-content">
             <div class="tab-pane active page-quick-sidebar-chat" id="quick_sidebar_tab_1">
                 <div class="page-quick-sidebar-chat-users" data-rail-color="#ddd" data-wrapper-class="page-quick-sidebar-list">
-                    <h3 class="list-heading">Staff</h3>
-                    <ul class="media-list list-items">
-                        <li class="media">
-                            <div class="media-status">
+                    <!--<h3 class="list-heading">Staff</h3>-->
+                    <div class="media-list list-items">
+                        <div class="media">
+                            <div class="page-quick-sidebar-item">
+                                <div class="page-quick-sidebar-chat-user" style="margin-left: -330px; margin-top: -25px;">
+                                    <div class="page-quick-sidebar-nav pull-left">
+                                        <a href="javascript:;" class="page-quick-sidebar-back-to-list" (click)='addNewTask()'><i class="fa fa-plus-circle" aria-hidden="true"></i> New Task</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <ul class="feeds list-items">
+                            <li class="" *ngFor="let task of MyTodoList">
+                                <!--<div class="media-status">
                                 <span class="badge badge-success">8</span>
-                            </div>
-                            <img class="media-object" src="../assets/layouts/layout4/img/avatar3.jpg" alt="...">
-                            <div class="media-body">
-                                <h4 class="media-heading">Bob Nilson</h4>
-                                <div class="media-heading-sub"> Project Manager </div>
-                            </div>
-                        </li>
-                        <li class="media">
-                            <img class="media-object" src="../assets/layouts/layout4/img/avatar1.jpg" alt="...">
-                            <div class="media-body">
-                                <h4 class="media-heading">Nick Larson</h4>
-                                <div class="media-heading-sub"> Art Director </div>
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="media-status">
-                                <span class="badge badge-danger">3</span>
-                            </div>
-                            <img class="media-object" src="../assets/layouts/layout4/img/avatar4.jpg" alt="...">
-                            <div class="media-body">
-                                <h4 class="media-heading">Deon Hubert</h4>
-                                <div class="media-heading-sub"> CTO </div>
-                            </div>
-                        </li>
-                        <li class="media">
+                            </div>-->
+                                <!--<img class="media-object" src="../assets/layouts/layout4/img/avatar3.jpg" alt="...">-->
+
+                                <!--<div (click)="setCurrentTask(task)">-->
+
+                                <div class="col1">
+                                    <div class="cont">
+                                        <div class="cont-col1">
+                                            <div class="label label-sm label-info">
+                                                <i class="fa fa-bell-o"></i>
+                                            </div>
+                                        </div>
+                                        <div class="cont-col2">
+                                            <div class="desc">
+                                                {{task.Title}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col2">
+                                    <a (click)="RemoveTask(task.ID)"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                </div>
+
+
+
+
+                                <!--<hr style="border-top : 1px solid rgba(233, 236, 243, 0.29)">-->
+                                <!--</div>-->
+
+                            </li>
+                            <!--<li class="media">
+                                <img class="media-object" src="../assets/layouts/layout4/img/avatar1.jpg" alt="...">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Nick Larson</h4>
+                                    <div class="media-heading-sub"> Art Director </div>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <div class="media-status">
+                                    <span class="badge badge-danger">3</span>
+                                </div>
+                                <img class="media-object" src="../assets/layouts/layout4/img/avatar4.jpg" alt="...">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Deon Hubert</h4>
+                                    <div class="media-heading-sub"> CTO </div>
+                                </div>
+                            </li>
+                                <li class="media">
                             <img class="media-object" src="../assets/layouts/layout4/img/avatar2.jpg" alt="...">
                             <div class="media-body">
                                 <h4 class="media-heading">Ella Wong</h4>
                                 <div class="media-heading-sub"> CEO </div>
                             </div>
-                        </li>
-                    </ul>
-                    <h3 class="list-heading">Customers</h3>
+                        </li>-->
+                        </ul>
+                    </div>
+                    <!--<h3 class="list-heading">Customers</h3>
                     <ul class="media-list list-items">
                         <li class="media">
                             <div class="media-status">
@@ -140,111 +177,40 @@
                                 <div class="media-heading-small"> Last seen 03:10 AM </div>
                             </div>
                         </li>
-                    </ul>
+                    </ul>-->
                 </div>
                 <div class="page-quick-sidebar-item">
                     <div class="page-quick-sidebar-chat-user">
                         <div class="page-quick-sidebar-nav">
-                            <a href="javascript:;" class="page-quick-sidebar-back-to-list">
+                            <a href="javascript:;" class="page-quick-sidebar-back-to-list" (click)='clearData()'>
                                 <i class="icon-arrow-left"></i>Back</a>
                         </div>
-                        <div class="page-quick-sidebar-chat-user-messages">
-                            <div class="post out">
-                                <img class="avatar" alt="" src="../assets/layouts/layout4/img/avatar3.jpg" />
-                                <div class="message">
-                                    <span class="arrow"></span>
-                                    <a href="javascript:;" class="name">Bob Nilson</a>
-                                    <span class="datetime">20:15</span>
-                                    <span class="body"> When could you send me the report ? </span>
-                                </div>
-                            </div>
-                            <div class="post in">
-                                <img class="avatar" alt="" src="../assets/layouts/layout4/img/avatar2.jpg" />
-                                <div class="message">
-                                    <span class="arrow"></span>
-                                    <a href="javascript:;" class="name">Ella Wong</a>
-                                    <span class="datetime">20:15</span>
-                                    <span class="body"> Its almost done. I will be sending it shortly </span>
-                                </div>
-                            </div>
-                            <div class="post out">
-                                <img class="avatar" alt="" src="../assets/layouts/layout4/img/avatar3.jpg" />
-                                <div class="message">
-                                    <span class="arrow"></span>
-                                    <a href="javascript:;" class="name">Bob Nilson</a>
-                                    <span class="datetime">20:15</span>
-                                    <span class="body"> Alright. Thanks! :) </span>
-                                </div>
-                            </div>
-                            <div class="post in">
-                                <img class="avatar" alt="" src="../assets/layouts/layout4/img/avatar2.jpg" />
-                                <div class="message">
-                                    <span class="arrow"></span>
-                                    <a href="javascript:;" class="name">Ella Wong</a>
-                                    <span class="datetime">20:16</span>
-                                    <span class="body"> You are most welcome. Sorry for the delay. </span>
-                                </div>
-                            </div>
-                            <div class="post out">
-                                <img class="avatar" alt="" src="../assets/layouts/layout4/img/avatar3.jpg" />
-                                <div class="message">
-                                    <span class="arrow"></span>
-                                    <a href="javascript:;" class="name">Bob Nilson</a>
-                                    <span class="datetime">20:17</span>
-                                    <span class="body"> No probs. Just take your time :) </span>
-                                </div>
-                            </div>
-                            <div class="post in">
-                                <img class="avatar" alt="" src="../assets/layouts/layout4/img/avatar2.jpg" />
-                                <div class="message">
-                                    <span class="arrow"></span>
-                                    <a href="javascript:;" class="name">Ella Wong</a>
-                                    <span class="datetime">20:40</span>
-                                    <span class="body"> Alright. I just emailed it to you. </span>
-                                </div>
-                            </div>
-                            <div class="post out">
-                                <img class="avatar" alt="" src="../assets/layouts/layout4/img/avatar3.jpg" />
-                                <div class="message">
-                                    <span class="arrow"></span>
-                                    <a href="javascript:;" class="name">Bob Nilson</a>
-                                    <span class="datetime">20:17</span>
-                                    <span class="body"> Great! Thanks. Will check it right away. </span>
-                                </div>
-                            </div>
-                            <div class="post in">
-                                <img class="avatar" alt="" src="../assets/layouts/layout4/img/avatar2.jpg" />
-                                <div class="message">
-                                    <span class="arrow"></span>
-                                    <a href="javascript:;" class="name">Ella Wong</a>
-                                    <span class="datetime">20:40</span>
-                                    <span class="body"> Please let me know if you have any comment. </span>
-                                </div>
-                            </div>
-                            <div class="post out">
-                                <img class="avatar" alt="" src="../assets/layouts/layout4/img/avatar3.jpg" />
-                                <div class="message">
-                                    <span class="arrow"></span>
-                                    <a href="javascript:;" class="name">Bob Nilson</a>
-                                    <span class="datetime">20:17</span>
-                                    <span class="body"> Sure. I will check and buzz you if anything needs to be corrected. </span>
-                                </div>
+                        <!--<div class="page-quick-sidebar-chat-user-messages">-->
+                        <div class="page-quick-sidebar-chat-user-form">
+                            <!--TODO :  Add UI to Update or Add New TAsk-->
+
+                            <div class="input-group" style="width:100%">
+                                <input type="text" class="form-control" placeholder="Enter Your To Do Task here..." [(ngModel)]="toDoTask.Title">
+                                <br/><br/>
+                                <button type="button" class="btn green" *ngIf="!isNewTask" (click)="updateTask(toDoTask)">Update</button>
+                                <button type="button" class="btn green" *ngIf="isNewTask" (click)="AddTask(toDoTask)">Save</button>
                             </div>
                         </div>
-                        <div class="page-quick-sidebar-chat-user-form">
+
+                        <!--</div>-->
+                        <!--<div class="page-quick-sidebar-chat-user-form">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Type a message here...">
                                 <div class="input-group-btn">
                                     <button type="button" class="btn green">
-                                                    <i class="icon-paper-clip"></i>
-                                                </button>
+                                         <i class="icon-paper-clip"></i>
+                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
-            <div class="tab-pane page-quick-sidebar-alerts" id="quick_sidebar_tab_2">
+            <!--<div class="tab-pane page-quick-sidebar-alerts" id="quick_sidebar_tab_2">
                 <div class="page-quick-sidebar-alerts-list">
                     <h3 class="list-heading">General</h3>
                     <ul class="feeds list-items">
@@ -561,7 +527,7 @@
                                         <i class="icon-settings"></i> Save Changes</button>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>

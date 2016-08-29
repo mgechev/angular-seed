@@ -1,0 +1,265 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+        <!--BEGIN breadcrumb -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']"> Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a [routerLink]="['/App/RRF/RRFDashboard']"> RRF Dashboard </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">Candidates</span>
+            </li>
+        </ul>
+        <!--End Breadcrumb>-->
+        <div class="row">
+            <div class="portlet-body">
+                <div class="col-lg-12">
+                    <div class="portlet light bordered">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <span class="caption-subject bold uppercase">RRF Details</span>
+                            </div>
+
+                        </div>
+                        <div class="portlet-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                                        <thead style="word-wrap: break-word;">
+                                            <tr>
+                                                <td> <b>Raised by/Date</b> </td>
+                                                <td> <b>Position Details</b> </td>
+                                                <td> <b>Requirments </b></td>
+                                                <td> <b>Priority</b></td>
+                                                <td> <b>Status </b></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="odd gradeX">
+                                                <td>
+                                                    <div align="left">
+                                                        {{selectedRRF.RaisedBy.Value }}
+                                                        <br> {{selectedRRF.CreatedDate}}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div align="left">
+                                                        Tech. : {{selectedRRF.Technology.Value }}
+                                                        <br>Position : {{selectedRRF.PositionTitle}}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div align="left">
+                                                        Skills :
+                                                        <label *ngFor="let skill of selectedRRF.SkillsRequired">
+                                                            {{skill.Value}}
+                                                        </label>
+                                                        <br>Date of Joining : {{selectedRRF.ExpDateOfJoining }}
+                                                        <br>Min.Exp : {{selectedRRF.MinExp }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        Max.Exp : {{selectedRRF.MaxExp }}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span class="mt-action-dot "></span> {{selectedRRF.Priority.Value}}
+                                                </td>
+                                                <td>
+                                                    <span class="mt-action-dot "></span> {{selectedRRF.Status.Value}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <span class="caption-subject bold">Candidate Details</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- Candidate List -->
+                                <div class="col-md-7">
+                                    <div class="table-scrollable ">
+                                        <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer">
+                                            <thead>
+                                                <tr>
+                                                    <th> # </th>
+                                                    <th>Candidate</th>
+                                                    <th>Status</th>
+                                                    <th>Last Round Scheduled</th>
+                                                    <th>Interview Mode</th>
+                                                    <th>Interview</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let selectedcandidate of AllCandidatesForRRF; let index = index">
+                                                    <td> {{index+1}} </td>
+                                                    <td> <a (click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate)'> {{selectedcandidate.Candidate}}</a></td>
+
+                                                    <td> {{selectedcandidate.InterviewDetails.Status}} </td>
+                                                    <td> {{selectedcandidate.InterviewDetails.Round.Value}}</td>
+                                                    <td>
+                                                        <div> {{selectedcandidate.InterviewDetails.InterviewMode.Value}}</div>
+                                                        <div *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview"> Skype ID: {{selectedcandidate.InterviewDetails.SkypeID?selectedcandidate.InterviewDetails.SkypeID.Value:"N/A"}}</div>
+                                                        <div *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview"> Password: {{selectedcandidate.InterviewDetails.SkypePassword?selectedcandidate.InterviewDetails.SkypePassword:"N/A"}}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+                                                                <i class="fa fa-angle-down"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu" role="menu">
+                                                                <li *ngIf="!selectedcandidate.isInterviewScheduled">
+                                                                    <button class="btn btn-default btnLink " [disabled]='canScheduleInterview(selectedcandidate.InterviewDetails.Status)' (click)='onScheduleInterviewClick(selectedcandidate)'>
+                                                                        <i class="fa fa-calendar-check-o"></i> Schedule
+                                                                    </button>
+                                                                </li>
+                                                                <li class="divider" *ngIf="selectedcandidate.isInterviewScheduled"> </li>
+
+                                                                <li>
+                                                                    <button class="btn btn-default btnLink " *ngIf="selectedcandidate.isInterviewScheduled" (click)='onReScheduleInterviewClick(selectedcandidate)'>
+                                                                        <i class="fa fa-calendar-check-o"></i> Re-Schedule
+                                                                    </button>
+                                                                </li>
+                                                                <li class="divider"> </li>
+                                                                <li>
+                                                                    <button class="btn btn-default btnLink " [disabled]='canCancelInterview(selectedcandidate.InterviewDetails.Status)' (click)='onCancelInterviewClick(selectedcandidate)'>
+                                                                        <i class="fa fa-times"></i>Cancel Interview</button>
+                                                                </li>
+                                                                <li class="divider"> </li>
+                                                                <li>
+                                                                    <button class="btn btn-default btnLink " [disabled]='isOfferGenerationVisible(selectedcandidate.InterviewDetails.Round.Value)'
+                                                                        (click)='OnProceedForOfferGenerationClick(selectedcandidate)'>
+                                                                        <i class="fa fa-paper-plane-o"></i>Offer Generation</button>
+                                                                </li>
+
+                                                            </ul>
+                                                        </div>
+                                                        <!--<a class="btn blue btn-outline btn-circle btn-sm active" *ngIf="!selectedcandidate.isInterviewScheduled"
+                                                            (click)='onScheduleInterviewClick(selectedcandidate)'> Schedule </a>
+
+                                                        <a class="btn blue btn-outline btn-circle btn-sm active" *ngIf="selectedcandidate.isInterviewScheduled" (click)='onReScheduleInterviewClick(selectedcandidate)'> Re-Schedule </a>-->
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <span *ngIf='isNull'>No Candidates Found</span>
+                                    </div>
+                                </div>
+                                <!-- Candidate List ENDS-->
+                                <!-- Candidate Details -->
+                                <div class="col-md-5" style="border-left:1px solid gray">
+                                    <span class="caption-subject bold" style="font-size : 14px">{{selectedCandidate}} Interview Rounds History</span>
+                                    <br/>
+                                    <br/>
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th> # </th>
+                                                <th style="width:20% !important">Round</th>
+                                                <th>Interviewer</th>
+                                                <th style="width:20% !important">Date</th>
+                                                <th style="width:20% !important">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let candidateHistory of CandidateRoundHistory; let index = index" (mouseover)='showPopOver(candidateHistory.Comments,index+1)'
+                                                id="round{{index+1}}">
+                                                <td> {{index+1}} </td>
+                                                <td> {{candidateHistory.Round.Value}}</td>
+                                                <td> <span *ngFor="let interviewer of candidateHistory.InterviewerAvailability">{{interviewer.Interviewer.Value}} ,</span></td>
+                                                <td> {{getDate(candidateHistory.InterviewDate)}}</td>
+                                                <td *ngIf="candidateHistory.Status.toLowerCase() != 'On Hold'.toLowerCase() "> {{candidateHistory.Status}}</td>
+                                                <td *ngIf="candidateHistory.Status.toLowerCase() == 'On Hold'.toLowerCase() "> <a (click)='changeStatus(candidateHistory.InterviewID)'> {{candidateHistory.Status}}</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <span *ngIf='isRoundHistoryPresent'>No Candidates Round History Found</span>
+
+                                    <hr/>
+
+                                    <!--change Interview status-->
+                                    <form role="statusForm" (submit)='onChangeStatus()' *ngIf='showChangeStatus'>
+                                        <div>
+                                            <b>Change Interview Status</b>
+                                            <br/>
+                                            <div class="row">
+                                                <div class="col-lg-4" align="right">
+                                                    Status
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <select id="cmbStaus" class="form-control" [(ngModel)]='changedStatus' required placeholder="Select status" tooltip="Select status"
+                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changedStatus"
+                                                        style="font-size: inherit;" required>
+                                                        <!--<option *ngFor="let technologie of technologies" [value]="technologie.Id">{{technologie.Value}}</option>-->
+                                                        <option value="Selected"> Selected</option>
+                                                        <option value="Rejected"> Rejected</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-lg-4" align="right">
+                                                    Comments
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <!---->
+                                                    <input type="text" [(ngModel)]='changesStatusComment' id="changesStatusComment" class="form-control" placeholder="change Status Comment"
+                                                        tooltip="comment" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                        tooltipEnable="!changesStatusComment" required="" autocomplete="off"
+                                                        style="font-size: inherit;" />
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="">
+                                                <div class="pull-right">
+                                                    <button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelChangeStatus()'>Cancel</button>                                                    &nbsp;
+                                                    <button type="submit " class="btn blue " id="btnChangeStatus">Change Status</button>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <hr style="margin-top: 50px;" />
+                                    </form>
+                                    <br/>
+                                    <base-chart class="chart" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+                                        [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></base-chart>
+
+                                </div>
+                                <!-- Candidate Details END-->
+                            </div>
+                            <!--Confirmation Box-->
+                            <div id="prcedfrOffrgenration" class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <b>Proceed For Offer Generation</b>
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                                        </div>
+                                        <div id="modalBody" class="modal-body">
+                                            Do you really want to proceed for Offer Generation ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" icon="fa-check" class="btn btn-info" (click)="proceedForOfferGeneration(InterviewID)" label="">Yes</button>
+                                            <button type="button" icon="fa-check" class="btn btn-default" data-dismiss="modal" label="">No</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE BASE CONTENT -->
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
