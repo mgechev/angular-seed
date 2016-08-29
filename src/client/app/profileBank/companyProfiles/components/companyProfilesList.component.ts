@@ -79,6 +79,9 @@ export class CompanyProfilesListComponent implements OnActivate {
             (results: any) => {
                 if (results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.companyProfilesList = results;
+                    for (var index = 0; index < this.companyProfilesList.Profiles.length; index++) {
+                        this.companyProfilesList.Profiles[index].ModifiedOn = moment(results.Profiles[index].ModifiedOn).format('MMMM D, YYYY h:mm a');
+                    }
                 } else { this.NORECORDSFOUND = true; }
             },
             error => {
@@ -223,7 +226,7 @@ export class CompanyProfilesListComponent implements OnActivate {
         for (var index = 0; index < this.companyProfilesList.Profiles.length; index++) {
             if (this.companyProfilesList.Profiles[index].IsChecked) {
                 if (!this.companyProfilesList.Profiles[index].isRRFAssigned &&
-                    this.companyProfilesList.Profiles[index].Status.Value.toLowerCase() !== 'incomplete' ) {
+                    this.companyProfilesList.Profiles[index].Status.Value.toLowerCase() !== 'incomplete') {
                     this.Candidate.CandidateID = this.companyProfilesList.Profiles[index].CandidateID;
                     this.Candidate.Candidate = this.companyProfilesList.Profiles[index].Candidate;
                     this.selectedCandidates.push(this.Candidate);
