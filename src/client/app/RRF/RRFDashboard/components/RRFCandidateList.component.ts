@@ -275,7 +275,7 @@ export class RRFCandidateListComponent implements OnActivate {
     }
 
     isOfferGenerationVisible(lastInterviewRound: string) {
-        if (lastInterviewRound.includes('hr')) {
+        if (lastInterviewRound.toLowerCase().includes('hr')) {
             return false;
         } else { return true; }
     }
