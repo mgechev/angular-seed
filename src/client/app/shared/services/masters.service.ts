@@ -102,7 +102,15 @@ export class MastersService {
             .catch(this.handleError);
     }
     GetInterviewRounds(candidateID: string, rrfId: string) {
-        let url = Config.GetURL('/api/RecruitmentCycle/GetIterviewRoundsForScheduling?CandidateID=' + candidateID + '&RRFID=' + rrfId);
+        let url = Config.GetURL('/api/RecruitmentCycle/GetIterviewRoundsForScheduling?CandidateID=' + candidateID
+            + '&RRFID=' + rrfId);
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+    GetInterviewRoundsIsRescheduled(candidateID: string, rrfId: string, interviewID: string) {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetIterviewRoundsForRescheduling?CandidateID=' + candidateID
+            + '&RRFID=' + rrfId + '&InterviewID=' + interviewID);
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);

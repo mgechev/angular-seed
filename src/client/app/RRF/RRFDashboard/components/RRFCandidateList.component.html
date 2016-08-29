@@ -114,7 +114,7 @@
                                                                 <i class="fa fa-angle-down"></i>
                                                             </button>
                                                             <ul class="dropdown-menu" role="menu">
-                                                                <li *ngIf="!selectedcandidate.isInterviewScheduled">
+                                                                <li *ngIf="!selectedcandidate.isInterviewScheduled && !selectedcandidate.isAwaitingApproval">
                                                                     <button class="btn btn-default btnLink " [disabled]='canScheduleInterview(selectedcandidate.InterviewDetails.Status)' (click)='onScheduleInterviewClick(selectedcandidate)'>
                                                                         <i class="fa fa-calendar-check-o"></i> Schedule
                                                                     </button>
@@ -229,26 +229,30 @@
                                         <hr style="margin-top: 50px;" />
                                     </form>
                                     <br/>
-                                    <base-chart class="chart" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-                                        [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></base-chart>
+                                    <base-chart class="chart" *ngIf="barChartData!==null" [datasets]="barChartData " [labels]="barChartLabels " [options]="barChartOptions
+                                        " [legend]="barChartLegend " [chartType]="barChartType " (chartHover)="chartHovered($event) "
+                                        (chartClick)="chartClicked($event) "></base-chart>
 
                                 </div>
                                 <!-- Candidate Details END-->
                             </div>
                             <!--Confirmation Box-->
-                            <div id="prcedfrOffrgenration" class="modal fade">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
+                            <div id="prcedfrOffrgenration " class="modal fade ">
+                                <div class="modal-dialog ">
+                                    <div class="modal-content ">
+                                        <div class="modal-header ">
                                             <b>Proceed For Offer Generation</b>
-                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                                            <button type="button " class="close " data-dismiss="modal
+                                        "><span aria-hidden="true ">×</span> <span class="sr-only ">close</span></button>
                                         </div>
-                                        <div id="modalBody" class="modal-body">
+                                        <div id="modalBody " class="modal-body ">
                                             Do you really want to proceed for Offer Generation ?
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" icon="fa-check" class="btn btn-info" (click)="proceedForOfferGeneration(InterviewID)" label="">Yes</button>
-                                            <button type="button" icon="fa-check" class="btn btn-default" data-dismiss="modal" label="">No</button>
+                                        <div class="modal-footer ">
+                                            <button type="button " icon="fa-check " class="btn btn-info " (click)="proceedForOfferGeneration(InterviewID)
+                                        " label=" ">Yes</button>
+                                            <button type="button " icon="fa-check " class="btn btn-default
+                                        " data-dismiss="modal " label=" ">No</button>
                                         </div>
                                     </div>
                                 </div>

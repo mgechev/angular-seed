@@ -40,7 +40,14 @@ export class RRFCandidateListService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-
+    GetCandidatesRatingsforChart(CandidateID: MasterData, RRFID: MasterData) {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetCandidateInterviewChartSummary');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { CandidateID: CandidateID, RRFID: RRFID })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     proceedForOfferGeneration(InterviewID: MasterData) {
         let url = Config.GetURL('/api/RecruitmentCycle/ProceedForOfferGeneration');
         this._spinnerService.show();

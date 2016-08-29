@@ -7,8 +7,9 @@ import {Interview} from '../../../recruitmentCycle/shared/model/interview';
 export class RRFSpecificCandidateList {
     Candidate: CandidateProfile;
     CandidateList: Array<CandidateProfile> = new Array<CandidateProfile>();
-    InterviewDetails : Interview = new Interview();
-    isInterviewScheduled:boolean=false;
+    InterviewDetails: Interview = new Interview();
+    isInterviewScheduled: boolean = false;
+    isAwaitingApproval: boolean = false;
     //CandidateInterviewRoundHistory: Array<InterviewRoundHistory> = new Array<InterviewRoundHistory>();
 }
 // export class InterviewRoundHistory {

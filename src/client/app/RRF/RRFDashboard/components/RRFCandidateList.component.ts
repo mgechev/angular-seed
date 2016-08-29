@@ -6,7 +6,7 @@ import { MastersService } from '../../../shared/services/masters.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI} from '../../../shared/model/common.model';
-import { CandidateProfile } from  '../../../profileBank/shared/model/myProfilesInfo';
+import { CandidateProfile, BarChartData } from  '../../../profileBank/shared/model/myProfilesInfo';
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 import { InterviewMode } from  '../../../shared/constantValue/index';
 //import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap';
@@ -55,15 +55,20 @@ export class RRFCandidateListComponent implements OnActivate {
         scaleShowVerticalLines: false,
         responsive: true
     };
-    public barChartLabels: string[] = ['Business Logic', 'Technical Skills', 'Communication'];
     public barChartType: string = 'bar';
     public barChartLegend: boolean = true;
 
+    // public barChartLabels: string[] = new Array<string>();
+    // public barChartData: any[] = new Array<string>();
+    public barChartLabels: string[] = ['Business Logic', 'Technical Skills', 'Communication'];
     public barChartData: any[] = [
         { data: [2, 5, 4], label: 'Technical 1' },
         { data: [1, 3, 4], label: 'Technical 2' },
         { data: [5, 3, 5], label: 'HR 1' }
     ];
+    // public barChartLabels: string[] = ['No Data'];
+    // public barChartData: any[] = [{ data: [0], label: 'No Data' }];
+
 
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
@@ -88,7 +93,20 @@ export class RRFCandidateListComponent implements OnActivate {
         this.getCanidatesForRRF();
         this.getRRFDetails();
     }
-
+    /**Bind candidtes rating in chart */
+    BindRatingChart(candidateID: MasterData, rrfID: MasterData) {
+        var barChartData = new BarChartData();
+        this._rrfCandidatesList.GetCandidatesRatingsforChart(candidateID, rrfID)
+            .subscribe(
+            (results: any) => {
+                barChartData = results;
+                if (barChartData) {
+                    this.barChartLabels = barChartData.functions;
+                    this.barChartData = barChartData.ratingsData;
+                }
+            },
+            error => this.errorMessage = <any>error);
+    }
     onScheduleInterviewClick(Candidate: any) {
         sessionStorage.setItem('RRFID', JSON.stringify(this.RRFID));
         sessionStorage.setItem('Candidate', JSON.stringify(Candidate));
@@ -145,6 +163,7 @@ export class RRFCandidateListComponent implements OnActivate {
                 }
             },
             error => this.errorMessage = <any>error);
+        this.BindRatingChart(CandidateID, this.RRFID);
     }
 
     showPopOver(Comments: string, index: string) {
@@ -192,6 +211,8 @@ export class RRFCandidateListComponent implements OnActivate {
     onReScheduleInterviewClick(Candidate: RRFSpecificCandidateList) {
         sessionStorage.setItem('RRFID', JSON.stringify(this.RRFID));
         sessionStorage.setItem('Candidate', JSON.stringify(Candidate));
+        // sessionStorage.setItem('Status', Candidate.InterviewDetails.Status);
+        sessionStorage.setItem('Status', 'Rescheduled');
         this._router.navigate(['/App/Recruitment Cycle/Schedule/' +
             Candidate.InterviewDetails.InterviewID.Value + 'ID' + Candidate.InterviewDetails.InterviewID.Id]);
     }
@@ -226,7 +247,11 @@ export class RRFCandidateListComponent implements OnActivate {
                     case 'rescheduled':
                         this.AllCandidatesForRRF[index].isInterviewScheduled = true;
                         break;
+                    case 'awaiting approval':
+                        this.AllCandidatesForRRF[index].isAwaitingApproval = true;
+                        break;
                     default:
+                        this.AllCandidatesForRRF[index].isAwaitingApproval = false;
                         break;
                 }
             } else {

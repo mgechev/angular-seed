@@ -207,7 +207,10 @@ export class CandidateExperience {
   public ItemID: string;
   public CommentsUpdated: boolean = false;
 }
-
+export class BarChartData {
+  public functions: any[];
+  public ratingsData: string[];
+}
 // export class GridOperations {
 //   public IDColl: Array<number> = new Array<number>();
 //   public ButtonClicked: number;
