@@ -677,7 +677,7 @@
                                                             <label class="control-label">Total Experience<small>&nbsp;(In years)</small></label>
                                                             <div class="row text-center">
                                                                 <div class="col-md-12">
-                                                                    <input type="text" placeholder="" class="form-control text-right" [(ngModel)]="CandidateExperiences.TotalExperience" />
+                                                                    <input type="number" step="any"  placeholder="" class="form-control text-right" [(ngModel)]="CandidateExperiences.TotalExperience" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -687,7 +687,7 @@
                                                             <label class="control-label">Relevant Experience <small>&nbsp;(In years)</small></label>
                                                             <div class="row text-center">
                                                                 <div class="col-md-12">
-                                                                    <input type="text" placeholder="" class="form-control text-right" [(ngModel)]="CandidateExperiences.RelevantExperience" />
+                                                                    <input type="number" step="any"  placeholder="" class="form-control text-right" [(ngModel)]="CandidateExperiences.RelevantExperience" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -756,8 +756,21 @@
                                                     <div class="table-toolbar">
                                                         <form role="form" (submit)="AddEditEmployerHistory()">
                                                             <div class="row form-group">
-                                                                <div class="col-md-3">
-                                                                    <div class="form-group">
+                                                                <div class="col-md-2">
+                                                                     <div class="form-group">
+                                                                        <label class="control-label">Company Name <span class="required"> * </span></label>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <input type="Text" placeholder="Company Name" class="form-control" [(ngModel)]="EmployersInformation.Company" title="Please enter company name"
+                                                                                    required="" tooltip="Company Name" tooltipPlacement="top"
+                                                                                    tooltipTrigger="mouseenter" tooltipEnable="!EmployersInformation.Company"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                      <div class="form-group">
                                                                         <label class="control-label">Designation<span class="required"> * </span></label>
                                                                         <div class="row">
                                                                             <div class="col-md-12">
@@ -768,19 +781,6 @@
                                                                                         tooltipEnable="!EmployersInformation.DesignationRole"
                                                                                     />
                                                                                 </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <div class="form-group">
-                                                                        <label class="control-label">Company Name <span class="required"> * </span></label>
-                                                                        <div class="row">
-                                                                            <div class="col-md-12">
-                                                                                <input type="Text" placeholder="Company Name" class="form-control" [(ngModel)]="EmployersInformation.Company" title="Please enter company name"
-                                                                                    required="" tooltip="Company Name" tooltipPlacement="top"
-                                                                                    tooltipTrigger="mouseenter" tooltipEnable="!EmployersInformation.Company"
-                                                                                />
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -801,6 +801,26 @@
                                                                 </div>
                                                                 <div class="col-md-2">
                                                                     <div class="form-group">
+                                                                        <label class="control-label">To Date <span class="required"> * </span></label>
+                                                                        <div class="row">
+                                                                             <div class="col-md-12">
+                                                                                 <input type="date" name="bday" id="toDate" required="" [(ngModel)]="EmployersInformation.ToDate" />
+                                                                            </div>
+                                                                         </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">From Date <span class="required"> * </span></label>
+                                                                        <div class="row">
+                                                                             <div class="col-md-12">
+                                                                                 <input type="date" name="bday" id="fromDate" required="" [(ngModel)]="EmployersInformation.FromDate" />
+                                                                            </div>
+                                                                         </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!--<div class="col-md-2">
+                                                                    <div class="form-group">
                                                                         <label class="control-label"> Period <span class="required"> * </span></label>
                                                                         <div class="row">
                                                                             <div class="col-md-12">
@@ -813,7 +833,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
+                                                                </div>-->
                                                                 <div class="col-md-1">
                                                                     <div class="form-group">
                                                                         <label class="control-label">Current </label>

@@ -29,7 +29,7 @@
                     <div class=" bordered ">
                         <div class="actions ">
                         </div>
-                       
+
                         <div>
                             <RRFGridRow [RRFData]='selectedRRF' [displayJobDescDetails]='true'></RRFGridRow>
                         </div>
@@ -82,9 +82,15 @@
             <div class="timeline-body " style="box-shadow: 2px 2px 7px rgba(0,0,0,.4);">
                 <div class="timeline-body-arrow "> </div>
                 <div class="timeline-body-head ">
-                    <div class="timeline-body-head-caption ">
+                    <div class="timeline-body-head-caption" style="width:100%;">
                         <label href="javascript:; " class="timeline-body-title font-blue-madison ">RRF Approval List :</label>
                         <!--<span class="timeline-body-time font-grey-cascade ">Approved on : 5 MAy 2016</span>-->
+                        <button class="btn btn green" style="float: right;" *ngIf='selectedRRF.IsShowFeedback == false' (click)='showAllFeedback(selectedRRF)'>
+                               <i class="fa fa-reply-all"></i> Show Feedback History
+                          </button>
+                        <button class="btn btn green" style="float: right;" *ngIf='selectedRRF.IsShowFeedback' (click)='showAllFeedback(selectedRRF)'>
+                               <i class="fa fa-reply-all"></i> Hide Feedback History
+                          </button>
                     </div>
                     <div class="timeline-body-head-actions "> </div>
                 </div>
@@ -115,6 +121,7 @@
                                 </table>
                             </div>                     
                     </span>
+                    <feedback-data [RRFID]=selectedRRF.RRFID *ngIf='selectedRRF.IsShowFeedback'></feedback-data>
                 </div>
             </div>
         </div>

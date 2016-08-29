@@ -577,7 +577,6 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     setInterviewValues(results: Interview) {
         //get Result
         this.ScheduleInterView = results;
-        ////this.ScheduleInterView.InterviewFromTime = '';
         //GetCandidateName TODO://fetch Candidate Name from results
         this.ScheduleInterView.Candidate = this.ScheduleInterView.Candidate ? this.ScheduleInterView.Candidate : 'No candidate available';
         //Set Value of Round By Interview Type

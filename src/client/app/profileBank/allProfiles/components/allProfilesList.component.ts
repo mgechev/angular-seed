@@ -90,6 +90,9 @@ export class AllProfilesListComponent implements OnActivate {
                 (results: any) => {
                     if (results.Profiles !== undefined && results.Profiles.length > 0) {
                         this.allProfilesList = <AllCandidateProfiles>results;
+                        for (var index = 0; index < this.allProfilesList.Profiles.length; index++) {
+                            this.allProfilesList.Profiles[index].ModifiedOn = moment(results.Profiles[index].ModifiedOn).format('MMMM D, YYYY h:mm a');
+                        }
                     } else { this.NORECORDSFOUND = true; }
                 },
                 error => this.errorMessage = <any>error);
@@ -111,6 +114,7 @@ export class AllProfilesListComponent implements OnActivate {
             (results: any) => {
                 this.profile.Comments = results.Comments;
                 this.profile.Status = results.Status;
+                this.toastr.success((<ResponseFromAPI>results).Message);
                 this.getAllProfiles();
             },
             error => this.toastr.error(<any>error));

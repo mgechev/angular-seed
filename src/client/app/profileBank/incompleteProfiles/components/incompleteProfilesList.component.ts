@@ -50,6 +50,9 @@ export class IncompleteProfilesListComponent implements OnActivate {
                 (results: any) => {
                     if (results.Profiles !== undefined && results.Profiles.length > 0) {
                         this.incompleteProfilesList = <AllCandidateProfiles>results;
+                        for (var index = 0; index < this.incompleteProfilesList.Profiles.length; index++) {
+                            this.incompleteProfilesList.Profiles[index].ModifiedOn = moment(results.Profiles[index].ModifiedOn).format('MMMM D, YYYY h:mm a');
+                        }
                     } else { this.NORECORDSFOUND = true; }
                 },
                 error => this.errorMessage = <any>error);

@@ -196,7 +196,8 @@ export class EmploymentHistory {
   public Location: string;
   public TimeSpentInCompany: string;
   public IsCurrentCompany: boolean = false;
-
+  public ToDate: Date;
+  public FromDate: Date;
 }
 export class CandidateExperience {
   public CandidateID: MasterData = new MasterData();

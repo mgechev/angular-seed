@@ -1,7 +1,9 @@
 import {Component} from '@angular/core';
 import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
 import { AllProfilesListComponent } from './allProfilesList.component';
-import { AllProfilesAddComponent } from './allProfilesAdd.component';
+import {MyProfilesAddComponent} from '../../myProfiles/components/myProfilesAdd.component';
+//import { AllProfilesAddComponent } from './allProfilesAdd.component';
+import { MyProfilesService } from '../../myProfiles/services/myProfiles.service';
 import { AllProfilesService } from '../services/allProfiles.service';
 import {AllProfilesViewComponent} from './allProfilesView.component';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -15,12 +17,12 @@ import { ProfileEsplHistoryListComponent } from '../../profilesEsplHistory/compo
     selector: 'rrf-all-profiles',
     template: '<router-outlet></router-outlet>',
     directives: [ROUTER_DIRECTIVES],
-    providers: [AllProfilesService, MastersService, ToastsManager, DataSharedService, ProfileBankService]
+    providers: [AllProfilesService,MyProfilesService, MastersService, ToastsManager, DataSharedService, ProfileBankService]
 })
 
 @Routes([
     { path: '/', component: AllProfilesListComponent },
-    { path: '/Edit/:id', component: AllProfilesAddComponent },
+    { path: '/Edit/:id', component: MyProfilesAddComponent },
     { path: '/View/:id', component: AllProfilesViewComponent },
     { path: '/Transfer', component: TransferOwnershipComponent },
     { path: '/History', component: ProfileEsplHistoryListComponent }
