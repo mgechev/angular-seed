@@ -123,9 +123,6 @@ export class MyProfilesListComponent implements OnActivate {
             (results: any) => {
                 if (results.Profiles !== null && results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.myProfilesList = <any>results;
-                    for (var index = 0; index < this.myProfilesList.Profiles.length; index++) {
-                        this.myProfilesList.Profiles[index].ModifiedOn = moment(results.Profiles[index].ModifiedOn).format('MMMM D, YYYY h:mm a');
-                    }
                 } else { this.NORECORDSFOUND = true; }
             },
             error => this.errorMessage = <any>error);

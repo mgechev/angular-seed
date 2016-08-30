@@ -79,9 +79,6 @@ export class CompanyProfilesListComponent implements OnActivate {
             (results: any) => {
                 if (results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.companyProfilesList = results;
-                    for (var index = 0; index < this.companyProfilesList.Profiles.length; index++) {
-                        this.companyProfilesList.Profiles[index].ModifiedOn = moment(results.Profiles[index].ModifiedOn).format('MMMM D, YYYY h:mm a');
-                    }
                 } else { this.NORECORDSFOUND = true; }
             },
             error => {

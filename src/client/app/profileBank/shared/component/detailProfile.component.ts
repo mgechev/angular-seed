@@ -25,6 +25,7 @@ export class DetailProfileComponent implements OnInit {
     ngOnInit() {
         /** */
         this.profile = this.selectedProfile;
+        this.profile.ModifiedOn = moment(this.profile.ModifiedOn).format('MMMM D, YYYY h:mm a');
         //console.log(this.profilePic);
     }
     /**Get resume by candidate code */

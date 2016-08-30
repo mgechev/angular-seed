@@ -76,9 +76,6 @@ export class BlackListedProfilesListComponent implements OnActivate {
             (results: AllCandidateProfiles) => {
                 if (results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.blacklistedProfilesList = results;
-                    for (var index = 0; index < this.blacklistedProfilesList.Profiles.length; index++) {
-                        this.blacklistedProfilesList.Profiles[index].ModifiedOn = moment(results.Profiles[index].ModifiedOn).format('MMMM D, YYYY h:mm a');
-                    }
                     //this.CandidateProfiles = results;
                 } else { this.NORECORDSFOUND = true; }
             },
