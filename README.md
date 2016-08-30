@@ -194,7 +194,6 @@ You may use it to learn how to extend this seed for your own use cases or use th
 Forks of this project demonstrate how to extend and integrate with other libraries:
 
  - https://github.com/mgechev/switching-to-angular2 - code samples for the book ["Switching to Angular 2"](https://www.packtpub.com/web-development/switching-angular-2).
- - https://github.com/archfirst/angular2-seed-sass - integration with [Sass](http://sass-lang.com/).
  - https://github.com/DeviantJS/angular2-seed-postcss - Extending PostCSS with precss / cssnext for Sass-like features.
  - https://github.com/DeviantJS/angular2-seed-material2 - integration with [Angular2-Material](https://github.com/angular/material2).
  - https://github.com/AngularShowcase/angular2-sample-app - sample Angular 2 application.
