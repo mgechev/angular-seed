@@ -16,7 +16,7 @@ export class LabelService {
     GENERAL_INCOME: 'Algemene inkomst',
     INVOICE_PAID: 'Betaalde factuur',
     IGNORE: 'Negeren',
-    VAT: 'btw',
+    VAT: 'Omzetbelasting',
     BUSINESS_FOOD: 'Eten & drinken',
     BUSINESS_CAR: 'Auto',
     FROM_SAVINGS_ACCOUNT: 'Van spaarrekening',

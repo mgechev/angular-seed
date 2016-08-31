@@ -88,7 +88,7 @@ export class VatComponent implements OnInit {
       if (this.transactions[i].costCharacter === CostCharacter.UNKNOWN) {
         this.transactionsUnmatched++;
       }
-      if (this.transactions[i].description.length > 200) {
+      if (this.transactions[i].description.length > 200 && CostType[this.transactions[i].costType] !== CostType.IGNORE) {
         this.transactionsLongDescription++;
       }
     }
@@ -139,6 +139,20 @@ export class VatComponent implements OnInit {
 
   public addMatchDisabled():boolean {
     return this.config.filtering.filterString.length < 2;
+  }
+
+  public calculateVat():void {
+    for (let i = 0; i < this.transactions.length; i++) {
+      if (CostCharacter[this.transactions[i].costCharacter] === CostCharacter.IGNORE) {
+        this.transactions.splice(i,1);
+      }
+    }
+    this.transactionsLoaded = this.transactions.length;
+    this.onChangeTable(this.config);
+  }
+
+  public calculateVatDisabled():boolean {
+    return this.transactionsUnmatched > 0;
   }
 
   // TODO: extract table component

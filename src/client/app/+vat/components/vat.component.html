@@ -32,6 +32,7 @@
   <input [(ngModel)]="costMatch.percentage" placeholder="percentage">
   <input [(ngModel)]="costMatch.fixedAmount" placeholder="vast bedrag">
   <button (click)="addMatch()" [disabled]="addMatchDisabled()">Match toevoegen</button>
+  <button (click)="calculateVat()" [disabled]="calculateVatDisabled()">Bereken btw</button>
   <vaadin-date-picker label="Kies een datum"></vaadin-date-picker>
 
   <ng-table [config]="config.sorting"
