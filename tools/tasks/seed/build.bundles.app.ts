@@ -25,5 +25,5 @@ export = (done: any) => {
                  join(JS_DEST, JS_PROD_APP_BUNDLE),
                  BUNDLER_OPTIONS)
     .then(() => done())
-    .catch(err => done(err));
+    .catch((err: any) => done(err));
 };

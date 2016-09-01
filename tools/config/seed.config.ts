@@ -274,7 +274,7 @@ export class SeedConfig {
     { src: 'zone.js/dist/zone.js', inject: 'libs' },
     { src: 'core-js/client/shim.min.js', inject: 'shims' },
     { src: 'systemjs/dist/system.src.js', inject: 'shims', env: ENVIRONMENTS.DEVELOPMENT },
-    { src: 'rxjs/bundles/Rx.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT }
+    { src: 'rxjs/bundles/Rx.umd.min.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
   ];
 
   /**
@@ -282,7 +282,7 @@ export class SeedConfig {
    * @type {InjectableDependency[]}
    */
   APP_ASSETS: InjectableDependency[] = [
-    { src: `${this.CSS_SRC}/main.${ this.getInjectableStyleExtension() }`, inject: true, vendor: false },
+    { src: `${this.CSS_SRC}/main.${this.getInjectableStyleExtension()}`, inject: true, vendor: false },
   ];
 
   /**
@@ -323,7 +323,7 @@ export class SeedConfig {
       '@angular/http': `node_modules/@angular/http/bundles/http.umd.js`,
       '@angular/platform-browser': `node_modules/@angular/platform-browser/bundles/platform-browser.umd.js`,
       '@angular/platform-browser-dynamic': `node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js`,
-      '@angular/router': `node_modules/@angular/router/index.js`,
+      '@angular/router': `node_modules/@angular/router/bundles/router.umd.js`,
       'rxjs/*': `node_modules/rxjs/*`,
       'app/*': `/app/*`,
       '*': `node_modules/*`
@@ -360,6 +360,10 @@ export class SeedConfig {
         defaultExtension: 'js'
       },
       '@angular/compiler': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/core/testing': {
         main: 'index.js',
         defaultExtension: 'js'
       },
@@ -437,6 +441,7 @@ export class SeedConfig {
       server: {
         baseDir: `${this.DIST_DIR}/empty/`,
         routes: {
+          [`${this.APP_BASE}${this.APP_SRC}`]: this.APP_SRC,
           [`${this.APP_BASE}${this.APP_DEST}`]: this.APP_DEST,
           [`${this.APP_BASE}node_modules`]: 'node_modules',
           [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST
@@ -484,7 +489,7 @@ export class SeedConfig {
    * @param {any} pluginKey The object key to look up in PLUGIN_CONFIGS.
    */
   getPluginConfig(pluginKey: string): any {
-    if (this.PLUGIN_CONFIGS[ pluginKey ]) {
+    if (this.PLUGIN_CONFIGS[pluginKey]) {
       return this.PLUGIN_CONFIGS[pluginKey];
     }
     return null;

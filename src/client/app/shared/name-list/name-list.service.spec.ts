@@ -1,6 +1,5 @@
-import { provide, ReflectiveInjector } from '@angular/core';
-import { disableDeprecatedForms, provideForms } from '@angular/forms';
-import { BaseRequestOptions, ConnectionBackend, Http, HTTP_PROVIDERS, Response, ResponseOptions } from '@angular/http';
+import { ReflectiveInjector } from '@angular/core';
+import { BaseRequestOptions, ConnectionBackend, Http, Response, ResponseOptions } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 import { Observable } from 'rxjs/Observable';
 
@@ -11,24 +10,19 @@ export function main() {
     let nameListService: NameListService;
     let backend: MockBackend;
     let initialResponse: any;
-    let providerArr: any[];
 
     beforeEach(() => {
-      providerArr = [disableDeprecatedForms(), provideForms()];
 
       let injector = ReflectiveInjector.resolveAndCreate([
-        disableDeprecatedForms(),
-        provideForms(),
-        HTTP_PROVIDERS,
         NameListService,
         BaseRequestOptions,
         MockBackend,
-        provide(Http, {
+        {provide: Http,
           useFactory: function(backend: ConnectionBackend, defaultOptions: BaseRequestOptions) {
             return new Http(backend, defaultOptions);
           },
           deps: [MockBackend, BaseRequestOptions]
-        }),
+        },
       ]);
       nameListService = injector.get(NameListService);
       backend = injector.get(MockBackend);
