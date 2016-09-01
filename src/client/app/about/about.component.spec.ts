@@ -1,4 +1,3 @@
-import { FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import {
   async,
@@ -16,7 +15,7 @@ export function main() {
     beforeEach(() => {
       TestBed.configureTestingModule({
         declarations: [TestComponent],
-        imports: [FormsModule, AboutModule]
+        imports: [AboutModule]
       });
     });
 
