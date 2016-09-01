@@ -3,11 +3,14 @@
  * @see https://angular.io/docs/ts/latest/api/platform-browser-dynamic/index/bootstrap-function.html
  */
 
+import { enableProdMode } from '@angular/core';
 // The browser platform with a compiler
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 // The app module
 import { AppModule } from './app.module';
+
+if ('<%= ENV %>' === 'prod') {  enableProdMode(); }
 
 // Compile and launch the module
 platformBrowserDynamic().bootstrapModule(AppModule);

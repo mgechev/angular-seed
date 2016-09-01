@@ -1,50 +1,50 @@
 import { Component } from '@angular/core';
-import { disableDeprecatedForms, provideForms } from '@angular/forms';
-import { TestComponentBuilder } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { TestBed } from '@angular/core/testing';
 
 import {
-  addProviders,
-  async,
-  inject
+  async
 } from '@angular/core/testing';
 import {
-  RouterConfig
+  RouterModule,
+  Route
 } from '@angular/router';
 
-import {provideFakeRouter} from '../testing/router/router-testing-providers';
+// import {provideFakeRouter} from '../testing/router/router-testing-providers';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './+home/home.component';
-import { AboutComponent } from './+about/about.component';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
 
 export function main() {
 
   describe('App component', () => {
     // Disable old forms
-    let providerArr: any[];
 
+    let config: Route[] = [
+      { path: '', component: HomeComponent },
+      { path: 'about', component: AboutComponent }
+    ];
     beforeEach(() => {
-      providerArr = [disableDeprecatedForms(), provideForms()];
-
-      // Support for testing component that uses Router
-      let config: RouterConfig = [
-        { path: '', component: HomeComponent },
-        { path: 'about', component: AboutComponent }
-      ];
-
-      addProviders([
-        provideFakeRouter(TestComponent, config)
-      ]);
+      TestBed.configureTestingModule({
+        imports: [RouterModule.forRoot(config), FormsModule],
+        declarations: [TestComponent, AppComponent, HomeComponent, AboutComponent],
+        providers:[
+        ]
+      });
     });
 
     it('should build without a problem',
-      async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-        tcb.overrideProviders(TestComponent, providerArr)
-          .createAsync(TestComponent)
-          .then((fixture) => {
-            expect(fixture.nativeElement.innerText.indexOf('HOME')).toBeTruthy();
+      async( () => {
+        TestBed
+          .compileComponents()
+          .then(() => {
+            let fixture = TestBed.createComponent(TestComponent);
+            let compiled = fixture.nativeElement;
+
+            expect(compiled).toBeTruthy();
           });
-      })));
+      }));
   });
 }
 
@@ -56,3 +56,6 @@ export function main() {
 
 class TestComponent {
 }
+
+
+
