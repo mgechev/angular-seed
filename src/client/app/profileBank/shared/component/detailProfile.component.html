@@ -11,7 +11,7 @@
                         alt="" src="data:image/jpeg;base64,{{profile.BinaryImage}}">
 
                     <img src="../assets/layouts/layout4/img/default-user.jpg" *ngIf="profile.BinaryImage===''||profile.BinaryImage===null" class="img-responsive pic-bordered"
-                        style="border-radius: 50%!important; height:150px;" alt="">
+                        style="border-radius: 50%!important; height: 140px;width: 150px;" alt="">
                     <br>
 
                 </li>
@@ -19,7 +19,7 @@
                 <li>
                     <span class="label label-sm label-success"> 
                     <i class="fa fa-mobile-phone"></i>
-                    <a href="tel:{{profile.PrimaryContact}}">{{profile.PrimaryContact?profile.PrimaryContact:"N/A"}}</a>
+                    <a style="color: white;font-weight: bolder;font-size: larger;" href="tel:{{profile.PrimaryContact}}">{{profile.PrimaryContact?profile.PrimaryContact:"N/A"}}</a>
                     </span>
                 </li>
 

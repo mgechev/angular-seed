@@ -213,9 +213,9 @@ export class MyProfilesListComponent implements OnActivate {
                         this.postProfilePhoto(_candidateID, this.uploadedPhoto[0]);
                     }
                     /**update Profile grid*/
-                    this.myProfilesList.GrdOperations = new GrdOptions();
-                    //this.getMyProfiles();
                     this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.myProfilesList.GrdOperations = new GrdOptions();
+                    this.getMyProfiles();
                     this.profile = new CandidateProfile();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
