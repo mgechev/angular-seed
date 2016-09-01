@@ -52,6 +52,8 @@ module.exports = function (config) {
       // suppress annoying 404 warnings for resources, images, etc.
       { pattern: 'dist/dev/assets/**/*', watched: false, included: false, served: true },
 
+      'test-config.js',
+      'dist/dev/app/system-config.js',
       'test-main.js'
     ],
 

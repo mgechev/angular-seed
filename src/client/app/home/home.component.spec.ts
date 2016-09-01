@@ -11,7 +11,6 @@ import {
   Http, HttpModule
 } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
-import { getDOM } from '@angular/platform-browser/src/dom/dom_adapter';
 
 import { NameListService } from '../shared/index';
 import { HomeModule } from './home.module';
@@ -49,15 +48,15 @@ export function main() {
             let homeDOMEl = fixture.debugElement.children[0].nativeElement;
 
             expect(homeInstance.nameListService).toEqual(jasmine.any(NameListService));
-            expect(getDOM().querySelectorAll(homeDOMEl, 'li').length).toEqual(0);
+            expect(homeDOMEl.querySelectorAll('li').length).toEqual(0);
 
             homeInstance.newName = 'Minko';
             homeInstance.addName();
 
             fixture.detectChanges();
 
-            expect(getDOM().querySelectorAll(homeDOMEl, 'li').length).toEqual(1);
-            expect(getDOM().querySelectorAll(homeDOMEl, 'li')[0].textContent).toEqual('Minko');
+            expect(homeDOMEl.querySelectorAll('li').length).toEqual(1);
+            expect(homeDOMEl.querySelectorAll('li')[0].textContent).toEqual('Minko');
           });
 
       }));

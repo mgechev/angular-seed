@@ -3,9 +3,9 @@
  * @see https://angular.io/docs/ts/latest/api/platform-browser-dynamic/index/bootstrap-function.html
  */
 import { AppModuleNgFactory } from './app.module.ngfactory';
-import { browserPlatform } from '@angular/platform-browser';
+import { platformBrowser } from '@angular/platform-browser';
 
-browserPlatform().bootstrapModuleFactory(AppModuleNgFactory);
+platformBrowser().bootstrapModuleFactory(AppModuleNgFactory);
 
 // In order to start the Service Worker located at "./worker.js"
 // uncomment this line. More about Service Workers here

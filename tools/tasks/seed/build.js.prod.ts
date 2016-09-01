@@ -12,9 +12,7 @@ const plugins = <any>gulpLoadPlugins();
  */
 
 export = () => {
-  let tsProject = makeTsProject({
-    isolatedModules: true
-  });
+  let tsProject = makeTsProject();
   let src = [
     'typings/index.d.ts',
     TOOLS_DIR + '/manual_typings/**/*.d.ts',
@@ -23,12 +21,15 @@ export = () => {
   let result = gulp.src(src)
     .pipe(plugins.plumber())
     .pipe(plugins.typescript(tsProject))
-    .once('error', function () {
+    .once('error', (e: any) => {
       this.once('finish', () => process.exit(1));
     });
 
 
   return result.js
     .pipe(plugins.template(templateLocals()))
-    .pipe(gulp.dest(TMP_DIR));
+    .pipe(gulp.dest(TMP_DIR))
+    .on('error', (e: any) => {
+      console.log(e);
+    });
 };
