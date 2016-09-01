@@ -4,7 +4,7 @@
 
 var argv = require('yargs').argv;
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -21,14 +21,19 @@ module.exports = function(config) {
       // Polyfills.
       'node_modules/core-js/client/shim.min.js',
 
+      'node_modules/traceur/bin/traceur.js',
+
       // System.js for module loading
       'node_modules/systemjs/dist/system.src.js',
 
       // Zone.js dependencies
       'node_modules/zone.js/dist/zone.js',
-      'node_modules/zone.js/dist/jasmine-patch.js',
+      'node_modules/zone.js/dist/long-stack-trace-zone.js',
       'node_modules/zone.js/dist/async-test.js',
       'node_modules/zone.js/dist/fake-async-test.js',
+      'node_modules/zone.js/dist/sync-test.js',
+      'node_modules/zone.js/dist/proxy.js',
+      'node_modules/zone.js/dist/jasmine-patch.js',
 
       // RxJs.
       { pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false },
@@ -120,5 +125,6 @@ module.exports = function(config) {
   if (process.env.TRAVIS || process.env.CIRCLECI) {
     config.browsers = ['Chrome_travis_ci'];
     config.singleRun = true;
+    config.browserNoActivityTimeout = 90000;
   }
 };
