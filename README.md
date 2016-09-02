@@ -54,7 +54,7 @@ npm start -- --app foo
 npm start -- --app bar
 ```
 
-_Does not rely on any global dependencies, except Java for the production build._
+_Does not rely on any global dependencies._
 
 # Table of Content
 
