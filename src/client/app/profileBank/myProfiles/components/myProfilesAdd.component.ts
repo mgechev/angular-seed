@@ -550,14 +550,24 @@ export class MyProfilesAddComponent implements OnActivate {
         /**selected files string assing to the collection : uploadedPhoto */
         try {
             let FileList: FileList = selectedFile.target.files;
-            if (this.uploadedPhoto)
-                this.uploadedPhoto.length = 0;
-            for (let i = 0, length = FileList.length; i < length; i++) {
-                this.uploadedPhoto.push(FileList.item(i));
-                this.fileUploaded = true;
-                this.fileName = FileList.item(i).name;
+            if (selectedFile.target.files[0].size < 2000000) {
+                if (selectedFile.target.files[0].type === "image/jpeg" || selectedFile.target.files[0].type === "image/png" || selectedFile.target.files[0].type === "image/jpg") {
+                    if (this.uploadedPhoto)
+                        this.uploadedPhoto.length = 0;
+                    for (let i = 0, length = FileList.length; i < length; i++) {
+                        this.uploadedPhoto.push(FileList.item(i));
+                        this.fileUploaded = true;
+                        this.fileName = FileList.item(i).name;
+                    }
+                    this.postPhoto(this.CandidateID, this.uploadedPhoto[0]);
+                }
+                else {
+                    this.toastr.error('Please upload image of type .jpg, .png, .jpeg');
+                }
             }
-            this.postPhoto(this.CandidateID, this.uploadedPhoto[0]);
+            else {
+                this.toastr.error('Please upload image of size less than 2 MB');
+            }
         } catch (error) {
             document.write(error);
         }

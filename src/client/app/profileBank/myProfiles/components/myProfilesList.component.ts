@@ -455,11 +455,21 @@ export class MyProfilesListComponent implements OnActivate {
     postFile(inputValue: any): void {
         try {
             let FileList: FileList = inputValue.target.files;
-            this.resumeFiles.length = 0;
-            for (let i = 0, length = FileList.length; i < length; i++) {
-                this.resumeFiles.push(FileList.item(i));
-                this.resumeUploaded = true;
-                this.resumeName = FileList.item(i).name;
+            if (inputValue.target.files[0].size < 2000000) {
+                if (inputValue.target.files[0].type === "application/pdf" || inputValue.target.files[0].name.split('.')[1] === "docx" || inputValue.target.files[0].name.split('.')[1] === "doc") {
+                    this.resumeFiles.length = 0;
+                    for (let i = 0, length = FileList.length; i < length; i++) {
+                        this.resumeFiles.push(FileList.item(i));
+                        this.resumeUploaded = true;
+                        this.resumeName = FileList.item(i).name;
+                    }
+                }
+                else {
+                    this.toastr.error('Please upload document of type .doc, .docx, .pdf');
+                }
+            }
+            else {
+                this.toastr.error('Please upload document of size less than 2 MB');
             }
         } catch (error) {
             document.write(error);
