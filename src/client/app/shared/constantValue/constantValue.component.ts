@@ -8,6 +8,7 @@ export class RRFStatus {
     public static get Rejected(): number { return 3; };
     public static get Assigned(): number { return 4; };
     public static get Closed(): number { return 5; };
+    public static get Declined(): number { return 6; };
 }
 
 export class APIResult {
