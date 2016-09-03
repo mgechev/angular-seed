@@ -1,8 +1,5 @@
-import {Component} from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router';
-import {HTTP_PROVIDERS} from '@angular/http';
-import {NavbarComponent} from "./shared/navbar/navbar.component";
-import {ToolbarComponent} from "./shared/toolbar/toolbar.component";
+import { Component } from '@angular/core';
+import { Config} from './shared/index';
 
 /**
  * This class represents the main application component. Within the @Routes annotation is the configuration of the
@@ -11,8 +8,11 @@ import {ToolbarComponent} from "./shared/toolbar/toolbar.component";
 @Component({
   moduleId: module.id,
   selector: 'sd-app',
-  viewProviders: [HTTP_PROVIDERS],
   templateUrl: 'app.component.html',
-  directives: [ROUTER_DIRECTIVES, NavbarComponent, ToolbarComponent]
 })
-export class AppComponent {}
+
+export class AppComponent {
+  constructor() {
+    console.log('Environment config', Config);
+  }
+}

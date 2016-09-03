@@ -16,7 +16,7 @@ const BUNDLER_OPTIONS = {
 };
 
 /**
- * Executes the build process, bundlig the JavaScript files using the SystemJS builder.
+ * Executes the build process, bundling the JavaScript files using the SystemJS builder.
  */
 export = (done: any) => {
   let builder = new Builder(SYSTEM_BUILDER_CONFIG);
@@ -25,5 +25,5 @@ export = (done: any) => {
                  join(JS_DEST, JS_PROD_APP_BUNDLE),
                  BUNDLER_OPTIONS)
     .then(() => done())
-    .catch(err => done(err));
+    .catch((err: any) => done(err));
 };

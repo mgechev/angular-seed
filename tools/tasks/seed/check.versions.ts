@@ -1,7 +1,8 @@
+import * as util from 'gulp-util';
 import { VERSION_NODE, VERSION_NPM } from '../../config';
 
 function reportError(message: string) {
-  console.error(require('chalk').white.bgRed.bold(message));
+  console.error(util.colors.white.bgRed.bold(message));
   process.exit(1);
 }
 

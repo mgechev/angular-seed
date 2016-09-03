@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgIf} from '@angular/common';
 import {PAGINATION_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {FORM_DIRECTIVES} from '@angular/common';
 import {Component} from '@angular/core';
@@ -17,10 +16,9 @@ import {LabelService} from "../../shared/services/label.service";
 @Component({
   moduleId: module.id,
   selector: 'vat',
-  providers: [CsvParseService, ImportListService, CostMatchService],
   templateUrl: 'vat.component.html',
   styleUrls: ['vat.component.css'],
-  directives: [NG_TABLE_DIRECTIVES, PAGINATION_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgIf, CORE_DIRECTIVES, FORM_DIRECTIVES, CostTypeSelector, VatTypeSelector, CostCharacterSelector, PolymerElement('vaadin-date-picker')]
+  directives: [NG_TABLE_DIRECTIVES, PAGINATION_DIRECTIVES, FORM_DIRECTIVES, CostTypeSelector, VatTypeSelector, CostCharacterSelector, PolymerElement('vaadin-date-picker')]
 })
 export class VatComponent implements OnInit {
   uploadedFile: File;
@@ -57,7 +55,7 @@ export class VatComponent implements OnInit {
   // TODO: extract cost match component
   public costMatch: CostMatch;
 
-  constructor(private importListService: ImportListService, private costMatchService: CostMatchService, private labelService: LabelService) {
+  constructor(private importListService: ImportListService, public costMatchService: CostMatchService, private labelService: LabelService) {
     this.uploadedFile = null;
     this.length = 0;
     this.costMatch = new CostMatch();
@@ -66,9 +64,7 @@ export class VatComponent implements OnInit {
   ngOnInit() {
     this.costMatches = this.costMatchService.getMatches()
       .subscribe(
-        costMatchData => {
-          this.costMatches = costMatchData;
-        },
+        costMatchData => this.costMatches = costMatchData,
         error => {
           alert(error.text());
           console.log(error.text());

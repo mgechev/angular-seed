@@ -1,9 +1,6 @@
-<ul class="topnav">
-  <li><a [routerLink]="['/']">Home</a></li>
-  <li><a [routerLink]="['/vat']">Aangifte btw</a></li>
-  <li><a [routerLink]="['/about']">Over TechyTax</a></li>
-  <li><a [routerLink]="['/login']">Inloggen</a></li>
-  <li class="icon">
-    <a href="javascript:void(0);" (click)="myFunction()">&#9776;</a>
-  </li>
-</ul>
+<nav>
+  <a [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">HOME</a>
+  <a [routerLink]="['/vat']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">VAT</a>
+  <a [routerLink]="['/about']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">ABOUT</a>
+  <a [routerLink]="['/login']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">LOGIN</a>
+</nav>

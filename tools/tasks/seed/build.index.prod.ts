@@ -55,13 +55,19 @@ function injectCss() {
 }
 
 /**
- * Transform the path of a dependecy to its location within the `dist` directory according to the applications
+ * Transform the path of a dependency to its location within the `dist` directory according to the applications
  * environment.
  */
 function transformPath() {
   return function(filepath: string) {
     let path: Array<string> = normalize(filepath).split(sep);
-    arguments[0] = APP_BASE + path.slice(3, path.length).join(sep) + `?${Date.now()}`;
+    let slice_after = path.indexOf(APP_DEST);
+    if (slice_after>-1) {
+      slice_after++;
+    } else {
+      slice_after = 3;
+    }
+    arguments[0] = APP_BASE + path.slice(slice_after, path.length).join(sep) + `?${Date.now()}`;
     return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));
   };
 }
