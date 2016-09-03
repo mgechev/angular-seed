@@ -29,3 +29,4 @@ export function clean(paths: string|string[]): (done: () => void) => void {
     Promise.all(promises).then(() => done());
   };
 }
+

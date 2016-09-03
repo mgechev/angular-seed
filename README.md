@@ -16,6 +16,7 @@ Provides fast, reliable and extensible starter for the development of Angular 2 
 - Supports multiple Angular applications with shared codebase in a single instance of the seed.
 - Ready to go, statically typed build system using gulp for working with TypeScript.
 - Production and development builds.
+- **Ahead-of-Time** compilation support.
 - Sample unit tests with Jasmine and Karma including code coverage via [istanbul](https://gotwarlost.github.io/istanbul/).
 - End-to-end tests with Protractor.
 - Development server with Livereload.
