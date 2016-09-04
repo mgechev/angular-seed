@@ -29,7 +29,7 @@
       "check-whitespace"
     ],
     "quotemark": [true, "single"],
-    "semicolon": true,
+    "semicolon": [true, "always"],
     "trailing-comma": true,
     "triple-equals": true,
     "variable-name": false,
