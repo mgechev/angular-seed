@@ -16,6 +16,7 @@ import {provideFakeRouter} from '../testing/router/router-testing-providers';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './+home/home.component';
 import { AboutComponent } from './+about/about.component';
+import { PeopleComponent } from './+people/people.component';
 
 export function main() {
 
