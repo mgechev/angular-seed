@@ -48,10 +48,26 @@ gulp.task('build.prod', (done: any) =>
               'build.assets.prod',
               'build.html_css',
               'copy.prod',
-              'compile.ahead.prod',
               'build.js.prod',
               'build.bundles',
               'build.bundles.app',
+              'minify.bundles',
+              'build.index.prod',
+              done));
+
+// --------------
+// Build prod.
+gulp.task('build.prod.exp', (done: any) =>
+  runSequence('clean.prod',
+              'tslint',
+              'css-lint',
+              'build.assets.prod',
+              'build.html_css',
+              'copy.prod',
+              'compile.ahead.prod',
+              'build.js.prod.exp',
+              'build.bundles',
+              'build.bundles.app.exp',
               'minify.bundles',
               'build.index.prod',
               done));
