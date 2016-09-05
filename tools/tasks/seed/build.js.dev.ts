@@ -8,6 +8,7 @@ import {
   APP_DEST,
   SYSTEM_CONFIG_DEV,
   APP_SRC,
+  BOOTSTRAP_FACTORY_PROD_MODULE,
   BOOTSTRAP_PROD_MODULE,
   /*PROJECT_ROOT, */TOOLS_DIR,
   TYPED_COMPILE_INTERVAL
@@ -32,9 +33,9 @@ export = () => {
   ]);
   let src = [
     join(APP_SRC, '**/*.ts'),
-    '!' + join(APP_SRC, BOOTSTRAP_PROD_MODULE + '.ts'),
     '!' + join(APP_SRC, '**/*.spec.ts'),
-    '!' + join(APP_SRC, '**/*.e2e-spec.ts')
+    '!' + join(APP_SRC, '**/*.e2e-spec.ts'),
+    '!' + join(APP_SRC, `**/${BOOTSTRAP_FACTORY_PROD_MODULE}.ts`)
   ];
 
   let projectFiles = gulp.src(src);
