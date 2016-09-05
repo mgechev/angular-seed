@@ -546,13 +546,12 @@ export class MyProfilesListComponent implements OnActivate {
         let chkStatus = false;
         let selectedCandidate: CandidateProfile = this.myProfilesList.Profiles[index];
 
-        if (selectedCandidate.isRRFAssigned) {
-            sessionStorage.setItem('RRFID', JSON.stringify(selectedCandidate.RRFID));
+        if (selectedCandidate.Status.Value.toLowerCase() === 'in process') {
+            sessionStorage.setItem('RRFID', JSON.stringify(selectedCandidate.RRFAssigned.RRFID));
             sessionStorage.setItem('Candidate', JSON.stringify(selectedCandidate));
             this._router.navigate(['/App/Recruitment Cycle/Schedule/New']);
         } else {
-            if (selectedCandidate.Status.Value.toLowerCase() === 'open' ||
-                selectedCandidate.Status.Value.toLowerCase() === 'rejected') {
+            if (selectedCandidate.Status.Value.toLowerCase() === 'open') {
                 this.Candidate = new Candidate();
                 this.Candidate.CandidateID = this.myProfilesList.Profiles[index].CandidateID;
                 this.Candidate.Candidate = this.myProfilesList.Profiles[index].Candidate;
@@ -562,7 +561,7 @@ export class MyProfilesListComponent implements OnActivate {
                 chkStatus = true;
             }
             if (chkStatus) {
-                this.toastr.warning('Candidate must be assigned to RRF. Only Open / Rejected status candidates can be Assigned to RRF');
+                this.toastr.warning('Candidate must be assigned to RRF. Only Open status candidates can be Assigned to RRF');
                 this.selectedCandidates = new Array<CandidateProfile>();
             } else {
                 sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));

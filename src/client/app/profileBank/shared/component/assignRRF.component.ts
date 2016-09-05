@@ -7,6 +7,7 @@ import { ResponseFromAPI, MasterData } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { RRFDetails } from  '../../../RRF/myRRF/index';
 import * as  _ from 'lodash';
+import { CandidateProfile, ResumeMeta, AddCandidateResponse, AllCandidateProfiles, CareerProfile } from '../../shared/model/myProfilesInfo';
 @Component({
     moduleId: module.id,
     selector: 'profiles-assignrrf',
@@ -26,7 +27,7 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
     CandidateAssigment: AssignRRFDetails;
     RRFList: Array<RRFDetails>;
     selectedRRF: RRFDetails;
-
+    profile: CandidateProfile;
 
     constructor(private _router: Router,
         private toastr: ToastsManager,
@@ -100,8 +101,8 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
         this.CandidateAssigment.Candidates.splice(chkItemIndex, 1);
     }
     nextToSchedule() {
-        
-         sessionStorage.removeItem('CandidateIDs');
+
+        sessionStorage.removeItem('CandidateIDs');
         if (this.returnPathToSchedule.toLowerCase().includes('schedule')) {
             sessionStorage.setItem('RRFID', JSON.stringify(this.selectedRRF.RRFID));
             sessionStorage.setItem('Candidate', JSON.stringify(this.CandidateAssigment.Candidates[0]));
@@ -112,21 +113,25 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
     onAssignRRF() {
         sessionStorage.removeItem('CandidateIDs');
         this.CandidateAssigment.RRFID = this.selectedRRF.RRFID;
-        if(this.CandidateAssigment.Candidates.length >0) {
-        this._assignRRFService.assignRRFToCandidates(this.CandidateAssigment)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.nextToSchedule();
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).Message);
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.toastr.error(<any>error);
-            });
+        // this.profile = new CandidateProfile();
+        // this.profile.isRRFAssigned = true;
+        if (this.CandidateAssigment.Candidates.length > 0) {
+            this._assignRRFService.assignRRFToCandidates(this.CandidateAssigment)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        // this.profile = new CandidateProfile();
+                        // this.profile.isRRFAssigned = true;
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.nextToSchedule();
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
+                });
         } else {
             this.toastr.error('No Candidates Selected');
         }
