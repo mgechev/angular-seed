@@ -100,11 +100,11 @@
                                                         <div class="row">
                                                             <div class="col-md-3 inlineForm">
                                                                 <div class="form-group ">
-                                                                    <input type="text" placeholder="Total Experience" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.TotalExperience"
+                                                                    <input type="number" step="any" placeholder="Total Experience" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.TotalExperience"
                                                                         tooltip="Total Experience" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                         tooltipEnable="!profile.CandidateCareerProfile.TotalExperience"
-                                                                        pattern="[0-9][1-9]" title="Enter total experience in years Eg. 02"
-                                                                        maxlength="2" />
+                                                                         title="Enter total experience in years Eg. 02"
+                                                                       min="0" max="99" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3  inlineForm">
@@ -116,11 +116,11 @@
                                                             </div>
                                                             <div class="col-md-3 inlineForm">
                                                                 <div class="form-group">
-                                                                    <input type="text" placeholder="Notice Period" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod"
+                                                                    <input type="number" placeholder="Notice Period" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod"
                                                                         tooltip="Notice Period" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                         tooltipEnable="!profile.CandidateOtherDetails.NoticePeriod"
-                                                                        pattern="[0-9][1-9]" title="Enter notice period in months Eg. 02"
-                                                                        maxlength="2" />
+                                                                        title="Enter notice period in Days Eg. 45"
+                                                                        max="120" />
                                                                 </div>
                                                             </div>
                                                         </div>
