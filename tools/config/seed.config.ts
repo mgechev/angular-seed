@@ -122,7 +122,7 @@ export class SeedConfig {
    * The default directory is `client`.
    * @type {string}
    */
-  APP_CLIENT = argv['client'] || 'client';
+  APP_CLIENT = argv['client'] || 'web';
 
   /**
    * The bootstrap file to be used to boot the application. The file to be used is dependent if the hot-loader option is
@@ -138,7 +138,7 @@ export class SeedConfig {
    * `index.html`.
    * @type {string}
    */
-  APP_TITLE = 'Welcome to angular2-seed!';
+  APP_TITLE = 'MeetingSync';
 
   /**
    * The base folder of the applications source files.
