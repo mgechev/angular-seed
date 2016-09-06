@@ -62,7 +62,8 @@ export class CandidateProfile {
   public isAuthourized: boolean;
   public Owner: MasterData = new MasterData();
   public CandidateCode: string;
-  public isRRFAssigned: boolean;
+  //public isRRFAssigned: boolean;
+  public RRFAssigned: RRFAssigned = new RRFAssigned();
 
   /**property for Images results binary string */
   public BinaryImage: string;
@@ -211,6 +212,11 @@ export class CandidateExperience {
 export class BarChartData {
   public functions: any[];
   public ratingsData: string[];
+}
+//TODO replace isRRFAssigned property from RRFAssigned object from all pages Model
+export class RRFAssigned {
+  public isRRFAssigned: boolean;
+  public RRFID: MasterData = new MasterData();
 }
 // export class GridOperations {
 //   public IDColl: Array<number> = new Array<number>();

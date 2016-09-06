@@ -514,7 +514,7 @@ export class MyProfilesListComponent implements OnActivate {
 
                 // || this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'rejected'  //Do not allow to assign RRF to Rejected candidate
                 if (this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'open') {
-                    if (!this.myProfilesList.Profiles[index].isRRFAssigned) {
+                    if (!this.myProfilesList.Profiles[index].RRFAssigned.isRRFAssigned) {
                         //Add to selectedCandidates array
                         this.Candidate.CandidateID = this.myProfilesList.Profiles[index].CandidateID;
                         this.Candidate.Candidate = this.myProfilesList.Profiles[index].Candidate;

@@ -219,6 +219,8 @@ export class RRFDashboardListComponent implements OnActivate {
                 return '#c2cad8';
             case RRFStatus.Closed:
                 return '#41ce29';
+            case RRFStatus.Declined:
+                return '#e7505a';
             default:
                 return '';
         }

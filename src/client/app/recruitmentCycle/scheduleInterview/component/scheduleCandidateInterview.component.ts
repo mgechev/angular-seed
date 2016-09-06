@@ -150,9 +150,17 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             this.getInterviewDetailsByID(this.ScheduleInterView.InterviewID);
         } else {
             //Get Modified Rounds
-            this.getInterviewRounds(this.ScheduleInterView.CandidateID.Value,
-                this.ScheduleInterView.RRFID.Value);
-            this.clearSession('Candidate');
+            if (_isRescheduled || this.ScheduleInterView.Status.toLowerCase() === 'cancelled') {
+                //Get Modified Rounds for re-schedule
+
+                this.getInterviewRoundsIsRescheduled(this.ScheduleInterView.CandidateID.Value
+                    , this.ScheduleInterView.RRFID.Value
+                    , this.ScheduleInterView.InterviewID.Id ? this.ScheduleInterView.InterviewID.Id.toString() : '');
+            } else {
+                this.getInterviewRounds(this.ScheduleInterView.CandidateID.Value,
+                    this.ScheduleInterView.RRFID.Value);
+                this.clearSession('Candidate');
+            }
         }
 
     }
@@ -533,6 +541,9 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             switch (status.toLowerCase()) {
                 case '':
                 case 'selected':
+                case 'cancelled':
+                    this.ScheduleInterView.Status = 'Scheduled';
+                    break;
                 case 'not scheduled':
                     this.ScheduleInterView.Status = 'Scheduled';
                     break;
@@ -652,6 +663,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     }
     /** Get interview rounds*/
     getInterviewRoundsIsRescheduled(candidateID: string, rrfID: string, interviewID: string) {
+
         this._mastersService.GetInterviewRoundsIsRescheduled(candidateID, rrfID, interviewID)
             .subscribe(
             results => {
