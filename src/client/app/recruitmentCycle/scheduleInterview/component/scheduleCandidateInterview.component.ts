@@ -97,7 +97,8 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         this.ScheduleInterView.RRFID = JSON.parse(sessionStorage.getItem('RRFID'));
         this.ScheduleInterView.Candidate = JSON.parse(sessionStorage.getItem('Candidate')).Candidate;
         this.ScheduleInterView.CandidateID = JSON.parse(sessionStorage.getItem('Candidate')).CandidateID;
-        this.ScheduleInterView.Status = sessionStorage.getItem('Status'); this.clearSession('Status');
+        this.ScheduleInterView.Status = sessionStorage.getItem('Status') !== null ? sessionStorage.getItem('Status') : 'Not Scheduled';
+        this.clearSession('Status');
 
         //this.ScheduleInterView.CandidateStatus.Value = 'Rejected';
         if (this.ScheduleInterView.Status !== null && this.ScheduleInterView.Status !== undefined &&
