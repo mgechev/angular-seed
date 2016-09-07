@@ -2,12 +2,21 @@ import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as merge from 'merge-stream';
 import * as util from 'gulp-util';
-import { join } from 'path';
+import { join/*, sep, relative*/ } from 'path';
 
-import { APP_DEST, APP_SRC, TOOLS_DIR, TYPED_COMPILE_INTERVAL } from '../../config';
+import {
+  APP_DEST,
+  SYSTEM_CONFIG_DEV,
+  APP_SRC,
+  BOOTSTRAP_FACTORY_PROD_MODULE,
+  /*PROJECT_ROOT, */TOOLS_DIR,
+  TYPED_COMPILE_INTERVAL
+} from '../../config';
 import { makeTsProject, templateLocals } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
+
+const jsonSystemConfig = JSON.stringify(SYSTEM_CONFIG_DEV);
 
 let typedBuildCounter = TYPED_COMPILE_INTERVAL; // Always start with the typed build.
 
@@ -24,7 +33,8 @@ export = () => {
   let src = [
     join(APP_SRC, '**/*.ts'),
     '!' + join(APP_SRC, '**/*.spec.ts'),
-    '!' + join(APP_SRC, '**/*.e2e-spec.ts')
+    '!' + join(APP_SRC, '**/*.e2e-spec.ts'),
+    '!' + join(APP_SRC, `**/${BOOTSTRAP_FACTORY_PROD_MODULE}.ts`)
   ];
 
   let projectFiles = gulp.src(src);
@@ -58,6 +68,17 @@ export = () => {
 
   return result.js
     .pipe(plugins.sourcemaps.write())
-    .pipe(plugins.template(templateLocals()))
+// Use for debugging with Webstorm/IntelliJ
+// https://github.com/mgechev/angular2-seed/issues/1220
+//    .pipe(plugins.sourcemaps.write('.', {
+//      includeContent: false,
+//      sourceRoot: (file: any) =>
+//        relative(file.path, PROJECT_ROOT + '/' + APP_SRC).replace(sep, '/') + '/' + APP_SRC
+//    }))
+    .pipe(plugins.template(Object.assign(
+      templateLocals(), {
+        SYSTEM_CONFIG_DEV: jsonSystemConfig
+      }
+     )))
     .pipe(gulp.dest(APP_DEST));
 };

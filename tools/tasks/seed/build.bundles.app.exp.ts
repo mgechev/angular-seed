@@ -2,7 +2,7 @@ import { join } from 'path';
 import * as Builder from 'systemjs-builder';
 
 import {
-  BOOTSTRAP_PROD_MODULE,
+  BOOTSTRAP_FACTORY_PROD_MODULE,
   JS_PROD_APP_BUNDLE,
   JS_DEST,
   SYSTEM_BUILDER_CONFIG,
@@ -21,7 +21,7 @@ const BUNDLER_OPTIONS = {
 export = (done: any) => {
   let builder = new Builder(SYSTEM_BUILDER_CONFIG);
   builder
-    .buildStatic(join(TMP_DIR, BOOTSTRAP_PROD_MODULE),
+    .buildStatic(join(TMP_DIR, BOOTSTRAP_FACTORY_PROD_MODULE),
                  join(JS_DEST, JS_PROD_APP_BUNDLE),
                  BUNDLER_OPTIONS)
     .then(() => done())
