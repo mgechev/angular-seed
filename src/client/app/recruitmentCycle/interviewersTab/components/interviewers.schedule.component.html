@@ -209,10 +209,11 @@
                                                             <i class="icon-download"></i> Download Resume </a>
                                                     </li>
                                                     <li>
-                                                        <a (click)='showIEF(_myInterview.RRFID, _myInterview.CandidateID, _myInterview.DisplayCandidateInfo, _myInterview.InterviewType, _myInterview.InterviewID ,_myInterview.Status)'>
-                                                            <span [hidden]='DisableIEF(_myInterview.InterviewDate,_myInterview.InterviewFromTime)' *ngIf='showSubmitIEF(_myInterview.Status)'> <i class="icon-tag"></i> Submit IEF</span>
+                                                        <button class="btn btn-default btnLink " [disabled]='DisableIEF(_myInterview.InterviewDate,_myInterview.InterviewFromTime)' (click)='showIEF(_myInterview.RRFID, _myInterview.CandidateID, _myInterview.DisplayCandidateInfo, _myInterview.InterviewType, _myInterview.InterviewID ,_myInterview.Status)' style="width:100%; border-color:white;">
+                                                            <span *ngIf='showSubmitIEF(_myInterview.Status)'> <i class="icon-tag"></i> Submit IEF</span>
                                                             <span *ngIf='!showSubmitIEF(_myInterview.Status)'> <i class="icon-tag"></i> Change status</span>
-                                                        </a>
+                                                        </button>
+                                                        
                                                     </li>
 
                                                 </ul>

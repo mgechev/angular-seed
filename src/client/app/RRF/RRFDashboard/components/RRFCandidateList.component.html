@@ -164,6 +164,7 @@
                                                 <th style="width:20% !important">Round</th>
                                                 <th>Interviewer</th>
                                                 <th style="width:20% !important">Date</th>
+                                                <th style="width:20% !important">Interview mode</th>
                                                 <th style="width:20% !important">Status</th>
                                             </tr>
                                         </thead>
@@ -174,6 +175,7 @@
                                                 <td> {{candidateHistory.Round.Value}}</td>
                                                 <td> <span *ngFor="let interviewer of candidateHistory.InterviewerAvailability">{{interviewer.Interviewer.Value}} ,</span></td>
                                                 <td> {{getDate(candidateHistory.InterviewDate)}}</td>
+                                                <td> {{candidateHistory.InterviewMode.Value}} </td>
                                                 <td *ngIf="candidateHistory.Status.toLowerCase() != 'On Hold'.toLowerCase() "> {{candidateHistory.Status}}</td>
                                                 <td *ngIf="candidateHistory.Status.toLowerCase() == 'On Hold'.toLowerCase() "> <a (click)='changeStatus(candidateHistory.InterviewID)'> {{candidateHistory.Status}}</a></td>
                                             </tr>
