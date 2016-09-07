@@ -229,9 +229,11 @@
                                         <hr style="margin-top: 50px;" />
                                     </form>
                                     <br/>
-                                    <base-chart class="chart" *ngIf="barChartData!==null" [datasets]="barChartData " [labels]="barChartLabels " [options]="barChartOptions
+                                    <div *ngIf="barChartData!==null">
+                                        <base-chart class="chart" *ngIf="barChartData.lent>0" [datasets]="barChartData " [labels]="barChartLabels " [options]="barChartOptions
                                         " [legend]="barChartLegend " [chartType]="barChartType " (chartHover)="chartHovered($event) "
-                                        (chartClick)="chartClicked($event) "></base-chart>
+                                            (chartClick)="chartClicked($event) "></base-chart>
+                                    </div>
 
                                 </div>
                                 <!-- Candidate Details END-->

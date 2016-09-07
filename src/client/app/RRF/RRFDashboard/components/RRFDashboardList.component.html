@@ -213,7 +213,7 @@
                                                     </li>
                                                     <li class="divider"> </li>
                                                     <li>
-                                                        <button class="btn btn-default btnLink" [disabled]="rrf.Status.Value ==='Declined' || rrf.Status.Value ==='Pending Approval'" (click)='onReScheduleInterviewsClick(rrf.RRFID)'>
+                                                        <button class="btn btn-default btnLink" [disabled]="rrf.Status.Value ==='Declined' || rrf.Status.Value ==='Pending Approval' || rrf.Status.Value ==='Rejected'" (click)='onReScheduleInterviewsClick(rrf.RRFID)'>
                                                             <i class="fa fa-calendar-check-o"></i> View Re-schedule Interviews
                                                         </button>
                                                     </li>

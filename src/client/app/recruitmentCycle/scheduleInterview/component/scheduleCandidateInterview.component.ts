@@ -235,6 +235,13 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                 } else { this.ScheduleInterView.ApprovalType = 'Skip Interview'; }
 
                 this.ScheduleInterView.Status = 'Awaiting Approval';
+                //Validate Timeslot and proceed for Schedule Interview
+                let cmb: any = $('#cmbInterviewers');
+                let value = cmb.val();
+                if (value !== null) {
+                    /**Get All Other selected Interviewers from multiselect Dropdown */
+                    this.getOtherSelectedInterviewers(value);
+                }
                 this.ScheduleCandidateInterView();
             }
         } catch (error) {
