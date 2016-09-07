@@ -7,7 +7,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
   moduleId: module.id,
   selector: 'ms-app',
   viewProviders: [HTTP_PROVIDERS],
-  directives: [ROUTER_DIRECTIVES, TimetableComponent],
+  directives: [ROUTER_DIRECTIVES, [TimetableComponent]],
   templateUrl: 'app.component.html'
 })
 

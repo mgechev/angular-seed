@@ -10,7 +10,7 @@ import { Config, NameListService, NavbarComponent, ToolbarComponent } from './sh
  */
 @Component({
   moduleId: module.id,
-  selector: 'sd-app',
+  selector: 'sd-app2',
   viewProviders: [NameListService, HTTP_PROVIDERS],
   templateUrl: 'app.component.html',
   directives: [ROUTER_DIRECTIVES, NavbarComponent, ToolbarComponent]
