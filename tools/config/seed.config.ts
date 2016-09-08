@@ -135,8 +135,9 @@ export class SeedConfig {
 
   BOOTSTRAP_PROD_MODULE = `${this.BOOTSTRAP_DIR}/` + 'main';
 
+  NG_FACTORY_FILE = 'main-prod';
 
-  BOOTSTRAP_FACTORY_PROD_MODULE = `${this.BOOTSTRAP_DIR}/` + 'main-prod';
+  BOOTSTRAP_FACTORY_PROD_MODULE = `${this.BOOTSTRAP_DIR}/${this.NG_FACTORY_FILE}`;
   /**
    * The default title of the application as used in the `<title>` tag of the
    * `index.html`.
