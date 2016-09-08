@@ -35,49 +35,66 @@
                     <!--<p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet
                         dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.
                     </p>-->
-                    <ul class="list-unstyled">
-                        <li>
+                    <!--<p>
+                        <a class="sbold" href="mailto:{{profile.Email}}">{{profile.Email?profile.Email:"N/A"}} </a>
+                    </p>-->
+                    <div class="row">
+                        <ul class="list-unstyled">
+                            <li>
+                                <div class="col-md-12">
+                                    <label class="control-label"><small>Skills : <strong> {{profile.CandidateSkills.PrimarySkills?profile.CandidateSkills.PrimarySkills:"N/A"}} </strong> {{profile.CandidateSkills.SecondarySkills}} {{profile.CandidateSkills.OtherSkills}} </small></label>
+                                </div>
+                                <!--<label class="control-label">Skills : <strong> C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF</strong></label>-->
+                            </li>
+                            <li>
+                                <div class="col-md-6">
+                                    <label class="control-label"><small> Salary Current  : <i class="fa fa-inr"></i>{{profile.CandidateSalaryDetails.CurrentSalary?profile.CandidateSalaryDetails.CurrentSalary:"N/A"}}</small> </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label"><small> Expected : <i class="fa fa-inr"></i>{{profile.CandidateSalaryDetails.ExpectedSalary?profile.CandidateSalaryDetails.ExpectedSalary:"N/A"}}</small> </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="col-md-6">
+                                    <label class="control-label"><small> Company : <i class="fa fa-inr"></i>Eternus Solutions </small></label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label"><small> Designation : <i class="fa fa-inr"></i>Project Manager </small></label>
+                                </div>
+                            </li>
 
-                            <label class="control-label">Skills : <strong> {{profile.CandidateSkills.PrimarySkills?profile.CandidateSkills.PrimarySkills:"N/A"}} </strong> {{profile.CandidateSkills.SecondarySkills}} {{profile.CandidateSkills.OtherSkills}} </label>
-                            <!--<label class="control-label">Skills : <strong> C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF</strong></label>-->
-                        </li>
-                        <li>
-                            <label class="control-label">Current Salary : <strong><i class="fa fa-inr"></i>{{profile.CandidateSalaryDetails.CurrentSalary?profile.CandidateSalaryDetails.CurrentSalary:"N/A"}}</strong></label>
-                        </li>
-                        <li>
-                            <label class="control-label">Expected Salary : <strong><i class="fa fa-inr"></i>{{profile.CandidateSalaryDetails.ExpectedSalary?profile.CandidateSalaryDetails.ExpectedSalary:"N/A"}}</strong></label>
-                        </li>
-                    </ul>
-                    <p>
-                        <a href="mailto:{{profile.Email}}">{{profile.Email?profile.Email:"N/A"}} </a>
-                    </p>
-                    <ul class="list-inline sbold" style="color:#f16e50">
-                        <li>
-                            <!--location-->
-                            <div tooltip="Location" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Location">
-                                <i class="fa fa-map-marker"></i>{{profile.District?profile.District:"N/A"}}
-                            </div>
-                        </li>
-                        <li>
-                            <!--experience-->
-                            <div tooltip="Experience" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Experience">
-                                <i class="fa fa-briefcase"></i>{{profile.TotalExperience?profile.TotalExperience:"N/A"}}
-                            </div>
-                        </li>
-                        <li>
-                            <!--tag-->
-                            <div tooltip="Tag" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="tag">
-                                <i class="fa fa-tag"></i> {{profile.Tag?profile.Tag:"N/A"}}
-                            </div>
-                        </li>
-                        <li>
-                            <!--notice period-->
-                            <div tooltip="Notice period" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Notice period">
-                                <i class="fa fa-hourglass-half"></i> {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod:"N/A"}}
-                            </div>
+                        </ul>
+                    </div>
+                    <p> <a class="sbold" href="mailto:{{profile.Email}}">{{profile.Email?profile.Email:"N/A"}} </a> </p>
+                    <div class="row">
+                        <ul class="list-inline sbold" style="color:#f16e50">
+                            <li>
+                                <!--location-->
+                                <div tooltip="Location" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Location">
+                                    <i class="fa fa-map-marker"></i> {{profile.District?profile.District:"N/A"}}
+                                </div>
+                            </li>
+                            <li>
+                                <!--experience-->
+                                <div tooltip="Experience" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Experience">
+                                    <i class="fa fa-briefcase"></i> {{profile.TotalExperience?profile.TotalExperience:"N/A"}}
+                                </div>
+                            </li>
+                            <li>
+                                <!--tag-->
+                                <div tooltip="Tag" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="tag">
+                                    <i class="fa fa-tag"></i> {{profile.Tag?profile.Tag:"N/A"}}
+                                </div>
+                            </li>
+                            <li>
+                                <!--notice period-->
+                                <div tooltip="Notice period" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Notice period">
+                                    <i class="fa fa-hourglass-half"></i> {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod:"N/A"}}
+                                </div>
 
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <!--end col-md-8-->
                 <div class="col-md-4">
