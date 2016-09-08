@@ -321,7 +321,6 @@ export class ProfileBankService {
     }
     /*** Remove Profile photo */
     removeProfilePhoto(candidateID: MasterData) {
-        console.log('Operaration sucessfull..! but API is pending to remove photo.');
         /** TODO:: Update api URL Once API is ready (API is pending) */
         let url = Config.GetURL('/api/ProfileBank/');
         this._spinnerService.show();

@@ -86,7 +86,6 @@ export class RecentProfilesListComponent implements OnActivate {
     }
     /**Redirecting to candidate's all interview history page */
     getCandidateHistory(_candidateID: MasterData) {
-        console.log(_candidateID);
         sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
         sessionStorage.setItem('onReturnPath', '/App/ProfileBank/RecentProfiles');
         this._router.navigate(['/App/ProfileBank/MyProfiles/History']);

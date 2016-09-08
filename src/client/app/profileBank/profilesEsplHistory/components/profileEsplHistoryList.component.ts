@@ -34,7 +34,6 @@ export class ProfileEsplHistoryListComponent implements OnActivate {
     routerOnActivate() {
         /** */
         this.historyOfCandidate = this.getSessionOf<MasterData>('HistoryOfCandidate');
-        console.log(this.historyOfCandidate);
         this.getProfilesHistory(this.historyOfCandidate);
     }
     /**Function to get candidates interviews history with ESPL */

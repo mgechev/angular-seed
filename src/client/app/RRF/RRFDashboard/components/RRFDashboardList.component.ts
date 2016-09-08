@@ -55,7 +55,7 @@ export class RRFDashboardListComponent implements OnActivate {
         responsive: true,
         legend: {
             onClick: function(event: any, legendItem: any) {
-                //console.log("legend click");
+                /** */
             }
         }
     };
@@ -63,7 +63,6 @@ export class RRFDashboardListComponent implements OnActivate {
     displayApproval: boolean = false;
     displayAssignedTo: boolean = false;
     SortByList: SortingMasterData[] = [];
-    
 
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService, private _router: Router,
@@ -237,7 +236,6 @@ export class RRFDashboardListComponent implements OnActivate {
 
     showRRFDetails(rrfId: MasterData) {
         //this.getRRFDetails(rrfId);
-        //console.log(this.selectedRRF);
         this.viewDetailsRRFId = rrfId;
         this.isListVisible = false;
         this.isChartVisible = false;
@@ -322,7 +320,7 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     onEditRRF(rrfID: number) {
-        console.log(rrfID);
+        /** */
     }
 
     onCloseRRFClick(rrfID: MasterData) {

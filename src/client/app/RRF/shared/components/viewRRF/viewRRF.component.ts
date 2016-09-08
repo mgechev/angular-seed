@@ -27,11 +27,10 @@ export class ViewRRFComponent implements OnInit {
     errorMessage: string = '';
     constructor(private _myRRFService: MyRRFService,
         private _RRFCandidateService: RRFCandidateListService) {
-       
+       /** */
     }
 
     ngOnInit() {
-        console.log('OnInit');
         this.getRRFDetails(this.RRFID);
         this.getCandidatesForRRF(this.RRFID);
     }
@@ -73,11 +72,4 @@ export class ViewRRFComponent implements OnInit {
             rrf.IsShowFeedback = true;
         }
     }
-    // ngAfterViewInit() {
-    //     console.log('ngAfterViewInit');
-    //     this.getRRFDetails(this.RRFID);
-    //     this.getCandidatesForRRF(this.RRFID);
-    // }
-
-
 }

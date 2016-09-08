@@ -170,7 +170,6 @@ export class AllProfilesListComponent implements OnActivate {
             (results: ResponseFromAPI) => {
                 if (results.StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
-                    console.log((<ResponseFromAPI>results).Message);
                     this.profile.Status = new MasterData();
                     this.getAllProfiles();
                 } else {

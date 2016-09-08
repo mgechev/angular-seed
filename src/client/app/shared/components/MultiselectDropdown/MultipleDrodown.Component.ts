@@ -7,10 +7,10 @@ import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 //let template = require('./MultipleDrodown.Component.html');
 
 @Component({
-    moduleId : module.id,
+    moduleId: module.id,
     selector: 'multiple-demo',
     //template: template,
-    templateUrl:'MultipleDrodown.Component.html',
+    templateUrl: 'MultipleDrodown.Component.html',
     directives: [SELECT_DIRECTIVES, NgClass, CORE_DIRECTIVES, FORM_DIRECTIVES, BUTTON_DIRECTIVES]
 })
 export class MultipleDemoComponent {
@@ -38,11 +38,11 @@ export class MultipleDemoComponent {
     }
 
     public selected(value: any): void {
-        console.log('Selected value is: ', value);
+        /** */
     }
 
     public removed(value: any): void {
-        console.log('Removed value is: ', value);
+        /** */
     }
 
     public refreshValue(value: any): void {

@@ -738,12 +738,10 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             this.event.Resource = this.InterviewerCalendarDetails.Resources[i].title;
         // this.event.allDay = e.calEvent.allDay;
         this.dialogVisible = true;
-        console.log(this.event);
 
         this.cd.detectChanges();
         let modalPopup: any = $('#fullCalModal');
         modalPopup.modal();
-        console.log(this.event);
     }
 
 }

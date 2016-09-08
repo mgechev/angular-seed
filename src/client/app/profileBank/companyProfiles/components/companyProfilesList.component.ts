@@ -100,7 +100,6 @@ export class CompanyProfilesListComponent implements OnActivate {
     }
     /**Redirecting to candidate's all interview history page */
     getCandidateHistory(_candidateID: MasterData) {
-        console.log(_candidateID);
         sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
         sessionStorage.setItem('onReturnPath', '/App/ProfileBank/CompanyProfiles');
         this._router.navigate(['/App/ProfileBank/CompanyProfiles/History']);

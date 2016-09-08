@@ -23,14 +23,6 @@ export class IEFGridRowComponent implements AfterViewInit {
 
     }
     ngAfterViewInit() {
-        // if (this.StaticIEFDetails.length !== 0) {
-        //     this.IEFDetails = this.StaticIEFDetails;
-        // } else {
-        //     this.getIEFByInterviewID();
-        // }
-        // console.log(this.IEFDetails);
-        // console.log('static data');
-        // console.log(this.StaticIEFDetails);
         this.getIEFByInterviewID();
     }
 

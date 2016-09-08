@@ -107,7 +107,6 @@ export class PushNotificationComponent implements OnActivate {
                 } else if (event.currentSubscription) {
                     if (!localStorage.getItem('currentSubscription')) {
                         let registrationID = event.currentSubscription.endpoint.split('https://android.googleapis.com/gcm/send/')[1];
-                        console.log(registrationID);
                         localStorage.setItem('currentSubscription', event.currentSubscription);
                     }
 

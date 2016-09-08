@@ -23,18 +23,15 @@ export class PanelsAvailablityComponent implements OnInit, OnChanges {
     @Output() updatedRRF: EventEmitter<RRFDetails> = new EventEmitter<RRFDetails>();
     constructor(private toastr: ToastsManager,
         private _panelsAvailability: PanelsAvailabilityService) {
-        console.log('In Contructor of panel...');
 
     }
     ngOnInit() {
         /** */
         //this.rrfDetails = this.selectedRRF;
         this.getPanelAvailablity();
-        //console.log(this.profilePic);
         // for (var index = 0; index < 4; index++) {
         //     this._strr.push(index.toString());
         // }
-        console.log('In init of panel...');
     }
     getPanelAvailablity() {
         /**Get interviewr's data from service */
