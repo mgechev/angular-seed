@@ -11,10 +11,9 @@ const getConfig = (path: string, env: string): any => {
     config = require(configPath);
   } catch (e) {
     config = null;
+    util.log(util.colors.red(e.message));
   }
-  if (!config) {
-    util.log(util.colors.red(`Cannot find ${configPath}`));
-  }
+
   return config;
 };
 
