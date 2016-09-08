@@ -39,6 +39,8 @@
 <li>Supports multiple Angular applications with shared codebase in a single instance of the seed.</li>
 <li>Ready to go, statically typed build system using gulp for working with TypeScript.</li>
 <li>Production and development builds.</li>
+<li>
+<strong>Ahead-of-Time</strong> compilation support.</li>
 <li>Sample unit tests with Jasmine and Karma including code coverage via <a href="https://gotwarlost.github.io/istanbul/">istanbul</a>.</li>
 <li>End-to-end tests with Protractor.</li>
 <li>Development server with Livereload.</li>
@@ -69,6 +71,8 @@ npm start
 npm run build.dev
 <span class="pl-c"># prod build</span>
 npm run build.prod
+<span class="pl-c"># prod build with AoT compilation</span>
+npm run build.prod.exp
 
 <span class="pl-c"># dev build of multiple applications (by default the value of --app is "app")</span>
 npm start -- --app baz
@@ -164,6 +168,7 @@ npm run serve.coverage
 <span class="pl-c"># e2e (aka. end-to-end, integration) - In three different shell windows</span>
 <span class="pl-c"># Make sure you don't have a global instance of Protractor</span>
 
+<span class="pl-c"># npm install webdriver-manager &lt;- Install this first for e2e testing</span>
 <span class="pl-c"># npm run webdriver-update &lt;- You will need to run this the first time</span>
 npm run webdriver-start
 npm run serve.e2e
@@ -233,8 +238,6 @@ npm run e2e.live</pre></div>
 <li>
 <a href="https://github.com/mgechev/switching-to-angular2">https://github.com/mgechev/switching-to-angular2</a> - code samples for the book <a href="https://www.packtpub.com/web-development/switching-angular-2">"Switching to Angular 2"</a>.</li>
 <li>
-<a href="https://github.com/archfirst/angular2-seed-sass">https://github.com/archfirst/angular2-seed-sass</a> - integration with <a href="http://sass-lang.com/">Sass</a>.</li>
-<li>
 <a href="https://github.com/DeviantJS/angular2-seed-postcss">https://github.com/DeviantJS/angular2-seed-postcss</a> - Extending PostCSS with precss / cssnext for Sass-like features.</li>
 <li>
 <a href="https://github.com/DeviantJS/angular2-seed-material2">https://github.com/DeviantJS/angular2-seed-material2</a> - integration with <a href="https://github.com/angular/material2">Angular2-Material</a>.</li>
@@ -254,6 +257,8 @@ npm run e2e.live</pre></div>
 <a href="https://github.com/tiagomapmarques/angular2-seed-phaser/tree/releases">https://github.com/tiagomapmarques/angular2-seed-phaser/tree/releases</a> - integration with <a href="http://phaser.io/">Phaser</a>.</li>
 <li>
 <a href="https://github.com/vyakymenko/angular2-seed-express">https://github.com/vyakymenko/angular2-seed-express</a> - integration with <a href="https://expressjs.com/">Express</a> full-stack development.</li>
+<li>
+<a href="https://github.com/UIUXEngineering/angular2-jspm-typescript-seed">https://github.com/UIUXEngineering/angular2-jspm-typescript-seed</a> - integration with <a href="http://jspm.io/">JSPM</a>.</li>
 </ul>
 
 <h1>
