@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import { Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment } from '@angular/router';
+import {CalendarModule} from 'primeng/primeng';
 import { CandidateProfile, ResumeMeta, Qualification, CandidateExperience, EmploymentHistory} from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -25,7 +26,6 @@ export class MyProfilesAddComponent implements OnActivate {
     qualification: Qualification;
     errorMessage: string;
     params: string;
-
     countries: Array<MasterData>;
     states: Array<MasterData>;
 
@@ -71,6 +71,9 @@ export class MyProfilesAddComponent implements OnActivate {
     }
 
     routerOnActivate(segment: RouteSegment) {
+        window.onbeforeunload = function () {
+            return "Data will be lost if you leave the page, are you sure?";
+        };
         //get all master data and bind to dropdown
         this.getCountries();
         // this.getStates();
@@ -92,7 +95,6 @@ export class MyProfilesAddComponent implements OnActivate {
         this.CurrentYear = date.getFullYear();
         this.getProfilePhoto(this.CandidateID);
     }
-
     createQualificationObj() {
         this.qualification = new Qualification();
         this.qualification.Qualification = new MasterData();
@@ -628,6 +630,11 @@ export class MyProfilesAddComponent implements OnActivate {
 
     Back() {
         // this._router.navigate(['/App/ProfileBank/MyProfiles']);
-        this._location.back();
+        let res: any;
+        res = confirm(
+            "Data will be lost if you leave the page, are you sure?"
+        );
+        if (res == true)
+            this._location.back();
     }
 }

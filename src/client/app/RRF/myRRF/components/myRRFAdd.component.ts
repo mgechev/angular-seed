@@ -63,6 +63,9 @@ export class MyRRFAddComponent implements OnActivate {
     }
 
     routerOnActivate(segment: RouteSegment): void {
+        window.onbeforeunload = function () {
+            return "Data will be lost if you leave the page, are you sure?";
+        };
         this.setMinDateToCalender();
 
         //dropdown with multi selector and search
@@ -203,11 +206,19 @@ export class MyRRFAddComponent implements OnActivate {
     }
 
     onCancelClick(): void {
-        if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.UpdateForFeedback) {
-            this._router.navigate(['/App/RRF/FeedbackPending/']);
-        } else {
-            this._router.navigate(['/App/RRF/RRFDashboard/']);
+
+        let res: any;
+        res = confirm(
+            "Data will be lost if you leave the page, are you sure?"
+        );
+        if (res == true) {
+            if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.UpdateForFeedback) {
+                this._router.navigate(['/App/RRF/FeedbackPending/']);
+            } else {
+                this._router.navigate(['/App/RRF/RRFDashboard/']);
+            }
         }
+
     }
 
     getDesignation(): void {
