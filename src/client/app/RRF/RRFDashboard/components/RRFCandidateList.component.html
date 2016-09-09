@@ -93,7 +93,7 @@
                                                     <th>Status</th>
                                                     <th>Last Round Scheduled</th>
                                                     <th>Interview Mode</th>
-                                                    <th>Interview</th>
+                                                    <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -160,22 +160,24 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th> # </th>
-                                                <th style="width:20% !important">Round</th>
+                                                <!--<th> # </th>-->
+                                                <th style="width:30% !important">Round/Mode</th>
                                                 <th>Interviewer</th>
                                                 <th style="width:20% !important">Date</th>
-                                                <th style="width:20% !important">Interview mode</th>
+                                                <!--<th style="width:20% !important">Interview mode</th>-->
                                                 <th style="width:20% !important">Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr *ngFor="let candidateHistory of CandidateRoundHistory; let index = index" (mouseover)='showPopOver(candidateHistory.Comments,index+1)'
                                                 id="round{{index+1}}">
-                                                <td> {{index+1}} </td>
-                                                <td> {{candidateHistory.Round.Value}}</td>
+                                                <!--<td> {{index+1}} </td>-->
+                                                <td> {{candidateHistory.Round.Value}}
+                                                    <br>{{candidateHistory.InterviewMode.Value}}
+                                                </td>
                                                 <td> <span *ngFor="let interviewer of candidateHistory.InterviewerAvailability">{{interviewer.Interviewer.Value}} ,</span></td>
                                                 <td> {{getDate(candidateHistory.InterviewDate)}}</td>
-                                                <td> {{candidateHistory.InterviewMode.Value}} </td>
+                                                <!--<td> {{candidateHistory.InterviewMode.Value}} </td>-->
                                                 <td *ngIf="candidateHistory.Status.toLowerCase() != 'On Hold'.toLowerCase() "> {{candidateHistory.Status}}</td>
                                                 <td *ngIf="candidateHistory.Status.toLowerCase() == 'On Hold'.toLowerCase() "> <a (click)='changeStatus(candidateHistory.InterviewID)'> {{candidateHistory.Status}}</a></td>
                                             </tr>
