@@ -1,6 +1,6 @@
 {
   "name": "angular2-seed",
-  "version": "0.0.0",
+  "version": "0.0.12",
   "description": "Modular seed project for Angular 2 apps with fast, statically typed build",
   "repository": {
     "url": "https://github.com/mgechev/angular2-seed"
@@ -31,7 +31,9 @@
     "e2e.ci": "gulp build.prod --color && gulp build.js.e2e --color && gulp e2e --color",
     "tests.all": "npm test && npm run e2e.ci",
     "webdriver-start": "webdriver-manager start",
-    "webdriver-update": "webdriver-manager update"
+    "webdriver-update": "webdriver-manager update",
+
+    "release": "gulp release.prod"
   },
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
@@ -112,7 +114,11 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "walk": "^2.3.9",
-    "yargs": "^4.8.0"
+    "yargs": "^4.8.0",
+
+    "gulp-bump": "^2.1.0",
+    "gulp-git": "^1.7.2",
+    "gulp-conventional-changelog": "^1.1.0"
   },
   "dependencies": {
     "@angular/common": "2.0.0-rc.6",
