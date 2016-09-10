@@ -7,19 +7,19 @@ import * as reporter from 'postcss-reporter';
 import * as stylelint from 'stylelint';
 import { join } from 'path';
 
-import { APP_ASSETS, APP_SRC, BROWSER_LIST, CSS_SRC, ENV, DEPENDENCIES, ENABLE_SCSS,  COLOR_GUARD_WHITE_LIST} from '../../config';
+import Config from '../../config';
 
 const plugins = <any>gulpLoadPlugins();
 
-const isProd = ENV === 'prod';
-var stylesheetType = ENABLE_SCSS ? 'scss' : 'css';
+const isProd = Config.ENV === 'prod';
+var stylesheetType = Config.ENABLE_SCSS ? 'scss' : 'css';
 
 const processors = [
   doiuse({
-    browsers: BROWSER_LIST,
+    browsers: Config.BROWSER_LIST,
   }),
   colorguard({
-    whitelist: COLOR_GUARD_WHITE_LIST
+    whitelist: Config.COLOR_GUARD_WHITE_LIST
   }),
   stylelint(),
   reporter({clearMessages: true})
@@ -27,25 +27,25 @@ const processors = [
 
 function lintComponentStylesheets() {
   return gulp.src([
-    join(APP_SRC, '**', `*.${stylesheetType}`),
-    `!${join(APP_SRC, 'assets', '**', '*.scss')}`,
-    `!${join(CSS_SRC, '**', '*.css')}`
+    join(Config.APP_SRC, '**', `*.${stylesheetType}`),
+    `!${join(Config.APP_SRC, 'assets', '**', '*.scss')}`,
+    `!${join(Config.CSS_SRC, '**', '*.css')}`
   ]).pipe(isProd ? plugins.cached('css-lint') : plugins.util.noop())
-    .pipe(ENABLE_SCSS ? plugins.sassLint() : plugins.postcss(processors))
-    .pipe(ENABLE_SCSS ? plugins.sassLint.format() : plugins.util.noop())
-    .pipe(ENABLE_SCSS ? plugins.sassLint.failOnError() : plugins.util.noop());
+    .pipe(Config.ENABLE_SCSS ? plugins.sassLint() : plugins.postcss(processors))
+    .pipe(Config.ENABLE_SCSS ? plugins.sassLint.format() : plugins.util.noop())
+    .pipe(Config.ENABLE_SCSS ? plugins.sassLint.failOnError() : plugins.util.noop());
 }
 
 function lintExternalStylesheets() {
   return gulp.src(getExternalStylesheets().map(r => r.src))
     .pipe(isProd ? plugins.cached('css-lint') : plugins.util.noop())
-    .pipe(ENABLE_SCSS ? plugins.sassLint() : plugins.postcss(processors))
-    .pipe(ENABLE_SCSS ? plugins.sassLint.format() : plugins.util.noop())
-    .pipe(ENABLE_SCSS ? plugins.sassLint.failOnError() : plugins.util.noop());
+    .pipe(Config.ENABLE_SCSS ? plugins.sassLint() : plugins.postcss(processors))
+    .pipe(Config.ENABLE_SCSS ? plugins.sassLint.format() : plugins.util.noop())
+    .pipe(Config.ENABLE_SCSS ? plugins.sassLint.failOnError() : plugins.util.noop());
 }
 
 function getExternalStylesheets() {
-  let stylesheets = ENABLE_SCSS ? DEPENDENCIES : APP_ASSETS;
+  let stylesheets = Config.ENABLE_SCSS ? Config.DEPENDENCIES : Config.APP_ASSETS;
   return stylesheets
     .filter(d => new RegExp(`\.${stylesheetType}$`)
     .test(d.src) && !d.vendor);
