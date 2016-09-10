@@ -19,11 +19,11 @@ export = () => {
 
   return gulp.src(src)
     .pipe(plugins.tslint({
-      rulesDirectory: CODELYZER_RULES
+      rulesDirectory: CODELYZER_RULES,
+      formatter: 'stylish',
+      formattersDirectory: 'node_modules/tslint-stylish'
     }))
-    .pipe(plugins.tslint.report(require('tslint-stylish'), {
-      emitError: require('is-ci'),
-      sort: true,
-      bell: true
+    .pipe(plugins.tslint.report({
+      emitError: require('is-ci')
     }));
 };
