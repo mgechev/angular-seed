@@ -1,12 +1,10 @@
-import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import { Component } from '@angular/core';
 import {
   async,
   TestBed
 } from '@angular/core/testing';
-import { getDOM } from '@angular/platform-browser/src/dom/dom_adapter';
 
-import { AboutComponent } from './about.component';
+import { AboutModule } from './about.module';
 
 export function main() {
    describe('About component', () => {
@@ -16,7 +14,7 @@ export function main() {
     beforeEach(() => {
       TestBed.configureTestingModule({
         declarations: [TestComponent],
-        providers: [disableDeprecatedForms(), provideForms()]
+        imports: [AboutModule]
       });
     });
 
@@ -28,7 +26,7 @@ export function main() {
             let fixture = TestBed.createComponent(TestComponent);
             let aboutDOMEl = fixture.debugElement.children[0].nativeElement;
 
-	          expect(getDOM().querySelectorAll(aboutDOMEl, 'h2')[0].textContent).toEqual('Features');
+	          expect(aboutDOMEl.querySelectorAll('h2')[0].textContent).toEqual('Features');
           });
         }));
     });
@@ -36,7 +34,6 @@ export function main() {
 
 @Component({
   selector: 'test-cmp',
-  directives: [AboutComponent],
   template: '<sd-about></sd-about>'
 })
 class TestComponent {}

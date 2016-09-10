@@ -47,10 +47,12 @@ gulp.task('build.prod', (done: any) =>
               'css-lint',
               'build.assets.prod',
               'build.html_css',
-              'copy.js.prod',
+              'copy.prod',
+              'compile.ahead.prod',
               'build.js.prod',
               'build.bundles',
               'build.bundles.app',
+              'minify.bundles',
               'build.index.prod',
               done));
 

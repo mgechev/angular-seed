@@ -33,11 +33,7 @@
   <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
 
   <% if (ENV === 'dev') { %>
-  <script>
-    System.config(<%=
-      JSON.stringify(SYSTEM_CONFIG, null, 2)
-    %>)
-  </script>
+  <script src="/app/system-config.js"></script>
   <% } %>
 
   <!-- libs:js -->
