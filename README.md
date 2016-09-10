@@ -453,30 +453,34 @@ Forks of this project demonstrate how to extend and integrate with other librari
 Here are all the awesome guys who are helping to make the project's wiki even better!
 
 ```
-37  Minko Gechev
+40  Minko Gechev
 22  Clayton K. N. Passos
 15  Shyam-Chen
 14  Vincent van Proosdij
+ 8  matthew harwood
  8  Christian Dobert
  8  Robert van Kints
- 8  matthew harwood
  6  Ludovic HENIN
  5  Attila Egyed
+ 4  davidgfolch
+ 4  Chris Kapilla
  3  Stefan Schüller
  3  Patrick Hillert
  3  Ezequiel Cicala
+ 3  Brian Kotek
  2  Nathan Walker
+ 2  Dinsitro
+ 2  Drake Wilson
+ 2  Simon Hampton
  2  Yannick Koehler
  2  Giovanni Candido da Silva
- 2  Simon Hampton
- 2  Cy Klassen
+ 2  hhubik
  2  Joshua Wiens
- 2  Drake Wilson
- 2  Dinsitro
+ 2  Cy Klassen
  1  zcsongor
+ 1  Ameer Nuri
+ 1  Ankit Kamboj
  1  BouncingBit
- 1  Brian Kotek
- 1  Chris Kapilla
  1  Dang Tung
  1  Eddie Sun
  1  Enrico Secondulfo
@@ -485,12 +489,15 @@ Here are all the awesome guys who are helping to make the project's wiki even be
  1  Myrmex
  1  Pol Stafford
  1  Raphael Schmitt
+ 1  Robert Stoll
  1  Sebastian Fuss
  1  Sebastien de Salvador
  1  The Ult
+ 1  Yonet
  1  graham
  1  kiuka
- 1  Ankit Kamboj
+ 1  silicakes
+ 1  Adam Johannesmeyer
 ```
 
 # Change Log
