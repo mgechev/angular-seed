@@ -2,10 +2,17 @@ import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
 
-import { APP_DEST, APP_SRC, TOOLS_DIR } from '../../config';
+import {
+  APP_DEST,
+  APP_SRC,
+  NG_FACTORY_FILE,
+  SYSTEM_CONFIG_DEV,
+  TOOLS_DIR
+} from '../../config';
 import { makeTsProject, templateLocals } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
+const jsonSystemConfig = JSON.stringify(SYSTEM_CONFIG_DEV);
 
 /**
  * Executes the build process, transpiling the TypeScript files (including the e2e-spec files, excluding the spec files)
@@ -17,7 +24,8 @@ export = () => {
     'typings/index.d.ts',
     TOOLS_DIR + '/manual_typings/**/*.d.ts',
     join(APP_SRC, '**/*.ts'),
-    '!' + join(APP_SRC, '**/*.spec.ts')
+    '!' + join(APP_SRC, '**/*.spec.ts'),
+    '!' + join(APP_SRC, `**/${NG_FACTORY_FILE}.ts`)
   ];
   let result = gulp.src(src)
     .pipe(plugins.plumber())
@@ -26,6 +34,8 @@ export = () => {
 
   return result.js
     .pipe(plugins.sourcemaps.write())
-    .pipe(plugins.template(templateLocals()))
+    .pipe(plugins.template(Object.assign(templateLocals(), {
+      SYSTEM_CONFIG_DEV: jsonSystemConfig
+    })))
     .pipe(gulp.dest(APP_DEST));
 };

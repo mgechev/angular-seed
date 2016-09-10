@@ -47,6 +47,8 @@ npm start
 npm run build.dev
 # prod build
 npm run build.prod
+# prod build with AoT compilation
+npm run build.prod.exp
 
 # dev build of multiple applications (by default the value of --app is "app")
 npm start -- --app baz
