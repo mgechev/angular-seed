@@ -310,7 +310,7 @@ export class SeedConfig {
    * The configuration of SystemJS for the `dev` environment.
    * @type {any}
    */
-  protected SYSTEM_CONFIG_DEV: any = {
+  SYSTEM_CONFIG_DEV: any = {
     defaultJSExtensions: true,
     packageConfigPaths: [
       `/node_modules/*/package.json`,

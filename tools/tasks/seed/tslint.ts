@@ -2,7 +2,7 @@ import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
 
-import { APP_SRC, CODELYZER_RULES, TOOLS_DIR } from '../../config';
+import Config from '../../config';
 
 const plugins = <any>gulpLoadPlugins();
 
@@ -11,17 +11,15 @@ const plugins = <any>gulpLoadPlugins();
  */
 export = () => {
   let src = [
-    join(APP_SRC, '**/*.ts'),
-    '!' + join(APP_SRC, '**/*.d.ts'),
-    join(TOOLS_DIR, '**/*.ts'),
-    '!' + join(TOOLS_DIR, '**/*.d.ts')
+    join(Config.APP_SRC, '**/*.ts'),
+    '!' + join(Config.APP_SRC, '**/*.d.ts'),
+    join(Config.TOOLS_DIR, '**/*.ts'),
+    '!' + join(Config.TOOLS_DIR, '**/*.d.ts')
   ];
 
   return gulp.src(src)
     .pipe(plugins.tslint({
-      rulesDirectory: CODELYZER_RULES,
-      formatter: 'stylish',
-      formattersDirectory: 'node_modules/tslint-stylish'
+      rulesDirectory: Config.CODELYZER_RULES
     }))
     .pipe(plugins.tslint.report({
       emitError: require('is-ci')
