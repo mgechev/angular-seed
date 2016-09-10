@@ -38,7 +38,7 @@ export class CostMatchService {
       );
   }
 
-  getMatches(): Observable<CostMatch[]> {
+  getMatches(): Observable<CostMatch> {
     contentHeaders.set('Authorization', localStorage.getItem('jwt'));
     return this.http.get('http://localhost:8080/auth/costmatches', { headers: contentHeaders })
       .map(res => <CostMatch> res.json())

@@ -1,30 +1,20 @@
 import {Component, OnInit} from '@angular/core';
-import {PAGINATION_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
-import {FORM_DIRECTIVES} from '@angular/common';
 import {Component} from '@angular/core';
-import {CsvParseService} from "../../shared/services/csv-parse.service";
 import {ImportListService, Transaction, CostCharacter, CostType} from "../../shared/services/import-list.service";
-import {NG_TABLE_DIRECTIVES} from "ng2-table/ng2-table";
-import {CostTypeSelector} from "./cost-type.selector";
-import {VatTypeSelector} from "./vat-type.selector";
 import {CostMatch, CostMatchService} from "../../shared/services/cost-match.service";
-import Collection = _.Collection;
-import {CostCharacterSelector} from "./cost-character.selector";
-import { PolymerElement } from '@vaadin/angular2-polymer';
 import {LabelService} from "../../shared/services/label.service";
 
 @Component({
   moduleId: module.id,
   selector: 'vat',
   templateUrl: 'vat.component.html',
-  styleUrls: ['vat.component.css'],
-  directives: [NG_TABLE_DIRECTIVES, PAGINATION_DIRECTIVES, FORM_DIRECTIVES, CostTypeSelector, VatTypeSelector, CostCharacterSelector, PolymerElement('vaadin-date-picker')]
+  styleUrls: ['vat.component.css']
 })
 export class VatComponent implements OnInit {
   uploadedFile: File;
   importedText: string;
 
-  private costMatches: Collection<CostMatch>;
+  private costMatches;
 
   transactionsLoaded: number = 0;
   transactionsUnmatched: number;

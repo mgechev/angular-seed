@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
 import {Http} from '@angular/http';
 import {contentHeaders} from '../../common/headers';
 
@@ -7,8 +6,7 @@ import {contentHeaders} from '../../common/headers';
   moduleId: module.id,
   selector: 'login',
   templateUrl: 'login.component.html',
-  styleUrls: ['login.css'],
-  directives: [CORE_DIRECTIVES, FORM_DIRECTIVES]
+  styleUrls: ['login.css']
 })
 
 export class LoginComponent {

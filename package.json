@@ -121,7 +121,7 @@
     "@angular/platform-browser": "2.0.0-rc.6",
     "@angular/platform-browser-dynamic": "2.0.0-rc.6",
     "@angular/router": "3.0.0-rc.2",
-    "@vaadin/angular2-polymer": "^1.0.0-beta1",
+    "@vaadin/angular2-polymer": "^1.0.0-beta3",
     "core-js": "^2.4.0",
     "es6-module-loader": "^0.17.8",
     "reflect-metadata": "^0.1.8",
@@ -129,7 +129,7 @@
     "systemjs": "0.19.27",
     "zone.js": "0.6.17",
     "moment": "^2.13.0",
-    "ng2-bootstrap": "^1.0.16",
-    "ng2-table": "^1.0.2"
+    "ng2-bootstrap": "^1.1.1",
+    "ng2-table": "^1.1.0"
   }
 }
