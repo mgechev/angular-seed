@@ -33,6 +33,9 @@
   <input [(ngModel)]="costMatch.fixedAmount" placeholder="vast bedrag">
   <button (click)="addMatch()" [disabled]="addMatchDisabled()">Match toevoegen</button>
   <button (click)="calculateVat()" [disabled]="calculateVatDisabled()">Bereken btw</button>
+  <div>
+    btw: {{vatReport.totalVatIn}}
+  </div>
   <vaadin-date-picker label="Kies een datum"></vaadin-date-picker>
 
   <ng-table [config]="config.sorting"

@@ -1,7 +1,5 @@
-import {Injectable} from '@angular/core';
 import {VatType, CostCharacter, CostType, Transaction} from "./import-list.service";
 import {Http} from '@angular/http';
-// import {Http} from '@angular/http/HttpModule';
 import {contentHeaders} from "../../common/headers";
 import Collection = _.Collection;
 import {LabelService} from "./label.service";
@@ -16,7 +14,6 @@ export class CostMatch {
   fixedAmount: number;
 }
 
-@Injectable()
 export class CostMatchService {
 
   constructor(private http: Http, private labelService: LabelService) {}
@@ -65,6 +62,7 @@ export class CostMatchService {
           transaction.costTypeDescription = this.labelService.get(CostType[costMatch.costType.id]);
           transaction.costCharacter = CostCharacter[costMatch.costCharacter];
           transaction.costCharacterDescription = this.labelService.get(CostCharacter[costMatch.costCharacter]);
+          transaction.costMatch = costMatch;
         }
       }
     });

@@ -8,6 +8,7 @@ import {VatTypeSelector} from "./vat-type.selector";
 import {CostCharacterSelector} from "./cost-character.selector";
 import {Ng2TableModule} from "ng2-table/ng2-table";
 import {PaginationModule} from "ng2-bootstrap/ng2-bootstrap";
+import {VatCalculationService} from "../../shared/services/vat-calculation.service";
 
 @NgModule({
     imports: [
@@ -24,7 +25,10 @@ import {PaginationModule} from "ng2-bootstrap/ng2-bootstrap";
       CostCharacterSelector
     ],
     exports: [VatComponent],
-    providers: [CostMatchService],
+    providers: [
+      CostMatchService,
+      VatCalculationService
+    ],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 

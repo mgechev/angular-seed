@@ -1,8 +1,8 @@
 import * as moment from 'moment/moment'
-import {Injectable} from '@angular/core';
 import {CsvParseService} from "./csv-parse.service";
 import any = jasmine.any;
 import {LabelService} from "./label.service";
+import {CostMatch} from "./cost-match.service";
 
 export enum CostType {
   GENERAL_EXPENSE = 2,
@@ -41,16 +41,19 @@ export enum CostCharacter {
 
 export enum VatType {
   NONE = 0,
-  LOW = 1,
-  HIGH = 2
+  LOW = 6,
+  HIGH = 21
 }
 
 export class Transaction {
   dateFormatted: string;
   date: moment.Moment;
   amount: number;
+  amountVat: number;
+  amountNet: number;
   amountFormatted: string;
   description: string;
+  costMatch: CostMatch;
   costType: CostType;
   costTypeDescription: string;
   costCharacter: CostCharacter;
@@ -68,7 +71,6 @@ export class Transaction {
   }
 }
 
-@Injectable()
 export class ImportListService {
   transactions: Transaction[] = [];
 

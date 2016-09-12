@@ -3,6 +3,7 @@ import {Component} from '@angular/core';
 import {ImportListService, Transaction, CostCharacter, CostType} from "../../shared/services/import-list.service";
 import {CostMatch, CostMatchService} from "../../shared/services/cost-match.service";
 import {LabelService} from "../../shared/services/label.service";
+import {VatCalculationService, VatReport} from "../../shared/services/vat-calculation.service";
 
 @Component({
   moduleId: module.id,
@@ -13,6 +14,8 @@ import {LabelService} from "../../shared/services/label.service";
 export class VatComponent implements OnInit {
   uploadedFile: File;
   importedText: string;
+
+  public vatReport: VatReport;
 
   private costMatches;
 
@@ -45,7 +48,12 @@ export class VatComponent implements OnInit {
   // TODO: extract cost match component
   public costMatch: CostMatch;
 
-  constructor(private importListService: ImportListService, public costMatchService: CostMatchService, private labelService: LabelService) {
+  constructor(
+    private importListService: ImportListService,
+    public costMatchService: CostMatchService,
+    private labelService: LabelService,
+    private vatCalculationService: VatCalculationService
+  ) {
     this.uploadedFile = null;
     this.length = 0;
     this.costMatch = new CostMatch();
@@ -98,6 +106,7 @@ export class VatComponent implements OnInit {
       this.length = this.transactions.length;
       if (this.transactionsLoaded) {
         this.checkTransactions();
+        this.updateTotalVat();
         this.onChangeTable(this.config);
       }
     };
@@ -118,6 +127,7 @@ export class VatComponent implements OnInit {
       }
     }
     this.checkTransactions();
+    this.updateTotalVat();
 
     this.config.filtering.filterString = '';
     this.onChangeTable(this.config);
@@ -127,14 +137,15 @@ export class VatComponent implements OnInit {
     return this.config.filtering.filterString.length < 2;
   }
 
-  public calculateVat():void {
-    for (let i = 0; i < this.transactions.length; i++) {
-      if (CostCharacter[this.transactions[i].costCharacter] === CostCharacter.IGNORE) {
-        this.transactions.splice(i,1);
-      }
-    }
-    this.transactionsLoaded = this.transactions.length;
-    this.onChangeTable(this.config);
+  private updateTotalVat():void {
+    // for (let i = 0; i < this.transactions.length; i++) {
+    //   if (CostCharacter[this.transactions[i].costCharacter] === CostCharacter.IGNORE) {
+    //     this.transactions.splice(i,1);
+    //   }
+    // }
+    this.vatReport = this.vatCalculationService.calculateTotalVat(this.transactions);
+    // this.transactionsLoaded = this.transactions.length;
+    // this.onChangeTable(this.config);
   }
 
   public calculateVatDisabled():boolean {
