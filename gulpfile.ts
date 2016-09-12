@@ -138,7 +138,25 @@ gulp.task('test', (done: any) =>
               'karma.run',
               done));
 
-// --------------
+
+// -------------- PROJECT -------------------------------
+
+gulp.task('release.prod', (done: any) =>
+    runSequence(
+        'clean.release',
+        'bump.app.version',
+        'build.prod',
+        'copy.dist.to.release',
+        'generate.changelog',
+        'git.commit',
+        'git.tag',
+        'git.push',
+        done
+    )
+);
+
+// -------------- PROJECT -------------------------------
+
 // Clean dev/coverage that will only run once
 // this prevents karma watchers from being broken when directories are deleted
 let firstRun = true;

@@ -1,5 +1,5 @@
 import { join } from 'path';
-
+import { readFileSync } from 'fs';
 import { SeedConfig } from './seed.config';
 
 /**
@@ -8,10 +8,18 @@ import { SeedConfig } from './seed.config';
  */
 export class ProjectConfig extends SeedConfig {
 
-  PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
+  PROJECT_TASKS_DIR    = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
+  PACKAGE_FILE         = 'package.json';
+  RELEASE_DIR          = 'release/';
+  CHANGELOG_FILE       = 'CHANGELOG.md';
+  ENABLE_SCSS          = true;
+
+  private _pkg: any;
 
   constructor() {
+
     super();
+
     // this.APP_TITLE = 'Put name of your app here';
 
     /* Enable typeless compiler runs (faster) between typed compiler runs. */
@@ -33,6 +41,46 @@ export class ProjectConfig extends SeedConfig {
 
     /* Add to or override NPM module configurations: */
     // this.mergeObject(this.PLUGIN_CONFIGS['browser-sync'], { ghostMode: false });
+
+    this._pkg = JSON.parse(readFileSync('package.json').toString());
+  }
+
+  get GIT_CONFIG():any {
+      return {
+        release_commit_message: 'chore(deploy): v' + this.appVersionSync + '. [skip ci]',
+        release_tag: 'v' + this.appVersionSync,
+        release_tag_title: 'release',
+        release_push_branch: 'master',
+        release_push_origin: 'origin',
+      };
+  };
+
+  get CSS_PROD_BUNDLE():string {
+    return this.appName + '.' + this.appVersionSync + '.css';
+  }
+
+  get JS_PROD_APP_BUNDLE():string {
+    return this.appName + '.' + this.appVersionSync + '.js';
+  }
+
+  get JS_PROD_SHIMS_BUNDLE():string {
+    return this.appName + '.' + this.appVersionSync + '.vendor.js';
+  }
+
+  /**
+   * Returns the applications version as defined in the `package.json`.
+   * @return {number} The applications version.
+   */
+  get appVersionSync(): number | string {
+    return JSON.parse(readFileSync('package.json').toString()).version;
+  }
+
+  get appVersion(): number | string {
+    return this._pkg.version;
+  }
+
+  get appName(): string {
+      return this._pkg.name;
   }
 
 }

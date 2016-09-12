@@ -1,3 +1,31 @@
+# CTX Angular Seed ( forked from Angular2-seed )
+
+The seed for ctx SPAs
+
+### Scripts
+
+- **npm run release -> (gulp release.prod)**:
+This script is meant to be runned by the CI server when merging a PR into master. Whenever this happes a patch version is generated.
+
+    - **clean.release**        : deletes `release` folder
+    - **bump.app.version**     : bumps `package.json` version
+    - **build.prod**           : builds production package
+    - **copy.dist.to.release** : copy `dist/prod` to `release/`
+    - **generate.changelog**   : generates `CHANGELOG.md `file
+    - **git.commit**           : commit changes
+    - **git.tag**              : generates a tag with the current version
+    - **git.push**             : push new version
+
+### Changes
+
+- Bundles names :  `package.name`.`package.version`.`file extension`
+
+### CI
+
+- CircleCI `circle.yml` file
+
+------------------------------------------------------------------------------------------------------
+
 # Introduction
 
 [![Angular 2 Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
@@ -180,9 +208,9 @@ Please see the [CONTRIBUTING](https://github.com/mgechev/angular2-seed/blob/mast
 An [advanced option to this seed exists here](https://github.com/NathanWalker/angular2-seed-advanced) which mirrors the latest changes here but adds core support for:
 
 - [ngrx/store](https://github.com/ngrx/store) RxJS powered state management, inspired by **Redux**
-- [ng2-translate](https://github.com/ocombe/ng2-translate) for i18n 
+- [ng2-translate](https://github.com/ocombe/ng2-translate) for i18n
   - Usage is optional but on by default
-  - Up to you and your team how you want to utilize it. It can be easily removed if not needed. 
+  - Up to you and your team how you want to utilize it. It can be easily removed if not needed.
 - [angulartics2](https://github.com/angulartics/angulartics2) Vendor-agnostic analytics for Angular2 applications.
   - Out of box support for [Segment](https://segment.com/)
     - When using the seed, be sure to change your `write_key` [here](https://github.com/NathanWalker/angular2-seed-advanced/blob/master/src/client/index.html#L24)

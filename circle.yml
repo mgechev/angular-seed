@@ -1,0 +1,26 @@
+machine:
+  node:
+    version: 5.1.0
+
+test:
+    override:
+        - npm run tests.all
+    post:
+        - mv reports $CIRCLE_TEST_REPORTS
+
+deployment:
+    master:
+        branch: master
+        commands:
+            - git tag -l | xargs git tag -d
+            - git fetch
+            - git config --global user.name "CtxCircleCI"
+            - git config --global user.email "ctx.ci@ef.com"
+            - npm run release
+
+dependencies:
+    pre:
+        - export CHROME_BIN=chromium-browser
+        - export DISPLAY=:99.0
+        - npm install -g npm typings karma phantomjs-prebuilt gulp
+
