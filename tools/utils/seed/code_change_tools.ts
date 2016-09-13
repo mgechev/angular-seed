@@ -1,13 +1,13 @@
 import * as browserSync from 'browser-sync';
 // import * as path from 'path';
 
-import { getPluginConfig } from '../../config';
+import Config from '../../config';
 
 /**
  * Initialises BrowserSync with the configuration defined in seed.config.ts (or if overriden: project.config.ts).
  */
 let runServer = () => {
-  browserSync.init(getPluginConfig('browser-sync'));
+  browserSync.init(Config.getPluginConfig('browser-sync'));
 };
 
 /**

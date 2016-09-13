@@ -5,10 +5,9 @@ import { HomeComponent } from './home.component';
 import { NameListService } from '../shared/name-list/index';
 
 @NgModule({
-    imports: [CommonModule, SharedModule],
-    declarations: [HomeComponent],
-    exports: [HomeComponent],
-    providers: [NameListService]
+  imports: [CommonModule, SharedModule],
+  declarations: [HomeComponent],
+  exports: [HomeComponent],
+  providers: [NameListService]
 })
-
 export class HomeModule { }

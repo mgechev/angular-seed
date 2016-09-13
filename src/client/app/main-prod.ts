@@ -3,16 +3,13 @@
  * @see https://angular.io/docs/ts/latest/api/platform-browser-dynamic/index/bootstrap-function.html
  */
 import { enableProdMode } from '@angular/core';
-// The browser platform with a compiler
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { platformBrowser } from '@angular/platform-browser';
 
-// The app module
-import { AppModule } from './app.module';
+import { AppModuleNgFactory } from './app.module.ngfactory';
 
-if (String('<%= ENV %>') === 'prod') { enableProdMode(); }
+enableProdMode();
 
-// Compile and launch the module
-platformBrowserDynamic().bootstrapModule(AppModule);
+platformBrowser().bootstrapModuleFactory(AppModuleNgFactory);
 
 // In order to start the Service Worker located at "./worker.js"
 // uncomment this line. More about Service Workers here

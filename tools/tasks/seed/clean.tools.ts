@@ -3,14 +3,14 @@ import * as util from 'gulp-util';
 import * as rimraf from 'rimraf';
 import { join } from 'path';
 
-import { TOOLS_DIR } from '../../config';
+import Config from '../../config';
 
 /**
  * Executes the build process, deleting all JavaScrip files (which were transpiled from the TypeScript sources) with in
  * the `tools` directory.
  */
 export = (done: any) => {
-  deleteAndWalk(TOOLS_DIR);
+  deleteAndWalk(Config.TOOLS_DIR);
   done();
 };
 
