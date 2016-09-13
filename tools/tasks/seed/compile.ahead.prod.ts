@@ -6,7 +6,7 @@ import { join } from 'path';
 import { writeFileSync, readFileSync } from 'fs';
 import {CodeGenerator} from '@angular/compiler-cli';
 
-import { TMP_DIR, BOOTSTRAP_DIR } from '../../config';
+import Config from '../../config';
 
 function codegen(
     ngOptions: tsc.AngularCompilerOptions, cliOptions: tsc.NgcCliOptions, program: ts.Program,
@@ -21,17 +21,17 @@ const copyFile = (name: string, from: string, to: string, mod: any = (f: string)
 
 export = (done: any) => {
   // Note: dirty hack until we're able to set config easier
-  copyFile('tsconfig.json', TMP_DIR, join(TMP_DIR, BOOTSTRAP_DIR), (content: string) => {
+  copyFile('tsconfig.json', Config.TMP_DIR, join(Config.TMP_DIR, Config.BOOTSTRAP_DIR), (content: string) => {
     const parsed = JSON.parse(content);
     parsed.files.push('main.ts');
     return JSON.stringify(parsed, null, 2);
   });
-  copyFile('typings.d.ts', TMP_DIR, join(TMP_DIR, BOOTSTRAP_DIR), (content: string) => {
+  copyFile('typings.d.ts', Config.TMP_DIR, join(Config.TMP_DIR, Config.BOOTSTRAP_DIR), (content: string) => {
     return content.replace('../../typings/index.d.ts', '../../../typings/index.d.ts');
   });
   const args = argv;
   const cliOptions = new tsc.NgcCliOptions(args);
-  tsc.main(join(TMP_DIR, BOOTSTRAP_DIR), cliOptions, codegen)
+  tsc.main(join(Config.TMP_DIR, Config.BOOTSTRAP_DIR), cliOptions, codegen)
     .then(done)
     .catch(e => {
       console.error(e.stack);
