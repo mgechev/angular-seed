@@ -40,7 +40,7 @@ export class MyProfilesService {
     }
     isExist(newProfile: CandidateProfile) {
         /**TODO::Replace api once its Ready from backend */
-        let url = Config.GetURL('/api/ProfileBank/getMyProfiles');
+        let url = Config.GetURL('/api/ProfileBank/ValidateCandidateDuplicates');
         this._spinnerService.show();
         return this.authHttp.post(url, newProfile)
             .map(this.extractData)

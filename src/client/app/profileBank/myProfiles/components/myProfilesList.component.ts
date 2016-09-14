@@ -122,16 +122,16 @@ export class MyProfilesListComponent implements OnActivate {
     }
     /** Check is current information is already exist in database.*/
     IsExist() {
-        this.toastr.error('Loost Focus');
-        // this._myProfilesService.isExist(this.profile)
-        //     .subscribe(
-        //     (results: any) => {
-        //         if (!results.exist)
-        //             if (results.Profiles !== null && results.Profiles !== undefined && results.Profiles.length > 0) {
-        //                 this.existedProfile = <any>results.Profiles;
-        //             }
-        //     },
-        //     error => this.toastr.error(<any>error));
+        this._myProfilesService.isExist(this.profile)
+            .subscribe(
+            (results: any) => {
+                if (!results.exist)
+                    if (results.Profiles !== null && results.Profiles !== undefined && results.Profiles.length > 0) {
+                        this.existedProfile = <any>results.Profiles;
+                        this.toastr.error('Profile already exist');
+                    }
+            },
+            error => this.toastr.error(<any>error));
     }
     getMyProfiles() {
         this._myProfilesService.getMyProfiles(this.myProfilesList.GrdOperations)
