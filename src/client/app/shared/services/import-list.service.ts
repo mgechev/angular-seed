@@ -3,6 +3,7 @@ import {CsvParseService} from "./csv-parse.service";
 import any = jasmine.any;
 import {LabelService} from "./label.service";
 import {CostMatch} from "./cost-match.service";
+import {Injectable} from "@angular/core";
 
 export enum CostType {
   GENERAL_EXPENSE = 2,
@@ -71,6 +72,7 @@ export class Transaction {
   }
 }
 
+@Injectable()
 export class ImportListService {
   transactions: Transaction[] = [];
 

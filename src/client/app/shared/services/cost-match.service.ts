@@ -4,6 +4,7 @@ import {contentHeaders} from "../../common/headers";
 import Collection = _.Collection;
 import {LabelService} from "./label.service";
 import {Observable} from "rxjs/Rx";
+import {Injectable} from "@angular/core";
 
 export class CostMatch {
   matchString: string;
@@ -14,6 +15,7 @@ export class CostMatch {
   fixedAmount: number;
 }
 
+@Injectable()
 export class CostMatchService {
 
   constructor(private http: Http, private labelService: LabelService) {}

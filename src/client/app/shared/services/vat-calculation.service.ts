@@ -1,10 +1,12 @@
 import {Transaction, CostCharacter, CostType, VatType} from "./import-list.service";
+import {Injectable} from "@angular/core";
 
 export class VatReport {
   totalVatIn: number;
   totalVatOut: number;
 }
 
+@Injectable()
 export class VatCalculationService {
 
   applyVat(transaction:Transaction, vatType:VatType) {
