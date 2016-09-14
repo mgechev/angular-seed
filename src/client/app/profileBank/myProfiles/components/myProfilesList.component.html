@@ -63,7 +63,7 @@
                                         <br>
                                         <div class="collapse row" id="demo">
                                             <div class="add-new-panel">
-                                                <form role="form" (submit)="OnSubmitCandidate()">
+                                                <form role="form" (submit)="OnSubmitCandidate()" style="background: #f6fbfc;padding: 10px;margin-bottom: 15px;overflow: hidden;border-left: #d4ad38 2px solid;">
                                                     <div class="container-fluid">
                                                         <div class="row" style="margin-top:34px;">
                                                             <div class="col-md-3 inlineForm">
@@ -83,15 +83,17 @@
                                                             <div class="col-md-3  inlineForm">
                                                                 <div class="form-group ">
                                                                     <input type="email" class="form-control" placeholder="Email Address" [(ngModel)]="profile.Email" required="" tooltip="Email"
-                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.Email">
+                                                                        (blur)="IsExist()" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="!profile.Email">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3 inlineForm">
                                                                 <div class="form-group ">
                                                                     <input type="text" placeholder="Contact Number" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact"
-                                                                        required="" pattern="^[0-9\-\+]{9,15}$" tooltip="Contact No"
-                                                                        title="Enter 10 digits" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                        tooltipEnable="!profile.PrimaryContact" />
+                                                                        (blur)="IsExist()" required="" pattern="^[0-9\-\+]{9,15}$"
+                                                                        tooltip="Contact No" title="Enter 10 digits" tooltipPlacement="top"
+                                                                        tooltipTrigger="mouseenter" tooltipEnable="!profile.PrimaryContact"
+                                                                    />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -130,15 +132,16 @@
                                                             <div class="col-md-3 inlineForm">
                                                                 <div class="form-group ">
                                                                     <input type="text" placeholder="Passport Number" class="form-control" [(ngModel)]="profile.PassportNumber" tooltip="Passport No"
-                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.PassportNumber"
-                                                                        pattern="[A-Za-z]{1}[0-9]{7}" title="Enter valid passport number. For Eg. A1234567"
+                                                                        (blur)="IsExist()" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="!profile.PassportNumber" pattern="[A-Za-z]{1}[0-9]{7}"
+                                                                        title="Enter valid passport number. For Eg. A1234567"
                                                                     />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3  inlineForm">
                                                                 <div class="form-group ">
                                                                     <input type="text" placeholder="Pan Number" class="form-control" [(ngModel)]="profile.PANNumber" tooltip="Pan Card No" tooltipPlacement="top"
-                                                                        tooltipTrigger="mouseenter" tooltipEnable="!profile.PANNumber"
+                                                                        (blur)="IsExist()" tooltipTrigger="mouseenter" tooltipEnable="!profile.PANNumber"
                                                                         pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}" title="Enter valid PAN number. For Eg. ABCDE1234F"
                                                                     />
                                                                 </div>
@@ -146,8 +149,9 @@
                                                             <div class="col-md-3 inlineForm">
                                                                 <div class="form-group">
                                                                     <input type="text" placeholder="Aadhar Card No" class="form-control" [(ngModel)]="profile.AadharCardNo" tooltip="Aadhar Card Number"
-                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.AadharCardNo"
-                                                                        pattern="^[0-9\-\+]{9,15}$" title="Enter valid Aadhaar Card number For Eg. 123456789012"
+                                                                        (blur)="IsExist()" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="!profile.AadharCardNo" pattern="^[0-9\-\+]{9,15}$"
+                                                                        title="Enter valid Aadhaar Card number For Eg. 123456789012"
                                                                         maxlength="12" />
                                                                 </div>
                                                             </div>

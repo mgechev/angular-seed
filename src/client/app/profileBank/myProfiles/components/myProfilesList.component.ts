@@ -29,6 +29,7 @@ export class MyProfilesListComponent implements OnActivate {
     CandidateID: MasterData = new MasterData();
     myProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
     profile: CandidateProfile;
+    existedProfile: CandidateProfile;
     errorMessage: string;
     status: number;
     psdTemplates: any;
@@ -119,7 +120,19 @@ export class MyProfilesListComponent implements OnActivate {
             this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
         window.scrollTo(0, 40);
     }
-
+    /** Check is current information is already exist in database.*/
+    IsExist() {
+        this.toastr.error('Loost Focus');
+        // this._myProfilesService.isExist(this.profile)
+        //     .subscribe(
+        //     (results: any) => {
+        //         if (!results.exist)
+        //             if (results.Profiles !== null && results.Profiles !== undefined && results.Profiles.length > 0) {
+        //                 this.existedProfile = <any>results.Profiles;
+        //             }
+        //     },
+        //     error => this.toastr.error(<any>error));
+    }
     getMyProfiles() {
         this._myProfilesService.getMyProfiles(this.myProfilesList.GrdOperations)
             .subscribe(
@@ -363,7 +376,9 @@ export class MyProfilesListComponent implements OnActivate {
         try {
             let FileList: FileList = selectedFile.target.files;
             if (selectedFile.target.files[0].size < 2000000) {
-                if (selectedFile.target.files[0].type === "image/jpeg" || selectedFile.target.files[0].type === "image/png" || selectedFile.target.files[0].type === "image/jpg") {
+                if (selectedFile.target.files[0].type === "image/jpeg"
+                    || selectedFile.target.files[0].type === "image/png"
+                    || selectedFile.target.files[0].type === "image/jpg") {
                     if (this.uploadedPhoto)
                         this.uploadedPhoto.length = 0;
                     for (let i = 0, length = FileList.length; i < length; i++) {
