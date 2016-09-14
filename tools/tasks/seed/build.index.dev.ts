@@ -62,6 +62,9 @@ function mapPath(dep: any) {
  */
 function transformPath() {
   return function (filepath: string) {
+    if (filepath.startsWith(`/${Config.APP_DEST}`)) {
+      filepath = filepath.replace(`/${Config.APP_DEST}`, '');
+    }
     arguments[0] = join(Config.APP_BASE, filepath) + `?${Date.now()}`;
     return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));
   };
