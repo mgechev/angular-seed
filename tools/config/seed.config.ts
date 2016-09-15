@@ -1,4 +1,5 @@
 import { join } from 'path';
+import * as slash from 'slash';
 import { argv } from 'yargs';
 
 import { Environments, InjectableDependency } from './seed.config.interfaces';
@@ -83,7 +84,7 @@ export class SeedConfig {
    * The base path of node modules.
    * @type {string}
    */
-  NPM_BASE = join(this.APP_BASE, 'node_modules/');
+  NPM_BASE = slash(join(this.APP_BASE, 'node_modules/'));
 
   /**
    * The flag for the hot-loader option of the application.
@@ -451,25 +452,29 @@ export class SeedConfig {
     'browser-sync': {
       middleware: [require('connect-history-api-fallback')({
         index: `${this.APP_BASE}index.html`,
-//        rewrites: [
-//          {
-//            from: /^\/node_modules\/.*$/,
-//            to: (context:any) => context.parsedUrl.pathname
-//          },
-//          {
-//            from: new RegExp(`^${this.APP_BASE}${this.APP_SRC}$`),
-//            to: (context:any) => context.parsedUrl.pathname
-//          },
-//          {
-//            from: /^\/assets\/.*$/,
-//            to: (context:any) => context.parsedUrl.pathname
-//          },
-//          {
-//            from: /^\/css\/.*$/,
-//            to: (context:any) => context.parsedUrl.pathname
-//          }
-//        ],
-//        disableDotRule: true
+        rewrites: [
+          {
+            from: new RegExp(`^${this.NPM_BASE}.*$`),
+            to: (context:any) => context.parsedUrl.pathname
+          },
+          {
+            from: new RegExp(`^\/${this.BOOTSTRAP_DIR}\/.*$`),
+            to: (context:any) => context.parsedUrl.pathname
+          },
+          {
+            from: new RegExp(`^${this.APP_BASE}${this.APP_SRC}\/.*$`),
+            to: (context:any) => context.parsedUrl.pathname
+          },
+          {
+            from: new RegExp(`^${this.ASSETS_SRC.replace(this.APP_SRC, '')}\/.*$`),
+            to: (context:any) => context.parsedUrl.pathname
+          },
+          {
+            from: new RegExp(`^${this.CSS_DEST.replace(this.APP_DEST, '')}\/.*$`),
+            to: (context:any) => `/${slash(join(this.APP_DEST, context.parsedUrl.pathname))}`
+          }
+        ],
+        disableDotRule: true
       })],
       port: this.PORT,
       startPath: this.APP_BASE,
