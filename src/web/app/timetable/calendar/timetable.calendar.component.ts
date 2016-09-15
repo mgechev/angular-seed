@@ -6,7 +6,8 @@ import {ROUTER_DIRECTIVES } from '@angular/router';
   moduleId: module.id,
   selector: 'timetable-calendar',
   templateUrl: 'timetable.calendar.component.html',
-  directives: []
+  directives: [ROUTER_DIRECTIVES],
+  styleUrls: ['timetable.calendar.component.css']
 })
 
 export class CalendarComponent {

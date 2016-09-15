@@ -1,5 +1,5 @@
 import {provideRouter, RouterConfig} from "@angular/router";
-import {TimetableRoutes} from "../../timetable/timetable.routes"
+import {TimetableRoutes} from "../../timetable/app/timetable.routes"
 
 const routes: RouterConfig = [
   ...TimetableRoutes

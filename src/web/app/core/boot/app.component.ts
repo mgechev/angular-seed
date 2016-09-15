@@ -1,6 +1,6 @@
 import { ROUTER_DIRECTIVES, Router, ActivatedRoute } from "@angular/router"
 import { Component, ApplicationRef} from "@angular/core"
-import { TimetableComponent } from "../../timetable/timetable.component"
+import { TimetableComponent } from "../../timetable/app/timetable.component"
 import { HTTP_PROVIDERS } from '@angular/http';
 
 @Component({
@@ -8,7 +8,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
   selector: 'ms-app',
   viewProviders: [HTTP_PROVIDERS],
   directives: [ROUTER_DIRECTIVES, [TimetableComponent]],
-  templateUrl: 'app.component.html'
+  templateUrl: 'app.component.html',
 })
 
 export class AppComponent {
