@@ -1,6 +1,6 @@
 import { join } from 'path';
-import { argv } from 'yargs';
 import * as slash from 'slash';
+import { argv } from 'yargs';
 
 import { Environments, InjectableDependency } from './seed.config.interfaces';
 
