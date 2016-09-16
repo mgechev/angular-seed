@@ -16,8 +16,5 @@
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": true
   },
-  "compileOnSave": false,
-  "files": [
-    "typings.d.ts"
-  ]
+  "compileOnSave": false
 }

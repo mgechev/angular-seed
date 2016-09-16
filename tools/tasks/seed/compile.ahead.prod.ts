@@ -23,6 +23,8 @@ export = (done: any) => {
   // Note: dirty hack until we're able to set config easier
   copyFile('tsconfig.json', Config.TMP_DIR, join(Config.TMP_DIR, Config.BOOTSTRAP_DIR), (content: string) => {
     const parsed = JSON.parse(content);
+    parsed.files = parsed.files || [];
+    parsed.files.push('typings.d.ts');
     parsed.files.push('main.ts');
     return JSON.stringify(parsed, null, 2);
   });
