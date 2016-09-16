@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import { CandidateProfile, ResumeMeta, AddCandidateResponse, AllCandidateProfiles, CareerProfile } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, ResumeMeta, AddCandidateResponse, AllCandidateProfiles, CareerProfile, MailDetails } from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -30,6 +30,7 @@ export class MyProfilesListComponent implements OnActivate {
     myProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
     profile: CandidateProfile;
     existedProfile: CandidateProfile;
+    isExist: boolean = false;
     errorMessage: string;
     status: number;
     psdTemplates: any;
@@ -97,7 +98,6 @@ export class MyProfilesListComponent implements OnActivate {
         this.getMyProfiles();
         this.getCandidateStatuses();
     }
-
     SaveCandidateID(id: MasterData) {
         this.seletedCandidateID = id;
 
@@ -125,9 +125,10 @@ export class MyProfilesListComponent implements OnActivate {
         this._myProfilesService.isExist(this.profile)
             .subscribe(
             (results: any) => {
-                if (!results.exist)
-                    if (results.Profiles !== null && results.Profiles !== undefined && results.Profiles.length > 0) {
-                        this.existedProfile = <any>results.Profiles;
+                if (results.isExist)
+                    if (results.profileBankObjects !== null && results.profileBankObjects !== undefined) {
+                        this.existedProfile = <any>results.profileBankObjects;
+                        this.isExist = <any>results.isExist;
                         this.toastr.error('Profile already exist');
                     }
             },
@@ -139,11 +140,22 @@ export class MyProfilesListComponent implements OnActivate {
             (results: any) => {
                 if (results.Profiles !== null && results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.myProfilesList = <any>results;
+                    this.getEmail('RMS.RRF.NEEDAPPROVAL');
                 } else { this.NORECORDSFOUND = true; }
             },
             error => this.errorMessage = <any>error);
     }
-
+    getEmail(EmailCode: any) {
+        this.profile.CandidateMailDetails = new MailDetails();
+        this._profileBankService.getEmail(EmailCode)
+            .subscribe(
+            results => {
+                for (var index = 0; index < this.myProfilesList.Profiles.length; index++) {
+                    this.myProfilesList.Profiles[index].CandidateMailDetails = <any>results;
+                }
+            },
+            error => this.errorMessage = <any>error);
+    }
     redirectToView(CandidateID: MasterData) {
         this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
@@ -338,15 +350,24 @@ export class MyProfilesListComponent implements OnActivate {
 
     openMailWindow() {
         var mailto: string = '';
+        var mailcc: string = '';
+        var mailsubject: string = '';
+        var mailbody: string = '';
         for (var index = 0; index < this.myProfilesList.Profiles.length; index++) {
             if (this.myProfilesList.Profiles[index].IsChecked) {
                 mailto = mailto + this.myProfilesList.Profiles[index].Email + ';';
+                mailcc = mailcc + this.myProfilesList.Profiles[index].CandidateMailDetails.Cc + ';';
+                mailsubject = this.myProfilesList.Profiles[index].CandidateMailDetails.Subject;
+                mailbody = this.myProfilesList.Profiles[index].CandidateMailDetails.Body;
+                mailbody += window.location.href;
+                mailbody += ">";
                 this.myProfilesList.Profiles[index].IsChecked = false;
             }
             this.selectedRowCount = 0;
         }
         this.allChecked = false;
-        window.location.href = 'mailto:' + mailto;
+        var str = 'mailto:' + mailto + '?cc=' + mailcc + '&subject=' + mailsubject + '&body=' + mailbody;
+        window.location.href = str;
     }
 
     onClickFollowUpComments(id: MasterData) {

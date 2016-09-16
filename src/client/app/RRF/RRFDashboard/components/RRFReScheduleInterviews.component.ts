@@ -2,7 +2,7 @@ import { Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate, RouteSegment} from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { RRFReScheduleInterviewService} from '../services/RRFReScheduleInterviews.service';
-import {InterviewsList} from '../../../recruitmentCycle/recruitersTab/index';
+import {InterviewsList, CandidateRRFID} from '../../../recruitmentCycle/recruitersTab/index';
 import { GrdOptions, MasterData } from  '../../../shared/model/index';
 import { AllScheduleInterviewPipe } from  '../../..//recruitmentCycle/recruitersTab/index';
 @Component({
@@ -11,7 +11,7 @@ import { AllScheduleInterviewPipe } from  '../../..//recruitmentCycle/recruiters
     templateUrl: 'RRFReScheduleInterviews.component.html',
     directives: [ROUTER_DIRECTIVES],
     providers: [ToastsManager],
-    pipes:[AllScheduleInterviewPipe]
+    pipes: [AllScheduleInterviewPipe]
 })
 
 export class RRFReScheduleInterviewsComponent implements OnActivate {
@@ -112,11 +112,11 @@ export class RRFReScheduleInterviewsComponent implements OnActivate {
     }
     checkViewMode() {
         //Clear RRF List
-        this.InterviewDetailsList = new InterviewsList();
+        this.InterviewDetailsList.CandidateRRFIDs = new CandidateRRFID();
         this.InterviewDetailsList.CandidateRRFIDs.RRFID.Id = this.RRFID.Id;
         this.InterviewDetailsList.CandidateRRFIDs.RRFID.Value = this.RRFID.Value;
         // this.InterviewDetailsList.GrdOperations = new GrdOptions();
-        this.resetToDefaultGridOptions();
+        //this.resetToDefaultGridOptions();//
         this.setGridOptions();
 
         if (this.currentView === 'allReInterviews') {

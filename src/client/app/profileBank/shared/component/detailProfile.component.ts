@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { CandidateProfile} from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, MailDetails} from '../../shared/model/myProfilesInfo';
 import { MasterData, Resume } from  '../../../shared/model/index';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 
@@ -14,6 +14,7 @@ import { ProfileBankService } from '../../shared/services/profileBank.service';
 export class DetailProfileComponent implements OnInit {
     profile: CandidateProfile;
     binaryResume: Resume;
+    emailDetails: any;
     errorMessage: string;
     //Get profiles data
     @Input() selectedProfile: CandidateProfile;
@@ -26,7 +27,17 @@ export class DetailProfileComponent implements OnInit {
         /** */
         this.profile = this.selectedProfile;
         this.profile.ModifiedOn = moment(this.profile.ModifiedOn).format('MMMM D, YYYY h:mm a');
+        this.getEmail('RMS.RRF.NEEDAPPROVAL');
         //console.log(this.profilePic);
+    }
+    getEmail(EmailCode: any) {
+        this.profile.CandidateMailDetails = new MailDetails();
+        this._profileBankService.getEmail(EmailCode)
+            .subscribe(
+            results => {
+                this.profile.CandidateMailDetails = <any>results;
+            },
+            error => this.errorMessage = <any>error);
     }
     /**Get resume by candidate code */
     getResume(candidateID: MasterData) {

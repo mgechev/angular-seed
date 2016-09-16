@@ -65,44 +65,43 @@
                                             <div class="add-new-panel">
                                                 <form role="form" (submit)="OnSubmitCandidate()" style="background: #f6fbfc;padding: 10px;margin-bottom: 15px;overflow: hidden;border-left: #d4ad38 2px solid;">
                                                     <div class="container-fluid">
-                                                        <div class="row" style="margin-top:34px;">
+                                                        <div class="row" style="margin-top:34px;" *ngIf="isExist">
                                                             <!--*ngIf="existedProfile.length != 0"-->
                                                             <div class="col-md-3 inlineForm">
                                                                 <div class="form-group">
                                                                     <label data-toggle="tooltip" data-placement="top" title="Candidate Id" tooltip="Candidate Id" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                        tooltipEnable="false">CF00076</label>
+                                                                        tooltipEnable="false">{{existedProfile.CandidateID.Value}}</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3  inlineForm">
                                                                 <div class="form-group ">
                                                                     <label data-toggle="tooltip" data-placement="top" title="Candidate Name" tooltip="Candidate Name" tooltipPlacement="top"
-                                                                        tooltipTrigger="mouseenter" tooltipEnable="false">Chetan badgujar</label>
+                                                                        tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.Candidate}}</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3  inlineForm">
                                                                 <div class="form-group ">
                                                                     <label data-toggle="tooltip" data-placement="top" title="Owner" tooltip="Owner" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                        tooltipEnable="false">Diksha sisodiya</label>
+                                                                        tooltipEnable="false">{{existedProfile.Owner.Value}}</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3 inlineForm">
                                                                 <div class="form-group ">
                                                                     <div class="col-md-7 inlineForm">
                                                                         <label data-toggle="tooltip" data-placement="top" title="Status" tooltip="Status" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                            tooltipEnable="false">In Progress</label>
+                                                                            tooltipEnable="false">{{existedProfile.Status.Value}}</label>
                                                                     </div>
 
                                                                     <a href="javascript:;" class="btn btn-icon-only green" data-toggle="tooltip" data-placement="top" title="View Profile" tooltip="View Profile"
-                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">
-                                                                        <!--(click)='redirectToView(myprofile.CandidateID)'-->
+                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
+                                                                        (click)='redirectToView(existedProfile.CandidateID)'>
                                                                         <i class="glyphicon glyphicon-user"> </i>
                                                                     </a>
 
 
                                                                     <a href="javascript:;" class="btn btn-icon-only purple" data-toggle="tooltip" data-placement="top" title="View Interview History"
                                                                         tooltip="View Interview History" tooltipPlacement="top"
-                                                                        tooltipTrigger="mouseenter" tooltipEnable="false">
-                                                                        <!--(click)='getCandidateHistory(myprofile.CandidateID)'-->
+                                                                        tooltipTrigger="mouseenter" tooltipEnable="false" (click)='getCandidateHistory(existedProfile.CandidateID)'>
                                                                         <i class="fa fa-history"> </i>
                                                                     </a>
 

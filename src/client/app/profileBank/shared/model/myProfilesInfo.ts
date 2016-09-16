@@ -26,6 +26,7 @@ export class CandidateProfile {
   public AadharCardNo: string = '';
   public CandidateTeamManagement = new TeamManagement();
   public CandidateCareerProfile = new CareerProfile();
+  public CandidateMailDetails = new MailDetails();
   //for checkboxes for list
   public IsChecked: boolean;
   public url: any;
@@ -95,6 +96,14 @@ export class TeamManagement {
   public TeamHandlingChallenges: string;
   public CommentsUpdated: boolean;
   public FollowUpComments: string;
+}
+export class MailDetails {
+  //properties of candidate Mail Details
+  public CC: string;
+  public Subject: string;
+  public Body: string;
+  public Status: string;
+  public To: string;
 }
 export class CareerProfile {
   //properties of Candidate Career Profile
