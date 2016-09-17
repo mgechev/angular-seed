@@ -25,7 +25,8 @@
       "jasmine",
       "node",
       "protractor",
-      "systemjs"
+      "systemjs",
+      "serve-static"
     ]
   },
   "exclude": [
