@@ -58,7 +58,7 @@ npm start -- --app bar
 
 _Does not rely on any global dependencies._
 
-# Table of Content
+# Table of Contents
 
 - [Introduction](#introduction)
 - [How to start](#how-to-start)
