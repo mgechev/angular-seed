@@ -20,10 +20,11 @@
       "../../node_modules"
     ],
     "types": [
-      "jasmine",
-      "systemjs",
       "core-js",
-      "node"
+      "jasmine",
+      "node",
+      "protractor",
+      "systemjs"
     ]
   },
   "compileOnSave": false

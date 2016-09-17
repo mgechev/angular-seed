@@ -21,10 +21,11 @@
       "./node_modules"
     ],
     "types": [
-      "jasmine",
-      "systemjs",
       "core-js",
-      "node"
+      "jasmine",
+      "node",
+      "protractor",
+      "systemjs"
     ]
   },
   "exclude": [
