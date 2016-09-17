@@ -1,8 +1,8 @@
 //component imports.
 import { TimetableComponent } from "./timetable.component";
-import { CalendarComponent } from "../calendar/timetable.calendar.component";
-import { PeopleComponent } from "../people/timetable.people.component";
-import { ScheduleComponent } from "../schedule/timetable.schedule.component";
+import { CalendarComponent } from "../calendar/timetable-calendar.component";
+import { PeopleComponent } from "../people/timetable-people.component";
+import { ScheduleComponent } from "../schedule/timetable-schedule.component";
 
 export const TimetableRoutes = [
   {

@@ -1,12 +1,11 @@
 body {
-  background: white;
+  background: #e9ebee;
   margin-left: 80px;
   margin-right: 80px;
 
   -webkit-box-shadow: 0 0 20px 4px #EEE;
   -moz-box-shadow: 0 0 20px 4px #EEE;
   box-shadow: 0 0 20px 4px #EEE;
-
 }
 div.container {
   width: 100%;

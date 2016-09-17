@@ -5,7 +5,7 @@ import {ROUTER_DIRECTIVES } from '@angular/router';
 @Component({
   moduleId: module.id,
   selector: 'timetable-people',
-  templateUrl: 'timetable.people.component.html',
+  templateUrl: 'timetable-people.component.html',
   directives: [ROUTER_DIRECTIVES],
   //styleUrls: ['file name of CSS']
 })

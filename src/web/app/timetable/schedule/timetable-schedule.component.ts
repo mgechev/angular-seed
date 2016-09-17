@@ -4,13 +4,13 @@ import {ROUTER_DIRECTIVES } from '@angular/router';
 
 @Component({
   moduleId: module.id,
-  selector: 'timetable-calendar',
-  templateUrl: 'timetable.calendar.component.html',
+  selector: 'timetable-schedule',
+  templateUrl: 'timetable-schedule.component.html',
   directives: [ROUTER_DIRECTIVES],
-  styleUrls: ['timetable.calendar.component.css']
+  //styleUrls: ['file name of CSS']
 })
 
-export class CalendarComponent {
+export class ScheduleComponent {
   example:string = "yanan";
 
 
