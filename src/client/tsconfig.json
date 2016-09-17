@@ -14,7 +14,18 @@
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitUseStrict": false,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "typeRoots": [
+      "../../node_modules/@types",
+      "../../node_modules"
+    ],
+    "types": [
+      "core-js",
+      "jasmine",
+      "node",
+      "protractor",
+      "systemjs"
+    ]
   },
   "compileOnSave": false
 }
