@@ -1,5 +1,9 @@
-<div *ngFor="let email of emails">
+<div *ngFor="let data of dataOne">
     <label class="label label-primary">
-     {{email}}
+     {{data.email}}
     </label>
+    <span class="glyphicon glyphicon-ok"
+      [class.glyphicon-ok]="isCompleted(data.completed)"
+      [class.glyphicon-remove]="!isCompleted(data.completed)">
+    </span>
 </div>
