@@ -11,7 +11,9 @@ import {ROUTER_DIRECTIVES } from '@angular/router';
 })
 
 export class ScheduleComponent {
-  example:string = "yanan";
+  // example:string = "yanan";
+  //Day/Month/Year
+  dates:any = ["10/10/2015","1/04/2016","2/09/2016","20/09/2016"]
 
 
 }
