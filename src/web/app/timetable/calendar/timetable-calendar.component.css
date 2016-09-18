@@ -18,9 +18,14 @@
   background: #46b5ff;
 }
 
+.calendar-day.selected:hover
+{
+  background: coral;
+}
+
 .calendar-day:hover
 {
-  background: #76c0ff;
+  background: #a6ff64;
 }
 
 .date-name
