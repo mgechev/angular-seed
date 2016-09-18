@@ -29,9 +29,9 @@ header, footer {
 .people-box{
   float: right;
   margin-top: 20px;
-  margin-right: 150px;
+  margin-right: 50px;
   border-left: .25rem solid transparent;
   display: block;
   height: auto;
-  width: 120px;
+  width: 220px;
 }
