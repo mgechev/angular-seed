@@ -1,1 +1,60 @@
+.calendar
+{
+}
 
+.calendar-day
+{
+  display: block;
+  border: solid 1px #535555;
+  margin-left: -1px;
+  margin-top: -1px;
+  text-align: right;
+  vertical-align: text-bottom;
+  padding: 8px;
+}
+
+.calendar-day.selected
+{
+  background: #46b5ff;
+}
+
+.calendar-day:hover
+{
+  background: #76c0ff;
+}
+
+.date-name
+{
+  text-align: center;
+  display: block;
+  font-size: 12px;
+}
+
+@media (min-width: 768px) {
+  .seven-cols .col-md-1,
+  .seven-cols .col-sm-1,
+  .seven-cols .col-lg-1  {
+    width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .seven-cols .col-md-1,
+  .seven-cols .col-sm-1,
+  .seven-cols .col-lg-1 {
+    width: 14.285714285714285714285714285714%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .seven-cols .col-md-1,
+  .seven-cols .col-sm-1,
+  .seven-cols .col-lg-1 {
+    width: 14.285714285714285714285714285714%;
+  }
+}
+
+.seven-cols .col-md-1
+{
+  padding: 0px;
+}

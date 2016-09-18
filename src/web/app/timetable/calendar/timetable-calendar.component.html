@@ -1,9 +1,19 @@
 <div class="row">
-  <h4 class="text-center"><i class="glyphicon glyphicon-menu-left"></i> September <i class="glyphicon glyphicon-menu-right"></i></h4>
-</div>
 
-<div class="row">
-  <div class="calander">
-    
+</div>
+<div class="calendar">
+<div class="row seven-cols">
+
+    <h4 class="text-center"><i class="glyphicon glyphicon-menu-left"></i> September <i class="glyphicon glyphicon-menu-right"></i></h4>
+    <div class="month">
+        <div class="col-md-1" *ngFor="let dateName of dateNames"><span class="date-name">{{dateName}}</span></div>
+        <div class="col-md-1" *ngFor="let number of numbers">
+
+            <div class="calendar-day"
+                 [class.selected] = "dateSelected(number)"
+                 (click)="dateSelect(number)">{{number}}</div>
+
+        </div>
+    </div>
   </div>
 </div>
