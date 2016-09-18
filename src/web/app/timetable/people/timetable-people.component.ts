@@ -28,7 +28,7 @@ const datas: data[] = [
 })
 
 export class PeopleComponent {
-  dataOne = datas
+  data = datas
 
   //emails: any = [["phazeblade@hotmail.com"], ["Patrick@no.this.is.patrick.com"], ["Praveal.lal@live.com"], ["Shoar@ShoarAgainstWar.com"]]
 
