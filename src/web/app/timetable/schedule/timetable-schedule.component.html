@@ -1,2 +1,21 @@
-Schedule Component HTML
-//Text.
+<table>
+  <td>
+    <div *ngFor="let time of timesBlock">
+      <tr>
+        <th>
+          {{ time }}
+        </th>
+      </tr>
+    </div>
+  <td>
+
+
+<div class= "date" *ngFor = "let date of dates">
+  <td width= "25%" >
+    {{ date }}
+      <div class= "date-contents">
+        Example Text
+      </div>
+  </td>
+</div>
+</table>
