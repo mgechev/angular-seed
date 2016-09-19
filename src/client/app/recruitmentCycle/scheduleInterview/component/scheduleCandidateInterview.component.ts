@@ -36,6 +36,8 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     InterviewTypes: Array<MasterData>;
     InterviewSkypeId: Array<MasterData>;
     InterviewRounds: Array<MasterData>;
+    /**Flag to denote current state of other interviewers to display in Dropdown*/
+    IsOtherInterviewersAdded: boolean = false;
     /**Get interview rounds with new format */
     CombinedInterviewRounds: Array<InterviewsRounds>;
     NominatedInterviewers: Array<MasterData>;
@@ -123,7 +125,8 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         };
-
+        /** Hide other interviwers by default*/
+        this.IsOtherInterviewersAdded = false;
         //For MultiselectDropdown
         let cmb: any = $('#cmbInterviewers');
         cmb.select2();
@@ -166,7 +169,10 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
 
     }
 
-
+    /**Change other interviewers existance in  interviewrs Dropdown*/
+    AddOtherInterviewers() {
+        this.IsOtherInterviewersAdded ? this.IsOtherInterviewersAdded = false : this.IsOtherInterviewersAdded = true;
+    }
     getResources() {
         //  this._calendarDataService.GetResources().then(
         //         (results:any) => {
