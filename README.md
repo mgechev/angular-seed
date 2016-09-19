@@ -99,7 +99,7 @@ npm start -- --port 8080 --reload-port 4000 --base /my-app/
 
 If you have different environments and you need to configure them to use different end points, settings, etc. you can use the files `dev.ts` or `prod.ts` in`./tools/env/`. The name of the file is environment you want to use.
 
-The can be specified by using:
+The environment can be specified by using:
 
 ```bash
 npm start -- --config-env ENV_NAME
