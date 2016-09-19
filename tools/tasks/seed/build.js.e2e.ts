@@ -15,7 +15,6 @@ const jsonSystemConfig = JSON.stringify(Config.SYSTEM_CONFIG_DEV);
 export = () => {
   let tsProject = makeTsProject();
   let src = [
-    'typings/index.d.ts',
     Config.TOOLS_DIR + '/manual_typings/**/*.d.ts',
     join(Config.APP_SRC, '**/*.ts'),
     '!' + join(Config.APP_SRC, '**/*.spec.ts'),
