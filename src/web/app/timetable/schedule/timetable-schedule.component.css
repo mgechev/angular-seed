@@ -20,8 +20,13 @@ table {
 }
 
 th {
-  padding: 20px;
   border: solid 5px #a0c0dd;
-  border-radius: 8px;
-  margin-left: 15px;
+}
+
+.cell-selected {
+  background: deepskyblue;
+}
+
+.cell-deselected {
+  background: white;
 }

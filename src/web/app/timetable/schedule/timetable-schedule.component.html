@@ -1,21 +1,22 @@
 <table>
-  <td>
-    <div *ngFor="let time of timesBlock">
-      <tr>
-        <th>
-          {{ time }}
-        </th>
-      </tr>
-    </div>
-  <td>
-
-
-<div class= "date" *ngFor = "let date of dates">
-  <td width= "25%" >
-    {{ date }}
-      <div class= "date-contents">
-        Example Text
+  <thread>
+  <tr>
+    <th width="10%">Available times</th>
+    <th *ngFor="let date of dates">
+      <div width="10%">
+        <p class="text text-center">
+          {{date}}
+        </p>
       </div>
-  </td>
-</div>
+    </th>
+  </tr>
+    <tr *ngFor="let time of availableTimes">
+      <th>{{time}}</th>
+      <th *ngFor="let date of dates"
+      (click) = "clickCell(date,time)"
+      [class.cell-selected] = "isSelected(time)"
+      [class.cell-deselected] = "!isSelected(time)"></th>
+
+    </tr>
+    </thread>
 </table>
