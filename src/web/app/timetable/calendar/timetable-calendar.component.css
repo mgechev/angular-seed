@@ -1,6 +1,65 @@
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:15px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:15px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-.tg .tg-hj1s{color:#c0c0c0;vertical-align:top}
-.tg .tg-yw4l{vertical-align:top}
-.tg .tg-96dg{color:#9b9b9b;vertical-align:top}
+.calendar
+{
+}
+
+.calendar-day
+{
+  display: block;
+  border: solid 1px #535555;
+  margin-left: -1px;
+  margin-top: -1px;
+  text-align: right;
+  vertical-align: text-bottom;
+  padding: 8px;
+}
+
+.calendar-day.selected
+{
+  background: #46b5ff;
+}
+
+.calendar-day.selected:hover
+{
+  background: coral;
+}
+
+.calendar-day:hover
+{
+  background: #a6ff64;
+}
+
+.date-name
+{
+  text-align: center;
+  display: block;
+  font-size: 12px;
+}
+
+@media (min-width: 768px) {
+  .seven-cols .col-md-1,
+  .seven-cols .col-sm-1,
+  .seven-cols .col-lg-1  {
+    width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .seven-cols .col-md-1,
+  .seven-cols .col-sm-1,
+  .seven-cols .col-lg-1 {
+    width: 14.285714285714285714285714285714%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .seven-cols .col-md-1,
+  .seven-cols .col-sm-1,
+  .seven-cols .col-lg-1 {
+    width: 14.285714285714285714285714285714%;
+  }
+}
+
+.seven-cols .col-md-1
+{
+  padding: 0px;
+}
