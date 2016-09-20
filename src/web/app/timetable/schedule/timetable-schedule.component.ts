@@ -26,61 +26,36 @@ export class dateTimes{
   styleUrls: ['timetable-schedule.component.css']
 })
 
-export class ScheduleComponent implements AfterViewInit {
+export class ScheduleComponent implements OnInit {
 
-  dates:any = ["10/10/2015", "1/04/2016", "2/09/2016", "20/09/2016", "01/01/2001","01/01/2001","01/01/2001"]
-  minTimeMaxTime:any = ["9:00","18:00"];
+  dates:string[] = ["10/10/2015", "1/04/2016", "2/09/2016", "20/09/2016", "01/01/2001","01/01/2001","01/01/2001"]
+  minTimeMaxTime:string[] = ["9:00","18:00"];
   availableTimes:string[] = ["09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00"]
   timeBlock:string[] =[]
   personalData: dateTimes = {email:"Fake Email",availableTimes:[]}
   trueFlag:boolean = false
 
   private clickCell = (date:string, time:string) => {
-
-    this.personalData.availableTimes.forEach(x => {
-      this.trueFlag = false
-
-      this.personalData.availableTimes.forEach(z => {
-        if(z.date === date) this.trueFlag = true
-        else this.trueFlag = false
-      })
-
-
-      if(this.trueFlag) {
-        if(x.listTimes.includes(time) && (x.date === date)) {
-          x.listTimes.splice(x.listTimes.indexOf(time),1)
-        } else {
-          x.listTimes.push(time)
-        }
-      } else{
-        this.personalData.availableTimes.push({date:date,listTimes:[time]})
-      }
-      }
-    );
-    if(this.personalData.availableTimes.length == 0) {
-      this.personalData.availableTimes.push({date:date,listTimes:[time]})
+    if(this.personalData.availableTimes[this.personalData.availableTimes.map(x => x.date).indexOf(date)].listTimes.includes(time)) {
+      this.personalData.availableTimes[this.personalData.availableTimes.map(x => x.date).indexOf(date)].listTimes.splice
+      (this.personalData.availableTimes[this.personalData.availableTimes.map(x => x.date).indexOf(date)].listTimes.indexOf(time),1);
+    } else {
+      this.personalData.availableTimes[this.personalData.availableTimes.map(x => x.date).indexOf(date)].listTimes.push(time)
     }
-
   }
 
-
-  private isSelected = (date:string, time:string) =>{
-    // this.personalData.availableTimes.find(, function(o) {return o.date === date})
-    this.personalData.availableTimes.forEach(x =>{
-      if(x.listTimes.includes(time) && (x.date === date)) {
-        console.log("Called selected")
-        console.log()
+  private isSelected = (date:string, time:string) => {
+      let _data = this.personalData.availableTimes.filter(x => x.date === date)
+      if (_data.find(x => x.listTimes.includes(time))) {
         return true
+      } else {
+        return false
       }
-      })
-    //console.log("Called deselect")
-    return false
-
   }
-
-
-  ngAfterViewInit(){
+  ngOnInit() {
+    this.dates.forEach(x => {
+      this.personalData.availableTimes.push({date:x,listTimes:[]})
+    })
   }
-
 }
 
