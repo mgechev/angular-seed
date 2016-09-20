@@ -1,5 +1,4 @@
-<table>
-  <thread>
+<table class="table table-striped table-bordered">
   <tr>
     <th width="10%">Available times</th>
     <th *ngFor="let date of dates">
@@ -14,9 +13,9 @@
       <th>{{time}}</th>
       <th *ngFor="let date of dates"
       (click) = "clickCell(date,time)"
-      [class.cell-selected] = "isSelected(time)"
-      [class.cell-deselected] = "!isSelected(time)"></th>
+      [class.cell-selected] = "isSelected(date,time)"
+      [class.cell-deselected] = "!isSelected(date,time)"
+      class="cell-deselected"></th>
 
     </tr>
-    </thread>
 </table>
