@@ -143,6 +143,6 @@
     "reflect-metadata": "^0.1.8",
     "rxjs": "5.0.0-beta.12",
     "systemjs": "0.19.27",
-    "zone.js": "0.6.21"
+    "zone.js": "0.6.23"
   }
 }
