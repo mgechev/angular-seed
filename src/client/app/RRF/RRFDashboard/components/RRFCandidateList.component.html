@@ -181,6 +181,7 @@
                                                 <!--<td> {{candidateHistory.InterviewMode.Value}} </td>-->
                                                 <td *ngIf="candidateHistory.Status.toLowerCase() != 'On Hold'.toLowerCase() "> {{candidateHistory.Status}}</td>
                                                 <td *ngIf="candidateHistory.Status.toLowerCase() == 'On Hold'.toLowerCase() "> <a (click)='changeStatus(candidateHistory.InterviewID)'> {{candidateHistory.Status}}</a></td>
+                                                <td *ngIf="candidateHistory.Status.toLowerCase() == 'Unfit'.toLowerCase() "> <a (click)='changeStatus(candidateHistory.InterviewID)'> {{candidateHistory.Status}}</a></td>
                                                 <td> <a (click)='setActualTime(candidateHistory.InterviewID)'> Actual Time</a></td>
                                             </tr>
                                         </tbody>
@@ -192,17 +193,17 @@
                                         <div class="form-group">
                                             <label class="col-md-3 control-label align">Actual Time </label>
                                             <div class="col-md-3">
-                                                <input type="time" name="bday" id="" [(ngModel)]='actualTime' required=""  />
+                                                <input type="time" name="bday" id="" [(ngModel)]='actualTime' required="" />
                                             </div>
                                         </div>
-                                       
-                                        <div class="">
-                                                <div class="pull-right">
-                                                    <button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelActualTime()'>Cancel</button>                                                    &nbsp;
-                                                    <button type="submit " class="btn blue " id="btnChangeStatus">Save</button>
-                                                </div>
 
+                                        <div class="">
+                                            <div class="pull-right">
+                                                <button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelActualTime()'>Cancel</button>                                                &nbsp;
+                                                <button type="submit " class="btn blue " id="btnChangeStatus">Save</button>
                                             </div>
+
+                                        </div>
                                     </form>
                                     <!--change Interview status-->
                                     <form role="statusForm" (submit)='onChangeStatus()' *ngIf='showChangeStatus'>
@@ -249,6 +250,68 @@
 
                                         <hr style="margin-top: 50px;" />
                                     </form>
+                                    <br/>
+                                    <!--BEGIN Unfit functionality-->
+                                    <form role="candidateTransferForm" (submit)='transferCandidate()' *ngIf='showChangeStatus'>
+                                        <div>
+                                            <b>Transfer candidate to other RRF</b>
+                                            <br/>
+                                            <div *ngIf='false' class="row">
+                                                <div class="col-lg-4" align="right">
+                                                    Status
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <select id="cmbStaus" class="form-control" [(ngModel)]='changedStatus' required placeholder="Select status" tooltip="Select status"
+                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changedStatus"
+                                                        style="font-size: inherit;" required>
+                                                        <!--<option *ngFor="let technologie of technologies" [value]="technologie.Id">{{technologie.Value}}</option>-->
+                                                        <option value="Selected"> Selected</option>
+                                                        <option value="Rejected"> Rejected</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <br/>
+                                            <div class="row">
+                                                <div class="col-lg-4" align="right">
+                                                    Open RRF
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <select id="cmbStaus" class="form-control" required placeholder="Select suitable RRF" tooltip="Select suitable Open RRF"
+                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changedStatus"
+                                                        style="font-size: inherit;" required>
+                                                        <!--<option *ngFor="let technologie of technologies" [value]="technologie.Id">{{technologie.Value}}</option>-->
+                                                        <option value="Selected"> Test RRF1</option>
+                                                        <option value="Rejected"> Test RRF2</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-lg-4" align="right">
+                                                    Comments/Reason
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <!---->
+                                                    <input type="text" [(ngModel)]='changesStatusComment' id="changesStatusComment" class="form-control" placeholder="change Status Comment"
+                                                        tooltip="comment" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                        tooltipEnable="!changesStatusComment" required="" autocomplete="off"
+                                                        style="font-size: inherit;" />
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="">
+                                                <div class="pull-right">
+                                                    <button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelChangeStatus()'>Cancel</button>                                                    &nbsp;
+                                                    <button type="submit " class="btn blue " id="btnChangeStatus">Change Status</button>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <hr style="margin-top: 50px;" />
+                                    </form>
+                                    <!--END Unfit functionality-->
                                     <br/>
                                     <div *ngIf="barChartData!==null">
                                         <base-chart class="chart" *ngIf="barChartData.lent>0" [datasets]="barChartData " [labels]="barChartLabels " [options]="barChartOptions
