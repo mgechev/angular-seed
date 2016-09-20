@@ -91,11 +91,11 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         return true
     }
     else{
-        if (interviewTime.split(':')[0] > new Date().getHours()) {
+        if (moment(interviewDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY') && interviewTime.split(':')[0] > new Date().getHours()) {
             return true
         }
         else{
-             if (interviewTime.split(':')[1] > new Date().getMinutes()) {
+             if (moment(interviewDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY') && interviewTime.split(':')[0] > new Date().getHours() && interviewTime.split(':')[1] > new Date().getMinutes()) {
                     return true;
                 } else {
                     return false;

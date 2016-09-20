@@ -166,6 +166,7 @@
                                                 <th style="width:20% !important">Date</th>
                                                 <!--<th style="width:20% !important">Interview mode</th>-->
                                                 <th style="width:20% !important">Status</th>
+                                                <th style="width:20% !important">Actual Time</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -180,13 +181,29 @@
                                                 <!--<td> {{candidateHistory.InterviewMode.Value}} </td>-->
                                                 <td *ngIf="candidateHistory.Status.toLowerCase() != 'On Hold'.toLowerCase() "> {{candidateHistory.Status}}</td>
                                                 <td *ngIf="candidateHistory.Status.toLowerCase() == 'On Hold'.toLowerCase() "> <a (click)='changeStatus(candidateHistory.InterviewID)'> {{candidateHistory.Status}}</a></td>
+                                                <td> <a (click)='setActualTime(candidateHistory.InterviewID)'> Actual Time</a></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                     <span *ngIf='isRoundHistoryPresent'>No Candidates Round History Found</span>
 
                                     <hr/>
+                                    <form (submit)='onSetActualTime()' *ngIf='setActualTimeForm'>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label align">Actual Time </label>
+                                            <div class="col-md-3">
+                                                <input type="time" name="bday" id="" required=""  />
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="">
+                                                <div class="pull-right">
+                                                    <button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelActualTime()'>Cancel</button>                                                    &nbsp;
+                                                    <button type="submit " class="btn blue " id="btnChangeStatus">Save</button>
+                                                </div>
 
+                                            </div>
+                                    </form>
                                     <!--change Interview status-->
                                     <form role="statusForm" (submit)='onChangeStatus()' *ngIf='showChangeStatus'>
                                         <div>

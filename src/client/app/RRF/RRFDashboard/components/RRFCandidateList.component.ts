@@ -49,7 +49,9 @@ export class RRFCandidateListComponent implements OnActivate {
     changedStatus: string = '';
     changesStatusComment: string = '';
     changeStatusInterviewID: MasterData = new MasterData();
+    ActualTimeInterviewID:MasterData = new MasterData();
     showChangeStatus: boolean = false;
+    setActualTimeForm: boolean = false;
     changeStatusCandidateID: MasterData = new MasterData();
     public barChartOptions: any = {
         scaleShowVerticalLines: false,
@@ -327,7 +329,10 @@ export class RRFCandidateListComponent implements OnActivate {
         this.changeStatusInterviewID = intervieID;
         this.showChangeStatus = true;
     }
-
+    setActualTime(intervieID: MasterData) {
+        this.ActualTimeInterviewID = intervieID
+        this.setActualTimeForm = true;
+    }
     onChangeStatus() {
         this._rrfCandidatesList.UpdateCandidateIEFStatus(this.changeStatusInterviewID, this.changedStatus, this.changesStatusComment)
             .subscribe(
@@ -350,5 +355,8 @@ export class RRFCandidateListComponent implements OnActivate {
 
     onCancelChangeStatus() {
         this.showChangeStatus = false;
+    }
+    onCancelActualTime(){
+        this.setActualTimeForm = false;
     }
 }
