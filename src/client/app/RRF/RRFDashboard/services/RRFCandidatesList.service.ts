@@ -65,6 +65,15 @@ export class RRFCandidateListService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+    // TO DO : Need to update API
+    setActualTime(InterviewID: MasterData, ActualTime: string) {
+        let url = Config.GetURL('/api/RecruitmentCycle/UpdateCandidateIEFStatus');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { InterviewID, ActualTime })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
 
     //Cancel scheduled Inerview
     CancelInterview(InterviewID: MasterData, Status: string, Reason: string) {

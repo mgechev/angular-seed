@@ -48,6 +48,7 @@ export class RRFCandidateListComponent implements OnActivate {
     modeConstant: InterviewMode = InterviewMode;
     changedStatus: string = '';
     changesStatusComment: string = '';
+    actualTime:string='';
     changeStatusInterviewID: MasterData = new MasterData();
     ActualTimeInterviewID:MasterData = new MasterData();
     showChangeStatus: boolean = false;
@@ -352,7 +353,15 @@ export class RRFCandidateListComponent implements OnActivate {
         this.changedStatus = '';
         this.changesStatusComment = '';
     }
+    onSetActualTime() {
+        this._rrfCandidatesList.setActualTime(this.ActualTimeInterviewID,this.actualTime)
+        .subscribe(
+            (results: any) => {
 
+            },
+            error => this.errorMessage = <any>error);
+            this.actualTime = '';
+    }
     onCancelChangeStatus() {
         this.showChangeStatus = false;
     }
