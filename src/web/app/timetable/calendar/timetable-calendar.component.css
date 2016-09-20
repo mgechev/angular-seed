@@ -5,7 +5,7 @@
 .calendar-day
 {
   display: block;
-  border: solid 1px #535555;
+  border: solid 1px #123;
   margin-left: -1px;
   margin-top: -1px;
   text-align: right;
@@ -20,12 +20,12 @@
 
 .calendar-day.selected:hover
 {
-  background: coral;
+
 }
 
 .calendar-day:hover
 {
-  background: #a6ff64;
+
 }
 
 .date-name
