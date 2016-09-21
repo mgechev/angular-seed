@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import {ROUTER_DIRECTIVES } from '@angular/router';
 
@@ -10,11 +10,12 @@ import {ROUTER_DIRECTIVES } from '@angular/router';
   styleUrls: ['timetable-calendar.component.css']
 })
 
-export class CalendarComponent {
+export class CalendarComponent implements OnInit{
   example:string = "yanan";
   months:any= ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   days: any = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
   dateNames: any = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  calendar:any = [[],[],[],[],[],[]]
   dates: string[] = []
   write:any = 0
 
@@ -26,7 +27,9 @@ export class CalendarComponent {
   currentYear:any = this.date.getFullYear()
 
 
-  private dateSelect = (date: string) => {
+  private dateSelect = (row, col) => {
+    console.log(row, col)
+    /*
     if (this.dates.includes(date)) {
       this.dates.splice(this.dates.indexOf(date), 1)
       console.log(this.dates);
@@ -35,6 +38,7 @@ export class CalendarComponent {
       this.dates.push(date)
       console.log(this.dates);
     }
+    */
   }
 
   private dateSelected = (date: string) => {
@@ -54,6 +58,7 @@ export class CalendarComponent {
     }
     this.currentMonthString = (this.months[current])
     this.currentMonth = current.toString()
+    this.updateCalendar(current, this.currentYear)
     //console.log(current)
     //console.log(this.months[current])
   }
@@ -67,8 +72,35 @@ export class CalendarComponent {
     }
     this.currentMonthString = (this.months[current])
     this.currentMonth = current.toString()
+    this.updateCalendar(current, this.currentYear)
     //console.log(current)
     //console.log(this.months[current])
+  }
+
+  private updateCalendar = (month:any, year:any) => {
+    var startDay = this.dateNames.indexOf(new Date(parseInt(year), parseInt(month), 1).toDateString().substr(0,3))
+    var lastMonthTotalDays = this.getTotalDays((month==0?11:month-1));
+    var skipped = false;
+    var day = 1;
+    for (var row = 0; row < 6; row++) {
+      for (var col = 0; col < 7; col++) {
+        if (!skipped) {
+          col = startDay;
+          skipped = true;
+        }
+        this.calendar[row][col] = "(" + day + "/" + month + "/" + year+  ")"
+        day++
+        if (day > this.getTotalDays(month))
+          day = 1;
+      }
+    }
+
+    for (var col = 0; col < startDay; col++) {
+      this.calendar[0][col] = ((lastMonthTotalDays - startDay) + (col+1))
+    }
+
+
+    console.log(this.calendar)
   }
 
   private nextYear = () => {
@@ -79,7 +111,7 @@ export class CalendarComponent {
     this.currentYear--
   }
 
-  private getDays = (month:any) => {
+  private getTotalDays = (month:any) => {
     var days = 0
     switch (parseInt(month)) { // Yes this code is extremely ugly but I can't do it in one line because javascript sucks
       case 0:
@@ -110,17 +142,20 @@ export class CalendarComponent {
   }
 
   private getStartDay = (day:any, month:any, year:any) => {
-    var startDay = new Date(day, month, year)
+    var startDay = new Date(parseInt(year), parseInt(month), parseInt(day)).toDateString().substr(0,3);
     return startDay
   }
 
   private displayDay = (row:any, col:any) => {
-    //console.log(this.write)
-    this.write++
-    var currentDay = this.days[(row-1)+((col-1)*7)];
-    if (currentDay <= this.getDays(this.currentMonth))
-      return currentDay
-    else
-      return (((row)+((col-1)*7)) - this.getDays(this.currentMonth))
-}
+    return this.calendar[col-1][row-1]
+  }
+
+  ngOnInit(){
+    //console.log(this.calendar)
+    this.updateCalendar(this.currentMonth, this.currentYear)
+
+    //console.log(this.calendar)
+  }
+
+
 }
