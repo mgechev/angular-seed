@@ -56,10 +56,10 @@
                             </li>
                             <li>
                                 <div class="col-md-6">
-                                    <label class="control-label"><small> Company : {{profile.CandidateCareerProfile.CurrentCompany?profile.CandidateCareerProfile.CurrentCompany:"N/A"}} </small></label>
+                                    <label class="control-label"><small> Company : {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.CurrentCompany?profile.CandidateCareerProfile.CurrentCompany:"N/A":"N/A"}} </small></label>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="control-label"><small> Designation : {{profile.CandidateCareerProfile.CurrentDesignationRole?profile.CandidateCareerProfile.CurrentDesignationRole:"N/A"}} </small></label>
+                                    <label class="control-label"><small> Designation : {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.CurrentDesignationRole?profile.CandidateCareerProfile.CurrentDesignationRole:"N/A":"N/A"}} </small></label>
                                 </div>
                             </li>
 
