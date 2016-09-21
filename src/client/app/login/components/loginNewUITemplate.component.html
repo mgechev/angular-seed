@@ -8,6 +8,8 @@
 <div class="content">
     <!-- BEGIN LOGIN FORM -->
     <form class="login-form" (submit)="doLogin($event)" novalidate="novalidate">
+        <div class="alert alert-danger display-hide"  *ngIf='LoginFailed' style="display: block;">
+            <button class="close" (click)='closeAlert()' data-close="alert"></button> The username and password you entered don't match. </div>
         <h3 class="form-title">Login to your account</h3>
         <div class="alert alert-danger display-hide">
             <button class="close" data-close="alert"></button>

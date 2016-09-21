@@ -35,4 +35,7 @@ export class LoginComponent {
             },
             error => this.errorMessage = <any>error);
     }
+    closeAlert(){
+        this.LoginFailed = false;
+    }
 }
