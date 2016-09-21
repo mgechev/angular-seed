@@ -34,32 +34,3 @@
   display: block;
   font-size: 12px;
 }
-
-@media (min-width: 768px) {
-  .seven-cols .col-md-1,
-  .seven-cols .col-sm-1,
-  .seven-cols .col-lg-1  {
-    width: 100%;
-  }
-}
-
-@media (min-width: 992px) {
-  .seven-cols .col-md-1,
-  .seven-cols .col-sm-1,
-  .seven-cols .col-lg-1 {
-    width: 14.285714285714285714285714285714%;
-  }
-}
-
-@media (min-width: 1200px) {
-  .seven-cols .col-md-1,
-  .seven-cols .col-sm-1,
-  .seven-cols .col-lg-1 {
-    width: 14.285714285714285714285714285714%;
-  }
-}
-
-.seven-cols .col-md-1
-{
-  padding: 0px;
-}

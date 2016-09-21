@@ -2,36 +2,19 @@
   <h3 class="text-center">{{currentYear}}</h3>
   <h4 class="text-center">
     <i class="glyphicon glyphicon-menu-left pull-left" (click)="prevMonth()"></i>
-    {{currentMonth}}
+    {{currentMonthString}} ({{getDays(currentMonth)}})
     <i class="glyphicon glyphicon-menu-right pull-right" (click)="nextMonth()"></i></h4>
   <table class="table table-striped table-bordered">
     <thead>
       <tr>
         <th *ngFor="let dateName of dateNames"><span class="date-name">{{dateName}}</span></th>
       </tr>
-
-      <tr *ngFor="#row of [1,2,3,4,5]">
-        <td *ngFor="#col of [1,2,3,4,5,6,7]">{{row * col}}</td>
-      </tr>
-      <!--<td *ngFor="let number of numbers">{{number}}</td>-->
     </thead>
+      <tbody>
+      <tr *ngFor="let col of [1,2,3,4,5]">
+        <td *ngFor="let row of [1,2,3,4,5,6,7]">{{displayDay(row, col)}}</td>
+      </tr>
+      </tbody>
+      <!--<td *ngFor="let number of numbers">{{number}}</td>-->
   </table>
 </div>
-<!--<div class="calendar">-->
-
-<!--<div class="row seven-cols">-->
-
-
-
-    <!--<div class="month">-->
-        <!--<div class="col-md-1" *ngFor="let dateName of dateNames"><span class="date-name">{{dateName}}</span></div>-->
-        <!--<div class="col-md-1" *ngFor="let number of numbers">-->
-
-            <!--<div class="calendar-day"-->
-                 <!--[class.selected] = "dateSelected(number)"-->
-                 <!--(click)="dateSelect(number)">{{number}}</div>-->
-
-        <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
