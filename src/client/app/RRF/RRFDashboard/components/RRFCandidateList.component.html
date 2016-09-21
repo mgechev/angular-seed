@@ -181,7 +181,7 @@
                                                 <!--<td> {{candidateHistory.InterviewMode.Value}} </td>-->
                                                 <td *ngIf="candidateHistory.Status.toLowerCase() != 'On Hold'.toLowerCase() "> {{candidateHistory.Status}}</td>
                                                 <td *ngIf="candidateHistory.Status.toLowerCase() == 'On Hold'.toLowerCase() "> <a (click)='changeStatus(candidateHistory.InterviewID)'> {{candidateHistory.Status}}</a></td>
-                                                <td *ngIf="candidateHistory.Status.toLowerCase() == 'Unfit'.toLowerCase() "> <a (click)='changeStatus(candidateHistory.InterviewID)'> {{candidateHistory.Status}}</a></td>
+                                                <td *ngIf="candidateHistory.Status.toLowerCase() == 'Fitment Issue'.toLowerCase() "> <a (click)='transferFromUnfit(candidateHistory.InterviewID)'> {{candidateHistory.Status}}</a></td>
                                                 <td> <a (click)='setActualTime(candidateHistory.InterviewID)'> Actual Time</a></td>
                                             </tr>
                                         </tbody>
@@ -218,7 +218,7 @@
                                                     <select id="cmbStaus" class="form-control" [(ngModel)]='changedStatus' required placeholder="Select status" tooltip="Select status"
                                                         tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changedStatus"
                                                         style="font-size: inherit;" required>
-                                                        <!--<option *ngFor="let technologie of technologies" [value]="technologie.Id">{{technologie.Value}}</option>-->
+                                                        <!--<option *ngFor="let OpenRrf of allOpenRrf" [value]="OpenRrf.RRFID.Id">{{OpenRrf.RRFID.Value}}</option>-->
                                                         <option value="Selected"> Selected</option>
                                                         <option value="Rejected"> Rejected</option>
                                                     </select>
@@ -252,24 +252,10 @@
                                     </form>
                                     <br/>
                                     <!--BEGIN Unfit functionality-->
-                                    <form role="candidateTransferForm" (submit)='transferCandidate()' *ngIf='showChangeStatus'>
+                                    <form role="candidateTransferForm" (submit)='transferCandidate()' *ngIf='IsAllowTransfer'>
                                         <div>
                                             <b>Transfer candidate to other RRF</b>
                                             <br/>
-                                            <div *ngIf='false' class="row">
-                                                <div class="col-lg-4" align="right">
-                                                    Status
-                                                </div>
-                                                <div class="col-lg-8">
-                                                    <select id="cmbStaus" class="form-control" [(ngModel)]='changedStatus' required placeholder="Select status" tooltip="Select status"
-                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changedStatus"
-                                                        style="font-size: inherit;" required>
-                                                        <!--<option *ngFor="let technologie of technologies" [value]="technologie.Id">{{technologie.Value}}</option>-->
-                                                        <option value="Selected"> Selected</option>
-                                                        <option value="Rejected"> Rejected</option>
-                                                    </select>
-                                                </div>
-                                            </div>
                                             <br/>
                                             <div class="row">
                                                 <div class="col-lg-4" align="right">
@@ -279,7 +265,7 @@
                                                     <select id="cmbStaus" class="form-control" required placeholder="Select suitable RRF" tooltip="Select suitable Open RRF"
                                                         tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changedStatus"
                                                         style="font-size: inherit;" required>
-                                                        <!--<option *ngFor="let technologie of technologies" [value]="technologie.Id">{{technologie.Value}}</option>-->
+                                                        <option *ngFor="let OpenRrf of allOpenRrf" [value]="OpenRrf.RRFID.Id">{{OpenRrf.RRFID.Value}}</option>
                                                         <option value="Selected"> Test RRF1</option>
                                                         <option value="Rejected"> Test RRF2</option>
                                                     </select>
@@ -291,18 +277,16 @@
                                                     Comments/Reason
                                                 </div>
                                                 <div class="col-lg-8">
-                                                    <!---->
-                                                    <input type="text" [(ngModel)]='changesStatusComment' id="changesStatusComment" class="form-control" placeholder="change Status Comment"
-                                                        tooltip="comment" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                        tooltipEnable="!changesStatusComment" required="" autocomplete="off"
-                                                        style="font-size: inherit;" />
+                                                    <input type="text" [(ngModel)]='transferReason' id="transferReasons" class="form-control" placeholder="Transfer reason" tooltip="comment"
+                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changesStatusComment"
+                                                        required="" autocomplete="off" style="font-size: inherit;" />
                                                 </div>
                                             </div>
                                             <br>
                                             <div class="">
                                                 <div class="pull-right">
-                                                    <button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelChangeStatus()'>Cancel</button>                                                    &nbsp;
-                                                    <button type="submit " class="btn blue " id="btnChangeStatus">Change Status</button>
+                                                    <button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelTransfer()'>Cancel</button>                                                    &nbsp;
+                                                    <button type="submit " class="btn blue " id="btnChangeStatus">Transfer</button>
                                                 </div>
 
                                             </div>

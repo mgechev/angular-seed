@@ -56,6 +56,14 @@ export class RRFCandidateListService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+    TransferToOtherRRF(InterviewID: MasterData, RRFID: MasterData, Comments: string) {
+        let url = Config.GetURL('/api/RecruitmentCycle/UpdateCandidateIEFStatus');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { InterviewID, RRFID, Comments })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
 
     UpdateCandidateIEFStatus(InterviewID: MasterData, Status: string, Comments: string) {
         let url = Config.GetURL('/api/RecruitmentCycle/UpdateCandidateIEFStatus');
@@ -65,7 +73,7 @@ export class RRFCandidateListService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-    // TO DO : Need to update API
+    // TODO : Need to update API
     setActualTime(InterviewID: MasterData, ActualTime: string) {
         let url = Config.GetURL('/api/RecruitmentCycle/UpdateCandidateIEFStatus');
         this._spinnerService.show();

@@ -27,6 +27,19 @@ import { RRFDetails } from '../../myRRF/models/rrfDetails';
 export class RRFCandidateListComponent implements OnActivate {
     RRFID: MasterData = new MasterData();
     selectedRRF: RRFDetails;
+    /**---------BEGING Transfer Candidate--------------- */
+    /**Seleted RRF for Transfer */
+    rrfToTrnasfer: RRFDetails;
+    /**To store all Open RRF */
+    allOpenRrf: RRFDetails[] = [];
+    /**Show trnasferTo option */
+    IsAllowTransfer: boolean = false;
+    /**Transfer reason */
+    transferReason: string;
+    /**transfer candidate from current intervieID */
+    TransferInterviewID: MasterData = new MasterData();
+    /**---------END Transfer Candidate--------------- */
+
     isNull: boolean = false;
     Candidate: string = 'Jhone DEF';
     doughnutChartLabels: string[] = [];
@@ -48,9 +61,9 @@ export class RRFCandidateListComponent implements OnActivate {
     modeConstant: InterviewMode = InterviewMode;
     changedStatus: string = '';
     changesStatusComment: string = '';
-    actualTime:string='';
+    actualTime: string = '';
     changeStatusInterviewID: MasterData = new MasterData();
-    ActualTimeInterviewID:MasterData = new MasterData();
+    ActualTimeInterviewID: MasterData = new MasterData();
     showChangeStatus: boolean = false;
     setActualTimeForm: boolean = false;
     changeStatusCandidateID: MasterData = new MasterData();
@@ -325,13 +338,57 @@ export class RRFCandidateListComponent implements OnActivate {
                 error => this.errorMessage = <any>error);
         }
     }
+    /**---------BEGING Transfer candidate functionality-------------*/
+    /**Transfer candidat from current RRF to other Open RRF */
+    transferFromUnfit(intervieID: MasterData) {
 
+        this.TransferInterviewID = intervieID;
+        this.IsAllowTransfer = true;
+    }
+    /**Hide the trnasfer to other RRF section */
+    onCancelTransfer() {
+        this.IsAllowTransfer = false;
+    }
+    /**Get all open RRF */
+    getAllOpenRRF() {
+        this._rrfDashboardService.getAllOpenRRF()
+            .subscribe(
+            (results: any) => {
+                this.allOpenRrf = <any>(results);
+            },
+            error => this.errorMessage = <any>error);
+    }
+    /** Transfer candidat to other open rrf*/
+    transferCandidate() {
+        this.TransferTo(this.TransferInterviewID, this.rrfToTrnasfer.RRFID, this.transferReason);
+    }
+    /**service call to perfomr action of trnasfer */
+    TransferTo(InterviewID: MasterData, RRFID: MasterData, Comments: string) {
+        this._rrfCandidatesList.TransferToOtherRRF(InterviewID, RRFID, Comments)
+            .subscribe(
+            (results: any) => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.getCanidatesForRRF();
+                    this.getCandidatesRoundHistory(this.changeStatusCandidateID, this.selectedCandidate);
+                    this.changeStatusInterviewID = new MasterData();
+                    this.IsAllowTransfer = false;
+                    this.showChangeStatus = false;
+                } else {
+                    this.toastr.success((<ResponseFromAPI>results).ErrorMsg);
+                }
+            },
+            error => this.errorMessage = <any>error);
+    }
+    /**---------END Transfer candidate functionality-------------*/
     changeStatus(intervieID: MasterData) {
+        /**TODO :: Remove once testing is done */
+        this.IsAllowTransfer = true;
         this.changeStatusInterviewID = intervieID;
         this.showChangeStatus = true;
     }
     setActualTime(intervieID: MasterData) {
-        this.ActualTimeInterviewID = intervieID
+        this.ActualTimeInterviewID = intervieID;
         this.setActualTimeForm = true;
     }
     onChangeStatus() {
@@ -354,18 +411,18 @@ export class RRFCandidateListComponent implements OnActivate {
         this.changesStatusComment = '';
     }
     onSetActualTime() {
-        this._rrfCandidatesList.setActualTime(this.ActualTimeInterviewID,this.actualTime)
-        .subscribe(
+        this._rrfCandidatesList.setActualTime(this.ActualTimeInterviewID, this.actualTime)
+            .subscribe(
             (results: any) => {
-
+                /**TODO:: */
             },
             error => this.errorMessage = <any>error);
-            this.actualTime = '';
+        this.actualTime = '';
     }
     onCancelChangeStatus() {
-        this.showChangeStatus = false;
+        this.showChangeStatus = false;this.IsAllowTransfer = false;
     }
-    onCancelActualTime(){
+    onCancelActualTime() {
         this.setActualTimeForm = false;
     }
 }
