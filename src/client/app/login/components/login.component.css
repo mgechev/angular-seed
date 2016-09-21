@@ -79,3 +79,147 @@
 .login-block button:hover {
     background: #ff7b81;
 }
+.login-body{
+	background: #4089C8!important;
+}
+.rms-login-box h2{
+	text-align: center;
+    font-family: Raleway;
+    font-size: 30px;
+    font-weight: 200;
+    color: #fff;
+    margin-bottom: 2em;
+}
+.rms-login-box h4{
+	font-family: Montserrat;
+    font-size: 17px;
+    font-weight: 300;
+    color: #fff;
+	margin-bottom: 1.6em;
+}
+.rms-login-box span{
+	font-family: Raleway;
+    font-size: 14px;
+    font-weight: 300;
+    color: #fff;
+	margin-left:8px;
+}
+.login-textbox{
+	background:#519fe2!important;
+	border:1px solid #519fe2!important;
+	height:42px!important;
+	box-shadow:none!important;
+	color:#fff!important;
+	font-family: Roboto;
+}
+.login-textbox:focus{
+	border-color:#ddd!important;
+}
+.login-btn{
+	width:100%;
+	padding:5px;
+	border:none!important;
+	height:42px!important;
+	border-radius:4px;
+	text-transform:uppercase;
+	font-family: Roboto;
+	color:#fff;
+	background: #83BD39!important;
+	font-weight: 600;
+	letter-spacing:0px;
+}
+.login-btn:hover{
+	background:#7ab135!important;
+}
+.forgot-pass-link-box{
+	font-family: Montserrat;
+    font-size: 12px;
+	padding-top:5px;
+	color:#95e82c!important
+}
+.forgot-pass-link-box a{
+	color:#fff;
+	font-family: Montserrat;
+    font-size: 12px;
+}
+.forgot-pass-link-box a:hover, .forgot-pass-link-box a:focus, .forgot-pass-link-box a:active{
+	color:#fff!important;
+}
+.login-textbox::-webkit-input-placeholder {
+   color:#fff!important;
+}
+.login-textbox:-moz-placeholder { /* Firefox 18- */
+   color:#fff!important;
+}
+.login-textbox::-moz-placeholder {  /* Firefox 19+ */
+   color:#fff!important;
+}
+.login-textbox:-ms-input-placeholder {  
+   color:#fff!important;
+}
+.rms-login-container{
+	padding-top:10em;
+}
+.login-separator{
+	display:none;
+}
+.forgot-pass-link-span{
+	float:right;
+}
+@media (max-width: 767px){
+	.rms-login-container {
+		padding-top: 8em;
+	}
+	.rms-login-box h4 {
+		font-size: 15px;
+	}
+	.rms-login-box h2 {
+        font-size: 23px;
+	}
+	.login-separator{
+		display:block;
+	}
+	.forgot-pass-link-span{
+		float:none;
+		margin-left:0!important;
+		margin-top:10px;
+		line-height:1.8em;
+	}
+	
+}
+
+@media (min-width: 992px) and (max-width: 1200px){
+	.login-parent-box{
+		width:36.3333%!important;
+	}
+}
+
+/*css For new login UI from Template*/
+.logoNew{
+    margin: 60px auto 20px;
+    padding: 15px;
+    text-align: center;
+    font-size: x-large;
+    color: #f24f52;
+}
+.content{
+    background-color: #fff;
+    width: 360px;
+    margin: 0 auto;
+    padding: 20px 30px 15px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+    border-radius: 7px;
+}
+.content .input-icon{
+    border-left: 2px solid #44B6AE!important;
+}
+.content .form-title{
+    font-weight: 300;
+    margin-bottom: 25px;
+}
+.social-icons li .facebook{
+    background: url('http://keenthemes.com/preview/metronic/theme/assets/global/img/social/facebook.png') no-repeat;
+}

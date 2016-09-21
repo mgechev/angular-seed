@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
     moduleId: module.id,
     selector: 'login-component',
-    templateUrl: 'login.component.html',
+    templateUrl: 'loginNewUITemplate.component.html',
     styleUrls: ['login.component.css']
 })
 export class LoginComponent {

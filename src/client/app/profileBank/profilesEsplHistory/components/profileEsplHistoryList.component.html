@@ -145,7 +145,10 @@
                                                             <td> {{candidateHistory.Round.Value}}</td>
                                                             <td> <span *ngFor="let interviewer of candidateHistory.InterviewerAvailability">{{interviewer.Interviewer.Value}} ,</span></td>
                                                             <!--<td> {{getDate(candidateHistory.InterviewDate)}}</td>-->
-                                                            <td> {{candidateHistory.InterviewDate}}</td>
+                                                            <td> {{candidateHistory.InterviewDate}}
+                                                                <br>Time:{{candidateHistory.InterviewFromTime ? candidateHistory.InterviewFromTime : "N/A" }}
+                                                                <br>Actual Time:{{candidateHistory.InterviewActualTime ? candidateHistory.InterviewActualTime : "N/A" }}
+                                                            </td>
                                                             <td> {{candidateHistory.Status}}</td>
                                                             <td>
                                                                 <!--<IEFGridRow [InterviewID]="candidateHistory.InterviewDetails.InterviewID" [StaticIEFDetails]="candidateHistory.IEFTransactionDetails"></IEFGridRow>-->
