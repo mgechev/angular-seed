@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import {ROUTER_DIRECTIVES } from '@angular/router';
 import any = jasmine.any;
