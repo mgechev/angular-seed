@@ -8,7 +8,6 @@ export class data{
   completed: boolean;
 };
 
-
   //TEST DATA SET FOR PEOPLE
 const datas: data[] = [
   {id: 1, email: "phazeblade@hotmail.com", completed:false},
