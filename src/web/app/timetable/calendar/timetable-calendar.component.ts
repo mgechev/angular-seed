@@ -9,10 +9,6 @@ export class CalendarDate {
   year: number
 };
 
-
-
-
-
 @Component({
   moduleId: module.id,
   selector: 'timetable-calendar',
@@ -22,15 +18,11 @@ export class CalendarDate {
 })
 
 export class CalendarComponent implements OnInit{
-  example:string = "yanan";
   months:any= ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-  days: any = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
   dateNames: any = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
   calendar:CalendarDate[][] = [[],[],[],[],[],[]]
   calendarDates:CalendarDate[] = []
   dates: string[] = []
-  write:any = 0
-
   // Current day/month/day
   date:any = new Date()
   currentDay:string = this.date.getDate()
@@ -40,18 +32,14 @@ export class CalendarComponent implements OnInit{
 
 
   private dateSelect = (row, col) => {
-    //console.log(this.calendar[row-1][col-1])
     let date = this.calendar[row-1][col-1]
-    //console.log(date)
-    //this.calendarDates.push({day:date.day, month:date.month, year:date.year})
-    //this.calendarDates.push(this.calendar[row-1][col-1])
 
     if (this.calendarDates.find(x => (x.day === date.day && x.month === date.month && x.year === date.year))) {
       this.calendarDates.splice(this.calendarDates.findIndex(x => x.day === date.day && x.month === date.month && x.year && date.year),1)
     }
     else {
       this.calendarDates.push({day:date.day, month:date.month, year:date.year})
-      console.log(this.calendarDates);
+      //console.log(this.calendarDates);
     }
   }
 
@@ -74,8 +62,6 @@ export class CalendarComponent implements OnInit{
     this.currentMonthString = (this.months[current])
     this.currentMonth = current.toString()
     this.updateCalendar(current, this.currentYear)
-    //console.log(current)
-    //console.log(this.months[current])
   }
 
   private prevMonth = () => {
@@ -88,8 +74,6 @@ export class CalendarComponent implements OnInit{
     this.currentMonthString = (this.months[current])
     this.currentMonth = current.toString()
     this.updateCalendar(current, this.currentYear)
-    //console.log(current)
-    //console.log(this.months[current])
   }
 
   private updateCalendar = (month:any, year:any) => {
@@ -127,9 +111,6 @@ export class CalendarComponent implements OnInit{
     for (var col = 0; col < startDay; col++) {
       this.calendar[0][col] = {day:((lastMonthTotalDays - startDay) + (col+1)), month:(month), year:year}
     }
-
-
-    //console.log(this.calendar)
   }
 
   private nextYear = () => {
@@ -180,10 +161,7 @@ export class CalendarComponent implements OnInit{
   }
 
   ngOnInit(){
-    //console.log(this.calendar)
     this.updateCalendar(this.currentMonth, this.currentYear)
-
-    //console.log(this.calendar)
   }
 
 
