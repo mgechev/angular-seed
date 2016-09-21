@@ -73,11 +73,11 @@ export class RRFCandidateListService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-    // TODO : Need to update API
-    setActualTime(InterviewID: MasterData, ActualTime: string) {
-        let url = Config.GetURL('/api/RecruitmentCycle/UpdateCandidateIEFStatus');
+
+    setActualTime(InterviewDetails: {}) {
+        let url = Config.GetURL('/api/RecruitmentCycle/UpdateCandidateActualInterviewTime');
         this._spinnerService.show();
-        return this.authHttp.post(url, { InterviewID, ActualTime })
+        return this.authHttp.post(url, { InterviewDetails })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

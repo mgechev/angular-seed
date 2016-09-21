@@ -73,6 +73,7 @@ export class RRFCandidateListComponent implements OnActivate {
     };
     public barChartType: string = 'bar';
     public barChartLegend: boolean = true;
+    public InterviewDetails: {};
 
     // public barChartLabels: string[] = new Array<string>();
     // public barChartData: any[] = new Array<string>();
@@ -411,16 +412,25 @@ export class RRFCandidateListComponent implements OnActivate {
         this.changesStatusComment = '';
     }
     onSetActualTime() {
-        this._rrfCandidatesList.setActualTime(this.ActualTimeInterviewID, this.actualTime)
+        this.InterviewDetails = { "InterviewID": this.ActualTimeInterviewID, 'InterviewActualTime': this.actualTime };
+        this._rrfCandidatesList.setActualTime(this.InterviewDetails)
             .subscribe(
             (results: any) => {
-                /**TODO:: */
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.getCanidatesForRRF();
+                    this.getCandidatesRoundHistory(this.changeStatusCandidateID, this.selectedCandidate);
+                    this.changeStatusInterviewID = new MasterData();
+                    this.setActualTimeForm = false;
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                }
             },
             error => this.errorMessage = <any>error);
         this.actualTime = '';
     }
     onCancelChangeStatus() {
-        this.showChangeStatus = false;this.IsAllowTransfer = false;
+        this.showChangeStatus = false; this.IsAllowTransfer = false;
     }
     onCancelActualTime() {
         this.setActualTimeForm = false;
