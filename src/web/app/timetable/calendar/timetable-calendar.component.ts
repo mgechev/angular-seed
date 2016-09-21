@@ -27,7 +27,7 @@ export class CalendarComponent implements OnInit{
   days: any = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
   dateNames: any = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
   calendar:CalendarDate[][] = [[],[],[],[],[],[]]
-  calendarDates:CalendarDate[]
+  calendarDates:CalendarDate[] = []
   dates: string[] = []
   write:any = 0
 
@@ -40,24 +40,24 @@ export class CalendarComponent implements OnInit{
 
 
   private dateSelect = (row, col) => {
-    console.log(this.calendar[row-1][col-1])
+    //console.log(this.calendar[row-1][col-1])
     let date = this.calendar[row-1][col-1]
+    //console.log(date)
     //this.calendarDates.push({day:date.day, month:date.month, year:date.year})
     //this.calendarDates.push(this.calendar[row-1][col-1])
-    /*
-    if (this.calendarDates.includes(this.calendar[row-1][col-1])) {
-      this.calendarDates.splice(this.calendarDates.indexOf(this.calendar[row-1][col-1]), 1)
-      console.log(this.calendarDates);
+
+    if (this.calendarDates.find(x => (x.day === date.day && x.month === date.month && x.year === date.year))) {
+      this.calendarDates.splice(this.calendarDates.findIndex(x => x.day === date.day && x.month === date.month && x.year && date.year),1)
     }
     else {
-      this.calendarDates.push(this.calendar[row-1][col-1])
+      this.calendarDates.push({day:date.day, month:date.month, year:date.year})
       console.log(this.calendarDates);
     }
-    */
   }
 
-  private dateSelected = (date: string) => {
-    if (this.dates.includes(date)) {
+  private dateSelected = (row, col) => {
+    let date = this.calendar[row-1][col-1]
+    if (this.calendarDates.find(x => (x.day === date.day && x.month === date.month && x.year === date.year))) {
       return true
     }else{
       return false

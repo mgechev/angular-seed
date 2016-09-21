@@ -12,7 +12,9 @@
     </thead>
       <tbody>
       <tr *ngFor="let row of [1,2,3,4,5,6]">
-        <td *ngFor="let col of [1,2,3,4,5,6,7]" (click)="dateSelect(row, col)">{{displayDay(col, row)}}</td>
+        <td *ngFor="let col of [1,2,3,4,5,6,7]"
+            (click)="dateSelect(row, col)"
+            [class.date-selected]="dateSelected(row,col)">{{displayDay(col, row)}}</td>
       </tr>
       </tbody>
       <!--<td *ngFor="let number of numbers">{{number}}</td>-->

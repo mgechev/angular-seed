@@ -28,6 +28,10 @@
 
 }
 
+.date-selected
+{
+  background: cornflowerblue;
+}
 .date-name
 {
   text-align: center;
