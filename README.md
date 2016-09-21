@@ -21,7 +21,7 @@ Provides fast, reliable and extensible starter for the development of Angular 2 
 - End-to-end tests with Protractor.
 - Development server with Livereload.
 - Following the [best practices](https://angular.io/styleguide).
-- Manager of your type definitions using [typings](https://github.com/typings/typings).
+- Manager of your type definitions using @types.
 - Has autoprefixer and css-lint support.
 
 # How to start
@@ -180,9 +180,9 @@ Please see the [CONTRIBUTING](https://github.com/mgechev/angular2-seed/blob/mast
 An [advanced option to this seed exists here](https://github.com/NathanWalker/angular2-seed-advanced) which mirrors the latest changes here but adds core support for:
 
 - [ngrx/store](https://github.com/ngrx/store) RxJS powered state management, inspired by **Redux**
-- [ng2-translate](https://github.com/ocombe/ng2-translate) for i18n 
+- [ng2-translate](https://github.com/ocombe/ng2-translate) for i18n
   - Usage is optional but on by default
-  - Up to you and your team how you want to utilize it. It can be easily removed if not needed. 
+  - Up to you and your team how you want to utilize it. It can be easily removed if not needed.
 - [angulartics2](https://github.com/angulartics/angulartics2) Vendor-agnostic analytics for Angular2 applications.
   - Out of box support for [Segment](https://segment.com/)
     - When using the seed, be sure to change your `write_key` [here](https://github.com/NathanWalker/angular2-seed-advanced/blob/master/src/client/index.html#L24)
@@ -279,8 +279,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │       │   └── router
 │       │       ├── mock-location-strategy.ts
 │       │       └── router-testing-providers.ts
-│       ├── tsconfig.json
-│       └── typings.d.ts
+│       └── tsconfig.json
 ├── test-main.js               <- testing configuration
 ├── tools
 │   ├── README.md              <- build documentation
@@ -507,4 +506,3 @@ You can follow the [Angular 2 change log here](https://github.com/angular/angula
 # License
 
 MIT
-
