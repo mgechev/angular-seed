@@ -91,7 +91,7 @@ export class MyProfilesListComponent implements OnActivate {
 
     routerOnActivate() {
         window.onbeforeunload = function () {
-            return "Data will be lost if you leave the page, are you sure?";
+            return 'Data will be lost if you leave the page, are you sure?';
         };
         this.getColumnsForSorting();
         this.myProfilesList.GrdOperations = new GrdOptions();

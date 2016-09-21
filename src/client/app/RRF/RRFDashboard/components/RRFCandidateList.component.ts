@@ -342,7 +342,7 @@ export class RRFCandidateListComponent implements OnActivate {
     /**---------BEGING Transfer candidate functionality-------------*/
     /**Transfer candidat from current RRF to other Open RRF */
     transferFromUnfit(intervieID: MasterData) {
-
+        this.getAllOpenRRF();
         this.TransferInterviewID = intervieID;
         this.IsAllowTransfer = true;
     }
@@ -384,6 +384,7 @@ export class RRFCandidateListComponent implements OnActivate {
     /**---------END Transfer candidate functionality-------------*/
     changeStatus(intervieID: MasterData) {
         /**TODO :: Remove once testing is done */
+        this.getAllOpenRRF();
         this.IsAllowTransfer = true;
         this.changeStatusInterviewID = intervieID;
         this.showChangeStatus = true;
