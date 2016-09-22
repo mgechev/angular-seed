@@ -7,7 +7,7 @@ import {NavBarComponent} from "../../universal/navbar/universal-navbar.component
 
 export const TimetableRoutes = [
   {
-    path: '',
+    path: 'meetingsync',
     component: TimetableComponent,
   }, {
     path: 'meetingsync/calendar',
