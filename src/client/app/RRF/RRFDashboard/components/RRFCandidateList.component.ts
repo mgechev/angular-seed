@@ -166,6 +166,7 @@ export class RRFCandidateListComponent implements OnActivate {
 
     getCandidatesRoundHistory(CandidateID: MasterData, CandidateName: string) {
         this.showChangeStatus = false;
+        this.IsAllowTransfer = false;
         this.CandidateRoundHistory = new Array<Interview>();
         this.selectedCandidate = CandidateName;
         this.changeStatusCandidateID = CandidateID;
@@ -342,9 +343,13 @@ export class RRFCandidateListComponent implements OnActivate {
     /**---------BEGING Transfer candidate functionality-------------*/
     /**Transfer candidat from current RRF to other Open RRF */
     transferFromUnfit(intervieID: MasterData) {
-        this.getAllOpenRRF();
-        this.TransferInterviewID = intervieID;
-        this.IsAllowTransfer = true;
+        if (!this.IsAllowTransfer) {
+            this.getAllOpenRRF();
+            this.TransferInterviewID = intervieID;
+            this.IsAllowTransfer = true;
+        } else {
+            this.IsAllowTransfer = false;
+        }
     }
     /**Hide the trnasfer to other RRF section */
     onCancelTransfer() {
@@ -383,9 +388,6 @@ export class RRFCandidateListComponent implements OnActivate {
     }
     /**---------END Transfer candidate functionality-------------*/
     changeStatus(intervieID: MasterData) {
-        /**TODO :: Remove once testing is done */
-        this.getAllOpenRRF();
-        this.IsAllowTransfer = true;
         this.changeStatusInterviewID = intervieID;
         this.showChangeStatus = true;
     }
@@ -413,7 +415,7 @@ export class RRFCandidateListComponent implements OnActivate {
         this.changesStatusComment = '';
     }
     onSetActualTime() {
-        this.InterviewDetails = { "InterviewID": this.ActualTimeInterviewID, 'InterviewActualTime': this.actualTime };
+        this.InterviewDetails = { 'InterviewID': this.ActualTimeInterviewID, 'InterviewActualTime': this.actualTime };
         this._rrfCandidatesList.setActualTime(this.InterviewDetails)
             .subscribe(
             (results: any) => {
@@ -431,7 +433,7 @@ export class RRFCandidateListComponent implements OnActivate {
         this.actualTime = '';
     }
     onCancelChangeStatus() {
-        this.showChangeStatus = false; this.IsAllowTransfer = false;
+        this.showChangeStatus = false;
     }
     onCancelActualTime() {
         this.setActualTimeForm = false;

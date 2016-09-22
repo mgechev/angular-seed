@@ -11,7 +11,7 @@
         <h3 class="form-title">Login to your account</h3>
         <div class="alert alert-danger display-hide" *ngIf='LoginFailed' style="display: block;">
             <button class="close" (click)='closeAlert()' data-close="alert"></button>
-            <span> Invalid user name and password..! </span>
+            <span> Invalid user name or password..! </span>
         </div>
         <div class="form-group">
             <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
@@ -59,4 +59,19 @@
         </div>
     </form>
     <!-- END LOGIN FORM -->
+    <!-- BEGIN FORGOT PASSWORD FORM -->
+    <!--<form class="forget-form" action="index.html" method="post">
+        <h3>Forget Password ?</h3>
+        <p> Enter your e-mail address below to reset your password. </p>
+        <div class="form-group">
+            <div class="input-icon">
+                <i class="fa fa-envelope"></i>
+                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email" />                </div>
+        </div>
+        <div class="form-actions">
+            <button type="button" id="back-btn" class="btn grey-salsa btn-outline"> Back </button>
+            <button type="submit" class="btn green pull-right"> Submit </button>
+        </div>
+    </form>-->
+    <!-- END FORGOT PASSWORD FORM -->
 </div>
