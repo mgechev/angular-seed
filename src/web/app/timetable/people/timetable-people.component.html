@@ -1,9 +1,18 @@
-<div *ngFor="let data of data">
-    <label class="label label-primary">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong>Participants</strong>
+  </div>
+    <ul class="list-group">
+<li class="list-group-item"  *ngFor="let data of data">
      {{data.email}}
-    </label>
-    <span class="glyphicon glyphicon-ok"
+    <div class="badge badge-success"
+      [class.badge-success]="isCompleted(data.completed)"
+      [class.badge-warning]="!isCompleted(data.completed)">
+      <i class="glyphicon glyphicon-ok pull-right"
       [class.glyphicon-ok]="isCompleted(data.completed)"
       [class.glyphicon-remove]="!isCompleted(data.completed)">
-    </span>
+    </i>
+    </div>
+</li>
+    </ul>
 </div>

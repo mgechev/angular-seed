@@ -1,8 +1,8 @@
-<div class="panel panel-info">
-  <div class="panel-heading">
+<div class="ibox">
+  <div class="ibox-title">
     <strong>Calendar<span class="pull-right">{{currentYear}} <i class="glyphicon glyphicon-calendar"></i></span></strong>
   </div>
-  <div class="panel-body">
+  <div class="ibox-content">
 <div class="row">
 
   <h4 class="text-center" style="margin: 8px;">
@@ -18,9 +18,14 @@
     </thead>
       <tbody>
       <tr *ngFor="let row of [1,2,3,4,5,6]">
-        <td *ngFor="let col of [1,2,3,4,5,6,7]"
+        <td class="" *ngFor="let col of [1,2,3,4,5,6,7]"
             (click)="dateSelect(row, col)"
-            [class.date-selected]="dateSelected(row,col)">{{displayDay(col, row)}}</td>
+            [class.date-selected]="dateSelected(row,col)">
+              <span class="pull-right"
+                    [class.text-success]="notCurrentMonth(row,col)">
+                {{displayDay(col, row)}}
+              </span>
+          </td>
       </tr>
       </tbody>
       <!--<td *ngFor="let number of numbers">{{number}}</td>-->

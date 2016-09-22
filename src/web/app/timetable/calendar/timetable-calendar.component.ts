@@ -160,6 +160,11 @@ export class CalendarComponent implements OnInit{
     return this.calendar[col-1][row-1].day
   }
 
+  private notCurrentMonth = (row:number, col:number) => {
+    let date = this.calendar[row-1][col-1]
+    return date.month != this.currentMonth
+  }
+
   ngOnInit(){
     this.updateCalendar(this.currentMonth, this.currentYear)
   }
