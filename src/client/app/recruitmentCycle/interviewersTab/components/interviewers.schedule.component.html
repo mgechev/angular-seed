@@ -160,10 +160,10 @@
         <div class="row">
             <div class="col-md-8">
                 <!-- MY SCHEDULE INTERVIEWS-->
-                <div class="portlet light bordered">
+                <div class="portlet light bordered" style="min-height: 430px;">
                     <div class="portlet-title">
                         <div class="caption font-dark">
-                            <span class="caption-subject bold uppercase"> My Schedule</span>
+                            <span class="caption-subject bold uppercase"><i class="fa fa-calendar-check-o"></i> My Schedule</span>
                         </div>
                     </div>
                     <div class="portlet-body">
@@ -209,11 +209,13 @@
                                                             <i class="icon-download"></i> Download Resume </a>
                                                     </li>
                                                     <li>
-                                                        <button class="btn btn-default btnLink " [disabled]='DisableIEF(_myInterview.InterviewDate,_myInterview.InterviewFromTime)' (click)='showIEF(_myInterview.RRFID, _myInterview.CandidateID, _myInterview.DisplayCandidateInfo, _myInterview.InterviewType, _myInterview.InterviewID ,_myInterview.Status)' style="width:100%; border-color:white;">
+                                                        <button class="btn btn-default btnLink " [disabled]='DisableIEF(_myInterview.InterviewDate,_myInterview.InterviewFromTime)'
+                                                            (click)='showIEF(_myInterview.RRFID, _myInterview.CandidateID, _myInterview.DisplayCandidateInfo, _myInterview.InterviewType, _myInterview.InterviewID ,_myInterview.Status)'
+                                                            style="width:100%; border-color:white;">
                                                             <span *ngIf='showSubmitIEF(_myInterview.Status)'> <i class="icon-tag"></i> Submit IEF</span>
                                                             <span *ngIf='!showSubmitIEF(_myInterview.Status)'> <i class="icon-tag"></i> Change status</span>
                                                         </button>
-                                                        
+
                                                     </li>
 
                                                 </ul>
@@ -256,7 +258,7 @@
                 <div class="portlet light bordered">
                     <div class="portlet-title">
                         <div class="caption font-dark">
-                            <span class="caption-subject bold uppercase"> Interview History</span>
+                            <span class="caption-subject bold uppercase"><i class="fa fa-history"></i> Interview History</span>
                         </div>
                     </div>
                     <div class="portlet-body">

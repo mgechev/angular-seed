@@ -110,7 +110,9 @@
                                                     </td>
                                                     <td>
                                                         <div class="btn-group">
-                                                            <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+                                                            <div *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() == 'Transferred'.toLowerCase()"> Not allowed</div>
+                                                            <button class="btn btn-xs green dropdown-toggle" *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() != 'Transferred'.toLowerCase()"
+                                                                type="button" data-toggle="dropdown" aria-expanded="false"> Actions
                                                                 <i class="fa fa-angle-down"></i>
                                                             </button>
                                                             <ul class="dropdown-menu" role="menu">
