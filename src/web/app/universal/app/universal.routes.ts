@@ -6,7 +6,7 @@ import {TimetableRoutes} from "../../timetable/app/timetable.routes"
 export const UniversalRoutes = [
   {
     path: '',
-    component: HomeComponent,
+    component: UniversalComponent,
     index: true,
     children: [
       ...TimetableRoutes,
