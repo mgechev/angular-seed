@@ -191,7 +191,7 @@
                                                     <!--</div>-->
                                                 </td>
                                                 <td *ngIf="candidateHistory.Status.toLowerCase() == 'On Hold'.toLowerCase() "> <a (click)='changeStatus(candidateHistory.InterviewID)'> {{candidateHistory.Status}}</a></td>
-                                                <td *ngIf="candidateHistory.Status.toLowerCase() == 'Fitment Issue'.toLowerCase() "> <a (click)='transferFromUnfit(candidateHistory.InterviewID)'> {{candidateHistory.Status}}</a></td>
+                                                <td *ngIf="candidateHistory.Status.toLowerCase() == 'Fitment Issue'.toLowerCase() "> <a (click)='transferFromUnfit(candidateHistory)'> {{candidateHistory.Status}}</a></td>
 
                                             </tr>
                                         </tbody>
@@ -275,8 +275,8 @@
                                                 </div>
                                                 <div class="col-lg-8">
                                                     <select id="cmbStaus" class="form-control" required placeholder="Select suitable RRF" tooltip="Select suitable Open RRF"
-                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changedStatus"
-                                                        style="font-size: inherit;" required>
+                                                        [(ngModel)]='rrfToTrnasfer' tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                        tooltipEnable="true" style="font-size: inherit;" required>
                                                         <option *ngFor="let OpenRrf of allOpenRrf" [value]="OpenRrf.RRFID.Id">{{OpenRrf.RRFCODE}} - {{OpenRrf.Designation.Value}} - {{OpenRrf.RaisedBy.Value}}</option>
                                                     </select>
                                                 </div>

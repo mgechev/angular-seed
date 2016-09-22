@@ -172,8 +172,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="odd gradeX " *ngFor="let rrf of rrfList | RRFPipe :searchText |RRFIDPipe :closeRRFID.Value ">
-                                        <td>
+                                    <tr *ngFor="let rrf of rrfList | RRFPipe :searchText |RRFIDPipe :closeRRFID.Value ">
+                                        <td style="box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);">
                                             <!--<div class="pull-right" *ngIf="currentView =='myRRF'">
                                                 <a class="btn-green" (click)='onShowAvailabilityClick()'>
                                                     <i class="fa fa-eye" aria-hidden="true"></i> Show Availability</a>

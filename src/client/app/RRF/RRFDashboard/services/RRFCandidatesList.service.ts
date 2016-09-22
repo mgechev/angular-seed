@@ -5,6 +5,7 @@ import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
 import { MasterData  } from '../../../shared/model/common.model';
+import { TransferInterview} from '../model/RRFCandidateList';
 
 @Injectable()
 export class RRFCandidateListService {
@@ -56,10 +57,10 @@ export class RRFCandidateListService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-    TransferToOtherRRF(InterviewID: MasterData, RRFID: MasterData, Comments: string) {
-        let url = Config.GetURL('/api/RecruitmentCycle/UpdateCandidateIEFStatus');
+    TransferToOtherRRF(InterviewDetails: TransferInterview) {
+        let url = Config.GetURL('/api/RecruitmentCycle/SendFitmentIssueForApproval');
         this._spinnerService.show();
-        return this.authHttp.post(url, { InterviewID, RRFID, Comments })
+        return this.authHttp.post(url, { InterviewDetails })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

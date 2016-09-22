@@ -1,4 +1,4 @@
-// import { MasterData  } from '../../../shared/model/common.model';
+import { MasterData  } from '../../../shared/model/common.model';
 // import { RRFDetails  } from '../../myRRF/models/rrfDetails';
 import { CandidateProfile } from  '../../../profileBank/shared/model/myProfilesInfo';
 import {Interview} from '../../../recruitmentCycle/shared/model/interview';
@@ -11,6 +11,11 @@ export class RRFSpecificCandidateList {
     isInterviewScheduled: boolean = false;
     isAwaitingApproval: boolean = false;
     //CandidateInterviewRoundHistory: Array<InterviewRoundHistory> = new Array<InterviewRoundHistory>();
+}
+export class TransferInterview extends Interview {
+    TransferRRFID: MasterData = new MasterData();
+    ApprovalType: string;
+    TransferReason: string;
 }
 // export class InterviewRoundHistory {
 //     InterviewDate: Date;

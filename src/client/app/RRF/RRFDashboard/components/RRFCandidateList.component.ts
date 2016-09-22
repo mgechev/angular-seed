@@ -11,7 +11,7 @@ import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 import { InterviewMode } from  '../../../shared/constantValue/index';
 //import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap';
 import {RRFCandidateListService} from '../services/RRFCandidatesList.service';
-import {RRFSpecificCandidateList} from '../model/RRFCandidateList';
+import {RRFSpecificCandidateList, TransferInterview} from '../model/RRFCandidateList';
 import {Interview} from '../../../recruitmentCycle/shared/model/interview';
 import { RRFDetails } from '../../myRRF/models/rrfDetails';
 
@@ -29,7 +29,7 @@ export class RRFCandidateListComponent implements OnActivate {
     selectedRRF: RRFDetails;
     /**---------BEGING Transfer Candidate--------------- */
     /**Seleted RRF for Transfer */
-    rrfToTrnasfer: RRFDetails;
+    rrfToTrnasfer: number;
     /**To store all Open RRF */
     allOpenRrf: RRFDetails[] = [];
     /**Show trnasferTo option */
@@ -38,6 +38,7 @@ export class RRFCandidateListComponent implements OnActivate {
     transferReason: string;
     /**transfer candidate from current intervieID */
     TransferInterviewID: MasterData = new MasterData();
+    TransferInterviewDetails: TransferInterview = new TransferInterview();
     /**---------END Transfer Candidate--------------- */
 
     isNull: boolean = false;
@@ -166,7 +167,8 @@ export class RRFCandidateListComponent implements OnActivate {
 
     getCandidatesRoundHistory(CandidateID: MasterData, CandidateName: string) {
         this.showChangeStatus = false;
-        this.IsAllowTransfer = false;
+       this.resetTransferOperation();
+        this.TransferInterviewDetails = new TransferInterview();
         this.CandidateRoundHistory = new Array<Interview>();
         this.selectedCandidate = CandidateName;
         this.changeStatusCandidateID = CandidateID;
@@ -342,18 +344,24 @@ export class RRFCandidateListComponent implements OnActivate {
     }
     /**---------BEGING Transfer candidate functionality-------------*/
     /**Transfer candidat from current RRF to other Open RRF */
-    transferFromUnfit(intervieID: MasterData) {
+    transferFromUnfit(interviewDetails: Interview) {
         if (!this.IsAllowTransfer) {
             this.getAllOpenRRF();
-            this.TransferInterviewID = intervieID;
+            // this.TransferInterviewID = intervieID;
+            /**Prepare object to transfer Candidate */
+            this.TransferInterviewDetails.InterviewID = interviewDetails.InterviewID;
+            this.TransferInterviewDetails.CandidateID = interviewDetails.CandidateID;
+            this.TransferInterviewDetails.RRFID = interviewDetails.RRFID;
             this.IsAllowTransfer = true;
         } else {
-            this.IsAllowTransfer = false;
+            this.resetTransferOperation();
+            this.TransferInterviewDetails = new TransferInterview();
         }
     }
     /**Hide the trnasfer to other RRF section */
     onCancelTransfer() {
-        this.IsAllowTransfer = false;
+        this.resetTransferOperation();
+        this.TransferInterviewDetails = new TransferInterview();
     }
     /**Get all open RRF */
     getAllOpenRRF() {
@@ -366,11 +374,16 @@ export class RRFCandidateListComponent implements OnActivate {
     }
     /** Transfer candidat to other open rrf*/
     transferCandidate() {
-        this.TransferTo(this.TransferInterviewID, this.rrfToTrnasfer.RRFID, this.transferReason);
+        /**Preparing object for service posting */
+        this.TransferInterviewDetails.TransferRRFID.Id = this.rrfToTrnasfer;
+        this.TransferInterviewDetails.ApprovalType = 'Fitment Issue';
+        this.TransferInterviewDetails.TransferReason = this.transferReason;
+        /**Pass object to service*/
+        this.TransferTo(this.TransferInterviewDetails);
     }
     /**service call to perfomr action of trnasfer */
-    TransferTo(InterviewID: MasterData, RRFID: MasterData, Comments: string) {
-        this._rrfCandidatesList.TransferToOtherRRF(InterviewID, RRFID, Comments)
+    TransferTo(transferInterview: TransferInterview) {
+        this._rrfCandidatesList.TransferToOtherRRF(transferInterview)
             .subscribe(
             (results: any) => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -378,13 +391,20 @@ export class RRFCandidateListComponent implements OnActivate {
                     this.getCanidatesForRRF();
                     this.getCandidatesRoundHistory(this.changeStatusCandidateID, this.selectedCandidate);
                     this.changeStatusInterviewID = new MasterData();
-                    this.IsAllowTransfer = false;
+                    this.resetTransferOperation();
                     this.showChangeStatus = false;
                 } else {
                     this.toastr.success((<ResponseFromAPI>results).ErrorMsg);
                 }
             },
             error => this.errorMessage = <any>error);
+    }
+    /**Reset all field and object related to transferCandidate */
+    resetTransferOperation() {
+        this.IsAllowTransfer = false;
+        this.TransferInterviewDetails = new TransferInterview();
+        this.rrfToTrnasfer = 0;
+        this.transferReason = '';
     }
     /**---------END Transfer candidate functionality-------------*/
     changeStatus(intervieID: MasterData) {
