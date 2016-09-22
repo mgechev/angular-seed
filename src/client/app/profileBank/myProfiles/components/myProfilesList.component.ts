@@ -125,11 +125,14 @@ export class MyProfilesListComponent implements OnActivate {
         this._myProfilesService.isExist(this.profile)
             .subscribe(
             (results: any) => {
-                if (results.isExist)
+                if (results.isExist){
                     if (results.profileBankObjects !== null && results.profileBankObjects !== undefined) {
                         this.existedProfile = <any>results.profileBankObjects;
                         this.isExist = <any>results.isExist;
                         this.toastr.error('Profile already exist');
+                    }
+                }else{
+                        this.isExist = false;
                     }
             },
             error => this.toastr.error(<any>error));

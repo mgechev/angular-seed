@@ -41,7 +41,12 @@ export class TopNavigationBarComponent implements OnInit, OnDestroy {
             error => this.errorMessage = <any>error);
 
     }
-
+    // This function search profiles acoording to search string
+    advancedSearch(searchString:string){
+        alert("We Are working on searching");
+        //TO DO: uncomment below api after API get ready
+        //this._router.navigate(['/App/ProfileBank/AdvanceSearch/' + searchString + 'searchString' + searchString]);
+    }
 
     logout() {
         this.loginService.logout();

@@ -1,0 +1,232 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content">
+
+        <!--BEGIN breadcrumb -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']"> Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">Profile Bank</span>
+            </li>
+        </ul>
+        <!--End Breadcrumb>-->
+        <!--<breadcrumb></breadcrumb>-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h4>My Profiles</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                      
+
+                        <!-- My Profile Grid Starts-->
+                        <div class="table-scrollable">
+                            <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" id="sample_1"
+                                role="grid" aria-describedby="sample_1_info">
+                                <thead class="thead">
+                                    <tr>
+                                        <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Name / Email / Contact</th>
+                                        <!--<th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Tag </th>
+                                        <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Professional Details </th>
+                                        <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Status </th>
+                                        <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Resume </th>-->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="gradeX odd " *ngFor="let myprofile of myProfilesList.Profiles |ProfileBankPipe:searchString">
+
+                                        <td>
+                                            <!-- Profile card -->
+                                            <div class=" light bordered">
+                                                <div class="row">
+                                                    <!-- Profile Photo -->
+                                                    <div class="col-md-2">
+                                                        <br>
+                                                        <ul class="list-unstyled profile-nav text-center">
+                                                            <li>
+                                                                <!--*ngIf="profile.BinaryImage!==''&&profile.BinaryImage!==null"-->
+                                                                <img class="img-responsive pic-bordered" *ngIf="profile.BinaryImage!==''&&profile.BinaryImage!==null" style="border-radius: 50%!important;height:150px;"
+                                                                    alt="" src="data:image/jpeg;base64,{{profile.BinaryImage}}">
+
+                                                                <img src="../assets/layouts/layout4/img/default-user.jpg" *ngIf="profile.BinaryImage===''||profile.BinaryImage===null" class="img-responsive pic-bordered"
+                                                                    style="border-radius: 50%!important; height: 140px;width: 150px;"
+                                                                    alt="">
+                                                                <br>
+
+                                                            </li>
+                                                            <!--<li><a href="javascript:;">shaktiman@durdarshan.com</a></li>-->
+                                                            <li>
+                                                                <span class="label label-sm label-success"> 
+                    <i class="fa fa-mobile-phone"></i>
+                    <a style="color: white;font-weight: bolder;font-size: larger;" href="tel:{{profile.PrimaryContact}}">{{profile.PrimaryContact?profile.PrimaryContact:"N/A"}}</a>
+                    </span>
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+                                                    <!-- /Profile Photo -->
+
+                                                    <!-- Profiles Details -->
+                                                    <div class="col-md-10">
+                                                        <div class="row message">
+                                                            <div class="col-md-8 profile-info">
+                                                                <h3 class="font-green sbold uppercase">{{profile.Candidate}}</h3>
+                                                                <!--<p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet
+                        dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.
+                    </p>-->
+                                                                <!--<p>
+                        <a class="sbold" href="mailto:{{profile.Email}}">{{profile.Email?profile.Email:"N/A"}} </a>
+                    </p>-->
+                                                                <div class="row">
+                                                                    <ul class="list-unstyled">
+                                                                        <li>
+                                                                            <div class="col-md-12">
+                                                                                <label class="control-label"><small>Skills : <strong> {{profile.CandidateSkills.PrimarySkills?profile.CandidateSkills.PrimarySkills:"N/A"}} </strong> {{profile.CandidateSkills.SecondarySkills}} {{profile.CandidateSkills.OtherSkills}} </small></label>
+                                                                            </div>
+                                                                            <!--<label class="control-label">Skills : <strong> C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF</strong></label>-->
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="col-md-6">
+                                                                                <label class="control-label"><small> Salary Current  : <i class="fa fa-inr"></i>{{profile.CandidateSalaryDetails.CurrentSalary?profile.CandidateSalaryDetails.CurrentSalary:"N/A"}}</small> </label>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <label class="control-label"><small> Expected : <i class="fa fa-inr"></i>{{profile.CandidateSalaryDetails.ExpectedSalary?profile.CandidateSalaryDetails.ExpectedSalary:"N/A"}}</small> </label>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="col-md-6">
+                                                                                <label class="control-label"><small> Company : {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.CurrentCompany?profile.CandidateCareerProfile.CurrentCompany:"N/A":"N/A"}} </small></label>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <label class="control-label"><small> Designation : {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.CurrentDesignationRole?profile.CandidateCareerProfile.CurrentDesignationRole:"N/A":"N/A"}} </small></label>
+                                                                            </div>
+                                                                        </li>
+
+                                                                    </ul>
+                                                                </div>
+                                                                <p> <a class="sbold" href="mailto:{{profile.Email}}?cc={{profile.CandidateMailDetails.Cc}}&amp;subject={{profile.CandidateMailDetails.Subject}}&amp;body={{profile.CandidateMailDetails.Body}}">{{profile.Email?profile.Email:"N/A"}} </a>                                                                    </p>
+                                                                <div class="row">
+                                                                    <ul class="list-inline sbold" style="color:#f16e50">
+                                                                        <li>
+                                                                            <!--location-->
+                                                                            <div class="uppercase" tooltip="Location" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Location">
+                                                                                <!--TODO:: Add Location once updated from Backend -->
+                                                                                <i class="fa fa-map-marker"></i> {{profile.District?profile.District:"N/A"}}
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <!--experience-->
+                                                                            <div tooltip="Experience" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Experience">
+                                                                                <i class="fa fa-briefcase"></i> {{profile.TotalExperience?profile.TotalExperience:"N/A"}}
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <!--tag-->
+                                                                            <div tooltip="Tag" class="uppercase" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="tag">
+                                                                                <i class="fa fa-tag"></i> {{profile.Tag?profile.Tag:"N/A"}}
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <!--notice period-->
+                                                                            <div tooltip="Notice period" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Notice period">
+                                                                                <i class="fa fa-hourglass-half"></i> {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod:"N/A"}}
+                                                                            </div>
+
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-md-8-->
+                                                            <div class="col-md-4">
+                                                                <div class="portlet sale-summary">
+                                                                    <div class="portlet-title">
+
+                                                                        <!--<div class="tools">
+                                <a class="reload" href="javascript:;" data-original-title="" title=""> </a>
+                            </div>-->
+                                                                        <span class="font-gray pull-right"> <small> Updated On {{profile.ModifiedOn?profile.ModifiedOn:"N/A"}}</small></span>
+                                                                    </div>
+                                                                    <div class="portlet-body">
+                                                                        <ul class="list-unstyled">
+                                                                            <li>
+                                                                                <h5 class="font-blue sbold uppercase">{{profile.Owner.Value?profile.Owner.Value:"N/A"}}</h5>
+                                                                            </li>
+                                                                            <li>
+                                                                                <span class="mt-action-dot color{{profile.Status.Id}}"> </span>{{profile.Status.Value}}
+                                                                            </li>
+                                                                            <li>
+                                                                                <div class="tools">
+                                                                                    <!--(click)='getResume(profile.CandidateID)'-->
+                                                                                    <a class="reload" data-original-title="" title="" (click)='getResume(profile.CandidateID)'><i aria-hidden="true" class="fa fa-download"></i>Download Resume</a>
+                                                                                    <!--<br>
+                                        <a href="data:application/octet-stream;charset=utf-8;base64,{{profile.BinaryResume}}" download="{{profile.ResumeName?profile.ResumeName:'TestResume.doc '}}"
+                                            class="reload" data-original-title="" title=""><i aria-hidden="true" class="fa fa-download"></i>Download Resume {{profile.Resume_ID}}  </a>-->
+                                                                                    <!--<a href="data:application/octet-stream;charset=utf-8;base64,{{profile.BinaryImage}}" class="btn btn-primary" download="pdftesting.pdf">Download</a>-->
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-md-4-->
+                                                        </div>
+                                                    </div>
+                                                    <!-- /Profiles Details -->
+                                                </div>
+                                            </div>
+                                            <!-- /Profile card -->
+                                            <!--<detail-profile [selectedProfile]="myprofile"></detail-profile>-->
+                                        </td>
+                                        <!--<td>
+                                            <tr>
+                                                <td style="float: left;">&nbsp; {{myprofile.Candidate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="float: left;">&nbsp; {{myprofile.Email}} </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="float: left;">&nbsp; {{myprofile.PrimaryContact}}</td>
+                                            </tr>
+                                        </td>
+                                        <td> {{myprofile.Tag}} </td>
+                                        <td>
+                                            <tr>
+                                                <td style="float: left;">&nbsp; Notice Period : {{myprofile.CandidateOtherDetails.NoticePeriod}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="float: left;">&nbsp; Current Salary :{{myprofile.CandidateSalaryDetails.CurrentSalary}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="float: left;">&nbsp; Expected Salary : {{myprofile.CandidateSalaryDetails.ExpectedSalary}}</td>
+                                            </tr>
+                                        </td>
+                                        <td>
+                                            <span class="mt-action-dot color{{myprofile.Status.Id}}"></span>{{myprofile.Status.Value}}
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="" download tooltip="Download Resume" tooltipPlacement="top" tooltipTrigger="mouseenter"><i class="fa fa-download" aria-hidden="true"></i></a>
+                                        </td>-->
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <span style="margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Candidates Found</span>
+                        </div>
+                        <!--  My Profile Grid  END-->
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE BASE CONTENT -->
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
