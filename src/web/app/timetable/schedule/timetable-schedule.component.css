@@ -1,0 +1,32 @@
+.date {
+  height: 100%;
+  border: solid 5px #a0c0dd;
+  border-radius: 8px;
+  display: inline-block;
+  padding: 5px;
+  margin-left: 15px;
+}
+.date-contents {
+  border-top:solid 1px #0088cc;
+  padding: 5px;
+}
+
+
+table {
+  border: solid 5px #a0c0dd;
+  border-radius: 8px;
+  margin-left: 15px;
+  display: inline-block;
+}
+
+th {
+  border: solid 5px #a0c0dd;
+}
+
+.cell-selected {
+  background: deepskyblue;
+}
+
+.cell-deselected {
+  background: white;
+}
