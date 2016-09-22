@@ -1,62 +1,35 @@
-<section class="row">
-  <div class="text text-center-left">
-    January
+<div class="ibox">
+  <div class="ibox-title">
+    <strong>Calendar<span class="pull-right">{{currentYear}} <i class="glyphicon glyphicon-calendar"></i></span></strong>
   </div>
-</section>
+  <div class="ibox-content">
+<div class="row">
 
-<section class="row">
-  <div class="col-md-6">
-    <table class="tg">
-        <tr>
-          <th class="tg-hj1s">30<br></th>
-          <th class="tg-hj1s">31</th>
-          <th class="tg-yw4l">1</th>
-          <th class="tg-yw4l">2</th>
-          <th class="tg-yw4l">3</th>
-          <th class="tg-yw4l">4</th>
-          <th class="tg-yw4l">5</th>
-        </tr>
-        <tr>
-          <td class="tg-yw4l">6</td>
-          <td class="tg-yw4l">7</td>
-          <td class="tg-yw4l">8</td>
-          <td class="tg-yw4l">9</td>
-          <td class="tg-yw4l">10</td>
-          <td class="tg-yw4l">11</td>
-          <td class="tg-yw4l">12</td>
-        </tr>
-        <tr>
-          <td class="tg-yw4l">13</td>
-          <td class="tg-yw4l">14</td>
-          <td class="tg-yw4l">15</td>
-          <td class="tg-yw4l">16</td>
-          <td class="tg-yw4l">17</td>
-          <td class="tg-yw4l">18</td>
-          <td class="tg-yw4l">19</td>
-        </tr>
-        <tr>
-          <td class="tg-yw4l">20</td>
-          <td class="tg-yw4l">21</td>
-          <td class="tg-yw4l">22</td>
-          <td class="tg-yw4l">23</td>
-          <td class="tg-yw4l">24</td>
-          <td class="tg-yw4l">25</td>
-          <td class="tg-yw4l">26</td>
-        </tr>
-        <tr>
-          <td class="tg-yw4l">27</td>
-          <td class="tg-yw4l">28</td>
-          <td class="tg-yw4l">29</td>
-          <td class="tg-yw4l">30</td>
-          <td class="tg-96dg">1</td>
-          <td class="tg-hj1s">2</td>
-          <td class="tg-96dg">3</td>
-        </tr>
-      </table>
+  <h4 class="text-center" style="margin: 8px;">
+    <button class="btn btn-sm btn-circle btn-info pull-left m-t-n-xs" (click)="prevMonth()"><i class="glyphicon glyphicon-menu-left"></i></button>
+    {{currentMonthString}}
+    <button class="btn btn-sm btn-circle btn-info pull-right m-t-n-xs"(click)="nextMonth()"><i class="glyphicon glyphicon-menu-right"></i></button>
+    </h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th *ngFor="let dateName of dateNames"><span class="date-name">{{dateName}}</span></th>
+      </tr>
+    </thead>
+      <tbody>
+      <tr *ngFor="let row of [1,2,3,4,5,6]">
+        <td class="" *ngFor="let col of [1,2,3,4,5,6,7]"
+            (click)="dateSelect(row, col)"
+            [class.date-selected]="dateSelected(row,col)">
+              <span class="pull-right"
+                    [class.text-success]="notCurrentMonth(row,col)">
+                {{displayDay(col, row)}}
+              </span>
+          </td>
+      </tr>
+      </tbody>
+      <!--<td *ngFor="let number of numbers">{{number}}</td>-->
+  </table>
+</div>
   </div>
-
-  <div class="col-md-6 text text-center">
-    this is some garbage placeholder shit i threw together
-  </div>
-
-</section>
+</div>

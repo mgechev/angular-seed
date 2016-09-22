@@ -8,13 +8,12 @@ export class data{
   completed: boolean;
 };
 
-
   //TEST DATA SET FOR PEOPLE
 const datas: data[] = [
   {id: 1, email: "phazeblade@hotmail.com", completed:false},
   {id: 2, email: "Patrick@no.this.is.patrick.com", completed:true},
   {id: 3, email: "praveal.lal@live.com", completed:true},
-  {id: 4, email: "shoar@ShoarAgainstWar.com", completed:true}
+  {id: 4, email: "richard@sor.nz", completed:true}
 ];
 
 
