@@ -1,6 +1,16 @@
 <!-- BEGIN TOP NAVIGATION MENU -->
 <div class="page-top">
-    <form class="search" style="margin: 22px 223px 0 0;display: inline-block;width: 31px;float: left;">
+    <form class="search-form" (submit)="advancedSearch(searchString)">
+        <div class="input-group">
+            <input type="text" class="form-control input-sm" placeholder="Search...">
+            <span class="input-group-btn">
+                                <a class="btn submit" >
+                                    <i class="icon-magnifier"></i>
+                                </a>
+             </span>
+        </div>
+    </form>
+    <!--<form class="search" style="margin: 22px 223px 0 0;display: inline-block;width: 31px;float: left;">
         <div class="input-group">
             <input type="text" class="form-control" [(ngModel)]="searchString" placeholder="Search for..." style="width:initial;" />
             <span class="input-group-btn">
@@ -8,7 +18,7 @@
             </span>
         </div>
 
-    </form>
+    </form>-->
     <div class="top-menu">
         <ul class="nav navbar-nav pull-right">
             <li class="separator hide"> </li>
