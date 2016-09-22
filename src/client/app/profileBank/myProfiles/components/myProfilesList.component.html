@@ -114,21 +114,21 @@
                                                             <div class="col-md-3 inlineForm">
                                                                 <div class="form-group">
                                                                     <input type="text" placeholder="First Name" class="form-control" [(ngModel)]="profile.FirstName" required="" tooltip="First Name"
-                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.FirstName"
+                                                                        tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.FirstName"
                                                                     />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3  inlineForm">
                                                                 <div class="form-group ">
                                                                     <input type="text" placeholder="Last Name" class="form-control" [(ngModel)]="profile.LastName" required="" tooltip="Last Name"
-                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.LastName"
+                                                                        tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.LastName"
                                                                     />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3  inlineForm">
                                                                 <div class="form-group ">
                                                                     <input type="email" class="form-control" placeholder="Email Address" [(ngModel)]="profile.Email" required="" tooltip="Email"
-                                                                        (blur)="IsExist()" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        (blur)="IsExist()" tooltipPlacement="bottom" tooltipTrigger="mouseenter"
                                                                         tooltipEnable="!profile.Email">
                                                                 </div>
                                                             </div>
@@ -136,7 +136,7 @@
                                                                 <div class="form-group ">
                                                                     <input type="text" placeholder="Contact Number" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact"
                                                                         (blur)="IsExist()" required="" pattern="^[0-9\-\+]{9,15}$"
-                                                                        tooltip="Contact No" title="Enter 10 digits" tooltipPlacement="top"
+                                                                        tooltip="Contact No" title="Enter 10 digits" tooltipPlacement="bottom"
                                                                         tooltipTrigger="mouseenter" tooltipEnable="!profile.PrimaryContact"
                                                                     />
                                                                 </div>
