@@ -451,30 +451,7 @@ export class SeedConfig {
      */
     'browser-sync': {
       middleware: [require('connect-history-api-fallback')({
-        index: `${this.APP_BASE}index.html`,
-        rewrites: [
-          {
-            from: new RegExp(`^${this.NPM_BASE}.*$`),
-            to: (context:any) => context.parsedUrl.pathname
-          },
-          {
-            from: new RegExp(`^\/${this.BOOTSTRAP_DIR}\/.*$`),
-            to: (context:any) => context.parsedUrl.pathname
-          },
-          {
-            from: new RegExp(`^${this.APP_BASE}${this.APP_SRC}\/.*$`),
-            to: (context:any) => context.parsedUrl.pathname
-          },
-          {
-            from: new RegExp(`^${this.ASSETS_SRC.replace(this.APP_SRC, '')}\/.*$`),
-            to: (context:any) => context.parsedUrl.pathname
-          },
-          {
-            from: new RegExp(`^${this.CSS_DEST.replace(this.APP_DEST, '')}\/.*$`),
-            to: (context:any) => `/${slash(join(this.APP_DEST, context.parsedUrl.pathname))}`
-          }
-        ],
-        disableDotRule: true
+        index: `${this.APP_BASE}index.html`
       })],
       port: this.PORT,
       startPath: this.APP_BASE,
