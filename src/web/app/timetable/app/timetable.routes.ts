@@ -11,15 +11,15 @@ export const TimetableRoutes = [
     component: TimetableComponent,
   }, {
     path: 'meetingsync/calendar',
-    component: CalendarComponent
+    component: CalendarComponent,
+    redirectTo: 'meetingsync'
   }, {
     path: 'meetingsync/people',
-    component: PeopleComponent
+    component: PeopleComponent,
+    redirectTo: 'meetingsync'
   }, {
     path: 'meetingsync/schedule',
-    component: ScheduleComponent
-  }, {
-    path: 'meetingsync/navbar',
-    component: NavBarComponent
+    component: ScheduleComponent,
+    redirectTo: 'meetingsync'
   }
 ]

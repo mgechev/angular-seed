@@ -7,6 +7,7 @@ export const UniversalComponentRoutes = [
     component: HomeComponent,
   }, {
     path: 'navbar',
-    component: NavBarComponent
+    component: NavBarComponent,
+    redirectTo: ''
   }
 ]

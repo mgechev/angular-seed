@@ -15,6 +15,5 @@ import { PeopleComponent } from "../people/timetable-people.component";
 })
 
 export class TimetableComponent {
-    example:boolean = true;
 
 }
