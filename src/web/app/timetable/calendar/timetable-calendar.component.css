@@ -15,7 +15,7 @@
 
 .calendar-day.selected
 {
-  background: #46b5ff;
+  background: #23c6c8;
 }
 
 .calendar-day.selected:hover
@@ -30,8 +30,14 @@
 
 .date-selected
 {
-  background: cornflowerblue;
+  background: #23c6c8;
 }
+
+.date-other-month
+{
+  color: #93929d;
+}
+
 .date-name
 {
   text-align: center;
