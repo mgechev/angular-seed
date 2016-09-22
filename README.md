@@ -137,6 +137,7 @@ npm run serve.coverage
 
 # e2e (aka. end-to-end, integration) - In three different shell windows
 # Make sure you don't have a global instance of Protractor
+# Make sure you do have Java in your PATH (required for webdriver)
 
 # npm install webdriver-manager <- Install this first for e2e testing
 # npm run webdriver-update <- You will need to run this the first time
