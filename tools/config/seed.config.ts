@@ -363,12 +363,13 @@ export class SeedConfig {
    */
   SYSTEM_BUILDER_CONFIG: any = {
     defaultJSExtensions: true,
+    base: this.PROJECT_ROOT,
     packageConfigPaths: [
-      join(this.PROJECT_ROOT, 'node_modules', '*', 'package.json'),
-      join(this.PROJECT_ROOT, 'node_modules', '@angular', '*', 'package.json')
+      join('node_modules', '*', 'package.json'),
+      join('node_modules', '@angular', '*', 'package.json')
     ],
     paths: {
-      [`${this.TMP_DIR}/*`]: `${this.TMP_DIR}/*`,
+      [join(this.TMP_DIR, 'app', '*')]: `${this.TMP_DIR}/app/*`,
       '*': 'node_modules/*'
     },
     packages: {
@@ -409,6 +410,7 @@ export class SeedConfig {
         defaultExtension: 'js'
       },
       'rxjs': {
+        main: 'Rx.js',
         defaultExtension: 'js'
       }
     }
