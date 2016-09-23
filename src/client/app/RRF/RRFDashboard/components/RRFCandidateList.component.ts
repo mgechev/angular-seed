@@ -118,7 +118,7 @@ export class RRFCandidateListComponent implements OnActivate {
             .subscribe(
             (results: any) => {
                 barChartData = results;
-                if (barChartData) {
+                if (barChartData.functions && barChartData.ratingsData) {
                     this.barChartLabels = barChartData.functions;
                     this.barChartData = barChartData.ratingsData;
                 }
