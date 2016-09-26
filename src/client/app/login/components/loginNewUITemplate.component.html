@@ -1,0 +1,81 @@
+<!-- BEGIN LOGO -->
+<!--<div class="logoNew">
+    <a href="index.html">
+        <img src="../assets/global/img/social/rms-logo.png" style="width:110px;height:20px" alt=""> </a>
+</div>-->
+<!-- END LOGO -->
+<!-- BEGIN LOGIN -->
+<div class="content" style="-webkit-box-shadow: 4px 3px 10px -2px rgba(0,0,0,0.39);
+-moz-box-shadow: 4px 3px 10px -2px rgba(0,0,0,0.39);
+box-shadow: 4px 3px 10px -2px rgba(0,0,0,0.39);">
+    <a href="index.html">
+        <img src="../assets/global/img/social/rms-logo.png" style="width:110px;height:auto;" alt=""> </a>
+    <!-- BEGIN LOGIN FORM -->
+    <form class="login-form" (submit)="doLogin($event)" novalidate="novalidate">
+        <h3 class="form-title">Login to your account</h3>
+        <div class="alert alert-danger display-hide" *ngIf='LoginFailed' style="display: block;">
+            <button class="close" (click)='closeAlert()' data-close="alert"></button>
+            <span> Invalid user name or password..! </span>
+        </div>
+        <div class="form-group">
+            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+            <label class="control-label visible-ie8 visible-ie9">Username</label>
+            <div class="input-icon">
+                <i class="fa fa-user"></i>
+                <input class="form-control placeholder-no-fix" type="text" [(ngModel)]="model.UserName" autocomplete="off" placeholder="User name"
+                    name="username"> </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">Password</label>
+            <div class="input-icon">
+                <i class="fa fa-lock"></i>
+                <input class="form-control placeholder-no-fix" type="password" [(ngModel)]="model.Password" autocomplete="off" placeholder="Password"
+                    name="password"> </div>
+        </div>
+        <div class="form-actions">
+            <label class="rememberme mt-checkbox mt-checkbox-outline">
+                        <input type="checkbox" name="remember" value="1"> Remember me
+                        <span></span>
+                    </label>
+            <button type="submit" class="btn green pull-right"> Login </button>
+        </div>
+        <div class="login-options">
+            <h4>Like us On</h4>
+            <ul class="social-icons">
+                <li>
+                    <a class="facebook" data-original-title="facebook"> </a>
+                </li>
+                <li>
+                    <a class="twitter" data-original-title="Twitter" href="javascript:;"> </a>
+                </li>
+                <li>
+                    <a class="googleplus" data-original-title="Goole Plus" href="javascript:;"> </a>
+                </li>
+                <li>
+                    <a class="linkedin" data-original-title="Linkedin" href="javascript:;"> </a>
+                </li>
+            </ul>
+        </div>
+        <div class="forget-password">
+            <h4>Forgot your password ?</h4>
+            <p> no worries, click
+                <a href="javascript:;" id="forget-password"> here </a> to reset your password. </p>
+        </div>
+    </form>
+    <!-- END LOGIN FORM -->
+    <!-- BEGIN FORGOT PASSWORD FORM -->
+    <!--<form class="forget-form" action="index.html" method="post">
+        <h3>Forget Password ?</h3>
+        <p> Enter your e-mail address below to reset your password. </p>
+        <div class="form-group">
+            <div class="input-icon">
+                <i class="fa fa-envelope"></i>
+                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email" />                </div>
+        </div>
+        <div class="form-actions">
+            <button type="button" id="back-btn" class="btn grey-salsa btn-outline"> Back </button>
+            <button type="submit" class="btn green pull-right"> Submit </button>
+        </div>
+    </form>-->
+    <!-- END FORGOT PASSWORD FORM -->
+</div>

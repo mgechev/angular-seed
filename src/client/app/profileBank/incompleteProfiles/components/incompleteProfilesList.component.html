@@ -10,7 +10,7 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <span class="active">Profile Bank</span>
+                <span class="active">Incomplete Profiles</span>
             </li>
         </ul>
         <!--End Breadcrumb>-->
@@ -20,7 +20,7 @@
                     <div class="portlet-title">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4>Incomplete Profiles</h4>
+                                <h4><i class="fa fa-tasks"></i> Incomplete Profiles</h4>
                             </div>
                         </div>
                     </div>
@@ -70,11 +70,11 @@
                         <!-- /Grid Tools bar -->
                         <div>
                             <table class="table table-striped table-bordered table-hover order-column dataTable no-footer" id="sample_1" role="grid"
-                            aria-describedby="sample_1_info">
+                                aria-describedby="sample_1_info">
                                 <thead class="thead">
                                     <tr>
                                         <th style="displya:none" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Personal Info</th>
-                                        <td ><b> Action </b></td>
+                                        <td><b> Action </b></td>
                                         <!--<th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Tag </th>
                                         <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Professional Details </th>
                                         <th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Required Details </th>
@@ -89,11 +89,30 @@
                                             <detail-profile [selectedProfile]="profile"></detail-profile>
                                         </td>
                                         <td style="width:80px">
-                                            <div class="btn-group ">
-                                                <button class="btn btn-xs green dropdown-toggle" (click)='onDeleteProfile(profile.CandidateID)' type="button" data-toggle="dropdown" aria-expanded="false">
+                                            <!--<div class="btn-group ">
+                                                <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                                                     Delete
-                                                    <!--<i class="fa fa-angle-down "></i>-->
                                                 </button>
+                                            </div>-->
+
+                                            <div class="btn-group">
+                                                <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+                                                            <i class="fa fa-angle-down"></i>
+                                                        </button>
+                                                <ul class="dropdown-menu pull-right" role="menu">
+                                                    <li>
+                                                        <button class="btn btn-default btnLink" (click)='onDeleteProfile(profile.CandidateID)'>
+                                                                 <i class="fa fa-times"></i>  Delete
+                                                             </button>
+                                                    </li>
+                                                    <li class="divider"> </li>
+                                                    <li>
+                                                        <button class="btn btn-default btnLink" (click)='redirectToEditProfile(profile.CandidateID)'>
+                                                                <i class="icon-user"></i> Edit Profile 
+                                                                  </button>
+
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </td>
                                     </tr>

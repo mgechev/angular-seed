@@ -137,8 +137,7 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
             });
     }
     onUpdate() {
-        //console.log('Printing updated functions from Parent ::');
-        console.log(this.functions);
+        /** */
     }
     /**Prepars IEF object for sumbmission */
     createIEF(_iefFunctions: IEFFunction[]) {

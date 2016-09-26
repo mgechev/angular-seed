@@ -1,17 +1,23 @@
-<div class=" portlet light bordered">
+<div class=" portlet light bordered" *ngIf='isRecordFound '>
     <div class="portlet-title">
-        <div class="row">
-
-            <div class="col-lg-9">
+        <div class="col-md-4">
+            <h4>Interview Approval</h4>
+            
+        </div>
+    </div>
+    <div class="portlet-title">
+        <div class="col-lg-12 row">
+            <div class="pull-right">
+                <button type="submit" id="btnApprove" class="btn green" [disabled]='!selectedRowCount' (click)='onInterviewApprove()' tooltip="Approve"
+                    tooltipPlacement="top" tooltipTrigger="mouseenter">&nbsp;<i class="fa fa-check" ></i>&nbsp;</button>
+                <button type="button" id="btnReject" class="btn red" [disabled]='!selectedRowCount ' (click)='onInterviewReject()' tooltip="Reject"
+                    tooltipPlacement="top" tooltipTrigger="mouseenter">&nbsp;<i class="fa fa-times"></i>&nbsp;</button>
+            </div>
+            <div class="" style="margin-right: 100px">
                 <textarea class="form-control" id="txtComment" [disabled]='!selectedRowCount' rows="2" placeholder="Enter comment..." style="resize:vertical ; margin-bottom: 5px;"
                     [(ngModel)]='comment' required=""></textarea>
             </div>
-            <div class="">
-                <button type="submit" id="btnApprove" class="btn green" [disabled]='!selectedRowCount' (click)='onInterviewApprove()'  tooltip="Approve" 
-                 tooltipPlacement="top" tooltipTrigger="mouseenter">&nbsp;<i class="fa fa-check" ></i>&nbsp;</button>
-                <button type="button" id="btnReject" class="btn red" [disabled]='!selectedRowCount ' (click)='onInterviewReject()' tooltip="Reject"
-                 tooltipPlacement="top" tooltipTrigger="mouseenter">&nbsp;<i class="fa fa-times"></i>&nbsp;</button>
-            </div>
+
         </div>
     </div>
     <div class="portlet-body">

@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="row" style="margin-top:15px">
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label align">Interview Type <span class="required"> * </span></label>
+                                        <!--<label class="col-md-3 control-label align">Interview Type <span class="required"> * </span></label>
                                         <div class="col-md-3">
                                             <div class="input-group select2-bootstrap-append" style="width:160px !important">
                                                 <select class="form-control" [(ngModel)]="ScheduleInterView.InterviewType.Id" [disabled]='isInterviewReschedule'  (change)='getInterviewRoundsbyInterviewType($event.target.value)'>
@@ -62,6 +62,16 @@
                                                     <option></option>
                                                     <option *ngFor="let round of InterviewRounds" [value]="round.Id">{{round.Value}}</option>
                                             </select>
+                                        </div>-->
+                                        <label class="col-md-3 control-label align">Interview Round <span class="required"> * </span></label>
+                                        <div class="col-md-3">
+                                            <div class="input-group select2-bootstrap-append" style="width:160px !important">
+                                                <select class="form-control" [(ngModel)]="ScheduleInterView.Round.Id" (change)='getNominatedInterviewersByRound($event.target.value)'
+                                                    [disabled]='isInterviewReschedule'>
+                                                    <option></option>
+                                                    <option *ngFor="let round of CombinedInterviewRounds" [value]="round.InterviewRound.Id">{{round.InterviewRound.Value}}</option>
+                                            </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -80,7 +90,7 @@
                                             <div class="col-md-3">
                                                 <select class="form-control" [(ngModel)]="ScheduleInterView.SkypeID">
                                                     <option></option>
-                                                    <option *ngFor="let round of InterviewRounds" [value]="round.Id">{{round.Value}}</option>
+                                                    <option *ngFor="let skypeid of InterviewSkypeId" [value]="skypeid.Id">{{skypeid.Value}}</option>
                                             </select>
                                             </div>
                                         </div>
@@ -95,12 +105,11 @@
                                                     <optgroup label="Nominations" *ngIf="NominatedInterviewersAvailable">
                                                         <option  *ngFor="let interviewer of NominatedInterviewers" [value]="interviewer.Id" [text]="interviewer.Value">{{interviewer.Value}}</option>
                                                     </optgroup>
-                                                    <optgroup label="Other">
+                                                    <optgroup  *ngIf="IsOtherInterviewersAdded" label="Other">
                                                         <option  *ngFor="let interviewer of OtherInterviewers" [value]="interviewer.Id">{{interviewer.Value}}</option>
                                                     </optgroup>
                                               </select>
-
-                                                <!--<multiple-demo></multiple-demo>-->
+                                                <a class="pull-right" tooltip="Add all other interviewers which are not nominated by initiator" (click)="AddOtherInterviewers()"><i class="fa fa-plus"></i> Interviewers</a>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -143,7 +152,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label align">Reason <span class="required"> * </span></label>
                                         <div class="col-md-8">
-                                            <textarea class="form-control" rows="2" placeholder="Reson to send for approval" style="resize:vertical" [(ngModel)]="ScheduleInterView.Reason"
+                                            <textarea class="form-control" rows="2" placeholder="Enter reason for change in schedule" style="resize:vertical" [(ngModel)]="ScheduleInterView.Reason"
                                                 required> </textarea>
                                         </div>
                                     </div>

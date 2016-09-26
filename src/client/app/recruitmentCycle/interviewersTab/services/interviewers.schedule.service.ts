@@ -62,9 +62,8 @@ export class InterviewersScheduleService {
     }
 
     getResources() {
-        return [{ id: 1, title: 'InterViewer A', eventColor: this.generateHexColors() },
-            { id: 2, title: 'InterViewer B', eventColor: this.generateHexColors() },
-            { id: 3, title: 'InterViewer C', eventColor: this.generateHexColors() }];
+        return [{ id: 1, title: 'Available', eventColor: '#32c5d2' },
+            { id: 2, title: 'Booked', eventColor: '#e7505a' }];
     }
     getEvent() {
         return [{
@@ -82,7 +81,7 @@ export class InterviewersScheduleService {
     GetMyAllConductedInerviews(grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/RecruitmentCycle/GetMyAllConductedInerviews');
         this._spinnerService.show();
-         return this.authHttp.post(url ,{grdOptions})
+        return this.authHttp.post(url, { grdOptions })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

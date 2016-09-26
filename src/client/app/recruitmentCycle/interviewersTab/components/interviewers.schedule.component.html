@@ -10,7 +10,7 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <span class="active">Interviewrs</span>
+                <span class="active">My Schedule</span>
             </li>
         </ul>
 
@@ -160,10 +160,10 @@
         <div class="row">
             <div class="col-md-8">
                 <!-- MY SCHEDULE INTERVIEWS-->
-                <div class="portlet light bordered">
+                <div class="portlet light bordered" style="min-height: 430px;">
                     <div class="portlet-title">
                         <div class="caption font-dark">
-                            <span class="caption-subject bold uppercase"> My Schedule</span>
+                            <span class="caption-subject bold uppercase"><i class="fa fa-calendar-check-o"></i> My Schedule</span>
                         </div>
                     </div>
                     <div class="portlet-body">
@@ -189,7 +189,11 @@
                                         <td>
                                             <a href="mailto:shuxer@gmail.com"> {{_myInterview.RRFCODE}} </a>
                                         </td>
-                                        <td> {{_myInterview.InterviewMode.Value}} </td>
+                                        <td>
+                                            <div> {{_myInterview.InterviewMode.Value}}</div>
+                                            <div *ngIf="_myInterview.InterviewMode.Id == modeConstant.SkypeInterview"> Skype ID: {{_myInterview.SkypeID.Value ? _myInterview.SkypeID.Value : "N/A"}}</div>
+                                            <div *ngIf="_myInterview.InterviewMode.Id == modeConstant.SkypeInterview"> Password: {{_myInterview.SkypePassword ? _myInterview.SkypePassword : "N/A"}}</div>
+                                        </td>
                                         <td class="center"> {{_myInterview.InterviewDate}} on {{_myInterview.InterviewFromTime}} </td>
                                         <td>
                                             <span class="label label-sm label-success"> {{_myInterview.Status}} </span>
@@ -201,14 +205,17 @@
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li>
-                                                        <a href="javascript:;">
+                                                        <a href="javascript:;" (click)='getResume(_myInterview.CandidateID)'>
                                                             <i class="icon-download"></i> Download Resume </a>
                                                     </li>
                                                     <li>
-                                                        <a (click)='showIEF(_myInterview.RRFID, _myInterview.CandidateID, _myInterview.DisplayCandidateInfo, _myInterview.InterviewType, _myInterview.InterviewID ,_myInterview.Status)'>
+                                                        <button class="btn btn-default btnLink " [disabled]='DisableIEF(_myInterview.InterviewDate,_myInterview.InterviewFromTime)'
+                                                            (click)='showIEF(_myInterview.RRFID, _myInterview.CandidateID, _myInterview.DisplayCandidateInfo, _myInterview.InterviewType, _myInterview.InterviewID ,_myInterview.Status)'
+                                                            style="width:100%; border-color:white;">
                                                             <span *ngIf='showSubmitIEF(_myInterview.Status)'> <i class="icon-tag"></i> Submit IEF</span>
                                                             <span *ngIf='!showSubmitIEF(_myInterview.Status)'> <i class="icon-tag"></i> Change status</span>
-                                                        </a>
+                                                        </button>
+
                                                     </li>
 
                                                 </ul>
@@ -221,46 +228,46 @@
                                 </tbody>
                             </table>
                             <span style="margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Records Found</span>
-                                            </div>
                         </div>
                     </div>
-                    <!-- /MY SCHEDULE INTERVIEWS-->
                 </div>
-                <div class="col-md-4">
-                    <!-- /MY SCHEDULE INTERVIEWS CALENDAR-->
-                    <div class="portlet light bordered">
-                        <div class="portlet-title">
-                            <div class="caption font-dark">
-                                <i class="icon-calendar font-dark"></i>
-                                <span class="caption-subject bold uppercase"> Schedule Calender</span>
-                            </div>
-                        </div>
-                        <div class="portlet-body">
-                            <div style=" text-align-last: center;">
-                                <full-calendar [resources]="InterviewerCalendarDetails.Resources" (onEventRender)="showDetails($event)" [events]="InterviewerCalendarDetails.Events"
-                                [header]="header" [defaultDate]="currentDate" [eventLimit]="4" [editable]="true">
-                                </full-calendar>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /MY SCHEDULE INTERVIEWS CALENDAR-->
-                </div>
+                <!-- /MY SCHEDULE INTERVIEWS-->
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="portlet light bordered">
-                        <div class="portlet-title">
-                            <div class="caption font-dark">
-                                <span class="caption-subject bold uppercase"> Interview History</span>
-                            </div>
+            <div class="col-md-4">
+                <!-- /MY SCHEDULE INTERVIEWS CALENDAR-->
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption font-dark">
+                            <i class="icon-calendar font-dark"></i>
+                            <span class="caption-subject bold uppercase"> Schedule Calender</span>
                         </div>
-                        <div class="portlet-body">
-                            <!-- BEGIN SHOW AND SEARCH  -->
-                            <div class="dataTables_wrapper no-footer">
-                                <div class="row" *ngIf="!HISTORYRECORDSNOTFOUND">
-                                    <div class="col-lg-3 col-sm-3">
-                                        <div class="dataTables_length ">
-                                            <label>show
+                    </div>
+                    <div class="portlet-body">
+                        <div style=" text-align-last: center;">
+                            <full-calendar [resources]="InterviewerCalendarDetails.Resources" (onEventRender)="showDetails($event)" [events]="InterviewerCalendarDetails.Events"
+                                [header]="header" [defaultDate]="currentDate" [eventLimit]="4" [editable]="true">
+                            </full-calendar>
+                        </div>
+                    </div>
+                </div>
+                <!-- /MY SCHEDULE INTERVIEWS CALENDAR-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption font-dark">
+                            <span class="caption-subject bold uppercase"><i class="fa fa-history"></i> Interview History</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <!-- BEGIN SHOW AND SEARCH  -->
+                        <div class="dataTables_wrapper no-footer">
+                            <div class="row" *ngIf="!HISTORYRECORDSNOTFOUND">
+                                <div class="col-lg-3 col-sm-3">
+                                    <div class="dataTables_length ">
+                                        <label>show
                                                 <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptionsIntwHistory.PerPageCount" (ngModelChange)="bindGridData()">
                                                     <option value="5">5</option>
                                                     <option value="10">10</option>
@@ -268,87 +275,87 @@
                                                     <option value="50">50</option>
                                                 </select>
                                             </label>
-                                        </div>
                                     </div>
-                                    <div class="col-lg-3 col-sm-3">
-                                        <div class="dataTables_length ">
-                                            <label>Sort By
+                                </div>
+                                <div class="col-lg-3 col-sm-3">
+                                    <div class="dataTables_length ">
+                                        <label>Sort By
                                                 <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptionsIntwHistory.OrderBy" (ngModelChange)="bindGridData()">
                                                     <!--<option *ngFor="let sortColumn of SortByList" [value]="sortColumn.Value">{{sortColumn.Id}}</option>-->
                                                     <option value="Modified">Modified</option>
                                                 </select>
                                             </label>
-                                        </div>
                                     </div>
-                                    <div class="col-lg-3 col-sm-3">
-                                        <div class="dataTables_length ">
-                                            <label>Order by
+                                </div>
+                                <div class="col-lg-3 col-sm-3">
+                                    <div class="dataTables_length ">
+                                        <label>Order by
                                                 <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptionsIntwHistory.Order" (ngModelChange)="bindGridData()">
                                                     <option value="asc">Ascending</option>
                                                     <option value="desc">Descending</option>
                                                 </select>
                                             </label>
-                                        </div>
                                     </div>
-                                    <div class="col-lg-3 col-sm-3 ">
-                                        <div class="dataTables_filter pull-right ">
-                                            <label>Search:
+                                </div>
+                                <div class="col-lg-3 col-sm-3 ">
+                                    <div class="dataTables_filter pull-right ">
+                                        <label>Search:
                                                 <input class="form-control input-sm input-small input-inline " [(ngModel)]='searchText' />
                                             </label>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- END SHOW AND SEARCH -->
-                            <div class="table-scrollable">
-                                <table class="table table-striped table-bordered table-checkable order-column" id="sample_1">
-                                    <!--<thead style="border-bottom:solid 1px rgb(231, 236, 241) !important;">
+                        </div>
+                        <!-- END SHOW AND SEARCH -->
+                        <div class="table-scrollable">
+                            <table class="table table-striped table-bordered table-checkable order-column" id="sample_1">
+                                <!--<thead style="border-bottom:solid 1px rgb(231, 236, 241) !important;">
                                     <tr>
                                         <th> Interview Details </th>
                                         <th> Actions </th>
                                     </tr>
                                 </thead>-->
-                                    <tbody>
-                                        <!-- NgBinding-->
-                                        <tr class="gradeX" *ngFor="let _myInterview of InterviewHistory">
-                                            <td>
-                                                <intwDetailsRow [InterviewRecord]=_myInterview></intwDetailsRow>
-                                                <br>
-                                                <br>
-                                                <IEFGridRow [InterviewID]=_myInterview.InterviewID *ngIf=_myInterview.showIEF></IEFGridRow>
+                                <tbody>
+                                    <!-- NgBinding-->
+                                    <tr class="gradeX" *ngFor="let _myInterview of InterviewHistory">
+                                        <td>
+                                            <intwDetailsRow [InterviewRecord]=_myInterview></intwDetailsRow>
+                                            <br>
+                                            <br>
+                                            <IEFGridRow [InterviewID]=_myInterview.InterviewID *ngIf=_myInterview.showIEF></IEFGridRow>
 
-                                            </td>
-                                            <td style="width:80px">
-                                                <div class="btn-group">
-                                                    <button class="btn btn-xs green dropdown-toggle" (click)="onIEFClick(_myInterview)" type="button" data-toggle="dropdown"
+                                        </td>
+                                        <td style="width:80px">
+                                            <div class="btn-group">
+                                                <button class="btn btn-xs green dropdown-toggle" (click)="onIEFClick(_myInterview)" type="button" data-toggle="dropdown"
                                                     aria-expanded="false"> {{_myInterview.IEFButtonText}}
                                                     </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <!-- /NgBinding-->
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <!-- /NgBinding-->
 
 
-                                    </tbody>
-                                </table>
-                                <span style="margin-top:5px;margin-left:15px" *ngIf='HISTORYRECORDSNOTFOUND'>No Records Found</span>
-                            </div>
+                                </tbody>
+                            </table>
+                            <span style="margin-top:5px;margin-left:15px" *ngIf='HISTORYRECORDSNOTFOUND'>No Records Found</span>
+                        </div>
 
-                            <div class="table-toolbar" *ngIf="!HISTORYRECORDSNOTFOUND">
-                                <div class="pull-right ">
-                                    <button type="button " class="btn btn-default " [disabled]="!grdOptionsIntwHistory.PreviousButton
+                        <div class="table-toolbar" *ngIf="!HISTORYRECORDSNOTFOUND">
+                            <div class="pull-right ">
+                                <button type="button " class="btn btn-default " [disabled]="!grdOptionsIntwHistory.PreviousButton
                                   " (click)="OnPaginationClick(-1) ">
                                         &laquo; Prev</button> &nbsp;&nbsp;
-                                    <button type="button " class="btn btn-default " [disabled]="!grdOptionsIntwHistory.NextButton
+                                <button type="button " class="btn btn-default " [disabled]="!grdOptionsIntwHistory.NextButton
                                   " (click)="OnPaginationClick(1) ">
                                         Next &raquo;</button>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- END CONTENT BODY -->
     </div>
-    <!-- END CONTENT -->
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->

@@ -67,6 +67,7 @@ export class QuickSidebarComponent implements OnInit {
       (results: ResponseFromAPI) => {
         if (results.StatusCode === APIResult.Success) {
           this.toastr.success((<ResponseFromAPI>results).Message);
+          this.getMyToDoList();
         } else {
           this.toastr.error((<ResponseFromAPI>results).Message);
         }
@@ -86,6 +87,8 @@ export class QuickSidebarComponent implements OnInit {
       (results: ResponseFromAPI) => {
         if (results.StatusCode === APIResult.Success) {
           this.toastr.success((<ResponseFromAPI>results).Message);
+          this.getMyToDoList();
+          this.clearData();
         } else {
           this.toastr.error((<ResponseFromAPI>results).Message);
         }
@@ -102,6 +105,7 @@ export class QuickSidebarComponent implements OnInit {
       (results: ResponseFromAPI) => {
         if (results.StatusCode === APIResult.Success) {
           this.toastr.success((<ResponseFromAPI>results).Message);
+          this.getMyToDoList();
         } else {
           this.toastr.error((<ResponseFromAPI>results).Message);
         }

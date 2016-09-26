@@ -5,6 +5,7 @@ import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
 import { MasterData  } from '../../../shared/model/common.model';
+import { TransferInterview} from '../model/RRFCandidateList';
 
 @Injectable()
 export class RRFCandidateListService {
@@ -40,11 +41,26 @@ export class RRFCandidateListService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-
+    GetCandidatesRatingsforChart(CandidateID: MasterData, RRFID: MasterData) {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetCandidateInterviewChartSummary');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { CandidateID: CandidateID, RRFID: RRFID })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     proceedForOfferGeneration(InterviewID: MasterData) {
         let url = Config.GetURL('/api/RecruitmentCycle/ProceedForOfferGeneration');
         this._spinnerService.show();
         return this.authHttp.post(url, { InterviewID })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    TransferToOtherRRF(InterviewDetails: TransferInterview) {
+        let url = Config.GetURL('/api/RecruitmentCycle/SendFitmentIssueForApproval');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { InterviewDetails })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
@@ -54,6 +70,15 @@ export class RRFCandidateListService {
         let url = Config.GetURL('/api/RecruitmentCycle/UpdateCandidateIEFStatus');
         this._spinnerService.show();
         return this.authHttp.post(url, { InterviewID, Status, Comments })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
+    setActualTime(InterviewDetails: {}) {
+        let url = Config.GetURL('/api/RecruitmentCycle/UpdateCandidateActualInterviewTime');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { InterviewDetails })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

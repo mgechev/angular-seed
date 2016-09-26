@@ -22,8 +22,5 @@ export class IEFFunctionComponent {
         //     mstData.Value = index.toString();
         //     this.ratings.push(mstData);
         // }
-        console.log('From Component..!');
-
-
     }
 }

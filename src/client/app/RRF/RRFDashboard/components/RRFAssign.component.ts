@@ -65,10 +65,16 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
             .subscribe(
             results => {
                 this.selectedRRF = <any>results;
-                if (this.selectedRRF.AssignedData === undefined) {
+                this.selectedRRF.assignedData = new Array();
+                for (var index = 0; index < results.AssignedData.length; index++) {
+                    if(results.AssignedData[index].Status.Value === 'Assigned'){
+                        this.selectedRRF.assignedData.push(results.AssignedData[index]);
+                    }
+                }
+                if (this.selectedRRF.assignedData === undefined) {
                     var assignmentDetails: AssignmentDetails = new AssignmentDetails();
-                    this.selectedRRF.AssignedData = new Array();
-                    this.selectedRRF.AssignedData.push(assignmentDetails);
+                    this.selectedRRF.assignedData = new Array();
+                    this.selectedRRF.assignedData.push(assignmentDetails);
                 }
                 this.GetRecruiter();
             },
@@ -117,6 +123,10 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
     isFormValidate() {
         if ($('#cmbAssignTo').val() === null) {
             this.toastr.error('Please select assign To value');
+            return false;
+        }
+        if ($('#txtAssigningComment').val() === "") {
+            this.toastr.error('Please select Assigning Comment');
             return false;
         }
         return true;

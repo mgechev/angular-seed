@@ -1,10 +1,30 @@
 <!-- BEGIN TOP NAVIGATION MENU -->
-<div class="top-menu">
-    <ul class="nav navbar-nav pull-right">
-        <li class="separator hide"> </li>
-        <!-- BEGIN NOTIFICATION DROPDOWN -->
-        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-        <!--<li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
+<div class="page-top">
+    <form class="search-form" (submit)="advancedSearch(searchString)">
+        <div class="input-group">
+            <input type="text" class="form-control input-sm" placeholder="Search...">
+            <span class="input-group-btn">
+                                <a class="btn submit" >
+                                    <i class="icon-magnifier"></i>
+                                </a>
+             </span>
+        </div>
+    </form>
+    <!--<form class="search" style="margin: 22px 223px 0 0;display: inline-block;width: 31px;float: left;">
+        <div class="input-group">
+            <input type="text" class="form-control" [(ngModel)]="searchString" placeholder="Search for..." style="width:initial;" />
+            <span class="input-group-btn">
+                  <button class="btn green-soft uppercase bold" type="button" (click)="advancedSearch(searchString)">Search</button>
+            </span>
+        </div>
+
+    </form>-->
+    <div class="top-menu">
+        <ul class="nav navbar-nav pull-right">
+            <li class="separator hide"> </li>
+            <!-- BEGIN NOTIFICATION DROPDOWN -->
+            <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+            <!--<li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                 <i class="icon-bell"></i>
                 <span class="badge badge-success"> 7 </span>
@@ -111,11 +131,11 @@
                 </li>
             </ul>
         </li>-->
-        <!-- END NOTIFICATION DROPDOWN -->
-        <li class="separator hide"> </li>
-        <!-- BEGIN INBOX DROPDOWN -->
-        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-        <!--<li class="dropdown dropdown-extended dropdown-inbox dropdown-dark" id="header_inbox_bar">
+            <!-- END NOTIFICATION DROPDOWN -->
+            <li class="separator hide"> </li>
+            <!-- BEGIN INBOX DROPDOWN -->
+            <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+            <!--<li class="dropdown dropdown-extended dropdown-inbox dropdown-dark" id="header_inbox_bar">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                 <i class="icon-envelope-open"></i>
                 <span class="badge badge-danger"> 4 </span>
@@ -187,11 +207,11 @@
                 </li>
             </ul>
         </li>-->
-        <!-- END INBOX DROPDOWN -->
-        <li class="separator hide"> </li>
-        <!-- BEGIN TODO DROPDOWN -->
-        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-        <!--<li class="dropdown dropdown-extended dropdown-tasks dropdown-dark" id="header_task_bar">
+            <!-- END INBOX DROPDOWN -->
+            <li class="separator hide"> </li>
+            <!-- BEGIN TODO DROPDOWN -->
+            <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+            <!--<li class="dropdown dropdown-extended dropdown-tasks dropdown-dark" id="header_task_bar">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                 <i class="icon-calendar"></i>
                 <span class="badge badge-primary"> 3 </span>
@@ -299,18 +319,18 @@
                 </li>
             </ul>
         </li>-->
-        <!-- END TODO DROPDOWN -->
-        <!-- BEGIN USER LOGIN DROPDOWN -->
-        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-        <li class="dropdown dropdown-user dropdown-dark">
-            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                <span class="username username-hide-on-mobile"> {{currentUser.Value}} </span>
-                <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
-                <!--<img alt="" class="img-circle" src="../assets/layouts/layout4/img/default-user.jpg" />-->
-                <img alt="" class="img-circle" src="../assets/pages/media/users/avatar10.jpg" />
-            </a>
-            <ul class="dropdown-menu dropdown-menu-default">
-                <!--<li>
+            <!-- END TODO DROPDOWN -->
+            <!-- BEGIN USER LOGIN DROPDOWN -->
+            <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+            <li class="dropdown dropdown-user dropdown-dark">
+                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                    <span class="username username-hide-on-mobile"> {{currentUser.Value}} </span>
+                    <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
+                    <!--<img alt="" class="img-circle" src="../assets/layouts/layout4/img/default-user.jpg" />-->
+                    <img alt="" class="img-circle" src="../assets/pages/media/users/avatar10.jpg" />
+                </a>
+                <ul class="dropdown-menu dropdown-menu-default">
+                    <!--<li>
                     <a href="page_user_profile_1.html">
                         <i class="icon-user"></i> My Profile </a>
                 </li>
@@ -335,26 +355,27 @@
                     <a href="page_user_lock_1.html">
                         <i class="icon-lock"></i> Lock Screen </a>
                 </li>-->
-                <li>
+                    <li>
 
-                    <a (click)="pushNotificationSettings()">
-                        <i class="fa fa-cogs"></i> Settings </a>
-                    <hr style="margin: 2px;" />
-                </li>
-                <li>
-                    <a (click)="logout()">
-                        <i class="icon-key"></i> Log Out </a>
-                </li>
+                        <a (click)="pushNotificationSettings()">
+                            <i class="fa fa-cogs"></i> Settings </a>
+                        <hr style="margin: 2px;" />
+                    </li>
+                    <li>
+                        <a (click)="logout()">
+                            <i class="icon-key"></i> Log Out </a>
+                    </li>
 
-            </ul>
-        </li>
-        <!-- END USER LOGIN DROPDOWN -->
-        <!-- BEGIN QUICK SIDEBAR TOGGLER -->
-        <li class="dropdown dropdown-extended quick-sidebar-toggler">
-            <span class="sr-only">Toggle Quick Sidebar</span>
-            <i class="icon-logout"></i>
-        </li>
-        <!-- END QUICK SIDEBAR TOGGLER -->
-    </ul>
+                </ul>
+            </li>
+            <!-- END USER LOGIN DROPDOWN -->
+            <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+            <li class="dropdown dropdown-extended quick-sidebar-toggler">
+                <span class="sr-only">Toggle Quick Sidebar</span>
+                <i class="icon-logout"></i>
+            </li>
+            <!-- END QUICK SIDEBAR TOGGLER -->
+        </ul>
+    </div>
 </div>
 <!-- END TOP NAVIGATION MENU -->

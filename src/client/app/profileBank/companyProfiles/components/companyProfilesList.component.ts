@@ -100,7 +100,6 @@ export class CompanyProfilesListComponent implements OnActivate {
     }
     /**Redirecting to candidate's all interview history page */
     getCandidateHistory(_candidateID: MasterData) {
-        console.log(_candidateID);
         sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
         sessionStorage.setItem('onReturnPath', '/App/ProfileBank/CompanyProfiles');
         this._router.navigate(['/App/ProfileBank/CompanyProfiles/History']);
@@ -222,8 +221,8 @@ export class CompanyProfilesListComponent implements OnActivate {
 
         for (var index = 0; index < this.companyProfilesList.Profiles.length; index++) {
             if (this.companyProfilesList.Profiles[index].IsChecked) {
-                if (!this.companyProfilesList.Profiles[index].isRRFAssigned &&
-                    this.companyProfilesList.Profiles[index].Status.Value.toLowerCase() !== 'incomplete' ) {
+                if (!this.companyProfilesList.Profiles[index].RRFAssigned.isRRFAssigned &&
+                    this.companyProfilesList.Profiles[index].Status.Value.toLowerCase() !== 'incomplete') {
                     this.Candidate.CandidateID = this.companyProfilesList.Profiles[index].CandidateID;
                     this.Candidate.Candidate = this.companyProfilesList.Profiles[index].Candidate;
                     this.selectedCandidates.push(this.Candidate);

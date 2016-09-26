@@ -111,6 +111,8 @@ export class AllProfilesListComponent implements OnActivate {
             (results: any) => {
                 this.profile.Comments = results.Comments;
                 this.profile.Status = results.Status;
+                this.toastr.success((<ResponseFromAPI>results).Message);
+                this.getAllProfiles();
             },
             error => this.toastr.error(<any>error));
     }
@@ -161,14 +163,13 @@ export class AllProfilesListComponent implements OnActivate {
     }
 
     onUpdateStauts() {
-        if (this.selectedStatus.Id === undefined)
-            this.selectedStatus = this.profile.Status;
+        this.selectedStatus.Id = 0;
+        this.selectedStatus.Value = "Incomplete";
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             (results: ResponseFromAPI) => {
                 if (results.StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
-                    console.log((<ResponseFromAPI>results).Message);
                     this.profile.Status = new MasterData();
                     this.getAllProfiles();
                 } else {

@@ -1,8 +1,8 @@
-import {Component, Input, Output, AfterViewInit, EventEmitter, OnChanges } from '@angular/core';
+import {Component, AfterViewInit, OnChanges } from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate } from '@angular/router';
 import {CalenderSlot, CalenderDetails} from '../Model/interviewSlot';
 import {InterviewSlotService } from '../Service/InterviewSlot.service';
-import { ResponseFromAPI, MasterData} from '../../../../../shared/model/common.model';
+import { ResponseFromAPI} from '../../../../../shared/model/common.model';
 import { APIResult} from  '../../../../../shared/constantValue/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
@@ -15,10 +15,9 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 })
 
 export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChanges {
-    //@Input() test :string;
-    @Input() RRFID: MasterData = new MasterData();
-    @Input() RRFCode: string;
-    //@Output() HideSlot = new EventEmitter();
+    // @Input() RRFID: MasterData = new MasterData();
+    // @Input() RRFCode: string;
+
     meta: CalenderSlot[] = [];
     errorMessage: string = '';
 
@@ -28,11 +27,13 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
         public toastr: ToastsManager) {
         // this.getRRFSlot();
         //this.HideSlot.emit('hideit');
+
+         this.getRRFSlot();
     }
 
     routerOnActivate() {
         //console.write();
-        if (this.meta.length == 0) {
+        if (this.meta.length === 0) {
             this.addNewSlot();
         }
     }
@@ -75,7 +76,7 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
     }
 
     getRRFSlot() {
-        this._interviewSlotService.getSlotForRRF(this.RRFID)
+        this._interviewSlotService.getSlotForRRF()
             .subscribe(
             (results: any) => {
                 this.meta = <any>results;
@@ -104,8 +105,8 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
     }
     removeSlot(slotTobeRemove: number) {
         for (var index = 0; index < this.meta.length; index++) {
-            if (this.meta[index].ID == slotTobeRemove) {
-                if (this.meta[index].ID == undefined) {
+            if (this.meta[index].ID === slotTobeRemove) {
+                if (this.meta[index].ID === undefined) {
                     this.meta.splice(index, 1);
                 } else {
                     this.removeSlotFromDB(this.meta[index]);
@@ -132,9 +133,9 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
     ngOnChanges(changes: any) {
         // if (changes.RRFCode != undefined && changes.RRFID != undefined) {
         //TODO when RRFCODE implemented uncommit this line and commit below line
-        if (changes.RRFID != undefined) {
-            this.getRRFSlot();
-        }
+        // if (changes.RRFID != undefined) {
+        //     this.getRRFSlot();
+        // }
 
     }
     formatDate(date: any) {

@@ -21,7 +21,7 @@
             {{IEFData.FunctionLabel}}
         </div>
         <div class="col-lg-1">
-            {{IEFData.Rating}}
+            {{IEFData.Rating === "0" ? "-" : IEFData.Rating }}
         </div>
         <div class="col-lg-7">
             {{IEFData.FunctionValue}}

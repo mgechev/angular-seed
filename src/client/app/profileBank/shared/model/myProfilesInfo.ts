@@ -26,6 +26,8 @@ export class CandidateProfile {
   public AadharCardNo: string = '';
   public CandidateTeamManagement = new TeamManagement();
   public CandidateCareerProfile = new CareerProfile();
+  public CandidateCurrentCompanyProfile = new EmploymentHistory();
+  public CandidateMailDetails = new MailDetails();
   //for checkboxes for list
   public IsChecked: boolean;
   public url: any;
@@ -62,7 +64,8 @@ export class CandidateProfile {
   public isAuthourized: boolean;
   public Owner: MasterData = new MasterData();
   public CandidateCode: string;
-  public isRRFAssigned: boolean;
+  //public isRRFAssigned: boolean;
+  public RRFAssigned: RRFAssigned = new RRFAssigned();
 
   /**property for Images results binary string */
   public BinaryImage: string;
@@ -70,6 +73,8 @@ export class CandidateProfile {
   public BinaryResume: string;
   /**Property for giving file name with extection */
   public ResumeName: string = 'TestResume.doc';
+  /**Propety to get profiles last updated date */
+  public ModifiedOn: string;
 
 }
 
@@ -92,6 +97,14 @@ export class TeamManagement {
   public TeamHandlingChallenges: string;
   public CommentsUpdated: boolean;
   public FollowUpComments: string;
+}
+export class MailDetails {
+  //properties of candidate Mail Details
+  public CC: string;
+  public Subject: string;
+  public Body: string;
+  public Status: string;
+  public To: string;
 }
 export class CareerProfile {
   //properties of Candidate Career Profile
@@ -194,7 +207,8 @@ export class EmploymentHistory {
   public Location: string;
   public TimeSpentInCompany: string;
   public IsCurrentCompany: boolean = false;
-
+  public ToDate: Date;
+  public FromDate: Date;
 }
 export class CandidateExperience {
   public CandidateID: MasterData = new MasterData();
@@ -205,7 +219,15 @@ export class CandidateExperience {
   public ItemID: string;
   public CommentsUpdated: boolean = false;
 }
-
+export class BarChartData {
+  public functions: any[];
+  public ratingsData: string[];
+}
+//TODO replace isRRFAssigned property from RRFAssigned object from all pages Model
+export class RRFAssigned {
+  public isRRFAssigned: boolean;
+  public RRFID: MasterData = new MasterData();
+}
 // export class GridOperations {
 //   public IDColl: Array<number> = new Array<number>();
 //   public ButtonClicked: number;

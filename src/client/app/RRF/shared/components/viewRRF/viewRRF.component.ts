@@ -1,11 +1,12 @@
-import { Component, Input, AfterViewInit} from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+import { Component, OnInit, Input, AfterViewInit} from '@angular/core';
+import {  OnActivate, ROUTER_DIRECTIVES, RouteSegment, Router } from '@angular/router';
 import { RRFDetails} from '../../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../../myRRF/services/myRRF.service';
 import { MasterData} from '../../../../shared/model/common.model';
 import { RRFGridRowComponent } from '../RRFGridRow/RRFGridRow.component';
 import { RRFCandidateListService } from '../../../RRFDashboard/services/RRFCandidatesList.service';
 import {RRFSpecificCandidateList} from '../../../RRFDashboard/model/RRFCandidateList';
+import {FeedbackDataComponent} from '../feedbackData/feedbackData.component';
 
 
 
@@ -13,26 +14,32 @@ import {RRFSpecificCandidateList} from '../../../RRFDashboard/model/RRFCandidate
     moduleId: module.id,
     selector: 'view-RRF',
     templateUrl: 'viewRRF.component.html',
-    directives: [ROUTER_DIRECTIVES, RRFGridRowComponent],
+    directives: [ROUTER_DIRECTIVES, RRFGridRowComponent, FeedbackDataComponent],
     styleUrls: ['viewRRF.component.css'],
     providers: [MyRRFService, RRFCandidateListService]
 })
 
 
-export class ViewRRFComponent implements AfterViewInit {
+export class ViewRRFComponent implements OnInit {
     @Input() RRFID: MasterData = new MasterData();
     selectedRRF: RRFDetails = new RRFDetails();
     candidatelist: RRFSpecificCandidateList[] = [];
     errorMessage: string = '';
     constructor(private _myRRFService: MyRRFService,
         private _RRFCandidateService: RRFCandidateListService) {
+       /** */
     }
 
+    ngOnInit() {
+        this.getRRFDetails(this.RRFID);
+        this.getCandidatesForRRF(this.RRFID);
+    }
     getRRFDetails(rrfID: MasterData) {
         this._myRRFService.getRRFDetails(rrfID.Value)
             .subscribe(
             (results: RRFDetails) => {
                 this.selectedRRF = results;
+                this.selectedRRF.IsShowFeedback = false;
             },
             error => this.errorMessage = <any>error);
     }
@@ -58,11 +65,11 @@ export class ViewRRFComponent implements AfterViewInit {
             }
         }
     }
-
-    ngAfterViewInit() {
-        this.getRRFDetails(this.RRFID);
-        this.getCandidatesForRRF(this.RRFID);
+     showAllFeedback(rrf: RRFDetails) {
+        if (rrf.IsShowFeedback === true) {
+            rrf.IsShowFeedback = false;
+        } else {
+            rrf.IsShowFeedback = true;
+        }
     }
-
-
 }

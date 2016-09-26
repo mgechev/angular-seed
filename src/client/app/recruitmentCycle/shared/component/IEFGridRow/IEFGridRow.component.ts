@@ -14,11 +14,13 @@ import {CandidateIEFService} from '../../services/Candidate.IEF.service';
 
 export class IEFGridRowComponent implements AfterViewInit {
     @Input() InterviewID: MasterData = new MasterData();
+    @Input() StaticIEFDetails: Array<IEFFunction> = new Array<IEFFunction>();
     IEFDetails: IEFFunction[] = [];
     errorMessage: string = '';
 
     constructor(private _candidateIEFService: CandidateIEFService) {
         //
+
     }
     ngAfterViewInit() {
         this.getIEFByInterviewID();

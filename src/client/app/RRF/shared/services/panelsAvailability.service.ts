@@ -10,19 +10,19 @@ export class PanelsAvailabilityService {
     constructor(private authHttp: AuthHttp,
         private _spinnerService: SpinnerService) { }
 
-    //Get RRf Specific Availability of All Interviewers assigned to this RRF
-    getAvailabilityForRRF(RRFID: MasterData) {
+    //Get  Availability of All Interviewers 
+    getAvailabilityForRRF() {
         //TODO: Change URL after discussion with backend
-        let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewersAvalabilityForRRF');
+        let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewersAvailabiltiyDetailsToRecruiter');
         this._spinnerService.show();
-        return this.authHttp.post(url, { RRFID: RRFID })
+        return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
     sendRequest(Interviewer: MasterData) {
         //TODO: Change URL after discussion with backend
-        let url ='';
+        let url = '';
         //let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewersAvalabilityForRRF');
         this._spinnerService.show();
         return this.authHttp.post(url, { Interviewer: Interviewer })

@@ -7,6 +7,7 @@ import { ResponseFromAPI, MasterData } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { RRFDetails } from  '../../../RRF/myRRF/index';
 import * as  _ from 'lodash';
+import { CandidateProfile, ResumeMeta, AddCandidateResponse, AllCandidateProfiles, CareerProfile } from '../../shared/model/myProfilesInfo';
 @Component({
     moduleId: module.id,
     selector: 'profiles-assignrrf',
@@ -19,13 +20,14 @@ import * as  _ from 'lodash';
 export class ProfileBankAssignRRFComponent implements OnActivate {
     CandidateIDs: Array<MasterData> = new Array<MasterData>();
     returnPath: string;
+    returnPathToSchedule: string;
     Title: string;
     errorMessage: string;
     isRRFSelected: boolean = false;
     CandidateAssigment: AssignRRFDetails;
     RRFList: Array<RRFDetails>;
     selectedRRF: RRFDetails;
-
+    profile: CandidateProfile;
 
     constructor(private _router: Router,
         private toastr: ToastsManager,
@@ -37,6 +39,7 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
 
     routerOnActivate() {
         this.returnPath = sessionStorage.getItem('returnPath');
+        this.returnPathToSchedule = sessionStorage.getItem('returnPathToSchedule');
         if (this.returnPath.includes('MyProfiles')) {
             this.Title = 'My Profiles';
         } else {
@@ -97,25 +100,38 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
         chkItemIndex = _.findIndex(this.CandidateAssigment.Candidates, candidate);
         this.CandidateAssigment.Candidates.splice(chkItemIndex, 1);
     }
+    nextToSchedule() {
 
+        sessionStorage.removeItem('CandidateIDs');
+        if (this.returnPathToSchedule.toLowerCase().includes('schedule')) {
+            sessionStorage.setItem('RRFID', JSON.stringify(this.selectedRRF.RRFID));
+            sessionStorage.setItem('Candidate', JSON.stringify(this.CandidateAssigment.Candidates[0]));
+        }
+        if (this.returnPathToSchedule !== undefined)
+            this._router.navigate([this.returnPathToSchedule]);
+    }
     onAssignRRF() {
         sessionStorage.removeItem('CandidateIDs');
         this.CandidateAssigment.RRFID = this.selectedRRF.RRFID;
-        if(this.CandidateAssigment.Candidates.length >0) {
-        this._assignRRFService.assignRRFToCandidates(this.CandidateAssigment)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.Back();
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).Message);
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.toastr.error(<any>error);
-            });
+        // this.profile = new CandidateProfile();
+        // this.profile.isRRFAssigned = true;
+        if (this.CandidateAssigment.Candidates.length > 0) {
+            this._assignRRFService.assignRRFToCandidates(this.CandidateAssigment)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        // this.profile = new CandidateProfile();
+                        // this.profile.isRRFAssigned = true;
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.nextToSchedule();
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
+                });
         } else {
             this.toastr.error('No Candidates Selected');
         }

@@ -3,7 +3,7 @@ import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
-import { RRFDetails } from '../models/rrfDetails';
+import { RRFDetails, RRFFeedback } from '../models/rrfDetails';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
 import { MasterData } from '../../../shared/model/common.model';
 
@@ -48,6 +48,15 @@ export class MyRRFService {
         let url = Config.GetURL('/api/RRF/ReRaiseRRF');
         this._spinnerService.show();
         return this.authHttp.post(url, { rrfDetails })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
+    updateForFeedback(RRFFeedbacks: RRFFeedback) {
+        let url = Config.GetURL('/api/RRF/UpdateRRFWithFeedback');
+        this._spinnerService.show();
+        return this.authHttp.post(url, RRFFeedbacks)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

@@ -9,15 +9,16 @@ import {IfAuthorizeDirective} from '../../../../shared/directives/ifAuthorize.di
     moduleId: module.id,
     selector: 'RRFGridRow',
     templateUrl: 'RRFGridRow.component.html',
-    directives: [ROUTER_DIRECTIVES,IfAuthorizeDirective],
+    directives: [ROUTER_DIRECTIVES, IfAuthorizeDirective],
     styleUrls: ['../../css/RRF.component.css']
 })
 
 export class RRFGridRowComponent {
     @Input() RRFData: RRFDetails = new RRFDetails();
-    @Input() displayApproval :boolean = false;
-    @Input() displayAssignedTo : boolean = false;
+    @Input() displayApproval: boolean = false;
+    @Input() displayAssignedTo: boolean = false;
     @Input() displayJobDescDetails: boolean = false;
+    @Input() displayFeedBackStatus: boolean = false;
 
     AssignStatus: RRFAssignStatus = RRFAssignStatus;
 

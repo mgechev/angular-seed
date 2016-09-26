@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { RRFDetails} from '../../../myRRF/models/rrfDetails';
 import { MasterData } from  '../../../../shared/model/index';
@@ -8,47 +8,52 @@ import { PanelAvailability} from '../../model/panelAvailability.model';
     moduleId: module.id,
     selector: 'panel-availablity',
     templateUrl: 'panelsAvailablity.component.html',
-    providers: [ToastsManager,PanelsAvailabilityService]
+    providers: [ToastsManager, PanelsAvailabilityService]
 })
-export class PanelsAvailablityComponent implements OnInit {
+export class PanelsAvailablityComponent implements OnInit, OnChanges {
     rrfDetails: RRFDetails;
     errorMessage: any;
     _strr: Array<string> = new Array<string>();
-    _availability : Array<PanelAvailability> = new Array<PanelAvailability>();
+    _availability: Array<PanelAvailability> = new Array<PanelAvailability>();
     //Get profiles data
-    @Input() selectedRRF: RRFDetails;
+
+    //Now it will show Interviewers availablity irrespective of RRF 
+    //@Input() selectedRRF: RRFDetails;
+
     @Output() updatedRRF: EventEmitter<RRFDetails> = new EventEmitter<RRFDetails>();
     constructor(private toastr: ToastsManager,
-                private _panelsAvailability:PanelsAvailabilityService) {
-        console.log('In Contructor of panel...');
+        private _panelsAvailability: PanelsAvailabilityService) {
 
     }
     ngOnInit() {
         /** */
-        this.rrfDetails = this.selectedRRF;
+        //this.rrfDetails = this.selectedRRF;
         this.getPanelAvailablity();
-        //console.log(this.profilePic);
         // for (var index = 0; index < 4; index++) {
         //     this._strr.push(index.toString());
         // }
-        console.log('In init of panel...');
     }
     getPanelAvailablity() {
         /**Get interviewr's data from service */
-        this._panelsAvailability.getAvailabilityForRRF(this.rrfDetails.RRFID)
+
+        this._panelsAvailability.getAvailabilityForRRF()
             .subscribe(
             (results: any) => {
-               this._availability = results;
+                this._availability = results;
             },
             error => this.errorMessage = <any>error);
     }
     sendrequest(interviewer: MasterData) {
-          this._panelsAvailability.sendRequest(interviewer)
+        this._panelsAvailability.sendRequest(interviewer)
             .subscribe(
             (results: any) => {
-               this._availability = results;
+                this._availability = results;
             },
             error => this.errorMessage = <any>error);
         /** */
+    }
+
+    ngOnChanges(changes: any) {
+        //
     }
 }

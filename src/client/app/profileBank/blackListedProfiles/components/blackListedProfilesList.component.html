@@ -10,7 +10,7 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <span class="active">Profile Bank</span>
+                <span class="active">BlackListed Profiles</span>
             </li>
         </ul>
         <!--End Breadcrumb>-->
@@ -20,7 +20,7 @@
                     <div class="portlet-title">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4>BlackListed Profiles</h4>
+                                <h4><i class="fa fa-black-tie"></i> BlackListed Profiles</h4>
                             </div>
                             <div class="col-md-6">
                                 <!--<div class="dt-buttons pull-right">
@@ -172,12 +172,12 @@
                                             <td class="text-center"><i class="fa fa-download" aria-hidden="true"></i>{{blacklistedProfile.Resume_ID}}
                                             </td>-->
 
-                                            <td>
+                                            <td style="width:8%;">
                                                 <div class="btn-group">
                                                     <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
                                                             <i class="fa fa-angle-down"></i>
                                                         </button>
-                                                    <ul class="dropdown-menu" role="menu">
+                                                    <ul class="dropdown-menu pull-right" role="menu">
                                                         <li>
                                                             <button class="btn btn-default btnLink" [disabled]='getEditAccess(blacklistedProfile.Owner)' (click)='redirectToEditProfile(blacklistedProfile.CandidateID)'>
                                                                  <i class="icon-user"></i> Edit Profile 

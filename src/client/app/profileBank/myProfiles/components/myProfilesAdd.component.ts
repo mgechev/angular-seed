@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import { Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment } from '@angular/router';
+import {CalendarModule} from 'primeng/primeng';
 import { CandidateProfile, ResumeMeta, Qualification, CandidateExperience, EmploymentHistory} from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -9,6 +10,7 @@ import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
+import {Location} from '@angular/common';
 
 @Component({
     moduleId: module.id,
@@ -24,7 +26,6 @@ export class MyProfilesAddComponent implements OnActivate {
     qualification: Qualification;
     errorMessage: string;
     params: string;
-
     countries: Array<MasterData>;
     states: Array<MasterData>;
 
@@ -60,7 +61,8 @@ export class MyProfilesAddComponent implements OnActivate {
         private _masterService: MastersService,
         private _profileBankService: ProfileBankService,
         public toastr: ToastsManager,
-        private _router: Router) {
+        private _router: Router,
+        private _location: Location) {
         this.profile = new CandidateProfile();
         this.createQualificationObj();
         this.resumeMeta = new ResumeMeta();
@@ -69,6 +71,9 @@ export class MyProfilesAddComponent implements OnActivate {
     }
 
     routerOnActivate(segment: RouteSegment) {
+        window.onbeforeunload = function () {
+            return "Data will be lost if you leave the page, are you sure?";
+        };
         //get all master data and bind to dropdown
         this.getCountries();
         // this.getStates();
@@ -90,7 +95,6 @@ export class MyProfilesAddComponent implements OnActivate {
         this.CurrentYear = date.getFullYear();
         this.getProfilePhoto(this.CandidateID);
     }
-
     createQualificationObj() {
         this.qualification = new Qualification();
         this.qualification.Qualification = new MasterData();
@@ -340,8 +344,9 @@ export class MyProfilesAddComponent implements OnActivate {
             ? this.CandidateExperiences.FollowUpComments.trim().replace(/ +/g, ' ') : ''
         ) {
             this.profile.CommentsUpdated = this.CandidateExperiences.CommentsUpdated = true;
+            // this.profile.PreviousFollowupComments = this.CandidateExperiences.FollowUpComments = this.profile.FollowUpComments.trim();
             this.profile.PreviousFollowupComments = this.CandidateExperiences.FollowUpComments
-                = this.profile.FollowUpComments.trim();
+                = this.CandidateExperiences.FollowUpComments.trim();
         } else {
             this.profile.CommentsUpdated = this.CandidateExperiences.CommentsUpdated = false;
         }
@@ -547,14 +552,24 @@ export class MyProfilesAddComponent implements OnActivate {
         /**selected files string assing to the collection : uploadedPhoto */
         try {
             let FileList: FileList = selectedFile.target.files;
-            if (this.uploadedPhoto)
-                this.uploadedPhoto.length = 0;
-            for (let i = 0, length = FileList.length; i < length; i++) {
-                this.uploadedPhoto.push(FileList.item(i));
-                this.fileUploaded = true;
-                this.fileName = FileList.item(i).name;
+            if (selectedFile.target.files[0].size < 2000000) {
+                if (selectedFile.target.files[0].type === "image/jpeg" || selectedFile.target.files[0].type === "image/png" || selectedFile.target.files[0].type === "image/jpg") {
+                    if (this.uploadedPhoto)
+                        this.uploadedPhoto.length = 0;
+                    for (let i = 0, length = FileList.length; i < length; i++) {
+                        this.uploadedPhoto.push(FileList.item(i));
+                        this.fileUploaded = true;
+                        this.fileName = FileList.item(i).name;
+                    }
+                    this.postPhoto(this.CandidateID, this.uploadedPhoto[0]);
+                }
+                else {
+                    this.toastr.error('Please upload image of type .jpg, .png, .jpeg');
+                }
             }
-            this.postPhoto(this.CandidateID, this.uploadedPhoto[0]);
+            else {
+                this.toastr.error('Please upload image of size less than 2 MB');
+            }
         } catch (error) {
             document.write(error);
         }
@@ -614,6 +629,12 @@ export class MyProfilesAddComponent implements OnActivate {
     /** END Upload profile photo functionality*/
 
     Back() {
-        this._router.navigate(['/App/ProfileBank/MyProfiles']);
+        // this._router.navigate(['/App/ProfileBank/MyProfiles']);
+        let res: any;
+        res = confirm(
+            "Data will be lost if you leave the page, are you sure?"
+        );
+        if (res == true)
+            this._location.back();
     }
 }

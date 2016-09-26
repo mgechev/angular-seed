@@ -21,15 +21,19 @@ import { MyProfilesComponent } from '../../profileBank/myProfiles/index';
 import { CompanyProfilesComponent } from '../../profileBank/companyProfiles/index';
 import { RecentProfilesComponent } from '../../profileBank/recentProfiles/index';
 import { IncompleteProfilesComponent } from '../../profileBank/incompleteProfiles/index';
+import { AdvanceSearchComponent } from '../../profileBank/advanceSearch/index';
 import { MyRRFComponent } from '../../RRF/myRRF/index';
 import { RRFApprovalComponent } from '../../RRF/RRFApproval/index';
 import { RRFDashboardComponent } from '../../RRF/RRFDashboard/index';
+import { PendingRequestComponent } from '../../RRF/PendingRequest/index';
 import { SpinnerComponent, SpinnerService } from '../../shared/components/spinner/spinner';
 import { InterviewrsComponent, RecruitmentInterviewerCalenderComponent } from '../../recruitmentCycle/interviewersTab/index';
 import {ScheduleInterviewComponent} from '../../recruitmentCycle/scheduleInterview/index';
 import {DashboardComponent} from '../../Dashboard/component/dashboard.component';
 import {ShowScheduleInterviewsComponent} from '../../recruitmentCycle/recruitersTab/components/interviews.component';
 import { PushNotificationComponent } from '../../settings/pushNotification/pushNotification.component';
+import {InterviewerAvalabilityComponent } from '../../RRF/InterviewerAvalability/InterviewerAvalability.component';
+import { FeedbackPendingComponent } from '../../RRF/FeedBackPending/component/feedbackPending.component';
 
 @Component({
     moduleId: module.id,
@@ -57,14 +61,18 @@ import { PushNotificationComponent } from '../../settings/pushNotification/pushN
     { path: '/ProfileBank/CompanyProfiles', component: CompanyProfilesComponent },
     { path: '/ProfileBank/RecentProfiles', component: RecentProfilesComponent },
     { path: '/ProfileBank/IncompleteProfiles', component: IncompleteProfilesComponent },
+    { path: '/ProfileBank/AdvanceSearch', component: AdvanceSearchComponent },
     { path: '/RRF/MyRRF', component: MyRRFComponent },
     { path: '/RRF/RRFApproval', component: RRFApprovalComponent },
     { path: '/RRF/RRFDashboard', component: RRFDashboardComponent },
+    { path: '/RRF/PendingRequest', component: PendingRequestComponent },
     { path: '/AllInterviews/showInterviews', component: ShowScheduleInterviewsComponent },
     { path: '/Recruitment Cycle/Interviewers', component: InterviewrsComponent },
     { path: '/Recruitment Cycle/Schedule', component: ScheduleInterviewComponent },
     { path: '/Recruitment Cycle/mycalendar', component: RecruitmentInterviewerCalenderComponent },
     { path: '/NotificationSetting' , component: PushNotificationComponent},
+    { path: '/RRF/InterviewsAvailability' , component: InterviewerAvalabilityComponent},
+    { path : '/RRF/FeedbackPending', component : FeedbackPendingComponent}
 
 
 ])
@@ -73,8 +81,6 @@ export class HomeComponent implements OnInit {
         App.init();
         Layout.init();
         Demo.init();
-
-      
     }
     routerOnActivate(segment: RouteSegment, prev?: RouteSegment, currTree?: RouteTree, prevTree?: RouteTree) {
         console.log(segment);

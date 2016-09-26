@@ -88,10 +88,20 @@ export class IncompleteProfilesListComponent implements OnActivate {
         this._profileBankService.deleteProfile(CandidateID)
             .subscribe(
             (results: any) => {
-                //Bind Updated data to grid
-                this.getIncompleteProfiles();
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    //Bind Updated data to grid
+                    this.getIncompleteProfiles();
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
             },
             error => this.toastr.error(<any>error));
+    }
+
+    redirectToEditProfile(CandidateID: MasterData) {
+        this._router.navigate(['/App/ProfileBank/IncompleteProfiles/Edit/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+
     }
 
 }

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import { CandidateProfile, ResumeMeta, AddCandidateResponse, AllCandidateProfiles } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, ResumeMeta, AddCandidateResponse, AllCandidateProfiles, CareerProfile, MailDetails } from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -29,6 +29,8 @@ export class MyProfilesListComponent implements OnActivate {
     CandidateID: MasterData = new MasterData();
     myProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
     profile: CandidateProfile;
+    existedProfile: CandidateProfile;
+    isExist: boolean = false;
     errorMessage: string;
     status: number;
     psdTemplates: any;
@@ -79,6 +81,7 @@ export class MyProfilesListComponent implements OnActivate {
         this.psdTemplates = new Array<File>();
         this.resumeFiles = new Array<File>();
         this.profile = new CandidateProfile();
+        this.profile.CandidateCareerProfile = new CareerProfile();
         this.resumeMeta = new ResumeMeta();
         this.selectedCandidates = new Array<Candidate>();
         this.Candidate = new Candidate();
@@ -87,12 +90,14 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     routerOnActivate() {
+        window.onbeforeunload = function () {
+            return 'Data will be lost if you leave the page, are you sure?';
+        };
         this.getColumnsForSorting();
         this.myProfilesList.GrdOperations = new GrdOptions();
         this.getMyProfiles();
         this.getCandidateStatuses();
     }
-
     SaveCandidateID(id: MasterData) {
         this.seletedCandidateID = id;
 
@@ -115,18 +120,45 @@ export class MyProfilesListComponent implements OnActivate {
             this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
         window.scrollTo(0, 40);
     }
-
+    /** Check is current information is already exist in database.*/
+    IsExist() {
+        this._myProfilesService.isExist(this.profile)
+            .subscribe(
+            (results: any) => {
+                if (results.isExist){
+                    if (results.profileBankObjects !== null && results.profileBankObjects !== undefined) {
+                        this.existedProfile = <any>results.profileBankObjects;
+                        this.isExist = <any>results.isExist;
+                        this.toastr.error('Profile already exist');
+                    }
+                }else{
+                        this.isExist = false;
+                    }
+            },
+            error => this.toastr.error(<any>error));
+    }
     getMyProfiles() {
         this._myProfilesService.getMyProfiles(this.myProfilesList.GrdOperations)
             .subscribe(
             (results: any) => {
                 if (results.Profiles !== null && results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.myProfilesList = <any>results;
+                    this.getEmail('RMS.RRF.NEEDAPPROVAL');
                 } else { this.NORECORDSFOUND = true; }
             },
             error => this.errorMessage = <any>error);
     }
-
+    getEmail(EmailCode: any) {
+        this.profile.CandidateMailDetails = new MailDetails();
+        this._profileBankService.getEmail(EmailCode)
+            .subscribe(
+            results => {
+                for (var index = 0; index < this.myProfilesList.Profiles.length; index++) {
+                    this.myProfilesList.Profiles[index].CandidateMailDetails = <any>results;
+                }
+            },
+            error => this.errorMessage = <any>error);
+    }
     redirectToView(CandidateID: MasterData) {
         this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
@@ -137,12 +169,12 @@ export class MyProfilesListComponent implements OnActivate {
             (results: any) => {
                 this.profile.Comments = results.Comments;
                 this.profile.Status = results.Status;
+                this.getMyProfiles();
             },
             error => this.toastr.error(<any>error));
     }
     /**Redirecting to candidate's all interview history page */
     getCandidateHistory(_candidateID: MasterData) {
-        console.log(_candidateID);
         sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
         sessionStorage.setItem('onReturnPath', '/App/ProfileBank/MyProfiles');
         this._router.navigate(['/App/ProfileBank/MyProfiles/History']);
@@ -211,9 +243,9 @@ export class MyProfilesListComponent implements OnActivate {
                         this.postProfilePhoto(_candidateID, this.uploadedPhoto[0]);
                     }
                     /**update Profile grid*/
+                    this.toastr.success((<ResponseFromAPI>results).Message);
                     this.myProfilesList.GrdOperations = new GrdOptions();
                     this.getMyProfiles();
-                    this.toastr.success((<ResponseFromAPI>results).Message);
                     this.profile = new CandidateProfile();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
@@ -244,7 +276,7 @@ export class MyProfilesListComponent implements OnActivate {
                     this.fileUploaded = false;
                     this.fileName = '';
                     // this.myProfilesList.GrdOperations = new GrdOptions();
-                    // this.getMyProfiles();
+                    this.getMyProfiles();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -267,8 +299,8 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     onUpdateStauts() {
-        if (this.selectedStatus.Id === undefined)
-            this.selectedStatus = this.profile.Status;
+        this.selectedStatus.Id = 0;
+        this.selectedStatus.Value = "Incomplete";
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
@@ -321,15 +353,24 @@ export class MyProfilesListComponent implements OnActivate {
 
     openMailWindow() {
         var mailto: string = '';
+        var mailcc: string = '';
+        var mailsubject: string = '';
+        var mailbody: string = '';
         for (var index = 0; index < this.myProfilesList.Profiles.length; index++) {
             if (this.myProfilesList.Profiles[index].IsChecked) {
                 mailto = mailto + this.myProfilesList.Profiles[index].Email + ';';
+                mailcc = mailcc + this.myProfilesList.Profiles[index].CandidateMailDetails.Cc + ';';
+                mailsubject = this.myProfilesList.Profiles[index].CandidateMailDetails.Subject;
+                mailbody = this.myProfilesList.Profiles[index].CandidateMailDetails.Body;
+                mailbody += window.location.href;
+                mailbody += ">";
                 this.myProfilesList.Profiles[index].IsChecked = false;
             }
             this.selectedRowCount = 0;
         }
         this.allChecked = false;
-        window.location.href = 'mailto:' + mailto;
+        var str = 'mailto:' + mailto + '?cc=' + mailcc + '&subject=' + mailsubject + '&body=' + mailbody;
+        window.location.href = str;
     }
 
     onClickFollowUpComments(id: MasterData) {
@@ -358,12 +399,24 @@ export class MyProfilesListComponent implements OnActivate {
     uploadPhoto(selectedFile: any) {
         try {
             let FileList: FileList = selectedFile.target.files;
-            if (this.uploadedPhoto)
-                this.uploadedPhoto.length = 0;
-            for (let i = 0, length = FileList.length; i < length; i++) {
-                this.uploadedPhoto.push(FileList.item(i));
-                this.photoUploaded = true;
-                this.photoName = FileList.item(i).name;
+            if (selectedFile.target.files[0].size < 2000000) {
+                if (selectedFile.target.files[0].type === "image/jpeg"
+                    || selectedFile.target.files[0].type === "image/png"
+                    || selectedFile.target.files[0].type === "image/jpg") {
+                    if (this.uploadedPhoto)
+                        this.uploadedPhoto.length = 0;
+                    for (let i = 0, length = FileList.length; i < length; i++) {
+                        this.uploadedPhoto.push(FileList.item(i));
+                        this.photoUploaded = true;
+                        this.photoName = FileList.item(i).name;
+                    }
+                }
+                else {
+                    this.toastr.error('Please upload image of type .jpg, .png, .jpeg');
+                }
+            }
+            else {
+                this.toastr.error('Please upload image of size less than 2 MB');
             }
         } catch (error) {
             document.write(error);
@@ -382,6 +435,7 @@ export class MyProfilesListComponent implements OnActivate {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.photoUploaded = false;
                     this.photoName = '';
+                    this.getMyProfiles();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -417,11 +471,21 @@ export class MyProfilesListComponent implements OnActivate {
     uploadFile(inputValue: any): void {
         try {
             let FileList: FileList = inputValue.target.files;
-            this.psdTemplates.length = 0;
-            for (let i = 0, length = FileList.length; i < length; i++) {
-                this.psdTemplates.push(FileList.item(i));
-                this.fileUploaded = true;
-                this.fileName = FileList.item(i).name;
+            if (inputValue.target.files[0].size < 2000000) {
+                if (inputValue.target.files[0].type === "application/pdf" || inputValue.target.files[0].name.split('.')[1] === "docx" || inputValue.target.files[0].name.split('.')[1] === "doc") {
+                    this.psdTemplates.length = 0;
+                    for (let i = 0, length = FileList.length; i < length; i++) {
+                        this.psdTemplates.push(FileList.item(i));
+                        this.fileUploaded = true;
+                        this.fileName = FileList.item(i).name;
+                    }
+                }
+                else {
+                    this.toastr.error('Please upload document of type .doc, .docx, .pdf');
+                }
+            }
+            else {
+                this.toastr.error('Please upload document of size less than 2 MB');
             }
         } catch (error) {
             document.write(error);
@@ -432,11 +496,21 @@ export class MyProfilesListComponent implements OnActivate {
     postFile(inputValue: any): void {
         try {
             let FileList: FileList = inputValue.target.files;
-            this.resumeFiles.length = 0;
-            for (let i = 0, length = FileList.length; i < length; i++) {
-                this.resumeFiles.push(FileList.item(i));
-                this.resumeUploaded = true;
-                this.resumeName = FileList.item(i).name;
+            if (inputValue.target.files[0].size < 2000000) {
+                if (inputValue.target.files[0].type === "application/pdf" || inputValue.target.files[0].name.split('.')[1] === "docx" || inputValue.target.files[0].name.split('.')[1] === "doc") {
+                    this.resumeFiles.length = 0;
+                    for (let i = 0, length = FileList.length; i < length; i++) {
+                        this.resumeFiles.push(FileList.item(i));
+                        this.resumeUploaded = true;
+                        this.resumeName = FileList.item(i).name;
+                    }
+                }
+                else {
+                    this.toastr.error('Please upload document of type .doc, .docx, .pdf');
+                }
+            }
+            else {
+                this.toastr.error('Please upload document of size less than 2 MB');
             }
         } catch (error) {
             document.write(error);
@@ -478,9 +552,10 @@ export class MyProfilesListComponent implements OnActivate {
         for (var index = 0; index < this.myProfilesList.Profiles.length; index++) {
             if (this.myProfilesList.Profiles[index].IsChecked) {
                 //Check for open / rejected Status
-                if (this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'open' ||
-                    this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'rejected') {
-                    if (!this.myProfilesList.Profiles[index].isRRFAssigned) {
+
+                // || this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'rejected'  //Do not allow to assign RRF to Rejected candidate
+                if (this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'open') {
+                    if (!this.myProfilesList.Profiles[index].RRFAssigned.isRRFAssigned) {
                         //Add to selectedCandidates array
                         this.Candidate.CandidateID = this.myProfilesList.Profiles[index].CandidateID;
                         this.Candidate.Candidate = this.myProfilesList.Profiles[index].Candidate;
@@ -495,7 +570,7 @@ export class MyProfilesListComponent implements OnActivate {
             }
         }
         if (chkStatus) {
-            this.toastr.warning('Only Open / Rejected status candidates can be Assigned to RRF');
+            this.toastr.warning('Only Open status candidates can be Assigned to RRF');
             this.selectedCandidates = new Array<CandidateProfile>();
         } else if (chkRRFAssigned) {
             this.toastr.warning('Candidate already assigned to RRF');
@@ -512,13 +587,12 @@ export class MyProfilesListComponent implements OnActivate {
         let chkStatus = false;
         let selectedCandidate: CandidateProfile = this.myProfilesList.Profiles[index];
 
-        if (selectedCandidate.isRRFAssigned) {
-            sessionStorage.setItem('RRFID', JSON.stringify(selectedCandidate.RRFID));
+        if (selectedCandidate.Status.Value.toLowerCase() === 'in process') {
+            sessionStorage.setItem('RRFID', JSON.stringify(selectedCandidate.RRFAssigned.RRFID));
             sessionStorage.setItem('Candidate', JSON.stringify(selectedCandidate));
             this._router.navigate(['/App/Recruitment Cycle/Schedule/New']);
         } else {
-            if (selectedCandidate.Status.Value.toLowerCase() === 'open' ||
-                selectedCandidate.Status.Value.toLowerCase() === 'rejected') {
+            if (selectedCandidate.Status.Value.toLowerCase() === 'open') {
                 this.Candidate = new Candidate();
                 this.Candidate.CandidateID = this.myProfilesList.Profiles[index].CandidateID;
                 this.Candidate.Candidate = this.myProfilesList.Profiles[index].Candidate;
@@ -528,11 +602,13 @@ export class MyProfilesListComponent implements OnActivate {
                 chkStatus = true;
             }
             if (chkStatus) {
-                this.toastr.warning('Candidate must be assigned to RRF. Only Open / Rejected status candidates can be Assigned to RRF');
+                this.toastr.warning('Candidate must be assigned to RRF. Only Open status candidates can be Assigned to RRF');
                 this.selectedCandidates = new Array<CandidateProfile>();
             } else {
                 sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));
-                sessionStorage.setItem('returnPath', '/App/Recruitment Cycle/Schedule/New');
+                //sessionStorage.setItem('returnPath', '/App/Recruitment Cycle/Schedule/New');
+                sessionStorage.setItem('returnPath', 'App/ProfileBank/MyProfiles');
+                sessionStorage.setItem('returnPathToSchedule', '/App/Recruitment Cycle/Schedule/New');
                 this._router.navigate(['/App/ProfileBank/MyProfiles/Assign']);
             }
 

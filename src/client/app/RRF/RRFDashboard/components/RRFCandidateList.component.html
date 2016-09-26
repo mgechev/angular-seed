@@ -91,8 +91,9 @@
                                                     <th> # </th>
                                                     <th>Candidate</th>
                                                     <th>Status</th>
-                                                    <th>Last Round Scheduled</th>
-                                                    <th>Interview</th>
+                                                    <th>Last Round</th>
+                                                    <th>Interview Mode</th>
+                                                    <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -102,14 +103,20 @@
 
                                                     <td> {{selectedcandidate.InterviewDetails.Status}} </td>
                                                     <td> {{selectedcandidate.InterviewDetails.Round.Value}}</td>
-
+                                                    <td>
+                                                        <div> {{selectedcandidate.InterviewDetails.InterviewMode.Value}}</div>
+                                                        <div *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview"> Skype ID: {{selectedcandidate.InterviewDetails.SkypeID?selectedcandidate.InterviewDetails.SkypeID.Value:"N/A"}}</div>
+                                                        <div *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview"> Password: {{selectedcandidate.InterviewDetails.SkypePassword?selectedcandidate.InterviewDetails.SkypePassword:"N/A"}}</div>
+                                                    </td>
                                                     <td>
                                                         <div class="btn-group">
-                                                            <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+                                                            <div *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() == 'Transferred'.toLowerCase()"> Not allowed</div>
+                                                            <button class="btn btn-xs green dropdown-toggle" *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() != 'Transferred'.toLowerCase()"
+                                                                type="button" data-toggle="dropdown" aria-expanded="false"> Actions
                                                                 <i class="fa fa-angle-down"></i>
                                                             </button>
                                                             <ul class="dropdown-menu" role="menu">
-                                                                <li *ngIf="!selectedcandidate.isInterviewScheduled">
+                                                                <li *ngIf="!selectedcandidate.isInterviewScheduled && !selectedcandidate.isAwaitingApproval">
                                                                     <button class="btn btn-default btnLink " [disabled]='canScheduleInterview(selectedcandidate.InterviewDetails.Status)' (click)='onScheduleInterviewClick(selectedcandidate)'>
                                                                         <i class="fa fa-calendar-check-o"></i> Schedule
                                                                     </button>
@@ -129,8 +136,8 @@
                                                                 <li class="divider"> </li>
                                                                 <li>
                                                                     <button class="btn btn-default btnLink " [disabled]='isOfferGenerationVisible(selectedcandidate.InterviewDetails.Round.Value)'
-                                                                    (click)='OnProceedForOfferGenerationClick(selectedcandidate)'>
-                                                                        <i class="fa fa-paper-plane-o"></i>Offer Generation</button>
+                                                                        (click)='OnProceedForOfferGenerationClick(selectedcandidate)'>
+                                                                        <i class="fa fa-paper-plane-o"></i>Generate Offer</button>
                                                                 </li>
 
                                                             </ul>
@@ -155,33 +162,67 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th> # </th>
-                                                <th style="width:20% !important">Round</th>
-                                                <th>Interviewer</th>
-                                                <th style="width:20% !important">Date</th>
+                                                <!--<th> # </th>-->
+                                                <th style="width:30% !important">Round/Mode</th>
+                                                <th style="width:20% !important">Interviewer</th>
+                                                <th style="width:30% !important">Date Time</th>
+                                                <!--<th style="width:20% !important">Interview mode</th>-->
                                                 <th style="width:20% !important">Status</th>
+                                                <!--<th style="width:20% !important">Actual Time</th>-->
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr *ngFor="let candidateHistory of CandidateRoundHistory; let index = index" (mouseover)='showPopOver(candidateHistory.Comments,index+1)'
-                                            id="round{{index+1}}">
-                                                <td> {{index+1}} </td>
-                                                <td> {{candidateHistory.Round.Value}}</td>
+                                                id="round{{index+1}}">
+                                                <!--<td> {{index+1}} </td>-->
+                                                <td> {{candidateHistory.Round.Value}}
+                                                    <br>{{candidateHistory.InterviewMode.Value}}
+                                                </td>
                                                 <td> <span *ngFor="let interviewer of candidateHistory.InterviewerAvailability">{{interviewer.Interviewer.Value}} ,</span></td>
-                                                <td> {{getDate(candidateHistory.InterviewDate)}}</td>
-                                                <td *ngIf="candidateHistory.Status.toLowerCase() != 'On Hold'.toLowerCase() "> {{candidateHistory.Status}}</td>
+                                                <td> {{getDate(candidateHistory.InterviewDate)}}
+                                                    <br>Time:{{candidateHistory.InterviewFromTime}}
+                                                    <br>
+                                                    <span *ngIf="candidateHistory.InterviewActualTime != ''">Actual Time:{{candidateHistory.InterviewActualTime}}</span>
+                                                    <br>
+                                                    <span *ngIf="candidateHistory.InterviewActualTime == ''"><a (click)='setActualTime(candidateHistory.InterviewID)'> Actual Time</a></span>
+                                                </td>
+                                                <!--<td> {{candidateHistory.InterviewMode.Value}} </td>-->
+                                                <td *ngIf="candidateHistory.Status.toLowerCase() != 'On Hold'.toLowerCase() && candidateHistory.Status.toLowerCase() != 'Fitment Issue'.toLowerCase()">
+                                                    <!--<div *ngIf="candidateHistory.Status.toLowerCase() != 'Fitment Issue'.toLowerCase()">-->
+                                                    {{candidateHistory.Status}}
+                                                    <!--</div>-->
+                                                </td>
                                                 <td *ngIf="candidateHistory.Status.toLowerCase() == 'On Hold'.toLowerCase() "> <a (click)='changeStatus(candidateHistory.InterviewID)'> {{candidateHistory.Status}}</a></td>
+                                                <td *ngIf="candidateHistory.Status.toLowerCase() == 'Fitment Issue'.toLowerCase() "> <a (click)='transferFromUnfit(candidateHistory)'> {{candidateHistory.Status}}</a></td>
+
                                             </tr>
                                         </tbody>
                                     </table>
                                     <span *ngIf='isRoundHistoryPresent'>No Candidates Round History Found</span>
 
                                     <hr/>
+                                    <form (submit)='onSetActualTime()' *ngIf='setActualTimeForm'>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label align">Actual Time </label>
+                                                <div class="col-md-3">
+                                                    <input type="time" name="bday" id="" [(ngModel)]='actualTime' required="" />
+                                                </div>
+                                            </div>
 
+                                            <div class="">
+                                                <div class="pull-right">
+                                                    <button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelActualTime()'>Cancel</button>                                                    &nbsp;
+                                                    <button type="submit " class="btn blue " id="btnChangeStatus">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                     <!--change Interview status-->
                                     <form role="statusForm" (submit)='onChangeStatus()' *ngIf='showChangeStatus'>
                                         <div>
                                             <b>Change Interview Status</b>
+                                            <br/>
                                             <br/>
                                             <div class="row">
                                                 <div class="col-lg-4" align="right">
@@ -189,9 +230,9 @@
                                                 </div>
                                                 <div class="col-lg-8">
                                                     <select id="cmbStaus" class="form-control" [(ngModel)]='changedStatus' required placeholder="Select status" tooltip="Select status"
-                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changedStatus" style="font-size: inherit;"
-                                                    required>
-                                                        <!--<option *ngFor="let technologie of technologies" [value]="technologie.Id">{{technologie.Value}}</option>-->
+                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changedStatus"
+                                                        style="font-size: inherit;" required>
+                                                        <!--<option *ngFor="let OpenRrf of allOpenRrf" [value]="OpenRrf.RRFID.Id">{{OpenRrf.RRFID.Value}}</option>-->
                                                         <option value="Selected"> Selected</option>
                                                         <option value="Rejected"> Rejected</option>
                                                     </select>
@@ -205,51 +246,95 @@
                                                 <div class="col-lg-8">
                                                     <!---->
                                                     <input type="text" [(ngModel)]='changesStatusComment' id="changesStatusComment" class="form-control" placeholder="change Status Comment"
-                                                    tooltip="comment" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                    tooltipEnable="!changesStatusComment" required="" autocomplete="off" style="font-size: inherit;"
-                                                    />
+                                                        tooltip="comment" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                        tooltipEnable="!changesStatusComment" required="" autocomplete="off"
+                                                        style="font-size: inherit;" />
                                                 </div>
                                             </div>
                                             <br>
                                             <div class="">
                                                 <div class="pull-right">
-                                                    <button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelChangeStatus()'>Cancel</button> &nbsp;
+                                                    <button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelChangeStatus()'>Cancel</button>                                                    &nbsp;
                                                     <button type="submit " class="btn blue " id="btnChangeStatus">Change Status</button>
                                                 </div>
 
                                             </div>
 
                                         </div>
-                                        
-                                          <hr style="margin-top: 50px;"/>
+
+                                        <hr style="margin-top: 50px;" />
                                     </form>
                                     <br/>
-                                   <base-chart class="chart"
-                                                    [datasets]="barChartData"
-                                                    [labels]="barChartLabels"
-                                                    [options]="barChartOptions"
-                                                    [legend]="barChartLegend"
-                                                    [chartType]="barChartType"
-                                                    (chartHover)="chartHovered($event)"
-                                                    (chartClick)="chartClicked($event)"></base-chart>
+                                    <!--BEGIN Unfit functionality-->
+                                    <form role="candidateTransferForm" (submit)='transferCandidate()' *ngIf='IsAllowTransfer'>
+                                        <div>
+                                            <b>Transfer candidate to other RRF</b>
+                                            <br/>
+                                            <br/>
+                                            <div class="row">
+                                                <div class="col-lg-4" align="right">
+                                                    Open RRF
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <select id="cmbStaus" class="form-control" required placeholder="Select suitable RRF" tooltip="Select suitable Open RRF"
+                                                        [(ngModel)]='rrfToTrnasfer' tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                        tooltipEnable="true" style="font-size: inherit;" required>
+                                                        <option *ngFor="let OpenRrf of allOpenRrf" [value]="OpenRrf.RRFID.Id">{{OpenRrf.RRFCODE}} - {{OpenRrf.Designation.Value}} - {{OpenRrf.RaisedBy.Value}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-lg-4" align="right">
+                                                    Comments/Reason
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <input type="text" [(ngModel)]='transferReason' id="transferReasons" class="form-control" placeholder="Transfer reason" tooltip="comment"
+                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changesStatusComment"
+                                                        required="" autocomplete="off" style="font-size: inherit;" />
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="">
+                                                <div class="pull-right">
+                                                    <button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelTransfer()'>Cancel</button>                                                    &nbsp;
+                                                    <button type="submit " class="btn blue " id="btnChangeStatus">Transfer</button>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <hr style="margin-top: 50px;" />
+                                    </form>
+                                    <!--END Unfit functionality-->
+                                    <br/>
+                                    <div>
+                                        <base-chart class="chart" *ngIf="barChartData.lent>0" [datasets]="barChartData " [labels]="barChartLabels " [options]="barChartOptions
+                                        " [legend]="barChartLegend " [chartType]="barChartType " (chartHover)="chartHovered($event) "
+                                            (chartClick)="chartClicked($event) "></base-chart>
+                                    </div>
 
                                 </div>
                                 <!-- Candidate Details END-->
                             </div>
                             <!--Confirmation Box-->
-                            <div id="prcedfrOffrgenration" class="modal fade">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
+                            <div id="prcedfrOffrgenration " class="modal fade ">
+                                <div class="modal-dialog ">
+                                    <div class="modal-content ">
+                                        <div class="modal-header ">
                                             <b>Proceed For Offer Generation</b>
-                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                                            <button type="button " class="close " data-dismiss="modal
+                                        "><span aria-hidden="true ">×</span> <span class="sr-only ">close</span></button>
                                         </div>
-                                        <div id="modalBody" class="modal-body">
+                                        <div id="modalBody " class="modal-body ">
                                             Do you really want to proceed for Offer Generation ?
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" icon="fa-check" class="btn btn-info" (click)="proceedForOfferGeneration(InterviewID)" label="">Yes</button>
-                                            <button type="button" icon="fa-check" class="btn btn-default" data-dismiss="modal" label="">No</button>
+                                        <div class="modal-footer ">
+                                            <button type="button " icon="fa-check " class="btn btn-info " (click)="proceedForOfferGeneration(InterviewID)
+                                        " label=" ">Yes</button>
+                                            <button type="button " icon="fa-check " class="btn btn-default
+                                        " data-dismiss="modal " label=" ">No</button>
                                         </div>
                                     </div>
                                 </div>

@@ -80,7 +80,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="table-scrollable ">
+                    <div class="table-scrollable "  *ngIf="!NORECORDSFOUND">
                         <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable
                                             no-footer " role="grid " aria-describedby="sample_1_info ">
                             <thead style="word-wrap: break-word; " class="thead">
@@ -121,6 +121,10 @@
                             </tbody>
 
                         </table>
+
+
+                    </div>
+                    <div class="table-scrollable ">
                         <span style="margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Records Found</span>
                     </div>
                     <div class="row" *ngIf="!NORECORDSFOUND">

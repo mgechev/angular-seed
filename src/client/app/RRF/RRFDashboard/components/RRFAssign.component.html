@@ -119,8 +119,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="odd gradeX" *ngFor='let assignee of selectedRRF.AssignedData'>
-
+                                        <tr class="odd gradeX" *ngFor='let assignee of selectedRRF.assignedData'>
+                                            
                                             <td> {{assignee.AssignedTo.Value }}</td>
                                             <td>
                                                 {{assignee.AssignedComments }}
@@ -140,7 +140,7 @@
 
                                                 </div>
                                             </td>
-
+                                            
                                         </tr>
                                     </tbody>
                                 </table>

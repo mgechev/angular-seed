@@ -25,12 +25,14 @@ export class RecruitmentInterviewAvailabilityComponent implements OnActivate {
     RRFCode: string;
     showSlotForRRF: boolean = false;
     NORECORDSFOUND: boolean = false;
+    showSlotText: string = 'Show Slot';
 
     constructor(private _router: Router,
         private toastr: ToastsManager,
         private _interviewService: InterviewersAvailabilityService) {
         this._rrfDetails = new Array<DetailRRF>();
         // this._showSlots =true;
+
     }
     //Router method overrid from OnActivate class
     routerOnActivate() {
@@ -77,6 +79,17 @@ export class RecruitmentInterviewAvailabilityComponent implements OnActivate {
 
     hideSlot() {
         this.showSlotForRRF = false;
+    }
+
+    showSlot() {
+        if (this.showSlotForRRF === false) {
+            this.showSlotForRRF = true;
+            this.showSlotText = 'Hide Slot';
+        } else {
+            this.showSlotForRRF = false;
+            this.showSlotText = 'Show Slot';
+        }
+
     }
 
 }

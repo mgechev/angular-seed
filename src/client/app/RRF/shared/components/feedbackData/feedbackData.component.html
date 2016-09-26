@@ -1,0 +1,38 @@
+<hr>
+<div align="left " style="margin: 15px;"  class="portlet light bordered">
+    <div>
+        <div>
+            <h5>
+                <i class="fa fa-history" aria-hidden="true"></i>
+                <B>FeedBack History</B>
+            </h5>
+        </div>
+        <hr>
+        <div *ngFor='let RRFFeedback of RRFFeedbackData'>
+            <div>
+                <B>{{RRFFeedback.UpdatedBy.Value}}</B> &nbsp;
+                <span>Feedback Date : {{RRFFeedback.UpdatedDate}}</span>
+            </div>
+            <div class="row">
+                <div class="col-lg-6" *ngIf='RRFFeedback.PreviousValue'>
+                    Comment : {{RRFFeedback.Feedback}}
+                </div>
+                <div class="col-lg-12" *ngIf='!RRFFeedback.PreviousValue'>
+                    Comment : {{RRFFeedback.Feedback}}
+                </div>
+                <div class="col-lg-3" *ngIf='RRFFeedback.PreviousValue'>
+                    Previous Date : {{RRFFeedback.PreviousValue}}
+                </div>
+                <div class="col-lg-3" *ngIf='RRFFeedback.UpdatedValue'>
+                    Updated Date : {{RRFFeedback.UpdatedValue}}
+                </div>
+
+            </div>
+             <br>
+        </div>
+       
+    </div>
+    <div class="table-scrollable " *ngIf='NORECORDSFOUND'>
+        <span style="margin-top:5px;margin-left:15px">No Records Found</span>
+    </div>
+</div>

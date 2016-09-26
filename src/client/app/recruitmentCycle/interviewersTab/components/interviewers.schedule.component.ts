@@ -1,16 +1,18 @@
 import { Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
+import { ROUTER_DIRECTIVES, Router, OnActivate } from '@angular/router';
 import { Interview} from '../../shared/model/interview';
 import { InterviewersScheduleService} from '../services/interviewers.schedule.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { MasterData } from  '../../../shared/model/index';
 import { FullCalendarComponent} from  '../../../shared/components/calendar/fullCalendar';
 import { CalendarDetails} from '../../scheduleInterview/model/calendarDetails';
+import { InterviewMode } from  '../../../shared/constantValue/index';
 import { iefModel} from '../../shared/model/ief';
 import { InterviewDetailsRowComponent } from '../../shared/component/InterviewDetailsRow/InterviewDetailsRow.component';
 import { GrdOptions } from '../../../shared/model/common.model';
 import { IEFGridRowComponent } from '../../shared/component/IEFGridRow/IEFGridRow.component';
 import { MyScheduleInterview } from '../model/myScheduleInterview';
+import { ProfileBankService } from '../../../profileBank/index';
 
 
 @Component({
@@ -18,7 +20,7 @@ import { MyScheduleInterview } from '../model/myScheduleInterview';
     selector: 'interviewers-shedule',
     templateUrl: 'interviewers.schedule.component.html',
     directives: [ROUTER_DIRECTIVES, FullCalendarComponent, InterviewDetailsRowComponent, IEFGridRowComponent],
-    providers: [Interview, ToastsManager, InterviewersScheduleService]
+    providers: [Interview, ToastsManager, ProfileBankService, InterviewersScheduleService]
 })
 
 export class RecruitmentInterviewScheduleComponent implements OnActivate {
@@ -32,6 +34,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
     NORECORDSFOUND: boolean = false;
     HISTORYRECORDSNOTFOUND: boolean = false;
     currentDate: string;
+    modeConstant: InterviewMode = InterviewMode;
     header: any = {
         left: 'prev,next today',
         center: 'title',
@@ -45,7 +48,8 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
     IEFButtonText: string = '';
     constructor(private _router: Router,
         private toastr: ToastsManager,
-        private _interviewService: InterviewersScheduleService) {
+        private _interviewService: InterviewersScheduleService,
+        private _profileBankService: ProfileBankService) {
         this.InterviewInformation = new Array<Interview>();
         this.InterviewInformationForCalendar = new Array<Interview>();
         /**Commenting as this functionality is deprecated */
@@ -56,7 +60,6 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
     /**Router method overrid from OnActivate class */
     routerOnActivate() {
         this.getMyInterviews();
-        this.InterviewerCalendarDetails.Events = <any>this._interviewService.getEvent();
         this.InterviewerCalendarDetails.Resources = <any>this._interviewService.getResources();
 
         this.getMyAllInterviewsDetailsOfCalendar();
@@ -83,7 +86,23 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
                 this.toastr.error(<any>error);
             });
     }
-
+    DisableIEF(interviewDate: Date, interviewTime: Date) {
+        if (moment(interviewDate).format('MM-DD-YYYY') > moment(new Date()).format('MM-DD-YYYY')) {
+        return true
+    }
+    else{
+        if (moment(interviewDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY') && interviewTime.split(':')[0] > new Date().getHours()) {
+            return true
+        }
+        else{
+             if (moment(interviewDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY') && interviewTime.split(':')[0] > new Date().getHours() && interviewTime.split(':')[1] > new Date().getMinutes()) {
+                    return true;
+                } else {
+                    return false;
+                }
+        }
+    }
+    }
     /**used for calender view */
     getMyAllInterviewsDetailsOfCalendar() {
         this._interviewService.getMyAllInterviewsDetailsOfCalendar()
@@ -198,5 +217,24 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         } else {
             return true;
         }
+    }
+    /**Get resume by candidate code */
+    getResume(candidateID: MasterData) {
+        this._profileBankService.getResume(candidateID)
+            .subscribe(
+            results => {
+                var Resume = <any>results;
+                if (Resume) {
+                    this.Download(Resume.BinaryResume, Resume.ResumeName);
+                } else { alert('Resume not available!'); }
+            },
+            error => this.errorMessage = <any>error);
+    }
+    /** Download crate file form binary and download in given fyle type */
+    Download(binaryResume: string, ResumeName: string) {
+        var link = document.createElement('a');
+        link.download = ResumeName;
+        link.href = 'data:application/octet-stream;charset=utf-8;base64,' + binaryResume;
+        link.click();
     }
 }

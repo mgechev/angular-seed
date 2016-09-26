@@ -113,6 +113,7 @@
                                     <select class="form-control" [(ngModel)]='iefStatus' required>
                                         <option>Selected</option>
                                         <option>Rejected</option>
+                                        <option>Fitment Issue</option>
                                         <option *ngIf='!isChangeStatusReq'>On Hold</option>
                                     </select>
                                 </div>
@@ -135,7 +136,7 @@
                     </div>
                 </form>
                 <!-- BEGIN IEF HISTORY-->
-                <div class="portlet light bordered" *ngIf="candidateIEFHistory.Length>=null">
+                <div class="portlet light bordered" *ngIf="candidateIEFHistory.Length !== 0">
                     <div class="portlet-title">
                         <div class="caption font-dark">
                             <span class="caption-subject bold uppercase">Candidate recruitment history </span>
@@ -171,7 +172,7 @@
                                             <ul>
                                                 <li *ngFor="let _iefRecord of _IEFHistory.IEFTransactionDetails">
                                                     <strong> {{_iefRecord.FunctionLabel}} : </strong>{{_iefRecord.FunctionValue}}
-                                                    <span *ngIf="!_iefRecord.isRating" class="badge badge-danger">{{_iefRecord.Rating}}</span>
+                                                    <span *ngIf="_iefRecord.isRating" class="badge badge-danger">{{_iefRecord.Rating}}</span>
                                                 </li>
                                             </ul>
 

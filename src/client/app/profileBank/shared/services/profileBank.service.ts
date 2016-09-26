@@ -21,7 +21,15 @@ export class ProfileBankService {
             .map(this.extractData)
             .catch(this.handleError);
     }
-
+    //To DO need to change api
+    getEmail(emailCode: any) {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetEmailByEmailCode?emailCode=' + emailCode);
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     updateOwnership(Ownership: TransferOwnershipMeta) {
         let url = Config.GetURL('/api/ProfileBank/UpdateProfileOwner');
         this._spinnerService.show();
@@ -203,7 +211,8 @@ export class ProfileBankService {
     }
 
     updateCandidateStatus(CandidateID: MasterData, Status: MasterData, Comments: string) {
-        let url = Config.GetURL('/api/ProfileBank/UpdateStatus');
+        //let url = Config.GetURL('/api/ProfileBank/UpdateStatus');
+        let url = Config.GetURL('/api/ProfileBank/BlacklistCandidate');
         this._spinnerService.show();
         return this.authHttp.post(url, { CandidateID: CandidateID, Status: Status, Comments: Comments })
             .map(this.extractData)
@@ -284,9 +293,15 @@ export class ProfileBankService {
                 saveAs(blob, filename);
             })
             .catch(this.handleError);
-
     }
-
+    getResume(CandidateID: MasterData) {
+        let url = Config.GetURL('/api/ProfileBank/GetResume?CandidateID=' + CandidateID.Value);
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     uploadProfilePhoto(resumeMeta: ResumeMeta) {
         let url = Config.GetURL('/api/ProfileBank/UploadProfilePhoto');
         return new Promise((resolve, reject) => {
@@ -314,7 +329,6 @@ export class ProfileBankService {
     }
     /*** Remove Profile photo */
     removeProfilePhoto(candidateID: MasterData) {
-        console.log('Operaration sucessfull..! but API is pending to remove photo.');
         /** TODO:: Update api URL Once API is ready (API is pending) */
         let url = Config.GetURL('/api/ProfileBank/');
         this._spinnerService.show();
@@ -324,12 +338,10 @@ export class ProfileBankService {
             .finally(() => this._spinnerService.hide());
     }
 
-    deleteProfile(candidateID: MasterData) {
-        console.log('Operaration sucessfull..! but API is pending to delete profile.');
-        /** TODO:: Update api URL Once API is ready (API is pending) */
-        let url = Config.GetURL('/api/ProfileBankPaging/GetOpenProfiles');
+    deleteProfile(CandidateID: MasterData) {
+        let url = Config.GetURL('/api/ProfileBank/DeleteCandidate');
         this._spinnerService.show();
-        return this.authHttp.post(url, { candidateID })
+        return this.authHttp.post(url, { CandidateID })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

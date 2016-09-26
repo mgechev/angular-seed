@@ -16,11 +16,9 @@ export class ProfileEsplHistoryService {
         private _spinnerService: SpinnerService) { }
 
     getProfilesInterviewHistory(CandidateID: MasterData) {
-        console.log('Service integration is pending');
-        /**TODO:: Integrate service */
-        let url = Config.GetURL('/api/ProfileBank/getMyProfiles');
+        let url = Config.GetURL('/api/RecruitmentCycle/GetCandidateInterviewsHistory');
         this._spinnerService.show();
-        return this.authHttp.post(url, { CandidateID })
+        return this.authHttp.post(url, CandidateID)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

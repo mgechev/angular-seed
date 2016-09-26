@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http,  Response } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { CandidateProfile, ResumeMeta} from '../../shared/model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
@@ -38,11 +38,19 @@ export class MyProfilesService {
             xhr.send(formData);
         });
     }
-
+    isExist(newProfile: CandidateProfile) {
+        /**TODO::Replace api once its Ready from backend */
+        let url = Config.GetURL('/api/ProfileBank/ValidateCandidateDuplicates');
+        this._spinnerService.show();
+        return this.authHttp.post(url, newProfile)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     getMyProfiles(grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/ProfileBank/getMyProfiles');
         this._spinnerService.show();
-        return this.authHttp.post(url,{grdOptions})
+        return this.authHttp.post(url, { grdOptions })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

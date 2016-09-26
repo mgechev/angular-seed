@@ -20,16 +20,19 @@
         <div class="row">
             <div class="portlet light bordered">
                 <div class="portlet-body">
-                      <h4>Assign RRF</h4>
-                      <hr class="hrClass"/>
-                    <form role="form" class="form-horizontal"  (submit)="onAssignRRF()">
+                    <h4>Assign RRF</h4>
+                    <hr class="hrClass" />
+                    <form role="form" class="form-horizontal" (submit)="onAssignRRF()">
                         <div class="row">
                             <label class="col-md-2 control-label">RRF <span class="required"> * </span></label>
-                            <div class="col-md-6">
+                            <div class="col-md-6" [hidden]="RRFList.length == 0">
                                 <select class="form-control" required (change)='onSelectRRF($event.target.value)'>
                                     <option></option>
-                                     <option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Id">{{rrf.RRFID.Value}} - {{rrf.PositionTitle}} - {{rrf.RaisedBy.Value}}</option> 
+                                     <option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Id">{{rrf.RRFCODE}} - {{rrf.Designation}} - {{rrf.PositionTitle}} - {{rrf.RaisedBy.Value}}</option> 
                                 </select>
+                            </div>
+                            <div class="col-md-6" [hidden]="RRFList.length != 0">
+                                <label class="col-md-6 control-label" style="text-align: left">No RRF assigned<span class="required"> </span></label>
                             </div>
 
                         </div>
@@ -84,7 +87,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <span class="mt-action-dot "></span> {{selectedRRF.Priority.Value}}   
+                                                <span class="mt-action-dot "></span> {{selectedRRF.Priority.Value}}
                                                 <!--{{selectedRRF.Priority.Value}}    {{getPriorityClass(selectedRRF.Priority.Id)}}-->
                                             </td>
                                             <td>

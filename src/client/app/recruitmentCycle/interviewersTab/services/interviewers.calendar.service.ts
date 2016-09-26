@@ -17,7 +17,7 @@ export class InterviewersCalendarService {
             'resourceId': 3,
             'title': 'All Day EventAll Day EventAll Day EventAll Day EventAll Day EventAll Day EventAll Day Event',
             'start': '2016-01-01'
-           },
+        },
             {
                 'id': 2,
                 'resourceId': 1,
@@ -107,23 +107,25 @@ export class InterviewersCalendarService {
             .finally(() => this._spinnerService.hide());
     }
 
-     GetResources() {
-         let url = Config.GetURL('/api/RecruitmentCycle/CalendarViewGetResources');
+    GetResources() {
+        let url = Config.GetURL('/api/RecruitmentCycle/CalendarViewGetResources');
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
-      //  return this.InterviewCalendarDetails.Resources;
+        //  return this.InterviewCalendarDetails.Resources;
     }
 
     getCalendarEventData() {
         return this.Events;
     }
-    getResources_1() {
-        return [{ id: 1, title: 'InterViewer A', eventColor: this.generateHexColors() },
-            { id: 2, title: 'InterViewer B', eventColor: this.generateHexColors() },
-            { id: 3, title: 'InterViewer C', eventColor: this.generateHexColors() }];
+    getStaticResources() {
+        return [{ id: 1, title: 'Available', eventColor: '#32c5d2' },
+            { id: 2, title: 'Booked', eventColor: '#e7505a' }];
+        // return [{ id: 1, title: 'InterViewer A', eventColor: this.generateHexColors() },
+        //     { id: 2, title: 'InterViewer B', eventColor: this.generateHexColors() },
+        //     { id: 3, title: 'InterViewer C', eventColor: this.generateHexColors() }];
     }
     generateHexColors() {
         return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);

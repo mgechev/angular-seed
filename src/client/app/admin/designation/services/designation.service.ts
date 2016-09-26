@@ -65,7 +65,6 @@ export class DesignationService {
     }
 
     private handleError(error: Response) {
-        console.log(error);
         return Observable.throw(error.json().error || 'Server error');
     }
 }
