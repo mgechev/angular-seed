@@ -47,7 +47,7 @@ export = () => {
   result = projectFiles
     .pipe(plugins.plumber())
     .pipe(plugins.sourcemaps.init())
-    .pipe(plugins.typescript(tsProject))
+    .pipe(tsProject())
     .on('error', () => {
       typedBuildCounter = Config.TYPED_COMPILE_INTERVAL;
     });
