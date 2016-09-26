@@ -12,7 +12,7 @@
   <body>
     <section class="page-header">
       <h1 class="project-name">Angular 2 Seed</h1>
-      <h2 class="project-tagline">Modular starter (seed) project for Angular 2 apps with statically typed build</h2>
+      <h2 class="project-tagline">High-quality, modular starter (seed) project for Angular 2 apps with statically typed build and AoT</h2>
       <a href="https://github.com/mgechev/angular2-seed" class="btn">View on GitHub</a>
       <a href="https://github.com/mgechev/angular2-seed/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/mgechev/angular2-seed/tarball/master" class="btn">Download .tar.gz</a>
@@ -45,7 +45,7 @@
 <li>End-to-end tests with Protractor.</li>
 <li>Development server with Livereload.</li>
 <li>Following the <a href="https://angular.io/styleguide">best practices</a>.</li>
-<li>Manager of your type definitions using <a href="https://github.com/typings/typings">typings</a>.</li>
+<li>Manager of your type definitions using <a href="https://github.com/types" class="user-mention">@types</a>.</li>
 <li>Has autoprefixer and css-lint support.</li>
 </ul>
 
@@ -87,7 +87,7 @@ npm start -- --app bar</pre></div>
 <ul>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#how-to-start">How to start</a></li>
-<li><a href="#table-of-contents">Table of Contents</a></li>
+<li><a href="#table-of-content">Table of Content</a></li>
 <li><a href="#configuration">Configuration</a></li>
 <li><a href="#environment-configuration">Environment Configuration</a></li>
 <li><a href="#tools-documentation">Tools documentation</a></li>
@@ -129,7 +129,7 @@ npm start -- --app bar</pre></div>
 
 <p>If you have different environments and you need to configure them to use different end points, settings, etc. you can use the files <code>dev.ts</code> or <code>prod.ts</code> in<code>./tools/env/</code>. The name of the file is environment you want to use.</p>
 
-<p>The can be specified by using:</p>
+<p>The environment can be specified by using:</p>
 
 <div class="highlight highlight-source-shell"><pre>npm start -- --config-env ENV_NAME</pre></div>
 
@@ -167,6 +167,7 @@ npm run serve.coverage
 
 <span class="pl-c"># e2e (aka. end-to-end, integration) - In three different shell windows</span>
 <span class="pl-c"># Make sure you don't have a global instance of Protractor</span>
+<span class="pl-c"># Make sure you do have Java in your PATH (required for webdriver)</span>
 
 <span class="pl-c"># npm install webdriver-manager &lt;- Install this first for e2e testing</span>
 <span class="pl-c"># npm run webdriver-update &lt;- You will need to run this the first time</span>
@@ -197,11 +198,11 @@ npm run e2e.live</pre></div>
 <a href="https://github.com/ngrx/store">ngrx/store</a> RxJS powered state management, inspired by <strong>Redux</strong>
 </li>
 <li>
-<a href="https://github.com/ocombe/ng2-translate">ng2-translate</a> for i18n 
+<a href="https://github.com/ocombe/ng2-translate">ng2-translate</a> for i18n
 
 <ul>
 <li>Usage is optional but on by default</li>
-<li>Up to you and your team how you want to utilize it. It can be easily removed if not needed. </li>
+<li>Up to you and your team how you want to utilize it. It can be easily removed if not needed.</li>
 </ul>
 </li>
 <li>
@@ -330,8 +331,7 @@ npm run e2e.live</pre></div>
 │       │   └── router
 │       │       ├── mock-location-strategy.ts
 │       │       └── router-testing-providers.ts
-│       ├── tsconfig.json
-│       └── typings.d.ts
+│       └── tsconfig.json
 ├── test-main.js               &lt;- testing configuration
 ├── tools
 │   ├── README.md              &lt;- build documentation
