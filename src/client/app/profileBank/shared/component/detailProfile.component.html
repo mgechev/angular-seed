@@ -56,10 +56,10 @@
                             </li>
                             <li>
                                 <div class="col-md-6">
-                                    <label class="control-label"><small> Company : {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.CurrentCompany?profile.CandidateCareerProfile.CurrentCompany:"N/A":"N/A"}} </small></label>
+                                    <label class="control-label"><small> Company : {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.Company?profile.CandidateCurrentCompanyProfile.Company:"N/A":"N/A"}} </small></label>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="control-label"><small> Designation : {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.CurrentDesignationRole?profile.CandidateCareerProfile.CurrentDesignationRole:"N/A":"N/A"}} </small></label>
+                                    <label class="control-label"><small> Designation : {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.DesignationRole?profile.CandidateCurrentCompanyProfile.DesignationRole:"N/A":"N/A"}} </small></label>
                                 </div>
                             </li>
 
@@ -72,7 +72,8 @@
                                 <!--location-->
                                 <div class="uppercase" tooltip="Location" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Location">
                                     <!--TODO:: Add Location once updated from Backend -->
-                                    <i class="fa fa-map-marker"></i> {{profile.District?profile.District:"N/A"}}
+                                    <i class="fa fa-map-marker"></i> {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.Location?profile.CandidateCurrentCompanyProfile.Location:"N/A":"N/A"}}
+                                    <!--{{profile.District?profile.District:"N/A"}}-->
                                 </div>
                             </li>
                             <li>

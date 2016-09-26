@@ -26,6 +26,7 @@ export class CandidateProfile {
   public AadharCardNo: string = '';
   public CandidateTeamManagement = new TeamManagement();
   public CandidateCareerProfile = new CareerProfile();
+  public CandidateCurrentCompanyProfile = new EmploymentHistory();
   public CandidateMailDetails = new MailDetails();
   //for checkboxes for list
   public IsChecked: boolean;
