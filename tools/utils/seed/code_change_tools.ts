@@ -1,11 +1,18 @@
 import { PORT, APP_DEST, APP_BASE, DIST_DIR } from '../../config';
 import * as browserSync from 'browser-sync';
+/*<<<<<<< HEAD 26 sep
 const proxy = require('proxy-middleware');
+=======*/
+// import * as path from 'path';
+
+import Config from '../../config';
+//>>>>>>> eb8c13ee984e8a813ed6f6b8c4bf68dba52a49ec
 
 /**
  * Initialises BrowserSync with the configuration defined in seed.config.ts (or if overriden: project.config.ts).
  */
 let runServer = () => {
+/*<<<<<<< HEAD 26 sep
   //browserSync.init(BROWSER_SYNC_CONFIG);
   let baseDir = APP_DEST;
   let routes: any = {
@@ -24,7 +31,7 @@ let runServer = () => {
     server: {
       baseDir: baseDir,
       middleware: [
-        /* Connect to Sharepoint backend server. */
+        // Connect to Sharepoint backend server. 
         proxy({
           protocol: 'http:',
           hostname: '192.168.101.124',
@@ -33,16 +40,16 @@ let runServer = () => {
           route: '/api'
 
         }),
-        /*    Connect to localhost backend server. 
-        proxy({
-          proxy({
-          protocol: 'http:',
-          hostname: 'localhost',
-          port: 3000,
-          pathname: '/api',
-          route: '/api'
-        }),*/
-        /* Connect to Heroku backend server. */
+        //    Connect to localhost backend server. 
+        // proxy({
+        //   proxy({
+        //   protocol: 'http:',
+        //   hostname: 'localhost',
+        //   port: 3000,
+        //   pathname: '/api',
+        //   route: '/api'
+        // }),
+        // Connect to Heroku backend server. 
         // proxy({
         //   protocol: 'https:',
         //   hostname: 'powerful-lowlands-67740.herokuapp.com',
@@ -57,6 +64,9 @@ let runServer = () => {
       routes: routes
     }
   });
+=======*/
+  browserSync.init(Config.getPluginConfig('browser-sync'));
+//>>>>>>> eb8c13ee984e8a813ed6f6b8c4bf68dba52a49ec
 };
 
 /**

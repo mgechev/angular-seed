@@ -1,3 +1,4 @@
+// <<<<<<< HEAD 26 sep
 //<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
 import { ROUTER_DIRECTIVES, Routes, Router } from '@angular/router';
@@ -17,6 +18,10 @@ import { Config, NameListService, NavbarComponent, ToolbarComponent } from './sh
 import { LoginComponent } from './login/index';
 import { LoginService } from './shared/services/login.service';
 import { Error400Component, Error500Component } from './errorPages/index';
+/*=======26 sep
+import { Component } from '@angular/core';
+import { Config} from './shared/index';
+>>>>>>> eb8c13ee984e8a813ed6f6b8c4bf68dba52a49ec*/
 
 /**
  * This class represents the main application component. Within the @Routes annotation is the configuration of the
@@ -25,8 +30,8 @@ import { Error400Component, Error500Component } from './errorPages/index';
 @Component({
   moduleId: module.id,
   selector: 'sd-app',
-  viewProviders: [NameListService, HTTP_PROVIDERS],
   templateUrl: 'app.component.html',
+  //<<<<<<< HEAD
   directives: [ROUTER_DIRECTIVES, NavbarComponent, ToolbarComponent],
   providers: [
     LoginService
@@ -48,6 +53,12 @@ import { Error400Component, Error500Component } from './errorPages/index';
  */
 export class AppComponent implements OnInit {
   constructor(private _router: Router, private _loginService: LoginService) {
+    /*======= 26 sep
+    })
+    
+    export class AppComponent {
+      constructor() {
+    >>>>>>> eb8c13ee984e8a813ed6f6b8c4bf68dba52a49ec*/
     console.log('Environment config', Config);
   }
 

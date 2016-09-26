@@ -2,7 +2,7 @@ import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as merge from 'merge-stream';
 
-import { DEPENDENCIES, JS_DEST, JS_PROD_SHIMS_BUNDLE } from '../../config';
+import Config from '../../config';
 
 const plugins = <any>gulpLoadPlugins();
 
@@ -15,7 +15,7 @@ export = () => merge(bundleShims());
  * Returns the shim files to be injected.
  */
 function getShims() {
-  let libs = DEPENDENCIES
+  let libs = Config.DEPENDENCIES
     .filter(d => /\.js$/.test(d.src));
 
   return libs.filter(l => l.inject === 'shims')
@@ -29,12 +29,8 @@ function getShims() {
  */
 function bundleShims() {
   return gulp.src(getShims())
-    // Strip comments and sourcemaps
-    .pipe(plugins.uglify({
-      mangle: false
-    }))
-    .pipe(plugins.concat(JS_PROD_SHIMS_BUNDLE))
+    .pipe(plugins.concat(Config.JS_PROD_SHIMS_BUNDLE))
     // Strip the first (global) 'use strict' added by reflect-metadata, but don't strip any others to avoid unintended scope leaks.
     .pipe(plugins.replace(/('|")use strict\1;var Reflect;/, 'var Reflect;'))
-    .pipe(gulp.dest(JS_DEST));
+    .pipe(gulp.dest(Config.JS_DEST));
 }

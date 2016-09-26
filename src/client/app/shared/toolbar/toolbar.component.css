@@ -14,7 +14,7 @@ h1 {
   line-height: 48px;
 }
 
-more {
+.more {
   background: url("./assets/svg/more.svg");
   float: right;
   height: 24px;
