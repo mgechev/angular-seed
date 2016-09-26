@@ -21,12 +21,7 @@
       "./node_modules"
     ],
     "types": [
-      "core-js",
-      "express",
-      "jasmine",
-      "node",
-      "protractor",
-      "systemjs"
+      "node"
     ]
   },
   "exclude": [
