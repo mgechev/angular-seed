@@ -17,7 +17,7 @@
         <!--<breadcrumb></breadcrumb>-->
         <div class="row">
             <div class="col-md-12">
-                <div class="portlet light bordered">
+                <div class="portlet light bordered" *ngIf="isViewRRFGrid">
                     <div class="portlet-title">
                         <div class="row">
                             <div class="col-md-4">
@@ -114,15 +114,15 @@
                                                             <div class="col-md-3 inlineForm">
                                                                 <div class="form-group">
                                                                     <input type="text" placeholder="First Name" class="form-control" [(ngModel)]="profile.FirstName" required="" tooltip="First Name"
-                                                                        tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.FirstName"
-                                                                    />
+                                                                        tooltipPlacement="bottom" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="!profile.FirstName" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3  inlineForm">
                                                                 <div class="form-group ">
                                                                     <input type="text" placeholder="Last Name" class="form-control" [(ngModel)]="profile.LastName" required="" tooltip="Last Name"
-                                                                        tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.LastName"
-                                                                    />
+                                                                        tooltipPlacement="bottom" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="!profile.LastName" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3  inlineForm">
@@ -340,7 +340,7 @@
                             <!-- Upload Resume END-->
 
                             <div class="row" *ngIf="!NORECORDSFOUND">
-                                <div class="col-md-3 col-sm-3">
+                                <div class="col-md-2 col-sm-2">
                                     <div class="dataTables_length" id="sample_1_length">
                                         <label>Show :
                                             <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
@@ -375,13 +375,29 @@
                                             </label>
                                 </div>
 
-                                <div class="col-md-3 col-sm-4">
+                                <div class="col-md-2 col-sm-2">
                                     <div id="sample_1_filter" class="dataTables_filter">
                                         <label>Search 
                                             <input type="search" class="form-control input-sm input-small input-inline " [(ngModel)] = "searchString"
                                             placeholder="" aria-controls="sample_1">
                                             </label>
                                     </div>
+                                </div>
+                                <div class="col-md-2 col-sm-2">
+                                    <label class="col-md-2 control-label">RRF </label>
+                                    <div class="col-md-6" [hidden]="RRFList.length == 0">
+                                        <select class="form-control" required (change)='onSelectRRF($event.target.value)'>
+                                    <option></option>
+                                     <option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Value">{{rrf.RRFCODE}} - {{rrf.PositionTitle}}</option> 
+                                </select>
+                                    </div>
+                                    <!--<div class="dropdown rrf-month-sort-dropdown">
+                                        <button class="btn-dropdown dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Sort By
+								        <span class="caret"></span></button>
+                                        <ul class="dropdown-menu" *ngFor="let rrf of RRFList">
+                                            <li><a (click) = 'onSelectRRF(rrf.RRFID.Value)'>{{rrf.RRFCODE}}</a></li>
+                                        </ul>
+                                    </div>-->
                                 </div>
                             </div>
                         </div>
@@ -416,7 +432,7 @@
                                                 </label>
                                         </td>
                                         <td>
-                                            <detail-profile [selectedProfile]="myprofile"></detail-profile>
+                                            <detail-profile [selectedProfile]="myprofile" [rrfID]="viewDetailsRRFId"></detail-profile>
                                         </td>
                                         <!--<td>
                                             <tr>
@@ -447,6 +463,14 @@
                                         <td class="text-center">
                                             <a href="" download tooltip="Download Resume" tooltipPlacement="top" tooltipTrigger="mouseenter"><i class="fa fa-download" aria-hidden="true"></i></a>
                                         </td>-->
+                                        <td style="width=3%;" *ngIf="viewDetailsRRFId !=''">
+
+                                            <button class="btn btn-circle btn-icon-only btn-default btn-xs blue" (click)='showRRFDetails(viewDetailsRRFId)' tooltip="View RRF"
+                                                tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="View RRF">
+                                                            <i class="fa fa-search-plus "></i> 
+                                                        </button>
+
+                                        </td>
                                         <td style="width:8%;">
                                             <div class="btn-group">
                                                 <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Actions <i class="fa fa-angle-down"></i>
@@ -519,8 +543,30 @@
                             </div>
                         </div>
                         <!--  My Profile pagination END-->
+
+
+
                     </div>
                 </div>
+                <!--VIEW RRF START-->
+                <div class="portlet-body">
+                    <div class=" col-lg-12 " id="divTimeLine " *ngIf="isViewRFF">
+
+                        <div class="portlet light bordered col-lg-11 col-md-12 col-sm-12 col-xs-12 ">
+                            <div class="table-toolbar ">
+                                <div class="row ">
+                                    <div class="col-md-6 ">
+                                        <div class="btn-group ">
+                                            <a class="btn green" (click)='showListOfRRF()'>Back</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <view-RRF [RRFID]='viewRRFDetails'></view-RRF>
+                        </div>
+                    </div>
+                </div>
+                <!--VIEW RRF END-->
             </div>
             <!-- END PAGE BASE CONTENT -->
         </div>

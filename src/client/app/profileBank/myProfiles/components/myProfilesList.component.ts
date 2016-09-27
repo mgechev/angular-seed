@@ -15,12 +15,17 @@ import { Candidate } from '../../shared/model/RRF';
 import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
 import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
 import { DetailProfileComponent } from '../../shared/component/detailProfile.component';
+import { RRFDetails } from  '../../../RRF/myRRF/index';
+import {AssignRRFService} from '../../shared/services/assignRRF.service';
+import {RRFCandidateListService} from '../../../RRF/RRFDashboard/services/RRFCandidatesList.service';
+import {ViewRRFComponent} from '../../../RRF/shared/components/viewRRF/viewRRF.component';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-myprofiles-list',
     templateUrl: 'myProfilesList.component.html',
-    directives: [DetailProfileComponent, ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES, IfAuthorizeDirective],
+    directives: [DetailProfileComponent, ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES, IfAuthorizeDirective, ViewRRFComponent],
+    providers: [AssignRRFService, ToastsManager, RRFCandidateListService],
     styleUrls: ['myProfiles.component.css'],
     pipes: [ProfileBankPipe]
 })
@@ -71,13 +76,21 @@ export class MyProfilesListComponent implements OnActivate {
     profilePhoto: string;
     /** For profile picture */
     profilePic: any;
+    RRFList: Array<RRFDetails>;
+    viewDetailsRRFId: string = '';
+    rrfObj: MasterData = new MasterData();
+    viewRRFDetails: MasterData = new MasterData();
+    isViewRFF: Boolean = false;
+    isViewRRFGrid: boolean = true;
 
     constructor(private _myProfilesService: MyProfilesService,
         private http: Http,
         private _router: Router,
         private _profileBankService: ProfileBankService,
         public toastr: ToastsManager,
-        private _masterService: MastersService) {
+        private _masterService: MastersService,
+        private _assignRRFService: AssignRRFService,
+        private _rrfCandidatesList: RRFCandidateListService) {
         this.psdTemplates = new Array<File>();
         this.resumeFiles = new Array<File>();
         this.profile = new CandidateProfile();
@@ -87,6 +100,7 @@ export class MyProfilesListComponent implements OnActivate {
         this.Candidate = new Candidate();
         this.uploadedPhoto = new Array<File>();
         this.photoMeta = new ResumeMeta();
+        this.RRFList = new Array<RRFDetails>();
     }
 
     routerOnActivate() {
@@ -94,9 +108,21 @@ export class MyProfilesListComponent implements OnActivate {
             return 'Data will be lost if you leave the page, are you sure?';
         };
         this.getColumnsForSorting();
+        this.getMyOpenAssignedRRF();
         this.myProfilesList.GrdOperations = new GrdOptions();
         this.getMyProfiles();
         this.getCandidateStatuses();
+    }
+    getMyOpenAssignedRRF() {
+        this._assignRRFService.getMyOpenRRF()
+            .subscribe(
+            (results: any) => {
+                this.RRFList = results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
     }
     SaveCandidateID(id: MasterData) {
         this.seletedCandidateID = id;
@@ -125,15 +151,15 @@ export class MyProfilesListComponent implements OnActivate {
         this._myProfilesService.isExist(this.profile)
             .subscribe(
             (results: any) => {
-                if (results.isExist){
+                if (results.isExist) {
                     if (results.profileBankObjects !== null && results.profileBankObjects !== undefined) {
                         this.existedProfile = <any>results.profileBankObjects;
                         this.isExist = <any>results.isExist;
                         this.toastr.error('Profile already exist');
                     }
-                }else{
-                        this.isExist = false;
-                    }
+                } else {
+                    this.isExist = false;
+                }
             },
             error => this.toastr.error(<any>error));
     }
@@ -637,6 +663,40 @@ export class MyProfilesListComponent implements OnActivate {
                 this.ColumnList = results;
             },
             error => this.toastr.error(<any>error));
+    }
+    onSelectRRF(rrfID: string) {
+        //this.rrfId = 'RRF6866237939ID76';
+        this.viewDetailsRRFId = rrfID;
+        this._rrfCandidatesList.getCandidatesForRRF(rrfID)
+            .subscribe(
+            (results: any) => {
+                if (results.length !== undefined) {
+                    this.myProfilesList.GrdOperations = new GrdOptions();
+                    this.myProfilesList.Profiles = <any>results;
+                    // this.AllCandidatesForRRF = results;
+                    //this.CheckInterviewStatus(results);
+                } else {
+                    //If No data present
+                    //this.isNull = true;
+                    this.NORECORDSFOUND = true;
+                }
+            },
+            error => this.errorMessage = <any>error);
+    }
+    showRRFDetails(rrfId: string) {
+        //this.getRRFDetails(rrfId);
+        this.rrfObj = { Id: 0, Value: rrfId };
+        this.viewRRFDetails = this.rrfObj;
+        this.isViewRFF = true;
+        this.isViewRRFGrid = false;
+        //this.isListVisible = false;
+        //this.isChartVisible = false;
+    }
+    showListOfRRF() {
+        this.isViewRRFGrid = true;
+        this.viewDetailsRRFId = '';
+        this.myProfilesList.GrdOperations = new GrdOptions();
+        this.getMyProfiles();
     }
 }
 

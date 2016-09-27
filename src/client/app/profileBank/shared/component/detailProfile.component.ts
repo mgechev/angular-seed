@@ -15,9 +15,11 @@ export class DetailProfileComponent implements OnInit {
     profile: CandidateProfile;
     binaryResume: Resume;
     emailDetails: any;
+    viewDetailsRRFId: MasterData = new MasterData();
     errorMessage: string;
     //Get profiles data
     @Input() selectedProfile: CandidateProfile;
+    @Input() rrfID: string;
     // @Input() profilePic: any;
     @Output() updatedProfile: EventEmitter<CandidateProfile> = new EventEmitter<CandidateProfile>();
     constructor(private toastr: ToastsManager, private _profileBankService: ProfileBankService) {
