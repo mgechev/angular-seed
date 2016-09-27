@@ -1,34 +1,38 @@
-import {Component} from '@angular/core';
-import { OnActivate, ROUTER_DIRECTIVES, Router } from '@angular/router';
+import { Component, NgModule, Pipe, OnInit } from '@angular/core';
+import { RouterModule, Router } from '@angular/router';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
-import { RRFDetails, AllRRFStatusCount  } from '../../myRRF/models/rrfDetails';
+import { RRFDetails, AllRRFStatusCount } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
-import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
-import {RRFIDPipe } from '../../shared/Filters/RRFIdFilter.component';
+//import { CHART_DIRECTIVES } from 'ng2-charts/ng2-charts';
+import { RRFIDPipe } from '../../shared/Filters/RRFIdFilter.component';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult, RRFStatus, RRFAssignStatus} from  '../../../shared/constantValue/index';
-import { MasterData, ResponseFromAPI, GrdOptions, SortingMasterData} from '../../../shared/model/common.model';
-import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
+import { APIResult, RRFStatus, RRFAssignStatus } from '../../../shared/constantValue/index';
+import { MasterData, ResponseFromAPI, GrdOptions, SortingMasterData } from '../../../shared/model/common.model';
+import { IfAuthorizeDirective } from '../../../shared/directives/ifAuthorize.directive';
 import { MastersService } from '../../../shared/services/masters.service';
-import {RRFPipe } from '../../shared/Filters/RRFFilter.component';
-import {ViewRRFComponent} from '../../shared/components/viewRRF/viewRRF.component';
-import {RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
+import { RRFPipe } from '../../shared/Filters/RRFFilter.component';
+import { ViewRRFComponent } from '../../shared/components/viewRRF/viewRRF.component';
+import { RRFGridRowComponent } from '../../shared/components/RRFGridRow/RRFGridRow.component';
 import { PanelsAvailablityComponent } from '../../shared/components/interviewersAvailablity/panelsAvailablity.component';
-import {InterviewApprovalComponent} from '../../../recruitmentCycle/shared/component/InterviewApproval/InterviewApproval.Component';
+import { InterviewApprovalComponent } from '../../../recruitmentCycle/shared/component/InterviewApproval/InterviewApproval.Component';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-dashboard-list',
     templateUrl: 'RRFDashboardList.component.html',
-    directives: [PanelsAvailablityComponent, ROUTER_DIRECTIVES, CHART_DIRECTIVES, IfAuthorizeDirective,
-        ViewRRFComponent, RRFGridRowComponent, InterviewApprovalComponent],
+    // directives: [PanelsAvailablityComponent, ROUTER_DIRECTIVES, CHART_DIRECTIVES, IfAuthorizeDirective,
+    //     ViewRRFComponent, RRFGridRowComponent, InterviewApprovalComponent],
     styleUrls: ['../../shared/css/RRF.component.css'],
-    pipes: [RRFIDPipe, RRFPipe],
+    //pipes: [RRFIDPipe, RRFPipe],
+    //providers: [ToastsManager]
+})
+
+@NgModule({
+    declarations: [PanelsAvailablityComponent, IfAuthorizeDirective, ViewRRFComponent, RRFGridRowComponent, InterviewApprovalComponent],
     providers: [ToastsManager]
 })
 
-export class RRFDashboardListComponent implements OnActivate {
-
+export class RRFDashboardListComponent implements OnInit {
     rrfList: RRFDetails[] = [];
     errorMessage: string;
     selectedRRF: RRFDetails = new RRFDetails();
@@ -54,7 +58,7 @@ export class RRFDashboardListComponent implements OnActivate {
         animation: false,
         responsive: true,
         legend: {
-            onClick: function(event: any, legendItem: any) {
+            onClick: function (event: any, legendItem: any) {
                 /** */
             }
         }
@@ -71,7 +75,7 @@ export class RRFDashboardListComponent implements OnActivate {
         this.currentView = 'myRRF';
     }
 
-    routerOnActivate() {
+    ngOnInit() {
         this.getLoggedInUser();
         this.getMyRRFData();
         this.getColumsForSorting('MYRRF');
@@ -501,6 +505,6 @@ export class RRFDashboardListComponent implements OnActivate {
     onShowAvailabilityClick() {
         this.showAvaililityPanel = !this.showAvaililityPanel;
     }
-    
+
 }
 
