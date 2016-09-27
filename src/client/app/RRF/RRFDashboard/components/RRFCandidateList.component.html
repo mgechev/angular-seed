@@ -135,7 +135,7 @@
                                                                 </li>
                                                                 <li class="divider"> </li>
                                                                 <li>
-                                                                    <button class="btn btn-default btnLink " [disabled]='isOfferGenerationVisible(selectedcandidate.InterviewDetails.Round.Value)'
+                                                                    <button class="btn btn-default btnLink " [disabled]='isOfferGenerationVisible(selectedcandidate.InterviewDetails.Round.Value , selectedcandidate.InterviewDetails.Status)'
                                                                         (click)='OnProceedForOfferGenerationClick(selectedcandidate)'>
                                                                         <i class="fa fa-paper-plane-o"></i>Generate Offer</button>
                                                                 </li>

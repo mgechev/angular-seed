@@ -75,6 +75,7 @@ export class RRFCandidateListComponent implements OnActivate {
     public barChartType: string = 'bar';
     public barChartLegend: boolean = true;
     public InterviewDetails: {};
+    UniqueRRFCode: string = '';
 
     // public barChartLabels: string[] = new Array<string>();
     // public barChartData: any[] = new Array<string>();
@@ -300,16 +301,15 @@ export class RRFCandidateListComponent implements OnActivate {
         return [day, month, year].join('-');
     }
 
-    isOfferGenerationVisible(lastInterviewRound: string) {
-        if (lastInterviewRound.toLowerCase().includes('hr')) {
+    isOfferGenerationVisible(lastInterviewRound: string , status: string ) {
+        if (lastInterviewRound.toLowerCase().includes('hr') && status.toLowerCase() != 'awaiting approval') {
             return false;
         } else { return true; }
     }
 
     canCancelInterview(status: string) {
         //if (status.toLowerCase() === 'scheduled' || status.toLowerCase() === 're-scheduled' ||
-        if (status.toLowerCase() === 'scheduled' || status.toLowerCase() === 'rescheduled' ||
-            status.toLowerCase() === 'awaiting approval') {
+        if (status.toLowerCase() === 'scheduled' || status.toLowerCase() === 'rescheduled') {
             return false;
         } else { return true; }
 
@@ -346,7 +346,8 @@ export class RRFCandidateListComponent implements OnActivate {
     /**Transfer candidat from current RRF to other Open RRF */
     transferFromUnfit(interviewDetails: Interview) {
         if (!this.IsAllowTransfer) {
-            this.getAllOpenRRF();
+            this.UniqueRRFCode = interviewDetails.RRFCode;
+            this.getAllOpenRRF(interviewDetails.RRFCode);
             // this.TransferInterviewID = intervieID;
             /**Prepare object to transfer Candidate */
             this.TransferInterviewDetails.InterviewID = interviewDetails.InterviewID;
@@ -364,11 +365,15 @@ export class RRFCandidateListComponent implements OnActivate {
         this.TransferInterviewDetails = new TransferInterview();
     }
     /**Get all open RRF */
-    getAllOpenRRF() {
+    getAllOpenRRF(uniqueRRF : string) {
         this._rrfDashboardService.getAllOpenRRF()
             .subscribe(
             (results: any) => {
-                this.allOpenRrf = <any>(results);
+                for(var index=0;index <= results.length;index++){
+                    if(results[index].RRFCODE !== uniqueRRF){
+                        this.allOpenRrf.push(<any>(results)[index]);
+                    }
+                }
             },
             error => this.errorMessage = <any>error);
     }
