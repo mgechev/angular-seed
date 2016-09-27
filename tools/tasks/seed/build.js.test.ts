@@ -1,6 +1,6 @@
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
-import { join} from 'path';
+import { join } from 'path';
 
 import Config from '../../config';
 import { makeTsProject } from '../../utils';
