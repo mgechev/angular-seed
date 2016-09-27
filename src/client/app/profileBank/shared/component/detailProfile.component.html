@@ -48,10 +48,10 @@
                             </li>
                             <li>
                                 <div class="col-md-6">
-                                    <label class="control-label"><small> Salary Current  : <i class="fa fa-inr"></i>{{profile.CandidateSalaryDetails.CurrentSalary?profile.CandidateSalaryDetails.CurrentSalary:"N/A"}}</small> </label>
+                                    <label class="control-label"><small> Current CTC : <i class="fa fa-inr"></i>{{profile.CandidateSalaryDetails.CurrentSalary?profile.CandidateSalaryDetails.CurrentSalary:"N/A"}}</small> </label>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="control-label"><small> Expected : <i class="fa fa-inr"></i>{{profile.CandidateSalaryDetails.ExpectedSalary?profile.CandidateSalaryDetails.ExpectedSalary:"N/A"}}</small> </label>
+                                    <label class="control-label"><small> Expected CTC : <i class="fa fa-inr"></i>{{profile.CandidateSalaryDetails.ExpectedSalary?profile.CandidateSalaryDetails.ExpectedSalary:"N/A"}}</small> </label>
                                 </div>
                             </li>
                             <li>
@@ -65,7 +65,9 @@
 
                         </ul>
                     </div>
-                    <p> <a class="sbold" href="mailto:{{profile.Email}}?cc={{profile.CandidateMailDetails.Cc}}&amp;subject={{profile.CandidateMailDetails.Subject}}&amp;body={{profile.CandidateMailDetails.Body}}">{{profile.Email?profile.Email:"N/A"}} </a>                        </p>
+                    <p>
+                        <a class="sbold" href="mailto:{{profile.Email}}?cc={{profile.CandidateMailDetails.Cc}}&amp;subject={{profile.CandidateMailDetails.Subject}}&amp;body={{profile.CandidateMailDetails.Body}}"><i class="fa fa-envelope-o"></i> {{profile.Email?profile.Email:"N/A"}} </a>
+                    </p>
                     <div class="row">
                         <ul class="list-inline sbold" style="color:#f16e50">
                             <li>
