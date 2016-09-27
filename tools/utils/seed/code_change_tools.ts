@@ -1,4 +1,4 @@
-import { PORT, APP_DEST, APP_BASE, DIST_DIR } from '../../config';
+//import { PORT, APP_DEST, APP_BASE, DIST_DIR } from '../../config';
 import * as browserSync from 'browser-sync';
 /*<<<<<<< HEAD 26 sep
 const proxy = require('proxy-middleware');
