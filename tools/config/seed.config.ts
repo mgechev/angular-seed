@@ -372,6 +372,48 @@ export class SeedConfig {
       [join(this.TMP_DIR, 'app', '*')]: `${this.TMP_DIR}/app/*`,
       'node_modules/*': 'node_modules/*',
       '*': 'node_modules/*'
+    },
+    packages: {
+      '@angular/common': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/compiler': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/core/testing': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/core': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/forms': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/http': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/platform-browser': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/platform-browser-dynamic': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/router': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'rxjs': {
+        main: 'Rx.js',
+        defaultExtension: 'js'
+      }
     }
   };
 
