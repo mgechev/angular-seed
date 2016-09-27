@@ -4,7 +4,7 @@ import * as tsc from '@angular/tsc-wrapped';
 import { argv } from 'yargs';
 import { join } from 'path';
 import { writeFileSync, readFileSync } from 'fs';
-import {CodeGenerator} from '@angular/compiler-cli';
+import { CodeGenerator } from '@angular/compiler-cli';
 
 import Config from '../../config';
 
