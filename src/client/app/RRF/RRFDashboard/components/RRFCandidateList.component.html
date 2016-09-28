@@ -110,8 +110,9 @@
                                                     </td>
                                                     <td>
                                                         <div class="btn-group">
-                                                            <div *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() == 'Transferred'.toLowerCase()"> Not allowed</div>
-                                                            <button class="btn btn-xs green dropdown-toggle" *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() != 'Transferred'.toLowerCase()"
+                                                            <div *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() == 'Transferred'.toLowerCase()">Not allowed</div>
+                                                            <div *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() == 'Unfit'.toLowerCase()">Not allowed</div>
+                                                            <button class="btn btn-xs green dropdown-toggle" *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() != 'Transferred'.toLowerCase() && selectedcandidate.InterviewDetails.Status.toLowerCase() != 'Unfit'.toLowerCase()"
                                                                 type="button" data-toggle="dropdown" aria-expanded="false"> Actions
                                                                 <i class="fa fa-angle-down"></i>
                                                             </button>
@@ -156,8 +157,13 @@
                                 <!-- Candidate List ENDS-->
                                 <!-- Candidate Details -->
                                 <div class="col-md-5" style="border-left:1px solid gray">
+                                    <span class="caption-subject bold" *ngIf="barChartData.length>0" style="font-size : 14px">{{selectedCandidate}} Interview Feedback History</span>
+                                    <div class="row">
+                                        <base-chart class="chart" *ngIf="barChartData.length>0" [datasets]="barChartData " [labels]="barChartLabels " [options]="barChartOptions
+                                        " [legend]="barChartLegend " [chartType]="barChartType " (chartHover)="chartHovered($event) "
+                                            (chartClick)="chartClicked($event) "></base-chart>
+                                    </div>
                                     <span class="caption-subject bold" style="font-size : 14px">{{selectedCandidate}} Interview Rounds History</span>
-                                    <br/>
                                     <br/>
                                     <table class="table table-hover">
                                         <thead>
@@ -309,11 +315,11 @@
                                     </form>
                                     <!--END Unfit functionality-->
                                     <br/>
-                                    <div>
+                                    <!--<div>
                                         <base-chart class="chart" *ngIf="barChartData.lent>0" [datasets]="barChartData " [labels]="barChartLabels " [options]="barChartOptions
                                         " [legend]="barChartLegend " [chartType]="barChartType " (chartHover)="chartHovered($event) "
                                             (chartClick)="chartClicked($event) "></base-chart>
-                                    </div>
+                                    </div>-->
 
                                 </div>
                                 <!-- Candidate Details END-->

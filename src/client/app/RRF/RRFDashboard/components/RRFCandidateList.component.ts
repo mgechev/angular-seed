@@ -77,14 +77,14 @@ export class RRFCandidateListComponent implements OnActivate {
     public InterviewDetails: {};
     UniqueRRFCode: string = '';
 
-    // public barChartLabels: string[] = new Array<string>();
-    // public barChartData: any[] = new Array<string>();
-    public barChartLabels: string[] = ['Business Logic', 'Technical Skills', 'Communication'];
-    public barChartData: any[] = [
-        { data: [2, 5, 4], label: 'Technical 1' },
-        { data: [1, 3, 4], label: 'Technical 2' },
-        { data: [5, 3, 5], label: 'HR 1' }
-    ];
+     public barChartLabels: string[] = new Array<string>();
+     public barChartData: any[] = new Array<string>();
+    // public barChartLabels: string[] = ['Business Logic', 'Technical Skills', 'Communication'];
+    // public barChartData: any[] = [
+    //     { data: [2, 5, 4], label: 'Technical 1' },
+    //     { data: [1, 3, 4], label: 'Technical 2' },
+    //     { data: [5, 3, 5], label: 'HR 1' }
+    // ];
     // public barChartLabels: string[] = ['No Data'];
     // public barChartData: any[] = [{ data: [0], label: 'No Data' }];
 
