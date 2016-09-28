@@ -94,7 +94,7 @@
     "gulp-sourcemaps": "2.0.0-alpha",
     "gulp-template": "^4.0.0",
     "gulp-tslint": "^6.0.1",
-    "gulp-typescript": "^2.13.6",
+    "gulp-typescript": "^3.0.1",
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.8",

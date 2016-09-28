@@ -18,7 +18,7 @@ const INLINE_OPTIONS = {
  */
 
 export = () => {
-  let tsProject = makeTsProject();
+  let tsProject = makeTsProject({}, Config.TMP_DIR);
   let src = [
     Config.TOOLS_DIR + '/manual_typings/**/*.d.ts',
     join(Config.TMP_DIR, '**/*.ts'),
@@ -27,7 +27,7 @@ export = () => {
   let result = gulp.src(src)
     .pipe(plugins.plumber())
     .pipe(plugins.inlineNg2Template(INLINE_OPTIONS))
-    .pipe(plugins.typescript(tsProject))
+    .pipe(tsProject())
     .once('error', function(e: any) {
       this.once('finish', () => process.exit(1));
     });

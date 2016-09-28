@@ -366,6 +366,7 @@ export class SeedConfig {
     ],
     paths: {
       [join(this.TMP_DIR, 'app', '*')]: `${this.TMP_DIR}/app/*`,
+      'node_modules/*': 'node_modules/*',
       '*': 'node_modules/*'
     },
     packages: {

@@ -1,6 +1,6 @@
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
-import { join} from 'path';
+import { join } from 'path';
 
 import Config from '../../config';
 import { makeTsProject } from '../../utils';
@@ -20,7 +20,7 @@ export = () => {
   let result = gulp.src(src)
     .pipe(plugins.plumber())
     .pipe(plugins.sourcemaps.init())
-    .pipe(plugins.typescript(tsProject));
+    .pipe(tsProject());
 
   return result.js
     .pipe(plugins.sourcemaps.write())

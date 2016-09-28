@@ -19,7 +19,7 @@ export = () => {
   let result = gulp.src(src, { base: './' })
     .pipe(plugins.plumber())
     .pipe(plugins.sourcemaps.init())
-    .pipe(plugins.typescript(tsProject));
+    .pipe(tsProject());
 
   return result.js
     .pipe(plugins.sourcemaps.write())
