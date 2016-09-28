@@ -73,6 +73,22 @@ export class SeedConfig {
   COVERAGE_DIR = 'coverage';
 
   /**
+   * Karma reporter configuration
+   */
+  KARMA_REPORTERS = {
+    preprocessors: {
+      'dist/**/!(*spec).js': ['coverage']
+    },
+    reporters: ['mocha', 'coverage'],
+    coverageReporter: {
+      dir: this.COVERAGE_DIR + '/',
+      reporters: [
+        {type: 'json', subdir: '.', file: 'coverage-final.json'}
+      ]
+    }
+  };
+
+  /**
    * The path for the base of the application at runtime.
    * The default path is based on the environment '/',
    * which can be overriden by the `--base` flag when running `npm start`.
