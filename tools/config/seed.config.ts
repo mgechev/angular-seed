@@ -75,7 +75,7 @@ export class SeedConfig {
   /**
    * Karma reporter configuration
    */
-  KARMA_REPORTERS = {
+  KARMA_REPORTERS: any = {
     preprocessors: {
       'dist/**/!(*spec).js': ['coverage']
     },
