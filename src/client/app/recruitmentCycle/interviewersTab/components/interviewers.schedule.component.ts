@@ -88,20 +88,20 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
     }
     DisableIEF(interviewDate: Date, interviewTime: Date) {
         if (moment(interviewDate).format('MM-DD-YYYY') > moment(new Date()).format('MM-DD-YYYY')) {
-        return true
-    }
-    else{
-        if (moment(interviewDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY') && interviewTime.split(':')[0] > new Date().getHours()) {
             return true
         }
-        else{
-             if (moment(interviewDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY') && interviewTime.split(':')[0] > new Date().getHours() && interviewTime.split(':')[1] > new Date().getMinutes()) {
+        else {
+            if (moment(interviewDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY') && interviewTime.split(':')[0] > new Date().getHours()) {
+                return true
+            }
+            else {
+                if (moment(interviewDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY') && interviewTime.split(':')[0] > new Date().getHours() && interviewTime.split(':')[1] > new Date().getMinutes()) {
                     return true;
                 } else {
                     return false;
                 }
+            }
         }
-    }
     }
     /**used for calender view */
     getMyAllInterviewsDetailsOfCalendar() {
@@ -236,5 +236,16 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         link.download = ResumeName;
         link.href = 'data:application/octet-stream;charset=utf-8;base64,' + binaryResume;
         link.click();
+    }
+
+    getTime(time: string[]) {
+        //time:string = interviewTime;
+        time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+        if (time.length > 1) { // If time format correct
+            time = time.slice(1);  // Remove full string match value
+            time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+            time[0] = +time[0] % 12 || 12; // Adjust hours
+        }
+        return time.join('');
     }
 }

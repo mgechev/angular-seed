@@ -186,11 +186,12 @@
                                                 </td>
                                                 <td> <span *ngFor="let interviewer of candidateHistory.InterviewerAvailability">{{interviewer.Interviewer.Value}} ,</span></td>
                                                 <td> {{getDate(candidateHistory.InterviewDate)}}
-                                                    <br>Time:{{candidateHistory.InterviewFromTime}}
+                                                    <br>Time:{{getTime(candidateHistory.InterviewFromTime)}}
                                                     <br>
-                                                    <span *ngIf="candidateHistory.InterviewActualTime != ''">Actual Time:{{candidateHistory.InterviewActualTime}}</span>
+                                                    <span *ngIf="candidateHistory.InterviewActualTime != ''">Actual Time:{{getTime(candidateHistory.InterviewActualTime)}}</span>
                                                     <br>
-                                                    <span *ngIf="candidateHistory.InterviewActualTime == ''"><a (click)='setActualTime(candidateHistory.InterviewID)'> Actual Time</a></span>
+                                                    <span *ngIf="candidateHistory.InterviewActualTime == '' && (candidateHistory.Status.toLowerCase() == 'Rejected'.toLowerCase() || candidateHistory.Status.toLowerCase() == 'Selected'.toLowerCase() ||
+        candidateHistory.Status.toLowerCase() == 'Fitment Issue'.toLowerCase() || candidateHistory.Status.toLowerCase() == 'On Hold'.toLowerCase())"><a (click)='setActualTime(candidateHistory.InterviewID)'> Actual Time</a></span>
                                                 </td>
                                                 <!--<td> {{candidateHistory.InterviewMode.Value}} </td>-->
                                                 <td *ngIf="candidateHistory.Status.toLowerCase() != 'On Hold'.toLowerCase() && candidateHistory.Status.toLowerCase() != 'Fitment Issue'.toLowerCase()">

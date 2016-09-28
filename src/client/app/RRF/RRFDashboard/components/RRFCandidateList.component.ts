@@ -77,8 +77,8 @@ export class RRFCandidateListComponent implements OnActivate {
     public InterviewDetails: {};
     UniqueRRFCode: string = '';
 
-     public barChartLabels: string[] = new Array<string>();
-     public barChartData: any[] = new Array<string>();
+    public barChartLabels: string[] = new Array<string>();
+    public barChartData: any[] = new Array<string>();
     // public barChartLabels: string[] = ['Business Logic', 'Technical Skills', 'Communication'];
     // public barChartData: any[] = [
     //     { data: [2, 5, 4], label: 'Technical 1' },
@@ -168,7 +168,7 @@ export class RRFCandidateListComponent implements OnActivate {
 
     getCandidatesRoundHistory(CandidateID: MasterData, CandidateName: string) {
         this.showChangeStatus = false;
-       this.resetTransferOperation();
+        this.resetTransferOperation();
         this.TransferInterviewDetails = new TransferInterview();
         this.CandidateRoundHistory = new Array<Interview>();
         this.selectedCandidate = CandidateName;
@@ -300,8 +300,18 @@ export class RRFCandidateListComponent implements OnActivate {
 
         return [day, month, year].join('-');
     }
+    getTime(time: string[]) {
+        //time:string = interviewTime;
+        time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+        if (time.length > 1) { // If time format correct
+            time = time.slice(1);  // Remove full string match value
+            time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+            time[0] = +time[0] % 12 || 12; // Adjust hours
+        }
+        return time.join('');
+    }
 
-    isOfferGenerationVisible(lastInterviewRound: string , status: string ) {
+    isOfferGenerationVisible(lastInterviewRound: string, status: string) {
         if (lastInterviewRound.toLowerCase().includes('hr') && status.toLowerCase() != 'awaiting approval') {
             return false;
         } else { return true; }
@@ -365,12 +375,12 @@ export class RRFCandidateListComponent implements OnActivate {
         this.TransferInterviewDetails = new TransferInterview();
     }
     /**Get all open RRF */
-    getAllOpenRRF(uniqueRRF : string) {
+    getAllOpenRRF(uniqueRRF: string) {
         this._rrfDashboardService.getAllOpenRRF()
             .subscribe(
             (results: any) => {
-                for(var index=0;index <= results.length;index++){
-                    if(results[index].RRFCODE !== uniqueRRF){
+                for (var index = 0; index <= results.length; index++) {
+                    if (results[index].RRFCODE !== uniqueRRF) {
                         this.allOpenRrf.push(<any>(results)[index]);
                     }
                 }
