@@ -278,6 +278,7 @@ export class SeedConfig {
     { src: 'zone.js/dist/zone.js', inject: 'libs' },
     { src: 'core-js/client/shim.min.js', inject: 'shims' },
     { src: 'systemjs/dist/system.src.js', inject: 'shims', env: ENVIRONMENTS.DEVELOPMENT },
+    // Temporary fix. See https://github.com/angular/angular/issues/9359
     { src: '.tmp/Rx.min.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
   ];
 

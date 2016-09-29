@@ -1,3 +1,7 @@
+/**
+ * Temporary fix. See https://github.com/angular/angular/issues/9359
+ */
+
 const Builder = require('systemjs-builder');
 
 export = (done:any) => {
