@@ -1,5 +1,5 @@
 <!-- Profile card -->
-<div class=" light bordered">
+<div class="light bordered">
     <div class="row">
         <!-- Profile Photo -->
         <div class="col-md-2">
@@ -7,7 +7,7 @@
             <ul class="list-unstyled profile-nav text-center">
                 <li>
                     <!--*ngIf="profile.BinaryImage!==''&&profile.BinaryImage!==null"-->
-                    <img class="img-responsive pic-bordered" *ngIf="profile.BinaryImage!==''&&profile.BinaryImage!==null" style="border-radius: 20%!important;height:150px;"
+                    <img class="img-responsive pic-bordered" *ngIf="profile.BinaryImage!==''&&profile.BinaryImage!==null" style="border-radius: 20%!important;height:150px;box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);"
                         alt="" src="data:image/jpeg;base64,{{profile.BinaryImage}}">
 
                     <img src="../assets/layouts/layout4/img/default-user.jpg" *ngIf="profile.BinaryImage===''||profile.BinaryImage===null" class="img-responsive pic-bordered"
@@ -17,9 +17,8 @@
                 </li>
                 <!--<li><a href="javascript:;">shaktiman@durdarshan.com</a></li>-->
                 <li>
-                    <span class="label label-sm label-success"> 
-                    <i class="fa fa-mobile-phone"></i>
-                    <a style="color: white;font-weight: bolder;font-size: larger;" href="tel:{{profile.PrimaryContact}}">{{profile.PrimaryContact?profile.PrimaryContact:"N/A"}}</a>
+                    <span> 
+                    <a class="btn btn-xs red" style="color: white;font-size: larger;" href="tel:{{profile.PrimaryContact}}"><i class="fa fa-phone"></i> {{profile.PrimaryContact?profile.PrimaryContact:"N/A"}}</a>
                     </span>
                 </li>
 
@@ -113,7 +112,8 @@
                         <div class="portlet-body">
                             <ul class="list-unstyled">
                                 <li>
-                                    <h5 class="font-blue sbold uppercase">{{profile.Owner.Value?profile.Owner.Value:"N/A"}}</h5>
+                                    <h5 tooltip="Owner" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Owner" class="font-blue sbold uppercase">
+                                        <!--<i class="fa fa-user"></i>-->{{profile.Owner.Value?profile.Owner.Value:"N/A"}}</h5>
                                 </li>
                                 <li>
                                     <span class="mt-action-dot color{{profile.Status.Id}}"> </span>{{profile.Status.Value}}
