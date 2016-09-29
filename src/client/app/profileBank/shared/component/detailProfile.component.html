@@ -7,7 +7,7 @@
             <ul class="list-unstyled profile-nav text-center">
                 <li>
                     <!--*ngIf="profile.BinaryImage!==''&&profile.BinaryImage!==null"-->
-                    <img class="img-responsive pic-bordered" *ngIf="profile.BinaryImage!==''&&profile.BinaryImage!==null" style="border-radius: 50%!important;height:150px;"
+                    <img class="img-responsive pic-bordered" *ngIf="profile.BinaryImage!==''&&profile.BinaryImage!==null" style="border-radius: 20%!important;height:150px;"
                         alt="" src="data:image/jpeg;base64,{{profile.BinaryImage}}">
 
                     <img src="../assets/layouts/layout4/img/default-user.jpg" *ngIf="profile.BinaryImage===''||profile.BinaryImage===null" class="img-responsive pic-bordered"
