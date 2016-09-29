@@ -43,6 +43,9 @@ npm start
 # api document for the app
 # npm run build.docs
 
+# to start deving with livereload site and coverage as well as continuous testing
+npm run start.deving
+
 # dev build
 npm run build.dev
 # prod build
