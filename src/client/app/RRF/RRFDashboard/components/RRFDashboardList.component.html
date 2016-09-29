@@ -7,9 +7,9 @@
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
-    <div class="page-content">
+    <div class="page-content" style="margin-left: 203px;margin-right: -15px;">
         <!--BEGIN breadcrumb -->
-        <ul class="page-breadcrumb breadcrumb">
+        <ul style="display:none" class="page-breadcrumb breadcrumb">
             <li>
                 <a [routerLink]="['/App']"> Home </a>
                 <i class="fa fa-circle"></i>
@@ -181,31 +181,34 @@
                                             <div class="row portlet-title" style="width:100%">
                                                 <div class="actions pull-right">
                                                     <button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" (click)='redirectToEditRRF(rrf.RRFID , rrf.Status.Id)'
-                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Edit RRF" [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] " [disabled]='allowEditRRF(rrf.Status.Id , rrf.RaisedBy.Id)'>
+                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
+                                                        title="Edit RRF" [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] " [disabled]='allowEditRRF(rrf.Status.Id , rrf.RaisedBy.Id)'>
                                                             <i class="fa fa-edit "></i><!-- Edit RRF-->
                                                         </button>
                                                     <button class="btn btn-circle btn-icon-only btn-default btn-xs blue" (click)='showRRFDetails(rrf.RRFID)' tooltip="View RRF"
-                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="View RRF">
+                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
+                                                        title="View RRF">
                                                             <i class="fa fa-search-plus "></i> <!--View RRF-->
                                                         </button>
                                                     <button class="btn btn-circle btn-icon-only btn-default btn-xs purple" (click)='redirectToAssignRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "
-                                                        tooltip="Assign RRF" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Assign RRF"
-                                                        tooltipEnable="true" [disabled]='allowAssignRRF(rrf.Status.Id)'>
+                                                        tooltip="Assign RRF" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                        title="Assign RRF" tooltipEnable="true" [disabled]='allowAssignRRF(rrf.Status.Id)'>
                                                             <i class="icon-user "></i> <!--Assign RRF-->
                                                         </button>
                                                     <button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" [ifAuthorize]="[ 'RC.VIEWRRFCANDIDATES.MANAGE'] "
-                                                        tooltip="View Candidates" tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Candidates"
-                                                        tooltipEnable="true" (click)='onViewCandidateClick(rrf.RRFID)' [disabled]='checkIfRRFClosed(rrf.Status.Id)'>
+                                                        tooltip="View Candidates" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                        title="View Candidates" tooltipEnable="true" (click)='onViewCandidateClick(rrf.RRFID)'
+                                                        [disabled]='checkIfRRFClosed(rrf.Status.Id)'>
                                                             <i class="fa fa-users "></i> <!--View Candidates-->
                                                         </button>
                                                     <button class="btn btn-circle btn-icon-only btn-default btn-xs green" [disabled]="rrf.Status.Value ==='Declined' || rrf.Status.Value ==='Pending Approval' || rrf.Status.Value ==='Rejected'"
-                                                        tooltip="View Re-schedule Interviews" tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Re-schedule Interviews"
-                                                        tooltipEnable="true" (click)='onReScheduleInterviewsClick(rrf.RRFID)'>
+                                                        tooltip="View Re-schedule Interviews" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                        title="View Re-schedule Interviews" tooltipEnable="true" (click)='onReScheduleInterviewsClick(rrf.RRFID)'>
                                                             <i class="fa fa-calendar-check-o"></i> <!--View Re-schedule Interviews-->
                                                         </button>
                                                     <button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='onCloseRRFClick(rrf.RRFID)' [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] "
-                                                        tooltip="Close RRF" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Close RRF"
-                                                        tooltipEnable="true" [disabled]='allowCloseRRF(rrf.Status.Id)'>
+                                                        tooltip="Close RRF" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                        title="Close RRF" tooltipEnable="true" [disabled]='allowCloseRRF(rrf.Status.Id)'>
                                                             <i class="fa fa-times "></i> <!--Close RRF-->
                                                         </button>
                                                 </div>

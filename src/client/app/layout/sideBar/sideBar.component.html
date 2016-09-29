@@ -3,7 +3,7 @@
     <!-- BEGIN SIDEBAR -->
     <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
     <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-    <div class="page-sidebar navbar-collapse " style="position: fixed !important;margin-left: -20px;margin-top: -15px;z-index: 9995;height: 100%!important;">
+    <div class="page-sidebar" style="position:fixed!important;margin-left: -20px;margin-top: -15px;z-index: 9995;height: 100%!important;">
         <!-- BEGIN SIDEBAR MENU -->
         <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
         <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
@@ -11,7 +11,7 @@
         <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
         <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
         <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-        <ul class="page-sidebar-menu " aria-expanded="true" data-keep-expanded="true" data-auto-scroll="true" data-slide-speed="200">
+        <ul class="page-sidebar-menu " aria-expanded="true" data-keep-expanded="true" data-auto-scroll="false" data-slide-speed="200">
             <li [ifAuthorize]="['DASHBOARD.READ']" class="nav-item start ">
                 <a [routerLink]="['/App/Dashboard']" class="nav-link ">
                     <i class="icon-graph"></i>
