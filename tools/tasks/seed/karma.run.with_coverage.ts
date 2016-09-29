@@ -16,7 +16,7 @@ let repeatableStartKarma = (done: any, config: any = {}) => {
 export = (done: any) => {
   return repeatableStartKarma(done, {
     preprocessors: {
-      'dist/**/!(*spec).js': ['coverage']
+      'dist/**/!(*spec|index|*.module).js': ['coverage']
     },
     reporters: ['mocha', 'coverage', 'karma-remap-istanbul'],
     coverageReporter: {
