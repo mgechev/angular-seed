@@ -1,5 +1,5 @@
-import { provide, ReflectiveInjector } from '@angular/core';
-import { BaseRequestOptions, ConnectionBackend, Http, HTTP_PROVIDERS, Response, ResponseOptions } from '@angular/http';
+import { ReflectiveInjector } from '@angular/core';
+import { BaseRequestOptions, ConnectionBackend, Http, Response, ResponseOptions } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 import { Observable } from 'rxjs/Observable';
 
@@ -12,17 +12,17 @@ export function main() {
     let initialResponse: any;
 
     beforeEach(() => {
+
       let injector = ReflectiveInjector.resolveAndCreate([
-        HTTP_PROVIDERS,
         NameListService,
         BaseRequestOptions,
         MockBackend,
-        provide(Http, {
+        {provide: Http,
           useFactory: function(backend: ConnectionBackend, defaultOptions: BaseRequestOptions) {
             return new Http(backend, defaultOptions);
           },
           deps: [MockBackend, BaseRequestOptions]
-        }),
+        },
       ]);
       nameListService = injector.get(NameListService);
       backend = injector.get(MockBackend);

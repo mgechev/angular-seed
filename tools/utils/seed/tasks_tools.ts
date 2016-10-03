@@ -1,4 +1,3 @@
-import * as chalk from 'chalk';
 import { existsSync, lstatSync, readdirSync } from 'fs';
 import * as gulp from 'gulp';
 import * as util from 'gulp-util';
@@ -11,7 +10,7 @@ import * as tildify from 'tildify';
  * @param {string} path - The path to load the tasks from.
  */
 export function loadTasks(path: string): void {
-  util.log('Loading tasks folder', chalk.yellow(path));
+  util.log('Loading tasks folder', util.colors.yellow(path));
   readDir(path, taskname => registerTask(taskname, path));
 }
 
@@ -22,7 +21,7 @@ export function loadTasks(path: string): void {
  */
 function registerTask(taskname: string, path: string): void {
   const TASK = join(path, taskname);
-  util.log('Registering task', chalk.yellow(tildify(TASK)));
+  util.log('Registering task', util.colors.yellow(tildify(TASK)));
 
   gulp.task(taskname, (done: any) => {
     const task = require(TASK);

@@ -1,15 +1,14 @@
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
-import * as merge from 'merge-stream';
 
-import { BOOTSTRAP_DIR, INLINE_TEMPLATES, PROD_DEST, TMP_DIR, TOOLS_DIR } from '../../config';
+import Config from '../../config';
 import { makeTsProject, templateLocals } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
 
 const INLINE_OPTIONS = {
-  base: TMP_DIR,
+  base: Config.TMP_DIR,
   useRelativePaths: true,
   removeLineBreaks: true
 };
@@ -17,35 +16,27 @@ const INLINE_OPTIONS = {
 /**
  * Executes the build process, transpiling the TypeScript files for the production environment.
  */
-function buildTS() {
+
+export = () => {
   let tsProject = makeTsProject();
   let src = [
-    'typings/index.d.ts',
-    TOOLS_DIR + '/manual_typings/**/*.d.ts',
-    join(TMP_DIR, '**/*.ts')
+    Config.TOOLS_DIR + '/manual_typings/**/*.d.ts',
+    join(Config.TMP_DIR, '**/*.ts'),
+    '!' + join(Config.TMP_DIR, `**/${Config.BOOTSTRAP_FACTORY_PROD_MODULE}.ts`)
   ];
   let result = gulp.src(src)
     .pipe(plugins.plumber())
-    .pipe(INLINE_TEMPLATES ? plugins.inlineNg2Template(INLINE_OPTIONS) : plugins.util.noop())
-    .pipe(plugins.typescript(tsProject));
+    .pipe(plugins.inlineNg2Template(INLINE_OPTIONS))
+    .pipe(plugins.typescript(tsProject))
+    .once('error', function(e: any) {
+      this.once('finish', () => process.exit(1));
+    });
+
 
   return result.js
     .pipe(plugins.template(templateLocals()))
-    .pipe(gulp.dest(TMP_DIR));
-}
-
-/**
- * Copy template files for the production environment if in LAZY TEMPLATE mode.
- */
-function copyTemplates() {
-
-  let result = gulp.src([join(TMP_DIR, BOOTSTRAP_DIR, '**', '*.html')]);
-
-  if (INLINE_TEMPLATES) {
-    return result;
-  }
-
-  return result.pipe(gulp.dest(join(PROD_DEST, BOOTSTRAP_DIR)));
-}
-
-export = () => merge(buildTS(), copyTemplates());
+    .pipe(gulp.dest(Config.TMP_DIR))
+    .on('error', (e: any) => {
+      console.log(e);
+    });
+};
