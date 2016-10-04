@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import { Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment } from '@angular/router';
-import {CalendarModule} from 'primeng/primeng';
 import { CandidateProfile, ResumeMeta, Qualification, CandidateExperience, EmploymentHistory} from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -57,6 +56,8 @@ export class MyProfilesAddComponent implements OnActivate {
     profilePhoto: string;
     /** For profile picture */
     profilePic: any;
+    readyToRelocateFlag: boolean = false;
+    reasonToRelocateFlag: boolean = false;
     constructor(private _myProfilesService: MyProfilesService,
         private _masterService: MastersService,
         private _profileBankService: ProfileBankService,
@@ -72,7 +73,7 @@ export class MyProfilesAddComponent implements OnActivate {
 
     routerOnActivate(segment: RouteSegment) {
         window.onbeforeunload = function () {
-            return "Data will be lost if you leave the page, are you sure?";
+            return 'Data will be lost if you leave the page, are you sure?';
         };
         //get all master data and bind to dropdown
         this.getCountries();
@@ -106,6 +107,12 @@ export class MyProfilesAddComponent implements OnActivate {
             .subscribe(
             (results: CandidateProfile) => {
                 this.profile = results;
+                if (this.profile.OutstationedCandidate === true) {
+                    this.readyToRelocateFlag = true;
+                }
+                if (this.profile.ReadyToRelocate === true) {
+                    this.reasonToRelocateFlag = true;
+                }
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments;
                 if (results.Country.Id !== 0)
                     this.getStates(results.Country.Id);
@@ -553,7 +560,8 @@ export class MyProfilesAddComponent implements OnActivate {
         try {
             let FileList: FileList = selectedFile.target.files;
             if (selectedFile.target.files[0].size < 2000000) {
-                if (selectedFile.target.files[0].type === "image/jpeg" || selectedFile.target.files[0].type === "image/png" || selectedFile.target.files[0].type === "image/jpg") {
+                if (selectedFile.target.files[0].type === 'image/jpeg' || selectedFile.target.files[0].type === 'image/png'
+                || selectedFile.target.files[0].type === 'image/jpg') {
                     if (this.uploadedPhoto)
                         this.uploadedPhoto.length = 0;
                     for (let i = 0, length = FileList.length; i < length; i++) {
@@ -562,12 +570,10 @@ export class MyProfilesAddComponent implements OnActivate {
                         this.fileName = FileList.item(i).name;
                     }
                     this.postPhoto(this.CandidateID, this.uploadedPhoto[0]);
-                }
-                else {
+                } else {
                     this.toastr.error('Please upload image of type .jpg, .png, .jpeg');
                 }
-            }
-            else {
+            }else {
                 this.toastr.error('Please upload image of size less than 2 MB');
             }
         } catch (error) {
@@ -632,9 +638,30 @@ export class MyProfilesAddComponent implements OnActivate {
         // this._router.navigate(['/App/ProfileBank/MyProfiles']);
         let res: any;
         res = confirm(
-            "Data will be lost if you leave the page, are you sure?"
+            'Data will be lost if you leave the page, are you sure?'
         );
-        if (res == true)
+        if (res === true)
             this._location.back();
+    }
+    onOutstationedClick(isChecked: any) {
+        if (isChecked === false) {
+            this.readyToRelocateFlag = true;
+        } else {
+            this.readyToRelocateFlag = false;
+            this.reasonToRelocateFlag = false;
+        }
+    }
+    onReadyToRelocate(isChecked: any) {
+        if (isChecked === false) {
+            this.reasonToRelocateFlag = true;
+        } else {
+            this.reasonToRelocateFlag = false;
+        }
+    }
+    nextTab() {
+        $('.nav-tabs > .active').next('li').find('a').trigger('click');
+    }
+    previousTab() {
+        $('.nav-tabs > .active').prev('li').find('a').trigger('click');
     }
 }

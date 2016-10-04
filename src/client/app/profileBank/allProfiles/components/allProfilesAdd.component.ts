@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { Router, RouteSegment, OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
-import {CandidateProfile, ResumeMeta, Qualification } from '../../shared/model/myProfilesInfo';
+import {CandidateProfile, ResumeMeta, Qualification, CandidateExperience } from '../../shared/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -46,7 +46,8 @@ export class AllProfilesAddComponent implements OnActivate {
     IsCurrentAddressSameAsPermanentChecked: boolean = false;
     IsOutstationedCandidateChecked: boolean = false;
     IsReadyToRelocateChecked: boolean = false;
-
+    /**Candidate Experience */
+    CandidateExperiences: CandidateExperience = new CandidateExperience();
     IsHidden: boolean = true;
     IsSuccess: boolean = false;
 
@@ -141,7 +142,7 @@ export class AllProfilesAddComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
-    
+
 
     getQualifications(): void {
         this._masterService.getQualifications()
@@ -334,23 +335,40 @@ export class AllProfilesAddComponent implements OnActivate {
             });
 
     }
-
+    /**Function to fetch candidate EXPERIENCE details */
+      GetCandidateExperience(candidateID: MasterData) {
+        this._profileBankService.getCandidateExperience(candidateID)
+            .subscribe(
+            results => {
+                this.CandidateExperiences = <any>results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+    }
+    /**Save candidate EXPERIENCE details */
     onSaveCareerProfileDetails(): void {
 
-        if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-            this.profile.CommentsUpdated = this.profile.CandidateCareerProfile.CommentsUpdated = true;
-            this.profile.PreviousFollowupComments = this.profile.CandidateCareerProfile.FollowUpComments
-                = this.profile.FollowUpComments.trim();
+        if (this.profile.PreviousFollowupComments
+            !== this.CandidateExperiences.FollowUpComments
+            ? this.CandidateExperiences.FollowUpComments.trim().replace(/ +/g, ' ') : ''
+        ) {
+            this.profile.CommentsUpdated = this.CandidateExperiences.CommentsUpdated = true;
+            // this.profile.PreviousFollowupComments = this.CandidateExperiences.FollowUpComments = this.profile.FollowUpComments.trim();
+            this.profile.PreviousFollowupComments = this.CandidateExperiences.FollowUpComments
+                = this.CandidateExperiences.FollowUpComments.trim();
         } else {
-            this.profile.CommentsUpdated = this.profile.CandidateCareerProfile.CommentsUpdated = false;
+            this.profile.CommentsUpdated = this.CandidateExperiences.CommentsUpdated = false;
         }
-        this.profile.CandidateCareerProfile.CandidateID = this.CandidateID;
-        this._profileBankService.editCandidateCareerDetails(this.profile.CandidateCareerProfile)
+        this.CandidateExperiences.CandidateID = this.CandidateID;
+        this._profileBankService.editCandidateCareerDetails(this.CandidateExperiences)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.getCandidateProfileById(this.CandidateID.Value);
+                    // this.getCandidateProfileById(this.CandidateID.Value);
+                    this.GetCandidateExperience(this.CandidateID);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -362,7 +380,6 @@ export class AllProfilesAddComponent implements OnActivate {
             );
 
     }
-
     onSaveSalaryDetails(): void {
         if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
             this.profile.CommentsUpdated = this.profile.CandidateSalaryDetails.CommentsUpdated = true;

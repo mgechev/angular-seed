@@ -73,8 +73,8 @@
                                                             <label class="control-label">First Name<span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" autofocus placeholder="First Name" class="form-control" [(ngModel)]="profile.FirstName" required="" (blur)="onSavePrimaryInfo()"
-                                                                    />
+                                                                    <input type="text" autofocus placeholder="First Name" class="form-control text-capitalize" [(ngModel)]="profile.FirstName"
+                                                                        required="" (blur)="onSavePrimaryInfo()" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -84,7 +84,7 @@
                                                             <label class="control-label">Middle Name</label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="Middle Name" class="form-control" [(ngModel)]="profile.MiddleName" (blur)="onSavePrimaryInfo()"
+                                                                    <input type="text" placeholder="Middle Name" class="form-control text-capitalize" [(ngModel)]="profile.MiddleName" (blur)="onSavePrimaryInfo()"
                                                                     />
                                                                 </div>
                                                             </div>
@@ -95,8 +95,8 @@
                                                             <label class="control-label">Last Name<span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="Last Name" class="form-control" [(ngModel)]="profile.LastName" required="" (blur)="onSavePrimaryInfo()"
-                                                                    />
+                                                                    <input type="text" placeholder="Last Name" class="form-control text-capitalize" [(ngModel)]="profile.LastName" required=""
+                                                                        (blur)="onSavePrimaryInfo()" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -131,8 +131,9 @@
                                                             <label class="control-label">Skills&nbsp; <small> (Primary Skills) </small> <span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-12">
-                                                                    <textarea class="form-control" rows="1" placeholder="Add Skills For E.g. C#,ASP.net" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.PrimarySkills"
-                                                                        required="" (blur)="onSavePrimaryInfo()"></textarea>
+                                                                    <textarea class="form-control text-capitalize" rows="1" placeholder="Add Skills For E.g. C#,ASP.net" style="resize:vertical"
+                                                                        [(ngModel)]="profile.CandidateSkills.PrimarySkills" required=""
+                                                                        (blur)="onSavePrimaryInfo()"></textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -142,8 +143,8 @@
                                                             <label class="control-label">Tag <span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-12">
-                                                                    <textarea class="form-control" rows="1" placeholder="Add Tags For E.g. Java, Sharepoint etc." style="resize:vertical" [(ngModel)]="profile.Tag"
-                                                                        required="" (blur)="onSavePrimaryInfo()"></textarea>
+                                                                    <textarea class="form-control text-capitalize" rows="1" placeholder="Add Tags For E.g. Java, Sharepoint etc." style="resize:vertical"
+                                                                        [(ngModel)]="profile.Tag" required="" (blur)="onSavePrimaryInfo()"></textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -164,7 +165,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Follow Up Comments</label>
-                                                            <textarea class="form-control" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
+                                                            <textarea class="form-control text-capitalize" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
                                                                 tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                 tooltipEnable="!profile.FollowUpComments" (blur)="onSavePrimaryInfo()">
                                                             </textarea>
@@ -194,9 +195,13 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="margiv-top-10">
-                                                    <button type="submit" class="btn green"> Save Changes </button>
+                                                <!--<div class="margiv-top-10;" >
+                                                    <button type="submit" class="btn green"> Save Changes</button>
                                                     <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
+                                                </div>-->
+                                                <div class="margiv-top-10;">
+                                                    <a class="btn green " (click)='nextTab()'>
+                                                         Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -235,8 +240,8 @@
                                                             <label class="control-label">First Name<span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" autofocus placeholder="First Name" class="form-control" [(ngModel)]="profile.FirstName" required="" (blur)="onSavePersonalDetails()"
-                                                                    />
+                                                                    <input type="text" autofocus placeholder="First Name" class="form-control text-capitalize" [(ngModel)]="profile.FirstName"
+                                                                        required="" (blur)="onSavePersonalDetails()" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -246,7 +251,7 @@
                                                             <label class="control-label">Middle Name</label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="Middle Name" class="form-control" [(ngModel)]="profile.MiddleName" (keyup)="removeWhiteSpaces($event.target.value)"
+                                                                    <input type="text" placeholder="Middle Name" class="form-control text-capitalize" [(ngModel)]="profile.MiddleName" (keyup)="removeWhiteSpaces($event.target.value)"
                                                                         (blur)="onSavePersonalDetails()" />
                                                                 </div>
                                                             </div>
@@ -258,8 +263,8 @@
                                                             <label class="control-label">Last Name<span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="Last Name" class="form-control" [(ngModel)]="profile.LastName" required="" (blur)="onSavePersonalDetails()"
-                                                                    />
+                                                                    <input type="text" placeholder="Last Name" class="form-control text-capitalize" [(ngModel)]="profile.LastName" required=""
+                                                                        (blur)="onSavePersonalDetails()" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -334,7 +339,7 @@
                                                             <label class="control-label">Current Address </label>
                                                             <div class="row">
                                                                 <div class="col-md-12">
-                                                                    <textarea class="form-control" rows="2" placeholder="Current Address" style="resize:vertical" [(ngModel)]="profile.CurrentAddress"
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Current Address" style="resize:vertical" [(ngModel)]="profile.CurrentAddress"
                                                                         (blur)="onSavePersonalDetails()"></textarea>
                                                                 </div>
                                                             </div>
@@ -356,7 +361,7 @@
                                                             <label class="control-label">Permanent Address <span class="required"> * </span></label>
                                                             <div class="row">
                                                                 <div class="col-md-12">
-                                                                    <textarea class="form-control" rows="2" placeholder="Permanent Address" style="resize:vertical" [(ngModel)]="profile.PermanentAddress"
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Permanent Address" style="resize:vertical" [(ngModel)]="profile.PermanentAddress"
                                                                         required="" (blur)="onSavePersonalDetails()"></textarea>
                                                                 </div>
                                                             </div>
@@ -370,7 +375,7 @@
                                                             <label class="control-label"> Outstationed Candidate</label>
                                                             <div class="mt-checkbox-inline ">
                                                                 <label class="mt-checkbox  mt-checkbox-outline">
-                                                                    <input type="checkbox" id="chkOutstationedCandidate" [(ngModel)]="profile.OutstationedCandidate">
+                                                                    <input type="checkbox" id="chkOutstationedCandidate" [(ngModel)]="profile.OutstationedCandidate" (change)="onOutstationedClick(profile.OutstationedCandidate)">
                                                                     <span></span>
                                                                 </label>
                                                             </div>
@@ -394,70 +399,71 @@
                                                             </select>
                                                         </div>
                                                     </div>
-
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label>District</label>
-                                                            <input type="text" placeholder="District" class="form-control" [(ngModel)]="profile.District" (blur)="onSavePersonalDetails()"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    <!---->
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-3" *ngIf="readyToRelocateFlag">
                                                         <div class="form-group">
                                                             <label class="control-label"> Ready To Relocate </label>
                                                             <div class="mt-checkbox-inline ">
                                                                 <label class="mt-checkbox  mt-checkbox-outline">
-                                                                    <input type="checkbox" id="chkReadyToRelocate" [(ngModel)]="profile.ReadyToRelocate"/>
+                                                                    <input type="checkbox" id="chkReadyToRelocate" [(ngModel)]="profile.ReadyToRelocate" (change)="onReadyToRelocate(profile.ReadyToRelocate)" />
                                                                     <span></span>
                                                                 </label>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <!--<div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>District</label>
+                                                            <input type="text" placeholder="District" class="form-control" [(ngModel)]="profile.District" (blur)="onSavePersonalDetails()"
+                                                            />
+                                                        </div>
+                                                    </div>-->
+
+                                                </div>
+                                                <div class="row">
+
+                                                    <div class="col-md-3" *ngIf="reasonToRelocateFlag">
                                                         <div class="form-group">
                                                             <label class="control-label">Reason To Relocate</label>
-                                                            <textarea class="form-control" rows="2" placeholder="Reason To Relocate" style="resize:vertical" [(ngModel)]="profile.ReasonToRelocate"
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Reason To Relocate" style="resize:vertical" [(ngModel)]="profile.ReasonToRelocate"
                                                                 (blur)="onSavePersonalDetails()"></textarea>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <!--<div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Friends Relatives</label>
                                                             <textarea class="form-control" rows="2" placeholder="Friends" style="resize:vertical" [(ngModel)]="profile.FriendsRelatives"
                                                                 (blur)="onSavePersonalDetails()"></textarea>
                                                         </div>
-                                                    </div>
+                                                    </div>-->
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Comments Additional Information</label>
-                                                            <textarea class="form-control" rows="2" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.CommentsAdditionalInformation"
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.CommentsAdditionalInformation"
                                                                 (blur)="onSavePersonalDetails()"></textarea>
                                                         </div>
                                                     </div>
-
-                                                </div>
-                                                <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Resume Source</label>
-                                                            <textarea class="form-control" rows="2" placeholder="Resume Source" style="resize:vertical" [(ngModel)]="profile.ResumeSource"
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Resume Source" style="resize:vertical" [(ngModel)]="profile.ResumeSource"
                                                                 (blur)="onSavePersonalDetails()"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Tagging</label>
-                                                            <input type="text" placeholder="Add Tagging For E.g. ASP.Net, Salesforce" class="form-control" [(ngModel)]="profile.Tag"
+                                                            <input type="text" placeholder="Add Tagging For E.g. ASP.Net, Salesforce" class="form-control text-capitalize" [(ngModel)]="profile.Tag"
                                                                 (blur)="onSavePersonalDetails()" />
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="row">
+
+
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Follow Up Comments</label>
-                                                            <textarea class="form-control" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
+                                                            <textarea class="form-control text-capitalize" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
                                                                 tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                 tooltipEnable="!profile.FollowUpComments" (blur)="onSavePersonalDetails()">
                                                             </textarea>
@@ -465,9 +471,16 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="margiv-top-10">
+                                                <!--<div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
                                                     <a class="btn default" (click)='Back()'> Cancel </a>
+                                                </div>-->
+
+                                                <div class="margiv-top-10;">
+                                                    <a class="btn green " (click)='previousTab()'>
+                                                        <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev </a>
+                                                    <a class="btn green " (click)='nextTab()'>
+                                                         Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -573,6 +586,14 @@
                                                     </table>
 
 
+                                                    <div class="margiv-top-10;">
+                                                        <a class="btn green " (click)='previousTab()'>
+                                                            <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev
+                                                        </a>
+                                                        <a class="btn green " (click)='nextTab()'>
+                                                         Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
+                                                    </div>
+
                                                 </div>
                                                 <!-- END EXAMPLE TABLE PORTLET-->
 
@@ -587,28 +608,28 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Expertise in Skill </label>
-                                                            <textarea class="form-control" rows="2" placeholder="Add Expertise Skills" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.ExpInSkill"
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Add Expertise Skills" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.ExpInSkill"
                                                                 (blur)='onSaveSkillsDetails()'></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Any Functional Experience</label>
-                                                            <textarea class="form-control" rows="2" placeholder="Add Functional Exp." style="resize:vertical" [(ngModel)]="profile.CandidateSkills.AnyFunctionalExp"
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Add Functional Exp." style="resize:vertical" [(ngModel)]="profile.CandidateSkills.AnyFunctionalExp"
                                                                 (blur)='onSaveSkillsDetails()'></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Primary Skills</label>
-                                                            <textarea class="form-control" rows="2" placeholder="Primary Skills" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.PrimarySkills"
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Primary Skills" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.PrimarySkills"
                                                                 (blur)='onSaveSkillsDetails()'></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Secondary Skills</label>
-                                                            <textarea class="form-control" rows="2" placeholder="Secondary Skills" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.SecondarySkills"
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Secondary Skills" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.SecondarySkills"
                                                                 (blur)='onSaveSkillsDetails()'></textarea>
                                                         </div>
                                                     </div>
@@ -617,28 +638,28 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Other Skills</label>
-                                                            <textarea class="form-control" rows="2" placeholder="Other Skills" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.OtherSkills"
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Other Skills" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.OtherSkills"
                                                                 (blur)='onSaveSkillsDetails()'></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Role and Responsibility</label>
-                                                            <textarea class="form-control" rows="2" placeholder="Role and Responsibility" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.RoleAndResponsibility"
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Role and Responsibility" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.RoleAndResponsibility"
                                                                 (blur)='onSaveSkillsDetails()'></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Projects Done</label>
-                                                            <textarea class="form-control" rows="2" placeholder="Projects Done" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.ProjectsDone"
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Projects Done" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.ProjectsDone"
                                                                 (blur)='onSaveSkillsDetails()'></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Testing Skills</label>
-                                                            <textarea class="form-control" rows="2" placeholder="Testing Skills" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.TestingSkills"
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Testing Skills" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.TestingSkills"
                                                                 (blur)='onSaveSkillsDetails()'></textarea>
                                                         </div>
                                                     </div>
@@ -647,29 +668,30 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Database</label>
-                                                            <textarea class="form-control" rows="2" placeholder="Database Known" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.Database"
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Database Known" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.Database"
                                                                 (blur)='onSaveSkillsDetails()'></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Inclination To Other Technology</label>
-                                                            <textarea class="form-control" rows="2" placeholder="Inclination To Other Technology" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.InclinationToOtherTechnology"
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Inclination To Other Technology" style="resize:vertical"
+                                                                [(ngModel)]="profile.CandidateSkills.InclinationToOtherTechnology"
                                                                 (blur)='onSaveSkillsDetails()'></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Aware About Testing</label>
-                                                            <textarea class="form-control" rows="2" placeholder="Add Testing knowledge" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.AwareAboutTesting"
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Add Testing knowledge" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.AwareAboutTesting"
                                                                 (blur)='onSaveSkillsDetails()'></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Strong Technical Skills</label>
-                                                            <textarea class="form-control" rows="2" placeholder="Add Strong Technical Skills" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.StrongTechnicalSkills"
-                                                                (blur)='onSaveSkillsDetails()'></textarea>
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Add Strong Technical Skills" style="resize:vertical"
+                                                                [(ngModel)]="profile.CandidateSkills.StrongTechnicalSkills" (blur)='onSaveSkillsDetails()'></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -677,16 +699,23 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Follow Up Comments</label>
-                                                            <textarea class="form-control" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
+                                                            <textarea class="form-control text-capitalize" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
                                                                 tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                 tooltipEnable="!profile.FollowUpComments" (blur)='onSaveSkillsDetails()'>
                                                             </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="margin-top-10">
+                                                <!--<div class="margin-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
                                                     <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
+                                                </div>-->
+
+                                                <div class="margiv-top-10;">
+                                                    <a class="btn green " (click)='previousTab()'>
+                                                        <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev </a>
+                                                    <a class="btn green " (click)='nextTab()'>
+                                                         Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -754,7 +783,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Follow Up Comments</label>
-                                                            <textarea class="form-control" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="CandidateExperiences.FollowUpComments"
+                                                            <textarea class="form-control text-capitalize" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="CandidateExperiences.FollowUpComments"
                                                                 tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                 tooltipEnable="!profile.FollowUpComments" (blur)='onSaveCareerProfileDetails()'>
                                                             </textarea>
@@ -789,8 +818,9 @@
                                                                         <label class="control-label">Company Name <span class="required"> * </span></label>
                                                                         <div class="row">
                                                                             <div class="col-md-12">
-                                                                                <input type="Text" placeholder="Company Name" class="form-control" [(ngModel)]="EmployersInformation.Company" title="Please enter company name"
-                                                                                    required="" tooltip="Company Name" tooltipPlacement="top"
+                                                                                <input type="Text" placeholder="Company Name" class="form-control text-capitalize" [(ngModel)]="EmployersInformation.Company"
+                                                                                    title="Please enter company name" required=""
+                                                                                    tooltip="Company Name" tooltipPlacement="top"
                                                                                     tooltipTrigger="mouseenter" tooltipEnable="!EmployersInformation.Company"
                                                                                 />
                                                                             </div>
@@ -803,7 +833,8 @@
                                                                         <div class="row">
                                                                             <div class="col-md-12">
                                                                                 <div>
-                                                                                    <input type="Text" placeholder="Designation" class="form-control" [(ngModel)]="EmployersInformation.DesignationRole" title="Please enter Designation in specified company"
+                                                                                    <input type="Text" placeholder="Designation" class="form-control text-capitalize" [(ngModel)]="EmployersInformation.DesignationRole"
+                                                                                        title="Please enter Designation in specified company"
                                                                                         required="" tooltip="Please enter Designation in specified company"
                                                                                         tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                                         tooltipEnable="!EmployersInformation.DesignationRole"
@@ -818,7 +849,8 @@
                                                                         <label class="control-label">Location <span class="required"> * </span></label>
                                                                         <div class="row">
                                                                             <div class="col-md-12">
-                                                                                <input type="Text" placeholder="Location" class="form-control" [(ngModel)]="EmployersInformation.Location" title="Please enter working location for specified company"
+                                                                                <input type="Text" placeholder="Location" class="form-control text-capitalize" [(ngModel)]="EmployersInformation.Location"
+                                                                                    title="Please enter working location for specified company"
                                                                                     required="" tooltip="Please enter working location for specified company"
                                                                                     tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                                     tooltipEnable="!EmployersInformation.Location"
@@ -850,7 +882,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                
+
                                                                 <!--<div class="col-md-2">
                                                                     <div class="form-group">
                                                                         <label class="control-label"> Period <span class="required"> * </span></label>
@@ -941,6 +973,14 @@
                                                             </tr>
                                                         </table>
                                                     </div>
+
+                                                    <div class="margiv-top-10;">
+                                                        <a class="btn green " (click)='previousTab()'>
+                                                            <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev
+                                                        </a>
+                                                        <a class="btn green " (click)='nextTab()'>
+                                                         Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
+                                                    </div>
                                                 </div>
                                                 <!-- /Employer information TAB -->
                                                 <!-- END EXAMPLE TABLE PORTLET-->
@@ -971,8 +1011,8 @@
                                                             <label class="control-label">Current Take Home</label>
                                                             <div class="row">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.TakeHomePay" (blur)='onSaveSalaryDetails()'
-                                                                    />
+                                                                    <input type="text" placeholder="" class="form-control text-capitalize" [(ngModel)]="profile.CandidateSalaryDetails.TakeHomePay"
+                                                                        (blur)='onSaveSalaryDetails()' />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1019,7 +1059,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Follow Up Comments</label>
-                                                            <textarea class="form-control" rows="2" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
                                                                 tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                 tooltipEnable="!profile.FollowUpComments" (blur)='onSaveSalaryDetails()'>
                                                             </textarea>
@@ -1030,7 +1070,7 @@
                                                             <label class="control-label">Any Perks</label>
                                                             <div class="row">
                                                                 <div class="col-md-10">
-                                                                    <textarea class="form-control" rows="1" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSalaryDetails.AnyPerks"
+                                                                    <textarea class="form-control text-capitalize" rows="1" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSalaryDetails.AnyPerks"
                                                                         (blur)='onSaveSalaryDetails()'></textarea>
                                                                 </div>
                                                             </div>
@@ -1038,9 +1078,16 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="margiv-top-10">
+                                                <!--<div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
                                                     <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
+                                                </div>-->
+
+                                                <div class="margiv-top-10;">
+                                                    <a class="btn green " (click)='previousTab()'>
+                                                        <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev </a>
+                                                    <a class="btn green " (click)='nextTab()'>
+                                                         Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -1076,14 +1123,16 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label class="control-label">Team Handling Experience</label>
-                                                            <textarea class="form-control" rows="1" placeholder="Add Team Handling Experience<" style="resize:vertical" [(ngModel)]="profile.CandidateTeamManagement.TeamHandlingExperience"
+                                                            <textarea class="form-control text-capitalize" rows="1" placeholder="Add Team Handling Experience<" style="resize:vertical"
+                                                                [(ngModel)]="profile.CandidateTeamManagement.TeamHandlingExperience"
                                                                 (blur)='onSaveTeamManagementDetails()'></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label class="control-label">Team Members Designations</label>
-                                                            <textarea class="form-control" rows="1" placeholder=" Add Team Members Designations" style="resize:vertical" [(ngModel)]="profile.CandidateTeamManagement.TeamMembersDesignations"
+                                                            <textarea class="form-control text-capitalize" rows="1" placeholder=" Add Team Members Designations" style="resize:vertical"
+                                                                [(ngModel)]="profile.CandidateTeamManagement.TeamMembersDesignations"
                                                                 (blur)='onSaveTeamManagementDetails()'></textarea>
                                                         </div>
                                                     </div>
@@ -1093,14 +1142,15 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label class="control-label">Team Handling Challenges</label>
-                                                            <textarea class="form-control" rows="2" placeholder="Add Team Handling Challenges" style="resize:vertical" [(ngModel)]="profile.CandidateTeamManagement.TeamHandlingChallenges"
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Add Team Handling Challenges" style="resize:vertical"
+                                                                [(ngModel)]="profile.CandidateTeamManagement.TeamHandlingChallenges"
                                                                 (blur)='onSaveTeamManagementDetails()'></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <div class="form-group">
                                                             <label class="control-label">Follow Up Comments</label>
-                                                            <textarea class="form-control" rows="2" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
                                                                 tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                 tooltipEnable="!profile.FollowUpComments" (blur)='onSaveTeamManagementDetails()'>
                                                             </textarea>
@@ -1108,9 +1158,14 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="margiv-top-10">
+                                                <!--<div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
                                                     <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
+                                                </div>-->
+
+                                                <div class="margiv-top-10;">
+                                                    <a class="btn green " (click)='previousTab()'>
+                                                        <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev </a>
                                                 </div>
                                             </form>
                                         </div>
@@ -1160,7 +1215,7 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Role Expected </label>
-                                                                    <input type="text" placeholder="Role Expected" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.RoleExpected"
+                                                                    <input type="text" placeholder="Role Expected" class="form-control text-capitalize" [(ngModel)]="profile.CandidateOtherDetails.RoleExpected"
                                                                         (blur)="onSaveProfessionalDetails()" />
                                                                 </div>
                                                             </div>
@@ -1173,14 +1228,14 @@
                                                                 -->
                                                                 <div class="form-group">
                                                                     <label class="control-label">Offered Candidate Status</label>
-                                                                    <input type="text" placeholder="Offered Candidate Status" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.OfferedCandidateStatus"
+                                                                    <input type="text" placeholder="Offered Candidate Status" class="form-control text-capitalize" [(ngModel)]="profile.CandidateOtherDetails.OfferedCandidateStatus"
                                                                         (blur)="onSaveProfessionalDetails()" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Job Search Period</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="Job Search Period" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.JobSerachPeriod"
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Job Search Period" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.JobSerachPeriod"
                                                                         (blur)="onSaveProfessionalDetails()"></textarea>
                                                                 </div>
                                                             </div>
@@ -1188,7 +1243,7 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Family Background</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="Family Background" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.FamilyBackground"
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Family Background" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.FamilyBackground"
                                                                         (blur)="onSaveProfessionalDetails()"></textarea>
                                                                 </div>
                                                             </div>
@@ -1198,21 +1253,21 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Exsting Company Offers If Any</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="Exsting Company Offers" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.IfExstingCompanyOffers"
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Exsting Company Offers" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.IfExstingCompanyOffers"
                                                                         (blur)="onSaveProfessionalDetails()"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Strengths </label>
-                                                                    <textarea class="form-control" rows="2" placeholder="Strengths" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.Strengths"
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Strengths" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.Strengths"
                                                                         (blur)="onSaveProfessionalDetails()"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Weekness</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="Weekness" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.Weekness"
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Weekness" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.Weekness"
                                                                         (blur)="onSaveProfessionalDetails()"></textarea>
                                                                 </div>
                                                             </div>
@@ -1222,14 +1277,15 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Notice Period Not Completed Count </label>
-                                                                    <textarea class="form-control" rows="2" placeholder="Notice Period Not Completed Count " style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriodNotCompletedCount"
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Notice Period Not Completed Count " style="resize:vertical"
+                                                                        [(ngModel)]="profile.CandidateOtherDetails.NoticePeriodNotCompletedCount"
                                                                         (blur)="onSaveProfessionalDetails()"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Looking For</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="Looking For" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.LookingFor"
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Looking For" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.LookingFor"
                                                                         (blur)="onSaveProfessionalDetails()"></textarea>
                                                                 </div>
                                                             </div>
@@ -1237,7 +1293,8 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Primary Reason To Quit Last Job</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="Primary Reason To Quit Last Job" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.PrimaryReasonToQuitLastJob"
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Primary Reason To Quit Last Job" style="resize:vertical"
+                                                                        [(ngModel)]="profile.CandidateOtherDetails.PrimaryReasonToQuitLastJob"
                                                                         (blur)="onSaveProfessionalDetails()"></textarea>
                                                                 </div>
                                                             </div>
@@ -1246,21 +1303,24 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Secondary Reason To Quit Last Job</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="Secondary Reason To Quit Last Job" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.SecondaryReasonToQuitLastJob"
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Secondary Reason To Quit Last Job" style="resize:vertical"
+                                                                        [(ngModel)]="profile.CandidateOtherDetails.SecondaryReasonToQuitLastJob"
                                                                         (blur)="onSaveProfessionalDetails()"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Primary Reason To Quit Current Job</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="Primary Reason To Quit Current Job" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.PrimaryReasonToQuitCurrentJob"
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Primary Reason To Quit Current Job" style="resize:vertical"
+                                                                        [(ngModel)]="profile.CandidateOtherDetails.PrimaryReasonToQuitCurrentJob"
                                                                         (blur)="onSaveProfessionalDetails()"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Secondary Reason To Quit Current Job</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="Secondary Reason To Quit Current Job" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.SecondaryReasonToQuitCurrentJob"
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Secondary Reason To Quit Current Job" style="resize:vertical"
+                                                                        [(ngModel)]="profile.CandidateOtherDetails.SecondaryReasonToQuitCurrentJob"
                                                                         (blur)="onSaveProfessionalDetails()"></textarea>
                                                                 </div>
                                                             </div>
@@ -1269,7 +1329,8 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Appraisal Bond Contract Details</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="Appraisal Bond Contract Details" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.AppraisalBondContractDetails"
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Appraisal Bond Contract Details" style="resize:vertical"
+                                                                        [(ngModel)]="profile.CandidateOtherDetails.AppraisalBondContractDetails"
                                                                         (blur)="onSaveProfessionalDetails()"></textarea>
                                                                 </div>
                                                             </div>
@@ -1278,7 +1339,7 @@
                                                                     <label class="control-label">Earlier Applied Process </label>
                                                                     <div class="row ">
                                                                         <div class="col-md-12">
-                                                                            <textarea class="form-control" rows="2" placeholder="Earlier Applied Process" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.EarlierAppliedProcess"
+                                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Earlier Applied Process" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.EarlierAppliedProcess"
                                                                                 (blur)="onSaveProfessionalDetails()"></textarea>
                                                                         </div>
                                                                     </div>
@@ -1294,7 +1355,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Follow Up Comments</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
                                                                         tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                         tooltipEnable="!profile.FollowUpComments" (blur)="onSaveProfessionalDetails()">
                                                                     </textarea>
@@ -1305,9 +1366,15 @@
                                                             </div>
 
                                                         </div>
-                                                        <div class="margiv-top-10">
+                                                        <!--<div class="margiv-top-10">
                                                             <button type="submit" class="btn green"> Save Changes </button>
                                                             <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
+                                                        </div>-->
+                                                        <div class="margiv-top-10;">
+                                                            <a class="btn green " (click)='previousTab()'>
+                                                                <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>                                                                Prev </a>
+                                                            <a class="btn green " (click)='nextTab()'>
+                                                         Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
                                                         </div>
                                                     </form>
                                                 </div>
