@@ -13,6 +13,7 @@ export = () => {
       baseDir: './' + coverageFolder
     },
     port: Config.COVERAGE_PORT,
-    files: watchedFiles
+    files: watchedFiles,
+    logFileChanges: false
   });
 };
