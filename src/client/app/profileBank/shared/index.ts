@@ -1,3 +1,3 @@
-export * from './components/interviewers.component'
-export * from './components/interviewers.availability.component'
-export * from './components/interviewers.calendar.component'
+export * from './component/assignRRF.component'
+export * from './component/detailProfile.component'
+

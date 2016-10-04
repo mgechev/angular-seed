@@ -1,5 +1,5 @@
-import { Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, OnActivate, RouteSegment} from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { Router} from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { RRFReScheduleInterviewService} from '../services/RRFReScheduleInterviews.service';
 import {InterviewsList, CandidateRRFID} from '../../../recruitmentCycle/recruitersTab/index';
@@ -14,7 +14,7 @@ import { AllScheduleInterviewPipe } from  '../../..//recruitmentCycle/recruiters
     pipes: [AllScheduleInterviewPipe]
 })
 
-export class RRFReScheduleInterviewsComponent implements OnActivate {
+export class RRFReScheduleInterviewsComponent implements OnInit {
     currentView: string = 'myReInterviews';
     NORECORDSFOUND: boolean = false;
     mode: string;
@@ -27,7 +27,7 @@ export class RRFReScheduleInterviewsComponent implements OnActivate {
         this.currentView = 'myReInterviews';
     }
 
-    routerOnActivate(segment: RouteSegment) {
+    ngOnInit(segment: RouteSegment) {
         this.InterviewDetailsList.CandidateRRFIDs.RRFID.Id = parseInt((segment.getParam('id')).split('ID')[1]);
         this.InterviewDetailsList.CandidateRRFIDs.RRFID.Value = (segment.getParam('id')).split('ID')[0];
         this.RRFID = this.InterviewDetailsList.CandidateRRFIDs.RRFID;

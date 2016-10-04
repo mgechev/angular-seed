@@ -1,5 +1,5 @@
-import {Component } from '@angular/core';
-import { OnActivate, ROUTER_DIRECTIVES, RouteSegment, Router } from '@angular/router';
+import {Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -19,12 +19,12 @@ import { RRFDetails } from '../../myRRF/models/rrfDetails';
     moduleId: module.id,
     selector: 'rrf-candidate-list',
     templateUrl: 'RRFCandidateList.component.html',
-    directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES],
+    //directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES],
     styleUrls: ['RRFDashboard.component.css'],
     providers: [ToastsManager]
 })
 
-export class RRFCandidateListComponent implements OnActivate {
+export class RRFCandidateListComponent implements OnInit {
     RRFID: MasterData = new MasterData();
     selectedRRF: RRFDetails;
     /**---------BEGING Transfer Candidate--------------- */
@@ -91,6 +91,7 @@ export class RRFCandidateListComponent implements OnActivate {
 
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
+        private activatedRoute: ActivatedRoute,
         private _rrfDashboardService: RRFDashboardService,
         private _mastersService: MastersService,
         private _rrfCandidatesList: RRFCandidateListService,
@@ -100,9 +101,10 @@ export class RRFCandidateListComponent implements OnActivate {
         this.CandidateRoundHistory = new Array<Interview>();
     }
 
-    routerOnActivate(segment: RouteSegment) {
-        this.RRFID.Id = parseInt((segment.getParam('id')).split('ID')[1]);
-        this.RRFID.Value = (segment.getParam('id')).split('ID')[0];
+    ngOnInit(segment: RouteSegment) {
+        var _id = this.activatedRoute.snapshot.params['id'];
+        this.RRFID.Id = parseInt((_id).split('ID')[1]);
+        this.RRFID.Value = (_id).split('ID')[0];
 
         this.doughnutChartLabels = ['Technical 1', 'HR'];
         this.doughnutChartData = [50, 50];

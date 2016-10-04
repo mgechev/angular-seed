@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, RouteSegment, Router } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { RoleService, RoleInfo } from '../../role/index';
 
@@ -7,11 +7,11 @@ import { RoleService, RoleInfo } from '../../role/index';
     moduleId: module.id,
     selector: 'admin-user-role',
     templateUrl: 'userRole.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    //directives: [ROUTER_DIRECTIVES],
     providers: [RoleService]
 })
 
-export class UserRoleComponent  {
+export class UserRoleComponent implements OnInit {
     errorMessage: string;
     params: number;
     userRole: any;
@@ -21,18 +21,20 @@ export class UserRoleComponent  {
     selectedRole: any;
     constructor(private _userService: UserService,
         private _router: Router,
+        private activatedRoute: ActivatedRoute,
         private _roleService: RoleService
-    ) {}
+    ) { }
 
-    routerOnActivate(segment: RouteSegment) {
-        this.params = Number(segment.getParam('id'));
+    ngOnInit() {
+        this.params = this.activatedRoute.snapshot.params['Id'];
+        //this.params = Number(segment.getParam('id'));
         this.getAllRoles();
     }
 
     getUserRole() {
         this._userService.getUserRole(this.params)
             .subscribe(
-            (results : any)=> {
+            (results: any) => {
                 this.userName = results.UserName;
                 this.userRole = results.Roles;
                 this.setRoleDropdown();
@@ -42,7 +44,7 @@ export class UserRoleComponent  {
     getAllRoles() {
         this._roleService.getRoles()
             .subscribe(
-            results=> {
+            results => {
                 this.roleList = <any>results;
                 this.getUserRole();
             },
@@ -53,7 +55,7 @@ export class UserRoleComponent  {
             this.selectedRole.UserId = this.params;
             this._userService.addUserRole(this.selectedRole)
                 .subscribe(
-                results=> {
+                results => {
                     this.selectedRole = {};
                     this.getUserRole();
                 },
@@ -61,11 +63,11 @@ export class UserRoleComponent  {
         }
     }
 
-    onRevokeRole(role:any) {
+    onRevokeRole(role: any) {
         role.userId = this.params;
         this._userService.revokeRole(role)
             .subscribe(
-            results=> {
+            results => {
                 this.getUserRole();
             },
             error => this.errorMessage = <any>error);

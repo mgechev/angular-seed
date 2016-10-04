@@ -1,5 +1,5 @@
-import { Component, AfterViewInit} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
+import { Component, OnInit, AfterViewInit} from '@angular/core';
+import { Router} from '@angular/router';
 import { Interview} from '../../shared/model/interview';
 import { InterviewersCalendarService} from '../services/interviewers.calendar.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -18,8 +18,8 @@ import { InterviewSlotComponent } from '../../shared/component/InterviewSlot/Com
     providers: [Interview, ToastsManager, InterviewersCalendarService, InterviewersAvailabilityService]
 })
 
-/** RecruitmentInterviewerCalenderComponent implements OnActivate*/
-export class RecruitmentInterviewerCalenderComponent implements OnActivate, AfterViewInit {
+/** RecruitmentInterviewerCalenderComponent implements On-Activate*/
+export class RecruitmentInterviewerCalenderComponent implements OnInit, AfterViewInit {
     returnPath: string;
     Title: string;
     errorMessage: string;
@@ -46,7 +46,7 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, Afte
         var date = new Date();
         this.currentDate = this.formatDate(date);
     }
-    routerOnActivate() {
+    ngOnInit() {
         //Get Events to show on Calendar
         this._myCalendarDetails.Resources = this._interviewService.getStaticResources();
         //this.events = this._interviewService.getCalendarEventData();

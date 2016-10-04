@@ -1,5 +1,5 @@
-import { Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, OnActivate, Router} from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { Router} from '@angular/router';
 import { TransferOwnershipMeta } from '../../shared/model/myProfilesInfo';
 import { DataSharedService } from '../../shared/services/dataShared.service';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
@@ -14,10 +14,10 @@ import { APIResult } from  '../../../shared/constantValue/index';
     moduleId: module.id,
     selector: 'rrf-companyprofiles-trnsfer',
     templateUrl: 'companyProfilesTransferOwnership.component.html',
-    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
+    //directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
-export class TransferOwnershipComponent implements OnActivate {
+export class TransferOwnershipComponent implements OnInit {
     CheckedCandidateIds: Array<MasterData>;
     errorMessage: string;
     candidateProfiles: Array<TransferOwnershipMeta>;
@@ -31,7 +31,7 @@ export class TransferOwnershipComponent implements OnActivate {
         private _router: Router,
         private _mastersService: MastersService) {
     }
-    routerOnActivate() {
+    ngOnInit() {
         this.getCandidateIds();
         this.getOwnerTypes();
         this.getRecruiters();

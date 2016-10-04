@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import { Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment } from '@angular/router';
-import {CalendarModule} from 'primeng/primeng';
+import { Component, OnInit} from '@angular/core';
+import { Router, ActivatedRoute} from '@angular/router';
+import { CalendarModule} from 'primeng/primeng';
 import { CandidateProfile, ResumeMeta, Qualification, CandidateExperience, EmploymentHistory} from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -16,11 +16,11 @@ import {Location} from '@angular/common';
     moduleId: module.id,
     selector: 'rrf-myprofiles-add',
     templateUrl: '../../shared/views/profileBankAdd.component.html',
-    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
+    //directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
     styleUrls: ['myProfiles.component.css']
 })
 
-export class MyProfilesAddComponent implements OnActivate {
+export class MyProfilesAddComponent implements OnInit {
     CandidateID: MasterData = new MasterData();
     profile: CandidateProfile;
     qualification: Qualification;
@@ -61,6 +61,7 @@ export class MyProfilesAddComponent implements OnActivate {
         private _masterService: MastersService,
         private _profileBankService: ProfileBankService,
         public toastr: ToastsManager,
+        private activatedRoute: ActivatedRoute,
         private _router: Router,
         private _location: Location) {
         this.profile = new CandidateProfile();
@@ -70,9 +71,9 @@ export class MyProfilesAddComponent implements OnActivate {
 
     }
 
-    routerOnActivate(segment: RouteSegment) {
+    ngOnInit() {
         window.onbeforeunload = function () {
-            return "Data will be lost if you leave the page, are you sure?";
+            return 'Data will be lost if you leave the page, are you sure?';
         };
         //get all master data and bind to dropdown
         this.getCountries();
@@ -83,7 +84,8 @@ export class MyProfilesAddComponent implements OnActivate {
         this.getGrades();
         this.getVisaType();
         //get current profile by Id
-        this.params = segment.getParam('id');
+        this.params = this.activatedRoute.snapshot.params['Id'];
+        //this.params = segment.getParam('id');
         if (this.params) {
             this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
             this.CandidateID.Value = this.params.split('ID')[0];
@@ -553,7 +555,9 @@ export class MyProfilesAddComponent implements OnActivate {
         try {
             let FileList: FileList = selectedFile.target.files;
             if (selectedFile.target.files[0].size < 2000000) {
-                if (selectedFile.target.files[0].type === "image/jpeg" || selectedFile.target.files[0].type === "image/png" || selectedFile.target.files[0].type === "image/jpg") {
+                if (selectedFile.target.files[0].type === 'image/jpeg' ||
+                    selectedFile.target.files[0].type === 'image/png' ||
+                    selectedFile.target.files[0].type === 'image/jpg') {
                     if (this.uploadedPhoto)
                         this.uploadedPhoto.length = 0;
                     for (let i = 0, length = FileList.length; i < length; i++) {
@@ -562,12 +566,10 @@ export class MyProfilesAddComponent implements OnActivate {
                         this.fileName = FileList.item(i).name;
                     }
                     this.postPhoto(this.CandidateID, this.uploadedPhoto[0]);
-                }
-                else {
+                } else {
                     this.toastr.error('Please upload image of type .jpg, .png, .jpeg');
                 }
-            }
-            else {
+            } else {
                 this.toastr.error('Please upload image of size less than 2 MB');
             }
         } catch (error) {
@@ -632,9 +634,9 @@ export class MyProfilesAddComponent implements OnActivate {
         // this._router.navigate(['/App/ProfileBank/MyProfiles']);
         let res: any;
         res = confirm(
-            "Data will be lost if you leave the page, are you sure?"
+            'Data will be lost if you leave the page, are you sure?'
         );
-        if (res == true)
+        if (res === true)
             this._location.back();
     }
 }

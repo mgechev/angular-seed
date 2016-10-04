@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import { Router, RouteSegment, OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import {CandidateProfile, ResumeMeta, Qualification } from '../../shared/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
@@ -13,11 +13,11 @@ import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
     moduleId: module.id,
     selector: 'allprofiles-add',
     templateUrl: '../../shared/views/profileBankAdd.component.html',
-    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
+    //directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
 
-export class AllProfilesAddComponent implements OnActivate {
+export class AllProfilesAddComponent implements OnInit {
     profile: CandidateProfile;
     CandidateID: MasterData = new MasterData();
     qualification: Qualification;
@@ -63,6 +63,7 @@ export class AllProfilesAddComponent implements OnActivate {
 
     constructor(private _allProfilesService: AllProfilesService,
         private _router: Router,
+        private activatedRoute: ActivatedRoute,
         private _profileBankService: ProfileBankService,
         public toastr: ToastsManager,
         private _masterService: MastersService) {
@@ -71,7 +72,7 @@ export class AllProfilesAddComponent implements OnActivate {
     }
 
 
-    routerOnActivate(segment: RouteSegment) {
+    ngOnInit() {
         //get all master data and bind to dropdown
         this.getLoggedInUser();
         this.getCountries();
@@ -82,7 +83,8 @@ export class AllProfilesAddComponent implements OnActivate {
         this.getGrades();
         this.getVisaType();
         //get current profile by Id
-        this.params = segment.getParam('id');
+        this.params = this.activatedRoute.snapshot.params['Id'];
+        //this.params = segment.getParam('id');
         if (this.params) {
             this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
             this.CandidateID.Value = this.params.split('ID')[0];
@@ -141,7 +143,7 @@ export class AllProfilesAddComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
-    
+
 
     getQualifications(): void {
         this._masterService.getQualifications()

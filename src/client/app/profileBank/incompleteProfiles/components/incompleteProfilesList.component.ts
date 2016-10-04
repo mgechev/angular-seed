@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
-import {CandidateProfile, AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
+import { Component, OnInit} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CandidateProfile, AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
 import { AllProfilesService } from '../../allProfiles/services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -18,13 +18,13 @@ import { DetailProfileComponent } from '../../shared/component/detailProfile.com
     moduleId: module.id,
     selector: 'rrf-incompleteprofiles-list',
     templateUrl: 'incompleteProfilesList.component.html',
-    directives: [DetailProfileComponent, ROUTER_DIRECTIVES, IfAuthorizeDirective, CollapseDirective, TOOLTIP_DIRECTIVES],
+    //directives: [DetailProfileComponent, ROUTER_DIRECTIVES, IfAuthorizeDirective, CollapseDirective, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
-    providers: [AllProfilesService],
-    pipes: [ProfileBankPipe]
+    //pipes: [ProfileBankPipe],
+    providers: [AllProfilesService]
 })
 
-export class IncompleteProfilesListComponent implements OnActivate {
+export class IncompleteProfilesListComponent implements OnInit {
     profile: CandidateProfile;
     CandidateProfiles: AllCandidateProfiles = new AllCandidateProfiles();
     incompleteProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
@@ -39,7 +39,7 @@ export class IncompleteProfilesListComponent implements OnActivate {
         private _masterService: MastersService) {
         this.profile = new CandidateProfile();
     }
-    routerOnActivate() {
+    ngOnInit() {
         this.getIncompleteProfiles();
     }
     /** Get ALL incomplte profiles to bind */

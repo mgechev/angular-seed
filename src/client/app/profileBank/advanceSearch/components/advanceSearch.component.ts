@@ -11,12 +11,13 @@ import { ProfileEsplHistoryListComponent } from '../../profilesEsplHistory/compo
 @Component({
     selector: 'rrf-myprofiles',
     template: ' <router-outlet></router-outlet>',
-    directives: [ROUTER_DIRECTIVES],
     providers: [AdvanceSearchService, MastersService,ToastsManager,ProfileBankService]
 })
-
+/**
+ * angular 2.0 changes
 @Routes([
     { path: '/:searchString', component: AdvanceSearchListComponent },
 ])
+ */
 export class AdvanceSearchComponent {
 }

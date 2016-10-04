@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, OnActivate } from '@angular/router';
+import { Router } from '@angular/router';
 import { Interview} from '../../shared/model/interview';
 import { InterviewersScheduleService} from '../services/interviewers.schedule.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -19,11 +19,11 @@ import { ProfileBankService } from '../../../profileBank/index';
     moduleId: module.id,
     selector: 'interviewers-shedule',
     templateUrl: 'interviewers.schedule.component.html',
-    directives: [ROUTER_DIRECTIVES, FullCalendarComponent, InterviewDetailsRowComponent, IEFGridRowComponent],
+    //directives: [ROUTER_DIRECTIVES, FullCalendarComponent, InterviewDetailsRowComponent, IEFGridRowComponent],
     providers: [Interview, ToastsManager, ProfileBankService, InterviewersScheduleService]
 })
 
-export class RecruitmentInterviewScheduleComponent implements OnActivate {
+export class RecruitmentInterviewScheduleComponent implements OnInit {
     returnPath: string;
     Title: string;
     errorMessage: string;
@@ -57,8 +57,8 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         var date = new Date();
         this.currentDate = this.formatDate(date);
     }
-    /**Router method overrid from OnActivate class */
-    routerOnActivate() {
+    /**Router method overrid from On-Activate class */
+    ngOnInit() {
         this.getMyInterviews();
         this.InterviewerCalendarDetails.Resources = <any>this._interviewService.getResources();
 
@@ -88,14 +88,14 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
     }
     DisableIEF(interviewDate: Date, interviewTime: Date) {
         if (moment(interviewDate).format('MM-DD-YYYY') > moment(new Date()).format('MM-DD-YYYY')) {
-            return true
-        }
-        else {
-            if (moment(interviewDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY') && interviewTime.split(':')[0] > new Date().getHours()) {
-                return true
-            }
-            else {
-                if (moment(interviewDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY') && interviewTime.split(':')[0] > new Date().getHours() && interviewTime.split(':')[1] > new Date().getMinutes()) {
+            return true;
+        }else {
+            if (moment(interviewDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY')
+            && interviewTime.split(':')[0] > new Date().getHours()) {
+                return true;
+            }else {
+                if (moment(interviewDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY')
+                && interviewTime.split(':')[0] > new Date().getHours() && interviewTime.split(':')[1] > new Date().getMinutes()) {
                     return true;
                 } else {
                     return false;

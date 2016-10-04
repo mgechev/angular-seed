@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
+import { IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
 import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
 import { ProfileInterviewHistory, AllInterviewsHistory }from '../models/profileEsplHistoryModel';
 import { MasterData } from  '../../../shared/model/index';
@@ -12,13 +12,13 @@ import { IEFGridRowComponent } from '../../../recruitmentCycle/shared/component/
     moduleId: module.id,
     selector: 'profile-esplhistory-list',
     templateUrl: 'profileEsplHistoryList.component.html',
-    directives: [ROUTER_DIRECTIVES, IfAuthorizeDirective, IEFGridRowComponent],
+    //directives: [ROUTER_DIRECTIVES, IfAuthorizeDirective, IEFGridRowComponent],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
-    providers: [ProfileEsplHistoryService],
-    pipes: [ProfileBankPipe]
+    providers: [ProfileEsplHistoryService]
+    //,pipes: [ProfileBankPipe]
 })
 
-export class ProfileEsplHistoryListComponent implements OnActivate {
+export class ProfileEsplHistoryListComponent implements OnInit {
     allInterviewsHistory: AllInterviewsHistory = new AllInterviewsHistory();
     profileHistory: ProfileInterviewHistory;
     profileHistoryCollection: Array<ProfileInterviewHistory> = new Array<ProfileInterviewHistory>();
@@ -28,11 +28,9 @@ export class ProfileEsplHistoryListComponent implements OnActivate {
     constructor(private _router: Router,
         public toastr: ToastsManager,
         private profilesHistoryService: ProfileEsplHistoryService) {
-        /** */
     }
 
-    routerOnActivate() {
-        /** */
+    ngOnInit() {
         this.historyOfCandidate = this.getSessionOf<MasterData>('HistoryOfCandidate');
         this.getProfilesHistory(this.historyOfCandidate);
     }

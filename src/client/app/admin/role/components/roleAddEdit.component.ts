@@ -1,18 +1,18 @@
-import {Component} from '@angular/core';
-import { Router, RouteSegment, ROUTER_DIRECTIVES } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import { Router, ActivatedRoute} from '@angular/router';
 import { RoleInfo } from '../models/roleInfo';
 import { RoleService } from '../services/role.service';
-import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
+// import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
+// import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
 
 @Component({
     moduleId: module.id,
     selector: 'admin-role-add',
-    templateUrl: 'roleAddEdit.component.html',
-    directives: [ROUTER_DIRECTIVES, TYPEAHEAD_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES]
+    templateUrl: 'roleAddEdit.component.html'
+    //,directives: [ROUTER_DIRECTIVES, TYPEAHEAD_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES]
 })
 
-export class RoleAddEditComponent {
+export class RoleAddEditComponent implements OnInit {
     role: RoleInfo;
     errorMessage: string;
     params: number;
@@ -20,12 +20,15 @@ export class RoleAddEditComponent {
     rolePermissionList: Array<any>;
     selectedPermission: any;
     constructor(private _roleService: RoleService,
+        private activatedRoute: ActivatedRoute,
+
         private _router: Router) {
         this.role = new RoleInfo(0, '');
     }
 
-    routerOnActivate(segment: RouteSegment) {
-        this.params = Number(segment.getParam('id'));
+    ngOnInit() {
+        this.params = this.activatedRoute.snapshot.params['Id'];
+        //this.params = Number(segment.getParam('id'));
         if (this.params) {
             this._roleService.getRoleById(this.params)
                 .subscribe(

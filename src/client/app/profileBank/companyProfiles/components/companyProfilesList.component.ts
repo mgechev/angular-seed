@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 import { CandidateProfile, AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
 import { Candidate } from '../../shared/model/RRF';
 import { CompanyProfilesService } from '../services/companyProfiles.service';
@@ -19,13 +19,13 @@ import { DetailProfileComponent } from '../../shared/component/detailProfile.com
     moduleId: module.id,
     selector: 'rrf-black-listed-profiles-list',
     templateUrl: 'companyProfilesList.component.html',
-    directives: [DetailProfileComponent, ROUTER_DIRECTIVES, IfAuthorizeDirective, CollapseDirective, TOOLTIP_DIRECTIVES],
+    //directives: [DetailProfileComponent, ROUTER_DIRECTIVES, IfAuthorizeDirective, CollapseDirective, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
-    providers: [CompanyProfilesService],
-    pipes: [ProfileBankPipe]
+    providers: [CompanyProfilesService]
+    //,pipes: [ProfileBankPipe]
 })
 
-export class CompanyProfilesListComponent implements OnActivate {
+export class CompanyProfilesListComponent implements OnInit {
     companyProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
     ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
 
@@ -56,7 +56,7 @@ export class CompanyProfilesListComponent implements OnActivate {
         this.companyProfilesList.GrdOperations = new GrdOptions();
     }
 
-    routerOnActivate() {
+    ngOnInit() {
         this.getColumnsForSorting();
         this.getLoggedInUser();
         this.getcompanyProfiles();

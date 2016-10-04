@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, OnActivate, RouteSegment, Router } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CandidateProfile } from '../../shared/model/myProfilesInfo';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { MasterData } from  '../../../shared/model/index';
@@ -9,10 +9,10 @@ import { MasterData } from  '../../../shared/model/index';
 
     templateUrl: '../../shared/views/profileBankView.component.html',
     providers: [ProfileBankService],
-    directives: [ROUTER_DIRECTIVES],
+    //directives: [ROUTER_DIRECTIVES],
     styleUrls: ['../../allProfiles/components/allProfilesView.component.css']
 })
-export class RecentProfilesViewComponent implements OnActivate {
+export class RecentProfilesViewComponent implements OnInit {
     params: string;
     errorMessage: string;
     profile: CandidateProfile;
@@ -21,11 +21,13 @@ export class RecentProfilesViewComponent implements OnActivate {
     TITLE: string = 'Recent Profiles';
 
     constructor(private _profileBankService: ProfileBankService,
+    private activatedRoute: ActivatedRoute,
         private _router: Router) {
         this.profile = new CandidateProfile();
     }
-    routerOnActivate(segment: RouteSegment) {
-        this.params = segment.getParam('id');
+    ngOnInit() {
+        this.params = this.activatedRoute.snapshot.params['id'];
+        //this.params = segment.getParam('id');
         this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
         this.CandidateID.Value = this.params.split('ID')[0];
 

@@ -1,5 +1,5 @@
-import {Component } from '@angular/core';
-import { Router, RouteSegment, ROUTER_DIRECTIVES, OnActivate } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { BlackListedProfilesService } from '../services/blacklistedProfiles.service';
 import { CandidateProfile, Qualification } from '../../shared/model/myProfilesInfo';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -14,11 +14,11 @@ import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
     selector: 'rrf-black-listed-profile-add',
 
     templateUrl: '../../shared/views/profileBankAdd.component.html',
-    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
+    //directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
 
-export class BlackListedProfilesAddComponent implements OnActivate {
+export class BlackListedProfilesAddComponent implements OnInit {
     CandidateID: MasterData = new MasterData();
 
     profile: CandidateProfile;
@@ -48,6 +48,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
     currentUser: MasterData = new MasterData();
     TITLE: string = 'BlackListed Profiles';
     constructor(private _blacklistedProfilesService: BlackListedProfilesService,
+        private activatedRoute: ActivatedRoute,
         private _router: Router,
         public toastr: ToastsManager,
         private _profileBankService: ProfileBankService,
@@ -57,7 +58,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
 
     }
 
-    routerOnActivate(segment: RouteSegment) {
+    ngOnInit() {
         this.getLoggedInUser();
         //get all master data and bind to dropdown
         this.getCountries();
@@ -68,7 +69,8 @@ export class BlackListedProfilesAddComponent implements OnActivate {
         this.getGrades();
         this.getVisaType();
         //get current profile by Id
-        this.params = segment.getParam('id');
+        this.params = this.activatedRoute.snapshot.params['Id'];
+        //this.params = segment.getParam('id');
         if (this.params) {
             this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
             this.CandidateID.Value = this.params.split('ID')[0];
@@ -174,9 +176,9 @@ export class BlackListedProfilesAddComponent implements OnActivate {
     }
     onSelectVisa(visaId: string) {
         //this.profile.CandidateOtherDetails.Visa.Id = parseInt(visaId);
-        for(var i=0;i < this.VisaType.length;i++) {
-            if ( this.VisaType[i].Id === parseInt(visaId))
-              this.profile.CandidateOtherDetails.Visa = this.VisaType[i];
+        for (var i = 0; i < this.VisaType.length; i++) {
+            if (this.VisaType[i].Id === parseInt(visaId))
+                this.profile.CandidateOtherDetails.Visa = this.VisaType[i];
         }
     }
 
@@ -418,15 +420,15 @@ export class BlackListedProfilesAddComponent implements OnActivate {
 
     getCandidateQualification() {
         this._profileBankService.getCandidateQualifications(this.CandidateID.Value)
-                .subscribe(
-                results => {
-                    this.profile.CandidateQualification = new Array<Qualification>();
-                    this.profile.CandidateQualification = <any>results;
-                },
-                error => {
-                    this.errorMessage = <any>error;
-                    this.toastr.error(<any>error);
-                });
+            .subscribe(
+            results => {
+                this.profile.CandidateQualification = new Array<Qualification>();
+                this.profile.CandidateQualification = <any>results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
     }
 
     editQualidficationData(QID: string) {

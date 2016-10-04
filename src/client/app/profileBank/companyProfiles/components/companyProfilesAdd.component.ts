@@ -1,5 +1,5 @@
-import {Component } from '@angular/core';
-import { Router, RouteSegment, ROUTER_DIRECTIVES, OnActivate } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CompanyProfilesService } from '../services/companyProfiles.service';
 import { CandidateProfile, Qualification } from '../../shared/model/myProfilesInfo';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -12,14 +12,14 @@ import { ProfileBankService } from '../../shared/services/profileBank.service';
     moduleId: module.id,
     selector: 'rrf-company-profile-add',
     templateUrl: '../../shared/views/profileBankAdd.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    //directives: [ROUTER_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
 
     providers: [CompanyProfilesService]
 
 })
 
-export class CompanyProfilesAddComponent implements OnActivate {
+export class CompanyProfilesAddComponent implements OnInit {
     CandidateID: MasterData = new MasterData();
 
     profile: CandidateProfile;
@@ -52,6 +52,7 @@ export class CompanyProfilesAddComponent implements OnActivate {
 
     constructor(private _CompanyProfilesService: CompanyProfilesService,
         private _router: Router,
+        private activatedRoute: ActivatedRoute,
         public toastr: ToastsManager,
         private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
@@ -60,7 +61,7 @@ export class CompanyProfilesAddComponent implements OnActivate {
 
     }
 
-    routerOnActivate(segment: RouteSegment) {
+    ngOnInit() {
         //get all master data and bind to dropdown
         this.getCountries();
         //this.getStates();
@@ -70,7 +71,8 @@ export class CompanyProfilesAddComponent implements OnActivate {
         this.getGrades();
         this.getVisaType();
         //get current profile by Id
-        this.params = segment.getParam('id');
+        this.params = this.activatedRoute.snapshot.params['Id'];
+        //this.params = segment.getParam('id');
         if (this.params) {
             this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
             this.CandidateID.Value = this.params.split('ID')[0];

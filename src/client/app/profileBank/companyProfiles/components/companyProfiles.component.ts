@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
+import { Routes } from '@angular/router';
 import { CompanyProfilesListComponent } from './companyProfilesList.component';
 import { CompanyProfilesAddComponent } from './companyProfilesAdd.component';
 import { CompanyProfilesService } from '../services/companyProfiles.service';
@@ -15,11 +15,12 @@ import { ProfileEsplHistoryListComponent } from '../../profilesEsplHistory/compo
 @Component({
     selector: 'rrf-black-listed-profiles',
     template: ' <router-outlet></router-outlet>',
-    directives: [ROUTER_DIRECTIVES],
+    //    directives: [ROUTER_DIRECTIVES],
     providers: [DataSharedService, CompanyProfilesService, MastersService,
         ToastsManager, ProfileBankService]
 })
-
+/**
+ * angular 2.0 changes
 @Routes([
     { path: '/', component: CompanyProfilesListComponent },
     { path: '/Edit/:id', component: CompanyProfilesAddComponent },
@@ -29,5 +30,6 @@ import { ProfileEsplHistoryListComponent } from '../../profilesEsplHistory/compo
     { path: '/History', component: ProfileEsplHistoryListComponent }
 
 ])
+*/
 export class CompanyProfilesComponent {
 }

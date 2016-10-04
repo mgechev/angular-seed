@@ -1,6 +1,11 @@
-import {Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import { CandidateProfile, ResumeMeta, AddCandidateResponse, AllCandidateProfiles, CareerProfile, MailDetails } from '../../shared/model/myProfilesInfo';
+import { Component, OnInit} from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { CandidateProfile,
+    ResumeMeta,
+    AddCandidateResponse,
+    AllCandidateProfiles,
+    CareerProfile,
+    MailDetails } from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -30,7 +35,7 @@ import {ViewRRFComponent} from '../../../RRF/shared/components/viewRRF/viewRRF.c
     pipes: [ProfileBankPipe]
 })
 
-export class MyProfilesListComponent implements OnActivate {
+export class MyProfilesListComponent implements OnInit {
     CandidateID: MasterData = new MasterData();
     myProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
     profile: CandidateProfile;
@@ -103,7 +108,7 @@ export class MyProfilesListComponent implements OnActivate {
         this.RRFList = new Array<RRFDetails>();
     }
 
-    routerOnActivate() {
+    ngOnInit() {
         window.onbeforeunload = function () {
             return 'Data will be lost if you leave the page, are you sure?';
         };
@@ -326,7 +331,7 @@ export class MyProfilesListComponent implements OnActivate {
 
     onUpdateStauts() {
         this.selectedStatus.Id = 0;
-        this.selectedStatus.Value = "Incomplete";
+        this.selectedStatus.Value = 'Incomplete';
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
@@ -426,9 +431,9 @@ export class MyProfilesListComponent implements OnActivate {
         try {
             let FileList: FileList = selectedFile.target.files;
             if (selectedFile.target.files[0].size < 2000000) {
-                if (selectedFile.target.files[0].type === "image/jpeg"
-                    || selectedFile.target.files[0].type === "image/png"
-                    || selectedFile.target.files[0].type === "image/jpg") {
+                if (selectedFile.target.files[0].type === 'image/jpeg'
+                    || selectedFile.target.files[0].type === 'image/png'
+                    || selectedFile.target.files[0].type === 'image/jpg') {
                     if (this.uploadedPhoto)
                         this.uploadedPhoto.length = 0;
                     for (let i = 0, length = FileList.length; i < length; i++) {
@@ -498,19 +503,19 @@ export class MyProfilesListComponent implements OnActivate {
         try {
             let FileList: FileList = inputValue.target.files;
             if (inputValue.target.files[0].size < 2000000) {
-                if (inputValue.target.files[0].type === "application/pdf" || inputValue.target.files[0].name.split('.')[1] === "docx" || inputValue.target.files[0].name.split('.')[1] === "doc") {
+                if (inputValue.target.files[0].type === 'application/pdf' ||
+                    inputValue.target.files[0].name.split('.')[1] === 'docx' ||
+                    inputValue.target.files[0].name.split('.')[1] === 'doc') {
                     this.psdTemplates.length = 0;
                     for (let i = 0, length = FileList.length; i < length; i++) {
                         this.psdTemplates.push(FileList.item(i));
                         this.fileUploaded = true;
                         this.fileName = FileList.item(i).name;
                     }
-                }
-                else {
+                } else {
                     this.toastr.error('Please upload document of type .doc, .docx, .pdf');
                 }
-            }
-            else {
+            } else {
                 this.toastr.error('Please upload document of size less than 2 MB');
             }
         } catch (error) {
@@ -523,19 +528,19 @@ export class MyProfilesListComponent implements OnActivate {
         try {
             let FileList: FileList = inputValue.target.files;
             if (inputValue.target.files[0].size < 2000000) {
-                if (inputValue.target.files[0].type === "application/pdf" || inputValue.target.files[0].name.split('.')[1] === "docx" || inputValue.target.files[0].name.split('.')[1] === "doc") {
+                if (inputValue.target.files[0].type === 'application/pdf'
+                || inputValue.target.files[0].name.split('.')[1] === 'docx'
+                || inputValue.target.files[0].name.split('.')[1] === 'doc') {
                     this.resumeFiles.length = 0;
                     for (let i = 0, length = FileList.length; i < length; i++) {
                         this.resumeFiles.push(FileList.item(i));
                         this.resumeUploaded = true;
                         this.resumeName = FileList.item(i).name;
                     }
-                }
-                else {
+                }else {
                     this.toastr.error('Please upload document of type .doc, .docx, .pdf');
                 }
-            }
-            else {
+            }else {
                 this.toastr.error('Please upload document of size less than 2 MB');
             }
         } catch (error) {
@@ -579,7 +584,8 @@ export class MyProfilesListComponent implements OnActivate {
             if (this.myProfilesList.Profiles[index].IsChecked) {
                 //Check for open / rejected Status
 
-                // || this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'rejected'  //Do not allow to assign RRF to Rejected candidate
+                /** Do not allow to assign RRF to Rejected candidate
+                 || this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'rejected'*/
                 if (this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'open') {
                     if (!this.myProfilesList.Profiles[index].RRFAssigned.isRRFAssigned) {
                         //Add to selectedCandidates array

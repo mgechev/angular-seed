@@ -1,5 +1,5 @@
-import { Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { ActivatedRoute, Router} from '@angular/router';
 import { InterviewersAvailabilityService} from '../services/interviewers.availability.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { DetailRRF } from '../../shared/model/detailRRF';
@@ -10,11 +10,11 @@ import { MasterData} from '../../../shared/model/common.model';
     moduleId: module.id,
     selector: 'interviewers-availability',
     templateUrl: 'interviewers.availability.component.html',
-    directives: [ROUTER_DIRECTIVES, InterviewSlotComponent],
+    //directives: [ROUTER_DIRECTIVES, InterviewSlotComponent],
     providers: [ToastsManager, InterviewersAvailabilityService]
 })
 
-export class RecruitmentInterviewAvailabilityComponent implements OnActivate {
+export class RecruitmentInterviewAvailabilityComponent implements OnInit {
     returnPath: string;
     Title: string;
     errorMessage: string;
@@ -34,8 +34,8 @@ export class RecruitmentInterviewAvailabilityComponent implements OnActivate {
         // this._showSlots =true;
 
     }
-    //Router method overrid from OnActivate class
-    routerOnActivate() {
+    //Router method overrid from On-Activate class
+    ngOnInit() {
         this.getMyAssignedRRF();
         this.returnPath = sessionStorage.getItem('returnPath');
     }

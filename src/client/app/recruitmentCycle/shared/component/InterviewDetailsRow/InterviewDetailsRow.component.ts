@@ -1,21 +1,17 @@
 import { Component, Input} from '@angular/core';
-import { ROUTER_DIRECTIVES, OnActivate } from '@angular/router';
 import { Interview} from '../../model/interview';
 
 @Component({
   moduleId: module.id,
   selector: 'intwDetailsRow',
   templateUrl: 'InterviewDetailsRow.component.html',
-  directives: [ROUTER_DIRECTIVES],
+  //directives: [ROUTER_DIRECTIVES],
   styleUrls: ['InterviewDetails.component.css'],
 })
 
-export class InterviewDetailsRowComponent implements OnActivate {
+export class InterviewDetailsRowComponent  {
   @Input() InterviewRecord: Interview = new Interview();
 
-  routerOnActivate() {
-
-  }
   getTime(time: string[]) {
     //time:string = interviewTime;
     time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];

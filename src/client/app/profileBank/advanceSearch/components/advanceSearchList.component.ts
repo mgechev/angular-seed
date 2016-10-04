@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, OnActivate, RouteSegment} from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CandidateProfile, ResumeMeta, AddCandidateResponse, AllCandidateProfiles, CareerProfile, MailDetails } from '../../shared/model/myProfilesInfo';
 import { AdvanceSearchService } from '../services/advanceSearch.service';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -13,19 +13,19 @@ import { ProfileBankService} from  '../../shared/services/profileBank.service';
 import { Headers, Http } from '@angular/http';
 import { Candidate } from '../../shared/model/RRF';
 import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
-import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
+import { IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
 import { DetailProfileComponent } from '../../shared/component/detailProfile.component';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-myprofiles-list',
     templateUrl: 'advanceSearchList.component.html',
-    directives: [DetailProfileComponent, ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES, IfAuthorizeDirective],
+    //directives: [DetailProfileComponent, ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES, IfAuthorizeDirective],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
-    pipes: [ProfileBankPipe]
+    //pipes: [ProfileBankPipe]
 })
 
-export class AdvanceSearchListComponent implements OnActivate {
+export class AdvanceSearchListComponent implements OnInit {
     params: string;
     inputsearchString: string = '';
     CandidateID: MasterData = new MasterData();
@@ -77,6 +77,7 @@ export class AdvanceSearchListComponent implements OnActivate {
     constructor(private _advanceSearchService: AdvanceSearchService,
         private http: Http,
         private _router: Router,
+        private activatedRoute: ActivatedRoute,
         private _profileBankService: ProfileBankService,
         public toastr: ToastsManager,
         private _masterService: MastersService) {
@@ -91,15 +92,17 @@ export class AdvanceSearchListComponent implements OnActivate {
         this.photoMeta = new ResumeMeta();
     }
 
-    routerOnActivate(segment: RouteSegment) {
-        this.params = segment.getParam('searchString');
+    ngOnInit() {
+
+        this.params = this.activatedRoute.snapshot.params['Id'];
+        //this.params = segment.getParam('searchString');
         if (this.params) {
             this.inputsearchString = this.params.split('searchString')[0];
             this.getAdvanceSearchResult(this.inputsearchString);
         }
     }
     // This function will get all profiles according to search string
-    getAdvanceSearchResult(insputString:string){
+    getAdvanceSearchResult(insputString: string) {
         this._advanceSearchService.getAdvanceSearch(insputString)
             .subscribe(
             (results: any) => {
@@ -108,7 +111,7 @@ export class AdvanceSearchListComponent implements OnActivate {
 
                 } else { this.NORECORDSFOUND = true; }
             },
-            error => this.errorMessage = <any>error); 
+            error => this.errorMessage = <any>error);
     }
 }
 

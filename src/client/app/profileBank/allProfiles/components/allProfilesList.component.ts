@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
-import {CandidateProfile, AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
+import { Component, OnInit} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CandidateProfile, AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -11,7 +11,7 @@ import { MasterData, GrdOptions, ResponseFromAPI, SortingMasterData } from  '../
 import { DataSharedService } from '../../shared/services/dataShared.service';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
-import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
+import { IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
 import { DetailProfileComponent } from '../../shared/component/detailProfile.component';
 // import { PanelsAvailablityComponent } from '../../../RRF/shared/index';
 
@@ -19,14 +19,14 @@ import { DetailProfileComponent } from '../../shared/component/detailProfile.com
     moduleId: module.id,
     selector: 'rrf-allprofiles-list',
     templateUrl: 'allProfilesList.component.html',
-    directives: [DetailProfileComponent, ROUTER_DIRECTIVES, IfAuthorizeDirective, CollapseDirective,
-        TOOLTIP_DIRECTIVES],
+    // directives: [DetailProfileComponent, ROUTER_DIRECTIVES, IfAuthorizeDirective, CollapseDirective,
+    //     TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
-    pipes: [ProfileBankPipe]
+    //pipes: [ProfileBankPipe]
 })
 
 
-export class AllProfilesListComponent implements OnActivate {
+export class AllProfilesListComponent implements OnInit {
     allProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
     AllCheckedItemIds: Array<MasterData> = new Array<MasterData>();
     allProfilesList_1: Array<CandidateProfile>;
@@ -60,7 +60,7 @@ export class AllProfilesListComponent implements OnActivate {
         this.profile = new CandidateProfile();
     }
 
-    routerOnActivate() {
+    ngOnInit() {
         //this.setPaginationValues();
         this.getColumnsForSorting();
         this.getLoggedInUser();
@@ -164,7 +164,7 @@ export class AllProfilesListComponent implements OnActivate {
 
     onUpdateStauts() {
         this.selectedStatus.Id = 0;
-        this.selectedStatus.Value = "Incomplete";
+        this.selectedStatus.Value = 'Incomplete';
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             (results: ResponseFromAPI) => {

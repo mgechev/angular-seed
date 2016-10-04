@@ -1,7 +1,7 @@
-import {Component, AfterViewInit, OnChanges } from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, OnActivate } from '@angular/router';
-import {CalenderSlot, CalenderDetails} from '../Model/interviewSlot';
-import {InterviewSlotService } from '../Service/InterviewSlot.service';
+import { Component, AfterViewInit, OnChanges } from '@angular/core';
+import { Router } from '@angular/router';
+import { CalenderSlot, CalenderDetails} from '../Model/interviewSlot';
+import { InterviewSlotService } from '../Service/InterviewSlot.service';
 import { ResponseFromAPI} from '../../../../../shared/model/common.model';
 import { APIResult} from  '../../../../../shared/constantValue/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -10,11 +10,11 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
     moduleId: module.id,
     selector: 'interview-slot',
     templateUrl: 'Interviewslot.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    //directives: [ROUTER_DIRECTIVES],
     providers: [ToastsManager, InterviewSlotService]
 })
 
-export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChanges {
+export class InterviewSlotComponent implements AfterViewInit, OnChanges {
     // @Input() RRFID: MasterData = new MasterData();
     // @Input() RRFCode: string;
 
@@ -30,16 +30,20 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
 
          this.getRRFSlot();
     }
-
-    routerOnActivate() {
+/**Removed due to Angular 2.0 
+ *  routerOn-Activate() {
         //console.write();
         if (this.meta.length === 0) {
             this.addNewSlot();
         }
     }
+*/
 
     ngAfterViewInit() {
         // this.getRRFSlot();
+        if (this.meta.length === 0) {
+            this.addNewSlot();
+        }
     }
 
 

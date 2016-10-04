@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, OnActivate, RouteSegment, Router } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CandidateProfile } from '../../shared/model/myProfilesInfo';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 
@@ -7,21 +7,23 @@ import { ProfileBankService } from '../../shared/services/profileBank.service';
     moduleId: module.id,
     selector: 'rrf-allprofiles-view',
     templateUrl: '../../shared/views/profileBankView.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    //directives: [ROUTER_DIRECTIVES],
     styleUrls: ['allProfilesView.component.css']
 })
-export class AllProfilesViewComponent implements OnActivate {
+export class AllProfilesViewComponent implements OnInit {
     params: string;
     errorMessage: string;
     profile: CandidateProfile;
     count: number = 0;
     TITLE: string = 'All Profiles';
     constructor(private _profileBankService: ProfileBankService,
+        private activatedRoute: ActivatedRoute,
         private _router: Router) {
         this.profile = new CandidateProfile();
     }
-    routerOnActivate(segment: RouteSegment) {
-        this.params = segment.getParam('id');
+    ngOnInit() {
+        this.params = this.activatedRoute.snapshot.params['Id'];
+        //this.params = segment.getParam('id');
         this.getProfileInformation(this.params);
     }
 

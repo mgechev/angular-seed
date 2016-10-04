@@ -1,20 +1,20 @@
-import {Component, ChangeDetectorRef } from '@angular/core';
-import {Router, RouteSegment, ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Router} from '@angular/router';
 import { FullCalendarComponent} from  '../../../shared/components/calendar/fullCalendar';
 //import { MultipleDemoComponent} from  '../../../shared/components/MultiselectDropdown/MultipleDrodown.Component';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';//ResponseFromAPI
-import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
-import {CalendarDataService} from '../service/calendarDataService';
-import {CalendarDetails, Event, Resource} from '../model/calendarDetails';
+import { SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
+import { CalendarDataService} from '../service/calendarDataService';
+import { CalendarDetails, Event, Resource} from '../model/calendarDetails';
 import { MastersService } from '../../../shared/services/masters.service';
 import { InterviewAvailability, Interview, InterviewsRounds } from '../../shared/model/interview';
 import { ScheduleInterviewService} from '../service/ScheduleInterview.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass} from '@angular/common';
-import {BUTTON_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
+import { CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass} from '@angular/common';
+import { BUTTON_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 import * as  _ from 'lodash';
-import {InterviewersPanel, Interviewers} from '../model/scheduleInterview';
+import { InterviewersPanel, Interviewers} from '../model/scheduleInterview';
 
 
 //multiple-demo
@@ -22,12 +22,12 @@ import {InterviewersPanel, Interviewers} from '../model/scheduleInterview';
     moduleId: module.id,
     selector: 'schedule-interview',
     templateUrl: 'scheduleCandidateInterview.component.html',
-    directives: [ROUTER_DIRECTIVES, SELECT_DIRECTIVES, FullCalendarComponent, BUTTON_DIRECTIVES
-        , FORM_DIRECTIVES, CORE_DIRECTIVES, NgClass],
+    // directives: [ROUTER_DIRECTIVES, SELECT_DIRECTIVES, FullCalendarComponent, BUTTON_DIRECTIVES
+    //     , FORM_DIRECTIVES, CORE_DIRECTIVES, NgClass],
     styleUrls: ['ScheduleCandidateInterviewComponent.css'],
 })
 
-export class ScheduleCandidateInterviewComponent implements OnActivate {
+export class ScheduleCandidateInterviewComponent implements OnInit {
     ScheduleInterView: Interview;
     resources: Array<Resource> = new Array<Resource>();
     errorMessage: string;
@@ -95,7 +95,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         //this.event = new Event();
     }
 
-    routerOnActivate(segment: RouteSegment) {
+    ngOnInit() {
         this.ScheduleInterView.RRFID = JSON.parse(sessionStorage.getItem('RRFID'));
         this.ScheduleInterView.Candidate = JSON.parse(sessionStorage.getItem('Candidate')).Candidate;
         this.ScheduleInterView.CandidateID = JSON.parse(sessionStorage.getItem('Candidate')).CandidateID;
@@ -131,9 +131,10 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         let cmb: any = $('#cmbInterviewers');
         cmb.select2();
         //Check for New Interview Schedule or Re-schdule
-        if (segment.getParam('id') !== 'New') {
-            this.ScheduleInterView.InterviewID.Id = parseInt((segment.getParam('id')).split('ID')[1]);
-            this.ScheduleInterView.InterviewID.Value = (segment.getParam('id')).split('ID')[0];
+        var _id= this.activatedRoute.snapshot.params['Id'];
+        if (_id !== 'New') {
+            this.ScheduleInterView.InterviewID.Id = parseInt((_id).split('ID')[1]);
+            this.ScheduleInterView.InterviewID.Value = (_id).split('ID')[0];
             /******Get Modified Interiews */
 
             var _isRescheduled = this.ScheduleInterView.Status ?

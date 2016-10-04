@@ -1,5 +1,4 @@
-import {Component} from '@angular/core';
-import {OnActivate, ROUTER_DIRECTIVES } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
 import { RRFDetails, RRFApproval} from '../../myRRF/models/rrfDetails';
 import { RRFApprovalService } from '../services/rrfApproval.service';
 import { RRFStatus } from  '../../../shared/constantValue/index';
@@ -14,13 +13,13 @@ import { MastersService } from '../../../shared/services/masters.service';
     moduleId: module.id,
     selector: 'rrf-approval-list',
     templateUrl: 'RRFApprovalList.component.html',
-    directives: [ROUTER_DIRECTIVES, RRFGridRowComponent],
+    //directives: [ROUTER_DIRECTIVES, RRFGridRowComponent],
     styleUrls: ['../../shared/css/RRF.component.css'],
     providers: [ToastsManager],
     pipes: [RRFPipe],
 })
 
-export class RRFApprovalListComponent implements OnActivate {
+export class RRFApprovalListComponent implements OnInit {
     rrfApprovalList: RRFDetails[] = [];
     errorMessage: string;
     comment: string;
@@ -37,7 +36,7 @@ export class RRFApprovalListComponent implements OnActivate {
         private _mastersService: MastersService) {
     }
 
-    routerOnActivate(): void {
+    ngOnInit(): void {
         this.getRRFApprovalList();
         this.getColumsForSorting('RRFAPPROVAL');
     }

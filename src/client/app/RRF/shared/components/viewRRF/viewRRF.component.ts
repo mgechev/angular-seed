@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit} from '@angular/core';
-import {  OnActivate, ROUTER_DIRECTIVES, RouteSegment, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { RRFDetails} from '../../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../../myRRF/services/myRRF.service';
 import { MasterData} from '../../../../shared/model/common.model';
@@ -14,7 +14,7 @@ import {FeedbackDataComponent} from '../feedbackData/feedbackData.component';
     moduleId: module.id,
     selector: 'view-RRF',
     templateUrl: 'viewRRF.component.html',
-    directives: [ROUTER_DIRECTIVES, RRFGridRowComponent, FeedbackDataComponent],
+    //directives: [ROUTER_DIRECTIVES, RRFGridRowComponent, FeedbackDataComponent],
     styleUrls: ['viewRRF.component.css'],
     providers: [MyRRFService, RRFCandidateListService]
 })
@@ -27,7 +27,7 @@ export class ViewRRFComponent implements OnInit {
     errorMessage: string = '';
     constructor(private _myRRFService: MyRRFService,
         private _RRFCandidateService: RRFCandidateListService) {
-       /** */
+        /** */
     }
 
     ngOnInit() {
@@ -65,7 +65,7 @@ export class ViewRRFComponent implements OnInit {
             }
         }
     }
-     showAllFeedback(rrf: RRFDetails) {
+    showAllFeedback(rrf: RRFDetails) {
         if (rrf.IsShowFeedback === true) {
             rrf.IsShowFeedback = false;
         } else {

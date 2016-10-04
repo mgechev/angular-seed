@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, RouteSegment, Router, OnActivate} from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CandidateProfile } from '../../shared/model/myProfilesInfo';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
 import { MasterData } from  '../../../shared/model/index';
@@ -8,24 +8,25 @@ import { MasterData } from  '../../../shared/model/index';
     moduleId: module.id,
     selector: 'rrf-blacklistedprofiles-view',
     templateUrl: '../../shared/views/profileBankView.component.html',
-
-    directives: [ROUTER_DIRECTIVES],
+    //directives: [ROUTER_DIRECTIVES],
     styleUrls: ['../../allProfiles/components/allProfilesView.component.css']
 })
 
-export class MyProfilesViewComponent implements OnActivate {
+export class MyProfilesViewComponent implements OnInit {
     params: string;
     CandidateID: MasterData = new MasterData();
     profile: CandidateProfile;
     errorMessage: string;
-    TITLE:string ='Profiles';
+    TITLE: string = 'Profiles';
     count: number = 0;
     constructor(private _profileBankService: ProfileBankService,
+        private activatedRoute: ActivatedRoute,
         private _router: Router) {
         this.profile = new CandidateProfile();
     }
-    routerOnActivate(segment: RouteSegment) {
-        this.params = segment.getParam('id');
+    ngOnInit() {
+        this.params = this.activatedRoute.snapshot.params['Id'];
+        //this.params = segment.getParam('id');
         this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
         this.CandidateID.Value = this.params.split('ID')[0];
 

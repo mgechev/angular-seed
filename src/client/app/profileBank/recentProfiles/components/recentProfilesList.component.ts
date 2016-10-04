@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, OnActivate } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import {CandidateProfile, AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
 import { RecentProfilesService } from '../services/recentProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -16,13 +16,13 @@ import { DetailProfileComponent } from '../../shared/component/detailProfile.com
     moduleId: module.id,
     selector: 'rrf-recent-profiles-list',
     templateUrl: 'recentProfilesList.component.html',
-    directives: [DetailProfileComponent, ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
+    //directives: [DetailProfileComponent, ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
-    providers: [ProfileBankService],
-    pipes: [ProfileBankPipe]
+    providers: [ProfileBankService]
+    //,pipes: [ProfileBankPipe]
 })
 
-export class RecentProfilesListComponent implements OnActivate {
+export class RecentProfilesListComponent implements OnInit {
     recentProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
     profile: CandidateProfile = new CandidateProfile();
     statusList: Array<MasterData>;
@@ -44,7 +44,7 @@ export class RecentProfilesListComponent implements OnActivate {
         private _masterService: MastersService) { }
 
     //Call Below methods when this page is loaded
-    routerOnActivate() {
+    ngOnInit() {
         this.getLoggedInUser();
         this.getRecentProfiles();
         this.getCandidateStatuses();
@@ -56,7 +56,6 @@ export class RecentProfilesListComponent implements OnActivate {
                 this.currentUser = results;
             },
             error => this.errorMessage = <any>error);
-
     }
 
 

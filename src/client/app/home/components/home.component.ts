@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ROUTER_DIRECTIVES, Routes, RouteSegment, RouteTree } from '@angular/router';
+import { Routes, ActivatedRoute, RouteTree } from '@angular/router';
 import { FooterComponent } from '../../layout/footer/footer.component';
 import { TopNavigationBarComponent } from '../../layout/topNavigationBar/topNavigationBar.component';
 import { PageActionsComponent } from '../../layout/pageActions/pageActions.component';
@@ -39,8 +39,8 @@ import { FeedbackPendingComponent } from '../../RRF/FeedBackPending/component/fe
     moduleId: module.id,
     templateUrl: 'home.component.html',
     styleUrls: ['home.component.css'],
-    directives: [ROUTER_DIRECTIVES, FooterComponent, PageActionsComponent, TopNavigationBarComponent,
-        SideBarComponent, QuickSidebarComponent, SpinnerComponent, DashboardComponent],
+    // directives: [ROUTER_DIRECTIVES, FooterComponent, PageActionsComponent, TopNavigationBarComponent,
+    //     SideBarComponent, QuickSidebarComponent, SpinnerComponent, DashboardComponent],
     providers: [SpinnerService],
 })
 @Routes([
@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
         Layout.init();
         Demo.init();
     }
-    routerOnActivate(segment: RouteSegment, prev?: RouteSegment, currTree?: RouteTree, prevTree?: RouteTree) {
+    routerOnActivate(segment: ActivatedRoute, prev?: ActivatedRoute, currTree?: RouteTree, prevTree?: RouteTree) {
         console.log(segment);
     }
 }

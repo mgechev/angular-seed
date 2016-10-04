@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 import { AllCandidateProfiles, CandidateProfile } from '../../shared/model/myProfilesInfo';
 import { BlackListedProfilesService } from '../services/blacklistedProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -16,13 +16,13 @@ import { DetailProfileComponent } from '../../shared/component/detailProfile.com
     moduleId: module.id,
     selector: 'rrf-black-listed-profiles-list',
     templateUrl: 'blackListedProfilesList.component.html',
-    directives: [DetailProfileComponent, ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
-    styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
-    pipes: [ProfileBankPipe]
+    //directives: [DetailProfileComponent, ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES],
+    styleUrls: ['../../myProfiles/components/myProfiles.component.css']
+    //,pipes: [ProfileBankPipe]
 
 })
 
-export class BlackListedProfilesListComponent implements OnActivate {
+export class BlackListedProfilesListComponent implements OnInit {
     blacklistedProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
     ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
     profile: CandidateProfile;
@@ -47,7 +47,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
 
     }
 
-    routerOnActivate() {
+    ngOnInit() {
         this.setPaginationValues();
         this.getLoggedInUser();
         this.getBlacklistedProfiles();

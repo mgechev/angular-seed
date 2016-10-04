@@ -1,5 +1,4 @@
 import { Component, Input} from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 import { InterviewApproval } from './model/interviewApproval';
 import { InterviewApprovalService } from './service/interviewApproval.service';
 import { MasterData, GrdOptions, ResponseFromAPI} from '../../../../shared/model/common.model';
@@ -12,7 +11,7 @@ import {  TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
     moduleId: module.id,
     selector: 'interview-approval',
     templateUrl: 'InterviewApproval.component.html',
-    directives: [ROUTER_DIRECTIVES ,InterviewApprovalGridRowComponent ,TOOLTIP_DIRECTIVES],
+    //directives: [InterviewApprovalGridRowComponent ,TOOLTIP_DIRECTIVES],
     providers: [InterviewApprovalService, ToastsManager]
 })
 

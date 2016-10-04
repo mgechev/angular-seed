@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {OnActivate, ROUTER_DIRECTIVES, Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 import { RRFFeedback} from '../../myRRF/models/rrfDetails';
 import { FeedbackPendingService } from '../services/feedbackPending.service';
 import { APIResult } from  '../../../shared/constantValue/index';
@@ -16,13 +16,13 @@ import { FeedBackpending} from '../models/feedbackPending';
     moduleId: module.id,
     selector: 'rrf-feedbackPending',
     templateUrl: 'feedbackPending.component.html',
-    directives: [ROUTER_DIRECTIVES, RRFGridRowComponent, IfAuthorizeDirective, FeedbackDataComponent],
     styleUrls: ['../../shared/css/RRF.component.css'],
+    //directives: [RRFGridRowComponent, IfAuthorizeDirective, FeedbackDataComponent],
     providers: [ToastsManager, FeedbackPendingService, MastersService],
-    pipes: [RRFPipe],
+    //  pipes: [RRFPipe],
 })
 
-export class FeedbackPendingComponent implements OnActivate {
+export class FeedbackPendingComponent implements OnInit {
     rrfFeedbackPendingList: FeedBackpending[] = [];
     errorMessage: string;
     comment: string;
@@ -40,7 +40,7 @@ export class FeedbackPendingComponent implements OnActivate {
         private _router: Router) {
     }
 
-    routerOnActivate(): void {
+    ngOnInit(): void {
         this.getLoggedInUser();
         this.getFeedbackPendingRRF();
         this.getColumsForSorting('RRFAPPROVAL'); //TODO
@@ -207,7 +207,7 @@ export class FeedbackPendingComponent implements OnActivate {
     allowEditRRF(rrf: FeedBackpending) {
         try {
             if (rrf.RaisedBy.Id === this.logedInUser.Id) {
-                if (rrf.FeedbackStatus.toLowerCase()=== 'update needed') {
+                if (rrf.FeedbackStatus.toLowerCase() === 'update needed') {
                     return true;
                 } else {
                     return false;

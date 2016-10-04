@@ -1,5 +1,4 @@
-import {Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, OnActivate } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
 import { TreeViewComponent } from '../../shared/components/treeview/treeview.component';
 import { TreeviewData, TreeviewNode } from './models/treeviewData';
 import { PushNotificationService } from './services/pushNotification.service';
@@ -9,20 +8,18 @@ import { PushNotificationService } from './services/pushNotification.service';
     moduleId: module.id,
     selector: 'push-notification',
     templateUrl: 'pushNotification.component.html',
-    directives: [ROUTER_DIRECTIVES, TreeViewComponent],
+    //directives: [ TreeViewComponent],
     providers: [PushNotificationService]
 })
 
-export class PushNotificationComponent implements OnActivate {
+export class PushNotificationComponent implements OnInit {
     RRFData: TreeviewData = new TreeviewData();
     ProfileBankData: TreeviewData = new TreeviewData();
     RecruitmentCycleData: TreeviewData = new TreeviewData();
     treeviewNodes: TreeviewNode[] = [];
-
     notificationStatus: boolean = false;
 
     constructor(private _pushNotificationService: PushNotificationService) {
-
         this.getSettingList();
         this.createRRFObject();
         this.createProfileBankObject();
@@ -30,7 +27,7 @@ export class PushNotificationComponent implements OnActivate {
         this.NotificationEnableDisable();
     }
 
-    routerOnActivate() {
+    ngOnInit() {
         (<any>($('.make-switch'))).bootstrapSwitch();
     }
     getSettingList() {

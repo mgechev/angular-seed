@@ -1,5 +1,5 @@
-import { Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { RecruiterScheduleInterviewService} from '../services/displayScheduleInterviews.service';
 import { InterviewsList} from '../model/interviewDetails';
@@ -10,12 +10,12 @@ import { AllScheduleInterviewPipe } from  '../filter/scheduleInterviews.pipe';
     moduleId: module.id,
     selector: 'show-schedule-interviews-recruiter',
     templateUrl: 'scheduleInterviews.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    //directives: [ROUTER_DIRECTIVES],
     pipes: [AllScheduleInterviewPipe]
-    // providers:[RecruiterScheduleInterviewService,ToastsManager]
+    //providers:[RecruiterScheduleInterviewService,ToastsManager]
 })
 
-export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
+export class ScheduleInterviewsForRecruitersComponent implements OnInit {
     currentView: string = 'myInterviews';
     NORECORDSFOUND: boolean = false;
     mode: string;
@@ -26,7 +26,7 @@ export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
         this.currentView = 'myInterviews';
     }
 
-    routerOnActivate() {
+    ngOnInit() {
         this.getMyScheduleInterviewsData();
     }
     onViewChanged(viewMode: string) {
@@ -72,7 +72,6 @@ export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
             });
     }
     getMyScheduleInterviewsData() {
-
         this.NORECORDSFOUND = false;
         this._recruitersInterviewService.getMyInterviews(this.InterviewDetailsList.GrdOperations)
             .subscribe(

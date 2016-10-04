@@ -1,9 +1,9 @@
-import {Component } from '@angular/core';
-import { Router, OnActivate, ROUTER_DIRECTIVES, RouteSegment } from '@angular/router';
-import {RRFDetails, Panel, IntwRoundSeqData, RRFFeedback } from '../models/rrfDetails';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { RRFDetails, Panel, IntwRoundSeqData, RRFFeedback } from '../models/rrfDetails';
 import { MyRRFService } from '../services/myRRF.service';
 import { MastersService } from '../../../shared/services/masters.service';
-import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
+import { SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult, RRFPriority, RRFStatus, RaiseRRFStatus } from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
@@ -23,9 +23,7 @@ import {BUTTON_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
     providers: [ToastsManager]
 })
 
-export class MyRRFAddComponent implements OnActivate {
-
-
+export class MyRRFAddComponent implements OnInit {
     newRRF: RRFDetails = new RRFDetails();
     panel: Panel = new Panel();
     errorMessage: string = '';
@@ -56,15 +54,15 @@ export class MyRRFAddComponent implements OnActivate {
 
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
+        private activatedRoute: ActivatedRoute,
         private _mastersService: MastersService,
         public toastr: ToastsManager) {
         // this.newRRF.Panel.push(this.panel);
-
     }
 
-    routerOnActivate(segment: RouteSegment): void {
+    ngOnInit(segment: RouteSegment): void {
         window.onbeforeunload = function () {
-            return "Data will be lost if you leave the page, are you sure?";
+            return 'Data will be lost if you leave the page, are you sure?';
         };
         this.setMinDateToCalender();
 
@@ -72,9 +70,8 @@ export class MyRRFAddComponent implements OnActivate {
         $('#cmbInterviewer').select2();
         $('#cmbSkillsReq').select2();
 
-
-        if (segment.getParam('id') !== undefined) {
-            this.params = segment.getParam('id');
+        if (this.activatedRoute.snapshot.params['id'] !== undefined) {
+            this.params = this.activatedRoute.snapshot.params['id'];
             if (this.params) {
                 this.RRFId.Value = this.params.split('ID')[0];
                 var temp: string = (this.params.split('ID')[1]);
@@ -132,11 +129,11 @@ export class MyRRFAddComponent implements OnActivate {
     }
 
     validateForm(): boolean {
-        if (this.newRRF.Panel.length == 0) {
+        if (this.newRRF.Panel.length === 0) {
             this.toastr.error('Please select interview panel Details');
             return false;
         }
-        if (this.newRRF.SkillsRequired.length == 0) {
+        if (this.newRRF.SkillsRequired.length === 0) {
             this.toastr.error('Please select Required skills');
             return false;
         }
@@ -209,9 +206,9 @@ export class MyRRFAddComponent implements OnActivate {
 
         let res: any;
         res = confirm(
-            "Data will be lost if you leave the page, are you sure?"
+            'Data will be lost if you leave the page, are you sure?'
         );
-        if (res == true) {
+        if (res === true) {
             if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.UpdateForFeedback) {
                 this._router.navigate(['/App/RRF/FeedbackPending/']);
             } else {
@@ -509,7 +506,4 @@ export class MyRRFAddComponent implements OnActivate {
         }
 
     }
-
-
-
 }

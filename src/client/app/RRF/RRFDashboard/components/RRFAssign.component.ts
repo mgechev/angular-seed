@@ -1,5 +1,4 @@
 import {Component, AfterViewInit, AfterContentInit  } from '@angular/core';
-import { OnActivate, ROUTER_DIRECTIVES, RouteSegment } from '@angular/router';
 import { RRFDetails, AssignmentDetails } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
@@ -21,7 +20,7 @@ import {RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow
     providers: [ToastsManager]
 })
 
-export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterContentInit {
+export class RRFAssignComponent implements  AfterViewInit, AfterContentInit {
     selectedRRF: RRFDetails = new RRFDetails();
     errorMessage: string;
     RRFId: MasterData = new MasterData();
@@ -34,13 +33,15 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
     AssignStatus: RRFAssignStatus = RRFAssignStatus;
 
     constructor(private _myRRFService: MyRRFService,
+    private activatedRoute: ActivatedRoute,
         private _rrfDashboardService: RRFDashboardService,
         private _mastersService: MastersService,
         public toastr: ToastsManager) {
     }
 
-    routerOnActivate(segment: RouteSegment) {
-        var params = segment.getParam('id');
+    ngOnInit() {
+var params = this.activatedRoute.snapshot.params['id'];
+        //var params = segment.getParam('id');
         if (params) {
             this.RRFId.Id = parseInt(params.split('ID')[1]);
             this.RRFId.Value = params.split('ID')[0];

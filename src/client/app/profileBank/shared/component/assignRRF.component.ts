@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import {AssignRRFDetails} from '../model/RRF';
-import {AssignRRFService} from '../services/assignRRF.service';
+import { Component, OnInit} from '@angular/core';
+import { Router} from '@angular/router';
+import { AssignRRFDetails} from '../model/RRF';
+import { AssignRRFService} from '../services/assignRRF.service';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ResponseFromAPI, MasterData } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -12,12 +12,12 @@ import { CandidateProfile, ResumeMeta, AddCandidateResponse, AllCandidateProfile
     moduleId: module.id,
     selector: 'profiles-assignrrf',
     templateUrl: 'assignRRF.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    //directives: [ROUTER_DIRECTIVES],
     providers: [AssignRRFService, ToastsManager],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
 
-export class ProfileBankAssignRRFComponent implements OnActivate {
+export class ProfileBankAssignRRFComponent implements OnInit {
     CandidateIDs: Array<MasterData> = new Array<MasterData>();
     returnPath: string;
     returnPathToSchedule: string;
@@ -37,7 +37,7 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
         this.selectedRRF = new RRFDetails();
     }
 
-    routerOnActivate() {
+    ngOnInit() {
         this.returnPath = sessionStorage.getItem('returnPath');
         this.returnPathToSchedule = sessionStorage.getItem('returnPathToSchedule');
         if (this.returnPath.includes('MyProfiles')) {

@@ -1,5 +1,4 @@
 import { Component, AfterViewInit, ElementRef, Input } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 import { MasterData} from '../../model/common.model';
 import {MastersService } from '../../services/masters.service';
 
@@ -7,7 +6,7 @@ import {MastersService } from '../../services/masters.service';
     moduleId: module.id,
     selector: 'multiselect-dropdown',
     templateUrl: 'dropdownMultiSelect.component.html',
-    directives: [ROUTER_DIRECTIVES],
+//    directives: [ROUTER_DIRECTIVES],
     styleUrls: ['dropdownMultiSelect.component.css'],
     providers: [MastersService]
 })

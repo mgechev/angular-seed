@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
+import { Routes } from '@angular/router';
 import {RecentProfilesListComponent} from './recentProfilesList.component';
 import {RecentProfilesAddComponent} from './recentProfilesAdd.component';
 import {RecentProfilesService } from '../services/recentProfiles.service';
@@ -12,16 +12,18 @@ import { ProfileEsplHistoryListComponent } from '../../profilesEsplHistory/compo
 @Component({
     selector: 'rrf-recent-profiles',
     template: '<router-outlet></router-outlet>',
-    directives: [ROUTER_DIRECTIVES],
+    //directives: [ROUTER_DIRECTIVES],
     providers: [ProfileBankService, RecentProfilesService,
         MastersService, ToastsManager]
 })
-
+/**
+ * angular 2.0 changes
 @Routes([
     { path: '/', component: RecentProfilesListComponent },
     { path: '/Edit/:id', component: RecentProfilesAddComponent },
     { path: '/View/:id', component: RecentProfilesViewComponent },
     { path: '/History', component: ProfileEsplHistoryListComponent }
 ])
+ */
 export class RecentProfilesComponent {
 }

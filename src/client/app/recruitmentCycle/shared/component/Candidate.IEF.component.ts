@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Interview } from  '../../shared/model/interview';
 import { CandidateIEFService } from  '../services/Candidate.IEF.service';
-import { ROUTER_DIRECTIVES, Router, OnActivate, RouteSegment} from '@angular/router';
+import { Router } from '@angular/router';
 import { IEFFunctionComponent} from './IEFFuncations/Component/IEFFunction.component';
 import { InterviewSlotComponent} from './InterviewSlot/Component/InterviewSlot.component';
 import { IEFInformation, iefModel, IEFFunction, IEFSubmission} from '../../shared/model/ief';
@@ -17,7 +17,7 @@ import { APIResult} from  '../../../shared/constantValue/index';
     providers: [ToastsManager, CandidateIEFService]
 })
 
-export class RecruitmentIEFComponent implements OnActivate, OnInit {
+export class RecruitmentIEFComponent implements OnInit {
     returnPath: string;
     errorMessage: string;
     requestedIef: iefModel = new iefModel();
@@ -32,7 +32,7 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
         private _candidateIEFService: CandidateIEFService) {
 
     }
-    routerOnActivate(segment: RouteSegment) {
+    ngOnInit() {
         this.requestedIef = this.getSessionOf<iefModel>('SubmitIef');
         this.getIEFDetails(this.requestedIef);
         this.getIEFHistory(this.requestedIef);

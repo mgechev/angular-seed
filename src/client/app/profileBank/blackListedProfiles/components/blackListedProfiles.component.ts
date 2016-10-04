@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
+import { Routes } from '@angular/router';
 import { BlackListedProfilesListComponent } from './blackListedProfilesList.component';
 import { BlackListedProfilesAddComponent } from './blackListedProfilesAdd.component';
 import { BlackListedProfilesService } from '../services/blacklistedProfiles.service';
@@ -12,15 +12,16 @@ import { ProfileEsplHistoryListComponent } from '../../profilesEsplHistory/compo
 @Component({
     selector: 'rrf-black-listed-profiles',
     template: ' <router-outlet></router-outlet>',
-    directives: [ROUTER_DIRECTIVES],
     providers: [BlackListedProfilesService, MastersService, ToastsManager, ProfileBankService]
 })
-
+/**
+ * angular 2.0 changes 
 @Routes([
     { path: '/', component: BlackListedProfilesListComponent },
     { path: '/Edit/:id', component: BlackListedProfilesAddComponent },
     { path: '/View/:id', component: BlackListedProfilesViewComponent },
     { path: '/History', component: ProfileEsplHistoryListComponent }
 ])
+*/
 export class BlackListedProfilesComponent {
 }

@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, OnActivate, RouteSegment, Router } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CandidateProfile } from '../../shared/model/myProfilesInfo';
 import { MasterData } from  '../../../shared/model/index';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
@@ -7,23 +7,25 @@ import { ProfileBankService } from '../../shared/services/profileBank.service';
     moduleId: module.id,
     selector: 'rrf-companyprofiles-view',
     templateUrl: '../../shared/views/profileBankView.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    //directives: [ROUTER_DIRECTIVES],
     styleUrls: ['../../allProfiles/components/allProfilesView.component.css']
 })
-export class CompanyProfilesViewComponent implements OnActivate {
+export class CompanyProfilesViewComponent implements OnInit {
     params: string;
     CandidateID: MasterData = new MasterData();
-    TITLE:string ='Company Profiles';
+    TITLE: string = 'Company Profiles';
 
     profile: CandidateProfile;
     errorMessage: string;
     count: number = 0;
     constructor(private _profileBankService: ProfileBankService,
+        private activatedRoute: ActivatedRoute,
         private _router: Router) {
         this.profile = new CandidateProfile();
     }
-    routerOnActivate(segment: RouteSegment) {
-        this.params = segment.getParam('id');
+    ngOnInit() {
+        this.params = this.activatedRoute.snapshot.params['Id'];
+        //this.params = segment.getParam('id');
         this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
         this.CandidateID.Value = this.params.split('ID')[0];
 
@@ -35,7 +37,6 @@ export class CompanyProfilesViewComponent implements OnActivate {
                 this.convertCheckboxesValues();
             },
             error => this.errorMessage = <any>error);
-
     }
 
     convertCheckboxesValues() {
@@ -81,7 +82,6 @@ export class CompanyProfilesViewComponent implements OnActivate {
             this.profile.CandidateSalaryDetails.CTCIncludeVariable = 'No';
         }
     }
-
     Back() {
         this._router.navigate(['/App/ProfileBank/CompanyProfiles']);
     }

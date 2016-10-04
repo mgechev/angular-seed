@@ -1,5 +1,5 @@
-import { Component} from '@angular/core';
-import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
+import { Component, NgModule, ModuleWithProviders } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 import { RRFDashboardListComponent } from './RRFDashboardList.component';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
 import { RRFAssignComponent } from './RRFAssign.component';
@@ -11,19 +11,30 @@ import { RRFReScheduleInterviewsComponent } from './RRFReScheduleInterviews.comp
 import {RRFReScheduleInterviewService} from '../services/RRFReScheduleInterviews.service';
 import {PanelsAvailabilityService} from '../../shared/services/panelsAvailability.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+
+
 @Component({
     selector: 'rrf-dashboard',
     template: ' <router-outlet></router-outlet>',
-    directives: [ROUTER_DIRECTIVES],
-    providers: [RRFDashboardService, MyRRFService, MastersService,PanelsAvailabilityService,
-                RRFCandidateListService,RRFReScheduleInterviewService,ToastsManager]
+    //directives: [ROUTER_DIRECTIVES],
+    providers: [RRFDashboardService, MyRRFService, MastersService, PanelsAvailabilityService,
+        RRFCandidateListService, RRFReScheduleInterviewService, ToastsManager]
 })
 
+@NgModule({
+    declarations: [RouterModule]
+})
+/**
+ * angular 2.0 changes
 @Routes([
     { path: '/', component: RRFDashboardListComponent },
     { path: '/Assign/:id', component: RRFAssignComponent },
     { path: '/Candidates/:id', component: RRFCandidateListComponent },
     { path: '/Interviews/:id', component: RRFReScheduleInterviewsComponent },
 ])
+*/
+
+
+
 export class RRFDashboardComponent {
 }
