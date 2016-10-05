@@ -6,6 +6,9 @@ node_js:
 
 sudo: false
 
+addons:
+  firefox: "39.0"
+
 os:
   - linux
   - osx
