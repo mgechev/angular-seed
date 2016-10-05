@@ -86,9 +86,25 @@
                                     <!-- NgBindings-->
                                     <tr class="gradeX odd" *ngFor="let profile of incompleteProfilesList.Profiles | ProfileBankPipe:searchString ">
                                         <td>
+                                            <div class="row portlet-title" style="width:100%">
+                                                <div class="actions pull-right">
+                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" (click)='redirectToEditProfile(profile.CandidateID)'
+                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
+                                                        title="Edit Profile">
+                                                        <i class="fa fa-edit "></i>
+                                                        <!-- Edit Profile-->
+                                                    </button>
+                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='onDeleteProfile(profile.CandidateID)' tooltip="Delete Profile"
+                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" title="Delete Profile"
+                                                        tooltipEnable="true" >
+                                                            <i class="fa fa-remove "></i> <!--Delete Profile-->
+                                                        </button>
+
+                                                </div>
+                                            </div>
                                             <detail-profile [selectedProfile]="profile"></detail-profile>
                                         </td>
-                                        <td style="width:80px">
+                                        <td style="width:80px display:none">
                                             <!--<div class="btn-group ">
                                                 <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                                                     Delete

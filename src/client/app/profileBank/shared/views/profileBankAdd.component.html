@@ -24,7 +24,7 @@
                 <div class="profile-content">
                     <div class="row">
                         <div class="col-md-14">
-                            <div class="portlet light bordered">
+                            <div class="portlet light bordered" style="padding-bottom: 45px">
                                 <div class="portlet-title tabbable-line">
                                     <div class="caption caption-md">
                                         <i class="icon-globe theme-font hide"></i>
@@ -67,7 +67,14 @@
                                         <!-- PRIMARY INFO TAB -->
                                         <div class="tab-pane active" id="tab_primaryInfo">
                                             <form role="form" class="todo-tasklist-item todo-tasklist-item-border-yellow" (submit)="onSavePrimaryInfo()">
-                                                <div class=row>
+                                                <div class="row">
+                                                    <div class="margiv-top-10 pull-right" style="margin-right:15px;">
+                                                        <a class="btn green " (click)='nextTab()'>
+                                                         Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">First Name<span class="required"> * </span></label>
@@ -199,7 +206,7 @@
                                                     <button type="submit" class="btn green"> Save Changes</button>
                                                     <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
                                                 </div>-->
-                                                <div class="margiv-top-10;">
+                                                <div class="margiv-top-10 pull-right">
                                                     <a class="btn green " (click)='nextTab()'>
                                                          Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
                                                 </div>
@@ -211,6 +218,16 @@
                                         <div class="tab-pane" id="tab_1_1">
 
                                             <form role="form" (submit)="onSavePersonalDetails()">
+                                                <div class="row">
+                                                    <div class="margiv-top-10 pull-right" style="margin-right:15px;">
+                                                        <a class="btn green " (click)='previousTab()'>
+                                                            <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev
+                                                        </a>
+                                                        <a class="btn green " (click)='nextTab()'>
+                                                         Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
+                                                    </div>
+                                                </div>
+
                                                 <!-- Profile Picture Option -->
                                                 <div class="col-md-3 col-md-3 portlet light profile-sidebar-portlet bordered">
                                                     <!-- SIDEBAR USERPIC -->
@@ -281,7 +298,13 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                                <hr>
+                                                <div class="portlet-title">
+                                                    <div class="caption font-dark">
+                                                        <span class="caption-subject bold uppercase">Contact Information</span>
+                                                    </div>
+                                                </div>
+                                                <hr>
                                                 <div class=row>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
@@ -309,38 +332,11 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label class="control-label">Pan Card No</label>
-                                                            <input type="text" placeholder="Pan Card No" class="form-control" [(ngModel)]="profile.PANNumber" title="Enter Valid PAN No. For E.g. ABCDE1234F"
-                                                                pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}" (blur)="onSavePersonalDetails()"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Passport No</label>
-                                                            <input type="text" placeholder="Passport No" class="form-control" [(ngModel)]="profile.PassportNumber" title="Enter Valid Passport No. For E.g. A1234567"
-                                                                pattern="[A-Za-z]{1}[0-9]{7}" (blur)="onSavePersonalDetails()"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label>Aadhaar Card No</label>
-                                                            <input type="text" placeholder="Aadhar Card No" class="form-control" [(ngModel)]="profile.AadharCardNo" tooltip="Aadhar Card Number"
-                                                                tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.AadharCardNo"
-                                                                pattern="^[0-9\-\+]{9,15}$" title="Enter valid Aadhaar Card number For Eg. 123456789012"
-                                                                maxlength="12" (blur)="onSavePersonalDetails()" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Current Address </label>
+                                                            <label class="control-label">Permanent Address <span class="required"> * </span></label>
                                                             <div class="row">
                                                                 <div class="col-md-12">
-                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Current Address" style="resize:vertical" [(ngModel)]="profile.CurrentAddress"
-                                                                        (blur)="onSavePersonalDetails()"></textarea>
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Permanent Address" style="resize:vertical" [(ngModel)]="profile.PermanentAddress"
+                                                                        required="" (blur)="onSavePersonalDetails()"></textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -356,32 +352,20 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Permanent Address <span class="required"> * </span></label>
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Permanent Address" style="resize:vertical" [(ngModel)]="profile.PermanentAddress"
-                                                                        required="" (blur)="onSavePersonalDetails()"></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label class="control-label"> Outstationed Candidate</label>
-                                                            <div class="mt-checkbox-inline ">
-                                                                <label class="mt-checkbox  mt-checkbox-outline">
-                                                                    <input type="checkbox" id="chkOutstationedCandidate" [(ngModel)]="profile.OutstationedCandidate" (change)="onOutstationedClick(profile.OutstationedCandidate)">
-                                                                    <span></span>
-                                                                </label>
+                                                            <label class="control-label">Current Address </label>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Current Address" style="resize:vertical" [(ngModel)]="profile.CurrentAddress"
+                                                                        (blur)="onSavePersonalDetails()"></textarea>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>Country</label>
@@ -399,6 +383,66 @@
                                                             </select>
                                                         </div>
                                                     </div>
+                                                </div>
+
+                                                <hr>
+                                                <div class="portlet-title">
+                                                    <div class="caption font-dark">
+                                                        <span class="caption-subject bold uppercase">Varification Proofs</span>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Aadhaar Card No</label>
+                                                            <input type="text" placeholder="Aadhar Card No" class="form-control" [(ngModel)]="profile.AadharCardNo" tooltip="Aadhar Card Number"
+                                                                tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.AadharCardNo"
+                                                                pattern="^[0-9\-\+]{9,15}$" title="Enter valid Aadhaar Card number For Eg. 123456789012"
+                                                                maxlength="12" (blur)="onSavePersonalDetails()" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Pan Card No</label>
+                                                            <input type="text" placeholder="Pan Card No" class="form-control" [(ngModel)]="profile.PANNumber" title="Enter Valid PAN No. For E.g. ABCDE1234F"
+                                                                pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}" (blur)="onSavePersonalDetails()"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Passport No</label>
+                                                            <input type="text" placeholder="Passport No" class="form-control" [(ngModel)]="profile.PassportNumber" title="Enter Valid Passport No. For E.g. A1234567"
+                                                                pattern="[A-Za-z]{1}[0-9]{7}" (blur)="onSavePersonalDetails()"
+                                                            />
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+
+                                                <hr>
+                                                <div class="portlet-title">
+                                                    <div class="caption font-dark">
+                                                        <span class="caption-subject bold uppercase">Others</span>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label"> Outstationed Candidate</label>
+                                                            <div class="mt-checkbox-inline ">
+                                                                <label class="mt-checkbox  mt-checkbox-outline">
+                                                                    <input type="checkbox" id="chkOutstationedCandidate" [(ngModel)]="profile.OutstationedCandidate" (change)="onOutstationedClick(profile.OutstationedCandidate)">
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="col-md-3" *ngIf="readyToRelocateFlag">
                                                         <div class="form-group">
                                                             <label class="control-label"> Ready To Relocate </label>
@@ -408,6 +452,20 @@
                                                                     <span></span>
                                                                 </label>
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3" *ngIf="reasonToRelocateFlag">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Reason To Relocate</label>
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Reason To Relocate" style="resize:vertical" [(ngModel)]="profile.ReasonToRelocate"
+                                                                (blur)="onSavePersonalDetails()"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Comments Additional Information</label>
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.CommentsAdditionalInformation"
+                                                                (blur)="onSavePersonalDetails()"></textarea>
                                                         </div>
                                                     </div>
                                                     <!--<div class="col-md-3">
@@ -421,13 +479,7 @@
                                                 </div>
                                                 <div class="row">
 
-                                                    <div class="col-md-3" *ngIf="reasonToRelocateFlag">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Reason To Relocate</label>
-                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Reason To Relocate" style="resize:vertical" [(ngModel)]="profile.ReasonToRelocate"
-                                                                (blur)="onSavePersonalDetails()"></textarea>
-                                                        </div>
-                                                    </div>
+
                                                     <!--<div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Friends Relatives</label>
@@ -435,13 +487,7 @@
                                                                 (blur)="onSavePersonalDetails()"></textarea>
                                                         </div>
                                                     </div>-->
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Comments Additional Information</label>
-                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.CommentsAdditionalInformation"
-                                                                (blur)="onSavePersonalDetails()"></textarea>
-                                                        </div>
-                                                    </div>
+
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Resume Source</label>
@@ -456,10 +502,7 @@
                                                                 (blur)="onSavePersonalDetails()" />
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-
-
+                                                    
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Follow Up Comments</label>
@@ -469,14 +512,14 @@
                                                             </textarea>
                                                         </div>
                                                     </div>
-
                                                 </div>
+                                              
                                                 <!--<div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
                                                     <a class="btn default" (click)='Back()'> Cancel </a>
                                                 </div>-->
 
-                                                <div class="margiv-top-10;">
+                                                <div class="margiv-top-10 pull-right">
                                                     <a class="btn green " (click)='previousTab()'>
                                                         <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev </a>
                                                     <a class="btn green " (click)='nextTab()'>
@@ -492,6 +535,16 @@
                                                     <!-- BEGIN EXAMPLE TABLE PORTLET-->
                                                     <div class="table-toolbar">
                                                         <form role="form" (submit)="onAddQualification()">
+                                                            <div class="row">
+                                                                <div class="margiv-top-10 pull-right" style="margin-right:15px;">
+                                                                    <a class="btn green " (click)='previousTab()'>
+                                                                        <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>                                                                        Prev
+                                                                    </a>
+                                                                    <a class="btn green " (click)='nextTab()'>
+                                                         Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
+                                                                </div>
+                                                            </div>
+
                                                             <div class="row">
                                                                 <div class="col-md-3">
                                                                     <div class="form-group">
@@ -584,26 +637,32 @@
                                                             </tr>
                                                         </tbody>
                                                     </table>
+                                                </div>
+                                                <!-- END EXAMPLE TABLE PORTLET-->
 
-
-                                                    <div class="margiv-top-10;">
+                                            </div>
+                                            <div class="margiv-top-10 pull-right">
+                                                <a class="btn green " (click)='previousTab()'>
+                                                    <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev
+                                                </a>
+                                                <a class="btn green " (click)='nextTab()'>
+                                                         Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
+                                            </div>
+                                        </div>
+                                        <!-- END QUALIFICATION TAB -->
+                                        <!-- SKILLS TAB -->
+                                        <div class="tab-pane" id="tab_1_3">
+                                            <form role="form" (submit)="onSaveSkillsDetails()">
+                                                <div class="row">
+                                                    <div class="margiv-top-10 pull-right" style="margin-right:15px;">
                                                         <a class="btn green " (click)='previousTab()'>
                                                             <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev
                                                         </a>
                                                         <a class="btn green " (click)='nextTab()'>
                                                          Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
                                                     </div>
-
                                                 </div>
-                                                <!-- END EXAMPLE TABLE PORTLET-->
 
-                                            </div>
-
-                                        </div>
-                                        <!-- END QUALIFICATION TAB -->
-                                        <!-- SKILLS TAB -->
-                                        <div class="tab-pane" id="tab_1_3">
-                                            <form role="form" (submit)="onSaveSkillsDetails()">
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-group">
@@ -711,7 +770,7 @@
                                                     <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
                                                 </div>-->
 
-                                                <div class="margiv-top-10;">
+                                                <div class="margiv-top-10 pull-right">
                                                     <a class="btn green " (click)='previousTab()'>
                                                         <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev </a>
                                                     <a class="btn green " (click)='nextTab()'>
@@ -725,7 +784,15 @@
                                             <!--<form role="form">-->
 
                                             <form role="form" (submit)="onSaveCareerProfileDetails()">
-
+                                                <div class="row">
+                                                    <div class="margiv-top-10 pull-right" style="margin-right:15px;">
+                                                        <a class="btn green " (click)='previousTab()'>
+                                                            <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev
+                                                        </a>
+                                                        <a class="btn green " (click)='nextTab()'>
+                                                         Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
+                                                    </div>
+                                                </div>
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-group">
@@ -974,7 +1041,28 @@
                                                         </table>
                                                     </div>
 
-                                                    <div class="margiv-top-10;">
+
+                                                </div>
+                                                <!-- /Employer information TAB -->
+                                                <!-- END EXAMPLE TABLE PORTLET-->
+
+                                            </div>
+                                            <!-- Employer information TAB -->
+                                            <div class="margiv-top-10 pull-right">
+                                                <a class="btn green " (click)='previousTab()'>
+                                                    <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev
+                                                </a>
+                                                <a class="btn green " (click)='nextTab()'>
+                                                         Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
+                                            </div>
+                                            <!--</form>-->
+                                        </div>
+                                        <!-- END CAREER PROFILE TAB -->
+                                        <!-- SALARY STRUCTURE TAB -->
+                                        <div class="tab-pane" id="tab_1_5">
+                                            <form role="form" (submit)="onSaveSalaryDetails()">
+                                                <div class="row">
+                                                    <div class="margiv-top-10 pull-right" style="margin-right:15px;">
                                                         <a class="btn green " (click)='previousTab()'>
                                                             <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev
                                                         </a>
@@ -982,18 +1070,7 @@
                                                          Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
                                                     </div>
                                                 </div>
-                                                <!-- /Employer information TAB -->
-                                                <!-- END EXAMPLE TABLE PORTLET-->
 
-                                            </div>
-                                            <!-- Employer information TAB -->
-
-                                            <!--</form>-->
-                                        </div>
-                                        <!-- END CAREER PROFILE TAB -->
-                                        <!-- SALARY STRUCTURE TAB -->
-                                        <div class="tab-pane" id="tab_1_5">
-                                            <form role="form" (submit)="onSaveSalaryDetails()">
                                                 <div class="row">
                                                     <div class="col-md-2">
                                                         <div class="form-group">
@@ -1083,7 +1160,7 @@
                                                     <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
                                                 </div>-->
 
-                                                <div class="margiv-top-10;">
+                                                <div class="margiv-top-10 pull-right">
                                                     <a class="btn green " (click)='previousTab()'>
                                                         <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev </a>
                                                     <a class="btn green " (click)='nextTab()'>
@@ -1095,6 +1172,13 @@
                                         <!-- TEAM MANAGEMENT TAB -->
                                         <div class="tab-pane" id="tab_1_6">
                                             <form role="form" (submit)="onSaveTeamManagementDetails()">
+                                                <div class="row">
+                                                    <div class="margiv-top-10 pull-right" style="margin-right:15px;">
+                                                        <a class="btn green " (click)='previousTab()'>
+                                                            <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev
+                                                        </a>
+                                                    </div>
+                                                </div>
                                                 <div class="row">
                                                     <div class="col-md-2">
                                                         <div class="form-group">
@@ -1163,7 +1247,7 @@
                                                     <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
                                                 </div>-->
 
-                                                <div class="margiv-top-10;">
+                                                <div class="margiv-top-10 pull-right">
                                                     <a class="btn green " (click)='previousTab()'>
                                                         <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev </a>
                                                 </div>
@@ -1175,6 +1259,15 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <form role="form" (submit)="onSaveProfessionalDetails()">
+                                                        <div class="row">
+                                                            <div class="margiv-top-10 pull-right" style="margin-right:15px;">
+                                                                <a class="btn green " (click)='previousTab()'>
+                                                                    <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>                                                                    Prev
+                                                                </a>
+                                                                <a class="btn green " (click)='nextTab()'>
+                                                         Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
+                                                            </div>
+                                                        </div>
                                                         <div class="row">
                                                             <div class="col-md-2">
                                                                 <div class="form-group">
@@ -1370,7 +1463,7 @@
                                                             <button type="submit" class="btn green"> Save Changes </button>
                                                             <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
                                                         </div>-->
-                                                        <div class="margiv-top-10;">
+                                                        <div class="margiv-top-10 pull-right">
                                                             <a class="btn green " (click)='previousTab()'>
                                                                 <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>                                                                Prev </a>
                                                             <a class="btn green " (click)='nextTab()'>
