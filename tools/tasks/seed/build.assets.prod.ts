@@ -27,6 +27,7 @@ export = () => {
     '!' + join(Config.APP_SRC, '**', '*.css'),
     '!' + join(Config.APP_SRC, '**', '*.html'),
     '!' + join(Config.APP_SRC, '**', '*.scss'),
+    '!' + join(Config.APP_SRC, '**', '*.sass'),
     '!' + join(Config.ASSETS_SRC, '**', '*.js')
   ].concat(Config.TEMP_FILES.map((p) => { return '!' + p; })))
     .pipe(onlyDirs(es))
