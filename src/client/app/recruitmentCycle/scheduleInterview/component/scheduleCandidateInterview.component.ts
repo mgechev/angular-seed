@@ -1,9 +1,9 @@
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
-import { Router} from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import { FullCalendarComponent} from  '../../../shared/components/calendar/fullCalendar';
 //import { MultipleDemoComponent} from  '../../../shared/components/MultiselectDropdown/MultipleDrodown.Component';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';//ResponseFromAPI
-import { SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
+//import { SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import { CalendarDataService} from '../service/calendarDataService';
 import { CalendarDetails, Event, Resource} from '../model/calendarDetails';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -11,8 +11,8 @@ import { InterviewAvailability, Interview, InterviewsRounds } from '../../shared
 import { ScheduleInterviewService} from '../service/ScheduleInterview.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
-import { CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass} from '@angular/common';
-import { BUTTON_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
+//import { CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass} from '@angular/common';
+//import { BUTTON_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 import * as  _ from 'lodash';
 import { InterviewersPanel, Interviewers} from '../model/scheduleInterview';
 
@@ -71,6 +71,7 @@ export class ScheduleCandidateInterviewComponent implements OnInit {
 
     constructor(private _router: Router,
         private _calendarDataService: CalendarDataService,
+        private activatedRoute: ActivatedRoute,
         private cd: ChangeDetectorRef,
         public toastr: ToastsManager,
         private _ScheduleInterviewService: ScheduleInterviewService,
@@ -131,7 +132,7 @@ export class ScheduleCandidateInterviewComponent implements OnInit {
         let cmb: any = $('#cmbInterviewers');
         cmb.select2();
         //Check for New Interview Schedule or Re-schdule
-        var _id= this.activatedRoute.snapshot.params['Id'];
+        var _id = this.activatedRoute.snapshot.params['Id'];
         if (_id !== 'New') {
             this.ScheduleInterView.InterviewID.Id = parseInt((_id).split('ID')[1]);
             this.ScheduleInterView.InterviewID.Value = (_id).split('ID')[0];

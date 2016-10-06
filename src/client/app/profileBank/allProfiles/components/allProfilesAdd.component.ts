@@ -13,7 +13,6 @@ import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
     moduleId: module.id,
     selector: 'allprofiles-add',
     templateUrl: '../../shared/views/profileBankAdd.component.html',
-    //directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css']
 })
 

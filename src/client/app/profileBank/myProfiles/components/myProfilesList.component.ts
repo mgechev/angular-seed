@@ -29,10 +29,10 @@ import {ViewRRFComponent} from '../../../RRF/shared/components/viewRRF/viewRRF.c
     moduleId: module.id,
     selector: 'rrf-myprofiles-list',
     templateUrl: 'myProfilesList.component.html',
-    directives: [DetailProfileComponent, ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES, IfAuthorizeDirective, ViewRRFComponent],
+    //directives: [DetailProfileComponent, ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES, IfAuthorizeDirective, ViewRRFComponent],
     providers: [AssignRRFService, ToastsManager, RRFCandidateListService],
     styleUrls: ['myProfiles.component.css'],
-    pipes: [ProfileBankPipe]
+    //pipes: [ProfileBankPipe]
 })
 
 export class MyProfilesListComponent implements OnInit {
@@ -394,7 +394,7 @@ export class MyProfilesListComponent implements OnInit {
                 mailsubject = this.myProfilesList.Profiles[index].CandidateMailDetails.Subject;
                 mailbody = this.myProfilesList.Profiles[index].CandidateMailDetails.Body;
                 mailbody += window.location.href;
-                mailbody += ">";
+                mailbody += '>';
                 this.myProfilesList.Profiles[index].IsChecked = false;
             }
             this.selectedRowCount = 0;
@@ -441,12 +441,10 @@ export class MyProfilesListComponent implements OnInit {
                         this.photoUploaded = true;
                         this.photoName = FileList.item(i).name;
                     }
-                }
-                else {
+                }else {
                     this.toastr.error('Please upload image of type .jpg, .png, .jpeg');
                 }
-            }
-            else {
+            }else {
                 this.toastr.error('Please upload image of size less than 2 MB');
             }
         } catch (error) {

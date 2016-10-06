@@ -2,9 +2,9 @@ import {Component, AfterViewInit, AfterContentInit  } from '@angular/core';
 import { RRFDetails, AssignmentDetails } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
-import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+//import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import { MastersService } from '../../../shared/services/masters.service';
-import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
+//import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult, RRFAssignStatus } from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
@@ -15,7 +15,7 @@ import {RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow
     moduleId: module.id,
     selector: 'rrf-assign',
     templateUrl: 'RRFAssign.component.html',
-    directives: [ROUTER_DIRECTIVES, DATEPICKER_DIRECTIVES, SELECT_DIRECTIVES, RRFGridRowComponent],
+    //directives: [ROUTER_DIRECTIVES, DATEPICKER_DIRECTIVES, SELECT_DIRECTIVES, RRFGridRowComponent],
     styleUrls: ['../../shared/css/RRF.component.css'],
     providers: [ToastsManager]
 })

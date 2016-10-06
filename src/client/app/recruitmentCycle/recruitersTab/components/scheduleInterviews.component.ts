@@ -11,7 +11,7 @@ import { AllScheduleInterviewPipe } from  '../filter/scheduleInterviews.pipe';
     selector: 'show-schedule-interviews-recruiter',
     templateUrl: 'scheduleInterviews.component.html',
     //directives: [ROUTER_DIRECTIVES],
-    pipes: [AllScheduleInterviewPipe]
+    //pipes: [AllScheduleInterviewPipe]
     //providers:[RecruiterScheduleInterviewService,ToastsManager]
 })
 

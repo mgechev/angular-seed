@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { Router} from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { RRFReScheduleInterviewService} from '../services/RRFReScheduleInterviews.service';
 import {InterviewsList, CandidateRRFID} from '../../../recruitmentCycle/recruitersTab/index';
@@ -9,9 +9,9 @@ import { AllScheduleInterviewPipe } from  '../../..//recruitmentCycle/recruiters
     moduleId: module.id,
     selector: 'show-re-schedule-interviews',
     templateUrl: 'RRFReScheduleInterviews.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    //directives: [ROUTER_DIRECTIVES],
     providers: [ToastsManager],
-    pipes: [AllScheduleInterviewPipe]
+    //pipes: [AllScheduleInterviewPipe]
 })
 
 export class RRFReScheduleInterviewsComponent implements OnInit {
@@ -23,13 +23,15 @@ export class RRFReScheduleInterviewsComponent implements OnInit {
     InterviewDetailsList: InterviewsList = new InterviewsList();
     constructor(private _rrfReScheduleInterviewService: RRFReScheduleInterviewService,
         private toastr: ToastsManager,
+        private activatedRoute: ActivatedRoute,
         private _router: Router) {
         this.currentView = 'myReInterviews';
     }
 
-    ngOnInit(segment: RouteSegment) {
-        this.InterviewDetailsList.CandidateRRFIDs.RRFID.Id = parseInt((segment.getParam('id')).split('ID')[1]);
-        this.InterviewDetailsList.CandidateRRFIDs.RRFID.Value = (segment.getParam('id')).split('ID')[0];
+    ngOnInit() {
+        var _paras = this.activatedRoute.snapshot.params['id'];
+        this.InterviewDetailsList.CandidateRRFIDs.RRFID.Id = parseInt((_paras).split('ID')[1]);
+        this.InterviewDetailsList.CandidateRRFIDs.RRFID.Value = (_paras).split('ID')[0];
         this.RRFID = this.InterviewDetailsList.CandidateRRFIDs.RRFID;
         this.getMyReScheduleInterviewsData();
     }

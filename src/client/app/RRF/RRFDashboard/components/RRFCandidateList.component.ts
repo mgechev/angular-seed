@@ -7,7 +7,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI} from '../../../shared/model/common.model';
 import { CandidateProfile, BarChartData } from  '../../../profileBank/shared/model/myProfilesInfo';
-import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
+//import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 import { InterviewMode } from  '../../../shared/constantValue/index';
 //import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap';
 import {RRFCandidateListService} from '../services/RRFCandidatesList.service';
@@ -101,7 +101,7 @@ export class RRFCandidateListComponent implements OnInit {
         this.CandidateRoundHistory = new Array<Interview>();
     }
 
-    ngOnInit(segment: RouteSegment) {
+    ngOnInit() {
         var _id = this.activatedRoute.snapshot.params['id'];
         this.RRFID.Id = parseInt((_id).split('ID')[1]);
         this.RRFID.Value = (_id).split('ID')[0];

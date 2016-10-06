@@ -1,15 +1,16 @@
 //<<<<<<< HEAD 26 sep
 import { APP_BASE_HREF, LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { disableDeprecatedForms, provideForms } from '@angular/forms';
-import { enableProdMode, provide } from '@angular/core';
-import { bootstrap } from '@angular/platform-browser-dynamic';
+//import { disableDeprecatedForms, provideForms } from '@angular/forms';
+import { enableProdMode } from '@angular/core';
+//import { enableProdMode, provide } from '@angular/core';
+//import { bootstrap } from '@angular/platform-browser-dynamic';
 //import { ROUTER_PROVIDERS } from '@angular/router';
 import { CommonService } from './shared/services/common.service';
 import { AuthHttp } from './shared/services/authHttp.service';
 
-import { APP_ROUTER_PROVIDERS } from './app.routes';
+//import { APP_ROUTER_PROVIDERS } from './app.routes';
 import { AppComponent } from './app.component';
-import { HTTP_PROVIDERS } from '@angular/http';
+//import { HTTP_PROVIDERS } from '@angular/http';
 import {ToastOptions} from  'ng2-toastr/ng2-toastr';
 
 // The browser platform with a compiler

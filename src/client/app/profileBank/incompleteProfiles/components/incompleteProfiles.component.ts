@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
+import { Routes} from '@angular/router';
 import { IncompleteProfilesListComponent } from './incompleteProfilesList.component';
 import { AllProfilesService } from '../../allprofiles/services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -13,14 +13,17 @@ import { MyProfilesService } from '../../myProfiles/services/myProfiles.service'
 @Component({
     selector: 'rrf-all-profiles',
     template: '<router-outlet></router-outlet>',
-    directives: [ROUTER_DIRECTIVES],
     providers: [DetailProfileComponent, AllProfilesService, MastersService,
-    ToastsManager, DataSharedService, ProfileBankService ,MyProfilesService]
+        ToastsManager, DataSharedService, ProfileBankService, MyProfilesService]
 })
 
+/**
+ * angular 2.0 changes
+ *  
 @Routes([
     { path: '/', component: IncompleteProfilesListComponent },
     { path: '/Edit/:id', component: MyProfilesAddComponent }
 ])
+ */
 export class IncompleteProfilesComponent {
 }

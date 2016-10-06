@@ -9,7 +9,7 @@ import { MasterData } from  '../../shared/model/index';
     moduleId: module.id,
     selector: 'top-navigation-bar',
     templateUrl: 'topNavigationBar.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    //directives: [ROUTER_DIRECTIVES],
     providers: [ProfileBankService]
 })
 

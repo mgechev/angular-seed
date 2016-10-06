@@ -1,10 +1,10 @@
 // <<<<<<< HEAD 26 sep
 //<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
-import { ROUTER_DIRECTIVES, Routes, Router } from '@angular/router';
-import { HTTP_PROVIDERS } from '@angular/http';
+//import { ROUTER_DIRECTIVES, Routes, Router } from '@angular/router';
+//import { HTTP_PROVIDERS } from '@angular/http';
 
-import { AboutComponent } from './+about/index';
+//import { AboutComponent } from './+about/index';
 import { HomeComponent } from './home/index';
 //import { NameListService, NavbarComponent, ToolbarComponent } from './shared/index';
 //=======
@@ -32,12 +32,14 @@ import { Config} from './shared/index';
   selector: 'sd-app',
   templateUrl: 'app.component.html',
   //<<<<<<< HEAD
-  directives: [ROUTER_DIRECTIVES, NavbarComponent, ToolbarComponent],
+  //directives: [ROUTER_DIRECTIVES, NavbarComponent, ToolbarComponent],
   providers: [
     LoginService
   ]
 })
 //<<<<<<< HEAD
+/**angular 2.0 changes
+ * 
 @Routes([
   { path: '/App', component: HomeComponent },
   { path: '/about', component: AboutComponent },
@@ -45,6 +47,7 @@ import { Config} from './shared/index';
   { path: '/404', component: Error400Component },
   { path: '/500', component: Error500Component }
 ])
+ */
 /**
  * This class represents the main application component.
  * Within the @Routes annotation is the configuration of the

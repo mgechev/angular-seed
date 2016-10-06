@@ -16,7 +16,6 @@ import { ProfileEsplHistoryListComponent } from '../../profilesEsplHistory/compo
 @Component({
     selector: 'rrf-all-profiles',
     template: '<router-outlet></router-outlet>',
-    //directives: [ROUTER_DIRECTIVES],
     providers: [AllProfilesService, MyProfilesService, MastersService, ToastsManager, DataSharedService, ProfileBankService]
 })
 

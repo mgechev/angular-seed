@@ -3,23 +3,23 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { RRFDetails, Panel, IntwRoundSeqData, RRFFeedback } from '../models/rrfDetails';
 import { MyRRFService } from '../services/myRRF.service';
 import { MastersService } from '../../../shared/services/masters.service';
-import { SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
+//import { SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult, RRFPriority, RRFStatus, RaiseRRFStatus } from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
-import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
+//import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { DropdownMultiSelectComponent } from '../../../shared/components/dropdownMultiSelect/dropdownMultiSelect.component';
 
 //MultipleDrodown
-import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass} from '@angular/common';
-import {BUTTON_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
+//import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass} from '@angular/common';
+//import {BUTTON_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-myrrf-add',
     templateUrl: 'myRRFAdd.component.html',
-    directives: [ROUTER_DIRECTIVES, SELECT_DIRECTIVES, NgClass, CORE_DIRECTIVES, FORM_DIRECTIVES,
-        BUTTON_DIRECTIVES, TOOLTIP_DIRECTIVES, DropdownMultiSelectComponent],
+    // directives: [ROUTER_DIRECTIVES, SELECT_DIRECTIVES, NgClass, CORE_DIRECTIVES, FORM_DIRECTIVES,
+    //     BUTTON_DIRECTIVES, TOOLTIP_DIRECTIVES, DropdownMultiSelectComponent],
     providers: [ToastsManager]
 })
 
@@ -60,7 +60,7 @@ export class MyRRFAddComponent implements OnInit {
         // this.newRRF.Panel.push(this.panel);
     }
 
-    ngOnInit(segment: RouteSegment): void {
+    ngOnInit(): void {
         window.onbeforeunload = function () {
             return 'Data will be lost if you leave the page, are you sure?';
         };

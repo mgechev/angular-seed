@@ -67,5 +67,5 @@ export const ProfileBankRoutes: Route[] = [
     { path: '/History', component: ProfileEsplHistoryListComponent },
 
     /**Adavance search */
-    { path: '/:searchString', component: AdvanceSearchListComponent }
+    //{ path: '/:searchString', component: AdvanceSearchListComponent }
 ];
