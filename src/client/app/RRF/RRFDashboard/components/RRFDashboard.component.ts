@@ -11,12 +11,13 @@ import { RRFReScheduleInterviewsComponent } from './RRFReScheduleInterviews.comp
 import {RRFReScheduleInterviewService} from '../services/RRFReScheduleInterviews.service';
 import {PanelsAvailabilityService} from '../../shared/services/panelsAvailability.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 @Component({
     selector: 'rrf-dashboard',
     template: ' <router-outlet></router-outlet>',
-    directives: [ROUTER_DIRECTIVES],
-    providers: [RRFDashboardService, MyRRFService, MastersService,PanelsAvailabilityService,
-                RRFCandidateListService,RRFReScheduleInterviewService,ToastsManager]
+    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
+    providers: [RRFDashboardService, MyRRFService, MastersService, PanelsAvailabilityService,
+        RRFCandidateListService, RRFReScheduleInterviewService, ToastsManager]
 })
 
 @Routes([

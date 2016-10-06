@@ -233,8 +233,8 @@
                                                     <div class="profile-userpic">
                                                         <!--[src]="profilePhoto"-->
 
-                                                        <img class="img-responsive pic-bordered" style="border-radius: 50%!important;" alt="" src="data:image/jpeg;base64,{{profilePic?profilePic._body:'N/A'}}">
-                                                        <img src="../assets/layouts/layout4/img/default-user.jpg" *ngIf="profilePic===null" class="img-responsive pic-bordered" style="border-radius: 50%!important;"
+                                                        <img class="img-responsive pic-bordered"  style="border-radius: 20%!important;height:150px;box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);" alt="" src="data:image/jpeg;base64,{{profilePic?profilePic._body:'N/A'}}">
+                                                        <img src="../assets/layouts/layout4/img/default-user.jpg" *ngIf="profilePic===null" class="img-responsive pic-bordered"  style="border-radius: 20%!important;height:150px;box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);"
                                                             alt="">
                                                     </div>
                                                     <!-- END SIDEBAR USERPIC -->
@@ -244,6 +244,7 @@
                                                         <div class="fileUpload btn btn-circle green btn-sm" data-toggle="tooltip" data-placement="top" title="Upload Photo">
                                                             <input type="file" class="upload" (change)="uploadPhoto($event)" /><span>Upload</span>
                                                         </div>
+                                                        <br/>
                                                         <button type="button" style="display:none" (click)="removePhoto(profile.CandidateID)" class="btn btn-circle red btn-sm">Remove</button>
                                                         <br/>
                                                     </div>

@@ -15,12 +15,13 @@ import {ViewRRFComponent} from '../../shared/components/viewRRF/viewRRF.componen
 import {RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
 import { PanelsAvailablityComponent } from '../../shared/components/interviewersAvailablity/panelsAvailablity.component';
 import {InterviewApprovalComponent} from '../../../recruitmentCycle/shared/component/InterviewApproval/InterviewApproval.Component';
+import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-dashboard-list',
     templateUrl: 'RRFDashboardList.component.html',
-    directives: [PanelsAvailablityComponent, ROUTER_DIRECTIVES, CHART_DIRECTIVES, IfAuthorizeDirective,
+    directives: [TOOLTIP_DIRECTIVES, PanelsAvailablityComponent, ROUTER_DIRECTIVES, CHART_DIRECTIVES, IfAuthorizeDirective,
         ViewRRFComponent, RRFGridRowComponent, InterviewApprovalComponent],
     styleUrls: ['../../shared/css/RRF.component.css'],
     pipes: [RRFIDPipe, RRFPipe],
@@ -54,7 +55,7 @@ export class RRFDashboardListComponent implements OnActivate {
         animation: false,
         responsive: true,
         legend: {
-            onClick: function(event: any, legendItem: any) {
+            onClick: function (event: any, legendItem: any) {
                 /** */
             }
         }
@@ -501,6 +502,6 @@ export class RRFDashboardListComponent implements OnActivate {
     onShowAvailabilityClick() {
         this.showAvaililityPanel = !this.showAvaililityPanel;
     }
-    
+
 }
 

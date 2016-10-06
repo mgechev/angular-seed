@@ -111,7 +111,7 @@
 
 
                             <div class="table-scrollable">
-                                <table class="table table-striped table-bordered table-hover order-column dataTable no-footer" id="sample_1" role="grid"
+                                <table class="table table-bordered table-hover order-column dataTable no-footer" id="sample_1" role="grid"
                                     aria-describedby="sample_1_info">
                                     <thead class="thead">
                                         <tr>
@@ -125,7 +125,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="gradeX odd" *ngFor="let recentProfile of recentProfilesList.Profiles|ProfileBankPipe:searchString">
+                                        <tr style="box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);"  *ngFor="let recentProfile of recentProfilesList.Profiles|ProfileBankPipe:searchString">
                                             <td>
                                                 <detail-profile [selectedProfile]="recentProfile"></detail-profile>
                                             </td>
