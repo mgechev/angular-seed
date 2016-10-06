@@ -13,8 +13,12 @@
             <div class="col-lg-5">
                 Reason :
             </div>
-            <div class="col-lg-7">
+            <div class="col-lg-7" *ngIf="interviewDetails.ApprovalType != 'Fitment Issue'">
                 {{interviewDetails.Reason}}
+            </div>
+            <div class="col-lg-7" *ngIf="interviewDetails.ApprovalType == 'Fitment Issue'">
+                Interviewer's comment:{{interviewDetails.Comments}}.
+                Reason:{{interviewDetails.TransferReason}}
             </div>
 
         </div>

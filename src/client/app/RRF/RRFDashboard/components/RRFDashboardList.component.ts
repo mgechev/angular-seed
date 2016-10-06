@@ -16,6 +16,7 @@ import { RRFGridRowComponent } from '../../shared/components/RRFGridRow/RRFGridR
 import { PanelsAvailablityComponent } from '../../shared/components/interviewersAvailablity/panelsAvailablity.component';
 import { InterviewApprovalComponent } from '../../../recruitmentCycle/shared/component/InterviewApproval/InterviewApproval.Component';
 
+
 @Component({
     moduleId: module.id,
     selector: 'rrf-dashboard-list',

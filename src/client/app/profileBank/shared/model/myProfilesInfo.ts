@@ -37,6 +37,7 @@ export class CandidateProfile {
 
   //Properties of Personal Information
   public SecondaryContact: number;
+  public City: string;
   public District: string;
   public State = new MasterData();
   public Country = new MasterData();
@@ -122,6 +123,7 @@ export class Skills {
   public CandidateID: MasterData = new MasterData();
   public ExpInSkill: string;
   public AnyFunctionalExp: string;
+  public AnyFunctionalExpFlag:boolean;
   public PrimarySkills: string;
   public SecondarySkills: string;
   public OtherSkills: string;
@@ -144,6 +146,8 @@ export class SalaryDetails {
   public AnyPerks: string;
   public CTCIncludeVariable: any;
   public HowMuchVariable: number;
+  public Allowance: number;
+  public Incentive: number;
   public CommentsUpdated: boolean;
   public FollowUpComments: string;
 }

@@ -3,7 +3,7 @@
     <!-- BEGIN SIDEBAR -->
     <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
     <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-    <div class="page-sidebar" style="position:fixed!important;margin-left: -20px;margin-top: -15px;z-index: 9995;height: 100%!important;">
+    <div class="page-sidebar" style="margin-left: -20px;margin-top: -15px;z-index: 9995;height: 100%!important; overflow-y: auto;">
         <!-- BEGIN SIDEBAR MENU -->
         <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
         <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
@@ -11,20 +11,20 @@
         <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
         <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
         <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-        <ul class="page-sidebar-menu " aria-expanded="true" data-keep-expanded="true" data-auto-scroll="false" data-slide-speed="200">
+        <ul class="page-sidebar-menu" aria-expanded="true" data-keep-expanded="true" data-auto-scroll="false" data-slide-speed="200" style="margin-bottom: 40%;">
             <li [ifAuthorize]="['DASHBOARD.READ']" class="nav-item start ">
                 <a [routerLink]="['/App/Dashboard']" class="nav-link ">
                     <i class="icon-graph"></i>
                     <span class="title">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item start" [ifAuthorize]="['PROFILEBANK.MANAGE']">
+            <li class="nav-item start open" [ifAuthorize]="['PROFILEBANK.MANAGE']">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-bank"></i>
                     <span class="title">Profile Bank</span>
                     <span class="arrow"></span>
                 </a>
-                <ul class="sub-menu">
+                <ul class="sub-menu always-open">
                     <li class="nav-item start " [ifAuthorize]="['PROFILEBANK.MYPROFILES.MANAGE']">
                         <a [routerLink]="['/App/ProfileBank/MyProfiles']" class="nav-link ">
                             <i class="fa fa-th-list"></i>
@@ -71,7 +71,7 @@
                     <span class="arrow"></span>
                 </a>
 
-                <ul class="sub-menu">
+                <ul class="sub-menu always-open">
                     <!--<li class="nav-item start " [ifAuthorize]="['RRF.MYRRF.MANAGE']">
                         <a [routerLink]="['/App/RRF/MyRRF/']" class="nav-link ">
                             <i class="icon-bar-chart"></i>
@@ -82,6 +82,12 @@
                         <a [routerLink]="['/App/RRF/RRFDashboard/']" class="nav-link ">
                             <i class="fa fa-dashboard"></i>
                             <span class="title">Dashboards</span>
+                        </a>
+                    </li>
+                    <li class="nav-item start " [ifAuthorize]="['RRF.DASHBOARD.MANAGE']">
+                        <a [routerLink]="['/App/RRF/PendingRequest/']" class="nav-link ">
+                            <i class="fa fa-dashboard"></i>
+                            <span class="title">Pending Requests</span>
                         </a>
                     </li>
                     <li class="nav-item start " [ifAuthorize]="['RRF.APPROVAL.MANAGE']">
@@ -118,7 +124,7 @@
                     <span class="title">Interviewer's Actions</span>
                     <span class="arrow"></span>
                 </a>
-                <ul class="sub-menu">
+                <ul class="sub-menu always-open">
                     <li class="nav-item start ">
                         <li class="nav-item start ">
                             <a [routerLink]="['/App/Recruitment Cycle/Interviewers/schedule']" class="nav-link ">

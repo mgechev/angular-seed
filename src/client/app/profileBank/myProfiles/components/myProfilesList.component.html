@@ -113,14 +113,14 @@
                                                         <div class="row">
                                                             <div class="col-md-3 inlineForm">
                                                                 <div class="form-group">
-                                                                    <input type="text" placeholder="First Name" class="form-control" [(ngModel)]="profile.FirstName" required="" tooltip="First Name"
+                                                                    <input type="text" placeholder="First Name" class="form-control text-capitalize" [(ngModel)]="profile.FirstName" required="" tooltip="First Name"
                                                                         tooltipPlacement="bottom" tooltipTrigger="mouseenter"
                                                                         tooltipEnable="!profile.FirstName" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3  inlineForm">
                                                                 <div class="form-group ">
-                                                                    <input type="text" placeholder="Last Name" class="form-control" [(ngModel)]="profile.LastName" required="" tooltip="Last Name"
+                                                                    <input type="text" placeholder="Last Name" class="form-control text-capitalize" [(ngModel)]="profile.LastName" required="" tooltip="Last Name"
                                                                         tooltipPlacement="bottom" tooltipTrigger="mouseenter"
                                                                         tooltipEnable="!profile.LastName" />
                                                                 </div>
@@ -156,7 +156,7 @@
                                                             </div>
                                                             <div class="col-md-3  inlineForm">
                                                                 <div class="form-group ">
-                                                                    <input type="text" placeholder="Tag" class="form-control" [(ngModel)]="profile.Tag" tooltip="Tag" tooltipPlacement="top"
+                                                                    <input type="text" placeholder="Tag" class="form-control text-capitalize" [(ngModel)]="profile.Tag" tooltip="Tag" tooltipPlacement="top"
                                                                         tooltipTrigger="mouseenter" tooltipEnable="!profile.Tag"
                                                                         title="Enter Tag" />
                                                                 </div>
@@ -383,21 +383,22 @@
                                             </label>
                                     </div>
                                 </div>
-                                <!--<div class="col-md-2 col-sm-2">
-                                    <label class="col-md-2 control-label">RRF </label>
+                                <div class="col-md-2 col-sm-2">
+                                    <label class="col-md-2 control-label">RRF: </label>
                                     <div class="col-md-6" [hidden]="RRFList.length == 0">
-                                        <select class="form-control" required (change)='onSelectRRF($event.target.value)'>
-                                    <option></option>
+                                        <select class="form-control" required (change)='onSelectRRF($event.target.value)' style="width:328px;">
+                                     <option></option>
                                      <option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Value">{{rrf.RRFCODE}} - {{rrf.PositionTitle}}</option> 
                                 </select>
                                     </div>
-                                </div>-->
+                                </div>
+
                             </div>
                         </div>
 
                         <!-- My Profile Grid Starts-->
-                        <div class="table-scrollable">
-                            <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" id="sample_1"
+                        <div class="table">
+                            <table class="table table-bordered table-hover table-checkable order-column dataTable no-footer" id="sample_1"
                                 role="grid" aria-describedby="sample_1_info">
                                 <thead class="thead">
                                     <tr>
@@ -412,12 +413,12 @@
                                         <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Professional Details </th>
                                         <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Status </th>
                                         <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Resume </th>-->
-                                        <th class="" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Actions </th>
+                                        <!--<th class="" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Actions </th>-->
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="gradeX odd " *ngFor="let myprofile of myProfilesList.Profiles |ProfileBankPipe:searchString">
+                                    <tr style="box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);" class="" *ngFor="let myprofile of myProfilesList.Profiles |ProfileBankPipe:searchString">
                                         <td>
                                             <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                                     <input type="checkbox" class="checkboxes" value="1" [id]='myprofile.CandidateID' [(ngModel)]='myprofile.IsChecked' (change)="onStateChange($event)"/>
@@ -425,6 +426,52 @@
                                                 </label>
                                         </td>
                                         <td class=" light bordered">
+                                            <div class="row portlet-title" style="width:100%">
+                                                <div class="actions pull-right">
+                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs blue" *ngIf="viewDetailsRRFId !=''" (click)='showRRFDetails(viewDetailsRRFId)' tooltip="View RRF"
+                                                tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="View RRF">
+                                                            <i class="fa fa-search-plus "></i> 
+                                                        </button>
+                                                    <a class="btn btn-circle btn-icon-only btn-default btn-xs yellow" [routerLink]="['/App/ProfileBank/MyProfiles/Edit/'+ myprofile.CandidateID.Value +'ID'+ myprofile.CandidateID.Id]" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                        tooltipEnable="true" title="Edit Profile">
+                                                            <i class="fa fa-edit " style="margin-top: 25%;"></i><!-- Edit Profile-->
+                                                        </a>
+                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs blue" (click)='SaveCandidateID(myprofile.CandidateID)' tooltip="Blacklist Profile"
+                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
+                                                        title="Blacklist Profile">
+                                                            <i class="icon-flag"></i> <!--Blacklist Profile-->
+                                                        </button>
+                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs purple" (click)='onClickScheduleInterview(myprofile.CandidateID)'
+                                                        tooltip="Schedule Interview" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                        title="Schedule Interview" tooltipEnable="true">
+                                                            <i class="fa fa-calendar-check-o"></i> <!--Schedule Interview-->
+                                                        </button>
+                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" (click)='onClickFollowUpComments(myprofile.CandidateID)'
+                                                        tooltip="Follow Up Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                        title="Follow Up Comments" tooltipEnable="true">
+                                                            <i class="fa fa-comments "></i> <!--Follow Up Comments-->
+                                                        </button>
+                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs green" (click)='onClickUploadResume(myprofile.CandidateID)'
+                                                        tooltip="Upload Resume" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                        title="Upload Resume" tooltipEnable="true">
+                                                            <i class="fa fa-upload"></i> <!--Upload Resume-->
+                                                        </button>
+                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" (click)='redirectToView(myprofile.CandidateID)' tooltip="View Profile"
+                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Profile"
+                                                        tooltipEnable="true">
+                                                            <i class="fa fa-search"></i> <!--View Profile-->
+                                                        </button>
+                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='deleteCandidate(myprofile.CandidateID)' tooltip="Delete Profile" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                        title="Delete Profile" tooltipEnable="true" [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] ">
+                                                            <i class="fa fa-remove "></i> <!--Delete Profile-->
+                                                        </button>
+                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs blue" (click)='getCandidateHistory(myprofile.CandidateID)' tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                        title="View Interview History" tooltipEnable="true">
+                                                            <i class="fa fa-history"></i> <!--View Interview History-->
+                                                        </button>
+
+                                                </div>
+                                            </div>
                                             <detail-profile [selectedProfile]="myprofile" [rrfID]="viewDetailsRRFId"></detail-profile>
                                         </td>
                                         <!--<td>
@@ -456,15 +503,15 @@
                                         <td class="text-center">
                                             <a href="" download tooltip="Download Resume" tooltipPlacement="top" tooltipTrigger="mouseenter"><i class="fa fa-download" aria-hidden="true"></i></a>
                                         </td>-->
-                                        <td style="width=3%;" *ngIf="viewDetailsRRFId !=''">
+                                        <!--<td style="width=3%;" *ngIf="viewDetailsRRFId !=''">
+                                            <a href="javascript:;" class="btn btn-xs grey-cascade" (click)='showRRFDetails(viewDetailsRRFId)'> View RRF
+                                                                        <i class="fa fa-link"></i>
+                                             </a>
 
-                                            <button class="btn btn-circle btn-icon-only btn-default btn-xs blue" (click)='showRRFDetails(viewDetailsRRFId)' tooltip="View RRF"
-                                                tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="View RRF">
-                                                            <i class="fa fa-search-plus "></i> 
-                                                        </button>
+                                            
 
-                                        </td>
-                                        <td style="width:8%;">
+                                        </td>-->
+                                        <td style="width:8%; Display:none;">
                                             <div class="btn-group">
                                                 <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Actions <i class="fa fa-angle-down"></i>
                                                            <!--<i class="fa fa-angle-down"></i>-->

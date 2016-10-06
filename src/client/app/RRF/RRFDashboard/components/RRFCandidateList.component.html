@@ -111,8 +111,8 @@
                                                     <td>
                                                         <div class="btn-group">
                                                             <div *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() == 'Transferred'.toLowerCase()">Not allowed</div>
-                                                            <div *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() == 'Unfit'.toLowerCase()">Not allowed</div>
-                                                            <button class="btn btn-xs green dropdown-toggle" *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() != 'Transferred'.toLowerCase() && selectedcandidate.InterviewDetails.Status.toLowerCase() != 'Unfit'.toLowerCase()"
+                                                            <div *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() == 'Not suitable'.toLowerCase()">Not allowed</div>
+                                                            <button class="btn btn-xs green dropdown-toggle" *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() != 'Transferred'.toLowerCase() && selectedcandidate.InterviewDetails.Status.toLowerCase() != 'Not suitable'.toLowerCase()"
                                                                 type="button" data-toggle="dropdown" aria-expanded="false"> Actions
                                                                 <i class="fa fa-angle-down"></i>
                                                             </button>
@@ -303,6 +303,9 @@
                                             </div>
                                             <br>
                                             <div class="">
+                                                <div class="pull-left">
+                                                    <a (click)="nevigateToInitiateRRF();"> Create New RRF</a>
+                                                    </div>
                                                 <div class="pull-right">
                                                     <button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelTransfer()'>Cancel</button>                                                    &nbsp;
                                                     <button type="submit " class="btn blue " id="btnChangeStatus">Transfer</button>

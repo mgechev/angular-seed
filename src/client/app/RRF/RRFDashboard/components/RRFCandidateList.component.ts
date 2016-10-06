@@ -381,7 +381,7 @@ export class RRFCandidateListComponent implements OnInit {
         this._rrfDashboardService.getAllOpenRRF()
             .subscribe(
             (results: any) => {
-                for (var index = 0; index <= results.length; index++) {
+                for (var index = 0; index < results.length; index++) {
                     if (results[index].RRFCODE !== uniqueRRF) {
                         this.allOpenRrf.push(<any>(results)[index]);
                     }
@@ -474,5 +474,8 @@ export class RRFCandidateListComponent implements OnInit {
     }
     onCancelActualTime() {
         this.setActualTimeForm = false;
+    }
+    nevigateToInitiateRRF() {
+        this._router.navigate(['App/RRF/MyRRF/Add']);
     }
 }

@@ -7,7 +7,7 @@ import { MastersService } from '../../../shared/services/masters.service';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
-import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
+//import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 
 @Component({
     moduleId: module.id,
@@ -45,7 +45,8 @@ export class AllProfilesAddComponent implements OnInit {
     IsCurrentAddressSameAsPermanentChecked: boolean = false;
     IsOutstationedCandidateChecked: boolean = false;
     IsReadyToRelocateChecked: boolean = false;
-
+    /**Candidate Experience */
+    CandidateExperiences: CandidateExperience = new CandidateExperience();
     IsHidden: boolean = true;
     IsSuccess: boolean = false;
 
@@ -335,23 +336,40 @@ export class AllProfilesAddComponent implements OnInit {
             });
 
     }
-
+    /**Function to fetch candidate EXPERIENCE details */
+      GetCandidateExperience(candidateID: MasterData) {
+        this._profileBankService.getCandidateExperience(candidateID)
+            .subscribe(
+            results => {
+                this.CandidateExperiences = <any>results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+    }
+    /**Save candidate EXPERIENCE details */
     onSaveCareerProfileDetails(): void {
 
-        if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-            this.profile.CommentsUpdated = this.profile.CandidateCareerProfile.CommentsUpdated = true;
-            this.profile.PreviousFollowupComments = this.profile.CandidateCareerProfile.FollowUpComments
-                = this.profile.FollowUpComments.trim();
+        if (this.profile.PreviousFollowupComments
+            !== this.CandidateExperiences.FollowUpComments
+            ? this.CandidateExperiences.FollowUpComments.trim().replace(/ +/g, ' ') : ''
+        ) {
+            this.profile.CommentsUpdated = this.CandidateExperiences.CommentsUpdated = true;
+            // this.profile.PreviousFollowupComments = this.CandidateExperiences.FollowUpComments = this.profile.FollowUpComments.trim();
+            this.profile.PreviousFollowupComments = this.CandidateExperiences.FollowUpComments
+                = this.CandidateExperiences.FollowUpComments.trim();
         } else {
-            this.profile.CommentsUpdated = this.profile.CandidateCareerProfile.CommentsUpdated = false;
+            this.profile.CommentsUpdated = this.CandidateExperiences.CommentsUpdated = false;
         }
-        this.profile.CandidateCareerProfile.CandidateID = this.CandidateID;
-        this._profileBankService.editCandidateCareerDetails(this.profile.CandidateCareerProfile)
+        this.CandidateExperiences.CandidateID = this.CandidateID;
+        this._profileBankService.editCandidateCareerDetails(this.CandidateExperiences)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.getCandidateProfileById(this.CandidateID.Value);
+                    // this.getCandidateProfileById(this.CandidateID.Value);
+                    this.GetCandidateExperience(this.CandidateID);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -363,7 +381,6 @@ export class AllProfilesAddComponent implements OnInit {
             );
 
     }
-
     onSaveSalaryDetails(): void {
         if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
             this.profile.CommentsUpdated = this.profile.CandidateSalaryDetails.CommentsUpdated = true;

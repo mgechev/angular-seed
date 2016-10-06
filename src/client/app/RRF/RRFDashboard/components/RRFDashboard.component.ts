@@ -12,7 +12,6 @@ import {RRFReScheduleInterviewService} from '../services/RRFReScheduleInterviews
 import {PanelsAvailabilityService} from '../../shared/services/panelsAvailability.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
-
 @Component({
     selector: 'rrf-dashboard',
     template: ' <router-outlet></router-outlet>',

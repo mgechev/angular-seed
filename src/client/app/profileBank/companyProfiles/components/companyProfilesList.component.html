@@ -139,9 +139,9 @@
                                 </form>
                             </div>
 
-                            <div class="table-scrollable">
-                                <table class="table table-striped table-bordered table-hover order-column dataTable no-footer" id="sample_1"
-                                    role="grid" aria-describedby="sample_1_info">
+                            <div class="table">
+                                <table class="table table-bordered table-hover order-column dataTable no-footer" id="sample_1" role="grid"
+                                    aria-describedby="sample_1_info">
                                     <thead class="thead">
                                         <tr>
                                             <td>
@@ -155,11 +155,11 @@
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Professional Details </th>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Status </th>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Resume </th>-->
-                                            <th class="" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Actions </th>
+                                            <!--<th class="" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Actions </th>-->
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="gradeX odd" *ngFor="let profile of companyProfilesList.Profiles | ProfileBankPipe:searchString ">
+                                        <tr style="box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);" class="" *ngFor="let profile of companyProfilesList.Profiles | ProfileBankPipe:searchString ">
                                             <td>
                                                 <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                                     <input type="checkbox" class="checkboxes" value="1" [id]='profile.CandidateID' [(ngModel)]='profile.IsChecked' (change)="onStateChange($event)"/>
@@ -167,6 +167,37 @@
                                                 </label>
                                             </td>
                                             <td>
+                                                <div class="row portlet-title" style="width:100%">
+                                                    <div class="actions pull-right">
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" (click)='redirectToEditProfile(profile.CandidateID)'
+                                                            tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
+                                                            title="Edit Profile">
+                                                            <i class="fa fa-edit "></i>
+                                                            <!-- Edit Profile-->
+                                                        </button>
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs purple" (click)='SaveCandidateID(profile.CandidateID)' tooltip="Update Status"
+                                                            tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
+                                                            title="Update Status">
+                                                            <i class="icon-flag"></i> <!--Update Status-->
+                                                        </button>
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs green" (click)='redirectToView(profile.CandidateID)' tooltip="View Profile"
+                                                            tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Profile"
+                                                            tooltipEnable="true">
+                                                            <i class="fa fa-search"></i> <!--View Profile-->
+                                                        </button>
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='deleteCandidate(profile.CandidateID)' [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] " tooltip="Delete Profile"
+                                                            tooltipPlacement="top" tooltipTrigger="mouseenter" title="Delete Profile"
+                                                            tooltipEnable="true" >
+                                                            <i class="fa fa-remove "></i> <!--Delete Profile-->
+                                                        </button>
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs blue" (click)='getCandidateHistory(profile.CandidateID)'
+                                                            tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                            title="View Interview History" tooltipEnable="true">
+                                                            <i class="fa fa-history"></i> <!--View Interview History-->
+                                                        </button>
+
+                                                    </div>
+                                                </div>
                                                 <detail-profile [selectedProfile]="profile"></detail-profile>
                                             </td>
                                             <!--<td>
@@ -201,7 +232,7 @@
                                                 <a href="" download><i class="fa fa-download" aria-hidden="true"></i>{{profile.Resume_ID}}</a>
                                             </td>-->
 
-                                            <td>
+                                            <td style="Display:none;">
                                                 <div class="btn-group">
                                                     <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
                                                             <i class="fa fa-angle-down"></i>

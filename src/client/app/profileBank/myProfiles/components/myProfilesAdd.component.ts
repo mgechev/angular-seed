@@ -57,6 +57,13 @@ export class MyProfilesAddComponent implements OnInit {
     profilePhoto: string;
     /** For profile picture */
     profilePic: any;
+    readyToRelocateFlag: boolean = false;
+    reasonToRelocateFlag: boolean = false;
+    OfferInHand: boolean = false;
+    VariableCTC: boolean = false;
+    AllowanceFlag: boolean = false;
+    IncentiveFlag: boolean = false;
+    FunctionalExp: boolean = false;
     constructor(private _myProfilesService: MyProfilesService,
         private _masterService: MastersService,
         private _profileBankService: ProfileBankService,
@@ -108,6 +115,18 @@ export class MyProfilesAddComponent implements OnInit {
             .subscribe(
             (results: CandidateProfile) => {
                 this.profile = results;
+                if (this.profile.OutstationedCandidate === true) {
+                    this.readyToRelocateFlag = true;
+                }
+                if (this.profile.ReadyToRelocate === true) {
+                    this.reasonToRelocateFlag = true;
+                }
+                if (this.profile.CandidateOtherDetails.OfferInHand === true) {
+                    this.OfferInHand = true;
+                }
+                if (this.profile.CandidateSalaryDetails.CTCIncludeVariable === true) {
+                    this.VariableCTC = true;
+                }
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments;
                 if (results.Country.Id !== 0)
                     this.getStates(results.Country.Id);
@@ -638,5 +657,61 @@ export class MyProfilesAddComponent implements OnInit {
         );
         if (res === true)
             this._location.back();
+    }
+    onOutstationedClick(isChecked: any) {
+        if (isChecked === false) {
+            this.readyToRelocateFlag = true;
+        } else {
+            this.readyToRelocateFlag = false;
+            this.reasonToRelocateFlag = false;
+        }
+    }
+    onReadyToRelocate(isChecked: any) {
+        if (isChecked === false) {
+            this.reasonToRelocateFlag = true;
+        } else {
+            this.reasonToRelocateFlag = false;
+        }
+    }
+    onOfferInHand(isChecked: any) {
+        if (isChecked === false) {
+            this.OfferInHand = true;
+        } else {
+            this.OfferInHand = false;
+        }
+    }
+    onVariableCTC(isChecked: any) {
+        if (isChecked === false) {
+            this.VariableCTC = true;
+        } else {
+            this.VariableCTC = false;
+        }
+    }
+    onAllowance(isChecked: any) {
+        if (isChecked === false) {
+            this.AllowanceFlag = true;
+        } else {
+            this.AllowanceFlag = false;
+        }
+    }
+    onIncentive(isChecked: any) {
+        if (isChecked === false) {
+            this.IncentiveFlag = true;
+        } else {
+            this.IncentiveFlag = false;
+        }
+    }
+    onFunctionalExp(isChecked: any) {
+        if (isChecked === false) {
+            this.FunctionalExp = true;
+        } else {
+            this.FunctionalExp = false;
+        }
+    }
+    nextTab() {
+        $('.nav-tabs > .active').next('li').find('a').trigger('click');
+    }
+    previousTab() {
+        $('.nav-tabs > .active').prev('li').find('a').trigger('click');
     }
 }
