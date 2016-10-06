@@ -140,7 +140,7 @@
                             </div>
 
                             <div class="table">
-                                <table class="table table-striped table-bordered table-hover order-column dataTable no-footer" id="sample_1" role="grid"
+                                <table class="table table-bordered table-hover order-column dataTable no-footer" id="sample_1" role="grid"
                                     aria-describedby="sample_1_info">
                                     <thead class="thead">
                                         <tr>
@@ -159,7 +159,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="gradeX odd" *ngFor="let profile of companyProfilesList.Profiles | ProfileBankPipe:searchString ">
+                                        <tr style="box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);" class="" *ngFor="let profile of companyProfilesList.Profiles | ProfileBankPipe:searchString ">
                                             <td>
                                                 <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                                     <input type="checkbox" class="checkboxes" value="1" [id]='profile.CandidateID' [(ngModel)]='profile.IsChecked' (change)="onStateChange($event)"/>

@@ -11,7 +11,7 @@
                         alt="" src="data:image/jpeg;base64,{{profile.BinaryImage}}">
 
                     <img src="../assets/layouts/layout4/img/default-user.jpg" *ngIf="profile.BinaryImage===''||profile.BinaryImage===null" class="img-responsive pic-bordered"
-                        style="border-radius: 50%!important; height: 140px;width: 150px;" alt="">
+                        style="border-radius: 20%!important;height:150px;box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);" alt="">
                     <br>
 
                 </li>
@@ -121,11 +121,28 @@
                                 <li>
                                     <div class="tools">
                                         <!--(click)='getResume(profile.CandidateID)'-->
-                                        <a class="reload" data-original-title="" title="" (click)='getResume(profile.CandidateID)'><i aria-hidden="true" class="fa fa-download"></i>Download Resume</a>
+                                        <a class="reload" data-original-title="reload" title="" (click)='getResume(profile.CandidateID)'><i aria-hidden="true" class="fa fa-download"></i>Download Resume</a>
                                         <!--<br>
                                         <a href="data:application/octet-stream;charset=utf-8;base64,{{profile.BinaryResume}}" download="{{profile.ResumeName?profile.ResumeName:'TestResume.doc '}}"
                                             class="reload" data-original-title="" title=""><i aria-hidden="true" class="fa fa-download"></i>Download Resume {{profile.Resume_ID}}  </a>-->
                                         <!--<a href="data:application/octet-stream;charset=utf-8;base64,{{profile.BinaryImage}}" class="btn btn-primary" download="pdftesting.pdf">Download</a>-->
+                                    </div>
+                                    <div class="login-options">
+                                        <br>
+                                        <ul class="social-icons">
+                                            <li>
+                                                <a class="facebook" data-original-title="facebook"> </a>
+                                            </li>
+                                            <li>
+                                                <a class="twitter" data-original-title="Twitter" href="javascript:;"> </a>
+                                            </li>
+                                            <li>
+                                                <a class="googleplus" data-original-title="Goole Plus" href="javascript:;"> </a>
+                                            </li>
+                                            <li>
+                                                <a class="linkedin" data-original-title="Linkedin" href="javascript:;"> </a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </li>
                             </ul>
