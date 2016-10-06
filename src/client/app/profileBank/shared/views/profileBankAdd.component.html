@@ -34,29 +34,28 @@
                                     </div>
                                     <ul class="nav nav-tabs">
                                         <li class="active">
-                                            <a href="#tab_primaryInfo" data-toggle="tab">Primary Info</a>
+                                            <a href="#tab_primaryInfo" data-toggle="tab">Quick Info</a>
                                         </li>
                                         <li>
                                             <a href="#tab_1_1" data-toggle="tab">Personal Info</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_7" data-toggle="tab">Professional Info</a>
-                                        </li>
-                                        <li>
-                                            <a href="#tab_1_5" data-toggle="tab">Salary Details</a>
-                                        </li>
-                                        <li>
                                             <a href="#tab_1_3" data-toggle="tab">Skills</a>
                                         </li>
                                         <li>
+                                            <a href="#tab_1_7" data-toggle="tab">Professional Info</a>
+                                        </li>
+                                        <!--<li>
                                             <a href="#tab_1_2" data-toggle="tab">Qualification</a>
-                                        </li>
-                                        <li>
+                                        </li>-->
+                                        <!--<li>
                                             <a href="#tab_1_4" data-toggle="tab">Career Profile</a>
-                                        </li>
-
-                                        <li>
+                                        </li>-->
+                                        <!--<li>
                                             <a href="#tab_1_6" data-toggle="tab">Team Mgt</a>
+                                        </li>-->
+                                        <li>
+                                            <a href="#tab_1_5" data-toggle="tab">Salary Details</a>
                                         </li>
 
                                     </ul>
@@ -180,22 +179,22 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label class="control-label">Expected Salary <span class="required"> * </span> </label>
+                                                            <label class="control-label">Current Salary <span class="required"> * </span> </label>
                                                             <div class="row ">
                                                                 <div class="col-md-6">
-                                                                    <input type="number" placeholder="" class="form-control" min="0" [(ngModel)]="profile.CandidateSalaryDetails.ExpectedSalary"
-                                                                        required (blur)="onSavePrimaryInfo()" />
+                                                                    <input type="number" placeholder="" class="form-control" min="0" [(ngModel)]="profile.CandidateSalaryDetails.CurrentSalary"
+                                                                        required="" (blur)="onSavePrimaryInfo()" />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label class="control-label">Current Salary <span class="required"> * </span> </label>
+                                                            <label class="control-label">Expected Salary <span class="required"> * </span> </label>
                                                             <div class="row ">
                                                                 <div class="col-md-6">
-                                                                    <input type="number" placeholder="" class="form-control" min="0" [(ngModel)]="profile.CandidateSalaryDetails.CurrentSalary"
-                                                                        required="" (blur)="onSavePrimaryInfo()" />
+                                                                    <input type="number" placeholder="" class="form-control" min="0" [(ngModel)]="profile.CandidateSalaryDetails.ExpectedSalary"
+                                                                        required (blur)="onSavePrimaryInfo()" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -298,7 +297,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <hr>
                                                 <div class="portlet-title">
                                                     <div class="caption font-dark">
                                                         <span class="caption-subject bold uppercase">Contact Information</span>
@@ -383,9 +381,18 @@
                                                             </select>
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label">City</label>
+                                                            <div class="row ">
+                                                                <div class="col-md-10">
+                                                                    <input type="text" placeholder="City" class="form-control" title="City" [(ngModel)]="profile.City" (blur)="onSavePersonalDetails()"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-
-                                                <hr>
                                                 <div class="portlet-title">
                                                     <div class="caption font-dark">
                                                         <span class="caption-subject bold uppercase">Varification Proofs</span>
@@ -419,12 +426,7 @@
                                                             />
                                                         </div>
                                                     </div>
-
-
                                                 </div>
-
-
-                                                <hr>
                                                 <div class="portlet-title">
                                                     <div class="caption font-dark">
                                                         <span class="caption-subject bold uppercase">Others</span>
@@ -502,7 +504,7 @@
                                                                 (blur)="onSavePersonalDetails()" />
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Follow Up Comments</label>
@@ -513,7 +515,113 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                              
+                                                <div class="portlet-title">
+                                                    <div class="caption font-dark">
+                                                        <span class="caption-subject bold uppercase">Qualification</span>
+                                                    </div>
+                                                </div>
+                                                <hr/>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                                                        <div class="table-toolbar">
+                                                            <form role="form" (submit)="onAddQualification()">
+                                                                <div class="row">
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">Qualification<span class="required"> * </span></label>
+                                                                            <div class="row">
+                                                                                <div class="col-md-10">
+                                                                                    <div>
+                                                                                        <select (change)='onSelectQualification($event.target.value)' class="form-control" [(ngModel)]="qualification.Qualification.Id"
+                                                                                            required>
+                                                                                        <option *ngFor="let q of qualifications" [value]="q.Id">{{q.Value}}</option>
+                                                                                    </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">Year Of Passing <span class="required"> * </span></label>
+                                                                            <div class="row">
+                                                                                <div class="col-md-10">
+                                                                                    <!--<select (change)='onSelectYear($event.target.value)' class="form-control" [(ngModel)]="qualification.YearofPassing.Id">
+                                                                                    <option *ngFor="let year of years" [value]="year.Id">{{year.Value}}</option>
+                                                                                </select>-->
+                                                                                    <input type="number" placeholder="YYYY" class="form-control" max="{{CurrentYear}}" maxlength="4" min="1950" [(ngModel)]="qualification.YearofPassing"
+                                                                                        required="" />
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">Grade <span class="required"> * </span></label>
+                                                                            <div class="row">
+                                                                                <div class="col-md-10">
+                                                                                    <!--<div *ngFor="let grd of qualification.Grade">-->
+                                                                                    <select (change)='onSelectGrade($event.target.value)' class="form-control" required [(ngModel)]="qualification.Grade.Id">
+                                                                                    <option *ngFor="let grade of grades" [value]="grade.Id">{{grade.Value}}</option>
+                                                                                </select>
+                                                                                    <!--</div>-->
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">Marks <small>(In %)</small><span class="required"> * </span></label>
+                                                                            <div class="row">
+                                                                                <div class="col-md-8">
+                                                                                    <input type="number" placeholder="" class="form-control" max="100" maxlength="3" min="0" [(ngModel)]="qualification.Marks"
+                                                                                        required="" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <br/>
+                                                                            <div class="row">
+                                                                                <div class="col-md-8">
+                                                                                    <button type="submit" class="btn green" style="padding-top: 5px;" *ngIf="IsHidden"> Add New </button>
+                                                                                    <button type="submit" class="btn green" style="padding-top: 5px;" *ngIf="!IsHidden"> Update </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th> Qualification </th>
+                                                                    <th> Year Of Passing</th>
+                                                                    <th> Grade </th>
+                                                                    <th> Marks </th>
+                                                                    <th> Edit </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let Qualification of profile.CandidateQualification">
+                                                                    <td> {{Qualification.Qualification.Value}}</td>
+                                                                    <td> {{Qualification.YearofPassing}}</td>
+                                                                    <td> {{Qualification.Grade.Value}}</td>
+                                                                    <td class="center">{{Qualification.Marks}} </td>
+                                                                    <td>
+                                                                        <a class="edit" (click)='editQualidficationData(Qualification.Qualification.Id)'> Edit </a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!-- END EXAMPLE TABLE PORTLET-->
+
+                                                </div>
                                                 <!--<div class="margiv-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
                                                     <a class="btn default" (click)='Back()'> Cancel </a>
@@ -664,20 +772,14 @@
                                                 </div>
 
                                                 <div class="row">
-                                                    <div class="col-md-3">
+                                                    <!--<div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Expertise in Skill </label>
                                                             <textarea class="form-control text-capitalize" rows="2" placeholder="Add Expertise Skills" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.ExpInSkill"
                                                                 (blur)='onSaveSkillsDetails()'></textarea>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Any Functional Experience</label>
-                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Add Functional Exp." style="resize:vertical" [(ngModel)]="profile.CandidateSkills.AnyFunctionalExp"
-                                                                (blur)='onSaveSkillsDetails()'></textarea>
-                                                        </div>
-                                                    </div>
+                                                    </div>-->
+
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Primary Skills</label>
@@ -692,12 +794,37 @@
                                                                 (blur)='onSaveSkillsDetails()'></textarea>
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Functional Experience</label>
+                                                            <div class="mt-checkbox-inline ">
+                                                                <label class="mt-checkbox  mt-checkbox-outline">
+                                                                    <input type="checkbox" id="chkCTCIncludeVariable" [(ngModel)]="profile.CandidateSkills.AnyFunctionalExpFlag" (change)="onFunctionalExp(profile.CandidateSkills.AnyFunctionalExpFlag)" />
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3" *ngIf="FunctionalExp">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Functional Experience if any</label>
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Add Functional Exp." style="resize:vertical" [(ngModel)]="profile.CandidateSkills.AnyFunctionalExp"
+                                                                (blur)='onSaveSkillsDetails()'></textarea>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-3">
+                                                    <!--<div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Other Skills</label>
                                                             <textarea class="form-control text-capitalize" rows="2" placeholder="Other Skills" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.OtherSkills"
+                                                                (blur)='onSaveSkillsDetails()'></textarea>
+                                                        </div>
+                                                    </div>-->
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Type Of Projects Done</label>
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Projects Done" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.ProjectsDone"
                                                                 (blur)='onSaveSkillsDetails()'></textarea>
                                                         </div>
                                                     </div>
@@ -710,22 +837,6 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label class="control-label">Projects Done</label>
-                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Projects Done" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.ProjectsDone"
-                                                                (blur)='onSaveSkillsDetails()'></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Testing Skills</label>
-                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Testing Skills" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.TestingSkills"
-                                                                (blur)='onSaveSkillsDetails()'></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
                                                             <label class="control-label">Database</label>
                                                             <textarea class="form-control text-capitalize" rows="2" placeholder="Database Known" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.Database"
                                                                 (blur)='onSaveSkillsDetails()'></textarea>
@@ -733,12 +844,23 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label class="control-label">Inclination To Other Technology</label>
+                                                            <label class="control-label">Inclination To learn New Technology</label>
                                                             <textarea class="form-control text-capitalize" rows="2" placeholder="Inclination To Other Technology" style="resize:vertical"
                                                                 [(ngModel)]="profile.CandidateSkills.InclinationToOtherTechnology"
                                                                 (blur)='onSaveSkillsDetails()'></textarea>
                                                         </div>
                                                     </div>
+                                                    <!--<div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Testing Skills</label>
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Testing Skills" style="resize:vertical" [(ngModel)]="profile.CandidateSkills.TestingSkills"
+                                                                (blur)='onSaveSkillsDetails()'></textarea>
+                                                        </div>
+                                                    </div>-->
+                                                </div>
+                                                <div class="row">
+
+
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Aware About Testing</label>
@@ -746,16 +868,7 @@
                                                                 (blur)='onSaveSkillsDetails()'></textarea>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Strong Technical Skills</label>
-                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Add Strong Technical Skills" style="resize:vertical"
-                                                                [(ngModel)]="profile.CandidateSkills.StrongTechnicalSkills" (blur)='onSaveSkillsDetails()'></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-9">
                                                         <div class="form-group">
                                                             <label class="control-label">Follow Up Comments</label>
                                                             <textarea class="form-control text-capitalize" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
@@ -764,7 +877,15 @@
                                                             </textarea>
                                                         </div>
                                                     </div>
+                                                    <!--<div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Strong Technical Skills</label>
+                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Add Strong Technical Skills" style="resize:vertical"
+                                                                [(ngModel)]="profile.CandidateSkills.StrongTechnicalSkills" (blur)='onSaveSkillsDetails()'></textarea>
+                                                        </div>
+                                                    </div>-->
                                                 </div>
+
                                                 <!--<div class="margin-top-10">
                                                     <button type="submit" class="btn green"> Save Changes </button>
                                                     <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
@@ -1066,26 +1187,15 @@
                                                         <a class="btn green " (click)='previousTab()'>
                                                             <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev
                                                         </a>
-                                                        <a class="btn green " (click)='nextTab()'>
-                                                         Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
+                                                        <!--<a class="btn green " (click)='nextTab()'>
+                                                         Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>-->
                                                     </div>
                                                 </div>
 
                                                 <div class="row">
                                                     <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <label class="control-label">CTC Include Variable</label>
-                                                            <div class="mt-checkbox-inline ">
-                                                                <label class="mt-checkbox  mt-checkbox-outline">
-                                                                    <input type="checkbox" id="chkCTCIncludeVariable" [(ngModel)]="profile.CandidateSalaryDetails.CTCIncludeVariable" />
-                                                                    <span></span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Current Take Home</label>
+                                                            <label class="control-label">Current CTC</label>
                                                             <div class="row">
                                                                 <div class="col-md-10">
                                                                     <input type="text" placeholder="" class="form-control text-capitalize" [(ngModel)]="profile.CandidateSalaryDetails.TakeHomePay"
@@ -1096,7 +1206,19 @@
                                                     </div>
                                                     <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <label class="control-label">How Much Variable</label>
+                                                            <label class="control-label">CTC Include Variable</label>
+                                                            <div class="mt-checkbox-inline ">
+                                                                <label class="mt-checkbox  mt-checkbox-outline">
+                                                                    <input type="checkbox" id="chkCTCIncludeVariable" [(ngModel)]="profile.CandidateSalaryDetails.CTCIncludeVariable" (change)="onVariableCTC(profile.CandidateSalaryDetails.CTCIncludeVariable)" />
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2" *ngIf="VariableCTC">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Variable </label>
                                                             <div class="row">
                                                                 <div class="col-md-10">
                                                                     <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.HowMuchVariable" (blur)='onSaveSalaryDetails()'
@@ -1107,10 +1229,22 @@
                                                     </div>
                                                     <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <label class="control-label">Expected Salary</label>
+                                                            <label class="control-label">Current Salary</label>
                                                             <div class="row">
                                                                 <div class="col-md-12">
-                                                                    <!--<input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.ExpectedSalary" 
+                                                                    <!--<input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CurrentSalary" />-->
+                                                                    <span class="form-control" tooltip="You can change this value from Primary Info Tab" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="!profile.CurrentSalary">{{profile.CandidateSalaryDetails.CurrentSalary}}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Expected Salary</label>
+                                                            <div class="row">
+                                                                <div class="col-md-8">
+                                                                    <!--<input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.ExpectedSalary"
                                                                    />-->
                                                                     <span class="form-control" tooltip="You can change this value from Primary Info Tab" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                         tooltipEnable="!profile.ExpectedSalary">{{profile.CandidateSalaryDetails.ExpectedSalary}}
@@ -1119,14 +1253,52 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <label class="control-label">Current Salary</label>
+                                                            <label class="control-label">Allowance</label>
+                                                            <div class="mt-checkbox-inline ">
+                                                                <label class="mt-checkbox  mt-checkbox-outline">
+                                                                    <input type="checkbox" id="chkCTCIncludeVariable" [(ngModel)]="profile.CandidateSalaryDetails.Allowance" (change)="onAllowance(profile.CandidateSalaryDetails.Allowance)" />
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-8" *ngIf="AllowanceFlag">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Allowance if any</label>
                                                             <div class="row">
-                                                                <div class="col-md-8">
-                                                                    <!--<input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CurrentSalary" />-->
-                                                                    <span class="form-control" tooltip="You can change this value from Primary Info Tab" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                        tooltipEnable="!profile.CurrentSalary">{{profile.CandidateSalaryDetails.CurrentSalary}}</span>
+                                                                <div class="col-md-10">
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.HowMuchVariable" (blur)='onSaveSalaryDetails()'
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Incentive</label>
+                                                            <div class="mt-checkbox-inline ">
+                                                                <label class="mt-checkbox  mt-checkbox-outline">
+                                                                    <input type="checkbox" id="chkCTCIncludeVariable" [(ngModel)]="profile.CandidateSalaryDetails.Incentive" (change)="onIncentive(profile.CandidateSalaryDetails.Incentive)" />
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-8" *ngIf="IncentiveFlag">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Incentive if any</label>
+                                                            <div class="row">
+                                                                <div class="col-md-10">
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.HowMuchVariable" (blur)='onSaveSalaryDetails()'
+                                                                    />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1163,8 +1335,8 @@
                                                 <div class="margiv-top-10 pull-right">
                                                     <a class="btn green " (click)='previousTab()'>
                                                         <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev </a>
-                                                    <a class="btn green " (click)='nextTab()'>
-                                                         Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
+                                                    <!--<a class="btn green " (click)='nextTab()'>
+                                                         Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>-->
                                                 </div>
                                             </form>
                                         </div>
@@ -1206,7 +1378,7 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label class="control-label">Team Handling Experience</label>
+                                                            <label class="control-label">Total Team Management Experience</label>
                                                             <textarea class="form-control text-capitalize" rows="1" placeholder="Add Team Handling Experience<" style="resize:vertical"
                                                                 [(ngModel)]="profile.CandidateTeamManagement.TeamHandlingExperience"
                                                                 (blur)='onSaveTeamManagementDetails()'></textarea>
@@ -1225,7 +1397,7 @@
 
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label class="control-label">Team Handling Challenges</label>
+                                                            <label class="control-label">Challenges While Handeling Team</label>
                                                             <textarea class="form-control text-capitalize" rows="2" placeholder="Add Team Handling Challenges" style="resize:vertical"
                                                                 [(ngModel)]="profile.CandidateTeamManagement.TeamHandlingChallenges"
                                                                 (blur)='onSaveTeamManagementDetails()'></textarea>
@@ -1286,11 +1458,18 @@
                                                                     <label class="control-label">Offer In Hand</label>
                                                                     <div class="mt-checkbox-inline ">
                                                                         <label class="mt-checkbox  mt-checkbox-outline">
-                                                                            <input type="checkbox" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.OfferInHand">
+                                                                            <input type="checkbox" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.OfferInHand" (change)="onOfferInHand(profile.CandidateOtherDetails.OfferInHand)">
                                                                             <!--TeamMgmt-->
                                                                             <span></span>
                                                                         </label>
                                                                     </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4" *ngIf="OfferInHand">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Offer Details </label>
+                                                                    <input type="text" placeholder="Offer Details" class="form-control text-capitalize" [(ngModel)]="profile.CandidateOtherDetails.RoleExpected"
+                                                                        (blur)="onSaveProfessionalDetails()" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
@@ -1305,23 +1484,24 @@
                                                                 </div>
                                                             </div>
 
+
+                                                        </div>
+                                                        <div class="row">
+                                                            <!--<div class="col-md-4">
+
+                                                                    <label class="control-label">Resigned Status Of Offered Candidate</label>
+                                                                    <textarea class="form-control" rows="2" placeholder="Resigned Status" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.ResignedStatusOfOfferedCandidate"></textarea>
+
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Offered Candidate Status</label>
+                                                                    <input type="text" placeholder="Offered Candidate Status" class="form-control text-capitalize" [(ngModel)]="profile.CandidateOtherDetails.OfferedCandidateStatus"
+                                                                        (blur)="onSaveProfessionalDetails()" />
+                                                                </div>
+                                                            </div>-->
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Role Expected </label>
                                                                     <input type="text" placeholder="Role Expected" class="form-control text-capitalize" [(ngModel)]="profile.CandidateOtherDetails.RoleExpected"
-                                                                        (blur)="onSaveProfessionalDetails()" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <!--
-                                                                    <label class="control-label">Resigned Status Of Offered Candidate</label>
-                                                                    <textarea class="form-control" rows="2" placeholder="Resigned Status" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.ResignedStatusOfOfferedCandidate"></textarea>
-                                                                -->
-                                                                <div class="form-group">
-                                                                    <label class="control-label">Offered Candidate Status</label>
-                                                                    <input type="text" placeholder="Offered Candidate Status" class="form-control text-capitalize" [(ngModel)]="profile.CandidateOtherDetails.OfferedCandidateStatus"
                                                                         (blur)="onSaveProfessionalDetails()" />
                                                                 </div>
                                                             </div>
@@ -1359,7 +1539,7 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label class="control-label">Weekness</label>
+                                                                    <label class="control-label">Weakness</label>
                                                                     <textarea class="form-control text-capitalize" rows="2" placeholder="Weekness" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.Weekness"
                                                                         (blur)="onSaveProfessionalDetails()"></textarea>
                                                                 </div>
@@ -1367,14 +1547,14 @@
 
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-md-4">
+                                                            <!--<div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Notice Period Not Completed Count </label>
                                                                     <textarea class="form-control text-capitalize" rows="2" placeholder="Notice Period Not Completed Count " style="resize:vertical"
                                                                         [(ngModel)]="profile.CandidateOtherDetails.NoticePeriodNotCompletedCount"
                                                                         (blur)="onSaveProfessionalDetails()"></textarea>
                                                                 </div>
-                                                            </div>
+                                                            </div>-->
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Looking For</label>
@@ -1391,8 +1571,6 @@
                                                                         (blur)="onSaveProfessionalDetails()"></textarea>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Secondary Reason To Quit Last Job</label>
@@ -1401,6 +1579,9 @@
                                                                         (blur)="onSaveProfessionalDetails()"></textarea>
                                                                 </div>
                                                             </div>
+
+                                                        </div>
+                                                        <div class="row">
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Primary Reason To Quit Current Job</label>
@@ -1417,11 +1598,20 @@
                                                                         (blur)="onSaveProfessionalDetails()"></textarea>
                                                                 </div>
                                                             </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Appraisal</label>
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Appraisal Bond Contract Details" style="resize:vertical"
+                                                                        [(ngModel)]="profile.CandidateOtherDetails.AppraisalBondContractDetails"
+                                                                        (blur)="onSaveProfessionalDetails()"></textarea>
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label class="control-label">Appraisal Bond Contract Details</label>
+                                                                    <label class="control-label">Bond/Contract</label>
                                                                     <textarea class="form-control text-capitalize" rows="2" placeholder="Appraisal Bond Contract Details" style="resize:vertical"
                                                                         [(ngModel)]="profile.CandidateOtherDetails.AppraisalBondContractDetails"
                                                                         (blur)="onSaveProfessionalDetails()"></textarea>
@@ -1439,13 +1629,11 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <div class="form-group">
-
-                                                                </div>
                                                             </div>
+
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-8">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Follow Up Comments</label>
                                                                     <textarea class="form-control text-capitalize" rows="2" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
@@ -1454,15 +1642,341 @@
                                                                     </textarea>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6">
+                                                        </div>
+
+                                                        <div class="portlet-title">
+                                                            <div class="caption font-dark">
+                                                                <span class="caption-subject bold uppercase">Career Profile</span>
+                                                            </div>
+                                                        </div>
+                                                        <hr/>
+                                                        <form role="form" (submit)="onSaveCareerProfileDetails()">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Total Experience<small>&nbsp;(In years)</small></label>
+                                                                        <div class="row text-center">
+                                                                            <div class="col-md-12">
+                                                                                <input type="number" step="any" placeholder="" class="form-control text-right" [(ngModel)]="CandidateExperiences.TotalExperience"
+                                                                                    (blur)='onSaveCareerProfileDetails()' />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Relevant Experience <small>&nbsp;(In years)</small></label>
+                                                                        <div class="row text-center">
+                                                                            <div class="col-md-12">
+                                                                                <input type="number" step="any" placeholder="" class="form-control text-right" [(ngModel)]="CandidateExperiences.RelevantExperience"
+                                                                                    (blur)='onSaveCareerProfileDetails()' />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!--<div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Time Spent In Current Company</label>
+                                                            <div class="row">
+                                                                <div class="col-md-8">
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.TimeSpentInCurrentCompany"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>-->
+                                                                <!--</div>
+                                                <div class="row">-->
+                                                                <!--<div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Current Company</label><br/>&nbsp;
+                                                            <input type="text" placeholder="Current Company" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.CurrentCompany"
+                                                            />
+                                                        </div>
+                                                    </div>-->
+
+                                                                <!--<div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Current Designation Role</label><br/>&nbsp;
+                                                            <input type="text" placeholder="Current Designation" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.CurrentDesignationRole"
+                                                            />
+                                                        </div>
+                                                    </div>-->
+
+                                                                <!--<div class="row">-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Follow Up Comments</label>
+                                                                        <textarea class="form-control text-capitalize" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="CandidateExperiences.FollowUpComments"
+                                                                            tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                            tooltipEnable="!profile.FollowUpComments" (blur)='onSaveCareerProfileDetails()'>
+                                                            </textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--</div>-->
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <button type="submit" class="btn green"> Save Changes </button>
+                                                                    <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
+                                                                </div>
 
                                                             </div>
+                                                        </form>
+                                                        <div class="portlet-title" style="margin-top:15px;">
+                                                            <div class="caption font-dark">
+                                                                <span class="caption-subject bold uppercase">Employer's Information</span>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                        <!-- Employer information TAB -->
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                                                                <div class="table-toolbar">
+                                                                    <form role="form" (submit)="AddEditEmployerHistory()">
+                                                                        <div class="row form-group">
+                                                                            <div class="col-md-2">
+                                                                                <div class="form-group">
+                                                                                    <label class="control-label">Company Name <span class="required"> * </span></label>
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-12">
+                                                                                            <input type="Text" placeholder="Company Name" class="form-control text-capitalize" [(ngModel)]="EmployersInformation.Company"
+                                                                                                title="Please enter company name"
+                                                                                                required="" tooltip="Company Name"
+                                                                                                tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                                                tooltipEnable="!EmployersInformation.Company"
+                                                                                            />
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-2">
+                                                                                <div class="form-group">
+                                                                                    <label class="control-label">Designation<span class="required"> * </span></label>
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-12">
+                                                                                            <div>
+                                                                                                <input type="Text" placeholder="Designation" class="form-control text-capitalize" [(ngModel)]="EmployersInformation.DesignationRole"
+                                                                                                    title="Please enter Designation in specified company"
+                                                                                                    required="" tooltip="Please enter Designation in specified company"
+                                                                                                    tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                                                    tooltipEnable="!EmployersInformation.DesignationRole"
+                                                                                                />
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-2">
+                                                                                <div class="form-group">
+                                                                                    <label class="control-label">Location <span class="required"> * </span></label>
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-12">
+                                                                                            <input type="Text" placeholder="Location" class="form-control text-capitalize" [(ngModel)]="EmployersInformation.Location"
+                                                                                                title="Please enter working location for specified company"
+                                                                                                required="" tooltip="Please enter working location for specified company"
+                                                                                                tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                                                tooltipEnable="!EmployersInformation.Location"
+                                                                                            />
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-2">
+                                                                                <div class="form-group">
+                                                                                    <label class="control-label">From Date <span class="required"> * </span></label>
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-12">
+                                                                                            <input type="date" name="bday" id="fromDate" required="" [(ngModel)]="EmployersInformation.FromDate" />
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-2">
+                                                                                <div class="form-group">
+                                                                                    <label class="control-label">To Date <span class="required"> * </span></label>
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-12">
+                                                                                            <!--<p-calendar [(ngModel)]="date2"></p-calendar>-->
+                                                                                            <input type="date" name="bday" id="toDate" required="" [(ngModel)]="EmployersInformation.ToDate" />
+                                                                                            <!--<datepicker [(ngModel)]="data.date" [expanded]="true"></datepicker>-->
+                                                                                            <!--<date-picker [(ngModel)]="EmployersInformation.ToDate"></date-picker>-->
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <!--<div class="col-md-2">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label"> Period <span class="required"> * </span></label>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <input type="number" placeholder="(In Month)" class="form-control" max="999" maxlength="3" min="0" required="" [(ngModel)]="EmployersInformation.TimeSpentInCurrentCompany"
+                                                                                    title="Please enter time spent in current company"
+                                                                                    tooltip="Time spent in specified company in months"
+                                                                                    tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                                    tooltipEnable="!EmployersInformation.TimeSpentInCompany"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>-->
+                                                                            <div class="col-md-1">
+                                                                                <div class="form-group">
+                                                                                    <label class="control-label">Current </label>
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-1">
+                                                                                            <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" [(ngModel)]="EmployersInformation.IsCurrentCompany"
+                                                                                                tooltip="Check for Adding filled details as current employer/employment Details"
+                                                                                                tooltipPlacement="bottom" tooltipTrigger="mouseenter"
+                                                                                                tooltipEnable="!EmployersInformation.IsCurrentCompany"
+                                                                                            />
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!--<div class="col-md-3">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">Comments </label>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <input type="text" placeholder="Enter comments" class="form-control" max="250" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>-->
+                                                                            <div class="col-md-1">
+                                                                                <div class="form-group">
+                                                                                    <br/>
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-2">
+                                                                                            <button type="submit" class="btn green" style="padding-top: 5px;"> {{EmploymentDetailsAction}} </button>
+                                                                                            <!--<button type="submit" class="btn green" style="padding-top: 5px;">Update </button>-->
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                                <div *ngIf="EmployersInformationList!==undefined">
+                                                                    <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th> Designation </th>
+                                                                                <th> Company Name </th>
+                                                                                <th> Location</th>
+                                                                                <th> Time Spent <small>(In Months)</small> </th>
+                                                                                <th> Current </th>
+                                                                                <th> Edit </th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr *ngFor="let EmployersInformation of EmployersInformationList">
+                                                                                <td> {{EmployersInformation.DesignationRole}}</td>
+                                                                                <td> {{EmployersInformation.Company}}</td>
+                                                                                <td> {{EmployersInformation.Location}}</td>
+                                                                                <td class="text-center"> {{EmployersInformation.TimeSpentInCompany}}</td>
+                                                                                <td class="text-center"> {{EmployersInformation.IsCurrentCompany===true?"Current":"-"}}</td>
+                                                                                <td>
+                                                                                    <a class="edit" (click)='EditEmployerInformation(EmployersInformation.CareerProfileID)'> Edit </a>
+                                                                                </td>
+                                                                            </tr>
+
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                                <div>
+                                                                    <table>
+                                                                        <tr *ngIf="EmployersInformationList===undefined">
+                                                                            <td>
+                                                                                No Employment history..!
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <!-- /Employer information TAB -->
+                                                            <!-- END EXAMPLE TABLE PORTLET-->
 
                                                         </div>
-                                                        <!--<div class="margiv-top-10">
-                                                            <button type="submit" class="btn green"> Save Changes </button>
-                                                            <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
-                                                        </div>-->
+                                                        <div class="portlet-title" style="margin-top:15px;">
+                                                            <div class="caption font-dark">
+                                                                <span class="caption-subject bold uppercase">Team Managment</span>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                        <form role="form" (submit)="onSaveTeamManagementDetails()">
+                                                           
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Team Management</label>
+                                                                        <div class="mt-checkbox-inline ">
+                                                                            <label class="mt-checkbox  mt-checkbox-outline">
+                                                                    <input type="checkbox" id="chkTeamManagement" [(ngModel)]="profile.CandidateTeamManagement.TeamMgmt" (change)='onSaveTeamManagementDetails()'>
+                                                                    <!--TeamMgmt-->
+                                                                    <span></span>
+                                                                </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="form-group">
+
+                                                                        <label class="control-label">No Of Team Members</label>
+                                                                        <div class="row">
+                                                                            <div class="col-md-8">
+                                                                                <input type="number" placeholder="0" class="form-control" min="0" [(ngModel)]="profile.CandidateTeamManagement.NoofTeamMembers"
+                                                                                    (blur)='onSaveTeamManagementDetails()' />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Total Team Management Experience</label>
+                                                                        <textarea class="form-control text-capitalize" rows="1" placeholder="Add Team Handling Experience<" style="resize:vertical"
+                                                                            [(ngModel)]="profile.CandidateTeamManagement.TeamHandlingExperience"
+                                                                            (blur)='onSaveTeamManagementDetails()'></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Team Members Designations</label>
+                                                                        <textarea class="form-control text-capitalize" rows="1" placeholder=" Add Team Members Designations" style="resize:vertical"
+                                                                            [(ngModel)]="profile.CandidateTeamManagement.TeamMembersDesignations"
+                                                                            (blur)='onSaveTeamManagementDetails()'></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Challenges While Handeling Team</label>
+                                                                        <textarea class="form-control text-capitalize" rows="2" placeholder="Add Team Handling Challenges" style="resize:vertical"
+                                                                            [(ngModel)]="profile.CandidateTeamManagement.TeamHandlingChallenges"
+                                                                            (blur)='onSaveTeamManagementDetails()'></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Follow Up Comments</label>
+                                                                        <textarea class="form-control text-capitalize" rows="2" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
+                                                                            tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                            tooltipEnable="!profile.FollowUpComments" (blur)='onSaveTeamManagementDetails()'>
+                                                            </textarea>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </form>
                                                         <div class="margiv-top-10 pull-right">
                                                             <a class="btn green " (click)='previousTab()'>
                                                                 <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>                                                                Prev </a>

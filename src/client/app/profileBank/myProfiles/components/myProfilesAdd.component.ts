@@ -58,6 +58,11 @@ export class MyProfilesAddComponent implements OnActivate {
     profilePic: any;
     readyToRelocateFlag: boolean = false;
     reasonToRelocateFlag: boolean = false;
+    OfferInHand: boolean = false;
+    VariableCTC: boolean = false;
+    AllowanceFlag: boolean = false;
+    IncentiveFlag: boolean = false;
+    FunctionalExp: boolean = false;
     constructor(private _myProfilesService: MyProfilesService,
         private _masterService: MastersService,
         private _profileBankService: ProfileBankService,
@@ -112,6 +117,12 @@ export class MyProfilesAddComponent implements OnActivate {
                 }
                 if (this.profile.ReadyToRelocate === true) {
                     this.reasonToRelocateFlag = true;
+                }
+                if (this.profile.CandidateOtherDetails.OfferInHand === true) {
+                    this.OfferInHand = true;
+                }
+                if (this.profile.CandidateSalaryDetails.CTCIncludeVariable === true) {
+                    this.VariableCTC = true;
                 }
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments;
                 if (results.Country.Id !== 0)
@@ -561,7 +572,7 @@ export class MyProfilesAddComponent implements OnActivate {
             let FileList: FileList = selectedFile.target.files;
             if (selectedFile.target.files[0].size < 2000000) {
                 if (selectedFile.target.files[0].type === 'image/jpeg' || selectedFile.target.files[0].type === 'image/png'
-                || selectedFile.target.files[0].type === 'image/jpg') {
+                    || selectedFile.target.files[0].type === 'image/jpg') {
                     if (this.uploadedPhoto)
                         this.uploadedPhoto.length = 0;
                     for (let i = 0, length = FileList.length; i < length; i++) {
@@ -573,7 +584,7 @@ export class MyProfilesAddComponent implements OnActivate {
                 } else {
                     this.toastr.error('Please upload image of type .jpg, .png, .jpeg');
                 }
-            }else {
+            } else {
                 this.toastr.error('Please upload image of size less than 2 MB');
             }
         } catch (error) {
@@ -656,6 +667,41 @@ export class MyProfilesAddComponent implements OnActivate {
             this.reasonToRelocateFlag = true;
         } else {
             this.reasonToRelocateFlag = false;
+        }
+    }
+    onOfferInHand(isChecked: any) {
+        if (isChecked === false) {
+            this.OfferInHand = true;
+        } else {
+            this.OfferInHand = false;
+        }
+    }
+    onVariableCTC(isChecked: any) {
+        if (isChecked === false) {
+            this.VariableCTC = true;
+        } else {
+            this.VariableCTC = false;
+        }
+    }
+    onAllowance(isChecked: any) {
+        if (isChecked === false) {
+            this.AllowanceFlag = true;
+        } else {
+            this.AllowanceFlag = false;
+        }
+    }
+    onIncentive(isChecked: any) {
+        if (isChecked === false) {
+            this.IncentiveFlag = true;
+        } else {
+            this.IncentiveFlag = false;
+        }
+    }
+    onFunctionalExp(isChecked: any) {
+        if (isChecked === false) {
+            this.FunctionalExp = true;
+        } else {
+            this.FunctionalExp = false;
         }
     }
     nextTab() {
