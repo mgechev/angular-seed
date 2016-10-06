@@ -5,10 +5,18 @@ import * as runSequence from 'run-sequence';
 import Config from './tools/config';
 import { loadTasks } from './tools/utils';
 
+let ENV = Config.ENV || 'dev';
 
 loadTasks(Config.SEED_TASKS_DIR);
 loadTasks(Config.PROJECT_TASKS_DIR);
 
+
+// --------------
+// Serve env
+gulp.task('serve.env', (done: any) =>
+  runSequence('build.'+ENV,
+              'serve.'+ENV,
+              done));
 
 // --------------
 // Build dev.

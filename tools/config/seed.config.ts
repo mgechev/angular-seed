@@ -591,7 +591,7 @@ function appVersion(): number | string {
 function getEnvironment() {
   let base: string[] = argv['_'];
   let prodKeyword = !!base.filter(o => o.indexOf(ENVIRONMENTS.PRODUCTION) >= 0).pop();
-  let env = (argv['env'] || '').toLowerCase();
+  let env = (argv['config-env'] || '').toLowerCase();
   if ((base && prodKeyword) || env === ENVIRONMENTS.PRODUCTION) {
     return ENVIRONMENTS.PRODUCTION;
   } else {
