@@ -1,5 +1,5 @@
 import { Component, Input, AfterViewInit } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+//import { ROUTER_DIRECTIVES } from '@angular/router';
 import { IEFFunction } from '../../model/ief.ts';
 import { ResponseFromAPI, MasterData} from '../../../../shared/model/common.model';
 import {CandidateIEFService} from '../../services/Candidate.IEF.service';
@@ -8,7 +8,7 @@ import {CandidateIEFService} from '../../services/Candidate.IEF.service';
     moduleId: module.id,
     selector: 'IEFGridRow',
     templateUrl: 'IEFGridRow.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    //directives: [ROUTER_DIRECTIVES],
     providers: [CandidateIEFService]
 })
 

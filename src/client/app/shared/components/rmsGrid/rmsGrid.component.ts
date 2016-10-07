@@ -1,12 +1,12 @@
 import {Component, Input} from '@angular/core';
-import {PAGINATION_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+//import {PAGINATION_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {GridMeta} from './models/gridMeta';
 
 @Component({
     moduleId: module.id,
     selector: 'rms-grid',
     templateUrl: 'rmsGrid.component.html',
-    directives: [PAGINATION_DIRECTIVES]
+    //directives: [PAGINATION_DIRECTIVES]
 })
 
 export class RMSGridComponent {

@@ -14,7 +14,7 @@ import { InterviewSlotComponent } from '../../shared/component/InterviewSlot/Com
     moduleId: module.id,
     selector: 'interviewers-mycalendar',
     templateUrl: 'interviewers.calendar.component.html',
-    directives: [ROUTER_DIRECTIVES, FullCalendarComponent, InterviewSlotComponent],
+    //directives: [ROUTER_DIRECTIVES, FullCalendarComponent, InterviewSlotComponent],
     providers: [Interview, ToastsManager, InterviewersCalendarService, InterviewersAvailabilityService]
 })
 

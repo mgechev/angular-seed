@@ -1,4 +1,5 @@
-import {Component, AfterViewInit, AfterContentInit  } from '@angular/core';
+import {Component, OnInit, AfterViewInit, AfterContentInit  } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { RRFDetails, AssignmentDetails } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
@@ -20,7 +21,7 @@ import {RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow
     providers: [ToastsManager]
 })
 
-export class RRFAssignComponent implements  AfterViewInit, AfterContentInit {
+export class RRFAssignComponent implements OnInit, AfterViewInit, AfterContentInit {
     selectedRRF: RRFDetails = new RRFDetails();
     errorMessage: string;
     RRFId: MasterData = new MasterData();
@@ -33,14 +34,14 @@ export class RRFAssignComponent implements  AfterViewInit, AfterContentInit {
     AssignStatus: RRFAssignStatus = RRFAssignStatus;
 
     constructor(private _myRRFService: MyRRFService,
-    private activatedRoute: ActivatedRoute,
+        private activatedRoute: ActivatedRoute,
         private _rrfDashboardService: RRFDashboardService,
         private _mastersService: MastersService,
         public toastr: ToastsManager) {
     }
 
     ngOnInit() {
-var params = this.activatedRoute.snapshot.params['id'];
+        var params = this.activatedRoute.snapshot.params['id'];
         //var params = segment.getParam('id');
         if (params) {
             this.RRFId.Id = parseInt(params.split('ID')[1]);
@@ -68,7 +69,7 @@ var params = this.activatedRoute.snapshot.params['id'];
                 this.selectedRRF = <any>results;
                 this.selectedRRF.assignedData = new Array();
                 for (var index = 0; index < results.AssignedData.length; index++) {
-                    if(results.AssignedData[index].Status.Value === 'Assigned'){
+                    if (results.AssignedData[index].Status.Value === 'Assigned') {
                         this.selectedRRF.assignedData.push(results.AssignedData[index]);
                     }
                 }
@@ -93,8 +94,8 @@ var params = this.activatedRoute.snapshot.params['id'];
 
     onAssignRRF(): void {
 
-        if(!this.isFormValidate()){
-            return ;
+        if (!this.isFormValidate()) {
+            return;
         }
         var selectedRec: number[] = $('#cmbAssignTo').val();
         // Creating array of selected Assignee
@@ -141,7 +142,7 @@ var params = this.activatedRoute.snapshot.params['id'];
     onUnAssignCancel(): void {
         this.unAssignRowVisible = false;
         this.UnAssignRec = new AssignmentDetails();
-        setTimeout(function() {
+        setTimeout(function () {
             $('#cmbAssignTo').select2();
         }, 20);
 
@@ -158,7 +159,7 @@ var params = this.activatedRoute.snapshot.params['id'];
                     this.unAssignedComments = '';
                     $('#cmbAssignTo').select2();
                     this.getRRFDetails(this.RRFId); //TODO
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $('#cmbAssignTo').select2();
                     }, 20);
                 } else {

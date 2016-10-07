@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Interview} from '../../shared/model/interview';
 import { InterviewersScheduleService} from '../services/interviewers.schedule.service';
@@ -89,13 +89,13 @@ export class RecruitmentInterviewScheduleComponent implements OnInit {
     DisableIEF(interviewDate: Date, interviewTime: Date) {
         if (moment(interviewDate).format('MM-DD-YYYY') > moment(new Date()).format('MM-DD-YYYY')) {
             return true;
-        }else {
+        } else {
             if (moment(interviewDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY')
-            && interviewTime.split(':')[0] > new Date().getHours()) {
+                && interviewTime.split(':')[0] > new Date().getHours()) {
                 return true;
-            }else {
+            } else {
                 if (moment(interviewDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY')
-                && interviewTime.split(':')[0] > new Date().getHours() && interviewTime.split(':')[1] > new Date().getMinutes()) {
+                    && interviewTime.split(':')[0] > new Date().getHours() && interviewTime.split(':')[1] > new Date().getMinutes()) {
                     return true;
                 } else {
                     return false;

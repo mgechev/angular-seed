@@ -15,8 +15,8 @@ import { MastersService } from '../../../shared/services/masters.service';
     templateUrl: 'RRFApprovalList.component.html',
     //directives: [ROUTER_DIRECTIVES, RRFGridRowComponent],
     styleUrls: ['../../shared/css/RRF.component.css'],
-    providers: [ToastsManager],
-    pipes: [RRFPipe],
+    providers: [ToastsManager]
+    //,pipes: [RRFPipe]
 })
 
 export class RRFApprovalListComponent implements OnInit {
@@ -155,7 +155,7 @@ export class RRFApprovalListComponent implements OnInit {
         this.grdOptions.ButtonClicked = 0;
         this.grdOptions.NextPageUrl = [];
     }
-    
+
     //Raised RRF single approval service call
     ActionOnRaisedRRF(rrfID: string,
         status: number,

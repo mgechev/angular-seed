@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass} from '@angular/common';
-import {BUTTON_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
-import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
+//import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass} from '@angular/common';
+//import {BUTTON_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
+//import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 
 // webpack html imports
 //let template = require('./MultipleDrodown.Component.html');
@@ -11,7 +11,7 @@ import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
     selector: 'multiple-demo',
     //template: template,
     templateUrl: 'MultipleDrodown.Component.html',
-    directives: [SELECT_DIRECTIVES, NgClass, CORE_DIRECTIVES, FORM_DIRECTIVES, BUTTON_DIRECTIVES]
+    //directives: [SELECT_DIRECTIVES, NgClass, CORE_DIRECTIVES, FORM_DIRECTIVES, BUTTON_DIRECTIVES]
 })
 export class MultipleDemoComponent {
     public items: Array<string> = ['Amsterdam', 'Antwerp', 'Athens', 'Barcelona',

@@ -16,8 +16,15 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
     selector: 'rrf-dashboard',
     template: ' <router-outlet></router-outlet>',
     //directives: [ROUTER_DIRECTIVES],
-    providers: [RRFDashboardService, MyRRFService, MastersService, PanelsAvailabilityService,
-        RRFCandidateListService, RRFReScheduleInterviewService, ToastsManager]
+    providers: [
+        RRFDashboardService,
+        MyRRFService,
+        MastersService,
+        PanelsAvailabilityService,
+        RRFCandidateListService,
+        RRFReScheduleInterviewService,
+        ToastsManager
+    ]
 })
 
 @NgModule({

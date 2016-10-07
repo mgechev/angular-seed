@@ -13,7 +13,7 @@ import { APIResult} from  '../../../shared/constantValue/index';
     moduleId: module.id,
     selector: 'recruiter-ief',
     templateUrl: 'Candidate.IEF.component.html',
-    directives: [ROUTER_DIRECTIVES, IEFFunctionComponent, InterviewSlotComponent],
+    //directives: [ROUTER_DIRECTIVES, IEFFunctionComponent, InterviewSlotComponent],
     providers: [ToastsManager, CandidateIEFService]
 })
 
@@ -32,13 +32,15 @@ export class RecruitmentIEFComponent implements OnInit {
         private _candidateIEFService: CandidateIEFService) {
 
     }
-    ngOnInit() {
+    OnInit() {
+        /**This method was on RouterOnActivate event */
         this.requestedIef = this.getSessionOf<iefModel>('SubmitIef');
         this.getIEFDetails(this.requestedIef);
         this.getIEFHistory(this.requestedIef);
         this.returnPath = sessionStorage.getItem('onReturnPath');
     }
     ngOnInit() {
+        this.OnInit();
         var intrviewStatus: string = sessionStorage.getItem('InterviewStatus')
         if (intrviewStatus.toLowerCase() === 'on hold') {
             this.getIEFPreviousData(this.requestedIef.InterviewID);

@@ -1,5 +1,5 @@
 import { Component, Input} from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+//import { ROUTER_DIRECTIVES } from '@angular/router';
 import { RRFDetails} from '../../../myRRF/models/rrfDetails';
 import { RRFAssignStatus} from  '../../../../shared/constantValue/index';
 import {IfAuthorizeDirective} from '../../../../shared/directives/ifAuthorize.directive';
@@ -9,7 +9,7 @@ import {IfAuthorizeDirective} from '../../../../shared/directives/ifAuthorize.di
     moduleId: module.id,
     selector: 'RRFGridRow',
     templateUrl: 'RRFGridRow.component.html',
-    directives: [ROUTER_DIRECTIVES, IfAuthorizeDirective],
+    //directives: [ROUTER_DIRECTIVES, IfAuthorizeDirective],
     styleUrls: ['../../css/RRF.component.css']
 })
 

@@ -12,7 +12,7 @@ import { AllScheduleInterviewPipe } from  '../filter/scheduleInterviews.pipe';
     templateUrl: 'scheduleInterviews.component.html',
     //directives: [ROUTER_DIRECTIVES],
     //pipes: [AllScheduleInterviewPipe]
-    //providers:[RecruiterScheduleInterviewService,ToastsManager]
+    providers:[RecruiterScheduleInterviewService,ToastsManager]
 })
 
 export class ScheduleInterviewsForRecruitersComponent implements OnInit {

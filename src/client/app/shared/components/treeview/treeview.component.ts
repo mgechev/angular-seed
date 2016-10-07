@@ -4,7 +4,7 @@ import {TreeviewData, TreeviewNode} from '../../../settings/pushNotification/mod
     moduleId: module.id,
     selector: 'tree-view',
     templateUrl: 'treeview.component.html',
-    directives: [TreeViewComponent]
+    //directives: [TreeViewComponent]
 })
 export class TreeViewComponent {
     @Input() directories: TreeviewData = new TreeviewData();

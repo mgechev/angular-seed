@@ -25,13 +25,9 @@ import { InterviewApprovalComponent } from '../../../recruitmentCycle/shared/com
     //     ViewRRFComponent, RRFGridRowComponent, InterviewApprovalComponent],
     styleUrls: ['../../shared/css/RRF.component.css'],
     //pipes: [RRFIDPipe, RRFPipe],
-    //providers: [ToastsManager]
-})
-
-@NgModule({
-    declarations: [PanelsAvailablityComponent, IfAuthorizeDirective, ViewRRFComponent, RRFGridRowComponent, InterviewApprovalComponent],
     providers: [ToastsManager]
 })
+
 
 export class RRFDashboardListComponent implements OnInit {
     rrfList: RRFDetails[] = [];

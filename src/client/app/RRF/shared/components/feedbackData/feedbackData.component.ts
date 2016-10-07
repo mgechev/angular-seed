@@ -1,5 +1,5 @@
 import {Component, Input, AfterViewInit} from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+//import { ROUTER_DIRECTIVES } from '@angular/router';
 import { RRFFeedback} from '../../../myRRF/models/rrfDetails';
 import {  MasterData } from '../../../../shared/model/common.model';
 import {FeedbackDataService} from './services/feedbackData.service'
@@ -8,7 +8,7 @@ import {FeedbackDataService} from './services/feedbackData.service'
     moduleId: module.id,
     selector: 'feedback-data',
     templateUrl: 'feedbackData.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    //directives: [ROUTER_DIRECTIVES],
     providers: [FeedbackDataService]
 })
 
