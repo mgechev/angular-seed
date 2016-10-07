@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 /**
  * This class represents the navigation bar component.
@@ -13,7 +12,7 @@ import { Router } from '@angular/router';
 
 export class NavbarComponent {
   public lang: string;
-  public constructor(private _router: Router) {
+  public constructor() {
     this.lang = localStorage.getItem('lang') || 'en-US';
   }
   public selectLanguage = (lang: string): void => {
