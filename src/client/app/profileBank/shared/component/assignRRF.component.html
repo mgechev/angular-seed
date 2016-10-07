@@ -28,7 +28,7 @@
                             <div class="col-md-6" [hidden]="RRFList.length == 0">
                                 <select class="form-control" required (change)='onSelectRRF($event.target.value)'>
                                     <option></option>
-                                     <option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Id">{{rrf.RRFCODE}} - {{rrf.Designation}} - {{rrf.PositionTitle}} - {{rrf.RaisedBy.Value}}</option> 
+                                     <option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Id">{{rrf.RRFCODE}} - {{rrf.Designation.Value}} - {{rrf.PositionTitle}} - {{rrf.RaisedBy.Value}}</option> 
                                 </select>
                             </div>
                             <div class="col-md-6" [hidden]="RRFList.length != 0">

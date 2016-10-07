@@ -603,7 +603,7 @@ export class MyProfilesListComponent implements OnActivate {
             this.selectedCandidates = new Array<CandidateProfile>();
         } else {
             sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));
-            sessionStorage.setItem('returnPath', '/App/ProfileBank/MyProfiles');
+            sessionStorage.setItem('returnPathToSchedule', '/App/ProfileBank/MyProfiles');
             this._router.navigate(['/App/ProfileBank/MyProfiles/Assign']);
         }
     }

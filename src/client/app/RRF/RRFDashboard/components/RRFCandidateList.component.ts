@@ -474,6 +474,7 @@ export class RRFCandidateListComponent implements OnActivate {
         this.setActualTimeForm = false;
     }
     nevigateToInitiateRRF() {
+        sessionStorage.setItem('navigationPath', '/App/RRF/RRFDashboard/Candidates/'+ this.RRFID.Value);
         this._router.navigate(['App/RRF/MyRRF/Add']);
     }
 }

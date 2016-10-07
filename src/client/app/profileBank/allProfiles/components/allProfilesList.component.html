@@ -141,8 +141,8 @@
                             </div>
 
                             <div class="table">
-                                <table class="table table-bordered table-hover table-checkable order-column dataTable no-footer"  id="sample_1"
-                                    role="grid" aria-describedby="sample_1_info">
+                                <table class="table table-bordered table-hover table-checkable order-column dataTable no-footer" id="sample_1" role="grid"
+                                    aria-describedby="sample_1_info">
                                     <thead class="thead">
                                         <tr>
                                             <td>
@@ -170,32 +170,36 @@
                                             </td>
                                             <td>
                                                 <div class="row portlet-title" style="width:100%">
-                                                <div class="actions pull-right">
-                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" (click)='redirectToEditProfile(profile.CandidateID)'  tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                        tooltipEnable="true" title="Edit Profile" [disabled]='getEditAccess(profile.Owner)'>
+                                                    <div class="actions pull-right">
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" (click)='redirectToEditProfile(profile.CandidateID)'
+                                                            tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
+                                                            title="Edit Profile" [disabled]='getEditAccess(profile.Owner)'>
                                                             <i class="fa fa-edit "></i><!-- Edit Profile-->
                                                         </button>
-                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs blue" (click)='SaveCandidateID(profile.CandidateID)'  tooltip="Blacklist Profile"
-                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
-                                                        title="Blacklist Profile" [disabled]='getEditAccess(profile.Owner)'>
-                                                            <i class="icon-flag"></i> <!--Blacklist Profile-->
-                                                        </button>
-                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs green" (click)='redirectToView(profile.CandidateID)' tooltip="View Profile"
-                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Profile"
-                                                        tooltipEnable="true">
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs green" (click)='redirectToView(profile.CandidateID)' tooltip="View Profile"
+                                                            tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Profile"
+                                                            tooltipEnable="true">
                                                             <i class="fa fa-search"></i> <!--View Profile-->
                                                         </button>
-                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='deleteCandidate(profile.CandidateID)' [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] " tooltip="Delete Profile" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                        title="Delete Profile" tooltipEnable="true" >
-                                                            <i class="fa fa-remove "></i> <!--Delete Profile-->
-                                                        </button>
-                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs purple" (click)='getCandidateHistory(profile.CandidateID)' tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                        title="View Interview History" tooltipEnable="true">
+
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs purple" (click)='getCandidateHistory(profile.CandidateID)'
+                                                            tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                            title="View Interview History" tooltipEnable="true">
                                                             <i class="fa fa-history"></i> <!--View Interview History-->
                                                         </button>
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs dark" (click)='SaveCandidateID(profile.CandidateID)' tooltip="Blacklist Profile"
+                                                            tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
+                                                            title="Blacklist Profile" [disabled]='getEditAccess(profile.Owner)'>
+                                                            <i class="icon-flag"></i> <!--Blacklist Profile-->
+                                                        </button>
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='deleteCandidate(profile.CandidateID)' [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] "
+                                                            tooltip="Delete Profile" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                            title="Delete Profile" tooltipEnable="true">
+                                                            <i class="fa fa-remove "></i> <!--Delete Profile-->
+                                                        </button>
 
+                                                    </div>
                                                 </div>
-                                            </div>
                                                 <detail-profile [selectedProfile]="profile"></detail-profile>
                                             </td>
                                             <!-- ng Binding -->

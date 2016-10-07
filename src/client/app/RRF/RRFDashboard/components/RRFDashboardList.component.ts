@@ -502,6 +502,10 @@ export class RRFDashboardListComponent implements OnActivate {
     onShowAvailabilityClick() {
         this.showAvaililityPanel = !this.showAvaililityPanel;
     }
+    navigateToInitiateRRF() {
+        sessionStorage.setItem('navigationPath', '/App/RRF/RRFDashboard');
+        this._router.navigate(['/App/RRF/MyRRF/Add']);
+    }
 
 }
 
