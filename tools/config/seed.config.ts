@@ -366,7 +366,7 @@ export class SeedConfig {
       '@angular/platform-browser-dynamic/testing':
         'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
-
+      'text': 'node_modules/systemjs-plugin-text/text.js',
       'app/*': '/app/*',
       // For test config
       'dist/dev/*': '/base/dist/dev/*',
@@ -397,6 +397,7 @@ export class SeedConfig {
     paths: {
       [join(this.TMP_DIR, 'app', '*')]: `${this.TMP_DIR}/app/*`,
       'node_modules/*': 'node_modules/*',
+      'text': 'node_modules/systemjs-plugin-text/text.js',
       '*': 'node_modules/*'
     },
     packages: {

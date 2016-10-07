@@ -1,0 +1,16 @@
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="c53afdd1dce2f12953e8b7098a5772a76975db03" datatype="html">
+        <source>
+  Howdy! Here&apos;s a list of awesome computer scientists. Do you know any others? Add to the list yourself.
+</source>
+        <target>Hello! Voici une liste d'informaticiens brilliants. Est-ce que tu en connais d'autres? Ajoute-les!</target>
+      </trans-unit>
+      <trans-unit id="f6755cff4957d5c3c89bafce5651f1b6fa2b1fd9" datatype="html">
+        <source>Add</source>
+        <target>Ajouter</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
