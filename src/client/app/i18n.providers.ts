@@ -3,7 +3,7 @@ import { TRANSLATIONS, TRANSLATIONS_FORMAT, LOCALE_ID } from '@angular/core';
 export function getTranslationProviders(): Promise<Object[]> {
 
   // Get the locale id from the global
-  const locale: string = 'fr';
+  const locale: string = localStorage.getItem('lang') || 'en-US';
 
   // return no providers if fail to get translation file for locale
   const noProviders: Object[] = [];

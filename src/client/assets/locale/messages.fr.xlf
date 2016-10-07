@@ -1,11 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="dcf8f15418a05a2f5b06cfe12eecbb46e94b13e1" datatype="html">
+        <source>HOME</source>
+        <target>ACCUEIL</target>
+      </trans-unit>
+      <trans-unit id="2ccc315673e88d7490220d465da566e3acff72d5" datatype="html">
+        <source>ABOUT</source>
+        <target>A PROPOS</target>
+      </trans-unit>
       <trans-unit id="c53afdd1dce2f12953e8b7098a5772a76975db03" datatype="html">
         <source>
   Howdy! Here&apos;s a list of awesome computer scientists. Do you know any others? Add to the list yourself.
 </source>
-        <target>Hello! Voici une liste d'informaticiens brilliants. Est-ce que tu en connais d'autres? Ajoute-les!</target>
+<target>
+Voici une liste d'informaticiens brilliants. Si tu en connais d'autres, ajoute-les!
+</target>
       </trans-unit>
       <trans-unit id="f6755cff4957d5c3c89bafce5651f1b6fa2b1fd9" datatype="html">
         <source>Add</source>
