@@ -26,7 +26,7 @@ export = () => {
     join(Config.APP_SRC, '**/*.ts'),
     '!' + join(Config.APP_SRC, '**/*.spec.ts'),
     '!' + join(Config.APP_SRC, '**/*.e2e-spec.ts'),
-    '!' + join(Config.APP_SRC, `**/${Config.BOOTSTRAP_FACTORY_PROD_MODULE}.ts`)
+    '!' + join(Config.TMP_DIR, `**/${Config.NG_FACTORY_FILE}.ts`)
   ];
 
   let projectFiles = gulp.src(src);
