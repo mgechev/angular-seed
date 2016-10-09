@@ -366,7 +366,7 @@ export class SeedConfig {
       '@angular/platform-browser-dynamic/testing':
         'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
-      'text': 'node_modules/systemjs-plugin-text/text.js',
+
       'app/*': '/app/*',
       // For test config
       'dist/dev/*': '/base/dist/dev/*',
@@ -394,9 +394,6 @@ export class SeedConfig {
       join('node_modules', '*', 'package.json'),
       join('node_modules', '@angular', '*', 'package.json')
     ],
-    map: {
-      'text': 'node_modules/systemjs-plugin-text/text.js'
-    },
     paths: {
       [join(this.TMP_DIR, this.BOOTSTRAP_DIR, '*')]: `${this.TMP_DIR}/${this.BOOTSTRAP_DIR}/*`,
       'node_modules/*': 'node_modules/*',
