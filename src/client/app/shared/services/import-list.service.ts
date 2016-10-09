@@ -16,6 +16,7 @@ export enum CostType {
   FROM_SAVINGS_ACCOUNT = 15,
   TO_SAVINGS_ACCOUNT = 10,
   TO_PRIVATE_ACCOUNT = 17,
+  TRAVEL_WITH_PUBLIC_TRANSPORT_OTHER_ACCOUNT = 8,
   FROM_PRIVATE_ACCOUNT = 18,
   INCOME_TAX = 29,
   INCOME_TAX_PAID_BACK = 30,
@@ -61,7 +62,7 @@ export class Transaction {
   costCharacterDescription: string;
 
   get dateFormatted(): string {
-    return this.date.format('DD/MM/YYYY');
+    return this.date.format('YYYY-MM-DD');
   }
 
   get amountFormatted(): string {
@@ -87,7 +88,16 @@ export class ImportListService {
     var csvLines: String[][];
     csvLines = this.csvParseService.csvToArray(csvFile, ',');
     var csvType: CsvType;
-    csvType = CsvType.ING;
+
+    this.transactions = [];
+    if (csvLines[0][1] !== undefined && csvLines[0][1].indexOf("Naam / Omschrijving") == 0) {
+      csvType = CsvType.ING;
+    } else {
+      csvLines = this.csvParseService.csvToArray(csvFile, ';');
+      if (csvLines[0][1].indexOf("Check") == 0) {
+        csvType = CsvType.OV_CHIPKAART;
+      }
+    }
 
     csvLines.shift(); // Skip the first line
     csvLines.forEach(line => {
@@ -100,15 +110,21 @@ export class ImportListService {
           case CsvType.OV_CHIPKAART: dateFormat = 'DD-MM-YYYY'; break;
         }
         transaction.date = moment(line[0], dateFormat);
-        transaction.amount = Number.parseFloat(line[6].replace(',', '.'));
-        if (line[5] === 'Af') {
-          transaction.costType = CostType.GENERAL_EXPENSE;
-        } else {
-          transaction.costType = CostType.GENERAL_INCOME;
-        }
-        var description:String = line[1];
-        if (line[8]) {
-          description = description.concat(' ', line[8]);
+
+        if (csvType === CsvType.ING) {
+          transaction.amount = Number.parseFloat(line[6].replace(',', '.'));
+          if (line[5] === 'Af') {
+            transaction.costType = CostType.GENERAL_EXPENSE;
+          } else {
+            transaction.costType = CostType.GENERAL_INCOME;
+          }
+          var description: String = line[1];
+          if (line[8]) {
+            description = description.concat(' ', line[8]);
+          }
+        } else if (csvType === CsvType.OV_CHIPKAART) {
+          transaction.amount = Number.parseFloat(line[5].replace(',', '.'));
+          description = "Van " + line[2] + " naar " + line[4] + " (" + line[3] + ") " + line[6] + " " + line[7] + " " + line[8];
         }
         transaction.description = description;
 

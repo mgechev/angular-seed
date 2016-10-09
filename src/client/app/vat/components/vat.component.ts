@@ -101,7 +101,7 @@ export class VatComponent implements OnInit {
     reader.onload = file => {
       var contents: any = file.target;
       this.importedText = contents.result;
-      this.transactions = this.importListService.convert(this.importedText);
+      this.transactions = this.transactions.concat(this.importListService.convert(this.importedText));
       this.transactions = this.costMatchService.match(this.transactions, this.costMatches);
       this.transactionsLoaded = this.transactions.length;
       this.length = this.transactions.length;

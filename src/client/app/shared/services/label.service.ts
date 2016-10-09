@@ -22,6 +22,7 @@ export class LabelService {
     FROM_SAVINGS_ACCOUNT: 'Van spaarrekening',
     TO_SAVINGS_ACCOUNT: 'Naar spaarrekening',
     TO_PRIVATE_ACCOUNT: 'Opname naar prive',
+    TRAVEL_WITH_PUBLIC_TRANSPORT_OTHER_ACCOUNT: 'Reiskosten',
     FROM_PRIVATE_ACCOUNT: 'Inleg vanuit prive',
     INCOME_TAX: 'Inkomstenbelasting',
     INCOME_TAX_PAID_BACK: 'Inkomstenbelasting terugbetaald',
