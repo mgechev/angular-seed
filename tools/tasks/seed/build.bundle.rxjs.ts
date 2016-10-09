@@ -4,7 +4,7 @@
 
 const Builder = require('systemjs-builder');
 
-export = (done:any) => {
+export = (done: any) => {
   const options = {
     normalize: true,
     runtime: false,
