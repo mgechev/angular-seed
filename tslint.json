@@ -1,6 +1,5 @@
 {
   "extends": "./tools/config/seed.tslint.json",
   "rules": {
-    //overwrite rules defined in seed.tslint.json here or add additional rules
   }
 }
