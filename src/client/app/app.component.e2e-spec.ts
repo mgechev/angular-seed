@@ -17,7 +17,11 @@ describe('App', () => {
   });
 
   it('should have correct nav text for About', () => {
-    expect(element(by.css('sd-app sd-navbar nav a:last-child')).getText()).toEqual('ABOUT');
+    expect(element(by.css('sd-app sd-navbar nav a:nth-child(2)')).getText()).toEqual('ABOUT');
+  });
+
+  it('should have correct language text for Français', () => {
+    expect(element(by.css('sd-app sd-navbar nav a:last-child')).getText()).toEqual('FRANCAIS');
   });
 
 });
