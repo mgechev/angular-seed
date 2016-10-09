@@ -30,11 +30,14 @@
   <vat-type-selector *ngIf="displayVatTypeSelector()" (select)="costMatch.vatType = $event"></vat-type-selector>
   <cost-character-selector (select)="costMatch.costCharacter = $event"></cost-character-selector>
   <input [(ngModel)]="costMatch.percentage" placeholder="percentage">
-  <input [(ngModel)]="costMatch.fixedAmount" placeholder="vast bedrag">
+  <input [(ngModel)]="costMatch.fixedAmount" placeholder="vast bedrag (netto)">
   <button (click)="addMatch()" [disabled]="addMatchDisabled()">Match toevoegen</button>
   <button (click)="calculateVat()" [disabled]="calculateVatDisabled()">Bereken btw</button>
   <div>
-    btw: {{vatReport.totalVatIn}}
+    btw uit: {{vatReport.totalVatOut}}
+  </div>
+  <div>
+    btw in: {{vatReport.totalVatIn}}
   </div>
   <vaadin-date-picker label="Kies een datum"></vaadin-date-picker>
 

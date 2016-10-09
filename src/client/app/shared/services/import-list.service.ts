@@ -41,9 +41,9 @@ export enum CostCharacter {
 }
 
 export enum VatType {
-  NONE = 0,
-  LOW = 6,
-  HIGH = 21
+  NONE,
+  LOW,
+  HIGH
 }
 
 export class Transaction {

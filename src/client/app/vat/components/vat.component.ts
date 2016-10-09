@@ -27,6 +27,8 @@ export class VatComponent implements OnInit {
   public columns:Array<any> = [
     {title: 'Datum', name: 'dateFormatted'},
     {title: 'Bedrag', name: 'amount'},
+    {title: 'Bedrag Netto', name: 'amountNet'},
+    {title: 'btw', name: 'amountVat'},
     {title: 'Omschrijving', name: 'description'},
     {title: 'Type', name: 'costTypeDescription'},
     {title: 'Zakelijk/Prive', name: 'costCharacterDescription', sort: 'asc'}
@@ -51,8 +53,7 @@ export class VatComponent implements OnInit {
   constructor(
     private importListService: ImportListService,
     public costMatchService: CostMatchService,
-    private labelService: LabelService,
-    private vatCalculationService: VatCalculationService
+    private labelService: LabelService
   ) {
     this.uploadedFile = null;
     this.length = 0;
@@ -138,14 +139,7 @@ export class VatComponent implements OnInit {
   }
 
   private updateTotalVat():void {
-    // for (let i = 0; i < this.transactions.length; i++) {
-    //   if (CostCharacter[this.transactions[i].costCharacter] === CostCharacter.IGNORE) {
-    //     this.transactions.splice(i,1);
-    //   }
-    // }
-    this.vatReport = this.vatCalculationService.calculateTotalVat(this.transactions);
-    // this.transactionsLoaded = this.transactions.length;
-    // this.onChangeTable(this.config);
+    this.vatReport = VatCalculationService.calculateTotalVat(this.transactions);
   }
 
   public calculateVatDisabled():boolean {
