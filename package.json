@@ -125,7 +125,6 @@
     "stylelint-config-standard": "^11.0.0",
     "supports-color": "^3.1.2",
     "systemjs-builder": "0.15.31",
-    "systemjs-plugin-text": "0.0.9",
     "tildify": "^1.2.0",
     "traceur": "^0.0.111",
     "ts-node": "^1.0.0",
