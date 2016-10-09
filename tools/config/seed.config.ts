@@ -394,10 +394,12 @@ export class SeedConfig {
       join('node_modules', '*', 'package.json'),
       join('node_modules', '@angular', '*', 'package.json')
     ],
+    map: {
+      'text': 'node_modules/systemjs-plugin-text/text.js'
+    },
     paths: {
       [join(this.TMP_DIR, this.BOOTSTRAP_DIR, '*')]: `${this.TMP_DIR}/${this.BOOTSTRAP_DIR}/*`,
       'node_modules/*': 'node_modules/*',
-      'text': 'node_modules/systemjs-plugin-text/text.js',
       '*': 'node_modules/*'
     },
     packages: {
