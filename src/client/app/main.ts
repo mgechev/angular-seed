@@ -14,7 +14,7 @@ import { AppModule } from './app.module';
 if (String('<%= ENV %>') === 'prod') { enableProdMode(); }
 
 // Compile and launch the module with i18n providers
-let TP = new TranslationProviders;
+let TP = new TranslationProviders();
 TP.getTranslationFile().then((providers: any) => {
   const options: any = { providers };
   platformBrowserDynamic().bootstrapModule(AppModule, options);
