@@ -14,6 +14,7 @@ Provides fast, reliable and extensible starter for the development of Angular pr
 
 - Allows you to painlessly update the seed tasks of your already existing project.
 - Supports multiple Angular applications with shared codebase in a single instance of the seed.
+- Official Angular i18n support.
 - Ready to go, statically typed build system using gulp for working with TypeScript.
 - Production and development builds.
 - **Ahead-of-Time** compilation support.
