@@ -1,20 +1,21 @@
 import { Component, OnInit} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
+//import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { InterviewRoundInfo } from '../models/interviewRoundInfo';
 import { InterviewRoundService } from '../services/interviewRound.service';
 
 @Component({
     moduleId: module.id,
     selector: 'admin-interview-round-list',
-    templateUrl: 'interviewRoundList.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    templateUrl: 'interviewRoundList.component.html'
+    //,directives: [ROUTER_DIRECTIVES]
 })
 
 export class InterviewRoundListComponent implements OnInit {
     interviewRoundList: Array<InterviewRoundInfo>;
     errorMessage: string;
-    constructor(private _interviewRoundService: InterviewRoundService,
-        private _router: Router) {
+    constructor(private _interviewRoundService: InterviewRoundService
+        //, private _router: Router
+    ) {
     }
 
     ngOnInit() {
@@ -24,16 +25,16 @@ export class InterviewRoundListComponent implements OnInit {
     getInterviewRound() {
         this._interviewRoundService.getInterviewRound()
             .subscribe(
-            (results:any)=> {
+            (results: any) => {
                 this.interviewRoundList = results;
             },
             error => this.errorMessage = <any>error);
     }
 
-    onDelete(interviewRound : InterviewRoundInfo) {
+    onDelete(interviewRound: InterviewRoundInfo) {
         this._interviewRoundService.deleteInterviewRound(interviewRound)
             .subscribe(
-            results=> {
+            results => {
                 this.getInterviewRound();
             },
             error => this.errorMessage = <any>error);

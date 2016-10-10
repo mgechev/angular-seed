@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+//import { ROUTER_DIRECTIVES } from '@angular/router';
 import { UserInfo } from '../models/userInfo';
 import { UserService } from '../services/user.service';
 
 @Component({
     moduleId: module.id,
     selector: 'admin-user-list',
-    templateUrl: 'userList.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    templateUrl: 'userList.component.html'
+    //,directives: [ROUTER_DIRECTIVES]
 })
 
 export class UserListComponent implements OnInit {
@@ -23,8 +23,8 @@ export class UserListComponent implements OnInit {
     getUsers() {
         this._userService.getUsers()
             .subscribe(
-            results=> {
-             this.userList = <any>results;
+            results => {
+                this.userList = <any>results;
             },
             error => this.errorMessage = <any>error);
     }

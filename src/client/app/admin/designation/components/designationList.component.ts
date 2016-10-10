@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
+//import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { DesignationInfo } from '../models/designationInfo';
 import { DesignationService } from '../services/designation.service';
 
@@ -7,14 +7,15 @@ import { DesignationService } from '../services/designation.service';
     moduleId: module.id,
     selector: 'admin-designation-list',
     templateUrl: 'designationList.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    //    directives: [ROUTER_DIRECTIVES]
 })
 
 export class DesignationListComponent implements OnInit {
     designationList: Array<DesignationInfo>;
     errorMessage: string;
     constructor(private _designationService: DesignationService,
-        private _router: Router) {
+        //private _router: Router
+    ) {
     }
 
     ngOnInit() {
@@ -24,7 +25,7 @@ export class DesignationListComponent implements OnInit {
     getDesignations() {
         this._designationService.getDesignations()
             .subscribe(
-            (results:any)=> {
+            (results: any) => {
                 this.designationList = results;
             },
             error => this.errorMessage = <any>error);
@@ -33,7 +34,7 @@ export class DesignationListComponent implements OnInit {
     onDelete(designation: DesignationInfo) {
         this._designationService.deleteDesignation(designation)
             .subscribe(
-            results=> {
+            results => {
                 this.getDesignations();
             },
             error => this.errorMessage = <any>error);

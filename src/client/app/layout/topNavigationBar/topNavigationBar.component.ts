@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy, EventEmitter} from '@angular/core';
-import { Router, ROUTER_DIRECTIVES } from '@angular/router';
+import { Router } from '@angular/router';
 import { LoginService } from '../../shared/services/login.service';
 //import { ProfileBankService } from '../../profilebank/shared/services/profileBank.service';
 import { ProfileBankService } from '../../profileBank/shared/services/profileBank.service';
@@ -42,8 +42,8 @@ export class TopNavigationBarComponent implements OnInit, OnDestroy {
 
     }
     // This function search profiles acoording to search string
-    advancedSearch(searchString:string){
-        alert("We Are working on searching");
+    advancedSearch(searchString: string) {
+        alert('We Are working on searching');
         //TO DO: uncomment below api after API get ready
         //this._router.navigate(['/App/ProfileBank/AdvanceSearch/' + searchString + 'searchString' + searchString]);
     }
@@ -57,7 +57,7 @@ export class TopNavigationBarComponent implements OnInit, OnDestroy {
         this.subscription.unsubscribe();
     }
 
-    pushNotificationSettings(){
+    pushNotificationSettings() {
         this._router.navigate(['/App/NotificationSetting']);
     }
 }

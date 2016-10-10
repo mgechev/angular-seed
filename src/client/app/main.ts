@@ -39,15 +39,15 @@ bootstrap(AppComponent, [
   //<<<<<<< HEAD
   //ROUTER_PROVIDERS,
   AuthHttp,
-  HTTP_PROVIDERS,
+  //HTTP_PROVIDERS,
   CommonService,
   //provide(APP_BASE_HREF, { useValue: '<%= APP_BASE %>' }),
   //provide(LocationStrategy, { useClass: HashLocationStrategy }),
   //provide(ToastOptions, { useValue: new ToastOptions(toastoptions) }),
   //=======
-  disableDeprecatedForms(),
-  provideForms(),
-  APP_ROUTER_PROVIDERS,
+  //disableDeprecatedForms(),
+  //provideForms(),
+  //APP_ROUTER_PROVIDERS,
   { provide: APP_BASE_HREF, useValue: '<%= APP_BASE %>' },
   { provide: LocationStrategy, useClass: HashLocationStrategy },
   { provide: ToastOptions, useValue: new ToastOptions(toastoptions) }

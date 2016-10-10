@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+//import { ROUTER_DIRECTIVES } from '@angular/router';
 import { RoleInfo } from '../models/roleInfo';
 import { RoleService } from '../services/role.service';
 
 @Component({
     moduleId: module.id,
     selector: 'admin-role-list',
-    templateUrl: 'roleList.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    templateUrl: 'roleList.component.html'
+    //,directives: [ROUTER_DIRECTIVES]
 })
 
 export class RoleListComponent implements OnInit {
@@ -23,16 +23,16 @@ export class RoleListComponent implements OnInit {
     getRoles() {
         this._roleService.getRoles()
             .subscribe(
-            results=> {
+            results => {
                 this.roleList = <any>results;
             },
             error => this.errorMessage = <any>error);
     }
 
-    onDelete(role:RoleInfo) {
+    onDelete(role: RoleInfo) {
         this._roleService.deleteRole(role)
             .subscribe(
-            results=> {
+            results => {
                 this.getRoles();
             },
             error => this.errorMessage = <any>error);

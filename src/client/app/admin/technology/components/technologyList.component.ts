@@ -1,13 +1,13 @@
 import { Component, OnInit} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { TechnologyInfo } from '../models/technologyInfo';
 import { TechnologyService } from '../services/technology.service';
 
 @Component({
     moduleId: module.id,
     selector: 'admin-technology-list',
-    templateUrl: 'technologyList.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    templateUrl: 'technologyList.component.html'
+    //,directives: [ROUTER_DIRECTIVES]
 })
 
 export class TechnologyListComponent implements OnInit {
@@ -24,7 +24,7 @@ export class TechnologyListComponent implements OnInit {
     getTechnology() {
         this._technologyService.getTechnologies()
             .subscribe(
-            (results:any)=> {
+            (results: any) => {
                 this.technologyList = results;
             },
             error => this.errorMessage = <any>error);
@@ -33,7 +33,7 @@ export class TechnologyListComponent implements OnInit {
     onDelete(technology: TechnologyInfo) {
         this._technologyService.deleteTechnology(technology)
             .subscribe(
-            results=> {
+            results => {
                 this.getTechnology();
             },
             error => this.errorMessage = <any>error);

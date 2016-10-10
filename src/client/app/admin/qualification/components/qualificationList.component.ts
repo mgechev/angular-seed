@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { QualificationInfo } from '../models/qualificationInfo';
 import { QualificationService } from '../services/qualification.service';
 
@@ -7,7 +7,7 @@ import { QualificationService } from '../services/qualification.service';
     moduleId: module.id,
     selector: 'admin-qualification-list',
     templateUrl: 'qualificationList.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    //directives: [ROUTER_DIRECTIVES]
 })
 
 export class QualificationListComponent implements OnInit {
@@ -24,7 +24,7 @@ export class QualificationListComponent implements OnInit {
     getQualifications() {
         this._qualificationService.getQualifications()
             .subscribe(
-            (results:any)=> {
+            (results: any) => {
                 this.qualificationList = results;
             },
             error => this.errorMessage = <any>error);
@@ -33,7 +33,7 @@ export class QualificationListComponent implements OnInit {
     onDelete(qualification: QualificationInfo) {
         this._qualificationService.deleteQualification(qualification)
             .subscribe(
-            results=> {
+            results => {
                 this.getQualifications();
             },
             error => this.errorMessage = <any>error);

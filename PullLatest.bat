@@ -1,1 +1,1 @@
-git pull origin develop
+git pull origin developNg2

@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
+//import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { FeatureInfo } from '../models/featureInfo';
 import { FeatureService } from '../services/feature.service';
 import { RMSGridComponent } from '../../../shared/components/rmsGrid/rmsGrid.component';
@@ -10,7 +10,7 @@ import {GridMeta} from '../../../shared/components/rmsGrid/models/gridMeta';
     moduleId: module.id,
     selector: 'admin-feature-list',
     templateUrl: 'featureList.component.html',
-    directives: [ROUTER_DIRECTIVES, RMSGridComponent]
+    //directives: [ROUTER_DIRECTIVES, RMSGridComponent]
 })
 
 export class FeatureListComponent implements OnInit {
@@ -29,7 +29,7 @@ export class FeatureListComponent implements OnInit {
                 { label: 'Delete', callback: this.onDelete.bind(this), icon: 'fa fa-trash' }],
             searchCallback: this.getFeatures.bind(this),
             gridOptions: new GridOptions(0, 10, 1, '', '', ''),
-            rowClickCallback:this.onEdit.bind(this)
+            rowClickCallback: this.onEdit.bind(this)
         };
         this.getFeatures();
     }
@@ -37,23 +37,23 @@ export class FeatureListComponent implements OnInit {
     getFeatures() {
         this._featureService.getFeatures(this.meta.gridOptions)
             .subscribe(
-            (results:any)=> {
+            (results: any) => {
                 this.meta.dataList = results.list;
                 this.meta.gridOptions = results.gridOptions;
             },
             error => this.errorMessage = <any>error);
     }
 
-    onDelete(feature:FeatureInfo) {
+    onDelete(feature: FeatureInfo) {
         this._featureService.deleteFeature(feature)
             .subscribe(
-            results=> {
+            results => {
                 this.getFeatures();
             },
             error => this.errorMessage = <any>error);
     }
 
-    onEdit(item:FeatureInfo) {
+    onEdit(item: FeatureInfo) {
         this._router.navigate(['/App/Admin/Feature/Edit/' + item.Id]);
     }
 }

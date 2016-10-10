@@ -1,13 +1,13 @@
 import { Component, OnInit} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { PracticeInfo } from '../models/practiceInfo';
 import { PracticeService } from '../services/practice.service';
 
 @Component({
     moduleId: module.id,
     selector: 'admin-practice-list',
-    templateUrl: 'practiceList.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    templateUrl: 'practiceList.component.html'
+    //,directives: [ROUTER_DIRECTIVES]
 })
 
 export class PraciceListComponent implements OnInit {
@@ -24,7 +24,7 @@ export class PraciceListComponent implements OnInit {
     getPractices() {
         this._practiceService.getPractices()
             .subscribe(
-            (results:any)=> {
+            (results: any) => {
                 this.practiceList = results;
             },
             error => this.errorMessage = <any>error);
@@ -33,7 +33,7 @@ export class PraciceListComponent implements OnInit {
     onDelete(practice: PracticeInfo) {
         this._practiceService.deletePractice(practice)
             .subscribe(
-            results=> {
+            results => {
                 this.getPractices();
             },
             error => this.errorMessage = <any>error);

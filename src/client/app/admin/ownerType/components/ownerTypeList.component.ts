@@ -1,13 +1,13 @@
 import { Component, OnInit} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { OwnerTypeInfo } from '../models/ownerTypeInfo';
 import { OwnerTypeService } from '../services/ownerType.service';
 
 @Component({
     moduleId: module.id,
     selector: 'admin-ownertype-list',
-    templateUrl: 'ownerTypeList.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    templateUrl: 'ownerTypeList.component.html'
+    //,directives: [ROUTER_DIRECTIVES]
 })
 
 export class OwnerTypeListComponent implements OnInit {
@@ -24,7 +24,7 @@ export class OwnerTypeListComponent implements OnInit {
     getOwnerTypes() {
         this._ownerTypeService.getOwnerTypes()
             .subscribe(
-            (results:any)=> {
+            (results: any) => {
                 this.ownerTypeList = results;
             },
             error => this.errorMessage = <any>error);
@@ -33,7 +33,7 @@ export class OwnerTypeListComponent implements OnInit {
     onDelete(ownerType: OwnerTypeInfo) {
         this._ownerTypeService.deleteOwnerType(ownerType)
             .subscribe(
-            results=> {
+            results => {
                 this.getOwnerTypes();
             },
             error => this.errorMessage = <any>error);

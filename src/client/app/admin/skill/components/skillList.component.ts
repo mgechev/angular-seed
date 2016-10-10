@@ -1,13 +1,13 @@
 import { Component, OnInit} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { SkillInfo } from '../models/skillInfo';
 import { SkillService } from '../services/skill.service';
 
 @Component({
     moduleId: module.id,
     selector: 'admin-skill-list',
-    templateUrl: 'skillList.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    templateUrl: 'skillList.component.html'
+    //,directives: [ROUTER_DIRECTIVES]
 })
 
 export class SkillListComponent implements OnInit {
@@ -24,7 +24,7 @@ export class SkillListComponent implements OnInit {
     getSkills() {
         this._skillService.getSkills()
             .subscribe(
-            (results:any)=> {
+            (results: any) => {
                 this.skillList = results;
             },
             error => this.errorMessage = <any>error);
@@ -33,7 +33,7 @@ export class SkillListComponent implements OnInit {
     onDelete(skill: SkillInfo) {
         this._skillService.deleteSkill(skill)
             .subscribe(
-            results=> {
+            results => {
                 this.getSkills();
             },
             error => this.errorMessage = <any>error);
