@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
+import { Routes } from '@angular/router';
 import {FeatureListComponent} from './featureList.component';
 import {FeatureAddComponent} from './featureAdd.component';
 import { FeatureService } from '../services/feature.service';

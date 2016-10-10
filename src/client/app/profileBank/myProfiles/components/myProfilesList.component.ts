@@ -9,7 +9,7 @@ import { CandidateProfile,
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
-import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
+//import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 import { MasterData, SortingMasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
@@ -441,10 +441,10 @@ export class MyProfilesListComponent implements OnInit {
                         this.photoUploaded = true;
                         this.photoName = FileList.item(i).name;
                     }
-                }else {
+                } else {
                     this.toastr.error('Please upload image of type .jpg, .png, .jpeg');
                 }
-            }else {
+            } else {
                 this.toastr.error('Please upload image of size less than 2 MB');
             }
         } catch (error) {
@@ -527,18 +527,18 @@ export class MyProfilesListComponent implements OnInit {
             let FileList: FileList = inputValue.target.files;
             if (inputValue.target.files[0].size < 2000000) {
                 if (inputValue.target.files[0].type === 'application/pdf'
-                || inputValue.target.files[0].name.split('.')[1] === 'docx'
-                || inputValue.target.files[0].name.split('.')[1] === 'doc') {
+                    || inputValue.target.files[0].name.split('.')[1] === 'docx'
+                    || inputValue.target.files[0].name.split('.')[1] === 'doc') {
                     this.resumeFiles.length = 0;
                     for (let i = 0, length = FileList.length; i < length; i++) {
                         this.resumeFiles.push(FileList.item(i));
                         this.resumeUploaded = true;
                         this.resumeName = FileList.item(i).name;
                     }
-                }else {
+                } else {
                     this.toastr.error('Please upload document of type .doc, .docx, .pdf');
                 }
-            }else {
+            } else {
                 this.toastr.error('Please upload document of size less than 2 MB');
             }
         } catch (error) {

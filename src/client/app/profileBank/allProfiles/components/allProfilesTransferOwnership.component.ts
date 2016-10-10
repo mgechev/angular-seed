@@ -5,7 +5,7 @@ import { DataSharedService } from '../../shared/services/dataShared.service';
 import { AllProfilesService } from '../services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
-import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
+//import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';

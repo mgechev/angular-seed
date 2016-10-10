@@ -8,7 +8,7 @@ import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
-import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
+//import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 @Component({
     moduleId: module.id,
     selector: 'rrf-black-listed-profile-add',

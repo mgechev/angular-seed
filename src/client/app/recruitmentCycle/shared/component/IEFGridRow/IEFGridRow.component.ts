@@ -1,6 +1,6 @@
 import { Component, Input, AfterViewInit } from '@angular/core';
 //import { ROUTER_DIRECTIVES } from '@angular/router';
-import { IEFFunction } from '../../model/ief.ts';
+import { IEFFunction } from '../../model/ief';
 import { ResponseFromAPI, MasterData} from '../../../../shared/model/common.model';
 import {CandidateIEFService} from '../../services/Candidate.IEF.service';
 

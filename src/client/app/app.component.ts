@@ -2,6 +2,7 @@
 //<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
 //import { ROUTER_DIRECTIVES, Routes, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 //import { HTTP_PROVIDERS } from '@angular/http';
 
 //import { AboutComponent } from './+about/index';
@@ -12,12 +13,13 @@ import { HomeComponent } from './home/index';
 //import { ROUTER_DIRECTIVES } from '@angular/router';
 //import { HTTP_PROVIDERS } from '@angular/http';
 
-import { Config, NameListService, NavbarComponent, ToolbarComponent } from './shared/index';
+import { Config } from './shared/index';
+//import { Config, NameListService, NavbarComponent, ToolbarComponent } from './shared/index';
 //>>>>>>> 80ccc9aadc3699bf89f1be2216ccfe1d91fa9bf5
 
-import { LoginComponent } from './login/index';
+//--import { LoginComponent } from './login/index';
 import { LoginService } from './shared/services/login.service';
-import { Error400Component, Error500Component } from './errorPages/index';
+//--import { Error400Component, Error500Component } from './errorPages/index';
 /*=======26 sep
 import { Component } from '@angular/core';
 import { Config} from './shared/index';

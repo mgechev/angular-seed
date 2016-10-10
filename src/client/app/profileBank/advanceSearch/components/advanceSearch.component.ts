@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
+import { Routes } from '@angular/router';
 import {AdvanceSearchListComponent} from './advanceSearchList.component';
 import { AdvanceSearchService } from '../services/advanceSearch.service';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -11,7 +11,7 @@ import { ProfileEsplHistoryListComponent } from '../../profilesEsplHistory/compo
 @Component({
     selector: 'rrf-myprofiles',
     template: ' <router-outlet></router-outlet>',
-    providers: [AdvanceSearchService, MastersService,ToastsManager,ProfileBankService]
+    providers: [AdvanceSearchService, MastersService, ToastsManager, ProfileBankService]
 })
 /**
  * angular 2.0 changes

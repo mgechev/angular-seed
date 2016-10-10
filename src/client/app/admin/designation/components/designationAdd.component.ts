@@ -15,12 +15,14 @@ export class DesignationAddComponent implements OnInit {
     errorMessage: string;
     params: number;
     constructor(private _designationService: DesignationService,
-        private _router: ActivatedRoute) {
+        private _router: Router,
+        private activatedRoute: ActivatedRoute
+    ) {
         this.designation = new DesignationInfo(0, '');
     }
 
-    ngOnInit(segment: ActivatedRoute) {
-        this.params = this._router.snapshot.params['Id'];
+    ngOnInit() {
+        this.params = this.activatedRoute.snapshot.params['Id'];
         //this.params = Number(segment.getParam('Id'));
         if (this.params) {
             this._designationService.getDesignationById(this.params)

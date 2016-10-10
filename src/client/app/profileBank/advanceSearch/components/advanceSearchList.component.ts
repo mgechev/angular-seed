@@ -4,7 +4,7 @@ import { CandidateProfile, ResumeMeta, AddCandidateResponse, AllCandidateProfile
 import { AdvanceSearchService } from '../services/advanceSearch.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
-import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
+//import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 import { MasterData, SortingMasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';

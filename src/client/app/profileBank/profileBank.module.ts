@@ -33,7 +33,7 @@ import {
   RecentProfilesViewComponent } from './recentProfiles/index';
 import {ProfileBankService, DetailProfileComponent, ProfileBankAssignRRFComponent } from './shared/index';
 import {ViewRRFComponent} from '../RRF/shared/index';
-import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
+//import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 
 
 @NgModule({
@@ -60,11 +60,11 @@ import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
     RecentProfilesAddComponent,
     RecentProfilesListComponent,
     RecentProfilesViewComponent,
-    CollapseDirective,
+    //CollapseDirective,
     IEFGridRowComponent,
     IfAuthorizeDirective,
-    ViewRRFComponent,
-    TOOLTIP_DIRECTIVES
+    //TOOLTIP_DIRECTIVES,
+    ViewRRFComponent
   ],
   exports: [
     ProfileBankAssignRRFComponent,

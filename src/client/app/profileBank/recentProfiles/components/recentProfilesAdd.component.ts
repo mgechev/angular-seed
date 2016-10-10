@@ -69,8 +69,8 @@ export class RecentProfilesAddComponent implements OnInit {
         this.getGrades();
         this.getVisaType();
         //get current profile by Id
-        this.params = this.activatedRoute.snapshot.params['Id'];
-        this.params = segment.getParam('id');
+        this.params = this.activatedRoute.snapshot.params['id'];
+        //this.params = segment.getParam('id');
         if (this.params) {
             this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
             this.CandidateID.Value = this.params.split('ID')[0];
