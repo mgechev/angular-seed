@@ -17,11 +17,8 @@
     "e2e": "protractor",
     "e2e.live": "protractor --elementExplorer",
     "gulp": "gulp",
-<<<<<<< HEAD
     "i18n": "ng-xi18n && gulp clean.i18n",
-=======
     "lint": "gulp tslint",
->>>>>>> 730fb4107d51b7e50df31fe2eb2024db878c660d
     "karma": "karma",
     "karma.start": "karma start",
     "postinstall": "gulp check.versions && gulp build.bundle.rxjs && npm prune && gulp webdriver && gulp print.banner",
