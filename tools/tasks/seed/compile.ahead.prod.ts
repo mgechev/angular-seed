@@ -28,6 +28,14 @@ export = (done: any) => {
     return JSON.stringify(parsed, null, 2);
   });
   const args = argv;
+
+  // If a translation, tell the compiler
+  if(args.lang) {
+    args['i18nFile'] = `./src/client/assets/locale/messages.${args.lang}.xlf`;
+    args['locale'] = args.lang;
+    args['i18nFormat'] = 'xlf';
+  }
+
   const cliOptions = new tsc.NgcCliOptions(args);
   tsc.main(join(Config.TMP_DIR, Config.BOOTSTRAP_DIR), cliOptions, codegen)
     .then(done)
@@ -37,4 +45,3 @@ export = (done: any) => {
       process.exit(1);
     });
 };
-
