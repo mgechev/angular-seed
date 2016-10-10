@@ -1,7 +1,7 @@
 # Introduction
 
 [![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
-[![Build Status](https://travis-ci.org/mgechev/angular2-seed.svg?branch=master)](https://travis-ci.org/mgechev/angular2-seed)
+[![Build Status](https://travis-ci.org/mgechev/angular-seed.svg?branch=master)](https://travis-ci.org/mgechev/angular2-seed)
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/mgechev/angular2-seed?svg=true)](https://ci.appveyor.com/project/mgechev/angular2-seed)
 [![Join the chat at https://gitter.im/mgechev/angular2-seed](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mgechev/angular2-seed?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
@@ -291,6 +291,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │   ├── project.config.ts  <- configuration of the specific project
 │   │   ├── seed.config.interfaces.ts
 │   │   └── seed.config.ts     <- generic configuration of the seed project
+│   │   └── seed.tslint.json   <- generic tslint configuration of the seed project
 │   ├── config.ts              <- exported configuration (merge both seed.config and project.config, project.config overrides seed.config)
 │   ├── debug.ts
 │   ├── env                    <- environment configuration
