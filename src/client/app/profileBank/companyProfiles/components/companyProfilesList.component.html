@@ -140,8 +140,7 @@
                             </div>
 
                             <div class="table">
-                                <table class="table table-bordered table-hover order-column dataTable no-footer" id="sample_1" role="grid"
-                                    aria-describedby="sample_1_info">
+                                <table class="table table-bordered table-hover order-column dataTable no-footer" id="sample_1" role="grid" aria-describedby="sample_1_info">
                                     <thead class="thead">
                                         <tr>
                                             <td>
@@ -185,15 +184,16 @@
                                                             tooltipEnable="true">
                                                             <i class="fa fa-search"></i> <!--View Profile-->
                                                         </button>
-                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='deleteCandidate(profile.CandidateID)' [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] " tooltip="Delete Profile"
-                                                            tooltipPlacement="top" tooltipTrigger="mouseenter" title="Delete Profile"
-                                                            tooltipEnable="true" >
-                                                            <i class="fa fa-remove "></i> <!--Delete Profile-->
-                                                        </button>
-                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs blue" (click)='getCandidateHistory(profile.CandidateID)'
-                                                            tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                            title="View Interview History" tooltipEnable="true">
+
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs blue" (click)='getCandidateHistory(profile.CandidateID)' tooltip="View Interview History"
+                                                            tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Interview History"
+                                                            tooltipEnable="true">
                                                             <i class="fa fa-history"></i> <!--View Interview History-->
+                                                        </button>
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='deleteCandidate(profile.CandidateID)' [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] "
+                                                            tooltip="Delete Profile" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                            title="Delete Profile" tooltipEnable="true">
+                                                            <i class="fa fa-remove "></i> <!--Delete Profile-->
                                                         </button>
 
                                                     </div>

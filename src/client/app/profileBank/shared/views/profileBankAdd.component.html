@@ -1194,13 +1194,39 @@
                                                 </div>
 
                                                 <div class="row">
-                                                    <div class="col-md-2">
+                                                    <!--<div class="col-md-2">
                                                         <div class="form-group">
                                                             <label class="control-label">Current CTC</label>
                                                             <div class="row">
                                                                 <div class="col-md-10">
                                                                     <input type="text" placeholder="" class="form-control text-capitalize" [(ngModel)]="profile.CandidateSalaryDetails.TakeHomePay"
                                                                         (blur)='onSaveSalaryDetails()' />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>-->
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Current CTC</label>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <!--<input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CurrentSalary" />-->
+                                                                    <span class="form-control" tooltip="You can change this value from Primary Info Tab" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="!profile.CurrentSalary">{{profile.CandidateSalaryDetails.CurrentSalary}}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Expected Salary</label>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <!--<input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.ExpectedSalary"
+                                                                   />-->
+                                                                    <span class="form-control" tooltip="You can change this value from Primary Info Tab" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="!profile.ExpectedSalary">{{profile.CandidateSalaryDetails.ExpectedSalary}}
+                                                                    </span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1217,46 +1243,21 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-2" *ngIf="VariableCTC">
+                                                    <div class="col-md-3" *ngIf="VariableCTC">
                                                         <div class="form-group">
                                                             <label class="control-label">Variable </label>
                                                             <div class="row">
-                                                                <div class="col-md-10">
+                                                                <div class="col-md-13">
                                                                     <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.HowMuchVariable" (blur)='onSaveSalaryDetails()'
                                                                     />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Current Salary</label>
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <!--<input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CurrentSalary" />-->
-                                                                    <span class="form-control" tooltip="You can change this value from Primary Info Tab" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                        tooltipEnable="!profile.CurrentSalary">{{profile.CandidateSalaryDetails.CurrentSalary}}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Expected Salary</label>
-                                                            <div class="row">
-                                                                <div class="col-md-8">
-                                                                    <!--<input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.ExpectedSalary"
-                                                                   />-->
-                                                                    <span class="form-control" tooltip="You can change this value from Primary Info Tab" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                        tooltipEnable="!profile.ExpectedSalary">{{profile.CandidateSalaryDetails.ExpectedSalary}}
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-1">
                                                         <div class="form-group">
                                                             <label class="control-label">Allowance</label>
                                                             <div class="mt-checkbox-inline ">
@@ -1268,7 +1269,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-8" *ngIf="AllowanceFlag">
+                                                    <div class="col-md-5" *ngIf="AllowanceFlag">
                                                         <div class="form-group">
                                                             <label class="control-label">Allowance if any</label>
                                                             <div class="row">
@@ -1279,9 +1280,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-1">
                                                         <div class="form-group">
                                                             <label class="control-label">Incentive</label>
                                                             <div class="mt-checkbox-inline ">
@@ -1293,7 +1292,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-8" *ngIf="IncentiveFlag">
+                                                    <div class="col-md-5" *ngIf="IncentiveFlag">
                                                         <div class="form-group">
                                                             <label class="control-label">Incentive if any</label>
                                                             <div class="row">
@@ -1305,6 +1304,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                               
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
@@ -1319,7 +1319,7 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Any Perks</label>
                                                             <div class="row">
-                                                                <div class="col-md-10">
+                                                                <div class="col-md-13">
                                                                     <textarea class="form-control text-capitalize" rows="1" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSalaryDetails.AnyPerks"
                                                                         (blur)='onSaveSalaryDetails()'></textarea>
                                                                 </div>
@@ -1526,7 +1526,7 @@
                                                         <div class="row">
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label class="control-label">Exsting Company Offers If Any</label>
+                                                                    <label class="control-label">Existing Company Offers If Any</label>
                                                                     <textarea class="form-control text-capitalize" rows="2" placeholder="Exsting Company Offers" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.IfExstingCompanyOffers"
                                                                         (blur)="onSaveProfessionalDetails()"></textarea>
                                                                 </div>

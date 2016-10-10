@@ -51,6 +51,7 @@ export class MyRRFAddComponent implements OnInit {
     isDisabled: boolean = false;
     feedbackComment: string = '';
     previousExpectedDateValue: Date;
+    navagateBackPath: string ='';
 
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
@@ -64,6 +65,7 @@ export class MyRRFAddComponent implements OnInit {
         window.onbeforeunload = function () {
             return 'Data will be lost if you leave the page, are you sure?';
         };
+        this.navagateBackPath = sessionStorage.getItem('navigationPath');
         this.setMinDateToCalender();
 
         //dropdown with multi selector and search
@@ -152,7 +154,7 @@ export class MyRRFAddComponent implements OnInit {
                     results => {
                         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                             this.toastr.success((<ResponseFromAPI>results).Message);
-                            this._router.navigate(['/App/RRF/RRFDashboard/']);
+                            this._router.navigate([this.navagateBackPath]);
                         } else {
                             this.toastr.error((<ResponseFromAPI>results).Message);
                         }
@@ -212,7 +214,8 @@ export class MyRRFAddComponent implements OnInit {
             if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.UpdateForFeedback) {
                 this._router.navigate(['/App/RRF/FeedbackPending/']);
             } else {
-                this._router.navigate(['/App/RRF/RRFDashboard/']);
+                //this._router.navigate(['/App/RRF/RRFDashboard/']);
+                this._router.navigate([this.navagateBackPath]);
             }
         }
 
