@@ -1,6 +1,4 @@
 <nav>
-  <a [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" i18n>HOME</a>
-  <a [routerLink]="['/about']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" i18n>ABOUT</a>
-  <a (click)="selectLanguage('fr')" *ngIf="lang !== 'fr'">FRANCAIS</a>
-  <a (click)="selectLanguage('en-US')" *ngIf="lang !== 'en-US'">ENGLISH</a>
+  <a [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">HOME</a>
+  <a [routerLink]="['/about']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">ABOUT</a>
 </nav>
