@@ -48,13 +48,14 @@ The seed provides the following tasks:
 | `build.js.e2e.ts`      | Transpiles the TypeScript files (excluding specs and e2e specs) for the `e2e` environment |
 | `build.js.prod.ts`     | Transpiles the TypeScript files (excluding specs and e2e specs) for the `prod` environment |
 | `build.js.test.ts`     | Transpiles the TypeScript files (excluding specs and e2e specs) for the `test` environment |
-| `build.js.tools.ts`    | Transpiles the TypeScript files located in `/tools` |
+| `build.tools.ts`       | Transpiles the TypeScript files located in `/tools` + `/gulpfile.ts` |
 | `check.versions.ts`    | Checks if the required Node and NPM (as defined in `/config/seed.config.ts`) are installed |
+| `check.tools.ts`       | Checks if the build.tools task has been run, if so runs clean.tools then build.tools |
 | `clean.all.ts`         | Cleans all files within the `/dist` directory |
 | `clean.coverage.ts`    | Cleans all files within the `/coverage` directory |
 | `clean.dev.ts`         | Cleans all files within the `/dist/dev` directory |
 | `clean.prod.ts`        | Cleans all files within the `/dist/prod` directory |
-| `clean.tools.ts`       | Cleans all JavaScript files (which got transpiled from the TypeScript files) within the `/tools` directory  |
+| `clean.tools.ts`       | Cleans all JavaScript files which were transpiled by the build.tools task  |
 | `copy.js.prod.ts`      | Copies all TypeScript files (excluding specs and e2e specs) over to the `/tmp` dir |
 | `css-lint.ts`          | Lints all `css` files using `stylelint` |
 | `e2e.ts`               | Runs all e2e specs using `protractor` |

@@ -41,7 +41,8 @@ gulp.task('build.e2e', (done: any) =>
 // --------------
 // Build prod.
 gulp.task('build.prod', (done: any) =>
-  runSequence('clean.prod',
+  runSequence('check.tools',
+              'clean.prod',
               'tslint',
               'build.assets.prod',
               'build.html_css',
@@ -56,7 +57,8 @@ gulp.task('build.prod', (done: any) =>
 // --------------
 // Build prod.
 gulp.task('build.prod.exp', (done: any) =>
-  runSequence('clean.prod',
+  runSequence('check.tools',
+              'clean.prod',
               'tslint',
               'build.assets.prod',
               'build.html_css',
@@ -89,12 +91,6 @@ gulp.task('test.watch', (done: any) =>
               'karma.watch',
               done));
 
-// --------------
-// Build tools.
-gulp.task('build.tools', (done: any) =>
-  runSequence('clean.tools',
-              'build.js.tools',
-              done));
 
 // --------------
 // Docs
@@ -149,9 +145,10 @@ let firstRun = true;
 gulp.task('clean.once', (done: any) => {
   if (firstRun) {
     firstRun = false;
-    runSequence('clean.dev', 'clean.coverage', done);
+    runSequence('check.tools', 'clean.dev', 'clean.coverage', done);
   } else {
     util.log('Skipping clean on rebuild');
     done();
   }
 });
+
