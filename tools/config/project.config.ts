@@ -10,6 +10,8 @@ export class ProjectConfig extends SeedConfig {
 
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
 
+  ENABLE_SCSS = true;
+
   constructor() {
     super();
     // this.APP_TITLE = 'Put name of your app here';

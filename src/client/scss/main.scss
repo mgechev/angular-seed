@@ -1,3 +1,5 @@
+@import 'variables';
+
 /* Reset */
 html,
 body,
@@ -14,10 +16,12 @@ div {
 
 /* Set up a default font and some padding to provide breathing room */
 body {
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: $body-font-family;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-color: $body-background-color;
 }
 
 p {
@@ -39,7 +43,7 @@ li {
 }
 
 input {
-  border: 1px solid #106cc8;
+  border: 1px solid $color-blue-0;
   font-size: 14px;
   height: 40px;
   outline: none;
@@ -47,7 +51,7 @@ input {
 }
 
 button {
-  background-color: #106cc8;
+  background-color: $color-blue-0;
   border-style: none;
   color: rgba(255, 255, 255, 0.87);
   cursor: pointer;
@@ -56,8 +60,8 @@ button {
   height: 40px;
   padding: 8px 18px;
   text-decoration: none;
-}
 
-button:hover {
-  background-color: #28739e;
+  &:hover {
+    background-color: $color-blue-1;
+  }
 }

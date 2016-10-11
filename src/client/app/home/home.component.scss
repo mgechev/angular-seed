@@ -1,0 +1,17 @@
+@import '../../scss/variables';
+
+:host {
+  display: block;
+  padding: 0 16px;
+
+  input {
+    width: $home-page-input-width;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0 0 0 8px;
+  }
+}
+
+
