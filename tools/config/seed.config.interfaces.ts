@@ -11,3 +11,8 @@ export interface Environments {
   [key: string]: string;
 }
 
+export interface ExtendPackages {
+  name: string;
+  path?: string;
+  packageMeta?: any;
+}
