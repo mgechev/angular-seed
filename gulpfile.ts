@@ -50,7 +50,7 @@ gulp.task('build.prod', (done: any) =>
               'copy.prod',
               'build.js.prod',
               'build.bundles',
-              'build.bundles.app',
+              'build.lazy-bundles.app',
               'minify.bundles',
               'build.index.prod',
               done));

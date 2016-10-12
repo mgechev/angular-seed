@@ -8,4 +8,4 @@ import { AboutRoutingModule } from './about-routing.module';
   declarations: [AboutComponent],
   exports: [AboutComponent]
 })
-export class AboutModule { }
+export default class AboutModule { }

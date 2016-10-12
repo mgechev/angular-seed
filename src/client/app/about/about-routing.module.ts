@@ -1,5 +1,5 @@
 import { RouterModule } from '@angular/router';
-import { AboutComponent } from './index';
+import { AboutComponent } from './about.component';
 
 export const AboutRoutingModule = RouterModule.forChild([
   {

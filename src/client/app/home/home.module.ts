@@ -12,5 +12,5 @@ import { HomeRoutingModule } from './home-routing.module';
   exports: [HomeComponent],
   providers: [NameListService]
 })
-export class HomeModule { }
+export default class HomeModule { }
 
