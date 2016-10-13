@@ -73,6 +73,24 @@ gulp.task('build.prod.exp', (done: any) =>
               done));
 
 // --------------
+// Build prod.
+gulp.task('build.prod.rollup.exp', (done: any) =>
+  runSequence('clean.prod',
+              'tslint',
+              'css-lint',
+              'build.assets.prod',
+              'build.html_css',
+              'copy.prod',
+              'compile.ahead.prod',
+              'build.js.prod.rollup.exp',
+              'build.bundles',
+              'build.bundles.app.rollup.exp',
+              'transpile.bundles.rollup.exp',
+              'minify.bundles',
+              'build.index.prod',
+              done));
+
+// --------------
 // Build test.
 gulp.task('build.test', (done: any) =>
   runSequence('clean.once',

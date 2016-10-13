@@ -1,12 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/from';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
+import * as OperatorMap from 'rxjs/operator/map';
+import * as OperatorCatch from 'rxjs/operator/catch';
+
+
+Observable.prototype.map = OperatorMap.map;
+Observable.prototype.catch = OperatorCatch._catch;
+Observable.prototype._catch = OperatorCatch._catch;
+
 
 /**
  * This class provides the NameList service with methods to read names and add names.
  */
 @Injectable()
 export class NameListService {
+  private _names: string[] = [];
 
   /**
    * Creates a new NameListService with the injected Http.
@@ -20,9 +33,13 @@ export class NameListService {
    * @return {string[]} The Observable for the HTTP request.
    */
   get(): Observable<string[]> {
-    return this.http.get('/assets/data.json')
-                    .map((res: Response) => res.json())
-                    .catch(this.handleError);
+    if (this._names.length) {
+      return Observable.from([this._names]);
+    } else {
+      return this.http.get('/assets/data.json')
+          .map((res: Response) => res.json())
+          .catch(this.handleError);
+    }
   }
 
   /**
