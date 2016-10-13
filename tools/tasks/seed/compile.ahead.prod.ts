@@ -14,17 +14,17 @@ function codegen(
   return CodeGenerator.create(ngOptions, cliOptions, program, host).codegen();
 }
 
-const copyFile = (name: string, from: string, to: string, mod: any = (f: string) => f) => {
-  const file = readFileSync(join(from, name));
-  writeFileSync(join(to, name), mod(file.toString()));
+const modifyFile = (path: string, mod: any = (f: string) => f) => {
+  const file = readFileSync(path);
+  writeFileSync(path, mod(file.toString()));
 };
 
 export = (done: any) => {
   // Note: dirty hack until we're able to set config easier
-  copyFile('tsconfig.json', Config.TMP_DIR, join(Config.TMP_DIR, Config.BOOTSTRAP_DIR), (content: string) => {
+  modifyFile(join(Config.TMP_DIR, 'tsconfig.json'), (content: string) => {
     const parsed = JSON.parse(content);
     parsed.files = parsed.files || [];
-    parsed.files.push('main.ts');
+    parsed.files.push(join(Config.BOOTSTRAP_DIR, 'main.ts'));
     return JSON.stringify(parsed, null, 2);
   });
   const args = argv;
@@ -37,7 +37,7 @@ export = (done: any) => {
   }
 
   const cliOptions = new tsc.NgcCliOptions(args);
-  tsc.main(join(Config.TMP_DIR, Config.BOOTSTRAP_DIR), cliOptions, codegen)
+  tsc.main(Config.TMP_DIR, cliOptions, codegen)
     .then(done)
     .catch(e => {
       console.error(e.stack);
@@ -45,3 +45,4 @@ export = (done: any) => {
       process.exit(1);
     });
 };
+

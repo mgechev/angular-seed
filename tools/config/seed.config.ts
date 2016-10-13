@@ -1,8 +1,9 @@
+import { readdirSync, lstatSync } from 'fs';
 import { join } from 'path';
 import * as slash from 'slash';
 import { argv } from 'yargs';
 
-import { Environments, InjectableDependency } from './seed.config.interfaces';
+import { Environments, ExtendPackages, InjectableDependency } from './seed.config.interfaces';
 
 /************************* DO NOT CHANGE ************************
  *
@@ -387,7 +388,7 @@ export class SeedConfig {
    * The system builder configuration of the application.
    * @type {any}
    */
-  SYSTEM_BUILDER_CONFIG: any = {
+  SYSTEM_BUILDER_CONFIG: any = prepareBuilderConfig({
     defaultJSExtensions: true,
     base: this.PROJECT_ROOT,
     packageConfigPaths: [
@@ -395,7 +396,6 @@ export class SeedConfig {
       join('node_modules', '@angular', '*', 'package.json')
     ],
     paths: {
-      [join(this.TMP_DIR, this.BOOTSTRAP_DIR, '*')]: `${this.TMP_DIR}/${this.BOOTSTRAP_DIR}/*`,
       'node_modules/*': 'node_modules/*',
       '*': 'node_modules/*'
     },
@@ -441,7 +441,7 @@ export class SeedConfig {
         defaultExtension: 'js'
       }
     }
-  };
+  }, join(this.PROJECT_ROOT, this.APP_SRC), this.TMP_DIR);
 
   /**
    * The Autoprefixer configuration for the application.
@@ -547,6 +547,29 @@ export class SeedConfig {
     return this.ENV === ENVIRONMENTS.PRODUCTION && this.ENABLE_SCSS ? 'scss' : 'css';
   }
 
+  addPackageBundles(pack: ExtendPackages) {
+
+    if (pack.path) {
+      this.SYSTEM_CONFIG_DEV.paths[pack.name] = pack.path;
+    }
+
+    if (pack.packageMeta) {
+      this.SYSTEM_BUILDER_CONFIG.packages[pack.name] = pack.packageMeta;
+    }
+  }
+
+}
+
+/**
+ * Used only when developing multiple applications with shared codebase.
+ * We need to specify the paths for each individual application otherwise
+ * SystemJS Builder cannot bundle the target app on Windows.
+ */
+function prepareBuilderConfig(config: any, srcPath: string, tmpPath: string) {
+  readdirSync(srcPath).filter(f =>
+    lstatSync(join(srcPath, f)).isDirectory()).forEach(f =>
+    config.paths[join(tmpPath, f, '*')] = `${tmpPath}/${f}/*`);
+  return config;
 }
 
 /**
