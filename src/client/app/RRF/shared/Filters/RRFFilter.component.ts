@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { RRFDetails} from '../../myRRF/models/rrfDetails';
+import { RRFDetails } from '../../myRRF/models/rrfDetails';
 
 @Pipe({ name: 'RRFPipe' })
 export class RRFPipe implements PipeTransform {
@@ -23,10 +23,10 @@ export class RRFPipe implements PipeTransform {
         ) : value;
     }
 
-    checkForSkill(value: RRFDetails, stringToSearh: string) {
+    checkForSkill(value: RRFDetails, stringToSearh: string): boolean {
         var result: boolean = false;
         for (var i = 0; i < value.SkillsRequired.length; i++) {
-            if (value.SkillsRequired[i].Value.search(new RegExp(stringToSearh, 'i')) !== -1 ) {
+            if (value.SkillsRequired[i].Value.search(new RegExp(stringToSearh, 'i')) !== -1) {
                 result = true;
                 return result;
             }

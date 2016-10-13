@@ -1,10 +1,10 @@
-import { Component, OnInit} from '@angular/core';
-//import { ROUTER_DIRECTIVES, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FeatureInfo } from '../models/featureInfo';
 import { FeatureService } from '../services/feature.service';
 import { RMSGridComponent } from '../../../shared/components/rmsGrid/rmsGrid.component';
-import {GridOptions} from '../../../shared/components/rmsGrid/models/gridOptions';
-import {GridMeta} from '../../../shared/components/rmsGrid/models/gridMeta';
+import { GridOptions } from '../../../shared/components/rmsGrid/models/gridOptions';
+import { GridMeta } from '../../../shared/components/rmsGrid/models/gridMeta';
 
 @Component({
     moduleId: module.id,
@@ -26,7 +26,7 @@ export class FeatureListComponent implements OnInit {
             properties: ['FeatureName'],
             dataList: this.featureList,
             itemActions: [{ label: 'Edit', callback: this.onEdit.bind(this), icon: 'fa fa-edit' },
-                { label: 'Delete', callback: this.onDelete.bind(this), icon: 'fa fa-trash' }],
+            { label: 'Delete', callback: this.onDelete.bind(this), icon: 'fa fa-trash' }],
             searchCallback: this.getFeatures.bind(this),
             gridOptions: new GridOptions(0, 10, 1, '', '', ''),
             rowClickCallback: this.onEdit.bind(this)

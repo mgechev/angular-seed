@@ -2,7 +2,7 @@
 //<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
 //import { ROUTER_DIRECTIVES, Routes, Router } from '@angular/router';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 //import { HTTP_PROVIDERS } from '@angular/http';
 
 //import { AboutComponent } from './+about/index';
@@ -68,11 +68,14 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('InOnInit');
+
+    /*
     if (this._loginService.isAuthenticated()) {
       this.getLoggedInUserPermission();
     } else {
       this._router.navigate(['/Login']);
-    }
+    }*/
   }
 
   getLoggedInUserPermission(): void {
