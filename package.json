@@ -65,7 +65,7 @@
     "async": "^2.0.1",
     "autoprefixer": "^6.3.7",
     "browser-sync": "^2.13.0",
-    "codelyzer": "1.0.0-beta.1",
+    "codelyzer": "~1.0.0-beta.2",
     "colorguard": "^1.2.0",
     "compression": "^1.6.2",
     "connect": "^3.4.1",
