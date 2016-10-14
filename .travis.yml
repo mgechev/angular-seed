@@ -43,12 +43,6 @@ notifications:
     on_failure: always  # options: [always|never|change] default: always
     on_start: never     # options: [always|never|change] default: always
 
-env:
-  global:
-    # https://github.com/DefinitelyTyped/tsd#tsdrc
-    # Token has no scope (read-only access to public information)
-    - TSD_GITHUB_TOKEN=9b18c72997769f3867ef2ec470e626d39661795d
-
 cache:
   directories: node_modules
 

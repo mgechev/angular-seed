@@ -8,9 +8,6 @@ version: "{build}"
 # Test against this version of Node.js
 environment:
   nodejs_version: "Stable"
-  # https://github.com/DefinitelyTyped/tsd#tsdrc
-  # Token has no scope (read-only access to public information)
-  TSD_GITHUB_TOKEN: "9b18c72997769f3867ef2ec470e626d39661795d"
 
 build: off
 

@@ -10,7 +10,6 @@ import Config from '../../config';
 import { CssTask } from '../css_task';
 
 const plugins = <any>gulpLoadPlugins();
-const cleanCss = require('gulp-clean-css');
 const gulpConcatCssConfig = Config.getPluginConfig('gulp-concat-css');
 
 const processors = [
@@ -95,7 +94,6 @@ function processAllExternalStylesheets() {
     .pipe(isProd ? plugins.concatCss(gulpConcatCssConfig.targetFile, gulpConcatCssConfig.options) : plugins.util.noop())
     .pipe(plugins.postcss(processors))
     .on('error', reportPostCssError)
-    .pipe(isProd ? cleanCss() : plugins.util.noop())
     .pipe(gulp.dest(Config.CSS_DEST));
 }
 
@@ -141,7 +139,6 @@ function processExternalCss() {
     .pipe(plugins.postcss(processors))
     .pipe(isProd ? plugins.concatCss(gulpConcatCssConfig.targetFile, gulpConcatCssConfig.options) : plugins.util.noop())
     .on('error', reportPostCssError)
-    .pipe(isProd ? cleanCss() : plugins.util.noop())
     .pipe(gulp.dest(Config.CSS_DEST));
 }
 
