@@ -44,8 +44,6 @@ export function serveDocs() {
  */
 export function serveCoverage() {
   let server = express();
-  let compression = require('compression');
-      server.use(compression());
 
   server.use(
     Config.APP_BASE,
@@ -63,8 +61,6 @@ export function serveCoverage() {
 export function serveProd() {
   let root = resolve(process.cwd(), Config.PROD_DEST);
   let server = express();
-  let compression = require('compression');
-      server.use(compression());
 
   server.use(Config.APP_BASE, express.static(root));
 
