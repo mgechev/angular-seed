@@ -27,10 +27,6 @@ const config = {
   },
 
   onPrepare: function() {
-    const SpecReporter = require('jasmine-spec-reporter');
-    // add jasmine spec reporter
-    jasmine.getEnv().addReporter(new SpecReporter({ displayStacktrace: true }));
-
     browser.ignoreSynchronization = false;
   },
 
