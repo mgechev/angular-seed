@@ -1,6 +1,4 @@
 import * as util from 'gulp-util';
-import * as runSequence from 'run-sequence';
-
 import { join } from 'path';
 
 let fs = require('fs');
@@ -14,17 +12,30 @@ export = (done: any) => {
 
   // need to require the build.toolchain task as it won't be able to run after we run clear.files
   let buildTools = require('./build.tools');
+  let cleanTools = require('./clean.tools');
+
+  let rebuild = false;
 
   try {
     fs.accessSync(checkFile, fs.F_OK);
     util.log('Gulpfile has previously been compiled, rebuilding toolchain');
-    runSequence('clean.tools');
-    util.log('Running \'build.tools\'');
-    buildTools(done);
+    rebuild = true;
 
   } catch (e) {
     util.log('Tools not compiled, skipping rebuild');
     done();
+  }
+
+  // continue here to prevent other errors being caught...
+  if (rebuild) {
+    util.log('Running \'clean.tools\' from check.tools');
+    cleanTools();
+
+    util.log('Running \'build.tools\' from check.tools');
+    let build = buildTools();
+
+    build.on('end', done);
+
   }
 
 };

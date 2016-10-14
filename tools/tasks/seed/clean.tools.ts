@@ -5,6 +5,10 @@ import Config from '../../config';
 
 /**
  * Removes all the js, js.map from the tools directories
+ *
+ * NB: this needs to remain syncronus, or check.tools will
+ * need to be updated to handle the returned promise/stream
+ *
  */
 export = () => {
   let source = [
