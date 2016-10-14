@@ -12,7 +12,7 @@
   <body>
     <section class="page-header">
       <h1 class="project-name">Angular Seed</h1>
-      <h2 class="project-tagline">High-quality, modular starter, seed project for Angular, 2 and beyond, apps with statically typed build and AoT</h2>
+      <h2 class="project-tagline">High-quality, modular starter project for Angular 2 (and beyond) with statically typed build and AoT</h2>
       <a href="https://github.com/mgechev/angular-seed" class="btn">View on GitHub</a>
       <a href="https://github.com/mgechev/angular-seed/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/mgechev/angular-seed/tarball/master" class="btn">Download .tar.gz</a>
@@ -22,21 +22,22 @@
       <h1>
 <a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction</h1>
 
-<p><a href="https://angular.io/styleguide"><img src="https://mgechev.github.io/angular2-style-guide/images/badge.svg" alt="Angular 2 Style Guide"></a>
-<a href="https://travis-ci.org/mgechev/angular2-seed"><img src="https://travis-ci.org/mgechev/angular2-seed.svg?branch=master" alt="Build Status"></a>
-<a href="https://ci.appveyor.com/project/mgechev/angular2-seed"><img src="https://ci.appveyor.com/api/projects/status/github/mgechev/angular2-seed?svg=true" alt="Build Status"></a>
+<p><a href="https://angular.io/styleguide"><img src="https://mgechev.github.io/angular2-style-guide/images/badge.svg" alt="Angular Style Guide"></a>
+<a href="https://travis-ci.org/mgechev/angular-seed"><img src="https://travis-ci.org/mgechev/angular-seed.svg?branch=master" alt="Build Status"></a>
+<a href="https://ci.appveyor.com/project/mgechev/angular2-seed"><img src="https://ci.appveyor.com/api/projects/status/jg5vg36w0klpa00e/branch/master?svg=true" alt="Build Status"></a>
 <a href="https://gitter.im/mgechev/angular2-seed?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/mgechev/angular2-seed"></a>
 <a href="http://opensource.org/licenses/MIT"><img src="http://img.shields.io/badge/license-MIT-brightgreen.svg" alt="MIT license"></a>
-<a href="https://david-dm.org/mgechev/angular2-seed"><img src="https://david-dm.org/mgechev/angular2-seed.svg" alt="Dependency Status"></a>
-<a href="https://david-dm.org/mgechev/angular2-seed#info=devDependencies"><img src="https://david-dm.org/mgechev/angular2-seed/dev-status.svg" alt="devDependency Status"></a></p>
+<a href="https://david-dm.org/mgechev/angular-seed"><img src="https://david-dm.org/mgechev/angular-seed.svg" alt="Dependency Status"></a>
+<a href="https://david-dm.org/mgechev/angular-seed#info=devDependencies"><img src="https://david-dm.org/mgechev/angular-seed/dev-status.svg" alt="devDependency Status"></a></p>
 
-<p>Provides fast, reliable and extensible starter for the development of Angular 2 projects.</p>
+<p>Provides fast, reliable and extensible starter for the development of Angular projects.</p>
 
-<p><code>angular2-seed</code> provides the following features:</p>
+<p><code>angular-seed</code> provides the following features:</p>
 
 <ul>
 <li>Allows you to painlessly update the seed tasks of your already existing project.</li>
 <li>Supports multiple Angular applications with shared codebase in a single instance of the seed.</li>
+<li>Official Angular i18n support.</li>
 <li>Ready to go, statically typed build system using gulp for working with TypeScript.</li>
 <li>Production and development builds.</li>
 <li>
@@ -54,12 +55,12 @@
 
 <p><strong>Note</strong> that this seed project requires node v4.x.x or higher and npm 2.14.7.</p>
 
-<p><strong>Here is how to <a href="https://github.com/mgechev/angular2-seed/wiki/Speed-up-the-build-on-Windows">speed-up the build on Windows</a></strong>.</p>
+<p><strong>Here is how to <a href="https://github.com/mgechev/angular-seed/wiki/Speed-up-the-build-on-Windows">speed-up the build on Windows</a></strong>.</p>
 
 <p>In order to start the seed use:</p>
 
-<div class="highlight highlight-source-shell"><pre>git clone --depth 1 https://github.com/mgechev/angular2-seed.git
-<span class="pl-c1">cd</span> angular2-seed
+<div class="highlight highlight-source-shell"><pre>git clone --depth 1 https://github.com/mgechev/angular-seed.git
+<span class="pl-c1">cd</span> angular-seed
 <span class="pl-c"># install the project's dependencies</span>
 npm install
 <span class="pl-c"># watches your files and uses livereload by default</span>
@@ -146,7 +147,7 @@ npm start -- --app bar</pre></div>
 <h1>
 <a id="how-to-extend" class="anchor" href="#how-to-extend" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to extend?</h1>
 
-<p>Visit the <a href="https://github.com/mgechev/angular2-seed/wiki">Wiki page</a> of the project.</p>
+<p>Visit the <a href="https://github.com/mgechev/angular-seed/wiki">Wiki page</a> of the project.</p>
 
 <h1>
 <a id="running-tests" class="anchor" href="#running-tests" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Running tests</h1>
@@ -189,17 +190,19 @@ npm run e2e.live</pre></div>
 <h1>
 <a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h1>
 
-<p>Please see the <a href="https://github.com/mgechev/angular2-seed/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a> file for guidelines.</p>
+<p>Please see the <a href="https://github.com/mgechev/angular-seed/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a> file for guidelines.</p>
 
 <h1>
 <a id="advanced-seed-option" class="anchor" href="#advanced-seed-option" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Advanced Seed Option</h1>
 
-<p>An <a href="https://github.com/NathanWalker/angular2-seed-advanced">advanced option to this seed exists here</a> which mirrors the latest changes here but adds core support for:</p>
+<p>An <a href="https://github.com/NathanWalker/angular-seed-advanced">advanced option to this seed exists here</a> which mirrors the latest changes here but adds core support for:</p>
 
 <ul>
 <li>
 <a href="https://github.com/ngrx/store">ngrx/store</a> RxJS powered state management, inspired by <strong>Redux</strong>
 </li>
+<li>
+<a href="https://github.com/ngrx/effects">ngrx/effects</a> Side effect model for @ngrx/store</li>
 <li>
 <a href="https://github.com/ocombe/ng2-translate">ng2-translate</a> for i18n
 
@@ -209,13 +212,13 @@ npm run e2e.live</pre></div>
 </ul>
 </li>
 <li>
-<a href="https://github.com/angulartics/angulartics2">angulartics2</a> Vendor-agnostic analytics for Angular2 applications.
+<a href="https://github.com/angulartics/angulartics2">angulartics2</a> Vendor-agnostic analytics for Angular applications.
 
 <ul>
 <li>Out of box support for <a href="https://segment.com/">Segment</a>
 
 <ul>
-<li>When using the seed, be sure to change your <code>write_key</code> <a href="https://github.com/NathanWalker/angular2-seed-advanced/blob/master/src/client/index.html#L24">here</a>
+<li>When using the seed, be sure to change your <code>write_key</code> <a href="https://github.com/NathanWalker/angular-seed-advanced/blob/master/src/client/index.html#L24">here</a>
 </li>
 </ul>
 </li>
@@ -246,7 +249,7 @@ npm run e2e.live</pre></div>
 <li>
 <a href="https://github.com/DeviantJS/angular2-seed-material2">https://github.com/DeviantJS/angular2-seed-material2</a> - integration with <a href="https://github.com/angular/material2">Angular2-Material</a>.</li>
 <li>
-<a href="https://github.com/AngularShowcase/angular2-sample-app">https://github.com/AngularShowcase/angular2-sample-app</a> - sample Angular 2 application.</li>
+<a href="https://github.com/AngularShowcase/angular2-sample-app">https://github.com/AngularShowcase/angular2-sample-app</a> - sample Angular application.</li>
 <li>
 <a href="https://github.com/AngularShowcase/ng2-bootstrap-sbadmin">https://github.com/AngularShowcase/ng2-bootstrap-sbadmin</a> - ng2-bootstrap-sbadmin.</li>
 <li>
@@ -254,9 +257,9 @@ npm run e2e.live</pre></div>
 <li>
 <a href="https://github.com/tarlepp/angular-sailsjs-boilerplate-frontend-angular2">https://github.com/tarlepp/angular-sailsjs-boilerplate-frontend-angular2</a> - Example application for <a href="http://sailsjs.org/">Sails.js</a> integration.</li>
 <li>
-<a href="https://github.com/ludohenin/ng2-wp-blog">https://github.com/ludohenin/ng2-wp-blog</a> - Angular 2 application using Wordpress <a href="http://v2.wp-api.org">JSON-API</a> backend..</li>
+<a href="https://github.com/ludohenin/ng2-wp-blog">https://github.com/ludohenin/ng2-wp-blog</a> - Angular application using Wordpress <a href="http://v2.wp-api.org">JSON-API</a> backend..</li>
 <li>
-<a href="https://github.com/AngularShowcase/angular2-seed-example-mashup">https://github.com/AngularShowcase/angular2-seed-example-mashup</a> - Angular 2 application demonstrating the use of <a href="http://redux.js.org/">Redux</a>, <a href="https://github.com/mbostock/d3">D3</a>, <a href="https://github.com/socketio">socket io</a>, <a href="https://developers.google.com/chart/">Google Charts</a>, and <a href="https://github.com/Reactive-Extensions/RxJS">RxJs</a>.</li>
+<a href="https://github.com/AngularShowcase/angular2-seed-example-mashup">https://github.com/AngularShowcase/angular2-seed-example-mashup</a> - Angular application demonstrating the use of <a href="http://redux.js.org/">Redux</a>, <a href="https://github.com/mbostock/d3">D3</a>, <a href="https://github.com/socketio">socket io</a>, <a href="https://developers.google.com/chart/">Google Charts</a>, and <a href="https://github.com/Reactive-Extensions/RxJS">RxJs</a>.</li>
 <li>
 <a href="https://github.com/tiagomapmarques/angular2-seed-phaser/tree/releases">https://github.com/tiagomapmarques/angular2-seed-phaser/tree/releases</a> - integration with <a href="http://phaser.io/">Phaser</a>.</li>
 <li>
@@ -342,6 +345,7 @@ npm run e2e.live</pre></div>
 │   │   ├── project.config.ts  &lt;- configuration of the specific project
 │   │   ├── seed.config.interfaces.ts
 │   │   └── seed.config.ts     &lt;- generic configuration of the seed project
+│   │   └── seed.tslint.json   &lt;- generic tslint configuration of the seed project
 │   ├── config.ts              &lt;- exported configuration (merge both seed.config and project.config, project.config overrides seed.config)
 │   ├── debug.ts
 │   ├── env                    &lt;- environment configuration
@@ -352,7 +356,6 @@ npm run e2e.live</pre></div>
 │   │   ├── project            &lt;- manual ambient typings for the project
 │   │   │   └── sample.package.d.ts
 │   │   └── seed               &lt;- seed manual ambient typings
-│   │       ├── angular2-hot-loader.d.ts
 │   │       ├── autoprefixer.d.ts
 │   │       ├── colorguard.d.ts
 │   │       ├── connect-livereload.d.ts
@@ -936,7 +939,7 @@ npm run e2e.live</pre></div>
 <h1>
 <a id="change-log" class="anchor" href="#change-log" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Change Log</h1>
 
-<p>You can follow the <a href="https://github.com/angular/angular/blob/master/CHANGELOG.md">Angular 2 change log here</a>.</p>
+<p>You can follow the <a href="https://github.com/angular/angular/blob/master/CHANGELOG.md">Angular change log here</a>.</p>
 
 <h1>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h1>
