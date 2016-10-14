@@ -72,7 +72,6 @@ _Does not rely on any global dependencies._
 - [Tools documentation](#tools-documentation)
 - [How to extend?](#how-to-extend)
 - [Running tests](#running-tests)
-<!--- [Progressive Web Apps](#progressive-web-apps) -->
 - [Contributing](#contributing)
 - [Advanced Seed Option](#advanced-seed-option)
 - [Examples](#examples)
@@ -154,27 +153,6 @@ npm run e2e
 npm run e2e.live
 ```
 You can learn more about [Protractor Interactive Mode here](https://github.com/angular/protractor/blob/master/docs/debugging.md#testing-out-protractor-interactively)
-
-<!-- # Progressive Web Apps
-
-`angular-seed` supports progressive web apps with [angular/mobile-toolkit](https://github.com/angular/mobile-toolkit).
-
-The seed can generate a file `manifest.appcache` which lists all files included in a project's output, along with SHA1 hashes of all file contents. This file can be used directly as an AppCache manifest (for now, `index.html` must be manually edited to set this up).
-
-The manifest is also annotated for use with `angular-service-worker`. Some manual operations are currently required to enable this usage. The package must be installed, and `worker.js` manually copied into the project src directory:
-
-```bash
-cp node_modules/angular-service-worker/dist/worker.js src/client
-```
-
-In order to generate the manifest file run:
-
-```bash
-# ENV can be both prod or dev
-npm run generate.manifest -- --env ENV
-```
-
-Then, the commented snippet in `main.ts` must be uncommented to register the worker script as a service worker. -->
 
 # Contributing
 
