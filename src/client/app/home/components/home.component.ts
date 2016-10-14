@@ -1,45 +1,45 @@
 import { Component, OnInit } from '@angular/core';
 import { Routes, ActivatedRoute } from '@angular/router';
-/**Layout */
-import { FooterComponent } from '../../layout/footer/footer.component';
-import { TopNavigationBarComponent } from '../../layout/topNavigationBar/topNavigationBar.component';
-import { PageActionsComponent } from '../../layout/pageActions/pageActions.component';
-import { SideBarComponent } from '../../layout/sideBar/sideBar.component';
-import { QuickSidebarComponent } from '../../layout/quickSidebar/quickSidebar.component';
-/** admin */
-import { FeatureComponent } from '../../admin/feature/index';
-import { PracticeComponent } from '../../admin/practice/index';
-import { SkillComponent } from '../../admin/skill/index';
-import { RoleComponent } from '../../admin/role/index';
-import { UserComponent } from '../../admin/user/index';
-import { TechnologyComponent } from '../../admin/technology/index';
-import { QualificationComponent } from '../../admin/qualification/index';
-import { InterviewRoundComponent } from '../../admin/interviewRound/index';
-import { DesignationComponent } from '../../admin/designation/index';
-import { OwnerTypeComponent } from '../../admin/ownerType/index';
-/** profileBank */
-import { AllProfilesComponent } from '../../profileBank/index';
-import { BlackListedProfilesComponent } from '../../profileBank/blackListedProfiles/index';
-import { MyProfilesComponent } from '../../profileBank/myProfiles/index';
-import { CompanyProfilesComponent } from '../../profileBank/companyProfiles/index';
-import { RecentProfilesComponent } from '../../profileBank/recentProfiles/index';
-import { IncompleteProfilesComponent } from '../../profileBank/incompleteProfiles/index';
-import { AdvanceSearchComponent } from '../../profileBank/advanceSearch/index';
-/** RRF */
-import { MyRRFComponent } from '../../RRF/myRRF/index';
-import { RRFApprovalComponent } from '../../RRF/RRFApproval/index';
-import { RRFDashboardComponent } from '../../RRF/RRFDashboard/index';
-import { FeedbackPendingComponent } from '../../RRF/FeedBackPending/index';
-import {InterviewerAvalabilityComponent } from '../../RRF/index';
-//import { PendingRequestComponent } from '../../RRF/PendingRequest/index';
-/** Recruitment Cycle */
-import {ShowScheduleInterviewsComponent} from '../../recruitmentCycle/index';
-import {ScheduleInterviewComponent} from '../../recruitmentCycle/scheduleInterview/index';
-import { InterviewrsComponent, RecruitmentInterviewerCalenderComponent } from '../../recruitmentCycle/interviewersTab/index';
+// /**Layout */
+// import { FooterComponent } from '../../layout/footer/footer.component';
+// import { TopNavigationBarComponent } from '../../layout/topNavigationBar/topNavigationBar.component';
+// import { PageActionsComponent } from '../../layout/pageActions/pageActions.component';
+// import { SideBarComponent } from '../../layout/sideBar/sideBar.component';
+// import { QuickSidebarComponent } from '../../layout/quickSidebar/quickSidebar.component';
+// /** admin */
+// import { FeatureComponent } from '../../admin/feature/index';
+// import { PracticeComponent } from '../../admin/practice/index';
+// import { SkillComponent } from '../../admin/skill/index';
+// import { RoleComponent } from '../../admin/role/index';
+// import { UserComponent } from '../../admin/user/index';
+// import { TechnologyComponent } from '../../admin/technology/index';
+// import { QualificationComponent } from '../../admin/qualification/index';
+// import { InterviewRoundComponent } from '../../admin/interviewRound/index';
+// import { DesignationComponent } from '../../admin/designation/index';
+// import { OwnerTypeComponent } from '../../admin/ownerType/index';
+// /** profileBank */
+// import { AllProfilesComponent } from '../../profileBank/index';
+// import { BlackListedProfilesComponent } from '../../profileBank/blackListedProfiles/index';
+// import { MyProfilesComponent } from '../../profileBank/myProfiles/index';
+// import { CompanyProfilesComponent } from '../../profileBank/companyProfiles/index';
+// import { RecentProfilesComponent } from '../../profileBank/recentProfiles/index';
+// import { IncompleteProfilesComponent } from '../../profileBank/incompleteProfiles/index';
+// import { AdvanceSearchComponent } from '../../profileBank/advanceSearch/index';
+// /** RRF */
+// import { MyRRFComponent } from '../../RRF/myRRF/index';
+// import { RRFApprovalComponent } from '../../RRF/RRFApproval/index';
+// import { RRFDashboardComponent } from '../../RRF/RRFDashboard/index';
+// import { FeedbackPendingComponent } from '../../RRF/FeedBackPending/index';
+// import { InterviewerAvalabilityComponent } from '../../RRF/index';
+// //import { PendingRequestComponent } from '../../RRF/PendingRequest/index';
+// /** Recruitment Cycle */
+// import { ShowScheduleInterviewsComponent } from '../../recruitmentCycle/index';
+// import { ScheduleInterviewComponent } from '../../recruitmentCycle/scheduleInterview/index';
+// import { InterviewrsComponent, RecruitmentInterviewerCalenderComponent } from '../../recruitmentCycle/interviewersTab/index';
 
-import { SpinnerComponent, SpinnerService } from '../../shared/components/spinner/spinner';
-import {DashboardComponent} from '../../Dashboard/component/dashboard.component';
-import { PushNotificationComponent } from '../../settings/index';
+// import { SpinnerComponent, SpinnerService } from '../../shared/components/spinner/spinner';
+// import { DashboardComponent } from '../../Dashboard/component/dashboard.component';
+// import { PushNotificationComponent } from '../../settings/index';
 
 
 @Component({
@@ -48,7 +48,7 @@ import { PushNotificationComponent } from '../../settings/index';
     styleUrls: ['home.component.css'],
     // directives: [ROUTER_DIRECTIVES, FooterComponent, PageActionsComponent, TopNavigationBarComponent,
     //     SideBarComponent, QuickSidebarComponent, SpinnerComponent, DashboardComponent],
-    providers: [SpinnerService],
+    //providers: [SpinnerService],
 })
 /**
  * angular 2.0 changes

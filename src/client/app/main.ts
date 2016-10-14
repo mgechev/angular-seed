@@ -1,15 +1,15 @@
 //<<<<<<< HEAD 26 sep
-import { APP_BASE_HREF, LocationStrategy, HashLocationStrategy } from '@angular/common';
+//import { APP_BASE_HREF, LocationStrategy, HashLocationStrategy } from '@angular/common';
 //import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import { enableProdMode } from '@angular/core';
 //import { enableProdMode, provide } from '@angular/core';
 //import { bootstrap } from '@angular/platform-browser-dynamic';
 //import { ROUTER_PROVIDERS } from '@angular/router';
-import { CommonService } from './shared/services/common.service';
-import { AuthHttp } from './shared/services/authHttp.service';
+////import { CommonService } from './shared/services/common.service';
+////import { AuthHttp } from './shared/services/authHttp.service';
 
 //import { APP_ROUTER_PROVIDERS } from './app.routes';
-import { AppComponent } from './app.component';
+////import { AppComponent } from './app.component';
 //import { HTTP_PROVIDERS } from '@angular/http';
 import {ToastOptions} from  'ng2-toastr/ng2-toastr';
 
@@ -34,7 +34,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 let toastoptions = {
   positionClass: 'toast-bottom-right',
 };
-
+/*
 bootstrap(AppComponent, [
   //<<<<<<< HEAD
   //ROUTER_PROVIDERS,
@@ -52,7 +52,7 @@ bootstrap(AppComponent, [
   { provide: LocationStrategy, useClass: HashLocationStrategy },
   { provide: ToastOptions, useValue: new ToastOptions(toastoptions) }
   //>>>>>>> 80ccc9aadc3699bf89f1be2216ccfe1d91fa9bf5
-]);
+]);*/
 /*======= 26 sep
 import { enableProdMode } from '@angular/core';
 // The browser platform with a compiler
