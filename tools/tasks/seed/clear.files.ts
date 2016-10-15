@@ -18,5 +18,5 @@ export = () => {
     join(Config.APP_SRC, '**/*.metadata.json')
   ];
 
-  return rimraf.sync(source);
+  return source.forEach(p => rimraf.sync(p));
 };
