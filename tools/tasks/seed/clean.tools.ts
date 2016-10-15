@@ -1,4 +1,4 @@
-import * as del from 'del';
+import * as rimraf from 'rimraf';
 import { join } from 'path';
 
 import Config from '../../config';
@@ -18,5 +18,5 @@ export = () => {
     join(Config.TOOLS_DIR, '**/*.js.map'),
   ];
 
-  return del.sync(source);
+  return source.forEach(p => rimraf.sync(p));
 };
