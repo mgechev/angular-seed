@@ -21,7 +21,6 @@ export class VatComponent implements OnInit {
 
   transactionsLoaded: number = 0;
   transactionsUnmatched: number;
-  transactionsLongDescription: number = 0;
   public rows:Array<any> = [];
 
   public columns:Array<any> = [
@@ -78,21 +77,13 @@ export class VatComponent implements OnInit {
 
   private checkTransactions(): void {
     this.transactionsUnmatched = 0;
-    this.transactionsLongDescription = 0;
     for (let i = 0; i < this.transactions.length; i++) {
       if (this.transactions[i].costCharacter === CostCharacter.UNKNOWN) {
         this.transactionsUnmatched++;
       }
-      if (this.transactions[i].description.length > 200 && CostType[this.transactions[i].costType] !== CostType.IGNORE) {
-        this.transactionsLongDescription++;
-      }
     }
-    this.config.filtering.onlyUnknown = false;
-    if (this.transactionsUnmatched > 0) {
-      this.config.filtering.onlyUnknown = true;
-    } else if (this.transactionsUnmatched === 0 && this.transactionsLongDescription > 0) {
-      this.config.sorting.sortType = 'length';
-    }
+
+    this.config.filtering.onlyUnknown = this.transactionsUnmatched > 0;
   }
 
   fileChangeEvent(fileInput: any){
@@ -180,13 +171,6 @@ export class VatComponent implements OnInit {
         if (previous[columnName] > current[columnName]) {
           return sort === 'desc' ? -1 : 1;
         } else if (previous[columnName] < current[columnName]) {
-          return sort === 'asc' ? -1 : 1;
-        }
-        return 0;
-      } else if (this.config.sorting.sortType === 'length') {
-        if (previous[columnName].length > current[columnName].length) {
-          return sort === 'desc' ? -1 : 1;
-        } else if (previous[columnName].length < current[columnName].length) {
           return sort === 'asc' ? -1 : 1;
         }
         return 0;

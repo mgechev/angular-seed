@@ -20,9 +20,6 @@
     <p *ngSwitchCase="false">Alle transacties zijn gematched.</p>
     <p *ngSwitchCase="true">Er zijn nog {{transactionsUnmatched}} onbekende transacties (zie kolom 'Zakelijk/Prive'). Voeg matches toe m.b.v. het zoekfilter hieronder.</p>
   </div>
-  <div *ngIf="transactionsLongDescription > 0">
-    <p>Er zijn nog {{transactionsLongDescription}} transacties met een te lange omschrijving. Voeg matches toe m.b.v. het zoekfilter hieronder.</p>
-  </div>
   <input *ngIf="config.filtering" placeholder="Zoekfilter (hoofdlettergevoelig)"
          [ngTableFiltering]="config.filtering"
          (tableChanged)="onChangeTable(config)"/>
