@@ -42,9 +42,7 @@ export class VatCalculationService {
           case CostType.BUSINESS_FOOD:
             vatOut = VatCalculationService.applyVat(transactions[i], 0);
             break;
-          case CostType.INVOICE_PAID:
-            vatIn = VatCalculationService.applyVat(transactions[i], 21);
-            break;
+          case CostType.INVOICE_PAID: break;
           default:
             if (transactions[i].costMatch != null && transactions[i].costMatch.vatType != null) {
               if (transactions[i].costMatch.fixedAmount > 0) {
