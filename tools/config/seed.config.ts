@@ -1,4 +1,3 @@
-import { readdirSync, lstatSync } from 'fs';
 import { join } from 'path';
 import * as slash from 'slash';
 import { argv } from 'yargs';
@@ -383,62 +382,64 @@ export class SeedConfig {
    * The system builder configuration of the application.
    * @type {any}
    */
-  get SYSTEM_BUILDER_CONFIG(): any {
-    return prepareBuilderConfig({
-      defaultJSExtensions: true,
-      base: this.PROJECT_ROOT,
-      packageConfigPaths: [
-        join('node_modules', '*', 'package.json'),
-        join('node_modules', '@angular', '*', 'package.json')
-      ],
-      paths: {
-        'node_modules/*': 'node_modules/*',
-        '*': 'node_modules/*'
+  SYSTEM_BUILDER_CONFIG: any = {
+    defaultJSExtensions: true,
+    base: this.PROJECT_ROOT,
+    packageConfigPaths: [
+      join('node_modules', '*', 'package.json'),
+      join('node_modules', '@angular', '*', 'package.json')
+    ],
+    paths: {
+      // Note that for multiple apps this configuration need to be updated
+      // You will have to include entries for each individual application in
+      // `src/client`.
+      [join(this.TMP_DIR, this.BOOTSTRAP_DIR, '*')]: `${this.TMP_DIR}/${this.BOOTSTRAP_DIR}/*`,
+      'node_modules/*': 'node_modules/*',
+      '*': 'node_modules/*'
+    },
+    packages: {
+      '@angular/common': {
+        main: 'index.js',
+        defaultExtension: 'js'
       },
-      packages: {
-        '@angular/common': {
-          main: 'index.js',
-          defaultExtension: 'js'
-        },
-        '@angular/compiler': {
-          main: 'index.js',
-          defaultExtension: 'js'
-        },
-        '@angular/core/testing': {
-          main: 'index.js',
-          defaultExtension: 'js'
-        },
-        '@angular/core': {
-          main: 'index.js',
-          defaultExtension: 'js'
-        },
-        '@angular/forms': {
-          main: 'index.js',
-          defaultExtension: 'js'
-        },
-        '@angular/http': {
-          main: 'index.js',
-          defaultExtension: 'js'
-        },
-        '@angular/platform-browser': {
-          main: 'index.js',
-          defaultExtension: 'js'
-        },
-        '@angular/platform-browser-dynamic': {
-          main: 'index.js',
-          defaultExtension: 'js'
-        },
-        '@angular/router': {
-          main: 'index.js',
-          defaultExtension: 'js'
-        },
-        'rxjs': {
-          main: 'Rx.js',
-          defaultExtension: 'js'
-        }
+      '@angular/compiler': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/core/testing': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/core': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/forms': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/http': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/platform-browser': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/platform-browser-dynamic': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/router': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'rxjs': {
+        main: 'Rx.js',
+        defaultExtension: 'js'
       }
-    }, join(this.PROJECT_ROOT, this.APP_SRC), this.TMP_DIR);
-  }
+    }
+  };
 
   /**
    * The Autoprefixer configuration for the application.
@@ -555,18 +556,6 @@ export class SeedConfig {
     }
   }
 
-}
-
-/**
- * Used only when developing multiple applications with shared codebase.
- * We need to specify the paths for each individual application otherwise
- * SystemJS Builder cannot bundle the target app on Windows.
- */
-function prepareBuilderConfig(config: any, srcPath: string, tmpPath: string) {
-  readdirSync(srcPath).filter(f =>
-    lstatSync(join(srcPath, f)).isDirectory()).forEach(f =>
-    config.paths[join(tmpPath, f, '*')] = `${tmpPath}/${f}/*`);
-  return config;
 }
 
 /**
