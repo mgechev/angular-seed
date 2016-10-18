@@ -383,60 +383,62 @@ export class SeedConfig {
    * The system builder configuration of the application.
    * @type {any}
    */
-  SYSTEM_BUILDER_CONFIG: any = prepareBuilderConfig({
-    defaultJSExtensions: true,
-    base: this.PROJECT_ROOT,
-    packageConfigPaths: [
-      join('node_modules', '*', 'package.json'),
-      join('node_modules', '@angular', '*', 'package.json')
-    ],
-    paths: {
-      'node_modules/*': 'node_modules/*',
-      '*': 'node_modules/*'
-    },
-    packages: {
-      '@angular/common': {
-        main: 'index.js',
-        defaultExtension: 'js'
+  get SYSTEM_BUILDER_CONFIG(): any {
+    return prepareBuilderConfig({
+      defaultJSExtensions: true,
+      base: this.PROJECT_ROOT,
+      packageConfigPaths: [
+        join('node_modules', '*', 'package.json'),
+        join('node_modules', '@angular', '*', 'package.json')
+      ],
+      paths: {
+        'node_modules/*': 'node_modules/*',
+        '*': 'node_modules/*'
       },
-      '@angular/compiler': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/core/testing': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/core': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/forms': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/http': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/platform-browser': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/platform-browser-dynamic': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/router': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      'rxjs': {
-        main: 'Rx.js',
-        defaultExtension: 'js'
+      packages: {
+        '@angular/common': {
+          main: 'index.js',
+          defaultExtension: 'js'
+        },
+        '@angular/compiler': {
+          main: 'index.js',
+          defaultExtension: 'js'
+        },
+        '@angular/core/testing': {
+          main: 'index.js',
+          defaultExtension: 'js'
+        },
+        '@angular/core': {
+          main: 'index.js',
+          defaultExtension: 'js'
+        },
+        '@angular/forms': {
+          main: 'index.js',
+          defaultExtension: 'js'
+        },
+        '@angular/http': {
+          main: 'index.js',
+          defaultExtension: 'js'
+        },
+        '@angular/platform-browser': {
+          main: 'index.js',
+          defaultExtension: 'js'
+        },
+        '@angular/platform-browser-dynamic': {
+          main: 'index.js',
+          defaultExtension: 'js'
+        },
+        '@angular/router': {
+          main: 'index.js',
+          defaultExtension: 'js'
+        },
+        'rxjs': {
+          main: 'Rx.js',
+          defaultExtension: 'js'
+        }
       }
-    }
-  }, join(this.PROJECT_ROOT, this.APP_SRC), this.TMP_DIR);
+    }, join(this.PROJECT_ROOT, this.APP_SRC), this.TMP_DIR);
+  }
 
   /**
    * The Autoprefixer configuration for the application.
