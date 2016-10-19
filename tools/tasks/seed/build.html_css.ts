@@ -45,7 +45,12 @@ function prepareTemplates() {
  * Execute the appropriate component-stylesheet processing method based on user stylesheet preference.
  */
 function processComponentStylesheets() {
-  return Config.ENABLE_SCSS ? processComponentScss() : processComponentCss();
+  return Config.ENABLE_SCSS ?
+    merge(
+      processComponentScss(),
+      processComponentCss())
+    :
+    processComponentCss();
 }
 
 /**
