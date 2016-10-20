@@ -26,6 +26,7 @@ import { Environments, ExtendPackages, InjectableDependency } from './seed.confi
  */
 export const ENVIRONMENTS: Environments = {
   DEVELOPMENT: 'dev',
+  STAGING: 'staging',
   PRODUCTION: 'prod'
 };
 
