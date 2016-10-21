@@ -64,7 +64,12 @@ function processComponentScss() {
     .pipe(plugins.sass(Config.getPluginConfig('gulp-sass')).on('error', plugins.sass.logError))
     .pipe(plugins.postcss(processors))
     .on('error', reportPostCssError)
-    .pipe(plugins.sourcemaps.write(isProd ? '.' : ''))
+    .pipe(plugins.sourcemaps.write(isProd ? '.' : '', {
+      sourceMappingURL: (file: any) => {
+        // write absolute urls to the map files
+        return `/${file.relative}.map`;
+      }
+    }))
     .pipe(gulp.dest(isProd ? Config.TMP_DIR : Config.APP_DEST));
 }
 
