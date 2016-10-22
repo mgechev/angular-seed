@@ -9,6 +9,7 @@ import {CostCharacterSelector} from "./cost-character.selector";
 import {Ng2TableModule} from "ng2-table/ng2-table";
 import {PaginationModule} from "ng2-bootstrap/ng2-bootstrap";
 import {VatCalculationService} from "../../shared/services/vat-calculation.service";
+import {TransactionTableComponent} from "./transaction-table.component";
 
 @NgModule({
     imports: [
@@ -22,12 +23,14 @@ import {VatCalculationService} from "../../shared/services/vat-calculation.servi
       KeysPipe,
       CostTypeSelector,
       VatTypeSelector,
-      CostCharacterSelector
+      CostCharacterSelector,
+      TransactionTableComponent
     ],
     exports: [VatComponent],
     providers: [
       CostMatchService,
-      VatCalculationService
+      VatCalculationService,
+      TransactionTableComponent
     ],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

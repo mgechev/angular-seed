@@ -20,10 +20,6 @@
     <p *ngSwitchCase="false">Alle transacties zijn gematched.</p>
     <p *ngSwitchCase="true">Er zijn nog {{transactionsUnmatched}} onbekende transacties (zie kolom 'Zakelijk/Prive'). Voeg matches toe m.b.v. het zoekfilter hieronder.</p>
   </div>
-  <input *ngIf="config.filtering" placeholder="Zoekfilter (hoofdlettergevoelig)"
-         [ngTableFiltering]="config.filtering"
-         (tableChanged)="onChangeTable(config)"/>
-
 
   <cost-type-selector (select)="costMatch.costType = $event"></cost-type-selector>
   <vat-type-selector *ngIf="displayVatTypeSelector()" (select)="costMatch.vatType = $event"></vat-type-selector>
@@ -40,21 +36,8 @@
   </div>
   <vaadin-date-picker label="Kies een datum"></vaadin-date-picker>
 
-  <ng-table [config]="config.sorting"
-            (tableChanged)="onChangeTable(config)"
-            [rows]="rows" [columns]="columns">
-  </ng-table>
-  <!-- changed to one-way-binding for the ngModel, see: http://stackoverflow.com/questions/34496514/ngmodel-no-value-accessor-for -->
-  <pagination *ngIf="config.paging"
-              class="pagination-sm"
-              (ngModel)="page"
-              [totalItems]="length"
-              [itemsPerPage]="itemsPerPage"
-              [maxSize]="maxSize"
-              [boundaryLinks]="true"
-              [rotate]="false"
-              (pageChanged)="onChangeTable(config, $event)"
-              (numPages)="numPages = $event">
-  </pagination>
-  <pre *ngIf="config.paging" class="card card-block card-header">Page:  / </pre>
+  <transaction-table [data]="transactions"
+                     [rows]="transactionTable.rows"
+                     [length]="transactions.length">
+  </transaction-table>
 </div>

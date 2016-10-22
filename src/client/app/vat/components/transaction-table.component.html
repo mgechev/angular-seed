@@ -1,0 +1,22 @@
+<input *ngIf="config.filtering" placeholder="Zoekfilter (hoofdlettergevoelig)"
+       [ngTableFiltering]="config.filtering"
+       (tableChanged)="onChangeTable(config)"/>
+
+<ng-table [config]="config.sorting"
+          (tableChanged)="onChangeTable(config)"
+          [rows]="rows" [columns]="columns">
+</ng-table>
+<!-- changed to one-way-binding for the ngModel, see: http://stackoverflow.com/questions/34496514/ngmodel-no-value-accessor-for -->
+<pagination *ngIf="config.paging"
+            class="pagination-sm"
+            (ngModel)="page"
+            [totalItems]="length"
+            [itemsPerPage]="itemsPerPage"
+            [maxSize]="maxSize"
+            [boundaryLinks]="true"
+            [rotate]="false"
+            (pageChanged)="onChangeTable(config, $event)"
+            (numPages)="numPages = $event">
+</pagination>
+<div>Test: {{length}}</div>
+<pre *ngIf="config.paging" class="card card-block card-header">Page:  / </pre>
