@@ -67,7 +67,7 @@ function processComponentScss() {
     .pipe(plugins.sourcemaps.write(isProd ? '.' : '', {
       sourceMappingURL: (file: any) => {
         // write absolute urls to the map files
-        return `/${file.relative}.map`;
+        return `${Config.APP_BASE}${file.relative}.map`;
       }
     }))
     .pipe(gulp.dest(isProd ? Config.TMP_DIR : Config.APP_DEST));
