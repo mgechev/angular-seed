@@ -6,7 +6,8 @@ IF YOU DON'T FILL OUT THE FOLLOWING INFORMATION WE MIGHT CLOSE YOUR ISSUE WITHOU
 ```
 [ ] bug report => search github for a similar issue or PR before submitting
 [ ] feature request
-[ ] support request => Please do not submit support request here, instead see use [gitter](https://gitter.im/mgechev/angular2-seed) or [stackoverflow](https://stackoverflow.com/questions/tagged/angular2)```
+[ ] support request => Please do not submit support request here, instead see use [gitter](https://gitter.im/mgechev/angular2-seed) or [stackoverflow](https://stackoverflow.com/questions/tagged/angular2)
+```
 
 **Current behavior**
 <!-- Describe how the bug manifests. -->
