@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+
+  dist-build:
+    container_name: dist-build
+    image: dist-build
+    build:
+      context: .
+      dockerfile: ./.docker/dist-build.development.dockerfile
+    ports:
+      - '5555:5555'
