@@ -22,7 +22,7 @@
   <!-- shims:js -->
   <!-- endinject -->
 
-  <% if (ENV === 'dev') { %>
+  <% if (BUILD_TYPE === 'dev') { %>
   <script src="<%= APP_BASE %>app/system-config.js"></script>
   <% } %>
 
@@ -32,7 +32,7 @@
   <!-- inject:js -->
   <!-- endinject -->
 
-  <% if (ENV === 'dev') { %>
+  <% if (BUILD_TYPE === 'dev') { %>
   <script>
   System.import('<%= BOOTSTRAP_MODULE %>')
     .catch(function (e) {
