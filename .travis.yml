@@ -1,6 +1,5 @@
 language: node_js
-node_js:
-  - stable
+node_js: stable
 
 sudo: false
 
@@ -10,13 +9,6 @@ addons:
 os:
   - linux
   - osx
-
-matrix:
-  exclude:
-    - os: osx
-      node_js: 4
-    - os: osx
-      node_js: 5
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
