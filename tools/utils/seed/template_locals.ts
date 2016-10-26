@@ -8,7 +8,7 @@ const getConfig = (path: string, env: string): any => {
   const configPath = join(path, env);
   let config: any;
   try {
-    config = require(configPath);
+    config = JSON.parse(JSON.stringify(require(configPath)));
   } catch (e) {
     config = null;
     util.log(util.colors.red(e.message));
