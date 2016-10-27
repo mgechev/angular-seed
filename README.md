@@ -122,6 +122,12 @@ A documentation of the provided tools can be found in [tools/README.md](tools/RE
 
 Visit the [Wiki page](https://github.com/mgechev/angular-seed/wiki) of the project.
 
+# How to update?
+```
+git remote add upstream https://github.com/mgechev/angular2-seed
+git pull upstream master
+```
+
 # Running tests
 
 ```bash
