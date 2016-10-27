@@ -1,3 +1,4 @@
+import { appendFileSync } from 'fs';
 import { join } from 'path';
 import * as Builder from 'systemjs-builder';
 
@@ -28,24 +29,37 @@ const normalizeConfig = (bundles: any[]) => {
   });
 };
 
+const addExtensions = `
+System.config({ defaultJSExtensions: true });
+(function () {
+  Object.keys(System.defined).forEach(function (m) {
+    if (!/\.js$/.test(m)) {
+      System.defined[m + '.js'] = System.defined[m];
+    }
+  });
+}());
+`;
+
 const bundleMain = () => {
-  let builder = new Builder(Config.SYSTEM_BUILDER_CONFIG);
+  const builder = new Builder(Config.SYSTEM_BUILDER_CONFIG);
+  const mainpath = join(Config.TMP_DIR, Config.BOOTSTRAP_PROD_MODULE);
+  const outpath = join(Config.JS_DEST, Config.JS_PROD_APP_BUNDLE);
   return builder
-    .buildStatic(join(Config.TMP_DIR, Config.BOOTSTRAP_PROD_MODULE),
-      join(Config.JS_DEST, Config.JS_PROD_APP_BUNDLE),
-      BUNDLER_OPTIONS);
+    .bundle(mainpath,
+      outpath,
+      Object.assign({ format: 'umd', BUNDLER_OPTIONS }))
+      .then((res: any) => {
+        appendFileSync(outpath, `System.import('${mainpath}.js');${addExtensions}`);
+        return res.modules;
+      });
 };
 
-const bundleModule = (config: Bundle[], bundle: Bundle) => {
-  const rest = config.filter(b => b !== bundle);
+const bundleModule = (config: Bundle[], exclude: string[], bundle: Bundle) => {
   let builder = new Builder(Config.SYSTEM_BUILDER_CONFIG);
   let all = join(Config.TMP_DIR, Config.BOOTSTRAP_DIR);
-  let restModules = rest.map(b => {
-    return join(Config.TMP_DIR, Config.BOOTSTRAP_DIR, b.path, b.module);
-  }).join(' + ');
   let bootstrap = join(Config.TMP_DIR, Config.BOOTSTRAP_DIR, bundle.path, bundle.module);
   let bootstrapDir = join(Config.TMP_DIR, Config.BOOTSTRAP_DIR, bundle.path);
-  let expression = `${bootstrap} - (${all}/**/*.js - ${bootstrapDir}/**/*.js)`;
+  let expression = `${bootstrap} - (${all}/**/*.js - ${bootstrapDir}/**/*.js) - ${exclude.join(' - ')}`;
   console.log('bundling', expression);
   return builder
     .buildStatic(
@@ -65,7 +79,7 @@ const bundleModule = (config: Bundle[], bundle: Bundle) => {
 export = (done: any) => {
   const config = normalizeConfig(Config.BUNDLES);
   bundleMain()
-    .then(() => Promise.all(config.map(bundleModule.bind(null, config))))
+    .then((bundled: string[]) => Promise.all(config.map(bundleModule.bind(null, config, bundled))))
     .then(() => done())
     .catch((e: any) => done(e));
 };

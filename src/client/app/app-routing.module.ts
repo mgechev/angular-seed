@@ -6,7 +6,7 @@ export const AppRoutingModule = RouterModule.forRoot([
     pathMatch: 'full',
     redirectTo: 'home'
   },
-  { path: 'home', loadChildren: './app/home/home.module' },
-  { path: 'about', loadChildren: './app/about/about.module' }
+  { path: 'home', loadChildren: './app/home/home.module#HomeModule' },
+  { path: 'about', loadChildren: './app/about/about.module#AboutModule' }
 ]);
 
