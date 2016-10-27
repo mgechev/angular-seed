@@ -1,5 +1,5 @@
-import * as del from 'del';
 import { join } from 'path';
+import * as rimraf from 'rimraf';
 
 import Config from '../../config';
 
@@ -18,5 +18,5 @@ export = () => {
     join(Config.APP_SRC, '**/*.metadata.json')
   ];
 
-  return del.sync(source);
+  return source.forEach(p => rimraf.sync(p));
 };
