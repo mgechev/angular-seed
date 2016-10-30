@@ -75,6 +75,7 @@
     "gulp-cached": "^1.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-concat-css": "^2.3.0",
+    "gulp-debug": "^2.1.2",
     "gulp-filter": "^4.0.0",
     "gulp-inject": "^4.1.0",
     "gulp-inline-ng2-template": "^3.0.1",

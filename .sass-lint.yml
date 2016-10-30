@@ -1,0 +1,18 @@
+rules:
+  property-sort-order: 0
+  mixins-before-declarations: 0
+  no-vendor-prefixes: 0
+  no-important: 0
+  nesting-depth: 0
+  no-css-comments: 0
+  no-duplicate-properties: 0
+  leading-zero: 0
+  no-misspelled-properties: 0
+  no-trailing-whitespace: 0
+
+  no-color-literals: 0
+  hex-notation: 0
+  hex-length: 0
+  no-color-keywords: 0
+  indentation: 0
+  no-transition-all: 0
