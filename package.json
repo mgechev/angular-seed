@@ -27,6 +27,7 @@
     "serve.dev": "gulp serve.dev --color --env-config dev --config-env dev",
     "serve.e2e": "gulp serve.e2e --color",
     "serve.prod": "gulp serve.prod --color --env-config prod --config-env prod",
+    "serve.prod.exp": "gulp serve.prod.exp --color --env-config prod --config-env prod",
     "start": "gulp serve.dev --color",
     "start.deving": "gulp start.deving --color",
     "tasks.list": "gulp --tasks-simple --color",
