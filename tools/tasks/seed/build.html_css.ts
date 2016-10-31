@@ -128,8 +128,8 @@ function processAllExternalStylesheets() {
  * Get a stream of external css files for subsequent processing.
  */
 function getExternalCssStream() {
-  return getSCSSFiles('process-external-scss', getExternalScss(), [abtractSCSSFiles])
-    .pipe(plugins.sass(Config.getPluginConfig('gulp-sass')).on('error', plugins.sass.logError));
+  return gulp.src(getExternalCss())
+    .pipe(isProd ? plugins.cached('process-external-css') : plugins.util.noop());
 }
 
 /**
@@ -143,9 +143,7 @@ function getExternalCss() {
  * Get a stream of external scss files for subsequent processing.
  */
 function getExternalScssStream() {
-  return gulp.src(getExternalScss())
-    .pipe(isProd ? plugins.cached('process-external-scss') : plugins.util.noop())
-    .pipe(isProd ? plugins.progeny() : plugins.util.noop())
+  return getSCSSFiles('process-external-scss', getExternalScss(), [abtractSCSSFiles])
     .pipe(plugins.sass(Config.getPluginConfig('gulp-sass')).on('error', plugins.sass.logError));
 }
 
