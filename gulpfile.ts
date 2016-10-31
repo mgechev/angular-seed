@@ -125,6 +125,13 @@ gulp.task('serve.prod', (done: any) =>
 
 
 // --------------
+// Serve prod exp
+gulp.task('serve.prod.exp', (done: any) =>
+  runSequence('build.prod.exp',
+              'server.prod',
+              done));
+
+// --------------
 // Test.
 gulp.task('test', (done: any) =>
   runSequence('build.test',

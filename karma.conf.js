@@ -20,6 +20,7 @@ module.exports = function (config) {
     files: [
       // Polyfills.
       'node_modules/core-js/client/shim.min.js',
+      'node_modules/intl/dist/Intl.min.js',
 
       'node_modules/traceur/bin/traceur.js',
 
