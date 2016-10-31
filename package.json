@@ -48,6 +48,7 @@
     "@types/core-js": "^0.9.34",
     "@types/express": "^4.0.33",
     "@types/gulp": "^3.8.32",
+    "@types/gulp-filter": "^3.0.29",
     "@types/gulp-load-plugins": "^0.0.28",
     "@types/gulp-protractor": "^1.0.29",
     "@types/gulp-sass": "^0.0.29",
