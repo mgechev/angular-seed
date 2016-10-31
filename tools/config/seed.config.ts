@@ -188,6 +188,12 @@ export class SeedConfig {
   CSS_SRC = `${this.APP_SRC}/css`;
 
   /**
+   * The folder of the applications scss files.
+   * @type {string}
+   */
+  SCSS_SRC = `${this.APP_SRC}/scss`;
+
+  /**
    * The directory of the applications tools
    * @type {string}
    */
