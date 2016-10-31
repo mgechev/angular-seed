@@ -96,27 +96,6 @@ export class SeedConfig {
   COVERAGE_TS_DIR = 'coverage';
 
   /**
-   * Karma reporter configuration
-   */
-  KARMA_REPORTERS: any = {
-    preprocessors: {
-      'dist/**/!(*spec).js': ['coverage']
-    },
-    reporters: ['mocha', 'coverage', 'karma-remap-istanbul'],
-    coverageReporter: {
-      dir: this.COVERAGE_DIR + '/',
-      reporters: [
-        {type: 'json', subdir: '.', file: 'coverage-final.json'}
-      ]
-    },
-    remapIstanbulReporter: {
-      reports: {
-        html: this.COVERAGE_TS_DIR
-      }
-    },
-  };
-
-  /**
    * The path for the base of the application at runtime.
    * The default path is based on the environment '/',
    * which can be overriden by the `--base` flag when running `npm start`.
@@ -532,6 +511,30 @@ export class SeedConfig {
         rebaseUrls: false
       }
     }
+  };
+
+  /**
+   * Karma reporter configuration
+   */
+  getKarmaReporters(): any {
+    return {
+      preprocessors: {
+        'dist/**/!(*spec|index|*.module|*.routes).js': ['coverage']
+      },
+      reporters: ['mocha', 'coverage', 'karma-remap-istanbul'],
+      coverageReporter: {
+        dir: this.COVERAGE_DIR + '/',
+        reporters: [
+          { type: 'json', subdir: '.', file: 'coverage-final.json' },
+          { type: 'html', subdir: '.' }
+        ]
+      },
+      remapIstanbulReporter: {
+        reports: {
+          html: this.COVERAGE_TS_DIR
+        }
+      }
+    };
   };
 
   /**

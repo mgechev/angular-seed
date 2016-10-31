@@ -47,7 +47,7 @@ export function serveCoverage() {
 
   server.use(
     Config.APP_BASE,
-    express.static(resolve(process.cwd(), 'coverage'))
+    express.static(resolve(process.cwd(), Config.COVERAGE_TS_DIR))
   );
 
   server.listen(Config.COVERAGE_PORT, () =>
