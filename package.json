@@ -58,7 +58,7 @@
     "@types/run-sequence": "^0.0.28",
     "@types/selenium-webdriver": "2.44.*",
     "@types/systemjs": "^0.19.31",
-    "@types/yargs": "^0.0.33",
+    "@types/yargs": "^0.0.34",
     "@types/zone.js": "^0.0.27",
     "async": "^2.1.1",
     "autoprefixer": "^6.5.1",
@@ -84,7 +84,7 @@
     "gulp-protractor": "^3.0.0",
     "gulp-replace": "^0.5.4",
     "gulp-sass": "^2.3.2",
-    "gulp-sourcemaps": "2.1.1",
+    "gulp-sourcemaps": "2.2.0",
     "gulp-template": "^4.0.0",
     "gulp-tslint": "^6.1.2",
     "gulp-typescript": "^3.0.2",
@@ -110,7 +110,7 @@
     "semver": "^5.3.0",
     "serve-static": "^1.11.1",
     "slash": "~1.0.0",
-    "systemjs-builder": "0.15.32",
+    "systemjs-builder": "0.15.33",
     "tildify": "^1.2.0",
     "traceur": "^0.0.111",
     "ts-node": "^1.4.3",
@@ -131,7 +131,7 @@
     "core-js": "^2.4.1",
     "reflect-metadata": "^0.1.8",
     "rxjs": "5.0.0-beta.12",
-    "systemjs": "0.19.39",
+    "systemjs": "0.19.40",
     "zone.js": "0.6.25"
   }
 }
