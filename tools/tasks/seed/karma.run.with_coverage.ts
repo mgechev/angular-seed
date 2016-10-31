@@ -14,23 +14,7 @@ let repeatableStartKarma = (done: any, config: any = {}) => {
 };
 
 export = (done: any) => {
-  return repeatableStartKarma(done, {
-    preprocessors: {
-      'dist/**/!(*spec|index|*.module|*.routes).js': ['coverage']
-    },
-    reporters: ['mocha', 'coverage', 'karma-remap-istanbul'],
-    coverageReporter: {
-      dir: 'coverage_js/',
-      reporters: [
-        { type: 'json', subdir: '.', file: 'coverage-final.json' },
-        { type: 'html', subdir: '.' }
-      ]
-    },
-    remapIstanbulReporter: {
-      reports: {
-        html: Config.COVERAGE_DIR
-      }
-    },
-    singleRun: true
-  });
+  let karmaReporters = Config.getKarmaReporters();
+  karmaReporters.singleRun = true;
+  return repeatableStartKarma(done, karmaReporters);
 };
