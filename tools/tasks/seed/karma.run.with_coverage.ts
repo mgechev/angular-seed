@@ -20,7 +20,7 @@ export = (done: any) => {
     },
     reporters: ['mocha', 'coverage', 'karma-remap-istanbul'],
     coverageReporter: {
-      dir: 'coverage_js/',
+      dir: Config.COVERAGE_DIR + '/',
       reporters: [
         { type: 'json', subdir: '.', file: 'coverage-final.json' },
         { type: 'html', subdir: '.' }
@@ -28,7 +28,7 @@ export = (done: any) => {
     },
     remapIstanbulReporter: {
       reports: {
-        html: Config.COVERAGE_DIR
+        html: Config.COVERAGE_TS_DIR
       }
     },
     singleRun: true

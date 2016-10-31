@@ -92,7 +92,8 @@ export class SeedConfig {
   * The path to the coverage output
   * NB: this must match what is configured in ./karma.conf.js
   */
-  COVERAGE_DIR = 'coverage';
+  COVERAGE_DIR = 'coverage_js';
+  COVERAGE_TS_DIR = 'coverage';
 
   /**
    * Karma reporter configuration
@@ -101,13 +102,18 @@ export class SeedConfig {
     preprocessors: {
       'dist/**/!(*spec).js': ['coverage']
     },
-    reporters: ['mocha', 'coverage'],
+    reporters: ['mocha', 'coverage', 'karma-remap-istanbul'],
     coverageReporter: {
       dir: this.COVERAGE_DIR + '/',
       reporters: [
         {type: 'json', subdir: '.', file: 'coverage-final.json'}
       ]
-    }
+    },
+    remapIstanbulReporter: {
+      reports: {
+        html: this.COVERAGE_TS_DIR
+      }
+    },
   };
 
   /**
