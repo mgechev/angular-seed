@@ -1,6 +1,5 @@
 import { join } from 'path';
 import * as slash from 'slash';
-import * as util from 'gulp-util';
 import { argv } from 'yargs';
 
 import { BuildType, ExtendPackages, InjectableDependency } from './seed.config.interfaces';
@@ -61,11 +60,6 @@ export class SeedConfig {
    * The default build type is `dev`, which can be overriden by the `--build-type dev|prod` flag when running `npm start`.
    */
   BUILD_TYPE = getBuildType();
-
-  get ENV() {
-    util.log(util.colors.yellow('Warning: the "ENV" property is deprecated. Use "BUILD_TYPE" instead.'));
-    return this.BUILD_TYPE;
-  }
 
   /**
    * The flag for the debug option of the application.

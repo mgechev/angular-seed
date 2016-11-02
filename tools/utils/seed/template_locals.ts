@@ -22,9 +22,6 @@ const getConfig = (path: string, env: string): any => {
  * project specific overrides as defined in project.config.ts)
  */
 export function templateLocals() {
-  if (argv['config-env']) {
-    util.log(util.colors.yellow('"--config-env" is now deprecated. Use "--env-config" instead.'));
-  }
   const configEnvName = argv['env-config'] || argv['config-env'] || 'dev';
   const configPath = Config.getPluginConfig('environment-config');
   const baseConfig = getConfig(configPath, 'base');
