@@ -362,8 +362,6 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   └── utils.ts
 ├── tsconfig.json              <- configuration of the typescript project (ts-node, which runs the tasks defined in gulpfile.ts)
 ├── tslint.json                <- tslint configuration
-├── typings                    <- typings directory. Contains all the external typing definitions defined with typings
-├── typings.json
 └── appveyor.yml
 ```
 
