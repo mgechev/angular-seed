@@ -1,6 +1,7 @@
 import { join } from 'path';
 
 import { SeedConfig } from './seed.config';
+import { ExtendPackages } from './seed.config.interfaces';
 
 /**
  * This class extends the basic seed configuration, allowing for project specific overrides. A few examples can be found
@@ -9,6 +10,8 @@ import { SeedConfig } from './seed.config';
 export class ProjectConfig extends SeedConfig {
 
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
+
+  ADDITIONAL_PACKAGES: ExtendPackages[] = [];
 
   constructor() {
     super();
@@ -30,6 +33,29 @@ export class ProjectConfig extends SeedConfig {
       // {src: `${this.APP_SRC}/your-path-to-lib/libs/jquery-ui.js`, inject: true, vendor: false}
       // {src: `${this.CSS_SRC}/path-to-lib/test-lib.css`, inject: true, vendor: false},
     ];
+
+    // Add packages (e.g. lodash)
+    // this.ADDITIONAL_PACKAGES = [{
+    //   name: 'lodash',
+    //   path: `${this.APP_BASE}node_modules/lodash/lodash.js`,
+    //   packageMeta: {
+    //     main: 'index.js',
+    //     defaultExtension: 'js'
+    //   }
+    // }];
+    //
+    // or
+    //
+    // this.ADDITIONAL_PACKAGES.push({
+    //   name: 'lodash',
+    //   path: `${this.APP_BASE}node_modules/lodash/lodash.js`,
+    //   packageMeta: {
+    //     main: 'index.js',
+    //     defaultExtension: 'js'
+    //   }
+    // });
+    //
+    // this.addPackagesBundles(this.ADDITIONAL_PACKAGES);
 
     /* Add to or override NPM module configurations: */
     // this.mergeObject(this.PLUGIN_CONFIGS['browser-sync'], { ghostMode: false });
