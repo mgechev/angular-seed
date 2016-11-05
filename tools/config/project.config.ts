@@ -11,8 +11,6 @@ export class ProjectConfig extends SeedConfig {
 
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
 
-  ADDITIONAL_PACKAGES: ExtendPackages[] = [];
-
   constructor() {
     super();
     // this.APP_TITLE = 'Put name of your app here';
@@ -35,7 +33,7 @@ export class ProjectConfig extends SeedConfig {
     ];
 
     // Add packages (e.g. lodash)
-    // this.ADDITIONAL_PACKAGES = [{
+    // let additionalPackages: ExtendPackages = [{
     //   name: 'lodash',
     //   path: `${this.APP_BASE}node_modules/lodash/lodash.js`,
     //   packageMeta: {
@@ -46,7 +44,9 @@ export class ProjectConfig extends SeedConfig {
     //
     // or
     //
-    // this.ADDITIONAL_PACKAGES.push({
+    // let additionalPackages: ExtendPackages[] = [];
+    //
+    // additionalPackages.push({
     //   name: 'lodash',
     //   path: `${this.APP_BASE}node_modules/lodash/lodash.js`,
     //   packageMeta: {
@@ -55,7 +55,7 @@ export class ProjectConfig extends SeedConfig {
     //   }
     // });
     //
-    // this.addPackagesBundles(this.ADDITIONAL_PACKAGES);
+    // this.addPackagesBundles(additionalPackages);
 
     /* Add to or override NPM module configurations: */
     // this.mergeObject(this.PLUGIN_CONFIGS['browser-sync'], { ghostMode: false });
