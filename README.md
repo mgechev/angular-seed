@@ -56,21 +56,30 @@ $ npm run start.deving
 $ npm run build.dev
 # prod build
 $ npm run build.prod
-# prod build with AoT compilation
-$ npm run build.prod.exp
 
 # dev build of multiple applications (by default the value of --app is "app")
 $ npm start -- --app baz
 $ npm start -- --app foo
 $ npm start -- --app bar
 ```
-
 _Does not rely on any global dependencies._
+
+# How to start with AoT compilation
+
+**Note** that AoT compilation requires **node v6.5.0 or higher** and **npm 3.10.3 or higher**.
+
+In order to start the seed with AoT use:
+
+```bash
+# prod build with AoT compilation
+$ npm run build.prod.exp
+```
 
 # Table of Contents
 
 - [Introduction](#introduction)
 - [How to start](#how-to-start)
+- [How to start with Aot](#how-to-start-with-aot-compilation)
 - [Table of Content](#table-of-content)
 - [Configuration](#configuration)
 - [Environment Configuration](#environment-configuration)
