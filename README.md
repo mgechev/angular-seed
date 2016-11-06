@@ -78,6 +78,7 @@ $ npm run build.prod.exp
 
 - [Introduction](#introduction)
 - [How to start](#how-to-start)
+- [How to start](#how-to-start-with-aot-compilation)
 - [Table of Content](#table-of-content)
 - [Configuration](#configuration)
 - [Environment Configuration](#environment-configuration)
