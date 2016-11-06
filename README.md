@@ -24,6 +24,7 @@ Provides fast, reliable and extensible starter for the development of Angular pr
 - Following the [best practices](https://angular.io/styleguide).
 - Manager of your type definitions using @types.
 - Has autoprefixer and css-lint support.
+- Provides full Docker support for both development and production environment
 
 # How to start
 
@@ -118,7 +119,7 @@ If you have different environments and you need to configure them to use differe
 The environment can be specified by using:
 
 ```bash
-$ npm start -- --config-env ENV_NAME
+$ npm start -- --env-config ENV_NAME
 ```
 
 Currently the `ENV_NAME`s are `dev`, `prod`, `staging`, but you can simply add a different file `"ENV_NAME.ts".` file in order to alter extra such environments.
@@ -217,8 +218,15 @@ Forks of this project demonstrate how to extend and integrate with other librari
 
 ```
 .
+├── .docker
+│   ├── dist-build.development.dockerfile  <- Dockerfile for development environment
+│   └── dist-build.production.dockerfile   <- Dockerfile for production environment
+├── .dockerignore              <- ignore file for the docker builds
 ├── LICENSE
 ├── README.md
+├── appveyor.yml
+├── docker-compose.production.yml  <- docker-compose file for production environment
+├── docker-compose.yml.        <- docker-compose file for development environment
 ├── gulpfile.ts                <- configuration of the gulp tasks
 ├── karma.conf.js              <- configuration of the test runner
 ├── package.json               <- dependencies of the project
@@ -226,7 +234,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
 ├── src                        <- source code of the application
 │   └── client
 │       ├── app
-│       │   ├── +about
+│       │   ├── about
 │       │   │   ├── about.component.css
 │       │   │   ├── about.component.e2e-spec.ts
 │       │   │   ├── about.component.html
@@ -235,7 +243,13 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │       │   │   ├── about.module.ts
 │       │   │   ├── about.routes.ts
 │       │   │   └── index.ts
-│       │   ├── +home
+│       │   ├── app.component.e2e-spec.ts
+│       │   ├── app.component.html
+│       │   ├── app.component.spec.ts
+│       │   ├── app.component.ts
+│       │   ├── app.module.ts
+│       │   ├── app.routes.ts
+│       │   ├── home
 │       │   │   ├── home.component.css
 │       │   │   ├── home.component.e2e-spec.ts
 │       │   │   ├── home.component.html
@@ -244,33 +258,30 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │       │   │   ├── home.module.ts
 │       │   │   ├── home.routes.ts
 │       │   │   └── index.ts
-│       │   ├── app.component.e2e-spec.ts
-│       │   ├── app.component.html
-│       │   ├── app.component.spec.ts
-│       │   ├── app.component.ts
-│       │   ├── app.module.ts
-│       │   ├── app.routes.ts
-│       │   ├── hot_loader_main.ts
+│       │   ├── i18n.providers.ts
+│       │   ├── main-prod.ts
 │       │   ├── main.ts
-│       │   └── shared
-│       │       ├── config
-│       │       │   └── env.config.ts
-│       │       ├── index.ts
-│       │       ├── shared.module.ts
-│       │       ├── name-list
-│       │       │   ├── index.ts
-│       │       │   ├── name-list.service.spec.ts
-│       │       │   └── name-list.service.ts
-│       │       ├── navbar
-│       │       │   ├── index.ts
-│       │       │   ├── navbar.component.css
-│       │       │   ├── navbar.component.html
-│       │       │   └── navbar.component.ts
-│       │       └── toolbar
-│       │           ├── index.ts
-│       │           ├── toolbar.component.css
-│       │           ├── toolbar.component.html
-│       │           └── toolbar.component.ts
+│       │   ├── operators.ts
+│       │   ├── shared
+│       │   │   ├── config
+│       │   │   │   └── env.config.ts
+│       │   │   ├── index.ts
+│       │   │   ├── name-list
+│       │   │   │   ├── index.ts
+│       │   │   │   ├── name-list.service.spec.ts
+│       │   │   │   └── name-list.service.ts
+│       │   │   ├── navbar
+│       │   │   │   ├── index.ts
+│       │   │   │   ├── navbar.component.css
+│       │   │   │   ├── navbar.component.html
+│       │   │   │   └── navbar.component.ts
+│       │   │   ├── shared.module.ts
+│       │   │   └── toolbar
+│       │   │       ├── index.ts
+│       │   │       ├── toolbar.component.css
+│       │   │       ├── toolbar.component.html
+│       │   │       └── toolbar.component.ts
+│       │   └── system-config.ts
 │       ├── assets
 │       │   ├── data.json
 │       │   └── svg
@@ -278,15 +289,14 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │       ├── css
 │       │   └── main.css
 │       ├── index.html
-│       ├── testing
-│       │   └── router
-│       │       ├── mock-location-strategy.ts
-│       │       └── router-testing-providers.ts
 │       └── tsconfig.json
-├── test-main.js               <- testing configuration
+├── test-config.js             <- testing configuration
+├── test-main.js               <- karma test launcher
 ├── tools
 │   ├── README.md              <- build documentation
 │   ├── config
+│   │   ├── banner-256.txt
+│   │   ├── banner.txt
 │   │   ├── project.config.ts  <- configuration of the specific project
 │   │   ├── seed.config.interfaces.ts
 │   │   └── seed.config.ts     <- generic configuration of the seed project
@@ -296,65 +306,76 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   ├── env                    <- environment configuration
 │   │   ├── base.ts
 │   │   ├── dev.ts
+│   │   ├── env-config.interface.ts
 │   │   └── prod.ts
 │   ├── manual_typings
 │   │   ├── project            <- manual ambient typings for the project
 │   │   │   └── sample.package.d.ts
 │   │   └── seed               <- seed manual ambient typings
+│   │       ├── angular2-hot-loader.d.ts
 │   │       ├── autoprefixer.d.ts
-│   │       ├── colorguard.d.ts
-│   │       ├── connect-livereload.d.ts
 │   │       ├── cssnano.d.ts
-│   │       ├── doiuse.d.ts
 │   │       ├── express-history-api-fallback.d.ts
 │   │       ├── istream.d.ts
 │   │       ├── karma.d.ts
 │   │       ├── merge-stream.d.ts
 │   │       ├── open.d.ts
-│   │       ├── postcss-reporter.d.ts
+│   │       ├── operators.d.ts
 │   │       ├── slash.d.ts
-│   │       ├── stylelint.d.ts
 │   │       ├── systemjs-builder.d.ts
-│   │       ├── tildify.d.ts
-│   │       ├── tiny-lr.d.ts
-│   │       └── walk.d.ts
+│   │       └── tildify.d.ts
 │   ├── tasks                  <- gulp tasks
+│   │   ├── assets_task.ts
+│   │   ├── css_task.ts
 │   │   ├── project            <- project specific gulp tasks
 │   │   │   └── sample.task.ts
 │   │   └── seed               <- seed generic gulp tasks. They can be overriden by the project specific gulp tasks
-│   │       ├── build.assets.dev.ts
-│   │       ├── build.assets.prod.ts
-│   │       ├── build.bundles.app.ts
-│   │       ├── build.bundles.ts
-│   │       ├── build.docs.ts
-│   │       ├── build.html_css.ts
-│   │       ├── build.index.dev.ts
-│   │       ├── build.index.prod.ts
-│   │       ├── build.js.dev.ts
-│   │       ├── build.js.e2e.ts
-│   │       ├── build.js.prod.ts
-│   │       ├── build.js.test.ts
-│   │       ├── build.js.tools.ts
-│   │       ├── check.versions.ts
-│   │       ├── clean.all.ts
-│   │       ├── clean.coverage.ts
-│   │       ├── clean.dev.ts
-│   │       ├── clean.prod.ts
-│   │       ├── clean.tools.ts
-│   │       ├── copy.js.prod.ts
-│   │       ├── css-lint.ts
-│   │       ├── e2e.ts
-│   │       ├── generate.manifest.ts
-│   │       ├── karma.start.ts
-│   │       ├── serve.coverage.ts
-│   │       ├── serve.docs.ts
-│   │       ├── server.prod.ts
-│   │       ├── server.start.ts
-│   │       ├── tslint.ts
-│   │       ├── watch.dev.ts
-│   │       ├── watch.e2e.ts
-│   │       ├── watch.test.ts
-│   │       └── webdriver.ts
+│   │   │   ├── build.assets.dev.ts
+│   │   │   ├── build.assets.prod.ts
+│   │   │   ├── build.bundle.rxjs.ts
+│   │   │   ├── build.bundles.app.exp.ts
+│   │   │   ├── build.bundles.app.ts
+│   │   │   ├── build.bundles.ts
+│   │   │   ├── build.docs.ts
+│   │   │   ├── build.html_css.ts
+│   │   │   ├── build.index.dev.ts
+│   │   │   ├── build.index.prod.ts
+│   │   │   ├── build.js.dev.ts
+│   │   │   ├── build.js.e2e.ts
+│   │   │   ├── build.js.prod.exp.ts
+│   │   │   ├── build.js.prod.ts
+│   │   │   ├── build.js.test.ts
+│   │   │   ├── build.tools.ts
+│   │   │   ├── check.tools.ts
+│   │   │   ├── check.versions.ts
+│   │   │   ├── clean.all.ts
+│   │   │   ├── clean.coverage.ts
+│   │   │   ├── clean.dev.ts
+│   │   │   ├── clean.prod.ts
+│   │   │   ├── clean.tools.ts
+│   │   │   ├── clear.files.ts
+│   │   │   ├── compile.ahead.prod.ts
+│   │   │   ├── copy.prod.ts
+│   │   │   ├── e2e.ts
+│   │   │   ├── generate.manifest.ts
+│   │   │   ├── karma.run.ts
+│   │   │   ├── karma.run.with_coverage.ts
+│   │   │   ├── karma.watch.ts
+│   │   │   ├── minify.bundles.ts
+│   │   │   ├── print.banner.ts
+│   │   │   ├── serve.coverage.ts
+│   │   │   ├── serve.coverage.watch.ts
+│   │   │   ├── serve.docs.ts
+│   │   │   ├── server.prod.ts
+│   │   │   ├── server.start.ts
+│   │   │   ├── start.deving.ts
+│   │   │   ├── tslint.ts
+│   │   │   ├── watch.dev.ts
+│   │   │   ├── watch.e2e.ts
+│   │   │   ├── watch.test.ts
+│   │   │   └── webdriver.ts
+│   │   ├── task.ts
+│   │   └── typescript_task.ts
 │   ├── utils                  <- build utils
 │   │   ├── project            <- project specific gulp utils
 │   │   │   └── sample_util.ts
@@ -362,6 +383,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │   ├── seed               <- seed specific gulp utils
 │   │   │   ├── clean.ts
 │   │   │   ├── code_change_tools.ts
+│   │   │   ├── karma.start.ts
 │   │   │   ├── server.ts
 │   │   │   ├── tasks_tools.ts
 │   │   │   ├── template_locals.ts
@@ -371,7 +393,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   └── utils.ts
 ├── tsconfig.json              <- configuration of the typescript project (ts-node, which runs the tasks defined in gulpfile.ts)
 ├── tslint.json                <- tslint configuration
-└── appveyor.yml
+└── yarn.lock
 ```
 
 # Contributors
