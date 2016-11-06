@@ -1,0 +1,16 @@
+<h1>Kosten</h1>
+<div>
+  <p>Voeg hier kosten toe.</p>
+
+  <cost-type-selector (select)="cost.costType = $event"></cost-type-selector>
+  <input [(ngModel)]="cost.date" placeholder="Datum">
+  <input [(ngModel)]="cost.amount" placeholder="Bedrag">
+  <input [(ngModel)]="cost.vat" placeholder="btw">
+  <input [(ngModel)]="cost.description" placeholder="Omschrijving">
+  <button (click)="addCost()">Kost toevoegen</button>
+
+  <cost-table [data]="costs"
+                     [rows]="costTable.rows"
+                     [length]="costs.length">
+  </cost-table>
+</div>

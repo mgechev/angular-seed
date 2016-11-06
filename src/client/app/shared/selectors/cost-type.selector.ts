@@ -1,6 +1,6 @@
 import {Component, Output, EventEmitter, Pipe, PipeTransform} from '@angular/core'
-import {CostType} from "../../shared/services/import-list.service";
-import {LabelService} from "../../shared/services/label.service";
+import {CostType} from "../services/import-list.service";
+import {LabelService} from "../services/label.service";
 
 @Pipe({
   name: 'keys'

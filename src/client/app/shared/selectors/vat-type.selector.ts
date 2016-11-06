@@ -1,5 +1,5 @@
 import {Component, Output, EventEmitter} from '@angular/core'
-import {VatType} from "../../shared/services/import-list.service";
+import {VatType} from "../services/import-list.service";
 import {KeysPipe} from "./cost-type.selector";
 
 @Component({

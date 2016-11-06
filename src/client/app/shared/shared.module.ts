@@ -10,6 +10,9 @@ import {CostMatchService} from "./services/cost-match.service";
 import {LabelService} from "./services/label.service";
 import {ImportListService} from "./services/import-list.service";
 import {CsvParseService} from "./services/csv-parse.service";
+import {CostTypeSelector, KeysPipe} from "./selectors/cost-type.selector";
+import {CostCharacterSelector} from "./selectors/cost-character.selector";
+import {VatTypeSelector} from "./selectors/vat-type.selector";
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -17,9 +20,24 @@ import {CsvParseService} from "./services/csv-parse.service";
 
 @NgModule({
   imports: [CommonModule, RouterModule],
-  declarations: [ToolbarComponent, NavbarComponent],
-  exports: [ToolbarComponent, NavbarComponent,
-    CommonModule, FormsModule, RouterModule]
+  declarations: [
+    ToolbarComponent,
+    NavbarComponent,
+    CostTypeSelector,
+    VatTypeSelector,
+    CostCharacterSelector,
+    KeysPipe
+  ],
+  exports: [
+    ToolbarComponent,
+    NavbarComponent,
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    CostTypeSelector,
+    CostCharacterSelector,
+    VatTypeSelector
+  ]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {

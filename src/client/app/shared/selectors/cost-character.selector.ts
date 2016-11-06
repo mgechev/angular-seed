@@ -1,5 +1,5 @@
 import {Component, Output, EventEmitter} from '@angular/core'
-import {CostCharacter} from "../../shared/services/import-list.service";
+import {CostCharacter} from "../services/import-list.service";
 import {KeysPipe} from "./cost-type.selector";
 
 @Component({

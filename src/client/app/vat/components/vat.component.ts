@@ -38,8 +38,8 @@ export class VatComponent implements OnInit {
       .subscribe(
         costMatchData => this.costMatches = costMatchData,
         error => {
-          alert(error.text());
-          console.log(error.text());
+          alert(error);
+          console.log(error);
         },
         () => console.log('Costmatches retrieved')
       )
