@@ -3,6 +3,8 @@
 'use strict';
 
 var argv = require('yargs').argv;
+var minimatch = require("minimatch");
+
 
 module.exports = function (config) {
   config.set({
@@ -115,7 +117,7 @@ module.exports = function (config) {
 
     // Passing command line arguments to tests
     client: {
-      files: argv.files
+      files:  argv.files ? minimatch.makeRe(argv.files).source : null
     }
   });
 
