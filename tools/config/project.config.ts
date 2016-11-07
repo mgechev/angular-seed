@@ -33,14 +33,14 @@ export class ProjectConfig extends SeedConfig {
     ];
 
     // Add packages (e.g. lodash)
-    let additionalPackages: ExtendPackages[] = [{
-      name: 'lodash',
-      path: `${this.APP_BASE}node_modules/lodash/lodash.js`,
-      packageMeta: {
-        main: 'index.js',
-        defaultExtension: 'js'
-      }
-    }];
+    // let additionalPackages: ExtendPackages[] = [{
+    //   name: 'lodash',
+    //   path: `${this.APP_BASE}node_modules/lodash/lodash.js`,
+    //   packageMeta: {
+    //     main: 'index.js',
+    //     defaultExtension: 'js'
+    //   }
+    // }];
     //
     // or
     //
@@ -55,7 +55,7 @@ export class ProjectConfig extends SeedConfig {
     //   }
     // });
     //
-    this.addPackagesBundles(additionalPackages);
+    // this.addPackagesBundles(additionalPackages);
 
     /* Add to or override NPM module configurations: */
     // this.mergeObject(this.PLUGIN_CONFIGS['browser-sync'], { ghostMode: false });
