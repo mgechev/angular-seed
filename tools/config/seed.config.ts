@@ -573,6 +573,14 @@ export class SeedConfig {
     }
   }
 
+  addPackagesBundles(packs: ExtendPackages[]) {
+
+    packs.forEach((pack: ExtendPackages) => {
+      this.addPackageBundles(pack);
+    });
+
+  }
+
 }
 
 /**
@@ -626,4 +634,3 @@ function getBuildType() {
     return BUILD_TYPES.DEVELOPMENT;
   }
 }
-
