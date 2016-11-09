@@ -282,11 +282,11 @@ export class SeedConfig {
   VERSION_NODE = '4.0.0';
 
   /**
-   * The flag to enable handling of SCSS files
-   * The default value is false. Override with the '--scss' flag.
+   * Enable SCSS stylesheet compilation.
+   * Set ENABLE_SCSS environment variable to 'true' or '1'
    * @type {boolean}
    */
-  ENABLE_SCSS = argv['scss'] || false;
+  ENABLE_SCSS = ['true', '1'].indexOf(`${process.env.ENABLE_SCSS}`.toLowerCase()) !== -1 || argv['scss'] || false;
 
   /**
    * The list of NPM dependcies to be injected in the `index.html`.
