@@ -566,9 +566,11 @@ export class SeedConfig {
 
     if (pack.path) {
       this.SYSTEM_CONFIG_DEV.paths[pack.name] = pack.path;
+      this.SYSTEM_BUILDER_CONFIG.paths[pack.name] = pack.path;
     }
 
     if (pack.packageMeta) {
+      this.SYSTEM_CONFIG_DEV.packages[pack.name] = pack.packageMeta;
       this.SYSTEM_BUILDER_CONFIG.packages[pack.name] = pack.packageMeta;
     }
   }
