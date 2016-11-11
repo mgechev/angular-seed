@@ -1,0 +1,165 @@
+body {
+    background: #f8f8f8;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.container-fluid {
+    margin-top: 50px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+.container-fluid.main {
+    height: calc(100% - 50px);
+}
+.container-fluid.modules {
+    margin-top: 25px;
+}
+.container-fluid.module {
+    padding: 0;
+    margin-top: 0;
+}
+.container-fluid.module h3 a {
+    margin-left: 10px;
+    color: #333;
+}
+.row.main {
+    height: 100%;
+}
+.content {
+    background: white;
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-top: 10px;
+}
+.content.readme {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.content h1:first-of-type {
+    margin-top: 15px
+}
+.content h3:first-of-type {
+    margin-top: 5px;
+}
+.content.readme h1:first-of-type {
+    margin-top: 0;
+}
+.glyphicon, .fa {
+  margin-right: 10px;
+}
+.fa-code-fork {
+  margin-right: 14px;
+}
+.fa-long-arrow-down {
+  margin-right: 16px;
+}
+.panel-body {
+  padding: 0px;
+}
+
+.panel-body table tr td {
+  padding-left: 15px
+}
+
+.panel-body .table {
+  margin-bottom: 0px;
+}
+
+.navbar-static-top {
+    margin-bottom: 0;
+    height: 50px;
+}
+.menu {
+    border-right: 1px solid #e7e7e7;
+    height: 100%;
+    padding: 0;
+}
+.menu .panel-group {
+    width: 100%;
+}
+.menu .panel-default {
+    border-right: none;
+    border-left: none;
+    border-bottom: none;
+}
+.menu .panel-group .panel-heading+.panel-collapse>.panel-body {
+    border-top: none;
+    overflow-y: auto;
+    max-height: 350px;
+}
+.menu .panel-default:last-of-type {
+    border-bottom: 1px solid #ddd;
+}
+.panel-group .panel+.panel {
+    margin-top: 0;
+}
+.menu a {
+    color: #3c3c3c;
+}
+.overview .card-title .fa {
+    font-size: 50px;
+}
+.copyright {
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    padding: 0 15px 15px 15px;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    display: -webkit-flex;
+    -webkit-flex-direction: column;
+    align-items: center;
+    -webkit-align-items: center;
+}
+.copyright img {
+    width: 80px;
+    margin-top: 10px;
+}
+.copyright a {
+    color: #009dff;
+    text-decoration: underline;
+}
+.breadcrumb {
+    background: none;
+    padding-left: 0;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+.breadcrumb a {
+    text-decoration: underline;
+    color: #333;
+}
+
+.comment {
+    margin: 15px 0;
+}
+code {
+    background: none;
+    padding: 2px 0;
+}
+.io-description {
+    margin: 10px 0;
+}
+.io-file {
+    margin: 20px 0;
+}
+.navbar .btn-menu {
+    position: absolute;
+    right: 0;
+    margin: 10px;
+}
+.xs-menu {
+    margin-top: 50px;
+    height: calc(100% - 50px);
+    display: none;
+    overflow-y: scroll;
+}
+
+.xs-menu .copyright {
+    margin-top: 20px;
+    position: relative;
+}
