@@ -4,6 +4,7 @@ import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as merge from 'merge-stream';
 import * as util from 'gulp-util';
+import * as filter from 'gulp-filter';
 import { join } from 'path';
 
 import Config from '../../config';
@@ -33,6 +34,10 @@ if (isProd) {
   );
 }
 
+const appSCSSFiles      = join(Config.APP_SRC, '**', '*.scss');
+const entrySCSSFiles    = join(Config.CSS_SRC, '**', '*.scss');
+const abtractSCSSFiles  = join(Config.SCSS_SRC, '**', '*.scss');
+
 /**
  * Copies all HTML files in `src/client` over to the `dist/tmp` directory.
  */
@@ -57,9 +62,7 @@ function processComponentStylesheets() {
  * Process scss files referenced from Angular component `styleUrls` metadata
  */
 function processComponentScss() {
-  return gulp.src(join(Config.APP_SRC, '**', '*.scss'))
-    .pipe(isProd ? plugins.cached('process-component-scss') : plugins.util.noop())
-    .pipe(isProd ? plugins.progeny() : plugins.util.noop())
+  return getSCSSFiles('process-component-scss', [appSCSSFiles], [abtractSCSSFiles])
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.sass(Config.getPluginConfig('gulp-sass')).on('error', plugins.sass.logError))
     .pipe(plugins.postcss(processors))
@@ -71,6 +74,20 @@ function processComponentScss() {
       }
     }))
     .pipe(gulp.dest(isProd ? Config.TMP_DIR : Config.APP_DEST));
+}
+
+/**
+ + * Get SCSS Files to process
+ + */
+function getSCSSFiles(cacheName:string, filesToCompile:string[], filesToExclude:string[] = []) {
+  let allFiles:string[] = filesToCompile.concat(filesToExclude);
+  let filteredFiles:string[] = filesToCompile.concat(
+    filesToExclude.map((path:string) => { return '!' + path; })
+  );
+  return gulp.src(allFiles)
+    .pipe(plugins.cached(cacheName))
+    .pipe(plugins.progeny())
+    .pipe(filter(filteredFiles));
 }
 
 /**
@@ -126,9 +143,7 @@ function getExternalCss() {
  * Get a stream of external scss files for subsequent processing.
  */
 function getExternalScssStream() {
-  return gulp.src(getExternalScss())
-    .pipe(isProd ? plugins.cached('process-external-scss') : plugins.util.noop())
-    .pipe(isProd ? plugins.progeny() : plugins.util.noop())
+  return getSCSSFiles('process-external-scss', getExternalScss(), [abtractSCSSFiles])
     .pipe(plugins.sass(Config.getPluginConfig('gulp-sass')).on('error', plugins.sass.logError));
 }
 
@@ -138,7 +153,7 @@ function getExternalScssStream() {
  */
 function getExternalScss() {
   return Config.DEPENDENCIES.filter(dep => /\.scss$/.test(dep.src)).map(dep => dep.src)
-    .concat([join(Config.CSS_SRC, '**', '*.scss')]);
+    .concat([entrySCSSFiles]);
 }
 
 /**

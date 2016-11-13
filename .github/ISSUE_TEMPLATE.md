@@ -27,7 +27,7 @@ please provide the *STEPS TO REPRODUCE* and if possible a *MINIMAL DEMO* of the 
 **Please tell us about your environment:**
 <!-- Operating system, IDE, package manager, HTTP server, ... -->
 
-* **Angular Seed Version:** 2.0.X
+* **Angular Seed Version:** `aaaaf75`
 <!-- Check which is the hash of the last commit from angular-seed that you have locally -->
 
 * **Node:** `node --version` =

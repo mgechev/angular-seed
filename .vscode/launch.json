@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Chrome against localhost, with sourcemaps",
+      "type": "chrome",
+      "preLaunchTask": "start",
+      "request": "launch",
+      "url": "http://localhost:5555",
+      "sourceMaps": true,
+      "webRoot": "${workspaceRoot}/src/client",
+      "sourceMapPathOverrides": {
+        "app/*": "${webRoot}/app/*"
+      }
+    },
+    {
+      "name": "Attach to Chrome, with sourcemaps",
+      "type": "chrome",
+      "request": "attach",
+      "port": 9222,
+      "sourceMaps": true,
+      "webRoot": "${workspaceRoot}/src/client",
+      "sourceMapPathOverrides": {
+        "app/*": "${webRoot}/app/*"
+      }
+    }
+  ]
+}

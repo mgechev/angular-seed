@@ -1,6 +1,5 @@
 import { join } from 'path';
 import * as slash from 'slash';
-import * as util from 'gulp-util';
 import { argv } from 'yargs';
 
 import { BuildType, ExtendPackages, InjectableDependency } from './seed.config.interfaces';
@@ -62,11 +61,6 @@ export class SeedConfig {
    */
   BUILD_TYPE = getBuildType();
 
-  get ENV() {
-    util.log(util.colors.yellow('Warning: the "ENV" property is deprecated. Use "BUILD_TYPE" instead.'));
-    return this.BUILD_TYPE;
-  }
-
   /**
    * The flag for the debug option of the application.
    * The default value is `false`, which can be overriden by the `--debug` flag when running `npm start`.
@@ -92,23 +86,8 @@ export class SeedConfig {
   * The path to the coverage output
   * NB: this must match what is configured in ./karma.conf.js
   */
-  COVERAGE_DIR = 'coverage';
-
-  /**
-   * Karma reporter configuration
-   */
-  KARMA_REPORTERS: any = {
-    preprocessors: {
-      'dist/**/!(*spec).js': ['coverage']
-    },
-    reporters: ['mocha', 'coverage'],
-    coverageReporter: {
-      dir: this.COVERAGE_DIR + '/',
-      reporters: [
-        {type: 'json', subdir: '.', file: 'coverage-final.json'}
-      ]
-    }
-  };
+  COVERAGE_DIR = 'coverage_js';
+  COVERAGE_TS_DIR = 'coverage';
 
   /**
    * The path for the base of the application at runtime.
@@ -208,6 +187,12 @@ export class SeedConfig {
   CSS_SRC = `${this.APP_SRC}/css`;
 
   /**
+   * The folder of the applications scss files.
+   * @type {string}
+   */
+  SCSS_SRC = `${this.APP_SRC}/scss`;
+
+  /**
    * The directory of the applications tools
    * @type {string}
    */
@@ -302,11 +287,11 @@ export class SeedConfig {
   VERSION_NODE = '4.0.0';
 
   /**
-   * The flag to enable handling of SCSS files
-   * The default value is false. Override with the '--scss' flag.
+   * Enable SCSS stylesheet compilation.
+   * Set ENABLE_SCSS environment variable to 'true' or '1'
    * @type {boolean}
    */
-  ENABLE_SCSS = argv['scss'] || false;
+  ENABLE_SCSS = ['true', '1'].indexOf(`${process.env.ENABLE_SCSS}`.toLowerCase()) !== -1 || argv['scss'] || false;
 
   /**
    * The list of NPM dependcies to be injected in the `index.html`.
@@ -316,6 +301,7 @@ export class SeedConfig {
     { src: 'zone.js/dist/zone.js', inject: 'libs' },
     { src: 'core-js/client/shim.min.js', inject: 'shims' },
     { src: 'systemjs/dist/system.src.js', inject: 'shims' },
+    { src: 'intl/dist/Intl.min.js', inject: 'shims' },
     // Temporary fix. See https://github.com/angular/angular/issues/9359
     { src: '.tmp/Rx.min.js', inject: 'libs', buildType: BUILD_TYPES.DEVELOPMENT },
   ];
@@ -512,6 +498,30 @@ export class SeedConfig {
   };
 
   /**
+   * Karma reporter configuration
+   */
+  getKarmaReporters(): any {
+    return {
+      preprocessors: {
+        'dist/**/!(*spec|index|*.module|*.routes).js': ['coverage']
+      },
+      reporters: ['mocha', 'coverage', 'karma-remap-istanbul'],
+      coverageReporter: {
+        dir: this.COVERAGE_DIR + '/',
+        reporters: [
+          { type: 'json', subdir: '.', file: 'coverage-final.json' },
+          { type: 'html', subdir: '.' }
+        ]
+      },
+      remapIstanbulReporter: {
+        reports: {
+          html: this.COVERAGE_TS_DIR
+        }
+      }
+    };
+  };
+
+  /**
    * Recursively merge source onto target.
    * @param {any} target The target object (to receive values from source)
    * @param {any} source The source object (to be merged onto target)
@@ -540,11 +550,21 @@ export class SeedConfig {
 
     if (pack.path) {
       this.SYSTEM_CONFIG_DEV.paths[pack.name] = pack.path;
+      this.SYSTEM_BUILDER_CONFIG.paths[pack.name] = pack.path;
     }
 
     if (pack.packageMeta) {
+      this.SYSTEM_CONFIG_DEV.packages[pack.name] = pack.packageMeta;
       this.SYSTEM_BUILDER_CONFIG.packages[pack.name] = pack.packageMeta;
     }
+  }
+
+  addPackagesBundles(packs: ExtendPackages[]) {
+
+    packs.forEach((pack: ExtendPackages) => {
+      this.addPackageBundles(pack);
+    });
+
   }
 
 }
@@ -600,4 +620,3 @@ function getBuildType() {
     return BUILD_TYPES.DEVELOPMENT;
   }
 }
-
