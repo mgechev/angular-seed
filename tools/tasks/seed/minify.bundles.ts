@@ -16,9 +16,10 @@ const getTask = (target: string, destDir: string) => {
     .pipe(gulp.dest(destDir));
 };
 
-export = () => {
-  return merge(
-    getTask(Config.JS_PROD_APP_BUNDLE, Config.JS_DEST),
-    getTask(Config.JS_PROD_SHIMS_BUNDLE, Config.JS_DEST)
-  );
+export = (done: any) => {
+  done();
+//  return merge(
+//    getTask(Config.JS_PROD_APP_BUNDLE, Config.JS_DEST),
+//    getTask(Config.JS_PROD_SHIMS_BUNDLE, Config.JS_DEST)
+//  );
 };

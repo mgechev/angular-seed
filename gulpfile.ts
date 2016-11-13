@@ -66,7 +66,7 @@ gulp.task('build.prod.exp', (done: any) =>
               'compile.ahead.prod',
               'build.js.prod.exp',
               'build.bundles',
-              'build.bundles.app.exp',
+              'build.lazy-bundles.app.exp',
               'minify.bundles',
               'build.index.prod',
               done));

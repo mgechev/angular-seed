@@ -42,7 +42,7 @@ System.config({ defaultJSExtensions: true });
 
 const bundleMain = () => {
   const builder = new Builder(Config.SYSTEM_BUILDER_CONFIG);
-  const mainpath = join(Config.TMP_DIR, Config.BOOTSTRAP_PROD_MODULE);
+  const mainpath = join(Config.TMP_DIR, Config.BOOTSTRAP_FACTORY_PROD_MODULE);
   const outpath = join(Config.JS_DEST, Config.JS_PROD_APP_BUNDLE);
   return builder
     .bundle(mainpath,
