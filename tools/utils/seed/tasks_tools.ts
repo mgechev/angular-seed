@@ -5,6 +5,9 @@ import * as isstream from 'isstream';
 import { join } from 'path';
 import * as tildify from 'tildify';
 
+import { changeFileManager } from './code_change_tools';
+import { Task } from '../../tasks/task';
+
 /**
  * Loads the tasks within the given path.
  * @param {string} path - The path to load the tasks from.
@@ -12,6 +15,33 @@ import * as tildify from 'tildify';
 export function loadTasks(path: string): void {
   util.log('Loading tasks folder', util.colors.yellow(path));
   readDir(path, taskname => registerTask(taskname, path));
+}
+
+function normalizeTask(task: any, taskName: string) {
+  if (task instanceof Task) {
+    return task;
+  }
+  if (task.prototype && task.prototype instanceof Task) {
+    return new task();
+  }
+  if (typeof task === 'function') {
+    return new class AnonTask extends Task {
+      run(done: any) {
+        if (task.length > 0) {
+          return task(done);
+        }
+
+        const taskReturnedValue = task();
+        if (isstream(taskReturnedValue)) {
+          return taskReturnedValue;
+        }
+
+        done();
+      }
+    };
+  }
+  throw new Error(taskName + ' should be instance of the class ' +
+    'Task, a function or a class which extends Task.');
 }
 
 /**
@@ -24,19 +54,19 @@ function registerTask(taskname: string, path: string): void {
   util.log('Registering task', util.colors.yellow(tildify(TASK)));
 
   gulp.task(taskname, (done: any) => {
-    const task = require(TASK);
-    if (task.length > 0) {
-      return task(done);
+    const task = normalizeTask(require(TASK), TASK);
+
+    if (changeFileManager.pristine || task.shallRun(changeFileManager.lastChangedFiles)) {
+      const result = task.run(done);
+      if (result && typeof result.catch === 'function') {
+        result.catch((e: any) => {
+          util.log(`Error while running "${TASK}"`, e);
+        });
+      }
+      return result;
+    } else {
+      done();
     }
-
-    const taskReturnedValue = task();
-    if (isstream(taskReturnedValue)) {
-      return taskReturnedValue;
-    }
-
-    // TODO: add promise handling if needed at some point.
-
-    done();
   });
 }
 

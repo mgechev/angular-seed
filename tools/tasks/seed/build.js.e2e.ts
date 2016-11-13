@@ -2,17 +2,11 @@ import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
 
-import {
-  APP_DEST,
-  APP_SRC,
-  BOOTSTRAP_FACTORY_PROD_MODULE,
-  SYSTEM_CONFIG_DEV,
-  TOOLS_DIR
-} from '../../config';
+import Config from '../../config';
 import { makeTsProject, templateLocals } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
-const jsonSystemConfig = JSON.stringify(SYSTEM_CONFIG_DEV);
+const jsonSystemConfig = JSON.stringify(Config.SYSTEM_CONFIG_DEV);
 
 /**
  * Executes the build process, transpiling the TypeScript files (including the e2e-spec files, excluding the spec files)
@@ -21,21 +15,20 @@ const jsonSystemConfig = JSON.stringify(SYSTEM_CONFIG_DEV);
 export = () => {
   let tsProject = makeTsProject();
   let src = [
-    'typings/index.d.ts',
-    TOOLS_DIR + '/manual_typings/**/*.d.ts',
-    join(APP_SRC, '**/*.ts'),
-    '!' + join(APP_SRC, '**/*.spec.ts'),
-    '!' + join(APP_SRC, `**/${BOOTSTRAP_FACTORY_PROD_MODULE}.ts`)
+    Config.TOOLS_DIR + '/manual_typings/**/*.d.ts',
+    join(Config.APP_SRC, '**/*.ts'),
+    '!' + join(Config.APP_SRC, '**/*.spec.ts'),
+    '!' + join(Config.APP_SRC, `**/${Config.NG_FACTORY_FILE}.ts`)
   ];
   let result = gulp.src(src)
     .pipe(plugins.plumber())
     .pipe(plugins.sourcemaps.init())
-    .pipe(plugins.typescript(tsProject));
+    .pipe(tsProject());
 
   return result.js
     .pipe(plugins.sourcemaps.write())
     .pipe(plugins.template(Object.assign(templateLocals(), {
       SYSTEM_CONFIG_DEV: jsonSystemConfig
     })))
-    .pipe(gulp.dest(APP_DEST));
+    .pipe(gulp.dest(Config.APP_DEST));
 };

@@ -2,19 +2,18 @@ import * as util from 'gulp-util';
 import { argv } from 'yargs';
 import { join } from 'path';
 
-import * as CONFIG from '../../config';
+import Config from '../../config';
 
 const getConfig = (path: string, env: string): any => {
   const configPath = join(path, env);
   let config: any;
   try {
-    config = require(configPath);
+    config = JSON.parse(JSON.stringify(require(configPath)));
   } catch (e) {
     config = null;
+    util.log(util.colors.red(e.message));
   }
-  if (!config) {
-    util.log(util.colors.red(`Cannot find ${configPath}`));
-  }
+
   return config;
 };
 
@@ -23,8 +22,8 @@ const getConfig = (path: string, env: string): any => {
  * project specific overrides as defined in project.config.ts)
  */
 export function templateLocals() {
-  const configEnvName = argv['config-env'] || 'dev';
-  const configPath = CONFIG.getPluginConfig('environment-config');
+  const configEnvName = argv['env-config'] || argv['config-env'] || 'dev';
+  const configPath = Config.getPluginConfig('environment-config');
   const baseConfig = getConfig(configPath, 'base');
   const config = getConfig(configPath, configEnvName);
 
@@ -32,7 +31,7 @@ export function templateLocals() {
     throw new Error('Invalid configuration name');
   }
 
-  return Object.assign(CONFIG, {
+  return Object.assign(Config, {
     ENV_CONFIG: JSON.stringify(Object.assign(baseConfig, config))
   });
 }

@@ -3,7 +3,7 @@ import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as merge from 'merge-stream';
 import { join } from 'path';
 
-import { JS_DEST, JS_PROD_APP_BUNDLE, JS_PROD_SHIMS_BUNDLE } from '../../config';
+import Config from '../../config';
 
 const plugins = <any>gulpLoadPlugins();
 
@@ -18,7 +18,7 @@ const getTask = (target: string, destDir: string) => {
 
 export = () => {
   return merge(
-    getTask(JS_PROD_APP_BUNDLE, JS_DEST),
-    getTask(JS_PROD_SHIMS_BUNDLE, JS_DEST)
+    getTask(Config.JS_PROD_APP_BUNDLE, Config.JS_DEST),
+    getTask(Config.JS_PROD_SHIMS_BUNDLE, Config.JS_DEST)
   );
 };
