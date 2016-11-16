@@ -101,7 +101,7 @@ export class SeedConfig {
    * The base path of node modules.
    * @type {string}
    */
-  NPM_BASE = slash(join(this.APP_BASE, 'node_modules/'));
+  NPM_BASE = slash(join('.', this.APP_BASE, 'node_modules/'));
 
   /**
    * The build interval which will force the TypeScript compiler to perform a typed compile run.
