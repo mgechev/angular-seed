@@ -104,20 +104,6 @@ export class SeedConfig {
   NPM_BASE = slash(join(this.APP_BASE, 'node_modules/'));
 
   /**
-   * The flag for the hot-loader option of the application.
-   * Per default the option is not set, but can be set by the `--hot-loader` flag when running `npm start`.
-   * @type {boolean}
-   */
-  ENABLE_HOT_LOADING = argv['hot-loader'];
-
-  /**
-   * The port where the application will run, if the `hot-loader` option mode is used.
-   * The default hot-loader port is `5578`.
-   * @type {number}
-   */
-  HOT_LOADER_PORT = 5578;
-
-  /**
    * The build interval which will force the TypeScript compiler to perform a typed compile run.
    * Between the typed runs, a typeless compile is run, which is typically much faster.
    * For example, if set to 5, the initial compile will be typed, followed by 5 typeless runs,
@@ -143,13 +129,10 @@ export class SeedConfig {
   APP_CLIENT = argv['client'] || 'client';
 
   /**
-   * The bootstrap file to be used to boot the application. The file to be used is dependent if the hot-loader option is
-   * used or not.
-   * Per default (non hot-loader mode) the `main.ts` file will be used, with the hot-loader option enabled, the
-   * `hot_loader_main.ts` file will be used.
+   * The bootstrap file to be used to boot the application.
    * @type {string}
    */
-  BOOTSTRAP_MODULE = `${this.BOOTSTRAP_DIR}/` + (this.ENABLE_HOT_LOADING ? 'hot_loader_main' : 'main');
+  BOOTSTRAP_MODULE = `${this.BOOTSTRAP_DIR}/main`;
 
   BOOTSTRAP_PROD_MODULE = `${this.BOOTSTRAP_DIR}/` + 'main';
 
