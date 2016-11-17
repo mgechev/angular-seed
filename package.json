@@ -44,7 +44,6 @@
   "devDependencies": {
     "@angular/compiler-cli": "~2.2.0",
     "@angular/platform-server": "~2.2.0",
-    "@angular/tsc-wrapped": "0.3.0",
     "@types/async": "^2.0.32",
     "@types/browser-sync": "^0.0.34",
     "@types/core-js": "^0.9.34",
