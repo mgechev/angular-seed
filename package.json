@@ -123,7 +123,6 @@
     "typescript": "^2.0.3",
     "walk": "^2.3.9",
     "yargs": "^6.0.0",
-    "intl": "^1.2.5",
     "minimatch": "^3.0.3"
   },
   "dependencies": {
@@ -135,6 +134,7 @@
     "@angular/platform-browser": "~2.2.0",
     "@angular/platform-browser-dynamic": "~2.2.0",
     "@angular/router": "~3.2.0",
+    "intl": "^1.2.5",
     "core-js": "^2.4.1",
     "reflect-metadata": "^0.1.8",
     "rxjs": "5.0.0-beta.12",
