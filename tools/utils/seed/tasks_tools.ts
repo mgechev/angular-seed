@@ -1,40 +1,84 @@
+import { existsSync, lstatSync, readdirSync } from 'fs';
 import * as gulp from 'gulp';
 import * as util from 'gulp-util';
-import * as chalk from 'chalk';
 import * as isstream from 'isstream';
+import { join } from 'path';
 import * as tildify from 'tildify';
-import {readdirSync, existsSync, lstatSync} from 'fs';
-import {join} from 'path';
 
+import { changeFileManager } from './code_change_tools';
+import { Task } from '../../tasks/task';
 
+/**
+ * Loads the tasks within the given path.
+ * @param {string} path - The path to load the tasks from.
+ */
 export function loadTasks(path: string): void {
-  util.log('Loading tasks folder', chalk.yellow(path));
+  util.log('Loading tasks folder', util.colors.yellow(path));
   readDir(path, taskname => registerTask(taskname, path));
 }
 
+function normalizeTask(task: any, taskName: string) {
+  if (task instanceof Task) {
+    return task;
+  }
+  if (task.prototype && task.prototype instanceof Task) {
+    return new task();
+  }
+  if (typeof task === 'function') {
+    return new class AnonTask extends Task {
+      run(done: any) {
+        if (task.length > 0) {
+          return task(done);
+        }
+
+        const taskReturnedValue = task();
+        if (isstream(taskReturnedValue)) {
+          return taskReturnedValue;
+        }
+
+        done();
+      }
+    };
+  }
+  throw new Error(taskName + ' should be instance of the class ' +
+    'Task, a function or a class which extends Task.');
+}
+
+/**
+ * Registers the task by the given taskname and path.
+ * @param {string} taskname - The name of the task.
+ * @param {string} path     - The path of the task.
+ */
 function registerTask(taskname: string, path: string): void {
   const TASK = join(path, taskname);
-  util.log('Registering task', chalk.yellow(tildify(TASK)));
+  util.log('Registering task', util.colors.yellow(tildify(TASK)));
 
   gulp.task(taskname, (done: any) => {
-    const task = require(TASK);
-    if (task.length > 0) {
-      return task(done);
+    const task = normalizeTask(require(TASK), TASK);
+
+    if (changeFileManager.pristine || task.shallRun(changeFileManager.lastChangedFiles)) {
+      const result = task.run(done);
+      if (result && typeof result.catch === 'function') {
+        result.catch((e: any) => {
+          util.log(`Error while running "${TASK}"`, e);
+        });
+      }
+      return result;
+    } else {
+      done();
     }
-
-    const taskReturnedValue = task();
-    if (isstream(taskReturnedValue)) {
-      return taskReturnedValue;
-    }
-
-    // TODO: add promise handling if needed at some point.
-
-    done();
   });
 }
 
+/**
+ * Reads the files in the given root directory and executes the given callback per found file.
+ * @param {string}   root - The root directory to read.
+ * @param {function} cb   - The callback to execute per found file.
+ */
 function readDir(root: string, cb: (taskname: string) => void) {
-  if (!existsSync(root)) return;
+  if (!existsSync(root)) {
+    return;
+  }
 
   walk(root);
 

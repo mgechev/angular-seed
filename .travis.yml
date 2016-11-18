@@ -1,22 +1,28 @@
 language: node_js
-node_js:
-  - 4
-  - 5
-  - 6
+node_js: stable
 
 sudo: false
 
+addons:
+  firefox: "39.0"
+
+os:
+  - linux
+  - osx
+
 before_install:
-  - export CHROME_BIN=chromium-browser  # Karma CI
-  - export DISPLAY=:99.0
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew outdated xctool || brew upgrade xctool; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CHROME_BIN=chromium-browser; fi  # Karma CI
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew cask install google-chrome; fi  # Karma CI
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi
 
 before_script:
-  - sh -e /etc/init.d/xvfb start
-  - nohup bash -c webdriver-manager start 2>&1 &  # Protractor CI
-  - sleep 1  # give server time to start
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then nohup bash -c "webdriver-manager start 2>&1 &"; fi  # Protractor CI
 
 after_failure:
-  - cat /home/travis/build/mgechev/angular2-seed/npm-debug.log
+  - cat /home/travis/build/mgechev/angular-seed/npm-debug.log
 
 branches:
   only: master
@@ -29,11 +35,8 @@ notifications:
     on_failure: always  # options: [always|never|change] default: always
     on_start: never     # options: [always|never|change] default: always
 
-env:
-  global:
-    # https://github.com/DefinitelyTyped/tsd#tsdrc
-    # Token has no scope (read-only access to public information)
-    - TSD_GITHUB_TOKEN=9b18c72997769f3867ef2ec470e626d39661795d
-
 cache:
   directories: node_modules
+
+script:
+  - npm run tests.all && npm run build.prod.exp

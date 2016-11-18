@@ -1,31 +1,22 @@
-import * as util from 'gulp-util';
-import * as chalk from 'chalk';
 import * as rimraf from 'rimraf';
-import {readdirSync, lstatSync} from 'fs';
-import {join} from 'path';
-import {TOOLS_DIR} from '../../config';
+import { join } from 'path';
 
-export = (done: any) => {
-  deleteAndWalk(TOOLS_DIR);
-  done();
-}
+import Config from '../../config';
 
-function walk(path: any) {
-  let files = readdirSync(path);
-  for (let i = 0; i < files.length; i += 1) {
-    let curPath = join(path, files[i]);
-    if (lstatSync(curPath).isDirectory()) { // recurse
-      deleteAndWalk(curPath);
-    }
-  }
-}
+/**
+ * Removes all the js, js.map from the tools directories
+ *
+ * NB: this needs to remain syncronus, or check.tools will
+ * need to be updated to handle the returned promise/stream
+ *
+ */
+export = () => {
+  let source = [
+    'gulpfile.js',
+    'gulpfile.js.map',
+    join(Config.TOOLS_DIR, '**/*.js'),
+    join(Config.TOOLS_DIR, '**/*.js.map'),
+  ];
 
-function deleteAndWalk(path: any) {
-  try {
-    rimraf.sync(join(path, '*.js'));
-    util.log('Deleted', chalk.yellow(`${path}/*.js`));
-  } catch (e) {
-    util.log('Error while deleting', chalk.yellow(`${path}/*.js`), e);
-  }
-  walk(path);
-}
+  return source.forEach(p => rimraf.sync(p));
+};

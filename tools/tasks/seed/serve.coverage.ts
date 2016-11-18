@@ -1,3 +1,6 @@
-import {serveCoverage} from '../../utils';
+import { serveCoverage } from '../../utils';
 
-export = serveCoverage
+/**
+ * Executes the build process, serving unit test coverage report using an `express` server.
+ */
+export = serveCoverage;
