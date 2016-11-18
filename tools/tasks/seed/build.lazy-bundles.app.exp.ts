@@ -6,7 +6,7 @@ import Config from '../../config';
 
 const BUNDLER_OPTIONS = {
   format: 'cjs',
-  minify: true,
+  minify: false,
   mangle: false
 };
 
@@ -21,23 +21,78 @@ const normalizeConfig = (bundles: any[]) => {
       b = { path: b };
     }
     if (!b.module) {
-      b.module = b.path.split('\/').pop() + '.module.js';
+      b.module = b.path.split('\/').pop() + '.module.ngfactory.js';
     } else {
-      b.module += '.js';
+      b.module += '.ngfactory.js';
     }
     return b;
   });
 };
 
 const addExtensions = `
-System.config({ defaultJSExtensions: true });
-(function () {
-  Object.keys(System.defined).forEach(function (m) {
-    if (!/\.js$/.test(m)) {
-      System.defined[m + '.js'] = System.defined[m];
+$traceurRuntime = {
+  typeof: function (a) {
+    return typeof a;
+  }
+};
+System.config({
+  defaultJSExtensions: true,
+  paths: {
+    'rxjs/*': 'rxjs/*'
+  },
+  meta: {
+    '*.json': {
+      format: 'json'
     }
-  });
-}());
+  },
+  packages: {
+    '@angular/core': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/compiler': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/common': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/http': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/forms': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/platform-browser': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/platform-browser-dynamic': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/router-deprecated': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/router': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    'jstimezonedetect': {
+      main: 'dist/jstz.min.js',
+      format: 'cjs',
+      defaultExtension: 'js'
+    },
+    'rxjs': {
+      main: 'Rx.js',
+      defaultExtension: 'js'
+    }
+  }
+});
 `;
 
 const bundleMain = () => {
@@ -47,9 +102,9 @@ const bundleMain = () => {
   return builder
     .bundle(mainpath,
       outpath,
-      Object.assign({ format: 'umd', sourceMaps: true }, BUNDLER_OPTIONS))
+      Object.assign({ format: 'umd', sourceMaps: true, runtime: true }, BUNDLER_OPTIONS))
       .then((res: any) => {
-        appendFileSync(outpath, `System.import('${mainpath}.js');${addExtensions}`);
+        appendFileSync(outpath, `\nSystem.import('${mainpath}.js');${addExtensions}`);
         return res.modules;
       });
 };
@@ -65,7 +120,7 @@ const bundleModule = (config: Bundle[], exclude: string[], bundle: Bundle) => {
     .buildStatic(
       expression,
       join(Config.JS_DEST, '..', Config.BOOTSTRAP_DIR, bundle.path, bundle.module),
-      Object.assign({}, BUNDLER_OPTIONS, { format: 'umd', sourceMaps: true }))
+      Object.assign({}, BUNDLER_OPTIONS, { format: 'umd', sourceMaps: true, runtime: true }))
       .then((res: any) => {
         console.log(res.modules);
         console.log('Bundled', bundle.path);
@@ -78,6 +133,7 @@ const bundleModule = (config: Bundle[], exclude: string[], bundle: Bundle) => {
  */
 export = (done: any) => {
   const config = normalizeConfig(Config.BUNDLES);
+  console.log(config);
   bundleMain()
     .then((bundled: string[]) => Promise.all(config.map(bundleModule.bind(null, config, bundled))))
     .then(() => done())

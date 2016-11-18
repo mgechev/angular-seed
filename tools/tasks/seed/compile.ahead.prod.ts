@@ -8,6 +8,20 @@ import { CodeGenerator } from '@angular/compiler-cli';
 
 import Config from '../../config';
 
+const normalizeConfig = (bundles: any[]) => {
+  return bundles.map(b => {
+    if (typeof b === 'string') {
+      b = { path: b };
+    }
+    if (!b.module) {
+      b.module = b.path.split('\/').pop() + '.module.ts';
+    } else {
+      b.module += '.ts';
+    }
+    return b;
+  });
+};
+
 function codegen(
     ngOptions: tsc.AngularCompilerOptions, cliOptions: tsc.NgcCliOptions, program: ts.Program,
     host: ts.CompilerHost) {
@@ -21,10 +35,12 @@ const modifyFile = (path: string, mod: any = (f: string) => f) => {
 
 export = (done: any) => {
   // Note: dirty hack until we're able to set config easier
+  const config = normalizeConfig(JSON.parse(JSON.stringify(Config.BUNDLES)));
   modifyFile(join(Config.TMP_DIR, 'tsconfig.json'), (content: string) => {
     const parsed = JSON.parse(content);
     parsed.files = parsed.files || [];
     parsed.files.push(join(Config.BOOTSTRAP_DIR, 'main.ts'));
+    config.forEach((f: any) => parsed.files.push(join(Config.BOOTSTRAP_DIR, f.path, f.module)));
     return JSON.stringify(parsed, null, 2);
   });
   const args = argv;

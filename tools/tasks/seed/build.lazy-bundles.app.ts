@@ -49,7 +49,7 @@ const bundleMain = () => {
       outpath,
       Object.assign({ format: 'umd', sourceMaps: true }, BUNDLER_OPTIONS))
       .then((res: any) => {
-        appendFileSync(outpath, `System.import('${mainpath}.js');${addExtensions}`);
+        appendFileSync(outpath, `\nSystem.import('${mainpath}.js');${addExtensions}`);
         return res.modules;
       });
 };
