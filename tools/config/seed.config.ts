@@ -513,6 +513,28 @@ export class SeedConfig {
     }
   };
 
+  constructor() {
+    for (let proxy of this.getProxyMiddleware()) {
+      this.PLUGIN_CONFIGS['browser-sync'].middleware.push(proxy);
+    }
+  }
+
+  /**
+   * Get proxy middleware configuration. Add in your project config like:
+   * getProxyMiddleware(): Array<any> {
+   *   const proxyMiddleware = require('http-proxy-middleware');
+   *   return [
+   *     proxyMiddleware('/ws', {
+   *       ws: false,
+   *       target: 'http://localhost:3003'
+   *     })
+   *   ];
+   * }
+   */
+  getProxyMiddleware(): Array<any> {
+    return [];
+  }
+
   /**
    * Karma reporter configuration
    */
