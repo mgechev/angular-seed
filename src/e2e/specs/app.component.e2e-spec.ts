@@ -1,7 +1,7 @@
 describe('App', () => {
 
-  beforeEach( () => {
-    browser.get('/');
+  beforeEach(async () => {
+    return await browser.get('/');
   });
 
   it('should have a title', () => {

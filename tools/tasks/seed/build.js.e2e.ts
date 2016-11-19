@@ -13,12 +13,10 @@ const jsonSystemConfig = JSON.stringify(Config.SYSTEM_CONFIG_DEV);
  * for the e2e environment.
  */
 export = () => {
-  let tsProject = makeTsProject();
+  let tsProject = makeTsProject({ 'target': 'es2015' }, Config.E2E_SRC);
   let src = [
     Config.TOOLS_DIR + '/manual_typings/**/*.d.ts',
-    join(Config.APP_SRC, '**/*.ts'),
-    '!' + join(Config.APP_SRC, '**/*.spec.ts'),
-    '!' + join(Config.APP_SRC, `**/${Config.NG_FACTORY_FILE}.ts`)
+    join(Config.E2E_SRC, '**/*.ts')
   ];
   let result = gulp.src(src)
     .pipe(plugins.plumber())
@@ -30,5 +28,5 @@ export = () => {
     .pipe(plugins.template(Object.assign(templateLocals(), {
       SYSTEM_CONFIG_DEV: jsonSystemConfig
     })))
-    .pipe(gulp.dest(Config.APP_DEST));
+    .pipe(gulp.dest(Config.E2E_DEST));
 };
