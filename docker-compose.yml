@@ -2,11 +2,18 @@ version: '2'
 
 services:
 
-  dist-build:
-    container_name: dist-build
-    image: dist-build
+  angular-seed:
     build:
       context: .
-      dockerfile: ./.docker/dist-build.development.dockerfile
+      dockerfile: ./.docker/angular-seed.development.dockerfile
+    command: npm start
+    container_name: angular-seed-start
+    image: angular-seed
+    networks:
+      - dev-network
     ports:
       - '5555:5555'
+
+networks:
+  dev-network:
+    driver: bridge
