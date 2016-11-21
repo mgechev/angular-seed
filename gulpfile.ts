@@ -13,7 +13,7 @@ loadTasks(Config.PROJECT_TASKS_DIR);
 // --------------
 // Build dev.
 gulp.task('build.dev', (done: any) =>
-  runSequence(//'clean.dev',
+  runSequence('clean.once',
 //              'tslint',
               'build.assets.dev',
               'build.html_css',
@@ -31,11 +31,9 @@ gulp.task('build.dev.watch', (done: any) =>
 // --------------
 // Build e2e.
 gulp.task('build.e2e', (done: any) =>
-  runSequence('clean.dev',
+  runSequence('clean.e2e',
               'tslint',
-              'build.assets.dev',
               'build.js.e2e',
-              'build.index.dev',
               done));
 
 // --------------
@@ -75,7 +73,7 @@ gulp.task('build.prod.exp', (done: any) =>
 // Build test.
 gulp.task('build.test', (done: any) =>
   runSequence('clean.once',
-              'tslint',
+//              'tslint',
               'build.assets.dev',
               'build.html_css',
               'build.js.dev',
@@ -110,8 +108,12 @@ gulp.task('serve.dev', (done: any) =>
 // --------------
 // Serve e2e
 gulp.task('serve.e2e', (done: any) =>
-  runSequence('build.e2e',
+  runSequence(
+              'tslint',
+              'build.dev',
+              'build.js.e2e',
               'server.start',
+              'watch.dev',
               'watch.e2e',
               done));
 

@@ -80,11 +80,49 @@ In order to start the seed with AoT use:
 $ npm run build.prod.exp
 ```
 
+# Dockerization
+
+The application provides full Docker support. You can use it for both development as well as production builds and deployments.
+
+## How to build and start the dockerized version of the application 
+
+The Dockerization infrastructure is described in the `docker-compose.yml` (respectively `docker-compose.production.yml`.
+The application consists of two containers:
+- `angular-seed` - In development mode, this container serves the angular app. In production mode it builds the angular app, with the build artifacts being served by the Nginx container
+- `angular-seed-nginx` - This container is used only production mode. It serves the built angular app with Nginx.
+
+## Development build and deployment
+
+Run the following:
+
+```bash
+$ docker-compose build
+$ docker-compose up -d
+```
+
+Now open your browser at http://localhost:5555
+
+## Production build and deployment
+
+Run the following:
+
+```bash
+$ docker-compose -f docker-compose.production.yml build
+$ docker-compose -f docker-compose.production.yml up angular-seed   # Wait until this container has finished building, as the nginx container is dependent on the production build artifacts
+$ docker-compose -f docker-compose.production.yml up -d angular-seed-nginx  # Start the nginx container in detached mode
+```
+
+Now open your browser at http://localhost:5555
+
 # Table of Contents
 
 - [Introduction](#introduction)
 - [How to start](#how-to-start)
 - [How to start with Aot](#how-to-start-with-aot-compilation)
+- [Dockerization](#dockerization)
+  + [How to build and start the dockerized version of the application](#how-to-build-and-start-the-dockerized-version-of-the-application)
+  + [Development build and deployment](#development-build-and-deployment)
+  + [Production build and deployment](#production-build-and-deployment)
 - [Table of Content](#table-of-content)
 - [Configuration](#configuration)
 - [Environment Configuration](#environment-configuration)

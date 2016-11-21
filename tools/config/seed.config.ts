@@ -153,6 +153,12 @@ export class SeedConfig {
   APP_SRC = `src/${this.APP_CLIENT}`;
 
   /**
+   * The name of the TypeScript project file
+   * @type {string}
+   */
+  APP_PROJECTNAME = 'tsconfig.json';
+
+  /**
    * The folder of the applications asset files.
    * @type {string}
    */
@@ -163,6 +169,11 @@ export class SeedConfig {
    * @type {string}
    */
   CSS_SRC = `${this.APP_SRC}/css`;
+
+  /**
+   * The folder of the e2e specs and framework
+   */
+  E2E_SRC = 'src/e2e';
 
   /**
    * The folder of the applications scss files.
@@ -204,6 +215,12 @@ export class SeedConfig {
    * @type {string}
    */
   PROD_DEST = `${this.DIST_DIR}/prod`;
+
+  /**
+   * The folder for the built files of the e2e-specs.
+   * @type {string}
+   */
+  E2E_DEST = `${this.DIST_DIR}/e2e`;
 
   /**
    * The folder for temporary files.
@@ -495,6 +512,28 @@ export class SeedConfig {
       }
     }
   };
+
+  constructor() {
+    for (let proxy of this.getProxyMiddleware()) {
+      this.PLUGIN_CONFIGS['browser-sync'].middleware.push(proxy);
+    }
+  }
+
+  /**
+   * Get proxy middleware configuration. Add in your project config like:
+   * getProxyMiddleware(): Array<any> {
+   *   const proxyMiddleware = require('http-proxy-middleware');
+   *   return [
+   *     proxyMiddleware('/ws', {
+   *       ws: false,
+   *       target: 'http://localhost:3003'
+   *     })
+   *   ];
+   * }
+   */
+  getProxyMiddleware(): Array<any> {
+    return [];
+  }
 
   /**
    * Karma reporter configuration
