@@ -28,7 +28,7 @@ export function templateLocals() {
   const config = getConfig(configPath, configEnvName);
 
   if (!config) {
-    throw new Error('Invalid configuration name');
+    throw new Error(configEnvName + ' is an invalid configuration name');
   }
 
   return Object.assign(Config, {
