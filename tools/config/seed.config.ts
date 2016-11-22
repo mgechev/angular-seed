@@ -301,6 +301,12 @@ export class SeedConfig {
   ENABLE_SCSS = ['true', '1'].indexOf(`${process.env.ENABLE_SCSS}`.toLowerCase()) !== -1 || argv['scss'] || false;
 
   /**
+   * Enable tslint emit error by setting env variable FORCE_TSLINT_EMIT_ERROR
+   * @type {boolean}
+   */
+  FORCE_TSLINT_EMIT_ERROR = process.env.FORCE_TSLINT_EMIT_ERROR ? true : false;
+
+  /**
    * Extra paths for the gulp process to watch for to trigger compilation.
    * @type {string[]}
    */
