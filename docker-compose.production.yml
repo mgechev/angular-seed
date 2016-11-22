@@ -26,7 +26,7 @@ services:
     ports:
       - '5555:80'
     volumes:
-      - ./.docker/nginx.conf:/etc/nginx/conf.d/b-unit.template
+      - ./.docker/nginx.conf:/etc/nginx/conf.d/angular-seed.template
       - ./dist/prod:/var/www/dist/prod
 
 networks:
