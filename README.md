@@ -545,6 +545,7 @@ Here are all the awesome guys who are helping to make the project's wiki even be
  3  Ezequiel Cicala
  3  Brian Kotek
  2  Nathan Walker
+ 2  Amal Shehu
  2  Dinsitro
  2  Drake Wilson
  2  Simon Hampton
