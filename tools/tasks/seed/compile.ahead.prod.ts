@@ -10,7 +10,7 @@ import Config from '../../config';
 function codegen(
   ngOptions: AngularCompilerOptions, cliOptions: NgcCliOptions, program: ts.Program,
   host: ts.CompilerHost) {
-  return CodeGenerator.create(ngOptions, cliOptions, program, host).codegen();
+  return CodeGenerator.create(ngOptions, cliOptions, program, host).codegen({ transitiveModules: true });
 }
 
 const modifyFile = (path: string, mod: any = (f: string) => f) => {
