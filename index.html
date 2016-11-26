@@ -26,7 +26,6 @@
 <a href="https://travis-ci.org/mgechev/angular-seed"><img src="https://travis-ci.org/mgechev/angular-seed.svg?branch=master" alt="Build Status"></a>
 <a href="https://ci.appveyor.com/project/mgechev/angular2-seed"><img src="https://ci.appveyor.com/api/projects/status/jg5vg36w0klpa00e/branch/master?svg=true" alt="Build Status"></a>
 <a href="https://gitter.im/mgechev/angular2-seed?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/mgechev/angular2-seed"></a>
-<a href="http://opensource.org/licenses/MIT"><img src="http://img.shields.io/badge/license-MIT-brightgreen.svg" alt="MIT license"></a>
 <a href="https://david-dm.org/mgechev/angular-seed"><img src="https://david-dm.org/mgechev/angular-seed.svg" alt="Dependency Status"></a>
 <a href="https://david-dm.org/mgechev/angular-seed#info=devDependencies"><img src="https://david-dm.org/mgechev/angular-seed/dev-status.svg" alt="devDependency Status"></a></p>
 
@@ -73,6 +72,11 @@ $ npm start
 <span class="pl-c"># api document for the app</span>
 <span class="pl-c"># npm run build.docs</span>
 
+<span class="pl-c">#generate api documentation</span>
+$ npm run compodoc
+$ npm serve.compodoc
+
+
 <span class="pl-c"># to start deving with livereload site and coverage as well as continuous testing</span>
 $ npm run start.deving
 
@@ -99,12 +103,60 @@ $ npm start -- --app bar</pre></div>
 $ npm run build.prod.exp</pre></div>
 
 <h1>
+<a id="dockerization" class="anchor" href="#dockerization" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dockerization</h1>
+
+<p>The application provides full Docker support. You can use it for both development as well as production builds and deployments.</p>
+
+<h2>
+<a id="how-to-build-and-start-the-dockerized-version-of-the-application" class="anchor" href="#how-to-build-and-start-the-dockerized-version-of-the-application" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to build and start the dockerized version of the application</h2>
+
+<p>The Dockerization infrastructure is described in the <code>docker-compose.yml</code> (respectively <code>docker-compose.production.yml</code>.
+The application consists of two containers:</p>
+
+<ul>
+<li>
+<code>angular-seed</code> - In development mode, this container serves the angular app. In production mode it builds the angular app, with the build artifacts being served by the Nginx container</li>
+<li>
+<code>angular-seed-nginx</code> - This container is used only production mode. It serves the built angular app with Nginx.</li>
+</ul>
+
+<h2>
+<a id="development-build-and-deployment" class="anchor" href="#development-build-and-deployment" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Development build and deployment</h2>
+
+<p>Run the following:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ docker-compose build
+$ docker-compose up -d</pre></div>
+
+<p>Now open your browser at http://localhost:5555</p>
+
+<h2>
+<a id="production-build-and-deployment" class="anchor" href="#production-build-and-deployment" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Production build and deployment</h2>
+
+<p>Run the following:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ docker-compose -f docker-compose.production.yml build
+$ docker-compose -f docker-compose.production.yml up angular-seed   <span class="pl-c"># Wait until this container has finished building, as the nginx container is dependent on the production build artifacts</span>
+$ docker-compose -f docker-compose.production.yml up -d angular-seed-nginx  <span class="pl-c"># Start the nginx container in detached mode</span></pre></div>
+
+<p>Now open your browser at http://localhost:5555</p>
+
+<h1>
 <a id="table-of-contents" class="anchor" href="#table-of-contents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Table of Contents</h1>
 
 <ul>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#how-to-start">How to start</a></li>
 <li><a href="#how-to-start-with-aot-compilation">How to start with Aot</a></li>
+<li>
+<a href="#dockerization">Dockerization</a>
+
+<ul>
+<li><a href="#how-to-build-and-start-the-dockerized-version-of-the-application">How to build and start the dockerized version of the application</a></li>
+<li><a href="#development-build-and-deployment">Development build and deployment</a></li>
+<li><a href="#production-build-and-deployment">Production build and deployment</a></li>
+</ul>
+</li>
 <li><a href="#table-of-content">Table of Content</a></li>
 <li><a href="#configuration">Configuration</a></li>
 <li><a href="#environment-configuration">Environment Configuration</a></li>
@@ -383,7 +435,6 @@ $ npm run e2e.live</pre></div>
 │   │   ├── project            &lt;- manual ambient typings for the project
 │   │   │   └── sample.package.d.ts
 │   │   └── seed               &lt;- seed manual ambient typings
-│   │       ├── angular2-hot-loader.d.ts
 │   │       ├── autoprefixer.d.ts
 │   │       ├── cssnano.d.ts
 │   │       ├── express-history-api-fallback.d.ts
@@ -954,31 +1005,39 @@ $ npm run e2e.live</pre></div>
 
 <p>Here are all the awesome guys who are helping to make the project's wiki even better!</p>
 
-<pre><code>40  Minko Gechev
-22  Clayton K. N. Passos
+<pre><code>56  Minko Gechev
+35  Clayton K. N. Passos
 15  Shyam-Chen
 14  Vincent van Proosdij
- 8  matthew harwood
  8  Christian Dobert
+ 8  matthew harwood
  8  Robert van Kints
+ 6  ruffiem
  6  Ludovic HENIN
  5  Attila Egyed
- 4  davidgfolch
  4  Chris Kapilla
- 3  Stefan Schüller
- 3  Patrick Hillert
- 3  Ezequiel Cicala
+ 4  davidgfolch
  3  Brian Kotek
- 2  Nathan Walker
+ 3  Stefan Schüller
+ 3  Ezequiel Cicala
+ 3  Robert Stoll
+ 3  Patrick Hillert
  2  Dinsitro
- 2  Drake Wilson
+ 2  Amal Shehu
+ 2  Brooke Smith
  2  Simon Hampton
  2  Yannick Koehler
  2  Giovanni Candido da Silva
+ 2  Hank Ehly
  2  hhubik
- 2  Joshua Wiens
  2  Cy Klassen
- 1  zcsongor
+ 2  Joshua Wiens
+ 2  Nathan Walker
+ 2  valentin
+ 2  zealitude
+ 2  Drake Wilson
+ 1  Adam Johannesmeyer
+ 1  陳彥澄
  1  Ameer Nuri
  1  Ankit Kamboj
  1  BouncingBit
@@ -986,19 +1045,29 @@ $ npm run e2e.live</pre></div>
  1  Eddie Sun
  1  Enrico Secondulfo
  1  Eugene Serkin
+ 1  Frido Koch
  1  Ishara Samantha
+ 1  Jack Morrissey
+ 1  Jesper Rønn-Jensen
  1  Myrmex
  1  Pol Stafford
  1  Raphael Schmitt
- 1  Robert Stoll
  1  Sebastian Fuss
  1  Sebastien de Salvador
+ 1  Simon Altschuler
+ 1  Sylvain Francois
  1  The Ult
  1  Yonet
+ 1  ganesansays
+ 1  gforceg
  1  graham
  1  kiuka
+ 1  mcchae7
+ 1  neridonk
+ 1  omerfarukyilmaz
+ 1  samuelfernandez
  1  silicakes
- 1  Adam Johannesmeyer
+ 1  zcsongor
 </code></pre>
 
 <h1>
