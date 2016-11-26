@@ -1,0 +1,94 @@
+{
+  "build.dev": [
+    "clean.once",
+    "build.assets.dev",
+    "build.html_css",
+    "build.js.dev",
+    "build.index.dev"
+  ],
+
+  "build.dev.watch": [
+    "build.dev",
+    "watch.dev"
+  ],
+
+  "build.e2e": [
+    "clean.e2e",
+    "tslint",
+    "build.js.e2e"
+  ],
+
+  "build.prod": [
+    "check.tools",
+    "clean.prod",
+    "tslint",
+    "build.assets.prod",
+    "build.html_css",
+    "copy.prod",
+    "build.js.prod",
+    "build.bundles",
+    "build.bundles.app",
+    "minify.bundles",
+    "build.index.prod"
+  ],
+
+  "build.prod.exp": [
+    "check.tools",
+    "clean.prod",
+    "tslint",
+    "build.assets.prod",
+    "build.html_css",
+    "copy.prod",
+    "compile.ahead.prod",
+    "build.js.prod.exp",
+    "build.bundles",
+    "build.bundles.app.exp",
+    "minify.bundles",
+    "build.index.prod"
+  ],
+
+  "build.test": [
+    "build.assets.dev",
+    "build.html_css",
+    "build.js.dev",
+    "build.js.test",
+    "build.index.dev"
+  ],
+
+  "test.watch": [
+    "build.test",
+    "watch.test",
+    "karma.watch"
+  ],
+
+  "serve.dev": [
+    "build.dev",
+    "server.start",
+    "watch.dev"
+  ],
+
+  "serve.e2e": [
+    "tslint",
+    "build.dev",
+    "build.js.e2e",
+    "server.start",
+    "watch.dev",
+    "watch.e2e"
+  ],
+
+  "serve.prod": [
+    "build.prod",
+    "server.prod"
+  ],
+
+  "serve.prod.exp": [
+    "build.prod.exp",
+    "server.prod"
+  ],
+
+  "test": [
+    "build.test",
+    "karma.run"
+  ]
+}
+
