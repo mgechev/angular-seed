@@ -326,6 +326,9 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │       │   └── system-config.ts
 │       ├── assets
 │       │   ├── data.json
+│       │   └── favicon
+│       │       ├── favicon-DEV.ico
+│       │       └── favicon-PROD.ico
 │       │   └── svg
 │       │       └── more.svg
 │       ├── css
