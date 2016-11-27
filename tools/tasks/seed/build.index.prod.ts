@@ -53,7 +53,7 @@ function transformPath() {
   return function(filepath: string) {
     let path: Array<string> = normalize(filepath).split(sep);
     let slice_after = path.indexOf(Config.APP_DEST);
-    if (slice_after>-1) {
+    if (slice_after > -1) {
       slice_after++;
     } else {
       slice_after = 3;
