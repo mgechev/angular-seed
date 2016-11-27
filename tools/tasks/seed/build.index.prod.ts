@@ -4,7 +4,7 @@ import { join, sep, normalize } from 'path';
 import * as slash from 'slash';
 
 import Config from '../../config';
-import { templateLocals } from '../../utils';
+import { TemplateLocalsBuilder } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
 
@@ -16,7 +16,7 @@ export = () => {
   return gulp.src(join(Config.APP_SRC, 'index.html'))
     .pipe(injectJs())
     .pipe(injectCss())
-    .pipe(plugins.template(templateLocals()))
+    .pipe(plugins.template(new TemplateLocalsBuilder().wihtoutStringifiedEnvConfig().build()))
     .pipe(gulp.dest(Config.APP_DEST));
 };
 
