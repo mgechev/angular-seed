@@ -343,8 +343,10 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │   ├── banner-256.txt
 │   │   ├── banner.txt
 │   │   ├── project.config.ts  <- configuration of the specific project
+│   │   ├── project.tasks.json <- override composite gulp tasks
+│   │   ├── seed.config.ts     <- generic configuration of the seed project
 │   │   ├── seed.config.interfaces.ts
-│   │   └── seed.config.ts     <- generic configuration of the seed project
+│   │   ├── seed.tasks.json    <- default composite gulp tasks
 │   │   └── seed.tslint.json   <- generic tslint configuration of the seed project
 │   ├── config.ts              <- exported configuration (merge both seed.config and project.config, project.config overrides seed.config)
 │   ├── debug.ts
