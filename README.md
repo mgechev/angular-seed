@@ -48,9 +48,9 @@ $ npm start
 # api document for the app
 # npm run build.docs
 
-#generate api documentation
+# generate api documentation
 $ npm run compodoc
-$ npm serve.compodoc
+$ npm run serve.compodoc
 
 
 # to start deving with livereload site and coverage as well as continuous testing
