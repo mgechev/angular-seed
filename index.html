@@ -72,9 +72,9 @@ $ npm start
 <span class="pl-c"># api document for the app</span>
 <span class="pl-c"># npm run build.docs</span>
 
-<span class="pl-c">#generate api documentation</span>
+<span class="pl-c"># generate api documentation</span>
 $ npm run compodoc
-$ npm serve.compodoc
+$ npm run serve.compodoc
 
 
 <span class="pl-c"># to start deving with livereload site and coverage as well as continuous testing</span>
@@ -407,6 +407,9 @@ $ npm run e2e.live</pre></div>
 │       │   └── system-config.ts
 │       ├── assets
 │       │   ├── data.json
+│       │   └── favicon
+│       │       ├── favicon-DEV.ico
+│       │       └── favicon-PROD.ico
 │       │   └── svg
 │       │       └── more.svg
 │       ├── css
@@ -421,8 +424,10 @@ $ npm run e2e.live</pre></div>
 │   │   ├── banner-256.txt
 │   │   ├── banner.txt
 │   │   ├── project.config.ts  &lt;- configuration of the specific project
+│   │   ├── project.tasks.json &lt;- override composite gulp tasks
+│   │   ├── seed.config.ts     &lt;- generic configuration of the seed project
 │   │   ├── seed.config.interfaces.ts
-│   │   └── seed.config.ts     &lt;- generic configuration of the seed project
+│   │   ├── seed.tasks.json    &lt;- default composite gulp tasks
 │   │   └── seed.tslint.json   &lt;- generic tslint configuration of the seed project
 │   ├── config.ts              &lt;- exported configuration (merge both seed.config and project.config, project.config overrides seed.config)
 │   ├── debug.ts
