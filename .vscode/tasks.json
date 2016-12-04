@@ -7,7 +7,7 @@
   "tasks": [
     {
       "taskName": "tslint",
-      "args": [ "run", "gulp", "tslint", "--color" ],
+      "args": [ "run", "lint" ],
       "problemMatcher": {
         "owner": "tslint",
         "fileLocation": [
