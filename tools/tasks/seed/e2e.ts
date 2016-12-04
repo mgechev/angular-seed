@@ -26,7 +26,7 @@ class Protractor {
  * Executes the build process, running all e2e specs using `protractor`.
  */
 export = (done: any) => {
-  process.env.LANG='en_US.UTF-8';
+  process.env.LANG = 'en_US.UTF-8';
   new Protractor()
     .server(Config.PORT, Config.PROD_DEST)
     .then((server: any) => {
