@@ -11,7 +11,7 @@ const getTask = (target: string, destDir: string) => {
   return gulp.src(join(destDir, target))
     .pipe(plugins.uglify({
       compress: true,
-      mangle: true
+      mangle:false
     }))
     .pipe(gulp.dest(destDir));
 };
