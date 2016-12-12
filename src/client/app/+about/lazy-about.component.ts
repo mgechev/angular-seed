@@ -9,4 +9,7 @@ import { Component } from '@angular/core';
   templateUrl: 'lazy-about.component.html',
   styleUrls: ['lazy-about.component.css']
 })
-export class LazyAboutComponent { }
+export class LazyAboutComponent  {
+
+
+}
