@@ -4,7 +4,7 @@ import * as Builder from 'systemjs-builder';
 import Config from '../../config';
 
 const BUNDLER_OPTIONS = {
-  format: 'cjs',
+  format: 'umd',
   minify: true,
   mangle: false
 };
@@ -14,9 +14,9 @@ const BUNDLER_OPTIONS = {
  */
 export = (done: any) => {
   let builder = new Builder(Config.SYSTEM_BUILDER_CONFIG);
-  builder
-    .bundle(join(Config.TMP_DIR, Config.BOOTSTRAP_PROD_MODULE),
-    join(Config.JS_DEST, Config.JS_PROD_APP_BUNDLE),
+  let mainBundle  = join(Config.TMP_DIR, Config.BOOTSTRAP_PROD_MODULE);
+  let lazyBundle = `${join(Config.TMP_DIR+'/app/+about/lazy-about.module')} - ${mainBundle}`;
+  builder.buildStatic(lazyBundle,join(Config.APP_DEST+'/app/+about','lazy-about.module.js'),
     BUNDLER_OPTIONS)
     .then(() => done())
     .catch((err: any) => done(err));

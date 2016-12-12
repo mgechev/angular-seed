@@ -28,6 +28,7 @@
     "build.js.prod",
     "build.bundles",
     "build.bundles.app",
+    "build.bundles.app.lazy",
     "minify.bundles",
     "build.index.prod"
   ],
