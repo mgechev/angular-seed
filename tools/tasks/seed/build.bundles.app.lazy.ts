@@ -24,7 +24,7 @@ export = (done : any) => {
   let mainBundle = join(Config.TMP_DIR, Config.BOOTSTRAP_PROD_MODULE);
   let bootstrapDir = join(Config.TMP_DIR, Config.BOOTSTRAP_DIR);
 
-  let src = join(bootstrapDir, '&*/*module.js');
+  let src = join(bootstrapDir, '+*/*module.js');
 
   return gulp.src(src)
     .pipe(plugins.flatmap((stream: any, file: any) => {
