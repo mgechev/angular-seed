@@ -5,7 +5,7 @@ describe('Lazy', () => {
   });
 
   it('should have correct header title', () => {
-    expect(element(by.css('sd-lazy h1')).getText()).toEqual('lazy');
+    expect(element(by.css('sd-lazy h1')).getText()).toEqual('lazy2');
   });
 
 });
