@@ -24,14 +24,14 @@ export = (done : any) => {
   let mainBundle = join(Config.TMP_DIR, Config.BOOTSTRAP_PROD_MODULE);
   let bootstrapDir = join(Config.TMP_DIR, Config.BOOTSTRAP_DIR);
 
-  let src = join(bootstrapDir, '+*/*module.js');
+  let src = join(bootstrapDir, '+**/**module.js');
 
   return gulp.src(src)
     .pipe(plugins.flatmap((stream: any, file: any) => {
-      let fileRelative: string = `${Config.BOOTSTRAP_DIR}/${file.relative}`;
+      let fileRelative: string = join(Config.BOOTSTRAP_DIR,file.relative);
       if (!fileRelative.includes('routing')) {
         let lazyBundle = `${join(Config.TMP_DIR,fileRelative)} - ${mainBundle}`;
-         builder.buildStatic(lazyBundle,join(Config.APP_DEST+'/'+ fileRelative),
+         builder.buildStatic(lazyBundle,join(Config.APP_DEST, fileRelative),
          BUNDLER_OPTIONS)
                .then(() => util.log('Builded Lazy Module '+ lazyBundle))
               .catch((err: any) => done(err));
