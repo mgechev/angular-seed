@@ -330,6 +330,9 @@ export class SeedConfig {
     '**/*~',
   ];
 
+  LAZY_MATCH_EXPRESSION = [join(join(this.TMP_DIR, this.BOOTSTRAP_DIR), '+*/*module.js'),
+                           join('!' + join(this.TMP_DIR, this.BOOTSTRAP_DIR), '+*/*routing.module.js')];
+
   /**
    * Returns the array of injectable dependencies (npm dependencies and assets).
    * @return {InjectableDependency[]} The array of npm dependencies and assets.
