@@ -5,7 +5,7 @@ import Config from '../../config';
 
 const BUNDLER_OPTIONS = {
   format: 'cjs',
-  minify: true,
+  minify: false,
   mangle: false
 };
 
@@ -14,8 +14,9 @@ const BUNDLER_OPTIONS = {
  */
 export = (done: any) => {
   let builder = new Builder(Config.SYSTEM_BUILDER_CONFIG);
+  let source = `${Config.TMP_DIR}/${Config.BOOTSTRAP_FACTORY_PROD_MODULE}`;
   builder
-    .buildStatic(join(Config.TMP_DIR, Config.BOOTSTRAP_FACTORY_PROD_MODULE),
+    .bundle(source,
       join(Config.JS_DEST, Config.JS_PROD_APP_BUNDLE),
       BUNDLER_OPTIONS)
     .then(() => done())
