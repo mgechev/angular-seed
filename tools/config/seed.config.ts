@@ -330,8 +330,10 @@ export class SeedConfig {
     '**/*~',
   ];
 
-  LAZY_MATCH_EXPRESSION = [join(join(this.TMP_DIR, this.BOOTSTRAP_DIR), '+*/*module.js'),
-  join('!' + join(this.TMP_DIR, this.BOOTSTRAP_DIR), '+*/*routing.module.js')];
+  BOOTSTRAP_TMP =  join(this.TMP_DIR, this.BOOTSTRAP_DIR);
+
+  LAZY_MATCH_EXPRESSION = [join(this.BOOTSTRAP_TMP, '*/lazy-about.module.js'),
+                           join(this.BOOTSTRAP_TMP, '*/lazy-dummy.module.js')];
 
   /**
    * Returns the array of injectable dependencies (npm dependencies and assets).

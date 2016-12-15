@@ -8,6 +8,6 @@ import { Component } from '@angular/core';
   selector: 'sd-lazy',
   template: `<app-header title="lazy2" ></app-header>`
 })
-export class LazyComponent  {
+export class LazyDummyComponent  {
 
 }

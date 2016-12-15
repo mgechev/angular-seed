@@ -28,9 +28,9 @@ export = (done: any) => {
     .pipe(plugins.flatmap((stream: any, file: any) => {
       let fileRelative: string = slash(join(Config.BOOTSTRAP_DIR, file.relative));
       let lazyBundle = `${slash(join(Config.TMP_DIR, fileRelative))} - ${mainBundle}`;
+      util.log('Building lazy bundle', lazyBundle);
       builder.buildStatic(lazyBundle, join(Config.APP_DEST, fileRelative),
         BUNDLER_OPTIONS)
-        .then(() => util.log('Builded Lazy Module ' + lazyBundle))
         .catch((err: any) => done(err));
       return stream;
     }));
