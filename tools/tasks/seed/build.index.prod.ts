@@ -35,7 +35,7 @@ function inject(...files: Array<string>) {
  * Injects the bundled JavaScript shims and application bundles for the production environment.
  */
 function injectJs() {
-  return inject(join(Config.JS_DEST, Config.JS_PROD_SHIMS_BUNDLE));
+  return inject(join(Config.JS_DEST, Config.JS_PROD_SHIMS_BUNDLE), join(Config.JS_DEST, Config.JS_PROD_APP_BUNDLE));
 }
 
 /**

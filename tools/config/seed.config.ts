@@ -331,7 +331,7 @@ export class SeedConfig {
   ];
 
   LAZY_MATCH_EXPRESSION = [join(join(this.TMP_DIR, this.BOOTSTRAP_DIR), '+*/*module.js'),
-                           join('!' + join(this.TMP_DIR, this.BOOTSTRAP_DIR), '+*/*routing.module.js')];
+  join('!' + join(this.TMP_DIR, this.BOOTSTRAP_DIR), '+*/*routing.module.js')];
 
   /**
    * Returns the array of injectable dependencies (npm dependencies and assets).
@@ -392,10 +392,6 @@ export class SeedConfig {
   SYSTEM_BUILDER_CONFIG: any = {
     defaultJSExtensions: true,
     base: this.PROJECT_ROOT,
-    packageConfigPaths: [
-      join('node_modules', '*', 'package.json'),
-      join('node_modules', '@angular', '*', 'package.json')
-    ],
     paths: {
       // Note that for multiple apps this configuration need to be updated
       // You will have to include entries for each individual application in
@@ -423,42 +419,6 @@ export class SeedConfig {
 
     },
     packages: {
-      '@angular/common': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/compiler': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/core/testing': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/core': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/forms': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/http': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/platform-browser': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/platform-browser-dynamic': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/router': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
       rxjs: {
         defaultExtension: 'js'
       }

@@ -15,10 +15,9 @@ const BUNDLER_OPTIONS = {
 export = (done: any) => {
   let builder = new Builder(Config.SYSTEM_BUILDER_CONFIG);
   let source = `${Config.TMP_DIR}/${Config.BOOTSTRAP_FACTORY_PROD_MODULE}`;
+  let outpath = join(Config.JS_DEST, Config.JS_PROD_APP_BUNDLE);
   builder
-    .bundle(source,
-      join(Config.JS_DEST, Config.JS_PROD_APP_BUNDLE),
-      BUNDLER_OPTIONS)
+    .bundle(source, outpath,  BUNDLER_OPTIONS)
     .then(() => done())
     .catch((err: any) => done(err));
 };

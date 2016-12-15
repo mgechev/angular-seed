@@ -36,31 +36,13 @@
 
   <% if (BUILD_TYPE === 'dev') { %>
   <script>
-  System.import('<%= BOOTSTRAP_MODULE %>')
-    .catch(function (e) {
-      console.error(e.stack || e,
-        'Not expecting this error? Report it at https://github.com/mgechev/angular-seed/issues');
-    });
-  </script>
-  <% } %>
-
-  <% if (BUILD_TYPE === 'prod') { %>
-  <script>
-    System.config({
-			defaultJSExtensions: true,
-			map: {
-				'dist/tmp/app': '.'
-			}
-		});
-    System.import('./js/app')
-      .then( () => System.import('main'))
+    System.import('<%= BOOTSTRAP_MODULE %>')
       .catch(function (e) {
         console.error(e.stack || e,
          'Not expecting this error? Report it at https://github.com/mgechev/angular-seed/issues');
      });
   </script>
   <% } %>
-
 
 </body>
 </html>
