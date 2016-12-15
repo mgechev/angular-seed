@@ -36,7 +36,7 @@ export function main() {
       let mockBackend = TestBed.get(MockBackend);
 
       mockBackend.connections.subscribe((c: any) => {
-        c.mockRespond(new Response(new ResponseOptions({ body: '["Dijkstra", "Hopper"]' })))
+        c.mockRespond(new Response(new ResponseOptions({ body: '["Dijkstra", "Hopper"]' })));
       });
 
       nameListService.get().subscribe((data: any) => {
