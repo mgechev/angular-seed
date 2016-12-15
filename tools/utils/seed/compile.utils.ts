@@ -1,4 +1,4 @@
-export const SYSTEMJS_CONFIG_START_SRC = `System.config({defaultJSExtensions: true,	map: {'dist/tmp/app':'.'}});`;
+export const SYSTEMJS_CONFIG_START_SRC = `System.config({defaultJSExtensions: true,	map: {'dist/tmp/app':'.', 'dist/tmp':'.'}});`;
 
 export const systemjsImportStart = (moduleName : string) => {
   return `System.import(\'${moduleName}\')
