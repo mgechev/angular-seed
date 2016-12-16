@@ -7,4 +7,8 @@
     <a [routerLink]="['/lazy']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Call another Lazy</a>
   </li>
 </ul>
+<h2>Names</h2>
+<ul>
+  <li *ngFor="let name of names">{{name}}</li>
+</ul>
 
