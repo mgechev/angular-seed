@@ -34,7 +34,7 @@
     "test": "gulp test --color",
     "e2e.ci": "gulp build.prod --color && gulp build.js.e2e --color && gulp e2e --color",
     "e2e.ci.exp": "gulp build.prod.exp --color && gulp build.js.e2e --color && gulp e2e --color",
-    "tests.all": "npm test && npm run e2e.ci && npm run e2e.ci.exp",
+    "tests.all": "npm test && npm run e2e.ci",
     "webdriver-start": "webdriver-manager start",
     "webdriver-update": "webdriver-manager update",
     "compodoc": "node_modules/.bin/compodoc -p src/client/tsconfig.json",
