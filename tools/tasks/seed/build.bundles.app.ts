@@ -3,12 +3,13 @@ import * as Builder from 'systemjs-builder';
 import { writeFileSync } from 'fs';
 
 import Config from '../../config';
-import { SYSTEMJS_CONFIG_START_SRC, systemjsImportStart } from '../../utils/seed/compile.utils';
+import { systemjsConfigStart, TRACEUR_RUNTIME_SRC, systemjsImportStart } from '../../utils/seed/compile.utils';
 
 const BUNDLER_OPTIONS = {
   format: 'cjs',
-  minify: true,
-  mangle: false
+  minify: false,
+  mangle: false,
+  encodeNames : false
 };
 
 /**
@@ -21,7 +22,10 @@ export = (done: any) => {
   builder
     .bundle(source, outpath, BUNDLER_OPTIONS)
     .then((output) => {
-      writeFileSync(outpath, `${SYSTEMJS_CONFIG_START_SRC} ${output.source} ${systemjsImportStart('main')}`);
+
+       writeFileSync(outpath, `${TRACEUR_RUNTIME_SRC} ${systemjsConfigStart(Config)}
+          ${output.source} ${systemjsImportStart('main')}`);
+
       done();
     })
     .catch((err: any) => done(err));
