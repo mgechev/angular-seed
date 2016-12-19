@@ -7,7 +7,7 @@ import { writeFileSync, readFileSync } from 'fs';
 import { CodeGenerator, AngularCompilerOptions, NgcCliOptions, main } from '@angular/compiler-cli';
 
 const glob = require('glob');
-
+const slash = require('slash');
 
 import Config from '../../config';
 
@@ -38,7 +38,7 @@ export = (done: any) => {
     const parsed = JSON.parse(content);
     parsed.files = parsed.files || [];
     parsed.files.push(join(Config.BOOTSTRAP_DIR, 'main.ts'));
-    files.forEach( filePath => parsed.files.push(filePath.replace(Config.TMP_DIR+path.sep,'')));
+    files.forEach( filePath => parsed.files.push(filePath.replace(slash(Config.TMP_DIR+path.sep),'')));
     return JSON.stringify(parsed, null, 2);
   });
 
