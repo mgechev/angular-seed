@@ -5,6 +5,7 @@ import { join } from 'path';
 import * as path from 'path';
 import { writeFileSync, readFileSync } from 'fs';
 import { CodeGenerator, AngularCompilerOptions, NgcCliOptions, main } from '@angular/compiler-cli';
+import * as util from 'gulp-util';
 
 const glob = require('glob');
 const slash = require('slash');
@@ -38,7 +39,11 @@ export = (done: any) => {
     const parsed = JSON.parse(content);
     parsed.files = parsed.files || [];
     parsed.files.push(join(Config.BOOTSTRAP_DIR, 'main.ts'));
-    files.forEach( filePath => parsed.files.push(filePath.replace(slash(Config.TMP_DIR+path.sep),'')));
+    files.forEach( filePath => {
+      let fileModule = filePath.replace(slash(Config.TMP_DIR+path.sep),'');
+      parsed.files.push(fileModule);
+      util.log(`Added Lazy bundle ${fileModule} to compile.ahead.`);
+    });
     return JSON.stringify(parsed, null, 2);
   });
 
