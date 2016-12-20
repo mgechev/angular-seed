@@ -308,7 +308,7 @@ export class SeedConfig {
     { src: 'zone.js/dist/zone.js', inject: 'libs' },
     { src: 'core-js/client/shim.min.js', inject: 'shims' },
     { src: 'intl/dist/Intl.min.js', inject: 'shims' },
-    { src: 'systemjs/dist/system.src.js', inject: 'shims' },
+    { src: 'systemjs/dist/system.src.js', inject: 'shims'},
     // Temporary fix. See https://github.com/angular/angular/issues/9359
     { src: '.tmp/Rx.min.js', inject: 'libs', buildType: BUILD_TYPES.DEVELOPMENT },
   ];
@@ -329,11 +329,6 @@ export class SeedConfig {
     '**/*___jb_tmp___',
     '**/*~',
   ];
-
-  BOOTSTRAP_TMP = join(this.TMP_DIR, this.BOOTSTRAP_DIR);
-
-  LAZY_MATCH_EXPRESSION  = [join(this.BOOTSTRAP_TMP, '**/lazy-about.module.ts'),
-                           join(this.BOOTSTRAP_TMP, '**/lazy-dummy.module.ts')];
 
   /**
    * Returns the array of injectable dependencies (npm dependencies and assets).
@@ -366,9 +361,9 @@ export class SeedConfig {
       '@angular/core/testing': 'node_modules/@angular/core/bundles/core-testing.umd.js',
       '@angular/http/testing': 'node_modules/@angular/http/bundles/http-testing.umd.js',
       '@angular/platform-browser/testing':
-      'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
+        'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
       '@angular/platform-browser-dynamic/testing':
-      'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
+        'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
       'app/*': '/app/*',
@@ -391,7 +386,6 @@ export class SeedConfig {
    * The system builder configuration of the application.
    * @type {any}
    */
-
   SYSTEM_BUILDER_CONFIG: any = {
     defaultJSExtensions: true,
     base: this.PROJECT_ROOT,
@@ -474,6 +468,16 @@ export class SeedConfig {
    */
   COLOR_GUARD_WHITE_LIST: [string, string][] = [
   ];
+
+  BOOTSTRAP_TMP = join(this.TMP_DIR, this.BOOTSTRAP_DIR);
+
+   /**
+   * The expression to define the folder that are lazy.
+   * @type {array}
+  */
+  LAZY_MATCH_EXPRESSION  = [join(this.BOOTSTRAP_TMP, '**/lazy-about.module.ts'),
+                            join(this.BOOTSTRAP_TMP, '**/lazy-dummy.module.ts')];
+
 
   /**
    * Configurations for NPM module configurations. Add to or override in project.config.ts.
@@ -623,6 +627,7 @@ export class SeedConfig {
 
   }
 
+
 }
 
 /**
@@ -675,4 +680,6 @@ function getBuildType() {
   } else {
     return BUILD_TYPES.DEVELOPMENT;
   }
+
+
 }
