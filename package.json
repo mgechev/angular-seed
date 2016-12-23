@@ -42,8 +42,8 @@
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
   "devDependencies": {
-    "@angular/compiler-cli": "~2.3.1",
-    "@angular/platform-server": "~2.3.1",
+    "@angular/compiler-cli": "~2.4.0",
+    "@angular/platform-server": "~2.4.0",
     "@types/async": "^2.0.32",
     "@types/browser-sync": "^0.0.34",
     "@types/express": "^4.0.33",
@@ -125,18 +125,18 @@
     "yargs": "^6.0.0"
   },
   "dependencies": {
-    "@angular/common": "~2.3.1",
-    "@angular/compiler": "~2.3.1",
-    "@angular/core": "~2.3.1",
-    "@angular/forms": "~2.3.1",
-    "@angular/http": "~2.3.1",
-    "@angular/platform-browser": "~2.3.1",
-    "@angular/platform-browser-dynamic": "~2.3.1",
-    "@angular/router": "~3.3.1",
+    "@angular/common": "~2.4.0",
+    "@angular/compiler": "~2.4.0",
+    "@angular/core": "~2.4.0",
+    "@angular/forms": "~2.4.0",
+    "@angular/http": "~2.4.0",
+    "@angular/platform-browser": "~2.4.0",
+    "@angular/platform-browser-dynamic": "~2.4.0",
+    "@angular/router": "~3.4.1",
     "core-js": "^2.4.1",
     "intl": "^1.2.5",
     "reflect-metadata": "^0.1.8",
-    "rxjs": "5.0.0-rc.4",
+    "rxjs": "5.0.2",
     "systemjs": "0.19.40",
     "zone.js": "^0.7.2"
   }
