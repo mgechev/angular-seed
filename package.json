@@ -42,8 +42,8 @@
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
   "devDependencies": {
-    "@angular/compiler-cli": "~2.3.1",
-    "@angular/platform-server": "~2.3.1",
+    "@angular/compiler-cli": "~2.4.0",
+    "@angular/platform-server": "~2.4.0",
     "@types/async": "^2.0.32",
     "@types/browser-sync": "^0.0.34",
     "@types/express": "^4.0.33",
