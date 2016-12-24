@@ -27,7 +27,7 @@
     "copy.prod",
     "build.js.prod",
     "build.bundles",
-    "build.bundles.app",
+    "build.lazy-bundles.app",
     "minify.bundles",
     "build.index.prod"
   ],
@@ -42,7 +42,7 @@
     "compile.ahead.prod",
     "build.js.prod.exp",
     "build.bundles",
-    "build.bundles.app.exp",
+    "build.lazy-bundles.app.exp",
     "minify.bundles",
     "build.index.prod"
   ],
