@@ -1,10 +1,9 @@
 import 'reflect-metadata';
 import * as ts from 'typescript';
-import * as tsc from '@angular/tsc-wrapped';
 import { argv } from 'yargs';
 import { join } from 'path';
 import { writeFileSync, readFileSync } from 'fs';
-import { CodeGenerator } from '@angular/compiler-cli';
+import { CodeGenerator, AngularCompilerOptions, NgcCliOptions, main } from '@angular/compiler-cli';
 
 import Config from '../../config';
 
@@ -23,9 +22,9 @@ const normalizeConfig = (bundles: any[]) => {
 };
 
 function codegen(
-    ngOptions: tsc.AngularCompilerOptions, cliOptions: tsc.NgcCliOptions, program: ts.Program,
-    host: ts.CompilerHost) {
-    return CodeGenerator.create(ngOptions, cliOptions, program, host).codegen({transitiveModules: true});
+  ngOptions: AngularCompilerOptions, cliOptions: NgcCliOptions, program: ts.Program,
+  host: ts.CompilerHost) {
+  return CodeGenerator.create(ngOptions, cliOptions, program, host).codegen();
 }
 
 const modifyFile = (path: string, mod: any = (f: string) => f) => {
@@ -46,14 +45,14 @@ export = (done: any) => {
   const args = argv;
 
   // If a translation, tell the compiler
-  if(args.lang) {
+  if (args.lang) {
     args['i18nFile'] = `./src/client/assets/locale/messages.${args.lang}.xlf`;
     args['locale'] = args.lang;
     args['i18nFormat'] = 'xlf';
   }
 
-  const cliOptions = new tsc.NgcCliOptions(args);
-  tsc.main(Config.TMP_DIR, cliOptions, codegen)
+  const cliOptions = new NgcCliOptions(args);
+  main(Config.TMP_DIR, cliOptions, codegen)
     .then(done)
     .catch(e => {
       console.error(e.stack);

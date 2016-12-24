@@ -1,0 +1,28 @@
+{
+  "version": "0.1.0",
+  "command": "npm",
+  "isShellCommand": true,
+  "showOutput": "always",
+  "suppressTaskName": true,
+  "tasks": [
+    {
+      "taskName": "tslint",
+      "args": [ "run", "lint" ],
+      "problemMatcher": {
+        "owner": "tslint",
+        "fileLocation": [
+          "relative",
+          "${workspaceRoot}"
+        ],
+        "severity": "warning",
+        "pattern": {
+          "regexp": "^(\\S.*)\\[(\\d+), (\\d+)\\]:\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "message": 4
+        }
+      }
+    }
+  ]
+}
