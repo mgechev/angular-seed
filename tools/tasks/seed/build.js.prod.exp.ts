@@ -4,7 +4,7 @@ import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
 
 import Config from '../../config';
-import { makeTsProject, templateLocals } from '../../utils';
+import { makeTsProject, TemplateLocalsBuilder } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
 
@@ -32,7 +32,7 @@ export = () => {
     });
 
   return result.js
-    .pipe(plugins.template(templateLocals()))
+    .pipe(plugins.template(new TemplateLocalsBuilder().build()))
     .pipe(gulp.dest(Config.TMP_DIR))
     .on('error', (e: any) => {
       console.log(e);
