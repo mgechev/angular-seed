@@ -11,6 +11,7 @@
     "build.e2e": "gulp build.e2e --color",
     "build.prod": "gulp build.prod --color --env-config prod --build-type prod",
     "build.prod.exp": "gulp build.prod.exp --color --env-config prod --build-type prod",
+    "build.prod.aot": "gulp build.prod.exp --color --env-config prod --build-type prod",
     "build.test": "gulp build.test --color",
     "test.watch": "gulp test.watch --color",
     "generate.manifest": "gulp generate.manifest --color",
