@@ -11,6 +11,7 @@
     "build.e2e": "gulp build.e2e --color",
     "build.prod": "gulp build.prod --color --env-config prod --build-type prod",
     "build.prod.exp": "gulp build.prod.exp --color --env-config prod --build-type prod",
+    "build.prod.aot": "gulp build.prod.exp --color --env-config prod --build-type prod",
     "build.test": "gulp build.test --color",
     "test.watch": "gulp test.watch --color",
     "generate.manifest": "gulp generate.manifest --color",
@@ -137,7 +138,7 @@
     "intl": "^1.2.5",
     "reflect-metadata": "^0.1.8",
     "rxjs": "5.0.2",
-    "systemjs": "0.19.40",
+    "systemjs": "0.19.41",
     "zone.js": "^0.7.2"
   }
 }
