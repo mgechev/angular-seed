@@ -3,22 +3,19 @@ import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
 
 import Config from '../../config';
-import { makeTsProject, templateLocals } from '../../utils';
+import { makeTsProject, TemplateLocalsBuilder } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
-const jsonSystemConfig = JSON.stringify(Config.SYSTEM_CONFIG_DEV);
 
 /**
  * Executes the build process, transpiling the TypeScript files (including the e2e-spec files, excluding the spec files)
  * for the e2e environment.
  */
 export = () => {
-  let tsProject = makeTsProject();
+  let tsProject = makeTsProject({ 'target': 'es2015' }, Config.E2E_SRC);
   let src = [
     Config.TOOLS_DIR + '/manual_typings/**/*.d.ts',
-    join(Config.APP_SRC, '**/*.ts'),
-    '!' + join(Config.APP_SRC, '**/*.spec.ts'),
-    '!' + join(Config.APP_SRC, `**/${Config.NG_FACTORY_FILE}.ts`)
+    join(Config.E2E_SRC, '**/*.ts')
   ];
   let result = gulp.src(src)
     .pipe(plugins.plumber())
@@ -27,8 +24,6 @@ export = () => {
 
   return result.js
     .pipe(plugins.sourcemaps.write())
-    .pipe(plugins.template(Object.assign(templateLocals(), {
-      SYSTEM_CONFIG_DEV: jsonSystemConfig
-    })))
-    .pipe(gulp.dest(Config.APP_DEST));
+    .pipe(plugins.template(new TemplateLocalsBuilder().withStringifiedSystemConfigDev().build()))
+    .pipe(gulp.dest(Config.E2E_DEST));
 };

@@ -1,18 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2015",
     "module": "commonjs",
     "declaration": false,
     "removeComments": true,
     "noLib": false,
-    "lib": ["es2016", "dom"],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
     "pretty": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "noImplicitReturns": true,
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": true,
@@ -21,13 +20,16 @@
       "../../node_modules"
     ],
     "types": [
-      "node",
+      "express",
       "jasmine",
+      "node",
       "protractor",
       "systemjs"
     ]
   },
   "exclude": [
+    "desktop",
+    "nativescript",
     "node_modules",
     "dist",
     "src"

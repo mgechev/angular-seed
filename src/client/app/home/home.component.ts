@@ -10,7 +10,6 @@ import { NameListService } from '../shared/index';
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.css'],
 })
-
 export class HomeComponent implements OnInit {
 
   newName: string = '';
@@ -39,7 +38,7 @@ export class HomeComponent implements OnInit {
     this.nameListService.get()
       .subscribe(
         names => this.names = names,
-        error =>  this.errorMessage = <any>error
+        error => this.errorMessage = <any>error
       );
   }
 

@@ -7,7 +7,7 @@
     "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": ["es6", "es2015", "dom"],
+    "lib": ["es2015"],
     "sourceMap": true,
     "pretty": true,
     "allowUnreachableCode": false,
