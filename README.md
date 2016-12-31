@@ -58,7 +58,8 @@ $ npm run start.deving
 
 # dev build
 $ npm run build.dev
-# prod build
+# prod build, will output the production application in `dist/prod`
+# the produced code can be deployed (rsynced) to a remote server
 $ npm run build.prod
 
 # dev build of multiple applications (by default the value of --app is "app")
@@ -75,8 +76,9 @@ _Does not rely on any global dependencies._
 In order to start the seed with AoT use:
 
 ```bash
-# prod build with AoT compilation
-$ npm run build.prod.exp
+# prod build with AoT compilation, will output the production application in `dist/prod`
+# the produced code can be deployed (rsynced) to a remote server
+$ npm run build.prod.aot
 ```
 
 # Dockerization
