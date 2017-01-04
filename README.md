@@ -178,7 +178,7 @@ Visit the [Wiki page](https://github.com/mgechev/angular-seed/wiki) of the proje
 
 # How to update?
 ```
-git remote add upstream https://github.com/mgechev/angular2-seed
+git remote add upstream https://github.com/mgechev/angular-seed
 git pull upstream master
 ```
 
