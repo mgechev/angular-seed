@@ -257,6 +257,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
  - https://github.com/tiagomapmarques/angular2-seed-phaser/tree/releases - integration with [Phaser](http://phaser.io/).
  - https://github.com/vyakymenko/angular2-seed-express - integration with [Express](https://expressjs.com/) full-stack development.
  - https://github.com/UIUXEngineering/angular2-jspm-typescript-seed - integration with [JSPM](http://jspm.io/).
+ - http://ngbot.io - a chat bot built with angular-seed.
 
 # Directory Structure
 
