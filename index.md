@@ -168,7 +168,7 @@ Currently the `ENV_NAME`s are `dev`, `prod`, `staging`, but you can simply add a
 
 # Tools documentation
 
-A documentation of the provided tools can be found in [tools/README.md](tools/README.md).
+A documentation of the provided tools can be found in [tools/README.md](https://github.com/mgechev/angular-seed/blob/master/tools/README.md).
 
 # How to extend?
 
