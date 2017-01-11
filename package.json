@@ -107,7 +107,7 @@
     "merge-stream": "^1.0.0",
     "minimatch": "^3.0.3",
     "open": "0.0.5",
-    "protractor": "^4.0.9",
+    "protractor": "^4.0.14",
     "remap-istanbul": "^0.8.4",
     "rimraf": "^2.5.4",
     "run-sequence": "^1.2.2",
