@@ -1,0 +1,14 @@
+<p>Angular 2 Seed is a starter project that implements best practices in coding, building and testing Angular 2 apps.</p>
+<app-header title="lazy" ></app-header>
+<h2>Features</h2>
+<ul>
+   <li>Lazy Loading with Header Module, only included here</li>
+   <li>
+    <a [routerLink]="['/lazy']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Call another Lazy</a>
+  </li>
+</ul>
+<h2>Names</h2>
+<ul>
+  <li *ngFor="let name of names">{{name}}</li>
+</ul>
+

@@ -308,7 +308,7 @@ export class SeedConfig {
     { src: 'zone.js/dist/zone.js', inject: 'libs' },
     { src: 'core-js/client/shim.min.js', inject: 'shims' },
     { src: 'intl/dist/Intl.min.js', inject: 'shims' },
-    { src: 'systemjs/dist/system.src.js', inject: 'shims', buildType: BUILD_TYPES.DEVELOPMENT },
+    { src: 'systemjs/dist/system.src.js', inject: 'shims'},
     // Temporary fix. See https://github.com/angular/angular/issues/9359
     { src: '.tmp/Rx.min.js', inject: 'libs', buildType: BUILD_TYPES.DEVELOPMENT },
   ];
@@ -397,7 +397,7 @@ export class SeedConfig {
       // Note that for multiple apps this configuration need to be updated
       // You will have to include entries for each individual application in
       // `src/client`.
-      [join(this.TMP_DIR, this.BOOTSTRAP_DIR, '*')]: `${this.TMP_DIR}/${this.BOOTSTRAP_DIR}/*`,
+      [`${this.TMP_DIR}/${this.BOOTSTRAP_DIR}/*`]: `${this.TMP_DIR}/${this.BOOTSTRAP_DIR}/*`,
       'dist/tmp/node_modules/*': 'dist/tmp/node_modules/*',
       'node_modules/*': 'node_modules/*',
       '*': 'node_modules/*'
@@ -468,6 +468,16 @@ export class SeedConfig {
    */
   COLOR_GUARD_WHITE_LIST: [string, string][] = [
   ];
+
+  BOOTSTRAP_TMP = join(this.TMP_DIR, this.BOOTSTRAP_DIR);
+
+   /**
+   * The expression to define the folder that are lazy.
+   * @type {array}
+  */
+  LAZY_MATCH_EXPRESSION  = [join(this.BOOTSTRAP_TMP, '**/lazy-about.module.ts'),
+                            join(this.BOOTSTRAP_TMP, '**/lazy-dummy.module.ts')];
+
 
   /**
    * Configurations for NPM module configurations. Add to or override in project.config.ts.
@@ -617,6 +627,7 @@ export class SeedConfig {
 
   }
 
+
 }
 
 /**
@@ -669,4 +680,6 @@ function getBuildType() {
   } else {
     return BUILD_TYPES.DEVELOPMENT;
   }
+
+
 }

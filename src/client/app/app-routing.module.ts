@@ -4,9 +4,9 @@ import { RouterModule } from '@angular/router';
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      /* define app module routes here, e.g., to lazily load a module
-         (do not place feature module routes here, use an own -routing.module.ts in the feature instead)
-       */
+       { path: 'lazy-about', loadChildren: 'app/lazy-about/lazy-about.module#LazyAboutModule' },
+       { path: 'lazy', loadChildren: 'app/lazy-dummy/lazy-dummy.module#LazyDummyModule' }
+        //To test the modules included only in lazy modules
     ])
   ],
   exports: [RouterModule]
