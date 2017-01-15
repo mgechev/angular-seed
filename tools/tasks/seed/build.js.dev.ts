@@ -66,7 +66,7 @@ export =
         //    .pipe(plugins.sourcemaps.write('.', {
         //      includeContent: false,
         //      sourceRoot: (file: any) =>
-        //        relative(file.path, PROJECT_ROOT + '/' + APP_SRC).replace(sep, '/') + '/' + APP_SRC
+        //        relative(file.path, Config.PROJECT_ROOT + '/' + Config.APP_SRC).replace(sep, '/') + '/' + Config.APP_SRC
         //    }))
         .pipe(plugins.template(new TemplateLocalsBuilder().withStringifiedSystemConfigDev().build()))
         .pipe(gulp.dest(Config.APP_DEST));
