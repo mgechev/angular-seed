@@ -301,6 +301,12 @@ export class SeedConfig {
   ENABLE_SCSS = ['true', '1'].indexOf(`${process.env.ENABLE_SCSS}`.toLowerCase()) !== -1 || argv['scss'] || false;
 
   /**
+   * Extra paths for the gulp process to watch for to trigger compilation.
+   * @type {string[]}
+   */
+  EXTRA_WATCH_PATHS: string[] = [];
+
+  /**
    * The list of NPM dependcies to be injected in the `index.html`.
    * @type {InjectableDependency[]}
    */

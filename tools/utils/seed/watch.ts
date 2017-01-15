@@ -18,6 +18,13 @@ export function watch(taskname: string, root: string = Config.APP_SRC) {
       join(root, '**')
     ].concat(Config.TEMP_FILES.map((p) => { return '!' + p; }));
 
+    // watches for user defined paths to trigger compilation
+    if (Config.EXTRA_WATCH_PATHS) {
+      paths = paths.concat(Config.EXTRA_WATCH_PATHS.map((p) => {
+        return join(p, '**');
+      }));
+    }
+
     plugins.watch(paths, (e: any) => {
       changeFileManager.addFile(e.path);
 
