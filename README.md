@@ -535,6 +535,10 @@ Forks of this project demonstrate how to extend and integrate with other librari
 :---: |:---: |:---: |:---: |:---: |:---: |
 [ZuSe](https://github.com/ZuSe) |[rossedfort](https://github.com/rossedfort) |[ruffiem](https://github.com/ruffiem) |[savcha](https://github.com/savcha) |[ultrasonicsoft](https://github.com/ultrasonicsoft) |[taguan](https://github.com/taguan) |
 
+[<img alt="RicardoD7I" src="https://avatars.githubusercontent.com/u/4669994?v=3&s=117" width="117">](https://github.com/RicardoD7I) |
+:---:|
+[RicardoD7I](https://github.com/RicardoD7I) |
+
 ## Wiki Contributors
 
 Here are all the awesome guys who are helping to make the project's wiki even better!
