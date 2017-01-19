@@ -28,6 +28,7 @@ export = (done: any) => {
       readdirSync(path)
       .filter(f => f.endsWith('d.ts'))
       .map(f => join(path, f)));
+    parsed.files = parsed.files.filter((f: string, i: number) => parsed.files.indexOf(f) === i);
     parsed.files.push(join(Config.BOOTSTRAP_DIR, 'main.ts'));
     return JSON.stringify(parsed, null, 2);
   });
