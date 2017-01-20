@@ -47,6 +47,22 @@
     "build.index.prod"
   ],
 
+  "build.prod.rollup.exp": [
+    "check.tools",
+    "clean.prod",
+    "tslint",
+    "build.assets.prod",
+    "build.html_css",
+    "copy.prod",
+    "compile.ahead.prod",
+    "build.js.prod.rollup.exp",
+    "build.bundles",
+    "build.bundles.app.rollup.exp",
+    "transpile.bundles.rollup.exp",
+    "minify.bundles",
+    "build.index.prod"
+  ],
+
   "build.test": [
     "build.assets.dev",
     "build.html_css",
@@ -83,6 +99,11 @@
 
   "serve.prod.exp": [
     "build.prod.exp",
+    "server.prod"
+  ],
+
+  "serve.prod.rollup.exp": [
+    "build.prod.rollup.exp",
     "server.prod"
   ],
 
