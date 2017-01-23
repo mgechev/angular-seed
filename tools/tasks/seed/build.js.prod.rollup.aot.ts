@@ -12,7 +12,7 @@ const plugins = <any>gulpLoadPlugins();
  */
 
 export = () => {
-  let tsProject = makeTsProject({
+  const tsProject = makeTsProject({
     target: 'es2015',
     module: 'es2015',
     moduleResolution: 'node',
@@ -24,17 +24,16 @@ export = () => {
       'systemjs'
     ]
   }, Config.TMP_DIR);
-  let src = [
-    Config.TOOLS_DIR + '/manual_typings/**/*.d.ts',
+  const src = [
+    join(Config.TOOLS_DIR, '/manual_typings/**/*.d.ts'),
     join(Config.TMP_DIR, '**/*.ts')
   ];
-  let result = gulp.src(src)
+  const result = gulp.src(src)
     .pipe(plugins.plumber())
     .pipe(tsProject())
-    .once('error', function(e: any) {
+    .once('error', () => {
       this.once('finish', () => process.exit(1));
     });
-
 
   return result.js
     .pipe(gulp.dest(Config.TMP_DIR))

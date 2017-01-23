@@ -25,7 +25,7 @@ const config = {
 export = (done: any) => {
   rollup.rollup(config)
     .then((bundle: any) => {
-      var result = bundle.generate({
+      const result = bundle.generate({
         format: 'iife'
       });
       const path = join(Config.TMP_DIR, 'bundle.js');
@@ -36,7 +36,8 @@ export = (done: any) => {
         }
         done();
       });
-    }, function (error: any) {
+    })
+    .catch((error: any) => {
       console.error(error);
       process.exit(0);
     });

@@ -13,17 +13,17 @@ const plugins = <any>gulpLoadPlugins();
  */
 
 export = () => {
-  let tsProject = makeTsProject({
+  const tsProject = makeTsProject({
     allowJs: true,
     noFallthroughCasesInSwitch: false
   }, Config.TMP_DIR);
-  let src = [
+  const src = [
     join(Config.TMP_DIR, 'bundle.js')
   ];
-  let result = gulp.src(src)
+  const result = gulp.src(src)
     .pipe(plugins.plumber())
     .pipe(tsProject())
-    .once('error', function(e: any) {
+    .once('error', () => {
       this.once('finish', () => process.exit(1));
     });
 
