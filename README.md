@@ -17,6 +17,7 @@ Provides fast, reliable and extensible starter for the development of Angular pr
 - Ready to go, statically typed build system using gulp for working with TypeScript.
 - Production and development builds.
 - **Ahead-of-Time** compilation support.
+- **Tree-Shaking** production builds with Rollup.
 - Sample unit tests with Jasmine and Karma including code coverage via [istanbul](https://gotwarlost.github.io/istanbul/).
 - End-to-end tests with Protractor.
 - Development server with Livereload.
@@ -81,6 +82,25 @@ In order to start the seed with AoT use:
 $ npm run build.prod.aot
 ```
 
+# Tree-shaking with Rollup
+
+This application provides full support for tree-shaking your production builds with Rollup, which can drastically reduce the size of your application. This is the highest level of optimization currently available.
+
+To run this optimized production build, use: 
+
+```bash
+# prod build with AoT compilation and Rollup tree-shaking, will output the production application in `dist/prod`
+# the produced code can be deployed (rsynced) to a remote server
+$ npm run build.prod.rollup.aot
+```
+
+Your project will be compiled ahead of time (AOT), and then the resulting bundle will be tree-shaken and minified. During the tree-shaking process Rollup statically analyses your code, and your dependencies, and includes the bare minimum in your bundle.
+
+**Notes** 
+- Beware of non-static/side-effectful imports. These cannot be properly optimized. For this reason, even though tree-shaking is taking place the developer still needs to be careful not to include non-static imports that are unnecessary, as those referenced imports will always end up in final bundle. Special attention should be given to RxJs, which makes heavy use of non-static/side-effectful imports: make sure you only add the operators you use, as any added operators will be included in your final production bundle.
+- UMD modules result in code that cannot be properly optimized. For best results, prefer ES6 modules whenever possible. This includes third-party dependencies: if one is published in both UMD and ES6 modules, go with the ES6 modules version.
+- During a production build, CommonJs modules will be automatically converted to ES6 modules. This means you can use them and/or require dependencies that use them without any issues.
+
 # Dockerization
 
 The application provides full Docker support. You can use it for both development as well as production builds and deployments.
@@ -120,6 +140,7 @@ Now open your browser at http://localhost:5555
 - [Introduction](#introduction)
 - [How to start](#how-to-start)
 - [How to start with Aot](#how-to-start-with-aot-compilation)
+- [Tree-shaking with Rollup](#tree-shaking-with-rollup)
 - [Dockerization](#dockerization)
   + [How to build and start the dockerized version of the application](#how-to-build-and-start-the-dockerized-version-of-the-application)
   + [Development build and deployment](#development-build-and-deployment)
