@@ -264,6 +264,11 @@ export class SeedConfig {
   VERSION = appVersion();
 
   /**
+   * The version which is reported by git describe. Use the task git.describe.ts to get the version
+   */
+  GIT_DESCRIBE: string = '';
+
+  /**
    * The name of the bundle file to includes all CSS files.
    * @type {string}
    */
