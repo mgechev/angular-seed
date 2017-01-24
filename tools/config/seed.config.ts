@@ -311,9 +311,9 @@ export class SeedConfig {
    * @type {InjectableDependency[]}
    */
   NPM_DEPENDENCIES: InjectableDependency[] = [
+    { src: 'core-js/client/shim.min.js', inject: 'shims' },
     { src: 'zone.js/dist/zone.js', inject: 'libs' },
     { src: 'zone.js/dist/long-stack-trace-zone.js', inject: 'libs', buildType: BUILD_TYPES.DEVELOPMENT },
-    { src: 'core-js/client/shim.min.js', inject: 'shims' },
     { src: 'intl/dist/Intl.min.js', inject: 'shims' },
     { src: 'systemjs/dist/system.src.js', inject: 'shims', buildType: BUILD_TYPES.DEVELOPMENT },
     // Temporary fix. See https://github.com/angular/angular/issues/9359
