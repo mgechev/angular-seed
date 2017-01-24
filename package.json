@@ -37,7 +37,7 @@
     "tasks.list": "gulp --tasks-simple --color",
     "test": "gulp test --color",
     "e2e.ci": "gulp build.prod --color && gulp build.e2e --color && gulp e2e --color",
-    "tests.all": "export FORCE_TSLINT_EMIT_ERROR=true && npm test && npm run e2e.ci",
+    "tests.all": "npm test && npm run e2e.ci",
     "webdriver-start": "webdriver-manager start",
     "webdriver-update": "webdriver-manager update",
     "compodoc": "node_modules/.bin/compodoc -p src/client/tsconfig.json",
