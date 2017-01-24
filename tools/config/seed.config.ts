@@ -304,7 +304,7 @@ export class SeedConfig {
    * Enable tslint emit error by setting env variable FORCE_TSLINT_EMIT_ERROR
    * @type {boolean}
    */
-  FORCE_TSLINT_EMIT_ERROR = process.env.FORCE_TSLINT_EMIT_ERROR ? true : false;
+  FORCE_TSLINT_EMIT_ERROR = !!process.env.FORCE_TSLINT_EMIT_ERROR;
 
   /**
    * Extra paths for the gulp process to watch for to trigger compilation.
