@@ -6,7 +6,7 @@ import Config from '../../config';
  */
 export = () => {
   let git = require('gulp-git');
-  git.exec({args: 'describe'}, (err: any, stdout: any) => {
+  git.exec({args: 'describe --always'}, (err: any, stdout: any) => {
     if (err) {
       util.log('git describe error:', err);
     }
