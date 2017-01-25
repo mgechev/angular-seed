@@ -15,14 +15,7 @@ export = () => {
   const tsProject = makeTsProject({
     target: 'es2015',
     module: 'es2015',
-    moduleResolution: 'node',
-    types: [
-      'express',
-      'jasmine',
-      'node',
-      'protractor',
-      'systemjs'
-    ]
+    moduleResolution: 'node'
   }, Config.TMP_DIR);
   const src = [
     join(Config.TOOLS_DIR, '/manual_typings/**/*.d.ts'),
