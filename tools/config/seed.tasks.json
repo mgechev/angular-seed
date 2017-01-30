@@ -56,7 +56,6 @@
     "copy.prod.rollup.aot",
     "compile.ahead.prod",
     "build.js.prod.rollup.aot",
-    "remove.debug",
     "build.bundles",
     "build.bundles.app.rollup.aot",
     "transpile.bundles.rollup.aot",
