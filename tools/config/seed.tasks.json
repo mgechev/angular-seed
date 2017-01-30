@@ -1,6 +1,6 @@
 {
   "initialize": [
-    "git.describe"
+    "noop"
   ],
 
   "build.dev": [
