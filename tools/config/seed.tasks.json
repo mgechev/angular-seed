@@ -64,6 +64,7 @@
   ],
 
   "build.test": [
+    "clean.dev",
     "build.assets.dev",
     "build.html_css",
     "build.js.dev",

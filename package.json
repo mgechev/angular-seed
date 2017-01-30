@@ -36,7 +36,7 @@
     "start.deving": "gulp start.deving --color",
     "tasks.list": "gulp --tasks-simple --color",
     "test": "gulp test --color",
-    "e2e.ci": "gulp build.prod --color && gulp build.js.e2e --color && gulp e2e --color",
+    "e2e.ci": "gulp build.prod --color && gulp build.e2e --color && gulp e2e --color",
     "tests.all": "npm test && npm run e2e.ci",
     "webdriver-start": "webdriver-manager start",
     "webdriver-update": "webdriver-manager update",
