@@ -21,5 +21,5 @@ export abstract class Task {
    * which should throw an end event once your task execution completes
    * or nothing in case you will manually invoke the `done` method.
    */
-  abstract run(done?: any): any | Promise<any> | void;
+  abstract run(done?: any, files?: string[]): any | Promise<any> | void;
 }

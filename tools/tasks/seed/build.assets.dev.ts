@@ -10,7 +10,7 @@ import Config from '../../config';
  */
 export =
   class BuildAssetsTask extends AssetsTask {
-    run() {
+    run(done: any, files: string[]) {
       let paths: string[] = [
         join(Config.APP_SRC, '**'),
         '!' + join(Config.APP_SRC, '**', '*.ts'),
