@@ -307,12 +307,6 @@ export class SeedConfig {
   EXTRA_WATCH_PATHS: string[] = [];
 
   /**
-   * Set to true in order to remove all console statements from your source
-   * @type {boolean}
-   */
-  PROD_DROP_CONSOLE: boolean = false;
-
-  /**
    * The list of NPM dependcies to be injected in the `index.html`.
    * @type {InjectableDependency[]}
    */

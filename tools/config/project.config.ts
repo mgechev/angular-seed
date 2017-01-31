@@ -43,8 +43,6 @@ export class ProjectConfig extends SeedConfig {
 
     /* Add to or override NPM module configurations: */
     // this.mergeObject(this.PLUGIN_CONFIGS['browser-sync'], { ghostMode: false });
-
-    this.PROD_DROP_CONSOLE = true;
   }
 
 }
