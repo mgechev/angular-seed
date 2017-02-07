@@ -1127,9 +1127,9 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
-codelyzer@~2.0.0-beta.3:
-  version "2.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/codelyzer/-/codelyzer-2.0.0-beta.4.tgz#644c5ffcdcc6c933991e3790a29c5085e80ae4ca"
+codelyzer@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/codelyzer/-/codelyzer-2.0.0.tgz#212b9182ba9fe0fee325f08781b0d49521a1c987"
   dependencies:
     app-root-path "^2.0.1"
     css-selector-tokenizer "^0.7.0"
@@ -5671,6 +5671,10 @@ rollup-plugin-commonjs@^7.0.0:
     magic-string "^0.19.0"
     resolve "^1.1.7"
     rollup-pluginutils "^1.5.1"
+
+rollup-plugin-includepaths@0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-includepaths/-/rollup-plugin-includepaths-0.2.1.tgz#6674f3cab87fac834ea8aed3245dc4b8ab0997a8"
 
 rollup-plugin-node-resolve@^2.0.0:
   version "2.0.0"
