@@ -24,7 +24,6 @@
     "types": [
       "node",
       "jasmine",
-      "protractor",
       "systemjs"
     ]
   },
