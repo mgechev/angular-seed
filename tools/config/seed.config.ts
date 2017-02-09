@@ -267,7 +267,7 @@ export class SeedConfig {
    * The name of the bundle file to includes all CSS files.
    * @type {string}
    */
-  CSS_PROD_BUNDLE = 'main.css';
+  CSS_PROD_BUNDLE = 'main';
 
   /**
    * The name of the bundle file to include all JavaScript shims.
@@ -331,7 +331,7 @@ export class SeedConfig {
    * @type {InjectableDependency[]}
    */
   APP_ASSETS: InjectableDependency[] = [
-    { src: `${this.CSS_SRC}/main.${this.getInjectableStyleExtension()}`, inject: true, vendor: false },
+    { src: `${this.CSS_DEST}/${this.CSS_PROD_BUNDLE}.${this.getInjectableStyleExtension()}`, inject: true, vendor: false },
   ];
 
   /**
@@ -531,7 +531,7 @@ export class SeedConfig {
      * @type {object}
      */
     'gulp-concat-css': {
-      targetFile: this.CSS_PROD_BUNDLE,
+      targetFile: `${this.CSS_PROD_BUNDLE}.css`,
       options: {
         rebaseUrls: false
       }
