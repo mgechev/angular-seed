@@ -1,5 +1,5 @@
 import * as browserSync from 'browser-sync';
-// import * as path from 'path';
+import * as path from 'path';
 
 import Config from '../../config';
 
@@ -52,7 +52,19 @@ let changed = (files: any) => {
   if (!(files instanceof Array)) {
     files = [files];
   }
-  browserSync.reload(files);
+
+  let onlyStylesChanged =
+    files
+      .map((f: string) => path.parse(f).ext)
+      .reduce((prev: string, current: string) => prev && Config.BS_INJECT_FILE_TYPES.indexOf(current) !== -1, true);
+
+  // trigger a browserSync inject/reload accordingly 
+  if (onlyStylesChanged) {
+    browserSync.reload(Config.CSS_PROD_BUNDLE);
+  } else {
+    browserSync.reload(files);
+  }
+
 };
 
 export { listen, changed };

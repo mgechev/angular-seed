@@ -300,6 +300,12 @@ export class SeedConfig {
    */
   ENABLE_SCSS = ['true', '1'].indexOf(`${process.env.ENABLE_SCSS}`.toLowerCase()) !== -1 || argv['scss'] || false;
 
+
+  /**
+   * File types which do not cause the browser to do a full reload, but an inject instead.
+   */
+  BS_INJECT_FILE_TYPES = ['.css', '.scss'];
+
   /**
    * Enable tslint emit error by setting env variable FORCE_TSLINT_EMIT_ERROR
    * @type {boolean}
@@ -501,7 +507,7 @@ export class SeedConfig {
       port: this.PORT,
       startPath: this.APP_BASE,
       open: argv['b'] ? false : true,
-      injectChanges: false,
+      injectChanges: true,
       server: {
         baseDir: `${this.DIST_DIR}/empty/`,
         routes: {
