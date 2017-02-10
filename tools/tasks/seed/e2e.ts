@@ -9,7 +9,7 @@ class Protractor {
   server(port: number, dir: string) {
     let app = express();
     let root = resolve(process.cwd(), dir);
-    for (let proxy of Config.getProxyMiddleware()) {
+    for (let proxy of Config.PROXY_MIDDLEWARE) {
       app.use(proxy);
     }
     app.use(express.static(root));
