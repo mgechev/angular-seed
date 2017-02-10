@@ -267,7 +267,7 @@ export class SeedConfig {
    * The name of the bundle file to includes all CSS files.
    * @type {string}
    */
-  CSS_PROD_BUNDLE = 'main';
+  CSS_BUNDLE_NAME = 'main';
 
   /**
    * The name of the bundle file to include all JavaScript shims.
@@ -330,9 +330,18 @@ export class SeedConfig {
    * The list of local files to be injected in the `index.html`.
    * @type {InjectableDependency[]}
    */
-  APP_ASSETS: InjectableDependency[] = [
-    { src: `${this.CSS_DEST}/${this.CSS_PROD_BUNDLE}.${this.getInjectableStyleExtension()}`, inject: true, vendor: false },
-  ];
+  APP_ASSETS: InjectableDependency[] = [];
+
+  /**
+   * Returns the array of injectable dependencies (the list of local files to be injected in the `index.html`).
+   * @return {InjectableDependency[]}
+   */
+  private get _APP_ASSETS(): InjectableDependency[] {
+    return [
+      { src: `${this.CSS_SRC}/${this.CSS_BUNDLE_NAME}.${this.getInjectableStyleExtension()}`, inject: true, vendor: false },
+      ...this.APP_ASSETS,
+    ];
+  }
 
   /**
    * The list of editor temporary files to ignore in watcher and asset builder.
@@ -349,7 +358,7 @@ export class SeedConfig {
    */
   get DEPENDENCIES(): InjectableDependency[] {
     return normalizeDependencies(this.NPM_DEPENDENCIES.filter(filterDependency.bind(null, this.BUILD_TYPE)))
-      .concat(this.APP_ASSETS.filter(filterDependency.bind(null, this.BUILD_TYPE)));
+      .concat(this._APP_ASSETS.filter(filterDependency.bind(null, this.BUILD_TYPE)));
   }
 
   /**
@@ -483,81 +492,76 @@ export class SeedConfig {
   ];
 
   /**
+  * Browser-sync middleware configurations array.
+  * @type {Array}
+  */
+  PROXY_MIDDLEWARE: any[] = [];
+
+  /**
    * Configurations for NPM module configurations. Add to or override in project.config.ts.
-   * If you like, use the mergeObject() method to assist with this.
+   * @type {any}
    */
-  PLUGIN_CONFIGS: any = {
+  PLUGIN_CONFIGS: any = {};
+
+  /**
+   * Returns the configuration object for NPM module configurations.
+   */
+  private get _PLUGIN_CONFIGS(): any {
     /**
      * The BrowserSync configuration of the application.
      * The default open behavior is to open the browser. To prevent the browser from opening use the `--b`  flag when
      * running `npm start` (tested with serve.dev).
      * Example: `npm start -- --b`
-     * @type {any}
+     * @return {any}
      */
-    'browser-sync': {
-      middleware: [require('connect-history-api-fallback')({
-        index: `${this.APP_BASE}index.html`
-      })],
-      port: this.PORT,
-      startPath: this.APP_BASE,
-      open: argv['b'] ? false : true,
-      injectChanges: false,
-      server: {
-        baseDir: `${this.DIST_DIR}/empty/`,
-        routes: {
-          [`${this.APP_BASE}${this.APP_SRC}`]: this.APP_SRC,
-          [`${this.APP_BASE}${this.APP_DEST}`]: this.APP_DEST,
-          [`${this.APP_BASE}node_modules`]: 'node_modules',
-          [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST
+    let defaults = {
+      'browser-sync': {
+        middleware: [require('connect-history-api-fallback')({
+          index: `${this.APP_BASE}index.html`
+        }), ...this.PROXY_MIDDLEWARE],
+        port: this.PORT,
+        startPath: this.APP_BASE,
+        open: argv['b'] ? false : true,
+        injectChanges: false,
+        server: {
+          baseDir: `${this.DIST_DIR}/empty/`,
+          routes: {
+            [`${this.APP_BASE}${this.APP_SRC}`]: this.APP_SRC,
+            [`${this.APP_BASE}${this.APP_DEST}`]: this.APP_DEST,
+            [`${this.APP_BASE}node_modules`]: 'node_modules',
+            [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST
+          }
+        }
+      },
+
+      // Note: you can customize the location of the file
+      'environment-config': join(this.PROJECT_ROOT, this.TOOLS_DIR, 'env'),
+
+      /**
+       * The options to pass to gulp-sass (and then to node-sass).
+       * Reference: https://github.com/sass/node-sass#options
+       * @type {object}
+       */
+      'gulp-sass': {
+        includePaths: ['./node_modules/']
+      },
+
+      /**
+       * The options to pass to gulp-concat-css
+       * Reference: https://github.com/mariocasciaro/gulp-concat-css
+       * @type {object}
+       */
+      'gulp-concat-css': {
+        targetFile: `${this.CSS_BUNDLE_NAME}.css`,
+        options: {
+          rebaseUrls: false
         }
       }
-    },
+    };
 
-    // Note: you can customize the location of the file
-    'environment-config': join(this.PROJECT_ROOT, this.TOOLS_DIR, 'env'),
+    this.mergeObject(defaults, this.PLUGIN_CONFIGS);
 
-    /**
-     * The options to pass to gulp-sass (and then to node-sass).
-     * Reference: https://github.com/sass/node-sass#options
-     * @type {object}
-     */
-    'gulp-sass': {
-      includePaths: ['./node_modules/']
-    },
-
-    /**
-     * The options to pass to gulp-concat-css
-     * Reference: https://github.com/mariocasciaro/gulp-concat-css
-     * @type {object}
-     */
-    'gulp-concat-css': {
-      targetFile: `${this.CSS_PROD_BUNDLE}.css`,
-      options: {
-        rebaseUrls: false
-      }
-    }
-  };
-
-  constructor() {
-    for (let proxy of this.getProxyMiddleware()) {
-      this.PLUGIN_CONFIGS['browser-sync'].middleware.push(proxy);
-    }
-  }
-
-  /**
-   * Get proxy middleware configuration. Add in your project config like:
-   * getProxyMiddleware(): Array<any> {
-   *   const proxyMiddleware = require('http-proxy-middleware');
-   *   return [
-   *     proxyMiddleware('/ws', {
-   *       ws: false,
-   *       target: 'http://localhost:3003'
-   *     })
-   *   ];
-   * }
-   */
-  getProxyMiddleware(): Array<any> {
-    return [];
+    return defaults;
   }
 
   /**
@@ -599,8 +603,8 @@ export class SeedConfig {
    * @param {any} pluginKey The object key to look up in PLUGIN_CONFIGS.
    */
   getPluginConfig(pluginKey: string): any {
-    if (this.PLUGIN_CONFIGS[pluginKey]) {
-      return this.PLUGIN_CONFIGS[pluginKey];
+    if (this._PLUGIN_CONFIGS[pluginKey]) {
+      return this._PLUGIN_CONFIGS[pluginKey];
     }
     return null;
   }
