@@ -305,7 +305,7 @@ export class SeedConfig {
    * Set ENABLE_PUG environment variable to 'true' or '1'
    * @type {boolean}
    */
-  ENABLE_PUG = ['true', '1'].indexOf(`${process.env.PUG_SCSS}`.toLowerCase()) !== -1 || argv['pug'] || false;
+  ENABLE_PUG = ['true', '1'].indexOf(`${process.env.ENABLE_PUG}`.toLowerCase()) !== -1 || argv['pug'] || false;
 
   /**
    * Enable tslint emit error by setting env variable FORCE_TSLINT_EMIT_ERROR
