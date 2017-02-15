@@ -147,6 +147,12 @@ export class SeedConfig {
   APP_TITLE = 'Welcome to angular-seed!';
 
   /**
+   * Tracking ID.
+   * @type {string}
+   */
+  GOOGLE_ANALYTICS_ID = 'UA-XXXXXXXX-X';
+
+  /**
    * The base folder of the applications source files.
    * @type {string}
    */
