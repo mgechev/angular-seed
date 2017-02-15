@@ -41,9 +41,33 @@ const abtractSCSSFiles  = join(Config.SCSS_SRC, '**', '*.scss');
 /**
  * Copies all HTML files in `src/client` over to the `dist/tmp` directory.
  */
-function prepareTemplates() {
+function prepareHtml() {
   return gulp.src(join(Config.APP_SRC, '**', '*.html'))
     .pipe(gulp.dest(Config.TMP_DIR));
+}
+
+/**
+ * Compiles and copies all PUG files in `src/client` over to the `dist/tmp` directory.
+ */
+function processPug() {
+  return gulp.src(join(Config.APP_SRC, '**', '*.pug'))
+    .pipe(plugins.plumber())
+    .pipe(plugins.pug({
+      pretty: true
+    }))
+    .on('error', function(err: any) {
+      util.log(new util.PluginError(err));
+    })
+    .pipe(gulp.dest(isProd ? Config.TMP_DIR : Config.APP_DEST));
+}
+
+function prepareTemplates() {
+  return Config.ENABLE_PUG ?
+    merge(
+      prepareHtml(),
+      processPug())
+    :
+    prepareHtml();
 }
 
 /**
@@ -174,7 +198,7 @@ export =
   class BuildHtmlCss extends CssTask {
 
     shallRun(files: String[]) {
-      return super.shallRun(files) || files.some(f => f.endsWith('.html'));
+      return super.shallRun(files) || files.some(f => f.endsWith('.html') || f.endsWith('.pug'));
     }
 
     run() {
