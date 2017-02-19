@@ -68,7 +68,7 @@
     "async": "^2.1.1",
     "autoprefixer": "^6.5.1",
     "browser-sync": "^2.17.3",
-    "codelyzer": "^2.0.0",
+    "codelyzer": "^2.0.1",
     "compodoc": "^0.0.29",
     "connect-history-api-fallback": "^1.3.0",
     "cssnano": "^3.7.7",
