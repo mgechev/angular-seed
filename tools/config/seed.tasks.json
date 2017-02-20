@@ -74,7 +74,7 @@
 
   "build.test": [
     "initialize",
-    "clean.dev",
+    "clean.once",
     "build.assets.dev",
     "build.html_css",
     "build.js.dev",
