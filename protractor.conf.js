@@ -1,49 +1,31 @@
-const config = {
-  baseUrl: 'http://localhost:5555/',
+// Protractor configuration file, see link for more information
+// https://github.com/angular/protractor/blob/master/lib/config.ts
 
+/*global jasmine */
+const { SpecReporter } = require('jasmine-spec-reporter');
+
+exports.config = {
+  allScriptsTimeout: 11000,
   specs: [
-    './dist/e2e/**/*.e2e-spec.js'
+    './e2e/**/*.e2e-spec.ts'
   ],
-
-  exclude: [],
-
-  // 'jasmine' by default will use the latest jasmine framework
-  framework: 'jasmine',
-
-  // allScriptsTimeout: 110000,
-
-  jasmineNodeOpts: {
-    // showTiming: true,
-    showColors: true,
-    isVerbose: false,
-    includeStackTrace: false,
-    // defaultTimeoutInterval: 400000
-  },
-
-  directConnect: true,
-
   capabilities: {
-    browserName: 'chrome'
+    'browserName': 'chrome'
   },
-
-  onPrepare: function() {
-    browser.ignoreSynchronization = false;
+  directConnect: true,
+  baseUrl: 'http://localhost:4200/',
+  framework: 'jasmine',
+  jasmineNodeOpts: {
+    showColors: true,
+    defaultTimeoutInterval: 30000,
+    print: function() {}
   },
-
-
-  /**
-   * Angular 2 configuration
-   *
-   * useAllAngular2AppRoots: tells Protractor to wait for any angular2 apps on the page instead of just the one matching
-   * `rootEl`
-   */
-  useAllAngular2AppRoots: true
+  beforeLaunch: function() {
+    require('ts-node').register({
+      project: 'e2e'
+    });
+  },
+  onPrepare() {
+    jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
+  }
 };
-
-if (process.env.TRAVIS) {
-  config.capabilities = {
-    browserName: 'firefox'
-  };
-}
-
-exports.config = config;
