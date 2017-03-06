@@ -1130,15 +1130,15 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
-codelyzer@^3.0.0-beta.1:
-  version "3.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/codelyzer/-/codelyzer-3.0.0-beta.1.tgz#2b17c805b3e69e1528ec58b5a6760d403767b07d"
+codelyzer@^3.0.0-beta.2:
+  version "3.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/codelyzer/-/codelyzer-3.0.0-rc.2.tgz#c3cb502ea4f03ca81e3661f0ae17b41fa8abec8c"
   dependencies:
     "@angular/compiler-cli" "^4.0.0-rc.1"
     app-root-path "^2.0.1"
     css-selector-tokenizer "^0.7.0"
     cssauron "^1.4.0"
-    ngast "^0.0.2"
+    ngast "^0.0.4"
     semver-dsl "^1.0.1"
     source-map "^0.5.6"
     sprintf-js "^1.0.3"
@@ -4464,13 +4464,9 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
-ngast@0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/ngast/-/ngast-0.0.3.tgz#5699146d056d2fcb700898cc6ceaf40280c97a50"
-
-ngast@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/ngast/-/ngast-0.0.2.tgz#faf989566b0ff608dbbe427f0cd79d77ad92836a"
+ngast@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/ngast/-/ngast-0.0.4.tgz#848db040c9b89fba1e896258aad90b2a3a2401cc"
 
 node-gyp@^3.3.1:
   version "3.5.0"
