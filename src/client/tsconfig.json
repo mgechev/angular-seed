@@ -27,6 +27,9 @@
       "systemjs"
     ]
   },
+  "files": [
+    "app/main.ts"
+  ],
   "exclude": [
     "node_modules",
     "dist",

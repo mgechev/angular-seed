@@ -6,7 +6,7 @@
   version "4.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/@angular/common/-/common-4.0.0-rc.2.tgz#69f68639270d71b2e8c552e4fa939975fcb88304"
 
-"@angular/compiler-cli@^4.0.0-rc.2":
+"@angular/compiler-cli@^4.0.0-rc.1", "@angular/compiler-cli@^4.0.0-rc.2":
   version "4.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/@angular/compiler-cli/-/compiler-cli-4.0.0-rc.2.tgz#49730cb232d48aba25d68541eb9166bf5330dd2b"
   dependencies:
@@ -1130,13 +1130,15 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
-codelyzer@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/codelyzer/-/codelyzer-2.0.1.tgz#d0f7121f67a8424c92d21d3b31f3640b83def9ed"
+codelyzer@^3.0.0-beta.1:
+  version "3.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/codelyzer/-/codelyzer-3.0.0-beta.1.tgz#2b17c805b3e69e1528ec58b5a6760d403767b07d"
   dependencies:
+    "@angular/compiler-cli" "^4.0.0-rc.1"
     app-root-path "^2.0.1"
     css-selector-tokenizer "^0.7.0"
     cssauron "^1.4.0"
+    ngast "^0.0.2"
     semver-dsl "^1.0.1"
     source-map "^0.5.6"
     sprintf-js "^1.0.3"
@@ -4462,6 +4464,14 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
+ngast@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/ngast/-/ngast-0.0.3.tgz#5699146d056d2fcb700898cc6ceaf40280c97a50"
+
+ngast@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/ngast/-/ngast-0.0.2.tgz#faf989566b0ff608dbbe427f0cd79d77ad92836a"
+
 node-gyp@^3.3.1:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/node-gyp/-/node-gyp-3.5.0.tgz#a8fe5e611d079ec16348a3eb960e78e11c85274a"
@@ -6573,11 +6583,7 @@ typescript@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.0.0.tgz#14795f9c39e06022597a2a09eb733adabef9b08c"
 
-typescript@^2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.1.4.tgz#b53b69fb841126acb1dd4b397d21daba87572251"
-
-typescript@^2.1.5:
+typescript@^2.1.4, typescript@^2.1.5:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.2.1.tgz#4862b662b988a4c8ff691cc7969622d24db76ae9"
 
