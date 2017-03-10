@@ -350,6 +350,13 @@ export class SeedConfig {
   }
 
   /**
+   * Generates the query string which should be appended to the end of the URLs in dev mode.
+   */
+  QUERY_STRING_GENERATOR = () => {
+    return Date.now().toString();
+  };
+
+  /**
    * The list of editor temporary files to ignore in watcher and asset builder.
    * @type {string[]}
    */
