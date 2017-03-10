@@ -32,7 +32,8 @@ export function main() {
             let fixture = TestBed.createComponent(HomeComponent);
             let homeInstance = fixture.debugElement.componentInstance;
             let homeDOMEl = fixture.debugElement.nativeElement;
-            let mockNameListService = <MockNameListService>fixture.debugElement.injector.get(NameListService);
+            let mockNameListService =
+              fixture.debugElement.injector.get<any>(NameListService) as MockNameListService;
             let nameListServiceSpy = spyOn(mockNameListService, 'get').and.callThrough();
 
             mockNameListService.returnValue = ['1', '2', '3'];
