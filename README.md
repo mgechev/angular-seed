@@ -25,6 +25,7 @@ Provides fast, reliable and extensible starter for the development of Angular pr
 - Manager of your type definitions using @types.
 - Has autoprefixer and css-lint support.
 - Provides full Docker support for both development and production environment
+- Support for Angular Mobile Toolkit
 
 # How to start
 
@@ -86,7 +87,7 @@ $ npm run build.prod.aot
 
 This application provides full support for tree-shaking your production builds with Rollup, which can drastically reduce the size of your application. This is the highest level of optimization currently available.
 
-To run this optimized production build, use: 
+To run this optimized production build, use:
 
 ```bash
 # prod build with AoT compilation and Rollup tree-shaking, will output the production application in `dist/prod`
@@ -96,7 +97,7 @@ $ npm run build.prod.rollup.aot
 
 Your project will be compiled ahead of time (AOT), and then the resulting bundle will be tree-shaken and minified. During the tree-shaking process Rollup statically analyses your code, and your dependencies, and includes the bare minimum in your bundle.
 
-**Notes** 
+**Notes**
 - Beware of non-static/side-effectful imports. These cannot be properly optimized. For this reason, even though tree-shaking is taking place the developer still needs to be careful not to include non-static imports that are unnecessary, as those referenced imports will always end up in final bundle. Special attention should be given to RxJs, which makes heavy use of non-static/side-effectful imports: make sure you only add the operators you use, as any added operators will be included in your final production bundle.
 - UMD modules result in code that cannot be properly optimized. For best results, prefer ES6 modules whenever possible. This includes third-party dependencies: if one is published in both UMD and ES6 modules, go with the ES6 modules version.
 - During a production build, CommonJs modules will be automatically converted to ES6 modules. This means you can use them and/or require dependencies that use them without any issues.
@@ -105,7 +106,7 @@ Your project will be compiled ahead of time (AOT), and then the resulting bundle
 
 The application provides full Docker support. You can use it for both development as well as production builds and deployments.
 
-## How to build and start the dockerized version of the application 
+## How to build and start the dockerized version of the application
 
 The Dockerization infrastructure is described in the `docker-compose.yml` (respectively `docker-compose.production.yml`.
 The application consists of two containers:
@@ -279,7 +280,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
  - https://github.com/UIUXEngineering/angular2-jspm-typescript-seed - integration with [JSPM](http://jspm.io/).
  - http://ngbot.io - a chat bot built with angular-seed.
  - [angular-seed-inspinia](https://github.com/DmitriyPotapov/angular-seed-inspinia) - integration with custom design template
- 
+
 # Directory Structure
 
 ```
