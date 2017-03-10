@@ -339,17 +339,6 @@ export class SeedConfig {
   APP_ASSETS: InjectableDependency[] = [];
 
   /**
-   * Returns the array of injectable dependencies (the list of local files to be injected in the `index.html`).
-   * @return {InjectableDependency[]}
-   */
-  private get _APP_ASSETS(): InjectableDependency[] {
-    return [
-      { src: `${this.CSS_SRC}/${this.CSS_BUNDLE_NAME}.${this.getInjectableStyleExtension()}`, inject: true, vendor: false },
-      ...this.APP_ASSETS,
-    ];
-  }
-
-  /**
    * The list of editor temporary files to ignore in watcher and asset builder.
    * @type {string[]}
    */
@@ -508,6 +497,24 @@ export class SeedConfig {
    * @type {any}
    */
   PLUGIN_CONFIGS: any = {};
+
+  /**
+   * Generates the query string which should be appended to the end of the URLs in dev mode.
+   */
+  QUERY_STRING_GENERATOR = () => {
+    return Date.now().toString();
+  }
+
+  /**
+   * Returns the array of injectable dependencies (the list of local files to be injected in the `index.html`).
+   * @return {InjectableDependency[]}
+   */
+  private get _APP_ASSETS(): InjectableDependency[] {
+    return [
+      { src: `${this.CSS_SRC}/${this.CSS_BUNDLE_NAME}.${this.getInjectableStyleExtension()}`, inject: true, vendor: false },
+      ...this.APP_ASSETS,
+    ];
+  }
 
   /**
    * Returns the configuration object for NPM module configurations.
