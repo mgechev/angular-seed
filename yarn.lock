@@ -55,6 +55,10 @@
   dependencies:
     tsickle "^0.21.0"
 
+"@swimlane/ngx-datatable@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@swimlane/ngx-datatable/-/ngx-datatable-7.0.0.tgz#297dc5df494c5d2af73ae73c6c1a4a5b7b1fe6db"
+
 "@types/async@^2.0.32":
   version "2.0.37"
   resolved "https://registry.yarnpkg.com/@types/async/-/async-2.0.37.tgz#7bf2ffba03ae965df99f21d4d41be340d6a322ab"
@@ -1984,10 +1988,6 @@ esprima@~3.1.0:
 estraverse@^1.9.1:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-1.9.3.tgz#af67f2dc922582415950926091a4005d29c9bb44"
-
-estree-walker@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/estree-walker/-/estree-walker-0.2.1.tgz#bdafe8095383d8414d5dc2ecf4c9173b6db9412e"
 
 estree-walker@^0.3.0:
   version "0.3.0"
@@ -4313,7 +4313,7 @@ methods@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
 
-micromatch@2.3.11, micromatch@^2.1.5, micromatch@^2.3.7, micromatch@^2.3.8:
+micromatch@2.3.11, micromatch@^2.1.5, micromatch@^2.3.11, micromatch@^2.3.7, micromatch@^2.3.8:
   version "2.3.11"
   resolved "https://registry.yarnpkg.com/micromatch/-/micromatch-2.3.11.tgz#86677c97d1720b363431d04d0d15293bd38c1565"
   dependencies:
@@ -5664,15 +5664,15 @@ rimraf@2, rimraf@^2.2.6, rimraf@^2.2.8, rimraf@^2.3.3, rimraf@^2.5.2, rimraf@^2.
   dependencies:
     glob "^7.0.5"
 
-rollup-plugin-commonjs@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-commonjs/-/rollup-plugin-commonjs-7.0.0.tgz#510762d5c423c761cd16d8e8451715b39f0ceb08"
+rollup-plugin-commonjs@^7.0.1:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-commonjs/-/rollup-plugin-commonjs-7.1.0.tgz#c3a772c2e4a5fa13507f5c578b66cc13b0cb8a79"
   dependencies:
     acorn "^4.0.1"
     estree-walker "^0.3.0"
     magic-string "^0.19.0"
     resolve "^1.1.7"
-    rollup-pluginutils "^1.5.1"
+    rollup-pluginutils "^2.0.1"
 
 rollup-plugin-includepaths@0.2.1:
   version "0.2.1"
@@ -5686,12 +5686,12 @@ rollup-plugin-node-resolve@^2.0.0:
     builtin-modules "^1.1.0"
     resolve "^1.1.6"
 
-rollup-pluginutils@^1.5.1:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-1.5.2.tgz#1e156e778f94b7255bfa1b3d0178be8f5c552408"
+rollup-pluginutils@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.0.1.tgz#7ec95b3573f6543a46a6461bd9a7c544525d0fc0"
   dependencies:
-    estree-walker "^0.2.1"
-    minimatch "^3.0.2"
+    estree-walker "^0.3.0"
+    micromatch "^2.3.11"
 
 rollup@^0.36.3:
   version "0.36.4"
@@ -5720,9 +5720,9 @@ rx@4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/rx/-/rx-4.1.0.tgz#a5f13ff79ef3b740fe30aa803fb09f98805d4782"
 
-rxjs@~5.1.1:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.1.1.tgz#fc48922965bc6c5efbcc0fe46e90a3af64137a7b"
+rxjs@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.2.0.tgz#db537de8767c05fa73721587a29e0085307d318b"
   dependencies:
     symbol-observable "^1.0.1"
 
@@ -6573,11 +6573,7 @@ typescript@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.0.0.tgz#14795f9c39e06022597a2a09eb733adabef9b08c"
 
-typescript@^2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.1.4.tgz#b53b69fb841126acb1dd4b397d21daba87572251"
-
-typescript@^2.1.5:
+typescript@^2.1.4, typescript@^2.1.5:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.2.1.tgz#4862b662b988a4c8ff691cc7969622d24db76ae9"
 
