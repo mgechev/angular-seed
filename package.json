@@ -115,9 +115,9 @@
     "remap-istanbul": "^0.8.4",
     "rimraf": "^2.5.4",
     "rollup": "^0.41.4",
+    "rollup-plugin-commonjs": "^7.0.1",
     "rollup-plugin-includepaths": "0.2.1",
     "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-plugin-commonjs": "^7.0.0",
     "run-sequence": "^1.2.2",
     "semver": "^5.3.0",
     "serve-static": "^1.11.1",
@@ -141,9 +141,10 @@
     "@angular/platform-browser": "^4.0.0-rc.2",
     "@angular/platform-browser-dynamic": "^4.0.0-rc.2",
     "@angular/router": "^4.0.0-rc.2",
+    "@swimlane/ngx-datatable": "^7.0.0",
     "core-js": "^2.4.1",
     "intl": "^1.2.5",
-    "rxjs": "~5.1.1",
+    "rxjs": "^5.2.0",
     "systemjs": "0.19.41",
     "zone.js": "^0.7.2"
   }
