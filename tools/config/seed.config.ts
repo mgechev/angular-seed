@@ -456,6 +456,10 @@ export class SeedConfig {
         main: 'bundles/router.umd.js',
         defaultExtension: 'js'
       },
+      '@angular/service-worker': {
+        main: 'bundles/service-worker.umd.js',
+        defaultExtension: 'js'
+      },
       'rxjs': {
         main: 'Rx.js',
         defaultExtension: 'js'
