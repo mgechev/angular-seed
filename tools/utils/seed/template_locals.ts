@@ -48,7 +48,7 @@ export class TemplateLocalsBuilder {
     const configPath = join(path, env);
     let config: any;
     try {
-      config = JSON.parse(JSON.stringify(require(configPath)));
+      config = JSON.parse(JSON.stringify(require(configPath).default));
     } catch (e) {
       config = null;
       util.log(util.colors.red(e.message));
