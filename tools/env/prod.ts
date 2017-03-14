@@ -4,5 +4,5 @@ const ProdConfig: EnvConfig = {
   ENV: 'PROD'
 };
 
-export default ProdConfig;
+export = ProdConfig;
 
