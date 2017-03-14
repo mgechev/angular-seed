@@ -4,5 +4,5 @@ const DevConfig: EnvConfig = {
   ENV: 'DEV'
 };
 
-export = DevConfig;
+export default DevConfig;
 
