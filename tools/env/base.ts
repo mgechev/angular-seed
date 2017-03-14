@@ -5,5 +5,5 @@ const BaseConfig: EnvConfig = {
   API: 'https://demo.com'
 };
 
-export = BaseConfig;
+export default BaseConfig;
 
