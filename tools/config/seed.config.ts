@@ -364,6 +364,8 @@ export class SeedConfig {
     defaultJSExtensions: true,
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
+      '@angular/animations': 'node_modules/@angular/animations/bundles/animations.umd.js',
+      '@angular/platform-browser/animations': 'node_modules/@angular/platform-browser/bundles/platform-browser-animations.umd.js',
       '@angular/common': 'node_modules/@angular/common/bundles/common.umd.js',
       '@angular/compiler': 'node_modules/@angular/compiler/bundles/compiler.umd.js',
       '@angular/core': 'node_modules/@angular/core/bundles/core.umd.js',
@@ -420,6 +422,10 @@ export class SeedConfig {
       '*': 'node_modules/*'
     },
     packages: {
+      '@angular/animations': {
+        main: 'bundles/animations.umd.js',
+        defaultExtension: 'js'
+      },
       '@angular/common': {
         main: 'bundles/common.umd.js',
         defaultExtension: 'js'

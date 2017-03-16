@@ -133,6 +133,7 @@
     "yargs": "^6.0.0"
   },
   "dependencies": {
+    "@angular/animations": "^4.0.0-rc.2",
     "@angular/common": "^4.0.0-rc.2",
     "@angular/compiler": "^4.0.0-rc.2",
     "@angular/core": "^4.0.0-rc.2",
