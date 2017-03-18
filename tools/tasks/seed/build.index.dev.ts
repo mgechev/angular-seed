@@ -17,7 +17,7 @@ export = () => {
     .pipe(inject('shims'))
     .pipe(inject('libs'))
     .pipe(inject())
-    .pipe(plugins.template(new TemplateLocalsBuilder().wihtoutStringifiedEnvConfig().build()))
+    .pipe(plugins.template(new TemplateLocalsBuilder().withoutStringifiedEnvConfig().build()))
     .pipe(gulp.dest(Config.APP_DEST));
 };
 
@@ -65,7 +65,11 @@ function transformPath() {
     if (filepath.startsWith(`/${Config.APP_DEST}`)) {
       filepath = filepath.replace(`/${Config.APP_DEST}`, '');
     }
-    arguments[0] = join(Config.APP_BASE, filepath) + `?${Date.now()}`;
+    arguments[0] = join(Config.APP_BASE, filepath);
+    const queryString = Config.QUERY_STRING_GENERATOR();
+    if (queryString) {
+      arguments[0] += `?${queryString}`;
+    }
     return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));
   };
 }

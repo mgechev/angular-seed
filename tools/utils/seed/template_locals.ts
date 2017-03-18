@@ -17,7 +17,7 @@ export class TemplateLocalsBuilder {
     this.stringifySystemConfigDev = true;
     return this;
   }
-  wihtoutStringifiedEnvConfig() {
+  withoutStringifiedEnvConfig() {
     this.stringifyEnvConfig = false;
     return this;
   }

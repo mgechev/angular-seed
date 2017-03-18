@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import * as ts from 'typescript';
 import { argv } from 'yargs';
 import { join } from 'path';
-import { writeFileSync, readFileSync } from 'fs';
+import { writeFileSync, readFileSync, readdirSync } from 'fs';
 import { CodeGenerator, AngularCompilerOptions, NgcCliOptions, main } from '@angular/compiler-cli';
 
 import Config from '../../config';
@@ -10,7 +10,7 @@ import Config from '../../config';
 function codegen(
   ngOptions: AngularCompilerOptions, cliOptions: NgcCliOptions, program: ts.Program,
   host: ts.CompilerHost) {
-  return CodeGenerator.create(ngOptions, cliOptions, program, host).codegen({ transitiveModules: true });
+  return CodeGenerator.create(ngOptions, cliOptions, program, host).codegen();
 }
 
 const modifyFile = (path: string, mod: any = (f: string) => f) => {
@@ -22,7 +22,13 @@ export = (done: any) => {
   // Note: dirty hack until we're able to set config easier
   modifyFile(join(Config.TMP_DIR, 'tsconfig.json'), (content: string) => {
     const parsed = JSON.parse(content);
+    const path = join(Config.PROJECT_ROOT, Config.TOOLS_DIR, 'manual_typings', 'project');
     parsed.files = parsed.files || [];
+    parsed.files = parsed.files.concat(
+      readdirSync(path)
+      .filter(f => f.endsWith('d.ts'))
+      .map(f => join(path, f)));
+    parsed.files = parsed.files.filter((f: string, i: number) => parsed.files.indexOf(f) === i);
     parsed.files.push(join(Config.BOOTSTRAP_DIR, 'main.ts'));
     return JSON.stringify(parsed, null, 2);
   });
