@@ -574,43 +574,53 @@ Forks of this project demonstrate how to extend and integrate with other librari
 Here are all the awesome guys who are helping to make the project's wiki even better!
 
 ```
-56  Minko Gechev
+60  Minko Gechev
 35  Clayton K. N. Passos
 15  Shyam-Chen
 14  Vincent van Proosdij
  8  Robert van Kints
- 8  Christian Dobert
  8  matthew harwood
+ 8  Christian Dobert
+ 7  Neo Minchul Chae
  6  Ludovic HENIN
  6  ruffiem
  5  Attila Egyed
- 4  hhubik
+ 5  hhubik
  4  Chris Kapilla
  4  davidgfolch
- 3  Robert Stoll
- 3  Brian Kotek
- 3  Patrick Hillert
+ 4  gforceg
+ 4  Brian Kotek
  3  Ezequiel Cicala
  3  Stefan Schüller
- 2  Brooke Smith
- 2  Simon Hampton
- 2  Giovanni Candido da Silva
- 2  Hank Ehly
- 2  Yannick Koehler
- 2  Cy Klassen
- 2  Amal Shehu
- 2  Joshua Wiens
+ 3  Kirill Zdornyy
+ 3  Patrick Hillert
+ 3  Robert Stoll
  2  Dinsitro
- 2  Drake Wilson
- 2  omerfarukyilmaz
+ 2  Brooke Smith
+ 2  Joshua Wiens
+ 2  Daniele Zurico
+ 2  Amal Shehu
+ 2  Cy Klassen
  2  Nathan Walker
- 2  valentin
+ 2  Simon Hampton
+ 2  omerfarukyilmaz
+ 2  Hank Ehly
  2  zealitude
+ 2  Paul Davis
+ 2  valentin
+ 2  Giovanni Candido da Silva
+ 2  Drake Wilson
+ 2  Yannick Koehler
+ 1  jovermier
+ 1  kiuka
+ 1  mcchae7
+ 1  neridonk
  1  samuelfernandez
  1  silicakes
  1  zcsongor
  1  Adam Johannesmeyer
  1  陳彥澄
+ 1  Alexander Yamkov
  1  Ameer Nuri
  1  Ankit Kamboj
  1  BouncingBit
@@ -620,28 +630,32 @@ Here are all the awesome guys who are helping to make the project's wiki even be
  1  Eddie Sun
  1  Enrico Secondulfo
  1  Eugene Serkin
+ 1  Fede Guzmán
  1  Frido Koch
  1  Ishara Samantha
  1  Jack Morrissey
  1  Jesper Rønn-Jensen
- 1  Kirill Zdornyy
+ 1  José Rebelo
+ 1  Karasu
  1  Marc-André Barbeau
+ 1  Mathias Døhl
  1  Myrmex
  1  Pol Stafford
  1  Raphael Schmitt
  1  Sebastian Fuss
  1  Sebastien de Salvador
+ 1  Shyam Chen
  1  Simon Altschuler
  1  Sylvain Francois
  1  The Ult
  1  Valentyn Yakymenko
+ 1  Vivin Antony
+ 1  Yen-cheng Chen, 陳彥澄
  1  Yonet
+ 1  Zakhar Gulchak
  1  ganesansays
- 1  gforceg
+ 1  geo101
  1  graham
- 1  kiuka
- 1  mcchae7
- 1  neridonk
 ```
 
 # Change Log
