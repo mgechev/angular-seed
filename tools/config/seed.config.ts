@@ -348,6 +348,19 @@ export class SeedConfig {
   ];
 
   /**
+   * List of directories to include in commonjs
+   * @type {string[]}
+   */
+  ROLLUP_INCLUDE_DIR: string[] = ['node_modules/**'];
+
+ /**
+  * List of named export Object key value pairs
+  * key: dependencie file
+  * value: exported Objects
+  */
+  ROLLUP_NAMED_EXPORTS: any[] = [];
+
+  /**
    * Returns the array of injectable dependencies (npm dependencies and assets).
    * @return {InjectableDependency[]} The array of npm dependencies and assets.
    */
@@ -663,6 +676,16 @@ export class SeedConfig {
 
   }
 
+/**
+ * Convert named rollup array to object
+ */
+  getRollupNamedExports() {
+    let namedExports = {};
+    this.ROLLUP_NAMED_EXPORTS.map(namedExport => {
+      namedExports = Object.assign(namedExports, namedExport);
+    });
+    return namedExports;
+  }
 }
 
 /**
