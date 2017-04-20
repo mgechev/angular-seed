@@ -3,12 +3,9 @@ version: '2'
 services:
 
   angular-seed:
-    build:
-      context: .
-      dockerfile: ./.docker/angular-seed.production.dockerfile
+    image: 270051160229.dkr.ecr.us-east-1.amazonaws.com/omicflows-frontend
     command: npm run build.prod
     container_name: angular-seed-build-prod
-    image: angular-seed
     networks:
       - prod-network
     volumes:
