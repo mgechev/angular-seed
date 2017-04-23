@@ -73,4 +73,4 @@ export function serveProd() {
   server.listen(Config.PORT, () =>
     openResource('http://localhost:' + Config.PORT + Config.APP_BASE)
   );
-};
+}

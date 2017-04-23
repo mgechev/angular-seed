@@ -55,5 +55,5 @@ export class TemplateLocalsBuilder {
     }
 
     return config;
-  };
+  }
 }

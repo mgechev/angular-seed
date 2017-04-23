@@ -20,7 +20,7 @@
     "e2e.live": "protractor --elementExplorer",
     "gulp": "gulp",
     "i18n": "ng-xi18n -p src/client/tsconfig.json && gulp clean.i18n",
-    "lint": "tslint -c tslint.json src/**/*.ts",
+    "lint": "gulp tslint",
     "karma": "karma",
     "karma.start": "karma start",
     "postinstall": "gulp check.versions && gulp build.bundle.rxjs && npm prune && gulp webdriver && gulp print.banner",
@@ -128,7 +128,7 @@
     "traceur": "^0.0.111",
     "ts-node": "^2.0.0",
     "tslint": "^5.0.0",
-    "typescript": "^2.1.5",
+    "typescript": "^2.2.0",
     "walk": "^2.3.9",
     "yargs": "^6.0.0"
   },
