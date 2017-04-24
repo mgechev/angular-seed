@@ -280,6 +280,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
  - https://github.com/UIUXEngineering/angular2-jspm-typescript-seed - integration with [JSPM](http://jspm.io/).
  - http://ngbot.io - a chat bot built with angular-seed.
  - [angular-seed-inspinia](https://github.com/DmitriyPotapov/angular-seed-inspinia) - integration with custom design template
+ - [telerik/kendo-angular-quickstart-seed](https://github.com/telerik/kendo-angular-quickstart-seed) - integration with Kendo UI for Angular
 
 # Directory Structure
 
