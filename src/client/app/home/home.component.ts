@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NameListService } from '../shared/name-list/name-list.service';
 
+import * as _ from 'lodash';
+
 /**
  * This class represents the lazy loaded HomeComponent.
  */
@@ -48,7 +50,7 @@ export class HomeComponent implements OnInit {
    */
   addName(): boolean {
     // TODO: implement nameListService.post
-    this.names.push(this.newName);
+    this.names.push(_.toUpper(this.newName));
     this.newName = '';
     return false;
   }
