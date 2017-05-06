@@ -38,7 +38,8 @@
     "build.bundles.app",
     "minify.bundles",
     "build.index.prod",
-    "sw.manifest.static"
+    "sw.manifest.static",
+    "minify.index"
   ],
 
   "build.prod.aot": [
@@ -55,7 +56,8 @@
     "build.bundles.app.aot",
     "minify.bundles",
     "build.index.prod",
-    "sw.manifest.static"
+    "sw.manifest.static",
+    "minify.index"
   ],
 
   "build.prod.rollup.aot": [
@@ -73,7 +75,8 @@
     "transpile.bundles.rollup.aot",
     "minify.bundles",
     "build.index.prod",
-    "sw.manifest.static"
+    "sw.manifest.static",
+    "minify.index"
   ],
 
   "build.test": [
