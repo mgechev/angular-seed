@@ -85,7 +85,7 @@ function getSCSSFiles(cacheName:string, filesToCompile:string[], filesToExclude:
     filesToExclude.map((path:string) => { return '!' + path; })
   );
   return gulp.src(allFiles)
-    .pipe(plugins.cached(cacheName))
+    .pipe(isProd ? plugins.cached(cacheName) : plugins.util.noop())
     .pipe(plugins.progeny())
     .pipe(filter(filteredFiles));
 }
