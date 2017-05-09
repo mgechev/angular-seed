@@ -42,4 +42,5 @@ cache:
   directories: node_modules
 
 script:
-  - npm run tests.all && npm run build.prod.exp
+  - npm run tests.all
+
