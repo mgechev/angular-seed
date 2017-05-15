@@ -23,7 +23,7 @@ export = () => {
   const result = gulp.src(src)
     .pipe(plugins.plumber())
     .pipe(tsProject())
-    .once('error', () => {
+    .once('error', function(e: any) {
       this.once('finish', () => process.exit(1));
     });
 
