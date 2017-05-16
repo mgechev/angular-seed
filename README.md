@@ -113,11 +113,13 @@ Put `i18n` attribute to your html tag to mark it for translation, more informati
 $ npm run i18n
 ```
 
+If you run this command for the first time, there is new language file called `messages.xlf` is created in folder `src/client/assets/locale`, please rename it to `messages.en.xlf`
+
 ## Production build with your language
 
 ```bash
-# Build pro app with Japanese language `src/client/assets/locale/messages.ja.xlf`
-$ npm run build.i18n -- --lang ja
+# Build pro app with language file `src/client/assets/locale/messages.en.xlf`
+$ npm run build.prod.rollup.aot -- --lang en
 ```
 
 # Dockerization
