@@ -19,7 +19,7 @@
     "e2e": "protractor",
     "e2e.live": "protractor --elementExplorer",
     "gulp": "gulp",
-    "i18n": "gulp lang.build && ng-xi18n -p dist/tmp/tsconfig.json --i18nFormat xlf && gulp lang.merge",
+    "i18n": "gulp i18n.build --build-type prod && ng-xi18n -p dist/tmp/tsconfig.json --i18nFormat xlf && gulp i18n.merge",
     "lint": "gulp tslint",
     "karma": "karma",
     "karma.start": "karma start",
