@@ -1,11 +1,13 @@
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as runSequence from 'run-sequence';
+import { argv } from 'yargs';
 import { join } from 'path';
 import Config from '../../config';
 
 const plugins = <any>gulpLoadPlugins();
 const sourceElements: any[] = [];
+const args = argv;
 let langEmpty: boolean = true;
 
 gulp.task('get_source_i18n', function () {
@@ -23,8 +25,7 @@ gulp.task('get_source_i18n', function () {
 });
 
 gulp.task('merge_translations_i18n', function () {
-  let langDest = join(Config.ASSETS_SRC, 'locale');
-  return gulp.src(join(langDest, '*.xlf'))
+  return gulp.src(join(Config.LOCALE_DEST, '*.xlf'))
     .pipe(plugins.cheerio({
       run: function ($: any, file: any) {
         let sourceIds: string[] = [];
@@ -50,13 +51,14 @@ gulp.task('merge_translations_i18n', function () {
         xmlMode: true
       }
     }))
-    .pipe(gulp.dest(langDest));
+    .pipe(gulp.dest(Config.LOCALE_DEST));
 });
 
 gulp.task('copy_source_i18n', function () {
-  let langDest = join(Config.ASSETS_SRC, 'locale');
+  let locDef = args.lang ? args.lang : 'en';
   return gulp.src(join(Config.TMP_DIR, 'messages.xlf'))
-    .pipe(langEmpty ? gulp.dest(langDest) : plugins.util.noop());
+    .pipe(plugins.rename(`messages.${locDef}.xlf`))
+    .pipe(langEmpty ? gulp.dest(Config.LOCALE_DEST) : plugins.util.noop());
 });
 
 export = () =>

@@ -109,16 +109,14 @@ Put `i18n` attribute to your html tag to mark it for translation, more informati
 ## Create a translation source file
 
 ```bash
-# Your translation file will be generated here `src/client/assets/locale`
+# Your translation file will be generated here `dist/locale`
 $ npm run i18n
 ```
-
-If you run this command for the first time, there is new language file called `messages.xlf` is created in folder `src/client/assets/locale`, please rename it to `messages.en.xlf`
 
 ## Production build with your language
 
 ```bash
-# Build pro app with language file `src/client/assets/locale/messages.en.xlf`
+# Build prod app with the language file `dist/locale/messages.en.xlf`
 $ npm run build.prod.rollup.aot -- --lang en
 ```
 
