@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig",
+  "exclude": [
+    "app/main-prod.ts"
+  ],
+  "angularCompilerOptions": {
+    "genDir": "./"
+  }
+}
