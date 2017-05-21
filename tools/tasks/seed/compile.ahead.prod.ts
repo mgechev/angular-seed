@@ -36,7 +36,7 @@ export = (done: any) => {
 
   // If a translation, tell the compiler
   if (args.lang) {
-    args['i18nFile'] = `./src/client/assets/locale/messages.${args.lang}.xlf`;
+    args['i18nFile'] = `${Config.LOCALE_DEST}/messages.${args.lang}.xlf`;
     args['locale'] = args.lang;
     args['i18nFormat'] = 'xlf';
   }
