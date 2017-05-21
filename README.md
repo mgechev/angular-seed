@@ -276,8 +276,8 @@ An [advanced option to this seed exists here](https://github.com/NathanWalker/an
     - When using the seed, be sure to change your `write_key` [here](https://github.com/NathanWalker/angular-seed-advanced/blob/master/src/client/index.html#L24)
   - Can be changed to any vendor, [learn more here](https://github.com/angulartics/angulartics2#supported-providers)
 - [lodash](https://lodash.com/) Helps reduce blocks of code down to single lines and enhances readability
-- [NativeScript](https://www.nativescript.org/) cross platform mobile (w/ native UI) apps. [Setup instructions here](#nativescript-app).
-- [Electron](http://electron.atom.io/) cross platform desktop apps (Mac, Windows and Linux). [Setup instructions here](#electron-app).
+- [NativeScript](https://www.nativescript.org/) cross platform mobile (w/ native UI) apps.
+- [Electron](http://electron.atom.io/) cross platform desktop apps (Mac, Windows and Linux).
 
 You may use it to learn how to extend this seed for your own use cases or use the advanced seed if your project needs those features.
 
