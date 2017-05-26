@@ -47,8 +47,6 @@ $ yarn install  # or yarn
 
 # watches your files and uses livereload by default
 $ npm start
-# api document for the app
-# npm run build.docs
 
 # generate api documentation
 $ npm run compodoc
