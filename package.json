@@ -64,7 +64,7 @@
     "@types/rimraf": "0.0.28",
     "@types/run-sequence": "^0.0.29",
     "@types/selenium-webdriver": "^3.0.3",
-    "@types/systemjs": "^0.19.31",
+    "@types/systemjs": "^0.20.2",
     "@types/yargs": "^6.5.0",
     "@types/zone.js": "^0.5.12",
     "async": "^2.1.1",
@@ -126,7 +126,7 @@
     "serve-static": "^1.11.1",
     "slash": "~1.0.0",
     "supports-color": "^3.1.2",
-    "systemjs-builder": "0.15.34",
+    "systemjs-builder": "0.16.4",
     "tildify": "^1.2.0",
     "traceur": "^0.0.111",
     "ts-node": "^3.0.4",
@@ -149,7 +149,7 @@
     "core-js": "^2.4.1",
     "intl": "^1.2.5",
     "rxjs": "^5.2.0",
-    "systemjs": "0.19.41",
+    "systemjs": "0.20.12",
     "zone.js": "^0.8.7"
   }
 }

@@ -411,6 +411,9 @@ export class SeedConfig {
       '*': 'node_modules/*'
     },
     packages: {
+      app: {
+        defaultExtension: 'js'
+      }
     }
   };
 
