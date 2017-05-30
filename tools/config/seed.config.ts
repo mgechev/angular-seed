@@ -380,7 +380,6 @@ export class SeedConfig {
    * @type {any}
    */
   SYSTEM_CONFIG_DEV: any = {
-    defaultJSExtensions: true,
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
       '@angular/animations': 'node_modules/@angular/animations/bundles/animations.umd.js',
@@ -405,12 +404,15 @@ export class SeedConfig {
         'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
-      'app/*': '/app/*',
+      'app/': '/app/',
       // For test config
-      'dist/dev/*': '/base/dist/dev/*',
-      '*': 'node_modules/*'
+      'dist/dev/': '/base/dist/dev/',
+      '': 'node_modules/'
     },
     packages: {
+      app: {
+        defaultExtension: 'js'
+      }
     }
   };
 
