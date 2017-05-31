@@ -26,6 +26,7 @@ import { BuildType, ExtendPackages, InjectableDependency } from './seed.config.i
  */
 export const BUILD_TYPES: BuildType = {
   DEVELOPMENT: 'dev',
+  STAGING: 'staging',
   PRODUCTION: 'prod'
 };
 
