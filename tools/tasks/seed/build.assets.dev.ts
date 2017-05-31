@@ -15,6 +15,7 @@ export =
         join(Config.APP_SRC, '**'),
         join(Config.NPM_BASE, '@angular', 'service-worker', 'bundles', 'worker-basic.js'),
         '!' + join(Config.APP_SRC, '**', '*.ts'),
+        '!' + join(Config.APP_SRC, '**', '*.pug'),
         '!' + join(Config.APP_SRC, '**', '*.scss'),
         '!' + join(Config.APP_SRC, '**', '*.sass')
             ].concat(Config.TEMP_FILES.map((p) => { return '!' + p; }));
