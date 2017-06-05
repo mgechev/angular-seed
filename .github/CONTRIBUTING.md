@@ -1,6 +1,6 @@
 ## Submitting Pull Requests
 
-**Please follow these basic steps to simplify pull request reviews - if you don't you'll probably just be asked to anyway.**
+**Please follow these basic steps to simplify pull request reviews - if you don't you'll probably just be asked to do so anyway.**
 
 * Please rebase your branch against the current master
 * Run ```npm install``` to make sure your development dependencies are up-to-date
