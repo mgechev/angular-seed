@@ -66,7 +66,6 @@
     "@types/selenium-webdriver": "^3.0.3",
     "@types/systemjs": "^0.20.2",
     "@types/yargs": "^6.5.0",
-    "@types/zone.js": "^0.5.12",
     "async": "^2.1.1",
     "autoprefixer": "^7.0.1",
     "browser-sync": "^2.17.3",
