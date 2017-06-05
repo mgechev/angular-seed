@@ -266,7 +266,7 @@ An [advanced option to this seed exists here](https://github.com/NathanWalker/an
 
 - [ngrx/store](https://github.com/ngrx/store) RxJS powered state management, inspired by **Redux**
 - [ngrx/effects](https://github.com/ngrx/effects) Side effect model for @ngrx/store
-- [ng2-translate](https://github.com/ocombe/ng2-translate) for i18n
+- [ngx-translate](https://github.com/ngx-translate/core) for i18n
   - Usage is optional but on by default
   - Up to you and your team how you want to utilize it. It can be easily removed if not needed.
 - [angulartics2](https://github.com/angulartics/angulartics2) Vendor-agnostic analytics for Angular applications.
