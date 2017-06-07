@@ -183,7 +183,6 @@ Default application server configuration
 
 ```js
 var PORT             = 5555;
-var LIVE_RELOAD_PORT = 4002;
 var DOCS_PORT        = 4003;
 var APP_BASE         = '/';
 ```
@@ -191,7 +190,7 @@ var APP_BASE         = '/';
 Configure at runtime
 
 ```bash
-$ npm start -- --port 8080 --reload-port 4000 --base /my-app/
+$ npm start -- --port 8080 --base /my-app/
 ```
 
 ## Environment configuration
