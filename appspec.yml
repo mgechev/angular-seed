@@ -1,0 +1,25 @@
+version: 0.0
+os: linux
+
+files:
+ - source: /
+   destination: /home/ubuntu/omicflows-frontend-deploy
+
+permissions:
+ - object: /
+   pattern: "**"
+   owner: ubuntu
+   group: ubuntu
+
+hooks:
+  AfterInstall:
+    - location: stop_server.sh
+      timeout: 300
+      runas: root
+    - location: start_server.sh
+      timeout: 400
+      runas: root
+  ValidateService:
+    - location: check_service.sh
+      timeout: 60
+      runas: root
