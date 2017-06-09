@@ -40,8 +40,8 @@
     "tests.all": "npm test && npm run e2e.ci",
     "webdriver-start": "node ./node_modules/protractor/bin/webdriver-manager start",
     "webdriver-update": "node ./node_modules/protractor/bin/webdriver-manager update",
-    "compodoc": "node ./node_modules/.bin/compodoc -p src/client/tsconfig.json",
-    "serve.compodoc": "node ./node_modules/.bin/compodoc -s"
+    "compodoc": "./node_modules/.bin/compodoc -p src/client/tsconfig.json",
+    "serve.compodoc": "./node_modules/.bin/compodoc -s"
   },
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
