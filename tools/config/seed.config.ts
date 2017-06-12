@@ -410,7 +410,7 @@ export class SeedConfig {
       '': 'node_modules/'
     },
     packages: {
-      app: {
+      [this.BOOTSTRAP_DIR]: {
         defaultExtension: 'js'
       }
     }
