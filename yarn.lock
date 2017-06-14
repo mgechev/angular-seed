@@ -2,67 +2,86 @@
 # yarn lockfile v1
 
 
-"@angular/animations@^4.1.3":
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-4.1.3.tgz#6e89a1e0fbfd6d0e90be4f2ae190aac67f83a411"
-
-"@angular/common@^4.1.3":
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/@angular/common/-/common-4.1.3.tgz#e7c4791e32131cf74c239428c2a67daab2eef017"
-
-"@angular/compiler-cli@^4.1.3":
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/@angular/compiler-cli/-/compiler-cli-4.1.3.tgz#c2362ffdf65756471481f839fab675bcac213f96"
+"@angular/animations@^4.2.0":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-4.2.2.tgz#4b00dd3414d55cf7a486686c548680c2fc93425e"
   dependencies:
-    "@angular/tsc-wrapped" "4.1.3"
+    tslib "^1.7.1"
+
+"@angular/common@^4.2.0":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/common/-/common-4.2.2.tgz#7c07c46897d5854271240790130077dc83a0a775"
+  dependencies:
+    tslib "^1.7.1"
+
+"@angular/compiler-cli@^4.2.0":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/compiler-cli/-/compiler-cli-4.2.2.tgz#bc5fa52e34000b678a3c8189ffe2da5fc0017501"
+  dependencies:
+    "@angular/tsc-wrapped" "4.2.2"
     minimist "^1.2.0"
     reflect-metadata "^0.1.2"
 
-"@angular/compiler@^4.1.3":
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-4.1.3.tgz#d2dd30853b0cf4a54758b4a314632c231f9c94c3"
+"@angular/compiler@^4.2.0":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-4.2.2.tgz#10c168f8a156397f07ae6ef83a0911e01ed264f8"
+  dependencies:
+    tslib "^1.7.1"
 
-"@angular/core@^4.1.3":
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-4.1.3.tgz#285498eb86ab7d0b6f982f8f9f487ef610013b35"
+"@angular/core@^4.2.0":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/core/-/core-4.2.2.tgz#af5587dda275935868709d8c186e2dc2a1d70a00"
+  dependencies:
+    tslib "^1.7.1"
 
-"@angular/forms@^4.1.3":
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-4.1.3.tgz#380ab4c3af84c5d1d748c2a7d04151c7dc8e4982"
+"@angular/forms@^4.2.0":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-4.2.2.tgz#5c960ad2960a0ae2999fc474560d73e910d118a0"
+  dependencies:
+    tslib "^1.7.1"
 
-"@angular/http@^4.1.3":
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/@angular/http/-/http-4.1.3.tgz#eb9d1c302a0172815f9a573310d9be0bdeb845ae"
+"@angular/http@^4.2.0":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/http/-/http-4.2.2.tgz#e9f977f7b0ecec4d58ecdfc56d5706d8295848b2"
+  dependencies:
+    tslib "^1.7.1"
 
-"@angular/platform-browser-dynamic@^4.1.3":
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-4.1.3.tgz#3c13fdcf591d487f6efdc1d46913f280c6d8c2ec"
+"@angular/platform-browser-dynamic@^4.2.0":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-4.2.2.tgz#00f4b8d1ce415f432bcc5ab2bb90b0b069036287"
+  dependencies:
+    tslib "^1.7.1"
 
-"@angular/platform-browser@^4.1.3":
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-4.1.3.tgz#4fa1db5119dd178b315ddae5b329bee1a932a5bd"
+"@angular/platform-browser@^4.2.0":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-4.2.2.tgz#e7e1ea32d1069ff960429076f3f0882965b620f3"
+  dependencies:
+    tslib "^1.7.1"
 
-"@angular/platform-server@^4.1.3":
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/@angular/platform-server/-/platform-server-4.1.3.tgz#bbfae42b15730357751da0e145d686f925a94431"
+"@angular/platform-server@^4.2.0":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/platform-server/-/platform-server-4.2.2.tgz#aaa1359615bdd9648c7c198db59aa520888168bd"
   dependencies:
     parse5 "^3.0.1"
+    tslib "^1.7.1"
     xhr2 "^0.1.4"
 
-"@angular/router@^4.1.3":
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/@angular/router/-/router-4.1.3.tgz#ddafd46ae7ccc8b1f74904ffb45f394e44625216"
+"@angular/router@^4.2.0":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/router/-/router-4.2.2.tgz#2f2d202c92dbe3828d5a3d2fd2c3737c0cb6a587"
+  dependencies:
+    tslib "^1.7.1"
 
-"@angular/service-worker@^1.0.0-beta.14":
-  version "1.0.0-beta.14"
-  resolved "https://registry.yarnpkg.com/@angular/service-worker/-/service-worker-1.0.0-beta.14.tgz#445242b7a62fedf9fc6c439eede4a31fa2c9f07f"
+"@angular/service-worker@^1.0.0-beta.15":
+  version "1.0.0-beta.15"
+  resolved "https://registry.yarnpkg.com/@angular/service-worker/-/service-worker-1.0.0-beta.15.tgz#222fab4570ba1e77c56b54181aa55d26d4f60cc9"
   dependencies:
     base64-js "^1.1.2"
     jshashes "^1.0.5"
 
-"@angular/tsc-wrapped@4.1.3":
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/@angular/tsc-wrapped/-/tsc-wrapped-4.1.3.tgz#2d6372c9187bf1621eacd960b94b39c4f95293cd"
+"@angular/tsc-wrapped@4.2.2":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/tsc-wrapped/-/tsc-wrapped-4.2.2.tgz#094da1514849a0847f9cb5184e0ceb16fc194457"
   dependencies:
     tsickle "^0.21.0"
 
@@ -314,12 +333,6 @@
 "@types/yargs@^6.5.0":
   version "6.5.0"
   resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-6.5.0.tgz#308b17d5ca469f49ef76460baba793cb75657887"
-
-"@types/zone.js@^0.5.12":
-  version "0.5.12"
-  resolved "https://registry.yarnpkg.com/@types/zone.js/-/zone.js-0.5.12.tgz#4101613a49defbef64fefdb3b809699fe08f68bc"
-  dependencies:
-    zone.js "*"
 
 abbrev@1, abbrev@1.0.x:
   version "1.0.9"
@@ -588,7 +601,7 @@ aws4@^1.2.1:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.5.0.tgz#0a29ffb79c31c9e712eeb087e8e7a64b4a56d755"
 
-babel-code-frame@^6.20.0, babel-code-frame@^6.22.0:
+babel-code-frame@^6.22.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-code-frame/-/babel-code-frame-6.22.0.tgz#027620bee567a88c32561574e7fd0801d33118e4"
   dependencies:
@@ -653,12 +666,6 @@ babel-messages@^6.23.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-messages@^6.8.0:
-  version "6.8.0"
-  resolved "https://registry.yarnpkg.com/babel-messages/-/babel-messages-6.8.0.tgz#bf504736ca967e6d65ef0adb5a2a5f947c8e0eb9"
-  dependencies:
-    babel-runtime "^6.0.0"
-
 babel-plugin-transform-amd-system-wrapper@^0.3.3:
   version "0.3.4"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-amd-system-wrapper/-/babel-plugin-transform-amd-system-wrapper-0.3.4.tgz#8d85dda78a300bf89b3b89167b6eabe7648c8a1a"
@@ -701,31 +708,14 @@ babel-register@^6.24.1:
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
 
-babel-runtime@^6.0.0, babel-runtime@^6.11.6, babel-runtime@^6.20.0, babel-runtime@^6.9.0:
-  version "6.20.0"
-  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.20.0.tgz#87300bdcf4cd770f09bf0048c64204e17806d16f"
-  dependencies:
-    core-js "^2.4.0"
-    regenerator-runtime "^0.10.0"
-
-babel-runtime@^6.22.0:
+babel-runtime@^6.0.0, babel-runtime@^6.11.6, babel-runtime@^6.22.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.23.0.tgz#0a9489f144de70efb3ce4300accdb329e2fc543b"
   dependencies:
     core-js "^2.4.0"
     regenerator-runtime "^0.10.0"
 
-babel-template@^6.14.0, babel-template@^6.9.0:
-  version "6.16.0"
-  resolved "https://registry.yarnpkg.com/babel-template/-/babel-template-6.16.0.tgz#e149dd1a9f03a35f817ddbc4d0481988e7ebc8ca"
-  dependencies:
-    babel-runtime "^6.9.0"
-    babel-traverse "^6.16.0"
-    babel-types "^6.16.0"
-    babylon "^6.11.0"
-    lodash "^4.2.0"
-
-babel-template@^6.24.1:
+babel-template@^6.14.0, babel-template@^6.24.1, babel-template@^6.9.0:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-template/-/babel-template-6.24.1.tgz#04ae514f1f93b3a2537f2a0f60a5a45fb8308333"
   dependencies:
@@ -733,20 +723,6 @@ babel-template@^6.24.1:
     babel-traverse "^6.24.1"
     babel-types "^6.24.1"
     babylon "^6.11.0"
-    lodash "^4.2.0"
-
-babel-traverse@^6.16.0:
-  version "6.21.0"
-  resolved "https://registry.yarnpkg.com/babel-traverse/-/babel-traverse-6.21.0.tgz#69c6365804f1a4f69eb1213f85b00a818b8c21ad"
-  dependencies:
-    babel-code-frame "^6.20.0"
-    babel-messages "^6.8.0"
-    babel-runtime "^6.20.0"
-    babel-types "^6.21.0"
-    babylon "^6.11.0"
-    debug "^2.2.0"
-    globals "^9.0.0"
-    invariant "^2.2.0"
     lodash "^4.2.0"
 
 babel-traverse@^6.24.1:
@@ -763,16 +739,7 @@ babel-traverse@^6.24.1:
     invariant "^2.2.0"
     lodash "^4.2.0"
 
-babel-types@^6.16.0, babel-types@^6.18.0, babel-types@^6.21.0:
-  version "6.21.0"
-  resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.21.0.tgz#314b92168891ef6d3806b7f7a917fdf87c11a4b2"
-  dependencies:
-    babel-runtime "^6.20.0"
-    esutils "^2.0.2"
-    lodash "^4.2.0"
-    to-fast-properties "^1.0.1"
-
-babel-types@^6.24.1:
+babel-types@^6.18.0, babel-types@^6.24.1:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.24.1.tgz#a136879dc15b3606bda0d90c1fc74304c2ff0975"
   dependencies:
@@ -6288,6 +6255,10 @@ tsickle@^0.21.0:
     source-map "^0.5.6"
     source-map-support "^0.4.2"
 
+tslib@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.7.1.tgz#bc8004164691923a79fe8378bbeb3da2017538ec"
+
 tslint@^5.0.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/tslint/-/tslint-5.1.0.tgz#51a47baeeb58956fcd617bd2cf00e2ef0eea2ed9"
@@ -6339,7 +6310,7 @@ ua-parser-js@0.7.12:
   version "0.7.12"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.12.tgz#04c81a99bdd5dc52263ea29d24c6bf8d4818a4bb"
 
-uglify-js@2.7.0, uglify-js@^2.6:
+uglify-js@2.7.0, uglify-js@^2.6, uglify-js@^2.6.1:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.7.0.tgz#f021e38ba2ca740860f5bd5c695c2a817345f0ec"
   dependencies:
@@ -6348,7 +6319,7 @@ uglify-js@2.7.0, uglify-js@^2.6:
     uglify-to-browserify "~1.0.0"
     yargs "~3.10.0"
 
-uglify-js@^2.6.1, uglify-js@~2.8.22:
+uglify-js@~2.8.22:
   version "2.8.23"
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.8.23.tgz#8230dd9783371232d62a7821e2cf9a817270a8a0"
   dependencies:
@@ -6859,6 +6830,6 @@ yn@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/yn/-/yn-1.2.0.tgz#d237a4c533f279b2b89d3acac2db4b8c795e4a63"
 
-zone.js@*, zone.js@^0.8.7:
+zone.js@^0.8.7:
   version "0.8.10"
   resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.8.10.tgz#6d1b696492c029cdbe808e59e87bbd9491b98aa8"
