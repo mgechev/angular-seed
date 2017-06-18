@@ -144,7 +144,7 @@
     "@angular/platform-browser": "^4.2.3",
     "@angular/platform-browser-dynamic": "^4.2.3",
     "@angular/router": "^4.2.3",
-    "@angular/service-worker": "^1.0.0-beta.15",
+    "@angular/service-worker": "^1.0.0-beta.16",
     "core-js": "^2.4.1",
     "intl": "^1.2.5",
     "rxjs": "^5.2.0",
