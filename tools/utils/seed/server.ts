@@ -1,11 +1,13 @@
 import * as express from 'express';
 import * as fallback from 'express-history-api-fallback';
+import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as openResource from 'open';
-import { resolve } from 'path';
+import { join, resolve } from 'path';
 
-import * as codeChangeTool from './code_change_tools';
 import Config from '../../config';
+import * as codeChangeTool from './code_change_tools';
 
+const plugins = <any>gulpLoadPlugins();
 /**
  * Serves the Single Page Application. More specifically, calls the `listen` method, which itself launches BrowserSync.
  */
@@ -23,6 +25,33 @@ export function notifyLiveReload(e:any) {
   codeChangeTool.changed(fileName);
 }
 
+/**
+ * This utility method is used to watch for the current project files
+ * and doing a callback upon change
+ */
+export function watchAppFiles(path: string, fileChangeCallback: (e: any, done: () => void) => void) {
+  let paths: string[] = [
+    join(Config.APP_SRC, path)
+  ].concat(Config.TEMP_FILES.map((p) => { return '!' + p; }));
+
+  let busyWithCall: boolean = false;
+  let changesWaiting: any = null;
+  let afterCall = () => {
+    busyWithCall = false;
+    if (changesWaiting) {
+      fileChangeCallback(changesWaiting, afterCall);
+      changesWaiting = null;
+    }
+  };
+  plugins.watch(paths, (e: any) => {
+    if (busyWithCall) {
+      changesWaiting = e;
+      return;
+    }
+    busyWithCall = true;
+    fileChangeCallback(e, afterCall);
+  });
+}
 /**
  * Starts a new `express` server, serving the static documentation files.
  */
