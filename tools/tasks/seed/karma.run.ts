@@ -1,5 +1,5 @@
-import { startKarma } from '../../utils/seed/karma.start';
 import Config from '../../config';
+import { startKarma } from '../../utils/seed/karma.start';
 
 /**
  * Executes the build process, running all unit tests using `karma`.

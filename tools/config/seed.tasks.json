@@ -90,12 +90,6 @@
     "sw.manifest.static"
   ],
 
-  "test.watch": [
-    "build.test",
-    "watch.test",
-    "karma.watch"
-  ],
-
   "serve.dev": [
     "build.dev",
     "server.start",
