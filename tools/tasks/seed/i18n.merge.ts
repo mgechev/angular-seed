@@ -19,7 +19,8 @@ gulp.task('get_source_i18n', function () {
         });
       },
       parserOptions: {
-        xmlMode: true
+        xmlMode: true,
+        decodeEntities: false
       }
     }));
 });
@@ -37,6 +38,12 @@ gulp.task('merge_translations_i18n', function () {
           if (targetElement.length === 0) {
             // missing translation
             $('body').append(sourceElement);
+          } else {
+            // update context group location
+            let newContextEl = $(sourceElement).children('context-group')
+              .attr('purpose', 'location');
+            targetElement.children('context-group').attr('purpose', 'location')
+              .replaceWith(newContextEl);
           }
         }
         $('trans-unit').map((function () {
@@ -48,7 +55,8 @@ gulp.task('merge_translations_i18n', function () {
         }));
       },
       parserOptions: {
-        xmlMode: true
+        xmlMode: true,
+        decodeEntities: false
       }
     }))
     .pipe(gulp.dest(Config.LOCALE_DEST));
