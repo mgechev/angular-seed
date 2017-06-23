@@ -241,7 +241,7 @@ export class SeedConfig {
   E2E_DEST = `${this.DIST_DIR}/e2e`;
 
   /**
-   * The folder for the built files of the e2e-specs.
+   * The folder for the built translation file.
    * @type {string}
    */
   LOCALE_DEST = `${this.DIST_DIR}/locale`;
