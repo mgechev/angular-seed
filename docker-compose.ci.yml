@@ -1,0 +1,10 @@
+version: "2"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./.docker/ci.Dockerfile
+    ports:
+      - "5555:5555"
+    tty: true

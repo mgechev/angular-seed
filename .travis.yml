@@ -1,31 +1,42 @@
+os: linux
+dist: trusty
+sudo: required
+
 language: node_js
 node_js: stable
 
-sudo: false
+services: docker
+install: true
 
-install: true  # yarn bug
+# addons:
+#   firefox: "45.0"
 
-addons:
-  firefox: "45.0"
+# jdk: oraclejdk8
 
-os:
-  - linux
-#  - osx
+# os:
+#   - linux
+#   - osx
 
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew outdated xctool || brew upgrade xctool; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CHROME_BIN=chromium-browser; fi  # Karma CI
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew cask install google-chrome; fi  # Karma CI
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi
+  # - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
+  # - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew outdated xctool || brew upgrade xctool; fi
+  # - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CHROME_BIN=chromium-browser; fi  # Karma CI
+  # - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew cask install google-chrome; fi  # Karma CI
+  # - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi
 
 before_script:
-  - npm install
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then nohup bash -c "webdriver-manager start 2>&1 &"; fi  # Protractor CI
+  - docker-compose -f docker-compose.ci.yml up -d
+  # - docker-compose ps
+  # - npm install
+  # - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
+  # - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then nohup bash -c "webdriver-manager start 2>&1 &"; fi  # Protractor CI
 
-after_failure:
-  - cat /home/travis/build/mgechev/angular-seed/npm-debug.log
+script:
+  - docker-compose exec app yarn run tests.all
+  # - npm run tests.all
+
+# after_failure:
+#   - cat /home/travis/build/mgechev/angular-seed/npm-debug.log
 
 branches:
   only: master
@@ -38,9 +49,5 @@ notifications:
     on_failure: always  # options: [always|never|change] default: always
     on_start: never     # options: [always|never|change] default: always
 
-cache:
-  directories: node_modules
-
-script:
-  - npm run tests.all
-
+# cache:
+#   directories: node_modules
