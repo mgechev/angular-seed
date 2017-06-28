@@ -130,7 +130,7 @@
     "traceur": "^0.0.111",
     "ts-node": "^3.0.4",
     "tslint": "^5.0.0",
-    "typescript": "^2.2.0",
+    "typescript": "~2.3.4",
     "walk": "^2.3.9",
     "yargs": "^8.0.1"
   },
