@@ -3,6 +3,10 @@
     "noop"
   ],
 
+  "finalize": [
+    "noop"
+  ],
+
   "build.dev": [
     "initialize",
     "clean.once",
@@ -10,7 +14,8 @@
     "build.html_css",
     "build.js.dev",
     "build.index.dev",
-    "sw.manifest.static"
+    "sw.manifest.static",
+    "finalize"
   ],
 
   "build.dev.watch": [
@@ -22,7 +27,8 @@
     "initialize",
     "clean.e2e",
     "tslint",
-    "build.js.e2e"
+    "build.js.e2e",
+    "finalize"
   ],
 
   "build.prod": [
@@ -39,7 +45,8 @@
     "minify.bundles",
     "build.index.prod",
     "sw.manifest.static",
-    "minify.index"
+    "minify.index",
+    "finalize"
   ],
 
   "build.prod.aot": [
@@ -57,7 +64,8 @@
     "minify.bundles",
     "build.index.prod",
     "sw.manifest.static",
-    "minify.index"
+    "minify.index",
+    "finalize"
   ],
 
   "build.prod.rollup.aot": [
@@ -76,7 +84,8 @@
     "minify.bundles",
     "build.index.prod",
     "sw.manifest.static",
-    "minify.index"
+    "minify.index",
+    "finalize"
   ],
 
   "build.test": [
@@ -87,7 +96,8 @@
     "build.js.dev",
     "build.js.test",
     "build.index.dev",
-    "sw.manifest.static"
+    "sw.manifest.static",
+    "finalize"
   ],
 
   "serve.dev": [
