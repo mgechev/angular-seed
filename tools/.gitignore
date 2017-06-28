@@ -1,4 +1,3 @@
 *.js
 *.js.map
 env/env-config.interface.metadata.json
-/node_modules
