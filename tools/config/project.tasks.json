@@ -1,4 +1,12 @@
 {
+  "initialize": [
+    "start"
+  ],
+
+  "finalize": [
+    "end"
+  ],
+
   "test": [
     "tslint",
     "build.test",
