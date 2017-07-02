@@ -7,6 +7,8 @@
 [![Dependency Status](https://david-dm.org/mgechev/angular-seed.svg)](https://david-dm.org/mgechev/angular-seed)
 [![devDependency Status](https://david-dm.org/mgechev/angular-seed/dev-status.svg)](https://david-dm.org/mgechev/angular-seed#info=devDependencies)
 
+This forked branch is for local dev as a child of https://github.com/pscott-au/nodejs-xero-integration-demo
+
 Provides fast, reliable and extensible starter for the development of Angular projects.
 
 `angular-seed` provides the following features:
