@@ -9,6 +9,9 @@ services:
     command: npm start
     container_name: angular-seed-start
     image: angular-seed
+    volumes:
+      - .:/home/app/angular-seed
+      - /home/app/angular-seed/node_modules
     networks:
       - dev-network
     ports:
