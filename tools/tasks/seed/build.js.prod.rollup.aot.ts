@@ -1,3 +1,4 @@
+import { readdirSync, lstatSync } from 'fs';
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
