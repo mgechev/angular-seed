@@ -1,3 +1,4 @@
+import { readdirSync, lstatSync } from 'fs';
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
@@ -17,9 +18,15 @@ export = () => {
     module: 'es2015',
     moduleResolution: 'node'
   }, Config.TMP_DIR);
+
+  let toIgnore = readdirSync(Config.TMP_DIR).filter((f: string) =>
+    lstatSync(join(Config.TMP_DIR, f)).isDirectory() && f !== Config.BOOTSTRAP_DIR)
+    .map((f: string) => '!' + join(Config.TMP_DIR, f, Config.NG_FACTORY_FILE + '.ts'));
+
   const src = [
     join(Config.TOOLS_DIR, '/manual_typings/**/*.d.ts'),
-    join(Config.TMP_DIR, '**/*.ts')
+    join(Config.TMP_DIR, '**/*.ts'),
+    ...toIgnore
   ];
   const result = gulp.src(src)
     .pipe(plugins.plumber())
