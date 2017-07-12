@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-import {
-  async,
-  TestBed
-} from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 
 import { AboutModule } from './about.module';
 
 export function main() {
-   describe('About component', () => {
+  describe('About component', () => {
     // Setting module for testing
     // Disable old forms
 
@@ -18,18 +15,20 @@ export function main() {
       });
     });
 
-    it('should work',
+    it(
+      'should work',
       async(() => {
-        TestBed
-          .compileComponents()
-          .then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
-            let aboutDOMEl = fixture.debugElement.children[0].nativeElement;
+        TestBed.compileComponents().then(() => {
+          let fixture = TestBed.createComponent(TestComponent);
+          let aboutDOMEl = fixture.debugElement.children[0].nativeElement;
 
-              expect(aboutDOMEl.querySelectorAll('h2')[0].textContent).toEqual('Features');
-          });
-        }));
-    });
+          expect(aboutDOMEl.querySelectorAll('h2')[0].textContent).toEqual(
+            'Features'
+          );
+        });
+      })
+    );
+  });
 }
 
 @Component({
