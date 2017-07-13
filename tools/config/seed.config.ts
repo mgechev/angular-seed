@@ -87,11 +87,6 @@ export class SeedConfig {
   SME_OUT_FORMAT = getSmeOutFormat();
 
   /**
-   * The current source-map-explorer output file name.
-   */
-  SME_OUT_FILE_NAME = 'report';
-
-  /**
    * The current source-map-explorer output folder.
    */
   SME_DIR = 'sme';

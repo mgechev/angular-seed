@@ -14,7 +14,7 @@ export function createSME(taskName: string) {
     let sme = './node_modules/.bin/source-map-explorer';
 
     let task = taskName.replace(/\./g, '_');
-    let outFileName = `${Config.SME_OUT_FILE_NAME}_${task}_${now()}.${Config.SME_OUT_FORMAT}`;
+    let outFileName = `${task}_${now()}.${Config.SME_OUT_FORMAT}`;
     let out = join(Config.SME_DIR, outFileName);
 
     let appBundle = join(Config.JS_DEST, Config.JS_PROD_APP_BUNDLE);
