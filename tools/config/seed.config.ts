@@ -2,7 +2,10 @@ import { join } from 'path';
 import * as slash from 'slash';
 import { argv } from 'yargs';
 
-import { BuildType, ExtendPackages, InjectableDependency } from './seed.config.interfaces';
+import {
+  BuildType, ExtendPackages, InjectableDependency,
+  SourceMapExplorerOutputFormat
+} from './seed.config.interfaces';
 
 /************************* DO NOT CHANGE ************************
  *
@@ -27,6 +30,16 @@ import { BuildType, ExtendPackages, InjectableDependency } from './seed.config.i
 export const BUILD_TYPES: BuildType = {
   DEVELOPMENT: 'dev',
   PRODUCTION: 'prod'
+};
+
+/**
+ * The enumeration of available source-map-explorer output formats.
+ * @type {SourceMapExplorerOutputFormats}
+ */
+export const SME_OUTPUT_FORMATS: SourceMapExplorerOutputFormat = {
+  HTML: 'html',
+  JSON: 'json',
+  TSV: 'tsv'
 };
 
 /**
@@ -60,6 +73,28 @@ export class SeedConfig {
    * The default build type is `dev`, which can be overriden by the `--build-type dev|prod` flag when running `npm start`.
    */
   BUILD_TYPE = getBuildType();
+
+  /**
+   * The flag to determine preserving source maps on build or not.
+   * The default value is `false`, which can be overriden by the `--preserve-source-maps` flag when running `npm start`.
+   */
+  PRESERVE_SOURCE_MAPS = argv['preserve-source-maps'] || false;
+
+  /**
+   * The current source-map-explorer output format.
+   * The default value is `html`, which can be overriden by the `--sme-out-format html|json|tsv` flag when running `npm run sme`.
+   */
+  SME_OUT_FORMAT = getSmeOutFormat();
+
+  /**
+   * The current source-map-explorer output file name.
+   */
+  SME_OUT_FILE_NAME = 'report';
+
+  /**
+   * The current source-map-explorer output folder.
+   */
+  SME_DIR = 'sme';
 
   /**
    * The flag for the debug option of the application.
@@ -746,4 +781,9 @@ function getBuildType() {
   } else {
     return BUILD_TYPES.DEVELOPMENT;
   }
+}
+
+function getSmeOutFormat() {
+  let format = (argv['sme-out-format'] || '').toUpperCase();
+  return SME_OUTPUT_FORMATS[format] || SME_OUTPUT_FORMATS.HTML;
 }

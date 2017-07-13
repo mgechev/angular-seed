@@ -119,6 +119,21 @@
     "build.prod.rollup.aot",
     "server.prod"
   ],
+  
+  "sme.prod": [
+    "build.prod",
+    "build.sme.prod"
+  ],
+
+  "sme.prod.aot": [
+    "build.prod.aot",
+    "build.sme.prod.aot"
+  ],
+
+  "sme.prod.rollup.aot": [
+    "build.prod.rollup.aot",
+    "build.sme.prod.rollup.aot"
+  ],
 
   "test": [
     "build.test",
