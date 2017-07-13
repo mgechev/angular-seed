@@ -36,7 +36,7 @@ if (isProd) {
 
 const appSCSSFiles      = join(Config.APP_SRC, '**', '*.scss');
 const entrySCSSFiles    = join(Config.CSS_SRC, '**', '*.scss');
-const abtractSCSSFiles  = join(Config.SCSS_SRC, '**', '*.scss');
+const abstractSCSSFiles = join(Config.SCSS_SRC, '**', '*.scss');
 
 /**
  * Copies all HTML files in `src/client` over to the `dist/tmp` directory.
@@ -62,7 +62,7 @@ function processComponentStylesheets() {
  * Process scss files referenced from Angular component `styleUrls` metadata
  */
 function processComponentScss() {
-  return getSCSSFiles('process-component-scss', [appSCSSFiles], [abtractSCSSFiles])
+  return getSCSSFiles('process-component-scss', [appSCSSFiles], [abstractSCSSFiles])
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.sass(Config.getPluginConfig('gulp-sass')).on('error', plugins.sass.logError))
     .pipe(plugins.postcss(processors))
@@ -143,7 +143,7 @@ function getExternalCss() {
  * Get a stream of external scss files for subsequent processing.
  */
 function getExternalScssStream() {
-  return getSCSSFiles('process-external-scss', getExternalScss(), [abtractSCSSFiles])
+  return getSCSSFiles('process-external-scss', getExternalScss(), [abstractSCSSFiles])
     .pipe(plugins.sass(Config.getPluginConfig('gulp-sass')).on('error', plugins.sass.logError));
 }
 
