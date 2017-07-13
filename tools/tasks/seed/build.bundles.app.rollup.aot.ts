@@ -1,4 +1,4 @@
-import { every, each, parallel } from 'async';
+import { parallel } from 'async';
 import { writeFile } from 'fs';
 import { join } from 'path';
 
