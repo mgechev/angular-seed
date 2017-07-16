@@ -26,6 +26,7 @@ Provides fast, reliable and extensible starter for the development of Angular pr
 - Has autoprefixer and css-lint support.
 - Provides full Docker support for both development and production environment
 - Support for Angular Mobile Toolkit
+- Allows you to analyze the space usage of created bundles by using source-map-explorer
 
 # How to start
 
@@ -152,6 +153,17 @@ $ docker-compose -f docker-compose.production.yml up -d angular-seed-nginx  # St
 
 Now open your browser at http://localhost:5555
 
+# Analyzing the space usage of the app
+You can analyze the bundle with `[source-map-explorer](https://github.com/danvk/source-map-explorer)`.
+It creates a html chart with a file by default, but output can also be json or tsv.
+
+Run the following:
+```bash
+$ npm run sme.prod # or respectively sme.prod.aot / sme.prod.rollup.aot
+# You can specify the output format by passing the `sme-out-format` parameter
+$ npm run sme.prod.aot -- --sme-out-format json # or html / tsv
+```
+
 # Table of Contents
 
 - [Introduction](#introduction)
@@ -162,6 +174,7 @@ Now open your browser at http://localhost:5555
   + [How to build and start the dockerized version of the application](#how-to-build-and-start-the-dockerized-version-of-the-application)
   + [Development build and deployment](#development-build-and-deployment)
   + [Production build and deployment](#production-build-and-deployment)
+- [Analyzing the space usage of the app](#analyzing-the-space-usage-of-the-app)
 - [Table of Content](#table-of-content)
 - [Configuration](#configuration)
 - [Environment Configuration](#environment-configuration)
@@ -432,6 +445,9 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │   │   ├── build.js.prod.exp.ts
 │   │   │   ├── build.js.prod.ts
 │   │   │   ├── build.js.test.ts
+│   │   │   ├── build.sme.prod.aot.ts
+│   │   │   ├── build.sme.prod.rollup.aot.ts
+│   │   │   ├── build.sme.prod.ts
 │   │   │   ├── build.tools.ts
 │   │   │   ├── check.tools.ts
 │   │   │   ├── check.versions.ts
@@ -472,6 +488,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │   │   ├── code_change_tools.ts
 │   │   │   ├── karma.start.ts
 │   │   │   ├── server.ts
+│   │   │   ├── sme.ts
 │   │   │   ├── tasks_tools.ts
 │   │   │   ├── template_locals.ts
 │   │   │   ├── tsproject.ts
