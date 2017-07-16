@@ -56,7 +56,7 @@
     "@types/gulp-filter": "^3.0.29",
     "@types/gulp-htmlmin": "^1.3.30",
     "@types/gulp-load-plugins": "^0.0.29",
-    "@types/gulp-protractor": "^1.0.29",
+    "@types/gulp-protractor": "^1.0.30",
     "@types/gulp-sass": "^0.0.30",
     "@types/gulp-util": "^3.0.29",
     "@types/jasmine": "^2.5.52",
