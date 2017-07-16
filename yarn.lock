@@ -2772,7 +2772,7 @@ gulp-tslint@^8.0.0:
     map-stream "~0.0.7"
     through "~2.3.8"
 
-gulp-typescript@^3.0.2:
+gulp-typescript@~3.1.7:
   version "3.1.7"
   resolved "https://registry.yarnpkg.com/gulp-typescript/-/gulp-typescript-3.1.7.tgz#d88600a914153f11c09c9a5ca8c2561ec75a4978"
   dependencies:
@@ -6284,6 +6284,10 @@ through@2, through@X.X.X, through@~2.3, through@~2.3.1, through@~2.3.6, through@
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
 
+thruway.js@^1.1.22:
+  version "1.1.22"
+  resolved "https://registry.yarnpkg.com/thruway.js/-/thruway.js-1.1.22.tgz#d7a8ad8f62afaad9cb5fc084aa58d4426bf313b0"
+
 tildify@^1.0.0, tildify@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/tildify/-/tildify-1.2.0.tgz#dcec03f55dca9b7aa3e5b04f21817eb56e63588a"
@@ -6991,6 +6995,6 @@ yn@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/yn/-/yn-2.0.0.tgz#e5adabc8acf408f6385fc76495684c88e6af689a"
 
-zone.js@^0.8.7:
+zone.js@0.8.12:
   version "0.8.12"
   resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.8.12.tgz#86ff5053c98aec291a0bf4bbac501d694a05cfbb"
