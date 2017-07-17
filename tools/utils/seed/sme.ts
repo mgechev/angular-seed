@@ -1,8 +1,11 @@
+import { exec } from 'child_process';
 import * as util from 'gulp-util';
 import { existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
 
 import Config from '../../config';
+
+const isWin = /^win/.test(process.platform);
 
 /**
  * Creates a source-map-explorer report with the given task name.
@@ -10,15 +13,18 @@ import Config from '../../config';
  */
 export function createSME(taskName: string) {
   return (): void => {
-    let exec = require('child_process').exec;
     let sme = './node_modules/.bin/source-map-explorer';
 
-    let task = taskName.replace(/\./g, '_');
-    let outFileName = `${task}_${now()}.${Config.SME_OUT_FORMAT}`;
-    let out = join(Config.SME_DIR, outFileName);
+    if (isWin) {
+      sme = '.\\node_modules\\.bin\\source-map-explorer.cmd';
+    }
 
-    let appBundle = join(Config.JS_DEST, Config.JS_PROD_APP_BUNDLE);
-    let appBundleMap = `${appBundle}.map`;
+    const task = taskName.replace(/\./g, '_');
+    const outFileName = `${task}_${now()}.${Config.SME_OUT_FORMAT}`;
+    const out = join(Config.SME_DIR, outFileName);
+
+    const appBundle = join(Config.JS_DEST, Config.JS_PROD_APP_BUNDLE);
+    const appBundleMap = `${appBundle}.map`;
 
     if (!existsSync(Config.SME_DIR)) {
       mkdirSync(Config.SME_DIR);
@@ -34,7 +40,7 @@ export function createSME(taskName: string) {
 }
 
 function now(): string {
-  let date = new Date();
+  const date = new Date();
   return new Date(date.getTime() - (date.getTimezoneOffset() * 60000))
     .toISOString()
     .replace(/[:.]/g, '_');
