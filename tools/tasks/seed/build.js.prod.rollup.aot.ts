@@ -5,6 +5,7 @@ import { join } from 'path';
 
 import Config from '../../config';
 import { makeTsProject, TemplateLocalsBuilder } from '../../utils';
+import { ModuleResolutionKind } from 'typescript/lib/typescript';
 
 const plugins = <any>gulpLoadPlugins();
 
@@ -16,7 +17,7 @@ export = () => {
   const tsProject = makeTsProject({
     target: 'es2015',
     module: 'es2015',
-    moduleResolution: 'node'
+    moduleResolution: ModuleResolutionKind.NodeJs
   }, Config.TMP_DIR);
 
   let toIgnore = readdirSync(Config.TMP_DIR).filter((f: string) =>
