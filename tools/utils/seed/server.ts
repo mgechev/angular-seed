@@ -66,7 +66,7 @@ export function serveDocs() {
   );
 
   server.listen(Config.DOCS_PORT, () =>
-    openResource(getResourceUrl())
+    openResource(getResourceUrl(Config.DOCS_PORT))
   );
 }
 
@@ -82,7 +82,7 @@ export function serveCoverage() {
   );
 
   server.listen(Config.COVERAGE_PORT, () =>
-    openResource(getResourceUrl())
+    openResource(getResourceUrl(Config.COVERAGE_PORT))
   );
 }
 
@@ -102,10 +102,10 @@ export function serveProd() {
   server.use(fallback('index.html', { root }));
 
   server.listen(Config.PORT, () =>
-    openResource(getResourceUrl())
+    openResource(getResourceUrl(Config.PORT))
   );
 }
 
-function getResourceUrl() {
-  return `http://localhost:{Config.PORT}{Config.APP_BASE}`;
+function getResourceUrl(port: number) {
+  return `http://localhost:${port}${Config.APP_BASE}`;
 }
