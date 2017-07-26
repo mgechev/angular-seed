@@ -130,6 +130,7 @@
     "source-map-explorer": "^1.4.0",
     "supports-color": "^3.1.2",
     "systemjs-builder": "0.16.9",
+    "temp": "^0.8.3",
     "tildify": "^1.2.0",
     "traceur": "^0.0.111",
     "ts-node": "^3.0.4",
