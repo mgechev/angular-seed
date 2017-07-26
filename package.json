@@ -23,7 +23,7 @@
     "lint": "gulp tslint",
     "karma": "karma",
     "karma.start": "karma start",
-    "postinstall": "gulp check.versions && gulp build.bundle.rxjs && npm prune && gulp webdriver && gulp print.banner",
+    "postinstall": "gulp check.versions && gulp build.bundle.rxjs && gulp webdriver && gulp print.banner",
     "reinstall": "npm cache clean && npm install",
     "serve.coverage": "gulp serve.coverage --color",
     "serve.dev": "gulp serve.dev --color --env-config dev",
