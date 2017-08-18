@@ -3,5 +3,5 @@
 export interface EnvConfig {
   API?: string;
   ENV?: string;
-  version?: string;
+  VERSION?: string;
 }
