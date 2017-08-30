@@ -650,7 +650,7 @@ export class SeedConfig {
    */
   QUERY_STRING_GENERATOR = () => {
     return Date.now().toString();
-  };
+  }
 
   /**
    * Returns the array of injectable dependencies (the list of local files to be injected in the `index.html`).
