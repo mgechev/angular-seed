@@ -1,5 +1,5 @@
-import * as gulp from 'gulp';
 import { argv } from 'yargs';
+import * as runSequence from 'run-sequence';
 
 require('../gulpfile');
 
@@ -14,4 +14,4 @@ console.log('* angular-seed tools ');
 console.log('* debugging task:', TASK);
 console.log('**********************');
 
-gulp.start(TASK);
+runSequence(TASK);
