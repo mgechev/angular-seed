@@ -25,7 +25,8 @@ export = () => {
     join(Config.TMP_DIR, '**/*.ts'),
     '!' + join(Config.TMP_DIR, `**/${Config.NG_FACTORY_FILE}.ts`)
   ];
-  let result = gulp.src(src)
+  let result = gulp
+    .src(src)
     .pipe(plugins.plumber())
     .pipe(plugins.inlineNg2Template(INLINE_OPTIONS))
     .pipe(tsProject())
@@ -33,9 +34,13 @@ export = () => {
       this.once('finish', () => process.exit(1));
     });
 
-
   return result.js
-    .pipe(plugins.template(new TemplateLocalsBuilder().build()))
+    .pipe(
+      plugins.template(
+        new TemplateLocalsBuilder().build(),
+        Config.TEMPLATE_CONFIG
+      )
+    )
     .pipe(gulp.dest(Config.TMP_DIR))
     .on('error', (e: any) => {
       console.log(e);

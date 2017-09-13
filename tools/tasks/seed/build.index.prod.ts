@@ -13,10 +13,16 @@ const plugins = <any>gulpLoadPlugins();
  * environment.
  */
 export = () => {
-  return gulp.src(join(Config.APP_SRC, 'index.html'))
+  return gulp
+    .src(join(Config.APP_SRC, 'index.html'))
     .pipe(injectJs())
     .pipe(injectCss())
-    .pipe(plugins.template(new TemplateLocalsBuilder().withoutStringifiedEnvConfig().build()))
+    .pipe(
+      plugins.template(
+        new TemplateLocalsBuilder().withoutStringifiedEnvConfig().build(),
+        Config.TEMPLATE_CONFIG
+      )
+    )
     .pipe(gulp.dest(Config.APP_DEST));
 };
 
@@ -25,17 +31,20 @@ export = () => {
  * @param {Array<string>} files - The files to be injected.
  */
 function inject(...files: Array<string>) {
-    return plugins.inject(gulp.src(files, { read: false }), {
-        files,
-        transform: transformPath()
-    });
+  return plugins.inject(gulp.src(files, { read: false }), {
+    files,
+    transform: transformPath()
+  });
 }
 
 /**
  * Injects the bundled JavaScript shims and application bundles for the production environment.
  */
 function injectJs() {
-  return inject(join(Config.JS_DEST, Config.JS_PROD_SHIMS_BUNDLE), join(Config.JS_DEST, Config.JS_PROD_APP_BUNDLE));
+  return inject(
+    join(Config.JS_DEST, Config.JS_PROD_SHIMS_BUNDLE),
+    join(Config.JS_DEST, Config.JS_PROD_APP_BUNDLE)
+  );
 }
 
 /**
@@ -58,11 +67,14 @@ function transformPath() {
     } else {
       slice_after = 3;
     }
-    arguments[0] = Config.APP_BASE + path.slice(slice_after, path.length).join(sep);
+    arguments[0] =
+      Config.APP_BASE + path.slice(slice_after, path.length).join(sep);
     const queryString = Config.QUERY_STRING_GENERATOR();
     if (queryString) {
       arguments[0] += `?${queryString}`;
     }
-    return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));
+    return slash(
+      plugins.inject.transform.apply(plugins.inject.transform, arguments)
+    );
   };
 }

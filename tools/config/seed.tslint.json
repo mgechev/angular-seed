@@ -30,6 +30,8 @@
     "triple-equals": true,
     "variable-name": false,
 
+    "angular-whitespace": [true, "check-semicolon", "check-interpolation"],
+    "banana-in-box": true,
     "directive-selector": [true, ["attribute"], [], "camelCase"],
     "component-selector": [true, ["element"], [], "kebab-case"],
     "use-input-property-decorator": true,
