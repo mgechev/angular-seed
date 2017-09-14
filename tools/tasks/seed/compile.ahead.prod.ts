@@ -1,8 +1,9 @@
 import 'reflect-metadata';
 import * as ts from 'typescript';
+import * as util from 'gulp-util';
 import { argv } from 'yargs';
 import { join } from 'path';
-import { writeFileSync, readFileSync, readdirSync } from 'fs';
+import { writeFileSync, readFileSync, readdirSync, existsSync } from 'fs';
 import {
   CodeGenerator,
   AngularCompilerOptions,
@@ -52,9 +53,16 @@ export = (done: any) => {
 
   // If a translation, tell the compiler
   if (args.lang) {
-    args['i18nFile'] = `${Config.LOCALE_DEST}/messages.${args.lang}.xlf`;
-    args['locale'] = args.lang;
-    args['i18nFormat'] = 'xlf';
+    let i18nFilePath = `${Config.LOCALE_DEST}/messages.${args.lang}.xlf`;
+    let isExists = existsSync(i18nFilePath);
+    if (isExists) {
+      args['i18nFile'] = i18nFilePath;
+      args['locale'] = args.lang;
+      args['i18nFormat'] = 'xlf';
+    } else {
+      util.log(util.colors.gray('Translation file is not found'), util.colors.yellow(i18nFilePath));
+      util.log(util.colors.gray(`Use 'npm run i18n' command to create your translation file`));
+    }
   }
 
   const cliOptions = new NgcCliOptions(args);
