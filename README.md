@@ -9,7 +9,7 @@
 
 Provides fast, reliable and extensible starter for the development of Angular projects.
 
-*Warning:* If you're just getting started with the entire JavaScript ecosystem then Angular Seed might not be the best choice for you. The project provides scalable approach for building Angular applications but you may face difficulties configuring this highly customizable solution. In such case we recommend the [Angular CLI](https://github.com/angular/angular-cli).
+**Warning: If you're just getting started with the entire JavaScript ecosystem then Angular Seed might not be the best choice for you. The project provides scalable approach for building Angular applications but you may face difficulties configuring this highly customizable solution. In such case we recommend the [Angular CLI](https://github.com/angular/angular-cli).**
 
 `angular-seed` provides the following features:
 
