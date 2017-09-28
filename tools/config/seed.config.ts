@@ -357,8 +357,8 @@ export class SeedConfig {
   ENABLE_SCSS = ['true', '1'].indexOf(
     `${process.env.ENABLE_SCSS}`.toLowerCase()
   ) !== -1 ||
-  argv['scss'] ||
-  false;
+    argv['scss'] ||
+    false;
 
   /**
    * Enable tslint emit error by setting env variable FORCE_TSLINT_EMIT_ERROR
@@ -469,7 +469,7 @@ export class SeedConfig {
       this.NPM_DEPENDENCIES.filter(filterDependency.bind(null, this.BUILD_TYPE))
     ).concat(
       this._APP_ASSETS.filter(filterDependency.bind(null, this.BUILD_TYPE))
-      );
+    );
   }
 
   /**
@@ -480,39 +480,39 @@ export class SeedConfig {
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
       '@angular/animations':
-      'node_modules/@angular/animations/bundles/animations.umd.js',
+        'node_modules/@angular/animations/bundles/animations.umd.js',
       '@angular/platform-browser/animations':
-      'node_modules/@angular/platform-browser/bundles/platform-browser-animations.umd.js',
+        'node_modules/@angular/platform-browser/bundles/platform-browser-animations.umd.js',
       '@angular/common': 'node_modules/@angular/common/bundles/common.umd.js',
       '@angular/common/http': 'node_modules/@angular/common/bundles/common-http.umd.js',
       '@angular/compiler':
-      'node_modules/@angular/compiler/bundles/compiler.umd.js',
+        'node_modules/@angular/compiler/bundles/compiler.umd.js',
       '@angular/core': 'node_modules/@angular/core/bundles/core.umd.js',
       '@angular/forms': 'node_modules/@angular/forms/bundles/forms.umd.js',
       '@angular/http': 'node_modules/@angular/http/bundles/http.umd.js',
       '@angular/platform-browser':
-      'node_modules/@angular/platform-browser/bundles/platform-browser.umd.js',
+        'node_modules/@angular/platform-browser/bundles/platform-browser.umd.js',
       '@angular/platform-browser-dynamic':
-      'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
+        'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
       '@angular/router': 'node_modules/@angular/router/bundles/router.umd.js',
       '@angular/animations/browser':
-      'node_modules/@angular/animations/bundles/animations-browser.umd.js',
+        'node_modules/@angular/animations/bundles/animations-browser.umd.js',
       'tslib': 'node_modules/tslib/tslib.js',
 
       '@angular/common/testing':
-      'node_modules/@angular/common/bundles/common-testing.umd.js',
+        'node_modules/@angular/common/bundles/common-testing.umd.js',
       '@angular/compiler/testing':
-      'node_modules/@angular/compiler/bundles/compiler-testing.umd.js',
+        'node_modules/@angular/compiler/bundles/compiler-testing.umd.js',
       '@angular/core/testing':
-      'node_modules/@angular/core/bundles/core-testing.umd.js',
+        'node_modules/@angular/core/bundles/core-testing.umd.js',
       '@angular/http/testing':
-      'node_modules/@angular/http/bundles/http-testing.umd.js',
+        'node_modules/@angular/http/bundles/http-testing.umd.js',
       '@angular/platform-browser/testing':
-      'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
+        'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
       '@angular/platform-browser-dynamic/testing':
-      'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
+        'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing':
-      'node_modules/@angular/router/bundles/router-testing.umd.js',
+        'node_modules/@angular/router/bundles/router-testing.umd.js',
 
       'app/': `${this.APP_BASE}app/`,
       // For test config
@@ -554,11 +554,11 @@ export class SeedConfig {
       [join(this.TMP_DIR, this.BOOTSTRAP_DIR, '*')]: `${this.TMP_DIR}/${this
         .BOOTSTRAP_DIR}/*`,
       '@angular/platform-browser/animations':
-      'node_modules/@angular/platform-browser/bundles/platform-browser-animations.umd.js',
+        'node_modules/@angular/platform-browser/bundles/platform-browser-animations.umd.js',
       '@angular/animations/browser':
-      'node_modules/@angular/animations/bundles/animations-browser.umd.js',
+        'node_modules/@angular/animations/bundles/animations-browser.umd.js',
       '@angular/common/http':
-      'node_modules/@angular/common/bundles/common-http.umd.js',
+        'node_modules/@angular/common/bundles/common-http.umd.js',
       'tslib': 'node_modules/tslib/tslib.js',
       'dist/tmp/node_modules/*': 'dist/tmp/node_modules/*',
       'node_modules/*': 'node_modules/*',
