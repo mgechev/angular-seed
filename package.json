@@ -1,8 +1,7 @@
 {
   "name": "angular-seed",
   "version": "1.0.0",
-  "description":
-    "Modular starter project for Angular 2 (and beyond) with statically typed build and AoT compilation",
+  "description": "Modular starter project for Angular 2 (and beyond) with statically typed build and AoT compilation",
   "repository": {
     "url": "https://github.com/mgechev/angular-seed"
   },
@@ -11,53 +10,39 @@
     "build.dev.watch": "gulp build.dev.watch --color",
     "build.e2e": "gulp build.e2e --color",
     "build.prod": "gulp build.prod --color --env-config prod --build-type prod",
-    "build.prod.exp":
-      "gulp build.prod.aot --color --env-config prod --build-type prod",
-    "build.prod.rollup.aot":
-      "gulp build.prod.rollup.aot --color --env-config prod --build-type prod",
-    "build.prod.aot":
-      "gulp build.prod.aot --color --env-config prod --build-type prod",
+    "build.prod.exp": "gulp build.prod.aot --color --env-config prod --build-type prod",
+    "build.prod.rollup.aot": "gulp build.prod.rollup.aot --color --env-config prod --build-type prod",
+    "build.prod.aot": "gulp build.prod.aot --color --env-config prod --build-type prod",
     "build.test": "gulp build.test --color",
     "test.watch": "gulp test.watch --color",
     "generate.manifest": "gulp generate.manifest --color",
     "e2e": "protractor",
     "e2e.live": "protractor --elementExplorer",
     "gulp": "gulp",
-    "i18n":
-      "gulp i18n.build --build-type prod && ng-xi18n -p dist/tmp/tsconfig.json --i18nFormat xlf && gulp i18n.merge",
+    "i18n": "gulp i18n.build --build-type prod && ng-xi18n -p dist/tmp/tsconfig.json --i18nFormat xlf && gulp i18n.merge",
     "lint": "gulp tslint",
     "karma": "karma",
     "karma.start": "karma start",
-    "postinstall":
-      "gulp check.versions && gulp build.bundle.rxjs && gulp webdriver && gulp print.banner",
+    "postinstall": "gulp check.versions && gulp build.bundle.rxjs && gulp webdriver && gulp print.banner",
     "reinstall": "npm cache clean && npm install",
     "serve.coverage": "gulp serve.coverage --color",
     "serve.dev": "gulp serve.dev --color --env-config dev",
     "serve.e2e": "gulp serve.e2e --color",
     "serve.prod": "gulp serve.prod --color --env-config prod --build-type prod",
-    "serve.prod.aot":
-      "gulp serve.prod.aot --color --env-config prod --build-type prod",
-    "serve.prod.exp":
-      "gulp serve.prod.aot --color --env-config prod --build-type prod",
-    "serve.prod.rollup.aot":
-      "gulp serve.prod.rollup.aot --color --env-config prod --build-type prod",
-    "sme.prod":
-      "gulp sme.prod --color --env-config prod --build-type prod --preserve-source-maps",
-    "sme.prod.aot":
-      "gulp sme.prod.aot --color --env-config prod --build-type prod --preserve-source-maps",
-    "sme.prod.rollup.aot":
-      "gulp sme.prod.rollup.aot --color --env-config prod --build-type prod --preserve-source-maps",
+    "serve.prod.aot": "gulp serve.prod.aot --color --env-config prod --build-type prod",
+    "serve.prod.exp": "gulp serve.prod.aot --color --env-config prod --build-type prod",
+    "serve.prod.rollup.aot": "gulp serve.prod.rollup.aot --color --env-config prod --build-type prod",
+    "sme.prod": "gulp sme.prod --color --env-config prod --build-type prod --preserve-source-maps",
+    "sme.prod.aot": "gulp sme.prod.aot --color --env-config prod --build-type prod --preserve-source-maps",
+    "sme.prod.rollup.aot": "gulp sme.prod.rollup.aot --color --env-config prod --build-type prod --preserve-source-maps",
     "start": "gulp serve.dev --color",
     "start.deving": "gulp start.deving --color",
     "tasks.list": "gulp --tasks-simple --color",
     "test": "gulp test --color",
-    "e2e.ci":
-      "gulp build.prod.rollup.aot --color && gulp build.e2e --color && gulp e2e --color",
+    "e2e.ci": "gulp build.prod.rollup.aot --color && gulp build.e2e --color && gulp e2e --color",
     "tests.all": "npm test && npm run e2e.ci",
-    "webdriver-start":
-      "node ./node_modules/protractor/bin/webdriver-manager start",
-    "webdriver-update":
-      "node ./node_modules/protractor/bin/webdriver-manager update",
+    "webdriver-start": "node ./node_modules/protractor/bin/webdriver-manager start",
+    "webdriver-update": "node ./node_modules/protractor/bin/webdriver-manager update",
     "compodoc": "./node_modules/.bin/compodoc -p src/client/tsconfig.json",
     "serve.compodoc": "./node_modules/.bin/compodoc -s"
   },
