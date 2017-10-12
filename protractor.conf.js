@@ -20,7 +20,8 @@ const config = {
     // defaultTimeoutInterval: 400000
   },
 
-  directConnect: true,
+  // https://github.com/angular/protractor/issues/4253
+  // directConnect: true,
 
   capabilities: {
     browserName: 'chrome'
