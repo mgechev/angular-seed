@@ -6,7 +6,8 @@ sudo: false
 install: true  # yarn bug
 
 addons:
-  firefox: "55.0"
+  firefox: latest
+  chrome: stable
 
 os:
   - linux
@@ -46,4 +47,3 @@ cache:
 
 script:
   - npm run tests.all
-

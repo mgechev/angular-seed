@@ -22,9 +22,9 @@ const config = {
 
   directConnect: true,
 
-  capabilities: {
+  multicapabilities: [{
     browserName: 'chrome'
-  },
+  }],
 
   onPrepare: function () {
     browser.ignoreSynchronization = false;
@@ -33,11 +33,10 @@ const config = {
 };
 
 if (process.env.TRAVIS) {
-  config.capabilities = {
+  config.multicapabilities.push({
     browserName: 'firefox'
-  };
+  });
   // https://github.com/angular/protractor/issues/4253
-  config.directConnect = false;
 }
 
 exports.config = config;
