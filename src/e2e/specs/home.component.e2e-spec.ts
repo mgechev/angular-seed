@@ -1,4 +1,4 @@
-import { browser, element, by } from 'protractor';
+import { browser, by, element } from 'protractor';
 
 describe('Home', () => {
 
@@ -6,20 +6,23 @@ describe('Home', () => {
     return await browser.get('/');
   });
 
-  it('should have an input', () => {
-    expect(element(by.css('sd-home form input')).isPresent()).toEqual(true);
+  it('should have an input', async () => {
+    const present = await element(by.css('sd-home form input')).isPresent();
+    expect(present).toEqual(true);
   });
 
-  it('should have a list of computer scientists', () => {
-    expect(element(by.css('sd-home ul')).getText())
+  it('should have a list of computer scientists', async () => {
+    const text = await element(by.css('sd-home ul')).getText();
+    expect(text)
       .toEqual('Edsger Dijkstra\nDonald Knuth\nAlan Turing\nGrace Hopper');
   });
 
-  it('should add a name to the list using the form', () => {
+  it('should add a name to the list using the form', async () => {
     element(by.css('sd-home form input')).sendKeys('Tim Berners-Lee');
     element(by.css('sd-home form button')).click();
 
-    expect(element(by.css('sd-home ul')).getText())
+    const text = await element(by.css('sd-home ul')).getText();
+    expect(text)
       .toEqual('Edsger Dijkstra\nDonald Knuth\nAlan Turing\nGrace Hopper\nTim Berners-Lee');
   });
 

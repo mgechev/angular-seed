@@ -1,15 +1,11 @@
 import 'reflect-metadata';
-import * as ts from 'typescript';
+
+import { AngularCompilerOptions, CodeGenerator, main, NgcCliOptions } from '@angular/compiler-cli';
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'fs';
 import * as util from 'gulp-util';
-import { argv } from 'yargs';
 import { join } from 'path';
-import { writeFileSync, readFileSync, readdirSync, existsSync } from 'fs';
-import {
-  CodeGenerator,
-  AngularCompilerOptions,
-  NgcCliOptions,
-  main
-} from '@angular/compiler-cli';
+import * as ts from 'typescript';
+import { argv } from 'yargs';
 
 import Config from '../../config';
 
@@ -68,7 +64,7 @@ export = (done: any) => {
   const cliOptions = new NgcCliOptions(args);
   main(Config.TMP_DIR, cliOptions, codegen)
     .then(done)
-    .catch(e => {
+    .catch((e: Error) => {
       console.error(e.stack);
       console.error('Compilation failed');
       process.exit(1);
