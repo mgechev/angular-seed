@@ -10,10 +10,10 @@ const includePaths = require('rollup-plugin-includepaths');
 const rollup = require('rollup');
 
 const config = {
-  entry: join(Config.TMP_DIR, Config.BOOTSTRAP_FACTORY_PROD_MODULE),
-  sourceMap: true,
+  input: join(Config.TMP_DIR, Config.BOOTSTRAP_FACTORY_PROD_MODULE),
+  sourcemap: true,
   treeshake: true,
-  moduleName: 'main',
+  name: 'main',
   plugins: [
     includePaths({
       include: {},
@@ -34,11 +34,11 @@ const config = {
 
 export = (done: any) => {
   rollup.rollup(config)
-    .then((bundle: any) => {
-      const result = bundle.generate({
-        format: 'iife',
-        sourceMap: Config.PRESERVE_SOURCE_MAPS
-      });
+    .then((bundle: any) => bundle.generate({
+      format: 'iife',
+      sourcemap: Config.PRESERVE_SOURCE_MAPS
+    }))
+    .then((result: any) => {
       const path = join(Config.TMP_DIR, 'bundle.js');
 
       parallel(getTasks(path, result), (error: any, results: boolean[]) => {
