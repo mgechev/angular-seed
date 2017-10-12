@@ -6,7 +6,7 @@ sudo: false
 install: true  # yarn bug
 
 addons:
-  firefox: "52.0"
+  firefox: "55.0"
 
 os:
   - linux

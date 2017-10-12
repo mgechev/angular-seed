@@ -20,8 +20,7 @@ const config = {
     // defaultTimeoutInterval: 400000
   },
 
-  // https://github.com/angular/protractor/issues/4253
-  // directConnect: true,
+  directConnect: true,
 
   capabilities: {
     browserName: 'chrome'
@@ -37,6 +36,8 @@ if (process.env.TRAVIS) {
   config.capabilities = {
     browserName: 'firefox'
   };
+  // https://github.com/angular/protractor/issues/4253
+  config.directConnect = false;
 }
 
 exports.config = config;
