@@ -50,7 +50,7 @@
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
   "engines": {
-    "node": ">=6.5.0",
+    "node": ">=6.9.0",
     "npm": ">=3.10.3"
   },
   "devDependencies": {
@@ -71,7 +71,7 @@
     "@types/node": "^8.0.25",
     "@types/rimraf": "2.0.2",
     "@types/run-sequence": "^0.0.29",
-    "@types/selenium-webdriver": "^3.0.3",
+    "@types/selenium-webdriver": "^3.0.7",
     "@types/systemjs": "^0.20.2",
     "@types/yargs": "^8.0.2",
     "async": "^2.1.1",
@@ -97,7 +97,7 @@
     "gulp-plumber": "~1.1.0",
     "gulp-postcss": "^7.0.0",
     "gulp-progeny": "^0.4.0",
-    "gulp-protractor": "^3.0.0",
+    "gulp-protractor": "^4.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.6.1",
     "gulp-sass": "^3.0.0",
@@ -121,7 +121,7 @@
     "merge-stream": "^1.0.0",
     "minimatch": "^3.0.3",
     "open": "0.0.5",
-    "protractor": "^4.0.14",
+    "protractor": "^5.1.2",
     "remap-istanbul": "^0.9.5",
     "rimraf": "^2.5.4",
     "rollup": "^0.43.0",
