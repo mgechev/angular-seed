@@ -13,19 +13,18 @@ Provides fast, reliable and extensible starter for the development of Angular pr
 
 `angular-seed` provides the following features:
 
-- Allows you to painlessly update the seed tasks of your already existing project.
+- Allows you to painlessly update the seed tasks of already existing project.
 - Supports multiple Angular applications with shared codebase in a single instance of the seed.
 - Official Angular i18n support.
 - Ready to go, statically typed build system using gulp for working with TypeScript.
 - Production and development builds.
 - **Ahead-of-Time** compilation support.
 - **Tree-Shaking** production builds with Rollup.
-- Uses codelyzer for static code analysis, which verifies that your project follows practices from the Angular style guide.
+- Uses codelyzer for static code analysis, which verifies that the project follows practices from the Angular style guide.
 - Sample unit tests with Jasmine and Karma including code coverage via [istanbul](https://gotwarlost.github.io/istanbul/).
 - End-to-end tests with Protractor.
 - Development server with Livereload.
 - Following the [best practices](https://angular.io/styleguide).
-- Manager of your type definitions using @types.
 - Has autoprefixer and css-lint support.
 - Provides full Docker support for both development and production environment
 - Support for Angular Mobile Toolkit
