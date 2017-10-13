@@ -7,11 +7,12 @@ import Config from '../../config';
 const plugins = <any>gulpLoadPlugins();
 
 /**
- * Executes the build process, linting the TypeScript files using `codelyzer`.
+ * Executes the build process, linting the style files using `stylelint`.
  */
 export = () => {
   const src = [
     join(Config.APP_SRC, '**/*.css'),
+    join(Config.APP_SRC, '**/*.sass'),
     join(Config.APP_SRC, '**/*.scss'),
   ];
 
