@@ -25,7 +25,6 @@ Provides fast, reliable and extensible starter for the development of Angular pr
 - End-to-end tests with Protractor.
 - Development server with Livereload.
 - Following the [best practices](https://angular.io/styleguide).
-- Has autoprefixer and css-lint support.
 - Provides full Docker support for both development and production environment
 - Support for Angular Mobile Toolkit
 - Allows you to analyze the space usage of created bundles by using source-map-explorer

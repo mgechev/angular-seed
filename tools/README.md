@@ -60,7 +60,6 @@ The seed provides the following tasks:
 | `clean.prod.ts`                | Cleans all files within the `/dist/prod` directory |
 | `clean.tools.ts`               | Cleans all JavaScript files which were transpiled by the build.tools task  |
 | `copy.js.prod.ts`              | Copies all TypeScript files (excluding specs and e2e specs) over to the `/tmp` dir |
-| `css-lint.ts`                  | Lints all `css` files using `stylelint` |
 | `e2e.ts`                       | Runs all e2e specs using `protractor` |
 | `generate.manifest.ts`         | Generates a `manifest` file for the application |
 | `karma.start.ts`               | Starts the unit tests using `karma` |
