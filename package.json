@@ -7,6 +7,7 @@
     "url": "https://github.com/mgechev/angular-seed"
   },
   "scripts": {
+    "build.tools": "tsc && gulp build.tools --color",
     "build.dev": "gulp build.dev --color --env-config dev",
     "build.dev.watch": "gulp build.dev.watch --color",
     "build.e2e": "gulp build.e2e --color",

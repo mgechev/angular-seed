@@ -7,7 +7,10 @@
     "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": ["es2015"],
+    "lib": [
+      "es2015",
+      "dom"
+    ],
     "sourceMap": true,
     "pretty": true,
     "allowUnreachableCode": false,
@@ -36,7 +39,8 @@
     "tools/manual_typings/seed/operators.d.ts",
     "tools/manual_typings/seed/slash.d.ts",
     "tools/manual_typings/seed/systemjs-builder.d.ts",
-    "tools/manual_typings/seed/tildify.d.ts"
+    "tools/manual_typings/seed/tildify.d.ts",
+    "tools/tasks/seed/build.tools.ts"
   ],
   "exclude": [
     "node_modules",
