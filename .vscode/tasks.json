@@ -6,10 +6,13 @@
   "suppressTaskName": true,
   "tasks": [
     {
-      "taskName": "tslint",
-      "args": [ "run", "lint" ],
+      "taskName": "lint",
+      "args": [
+        "run",
+        "lint"
+      ],
       "problemMatcher": {
-        "owner": "tslint",
+        "owner": "lint",
         "fileLocation": [
           "relative",
           "${workspaceRoot}"
