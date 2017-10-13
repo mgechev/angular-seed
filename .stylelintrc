@@ -1,0 +1,21 @@
+{
+  "extends": "./tools/config/seed.stylelint.json",
+  "rules": {
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "include",
+        ]
+      }
+    ],
+    "selector-type-no-unknown": [
+      true,
+      {
+        "ignoreTypes": [
+          "/^sd-/"
+        ]
+      }
+    ]
+  }
+}

@@ -2,7 +2,10 @@
   "initialize": [
     "noop"
   ],
-
+  "lint": [
+    "stylelint",
+    "tslint"
+  ],
   "build.dev": [
     "initialize",
     "clean.once",
@@ -12,24 +15,21 @@
     "build.index.dev",
     "sw.manifest.static"
   ],
-
   "build.dev.watch": [
     "build.dev",
     "watch.dev"
   ],
-
   "build.e2e": [
     "initialize",
     "clean.e2e",
-    "tslint",
+    "lint",
     "build.js.e2e"
   ],
-
   "build.prod": [
     "initialize",
     "check.tools",
     "clean.prod",
-    "tslint",
+    "lint",
     "build.assets.prod",
     "build.html_css",
     "copy.prod",
@@ -41,12 +41,11 @@
     "sw.manifest.static",
     "minify.index"
   ],
-
   "build.prod.aot": [
     "initialize",
     "check.tools",
     "clean.prod",
-    "tslint",
+    "lint",
     "build.assets.prod",
     "build.html_css",
     "copy.prod",
@@ -59,12 +58,11 @@
     "sw.manifest.static",
     "minify.index"
   ],
-
   "build.prod.rollup.aot": [
     "initialize",
     "check.tools",
     "clean.prod",
-    "tslint",
+    "lint",
     "build.assets.prod",
     "build.html_css",
     "copy.prod.rollup.aot",
@@ -78,7 +76,6 @@
     "sw.manifest.static",
     "minify.index"
   ],
-
   "build.test": [
     "initialize",
     "clean.once",
@@ -89,52 +86,43 @@
     "build.index.dev",
     "sw.manifest.static"
   ],
-
   "serve.dev": [
     "build.dev",
     "server.start",
     "watch.dev"
   ],
-
   "serve.e2e": [
-    "tslint",
+    "lint",
     "build.dev",
     "build.js.e2e",
     "server.start",
     "watch.dev",
     "watch.e2e"
   ],
-
   "serve.prod": [
     "build.prod",
     "server.prod"
   ],
-
   "serve.prod.aot": [
     "build.prod.aot",
     "server.prod"
   ],
-
   "serve.prod.rollup.aot": [
     "build.prod.rollup.aot",
     "server.prod"
   ],
-  
   "sme.prod": [
     "build.prod",
     "build.sme.prod"
   ],
-
   "sme.prod.aot": [
     "build.prod.aot",
     "build.sme.prod.aot"
   ],
-
   "sme.prod.rollup.aot": [
     "build.prod.rollup.aot",
     "build.sme.prod.rollup.aot"
   ],
-
   "test": [
     "build.test",
     "karma.run"
