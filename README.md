@@ -147,9 +147,7 @@ Now open your browser at http://localhost:5555
 Run the following:
 
 ```bash
-$ docker-compose -f docker-compose.production.yml build
-$ docker-compose -f docker-compose.production.yml up angular-seed   # Wait until this container has finished building, as the nginx container is dependent on the production build artifacts
-$ docker-compose -f docker-compose.production.yml up -d angular-seed-nginx  # Start the nginx container in detached mode
+$ docker-compose -f docker-compose.production.yml up -d  # Start the nginx container in detached mode
 ```
 
 Now open your browser at http://localhost:5555
