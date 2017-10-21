@@ -13,11 +13,12 @@ export = (done: any) => {
     minify: true,
     mangle: false
   };
-  var builder = new Builder('./');
+  const builder = new Builder('./');
   builder.config({
     paths: {
       'n:*': 'node_modules/*',
       'rxjs/*': 'node_modules/rxjs/*.js',
+      'rxjs/operators': 'node_modules/rxjs/operators/index.js'
     },
     map: {
       'rxjs': 'n:rxjs',
