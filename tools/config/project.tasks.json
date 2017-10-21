@@ -1,8 +1,7 @@
 {
   "test": [
-    "tslint",
+    "lint",
     "build.test",
     "karma.run"
   ]
 }
-

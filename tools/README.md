@@ -67,6 +67,7 @@ The seed provides the following tasks:
 | `serve.docs.ts`                | Serves the application documentation using an `express` server |
 | `server.prod.ts`               | Serves the files from `/dist/prod` using an `express` server |
 | `server.start.ts`              | Serves the files from `/dist/dev` using an `express` server |
+| `stylelint.ts`                 | Lints the style files using `stylelint` |
 | `tslint.ts`                    | Lints the TypeScript files using `codelyzer` |
 | `watch.dev.ts`                 | Watches for code changes and rebuilds the files in `/dist/dev` |
 | `watch.e2e.ts`                 | Watches for code changes and rebuilds the files in `/dist/e2e` |
