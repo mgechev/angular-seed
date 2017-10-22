@@ -2,16 +2,15 @@ version: '2'
 
 services:
 
-  angular-seed:
+  web:
     build:
       context: .
       dockerfile: ./.docker/angular-seed.development.dockerfile
     command: npm start
-    container_name: angular-seed-start
-    image: angular-seed
+    container_name: angular-seed-dev
+    image: angular-seed/dev
     volumes:
-      - .:/home/app/angular-seed
-      - /home/app/angular-seed/node_modules
+      - ./src:/home/node/angular-seed/src
     networks:
       - dev-network
     ports:

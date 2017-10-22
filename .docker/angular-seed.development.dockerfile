@@ -1,19 +1,18 @@
 FROM node:8.6
 
-# prepare a user which runs everything locally! - required in child images!
-RUN useradd --user-group --create-home --shell /bin/false app
+WORKDIR /home/node/angular-seed
 
-ENV HOME=/home/app
-WORKDIR $HOME
+# NB: Only copy files that are required by 'npm install'
+# The 'src' directory will be mounted as a shared volume by docker-compose (allowing for live-reload)
+COPY package.json .
+COPY package-lock.json .
+COPY gulpfile.ts .
+COPY tsconfig.json .
+COPY tslint.json .
+COPY tools ./tools/
 
-ENV APP_NAME=angular-seed
-
-# before switching to user we need to set permission properly
-# copy all files, except the ignored files from .dockerignore
-COPY . $HOME/$APP_NAME/
-RUN chown -R app:app $HOME/*
-
-USER app
-WORKDIR $HOME/$APP_NAME
+# before switching to non-root user, change ownership of home
+RUN chown -R node:node .
+USER node
 
 RUN npm install
