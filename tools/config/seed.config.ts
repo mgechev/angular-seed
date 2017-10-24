@@ -501,6 +501,8 @@ export class SeedConfig {
 
       '@angular/common/testing':
         'node_modules/@angular/common/bundles/common-testing.umd.js',
+      '@angular/common/http/testing':
+        'node_modules/@angular/common/bundles/common-http-testing.umd.js',
       '@angular/compiler/testing':
         'node_modules/@angular/compiler/bundles/compiler-testing.umd.js',
       '@angular/core/testing':

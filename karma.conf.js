@@ -57,6 +57,9 @@ module.exports = function (config) {
       // suppress annoying 404 warnings for resources, images, etc.
       { pattern: 'dist/dev/assets/**/*', watched: false, included: false, served: true },
 
+      // Test dependencies for HttpClient
+      { pattern: 'node_modules/tslib/**/*.js', included: false, watched: true },
+
       'test-main.js'
     ],
 
