@@ -67,7 +67,7 @@
     "@types/gulp-load-plugins": "^0.0.30",
     "@types/gulp-protractor": "^1.0.30",
     "@types/gulp-sass": "^0.0.30",
-    "@types/gulp-util": "^3.0.29",
+    "@types/gulp-util": "3.0.31",
     "@types/jasmine": "^2.6.0",
     "@types/node": "^8.0.34",
     "@types/rimraf": "2.0.2",
