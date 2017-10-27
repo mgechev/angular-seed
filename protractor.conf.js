@@ -1,42 +1,15 @@
-const config = {
-  baseUrl: 'http://localhost:5555/',
+exports.config = {
+  seleniumAddress: 'http://localhost:4444/wd/hub',
 
-  specs: [
-    './dist/e2e/**/*.e2e-spec.js'
-  ],
+  specs: ['src/e2e/tests/*.spec.js'],
 
-  exclude: [],
-
-  // 'jasmine' by default will use the latest jasmine framework
-  framework: 'jasmine',
-
-  // allScriptsTimeout: 110000,
-
-  jasmineNodeOpts: {
-    // showTiming: true,
-    showColors: true,
-    isVerbose: false,
-    includeStackTrace: false,
-    // defaultTimeoutInterval: 400000
-  },
-
-  directConnect: true,
-
-  multicapabilities: [{
-    browserName: 'chrome'
-  }],
-
-  onPrepare: function () {
-    browser.ignoreSynchronization = false;
-  },
-
+  capabilities: {
+      browserName: 'chrome',
+      chromeOptions: {
+          args: [
+              '--start-maximized'
+              // '--headless'
+          ]
+      }
+  }
 };
-
-if (process.env.TRAVIS) {
-  config.multicapabilities.push({
-    browserName: 'firefox'
-  });
-  // https://github.com/angular/protractor/issues/4253
-}
-
-exports.config = config;
