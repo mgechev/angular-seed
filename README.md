@@ -288,7 +288,7 @@ Please see the [CONTRIBUTING](https://github.com/mgechev/angular-seed/blob/maste
 
 # Advanced Seed Option
 
-An [advanced option to this seed exists here](https://github.com/NathanWalker/angular-seed-advanced) which mirrors the latest changes here but adds core support for:
+An [advanced option to this seed exists here](https://github.com/NathanWalker/angular-seed-advanced) which shows examples of how this seed can be expanded to support:
 
 - [ngrx/store](https://github.com/ngrx/store) RxJS powered state management, inspired by **Redux**
 - [ngrx/effects](https://github.com/ngrx/effects) Side effect model for @ngrx/store
@@ -303,7 +303,7 @@ An [advanced option to this seed exists here](https://github.com/NathanWalker/an
 - [NativeScript](https://www.nativescript.org/) cross platform mobile (w/ native UI) apps.
 - [Electron](http://electron.atom.io/) cross platform desktop apps (Mac, Windows and Linux).
 
-You may use it to learn how to extend this seed for your own use cases or use the advanced seed if your project needs those features.
+You may use it to learn how to extend this seed for your own use cases.
 
 # Examples
 
