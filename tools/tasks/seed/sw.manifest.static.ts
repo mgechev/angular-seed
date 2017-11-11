@@ -12,7 +12,7 @@ export = () => {
 
   // Create ngsw.json contorl file from config file using
   // @angular/service-worker's NGSW CLI
-  exec('node_modules/.bin/ngsw-config ' + Config.APP_DEST + ' ./src/client/ngsw-config.json', function(
+  exec('node node_modules/.bin/ngsw-config ' + Config.APP_DEST + ' ./src/client/ngsw-config.json', function(
     error: Error,
     stdout: NodeBuffer,
     stderr: NodeBuffer
