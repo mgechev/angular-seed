@@ -16,6 +16,7 @@ export = () => {
   const tsProject = makeTsProject(
     {
       allowJs: true,
+      declaration: false,
       noFallthroughCasesInSwitch: false
     },
     Config.TMP_DIR
@@ -25,9 +26,7 @@ export = () => {
     .src(src)
     .pipe(plugins.plumber())
     .pipe(
-      Config.PRESERVE_SOURCE_MAPS
-        ? plugins.sourcemaps.init({ loadMaps: true, largeFile: true })
-        : plugins.util.noop()
+      Config.PRESERVE_SOURCE_MAPS ? plugins.sourcemaps.init({ loadMaps: true, largeFile: true }) : plugins.util.noop()
     )
     .pipe(tsProject())
     .once('error', function(e: any) {
@@ -35,17 +34,8 @@ export = () => {
     });
 
   return result.js
-    .pipe(
-      Config.PRESERVE_SOURCE_MAPS
-        ? plugins.sourcemaps.write()
-        : plugins.util.noop()
-    )
-    .pipe(
-      plugins.template(
-        new TemplateLocalsBuilder().build(),
-        Config.TEMPLATE_CONFIG
-      )
-    )
+    .pipe(Config.PRESERVE_SOURCE_MAPS ? plugins.sourcemaps.write() : plugins.util.noop())
+    .pipe(plugins.template(new TemplateLocalsBuilder().build(), Config.TEMPLATE_CONFIG))
     .pipe(plugins.rename(Config.JS_PROD_APP_BUNDLE))
     .pipe(gulp.dest(Config.JS_DEST))
     .on('error', (e: any) => {
