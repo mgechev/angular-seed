@@ -1,6 +1,7 @@
 import * as gulp from 'gulp';
 import * as util from 'gulp-util';
 import Config from '../../config';
+import { join } from 'path';
 
 function reportError(message: string) {
   console.error(util.colors.white.bgRed.bold(message));
@@ -12,15 +13,13 @@ export = () => {
 
   // Create ngsw.json contorl file from config file using
   // @angular/service-worker's NGSW CLI
-  exec('node node_modules/.bin/ngsw-config ' + Config.APP_DEST + ' ./src/client/ngsw-config.json', function(
-    error: Error,
-    stdout: NodeBuffer,
-    stderr: NodeBuffer
-  ) {
+  const sw = join('node_modules', '.bin', 'ngsw-config');
+  const src = join('.', 'src', 'client', 'ngsw-config.json');
+  exec(`${sw} ${Config.APP_DEST} ${src}`, function(error: Error, stdout: NodeBuffer, stderr: NodeBuffer) {
     if (error !== null) {
       reportError('Angular Service Worker config error: ' + error + stderr);
     } else {
-      console.log('Angular Service Worker config success');
+      util.log('Angular Service Worker config success');
     }
   });
 
