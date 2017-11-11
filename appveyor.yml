@@ -19,7 +19,7 @@ init:
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - npm install -g npm@3.10.8
+  - npm install -g npm@5.5.1
   - ps: $env:path = $env:appdata + "\npm;" + $env:path
   - npm install && npm install karma-ie-launcher webdriver-manager
   - npm run webdriver-update
