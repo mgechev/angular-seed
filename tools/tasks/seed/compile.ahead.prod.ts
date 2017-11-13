@@ -53,9 +53,9 @@ export = (done: any) => {
         const i18nFilePath = `${Config.LOCALE_DEST}/messages.${lang}.xlf`;
         const isExists = existsSync(i18nFilePath);
         if (isExists) {
-          args.push('--i18n-file', i18nFilePath);
+          args.push('--i18nFile', i18nFilePath);
           args.push('--locale', lang);
-          args.push('--i18n-format', 'xlf');
+          args.push('--i18nFormat', 'xlf');
         } else {
           util.log(util.colors.gray('Translation file is not found'), util.colors.yellow(i18nFilePath));
           util.log(util.colors.gray(`Use 'npm run i18n' command to create your translation file`));
