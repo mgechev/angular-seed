@@ -21,8 +21,7 @@
     "e2e": "protractor",
     "e2e.live": "protractor --elementExplorer",
     "gulp": "gulp",
-    "i18n":
-      "gulp i18n.build --build-type prod && ng-xi18n -p dist/tmp/tsconfig.json --i18nFormat xlf && gulp i18n.merge",
+    "i18n": "gulp i18n.build --build-type prod && ng-xi18n -p dist/tmp/tsconfig.json --i18nFormat xlf && gulp i18n.merge",
     "lint": "gulp tslint",
     "karma": "karma",
     "karma.start": "karma start",
@@ -37,8 +36,7 @@
     "serve.prod.rollup.aot": "gulp serve.prod.rollup.aot --color --env-config prod --build-type prod",
     "sme.prod": "gulp sme.prod --color --env-config prod --build-type prod --preserve-source-maps",
     "sme.prod.aot": "gulp sme.prod.aot --color --env-config prod --build-type prod --preserve-source-maps",
-    "sme.prod.rollup.aot":
-      "gulp sme.prod.rollup.aot --color --env-config prod --build-type prod --preserve-source-maps",
+    "sme.prod.rollup.aot": "gulp sme.prod.rollup.aot --color --env-config prod --build-type prod --preserve-source-maps",
     "start": "gulp serve.dev --color",
     "start.deving": "gulp start.deving --color",
     "tasks.list": "gulp --tasks-simple --color",
@@ -136,7 +134,7 @@
     "serve-static": "^1.13.1",
     "slash": "~1.0.0",
     "source-map-explorer": "^1.5.0",
-    "supports-color": "^4.4.0",
+    "supports-color": "^5.0.0",
     "systemjs-builder": "0.16.12",
     "temp": "^0.8.3",
     "tildify": "^1.2.0",
@@ -145,7 +143,7 @@
     "tslint": "^5.7.0",
     "typescript": "^2.6.1",
     "walk": "^2.3.9",
-    "yargs": "^9.0.1"
+    "yargs": "^10.0.3"
   },
   "dependencies": {
     "@angular/animations": "^5.0.0",
