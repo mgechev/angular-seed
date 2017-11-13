@@ -6,11 +6,7 @@
     "eofline": true,
     "indent": [true, "spaces"],
     "max-line-length": [true, 140],
-    "member-ordering": [true,
-      "public-before-private",
-      "static-before-instance",
-      "variables-before-functions"
-    ],
+    "member-ordering": [true, "public-before-private", "static-before-instance", "variables-before-functions"],
     "no-arg": true,
     "no-construct": true,
     "no-duplicate-variable": true,
@@ -18,12 +14,7 @@
     "no-eval": true,
     "no-trailing-whitespace": true,
     "no-unused-expression": true,
-    "one-line": [true,
-      "check-open-brace",
-      "check-catch",
-      "check-else",
-      "check-whitespace"
-    ],
+    "one-line": [true, "check-open-brace", "check-catch", "check-else", "check-whitespace"],
     "quotemark": [true, "single"],
     "semicolon": [true, "always"],
     "trailing-comma": true,
@@ -31,6 +22,7 @@
     "variable-name": false,
 
     "angular-whitespace": [true, "check-semicolon", "check-interpolation"],
+    "no-output-on-prefix": true,
     "banana-in-box": true,
     "directive-selector": [true, ["attribute"], [], "camelCase"],
     "component-selector": [true, ["element"], [], "kebab-case"],
@@ -43,9 +35,6 @@
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
     "directive-class-suffix": true,
-    "import-destructuring-spacing": true,
-    "templates-use-public": true,
-    "no-access-missing-member": true,
-    "invoke-injectable": true
+    "import-destructuring-spacing": true
   }
 }
