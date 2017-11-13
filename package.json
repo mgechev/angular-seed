@@ -56,6 +56,7 @@
   },
   "devDependencies": {
     "@angular/compiler-cli": "^5.0.0",
+    "@angular/language-service": "^5.0.1",
     "@angular/platform-server": "^5.0.0",
     "@compodoc/compodoc": "^1.0.1",
     "@types/async": "^2.0.44",
