@@ -47,6 +47,10 @@
   dependencies:
     tslib "^1.7.1"
 
+"@angular/language-service@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-5.0.1.tgz#869e09dbd6e3d95c117c062d21dd1fd920ad44d6"
+
 "@angular/platform-browser-dynamic@^5.0.0":
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-5.0.1.tgz#16db67d52d4531563ab15429c6bdfe18bc1bedc8"
