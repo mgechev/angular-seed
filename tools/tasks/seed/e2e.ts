@@ -14,9 +14,11 @@ class Protractor {
     }
     app.use(express.static(root));
     app.use(history('index.html', { root }));
-    return async () => {
-      await app.listen(port);
-    };
+    return new Promise((resolve, reject) => {
+      const server = app.listen(port, () => {
+        resolve(server);
+      });
+    });
   }
 }
 
