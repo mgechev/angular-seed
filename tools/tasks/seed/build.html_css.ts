@@ -79,10 +79,10 @@ function processComponentScss() {
 /**
  + * Get SCSS Files to process
  + */
-function getSCSSFiles(cacheName:string, filesToCompile:string[], filesToExclude:string[] = []) {
-  let allFiles:string[] = filesToCompile.concat(filesToExclude);
-  let filteredFiles:string[] = filesToCompile.concat(
-    filesToExclude.map((path:string) => { return '!' + path; })
+function getSCSSFiles(cacheName: string, filesToCompile: string[], filesToExclude: string[] = []) {
+  const allFiles: string[] = filesToCompile.concat(filesToExclude);
+  const filteredFiles: string[] = filesToCompile.concat(
+    filesToExclude.map((path: string) => { return '!' + path; })
   );
   return gulp.src(allFiles)
     .pipe(plugins.cached(cacheName))

@@ -29,12 +29,12 @@ export function main() {
         TestBed
           .compileComponents()
           .then(() => {
-            let fixture = TestBed.createComponent(HomeComponent);
-            let homeInstance = fixture.debugElement.componentInstance;
-            let homeDOMEl = fixture.debugElement.nativeElement;
-            let mockNameListService =
+            const fixture = TestBed.createComponent(HomeComponent);
+            const homeInstance = fixture.debugElement.componentInstance;
+            const homeDOMEl = fixture.debugElement.nativeElement;
+            const mockNameListService =
               fixture.debugElement.injector.get<any>(NameListService) as MockNameListService;
-            let nameListServiceSpy = spyOn(mockNameListService, 'get').and.callThrough();
+            const nameListServiceSpy = spyOn(mockNameListService, 'get').and.callThrough();
 
             mockNameListService.returnValue = ['1', '2', '3'];
 

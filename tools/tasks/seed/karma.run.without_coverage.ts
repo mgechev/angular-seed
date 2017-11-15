@@ -3,7 +3,7 @@ import { join } from 'path';
 
 import Config from '../../config';
 
-let repeatableStartKarma = (done: any, config: any = {}) => {
+const repeatableStartKarma = (done: any, config: any = {}) => {
   return new (<any>karma).Server(Object.assign({
     configFile: join(process.cwd(), 'karma.conf.js'),
     singleRun: true

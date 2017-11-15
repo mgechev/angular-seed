@@ -11,8 +11,8 @@ function reportError(message: string) {
  * defined in the application configuration.
  */
 export = () => {
-  let exec = require('child_process').exec;
-  let semver = require('semver');
+  const exec = require('child_process').exec;
+  const semver = require('semver');
 
   exec('npm --version',
     function(error: Error, stdout: NodeBuffer, stderr: NodeBuffer) {

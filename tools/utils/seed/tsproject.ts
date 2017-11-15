@@ -6,16 +6,16 @@ import Config from '../../config';
 
 const plugins = <any>gulpLoadPlugins();
 
-let tsProjects: any = {};
+const tsProjects: any = {};
 
 /**
  * Creates a TypeScript project with the given options using the gulp typescript plugin.
  * @param {Object} options - The additional options for the project configuration.
  */
 export function makeTsProject(options: ts.Settings = {}, pathToTsConfig: string = Config.APP_SRC, projectName = Config.APP_PROJECTNAME) {
-  let optionsHash = JSON.stringify(options);
+  const optionsHash = JSON.stringify(options);
   if (!tsProjects[optionsHash]) {
-    let config = Object.assign({
+    const config = Object.assign({
       typescript: require('typescript')
     }, options);
     tsProjects[optionsHash] =

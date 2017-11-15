@@ -22,7 +22,7 @@ export = () => {
     Config.TMP_DIR
   );
 
-  let toIgnore = readdirSync(Config.TMP_DIR)
+  const toIgnore = readdirSync(Config.TMP_DIR)
     .filter(
       (f: string) =>
         lstatSync(join(Config.TMP_DIR, f)).isDirectory() &&

@@ -9,7 +9,7 @@ function reportError(message: string) {
 }
 
 export = () => {
-  let exec = require('child_process').exec;
+  const exec = require('child_process').exec;
 
   // Create ngsw.json contorl file from config file using
   // @angular/service-worker's NGSW CLI
