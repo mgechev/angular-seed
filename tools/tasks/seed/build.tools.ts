@@ -11,14 +11,14 @@ const plugins = <any>gulpLoadPlugins();
  * Executes the build process, transpiling the TypeScript files within the `tools` directory.
  */
 export = () => {
-  let tsProject = makeTsProject();
+  const tsProject = makeTsProject();
 
-  let src = [
+  const src = [
     join(Config.PROJECT_ROOT, 'gulpfile.ts'),
     join(Config.TOOLS_DIR, 'manual_typings/**/*.d.ts'),
     join(Config.TOOLS_DIR, '**/*.ts')
   ];
-  let result = gulp
+  const result = gulp
     .src(src, { base: './' })
     .pipe(plugins.plumber())
     .pipe(plugins.sourcemaps.init())

@@ -12,7 +12,7 @@ import { NameListService } from '../shared/name-list/name-list.service';
 })
 export class HomeComponent implements OnInit {
 
-  newName: string = '';
+  newName = '';
   errorMessage: string;
   names: any[] = [];
 

@@ -29,5 +29,5 @@ export = (done: any) => {
   });
   builder.bundle('rxjs', 'node_modules/.tmp/Rx.min.js', options)
     .then(() => done())
-    .catch((error:any) => done(error));
+    .catch((error: any) => done(error));
 };

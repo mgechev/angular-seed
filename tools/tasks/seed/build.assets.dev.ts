@@ -10,7 +10,7 @@ import Config from '../../config';
  */
 export = class BuildAssetsTask extends AssetsTask {
   run(done: any) {
-    let paths: string[] = [
+    const paths: string[] = [
       join(Config.APP_SRC, '**'),
       join(Config.NPM_BASE, '@angular', 'service-worker', 'bundles', 'worker-basic.js'),
       '!' + join(Config.APP_SRC, 'ngsw-config.json'),

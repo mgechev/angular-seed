@@ -8,7 +8,7 @@ import Config from '../../config';
 const plugins = <any>gulpLoadPlugins();
 const sourceElements: any[] = [];
 const args = argv;
-let langEmpty: boolean = true;
+let langEmpty = true;
 
 gulp.task('get_source_i18n', function () {
   return gulp.src(join(Config.TMP_DIR, 'messages.xlf'))
@@ -29,26 +29,26 @@ gulp.task('merge_translations_i18n', function () {
   return gulp.src(join(Config.LOCALE_DEST, '*.xlf'))
     .pipe(plugins.cheerio({
       run: function ($: any, file: any) {
-        let sourceIds: string[] = [];
+        const sourceIds: string[] = [];
         langEmpty = false;
-        for (var sourceElement of sourceElements) {
-          let id = $(sourceElement).attr('id');
+        for (const sourceElement of sourceElements) {
+          const id = $(sourceElement).attr('id');
           sourceIds.push(id);
-          let targetElement = $('#' + id);
+          const targetElement = $('#' + id);
           if (targetElement.length === 0) {
             // missing translation
             $('body').append(sourceElement);
           } else {
             // update context group location
-            let newContextEl = $(sourceElement).children('context-group')
+            const newContextEl = $(sourceElement).children('context-group')
               .attr('purpose', 'location');
             targetElement.children('context-group').attr('purpose', 'location')
               .replaceWith(newContextEl);
           }
         }
         $('trans-unit').map((function () {
-          let id = $(this).attr('id');
-          let existing = sourceIds.find((item) => item === id);
+          const id = $(this).attr('id');
+          const existing = sourceIds.find((item) => item === id);
           if (!existing) {
             $('#' + id).remove();
           }
@@ -63,7 +63,7 @@ gulp.task('merge_translations_i18n', function () {
 });
 
 gulp.task('copy_source_i18n', function () {
-  let locDef = args.lang ? args.lang : 'en';
+  const locDef = args.lang ? args.lang : 'en';
   return gulp.src(join(Config.TMP_DIR, 'messages.xlf'))
     .pipe(plugins.rename(`messages.${locDef}.xlf`))
     .pipe(langEmpty ? gulp.dest(Config.LOCALE_DEST) : plugins.util.noop());

@@ -34,21 +34,21 @@ export let changeFileManager = new ChangeFileManager();
 /**
  * Initialises BrowserSync with the configuration defined in seed.config.ts (or if overriden: project.config.ts).
  */
-let runServer = () => {
+const runServer = () => {
   browserSync.init(Config.getPluginConfig('browser-sync'));
 };
 
 /**
  * Runs BrowserSync as the listening process for the application.
  */
-let listen = () => {
+const listen = () => {
   runServer();
 };
 
 /**
  * Provides a flag to mark which files have changed and reloads BrowserSync accordingly.
  */
-let changed = (files: any) => {
+const changed = (files: any) => {
   if (!(files instanceof Array)) {
     files = [files];
   }

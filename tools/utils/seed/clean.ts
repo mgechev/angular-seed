@@ -17,7 +17,7 @@ export function clean(paths: string|string[]): (done: () => void) => void {
       pathsToClean = [<string>paths];
     }
 
-    let promises = pathsToClean.map(p => {
+    const promises = pathsToClean.map(p => {
       return new Promise(resolve => {
         const relativePath: string = relative(Config.PROJECT_ROOT, p);
         if (relativePath.startsWith('..')) {

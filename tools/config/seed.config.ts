@@ -686,7 +686,7 @@ export class SeedConfig {
      * Example: `npm start -- --b`
      * @return {any}
      */
-    let defaults = {
+    const defaults = {
       'browser-sync': {
         middleware: [
           require('connect-history-api-fallback')({
@@ -854,7 +854,7 @@ function filterDependency(type: string, d: InjectableDependency): boolean {
  * @return {number} The applications version.
  */
 function appVersion(): number | string {
-  var pkg = require('../../package.json');
+  const pkg = require('../../package.json');
   return pkg.version;
 }
 
@@ -862,9 +862,9 @@ function appVersion(): number | string {
  * Returns the application build type.
  */
 function getBuildType() {
-  let type = (argv['build-type'] || argv['env'] || '').toLowerCase();
-  let base: string[] = argv['_'];
-  let prodKeyword = !!base
+  const type = (argv['build-type'] || argv['env'] || '').toLowerCase();
+  const base: string[] = argv['_'];
+  const prodKeyword = !!base
     .filter(o => o.indexOf(BUILD_TYPES.PRODUCTION) >= 0)
     .pop();
   if ((base && prodKeyword) || type === BUILD_TYPES.PRODUCTION) {
@@ -875,6 +875,6 @@ function getBuildType() {
 }
 
 function getSmeOutFormat() {
-  let format = (argv['sme-out-format'] || '').toUpperCase();
+  const format = (argv['sme-out-format'] || '').toUpperCase();
   return SME_OUTPUT_FORMATS[format] || SME_OUTPUT_FORMATS.HTML;
 }

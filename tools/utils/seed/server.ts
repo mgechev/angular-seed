@@ -21,8 +21,8 @@ export function serveSPA() {
  * which itself initiates a BrowserSync reload.
  * @param {any} e - The file that has changed.
  */
-export function notifyLiveReload(e:any) {
-  let fileName = e.path;
+export function notifyLiveReload(e: any) {
+  const fileName = e.path;
   codeChangeTool.changed(fileName);
 }
 
@@ -31,13 +31,13 @@ export function notifyLiveReload(e:any) {
  * and doing a callback upon change
  */
 export function watchAppFiles(path: string, fileChangeCallback: (e: any, done: () => void) => void) {
-  let paths: string[] = [
+  const paths: string[] = [
     join(Config.APP_SRC, path)
   ].concat(Config.TEMP_FILES.map((p) => { return '!' + p; }));
 
-  let busyWithCall: boolean = false;
+  let busyWithCall = false;
   let changesWaiting: any = null;
-  let afterCall = () => {
+  const afterCall = () => {
     busyWithCall = false;
     if (changesWaiting) {
       fileChangeCallback(changesWaiting, afterCall);
@@ -58,7 +58,7 @@ export function watchAppFiles(path: string, fileChangeCallback: (e: any, done: (
  * Starts a new `express` server, serving the static documentation files.
  */
 export function serveDocs() {
-  let server = express();
+  const server = express();
 
   server.use(
     Config.APP_BASE,
@@ -74,7 +74,7 @@ export function serveDocs() {
  * Starts a new `express` server, serving the static unit test code coverage report.
  */
 export function serveCoverage() {
-  let server = express();
+  const server = express();
 
   server.use(
     Config.APP_BASE,
@@ -90,10 +90,10 @@ export function serveCoverage() {
  * Starts a new `express` server, serving the built files from `dist/prod`.
  */
 export function serveProd() {
-  let root = resolve(process.cwd(), Config.PROD_DEST);
-  let server = express();
+  const root = resolve(process.cwd(), Config.PROD_DEST);
+  const server = express();
 
-  for (let proxy of Config.PROXY_MIDDLEWARE) {
+  for (const proxy of Config.PROXY_MIDDLEWARE) {
     server.use(proxy);
   }
 

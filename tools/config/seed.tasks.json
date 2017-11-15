@@ -6,6 +6,7 @@
   "build.dev": [
     "initialize",
     "clean.once",
+    "tslint",
     "build.assets.dev",
     "build.html_css",
     "build.js.dev",
@@ -119,7 +120,7 @@
     "build.prod.rollup.aot",
     "server.prod"
   ],
-  
+
   "sme.prod": [
     "build.prod",
     "build.sme.prod"

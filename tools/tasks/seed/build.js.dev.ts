@@ -19,8 +19,8 @@ let typedBuildCounter = Config.TYPED_COMPILE_INTERVAL; // Always start with the 
 export = class BuildJsDev extends TypeScriptTask {
   run() {
     let tsProject: any;
-    let typings = gulp.src([Config.TOOLS_DIR + '/manual_typings/**/*.d.ts']);
-    let src = [
+    const typings = gulp.src([Config.TOOLS_DIR + '/manual_typings/**/*.d.ts']);
+    const src = [
       join(Config.APP_SRC, '**/*.ts'),
       '!' + join(Config.APP_SRC, '**/*.spec.ts'),
       '!' + join(Config.APP_SRC, '**/*.e2e-spec.ts'),
