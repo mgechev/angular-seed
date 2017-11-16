@@ -1,11 +1,9 @@
 import 'reflect-metadata';
 
-import { AngularCompilerOptions } from '@angular/compiler-cli';
 import { main } from '@angular/compiler-cli/src/main';
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'fs';
 import * as util from 'gulp-util';
 import { join } from 'path';
-import * as ts from 'typescript';
 import { argv } from 'yargs';
 
 import Config from '../../config';

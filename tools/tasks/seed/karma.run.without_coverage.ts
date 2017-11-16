@@ -1,8 +1,6 @@
 import * as karma from 'karma';
 import { join } from 'path';
 
-import Config from '../../config';
-
 const repeatableStartKarma = (done: any, config: any = {}) => {
   return new (<any>karma).Server(Object.assign({
     configFile: join(process.cwd(), 'karma.conf.js'),

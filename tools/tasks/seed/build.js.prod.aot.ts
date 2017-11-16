@@ -11,7 +11,6 @@ const plugins = <any>gulpLoadPlugins();
 /**
  * Executes the build process, transpiling the TypeScript files for the production environment.
  */
-
 export = () => {
   const tsProject = makeTsProject({}, Config.TMP_DIR);
   const toIgnore = readdirSync(Config.TMP_DIR)
