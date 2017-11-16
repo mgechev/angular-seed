@@ -77,8 +77,8 @@ function processComponentScss() {
 }
 
 /**
- + * Get SCSS Files to process
- + */
+ * Get SCSS Files to process
+ */
 function getSCSSFiles(cacheName: string, filesToCompile: string[], filesToExclude: string[] = []) {
   const allFiles: string[] = filesToCompile.concat(filesToExclude);
   const filteredFiles: string[] = filesToCompile.concat(

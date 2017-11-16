@@ -6,7 +6,7 @@ import Config from '../../config';
 
 /**
  * Cleans the given path(s) using `rimraf`.
- * @param {string or string[]} paths - The path or list of paths to clean.
+ * @param {string | string[]} paths - The path or list of paths to clean.
  */
 export function clean(paths: string|string[]): (done: () => void) => void {
   return done => {

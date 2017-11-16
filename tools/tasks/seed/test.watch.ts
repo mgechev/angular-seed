@@ -1,9 +1,7 @@
 import * as gulp from 'gulp';
-import { join } from 'path';
 import * as runSequence from 'run-sequence';
 
-import Config from '../../config';
-import { notifyLiveReload, watchAppFiles } from '../../utils';
+import { watchAppFiles } from '../../utils';
 
 gulp.task('watch.while_testing', function () {
   watchAppFiles('**/!(*.ts)', (e: any, done: any) =>

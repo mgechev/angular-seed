@@ -7,6 +7,8 @@ export abstract class Task {
    * task activation mechanism. By default each task will be always executed.
    *
    * @param {string[]} files A list of files changed since the previous watch.
+   *
+   * @returns {boolean}
    */
   shallRun(files: string[]): boolean {
     return true;
@@ -15,8 +17,10 @@ export abstract class Task {
   /**
    * Implements your task behavior.
    *
-   * @param {any} done A function which should be activated once your task completes.
-   * @return {ReadWriteStream | Promise<any> | void} This method can either return a promise
+   * @param {any} done - A function which should be activated once your task completes.
+   * @param {string[]} files? - Files array.
+   *
+   * @returns {ReadWriteStream | Promise<any> | void} This method can either return a promise
    * which should be resolved once your task execution completes, a stream
    * which should throw an end event once your task execution completes
    * or nothing in case you will manually invoke the `done` method.
