@@ -1,0 +1,30 @@
+#form-container {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 4px;
+}
+
+#map-container {
+    height: 400px;
+    width: 90%;
+    margin: auto;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+}
+
+input.searchInput[type=text] {
+    background-image: url('../../assets/images/searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 8px 20px 8px 40px;
+    /* -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out; */
+}
+
+input.searchInput:focus {
+    /* width: 400px; */
+}
+
+.lat { width: 80px; }
+
+.long { width: 80px; }

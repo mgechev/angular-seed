@@ -1,60 +1,36 @@
-/* Reset */
-html, body, div {
+body {
   border: 0;
   margin: 0;
   padding: 0;
-}
-
-html, body {
   height: 100%;
   width: 100%;
-}
-
-body {
-  display: flex;
   flex-direction: column;
-}
-
-/* Box-sizing border-box */
-*, *:before, *:after {
-  box-sizing: border-box;
-}
-
-/* Set up a default font and some padding to provide breathing room */
-body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-p {
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  line-height: 20px;
-  margin-bottom: 1em;
-  margin-top: 1em;
-}
-
-ul {
-  margin: 10px 0 0;
-  padding: 0 0 0 20px;
-}
-
-li {
-  font-weight: 400;
-  margin-top: 4px;
+div {
+  border: 0;
+  margin: 0;
+  padding: 0;
 }
 
 input {
-  border: 1px solid #106cc8;
+  border: 2px solid #ccc;
+  border-radius: 4px;
   font-size: 14px;
-  height: 40px;
+  height: 30px;
   outline: none;
-  padding: 8px;
+  padding: 7px;
 }
 
-button {
+.numericInput {
+  text-align: center;
+}
+
+button.formButton {
   background-color: #106cc8;
   border-style: none;
   color: rgba(255, 255, 255, 0.87);
@@ -64,8 +40,12 @@ button {
   height: 40px;
   padding: 8px 18px;
   text-decoration: none;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  position: relative;
+  z-index: 1;
 }
 
-button:hover {
-  background-color: #28739e;
+button.formButton:hover {
+  background-color: #28789e;
 }

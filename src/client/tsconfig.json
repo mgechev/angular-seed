@@ -27,8 +27,5 @@
       "systemjs"
     ]
   },
-  "compileOnSave": false,
-  "exclude": [
-    "app/main-prod.ts"
-  ]
+  "compileOnSave": false
 }

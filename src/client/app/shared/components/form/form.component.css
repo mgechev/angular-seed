@@ -1,0 +1,18 @@
+.stepForm {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+button { background-color: transparent; border: none; z-index: 1; }
+button:focus { outline: none; }
+i { background-color: transparent; }
+.hidden-btn {
+    opacity: 0;
+
+    -webkit-transition: all linear 0.2s;
+    -moz-transition: all linear 0.2s;
+    -ms-transition: all linear 0.2s;
+    -o-transition: all linear 0.2s;
+    transition: all linear 0.2s;
+}

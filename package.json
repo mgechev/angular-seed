@@ -34,7 +34,6 @@
   "devDependencies": {
     "@angular/compiler-cli": "^4.4.4",
     "@angular/platform-server": "^4.4.4",
-    "@compodoc/compodoc": "^1.0.1",
     "@types/async": "^2.0.44",
     "@types/browser-sync": "^0.0.36",
     "@types/express": "^4.0.37",
@@ -126,7 +125,7 @@
     "yargs": "^9.0.1"
   },
   "dependencies": {
-    "@agm/core": "^1.0.0-beta.0",
+    "@agm/core": "^1.0.0-beta.2",
     "@angular/animations": "^4.4.4",
     "@angular/common": "^4.4.4",
     "@angular/compiler": "^4.4.4",
@@ -140,6 +139,7 @@
     "core-js": "^2.5.1",
     "font-awesome": "^4.7.0",
     "intl": "^1.2.5",
+    "protractor": "^5.2.0",
     "rxjs": "^5.5.0",
     "systemjs": "0.20.19",
     "zone.js": "0.8.18"
