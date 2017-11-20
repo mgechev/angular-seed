@@ -5,6 +5,7 @@ import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as merge from 'merge-stream';
 import * as util from 'gulp-util';
 import * as filter from 'gulp-filter';
+import * as gulpif from 'gulp-if';
 import { join } from 'path';
 
 import Config from '../../config';
@@ -62,17 +63,18 @@ function processComponentStylesheets() {
  * Process scss files referenced from Angular component `styleUrls` metadata
  */
 function processComponentScss() {
+
   return getSCSSFiles('process-component-scss', [appSCSSFiles], [abstractSCSSFiles])
-    .pipe(plugins.sourcemaps.init())
+    .pipe(gulpif(!isProd, plugins.sourcemaps.init()))
     .pipe(plugins.sass(Config.getPluginConfig('gulp-sass')).on('error', plugins.sass.logError))
     .pipe(plugins.postcss(processors))
     .on('error', reportPostCssError)
-    .pipe(plugins.sourcemaps.write(isProd ? '.' : '', {
+    .pipe(gulpif(!isProd, plugins.sourcemaps.write('', {
       sourceMappingURL: (file: any) => {
         // write absolute urls to the map files
         return `${Config.APP_BASE}${file.relative}.map`;
       }
-    }))
+    })))
     .pipe(gulp.dest(isProd ? Config.TMP_DIR : Config.APP_DEST));
 }
 
