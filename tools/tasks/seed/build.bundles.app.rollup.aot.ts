@@ -22,22 +22,27 @@ const config = {
       extensions: ['.js', '.json', '.html', '.ts']
     }),
     nodeResolve({
-      jsnext: true, main: true, module: true
+      jsnext: true,
+      main: true,
+      module: true
     }),
-    commonjs({ //See project.config.ts to extend
+    commonjs({
+      //See project.config.ts to extend
       include: Config.ROLLUP_INCLUDE_DIR,
       namedExports: Config.getRollupNamedExports()
     })
   ]
 };
 
-
 export = (done: any) => {
-  rollup.rollup(config)
-    .then((bundle: any) => bundle.generate({
-      format: 'iife',
-      sourcemap: Config.PRESERVE_SOURCE_MAPS
-    }))
+  rollup
+    .rollup(config)
+    .then((bundle: any) =>
+      bundle.generate({
+        format: 'iife',
+        sourcemap: Config.PRESERVE_SOURCE_MAPS
+      })
+    )
     .then((result: any) => {
       const path = join(Config.TMP_DIR, 'bundle.js');
 
@@ -58,14 +63,16 @@ export = (done: any) => {
 function getTasks(path: string, result: any): any[] {
   const tasks = [
     (callback: any) =>
-      writeFile(path,
+      writeFile(
+        path,
         result.code + (Config.PRESERVE_SOURCE_MAPS ? '\n//# sourceMappingURL=bundle.js.map' : ''),
-        (error: any) => callback(null, !error))
+        (error: any) => callback(null, !error)
+      )
   ];
   if (Config.PRESERVE_SOURCE_MAPS) {
-    tasks.push((callback: any) => writeFile(path + '.map',
-      result.map.toString(),
-      (error: any) => callback(null, !error)));
+    tasks.push((callback: any) =>
+      writeFile(path + '.map', result.map.toString(), (error: any) => callback(null, !error))
+    );
   }
   return tasks;
 }
