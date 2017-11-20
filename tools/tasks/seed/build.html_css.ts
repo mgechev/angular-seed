@@ -63,6 +63,7 @@ function processComponentStylesheets() {
  * Process scss files referenced from Angular component `styleUrls` metadata
  */
 function processComponentScss() {
+
   return getSCSSFiles('process-component-scss', [appSCSSFiles], [abstractSCSSFiles])
     .pipe(gulpif(!isProd, plugins.sourcemaps.init()))
     .pipe(plugins.sass(Config.getPluginConfig('gulp-sass')).on('error', plugins.sass.logError))
