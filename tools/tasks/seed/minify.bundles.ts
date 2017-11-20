@@ -8,15 +8,22 @@ import Config from '../../config';
 const plugins = <any>gulpLoadPlugins();
 
 const getTask = (target: string, destDir: string, sourceMaps: boolean = false) => {
-  return gulp.src(join(destDir, target))
-    .pipe(sourceMaps && Config.PRESERVE_SOURCE_MAPS ? plugins.sourcemaps.init({
-      loadMaps: true,
-      largeFile: true
-    }) : plugins.util.noop())
-    .pipe(plugins.uglify({
-      compress: true,
-      mangle: true
-    }))
+  return gulp
+    .src(join(destDir, target))
+    .pipe(
+      sourceMaps && Config.PRESERVE_SOURCE_MAPS
+        ? plugins.sourcemaps.init({
+            loadMaps: true,
+            largeFile: true
+          })
+        : plugins.util.noop()
+    )
+    .pipe(
+      plugins.uglify({
+        compress: true,
+        mangle: true
+      })
+    )
     .pipe(sourceMaps && Config.PRESERVE_SOURCE_MAPS ? plugins.sourcemaps.write('.') : plugins.util.noop())
     .pipe(gulp.dest(destDir));
 };
