@@ -83,8 +83,10 @@ The seed provides the following utilities:
 
 | Filename               | Description |
 | :--------------------- | :---------- |
+| `build_optimizer.ts`   | Provides build optimization with `@angular-devkit/build-optimizer` |
 | `clean.ts`             | Provides a utility to clean files and directories |
 | `code_change_tools.ts` | Provides utilities to make use of BrowserSync to refresh the browser after a code change |
+| `karma.start.ts`       | Provides utilities to start Karma server with configuration |
 | `server.ts`            | Provides utilities to start `express` servers for the application, the documentation and the unit test coverage |
 | `sme.ts`               | Provides utilities to create `source-map-explorer` reports |
 | `task_tools.ts`        | Provides utilities to start tasks (matching task names as string input parameters from the `gulpfile.ts` to the corresponding files) |
