@@ -4,7 +4,7 @@ import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
 
 import Config from '../../config';
-import { makeTsProject, TemplateLocalsBuilder } from '../../utils';
+import { makeTsProject, ngBuildOptimizer, TemplateLocalsBuilder } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
 
@@ -14,15 +14,8 @@ const plugins = <any>gulpLoadPlugins();
 export = () => {
   const tsProject = makeTsProject({}, Config.TMP_DIR);
   const toIgnore = readdirSync(Config.TMP_DIR)
-    .filter(
-      (f: string) =>
-        lstatSync(join(Config.TMP_DIR, f)).isDirectory() &&
-        f !== Config.BOOTSTRAP_DIR
-    )
-    .map(
-      (f: string) =>
-        '!' + join(Config.TMP_DIR, f, Config.NG_FACTORY_FILE + '.ts')
-    );
+    .filter((f: string) => lstatSync(join(Config.TMP_DIR, f)).isDirectory() && f !== Config.BOOTSTRAP_DIR)
+    .map((f: string) => '!' + join(Config.TMP_DIR, f, Config.NG_FACTORY_FILE + '.ts'));
 
   const src = [
     Config.TOOLS_DIR + '/manual_typings/**/*.d.ts',
@@ -39,12 +32,8 @@ export = () => {
     });
 
   return result.js
-    .pipe(
-      plugins.template(
-        new TemplateLocalsBuilder().build(),
-        Config.TEMPLATE_CONFIG
-      )
-    )
+    .pipe(plugins.template(new TemplateLocalsBuilder().build(), Config.TEMPLATE_CONFIG))
+    .pipe(ngBuildOptimizer())
     .pipe(gulp.dest(Config.TMP_DIR))
     .on('error', (e: any) => {
       console.log(e);
