@@ -343,62 +343,66 @@ Forks of this project demonstrate how to extend and integrate with other librari
 ├── karma.conf.js              <- configuration of the test runner
 ├── package.json               <- dependencies of the project
 ├── protractor.conf.js         <- e2e tests configuration
-├── src                        <- source code of the application
-│   └── client
-│       ├── app
-│       │   ├── about
-│       │   │   ├── about.component.css
-│       │   │   ├── about.component.e2e-spec.ts
-│       │   │   ├── about.component.html
-│       │   │   ├── about.component.spec.ts
-│       │   │   ├── about.component.ts
-│       │   │   ├── about.module.ts
-│       │   │   └── about-routing.module.ts
+├── src
+│   ├── client
+│   │   ├── app
+│   │   │   ├── about
+│   │   │   │   ├── about-routing.module.ts
+│   │   │   │   ├── about.component.css
+│   │   │   │   ├── about.component.html
+│   │   │   │   ├── about.component.spec.ts
+│   │   │   │   ├── about.component.ts
+│   │   │   │   └── about.module.ts
+│   │   │   ├── app-routing.module.ts
+│   │   │   ├── app.component.css
+│   │   │   ├── app.component.html
+│   │   │   ├── app.component.spec.ts
+│   │   │   ├── app.component.ts
+│   │   │   ├── app.module.ts
+│   │   │   ├── home
+│   │   │   │   ├── home-routing.module.ts
+│   │   │   │   ├── home.component.css
+│   │   │   │   ├── home.component.html
+│   │   │   │   ├── home.component.spec.ts
+│   │   │   │   ├── home.component.ts
+│   │   │   │   └── home.module.ts
+│   │   │   ├── i18n.providers.ts
+│   │   │   ├── main-prod.ts
+│   │   │   ├── main.ts
+│   │   │   ├── operators.ts
+│   │   │   └── shared
+│   │   │       ├── config
+│   │   │       │   └── env.config.ts
+│   │   │       ├── name-list
+│   │   │       │   ├── name-list.service.spec.ts
+│   │   │       │   └── name-list.service.ts
+│   │   │       ├── navbar
+│   │   │       │   ├── navbar.component.css
+│   │   │       │   ├── navbar.component.html
+│   │   │       │   └── navbar.component.ts
+│   │   │       ├── shared.module.ts
+│   │   │       └── toolbar
+│   │   │           ├── toolbar.component.css
+│   │   │           ├── toolbar.component.html
+│   │   │           └── toolbar.component.ts
+│   │   ├── assets
+│   │   │   ├── data.json
+│   │   │   ├── favicon
+│   │   │   │   ├── favicon-DEV.ico
+│   │   │   │   └── favicon-PROD.ico
+│   │   │   └── svg
+│   │   │       └── more.svg
+│   │   ├── css
+│   │   │   └── main.css
+│   │   ├── index.html
+│   │   ├── ngsw-config.json
+│   │   ├── system-config.ts
+│   │   └── tsconfig.json
+│   └── e2e
+│       ├── specs
+│       │   ├── about.component.e2e-spec.ts
 │       │   ├── app.component.e2e-spec.ts
-│       │   ├── app.component.html
-│       │   ├── app.component.spec.ts
-│       │   ├── app.component.ts
-│       │   ├── app.module.ts
-│       │   ├── app.routes.ts
-│       │   ├── home
-│       │   │   ├── home.component.css
-│       │   │   ├── home.component.e2e-spec.ts
-│       │   │   ├── home.component.html
-│       │   │   ├── home.component.spec.ts
-│       │   │   ├── home.component.ts
-│       │   │   ├── home.module.ts
-│       │   │   └── home-routing.module.ts
-│       │   ├── i18n.providers.ts
-│       │   ├── main-prod.ts
-│       │   ├── main.ts
-│       │   ├── operators.ts
-│       │   ├── shared
-│       │   │   ├── config
-│       │   │   │   └── env.config.ts
-│       │   │   ├── index.ts
-│       │   │   ├── name-list
-│       │   │   │   ├── name-list.service.spec.ts
-│       │   │   │   └── name-list.service.ts
-│       │   │   ├── navbar
-│       │   │   │   ├── navbar.component.css
-│       │   │   │   ├── navbar.component.html
-│       │   │   │   └── navbar.component.ts
-│       │   │   ├── shared.module.ts
-│       │   │   └── toolbar
-│       │   │       ├── toolbar.component.css
-│       │   │       ├── toolbar.component.html
-│       │   │       └── toolbar.component.ts
-│       │   └── system-config.ts
-│       ├── assets
-│       │   ├── data.json
-│       │   └── favicon
-│       │       ├── favicon-DEV.ico
-│       │       └── favicon-PROD.ico
-│       │   └── svg
-│       │       └── more.svg
-│       ├── css
-│       │   └── main.css
-│       ├── index.html
+│       │   └── home.component.e2e-spec.ts
 │       └── tsconfig.json
 ├── test-config.js             <- testing configuration
 ├── test-main.js               <- karma test launcher
@@ -444,7 +448,8 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │   │   ├── build.assets.dev.ts
 │   │   │   ├── build.assets.prod.ts
 │   │   │   ├── build.bundle.rxjs.ts
-│   │   │   ├── build.bundles.app.exp.ts
+│   │   │   ├── build.bundles.app.aot.ts
+│   │   │   ├── build.bundles.app.rollup.aot.ts
 │   │   │   ├── build.bundles.app.ts
 │   │   │   ├── build.bundles.ts
 │   │   │   ├── build.docs.ts
@@ -453,7 +458,8 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │   │   ├── build.index.prod.ts
 │   │   │   ├── build.js.dev.ts
 │   │   │   ├── build.js.e2e.ts
-│   │   │   ├── build.js.prod.exp.ts
+│   │   │   ├── build.js.prod.aot.ts
+│   │   │   ├── build.js.prod.rollup.aot.ts
 │   │   │   ├── build.js.prod.ts
 │   │   │   ├── build.js.test.ts
 │   │   │   ├── build.sme.prod.aot.ts
@@ -465,17 +471,25 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │   │   ├── clean.all.ts
 │   │   │   ├── clean.coverage.ts
 │   │   │   ├── clean.dev.ts
+│   │   │   ├── clean.e2e.ts
 │   │   │   ├── clean.prod.ts
+│   │   │   ├── clean.sme.ts
 │   │   │   ├── clean.tools.ts
 │   │   │   ├── clear.files.ts
 │   │   │   ├── compile.ahead.prod.ts
+│   │   │   ├── copy.prod.rollup.aot.ts
 │   │   │   ├── copy.prod.ts
 │   │   │   ├── e2e.ts
 │   │   │   ├── generate.manifest.ts
+│   │   │   ├── i18n.build.ts
+│   │   │   ├── i18n.merge.ts
 │   │   │   ├── karma.run.ts
 │   │   │   ├── karma.run.with_coverage.ts
+│   │   │   ├── karma.run.without_coverage.ts
 │   │   │   ├── karma.watch.ts
 │   │   │   ├── minify.bundles.ts
+│   │   │   ├── minify.index.ts
+│   │   │   ├── noop.ts
 │   │   │   ├── print.banner.ts
 │   │   │   ├── serve.coverage.ts
 │   │   │   ├── serve.coverage.watch.ts
@@ -483,6 +497,9 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │   │   ├── server.prod.ts
 │   │   │   ├── server.start.ts
 │   │   │   ├── start.deving.ts
+│   │   │   ├── sw.manifest.static.ts
+│   │   │   ├── test.watch.ts
+│   │   │   ├── transpile.bundles.rollup.aot.ts
 │   │   │   ├── tslint.ts
 │   │   │   ├── watch.dev.ts
 │   │   │   ├── watch.e2e.ts
@@ -495,6 +512,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │   │   └── sample_util.ts
 │   │   ├── project.utils.ts
 │   │   ├── seed               <- seed specific gulp utils
+│   │   │   ├── build_optimizer.ts
 │   │   │   ├── clean.ts
 │   │   │   ├── code_change_tools.ts
 │   │   │   ├── karma.start.ts
