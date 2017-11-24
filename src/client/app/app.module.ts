@@ -8,10 +8,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AboutModule } from './about/about.module';
 import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
+import { NgIdleModule } from '@ng-idle/core';
 
 
 @NgModule({
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, AboutModule, HomeModule, SharedModule.forRoot()],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, AboutModule, HomeModule, SharedModule.forRoot(), NgIdleModule.forRoot()],
   declarations: [AppComponent],
   providers: [{
     provide: APP_BASE_HREF,

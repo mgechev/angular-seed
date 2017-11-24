@@ -157,6 +157,7 @@
     "@angular/platform-browser-dynamic": "^5.0.1",
     "@angular/router": "^5.0.1",
     "@angular/service-worker": "^5.0.1",
+    "@ng-idle/core": "^2.0.0-beta.12",
     "core-js": "^2.5.1",
     "intl": "^1.2.5",
     "rxjs": "^5.5.2",
