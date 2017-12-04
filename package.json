@@ -159,7 +159,7 @@
     "@angular/service-worker": "^5.0.1",
     "core-js": "^2.5.1",
     "intl": "^1.2.5",
-    "rxjs": "^5.5.2",
+    "rxjs": "^5.5.3",
     "systemjs": "0.20.19",
     "zone.js": "0.8.18"
   }
