@@ -50,6 +50,9 @@ export class ProjectConfig extends SeedConfig {
     // }];
     //
     // this.addPackagesBundles(additionalPackages);
+    this.addPackageBundles(
+        { name: '@ng-idle/core', path: 'node_modules/@ng-idle/core/bundles/core.umd.js' }
+    );
 
     /* Add proxy middleware */
     // this.PROXY_MIDDLEWARE = [

@@ -513,6 +513,7 @@ export class SeedConfig {
       '@angular/router/testing':
         'node_modules/@angular/router/bundles/router-testing.umd.js',
       'rxjs/operators': 'node_modules/rxjs/operators/index.js',
+      '@ng-idle/core': 'node_modules/@ng-idle/core/bundles/core.umd.js',
 
       'app/': `${this.APP_BASE}app/`,
       // For test config
@@ -609,7 +610,11 @@ export class SeedConfig {
       rxjs: {
         main: 'Rx.js',
         defaultExtension: 'js'
-      }
+      },
+      '@ng-idle/core': {
+        main: 'bundles/core.umd.js',
+        defaultExtension: 'js'
+      },
     }
   };
 
