@@ -126,7 +126,7 @@
     "protractor": "^5.2.0",
     "remap-istanbul": "^0.9.5",
     "rimraf": "^2.6.2",
-    "rollup": "~0.52.0",
+    "rollup": "~0.53.0",
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-includepaths": "0.2.2",
     "rollup-plugin-node-resolve": "^3.0.0",
