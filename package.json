@@ -60,7 +60,7 @@
     "@angular/platform-server": "^5.0.1",
     "@compodoc/compodoc": "^1.0.4",
     "@types/async": "^2.0.45",
-    "@types/browser-sync": "^0.0.37",
+    "@types/browser-sync": "^0.0.38",
     "@types/express": "^4.0.39",
     "@types/gulp": "^4.0.5",
     "@types/gulp-filter": "^3.0.31",
