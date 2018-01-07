@@ -109,7 +109,7 @@
     "gulp-typescript": "~3.2.3",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
-    "gulp-watch": "^4.3.11",
+    "gulp-watch": "^5.0.0",
     "is-ci": "^1.0.10",
     "isstream": "^0.1.2",
     "jasmine-core": "~2.8.0",
