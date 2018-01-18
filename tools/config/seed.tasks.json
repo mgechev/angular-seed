@@ -1,7 +1,5 @@
 {
-  "initialize": [
-    "noop"
-  ],
+  "initialize": ["noop"],
 
   "build.dev": [
     "initialize",
@@ -14,17 +12,9 @@
     "sw.manifest.static"
   ],
 
-  "build.dev.watch": [
-    "build.dev",
-    "watch.dev"
-  ],
+  "build.dev.watch": ["build.dev", "watch.dev"],
 
-  "build.e2e": [
-    "initialize",
-    "clean.e2e",
-    "tslint",
-    "build.js.e2e"
-  ],
+  "build.e2e": ["initialize", "clean.e2e", "tslint", "build.js.e2e"],
 
   "build.prod": [
     "initialize",
@@ -87,57 +77,24 @@
     "build.html_css",
     "build.js.dev",
     "build.js.test",
-    "build.index.dev",
-    "sw.manifest.static"
+    "build.index.dev"
   ],
 
-  "serve.dev": [
-    "build.dev",
-    "server.start",
-    "watch.dev"
-  ],
+  "serve.dev": ["build.dev", "server.start", "watch.dev"],
 
-  "serve.e2e": [
-    "tslint",
-    "build.dev",
-    "build.js.e2e",
-    "server.start",
-    "watch.dev",
-    "watch.e2e"
-  ],
+  "serve.e2e": ["tslint", "build.dev", "build.js.e2e", "server.start", "watch.dev", "watch.e2e"],
 
-  "serve.prod": [
-    "build.prod",
-    "server.prod"
-  ],
+  "serve.prod": ["build.prod", "server.prod"],
 
-  "serve.prod.aot": [
-    "build.prod.aot",
-    "server.prod"
-  ],
+  "serve.prod.aot": ["build.prod.aot", "server.prod"],
 
-  "serve.prod.rollup.aot": [
-    "build.prod.rollup.aot",
-    "server.prod"
-  ],
+  "serve.prod.rollup.aot": ["build.prod.rollup.aot", "server.prod"],
 
-  "sme.prod": [
-    "build.prod",
-    "build.sme.prod"
-  ],
+  "sme.prod": ["build.prod", "build.sme.prod"],
 
-  "sme.prod.aot": [
-    "build.prod.aot",
-    "build.sme.prod.aot"
-  ],
+  "sme.prod.aot": ["build.prod.aot", "build.sme.prod.aot"],
 
-  "sme.prod.rollup.aot": [
-    "build.prod.rollup.aot",
-    "build.sme.prod.rollup.aot"
-  ],
+  "sme.prod.rollup.aot": ["build.prod.rollup.aot", "build.sme.prod.rollup.aot"],
 
-  "test": [
-    "build.test",
-    "karma.run"
-  ]
+  "test": ["build.test", "karma.run"]
 }
