@@ -106,13 +106,13 @@
     "gulp-sourcemaps": "2.6.3",
     "gulp-template": "^5.0.0",
     "gulp-tslint": "^8.1.2",
-    "gulp-typescript": "~3.2.3",
+    "gulp-typescript": "~4.0.0-alpha.1",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
     "gulp-watch": "^5.0.0",
     "is-ci": "^1.0.10",
     "isstream": "^0.1.2",
-    "jasmine-core": "~2.8.0",
+    "jasmine-core": "~2.9.0",
     "jasmine-spec-reporter": "^4.2.1",
     "karma": "~2.0.0",
     "karma-chrome-launcher": "~2.2.0",
@@ -124,9 +124,9 @@
     "minimatch": "^3.0.4",
     "open": "0.0.5",
     "protractor": "^5.2.0",
-    "remap-istanbul": "^0.9.5",
+    "remap-istanbul": "^0.10.0",
     "rimraf": "^2.6.2",
-    "rollup": "~0.53.0",
+    "rollup": "~0.54.0",
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-includepaths": "0.2.2",
     "rollup-plugin-node-resolve": "^3.0.0",
@@ -147,7 +147,7 @@
     "yargs": "^10.0.3"
   },
   "dependencies": {
-    "@angular-devkit/build-optimizer": "0.0.36",
+    "@angular-devkit/build-optimizer": "0.0.41",
     "@angular/animations": "^5.0.1",
     "@angular/common": "^5.0.1",
     "@angular/compiler": "^5.0.1",
@@ -161,6 +161,6 @@
     "intl": "^1.2.5",
     "rxjs": "^5.5.3",
     "systemjs": "0.20.19",
-    "zone.js": "0.8.19"
+    "zone.js": "0.8.20"
   }
 }
