@@ -7,7 +7,12 @@ install: true  # yarn bug
 
 addons:
   firefox: latest
-  chrome: stable
+  # chrome: stable
+
+addons:
+  apt:
+    packages:
+      - google-chrome-stable
 
 os:
   - linux
