@@ -44,7 +44,7 @@
     "e2e.ci": "gulp build.prod.rollup.aot --color && gulp build.e2e --color && gulp e2e --color",
     "tests.all": "npm test && npm run e2e.ci",
     "webdriver-start": "node ./node_modules/protractor/bin/webdriver-manager start",
-    "webdriver-update": "node ./node_modules/protractor/bin/webdriver-manager update",
+    "webdriver-update": "node ./node_modules/protractor/bin/webdriver-manager update --standalone false --gecko false",
     "compodoc": "./node_modules/.bin/compodoc -p src/client/tsconfig.json",
     "serve.compodoc": "./node_modules/.bin/compodoc -s"
   },
