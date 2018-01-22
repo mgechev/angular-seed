@@ -103,7 +103,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.6.1",
     "gulp-sass": "^3.1.0",
-    "gulp-sourcemaps": "2.6.3",
+    "gulp-sourcemaps": "2.6.4",
     "gulp-template": "^5.0.0",
     "gulp-tslint": "^8.1.2",
     "gulp-typescript": "~4.0.0-alpha.1",
