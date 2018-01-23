@@ -144,7 +144,7 @@
     "tslint": "^5.8.0",
     "typescript": "^2.6.1",
     "walk": "^2.3.9",
-    "yargs": "^10.0.3"
+    "yargs": "^11.0.0"
   },
   "dependencies": {
     "@angular-devkit/build-optimizer": "0.0.41",
