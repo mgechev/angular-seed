@@ -160,7 +160,7 @@
     "gulp-typescript": "^3.2.4",
     "intl": "^1.2.5",
     "rxjs": "^5.5.3",
-    "systemjs": "0.20.19",
+    "systemjs": "0.21.0",
     "zone.js": "0.8.20"
   }
 }
