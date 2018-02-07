@@ -157,7 +157,7 @@
     "@angular/router": "^5.2.3",
     "@angular/service-worker": "^5.2.3",
     "core-js": "^2.5.3",
-    "gulp-typescript": "^3.2.4",
+    "gulp-typescript": "^4.0.0",
     "intl": "^1.2.5",
     "rxjs": "^5.5.3",
     "systemjs": "0.21.0",
