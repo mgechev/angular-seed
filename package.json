@@ -28,7 +28,6 @@
     "reinstall": "npm cache clean && npm install",
     "serve.coverage": "gulp serve.coverage --color",
     "serve.dev": "gulp serve.dev --color --env-config dev",
-    "serve.e2e": "gulp serve.e2e --color",
     "serve.prod": "gulp serve.prod --color --env-config prod --build-type prod",
     "serve.prod.aot": "gulp serve.prod.aot --color --env-config prod --build-type prod",
     "serve.prod.exp": "gulp serve.prod.aot --color --env-config prod --build-type prod",

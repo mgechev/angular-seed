@@ -80,8 +80,6 @@
 
   "serve.dev": ["build.dev", "server.start", "watch.dev"],
 
-  "serve.e2e": ["tslint", "build.dev", "build.js.e2e", "server.start", "watch.dev", "watch.e2e"],
-
   "serve.prod": ["build.prod", "server.prod"],
 
   "serve.prod.aot": ["build.prod.aot", "server.prod"],
