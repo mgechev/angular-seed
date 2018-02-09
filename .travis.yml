@@ -22,6 +22,8 @@ before_install:
 
 before_script:
   - npm install
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
+
 
 after_failure:
   - cat /home/travis/build/mgechev/angular-seed/npm-debug.log
