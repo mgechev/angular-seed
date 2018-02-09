@@ -14,8 +14,6 @@
 
   "build.dev.watch": ["build.dev", "watch.dev"],
 
-  "build.e2e": ["initialize", "clean.e2e", "tslint", "build.js.e2e"],
-
   "build.prod": [
     "initialize",
     "check.tools",
