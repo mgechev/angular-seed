@@ -39,7 +39,7 @@
     "start.deving": "gulp start.deving --color",
     "tasks.list": "gulp --tasks-simple --color",
     "test": "gulp test --color",
-    "e2e.ci": "gulp build.prod.rollup.aot --color && cypress run",
+    "e2e.ci": "gulp build.prod.rollup.aot --color && gulp e2e --color",
     "tests.all": "npm test && npm run e2e.ci",
     "compodoc": "./node_modules/.bin/compodoc -p src/client/tsconfig.json",
     "serve.compodoc": "./node_modules/.bin/compodoc -s"

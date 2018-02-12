@@ -272,7 +272,7 @@ $ npm run serve.coverage
 $ npm start
 $ npm run e2e
 
-# e2e - In one shell window (especially useful for continious integration)
+# e2e - In one shell window (especially useful for Continuous Integration)
 $ npm run e2e.ci
 
 # e2e live mode - Using Cypress app - In two different shell windows
