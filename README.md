@@ -482,6 +482,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │   │   ├── compile.ahead.prod.ts
 │   │   │   ├── copy.prod.rollup.aot.ts
 │   │   │   ├── copy.prod.ts
+│   │   │   ├── e2e.ts
 │   │   │   ├── generate.manifest.ts
 │   │   │   ├── i18n.build.ts
 │   │   │   ├── i18n.merge.ts
