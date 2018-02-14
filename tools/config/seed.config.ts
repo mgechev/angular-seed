@@ -489,7 +489,6 @@ export class SeedConfig {
         'node_modules/@angular/compiler/bundles/compiler.umd.js',
       '@angular/core': 'node_modules/@angular/core/bundles/core.umd.js',
       '@angular/forms': 'node_modules/@angular/forms/bundles/forms.umd.js',
-      '@angular/http': 'node_modules/@angular/http/bundles/http.umd.js',
       '@angular/platform-browser':
         'node_modules/@angular/platform-browser/bundles/platform-browser.umd.js',
       '@angular/platform-browser-dynamic':
@@ -507,8 +506,6 @@ export class SeedConfig {
         'node_modules/@angular/compiler/bundles/compiler-testing.umd.js',
       '@angular/core/testing':
         'node_modules/@angular/core/bundles/core-testing.umd.js',
-      '@angular/http/testing':
-        'node_modules/@angular/http/bundles/http-testing.umd.js',
       '@angular/platform-browser/testing':
         'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
       '@angular/platform-browser-dynamic/testing':
@@ -591,10 +588,6 @@ export class SeedConfig {
       },
       '@angular/forms': {
         main: 'bundles/forms.umd.js',
-        defaultExtension: 'js'
-      },
-      '@angular/http': {
-        main: 'bundles/http.umd.js',
         defaultExtension: 'js'
       },
       '@angular/platform-browser': {

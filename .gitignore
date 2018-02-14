@@ -49,6 +49,7 @@ docs
 lib
 test
 tmp
+cypress/videos
 
 gulpfile.js
 gulpfile.js.map
