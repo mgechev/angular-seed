@@ -279,7 +279,6 @@ $ npm run e2e.ci
 $ npm start
 $ npm run e2e.live
 ```
-You can learn more about [Protractor Interactive Mode here](https://github.com/angular/protractor/blob/master/docs/debugging.md#testing-out-protractor-interactively)
 
 # Contributing
 
@@ -339,7 +338,6 @@ Forks of this project demonstrate how to extend and integrate with other librari
 ├── gulpfile.ts                <- configuration of the gulp tasks
 ├── karma.conf.js              <- configuration of the test runner
 ├── package.json               <- dependencies of the project
-├── protractor.conf.js         <- e2e tests configuration
 ├── cypress
 |   ├── fixtures
 |   |   └── example.json

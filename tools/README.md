@@ -67,7 +67,7 @@ The seed provides the following tasks:
 | `compile.ahead.prod.ts`              | Compile bundles with AoT |
 | `copy.prod.rollup.aot.ts`            | Copies all TypeScript files (excluding specs and e2e specs) over to the `/tmp` dir before AoT, Rollup compilation |
 | `copy.prod.ts`                       | Copies all TypeScript files (excluding specs and e2e specs) over to the `/tmp` dir |
-| `e2e.ts`                             | Runs all e2e specs using `protractor` |
+| `e2e.ts`                             | Runs all e2e specs using `cypress` |
 | `generate.manifest.ts`               | Generates a `manifest` file for the application |
 | `i18n.build.ts`                      | Run sequence of tasks `clean.prod`, `copy.prod` and `build.html_css` |
 | `i18n.merge.ts`                      | Add `i18n` translation in to the files  |
