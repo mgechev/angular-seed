@@ -72,7 +72,7 @@
     "@types/run-sequence": "^0.0.30",
     "@types/selenium-webdriver": "^3.0.8",
     "@types/systemjs": "^0.20.6",
-    "@types/yargs": "^10.0.0",
+    "@types/yargs": "^11.0.0",
     "async": "^2.6.0",
     "autoprefixer": "^8.0.0",
     "browser-sync": "^2.23.6",
