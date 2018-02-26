@@ -321,6 +321,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
  - http://ngbot.io - a chat bot built with angular-seed.
  - [angular-seed-inspinia](https://github.com/DmitriyPotapov/angular-seed-inspinia) - integration with custom design template
  - [telerik/kendo-angular-quickstart-seed](https://github.com/telerik/kendo-angular-quickstart-seed) - integration with Kendo UI for Angular
+ - https://github.com/vyakymenko/angular-lib-starter-pack - sample how to create your library compatible with [Angular Seed](https://github.com/mgechev/angular-seed) with [integration guide](https://github.com/vyakymenko/angular-lib-starter-pack#test-your-library-with-angular-seed-or-angular-seed-express).
 
 # Directory Structure
 
