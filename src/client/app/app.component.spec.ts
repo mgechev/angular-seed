@@ -15,8 +15,8 @@ import {
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
-import { ToolbarComponent } from './shared/toolbar/toolbar.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
+import { ToolbarComponent } from './core/toolbar/toolbar.component';
+import { NavbarComponent } from './core/navbar/navbar.component';
 
 export function main() {
 
