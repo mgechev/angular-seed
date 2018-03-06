@@ -113,7 +113,6 @@
 }
 
 .c-1 {
-  z-index:1;
   background: #43A047;
   -webkit-transition-delay: 0.1s, 0.1s, 0.1s;
           transition-delay: 0.1s, 0.1s, 0.1s;
@@ -128,7 +127,6 @@
 }
 
 .c-2 {
-  z-index:1;
   background: #388E3C;
   -webkit-transition-delay: 0.2s, 0.2s, 0.2s;
           transition-delay: 0.2s, 0.2s, 0.2s;
@@ -143,7 +141,6 @@
 }
 
 .c-3 {
-  z-index:1;
   -webkit-transition-delay: 0.3s,0.3s, 0.3s;
           transition-delay: 0.3s,0.3s, 0.3s;
   background: #2E7D32;
@@ -158,7 +155,6 @@
 }
 
 .c-4 {
-  z-index:1;
   -webkit-transition-delay: 0.4s, 0.4s, 0.4s;
           transition-delay: 0.4s, 0.4s, 0.4s;
   background: #1B5E20;
@@ -175,4 +171,8 @@
 .c-5 {
   background: #4CAF50;
   opacity: 0.5
+}
+
+.onTop {
+  z-index: 2;
 }
