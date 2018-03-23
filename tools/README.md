@@ -92,7 +92,6 @@ The seed provides the following tasks:
 | `watch.dev.ts`                       | Watches for code changes and rebuilds the files in `/dist/dev` |
 | `watch.e2e.ts`                       | Watches for code changes and rebuilds the files in `/dist/e2e` |
 | `watch.test.ts`                      | Watches for code changes and rebuilds the files in `/dist/test` |
-| `webdriver.ts`                       | Installs the Selenium webdriver used for the Protractor e2e specs |
 
 ## Utilities
 
