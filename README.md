@@ -24,7 +24,7 @@ Provides fast, reliable and extensible starter for the development of Angular pr
 - **Tree-Shaking** production builds with Rollup.
 - Uses codelyzer for static code analysis, which verifies that the project follows practices from the Angular style guide.
 - Sample unit tests with Jasmine and Karma including code coverage via [istanbul](https://gotwarlost.github.io/istanbul/).
-- End-to-end tests with Protractor.
+- End-to-end tests with Cypress.
 - Development server with Livereload.
 - Following the [best practices](https://angular.io/styleguide).
 - Provides full Docker support for both development and production environment
