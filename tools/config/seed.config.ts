@@ -560,7 +560,7 @@ export class SeedConfig {
       '@angular/common/http':
         'node_modules/@angular/common/bundles/common-http.umd.js',
       'tslib': 'node_modules/tslib/tslib.js',
-      'rxjs/operators': 'node_modules/rxjs/operators/index.js',
+      'rxjs/operators': 'node_modules/rxjs/operators.js',
       'dist/tmp/node_modules/*': 'dist/tmp/node_modules/*',
       'node_modules/*': 'node_modules/*',
       '*': 'node_modules/*'
