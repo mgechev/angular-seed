@@ -512,7 +512,7 @@ export class SeedConfig {
         'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing':
         'node_modules/@angular/router/bundles/router-testing.umd.js',
-      'rxjs/operators': 'node_modules/rxjs/operators.js',
+      'rxjs/operators/*': 'node_modules/rxjs/operators/*',
 
       'app/': `${this.APP_BASE}app/`,
       // For test config
@@ -560,7 +560,7 @@ export class SeedConfig {
       '@angular/common/http':
         'node_modules/@angular/common/bundles/common-http.umd.js',
       'tslib': 'node_modules/tslib/tslib.js',
-      'rxjs/operators': 'node_modules/rxjs/operators.js',
+      'rxjs/operators/*': 'node_modules/rxjs/*',
       'dist/tmp/node_modules/*': 'dist/tmp/node_modules/*',
       'node_modules/*': 'node_modules/*',
       '*': 'node_modules/*'
