@@ -512,7 +512,7 @@ export class SeedConfig {
         'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing':
         'node_modules/@angular/router/bundles/router-testing.umd.js',
-      'rxjs/operators': 'node_modules/rxjs/operators/index.js',
+      'rxjs/operators': 'node_modules/rxjs/operators.js',
 
       'app/': `${this.APP_BASE}app/`,
       // For test config
