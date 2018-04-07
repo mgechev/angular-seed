@@ -18,7 +18,7 @@ export = (done: any) => {
     paths: {
       'n:*': 'node_modules/*',
       'rxjs/*': 'node_modules/rxjs/*.js',
-      'rxjs/operators': 'node_modules/rxjs/operators.js'
+      'rxjs/operators/*': 'node_modules/rxjs/*'
     },
     map: {
       'rxjs': 'n:rxjs',
