@@ -36,7 +36,6 @@
     "tools/manual_typings/seed/karma.d.ts",
     "tools/manual_typings/seed/merge-stream.d.ts",
     "tools/manual_typings/seed/open.d.ts",
-    "tools/manual_typings/seed/operators.d.ts",
     "tools/manual_typings/seed/slash.d.ts",
     "tools/manual_typings/seed/systemjs-builder.d.ts",
     "tools/manual_typings/seed/tildify.d.ts",
