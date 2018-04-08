@@ -449,7 +449,6 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │   └── seed               <- seed generic gulp tasks. They can be overriden by the project specific gulp tasks
 │   │   │   ├── build.assets.dev.ts
 │   │   │   ├── build.assets.prod.ts
-│   │   │   ├── build.bundle.rxjs.ts
 │   │   │   ├── build.bundles.app.aot.ts
 │   │   │   ├── build.bundles.app.rollup.aot.ts
 │   │   │   ├── build.bundles.app.ts
