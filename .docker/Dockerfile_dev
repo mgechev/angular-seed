@@ -10,6 +10,7 @@ COPY gulpfile.ts .
 COPY tsconfig.json .
 COPY tslint.json .
 COPY tools ./tools/
+COPY cypress ./cypress/
 
 # before switching to non-root user, change ownership of home
 RUN chown -R node:node .
