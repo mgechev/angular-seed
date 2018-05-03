@@ -53,7 +53,7 @@
   "devDependencies": {
     "@angular/compiler-cli": "^5.2.9",
     "@angular/language-service": "^5.2.9",
-    "@angular/platform-server": "^5.2.9",
+    "@angular/platform-server": "^6.0.0",
     "@bahmutov/add-typescript-to-cypress": "^2.0.0",
     "@compodoc/compodoc": "^1.1.1",
     "@types/async": "^2.0.48",
