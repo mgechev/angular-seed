@@ -130,7 +130,7 @@
     "slash": "~2.0.0",
     "source-map-explorer": "^1.5.0",
     "supports-color": "^5.3.0",
-    "systemjs-builder": "0.16.12",
+    "systemjs-builder": "0.16.13",
     "temp": "^0.8.3",
     "tildify": "^1.2.0",
     "traceur": "^0.0.111",
