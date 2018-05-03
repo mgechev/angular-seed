@@ -149,7 +149,7 @@
     "@angular/forms": "^5.2.9",
     "@angular/platform-browser": "^5.2.9",
     "@angular/platform-browser-dynamic": "^5.2.9",
-    "@angular/router": "^5.2.9",
+    "@angular/router": "^6.0.0",
     "@angular/service-worker": "^5.2.9",
     "core-js": "^2.5.4",
     "intl": "^1.2.5",
