@@ -506,20 +506,23 @@ export class SeedConfig {
         'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing':
         'node_modules/@angular/router/bundles/router-testing.umd.js',
-      'rxjs': 'node_modules/rxjs',
-
       'app/': `${this.APP_BASE}app/`,
       // For test config
       'dist/dev/': '/base/dist/dev/',
       '': 'node_modules/',
     },
+    map: {
+      'rxjs': 'node_modules/rxjs'
+    },
     packages: {
       [this.BOOTSTRAP_DIR]: {
         defaultExtension: 'js'
       },
-      rxjs: {
-        defaultExtension: 'js'
-      }
+      'rxjs/ajax': { main: 'index.js', defaultExtension: 'js' },
+      'rxjs/operators': { main: 'index.js', defaultExtension: 'js' },
+      'rxjs/testing': { main: 'index.js', defaultExtension: 'js' },
+      'rxjs/websocket': { main: 'index.js', defaultExtension: 'js' },
+      'rxjs': { main: 'index.js', defaultExtension: 'js' }
     }
   };
 
@@ -562,6 +565,9 @@ export class SeedConfig {
       'node_modules/*': 'node_modules/*',
       '*': 'node_modules/*'
     },
+    map: {
+      'rxjs': 'node_modules/rxjs'
+    },
     packages: {
       '@angular/animations': {
         main: 'bundles/animations.umd.js',
@@ -603,7 +609,24 @@ export class SeedConfig {
         main: 'bundles/service-worker.umd.js',
         defaultExtension: 'js'
       },
-      rxjs: {
+      'rxjs/ajax': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'rxjs/operators': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'rxjs/testing': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'rxjs/websocket': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'rxjs': {
+        main: 'index.js',
         defaultExtension: 'js'
       }
     }
