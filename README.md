@@ -65,6 +65,8 @@ $ npm run build.dev
 # prod build, will output the production application in `dist/prod`
 # the produced code can be deployed (rsynced) to a remote server
 $ npm run build.prod
+# prod build using different base path
+$ npm run build.prod -- --base "/foo/bar/"
 
 # dev build of multiple applications (by default the value of --app is "app")
 $ npm start -- --app baz

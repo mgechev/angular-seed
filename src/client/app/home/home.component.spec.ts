@@ -4,7 +4,7 @@ import {
   TestBed
  } from '@angular/core/testing';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { HomeComponent } from './home.component';
 import { NameListService } from '../shared/name-list/name-list.service';
