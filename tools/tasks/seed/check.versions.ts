@@ -15,7 +15,7 @@ export = () => {
   const semver = require('semver');
 
   exec('npm --version',
-    function(error: Error, stdout: NodeBuffer, stderr: NodeBuffer) {
+    function(error: Error, stdout: any, stderr: any) {
       if (error !== null) {
         reportError('npm preinstall error: ' + error + stderr);
       }
@@ -26,7 +26,7 @@ export = () => {
     });
 
   exec('node --version',
-    function(error: Error, stdout: NodeBuffer, stderr: NodeBuffer) {
+    function(error: Error, stdout: any, stderr: any) {
       if (error !== null) {
         reportError('npm preinstall error: ' + error + stderr);
       }
