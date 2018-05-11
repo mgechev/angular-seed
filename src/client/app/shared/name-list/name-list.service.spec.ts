@@ -2,7 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { NameListService } from './name-list.service';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 export function main() {
   describe('NameList Service', () => {
