@@ -96,7 +96,7 @@
     "gulp-postcss": "^7.0.1",
     "gulp-progeny": "^0.4.1",
     "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.6.1",
+    "gulp-replace": "^1.0.0",
     "gulp-sass": "^4.0.0",
     "gulp-sourcemaps": "2.6.4",
     "gulp-template": "^5.0.0",
