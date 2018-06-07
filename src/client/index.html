@@ -47,7 +47,8 @@
   <script>
   System.import('<%= BOOTSTRAP_MODULE %>')
     .catch(function (e) {
-      console.error(e.stack || e,
+      // console.error(e.stack || e,
+      console.error(e,
         'Not expecting this error? Report it at https://github.com/mgechev/angular-seed/issues');
     });
   </script>

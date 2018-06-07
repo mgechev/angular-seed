@@ -471,6 +471,12 @@ export class SeedConfig {
    * @type {any}
    */
   SYSTEM_CONFIG_DEV: any = {
+    bundles: {
+      'node_modules/.tmp/Rx.min.js': [
+        'rxjs',
+        'rxjs/*'
+      ]
+    },
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
       '@angular/animations':
@@ -506,7 +512,6 @@ export class SeedConfig {
         'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing':
         'node_modules/@angular/router/bundles/router-testing.umd.js',
-      'rxjs': 'node_modules/rxjs',
 
       'app/': `${this.APP_BASE}app/`,
       // For test config
@@ -515,9 +520,6 @@ export class SeedConfig {
     },
     packages: {
       [this.BOOTSTRAP_DIR]: {
-        defaultExtension: 'js'
-      },
-      rxjs: {
         defaultExtension: 'js'
       }
     }
@@ -603,7 +605,24 @@ export class SeedConfig {
         main: 'bundles/service-worker.umd.js',
         defaultExtension: 'js'
       },
-      rxjs: {
+      'rxjs': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'rxjs/ajax': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'rxjs/operators': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'rxjs/testing': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'rxjs/webSocket': {
+        main: 'index.js',
         defaultExtension: 'js'
       }
     }
