@@ -14,19 +14,25 @@ bower_components
 .classpath
 *.launch
 .settings/
+.editorconfig
 
 # misc
 .sass-cache
 connect.lock
 coverage/*
+coverage_js/*
 libpeerconnection.log
 npm-debug.log
 testem.log
 typings
 
-# e2e
+# test
+*.spec.ts
 e2e/*.js
 e2e/*.map
+test-config.js
+test-main.js
+karma.conf.js
 
 #System Files
 .DS_Store
