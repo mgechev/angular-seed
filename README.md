@@ -131,6 +131,12 @@ The application provides full Docker support. You can use it for both developmen
 Please note that prod and dev are built into their own separate image, which can lead to unexpected differences in the
 npm dependencies and the state of the sources in the container, if you are not familiar with Docker. See below.
 
+Please also note that karma tests (`npm test`) are independent from the docker environment.
+Even if an angular-seed container is up and running, karma will run in the context of your **local** npm install,
+which may differ from that of the container. In fact, the docker containers don't have karma installed at all.
+
+Cypress tests are however fully supported and recommended to test the app served by either the dev or prod docker containers.  
+
 ## Development build and deployment
 
 The dev image only contains the npm libraries installed, but not the sources. The sources are mounted at runtime,
