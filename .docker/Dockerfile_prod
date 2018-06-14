@@ -1,4 +1,4 @@
-FROM node:9.11 as builder
+FROM node:8.6 as builder
 
 WORKDIR /home/node/angular-seed
 
@@ -9,11 +9,8 @@ COPY . .
 RUN chown -R node:node .
 USER node
 
-# NB: this is a workaround due to the fact that npm '--no-optional' flag doesn't work (open script below for more)
-RUN node .docker/rm.optional.deps.js
-
-RUN npm install --no-optional
-RUN npm run build.prod.rollup.aot
+RUN npm install
+RUN npm run build.prod
 
 FROM nginx:1.13
 COPY --from=builder /home/node/angular-seed/dist/prod /var/www/dist/prod
