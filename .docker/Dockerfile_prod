@@ -11,6 +11,7 @@ USER node
 
 # NB: this is a workaround due to the fact that npm '--no-optional' flag doesn't work (open script below for more)
 RUN node .docker/rm.optional.deps.js
+RUN rm -r cypress && rm cypress.json
 
 RUN npm install --no-optional
 RUN npm run build.prod.rollup.aot
