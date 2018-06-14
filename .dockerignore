@@ -30,8 +30,6 @@ typings
 *.spec.ts
 e2e/*.js
 e2e/*.map
-cypress
-cypress.json
 test-config.js
 test-main.js
 karma.conf.js
