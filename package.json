@@ -123,7 +123,7 @@
     "rimraf": "^2.6.2",
     "rollup": "~0.60.1",
     "rollup-plugin-commonjs": "^9.0.0",
-    "rollup-plugin-includepaths": "0.2.2",
+    "rollup-plugin-includepaths": "0.2.3",
     "rollup-plugin-node-resolve": "^3.3.0",
     "run-sequence": "^2.2.1",
     "semver": "^5.5.0",
