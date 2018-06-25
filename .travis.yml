@@ -40,7 +40,8 @@ notifications:
     on_start: never     # options: [always|never|change] default: always
 
 cache:
-  directories: node_modules
+  directories:
+    - "$HOME/.npm"
 
 script:
   - npm run tests.all
