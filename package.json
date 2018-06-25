@@ -66,7 +66,7 @@
     "@types/gulp-sass": "^0.0.31",
     "@types/gulp-util": "^3.0.34",
     "@types/jasmine": "^2.8.6",
-    "@types/node": "~9.6.2",
+    "@types/node": "^10.3.5",
     "@types/rimraf": "2.0.2",
     "@types/run-sequence": "^0.0.30",
     "@types/systemjs": "^0.20.6",
@@ -90,7 +90,7 @@
     "gulp-filter": "^5.1.0",
     "gulp-htmlmin": "^4.0.0",
     "gulp-inject": "^4.3.2",
-    "gulp-inline-ng2-template": "^4.1.0",
+    "gulp-inline-ng2-template": "^5.0.0",
     "gulp-load-plugins": "^1.5.0",
     "gulp-plumber": "~1.2.0",
     "gulp-postcss": "^7.0.1",
@@ -121,9 +121,9 @@
     "open": "0.0.5",
     "remap-istanbul": "^0.11.0",
     "rimraf": "^2.6.2",
-    "rollup": "~0.60.1",
+    "rollup": "~0.61.2",
     "rollup-plugin-commonjs": "^9.0.0",
-    "rollup-plugin-includepaths": "0.2.2",
+    "rollup-plugin-includepaths": "0.2.3",
     "rollup-plugin-node-resolve": "^3.3.0",
     "run-sequence": "^2.2.1",
     "semver": "^5.5.0",
@@ -157,5 +157,8 @@
     "rxjs": "^6.1.0",
     "systemjs": "0.21.4",
     "zone.js": "~0.8.26"
+  },
+  "resolutions": {
+    "@types/sinon": "<5.0.0"
   }
 }
