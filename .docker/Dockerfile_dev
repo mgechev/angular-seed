@@ -1,4 +1,4 @@
-FROM node:8.6
+FROM node:9.11
 
 WORKDIR /home/node/angular-seed
 
@@ -10,10 +10,13 @@ COPY gulpfile.ts .
 COPY tsconfig.json .
 COPY tslint.json .
 COPY tools ./tools/
-COPY cypress ./cypress/
+COPY .docker/rm.optional.deps.js ./.docker/rm.optional.deps.js
 
 # before switching to non-root user, change ownership of home
 RUN chown -R node:node .
 USER node
 
-RUN npm install
+# NB: this is a workaround due to the fact that npm '--no-optional' flag doesn't work (open script below for more)
+RUN node .docker/rm.optional.deps.js
+
+RUN npm install --no-optional
