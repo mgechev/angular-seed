@@ -83,7 +83,7 @@
     "@types/systemjs": "^0.20.6",
     "@types/yargs": "^11.0.0",
     "async": "^2.6.0",
-    "autoprefixer": "^8.2.0",
+    "autoprefixer": "^9.0.0",
     "browser-sync": "^2.23.6",
     "codelyzer": "^4.2.1",
     "connect-history-api-fallback": "^1.5.0",
