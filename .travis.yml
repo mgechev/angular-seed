@@ -21,7 +21,7 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi
 
 before_script:
-  - npm install
+  - npm ci
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
 
 
@@ -40,7 +40,8 @@ notifications:
     on_start: never     # options: [always|never|change] default: always
 
 cache:
-  directories: node_modules
+  directories:
+    - "$HOME/.npm"
 
 script:
   - npm run tests.all

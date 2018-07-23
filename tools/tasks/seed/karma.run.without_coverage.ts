@@ -4,7 +4,8 @@ import { join } from 'path';
 const repeatableStartKarma = (done: any, config: any = {}) => {
   return new (<any>karma).Server(Object.assign({
     configFile: join(process.cwd(), 'karma.conf.js'),
-    singleRun: true
+    singleRun: false,
+    autowatch: true
   }, config), (exitCode: any) => {
     // Karma run is finished but do not exit the process for failure. Rather just mark this task as done.
     done();
