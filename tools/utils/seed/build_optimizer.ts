@@ -2,7 +2,7 @@ import * as through from 'through2';
 import { buildOptimizer } from '@angular-devkit/build-optimizer';
 
 const inlineSourceMap = (map: any) => {
-  return '// # sourceMappingURL=data:application/json;base64,' + new Buffer(JSON.stringify(map)).toString('base64');
+  return '// # sourceMappingURL=data:application/json;base64,' + Buffer.from(JSON.stringify(map)).toString('base64');
 };
 
 export const ngBuildOptimizer = () => {

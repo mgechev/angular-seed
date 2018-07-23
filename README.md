@@ -33,9 +33,7 @@ Provides fast, reliable and extensible starter for the development of Angular pr
 
 # How to start
 
-**Note** that this seed project requires node v4.x.x or higher and npm 2.14.7 but in order to be able to take advantage of the complete functionality we **strongly recommend node >=v6.5.0 and npm >=3.10.3**.
-
-**Here is how to [speed-up the build on Windows](https://github.com/mgechev/angular-seed/wiki/Speed-up-the-build-on-Windows)**.
+**Note** that this seed project requires node >=v6.9.0 or higher and npm >=3.10.3 but in order to be able to take advantage of the complete functionality we **strongly recommend node >=v8.x.x and npm >=5.x.x**.
 
 In order to start the seed use:
 
@@ -75,32 +73,6 @@ $ npm start -- --app bar
 ```
 _Does not rely on any global dependencies._
 
-# How to start with AoT compilation
-
-**Note** that AoT compilation requires **node v6.5.0 or higher** and **npm 3.10.3 or higher**.
-
-In order to start the seed with AoT use:
-
-```bash
-# prod build with AoT compilation, will output the production application in `dist/prod`
-# the produced code can be deployed (rsynced) to a remote server
-$ npm run build.prod.aot
-```
-
-# Tree-shaking with Rollup
-
-This application provides full support for tree-shaking your production builds with Rollup, which can drastically reduce the size of your application. This is the highest level of optimization currently available.
-
-To run this optimized production build, use:
-
-```bash
-# prod build with AoT compilation and Rollup tree-shaking, will output the production application in `dist/prod`
-# the produced code can be deployed (rsynced) to a remote server
-$ npm run build.prod.rollup.aot
-```
-
-Your project will be compiled ahead of time (AOT), and then the resulting bundle will be tree-shaken and minified. During the tree-shaking process Rollup statically analyses your code, and your dependencies, and includes the bare minimum in your bundle.
-
 **Notes**
 - Beware of non-static/side-effectful imports. These cannot be properly optimized. For this reason, even though tree-shaking is taking place the developer still needs to be careful not to include non-static imports that are unnecessary, as those referenced imports will always end up in final bundle. Special attention should be given to RxJs, which makes heavy use of non-static/side-effectful imports: make sure you only [pipeable operators](https://github.com/ReactiveX/rxjs/blob/master/doc/pipeable-operators.md).
 - UMD modules result in code that cannot be properly optimized. For best results, prefer ES6 modules whenever possible. This includes third-party dependencies: if one is published in both UMD and ES6 modules, go with the ES6 modules version.
@@ -121,7 +93,7 @@ $ npm run i18n
 
 ```bash
 # Build prod app with the language file `dist/locale/messages.en.xlf`
-$ npm run build.prod.rollup.aot -- --lang en
+$ npm run build.prod -- --lang en
 ```
 
 # Dockerization
@@ -183,17 +155,15 @@ It creates a html chart with a file by default, but output can also be json or t
 
 Run the following:
 ```bash
-$ npm run sme.prod # or respectively sme.prod.aot / sme.prod.rollup.aot
+$ npm run sme.prod
 # You can specify the output format by passing the `sme-out-format` parameter
-$ npm run sme.prod.aot -- --sme-out-format json # or html / tsv
+$ npm run sme.prod -- --sme-out-format json # or html / tsv
 ```
 
 # Table of Contents
 
 - [Introduction](#introduction)
 - [How to start](#how-to-start)
-- [How to start with Aot](#how-to-start-with-aot-compilation)
-- [Tree-shaking with Rollup](#tree-shaking-with-rollup)
 - [Dockerization](#dockerization)
   + [How to build and start the dockerized version of the application](#how-to-build-and-start-the-dockerized-version-of-the-application)
   + [Development build and deployment](#development-build-and-deployment)
@@ -219,9 +189,9 @@ $ npm run sme.prod.aot -- --sme-out-format json # or html / tsv
 Default application server configuration
 
 ```js
-var PORT             = 5555;
-var DOCS_PORT        = 4003;
-var APP_BASE         = '/';
+const PORT             = 5555;
+const DOCS_PORT        = 4003;
+const APP_BASE         = '/';
 ```
 
 Configure at runtime
@@ -457,18 +427,14 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │   └── seed               <- seed generic gulp tasks. They can be overriden by the project specific gulp tasks
 │   │   │   ├── build.assets.dev.ts
 │   │   │   ├── build.assets.prod.ts
-│   │   │   ├── build.bundles.app.aot.ts
 │   │   │   ├── build.bundles.app.rollup.aot.ts
-│   │   │   ├── build.bundles.app.ts
 │   │   │   ├── build.bundles.ts
 │   │   │   ├── build.docs.ts
 │   │   │   ├── build.html_css.ts
 │   │   │   ├── build.index.dev.ts
 │   │   │   ├── build.index.prod.ts
 │   │   │   ├── build.js.dev.ts
-│   │   │   ├── build.js.prod.aot.ts
 │   │   │   ├── build.js.prod.rollup.aot.ts
-│   │   │   ├── build.js.prod.ts
 │   │   │   ├── build.js.test.ts
 │   │   │   ├── build.sme.prod.aot.ts
 │   │   │   ├── build.sme.prod.rollup.aot.ts
