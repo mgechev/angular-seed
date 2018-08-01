@@ -13,7 +13,8 @@ lines.forEach(row => {
     let data = {
         name: cols[0].substr(1, cols[0].length - 2), 
         lat: parseFloat(cols[1]),
-        long: parseFloat(cols[2])
+        long: parseFloat(cols[2]),
+        verified: true
     };
 
     if (data.name === '') {
