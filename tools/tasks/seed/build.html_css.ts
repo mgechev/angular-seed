@@ -62,12 +62,13 @@ function processComponentStylesheets() {
  * Process scss files referenced from Angular component `styleUrls` metadata
  */
 function processComponentScss() {
+
   return getSCSSFiles('process-component-scss', [appSCSSFiles], [abstractSCSSFiles])
-    .pipe(plugins.sourcemaps.init())
+    .pipe(isProd ? plugins.util.noop() : plugins.sourcemaps.init())
     .pipe(plugins.sass(Config.getPluginConfig('gulp-sass')).on('error', plugins.sass.logError))
     .pipe(plugins.postcss(processors))
     .on('error', reportPostCssError)
-    .pipe(plugins.sourcemaps.write(isProd ? '.' : '', {
+    .pipe(isProd ? plugins.util.noop() : plugins.sourcemaps.write('', {
       sourceMappingURL: (file: any) => {
         // write absolute urls to the map files
         return `${Config.APP_BASE}${file.relative}.map`;
@@ -77,12 +78,12 @@ function processComponentScss() {
 }
 
 /**
- + * Get SCSS Files to process
- + */
-function getSCSSFiles(cacheName:string, filesToCompile:string[], filesToExclude:string[] = []) {
-  let allFiles:string[] = filesToCompile.concat(filesToExclude);
-  let filteredFiles:string[] = filesToCompile.concat(
-    filesToExclude.map((path:string) => { return '!' + path; })
+ * Get SCSS Files to process
+ */
+function getSCSSFiles(cacheName: string, filesToCompile: string[], filesToExclude: string[] = []) {
+  const allFiles: string[] = filesToCompile.concat(filesToExclude);
+  const filteredFiles: string[] = filesToCompile.concat(
+    filesToExclude.map((path: string) => { return '!' + path; })
   );
   return gulp.src(allFiles)
     .pipe(plugins.cached(cacheName))

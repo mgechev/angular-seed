@@ -4,6 +4,7 @@
     "class-name": true,
     "curly": false,
     "eofline": true,
+    "import-spacing": true,
     "indent": [true, "spaces"],
     "max-line-length": [true, 140],
     "member-ordering": [true,
@@ -12,25 +13,72 @@
       "variables-before-functions"
     ],
     "no-arg": true,
+    "no-bitwise": true,
+    "no-console": [
+      true,
+      "debug",
+      "info",
+      "time",
+      "timeEnd",
+      "trace"
+    ],
     "no-construct": true,
     "no-duplicate-variable": true,
     "no-empty": true,
+    "no-empty-interface": true,
     "no-eval": true,
+    "no-inferrable-types": [
+      true,
+      "ignore-params"
+    ],
+    "no-misused-new": true,
+    "no-non-null-assertion": true,
+    "no-string-literal": false,
+    "no-string-throw": true,
+    "no-switch-case-fall-through": true,
     "no-trailing-whitespace": true,
+    "no-unnecessary-initializer": true,
     "no-unused-expression": true,
-    "one-line": [true,
+    "no-var-keyword": true,
+    "object-literal-sort-keys": false,
+    "one-line": [
+      true,
       "check-open-brace",
       "check-catch",
       "check-else",
       "check-whitespace"
     ],
-    "quotemark": [true, "single"],
+    "prefer-const": true,
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "radix": true,
     "semicolon": [true, "always"],
     "trailing-comma": true,
-    "triple-equals": true,
+    "triple-equals": [true, "allow-null-check"],
+    "typedef-whitespace": [
+      true,
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      }
+    ],
     "variable-name": false,
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-separator",
+      "check-type"
+    ],
 
     "angular-whitespace": [true, "check-semicolon", "check-interpolation"],
+    "no-output-on-prefix": true,
     "banana-in-box": true,
     "directive-selector": [true, ["attribute"], [], "camelCase"],
     "component-selector": [true, ["element"], [], "kebab-case"],
@@ -43,9 +91,6 @@
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
     "directive-class-suffix": true,
-    "import-destructuring-spacing": true,
-    "templates-use-public": true,
-    "no-access-missing-member": true,
-    "invoke-injectable": true
+    "import-destructuring-spacing": true
   }
 }

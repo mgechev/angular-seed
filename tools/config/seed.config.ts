@@ -2,6 +2,8 @@ import { join } from 'path';
 import * as slash from 'slash';
 import { argv } from 'yargs';
 
+const magicImporter = require('node-sass-magic-importer');
+
 import {
   BuildType,
   ExtendPackages,
@@ -427,12 +429,6 @@ export class SeedConfig {
       inject: 'shims',
       buildType: BUILD_TYPES.DEVELOPMENT
     },
-    // Temporary fix. See https://github.com/angular/angular/issues/9359
-    {
-      src: '.tmp/Rx.min.js',
-      inject: 'libs',
-      buildType: BUILD_TYPES.DEVELOPMENT
-    }
   ];
 
   /**
@@ -477,6 +473,12 @@ export class SeedConfig {
    * @type {any}
    */
   SYSTEM_CONFIG_DEV: any = {
+    bundles: {
+      'node_modules/.tmp/Rx.min.js': [
+        'rxjs',
+        'rxjs/*'
+      ]
+    },
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
       '@angular/animations':
@@ -489,7 +491,6 @@ export class SeedConfig {
         'node_modules/@angular/compiler/bundles/compiler.umd.js',
       '@angular/core': 'node_modules/@angular/core/bundles/core.umd.js',
       '@angular/forms': 'node_modules/@angular/forms/bundles/forms.umd.js',
-      '@angular/http': 'node_modules/@angular/http/bundles/http.umd.js',
       '@angular/platform-browser':
         'node_modules/@angular/platform-browser/bundles/platform-browser.umd.js',
       '@angular/platform-browser-dynamic':
@@ -507,8 +508,6 @@ export class SeedConfig {
         'node_modules/@angular/compiler/bundles/compiler-testing.umd.js',
       '@angular/core/testing':
         'node_modules/@angular/core/bundles/core-testing.umd.js',
-      '@angular/http/testing':
-        'node_modules/@angular/http/bundles/http-testing.umd.js',
       '@angular/platform-browser/testing':
         'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
       '@angular/platform-browser-dynamic/testing':
@@ -562,6 +561,7 @@ export class SeedConfig {
       '@angular/common/http':
         'node_modules/@angular/common/bundles/common-http.umd.js',
       'tslib': 'node_modules/tslib/tslib.js',
+      'rxjs': 'node_modules/rxjs',
       'dist/tmp/node_modules/*': 'dist/tmp/node_modules/*',
       'node_modules/*': 'node_modules/*',
       '*': 'node_modules/*'
@@ -591,10 +591,6 @@ export class SeedConfig {
         main: 'bundles/forms.umd.js',
         defaultExtension: 'js'
       },
-      '@angular/http': {
-        main: 'bundles/http.umd.js',
-        defaultExtension: 'js'
-      },
       '@angular/platform-browser': {
         main: 'bundles/platform-browser.umd.js',
         defaultExtension: 'js'
@@ -611,8 +607,24 @@ export class SeedConfig {
         main: 'bundles/service-worker.umd.js',
         defaultExtension: 'js'
       },
-      rxjs: {
-        main: 'Rx.js',
+      'rxjs': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'rxjs/ajax': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'rxjs/operators': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'rxjs/testing': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'rxjs/webSocket': {
+        main: 'index.js',
         defaultExtension: 'js'
       }
     }
@@ -686,7 +698,7 @@ export class SeedConfig {
      * Example: `npm start -- --b`
      * @return {any}
      */
-    let defaults = {
+    const defaults = {
       'browser-sync': {
         middleware: [
           require('connect-history-api-fallback')({
@@ -718,7 +730,8 @@ export class SeedConfig {
        * @type {object}
        */
       'gulp-sass': {
-        includePaths: ['./node_modules/']
+        includePaths: ['./node_modules/'],
+        importer: magicImporter()
       },
 
       /**
@@ -854,7 +867,7 @@ function filterDependency(type: string, d: InjectableDependency): boolean {
  * @return {number} The applications version.
  */
 function appVersion(): number | string {
-  var pkg = require('../../package.json');
+  const pkg = require('../../package.json');
   return pkg.version;
 }
 
@@ -862,9 +875,9 @@ function appVersion(): number | string {
  * Returns the application build type.
  */
 function getBuildType() {
-  let type = (argv['build-type'] || argv['env'] || '').toLowerCase();
-  let base: string[] = argv['_'];
-  let prodKeyword = !!base
+  const type = (argv['build-type'] || argv['env'] || '').toLowerCase();
+  const base: string[] = argv['_'];
+  const prodKeyword = !!base
     .filter(o => o.indexOf(BUILD_TYPES.PRODUCTION) >= 0)
     .pop();
   if ((base && prodKeyword) || type === BUILD_TYPES.PRODUCTION) {
@@ -875,6 +888,6 @@ function getBuildType() {
 }
 
 function getSmeOutFormat() {
-  let format = (argv['sme-out-format'] || '').toUpperCase();
+  const format = (argv['sme-out-format'] || '').toUpperCase();
   return SME_OUTPUT_FORMATS[format] || SME_OUTPUT_FORMATS.HTML;
 }

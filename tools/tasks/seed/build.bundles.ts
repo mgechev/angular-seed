@@ -15,7 +15,7 @@ export = () => merge(bundleShims());
  * Returns the shim files to be injected.
  */
 function getShims() {
-  let libs = Config.DEPENDENCIES
+  const libs = Config.DEPENDENCIES
     .filter(d => /\.js$/.test(d.src));
 
   return libs.filter(l => l.inject === 'shims')

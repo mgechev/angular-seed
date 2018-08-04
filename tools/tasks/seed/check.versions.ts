@@ -11,11 +11,11 @@ function reportError(message: string) {
  * defined in the application configuration.
  */
 export = () => {
-  let exec = require('child_process').exec;
-  let semver = require('semver');
+  const exec = require('child_process').exec;
+  const semver = require('semver');
 
   exec('npm --version',
-    function(error: Error, stdout: NodeBuffer, stderr: NodeBuffer) {
+    function(error: Error, stdout: any, stderr: any) {
       if (error !== null) {
         reportError('npm preinstall error: ' + error + stderr);
       }
@@ -26,7 +26,7 @@ export = () => {
     });
 
   exec('node --version',
-    function(error: Error, stdout: NodeBuffer, stderr: NodeBuffer) {
+    function(error: Error, stdout: any, stderr: any) {
       if (error !== null) {
         reportError('npm preinstall error: ' + error + stderr);
       }

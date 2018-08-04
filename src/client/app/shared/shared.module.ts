@@ -17,11 +17,11 @@ import { DirectionsMapDirective } from './directives/directions.directive';
 
 import { RouteBoxerService } from './services/routeboxer/routeboxer.service';
 import { LocationsService } from './services/locations/locations.service';
+import { NameListService } from './name-list/name-list.service';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
-
 @NgModule({
   imports: [CommonModule, RouterModule,
             AgmCoreModule.forRoot({

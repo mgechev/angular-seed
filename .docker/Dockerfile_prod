@@ -1,0 +1,21 @@
+FROM node:9.11 as builder
+
+WORKDIR /home/node/angular-seed
+
+# copy all files not listed in .dockerignore
+COPY . .
+
+# before switching to non-root user, change ownership of home
+RUN chown -R node:node .
+USER node
+
+# NB: this is a workaround due to the fact that npm '--no-optional' flag doesn't work (open script below for more)
+RUN node .docker/rm.optional.deps.js
+RUN rm -r cypress && rm cypress.json
+
+RUN npm install --no-optional
+RUN npm run build.prod.rollup.aot
+
+FROM nginx:1.13
+COPY --from=builder /home/node/angular-seed/dist/prod /var/www/dist/prod
+COPY ./.docker/nginx.conf /etc/nginx/conf.d/angular-seed.template
