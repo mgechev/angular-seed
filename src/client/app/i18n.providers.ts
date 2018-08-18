@@ -3,18 +3,18 @@
 // export class TranslationProviders {
 //
 //   public getTranslationFile = (): Promise<any> => {
-//     const noProviders: Object[] = [];
+//     let noProviders: Object[] = [];
 //
 //     // Define a way to retrieve the local information
-//     const locale: string = 'en-US';
+//     let locale: string = 'en-US';
 //
 //     // Set the directory to the translation files
-//     const file: string = `../assets/locale/messages.${locale}.xlf`;
+//     let file: string = `../assets/locale/messages.${locale}.xlf`;
 //
-//     if (!locale || locale === 'en-US') return Promise.resolve(noProviders);
+//     if(!locale || locale === 'en-US') return Promise.resolve(noProviders);
 //
 //     return new Promise(function (resolve, reject) {
-//       const xhr = new XMLHttpRequest;
+//       let xhr = new XMLHttpRequest;
 //       xhr.open('GET', file);
 //       xhr.onload = (data: any) => resolve(
 //         [
@@ -27,4 +27,5 @@
 //       xhr.send();
 //     });
 //   }
-// }
+// };
+//

@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+In order to start:
+=======
 # Introduction
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/mgechev/angular-seed.svg)](https://greenkeeper.io/)
@@ -36,6 +39,7 @@ Provides fast, reliable and extensible starter for the development of Angular pr
 **Note** that this seed project requires node >=v6.9.0 or higher and npm >=3.10.3 but in order to be able to take advantage of the complete functionality we **strongly recommend node >=v8.x.x and npm >=5.x.x**.
 
 In order to start the seed use:
+>>>>>>> 43b1d6484dff22c3ee7118be249b974bbd218e9d
 
 
 ```bash
@@ -49,6 +53,8 @@ $ yarn install  # or yarn
 
 # watches your files and uses livereload by default
 $ npm start
+# api document for the app
+# npm run build.docs
 
 # generate api documentation
 $ npm run compodoc
@@ -63,6 +69,8 @@ $ npm run build.dev
 # prod build, will output the production application in `dist/prod`
 # the produced code can be deployed (rsynced) to a remote server
 $ npm run build.prod
+<<<<<<< HEAD
+=======
 # prod build using different base path
 $ npm run build.prod -- --base "/foo/bar/"
 
@@ -70,14 +78,16 @@ $ npm run build.prod -- --base "/foo/bar/"
 $ npm start -- --app baz
 $ npm start -- --app foo
 $ npm start -- --app bar
+>>>>>>> 43b1d6484dff22c3ee7118be249b974bbd218e9d
 ```
-_Does not rely on any global dependencies._
 
 **Notes**
 - Beware of non-static/side-effectful imports. These cannot be properly optimized. For this reason, even though tree-shaking is taking place the developer still needs to be careful not to include non-static imports that are unnecessary, as those referenced imports will always end up in final bundle. Special attention should be given to RxJs, which makes heavy use of non-static/side-effectful imports: make sure you only [pipeable operators](https://github.com/ReactiveX/rxjs/blob/master/doc/pipeable-operators.md).
 - UMD modules result in code that cannot be properly optimized. For best results, prefer ES6 modules whenever possible. This includes third-party dependencies: if one is published in both UMD and ES6 modules, go with the ES6 modules version.
 - During a production build, CommonJs modules will be automatically converted to ES6 modules. This means you can use them and/or require dependencies that use them without any issues.
 
+<<<<<<< HEAD
+=======
 # Internationalization
 
 Put `i18n` attribute to your html tag to mark it for translation, more information here: https://angular.io/docs/ts/latest/cookbook/i18n.html
@@ -184,20 +194,28 @@ $ npm run sme.prod -- --sme-out-format json # or html / tsv
 - [Change Log](#change-log)
 - [License](#license)
 
+>>>>>>> 43b1d6484dff22c3ee7118be249b974bbd218e9d
 # Configuration
 
 Default application server configuration
 
 ```js
+<<<<<<< HEAD
+var PORT             = 5555;
+var LIVE_RELOAD_PORT = 4002;
+var DOCS_PORT        = 4003;
+var APP_BASE         = '/';
+=======
 const PORT             = 5555;
 const DOCS_PORT        = 4003;
 const APP_BASE         = '/';
+>>>>>>> 43b1d6484dff22c3ee7118be249b974bbd218e9d
 ```
 
 Configure at runtime
 
 ```bash
-$ npm start -- --port 8080 --base /my-app/
+$ npm start -- --port 8080 --reload-port 4000 --base /my-app/
 ```
 
 ## Environment configuration
@@ -216,36 +234,25 @@ Currently the `ENV_NAME`s are `dev`, `prod`, `staging`, but you can simply add a
 
 A documentation of the provided tools can be found in [tools/README.md](tools/README.md).
 
-# How to extend?
-
-Visit the [Wiki page](https://github.com/mgechev/angular-seed/wiki) of the project.
-
-# How to update?
-```
-git remote add upstream https://github.com/mgechev/angular-seed
-git pull upstream master
-```
-
 # Running tests
 
 ```bash
-$ npm test
-
-# Development. Your app will be watched by karma
-# on each change all your specs will be executed.
-$ npm run test.watch
-# NB: The command above might fail with a "EMFILE: too many open files" error.
-# Some OS have a small limit of opened file descriptors (256) by default
-# and will result in the EMFILE error.
-# You can raise the maximum of file descriptors by running the command below:
-$ ulimit -n 10480
-
-
 # code coverage (istanbul)
 # auto-generated at the end of `npm test`
 # view coverage report:
 $ npm run serve.coverage
 
+<<<<<<< HEAD
+# e2e (aka. end-to-end, integration) - In three different shell windows
+# Make sure you don't have a global instance of Protractor
+# Make sure you do have Java in your PATH (required for webdriver)
+
+$ npm run webdriver-update
+$ npm run webdriver-start
+$ npm start
+$ npm test
+```
+=======
 # e2e (aka. end-to-end, integration)  - In two different shell windows
 $ npm start
 $ npm run e2e
@@ -710,3 +717,4 @@ You can follow the [Angular change log here](https://github.com/angular/angular/
 # License
 
 MIT
+>>>>>>> 43b1d6484dff22c3ee7118be249b974bbd218e9d

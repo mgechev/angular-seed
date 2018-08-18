@@ -1,0 +1,23 @@
+<div id="form-container">
+  <cotw-form>
+    <cotw-form-step [isValid]="climbSearch.controls.originSearchControl.valid">
+      <form [formGroup]="climbSearch">
+        <input placeholder="starting location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="searchInput" #originSearch formControlName="originSearchControl">
+      </form>
+    </cotw-form-step>
+    <cotw-form-step [isValid]="climbSearch.controls.destSearchControl.valid">
+      <form [formGroup]="climbSearch">
+        <input placeholder="destination" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="searchInput" #destSearch formControlName="destSearchControl">
+      </form>
+    </cotw-form-step>
+    <cotw-form-step>
+      <form (ngSubmit)="onSubmit(climbSearch)" [formGroup]="climbSearch">
+        <input placeholder="detour distance" type="number" class="numericInput detour" formControlName="distanceControl">
+        <button class="formButton" type="submit" [disabled]="climbSearch.invalid">Find</button>
+      </form>
+    </cotw-form-step>
+  </cotw-form>
+</div>
+<div id="map-container">
+  <sebm-google-map-directions [origin]="orig" [destination]="dest"></sebm-google-map-directions>
+</div>

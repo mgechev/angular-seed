@@ -1,0 +1,486 @@
+'Rim Road', 40.95514097, -80.17150640
+'Audubon Outdoor Wall', 39.94850323, -83.00904751
+'The Projects', 40.96082070, -80.17158151
+'Breakneck Rocks', 40.93775847, -80.17851233
+'Cupid''s Bower', 38.98134657, -77.23144054
+'Angler''s Inn Rocks', 38.98183029, -77.23009944
+'Crag X', 38.97992875, -77.23731995
+'Purple Horse', 38.98145082, -77.24006653
+'Spitzbergen', 38.98288113, -77.24357486
+'Lower Mather Gorge', 38.98656726, -77.24555969
+'Rocky Islands', 38.99468109, -77.24842429
+'Bulges', 38.99375551, -77.24622488
+'Gorky Park', 38.99508133, -77.25207210
+'Microdome', 38.99467275, -77.25073099
+'Flat Iron', 38.99445595, -77.25010872
+'Sand Box', 38.99342196, -77.24940062
+'Cigar Box', 38.99290496, -77.24910021
+'Dihedrals', 38.99235461, -77.24875689
+'Dike Creek', 38.99160411, -77.24854231
+'Juliet''s Balcony', 38.99102039, -77.24845648
+'Seclusion', 38.99036995, -77.24830627
+'Romeo''s Ladder', 38.98978622, -77.24817753
+'Aid Box', 38.98935259, -77.24789858
+'Canal Cut', 38.98906489, -77.24765718
+'Bird''s Nest', 38.98831019, -77.24744797
+'Cornice', 38.98783485, -77.24727631
+'Dr. Needlepoint', 38.98683413, -77.24701881
+'Degree 101', 38.98594180, -77.24649310
+'Downstream Climbs', 38.98454909, -77.24586010
+'Cow Hoof', 38.98173021, -77.24289894
+'Echo Rock', 38.98106301, -77.24124670
+'Bruisebrother''s Wall', 37.72466661, -83.62695336
+'Moss Island', 43.03972237, -74.86112148
+'Unlikely Wall', 39.02443500, -86.53564800
+'Upper Fetish Wall', 37.80920000, -79.79740000
+'Rumbling Bald Boulders', 35.44900000, -82.21430000
+'Trapper''s Camp', 38.01596600, -93.71791300
+'Mushroom Rock', 38.72461000, -98.03066000
+'Jackson Falls', 37.51019400, -88.68218800
+'Second Pullout', 36.15217700, -115.43730900
+'Echo Rock', 34.02540000, -116.15680000
+'Fucoidal Quarzite', 41.77915500, -111.64558800
+'Camelback Mountain', 33.52122500, -111.97348800
+'Las Conchas', 35.81534700, -106.53286800
+'Barton Creek Greenbelt', 30.24390000, -97.80050000
+'Quartz Mountain', 34.89800500, -99.33318600
+'10 Mile Canyon', 39.54090000, -106.13930000
+'HightowerSW', 42.00370000, -105.37420000
+'Smith Rock', 44.36806500, -121.13921800
+'McLellan Rocks', 47.83752500, -117.72042400
+'Black Cliffs', 43.53730000, -116.08790000
+'Kootenai Canyon', 46.53790000, -114.15080000
+'Sentinel Butte', 46.87840000, -103.83630000
+'Barn Bluff', 44.56950000, -92.52650000
+'Spearfish Canyon', 44.45780000, -103.85890000
+'Palisades State Park', 43.69010000, -96.51470000
+'Pictured Rocks', 42.20868500, -91.10077900
+'Devil''s Lake', 43.41350000, -89.71640000
+'Mississippi Palisades', 42.14540000, -90.16620000
+'Obed & Clear Creek ', 36.11660000, -84.73170000
+'Horseshoe Canyon Ranch', 36.01180000, -93.29220000
+'Wolf Rock Cave', 30.97196000, -93.19324000
+'Tishomingo State Park', 34.60379700, -88.17588300
+'Sand Rock', 34.18040000, -85.81700000
+'Camp La-No-Che Tower', 28.95201000, -81.53529000
+'Currahee Mountain', 34.52940000, -83.37590000
+'Savannah River Quarry', 33.49752000, -81.98982000
+'New River Gorge', 38.07240000, -81.08120000
+'Harper''s Ferry', 39.32260000, -77.72640000
+'Alapocas Woods Park', 39.76998700, -75.55780600
+'Sourland Mountain Preserve', 40.46014000, -74.71733100
+'Fat Man''s Squeeze', 41.34900000, -72.59680000
+'Cavalry Boulder Field', 42.62135200, -70.72330700
+'Rumney', 43.80210000, -71.83670000
+'Smuggler''s Notch', 44.55476000, -72.79626800
+'Clifton Crags', 44.80740000, -68.59660000
+'Blowing Rocks Preserve', 26.97968100, -80.08383000
+'Toadstool Park', 42.85801200, -103.58326400
+'Grand Ledge', 42.75870000, -84.75390000
+'Big Sur', 35.83860000, -121.40120000
+'Carmel River State Beach', 36.53880000, -121.92780000
+'Conejo Mountain', 34.19780000, -118.96350000
+'Owl Tor', 35.11653900, -120.10009300
+'Miller''s Crossing', 35.11766197, -120.10145545
+'Mr. Lee''s Greater Hong Kong', 35.12734998, -120.11764526
+'Doom Wall', 35.12426118, -120.11120796
+'Big Rocks', 35.12408567, -120.11296749
+'Derrydale Cliff', 34.58300000, -119.26130000
+'Foothill Crag', 34.47050000, -119.25120000
+'The Fortress', 34.58060000, -119.26050000
+'The Hideout', 34.47026436, -119.24594879
+'Home Away From Home Boulder', 34.50610000, -119.29530000
+'Matilija Wall', 34.47930000, -119.31150000
+'Pine Mountain', 34.62520000, -119.28240000
+'Potrero John', 34.58060000, -119.26060000
+'Sespe Gorge (Black Wall)', 34.57760000, -119.25790000
+'Sisar Canyon', 34.44960000, -119.13410000
+'Wheeler Gorge', 34.50750000, -119.27570000
+'Panther Beach', 36.99240000, -122.16990000
+'Pinnacles National Monument', 36.50040000, -121.20200000
+'Point Mugu', 34.08610000, -119.05890000
+'Bishop Peak', 35.30260000, -120.69700000
+'Cabrillo Peak', 35.34670000, -120.82520000
+'Cerro Romauldo', 35.31410000, -120.72690000
+'Cathedral Peak', 34.48960000, -119.71770000
+'Cielo Crack Crag', 34.50980000, -119.82310000
+'Crag Full of Dynamite', 34.47860000, -119.60290000
+'Fire Crags', 34.49300000, -119.79300000
+'Gibraltar Area', 34.47830000, -119.68000000
+'Green Dome', 34.47880000, -119.60200000
+'Hermit Rock', 34.47900000, -119.60250000
+'Lower Mission Canyon', 34.46430000, -119.71260000
+'Paradise Road', 34.54310000, -119.81140000
+'The Playground', 34.50230000, -119.85600000
+'Potter''s Point', 34.48550000, -119.69390000
+'Renaissance Crag', 34.47120200, -119.68891000
+'San Ysidro', 34.44640000, -119.62300000
+'The Brickyard', 34.49780000, -119.86110000
+'The Lizard''s Mouth', 34.50240000, -119.86640000
+'Painted Cave', 34.49920000, -119.78900000
+'Skofield Park', 34.45690000, -119.69360000
+'Trigo Boulder', 34.41140000, -119.86010000
+'Westmont College Boulder', 34.45020000, -119.66030000
+'Tar Creek (the Swimming Hole)', 34.45730000, -118.92320000
+'Wagon Caves', 36.07140000, -121.32490000
+'The Dead Zone', 34.49749400, -117.11753500
+'Deadman''s Point', 34.47524800, -117.12604900
+'Horseman''s Center', 34.48470000, -117.13130000
+'K-Rock', 34.47910000, -117.13130000
+'Tatooine', 34.56470000, -117.11660000
+'The Cemetary', 34.48200000, -117.12940000
+'Chimney Rock', 34.46880000, -117.01630000
+'Coyote Hole', 34.12270000, -116.30850000
+'Giant Rock', 34.33280500, -116.38891300
+'Hercules Finger', 34.33280500, -116.38891300
+'House of the Setting Sun', 34.66558200, -116.99405200
+'Interstate 10 Crags', 33.66840000, -115.65460000
+'Johnson Valley Areas', 34.32190000, -116.50590000
+'Lucerne Limestone', 34.51660000, -116.99260000
+'New Jackson City', 34.66630000, -116.97840000
+'Old Woman Statue', 34.52160000, -115.16490000
+'Tehachapi', 35.06790000, -118.48600000
+'Banner Peak', 37.69600000, -119.19460000
+'Bear Creek Spire', 37.36810000, -118.76700000
+'The Black Kaweah', 36.54500000, -118.51600000
+'Boundary Peak', 37.84610000, -118.35130000
+'Charlotte Dome', 36.78250000, -118.48000000
+'Joshua Tree National Park', 34.01220000, -116.16800000
+'Arroyo Seco Boulders', 34.19320000, -118.16870000
+'Crystal Lake Boulders', 34.31630000, -117.83850000
+'Crystal Lake Crag', 34.31810000, -117.84910000
+'Horse Flats', 34.34940000, -118.01580000
+'Millard Canyon', 34.21630000, -118.14600000
+'Texas Canyon', 34.51360000, -118.40210000
+'Tunnel Crag', 34.36010000, -117.85930000
+'Williamson Rock', 34.36350000, -117.87970000
+'Devil''s Punchbowl', 34.41390000, -117.85870000
+'Eagle Rock', 34.14320000, -118.18350000
+'Parsons Beach', 33.47310000, -118.55030000
+'Point Dume', 34.01500000, -118.82050000
+'Boney Bluff', 34.11160900, -118.92679800
+'Echo Cliffs', 34.12509200, -118.92675500
+'Hueco Wall', 34.11890000, -118.94300000
+'The Lookout', 34.10782900, -118.89270200
+'Century Lake Area', 34.09810000, -118.73400000
+'Crags Rd. Crags', 34.09610000, -118.73100000
+'Planet of the Apes Wall', 34.09514800, -118.73052500
+'Ghetto Wall', 34.09484100, -118.73149000
+'Mt. Gorgeous', 34.09549400, -118.73122200
+'Stumbling Blocks', 34.09431200, -118.73201600
+'Toddler Terrace', 34.09422800, -118.73391000
+'Miniholland', 34.10170000, -118.84560000
+'Mt. Olympus', 34.11233800, -118.92676600
+'Saddle Peak', 34.07940000, -118.65930000
+'Stoney Point', 34.27140000, -118.60400000
+'Tick Rock', 34.05240000, -118.55320000
+'Castle Rock', 40.79450000, -123.50230000
+'Footsteps Rock', 41.61550000, -124.11500000
+'Goat Rocks', 40.46720000, -123.80520000
+'Houda Point', 41.03530000, -124.11920000
+'Lost Rocks', 41.51960000, -124.08150000
+'Luffenholtz Beach', 41.04000000, -124.11970000
+'Moonstone Beach', 41.03000000, -124.11250000
+'Patrick''s Point State Park', 41.13840000, -124.15620000
+'Promontory', 41.60650000, -124.10510000
+'Trinity Aretes', 40.79310000, -123.50810000
+'El Cariso', 33.64689500, -117.44334300
+'Ortega Falls', 33.62590000, -117.42630000
+'Pirate''s Cove', 33.59490000, -117.87810000
+'San Juan Canyon', 33.61640300, -117.42742400
+'Candy Store Boulders', 33.61155100, -117.42524700
+'Upper San Juan Boulders', 33.60535300, -117.43223900
+'Big Rock Area', 33.84230000, -117.16400000
+'Box Springs Mountain Park', 33.98930000, -117.30860000
+'Double Butte Mountain', 33.72630000, -117.13220000
+'Dry Falls', 33.82930000, -116.57090000
+'Mount Rubidoux', 33.98400000, -117.39170000
+'Riverside Quarry', 34.01690000, -117.41660000
+'Tenaja Falls', 33.55610000, -117.39810000
+'Thee Area', 33.95717000, -117.38262100
+'Waishal Trail', 33.56946900, -117.26029900
+'8000 Foot Crag', 34.17370000, -116.71770000
+'Aggro Crag Boulder', 34.28460000, -116.81920000
+'Arctic Temple', 34.22760000, -116.98830000
+'Arrowbear Boulders', 34.21380000, -117.07730000
+'Black Bluff', 34.23266700, -116.91358600
+'Blackhawk Pinnacle', 34.32430000, -116.81030000
+'Castle Rock ', 34.22950000, -116.95870000
+'The Coven', 34.27440000, -116.98750000
+'Aztec Pond', 34.27410000, -117.12750000
+'Deep Creek Hot Springs', 34.33940000, -117.17710000
+'Deep Creek Narrows', 34.21180000, -117.10110000
+'Fawnskin Tower', 34.35560700, -117.06876800
+'Fisherman''s Buttress Area', 34.24060000, -116.96710000
+'Hanna Rocks', 34.28420000, -116.95880000
+'Frustration Creek', 34.09870000, -116.97180000
+'Holcomb Valley Pinnacles', 34.31240000, -116.88040000
+'Jacoby Canyon', 34.30360000, -116.84180000
+'Keller Peak', 34.19930000, -117.05090000
+'Lake Arrowhead Pinnacles', 34.30670000, -117.22810000
+'Legoland', 34.28205100, -116.97661800
+'Luna Boulders', 34.38049200, -117.14146600
+'Mill Creek', 34.10230000, -117.01350000
+'Mill Creek Wash', 34.09650000, -117.02800000
+'Mormon Rocks', 34.31990000, -117.49610000
+'Mountain Home Creek', 34.11970000, -116.97690000
+'North Shore Boulders', 34.27320000, -116.84770000
+'Onyx Summit Crag', 34.19680000, -116.72400000
+'Pinnacle with a View', 34.27529800, -116.96433300
+'School Rock', 34.19520000, -117.08360000
+'Scot Rock', 34.22560000, -117.19620000
+'Seely Creek', 34.25650000, -117.30750000
+'Sphinx Rock', 34.22710000, -117.25430000
+'Tanglewood Slab', 34.30290000, -116.85800000
+'Toot Sweet', 34.28080000, -116.97780000
+'Yellow Post Bouldering', 34.22576600, -116.96729400
+'Bonita', 32.69130000, -117.01200000
+'Top Ramen Boulder', 33.16620000, -117.28870000
+'Corte Madera', 32.75550000, -116.59100000
+'Cougar Crag', 33.36437012, -117.09503174
+'Culp Valley', 33.21620000, -116.45960000
+'Descanso Wall', 32.84440000, -116.63510000
+'Dixon Lake', 33.16070000, -117.04600000
+'Eagle Peak', 32.88220000, -116.64100000
+'El Cajon Mountain', 32.90410000, -116.81800000
+'Mission Gorge', 32.81870000, -117.05600000
+'Mount Woodson', 33.00630000, -116.96000000
+'Otay', 32.60300000, -116.90710000
+'Poway Crags', 32.98440000, -116.94960000
+'Rancho Penasquito Canyon', 32.92710000, -117.17720000
+'Santee Boulders', 32.86410000, -116.98500000
+'Stonewall Peak', 32.95990000, -116.57200000
+'Valley of the Moon', 32.63100000, -116.07880000
+'Black Mountain', 33.82630000, -116.75910000
+'Garner Valley', 33.63210000, -116.64140000
+'Humber Park', 33.63210000, -116.64140000
+'Idyllwild County Park', 33.74410000, -116.72250000
+'Mt. San Jacinto', 33.81510000, -116.68000000
+'The Tramway', 33.80620000, -116.63670000
+'Chimney Rocks', 36.65400000, -118.86670000
+'The Fortress', 36.54690000, -118.76530000
+'The Gorge of Despair', 36.89160000, -118.75820000
+'Hospital Rock Area', 36.52050000, -118.77350000
+'Moro Rock', 36.54420000, -118.76420000
+'North Dome Boulder Field', 36.79617500, -118.59588900
+'The Obelisk', 36.90790000, -118.85400000
+'Tehipite Dome', 36.91880000, -118.78100000
+'Aquarian Valley', 37.29040000, -122.16580000
+'Angwin', 38.56840000, -122.44060000
+'Beaver Street Wall', 37.76550000, -122.43680000
+'Black Sand Beach', 37.82510000, -122.51380000
+'Fort Ross', 38.53610000, -123.24150000
+'Cragmont Park', 37.89200000, -122.26350000
+'Castle Rock Park', 37.23660000, -122.10500000
+'Coyote Hills', 37.55120000, -122.08660000
+'Glen Canyon', 37.74080000, -122.43980000
+'Great Stone Face Rock Park', 37.89670000, -122.27830000
+'Grizzly Peak Boulders', 37.88230000, -122.24190000
+'Handley Rock Park', 37.46570000, -122.26940000
+'Indian Joe Caves', 37.51620000, -121.83050000
+'Indian Rock', 37.89220000, -122.27280000
+'Lower Guadalupe Rock', 37.18640000, -121.87180000
+'Mickey''s Beach', 37.88860000, -122.63270000
+'Mount Diablo State Park', 37.88170000, -121.91460000
+'Mount St. Helena', 38.67060000, -122.63330000
+'Mount Tamalpais', 37.92910000, -122.57800000
+'Navarro Beach', 39.19250000, -123.75860000
+'The Nut Tree Boulders', 38.37670000, -121.98450000
+'The Philosopher''s Stone', 38.78040000, -122.72020000
+'Point Reyes National Seashore', 38.09050000, -122.92120000
+'Putah Creek', 38.51740000, -122.05600000
+'Remillard Park', 37.89230000, -122.26110000
+'Ring Mountain', 37.90950000, -122.48280000
+'Salt Point State Park', 38.57060000, -123.32090000
+'Skyline Slabs', 37.29340000, -122.16130000
+'Sonoma Coast State Park', 38.43260000, -123.07370000
+'Squaw Cliff Area', 38.80320000, -123.01320000
+'Sugarloaf Ridge State Park', 38.44300000, -122.50520000
+'Burney Limestone', 40.77930000, -122.00220000
+'Grizzly Dome', 39.86960000, -121.37350000
+'Lassen National Park', 40.50920000, -121.43310000
+'South Fork', 41.28380000, -122.38000000
+'Tom''s Thumb', 40.23810000, -120.54360000
+'Horseshoe Canyon', 38.91500000, -121.01430000
+'Mammoth Bar', 38.91850000, -121.00670000
+'Memorial Wall', 38.91570000, -121.01490000
+'Scale Wall', 38.91550000, -121.01450000
+'Surf Tower', 38.91540000, -121.01510000
+'Wreckage Wall', 38.91493700, -121.01202200
+'Calaveras Dome Area', 38.49390000, -120.21720000
+'Consumnes River Gorge', 38.65240000, -120.70660000
+'Deer Creek Park', 38.78710000, -121.23950000
+'Folsom Lake SRA', 38.70740000, -121.16810000
+'Hell''s Kitchen', 38.42310000, -120.08200000
+'Mosquito Coast', 38.77570000, -120.74840000
+'Valley Springs Klippe', 38.19720000, -120.81840000
+'Courtright Reservoir', 37.07490000, -118.98190000
+'Fresno Dome', 37.45400000, -119.53600000
+'Shuteye Ridge', 37.35000000, -119.42760000
+'Squarenail', 37.03760000, -119.40740000
+'Tollhouse Rock', 37.03300000, -119.38700000
+'Upper Jackass Lake', 37.42170000, -119.48550000
+'Wilderness Wall', 37.29140000, -119.10220000
+'Yeti Dome', 37.21020000, -119.23930000
+'5N06 of Sonora', 38.20390000, -120.01400000
+'Columns of the Giants', 38.33530000, -119.80410000
+'Herring Creek Dome', 38.23670000, -119.93190000
+'Jailhouse Rock', 37.90700000, -120.55820000
+'Knight''s Ferry ', 37.81950000, -120.66680000
+'Potter''s Rock', 38.24970000, -120.01180000
+'Sonora Pass Bouldering', 38.31430000, -119.60560000
+'Table Mountain', 37.93210000, -120.46240000
+'Beehive Area', 37.33710000, -118.57590000
+'Buttermilk Crags', 37.33662300, -118.57501000
+'Buttermilks', 37.32760000, -118.57570000
+'Checkerboard Area', 37.32540000, -118.58070000
+'Dale''s Camp', 37.31880000, -118.57500000
+'Get Carter Boulder', 37.33880000, -118.57760000
+'Pollen Grans (Lidija Boulders)', 37.33820000, -118.57100000
+'Sherman Acres', 37.29910000, -118.59550000
+'Druid Stones', 37.30710000, -118.43640000
+'Little Egypt', 37.29798800, -118.52771800
+'Lower Rock Creek Wall', 37.51330000, -118.61360000
+'Mountain Light Wall', 37.28180000, -118.64440000
+'Owens River Gorge', 37.47590000, -118.55900000
+'Pine Creek Canyon', 37.38220000, -118.67240000
+'Sabrina Basin Bouldering', 37.19210000, -118.64410000
+'Birdie Cracks', 37.41210000, -118.47670000
+'Fish Slough Boulders', 37.43660000, -118.40640000
+'Happy Boulders', 37.41560000, -118.44820000
+'Sad Boulders', 37.41870000, -118.43430000
+'Grey Towers', 37.45700000, -118.65260000
+'Sphinx Canyon', 37.42760000, -118.64750000
+'Count Chossula', 35.68610000, -117.88990000
+'Green Eggs and Ham', 35.68640000, -117.89120000
+'Owens Ridge', 35.72660000, -117.96670000
+'Indian Wells Canyon', 35.71550000, -117.97430000
+'June Lake Area', 37.78050000, -119.07550000
+'Lee Vining', 37.95750000, -119.12190000
+'Al''s Garage', 37.77490000, -118.92700000
+'Alpers Canyon', 37.77510000, -118.93500000
+'Bear Crag', 37.65392700, -119.05832300
+'First Wave Buttress', 37.57480000, -118.55310000
+'Parking Lot Crag', 37.57580000, -118.55570000
+'Clark Canyon', 37.78910000, -118.91350000
+'Crystal Crag', 37.59200000, -119.01410000
+'Dike Wall', 37.59804800, -119.01601900
+'Horseshoe Piles', 37.60300000, -119.01860000
+'Horseshoe Slabs', 37.60570000, -119.02160000
+'Junction Rock', 37.65520000, -118.93110000
+'Laurel Canyon', 37.57600000, -118.91280000
+'Looking Wall', 37.75540000, -118.74870000
+'Emerald Lake Bouldering', 37.58300000, -118.98900000
+'Gentian Meadows', 37.57840000, -118.98500000
+'Geophysics Wall', 37.64400000, -118.90780000
+'Geothermal Boulders', 37.64630000, -118.91900000
+'Horseshoe Slab Boulders', 37.60530000, -119.02090000
+'The Ravine', 37.63860000, -118.91670000
+'Rick''s Rocks', 37.78270000, -118.93860000
+'Killer Wall', 37.59500000, -119.01000000
+'Medicine Boulder', 37.58960000, -119.00670000
+'Spoon Boulder', 37.59490000, -119.01000000
+'TJ Slabs', 37.59340000, -119.00670000
+'Way Lake', 37.58250000, -118.99500000
+'Mammoth Rock', 37.61500000, -118.99130000
+'Matrimony Wall', 37.74900000, -118.97610000
+'McLeod Lake', 37.60760000, -119.02820000
+'Gong Show Wall', 37.50960000, -118.71790000
+'Iris Slab', 37.51804900, -118.71474800
+'Patricia Bowl', 37.46310000, -118.74590000
+'The Batter Boulder', 37.50980000, -118.71570000
+'The Boy Named Sue Boulder', 37.50920000, -118.71520000
+'Campground Boulder', 37.51030000, -118.71470000
+'Clearcut Boulder', 37.50990000, -118.71550000
+'Alcove Area', 37.56250000, -118.62400000
+'Catacombs (Sherwin Plateau)', 37.58150000, -118.62210000
+'The Dreamers (Sherwin Plateau)', 37.56530000, -118.62630000
+'Pocketopia', 37.59170000, -118.63280000
+'The Stumps', 37.77580000, -118.96470000
+'Anaerobia', 37.59280000, -119.00870000
+'TJ Swan Cliff', 37.59340000, -119.00710000
+'TJ Lake South', 37.58960000, -119.00720000
+'Trenchtown Rock', 37.66060000, -119.08730000
+'Warming Wall', 37.64780000, -119.00300000
+'Walker River Canyon', 38.41748900, -119.45047300
+'Alabama Hills', 36.58477800, -118.11515100
+'The Tall Wall', 36.60710000, -118.13280000
+'The Pistachio', 36.60660000, -118.13200000
+'Whitney Portal', 36.58777600, -118.24074300
+'Big Chief', 39.24560000, -120.20040000
+'Bowman Lake', 39.44430000, -120.65600000
+'Crystal Bay Boulder', 39.24260000, -120.00270000
+'Donner Pass', 39.31840000, -120.31400000
+'The Emeralds', 39.32120000, -120.65380000
+'Free For All Valley', 39.59170000, -120.62820000
+'Indian Springs', 39.33500000, -120.57580000
+'Mills Peak', 39.70470000, -120.62340000
+'Railroad Rock Crag', 39.39440000, -120.02180000
+'Rainbow', 39.30640000, -120.51760000
+'Trippy Rock', 39.27370000, -119.94170000
+'Truckee River Canyon', 39.22190000, -120.20100000
+'Twin Crags', 39.16650000, -120.16140000
+'D.L. Bliss State Park', 38.97910000, -120.09830000
+'Eagle Creek Canyon', 38.95190000, -120.11270000
+'Eagle Rock', 39.09550000, -120.16400000
+'Echo Lakes', 38.81410000, -120.03020000
+'Indian Rock', 38.87960000, -120.07100000
+'Getaways (Loon Lake)', 39.00680000, -120.31790000
+'Looney Tunes', 38.97060000, -120.32380000
+'Shoreline Cliffband', 39.00380000, -120.30570000
+'Lover''s Leap', 38.80150000, -120.13300000
+'Luther Rock', 38.80440000, -120.00990000
+'Luther Spires', 38.79400000, -119.99630000
+'Phantom Spires', 38.79000000, -120.24170000
+'The Pie Shop', 38.88470000, -120.02250000
+'Sugarloaf', 38.77650000, -120.30790000
+'True Value Crag', 38.65060000, -119.72450000
+'Woodfords Canyon', 38.76530000, -119.84630000
+'Wright''s Lake', 38.84930000, -120.22590000
+'Suicide Rock', 33.77100000, -116.69600000
+'Tahquitz Rock', 33.76020000, -116.68400000
+'Yosemite National Park', 37.73970000, -119.57300000
+'The Pond', 33.31030300, -111.06860200
+'Kinlock Cave', 34.31494200, -87.51528700
+'Thompson Creek Trail', 34.35066428, -87.51777649
+'Ship Rock', 34.35293183, -87.50885010
+'Cherokee Bluffs', 32.68270000, -85.90640000
+'Colbert Heights', 34.67840000, -87.70510000
+'Coosa Slabs', 32.61330000, -86.25220000
+'Griffin Falls', 34.28760000, -85.92370000
+'Horse Pens 40', 33.92940000, -86.24900000
+'Hospital Boulders', 34.07630000, -86.01830000
+'Hurricane Creek Park', 34.22860000, -86.85990000
+'Jamestown', 34.41120000, -85.57370000
+'LaGrange', 34.65000000, -87.56000000
+'Moss Rock Preserve', 33.38360000, -86.84160000
+'Palisades Park', 33.96020000, -86.47740000
+'Seven Falls', 34.32310000, -86.95470000
+'Steele', 33.93460000, -86.23310000
+'Yellow Bluff', 34.43530000, -86.67460000
+'Chickaloon Boulders', 61.76460000, -148.53390000
+'Frostbite Boulders', 61.23461000, -149.27078400
+'Long Lake Boulders', 61.80929200, -148.20972900
+'Ravine Lake', 61.80490000, -148.29290000
+'Service Boulder', 61.14150000, -149.76410000
+'Bermuda Triangle', 61.00910000, -149.69610000
+'Crack in the Woods', 61.02410000, -149.74820000
+'Dino Head', 60.98340000, -149.58970000
+'Fundamentalist''s Cut', 61.01650000, -149.73430000
+'Good Vibes Wall', 61.01800000, -149.73870000
+'Northern Passage', 61.00600000, -149.68180000
+'Party World', 60.99010000, -149.61790000
+'Pivot Point', 61.02150000, -149.74340000
+'Sea Cave', 61.03520000, -149.77730000
+'Shot Rock', 61.02070000, -149.74440000
+'Weiner Lake Boulders', 61.81190000, -148.16620000
+'Weiner Lake', 61.81280000, -148.16650000
+'Gulkana and College Glacier', 63.18573400, -145.53468700
+'Angel Creek Rocks', 65.01130000, -146.21670000
+'Coon Bluff', 33.54710000, -111.64820000
+'Crown King Area', 34.21104800, -112.33202000
+'Dromedary Peak', 33.25333100, -111.25344900
+'Eagletail Mountains', 33.45665100, -113.36322100
+'The Blooming Wall', 34.29780000, -111.35600000
+'The Library', 34.29970000, -111.35710000
+'Four Peaks Wilderness', 33.71320000, -111.33030000

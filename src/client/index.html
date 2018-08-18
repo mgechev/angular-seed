@@ -7,14 +7,13 @@
   <title><%= APP_TITLE %></title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="<%= APP_BASE %>assets/favicon/favicon-<%= ENV_CONFIG.ENV %>.ico" type="image/x-icon">
+  <link rel="icon" href="<%= APP_BASE %>assets/images/favicon/favicon-<%= ENV_CONFIG.ENV %>.ico" type="image/x-icon">
 
   <!-- inject:css -->
   <!-- endinject -->
 </head>
 <body>
-
-  <sd-app>Loading...</sd-app>
+  <cotw-app>Loading...</cotw-app>
 
   <script defer>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -26,15 +25,15 @@
   </script>
 
   <script>
-  // Fixes undefined module function in SystemJS bundle
-  function module() {}
+    // Fixes undefined module function in SystemJS bundle
+    function module() {}
   </script>
 
   <!-- shims:js -->
   <!-- endinject -->
 
   <% if (BUILD_TYPE === 'dev') { %>
-  <script src="<%= APP_BASE %>system-config.js"></script>
+    <script src="<%= APP_BASE %>system-config.js"></script>
   <% } %>
 
   <!-- libs:js -->

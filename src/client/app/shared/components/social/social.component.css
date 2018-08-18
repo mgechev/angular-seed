@@ -1,0 +1,178 @@
+/* * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.circle-offscreen {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 15em;
+  height: 15em;
+  -webkit-transition: width 0.3s, height 0.3s, -webkit-transform 0.3s;
+  transition: width 0.3s, height 0.3s, -webkit-transform 0.3s;
+  transition: width 0.3s, height 0.3s, transform 0.3s;
+  transition: width 0.3s, height 0.3s, transform 0.3s, -webkit-transform 0.3s;
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+  border-bottom-left-radius: 100%;
+  overflow: hidden;
+}
+.circle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 15em;
+  height: 15em;
+  -webkit-transition: width 0.3s, height 0.3s, -webkit-transform 0.3s;
+  transition: width 0.3s, height 0.3s, -webkit-transform 0.3s;
+  transition: width 0.3s, height 0.3s, transform 0.3s;
+  transition: width 0.3s, height 0.3s, transform 0.3s, -webkit-transform 0.3s;
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+  border-bottom-left-radius: 100%;
+}
+.circle .link {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.circle .link::before {
+  position: absolute;
+  display: block;
+  color: white;
+  font-family: 'FontAwesome';
+  font-size: 1.5em;
+  top: 1em;
+  left: 1em;
+}
+
+.wrapcircles.closed .circle {
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+  width: 5em;
+  height: 5em;
+  -webkit-transition-delay: 0s;
+          transition-delay: 0s;
+}
+.wrapcircles.closed #click {
+  -webkit-transform: none;
+          transform: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.wrapcircles.closed #click span {
+  top: 1.125em;
+  left: 2em;
+}
+.wrapcircles.closed #click span::after {
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+.wrapcircles.closed #click span::before {
+  -webkit-transform: none;
+          transform: none;
+}
+
+#click {
+  cursor: pointer;
+}
+
+#click span {
+  -webkit-transition: bottom 0.3s, left 0.3s;
+  transition: bottom 0.3s, left 0.3s;
+  display: block;
+  width: 30px;
+  height: 30px;
+  top: 1em;
+  left: 1em;
+  position: absolute;
+}
+#click span::before, #click span::after {
+  display: block;
+  position: absolute;
+  font-family: inherit;
+  content: '';
+  width: 30px;
+  height: 8px;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+  top: 11px;
+  border-radius: 3px;
+  background: white;
+}
+#click span::before {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+#click span::after {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.c-1 {
+  background: #43A047;
+  -webkit-transition-delay: 0.1s, 0.1s, 0.1s;
+          transition-delay: 0.1s, 0.1s, 0.1s;
+  -webkit-transform: rotate(-18deg);
+          transform: rotate(-18deg);
+  opacity: 0.5
+}
+.c-1 .link::before {
+  -webkit-transform: rotate(18deg);
+          transform: rotate(18deg);
+  content: '\f0f3';
+}
+
+.c-2 {
+  background: #388E3C;
+  -webkit-transition-delay: 0.2s, 0.2s, 0.2s;
+          transition-delay: 0.2s, 0.2s, 0.2s;
+  -webkit-transform: rotate(-36deg);
+          transform: rotate(-36deg);
+  opacity: 0.5
+}
+.c-2 .link::before {
+  -webkit-transform: rotate(36deg);
+          transform: rotate(36deg);
+  content: '\f013';
+}
+
+.c-3 {
+  -webkit-transition-delay: 0.3s,0.3s, 0.3s;
+          transition-delay: 0.3s,0.3s, 0.3s;
+  background: #2E7D32;
+  -webkit-transform: rotate(-54deg);
+          transform: rotate(-54deg);
+  opacity: 0.5
+}
+.c-3 .link::before {
+  -webkit-transform: rotate(54deg);
+          transform: rotate(54deg);
+  content: '\f082';
+}
+
+.c-4 {
+  -webkit-transition-delay: 0.4s, 0.4s, 0.4s;
+          transition-delay: 0.4s, 0.4s, 0.4s;
+  background: #1B5E20;
+  -webkit-transform: rotate(-72deg);
+          transform: rotate(-72deg);
+  opacity: 0.5
+}
+.c-4 .link::before {
+  -webkit-transform: rotate(72deg);
+          transform: rotate(72deg);
+  content: '\f099';
+}
+
+.c-5 {
+  background: #4CAF50;
+  opacity: 0.5
+}
+
+.onTop {
+  z-index: 2;
+} */
