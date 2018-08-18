@@ -7,7 +7,7 @@ import { AgmCoreModule } from '@agm/core';
 import { HttpModule } from '@angular/http';
 
 import { HeaderComponent } from './components/header/header.component';
-import { SocialComponent } from './components/social/social.component';
+// import { SocialComponent } from './components/social/social.component';
 import { FindMapComponent } from './components/findMap/findMap.component';
 import { AddMapComponent } from './components/addMap/addMap.component';
 import { FormComponent } from './components/form/form.component';
@@ -30,12 +30,10 @@ import { NameListService } from './name-list/name-list.service';
             }),
             BrowserModule, FormsModule,
             ReactiveFormsModule, HttpModule],
-  declarations: [SocialComponent,
-                 HeaderComponent, AddMapComponent,
+  declarations: [HeaderComponent, AddMapComponent,
                  FindMapComponent, DirectionsMapDirective,
                  FormComponent, FormStepComponent],
-  exports: [SocialComponent,
-            HeaderComponent, AddMapComponent,
+  exports: [HeaderComponent, AddMapComponent,
             FindMapComponent, CommonModule,
             FormsModule, RouterModule,
             FormComponent, FormStepComponent]

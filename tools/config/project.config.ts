@@ -12,9 +12,9 @@ export class ProjectConfig extends SeedConfig {
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
 
   FONTS_DEST = `${this.APP_DEST}/fonts`;
-  FONTS_SRC = [
-      'node_modules/font-awesome/fonts/**'
-  ];
+  // FONTS_SRC = [
+      // 'node_modules/font-awesome/fonts/**'
+  // ];
 
   constructor() {
     super();
@@ -29,7 +29,7 @@ export class ProjectConfig extends SeedConfig {
       ...this.NPM_DEPENDENCIES,
       // {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
       // {src: 'lodash/lodash.min.js', inject: 'libs'},
-      { src: 'font-awesome/css/font-awesome.min.css', inject: true },
+      // { src: 'font-awesome/css/font-awesome.min.css', inject: true },
     ];
 
     // Add `local` third-party libraries to be injected/bundled.
