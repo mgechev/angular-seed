@@ -117,7 +117,7 @@
     "open": "0.0.5",
     "remap-istanbul": "^0.11.1",
     "rimraf": "^2.6.2",
-    "rollup": "~0.65.0",
+    "rollup": "~0.66.0",
     "rollup-plugin-commonjs": "^9.1.5",
     "rollup-plugin-includepaths": "0.2.3",
     "rollup-plugin-node-resolve": "^3.3.0",
