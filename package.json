@@ -75,7 +75,7 @@
     "@types/rimraf": "2.0.2",
     "@types/run-sequence": "^0.0.30",
     "@types/systemjs": "^0.20.6",
-    "@types/yargs": "^11.1.1",
+    "@types/yargs": "^12.0.0",
     "async": "^2.6.1",
     "autoprefixer": "^9.1.1",
     "browser-sync": "^2.24.6",
