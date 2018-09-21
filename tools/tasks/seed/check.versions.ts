@@ -1,8 +1,10 @@
-import * as util from 'gulp-util';
+import * as colors from 'ansi-colors';
+import * as log from 'fancy-log';
+
 import Config from '../../config';
 
 function reportError(message: string) {
-  console.error(util.colors.white.bgRed.bold(message));
+  log.error(colors.white.bgRed.bold(message));
   process.exit(1);
 }
 

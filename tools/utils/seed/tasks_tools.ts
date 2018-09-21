@@ -1,7 +1,8 @@
+import * as colors from 'ansi-colors';
+import * as log from 'fancy-log';
 import { existsSync, lstatSync, readFileSync, readdirSync } from 'fs';
 import * as runSequence from 'run-sequence';
 import * as gulp from 'gulp';
-import * as util from 'gulp-util';
 import * as isstream from 'isstream';
 import { join } from 'path';
 import * as tildify from 'tildify';
@@ -14,7 +15,7 @@ import { Task } from '../../tasks/task';
  * @param {string} path - The path to load the tasks from.
  */
 export function loadTasks(path: string): void {
-  util.log('Loading tasks folder', util.colors.yellow(path));
+  log('Loading tasks folder', colors.yellow(path));
   readDir(path, taskname => registerTask(taskname, path));
 }
 
@@ -85,7 +86,7 @@ export function loadCompositeTasks(seedTasksFile: string, projectTasksFile: stri
     seedTasks = JSON.parse(readFileSync(seedTasksFile).toString());
     projectTasks = JSON.parse(readFileSync(projectTasksFile).toString());
   } catch (e) {
-    util.log('Cannot load the task configuration files: ' + e.toString());
+    log('Cannot load the task configuration files: ' + e.toString());
     return;
   }
   [[seedTasks, seedTasksFile], [projectTasks, projectTasksFile]]
@@ -93,7 +94,7 @@ export function loadCompositeTasks(seedTasksFile: string, projectTasksFile: stri
       const invalid = validateTasks(tasks);
       if (invalid.length) {
         const errorMessage = getInvalidTaskErrorMessage(invalid, file);
-        util.log(util.colors.red(errorMessage));
+        log(colors.red(errorMessage));
         process.exit(1);
       }
     });
@@ -135,7 +136,7 @@ function normalizeTask(task: any, taskName: string) {
  */
 function registerTask(taskname: string, path: string): void {
   const TASK = join(path, taskname);
-  util.log('Registering task', util.colors.yellow(tildify(TASK)));
+  log('Registering task', colors.yellow(tildify(TASK)));
 
   gulp.task(taskname, (done: any) => {
     const task = normalizeTask(require(TASK), TASK);
@@ -144,7 +145,7 @@ function registerTask(taskname: string, path: string): void {
       const result = task.run(done, changeFileManager.lastChangedFiles);
       if (result && typeof result.catch === 'function') {
         result.catch((e: any) => {
-          util.log(`Error while running "${TASK}"`, e);
+          log(`Error while running "${TASK}"`, e);
         });
       }
       return result;
