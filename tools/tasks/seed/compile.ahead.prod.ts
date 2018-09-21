@@ -1,8 +1,9 @@
 import 'reflect-metadata';
 
 import { main } from '@angular/compiler-cli/src/main';
+import * as colors from 'ansi-colors';
+import * as log from 'fancy-log';
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'fs';
-import * as util from 'gulp-util';
 import { join } from 'path';
 import { argv } from 'yargs';
 
@@ -55,8 +56,8 @@ export = (done: any) => {
           args.push('--locale', lang);
           args.push('--i18nFormat', 'xlf');
         } else {
-          util.log(util.colors.gray('Translation file is not found'), util.colors.yellow(i18nFilePath));
-          util.log(util.colors.gray(`Use 'npm run i18n' command to create your translation file`));
+          log(colors.gray('Translation file is not found'), colors.yellow(i18nFilePath));
+          log(colors.gray(`Use 'npm run i18n' command to create your translation file`));
         }
       } else {
         args.push('--' + key, namedArgs[key]);

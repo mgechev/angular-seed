@@ -1,5 +1,6 @@
+import * as colors from 'ansi-colors';
 import { exec } from 'child_process';
-import * as util from 'gulp-util';
+import * as log from 'fancy-log';
 import { existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
 
@@ -32,7 +33,7 @@ export function createSME(taskName: string) {
     exec(`${sme} --${Config.SME_OUT_FORMAT} ${appBundle} ${appBundleMap} > ${out}`,
       (error: Error, stdout: string, stderr: string) => {
         if (error !== null) {
-          console.error(util.colors.red.bold('source-map-explorer error: ' + error + stderr));
+          console.error(colors.red.bold('source-map-explorer error: ' + error + stderr));
           process.exit(1);
         }
       });

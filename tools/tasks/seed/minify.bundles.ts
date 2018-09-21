@@ -1,6 +1,7 @@
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as merge from 'merge-stream';
+import * as through2 from 'through2';
 import { join } from 'path';
 
 import Config from '../../config';
@@ -16,7 +17,7 @@ const getTask = (target: string, destDir: string, sourceMaps: boolean = false) =
             loadMaps: true,
             largeFile: true
           })
-        : plugins.util.noop()
+        : through2.obj()
     )
     .pipe(
       plugins.uglify({
@@ -24,7 +25,7 @@ const getTask = (target: string, destDir: string, sourceMaps: boolean = false) =
         mangle: true
       })
     )
-    .pipe(sourceMaps && Config.PRESERVE_SOURCE_MAPS ? plugins.sourcemaps.write('.') : plugins.util.noop())
+    .pipe(sourceMaps && Config.PRESERVE_SOURCE_MAPS ? plugins.sourcemaps.write('.') : through2.obj())
     .pipe(gulp.dest(destDir));
 };
 

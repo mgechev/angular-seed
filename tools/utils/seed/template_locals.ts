@@ -1,4 +1,5 @@
-import * as util from 'gulp-util';
+import * as colors from 'ansi-colors';
+import * as log from 'fancy-log';
 import { argv } from 'yargs';
 import { join } from 'path';
 
@@ -53,7 +54,7 @@ export class TemplateLocalsBuilder {
       config = JSON.parse(JSON.stringify(require(configPath)));
     } catch (e) {
       config = null;
-      util.log(util.colors.red(e.message));
+      log(colors.red(e.message));
     }
 
     return config;

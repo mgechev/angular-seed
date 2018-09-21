@@ -1,10 +1,11 @@
-import * as util from 'gulp-util';
+import * as colors from 'ansi-colors';
+import * as log from 'fancy-log';
 
 export = (done: any) => {
-  util.log(util.colors.yellow(`
+  log(colors.yellow(`
     Warning!
-    Please use ${util.colors.green('npm run build.prod')}
-    Instead of ${util.colors.red('npm run build.prod.aot')} or ${util.colors.red('npm run build.prod.aot')}
+    Please use ${colors.green('npm run build.prod')}
+    Instead of ${colors.red('npm run build.prod.aot')} or ${colors.red('npm run build.prod.aot')}
     They will be deleted soon!`));
 
   done();

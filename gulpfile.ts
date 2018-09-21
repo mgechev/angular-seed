@@ -1,5 +1,6 @@
+import * as colors from 'ansi-colors';
+import * as log from 'fancy-log';
 import * as gulp from 'gulp';
-import * as util from 'gulp-util';
 import * as runSequence from 'run-sequence';
 
 import Config from './tools/config';
@@ -19,7 +20,7 @@ gulp.task('clean.once', (done: any) => {
     firstRun = false;
     runSequence('check.tools', 'clean.dev', 'clean.coverage', done);
   } else {
-    util.log('Skipping clean on rebuild');
+    log('Skipping clean on rebuild');
     done();
   }
 });
