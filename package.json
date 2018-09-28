@@ -76,7 +76,7 @@
     "@types/run-sequence": "^0.0.30",
     "@types/systemjs": "^0.20.6",
     "@types/through2": "^2.0.34",
-    "@types/yargs": "^12.0.0",
+    "@types/yargs": "12.0.0",
     "ansi-colors": "^3.0.6",
     "async": "^2.6.1",
     "autoprefixer": "^9.1.1",
