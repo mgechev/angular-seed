@@ -131,7 +131,7 @@
     "supports-color": "^5.4.0",
     "systemjs-builder": "0.16.13",
     "temp": "^0.8.3",
-    "through2": "^2.0.3",
+    "through2": "^3.0.0",
     "tildify": "^1.2.0",
     "traceur": "^0.0.111",
     "ts-node": "^6.0.0",
