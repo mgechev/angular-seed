@@ -498,6 +498,8 @@ export class SeedConfig {
       '@angular/router': 'node_modules/@angular/router/bundles/router.umd.js',
       '@angular/animations/browser':
         'node_modules/@angular/animations/bundles/animations-browser.umd.js',
+      '@angular/service-worker':
+        'node_modules/@angular/service-worker/bundles/service-worker.umd.js',
       'tslib': 'node_modules/tslib/tslib.js',
 
       '@angular/common/testing':
