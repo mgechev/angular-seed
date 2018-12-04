@@ -77,7 +77,7 @@
     "@types/systemjs": "^0.20.6",
     "@types/through2": "^2.0.34",
     "@types/yargs": "12.0.0",
-    "ansi-colors": "^3.0.6",
+    "ansi-colors": "^3.2.2",
     "async": "^2.6.1",
     "autoprefixer": "^9.1.1",
     "browser-sync": "^2.24.6",
