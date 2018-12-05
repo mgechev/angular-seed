@@ -111,7 +111,7 @@
     "gulp-typescript": "^4.0.2",
     "gulp-uglify": "^3.0.1",
     "gulp-watch": "^5.0.1",
-    "is-ci": "^1.2.0",
+    "is-ci": "^2.0.0",
     "isstream": "^0.1.2",
     "merge-stream": "^1.0.1",
     "minimatch": "^3.0.4",
