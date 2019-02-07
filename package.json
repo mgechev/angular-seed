@@ -151,7 +151,7 @@
     "@angular/platform-browser-dynamic": "^7.0.0",
     "@angular/router": "^7.0.0",
     "@angular/service-worker": "^7.0.0",
-    "core-js": "2.6.2",
+    "core-js": "2.6.4",
     "intl": "^1.2.5",
     "rxjs": "^6.2.2",
     "systemjs": "0.21.5",
