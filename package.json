@@ -71,7 +71,7 @@
     "@types/gulp-load-plugins": "^0.0.31",
     "@types/gulp-sass": "^0.0.31",
     "@types/gulp-util": "^3.0.34",
-    "@types/node": "^11.9.0",
+    "@types/node": "11.9.5",
     "@types/rimraf": "2.0.2",
     "@types/run-sequence": "^0.0.30",
     "@types/systemjs": "^0.20.6",
